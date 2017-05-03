@@ -4,5 +4,5 @@ import reactNative from './react-native.js'
 
 export default {
   'react-dom': reactDom,
-  'react-native': reactNative
+  'react-native': reactNative,
 }

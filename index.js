@@ -1,5 +1,8 @@
-import morph from './morphers.js'
+import * as types from './types.js'
+import doMorph from './morphers.js'
 import prettier from 'prettier'
+
+const DEFAULT_IMPORT = name => `import ${name} from './${name}.view'`
 
 const FORMAT_OPTIONS = {
   // Fit code within this line limit
@@ -17,13 +20,18 @@ const FORMAT_OPTIONS = {
 }
 
 // TODO revisit custom
-export default function viewsMorph(code, { as='react-dom', custom=[], isInBundler=false, name }) {
-  const morphed = morph[as]({
+export const morph = (
+  code,
+  { as = 'react-dom', custom = [], getImport = DEFAULT_IMPORT, name },
+) => {
+  const morphed = doMorph[as]({
     custom,
-    isInBundler,
+    getImport,
     name,
     view: code,
   })
 
   return prettier.format(morphed, FORMAT_OPTIONS)
 }
+
+export { types }

@@ -14,5 +14,5 @@ export default [
   'SvgText',
   'Use',
   'Defs',
-  'Stop'
+  'Stop',
 ]

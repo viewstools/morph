@@ -17,6 +17,6 @@ export default function* Style({ css }, { indent, index }) {
   return {
     accessed,
     index: index + 1,
-    uses: []
+    uses: [],
   }
 }

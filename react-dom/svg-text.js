@@ -1,10 +1,18 @@
 import * as fromCode from './code.js'
 import morphProps from './morph-props.js'
 
-export default function* SvgText({ text, ...props }, { block, custom, debug, indent, index }) {
+export default function* SvgText(
+  { text, ...props },
+  { block, custom, debug, indent, index }
+) {
   const accessed = []
   yield `${indent}<text`
-  const { accessed:accessedProps, hasProps } = yield* morphProps(props, { block, debug, indent: `${indent}  `, index })
+  const { accessed: accessedProps, hasProps } = yield* morphProps(props, {
+    block,
+    debug,
+    indent: `${indent}  `,
+    index,
+  })
   if (hasProps) {
     yield indent
     accessedProps.forEach(b => !accessed.includes(b) && accessed.push(b))
@@ -53,7 +61,9 @@ export default function* SvgText({ text, ...props }, { block, custom, debug, ind
       }
     }
     if (extractedCode) {
-      extractedCode.accessed.forEach(a => !accessed.includes(a) && accessed.push(a))
+      extractedCode.accessed.forEach(
+        a => !accessed.includes(a) && accessed.push(a)
+      )
     }
   }
 

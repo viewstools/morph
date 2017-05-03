@@ -1,9 +1,8 @@
+import { ACTION, TELEPORT } from './types.js'
 import morphBlock from './react-dom/morph-block.js'
 import toJson from './to-json.js'
 
-const getImport = (name, file) => `import ${name} from '${file}'`
-
-export default ({ custom, isInBundler, name, view }) => {
+export default ({ custom, getImport, name, view }) => {
   // TODO try without toJson, maybe using a buble like approach with the AST and magicstring
   // TODO sourcemaps
   const block = toJson({ code: view }).views[0].json
@@ -30,18 +29,14 @@ export default ({ custom, isInBundler, name, view }) => {
     }
   })
 
-  const dependencies = uses.map(m => getImport(m, isInBundler? `./__view__/${m}` : `./${m}.view`))
-  if (usesAction) dependencies.push(
-    getImport('ViewsAction', `${isInBundler? './__view__/' : ''}views-morph/react-dom/Action.js`)
-  )
-  if (usesTeleport) dependencies.push(
-    getImport('ViewsTeleport', `${isInBundler? './__view__/' : ''}views-morph/react-dom/Teleport.js`)
-  )
+  const dependencies = uses.map(getImport)
+  if (usesAction) dependencies.push(getImport(ACTION))
+  if (usesTeleport) dependencies.push(getImport(TELEPORT))
 
-  return (`import React from 'react'
+  return `import React from 'react'
 ${dependencies.join('\n')}
 const ${name} = props => (
   ${code.join('')}
 )
-export default ${name}`)
+export default ${name}`
 }

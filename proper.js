@@ -13,7 +13,7 @@ const createResponse = (onAccess, at) => {
 
   return createProxy(ProxyResponse, onAccess, `${at}.`)
 }
-const createProxy = (t, onAccess, at = '') => (
+const createProxy = (t, onAccess, at = '') =>
   new Proxy(t, {
     get(target, property, receiver) {
       const key = `${at}${property}`
@@ -27,9 +27,8 @@ const createProxy = (t, onAccess, at = '') => (
       // itfails to understand that it is part of thing, maybe because we're not tracking that
       // console.log('target', target, 'context', context, 'key', key)
       onAccess(key)
-    }
+    },
   })
-)
 
 const VALID_CONSTS = ['props', 'item', 'i']
 
@@ -56,18 +55,23 @@ export default (rawCode, ...args) => {
     })
   }
   const proxies = args.map(proxyFromArg)
-  proxies.push(new Proxy({}, {
-    has(target, key, context) {
-      // TODO the problem is iwth thing.color because it finds color but
-      // itfails to understand that it is part of thing, maybe because we're not tracking that
-      // console.log('target', target, 'context', context, 'key', key)
-      // console.log('keykey', key)
-      accessed[key] = true
-    }
-  }))
-// createProxy({}, key => {
-//     // console.error(new Error(key))
-//   }))
+  proxies.push(
+    new Proxy(
+      {},
+      {
+        has(target, key, context) {
+          // TODO the problem is iwth thing.color because it finds color but
+          // itfails to understand that it is part of thing, maybe because we're not tracking that
+          // console.log('target', target, 'context', context, 'key', key)
+          // console.log('keykey', key)
+          accessed[key] = true
+        },
+      }
+    )
+  )
+  // createProxy({}, key => {
+  //     // console.error(new Error(key))
+  //   }))
 
   // the code might be a function instead of code that runs right away,
   // if so, extract the internal function's body and use that instead
@@ -84,11 +88,13 @@ export default (rawCode, ...args) => {
   while (shouldRun) {
     try {
       // build a function with the code taking the arguments it needs
-      const fn = new Function(...Object.keys(accessed).concat('___views___', code))
+      const fn = new Function(
+        ...Object.keys(accessed).concat('___views___', code)
+      )
       // call it with the proxies
       fn(...proxies)
       shouldRun = false
-    } catch(err) {
+    } catch (err) {
       // if something went wrong it probably means that there's a syntax error
       // here it's better to be safe than sorry, so we'll flag that code as invalid
       const standaloneMatch = err.message.match(/^(.+) is not defined$/)
@@ -101,17 +107,19 @@ export default (rawCode, ...args) => {
     }
   }
 
-  const flatAccessed = Object.keys(accessed).map(k => {
-    const v = accessed[k]
-    if (v === true) {
-      return k
-    } else if (Array.isArray(v)) {
-      return [k].concat(v.map(vv => `${k}.${vv}`))
-    }
-  }).reduce((a,b) => a.concat(b), [])
+  const flatAccessed = Object.keys(accessed)
+    .map(k => {
+      const v = accessed[k]
+      if (v === true) {
+        return k
+      } else if (Array.isArray(v)) {
+        return [k].concat(v.map(vv => `${k}.${vv}`))
+      }
+    })
+    .reduce((a, b) => a.concat(b), [])
 
   return {
     accessed: flatAccessed.filter(Boolean),
-    isValid
+    isValid,
   }
 }

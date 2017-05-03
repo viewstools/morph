@@ -5,16 +5,17 @@ export default function* morphProps(rawProps, { block, debug, indent, index }) {
   const accessed = []
   const props = {}
 
-  Object.keys(rawProps)
-    .forEach(key => {
-      if (typeof rawProps[key] !== 'undefined') {
-        props[key] = rawProps[key]
-      }
-    })
+  Object.keys(rawProps).forEach(key => {
+    if (typeof rawProps[key] !== 'undefined') {
+      props[key] = rawProps[key]
+    }
+  })
 
   if (debug) {
     if (props.onClick) {
-      const { accessed:accessedOnClick, code:codeOnClick } = extractCode(props.onClick)
+      const { accessed: accessedOnClick, code: codeOnClick } = extractCode(
+        props.onClick
+      )
       accessedOnClick.forEach(a => !accessed.includes(a) && accessed.push(a))
 
       props.onClick = `{e => { props._select(e, ${index}); props._transitionTo(e, ${codeOnClick}) }}`
@@ -37,11 +38,13 @@ export default function* morphProps(rawProps, { block, debug, indent, index }) {
 
     if (prop === 'apply') {
       const merge = Array.isArray(value) ? value : [value]
-      for (let i=0; i < merge.length; i++) {
+      for (let i = 0; i < merge.length; i++) {
         const mValue = merge[i]
 
         if (typeof mValue === 'string' && hasCode(mValue)) {
-          const { accessed:accessedMValue, code:codeMValue } = extractCode(mValue)
+          const { accessed: accessedMValue, code: codeMValue } = extractCode(
+            mValue
+          )
           accessedMValue.forEach(a => !accessed.includes(a) && accessed.push(a))
           yield `${indent}{...${codeMValue}}`
 
@@ -62,7 +65,10 @@ export default function* morphProps(rawProps, { block, debug, indent, index }) {
           if (hasCode(value)) {
             yield '{'
             // implicit interpolation
-            if (/\${/.test(extractedCode.code) && !/`/.test(extractedCode.code)) {
+            if (
+              /\${/.test(extractedCode.code) &&
+              !/`/.test(extractedCode.code)
+            ) {
               yield '`'
               yield extractedCode.codeRaw
               yield '`'
@@ -79,7 +85,11 @@ export default function* morphProps(rawProps, { block, debug, indent, index }) {
             }
           }
         }
-      } else if (typeof value === 'number' || typeof value === 'boolean' || value === null) {
+      } else if (
+        typeof value === 'number' ||
+        typeof value === 'boolean' ||
+        value === null
+      ) {
         yield `{${value}}`
       } else {
         yield '{'

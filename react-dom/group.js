@@ -1,7 +1,24 @@
 import morphBlock from './morph-block.js'
 import morphProps from './morph-props.js'
 
-export default function* Group({ blocks, className, goTo, id, isActive, key, onClick, ref, style, styleActive, styleActiveHover, styleHover, teleportTo }, { block, custom, indent, index }) {
+export default function* Group(
+  {
+    blocks,
+    className,
+    goTo,
+    id,
+    isActive,
+    key,
+    onClick,
+    ref,
+    style,
+    styleActive,
+    styleActiveHover,
+    styleHover,
+    teleportTo,
+  },
+  { block, custom, indent, index }
+) {
   const accessed = []
   const internalIndent = `${indent}  `
   const isActionable = teleportTo || goTo || onClick
@@ -42,7 +59,11 @@ export default function* Group({ blocks, className, goTo, id, isActive, key, onC
 
   yield `${indent}<${tag}`
 
-  const { accessed:accessedProps, hasProps } = yield* morphProps(props, { block, indent: internalIndent, index })
+  const { accessed: accessedProps, hasProps } = yield* morphProps(props, {
+    block,
+    indent: internalIndent,
+    index,
+  })
   if (hasProps) {
     yield indent
     accessedProps.forEach(b => !accessed.includes(b) && accessed.push(b))
@@ -52,7 +73,12 @@ export default function* Group({ blocks, className, goTo, id, isActive, key, onC
     yield '>\n'
 
     for (const child of blocks) {
-      const res = yield* morphBlock(child, { block: child.block, custom, indent: internalIndent, index: nextIndex })
+      const res = yield* morphBlock(child, {
+        block: child.block,
+        custom,
+        indent: internalIndent,
+        index: nextIndex,
+      })
       nextIndex = res.index
       res.accessed.forEach(b => !accessed.includes(b) && accessed.push(b))
       res.uses.forEach(b => !uses.includes(b) && uses.push(b))
@@ -80,21 +106,27 @@ export default function* Group({ blocks, className, goTo, id, isActive, key, onC
 }
 
 export function* Horizontal({ style, ...rest }, options) {
-  return yield* Group({
-    style: {
-      flexDirection: 'row',
-      ...style
+  return yield* Group(
+    {
+      style: {
+        flexDirection: 'row',
+        ...style,
+      },
+      ...rest,
     },
-    ...rest
-  }, options)
+    options
+  )
 }
 
 export function* Vertical({ style, ...rest }, options) {
-  return yield* Group({
-    style: {
-      flexDirection: 'column',
-      ...style
+  return yield* Group(
+    {
+      style: {
+        flexDirection: 'column',
+        ...style,
+      },
+      ...rest,
     },
-    ...rest
-  }, options)
+    options
+  )
 }

@@ -1,5 +1,12 @@
-import { CaptureEmail, CaptureFile, CaptureInput, CaptureNumber, CapturePhone, CaptureSecure,
-  CaptureText } from './capture.js'
+import {
+  CaptureEmail,
+  CaptureFile,
+  CaptureInput,
+  CaptureNumber,
+  CapturePhone,
+  CaptureSecure,
+  CaptureText,
+} from './capture.js'
 import { extractCode, hasCode } from './code.js'
 import { Horizontal, Vertical } from './group.js'
 import morphProps from './morph-props.js'
@@ -26,7 +33,10 @@ const morphers = {
   Vertical,
 }
 
-export default function* morphBlock({ block, when, ...props }, { custom, indent, index }) {
+export default function* morphBlock(
+  { block, when, ...props },
+  { custom, indent, index }
+) {
   const accessed = []
   const uses = []
   let nextIndex = index + 1
@@ -36,20 +46,25 @@ export default function* morphBlock({ block, when, ...props }, { custom, indent,
     if (index > 0) {
       yield '{'
     }
-    const { accessed:accessedWhen, code:whenCode } = extractCode(when)
+    const { accessed: accessedWhen, code: whenCode } = extractCode(when)
     accessedWhen.forEach(a => !accessed.includes(a) && accessed.push(a))
     yield `${whenCode} ? (\n`
     internalIndent = `${indent}  `
   }
 
   if (morphers[block]) {
-    const res = yield* morphers[block](props, { block, custom, indent: internalIndent, index })
+    const res = yield* morphers[block](props, {
+      block,
+      custom,
+      indent: internalIndent,
+      index,
+    })
     nextIndex = res.index
     res.accessed.forEach(b => !accessed.includes(b) && accessed.push(b))
     res.uses.forEach(b => !uses.includes(b) && uses.push(b))
   } else {
     const isCustomBlock = true // custom.includes(block)
-    let tag = isCustomBlock ? block : block.toLowerCase()
+    let tag = block // isCustomBlock ? block : block.toLowerCase()
     // TODO implement render from props
     if (hasCode(tag)) {
       tag = 'div' // extractCode(tag).code
@@ -62,7 +77,11 @@ export default function* morphBlock({ block, when, ...props }, { custom, indent,
       uses.push(block)
     }
 
-    const { accessed:accessedProps, hasProps } = yield* morphProps(rest, { block, indent: `${internalIndent}  `, index })
+    const { accessed: accessedProps, hasProps } = yield* morphProps(rest, {
+      block,
+      indent: `${internalIndent}  `,
+      index,
+    })
     accessedProps.forEach(b => !accessed.includes(b) && accessed.push(b))
 
     if (blocks) {
@@ -72,7 +91,12 @@ export default function* morphBlock({ block, when, ...props }, { custom, indent,
       yield '>\n'
 
       for (const child of blocks) {
-        const res = yield* morphBlock(child, { block: child.block, custom, indent: `${internalIndent}  `, index: nextIndex })
+        const res = yield* morphBlock(child, {
+          block: child.block,
+          custom,
+          indent: `${internalIndent}  `,
+          index: nextIndex,
+        })
         nextIndex = res.index
         res.accessed.forEach(b => !accessed.includes(b) && accessed.push(b))
         res.uses.forEach(b => !uses.includes(b) && uses.push(b))

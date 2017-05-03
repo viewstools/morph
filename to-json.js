@@ -8,7 +8,11 @@ const add = (group, obj, k, v) => {
 const getValue = property => {
   switch (property.value.type) {
     case 'Literal':
-      if (property.tags && property.tags.includes('code') && !/^{/.test(property.value.value)) {
+      if (
+        property.tags &&
+        property.tags.includes('code') &&
+        !/^{/.test(property.value.value)
+      ) {
         return `{${property.value.value}}`
       } else {
         return property.value.value
@@ -41,7 +45,10 @@ const findRelevantStyleTag = tags => {
   return tag ? `${tag[0].toUpperCase()}${tag.slice(1)}` : ''
 }
 
-const walkBlock = ({ captureNext, is, isBasic, name, blocks, properties }, { isView }) => {
+const walkBlock = (
+  { captureNext, is, isBasic, name, blocks, properties },
+  { isView }
+) => {
   const b = {}
 
   if (isView) {
