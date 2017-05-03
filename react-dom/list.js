@@ -12,26 +12,23 @@ export default function* List(
     tag = 'div',
     variable = 'item',
   },
-  { block, custom, debug, indent, index }
+  { block, debug, index }
 ) {
-  const internalIndent = `${indent}  `
   const props = {}
   const accessed = []
   const uses = []
   let nextIndex = index + 1
 
   if (tag !== false) {
-    yield `${indent}<${tag}`
+    yield `<${tag}`
 
     // TODO review if we need to explicitly set flexDirection here or if we can just let it be
     if (style) props.style = style
     const { accessed: accessedProps, hasProps } = yield* morphProps(props, {
       debug,
-      indent: internalIndent,
       index,
     })
     if (hasProps) {
-      yield indent
       accessedProps.forEach(a => !accessed.includes(a) && accessed.push(a))
     }
 
@@ -52,37 +49,35 @@ export default function* List(
       rblock.key = `{${listIndex}}`
     }
 
-    yield `${internalIndent}{${from} && ${from}.map((${variable}, ${listIndex}) => `
+    yield `{${from} && ${from}.map((${variable}, ${listIndex}) => `
 
     if (helpers) {
       const { accessed: accessedHelpers, codeRaw: helpersCode } = extractCode(
         helpers.replace(/\\n/g, '')
       )
       accessedHelpers.forEach(a => !accessed.includes(a) && accessed.push(a))
-      yield `{\n${indent}${helpersCode}\n${indent}return `
+      yield `{\n${helpersCode}\nreturn `
     }
 
     yield '(\n'
 
     const res = yield* morphBlock(rblock, {
       block,
-      custom,
       debug,
-      indent: `${internalIndent}  `,
       index: nextIndex,
     })
     nextIndex = res.index
     res.accessed.forEach(b => !accessed.includes(b) && accessed.push(b))
     res.uses.forEach(b => !uses.includes(b) && uses.push(b))
 
-    yield `\n${internalIndent})`
+    yield `\n)`
 
     if (helpers) yield '}'
     yield ')}'
   }
 
   if (tag !== false) {
-    yield `\n${indent}</${tag}>\n`
+    yield `\n</${tag}>\n`
   }
 
   return {

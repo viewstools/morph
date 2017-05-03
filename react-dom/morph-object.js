@@ -1,14 +1,13 @@
 import { extractCode, hasCode } from './code.js'
 import { FILL, STROKE } from '../blocking-styles.js'
 
-export default function* morphObject(props, { block, indent }) {
+export default function* morphObject(props, { block }) {
   const accessed = []
   const keys = Object.keys(props)
-  let internalIndent = `${indent}  `
 
   yield `{\n`
 
-  for (let i=0; i < keys.length; i++) {
+  for (let i = 0; i < keys.length; i++) {
     const prop = keys[i]
     const value = props[prop]
 
@@ -19,14 +18,16 @@ borderRadius: 3,
 height: ${value},
 flex: 1`
     } else {
-      yield `${internalIndent}${prop}`
+      yield `${prop}`
       if (prop !== 'apply') {
         yield `: `
       }
 
       if (typeof value === 'string') {
         if (hasCode(value)) {
-          const { accessed:accessedValue, code:codeValue } = extractCode(value)
+          const { accessed: accessedValue, code: codeValue } = extractCode(
+            value
+          )
           accessedValue.forEach(a => !accessed.includes(a) && accessed.push(a))
           yield codeValue
         } else {
@@ -37,10 +38,15 @@ flex: 1`
             yield JSON.stringify(value)
           }
         }
-      } else if (typeof value === 'number' || typeof value === 'boolean' || value === null || typeof value === 'undefined') {
+      } else if (
+        typeof value === 'number' ||
+        typeof value === 'boolean' ||
+        value === null ||
+        typeof value === 'undefined'
+      ) {
         yield value
       } else {
-        yield* morphObject(value[i], { block, indent: `${internalIndent}  ` })
+        yield* morphObject(value[i], { block })
       }
     }
 
@@ -49,7 +55,7 @@ flex: 1`
     }
   }
 
-  yield `\n${indent}}`
+  yield `\n}`
 
   return {
     accessed,

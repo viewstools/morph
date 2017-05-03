@@ -4,14 +4,13 @@ import morphProps from './morph-props.js'
 // TODO morph onClick for debug
 export default function* Image(
   { source, src, style },
-  { block, debug, indent, index }
+  { block, debug, index }
 ) {
-  yield `${indent}<img`
+  yield `<img`
   const { accessed, hasProps } = yield* morphProps(
     { src: source || src, style },
-    { block, debug, indent: `${indent}  `, index }
+    { block, debug, index }
   )
-  if (hasProps) yield indent
   yield `/>\n`
 
   return {

@@ -3,19 +3,17 @@ import morphProps from './morph-props.js'
 
 function* Capture(
   { styleActive, styleActiveHover, styleHover, stylePlaceholder, ...props },
-  { block, custom, debug, indent, index }
+  { block, debug, index }
 ) {
   const uses = []
   let nextIndex = index + 1
 
-  yield `${indent}<input`
+  yield `<input`
   const { accessed, hasProps } = yield* morphProps(props, {
     block,
     debug,
-    indent: `${indent}  `,
     index,
   })
-  if (hasProps) yield indent
   yield `/>\n`
 
   return {

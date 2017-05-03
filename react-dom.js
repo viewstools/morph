@@ -2,12 +2,12 @@ import { ACTION, TELEPORT } from './types.js'
 import morphBlock from './react-dom/morph-block.js'
 import toJson from './to-json.js'
 
-export default ({ custom, getImport, name, view }) => {
+export default ({ getImport, name, view }) => {
   // TODO try without toJson, maybe using a buble like approach with the AST and magicstring
   // TODO sourcemaps
   const block = toJson({ code: view }).views[0].json
   const code = []
-  const gen = morphBlock(block, { custom, indent: '', index: 0 })
+  const gen = morphBlock(block, { index: 0 })
 
   let next
   while (!(next = gen.next()).done) {

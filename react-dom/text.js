@@ -1,21 +1,17 @@
 import * as fromCode from './code.js'
 import morphProps from './morph-props.js'
 
-export default function* Text(
-  { style, text },
-  { block, debug, indent, index }
-) {
+export default function* Text({ style, text }, { block, debug, index }) {
   const accessed = []
-  yield `${indent}<div`
+  yield `<div`
   const { accessed: accessedProps, hasProps } = yield* morphProps(
     { style },
-    { block, debug, indent: `${indent}  `, index }
+    { block, debug, index }
   )
   if (hasProps) {
-    yield indent
     accessedProps.forEach(b => !accessed.includes(b) && accessed.push(b))
   }
-  yield `>\n${indent}  `
+  yield `>\n`
 
   const startsWithCode = fromCode.START.test(text)
   const endsWithCode = fromCode.END.test(text)
@@ -47,7 +43,7 @@ export default function* Text(
     }
   }
 
-  yield `\n${indent}</div>\n`
+  yield `\n</div>\n`
 
   return {
     accessed,

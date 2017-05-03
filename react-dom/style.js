@@ -1,10 +1,10 @@
 import { extractCode, hasCode } from './code.js'
 
 // TODO onClick for debug
-export default function* Style({ css }, { indent, index }) {
+export default function* Style({ css }, { index }) {
   let accessed = []
 
-  yield `${indent}<style>\n${indent}  `
+  yield `<style>\n`
 
   if (hasCode(css)) {
     yield css
@@ -12,7 +12,7 @@ export default function* Style({ css }, { indent, index }) {
   } else {
     yield `{\`${css}\`}`
   }
-  yield `\n${indent}</style>\n`
+  yield `\n</style>\n`
 
   return {
     accessed,

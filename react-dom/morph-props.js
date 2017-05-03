@@ -1,7 +1,7 @@
 import { extractCode, hasCode } from './code.js'
 import morphObject from './morph-object.js'
 
-export default function* morphProps(rawProps, { block, debug, indent, index }) {
+export default function* morphProps(rawProps, { block, debug, index }) {
   const accessed = []
   const props = {}
 
@@ -46,7 +46,7 @@ export default function* morphProps(rawProps, { block, debug, indent, index }) {
             mValue
           )
           accessedMValue.forEach(a => !accessed.includes(a) && accessed.push(a))
-          yield `${indent}{...${codeMValue}}`
+          yield `{...${codeMValue}}`
 
           if (i < merge.length - 1) {
             yield '\n'
@@ -55,7 +55,7 @@ export default function* morphProps(rawProps, { block, debug, indent, index }) {
       }
       // TODO support data attrs and blockName
     } else {
-      yield `${indent}${prop}=`
+      yield `${prop}=`
 
       if (typeof value === 'string') {
         if (prop === 'onClick' && debug) {
@@ -93,7 +93,7 @@ export default function* morphProps(rawProps, { block, debug, indent, index }) {
         yield `{${value}}`
       } else {
         yield '{'
-        const res = yield* morphObject(value, { block, indent })
+        const res = yield* morphObject(value, { block })
         res.accessed.forEach(b => !accessed.includes(b) && accessed.push(b))
         yield '}'
       }

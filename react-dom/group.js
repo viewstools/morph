@@ -17,10 +17,9 @@ export default function* Group(
     styleHover,
     teleportTo,
   },
-  { block, custom, indent, index }
+  { block, index }
 ) {
   const accessed = []
-  const internalIndent = `${indent}  `
   const isActionable = teleportTo || goTo || onClick
   const props = {}
   const uses = []
@@ -57,15 +56,13 @@ export default function* Group(
   if (onClick) props.onClick = onClick
   if (style) props.style = style
 
-  yield `${indent}<${tag}`
+  yield `<${tag}`
 
   const { accessed: accessedProps, hasProps } = yield* morphProps(props, {
     block,
-    indent: internalIndent,
     index,
   })
   if (hasProps) {
-    yield indent
     accessedProps.forEach(b => !accessed.includes(b) && accessed.push(b))
   }
 
@@ -75,8 +72,6 @@ export default function* Group(
     for (const child of blocks) {
       const res = yield* morphBlock(child, {
         block: child.block,
-        custom,
-        indent: internalIndent,
         index: nextIndex,
       })
       nextIndex = res.index
@@ -87,13 +82,13 @@ export default function* Group(
     if (index === 0) {
       yield '{props.children}'
     }
-    yield `${indent}</${tag}>`
+    yield `</${tag}>`
   } else {
     if (index === 0) {
       yield '{props.children}'
-      yield `${indent}</${tag}>`
+      yield `</${tag}>`
     } else {
-      yield `${indent}/>`
+      yield `/>`
     }
   }
   yield '\n'
