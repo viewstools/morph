@@ -1,8 +1,11 @@
 {
   "name": "views-morph",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Views language morpher",
   "main": "lib.js",
+  "bin": {
+    "views-morph": "./cli.js"
+  },
   "scripts": {
     "prepublish": "NODE_ENV=production rollup --config rollup.config.js",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -26,9 +29,12 @@
     "rollup-watch": "^3.2.2"
   },
   "dependencies": {
+    "buble": "^0.15.2",
     "css-properties": "^2.0.2",
+    "minimist": "^1.2.0",
     "prettier": "^1.2.2",
     "synesthesia": "^1.0.1",
-    "to-camel-case": "^1.0.0"
+    "to-camel-case": "^1.0.0",
+    "to-pascal-case": "^1.0.0"
   }
 }
