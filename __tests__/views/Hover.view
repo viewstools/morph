@@ -1,0 +1,8 @@
+Button is Vertical
+backgroundColor black
+backgroundColorHover white
+onClick props.onClick
+Text
+color white
+colorHover black
+text Hey!

@@ -1,5 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`react-dom parses Hover 1`] = `
+"import React from 'react';
+import ViewsAction from './ViewsAction.view';
+const Hover = props => (
+  <ViewsAction
+    styleHover={{
+      backgroundColor: 'white',
+    }}
+    onClick={props.onClick}
+    style={{
+      flexDirection: 'column',
+      backgroundColor: 'black',
+    }}
+  >
+    <div
+      style={{
+        color: 'white',
+      }}
+    >
+      {'Hey!'}
+    </div>
+    {props.children}
+  </ViewsAction>
+);
+export default Hover;
+"
+`;
+
 exports[`react-dom parses JustText 1`] = `
 "import React from 'react';
 

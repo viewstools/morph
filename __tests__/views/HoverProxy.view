@@ -1,0 +1,20 @@
+Button is Vertical
+backgroundColor black
+backgroundColorHover white
+onClick props.onClick
+Icon is Proxy
+from props.icon
+fill white
+fillHover black
+Text
+color white
+colorHover black
+text Hey!
+
+
+# Icon is Svg
+# Path
+# d svg-stuff...
+# fill props.fill
+# fillHover props.fillHover
+

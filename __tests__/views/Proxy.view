@@ -1,0 +1,6 @@
+Button is Horizontal
+Icon is Proxy
+from props.icon
+fill red
+Text
+text props.text

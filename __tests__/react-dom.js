@@ -1,40 +1,16 @@
 const { morph } = require('../lib.js')
-
-const views = [
-  {
-    name: 'JustText',
-    code: `Text
-text hey!`,
-  },
-  {
-    name: 'Proxy',
-    code: `Button is Horizontal
-Icon is Proxy
-from props.icon
-fill red
-Text
-text props.text`,
-  },
-  {
-    name: 'UseOfProxy',
-    code: `App is Horizontal
-Button
-icon MyIcon
-text I'm a button!`,
-  },
-  {
-    name: 'ListOfSomething',
-    code: `List
-from props.list
-Text
-text item.name`,
-  },
-]
+const { join } = require('path')
+const { readdirSync, readFileSync } = require('fs')
 
 const as = 'react-dom'
+const isView = f => /\.view$/.test(f)
+const getPath = (f = '.') => join(__dirname, 'views', f)
 
 describe(as, () => {
-  views.forEach(({ code, name }) => {
+  readdirSync(getPath()).filter(isView).forEach(f => {
+    const name = f.replace(/\.view$/, '')
+    const code = readFileSync(getPath(f), 'utf-8')
+
     it(`parses ${name}`, () => {
       expect(morph(code, { as, name, pretty: true })).toMatchSnapshot()
     })
