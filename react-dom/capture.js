@@ -5,11 +5,8 @@ function* Capture(
   { styleActive, styleActiveHover, styleHover, stylePlaceholder, ...props },
   { block, debug, index }
 ) {
-  const uses = []
-  let nextIndex = index + 1
-
   yield `<input`
-  const { accessed, hasProps } = yield* morphProps(props, {
+  const { accessed, hasProps, uses } = yield* morphProps(props, {
     block,
     debug,
     index,
@@ -18,7 +15,7 @@ function* Capture(
 
   return {
     accessed,
-    index: nextIndex,
+    index: index + 1,
     uses,
   }
 }

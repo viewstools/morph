@@ -24,12 +24,13 @@ export default function* List(
 
     // TODO review if we need to explicitly set flexDirection here or if we can just let it be
     if (style) props.style = style
-    const { accessed: accessedProps, hasProps } = yield* morphProps(props, {
+    const res = yield* morphProps(props, {
       debug,
       index,
     })
-    if (hasProps) {
-      accessedProps.forEach(a => !accessed.includes(a) && accessed.push(a))
+    if (res.hasProps) {
+      res.accessed.forEach(a => !accessed.includes(a) && accessed.push(a))
+      res.uses.forEach(b => !uses.includes(b) && uses.push(b))
     }
 
     yield '>\n'

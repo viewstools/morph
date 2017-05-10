@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`react-dom parses JustText 1`] = `
+"import React from 'react';
+
+const JustText = props => (
+  <div>
+    {'hey!'}
+  </div>
+);
+export default JustText;
+"
+`;
+
+exports[`react-dom parses Proxy 1`] = `
+"import React from 'react';
+
+const Proxy = props => (
+  <div
+    style={{
+      flexDirection: 'row',
+    }}
+  >
+    <props.icon blockIs=\\"Icon\\" fill=\\"red\\" />
+    <div>
+      {props.text}
+    </div>
+    {props.children}
+  </div>
+);
+export default Proxy;
+"
+`;
+
+exports[`react-dom parses UseOfProxy 1`] = `
+"import React from 'react';
+import Button from './Button.view';
+import MyIcon from './MyIcon.view';
+const UseOfProxy = props => (
+  <div
+    style={{
+      flexDirection: 'row',
+    }}
+  >
+    <Button icon={MyIcon} text=\\"I'm a button!\\" />
+    {props.children}
+  </div>
+);
+export default UseOfProxy;
+"
+`;

@@ -12,6 +12,7 @@ import { Horizontal, Vertical } from './group.js'
 import morphProps from './morph-props.js'
 import Image from './image.js'
 import List from './list.js'
+import Proxy from './proxy.js'
 import Style from './style.js'
 import SvgText from './svg-text.js'
 import Text from './text.js'
@@ -27,6 +28,7 @@ const morphers = {
   Horizontal,
   Image,
   List,
+  Proxy,
   Style,
   SvgText,
   Text,
@@ -60,11 +62,12 @@ export default function* morphBlock({ block, when, ...props }, { index }) {
     yield `<${block}`
     const { blocks, ...rest } = props
 
-    const { accessed: accessedProps, hasProps } = yield* morphProps(rest, {
+    const res = yield* morphProps(rest, {
       block,
       index,
     })
-    accessedProps.forEach(b => !accessed.includes(b) && accessed.push(b))
+    res.accessed.forEach(b => !accessed.includes(b) && accessed.push(b))
+    res.uses.forEach(b => !uses.includes(b) && uses.push(b))
 
     if (blocks) {
       yield '>\n'

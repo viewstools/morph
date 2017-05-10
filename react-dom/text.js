@@ -4,7 +4,7 @@ import morphProps from './morph-props.js'
 export default function* Text({ style, text }, { block, debug, index }) {
   const accessed = []
   yield `<div`
-  const { accessed: accessedProps, hasProps } = yield* morphProps(
+  const { accessed: accessedProps, hasProps, uses } = yield* morphProps(
     { style },
     { block, debug, index }
   )
@@ -48,6 +48,6 @@ export default function* Text({ style, text }, { block, debug, index }) {
   return {
     accessed,
     index: index + 1,
-    uses: [],
+    uses,
   }
 }

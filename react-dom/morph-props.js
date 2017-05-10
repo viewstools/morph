@@ -1,9 +1,15 @@
 import { extractCode, hasCode } from './code.js'
 import morphObject from './morph-object.js'
 
+const IS_BLOCK = /^[A-Z][a-zA-Z0-9]+$/
+const isBlock = s => IS_BLOCK.test(s)
+
+const canPropBeProxied = p => p !== 'text' && p !== 'blockIs'
+
 export default function* morphProps(rawProps, { block, debug, index }) {
   const accessed = []
   const props = {}
+  const uses = []
 
   Object.keys(rawProps).forEach(key => {
     if (typeof rawProps[key] !== 'undefined') {
@@ -28,6 +34,7 @@ export default function* morphProps(rawProps, { block, debug, index }) {
     return {
       accessed,
       hasProps: false,
+      uses,
     }
   }
 
@@ -81,7 +88,13 @@ export default function* morphProps(rawProps, { block, debug, index }) {
             if (!isNaN(maybeNumber) && maybeNumber == value) {
               yield `{${maybeNumber}}`
             } else {
-              yield JSON.stringify(value)
+              if (canPropBeProxied(prop) && isBlock(value)) {
+                console.log('will use', value)
+                uses.push(value)
+                yield `{${value}}`
+              } else {
+                yield JSON.stringify(value)
+              }
             }
           }
         }
@@ -105,5 +118,6 @@ export default function* morphProps(rawProps, { block, debug, index }) {
   return {
     accessed,
     hasProps: true,
+    uses,
   }
 }

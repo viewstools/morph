@@ -7,7 +7,7 @@ export default function* Image(
   { block, debug, index }
 ) {
   yield `<img`
-  const { accessed, hasProps } = yield* morphProps(
+  const { accessed, hasProps, uses } = yield* morphProps(
     { src: source || src, style },
     { block, debug, index }
   )
@@ -16,6 +16,6 @@ export default function* Image(
   return {
     accessed,
     index: index + 1,
-    uses: [],
+    uses,
   }
 }

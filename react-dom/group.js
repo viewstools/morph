@@ -58,12 +58,13 @@ export default function* Group(
 
   yield `<${tag}`
 
-  const { accessed: accessedProps, hasProps } = yield* morphProps(props, {
+  const res = yield* morphProps(props, {
     block,
     index,
   })
-  if (hasProps) {
-    accessedProps.forEach(b => !accessed.includes(b) && accessed.push(b))
+  if (res.hasProps) {
+    res.accessed.forEach(b => !accessed.includes(b) && accessed.push(b))
+    res.uses.forEach(b => !uses.includes(b) && uses.push(b))
   }
 
   if (blocks) {
