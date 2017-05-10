@@ -4,6 +4,7 @@ import morphProps from './morph-props.js'
 
 export default function* List(
   {
+    blockIs,
     blocks,
     index: listIndex = 'i',
     from: rawFrom,
@@ -13,7 +14,7 @@ export default function* List(
   },
   { block, debug, index }
 ) {
-  const props = {}
+  const props = { blockIs }
   const accessed = []
   const uses = []
   let nextIndex = index + 1

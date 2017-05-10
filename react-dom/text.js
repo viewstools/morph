@@ -1,11 +1,14 @@
 import * as fromCode from './code.js'
 import morphProps from './morph-props.js'
 
-export default function* Text({ key, style, text }, { block, debug, index }) {
+export default function* Text(
+  { blockIs, key, style, text },
+  { block, debug, index }
+) {
   const accessed = []
   yield `<div`
   const { accessed: accessedProps, hasProps, uses } = yield* morphProps(
-    { key, style },
+    { blockIs, key, style },
     { block, debug, index }
   )
   if (hasProps) {

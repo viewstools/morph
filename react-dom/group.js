@@ -3,6 +3,7 @@ import morphProps from './morph-props.js'
 
 export default function* Group(
   {
+    blockIs,
     blocks,
     className,
     goTo,
@@ -21,7 +22,7 @@ export default function* Group(
 ) {
   const accessed = []
   const isActionable = teleportTo || goTo || onClick
-  const props = {}
+  const props = { blockIs }
   const uses = []
   let nextIndex = index + 1
 

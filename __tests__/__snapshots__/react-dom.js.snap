@@ -5,6 +5,7 @@ exports[`react-dom parses Hover 1`] = `
 import ViewsAction from './ViewsAction.view';
 const Hover = props => (
   <ViewsAction
+    data-block-name=\\"Hover.Button\\"
     styleHover={{
       backgroundColor: 'white',
     }}
@@ -25,6 +26,40 @@ const Hover = props => (
   </ViewsAction>
 );
 export default Hover;
+"
+`;
+
+exports[`react-dom parses HoverProxy 1`] = `
+"import React from 'react';
+import ViewsAction from './ViewsAction.view';
+const HoverProxy = props => (
+  <ViewsAction
+    data-block-name=\\"HoverProxy.Button\\"
+    styleHover={{
+      backgroundColor: 'white',
+    }}
+    onClick={props.onClick}
+    style={{
+      flexDirection: 'column',
+      backgroundColor: 'black',
+    }}
+  >
+    <props.icon
+      data-block-name=\\"HoverProxy.Icon\\"
+      fill=\\"white\\"
+      fillHover=\\"black\\"
+    />
+    <div
+      style={{
+        color: 'white',
+      }}
+    >
+      {'Hey!'}
+    </div>
+    {props.children}
+  </ViewsAction>
+);
+export default HoverProxy;
 "
 `;
 
@@ -57,16 +92,29 @@ export default ListOfSomething;
 "
 `;
 
+exports[`react-dom parses NameIsType 1`] = `
+"import React from 'react';
+
+const NameIsType = props => (
+  <div data-block-name=\\"NameIsType.Texto\\">
+    {'iam'}
+  </div>
+);
+export default NameIsType;
+"
+`;
+
 exports[`react-dom parses Proxy 1`] = `
 "import React from 'react';
 
 const Proxy = props => (
   <div
+    data-block-name=\\"Proxy.Button\\"
     style={{
       flexDirection: 'row',
     }}
   >
-    <props.icon blockIs=\\"Icon\\" fill=\\"red\\" />
+    <props.icon data-block-name=\\"Proxy.Icon\\" fill=\\"red\\" />
     <div>
       {props.text}
     </div>
@@ -83,6 +131,7 @@ import Button from './Button.view';
 import MyIcon from './MyIcon.view';
 const UseOfProxy = props => (
   <div
+    data-block-name=\\"UseOfProxy.App\\"
     style={{
       flexDirection: 'row',
     }}

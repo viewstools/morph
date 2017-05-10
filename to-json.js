@@ -46,18 +46,18 @@ const findRelevantStyleTag = tags => {
 }
 
 const walkBlock = (
-  { captureNext, is, isBasic, name, blocks, properties },
-  { isView }
+  { blocks, captureNext, is, isBasic, name, properties },
+  { isView, scope }
 ) => {
   const b = {}
 
   if (isView) {
     b.block = name.value
-    b.blockIs = is
+    b.blockIs = is ? `${scope}.${is}` : is
     b.captureNext = captureNext
 
     if (blocks) {
-      b.blocks = blocks.elements.map(eb => walkBlock(eb, { isView }))
+      b.blocks = blocks.elements.map(eb => walkBlock(eb, { isView, scope }))
     }
   }
 
@@ -82,7 +82,7 @@ const walkBlock = (
   return b
 }
 
-export default ({ code, isView = true }) => {
+export default ({ code, isView = true, name }) => {
   const ret = parse(code)
   const views = ret.views
   delete ret.views
@@ -91,7 +91,7 @@ export default ({ code, isView = true }) => {
   return Object.assign({}, ret, {
     [key]: views.map(ast => ({
       ast,
-      json: walkBlock(ast, { isView }),
+      json: walkBlock(ast, { isView, scope: name }),
     })),
   })
 }

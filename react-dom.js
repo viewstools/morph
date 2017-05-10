@@ -5,7 +5,7 @@ import toJson from './to-json.js'
 export default ({ getImport, name, view }) => {
   // TODO try without toJson, maybe using a buble like approach with the AST and magicstring
   // TODO sourcemaps
-  const block = toJson({ code: view }).views[0].json
+  const block = toJson({ code: view, name }).views[0].json
   const code = []
   const gen = morphBlock(block, { index: 0 })
 

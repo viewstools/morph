@@ -43,6 +43,7 @@ export default function* morphProps(rawProps, { block, debug, index }) {
   for (const prop in props) {
     const value = props[prop]
 
+    // TODO should we remove apply?
     if (prop === 'apply') {
       const merge = Array.isArray(value) ? value : [value]
       for (let i = 0; i < merge.length; i++) {
@@ -60,9 +61,9 @@ export default function* morphProps(rawProps, { block, debug, index }) {
           }
         }
       }
-      // TODO support data attrs and blockName
     } else {
-      yield `${prop}=`
+      // TODO support data attrs?
+      yield prop === 'blockIs' ? 'data-block-name=' : `${prop}=`
 
       if (typeof value === 'string') {
         if (prop === 'onClick' && debug) {
