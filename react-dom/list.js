@@ -5,7 +5,6 @@ import morphProps from './morph-props.js'
 export default function* List(
   {
     blocks,
-    helpers,
     index: listIndex = 'i',
     from: rawFrom,
     style,
@@ -50,17 +49,7 @@ export default function* List(
       rblock.key = `{${listIndex}}`
     }
 
-    yield `{${from} && ${from}.map((${variable}, ${listIndex}) => `
-
-    if (helpers) {
-      const { accessed: accessedHelpers, codeRaw: helpersCode } = extractCode(
-        helpers.replace(/\\n/g, '')
-      )
-      accessedHelpers.forEach(a => !accessed.includes(a) && accessed.push(a))
-      yield `{\n${helpersCode}\nreturn `
-    }
-
-    yield '(\n'
+    yield `{${from} && ${from}.map((${variable}, ${listIndex}) => (\n`
 
     const res = yield* morphBlock(rblock, {
       block,
@@ -71,10 +60,7 @@ export default function* List(
     res.accessed.forEach(b => !accessed.includes(b) && accessed.push(b))
     res.uses.forEach(b => !uses.includes(b) && uses.push(b))
 
-    yield `\n)`
-
-    if (helpers) yield '}'
-    yield ')}'
+    yield `\n))}`
   }
 
   if (tag !== false) {

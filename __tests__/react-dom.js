@@ -22,6 +22,13 @@ Button
 icon MyIcon
 text I'm a button!`,
   },
+  {
+    name: 'ListOfSomething',
+    code: `List
+from props.list
+Text
+text item.name`,
+  },
 ]
 
 const as = 'react-dom'

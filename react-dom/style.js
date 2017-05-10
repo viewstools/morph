@@ -1,5 +1,6 @@
 import { extractCode, hasCode } from './code.js'
 
+// TODO remove. It is an escape hatch at the end...
 // TODO onClick for debug
 export default function* Style({ css }, { index }) {
   let accessed = []

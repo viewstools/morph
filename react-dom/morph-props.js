@@ -89,7 +89,6 @@ export default function* morphProps(rawProps, { block, debug, index }) {
               yield `{${maybeNumber}}`
             } else {
               if (canPropBeProxied(prop) && isBlock(value)) {
-                console.log('will use', value)
                 uses.push(value)
                 yield `{${value}}`
               } else {

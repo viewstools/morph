@@ -12,6 +12,23 @@ export default JustText;
 "
 `;
 
+exports[`react-dom parses ListOfSomething 1`] = `
+"import React from 'react';
+
+const ListOfSomething = props => (
+  <div>
+    {props.list &&
+      props.list.map((item, i) => (
+        <div key={i}>
+          {item.name}
+        </div>
+      ))}
+  </div>
+);
+export default ListOfSomething;
+"
+`;
+
 exports[`react-dom parses Proxy 1`] = `
 "import React from 'react';
 

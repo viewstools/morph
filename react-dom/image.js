@@ -3,12 +3,12 @@ import morphProps from './morph-props.js'
 // TODO migrate src
 // TODO morph onClick for debug
 export default function* Image(
-  { source, src, style },
+  { key, source, src, style },
   { block, debug, index }
 ) {
   yield `<img`
   const { accessed, hasProps, uses } = yield* morphProps(
-    { src: source || src, style },
+    { key, src: source || src, style },
     { block, debug, index }
   )
   yield `/>\n`
