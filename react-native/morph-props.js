@@ -1,21 +1,29 @@
 import { extractCode, hasCode } from './code.js'
 import morphObject from './morph-object.js'
 import SVG from '../svg.js'
+import transformStyles from './transform-styles.js'
 
-export default function* morphProps(rawProps, { block, debug, indent, index }) {
+const IS_BLOCK = /^[A-Z][a-zA-Z0-9]+$/
+const isBlock = s => IS_BLOCK.test(s)
+
+const canPropBeProxied = p => p !== 'text' && p !== 'blockIs'
+
+export default function* morphProps(rawProps, { block, debug, index }) {
   const accessed = []
   const props = {}
+  const uses = []
 
-  Object.keys(rawProps)
-    .forEach(key => {
-      if (typeof rawProps[key] !== 'undefined') {
-        props[key] = rawProps[key]
-      }
-    })
+  Object.keys(rawProps).forEach(key => {
+    if (typeof rawProps[key] !== 'undefined') {
+      props[key] = rawProps[key]
+    }
+  })
 
   if (debug) {
     if (props.onClick) {
-      const { accessed:accessedOnClick, code:codeOnClick } = extractCode(props.onClick)
+      const { accessed: accessedOnClick, code: codeOnClick } = extractCode(
+        props.onClick
+      )
       accessedOnClick.forEach(a => !accessed.includes(a) && accessed.push(a))
 
       props.onClick = `{e => { props._select(e, ${index}); props._transitionTo(e, ${codeOnClick}) }}`
@@ -28,14 +36,13 @@ export default function* morphProps(rawProps, { block, debug, indent, index }) {
     return {
       accessed,
       hasProps: false,
+      uses,
     }
   }
 
-  // TODO HACK for now to pass onClick to onPress
   if (props.onClick) {
     props.onPress = props.onClick
     delete props.onClick
-
     if (SVG.includes(block)) {
       props.onResponderMove = `{() => false}`
     }
@@ -46,34 +53,29 @@ export default function* morphProps(rawProps, { block, debug, indent, index }) {
   for (const prop in props) {
     const value = props[prop]
 
-    if (prop === 'marginTop' && value === 'auto') continue
-
+    // TODO should we remove apply?
     if (prop === 'apply') {
       const merge = Array.isArray(value) ? value : [value]
-      for (let i=0; i < merge.length; i++) {
+      for (let i = 0; i < merge.length; i++) {
         const mValue = merge[i]
 
         if (typeof mValue === 'string' && hasCode(mValue)) {
-          const { accessed:accessedMValue, code:codeMValue } = extractCode(mValue)
+          const { accessed: accessedMValue, code: codeMValue } = extractCode(
+            mValue
+          )
           accessedMValue.forEach(a => !accessed.includes(a) && accessed.push(a))
-          yield `${indent}{...${codeMValue}}`
+          yield `{...${codeMValue}}`
 
           if (i < merge.length - 1) {
             yield '\n'
           }
         }
       }
-      // TODO support data attrs and blockName
     } else {
-
-      yield `${indent}${prop}=`
+      // TODO support data attrs?
+      yield prop === 'blockIs' ? 'data-block-name=' : `${prop}=`
 
       if (typeof value === 'string') {
-        if (prop === 'fontFamily' && value.includes(',') && !value.includes('props') && !value.includes('item')) {
-          yield `"${value.split(',')[0]}"`
-          continue
-        }
-
         if (prop === 'onClick' && debug) {
           yield value
         } else {
@@ -81,7 +83,10 @@ export default function* morphProps(rawProps, { block, debug, indent, index }) {
           if (hasCode(value)) {
             yield '{'
             // implicit interpolation
-            if (/\${/.test(extractedCode.code) && !/`/.test(extractedCode.code)) {
+            if (
+              /\${/.test(extractedCode.code) &&
+              !/`/.test(extractedCode.code)
+            ) {
               yield '`'
               yield extractedCode.codeRaw
               yield '`'
@@ -90,19 +95,32 @@ export default function* morphProps(rawProps, { block, debug, indent, index }) {
             }
             yield '}'
           } else {
-            const isNumber = (/%/.test(value) || /^[0-9\-]+$/.test(value)) && prop !== 'fontWeight'
-        // console.log('prop', prop, 'isNumber', isNumber)
-            yield isNumber ? parseInt(value, 10) : JSON.stringify(value)
+            const maybeNumber = parseFloat(value, 10)
+            if (!isNaN(maybeNumber) && maybeNumber == value) {
+              yield `{${maybeNumber}}`
+            } else {
+              if (canPropBeProxied(prop) && isBlock(value)) {
+                uses.push(value)
+                yield `{${value}}`
+              } else {
+                yield JSON.stringify(value)
+              }
+            }
           }
         }
-      } else if (typeof value === 'number' || typeof value === 'boolean' || value === null) {
-      // console.log('prop number', prop)
-        yield '{'
-        yield prop === 'fontWeight' ? `"${value}"` : value
-        yield '}'
+      } else if (
+        typeof value === 'number' ||
+        typeof value === 'boolean' ||
+        value === null
+      ) {
+        yield `{${value}}`
       } else {
         yield '{'
-        const res = yield* morphObject(value, { block, indent })
+        const res = yield* morphObject(
+          // value,
+          /^style/.test(prop) ? transformStyles(value) : value,
+          { block }
+        )
         res.accessed.forEach(b => !accessed.includes(b) && accessed.push(b))
         yield '}'
       }
@@ -114,5 +132,6 @@ export default function* morphProps(rawProps, { block, debug, indent, index }) {
   return {
     accessed,
     hasProps: true,
+    uses,
   }
 }

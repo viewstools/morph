@@ -2,7 +2,19 @@ import { extractCode } from './code.js'
 import morphBlock from './morph-block.js'
 import morphProps from './morph-props.js'
 
-function* Capture({ blockIs, captureNext, onSubmit, styleActive, styleActiveHover, styleHover, stylePlaceholder, ...props }, { block, custom, debug, indent, index }) {
+function* Capture(
+  {
+    blockIs,
+    captureNext,
+    onSubmit,
+    styleActive,
+    styleActiveHover,
+    styleHover,
+    stylePlaceholder,
+    ...props
+  },
+  { block, custom, debug, index }
+) {
   const uses = ['TextInput']
   let nextIndex = index + 1
 
@@ -24,12 +36,16 @@ function* Capture({ blockIs, captureNext, onSubmit, styleActive, styleActiveHove
     props.value = `{state.${blockIs}}`
   }
 
-  yield `${indent}<TextInput`
-  const { accessed, hasProps } = yield* morphProps({
-    ...props,
-    placeholderTextColor: stylePlaceholder? stylePlaceholder.color : undefined,
-  }, { block, debug, indent: `${indent}  `, index })
-  if (hasProps) yield indent
+  yield `<TextInput`
+  const { accessed, hasProps } = yield* morphProps(
+    {
+      ...props,
+      placeholderTextColor: stylePlaceholder
+        ? stylePlaceholder.color
+        : undefined,
+    },
+    { block, debug, index }
+  )
   yield `/>\n`
 
   return {
@@ -41,40 +57,55 @@ function* Capture({ blockIs, captureNext, onSubmit, styleActive, styleActiveHove
 }
 
 export function* CaptureEmail(props, options) {
-  return yield* Capture({
-    ...props,
-    autoCapitalize: 'none',
-    autoCorrect: false,
-    keyboardType: 'email-address',
-  }, options)
+  return yield* Capture(
+    {
+      ...props,
+      autoCapitalize: 'none',
+      autoCorrect: false,
+      keyboardType: 'email-address',
+    },
+    options
+  )
 }
 
 export function* CaptureInput(props, options) {
-  return yield* Capture({
-    ...props,
-    keyboardType: 'default',
-  }, options)
+  return yield* Capture(
+    {
+      ...props,
+      keyboardType: 'default',
+    },
+    options
+  )
 }
 
 export function* CaptureNumber(props, options) {
-  return yield* Capture({
-    ...props,
-    keyboardType: 'numeric',
-  }, options)
+  return yield* Capture(
+    {
+      ...props,
+      keyboardType: 'numeric',
+    },
+    options
+  )
 }
 
 export function* CapturePhone(props, options) {
-  return yield* Capture({
-    ...props,
-    keyboardType: 'phone-pad',
-  }, options)
+  return yield* Capture(
+    {
+      ...props,
+      keyboardType: 'phone-pad',
+    },
+    options
+  )
 }
 
 export function* CaptureSecure(props, options) {
-  return yield* Capture({
-    ...props,
-    secureTextEntry: true,
-  }, options)
+  return yield* Capture(
+    {
+      ...props,
+      secureTextEntry: true,
+    },
+    options
+  )
 }
 
 export function* CaptureText(props, options) {

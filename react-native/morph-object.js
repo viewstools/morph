@@ -2,7 +2,7 @@ import { extractCode, hasCode } from './code.js'
 import { FILL, STROKE } from '../blocking-styles.js'
 
 const AVOID = [
-  // 'fontFamily',
+  'fontFamily',
   'fontWeight',
   'filter',
   // 'fontSize',
@@ -11,25 +11,23 @@ const AVOID = [
   'overflowY',
   'transition',
 
-
   'auto',
 ]
 
 const SWAP = {
-  'borderBottomStyle': 'borderStyle',
-  'borderLeftStyle': 'borderStyle',
-  'borderRightStyle': 'borderStyle',
-  'borderTopStyle': 'borderStyle',
+  borderBottomStyle: 'borderStyle',
+  borderLeftStyle: 'borderStyle',
+  borderRightStyle: 'borderStyle',
+  borderTopStyle: 'borderStyle',
 }
 
-export default function* morphObject(props, { block, indent }) {
+export default function* morphObject(props, { block }) {
   const accessed = []
   const keys = Object.keys(props)
-  let internalIndent = `${indent}  `
 
   yield `{\n`
 
-  for (let i=0; i < keys.length; i++) {
+  for (let i = 0; i < keys.length; i++) {
     let prop = keys[i]
     let value = props[prop]
 
@@ -53,14 +51,18 @@ borderRadius: 3,
 height: ${value},
 flex: 1`
     } else {
-      yield `${internalIndent}${prop}`
+      yield `${prop}`
       if (prop !== 'apply') {
         yield `: `
       }
 
       if (typeof value === 'string') {
         if (hasCode(value)) {
-          const { accessed:accessedValue, code:codeValue, codeRaw } = extractCode(value)
+          const {
+            accessed: accessedValue,
+            code: codeValue,
+            codeRaw,
+          } = extractCode(value)
           accessedValue.forEach(a => !accessed.includes(a) && accessed.push(a))
           // implicit interpolation
           if (/\${/.test(codeValue) && !/`/.test(codeValue)) {
@@ -74,21 +76,27 @@ flex: 1`
           // support vh/vw, assumes your view passes props.height and props.width
           if (/^[0-9]+(vh|vw)$/.test(value)) {
             const number = parseInt(value, 10)
-            const dimension = /vh/.test(value)? 'height' : 'width'
+            const dimension = /vh/.test(value) ? 'height' : 'width'
             yield '`'
             yield `${number} * props.${dimension} / 100`
             yield '`'
           } else {
-            const isNumber = (/%/.test(value) || /^[0-9\-]+$/.test(value))
+            const isNumber = /%/.test(value) || /^[0-9\-]+$/.test(value)
             // console.log('prop', prop, 'isNumber', isNumber)
             yield isNumber ? parseInt(value, 10) : JSON.stringify(value)
           }
         }
-      } else if (typeof value === 'number' || typeof value === 'boolean' || value === null || typeof value === 'undefined') {
+      } else if (
+        typeof value === 'number' ||
+        typeof value === 'boolean' ||
+        value === null ||
+        typeof value === 'undefined'
+      ) {
+        // yield value
         // console.log('prop nubmer', prop)
-          yield prop === 'fontWeight' ? `"${value}"` : value
+        yield prop === 'fontWeight' ? `"${value}"` : value
       } else {
-        yield* morphObject(value[i], { block, indent: `${internalIndent}  ` })
+        yield* morphObject(value[i], { block })
       }
     }
 
@@ -97,7 +105,7 @@ flex: 1`
     }
   }
 
-  yield `\n${indent}}`
+  yield `\n}`
 
   return {
     accessed,

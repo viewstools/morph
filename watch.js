@@ -68,27 +68,32 @@ module.exports = options => {
 
   const morphView = filter(f => {
     const { file, view } = toViewPath(f)
+    if (isJs(f)) return
 
     readFile(f, 'utf-8', (err, source) => {
       if (err) {
         return console.error(chalk.red('M'), view, err)
       }
 
-      const code = morph(source, {
-        as,
-        compile,
-        name: view,
-        getImport,
-        pretty,
-      })
+      try {
+        const code = morph(source, {
+          as,
+          compile,
+          name: view,
+          getImport,
+          pretty,
+        })
 
-      writeFile(`${f}.js`, code, err => {
-        if (err) {
-          return console.error(chalk.red('M'), view, err)
-        }
+        writeFile(`${f}.js`, code, err => {
+          if (err) {
+            return console.error(chalk.red('M'), view, err)
+          }
 
-        console.log(chalk.green('M'), view)
-      })
+          console.log(chalk.green('M'), view)
+        })
+      } catch (err) {
+        return console.error(chalk.red('M'), view, err)
+      }
     })
   })
 

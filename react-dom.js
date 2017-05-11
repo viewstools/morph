@@ -18,10 +18,10 @@ export default ({ getImport, name, view }) => {
   let usesTeleport = false
   const uses = next.value.uses.sort().filter(d => {
     switch (d) {
-      case 'ViewsAction':
+      case ACTION:
         usesAction = true
         break
-      case 'ViewsTeleport':
+      case TELEPORT:
         usesTeleport = true
         break
       default:

@@ -1,4 +1,4 @@
-export default function* Style({ css }, { indent, index }) {
+export default function* Style({ css }, { index }) {
   return {
     access: [],
     captures: [],

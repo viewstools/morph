@@ -1,30 +1,30 @@
+import getBody from './react-native/get-body.js'
+import getDependencies from './react-native/get-dependencies.js'
 import morphBlock from './react-native/morph-block.js'
-import SVG from './svg.js'
 import toJson from './to-json.js'
-import wrap from './react-native/wrap.js'
 
-// TODO fix like react-dom
-const toReactNative = (block, { custom = [], name } = {}) => {
-  const code = []
-  const gen = morphBlock(block, { custom: SVG.concat(custom), indent: '', index: 0 })
+export default ({ getImport, name, view }) => {
+  // TODO try without toJson, maybe using a buble like approach with the AST and magicstring
+  // TODO sourcemaps
+  const block = toJson({ code: view, name }).views[0].json
+  const gen = morphBlock(block, { index: 0 })
+  let code = []
 
   let next
   while (!(next = gen.next()).done) {
     code.push(next.value)
   }
+  code = code.join('')
 
-  const captures = next.value.captures
-  const uses = next.value.uses.sort()
+  const { captures, uses } = next.value
 
-  return wrap({
-    captures,
-    name,
-    code: code.join('').replace(/\n$/, ''),
-    uses,
-  })
-}
+  if (uses.includes('TextInput')) {
+    uses.push('KeyboardAvoidingView')
+    code = `<KeyboardAvoidingView behavior='position'>${code}</KeyboardAvoidingView>`
+  }
 
-export default ({ custom, name, view:code }) => {
-  const asJson = toJson({ code })
-  return toReactNative(asJson.views[0].json, { custom, name })
+  return `import React from 'react'
+${getDependencies(uses, getImport)}
+${getBody({ code, captures, name })}
+export default ${name}`
 }

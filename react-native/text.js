@@ -1,15 +1,17 @@
 import * as fromCode from './code.js'
 import morphProps from './morph-props.js'
 
-export default function* Text({ style, text }, { block, debug, indent, index }) {
+export default function* Text({ style, text }, { block, debug, index }) {
   const accessed = []
-  yield `${indent}<Text`
-  const { accessed:accessedProps, hasProps } = yield* morphProps({ style }, { block, debug, indent: `${indent}  `, index })
+  yield `<Text`
+  const { accessed: accessedProps, hasProps } = yield* morphProps(
+    { style },
+    { block, debug, index }
+  )
   if (hasProps) {
-    yield indent
     accessedProps.forEach(b => !accessed.includes(b) && accessed.push(b))
   }
-  yield `>\n${indent}  `
+  yield `>\n`
 
   const startsWithCode = fromCode.START.test(text)
   const endsWithCode = fromCode.END.test(text)
@@ -23,7 +25,8 @@ export default function* Text({ style, text }, { block, debug, indent, index }) 
     if (extractedCode) {
       yield '{'
       if (extractedCode.isValid) {
-        const isImplicitInterpolation = /\${/.test(extractedCode.code) && !/`/.test(extractedCode.code)
+        const isImplicitInterpolation =
+          /\${/.test(extractedCode.code) && !/`/.test(extractedCode.code)
         if (isImplicitInterpolation) yield '`'
         yield extractedCode.code
         if (isImplicitInterpolation) yield '`'
@@ -35,18 +38,18 @@ export default function* Text({ style, text }, { block, debug, indent, index }) 
       yield text
     }
     if (extractedCode) {
-      extractedCode.accessed.forEach(a => !accessed.includes(a) && accessed.push(a))
+      extractedCode.accessed.forEach(
+        a => !accessed.includes(a) && accessed.push(a)
+      )
     }
   }
 
-  yield `\n${indent}</Text>\n`
+  yield `\n</Text>\n`
 
   return {
     accessed,
     captures: [],
     index: index + 1,
-    uses: [
-      'Text',
-    ],
+    uses: ['Text'],
   }
 }

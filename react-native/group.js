@@ -1,15 +1,32 @@
 import morphBlock from './morph-block.js'
 import morphProps from './morph-props.js'
 
-export default function* Group({
-  blocks, className, goTo, id, isActive, key,
-  modalTitle, modalMessage, modalOKLabel, modalOKAction, modalCancelLabel, modalCancelAction,
-  onClick, ref,
-  style, styleActive, styleActiveHover, styleHover, teleportTo
-}, { custom, indent, index }) {
+export default function* Group(
+  {
+    blocks,
+    className,
+    goTo,
+    id,
+    isActive,
+    key,
+    modalTitle,
+    modalMessage,
+    modalOKLabel,
+    modalOKAction,
+    modalCancelLabel,
+    modalCancelAction,
+    onClick,
+    ref,
+    style,
+    styleActive,
+    styleActiveHover,
+    styleHover,
+    teleportTo,
+  },
+  { custom, index }
+) {
   const accessed = []
   const captures = []
-  const internalIndent = `${indent}  `
   const isActionable = teleportTo || goTo || onClick
   const props = {}
   const uses = []
@@ -49,11 +66,12 @@ export default function* Group({
   if (onClick) props.onClick = onClick
   if (style) props.style = style
 
-  yield `${indent}<${tag}`
+  yield `<${tag}`
 
-  const { accessed:accessedProps, hasProps } = yield* morphProps(props, { indent: internalIndent, index })
+  const { accessed: accessedProps, hasProps } = yield* morphProps(props, {
+    index,
+  })
   if (hasProps) {
-    yield indent
     accessedProps.forEach(b => !accessed.includes(b) && accessed.push(b))
   }
 
@@ -61,7 +79,7 @@ export default function* Group({
     yield '>\n'
 
     for (const child of blocks) {
-      const res = yield* morphBlock(child, { custom, indent: internalIndent, index: nextIndex })
+      const res = yield* morphBlock(child, { custom, index: nextIndex })
       nextIndex = res.index
       res.accessed.forEach(b => !accessed.includes(b) && accessed.push(b))
       res.captures.forEach(b => !captures.includes(b) && captures.push(b))
@@ -71,13 +89,13 @@ export default function* Group({
     if (index === 0) {
       yield '{props.children}'
     }
-    yield `${indent}</${tag}>`
+    yield `</${tag}>`
   } else {
     if (index === 0) {
       yield '{props.children}'
-      yield `${indent}</${tag}>`
+      yield `</${tag}>`
     } else {
-      yield `${indent}/>`
+      yield `/>`
     }
   }
   yield '\n'
@@ -91,21 +109,27 @@ export default function* Group({
 }
 
 export function* Horizontal({ style, ...rest }, options) {
-  return yield* Group({
-    style: {
-      flexDirection: 'row',
-      ...style
+  return yield* Group(
+    {
+      style: {
+        flexDirection: 'row',
+        ...style,
+      },
+      ...rest,
     },
-    ...rest
-  }, options)
+    options
+  )
 }
 
 export function* Vertical({ style, ...rest }, options) {
-  return yield* Group({
-    style: {
-      flexDirection: 'column',
-      ...style
+  return yield* Group(
+    {
+      style: {
+        flexDirection: 'column',
+        ...style,
+      },
+      ...rest,
     },
-    ...rest
-  }, options)
+    options
+  )
 }
