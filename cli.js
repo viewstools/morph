@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const { readFileSync, statSync, writeFileSync } = require('fs')
 const { morph, pathToName } = require('./lib.js')
 const chalk = require('chalk')
