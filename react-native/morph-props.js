@@ -10,6 +10,7 @@ const canPropBeProxied = p => p !== 'text' && p !== 'blockIs'
 
 export default function* morphProps(rawProps, { block, debug, index }) {
   const accessed = []
+  const captures = []
   const props = {}
   const uses = []
 
@@ -131,6 +132,7 @@ export default function* morphProps(rawProps, { block, debug, index }) {
 
   return {
     accessed,
+    captures,
     hasProps: true,
     uses,
   }
