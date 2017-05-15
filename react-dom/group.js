@@ -1,3 +1,4 @@
+import { ACTION, TELEPORT } from '../types.js'
 import morphBlock from './morph-block.js'
 import morphProps from './morph-props.js'
 
@@ -28,7 +29,7 @@ export default function* Group(
 
   let tag = 'div'
   if (teleportTo) {
-    tag = 'ViewsTeleport'
+    tag = TELEPORT
     uses.push(tag)
     props.to = teleportTo
     props._ref = ref
@@ -38,7 +39,7 @@ export default function* Group(
     props.ref = ref
     props.href = goTo
   } else if (onClick) {
-    tag = 'ViewsAction'
+    tag = ACTION
     uses.push(tag)
     props._ref = ref
   } else {

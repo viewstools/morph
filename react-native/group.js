@@ -1,3 +1,4 @@
+import { ACTION, TELEPORT } from '../types.js'
 import morphBlock from './morph-block.js'
 import morphProps from './morph-props.js'
 
@@ -34,7 +35,7 @@ export default function* Group(
 
   let tag = 'View'
   if (teleportTo) {
-    tag = 'ViewsTeleport'
+    tag = TELEPORT
     props.to = teleportTo
     props._ref = ref
   } else if (goTo) {
@@ -43,7 +44,7 @@ export default function* Group(
     props.ref = ref
     props.href = goTo
   } else if (onClick) {
-    tag = 'ViewsAction'
+    tag = ACTION
     props._ref = ref
   } else {
     if (style && (style.overflowY === 'auto' || style.overflowY === 'scroll')) {
@@ -69,6 +70,7 @@ export default function* Group(
   yield `<${tag}`
 
   const { accessed: accessedProps, hasProps } = yield* morphProps(props, {
+    block: tag,
     index,
   })
   if (hasProps) {

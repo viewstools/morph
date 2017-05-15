@@ -7,7 +7,7 @@ const getValue = (key, value) =>
   typeof value === 'number' &&
     !(isUnitlessNumber.hasOwnProperty(key) && isUnitlessNumber[key])
     ? `${value}px`
-    : value
+    : `${value}`
 
 const avoid = {}
 

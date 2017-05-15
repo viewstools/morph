@@ -1,3 +1,4 @@
-export default (name, warning) =>
-  `import { View } from 'react-native'
-  const ${name} = () => { console.warn("${warning}"); return <View>${name} 👻</View> }`
+export default (
+  name,
+  warning
+) => `const ${name} = () => { console.warn("${warning}"); return <Text>${name} 👻</Text> }`

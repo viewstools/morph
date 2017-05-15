@@ -41,12 +41,10 @@ export default function* morphProps(rawProps, { block, debug, index }) {
     }
   }
 
-  if (props.onClick) {
+  if (props.onClick && SVG.includes(block)) {
     props.onPress = props.onClick
     delete props.onClick
-    if (SVG.includes(block)) {
-      props.onResponderMove = `{() => false}`
-    }
+    props.onResponderMove = `{() => false}`
   }
 
   yield '\n'
