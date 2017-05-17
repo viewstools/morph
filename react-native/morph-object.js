@@ -2,7 +2,7 @@ import { extractCode, hasCode } from './code.js'
 import { FILL, STROKE } from '../blocking-styles.js'
 
 const AVOID = [
-  'fontFamily',
+  // 'fontFamily',
   'fontWeight',
   'filter',
   // 'fontSize',
@@ -23,6 +23,7 @@ const SWAP = {
 
 export default function* morphObject(props, { block }) {
   const accessed = []
+  // TODO capture fonts
   const keys = Object.keys(props)
 
   yield `{\n`

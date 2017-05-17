@@ -1,7 +1,7 @@
 import { extractCode, hasCode } from './code.js'
 import morphObject from './morph-object.js'
 import SVG from '../svg.js'
-import transformStyles from './transform-styles.js'
+// import transformStyles from './transform-styles.js'
 
 const IS_BLOCK = /^[A-Z][a-zA-Z0-9]+$/
 const isBlock = s => IS_BLOCK.test(s)
@@ -116,8 +116,8 @@ export default function* morphProps(rawProps, { block, debug, index }) {
       } else {
         yield '{'
         const res = yield* morphObject(
-          // value,
-          /^style/.test(prop) ? transformStyles(value) : value,
+          value,
+          // /^style/.test(prop) ? transformStyles(value) : value,
           { block }
         )
         res.accessed.forEach(b => !accessed.includes(b) && accessed.push(b))
