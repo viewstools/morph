@@ -1,9 +1,26 @@
 import {
-  getBlock, getFontInfo, getProp, getSection, getTodo, getValue,
-  isBasic, isBlock, isCapture, isEmptyList, isEmptyText, isEnd, isFontable, isGroup, isItem,
-  isList, isProp, isSection, isText, isTodo,
+  getBlock,
+  getFontInfo,
+  getProp,
+  getSection,
+  getTodo,
+  getValue,
+  isBasic,
+  isBlock,
+  isCapture,
+  isEmptyList,
+  isEmptyText,
+  isEnd,
+  isFontable,
+  isGroup,
+  isItem,
+  isList,
+  isProp,
+  isSection,
+  isText,
+  isTodo,
   stemStylesFromProp,
-  warn
+  warn,
 } from './helpers.js'
 import getLoc from './get-loc.js'
 import getMeta from './get-meta.js'
@@ -22,7 +39,7 @@ export default text => {
       let fontFamily
       let fontWeight
 
-      block.properties.properties.forEach(p => {
+      block.properties.list.forEach(p => {
         if (p.key.value === 'fontFamily') {
           fontFamily = p.value.value
         } else if (p.key.value === 'fontWeight') {
@@ -53,7 +70,8 @@ export default text => {
 
     block.loc.end = {
       line: endLine,
-      column: (typeof prevLine === 'string' ? prevLine : lines[endLine]).length - 1,
+      column: (typeof prevLine === 'string' ? prevLine : lines[endLine])
+        .length - 1,
     }
     // TODO review this
     // if we're past our line, use the previous line's end
@@ -70,7 +88,7 @@ export default text => {
     // })
     // end this block's properties if any
     if (block.properties) {
-      const last = block.properties.properties[block.properties.properties.length - 1]
+      const last = block.properties.list[block.properties.list.length - 1]
       block.properties.loc.end = last.loc.end
 
       // look for fonts
@@ -78,14 +96,14 @@ export default text => {
     }
 
     if (block.blocks) {
-      block.blocks.elements.forEach(lookForFonts)
+      block.blocks.list.forEach(lookForFonts)
     }
 
     if (stack.length > 0) {
       // // if there are more blocks, put this block as part of the last block on the stack's block
       // const nextLast = stack[stack.length - 1]
       // if (nextLast !== block && nextLast.blocks) {
-      //   nextLast.blocks.elements.push(block)
+      //   nextLast.blocks.list.push(block)
       // }
       return false
     } else {
@@ -96,7 +114,7 @@ export default text => {
   }
 
   const parseBlock = (l, i, line, lineIndex) => {
-    const { block:name, is } = getBlock(line)
+    const { block: name, is } = getBlock(line)
     let shouldPushToStack = false
 
     const block = {
@@ -108,7 +126,9 @@ export default text => {
       },
       isBasic: isBasic(name),
       loc: getLoc(lineIndex, l.indexOf(line)),
-      parents: stack.filter(b => b.type === 'Block').map(b => b.is || b.name.value),
+      parents: stack
+        .filter(b => b.type === 'Block')
+        .map(b => b.is || b.name.value),
     }
     if (is) {
       block.is = is
@@ -126,7 +146,7 @@ export default text => {
     const last = stack[stack.length - 1]
     if (last) {
       if (last.blocks) {
-        if (isList(last.name.value) && last.blocks.elements.length > 0) {
+        if (isList(last.name.value) && last.blocks.list.length > 0) {
           // the list already has a block
           let topLevelIsGroup = false
           if (stack.length - 2 >= 0) {
@@ -137,14 +157,19 @@ export default text => {
 
           if (topLevelIsGroup) {
             // tell how we can fix that
-            warn(lines[i - 1] === '' ? `put 1 empty line before` : `put 2 empty lines before`, block)
+            warn(
+              lines[i - 1] === ''
+                ? `put 1 empty line before`
+                : `put 2 empty lines before`,
+              block
+            )
           } else {
             warn(`add Vertical at the top`, block)
           }
           // shouldPushToStack = true
         }
 
-        last.blocks.elements.push(block)
+        last.blocks.list.push(block)
       } else {
         // the block is inside a block that isn't a group
         end(stack.pop(), lineIndex - 1)
@@ -152,7 +177,12 @@ export default text => {
 
         if (topLevelIsGroup) {
           // tell how we can fix that
-          warn(lines[i - 1] === '' ? `put 1 empty line before` : `put 2 empty lines before`, block)
+          warn(
+            lines[i - 1] === ''
+              ? `put 1 empty line before`
+              : `put 2 empty lines before`,
+            block
+          )
         } else {
           warn(`add Vertical at the top`, block)
         }
@@ -179,8 +209,8 @@ export default text => {
 
     if (isGroup(name)) {
       block.blocks = {
-        type: 'ArrayExpression',
-        elements: [],
+        type: 'Blocks',
+        list: [],
         loc: getLoc(lineIndex + 1, 0),
       }
       shouldPushToStack = true
@@ -193,7 +223,10 @@ export default text => {
 
   const parseProps = (i, block) => {
     let endOfBlockIndex = i
-    while (endOfBlockIndex < lines.length - 1 && !isBlock(lines[endOfBlockIndex])) {
+    while (
+      endOfBlockIndex < lines.length - 1 &&
+      !isBlock(lines[endOfBlockIndex])
+    ) {
       endOfBlockIndex++
     }
 
@@ -236,7 +269,11 @@ export default text => {
             key: {
               type: 'Literal',
               value: prop,
-              loc: getLoc(lineIndex, l.indexOf(prop), l.indexOf(prop) + prop.length - 1),
+              loc: getLoc(
+                lineIndex,
+                l.indexOf(prop),
+                l.indexOf(prop) + prop.length - 1
+              ),
             },
             value: {
               type: 'ObjectExpression',
@@ -245,10 +282,9 @@ export default text => {
             },
           })
         }
-
       } else if (isProp(line)) {
-        const [ propRaw, value ] = getProp(line)
-        const [ prop, stemmedTag ] = stemStylesFromProp(propRaw)
+        const [propRaw, value] = getProp(line)
+        const [prop, stemmedTag] = stemStylesFromProp(propRaw)
         const tags = getTags(prop, value)
         if (stemmedTag) {
           tags.push(stemmedTag)
@@ -261,8 +297,13 @@ export default text => {
           if (lastValue.type === 'ObjectExpression') {
             last = lastValue.properties
           } else if (lastValue.type === 'ArrayExpression') {
-            const lastElement = lastValue.elements[lastValue.elements.length - 1]
-            if (lastElement && lastElement.type === 'ArrayItem' && !isItem(prop)) {
+            const lastElement =
+              lastValue.elements[lastValue.elements.length - 1]
+            if (
+              lastElement &&
+              lastElement.type === 'ArrayItem' &&
+              !isItem(prop)
+            ) {
               last = lastElement.value.properties
             } else {
               last = lastValue.elements
@@ -277,20 +318,29 @@ export default text => {
             value: {
               type: 'Literal',
               value: getValue(value),
-              loc: getLoc(lineIndex, l.indexOf(value), l.indexOf(value) + value.length - 1),
+              loc: getLoc(
+                lineIndex,
+                l.indexOf(value),
+                l.indexOf(value) + value.length - 1
+              ),
             },
           })
-
         } else {
-          const propValue = isEmptyList(value) ? {
-            type: 'ArrayExpression',
-            elements: [],
-          } : {
-            type: 'Literal',
-            value: getValue(value),
-          }
+          const propValue = isEmptyList(value)
+            ? {
+                type: 'ArrayExpression',
+                elements: [],
+              }
+            : {
+                type: 'Literal',
+                value: getValue(value),
+              }
 
-          propValue.loc = getLoc(lineIndex, l.indexOf(value), l.indexOf(value) + value.length - 1)
+          propValue.loc = getLoc(
+            lineIndex,
+            l.indexOf(value),
+            l.indexOf(value) + value.length - 1
+          )
 
           last.push({
             type: 'Property',
@@ -299,14 +349,17 @@ export default text => {
               type: 'Literal',
               // TODO should we use propRaw as value here?
               value: prop,
-              loc: getLoc(lineIndex, l.indexOf(propRaw), l.indexOf(propRaw) + propRaw.length - 1),
+              loc: getLoc(
+                lineIndex,
+                l.indexOf(propRaw),
+                l.indexOf(propRaw) + propRaw.length - 1
+              ),
             },
             tags,
             meta: getMeta(value, l, lineIndex),
             value: propValue,
           })
         }
-
       } else if (isEnd(line)) {
         const prevLine = lines[j - 1]
 
@@ -345,8 +398,8 @@ export default text => {
 
     if (properties.length > 0) {
       block.properties = {
-        type: 'ObjectExpression',
-        properties,
+        type: 'Properties',
+        list: properties,
         loc,
       }
     }
@@ -358,21 +411,19 @@ export default text => {
 
     if (isBlock(line)) {
       parseBlock(l, i, line, lineIndex)
-
     } else if (isProp(line) || isSection(line)) {
       let block = stack[stack.length - 1] || views[views.length - 1]
       // TODO add warning
       if (!block) return
-      if (block.blocks && block.blocks.elements.length > 0) {
-        block = block.blocks.elements[block.blocks.elements.length - 1]
+      if (block.blocks && block.blocks.list.length > 0) {
+        block = block.blocks.list[block.blocks.list.length - 1]
       }
 
       if (!block.properties) {
         parseProps(i, block)
       }
-
     } else if (isTodo(line)) {
-      const [ _, to, message ] = getTodo(line)
+      const [_, to, message] = getTodo(line)
 
       const todo = {
         type: 'Todo',
@@ -382,18 +433,17 @@ export default text => {
       }
 
       todos.push(todo)
-
     } else if (isEnd(line) && stack.length > 0) {
       const prevLine = lines[i - 1]
       if (isEnd(prevLine)) {
         end(stack.pop(), lineIndex)
       }
-
     }
   })
 
   if (stack.length > 0) {
-    while (!end(stack.pop(), lines.length)) {}
+    while (!end(stack.pop(), lines.length)) {
+    }
   }
 
   return {
