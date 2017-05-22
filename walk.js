@@ -39,9 +39,13 @@ function visit(node, parent, enter, leave, prop, index) {
 
     if (isArray(value)) {
       for (let j = 0; j < value.length; j += 1) {
+        // allow you to walk up the tree
+        node.parent = parent
         visit(value[j], node, enter, leave, key, j)
       }
     } else if (value && value.type) {
+      // allow you to walk up the tree
+      node.parent = parent
       visit(value, node, enter, leave, key, null)
     }
   }

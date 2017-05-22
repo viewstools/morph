@@ -1,12 +1,14 @@
 import { ACTION, TELEPORT } from './types.js'
-import { hasProp } from './morph-utils.js'
-import { makeVisitors } from './morph-react.js'
+import { hasProp, isCode } from './morph-utils.js'
+import { makeVisitors, wrap } from './morph-react.js'
 import morph from './morph.js'
 
 export default code => {
   const state = {
+    fonts: [],
     render: [],
     styles: {},
+    todos: [],
     uses: [],
   }
 
@@ -75,7 +77,7 @@ const getGroupBlockName = node => {
 }
 
 const getListBlockName = node =>
-  hasProp(node, 'overflowY', v => v === 'auto' || v === 'scroll')
+  hasProp(node, /^overflow/, v => v === 'auto' || v === 'scroll')
     ? 'ScrollView'
     : 'View'
 
@@ -85,10 +87,10 @@ const getValueForProperty = (node, parent) => {
 
   switch (node.value.type) {
     case 'Literal':
-      if (typeof node.value.value === 'string' && !node.tags.includes('code')) {
-        return JSON.stringify(node.value.value)
+      if (typeof value === 'string' && !isCode(node)) {
+        return JSON.stringify(value)
       } else {
-        return wrap(number)
+        return wrap(value)
       }
     // TODO lists
     case 'ArrayExpression':
@@ -99,9 +101,10 @@ const getValueForProperty = (node, parent) => {
   }
 }
 
-// TODO
+const blacklist = ['overflow', 'overflowX', 'overflowY', 'fontWeight']
 const isValidPropertyForBlock = (node, parent) => {
-  // const key = node.key.value
+  const key = node.key.value
   // const value = node.value.value
-  return true
+
+  return !blacklist.includes(key)
 }

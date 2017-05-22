@@ -20,6 +20,6 @@ export default (code, state, visitors) => {
     },
   })
 
-  if (visitors['Fonts']) visitors['Fonts'](parsed.fonts)
-  if (visitors['Todos']) visitors['Todos'](parsed.todos)
+  if (visitors['Fonts']) visitors['Fonts'](parsed.fonts, state)
+  if (visitors['Todos']) visitors['Todos'](parsed.todos, state)
 }

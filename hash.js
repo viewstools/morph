@@ -2,7 +2,9 @@
 // murmurhash2 via https://gist.github.com/raycmorgan/588423
 
 export default function hashArray(arr) {
-  let str = arr.join(',')
+  let str = (Array.isArray(arr)
+    ? arr
+    : Object.keys(arr).map(k => `${k}:${arr[k]}`)).join(',')
   return murmur2(str, str.length).toString(36)
 }
 
