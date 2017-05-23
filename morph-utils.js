@@ -1,3 +1,17 @@
+import { wrap } from './morph-react.js'
+
+export const getObjectAsString = obj =>
+  wrap(
+    Object.keys(obj)
+      .map(k => {
+        const v = typeof obj[k] === 'object' && hasKeys(obj[k])
+          ? getObjectAsString(obj[k])
+          : obj[k]
+        return `${JSON.stringify(k)}: ${v}`
+      })
+      .join(',')
+  )
+
 export const hasKeys = obj => Object.keys(obj).length > 0
 
 export const hasProp = (node, key, match) => {

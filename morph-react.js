@@ -1,4 +1,4 @@
-import { hasKeys, isCode, isStyle } from './morph-utils.js'
+import { getObjectAsString, hasKeys, isCode, isStyle } from './morph-utils.js'
 import hash from './hash.js'
 
 export const makeVisitors = ({
@@ -8,10 +8,9 @@ export const makeVisitors = ({
   isValidPropertyForBlock,
 }) => ({
   Block: {
-    // TODO Vertical/Horizontal
     // TODO Image
     // TODO Capture*
-    // TODO List
+    // TODO List without wrapper?
     // TODO when
     enter(node, parent, state) {
       const name = getBlockName(node)
@@ -20,14 +19,6 @@ export const makeVisitors = ({
         return
       }
       node.name.finalValue = name
-
-      if (node.name.value === 'List') {
-        const from = node.properties.list.find(n => n.key.value === 'from')
-        if (!from) return
-
-        if (parent) state.render.push('{')
-        state.render.push(`${from.value.value}.map((item, i) => `)
-      }
 
       if (!state.uses.includes(name)) state.uses.push(name)
 
@@ -49,26 +40,41 @@ export const makeVisitors = ({
       } else {
         state.render.push('/>')
       }
-
-      if (node.name.value === 'List') {
-        state.render.push(')')
-        if (parent) state.render.push(`}`)
-      }
     },
   },
 
   Blocks: {
     enter(node, parent, state) {
       if (node.list.length > 0) state.render.push('>')
+
+      if (parent.name.value === 'List') {
+        const from = parent.properties.list.find(n => n.key.value === 'from')
+        if (!from) return
+
+        state.render.push(`{${from.value.value}.map((item, i) => `)
+
+        node.list.forEach(n => (n.isInList = true))
+      }
+    },
+    leave(node, parent, state) {
+      if (parent.name.value === 'List') {
+        state.render.push(')}')
+      }
     },
   },
 
   Properties: {
     enter(node, parent, state) {
-      // TODO remap properties, in particular styles
       node.style = {
         dynamic: {},
         static: {},
+      }
+
+      const name = parent.name.value
+      if (name === 'Vertical' || name === 'List') {
+        node.style.static.flexDirection = 'column'
+      } else if (name === 'Horizontal') {
+        node.style.static.flexDirection = 'row'
       }
     },
     leave(node, parent, state) {
@@ -81,11 +87,7 @@ export const makeVisitors = ({
         style = `styles.${id}`
       }
       if (hasKeys(node.style.dynamic)) {
-        const dynamic = wrap(
-          Object.keys(node.style.dynamic)
-            .map(k => `${JSON.stringify(k)}: ${node.style.dynamic[k]}`)
-            .join(',')
-        )
+        const dynamic = getObjectAsString(node.style.dynamic)
         style = style ? `[${style},${dynamic}]` : dynamic
       }
 
@@ -93,7 +95,7 @@ export const makeVisitors = ({
         state.render.push(` style={${style}}`)
       }
 
-      if (parent.name.value === 'List' && !node.hasKey) {
+      if (parent.isInList && !node.hasKey) {
         state.render.push(' key={i}')
       }
     },
@@ -121,7 +123,7 @@ export const makeVisitors = ({
         state.render.push(` ${key}=${value}`)
       }
 
-      if (parent.parent.name.value === 'List' && key === 'key') {
+      if (parent.isInList === 'List' && key === 'key') {
         parent.hasKey = true
       }
     },
