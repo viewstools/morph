@@ -5,6 +5,7 @@ const NATIVE = [
   'Image',
   'KeyboardAvoidingView',
   'ScrollView',
+  'StyleSheet',
   'Text',
   'TextInput',
   'View',

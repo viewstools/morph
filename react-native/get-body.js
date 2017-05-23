@@ -1,5 +1,6 @@
-export default ({ code, captures, name }) =>
-  captures.length > 0
+export default ({ state, name }) => {
+  const render = state.render.join('')
+  return state.captures.length > 0
     ? `class ${name} extends React.Component {
   constructor(props) {
     super(props)
@@ -8,7 +9,8 @@ export default ({ code, captures, name }) =>
 
   render() {
     const { props, state } = this
-    return (${code})
+    return (${render})
   }
 }`
-    : `const ${name} = props => (${code})`
+    : `const ${name} = props => (${render})`
+}

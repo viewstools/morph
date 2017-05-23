@@ -1,10 +1,15 @@
 import { ACTION, TELEPORT } from './types.js'
 import { hasProp, isCode } from './morph-utils.js'
 import { makeVisitors, wrap } from './morph-react.js'
+import getBody from './react-native/get-body.js'
+import getColor from 'color'
+import getDependencies from './react-native/get-dependencies.js'
+import getStyles from './react-native/get-styles.js'
 import morph from './morph.js'
 
-export default code => {
+export default ({ getImport, name, view }) => {
   const state = {
+    captures: [],
     fonts: [],
     render: [],
     styles: {},
@@ -13,16 +18,30 @@ export default code => {
   }
 
   morph(
-    code,
+    view,
     state,
     makeVisitors({
       getBlockName,
+      getStyleForProperty,
       getValueForProperty,
       isValidPropertyForBlock,
     })
   )
 
-  return state
+  if (state.uses.includes('TextInput')) {
+    state.uses.push('KeyboardAvoidingView')
+    state.render = [
+      `<KeyboardAvoidingView behavior='position'>`,
+      ...state.render,
+      `</KeyboardAvoidingView>`,
+    ]
+  }
+
+  if (Object.keys(state.styles).length > 0) {
+    state.uses.push('StyleSheet')
+  }
+
+  return toComponent({ getImport, name, state })
 }
 
 const getBlockName = node => {
@@ -81,17 +100,88 @@ const getListBlockName = node =>
     ? 'ScrollView'
     : 'View'
 
+const getFontFamily = (node, parent) => {
+  const fontWeight = parent.list.find(n => n.key.value === 'fontWeight')
+  const key = node.key.value
+  const fontFamily = node.value.value.split(',')[0].replace(/\s/g, '')
+
+  return fontWeight ? `${fontFamily}-${fontWeight.value.value}` : fontFamily
+}
+
+// support
+// /* offset-x | offset-y | color */
+// box-shadow: 60px -16px teal;
+// /* offset-x | offset-y | blur-radius | color */
+// box-shadow: 10px 5px 5px black;
+// /* offset-x | offset-y | blur-radius | spread-radius | color */
+// box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+//
+// https://developer.mozilla.org/en/docs/Web/CSS/box-shadow?v=example
+// prop mapping https://github.com/necolas/react-native-web/issues/44#issuecomment-269031472
+const getShadow = value => {
+  const [offsetX, offsetY, ...parts] = value.split(' ')
+
+  const ret = {
+    // Android
+    elevation: 1,
+    // iOS,
+    shadowOffset: {
+      height: parseInt(offsetX, 10),
+      width: parseInt(offsetY, 10),
+    },
+  }
+
+  let color
+  if (parts.length === 1) {
+    color = parts[0]
+  } else if (parts.length === 2) {
+    color = parts[1]
+    ret.shadowRadius = parseInt(parts[0])
+  }
+
+  if (color) {
+    color = getColor(color)
+    ret.shadowColor = color.string()
+    ret.shadowOpacity = color.valpha
+  }
+
+  return ret
+}
+
+const getStyleForProperty = (node, parent, code) => {
+  const key = node.key.value
+  const value = node.value.value
+
+  switch (key) {
+    case 'boxShadow':
+      return getShadow(value)
+
+    case 'fontFamily':
+      return {
+        fontFamily: getFontFamily(node, parent),
+      }
+
+    case 'zIndex':
+      return {
+        zIndex: code ? value : parseInt(value, 10),
+      }
+
+    default:
+      return {
+        [key]: value,
+      }
+  }
+}
+
 const getValueForProperty = (node, parent) => {
   const key = node.key.value
   const value = node.value.value
 
   switch (node.value.type) {
     case 'Literal':
-      if (typeof value === 'string' && !isCode(node)) {
-        return JSON.stringify(value)
-      } else {
-        return wrap(value)
-      }
+      return typeof value === 'string' && !isCode(node)
+        ? JSON.stringify(value)
+        : wrap(value)
     // TODO lists
     case 'ArrayExpression':
       return wrap(false)
@@ -102,9 +192,13 @@ const getValueForProperty = (node, parent) => {
 }
 
 const blacklist = ['overflow', 'overflowX', 'overflowY', 'fontWeight']
-const isValidPropertyForBlock = (node, parent) => {
-  const key = node.key.value
-  // const value = node.value.value
+const isValidPropertyForBlock = (node, parent) =>
+  !blacklist.includes(node.key.value)
 
-  return !blacklist.includes(key)
-}
+const toComponent = ({ getImport, name, state }) => `import React from 'react'
+${getDependencies(state.uses, getImport)}
+
+${getStyles(state.styles)}
+
+${getBody({ state, name })}
+export default ${name}`

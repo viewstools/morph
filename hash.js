@@ -1,7 +1,8 @@
 // https://raw.githubusercontent.com/threepointone/glam/master/src/hash.js
 // murmurhash2 via https://gist.github.com/raycmorgan/588423
 
-export default function hashArray(arr) {
+export default (arr, prefix = 'h') => `h${hash(arr)}`
+function hash(arr) {
   let str = (Array.isArray(arr)
     ? arr
     : Object.keys(arr).map(k => `${k}:${arr[k]}`)).join(',')
