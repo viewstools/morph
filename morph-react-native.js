@@ -1,5 +1,5 @@
 import { ACTION, TELEPORT } from './types.js'
-import { hasProp, isCode } from './morph-utils.js'
+import { getProp, hasProp, isCode } from './morph-utils.js'
 import { makeVisitors, wrap } from './morph-react.js'
 import getBody from './react-native/get-body.js'
 import getColor from 'color'
@@ -61,14 +61,9 @@ const getBlockName = node => {
 
     case 'List':
       return getListBlockName(node)
-      break
 
     case 'Proxy':
       return getProxyBlockName(node)
-      break
-
-    case 'Style':
-      return null
     // TODO SvgText should be just Text but the import should be determined from the parent
     // being Svg
 
@@ -106,6 +101,11 @@ const getFontFamily = (node, parent) => {
   const fontFamily = node.value.value.split(',')[0].replace(/\s/g, '')
 
   return fontWeight ? `${fontFamily}-${fontWeight.value.value}` : fontFamily
+}
+
+const getProxyBlockName = node => {
+  const from = getProp(node, 'from')
+  return from && from.value.value
 }
 
 // support

@@ -12,14 +12,18 @@ export const getObjectAsString = obj =>
       .join(',')
   )
 
-export const hasKeys = obj => Object.keys(obj).length > 0
-
-export const hasProp = (node, key, match) => {
+export const getProp = (node, key) => {
   const finder = typeof key === 'string'
     ? p => p.key.value === key
     : p => key.test(p.key.value)
 
-  const prop = node.properties.list.find(finder)
+  return node.properties && node.properties.list.find(finder)
+}
+
+export const hasKeys = obj => Object.keys(obj).length > 0
+
+export const hasProp = (node, key, match) => {
+  const prop = getProp(node, key)
   if (!prop) return false
   return typeof match === 'function' ? match(prop.value.value) : true
 }

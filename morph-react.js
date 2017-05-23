@@ -1,4 +1,10 @@
-import { getObjectAsString, hasKeys, isCode, isStyle } from './morph-utils.js'
+import {
+  getObjectAsString,
+  getProp,
+  hasKeys,
+  isCode,
+  isStyle,
+} from './morph-utils.js'
 import hash from './hash.js'
 
 export const makeVisitors = ({
@@ -6,32 +12,19 @@ export const makeVisitors = ({
   getStyleForProperty,
   getValueForProperty,
   isValidPropertyForBlock,
-}) => ({
-  Block: {
-    // TODO Image
-    // TODO Capture*
-    // TODO List without wrapper?
-    // TODO when
+}) => {
+  const BlockName = {
     enter(node, parent, state) {
       const name = getBlockName(node)
-      if (name === null) {
-        this.skip()
-        return
-      }
-      node.name.finalValue = name
+      if (name === null) return this.skip()
 
-      if (!state.uses.includes(name)) state.uses.push(name)
+      node.name.finalValue = name
+      if (!state.uses.includes(name) && !/props/.test(name))
+        state.uses.push(name)
 
       state.render.push(`<${name}`)
     },
     leave(node, parent, state) {
-      const name = getBlockName(node)
-
-      if (node.explicitChildren) {
-        state.render.push('>')
-        state.render.push(node.explicitChildren)
-      }
-
       if (
         node.explicitChildren ||
         (node.blocks && node.blocks.list.length > 0)
@@ -41,14 +34,40 @@ export const makeVisitors = ({
         state.render.push('/>')
       }
     },
-  },
+  }
 
-  Blocks: {
+  const BlockWhen = {
     enter(node, parent, state) {
-      if (node.list.length > 0) state.render.push('>')
+      // when lets you show/hide blocks depending on props
+      const when = getProp(node, 'when')
+      if (when) {
+        node.when = true
 
+        if (parent) state.render.push('{')
+        state.render.push(`${when.value.value} ? `)
+      }
+    },
+    leave(node, parent, state) {
+      if (node.when) {
+        state.render.push(` : null`)
+        if (parent) state.render.push('}')
+      }
+    },
+  }
+
+  const BlockExplicitChildren = {
+    leave(node, parent, state) {
+      if (node.explicitChildren) {
+        state.render.push('>')
+        state.render.push(node.explicitChildren)
+      }
+    },
+  }
+
+  const BlocksList = {
+    enter(node, parent, state) {
       if (parent.name.value === 'List') {
-        const from = parent.properties.list.find(n => n.key.value === 'from')
+        const from = getProp(parent, 'from')
         if (!from) return
 
         state.render.push(`{${from.value.value}.map((item, i) => `)
@@ -61,9 +80,17 @@ export const makeVisitors = ({
         state.render.push(')}')
       }
     },
-  },
+  }
 
-  Properties: {
+  const PropertiesListKey = {
+    leave(node, parent, state) {
+      if (parent.isInList && !node.hasKey) {
+        state.render.push(' key={i}')
+      }
+    },
+  }
+
+  const PropertiesStyle = {
     enter(node, parent, state) {
       node.style = {
         dynamic: {},
@@ -94,18 +121,26 @@ export const makeVisitors = ({
       if (style) {
         state.render.push(` style={${style}}`)
       }
+    },
+  }
 
-      if (parent.isInList && !node.hasKey) {
-        state.render.push(' key={i}')
+  const PropertyList = {
+    enter(node, parent, state) {
+      // block is List
+      if (!(node.key.value === 'from' && parent.parent.name.value === 'List')) {
+        const value = getValueForProperty(node, parent)
+        state.render.push(` ${node.key.value}=${value}`)
+      }
+
+      // block is inside List
+      if (parent.isInList === 'List' && node.key.value === 'key') {
+        parent.hasKey = true
       }
     },
-  },
+  }
 
-  Property: {
+  const PropertyStyle = {
     enter(node, parent, state) {
-      if (!isValidPropertyForBlock(node, parent)) return
-
-      const key = node.key.value
       if (isStyle(node)) {
         const code = isCode(node)
         const styleForProperty = getStyleForProperty(node, parent, code)
@@ -114,28 +149,79 @@ export const makeVisitors = ({
           code ? parent.style.dynamic : parent.style.static,
           styleForProperty
         )
-      } else if (key === 'text' && parent.parent.name.value === 'Text') {
+
+        return true
+      }
+    },
+  }
+
+  const PropertyText = {
+    enter(node, parent, state) {
+      if (node.key.value === 'text' && parent.parent.name.value === 'Text') {
         parent.parent.explicitChildren = isCode(node)
           ? wrap(node.value.value)
           : node.value.value
-      } else if (!(key === 'from' && parent.parent.name.value === 'List')) {
-        const value = getValueForProperty(node, parent)
-        state.render.push(` ${key}=${value}`)
-      }
 
-      if (parent.isInList === 'List' && key === 'key') {
-        parent.hasKey = true
+        return true
       }
     },
-  },
+  }
 
-  Fonts(list, state) {
-    state.fonts = list
-  },
+  return {
+    Block: {
+      // TODO Image
+      // TODO Capture*
+      // TODO List without wrapper?
+      enter(node, parent, state) {
+        BlockWhen.enter.call(this, node, parent, state)
+        BlockName.enter.call(this, node, parent, state)
+      },
+      leave(node, parent, state) {
+        BlockExplicitChildren.leave.call(this, node, parent, state)
+        BlockName.leave.call(this, node, parent, state)
+        BlockWhen.leave.call(this, node, parent, state)
+      },
+    },
 
-  Todos(list, state) {
-    state.todos = list
-  },
-})
+    Blocks: {
+      enter(node, parent, state) {
+        if (node.list.length > 0) state.render.push('>')
+        BlocksList.enter.call(this, node, parent, state)
+      },
+      leave(node, parent, state) {
+        BlocksList.leave.call(this, node, parent, state)
+      },
+    },
+
+    Properties: {
+      enter(node, parent, state) {
+        PropertiesStyle.enter.call(this, node, parent, state)
+      },
+      leave(node, parent, state) {
+        PropertiesStyle.leave.call(this, node, parent, state)
+        PropertiesListKey.leave.call(this, node, parent, state)
+      },
+    },
+
+    Property: {
+      enter(node, parent, state) {
+        if (node.key.value === 'when') return
+        if (!isValidPropertyForBlock(node, parent)) return
+
+        if (PropertyStyle.enter.call(this, node, parent, state)) return
+        if (PropertyText.enter.call(this, node, parent, state)) return
+        PropertyList.enter.call(this, node, parent, state)
+      },
+    },
+
+    Fonts(list, state) {
+      state.fonts = list
+    },
+
+    Todos(list, state) {
+      state.todos = list
+    },
+  }
+}
 
 export const wrap = s => `{${s}}`

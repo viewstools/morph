@@ -1,0 +1,138 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`react-native parses Hover 1`] = `
+"import React from 'react';
+import ViewsAction from './ViewsAction.view';
+import { StyleSheet, Text } from 'react-native';
+
+const styles = StyleSheet.create({
+  hp30p9n: { flexDirection: 'column', backgroundColor: 'white' },
+  h1e0dqk7: { color: 'black' },
+});
+
+const Hover = props => (
+  <ViewsAction onClick={props.onClick} style={styles.hp30p9n}>
+    <Text style={styles.h1e0dqk7}>Hey!</Text>
+  </ViewsAction>
+);
+export default Hover;
+"
+`;
+
+exports[`react-native parses HoverProxy 1`] = `
+"import React from 'react';
+import ViewsAction from './ViewsAction.view';
+import { StyleSheet, Text } from 'react-native';
+
+const styles = StyleSheet.create({
+  hp30p9n: { flexDirection: 'column', backgroundColor: 'white' },
+  h1e0dqk7: { color: 'black' },
+});
+
+const HoverProxy = props => (
+  <ViewsAction onClick={props.onClick} style={styles.hp30p9n}>
+    <props.icon from={props.icon} fill=\\"white\\" fillHover=\\"black\\" />
+    <Text style={styles.h1e0dqk7}>Hey!</Text>
+  </ViewsAction>
+);
+export default HoverProxy;
+"
+`;
+
+exports[`react-native parses JustText 1`] = `
+"import React from 'react';
+import { Text } from 'react-native';
+
+const JustText = props => <Text>hey!</Text>;
+export default JustText;
+"
+`;
+
+exports[`react-native parses ListOfSomething 1`] = `
+"import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+
+const styles = StyleSheet.create({ h197667r: { flexDirection: 'column' } });
+
+const ListOfSomething = props => (
+  <View style={styles.h197667r}>
+    {props.list.map((item, i) => <Text key={i}>{item.name}</Text>)}
+  </View>
+);
+export default ListOfSomething;
+"
+`;
+
+exports[`react-native parses NameIsType 1`] = `
+"import React from 'react';
+import { Text } from 'react-native';
+
+const NameIsType = props => <Text>iam</Text>;
+export default NameIsType;
+"
+`;
+
+exports[`react-native parses Proxy 1`] = `
+"import React from 'react';
+import { Text, View } from 'react-native';
+
+const Proxy = props => (
+  <View>
+    <props.icon from={props.icon} fill=\\"red\\" /><Text>{props.text}</Text>
+  </View>
+);
+export default Proxy;
+"
+`;
+
+exports[`react-native parses UseOfProxy 1`] = `
+"import React from 'react';
+import Button from './Button.view';
+import { View } from 'react-native';
+
+const UseOfProxy = props => (
+  <View><Button icon=\\"MyIcon\\" text=\\"I'm a button!\\" /></View>
+);
+export default UseOfProxy;
+"
+`;
+
+exports[`react-native parses When 1`] = `
+"import React from 'react';
+import { Text, View } from 'react-native';
+
+const When = props => (
+  <View>{props.showMe ? <Text>I may be hidden</Text> : null}</View>
+);
+export default When;
+"
+`;
+
+exports[`react-native parses WhenList 1`] = `
+"import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+
+const styles = StyleSheet.create({ h197667r: { flexDirection: 'column' } });
+
+const WhenList = props => (
+  <View>
+    {props.showMe
+      ? <View style={styles.h197667r}>
+          {props.list.map((item, i) => <Text key={i}>{item.thing}</Text>)}
+        </View>
+      : null}
+  </View>
+);
+export default WhenList;
+"
+`;
+
+exports[`react-native parses WhenTopLevel 1`] = `
+"import React from 'react';
+import { Text } from 'react-native';
+
+const WhenTopLevel = props =>
+  (props.showMe ? <Text>I may be hidden</Text> : null);
+export default WhenTopLevel;
+"
+`;
