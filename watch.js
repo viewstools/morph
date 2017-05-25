@@ -44,6 +44,10 @@ module.exports = options => {
     fn(f)
   }
 
+  const getImportFileName = name => {
+    const f = views[name]
+    return isView(f) ? `${f}.js` : f
+  }
   const getImport = name => {
     switch (name) {
       case ACTION:
@@ -51,7 +55,7 @@ module.exports = options => {
         return `import { ${name} } from '${shared}'`
       default:
         return views[name]
-          ? `import ${name} from '${views[name]}'`
+          ? `import ${name} from '${getImportFileName(name)}'`
           : viewNotFound(name)
     }
   }

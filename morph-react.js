@@ -1,17 +1,11 @@
-import {
-  getObjectAsString,
-  getProp,
-  hasKeys,
-  isCode,
-  isStyle,
-} from './morph-utils.js'
-import hash from './hash.js'
+import { getProp, hasKeys, isCode, isStyle } from './morph-utils.js'
 
 export const makeVisitors = ({
   getBlockName,
   getStyleForProperty,
   getValueForProperty,
   isValidPropertyForBlock,
+  PropertiesStyleLeave,
 }) => {
   const BlockName = {
     enter(node, parent, state) {
@@ -104,34 +98,11 @@ export const makeVisitors = ({
         node.style.static.flexDirection = 'row'
       }
     },
-    leave(node, parent, state) {
-      let style = null
-
-      if (hasKeys(node.style.static)) {
-        const id = hash(node.style.static)
-        state.styles[id] = node.style.static
-        parent.styleId = id
-        style = `styles.${id}`
-      }
-      if (hasKeys(node.style.dynamic)) {
-        const dynamic = getObjectAsString(node.style.dynamic)
-        style = style ? `[${style},${dynamic}]` : dynamic
-      }
-
-      if (style) {
-        state.render.push(` style={${style}}`)
-      }
-    },
+    leave: PropertiesStyleLeave,
   }
 
   const PropertyList = {
     enter(node, parent, state) {
-      // block is List
-      if (!(node.key.value === 'from' && parent.parent.name.value === 'List')) {
-        const value = getValueForProperty(node, parent)
-        state.render.push(` ${node.key.value}=${value}`)
-      }
-
       // block is inside List
       if (parent.isInList === 'List' && node.key.value === 'key') {
         parent.hasKey = true
@@ -139,16 +110,43 @@ export const makeVisitors = ({
     },
   }
 
+  const PropertyRest = {
+    enter(node, parent, state) {
+      if (
+        !parent.skip &&
+        !(node.key.value === 'from' && parent.parent.name.value === 'List')
+      ) {
+        const value = getValueForProperty(node, parent)
+
+        if (value) {
+          Object.keys(value).forEach(k =>
+            state.render.push(` ${k}=${value[k]}`)
+          )
+        }
+      }
+    },
+  }
+
   const PropertyStyle = {
     enter(node, parent, state) {
-      if (isStyle(node)) {
+      if (isStyle(node) && parent.parent.isBasic) {
         const code = isCode(node)
-        const styleForProperty = getStyleForProperty(node, parent, code)
-
-        Object.assign(
-          code ? parent.style.dynamic : parent.style.static,
-          styleForProperty
+        const { _isProp, ...styleForProperty } = getStyleForProperty(
+          node,
+          parent,
+          code
         )
+
+        if (_isProp) {
+          Object.keys(styleForProperty).forEach(k =>
+            state.render.push(` ${k}=${safe(styleForProperty[k], node)}`)
+          )
+        } else {
+          Object.assign(
+            code ? parent.style.dynamic : parent.style.static,
+            styleForProperty
+          )
+        }
 
         return true
       }
@@ -211,6 +209,7 @@ export const makeVisitors = ({
         if (PropertyStyle.enter.call(this, node, parent, state)) return
         if (PropertyText.enter.call(this, node, parent, state)) return
         PropertyList.enter.call(this, node, parent, state)
+        PropertyRest.enter.call(this, node, parent, state)
       },
     },
 
@@ -223,5 +222,10 @@ export const makeVisitors = ({
     },
   }
 }
+
+export const safe = (value, node) =>
+  typeof value === 'string' && !isCode(node)
+    ? JSON.stringify(value)
+    : wrap(value)
 
 export const wrap = s => `{${s}}`

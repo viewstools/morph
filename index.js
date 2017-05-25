@@ -6,7 +6,7 @@ import doGetViewNotFound from './get-view-not-found.js'
 import toPascalCase from 'to-pascal-case'
 import prettier from 'prettier'
 
-const DEFAULT_IMPORT = name => `import ${name} from './${name}.view'`
+const DEFAULT_IMPORT = name => `import ${name} from './${name}.view.js'`
 
 export const morph = (
   code,

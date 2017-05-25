@@ -28,7 +28,7 @@ export const hasProp = (node, key, match) => {
   return typeof match === 'function' ? match(prop.value.value) : true
 }
 
-export const isCode = node => isTag('code', node)
-export const isStyle = node => isTag('style', node)
+export const isCode = node => isTag(node, 'code')
+export const isStyle = node => isTag(node, 'style')
 
-const isTag = (tag, node) => node.tags.includes(tag)
+export const isTag = (node, tag) => node.tags.includes(tag)

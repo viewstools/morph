@@ -134,9 +134,7 @@ export default text => {
       block.is = is
 
       if (isCapture(name)) {
-        console.log('got capture', name)
         if (lastCapture) {
-          console.log('is after', lastCapture.is)
           lastCapture.captureNext = is
         }
         lastCapture = block

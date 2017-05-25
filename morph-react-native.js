@@ -1,10 +1,18 @@
 import { ACTION, TELEPORT } from './types.js'
-import { getProp, hasProp, isCode } from './morph-utils.js'
-import { makeVisitors, wrap } from './morph-react.js'
+import {
+  getObjectAsString,
+  getProp,
+  hasKeys,
+  hasProp,
+  isCode,
+  isTag,
+} from './morph-utils.js'
+import { makeVisitors, safe } from './morph-react.js'
 import getBody from './react-native/get-body.js'
 import getColor from 'color'
 import getDependencies from './react-native/get-dependencies.js'
 import getStyles from './react-native/get-styles.js'
+import hash from './hash.js'
 import morph from './morph.js'
 
 export default ({ getImport, name, view }) => {
@@ -17,16 +25,24 @@ export default ({ getImport, name, view }) => {
     uses: [],
   }
 
-  morph(
-    view,
-    state,
-    makeVisitors({
-      getBlockName,
-      getStyleForProperty,
-      getValueForProperty,
-      isValidPropertyForBlock,
-    })
-  )
+  const { Block, ...visitors } = makeVisitors({
+    getBlockName,
+    getStyleForProperty,
+    getValueForProperty,
+    isValidPropertyForBlock,
+    PropertiesStyleLeave,
+  })
+
+  morph(view, state, {
+    ...visitors,
+    Block: {
+      enter(node, parent, state) {
+        Block.enter.call(this, node, parent, state)
+        BlockNative.enter.call(this, node, parent, state)
+      },
+      leave: Block.leave,
+    },
+  })
 
   if (state.uses.includes('TextInput')) {
     state.uses.push('KeyboardAvoidingView')
@@ -42,6 +58,57 @@ export default ({ getImport, name, view }) => {
   }
 
   return toComponent({ getImport, name, state })
+}
+
+const BlockNative = {
+  enter(node, parent, state) {
+    if (/Capture/.test(node.name.value)) {
+      if (node.properties && !hasProp(node, 'ref')) {
+        node.properties.skip = true
+
+        const { captureNext } = node
+        let onSubmit = getProp(node, 'onSubmit') || null
+        if (onSubmit) onSubmit = onSubmit.value.value
+
+        if (captureNext) {
+          state.render.push(` blurOnSubmit={false}`)
+          state.render
+            .push(` onSubmitEditing={this.$capture${captureNext}? () => this.$capture${captureNext}.focus() : ${onSubmit}}`)
+          state.render(` returnKeyType = {this.$capture${captureNext}? 'next' : 'go'}`)
+        } else {
+          if (onSubmit) {
+            state.render.push(` onSubmitEditing={${onSubmit}}`)
+            state.render.push(` returnKeyType="go"`)
+          } else {
+            state.render.push(` returnKeyType="done"`)
+          }
+        }
+        state.render
+          .push(` onChangeText = {${node.is} => this.setState({ ${node.is} })}`)
+        state.render.push(` ref={$e => this.$capture${node.is} = $e}`)
+        state.render.push(` value={state.${node.is}}`)
+      }
+    }
+  },
+}
+
+function PropertiesStyleLeave(node, parent, state) {
+  let style = null
+
+  if (hasKeys(node.style.static)) {
+    const id = hash(node.style.static)
+    state.styles[id] = node.style.static
+    parent.styleId = id
+    style = `styles.${id}`
+  }
+  if (hasKeys(node.style.dynamic)) {
+    const dynamic = getObjectAsString(node.style.dynamic)
+    style = style ? `[${style},${dynamic}]` : dynamic
+  }
+
+  if (style) {
+    state.render.push(` style={${style}}`)
+  }
 }
 
 const getBlockName = node => {
@@ -172,6 +239,17 @@ const getStyleForProperty = (node, parent, code) => {
         zIndex: code ? value : parseInt(value, 10),
       }
 
+    case 'color':
+      if (
+        /Capture/.test(parent.parent.name.value) &&
+        isTag(node, 'placeholder')
+      ) {
+        return {
+          _isProp: true,
+          placeholderTextColor: value,
+        }
+      }
+
     default:
       return {
         [key]: value,
@@ -185,15 +263,14 @@ const getValueForProperty = (node, parent) => {
 
   switch (node.value.type) {
     case 'Literal':
-      return typeof value === 'string' && !isCode(node)
-        ? JSON.stringify(value)
-        : wrap(value)
+      return {
+        [key]: safe(value, node),
+      }
     // TODO lists
     case 'ArrayExpression':
-      return wrap(false)
     // TODO support object nesting
     case 'ObjectExpression':
-      return wrap(false)
+      return false
   }
 }
 

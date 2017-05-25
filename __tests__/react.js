@@ -4,7 +4,7 @@ import { readdirSync, readFileSync } from 'fs'
 
 const isView = f => /\.view$/.test(f)
 const getPath = (f = '.') => join(__dirname, 'views', f)
-;[('react-dom', 'react-native')].forEach(as =>
+;['react-dom', 'react-native'].forEach(as =>
   describe(as, () => {
     readdirSync(getPath()).filter(isView).forEach(f => {
       const name = f.replace(/\.view$/, '')

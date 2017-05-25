@@ -2115,6 +2115,12 @@ strip-bom@^2.0.0:
   dependencies:
     is-utf8 "^0.2.0"
 
+style-to-css@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/style-to-css/-/style-to-css-1.0.3.tgz#fceddd65c134b8b5210adf183cd0b03508e30102"
+  dependencies:
+    to-slug-case "^1.0.0"
+
 supports-color@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-2.0.0.tgz#535d045ce6b6363fa40117084629995e9df324c7"
