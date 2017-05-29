@@ -1,6 +1,6 @@
 {
   "name": "views-morph",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Views language morpher",
   "main": "lib.js",
   "bin": {
@@ -39,6 +39,7 @@
     "css-properties": "^2.0.2",
     "css-to-react-native": "^2.0.3",
     "gaze": "^1.1.2",
+    "glam": "^4.0.3",
     "globule": "^1.1.0",
     "minimist": "^1.2.0",
     "prettier": "^1.2.2",

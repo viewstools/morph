@@ -3,14 +3,17 @@
 exports[`react-dom parses Action 1`] = `
 "import React from 'react';
 import css from 'glam';
-import ViewsAction from './ViewsAction.view';
 
-const styles = { h197667r: css\`flex-direction: column\` };
+const styles = {
+  h73hviv: css('css-1s0kfvh', [], () => [
+    \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
+  ]),
+};
 
 const Action = props => (
-  <ViewsAction onClick={props.clickMe} className={styles.h197667r}>
+  <button onClick={props.clickMe} className={styles.h73hviv}>
     <div>click me</div>
-  </ViewsAction>
+  </button>
 );
 export default Action;
 "
@@ -20,11 +23,15 @@ exports[`react-dom parses BoxShadow 1`] = `
 "import React from 'react';
 import css from 'glam';
 
-const styles = { h197667r: css\`flex-direction: column\` };
+const styles = {
+  h73hviv: css('css-1s0kfvh', [], () => [
+    \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
+  ]),
+};
 
 const BoxShadow = props => (
   <div
-    className={styles.h197667r}
+    className={styles.h73hviv}
     style={{ boxShadow: \`10px 5px 2px \${props.color}\` }}
   />
 );
@@ -36,10 +43,16 @@ exports[`react-dom parses CaptureEmail 1`] = `
 "import React from 'react';
 import css from 'glam';
 
-const styles = { h1veh7ze: css\`border: 1px solid black;color: blue\` };
+const styles = {
+  hvufezv: css('css-17byui2', [], () => [
+    \`.css-17byui2 { border: 1px solid black;
+color: red; }\`,
+    \`.css-17byui2::placeholder { color: blue; }\`,
+  ]),
+};
 
 const CaptureEmail = props => (
-  <input onSubmit={props.onSubmit} className={styles.h1veh7ze} />
+  <input onSubmit={props.onSubmit} className={styles.hvufezv} />
 );
 export default CaptureEmail;
 "
@@ -89,10 +102,14 @@ exports[`react-dom parses GoTo 1`] = `
 "import React from 'react';
 import css from 'glam';
 
-const styles = { h197667r: css\`flex-direction: column\` };
+const styles = {
+  h73hviv: css('css-1s0kfvh', [], () => [
+    \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
+  ]),
+};
 
 const GoTo = props => (
-  <a goTo=\\"https://viewsdx.com\\" className={styles.h197667r}>
+  <a goTo=\\"https://viewsdx.com\\" className={styles.h73hviv}>
     <div>Go to ViewsDX website!</div>
   </a>
 );
@@ -104,9 +121,14 @@ exports[`react-dom parses Horizontal 1`] = `
 "import React from 'react';
 import css from 'glam';
 
-const styles = { h1ylap54: css\`flex-direction: row;border: 1px solid red\` };
+const styles = {
+  h1vxlj3j: css('css-vkz5lf', [], () => [
+    \`.css-vkz5lf { flex-direction: row; -webkit-box-direction: normal; -webkit-box-orient: horizontal; -ms-flex-direction: row; -webkit-flex-direction: row;
+border: 1px solid red; }\`,
+  ]),
+};
 
-const Horizontal = props => <div className={styles.h1ylap54} />;
+const Horizontal = props => <div className={styles.h1vxlj3j} />;
 export default Horizontal;
 "
 `;
@@ -114,17 +136,23 @@ export default Horizontal;
 exports[`react-dom parses Hover 1`] = `
 "import React from 'react';
 import css from 'glam';
-import ViewsAction from './ViewsAction.view';
 
 const styles = {
-  hp30p9n: css\`flex-direction: column;background-color: white\`,
-  h1e0dqk7: css\`color: black\`,
+  h1ven99o: css('css-i58qmr', [], () => [
+    \`.css-i58qmr { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column;
+background-color: black; }\`,
+    \`.css-i58qmr:hover { background-color: white; }\`,
+  ]),
+  hanouj1: css('css-9glvsj', [], () => [
+    \`.css-9glvsj { color: white; }\`,
+    \`.css-9glvsj:hover { color: black; }\`,
+  ]),
 };
 
 const Hover = props => (
-  <ViewsAction onClick={props.onClick} className={styles.hp30p9n}>
-    <div className={styles.h1e0dqk7}>Hey!</div>
-  </ViewsAction>
+  <button onClick={props.onClick} className={styles.h1ven99o}>
+    <div className={styles.hanouj1}>Hey!</div>
+  </button>
 );
 export default Hover;
 "
@@ -133,18 +161,24 @@ export default Hover;
 exports[`react-dom parses HoverProxy 1`] = `
 "import React from 'react';
 import css from 'glam';
-import ViewsAction from './ViewsAction.view';
 
 const styles = {
-  hp30p9n: css\`flex-direction: column;background-color: white\`,
-  h1e0dqk7: css\`color: black\`,
+  h1ven99o: css('css-i58qmr', [], () => [
+    \`.css-i58qmr { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column;
+background-color: black; }\`,
+    \`.css-i58qmr:hover { background-color: white; }\`,
+  ]),
+  hanouj1: css('css-9glvsj', [], () => [
+    \`.css-9glvsj { color: white; }\`,
+    \`.css-9glvsj:hover { color: black; }\`,
+  ]),
 };
 
 const HoverProxy = props => (
-  <ViewsAction onClick={props.onClick} className={styles.hp30p9n}>
+  <button onClick={props.onClick} className={styles.h1ven99o}>
     <props.icon from={props.icon} fill=\\"white\\" fillHover=\\"black\\" />
-    <div className={styles.h1e0dqk7}>Hey!</div>
-  </ViewsAction>
+    <div className={styles.hanouj1}>Hey!</div>
+  </button>
 );
 export default HoverProxy;
 "
@@ -170,10 +204,14 @@ exports[`react-dom parses ListOfSomething 1`] = `
 "import React from 'react';
 import css from 'glam';
 
-const styles = { h197667r: css\`flex-direction: column\` };
+const styles = {
+  h73hviv: css('css-1s0kfvh', [], () => [
+    \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
+  ]),
+};
 
 const ListOfSomething = props => (
-  <div className={styles.h197667r}>
+  <div className={styles.h73hviv}>
     {props.list.map((item, i) => <div key={i}>{item.name}</div>)}
   </div>
 );
@@ -223,12 +261,16 @@ export default Svg;
 exports[`react-dom parses Teleport 1`] = `
 "import React from 'react';
 import css from 'glam';
-import ViewsTeleport from './ViewsTeleport.view';
+import ViewsTeleport from './ViewsTeleport.view.js';
 
-const styles = { hcstcuq: css\`flex-direction: row\` };
+const styles = {
+  h4wk4vz: css('css-sw3yj', [], () => [
+    \`.css-sw3yj { flex-direction: row; -webkit-box-direction: normal; -webkit-box-orient: horizontal; -ms-flex-direction: row; -webkit-flex-direction: row; }\`,
+  ]),
+};
 
 const Teleport = props => (
-  <ViewsTeleport teleportTo=\\"..\\" className={styles.hcstcuq}>
+  <ViewsTeleport teleportTo=\\"..\\" className={styles.h4wk4vz}>
     <div>go back</div>
   </ViewsTeleport>
 );
@@ -241,17 +283,22 @@ exports[`react-dom parses Text 1`] = `
 import css from 'glam';
 
 const styles = {
-  hngg1gi: css\`color: blue;font-family: Montserrat, sans-serif;font-size: 16px;font-weight: 300\`,
+  h11bw6cg: css('css-1l09f9n', [], () => [
+    \`.css-1l09f9n { color: blue;
+font-family: Montserrat, sans-serif;
+font-size: 16px;
+font-weight: 300; }\`,
+  ]),
 };
 
-const Text = props => <div className={styles.hngg1gi}>Hi, I'm some text</div>;
+const Text = props => <div className={styles.h11bw6cg}>Hi, I'm some text</div>;
 export default Text;
 "
 `;
 
 exports[`react-dom parses UseOfProxy 1`] = `
 "import React from 'react';
-import Button from './Button.view';
+import Button from './Button.view.js';
 
 const UseOfProxy = props => (
   <div><Button color=\\"red\\" icon=\\"MyIcon\\" text=\\"I'm a button!\\" /></div>
@@ -264,9 +311,14 @@ exports[`react-dom parses Vertical 1`] = `
 "import React from 'react';
 import css from 'glam';
 
-const styles = { h1ldc0yo: css\`flex-direction: column;background-color: red\` };
+const styles = {
+  h1lis1gl: css('css-nxb3y5', [], () => [
+    \`.css-nxb3y5 { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column;
+background-color: red; }\`,
+  ]),
+};
 
-const Vertical = props => <div className={styles.h1ldc0yo} />;
+const Vertical = props => <div className={styles.h1lis1gl} />;
 export default Vertical;
 "
 `;
@@ -285,12 +337,16 @@ exports[`react-dom parses WhenList 1`] = `
 "import React from 'react';
 import css from 'glam';
 
-const styles = { h197667r: css\`flex-direction: column\` };
+const styles = {
+  h73hviv: css('css-1s0kfvh', [], () => [
+    \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
+  ]),
+};
 
 const WhenList = props => (
   <div>
     {props.showMe
-      ? <div className={styles.h197667r}>
+      ? <div className={styles.h73hviv}>
           {props.list.map((item, i) => <div key={i}>{item.thing}</div>)}
         </div>
       : null}
@@ -311,13 +367,13 @@ export default WhenTopLevel;
 
 exports[`react-native parses Action 1`] = `
 "import React from 'react';
-import ViewsAction from './ViewsAction.view';
+import ViewsAction from './ViewsAction.view.js';
 import { StyleSheet, Text } from 'react-native';
 
-const styles = StyleSheet.create({ h197667r: { flexDirection: 'column' } });
+const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
 const Action = props => (
-  <ViewsAction onClick={props.clickMe} style={styles.h197667r}>
+  <ViewsAction onClick={props.clickMe} style={styles.h18pdll5}>
     <Text>click me</Text>
   </ViewsAction>
 );
@@ -329,12 +385,12 @@ exports[`react-native parses BoxShadow 1`] = `
 "import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
-const styles = StyleSheet.create({ h197667r: { flexDirection: 'column' } });
+const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
 const BoxShadow = props => (
   <View
     style={[
-      styles.h197667r,
+      styles.h18pdll5,
       {
         elevation: 1,
         shadowOffset: { height: 10, width: 5 },
@@ -354,7 +410,7 @@ exports[`react-native parses CaptureEmail 1`] = `
 import { KeyboardAvoidingView, StyleSheet, TextInput } from 'react-native';
 
 const styles = StyleSheet.create({
-  h16yoyru: { border: '1px solid black', color: 'red' },
+  hfkv7h1: { border: '1px solid black', color: 'red' },
 });
 
 const CaptureEmail = props => (
@@ -366,7 +422,7 @@ const CaptureEmail = props => (
       ref={$e => (this.$captureEmail = $e)}
       value={state.Email}
       placeholderTextColor=\\"blue\\"
-      style={styles.h16yoyru}
+      style={styles.hfkv7h1}
     />
   </KeyboardAvoidingView>
 );
@@ -376,7 +432,7 @@ export default CaptureEmail;
 
 exports[`react-native parses CaptureFile 1`] = `
 "import React from 'react';
-import CaptureFile from './CaptureFile.view';
+import CaptureFile from './CaptureFile.view.js';
 
 const CaptureFile = props => <CaptureFile />;
 export default CaptureFile;
@@ -429,13 +485,13 @@ export default CaptureText;
 
 exports[`react-native parses GoTo 1`] = `
 "import React from 'react';
-import Link from './Link.view';
+import Link from './Link.view.js';
 import { StyleSheet, Text } from 'react-native';
 
-const styles = StyleSheet.create({ h197667r: { flexDirection: 'column' } });
+const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
 const GoTo = props => (
-  <Link goTo=\\"https://viewsdx.com\\" style={styles.h197667r}>
+  <Link goTo=\\"https://viewsdx.com\\" style={styles.h18pdll5}>
     <Text>Go to ViewsDX website!</Text>
   </Link>
 );
@@ -448,27 +504,27 @@ exports[`react-native parses Horizontal 1`] = `
 import { StyleSheet, View } from 'react-native';
 
 const styles = StyleSheet.create({
-  h1ylap54: { flexDirection: 'row', border: '1px solid red' },
+  hxlugwh: { flexDirection: 'row', border: '1px solid red' },
 });
 
-const Horizontal = props => <View style={styles.h1ylap54} />;
+const Horizontal = props => <View style={styles.hxlugwh} />;
 export default Horizontal;
 "
 `;
 
 exports[`react-native parses Hover 1`] = `
 "import React from 'react';
-import ViewsAction from './ViewsAction.view';
+import ViewsAction from './ViewsAction.view.js';
 import { StyleSheet, Text } from 'react-native';
 
 const styles = StyleSheet.create({
-  hp30p9n: { flexDirection: 'column', backgroundColor: 'white' },
-  h1e0dqk7: { color: 'black' },
+  h1jrzrhl: { flexDirection: 'column', backgroundColor: 'black' },
+  hyfo4ef: { color: 'white' },
 });
 
 const Hover = props => (
-  <ViewsAction onClick={props.onClick} style={styles.hp30p9n}>
-    <Text style={styles.h1e0dqk7}>Hey!</Text>
+  <ViewsAction onClick={props.onClick} style={styles.h1jrzrhl}>
+    <Text style={styles.hyfo4ef}>Hey!</Text>
   </ViewsAction>
 );
 export default Hover;
@@ -477,18 +533,18 @@ export default Hover;
 
 exports[`react-native parses HoverProxy 1`] = `
 "import React from 'react';
-import ViewsAction from './ViewsAction.view';
+import ViewsAction from './ViewsAction.view.js';
 import { StyleSheet, Text } from 'react-native';
 
 const styles = StyleSheet.create({
-  hp30p9n: { flexDirection: 'column', backgroundColor: 'white' },
-  h1e0dqk7: { color: 'black' },
+  h1jrzrhl: { flexDirection: 'column', backgroundColor: 'black' },
+  hyfo4ef: { color: 'white' },
 });
 
 const HoverProxy = props => (
-  <ViewsAction onClick={props.onClick} style={styles.hp30p9n}>
+  <ViewsAction onClick={props.onClick} style={styles.h1jrzrhl}>
     <props.icon from={props.icon} fill=\\"white\\" fillHover=\\"black\\" />
-    <Text style={styles.h1e0dqk7}>Hey!</Text>
+    <Text style={styles.hyfo4ef}>Hey!</Text>
   </ViewsAction>
 );
 export default HoverProxy;
@@ -517,10 +573,10 @@ exports[`react-native parses ListOfSomething 1`] = `
 "import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-const styles = StyleSheet.create({ h197667r: { flexDirection: 'column' } });
+const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
 const ListOfSomething = props => (
-  <View style={styles.h197667r}>
+  <View style={styles.h18pdll5}>
     {props.list.map((item, i) => <Text key={i}>{item.name}</Text>)}
   </View>
 );
@@ -574,13 +630,13 @@ export default Svg;
 
 exports[`react-native parses Teleport 1`] = `
 "import React from 'react';
-import ViewsTeleport from './ViewsTeleport.view';
+import ViewsTeleport from './ViewsTeleport.view.js';
 import { StyleSheet, Text } from 'react-native';
 
-const styles = StyleSheet.create({ hcstcuq: { flexDirection: 'row' } });
+const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
 
 const Teleport = props => (
-  <ViewsTeleport teleportTo=\\"..\\" style={styles.hcstcuq}>
+  <ViewsTeleport teleportTo=\\"..\\" style={styles.hp2cr4d}>
     <Text>go back</Text>
   </ViewsTeleport>
 );
@@ -593,17 +649,17 @@ exports[`react-native parses Text 1`] = `
 import { StyleSheet, Text } from 'react-native';
 
 const styles = StyleSheet.create({
-  h1rtwlqa: { color: 'blue', fontFamily: 'Montserrat-300', fontSize: 16 },
+  h11t0jc: { color: 'blue', fontFamily: 'Montserrat-300', fontSize: 16 },
 });
 
-const Text = props => <Text style={styles.h1rtwlqa}>Hi, I'm some text</Text>;
+const Text = props => <Text style={styles.h11t0jc}>Hi, I'm some text</Text>;
 export default Text;
 "
 `;
 
 exports[`react-native parses UseOfProxy 1`] = `
 "import React from 'react';
-import Button from './Button.view';
+import Button from './Button.view.js';
 import { View } from 'react-native';
 
 const UseOfProxy = props => (
@@ -618,10 +674,10 @@ exports[`react-native parses Vertical 1`] = `
 import { StyleSheet, View } from 'react-native';
 
 const styles = StyleSheet.create({
-  h1ldc0yo: { flexDirection: 'column', backgroundColor: 'red' },
+  h1c5r919: { flexDirection: 'column', backgroundColor: 'red' },
 });
 
-const Vertical = props => <View style={styles.h1ldc0yo} />;
+const Vertical = props => <View style={styles.h1c5r919} />;
 export default Vertical;
 "
 `;
@@ -641,12 +697,12 @@ exports[`react-native parses WhenList 1`] = `
 "import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-const styles = StyleSheet.create({ h197667r: { flexDirection: 'column' } });
+const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
 const WhenList = props => (
   <View>
     {props.showMe
-      ? <View style={styles.h197667r}>
+      ? <View style={styles.h18pdll5}>
           {props.list.map((item, i) => <Text key={i}>{item.thing}</Text>)}
         </View>
       : null}

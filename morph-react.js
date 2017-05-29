@@ -1,4 +1,10 @@
-import { getProp, hasKeys, isCode, isStyle } from './morph-utils.js'
+import {
+  getProp,
+  getStyleType,
+  hasKeys,
+  isCode,
+  isStyle,
+} from './morph-utils.js'
 
 export const makeVisitors = ({
   getBlockName,
@@ -87,15 +93,29 @@ export const makeVisitors = ({
   const PropertiesStyle = {
     enter(node, parent, state) {
       node.style = {
-        dynamic: {},
-        static: {},
+        dynamic: {
+          base: {},
+          active: {},
+          hover: {},
+          activeHover: {},
+          disabled: {},
+          placeholder: {},
+        },
+        static: {
+          base: {},
+          active: {},
+          hover: {},
+          activeHover: {},
+          disabled: {},
+          placeholder: {},
+        },
       }
 
       const name = parent.name.value
       if (name === 'Vertical' || name === 'List') {
-        node.style.static.flexDirection = 'column'
+        node.style.static.base.flexDirection = 'column'
       } else if (name === 'Horizontal') {
-        node.style.static.flexDirection = 'row'
+        node.style.static.base.flexDirection = 'row'
       }
     },
     leave: PropertiesStyleLeave,
@@ -142,10 +162,8 @@ export const makeVisitors = ({
             state.render.push(` ${k}=${safe(styleForProperty[k], node)}`)
           )
         } else {
-          Object.assign(
-            code ? parent.style.dynamic : parent.style.static,
-            styleForProperty
-          )
+          const target = code ? parent.style.dynamic : parent.style.static
+          Object.assign(target[getStyleType(node)], styleForProperty)
         }
 
         return true

@@ -5,7 +5,7 @@ export default (arr, prefix = 'h') => `h${hash(arr)}`
 function hash(arr) {
   let str = (Array.isArray(arr)
     ? arr
-    : Object.keys(arr).map(k => `${k}:${arr[k]}`)).join(',')
+    : Object.keys(arr).map(k => `${k}:${JSON.stringify(arr[k])}`)).join(',')
   return murmur2(str, str.length).toString(36)
 }
 

@@ -1,4 +1,3 @@
-import { ACTION, TELEPORT } from './types.js'
 import {
   getObjectAsString,
   getProp,
@@ -8,6 +7,8 @@ import {
   isTag,
 } from './morph-utils.js'
 import { makeVisitors, wrap } from './morph-react.js'
+import { TELEPORT } from './types.js'
+import { transform } from 'babel-core'
 import getBody from './react-native/get-body.js'
 import getColor from 'color'
 import getDependencies from './react-native/get-dependencies.js'
@@ -47,14 +48,27 @@ export default ({ getImport, name, view }) => {
 }
 
 function PropertiesStyleLeave(node, parent, state) {
-  if (hasKeys(node.style.static)) {
+  if (hasKeys(node.style.static.base)) {
     const id = hash(node.style.static)
     state.styles[id] = node.style.static
     parent.styleId = id
-    state.render.push(` className={styles.${id}}`)
+    const isActive = getProp(parent, 'isActive')
+
+    let className = [
+      `styles.${id}`,
+      isActive && `${isActive.value.value} && 'active'`,
+    ].filter(Boolean)
+
+    if (className.length > 0) {
+      className = className.map(k => `\${${k}}`).join(' ')
+      className = `\`${className}\``
+    }
+
+    state.render.push(` className=${wrap(className)}`)
   }
-  if (hasKeys(node.style.dynamic)) {
-    const dynamic = getObjectAsString(node.style.dynamic)
+  // TODO needs to be different, it should also be a classname here too
+  if (hasKeys(node.style.dynamic.base)) {
+    const dynamic = getObjectAsString(node.style.dynamic.base)
     state.render.push(` style={${dynamic}}`)
   }
 }
@@ -164,18 +178,53 @@ const getValue = (key, value) =>
 
 const toCss = obj =>
   Object.keys(obj)
-    .map(k => `${toSlugCase(k)}: ${getValue(k, obj[k])}`)
-    .join(';')
+    .map(k => `${toSlugCase(k)}: ${getValue(k, obj[k])};`)
+    .join('\n')
+
+const toNestedCss = ({
+  base,
+  hover,
+  active,
+  activeHover,
+  disabled,
+  placeholder,
+}) => {
+  const baseCss = toCss(base)
+  const hoverCss = toCss(hover)
+  const activeCss = toCss(active)
+  const activeHoverCss = toCss(activeHover)
+  const disabledCss = toCss(disabled)
+  const placeholderCss = toCss(placeholder)
+
+  const ret = [
+    baseCss,
+    hoverCss && `&:hover {${hoverCss}}`,
+    activeCss && `&.active {${activeCss}}`,
+    activeHoverCss && `&.active:hover {${activeHoverCss}}`,
+    disabledCss && `&:disabled {${disabledCss}}`,
+    placeholderCss && `&::placeholder {${placeholderCss}}`,
+  ]
+    .filter(Boolean)
+    .join('\n')
+
+  return ret
+}
 
 const getStyles = styles => {
   if (!hasKeys(styles)) return ''
 
   const obj = Object.keys(styles)
-    .map(k => `${JSON.stringify(k)}: css\`${toCss(styles[k])}\``)
+    .map(k => `${JSON.stringify(k)}: css\`${toNestedCss(styles[k])}\``)
     .join(',')
 
-  return `const styles = {${obj}}`
+  return transformGlam(`const styles = {${obj}}`).code
 }
+
+const transformGlam = code =>
+  transform(code, {
+    babelrc: false,
+    plugins: [[require.resolve('glam/babel'), { inline: true }]],
+  })
 
 // THE SAME
 const toComponent = ({ getImport, name, state }) => `import React from 'react'

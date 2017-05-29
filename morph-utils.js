@@ -20,6 +20,10 @@ export const getProp = (node, key) => {
   return node.properties && node.properties.list.find(finder)
 }
 
+const styleStems = ['active', 'hover', 'activeHover', 'placeholder', 'disabled']
+export const getStyleType = node =>
+  styleStems.find(tag => isTag(node, tag)) || 'base'
+
 export const hasKeys = obj => Object.keys(obj).length > 0
 
 export const hasProp = (node, key, match) => {

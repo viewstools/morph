@@ -20,7 +20,7 @@ const ITEM = /^item[A-Z]*$/
 const MARGIN = /^margin/
 const PADDING = /^padding/
 const PROP = /^([a-z][a-zA-Z0-9]*)\s+(.+)$/
-const PROP_STYLE_STEMS = /^([a-z][A-Z0-9]*?)(Active|ActiveHover|Hover|Placeholder)?$/i
+const PROP_STYLE_STEMS = /^([a-z][A-Z0-9]*?)(Active|ActiveHover|Hover|Placeholder|Disabled)?$/i
 const SECTION = /^([a-z][a-zA-Z0-9]*)$/
 const STYLE = new RegExp(
   `^(${cssProperties.map(toCamelCase).join('|')}|heightBlocked)$`

@@ -95,14 +95,14 @@ const BlockNative = {
 function PropertiesStyleLeave(node, parent, state) {
   let style = null
 
-  if (hasKeys(node.style.static)) {
-    const id = hash(node.style.static)
-    state.styles[id] = node.style.static
+  if (hasKeys(node.style.static.base)) {
+    const id = hash(node.style.static.base)
+    state.styles[id] = node.style.static.base
     parent.styleId = id
     style = `styles.${id}`
   }
-  if (hasKeys(node.style.dynamic)) {
-    const dynamic = getObjectAsString(node.style.dynamic)
+  if (hasKeys(node.style.dynamic.base)) {
+    const dynamic = getObjectAsString(node.style.dynamic.base)
     style = style ? `[${style},${dynamic}]` : dynamic
   }
 
