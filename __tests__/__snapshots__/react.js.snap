@@ -11,7 +11,7 @@ const styles = {
 };
 
 const Action = props => (
-  <button onClick={props.clickMe} className={styles.h73hviv}>
+  <button onClick={props.clickMe} className={\`\${styles.h73hviv}\`}>
     <div>click me</div>
   </button>
 );
@@ -31,7 +31,7 @@ const styles = {
 
 const BoxShadow = props => (
   <div
-    className={styles.h73hviv}
+    className={\`\${styles.h73hviv}\`}
     style={{ boxShadow: \`10px 5px 2px \${props.color}\` }}
   />
 );
@@ -52,7 +52,7 @@ color: red; }\`,
 };
 
 const CaptureEmail = props => (
-  <input onSubmit={props.onSubmit} className={styles.hvufezv} />
+  <input onSubmit={props.onSubmit} className={\`\${styles.hvufezv}\`} />
 );
 export default CaptureEmail;
 "
@@ -109,7 +109,7 @@ const styles = {
 };
 
 const GoTo = props => (
-  <a goTo=\\"https://viewsdx.com\\" className={styles.h73hviv}>
+  <a goTo=\\"https://viewsdx.com\\" className={\`\${styles.h73hviv}\`}>
     <div>Go to ViewsDX website!</div>
   </a>
 );
@@ -128,7 +128,7 @@ border: 1px solid red; }\`,
   ]),
 };
 
-const Horizontal = props => <div className={styles.h1vxlj3j} />;
+const Horizontal = props => <div className={\`\${styles.h1vxlj3j}\`} />;
 export default Horizontal;
 "
 `;
@@ -150,8 +150,8 @@ background-color: black; }\`,
 };
 
 const Hover = props => (
-  <button onClick={props.onClick} className={styles.h1ven99o}>
-    <div className={styles.hanouj1}>Hey!</div>
+  <button onClick={props.onClick} className={\`\${styles.h1ven99o}\`}>
+    <div className={\`\${styles.hanouj1}\`}>Hey!</div>
   </button>
 );
 export default Hover;
@@ -175,9 +175,9 @@ background-color: black; }\`,
 };
 
 const HoverProxy = props => (
-  <button onClick={props.onClick} className={styles.h1ven99o}>
+  <button onClick={props.onClick} className={\`\${styles.h1ven99o}\`}>
     <props.icon from={props.icon} fill=\\"white\\" fillHover=\\"black\\" />
-    <div className={styles.hanouj1}>Hey!</div>
+    <div className={\`\${styles.hanouj1}\`}>Hey!</div>
   </button>
 );
 export default HoverProxy;
@@ -211,7 +211,7 @@ const styles = {
 };
 
 const ListOfSomething = props => (
-  <div className={styles.h73hviv}>
+  <div className={\`\${styles.h73hviv}\`}>
     {props.list.map((item, i) => <div key={i}>{item.name}</div>)}
   </div>
 );
@@ -270,7 +270,7 @@ const styles = {
 };
 
 const Teleport = props => (
-  <ViewsTeleport teleportTo=\\"..\\" className={styles.h4wk4vz}>
+  <ViewsTeleport teleportTo=\\"..\\" className={\`\${styles.h4wk4vz}\`}>
     <div>go back</div>
   </ViewsTeleport>
 );
@@ -291,7 +291,9 @@ font-weight: 300; }\`,
   ]),
 };
 
-const Text = props => <div className={styles.h11bw6cg}>Hi, I'm some text</div>;
+const Text = props => (
+  <div className={\`\${styles.h11bw6cg}\`}>Hi, I'm some text</div>
+);
 export default Text;
 "
 `;
@@ -318,7 +320,7 @@ background-color: red; }\`,
   ]),
 };
 
-const Vertical = props => <div className={styles.h1lis1gl} />;
+const Vertical = props => <div className={\`\${styles.h1lis1gl}\`} />;
 export default Vertical;
 "
 `;
@@ -346,7 +348,7 @@ const styles = {
 const WhenList = props => (
   <div>
     {props.showMe
-      ? <div className={styles.h73hviv}>
+      ? <div className={\`\${styles.h73hviv}\`}>
           {props.list.map((item, i) => <div key={i}>{item.thing}</div>)}
         </div>
       : null}
@@ -410,7 +412,12 @@ exports[`react-native parses CaptureEmail 1`] = `
 import { KeyboardAvoidingView, StyleSheet, TextInput } from 'react-native';
 
 const styles = StyleSheet.create({
-  hfkv7h1: { border: '1px solid black', color: 'red' },
+  hm4pcs: {
+    borderColor: 'black',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    color: 'red',
+  },
 });
 
 const CaptureEmail = props => (
@@ -422,7 +429,7 @@ const CaptureEmail = props => (
       ref={$e => (this.$captureEmail = $e)}
       value={state.Email}
       placeholderTextColor=\\"blue\\"
-      style={styles.hfkv7h1}
+      style={styles.hm4pcs}
     />
   </KeyboardAvoidingView>
 );
@@ -504,10 +511,15 @@ exports[`react-native parses Horizontal 1`] = `
 import { StyleSheet, View } from 'react-native';
 
 const styles = StyleSheet.create({
-  hxlugwh: { flexDirection: 'row', border: '1px solid red' },
+  h13qdyyc: {
+    flexDirection: 'row',
+    borderColor: 'red',
+    borderStyle: 'solid',
+    borderWidth: 1,
+  },
 });
 
-const Horizontal = props => <View style={styles.hxlugwh} />;
+const Horizontal = props => <View style={styles.h13qdyyc} />;
 export default Horizontal;
 "
 `;

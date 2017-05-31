@@ -72,9 +72,12 @@ const BlockNative = {
 
         if (captureNext) {
           state.render.push(` blurOnSubmit={false}`)
-          state.render
-            .push(` onSubmitEditing={this.$capture${captureNext}? () => this.$capture${captureNext}.focus() : ${onSubmit}}`)
-          state.render(` returnKeyType = {this.$capture${captureNext}? 'next' : 'go'}`)
+          state.render.push(
+            ` onSubmitEditing={this.$capture${captureNext}? () => this.$capture${captureNext}.focus() : ${onSubmit}}`
+          )
+          state.render(
+            ` returnKeyType = {this.$capture${captureNext}? 'next' : 'go'}`
+          )
         } else {
           if (onSubmit) {
             state.render.push(` onSubmitEditing={${onSubmit}}`)
@@ -83,8 +86,9 @@ const BlockNative = {
             state.render.push(` returnKeyType="done"`)
           }
         }
-        state.render
-          .push(` onChangeText = {${node.is} => this.setState({ ${node.is} })}`)
+        state.render.push(
+          ` onChangeText = {${node.is} => this.setState({ ${node.is} })}`
+        )
         state.render.push(` ref={$e => this.$capture${node.is} = $e}`)
         state.render.push(` value={state.${node.is}}`)
       }
@@ -148,7 +152,11 @@ const getGroupBlockName = node => {
   } else if (hasProp(node, 'goTo')) {
     name = 'Link'
   } else if (hasProp(node, 'onClick')) {
+    // TODO morph as regular view, also, revisit underlayColor
+    // TODO active
+    // name = 'View'
     name = ACTION
+    node.isAction = true
   } else if (hasProp(node, 'overflowY', v => v === 'auto' || v === 'scroll')) {
     name = 'ScrollView'
   }
@@ -203,7 +211,7 @@ const getShadow = value => {
     color = parts[0]
   } else if (parts.length === 2) {
     color = parts[1]
-    ret.shadowRadius = parseInt(parts[0])
+    ret.shadowRadius = parseInt(parts[0], 10)
   }
 
   if (color) {
@@ -221,11 +229,24 @@ const getShadow = value => {
   return ret
 }
 
+const getBorder = value => {
+  const [borderWidth, borderStyle, borderColor] = value.split(' ')
+
+  return {
+    borderColor,
+    borderStyle,
+    borderWidth: parseInt(borderWidth, 10),
+  }
+}
+
 const getStyleForProperty = (node, parent, code) => {
   const key = node.key.value
   const value = node.value.value
 
   switch (key) {
+    case 'border':
+      return getBorder(value)
+
     case 'boxShadow':
       return getShadow(value)
 
