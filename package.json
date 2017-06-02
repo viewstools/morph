@@ -7,6 +7,7 @@
     "views-morph": "./cli.js"
   },
   "scripts": {
+    "precommit": "lint-staged",
     "prepublish": "NODE_ENV=production rollup --config rollup.config.js",
     "test": "jest",
     "watch": "rollup --config rollup.config.js --watch"
@@ -22,12 +23,16 @@
   },
   "homepage": "https://github.com/viewsdx/morph#readme",
   "devDependencies": {
+    "babel-eslint": "^7.2.3",
     "babel-jest": "^20.0.3",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "eslint": "^3.19.0",
+    "husky": "^0.13.4",
     "import-export": "^1.0.1",
     "jest": "^20.0.0",
+    "lint-staged": "^3.6.0",
     "rollup": "^0.41.6",
     "rollup-plugin-babel": "^2.7.1",
     "rollup-watch": "^3.2.2"
@@ -38,15 +43,22 @@
     "color": "^1.0.3",
     "css-properties": "^2.0.2",
     "css-to-react-native": "^2.0.3",
+    "eslint-plugin-import": "^2.3.0",
     "gaze": "^1.1.2",
     "glam": "^4.0.3",
     "globule": "^1.1.0",
     "minimist": "^1.2.0",
-    "prettier": "^1.2.2",
+    "prettier": "^1.4.0",
     "style-to-css": "^1.0.3",
     "synesthesia": "^1.0.1",
     "to-camel-case": "^1.0.0",
     "to-pascal-case": "^1.0.0",
     "to-slug-case": "^1.0.0"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --trailing-comma es5 --single-quote --write",
+      "git add"
+    ]
   }
 }

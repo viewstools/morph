@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`react-dom parses Action 1`] = `
+exports[`react-dom parses react-dom Action 1`] = `
 "import React from 'react';
 import css from 'glam';
 
@@ -10,16 +10,15 @@ const styles = {
   ]),
 };
 
-const Action = props => (
+const Action = props =>
   <button onClick={props.clickMe} className={\`\${styles.h73hviv}\`}>
     <div>click me</div>
-  </button>
-);
+  </button>;
 export default Action;
 "
 `;
 
-exports[`react-dom parses BoxShadow 1`] = `
+exports[`react-dom parses react-dom BoxShadow 1`] = `
 "import React from 'react';
 import css from 'glam';
 
@@ -29,17 +28,16 @@ const styles = {
   ]),
 };
 
-const BoxShadow = props => (
+const BoxShadow = props =>
   <div
     className={\`\${styles.h73hviv}\`}
     style={{ boxShadow: \`10px 5px 2px \${props.color}\` }}
-  />
-);
+  />;
 export default BoxShadow;
 "
 `;
 
-exports[`react-dom parses CaptureEmail 1`] = `
+exports[`react-dom parses react-dom CaptureEmail 1`] = `
 "import React from 'react';
 import css from 'glam';
 
@@ -51,14 +49,13 @@ color: red; }\`,
   ]),
 };
 
-const CaptureEmail = props => (
-  <input onSubmit={props.onSubmit} className={\`\${styles.hvufezv}\`} />
-);
+const CaptureEmail = props =>
+  <input onSubmit={props.onSubmit} className={\`\${styles.hvufezv}\`} />;
 export default CaptureEmail;
 "
 `;
 
-exports[`react-dom parses CaptureFile 1`] = `
+exports[`react-dom parses react-dom CaptureFile 1`] = `
 "import React from 'react';
 
 const CaptureFile = props => <input />;
@@ -66,7 +63,7 @@ export default CaptureFile;
 "
 `;
 
-exports[`react-dom parses CaptureNumber 1`] = `
+exports[`react-dom parses react-dom CaptureNumber 1`] = `
 "import React from 'react';
 
 const CaptureNumber = props => <input />;
@@ -74,7 +71,7 @@ export default CaptureNumber;
 "
 `;
 
-exports[`react-dom parses CapturePhone 1`] = `
+exports[`react-dom parses react-dom CapturePhone 1`] = `
 "import React from 'react';
 
 const CapturePhone = props => <input />;
@@ -82,7 +79,7 @@ export default CapturePhone;
 "
 `;
 
-exports[`react-dom parses CaptureSecure 1`] = `
+exports[`react-dom parses react-dom CaptureSecure 1`] = `
 "import React from 'react';
 
 const CaptureSecure = props => <input />;
@@ -90,7 +87,7 @@ export default CaptureSecure;
 "
 `;
 
-exports[`react-dom parses CaptureText 1`] = `
+exports[`react-dom parses react-dom CaptureText 1`] = `
 "import React from 'react';
 
 const CaptureText = props => <input />;
@@ -98,7 +95,7 @@ export default CaptureText;
 "
 `;
 
-exports[`react-dom parses GoTo 1`] = `
+exports[`react-dom parses react-dom GoTo 1`] = `
 "import React from 'react';
 import css from 'glam';
 
@@ -108,16 +105,15 @@ const styles = {
   ]),
 };
 
-const GoTo = props => (
+const GoTo = props =>
   <a goTo=\\"https://viewsdx.com\\" className={\`\${styles.h73hviv}\`}>
     <div>Go to ViewsDX website!</div>
-  </a>
-);
+  </a>;
 export default GoTo;
 "
 `;
 
-exports[`react-dom parses Horizontal 1`] = `
+exports[`react-dom parses react-dom Horizontal 1`] = `
 "import React from 'react';
 import css from 'glam';
 
@@ -133,7 +129,7 @@ export default Horizontal;
 "
 `;
 
-exports[`react-dom parses Hover 1`] = `
+exports[`react-dom parses react-dom Hover 1`] = `
 "import React from 'react';
 import css from 'glam';
 
@@ -149,16 +145,15 @@ background-color: black; }\`,
   ]),
 };
 
-const Hover = props => (
+const Hover = props =>
   <button onClick={props.onClick} className={\`\${styles.h1ven99o}\`}>
     <div className={\`\${styles.hanouj1}\`}>Hey!</div>
-  </button>
-);
+  </button>;
 export default Hover;
 "
 `;
 
-exports[`react-dom parses HoverProxy 1`] = `
+exports[`react-dom parses react-dom HoverProxy 1`] = `
 "import React from 'react';
 import css from 'glam';
 
@@ -174,17 +169,16 @@ background-color: black; }\`,
   ]),
 };
 
-const HoverProxy = props => (
+const HoverProxy = props =>
   <button onClick={props.onClick} className={\`\${styles.h1ven99o}\`}>
     <props.icon from={props.icon} fill=\\"white\\" fillHover=\\"black\\" />
     <div className={\`\${styles.hanouj1}\`}>Hey!</div>
-  </button>
-);
+  </button>;
 export default HoverProxy;
 "
 `;
 
-exports[`react-dom parses Image 1`] = `
+exports[`react-dom parses react-dom Image 1`] = `
 "import React from 'react';
 
 const Image = props => <img source=\\"https://viewsdx.com/rocks.jpg\\" />;
@@ -192,7 +186,7 @@ export default Image;
 "
 `;
 
-exports[`react-dom parses JustText 1`] = `
+exports[`react-dom parses react-dom JustText 1`] = `
 "import React from 'react';
 
 const JustText = props => <div>hey!</div>;
@@ -200,7 +194,7 @@ export default JustText;
 "
 `;
 
-exports[`react-dom parses ListOfSomething 1`] = `
+exports[`react-dom parses react-dom ListOfSomething 1`] = `
 "import React from 'react';
 import css from 'glam';
 
@@ -210,16 +204,15 @@ const styles = {
   ]),
 };
 
-const ListOfSomething = props => (
+const ListOfSomething = props =>
   <div className={\`\${styles.h73hviv}\`}>
     {props.list.map((item, i) => <div key={i}>{item.name}</div>)}
-  </div>
-);
+  </div>;
 export default ListOfSomething;
 "
 `;
 
-exports[`react-dom parses NameIsType 1`] = `
+exports[`react-dom parses react-dom NameIsType 1`] = `
 "import React from 'react';
 
 const NameIsType = props => <div>iam</div>;
@@ -227,17 +220,16 @@ export default NameIsType;
 "
 `;
 
-exports[`react-dom parses Proxy 1`] = `
+exports[`react-dom parses react-dom Proxy 1`] = `
 "import React from 'react';
 
-const Proxy = props => (
-  <div><props.icon from={props.icon} fill=\\"red\\" /><div>{props.text}</div></div>
-);
+const Proxy = props =>
+  <div><props.icon from={props.icon} fill=\\"red\\" /><div>{props.text}</div></div>;
 export default Proxy;
 "
 `;
 
-exports[`react-dom parses Svg 1`] = `
+exports[`react-dom parses react-dom Svg 1`] = `
 "import React from 'react';
 import Svg, {
   Text as SvgText,
@@ -246,19 +238,16 @@ import Svg, {
   Text as SvgText,
 } from 'react-native-svg';
 
-const Svg = props => (
+const Svg = props =>
   <Svg viewBox=\\"0 0 20 20\\">
-    <Path d=\\"0 20\\" />
-    <Circle cx={10} cy={5} r={5} />
-    <G><Path d={1} /><Path d={2} /></G>
-    <text text=\\"hey\\" />
-  </Svg>
-);
+    <Path d=\\"0 20\\" /><Circle cx={10} cy={5} r={5} />
+    <G><Path d={1} /><Path d={2} /></G><text text=\\"hey\\" />
+  </Svg>;
 export default Svg;
 "
 `;
 
-exports[`react-dom parses Teleport 1`] = `
+exports[`react-dom parses react-dom Teleport 1`] = `
 "import React from 'react';
 import css from 'glam';
 import ViewsTeleport from './ViewsTeleport.view.js';
@@ -269,16 +258,15 @@ const styles = {
   ]),
 };
 
-const Teleport = props => (
+const Teleport = props =>
   <ViewsTeleport teleportTo=\\"..\\" className={\`\${styles.h4wk4vz}\`}>
     <div>go back</div>
-  </ViewsTeleport>
-);
+  </ViewsTeleport>;
 export default Teleport;
 "
 `;
 
-exports[`react-dom parses Text 1`] = `
+exports[`react-dom parses react-dom Text 1`] = `
 "import React from 'react';
 import css from 'glam';
 
@@ -291,25 +279,23 @@ font-weight: 300; }\`,
   ]),
 };
 
-const Text = props => (
-  <div className={\`\${styles.h11bw6cg}\`}>Hi, I'm some text</div>
-);
+const Text = props =>
+  <div className={\`\${styles.h11bw6cg}\`}>Hi, I'm some text</div>;
 export default Text;
 "
 `;
 
-exports[`react-dom parses UseOfProxy 1`] = `
+exports[`react-dom parses react-dom UseOfProxy 1`] = `
 "import React from 'react';
 import Button from './Button.view.js';
 
-const UseOfProxy = props => (
-  <div><Button color=\\"red\\" icon=\\"MyIcon\\" text=\\"I'm a button!\\" /></div>
-);
+const UseOfProxy = props =>
+  <div><Button color=\\"red\\" icon=\\"MyIcon\\" text=\\"I'm a button!\\" /></div>;
 export default UseOfProxy;
 "
 `;
 
-exports[`react-dom parses Vertical 1`] = `
+exports[`react-dom parses react-dom Vertical 1`] = `
 "import React from 'react';
 import css from 'glam';
 
@@ -325,17 +311,16 @@ export default Vertical;
 "
 `;
 
-exports[`react-dom parses When 1`] = `
+exports[`react-dom parses react-dom When 1`] = `
 "import React from 'react';
 
-const When = props => (
-  <div>{props.showMe ? <div>I may be hidden</div> : null}</div>
-);
+const When = props =>
+  <div>{props.showMe ? <div>I may be hidden</div> : null}</div>;
 export default When;
 "
 `;
 
-exports[`react-dom parses WhenList 1`] = `
+exports[`react-dom parses react-dom WhenList 1`] = `
 "import React from 'react';
 import css from 'glam';
 
@@ -345,51 +330,48 @@ const styles = {
   ]),
 };
 
-const WhenList = props => (
+const WhenList = props =>
   <div>
     {props.showMe
       ? <div className={\`\${styles.h73hviv}\`}>
           {props.list.map((item, i) => <div key={i}>{item.thing}</div>)}
         </div>
       : null}
-  </div>
-);
+  </div>;
 export default WhenList;
 "
 `;
 
-exports[`react-dom parses WhenTopLevel 1`] = `
+exports[`react-dom parses react-dom WhenTopLevel 1`] = `
 "import React from 'react';
 
 const WhenTopLevel = props =>
-  (props.showMe ? <div>I may be hidden</div> : null);
+  props.showMe ? <div>I may be hidden</div> : null;
 export default WhenTopLevel;
 "
 `;
 
-exports[`react-native parses Action 1`] = `
+exports[`react-native parses react-native Action 1`] = `
 "import React from 'react';
-import ViewsAction from './ViewsAction.view.js';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
-const Action = props => (
-  <ViewsAction onClick={props.clickMe} style={styles.h18pdll5}>
+const Action = props =>
+  <View onClick={props.clickMe} style={styles.h18pdll5}>
     <Text>click me</Text>
-  </ViewsAction>
-);
+  </View>;
 export default Action;
 "
 `;
 
-exports[`react-native parses BoxShadow 1`] = `
+exports[`react-native parses react-native BoxShadow 1`] = `
 "import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
-const BoxShadow = props => (
+const BoxShadow = props =>
   <View
     style={[
       styles.h18pdll5,
@@ -401,13 +383,12 @@ const BoxShadow = props => (
         shadowOpacity: 1,
       },
     ]}
-  />
-);
+  />;
 export default BoxShadow;
 "
 `;
 
-exports[`react-native parses CaptureEmail 1`] = `
+exports[`react-native parses react-native CaptureEmail 1`] = `
 "import React from 'react';
 import { KeyboardAvoidingView, StyleSheet, TextInput } from 'react-native';
 
@@ -420,7 +401,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const CaptureEmail = props => (
+const CaptureEmail = props =>
   <KeyboardAvoidingView behavior=\\"position\\">
     <TextInput
       onSubmitEditing={props.onSubmit}
@@ -431,13 +412,12 @@ const CaptureEmail = props => (
       placeholderTextColor=\\"blue\\"
       style={styles.hm4pcs}
     />
-  </KeyboardAvoidingView>
-);
+  </KeyboardAvoidingView>;
 export default CaptureEmail;
 "
 `;
 
-exports[`react-native parses CaptureFile 1`] = `
+exports[`react-native parses react-native CaptureFile 1`] = `
 "import React from 'react';
 import CaptureFile from './CaptureFile.view.js';
 
@@ -446,67 +426,70 @@ export default CaptureFile;
 "
 `;
 
-exports[`react-native parses CaptureNumber 1`] = `
+exports[`react-native parses react-native CaptureNumber 1`] = `
 "import React from 'react';
 import { KeyboardAvoidingView, TextInput } from 'react-native';
 
-const CaptureNumber = props => (
-  <KeyboardAvoidingView behavior=\\"position\\"><TextInput /></KeyboardAvoidingView>
-);
+const CaptureNumber = props =>
+  <KeyboardAvoidingView behavior=\\"position\\">
+    <TextInput />
+  </KeyboardAvoidingView>;
 export default CaptureNumber;
 "
 `;
 
-exports[`react-native parses CapturePhone 1`] = `
+exports[`react-native parses react-native CapturePhone 1`] = `
 "import React from 'react';
 import { KeyboardAvoidingView, TextInput } from 'react-native';
 
-const CapturePhone = props => (
-  <KeyboardAvoidingView behavior=\\"position\\"><TextInput /></KeyboardAvoidingView>
-);
+const CapturePhone = props =>
+  <KeyboardAvoidingView behavior=\\"position\\">
+    <TextInput />
+  </KeyboardAvoidingView>;
 export default CapturePhone;
 "
 `;
 
-exports[`react-native parses CaptureSecure 1`] = `
+exports[`react-native parses react-native CaptureSecure 1`] = `
 "import React from 'react';
 import { KeyboardAvoidingView, TextInput } from 'react-native';
 
-const CaptureSecure = props => (
-  <KeyboardAvoidingView behavior=\\"position\\"><TextInput /></KeyboardAvoidingView>
-);
+const CaptureSecure = props =>
+  <KeyboardAvoidingView behavior=\\"position\\">
+    <TextInput />
+  </KeyboardAvoidingView>;
 export default CaptureSecure;
 "
 `;
 
-exports[`react-native parses CaptureText 1`] = `
+exports[`react-native parses react-native CaptureText 1`] = `
 "import React from 'react';
 import { KeyboardAvoidingView, TextInput } from 'react-native';
 
-const CaptureText = props => (
-  <KeyboardAvoidingView behavior=\\"position\\"><TextInput /></KeyboardAvoidingView>
-);
+const CaptureText = props =>
+  <KeyboardAvoidingView behavior=\\"position\\">
+    <TextInput />
+  </KeyboardAvoidingView>;
 export default CaptureText;
 "
 `;
 
-exports[`react-native parses GoTo 1`] = `
+exports[`react-native parses react-native GoTo 1`] = `
 "import React from 'react';
 import Link from './Link.view.js';
 import { StyleSheet, Text } from 'react-native';
 
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
-const GoTo = props => (
+const GoTo = props =>
   <Link goTo=\\"https://viewsdx.com\\" style={styles.h18pdll5}>
     <Text>Go to ViewsDX website!</Text>
-  </Link>
-);
+  </Link>;
 export default GoTo;
 "
 `;
 
-exports[`react-native parses Horizontal 1`] = `
+exports[`react-native parses react-native Horizontal 1`] = `
 "import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
@@ -524,46 +507,42 @@ export default Horizontal;
 "
 `;
 
-exports[`react-native parses Hover 1`] = `
+exports[`react-native parses react-native Hover 1`] = `
 "import React from 'react';
-import ViewsAction from './ViewsAction.view.js';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 const styles = StyleSheet.create({
   h1jrzrhl: { flexDirection: 'column', backgroundColor: 'black' },
   hyfo4ef: { color: 'white' },
 });
 
-const Hover = props => (
-  <ViewsAction onClick={props.onClick} style={styles.h1jrzrhl}>
+const Hover = props =>
+  <View onClick={props.onClick} style={styles.h1jrzrhl}>
     <Text style={styles.hyfo4ef}>Hey!</Text>
-  </ViewsAction>
-);
+  </View>;
 export default Hover;
 "
 `;
 
-exports[`react-native parses HoverProxy 1`] = `
+exports[`react-native parses react-native HoverProxy 1`] = `
 "import React from 'react';
-import ViewsAction from './ViewsAction.view.js';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 const styles = StyleSheet.create({
   h1jrzrhl: { flexDirection: 'column', backgroundColor: 'black' },
   hyfo4ef: { color: 'white' },
 });
 
-const HoverProxy = props => (
-  <ViewsAction onClick={props.onClick} style={styles.h1jrzrhl}>
+const HoverProxy = props =>
+  <View onClick={props.onClick} style={styles.h1jrzrhl}>
     <props.icon from={props.icon} fill=\\"white\\" fillHover=\\"black\\" />
     <Text style={styles.hyfo4ef}>Hey!</Text>
-  </ViewsAction>
-);
+  </View>;
 export default HoverProxy;
 "
 `;
 
-exports[`react-native parses Image 1`] = `
+exports[`react-native parses react-native Image 1`] = `
 "import React from 'react';
 import { Image } from 'react-native';
 
@@ -572,7 +551,7 @@ export default Image;
 "
 `;
 
-exports[`react-native parses JustText 1`] = `
+exports[`react-native parses react-native JustText 1`] = `
 "import React from 'react';
 import { Text } from 'react-native';
 
@@ -581,22 +560,21 @@ export default JustText;
 "
 `;
 
-exports[`react-native parses ListOfSomething 1`] = `
+exports[`react-native parses react-native ListOfSomething 1`] = `
 "import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
-const ListOfSomething = props => (
+const ListOfSomething = props =>
   <View style={styles.h18pdll5}>
     {props.list.map((item, i) => <Text key={i}>{item.name}</Text>)}
-  </View>
-);
+  </View>;
 export default ListOfSomething;
 "
 `;
 
-exports[`react-native parses NameIsType 1`] = `
+exports[`react-native parses react-native NameIsType 1`] = `
 "import React from 'react';
 import { Text } from 'react-native';
 
@@ -605,20 +583,19 @@ export default NameIsType;
 "
 `;
 
-exports[`react-native parses Proxy 1`] = `
+exports[`react-native parses react-native Proxy 1`] = `
 "import React from 'react';
 import { Text, View } from 'react-native';
 
-const Proxy = props => (
+const Proxy = props =>
   <View>
     <props.icon from={props.icon} fill=\\"red\\" /><Text>{props.text}</Text>
-  </View>
-);
+  </View>;
 export default Proxy;
 "
 `;
 
-exports[`react-native parses Svg 1`] = `
+exports[`react-native parses react-native Svg 1`] = `
 "import React from 'react';
 import Svg, {
   Text as SvgText,
@@ -628,35 +605,31 @@ import Svg, {
   Text as SvgText,
 } from 'react-native-svg';
 
-const Svg = props => (
+const Svg = props =>
   <Svg viewBox=\\"0 0 20 20\\">
-    <Path d=\\"0 20\\" />
-    <Circle cx={10} cy={5} r={5} />
-    <G><Path d={1} /><Path d={2} /></G>
-    <SvgText text=\\"hey\\" />
-  </Svg>
-);
+    <Path d=\\"0 20\\" /><Circle cx={10} cy={5} r={5} />
+    <G><Path d={1} /><Path d={2} /></G><SvgText text=\\"hey\\" />
+  </Svg>;
 export default Svg;
 "
 `;
 
-exports[`react-native parses Teleport 1`] = `
+exports[`react-native parses react-native Teleport 1`] = `
 "import React from 'react';
 import ViewsTeleport from './ViewsTeleport.view.js';
 import { StyleSheet, Text } from 'react-native';
 
 const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
 
-const Teleport = props => (
+const Teleport = props =>
   <ViewsTeleport teleportTo=\\"..\\" style={styles.hp2cr4d}>
     <Text>go back</Text>
-  </ViewsTeleport>
-);
+  </ViewsTeleport>;
 export default Teleport;
 "
 `;
 
-exports[`react-native parses Text 1`] = `
+exports[`react-native parses react-native Text 1`] = `
 "import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 
@@ -669,19 +642,18 @@ export default Text;
 "
 `;
 
-exports[`react-native parses UseOfProxy 1`] = `
+exports[`react-native parses react-native UseOfProxy 1`] = `
 "import React from 'react';
 import Button from './Button.view.js';
 import { View } from 'react-native';
 
-const UseOfProxy = props => (
-  <View><Button color=\\"red\\" icon=\\"MyIcon\\" text=\\"I'm a button!\\" /></View>
-);
+const UseOfProxy = props =>
+  <View><Button color=\\"red\\" icon=\\"MyIcon\\" text=\\"I'm a button!\\" /></View>;
 export default UseOfProxy;
 "
 `;
 
-exports[`react-native parses Vertical 1`] = `
+exports[`react-native parses react-native Vertical 1`] = `
 "import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
@@ -694,42 +666,40 @@ export default Vertical;
 "
 `;
 
-exports[`react-native parses When 1`] = `
+exports[`react-native parses react-native When 1`] = `
 "import React from 'react';
 import { Text, View } from 'react-native';
 
-const When = props => (
-  <View>{props.showMe ? <Text>I may be hidden</Text> : null}</View>
-);
+const When = props =>
+  <View>{props.showMe ? <Text>I may be hidden</Text> : null}</View>;
 export default When;
 "
 `;
 
-exports[`react-native parses WhenList 1`] = `
+exports[`react-native parses react-native WhenList 1`] = `
 "import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
-const WhenList = props => (
+const WhenList = props =>
   <View>
     {props.showMe
       ? <View style={styles.h18pdll5}>
           {props.list.map((item, i) => <Text key={i}>{item.thing}</Text>)}
         </View>
       : null}
-  </View>
-);
+  </View>;
 export default WhenList;
 "
 `;
 
-exports[`react-native parses WhenTopLevel 1`] = `
+exports[`react-native parses react-native WhenTopLevel 1`] = `
 "import React from 'react';
 import { Text } from 'react-native';
 
 const WhenTopLevel = props =>
-  (props.showMe ? <Text>I may be hidden</Text> : null);
+  props.showMe ? <Text>I may be hidden</Text> : null;
 export default WhenTopLevel;
 "
 `;
