@@ -11,9 +11,11 @@ const styles = {
 };
 
 const Action = props =>
-  <button onClick={props.clickMe} className={\`\${styles.h73hviv}\`}>
-    <div>click me</div>
-  </button>;
+  props.check
+    ? <button onClick={props.clickMe} className={\`\${styles.h73hviv}\`}>
+        <div>click me</div>
+      </button>
+    : null;
 export default Action;
 "
 `;
@@ -353,14 +355,20 @@ export default WhenTopLevel;
 
 exports[`react-native parses react-native Action 1`] = `
 "import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
 const Action = props =>
-  <View onClick={props.clickMe} style={styles.h18pdll5}>
-    <Text>click me</Text>
-  </View>;
+  props.check
+    ? <TouchableHighlight
+        activeOpacity={0.7}
+        onPress={props.clickMe}
+        underlayColor=\\"transparent\\"
+      >
+        <View style={styles.h18pdll5}><Text>click me</Text></View>
+      </TouchableHighlight>
+    : null;
 export default Action;
 "
 `;
@@ -509,7 +517,7 @@ export default Horizontal;
 
 exports[`react-native parses react-native Hover 1`] = `
 "import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 
 const styles = StyleSheet.create({
   h1jrzrhl: { flexDirection: 'column', backgroundColor: 'black' },
@@ -517,16 +525,22 @@ const styles = StyleSheet.create({
 });
 
 const Hover = props =>
-  <View onClick={props.onClick} style={styles.h1jrzrhl}>
-    <Text style={styles.hyfo4ef}>Hey!</Text>
-  </View>;
+  <TouchableHighlight
+    activeOpacity={0.7}
+    onPress={props.onClick}
+    underlayColor=\\"transparent\\"
+  >
+    <View style={styles.h1jrzrhl}>
+      <Text style={styles.hyfo4ef}>Hey!</Text>
+    </View>
+  </TouchableHighlight>;
 export default Hover;
 "
 `;
 
 exports[`react-native parses react-native HoverProxy 1`] = `
 "import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 
 const styles = StyleSheet.create({
   h1jrzrhl: { flexDirection: 'column', backgroundColor: 'black' },
@@ -534,10 +548,16 @@ const styles = StyleSheet.create({
 });
 
 const HoverProxy = props =>
-  <View onClick={props.onClick} style={styles.h1jrzrhl}>
-    <props.icon from={props.icon} fill=\\"white\\" fillHover=\\"black\\" />
-    <Text style={styles.hyfo4ef}>Hey!</Text>
-  </View>;
+  <TouchableHighlight
+    activeOpacity={0.7}
+    onPress={props.onClick}
+    underlayColor=\\"transparent\\"
+  >
+    <View style={styles.h1jrzrhl}>
+      <props.icon from={props.icon} fill=\\"white\\" fillHover=\\"black\\" />
+      <Text style={styles.hyfo4ef}>Hey!</Text>
+    </View>
+  </TouchableHighlight>;
 export default HoverProxy;
 "
 `;

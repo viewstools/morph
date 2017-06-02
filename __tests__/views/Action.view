@@ -1,4 +1,5 @@
 Vertical
 onClick props.clickMe
+when props.check
 Text
 text click me

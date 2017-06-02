@@ -6,7 +6,7 @@ import {
   hasProp,
   isTag,
 } from './morph-utils.js';
-import { makeVisitors, safe } from './morph-react.js';
+import { makeVisitors, safe, wrap } from './morph-react.js';
 import getBody from './react-native/get-body.js';
 import getColor from 'color';
 import getDependencies from './react-native/get-dependencies.js';
@@ -22,9 +22,18 @@ export default ({ getImport, name, view }) => {
     styles: {},
     todos: [],
     uses: [],
+    use(name) {
+      if (!state.uses.includes(name) && !/props/.test(name))
+        state.uses.push(name);
+    },
   };
 
-  const { Block, ...visitors } = makeVisitors({
+  const {
+    BlockExplicitChildren,
+    BlockName,
+    BlockWhen,
+    ...visitors
+  } = makeVisitors({
     getBlockName,
     getStyleForProperty,
     getValueForProperty,
@@ -32,16 +41,25 @@ export default ({ getImport, name, view }) => {
     PropertiesStyleLeave,
   });
 
-  morph(view, state, {
-    ...visitors,
-    Block: {
-      enter(node, parent, state) {
-        Block.enter.call(this, node, parent, state);
-        BlockNative.enter.call(this, node, parent, state);
-      },
-      leave: Block.leave,
+  visitors.Block = {
+    // TODO Image
+    // TODO Capture*
+    // TODO List without wrapper?
+    enter(node, parent, state) {
+      BlockWhen.enter.call(this, node, parent, state);
+      BlockAction.enter.call(this, node, parent, state);
+      BlockName.enter.call(this, node, parent, state);
+      BlockCapture.enter.call(this, node, parent, state);
     },
-  });
+    leave(node, parent, state) {
+      BlockExplicitChildren.leave.call(this, node, parent, state);
+      BlockName.leave.call(this, node, parent, state);
+      BlockAction.leave.call(this, node, parent, state);
+      BlockWhen.leave.call(this, node, parent, state);
+    },
+  };
+
+  morph(view, state, visitors);
 
   if (state.uses.includes('TextInput')) {
     state.uses.push('KeyboardAvoidingView');
@@ -59,7 +77,26 @@ export default ({ getImport, name, view }) => {
   return toComponent({ getImport, name, state });
 };
 
-const BlockNative = {
+const BlockAction = {
+  enter(node, parent, state) {
+    getBlockName(node);
+
+    if (node.isAction) {
+      const action = wrap(getProp(node, 'onClick').value.value);
+      state.use('TouchableHighlight');
+      state.render.push(
+        `<TouchableHighlight activeOpacity={0.7} onPress=${action} underlayColor='transparent'>`
+      );
+    }
+  },
+  leave(node, parent, state) {
+    if (node.isAction) {
+      state.render.push(`</TouchableHighlight>`);
+    }
+  },
+};
+
+const BlockCapture = {
   enter(node, parent, state) {
     if (/Capture/.test(node.name.value)) {
       if (node.properties && !hasProp(node, 'ref')) {
@@ -290,7 +327,13 @@ const getValueForProperty = (node, parent) => {
   }
 };
 
-const blacklist = ['overflow', 'overflowX', 'overflowY', 'fontWeight'];
+const blacklist = [
+  'overflow',
+  'overflowX',
+  'overflowY',
+  'fontWeight',
+  'onClick',
+];
 const isValidPropertyForBlock = (node, parent) =>
   !blacklist.includes(node.key.value);
 
