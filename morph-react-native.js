@@ -1,9 +1,9 @@
-import { TELEPORT } from './types.js';
 import {
   getObjectAsString,
   getProp,
   hasKeys,
   hasProp,
+  isCode,
   isTag,
 } from './morph-utils.js';
 import { makeVisitors, safe, wrap } from './morph-react.js';
@@ -42,19 +42,19 @@ export default ({ getImport, name, view }) => {
   });
 
   visitors.Block = {
-    // TODO Image
     // TODO Capture*
-    // TODO List without wrapper?
+    // TODO FlatList
     enter(node, parent, state) {
       BlockWhen.enter.call(this, node, parent, state);
-      BlockAction.enter.call(this, node, parent, state);
+      BlockWrap.enter.call(this, node, parent, state);
       BlockName.enter.call(this, node, parent, state);
       BlockCapture.enter.call(this, node, parent, state);
+      BlockBackgroundImage.enter.call(this, node, parent, state);
     },
     leave(node, parent, state) {
       BlockExplicitChildren.leave.call(this, node, parent, state);
       BlockName.leave.call(this, node, parent, state);
-      BlockAction.leave.call(this, node, parent, state);
+      BlockWrap.leave.call(this, node, parent, state);
       BlockWhen.leave.call(this, node, parent, state);
     },
   };
@@ -74,24 +74,64 @@ export default ({ getImport, name, view }) => {
     state.uses.push('StyleSheet');
   }
 
-  return toComponent({ getImport, name, state });
+  const imports = {
+    Link: "import { Link } from 'react-router-native'",
+  };
+
+  const finalGetImport = name => imports[name] || getImport(name);
+
+  return toComponent({ getImport: finalGetImport, name, state });
 };
 
-const BlockAction = {
+const BlockWrap = {
   enter(node, parent, state) {
-    getBlockName(node);
+    const name = getBlockName(node);
 
-    if (node.isAction) {
-      const action = wrap(getProp(node, 'onClick').value.value);
+    if (
+      name === 'Text' &&
+      parent &&
+      parent.parent &&
+      (parent.parent.backgroundImage || parent.parent.ensureBackgroundColor)
+    ) {
+      node.ensureBackgroundColor = true;
+    }
+
+    if (node.action) {
       state.use('TouchableHighlight');
       state.render.push(
-        `<TouchableHighlight activeOpacity={0.7} onPress=${action} underlayColor='transparent'>`
+        `<TouchableHighlight
+          activeOpacity={0.7}
+          onPress=${wrap(node.action)}
+          underlayColor='transparent'>`
       );
+      node.wrapEnd = '</TouchableHighlight>';
+    } else if (node.teleport) {
+      state.use('Link');
+      const teleportTo = getProp(node, 'teleportTo');
+      state.render.push(
+        `<Link
+          activeOpacity={0.7}
+          to=${safe(teleportTo.value.value, teleportTo)}
+          underlayColor='transparent'>`
+      );
+      node.wrapEnd = '</Link>';
+    } else if (node.goTo) {
+      // const goTo = getProp(node, 'goTo')
+      // TODO https://facebook.github.io/react-native/docs/linking.html
     }
   },
   leave(node, parent, state) {
-    if (node.isAction) {
-      state.render.push(`</TouchableHighlight>`);
+    if (node.wrapEnd) {
+      state.render.push(node.wrapEnd);
+    }
+  },
+};
+
+const BlockBackgroundImage = {
+  enter(node, parent, state) {
+    if (node.backgroundImage) {
+      const source = wrap(getObjectAsString({ uri: node.backgroundImage }));
+      state.render.push(` resizeMode="cover" source=${source}`);
     }
   },
 };
@@ -134,6 +174,14 @@ const BlockCapture = {
 
 function PropertiesStyleLeave(node, parent, state) {
   let style = null;
+
+  if (
+    parent.ensureBackgroundColor &&
+    (!('backgroundColor' in node.style.static.base) ||
+      !('backgroundColor' in node.style.dynamic.base))
+  ) {
+    node.style.static.base.backgroundColor = 'transparent';
+  }
 
   if (hasKeys(node.style.static.base)) {
     const id = hash(node.style.static.base);
@@ -183,15 +231,23 @@ const getGroupBlockName = node => {
   let name = 'View';
 
   if (hasProp(node, 'teleportTo')) {
-    name = TELEPORT;
+    node.teleport = true;
   } else if (hasProp(node, 'goTo')) {
-    name = 'Link';
+    node.goTo = true;
   } else if (hasProp(node, 'onClick')) {
-    node.isAction = true;
+    node.action = getProp(node, 'onClick').value.value;
+  }
+
+  if (hasProp(node, 'backgroundImage')) {
+    const propNode = getProp(node, 'backgroundImage');
+    node.backgroundImage = isCode(propNode)
+      ? propNode.value.value
+      : JSON.stringify(propNode.value.value);
+
+    name = 'Image';
   } else if (hasProp(node, 'overflowY', v => v === 'auto' || v === 'scroll')) {
     name = 'ScrollView';
   }
-  // TODO hasProp(node, 'backgroundImage')
 
   return name;
 };
@@ -328,11 +384,15 @@ const getValueForProperty = (node, parent) => {
 };
 
 const blacklist = [
+  'backgroundImage',
+  'backgroundSize',
   'overflow',
   'overflowX',
   'overflowY',
   'fontWeight',
   'onClick',
+  'teleportTo',
+  'goTo',
 ];
 const isValidPropertyForBlock = (node, parent) =>
   !blacklist.includes(node.key.value);

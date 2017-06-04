@@ -5,8 +5,7 @@ import {
   hasProp,
   isCode,
 } from './morph-utils.js';
-import { makeVisitors, wrap } from './morph-react.js';
-import { TELEPORT } from './types.js';
+import { makeVisitors, safe as safeProp, wrap } from './morph-react.js';
 import { transform } from 'babel-core';
 import getBody from './react-native/get-body.js';
 import getDependencies from './react-native/get-dependencies.js';
@@ -29,25 +28,93 @@ export default ({ getImport, name, view }) => {
     },
   };
 
-  morph(
-    view,
-    state,
-    makeVisitors({
-      getBlockName,
-      getStyleForProperty,
-      getValueForProperty,
-      isValidPropertyForBlock,
-      PropertiesStyleLeave,
-    })
-  );
+  const {
+    BlockExplicitChildren,
+    BlockName,
+    BlockWhen,
+    ...visitors
+  } = makeVisitors({
+    getBlockName,
+    getStyleForProperty,
+    getValueForProperty,
+    isValidPropertyForBlock,
+    PropertiesStyleLeave,
+  });
+
+  visitors.Block = {
+    // TODO Capture*
+    // TODO List without wrapper?
+    enter(node, parent, state) {
+      BlockWhen.enter.call(this, node, parent, state);
+      // BlockWrap.enter.call(this, node, parent, state)
+      BlockName.enter.call(this, node, parent, state);
+      // BlockCapture.enter.call(this, node, parent, state)
+      BlockTeleport.enter.call(this, node, parent, state);
+      BlockGoTo.enter.call(this, node, parent, state);
+    },
+    leave(node, parent, state) {
+      BlockExplicitChildren.leave.call(this, node, parent, state);
+      BlockName.leave.call(this, node, parent, state);
+      // BlockWrap.leave.call(this, node, parent, state)
+      BlockWhen.leave.call(this, node, parent, state);
+    },
+  };
+
+  morph(view, state, visitors);
 
   // TODO
   if (Object.keys(state.styles).length > 0) {
     state.uses.push('glam');
   }
 
-  return toComponent({ getImport, name, state });
+  const imports = {
+    Link: "import { Link } from 'react-router-dom'",
+  };
+
+  const finalGetImport = name => imports[name] || getImport(name);
+
+  return toComponent({ getImport: finalGetImport, name, state });
 };
+
+const BlockGoTo = {
+  enter(node, parent, state) {
+    if (node.goTo) {
+      const goTo = getProp(node, 'goTo');
+      state.render.push(
+        ` target='_blank' href=${safeProp(goTo.value.value, goTo)}`
+      );
+    }
+  },
+};
+
+const BlockTeleport = {
+  enter(node, parent, state) {
+    if (node.teleport) {
+      const teleportTo = getProp(node, 'teleportTo');
+      state.render.push(` to=${safeProp(teleportTo.value.value, teleportTo)}`);
+    }
+  },
+};
+
+// const BlockWrap = {
+//   enter(node, parent, state) {
+//     getBlockName(node)
+
+//     if (node.teleport) {
+//       state.use('Link')
+//       const teleportTo = getProp(node, 'teleportTo')
+//       state.render.push(
+//         `<Link to=${safeProp(teleportTo.value.value, teleportTo)}>`
+//       )
+//       node.wrapEnd = '</Link>'
+//     }
+//   },
+//   leave(node, parent, state) {
+//     if (node.wrapEnd) {
+//       state.render.push(node.wrapEnd)
+//     }
+//   },
+// }
 
 function PropertiesStyleLeave(node, parent, state) {
   if (hasKeys(node.style.static.base)) {
@@ -114,9 +181,11 @@ const getGroupBlockName = node => {
   let name = 'div';
 
   if (hasProp(node, 'teleportTo')) {
-    name = TELEPORT;
+    name = 'Link';
+    node.teleport = true;
   } else if (hasProp(node, 'goTo')) {
     name = 'a';
+    node.goTo = true;
   } else if (hasProp(node, 'onClick')) {
     name = 'button';
   } else if (hasProp(node, 'overflowY', v => v === 'auto' || v === 'scroll')) {
@@ -136,6 +205,12 @@ const getStyleForProperty = (node, parent, code) => {
   const value = node.value.value;
 
   switch (key) {
+    case 'backgroundImage':
+      return {
+        backgroundImage: code ? `\`url(\${${value}})\`` : `url("${value}")`,
+        backgroundSize: 'cover',
+      };
+
     case 'zIndex':
       return {
         zIndex: code ? value : parseInt(value, 10),
@@ -168,9 +243,9 @@ const getValueForProperty = (node, parent) => {
   }
 };
 
-// const blacklist = ['overflow', 'overflowX', 'overflowY', 'fontWeight']
-const isValidPropertyForBlock = (node, parent) => true;
-// !blacklist.includes(node.key.value)
+const blacklist = ['backgroundSize', 'teleportTo', 'goTo'];
+const isValidPropertyForBlock = (node, parent) =>
+  !blacklist.includes(node.key.value);
 
 const getValue = (key, value) =>
   typeof value === 'number' &&

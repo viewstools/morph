@@ -1,4 +1,3 @@
-import { ACTION, TELEPORT } from '../types.js';
 import SVG from '../svg.js';
 
 const NATIVE = [
@@ -15,33 +14,20 @@ const NATIVE = [
 export default (uses, getImport) => {
   const usesNative = [];
   const usesSvg = [];
-  let usesAction = false;
-  let usesTeleport = false;
 
   const dependencies = [];
   uses.sort().forEach(d => {
-    switch (d) {
-      case ACTION:
-        usesAction = true;
-        break;
-      case TELEPORT:
-        usesTeleport = true;
-        break;
-      default:
-        if (NATIVE.includes(d)) {
-          usesNative.push(d);
-        } else if (SVG.includes(d)) {
-          usesSvg.push('SvgText' ? 'Text as SvgText' : d);
-        } else if (/^[A-Z]/.test(d)) {
-          dependencies.push(getImport(d));
-        } else if (d === 'glam') {
-          dependencies.push(`import css from 'glam'`);
-        }
+    if (NATIVE.includes(d)) {
+      usesNative.push(d);
+    } else if (SVG.includes(d)) {
+      usesSvg.push('SvgText' ? 'Text as SvgText' : d);
+    } else if (/^[A-Z]/.test(d)) {
+      dependencies.push(getImport(d));
+    } else if (d === 'glam') {
+      dependencies.push(`import css from 'glam'`);
     }
   });
 
-  if (usesAction) dependencies.push(getImport(ACTION));
-  if (usesTeleport) dependencies.push(getImport(TELEPORT));
   if (usesSvg.length > 0) {
     const svg = usesSvg.filter(m => m !== 'Svg').join(', ');
     dependencies.push(`import Svg, { ${svg} } from 'react-native-svg'`);

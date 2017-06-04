@@ -20,6 +20,35 @@ export default Action;
 "
 `;
 
+exports[`react-dom parses react-dom BackgroundImage 1`] = `
+"import React from 'react';
+import css from 'glam';
+
+const styles = {
+  h1ob536b: css('css-1bxi9t2', [], () => [
+    \`.css-1bxi9t2 { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column;
+background-image: url(\\"https://viewsdx.com/image.jpg\\");
+background-size: cover; }\`,
+  ]),
+  h4wk4vz: css('css-sw3yj', [], () => [
+    \`.css-sw3yj { flex-direction: row; -webkit-box-direction: normal; -webkit-box-orient: horizontal; -ms-flex-direction: row; -webkit-flex-direction: row; }\`,
+  ]),
+};
+
+const BackgroundImage = props =>
+  <div className={\`\${styles.h1ob536b}\`}>
+    <div
+      className={\`\${styles.h4wk4vz}\`}
+      style={{
+        backgroundImage: \`url(\${props.backgroundImage})\`,
+        backgroundSize: cover,
+      }}
+    />
+  </div>;
+export default BackgroundImage;
+"
+`;
+
 exports[`react-dom parses react-dom BoxShadow 1`] = `
 "import React from 'react';
 import css from 'glam';
@@ -108,7 +137,7 @@ const styles = {
 };
 
 const GoTo = props =>
-  <a goTo=\\"https://viewsdx.com\\" className={\`\${styles.h73hviv}\`}>
+  <a target=\\"_blank\\" href=\\"https://viewsdx.com\\" className={\`\${styles.h73hviv}\`}>
     <div>Go to ViewsDX website!</div>
   </a>;
 export default GoTo;
@@ -251,8 +280,8 @@ export default Svg;
 
 exports[`react-dom parses react-dom Teleport 1`] = `
 "import React from 'react';
+import { Link } from 'react-router-dom';
 import css from 'glam';
-import ViewsTeleport from './ViewsTeleport.view.js';
 
 const styles = {
   h4wk4vz: css('css-sw3yj', [], () => [
@@ -261,9 +290,7 @@ const styles = {
 };
 
 const Teleport = props =>
-  <ViewsTeleport teleportTo=\\"..\\" className={\`\${styles.h4wk4vz}\`}>
-    <div>go back</div>
-  </ViewsTeleport>;
+  <Link to=\\"..\\" className={\`\${styles.h4wk4vz}\`}><div>go back</div></Link>;
 export default Teleport;
 "
 `;
@@ -370,6 +397,31 @@ const Action = props =>
       </TouchableHighlight>
     : null;
 export default Action;
+"
+`;
+
+exports[`react-native parses react-native BackgroundImage 1`] = `
+"import React from 'react';
+import { Image, StyleSheet } from 'react-native';
+
+const styles = StyleSheet.create({
+  h18pdll5: { flexDirection: 'column' },
+  hp2cr4d: { flexDirection: 'row' },
+});
+
+const BackgroundImage = props =>
+  <Image
+    resizeMode=\\"cover\\"
+    source={{ uri: 'https://viewsdx.com/image.jpg' }}
+    style={styles.h18pdll5}
+  >
+    <Image
+      resizeMode=\\"cover\\"
+      source={{ uri: props.backgroundImage }}
+      style={styles.hp2cr4d}
+    />
+  </Image>;
+export default BackgroundImage;
 "
 `;
 
@@ -484,15 +536,12 @@ export default CaptureText;
 
 exports[`react-native parses react-native GoTo 1`] = `
 "import React from 'react';
-import Link from './Link.view.js';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
 const GoTo = props =>
-  <Link goTo=\\"https://viewsdx.com\\" style={styles.h18pdll5}>
-    <Text>Go to ViewsDX website!</Text>
-  </Link>;
+  <View style={styles.h18pdll5}><Text>Go to ViewsDX website!</Text></View>;
 export default GoTo;
 "
 `;
@@ -636,15 +685,15 @@ export default Svg;
 
 exports[`react-native parses react-native Teleport 1`] = `
 "import React from 'react';
-import ViewsTeleport from './ViewsTeleport.view.js';
-import { StyleSheet, Text } from 'react-native';
+import { Link } from 'react-router-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
 
 const Teleport = props =>
-  <ViewsTeleport teleportTo=\\"..\\" style={styles.hp2cr4d}>
-    <Text>go back</Text>
-  </ViewsTeleport>;
+  <Link activeOpacity={0.7} to=\\"..\\" underlayColor=\\"transparent\\">
+    <View style={styles.hp2cr4d}><Text>go back</Text></View>
+  </Link>;
 export default Teleport;
 "
 `;
