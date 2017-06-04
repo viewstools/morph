@@ -1,11 +1,11 @@
-import { basename, extname } from 'path';
-import buble from 'buble';
-import doMorph from './morphers.js';
-import doGetViewNotFound from './get-view-not-found.js';
-import toPascalCase from 'to-pascal-case';
-import prettier from 'prettier';
+import { basename, extname } from 'path'
+import buble from 'buble'
+import doMorph from './morphers.js'
+import doGetViewNotFound from './get-view-not-found.js'
+import toPascalCase from 'to-pascal-case'
+import prettier from 'prettier'
 
-const DEFAULT_IMPORT = name => `import ${name} from './${name}.view.js'`;
+const DEFAULT_IMPORT = name => `import ${name} from './${name}.view.js'`
 
 export const morph = (
   code,
@@ -15,7 +15,7 @@ export const morph = (
     getImport,
     name,
     view: code,
-  });
+  })
 
   if (compile) {
     morphed = buble.transform(morphed, {
@@ -23,7 +23,7 @@ export const morph = (
       transforms: {
         modules: false,
       },
-    }).code;
+    }).code
   }
 
   return pretty
@@ -31,11 +31,11 @@ export const morph = (
         singleQuote: true,
         trailingComma: 'es5',
       })
-    : morphed;
-};
+    : morphed
+}
 
 export const getViewNotFound = (as, name, warning) =>
-  doGetViewNotFound[as](name, warning);
+  doGetViewNotFound[as](name, warning)
 
 const sanitize = input =>
   basename(input)
@@ -43,7 +43,7 @@ const sanitize = input =>
     .replace(/[^a-zA-Z_$0-9]+/g, '_')
     .replace(/^_/, '')
     .replace(/_$/, '')
-    .replace(/^(\d)/, '_$1');
+    .replace(/^(\d)/, '_$1')
 
 export const pathToName = path =>
-  toPascalCase(sanitize(basename(path).replace('.view', '')));
+  toPascalCase(sanitize(basename(path).replace('.view', '')))

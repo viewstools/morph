@@ -1,6 +1,6 @@
 {
   "name": "views-morph",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Views language morpher",
   "main": "lib.js",
   "bin": {
@@ -48,7 +48,7 @@
     "glam": "^4.0.3",
     "globule": "^1.1.0",
     "minimist": "^1.2.0",
-    "prettier": "^1.4.0",
+    "prettier": "^1.4.2",
     "style-to-css": "^1.0.3",
     "synesthesia": "^1.0.1",
     "to-camel-case": "^1.0.0",
@@ -57,7 +57,7 @@
   },
   "lint-staged": {
     "*.js": [
-      "prettier --trailing-comma es5 --single-quote --write",
+      "prettier --trailing-comma es5 --single-quote --no-semi --write",
       "git add"
     ]
   }

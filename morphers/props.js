@@ -12,8 +12,7 @@ export const morph = ({ props }) => {
         ret[v.ast.is || `State${i}`] = v.json
       })
     }
-  } catch(err) {
-  }
+  } catch (err) {}
 
   return JSON.stringify(ret, null, 2)
 }

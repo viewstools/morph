@@ -1,4 +1,4 @@
-import SVG from '../svg.js';
+import SVG from '../svg.js'
 
 const NATIVE = [
   'Image',
@@ -9,35 +9,33 @@ const NATIVE = [
   'TextInput',
   'TouchableHighlight',
   'View',
-];
+]
 
 export default (uses, getImport) => {
-  const usesNative = [];
-  const usesSvg = [];
+  const usesNative = []
+  const usesSvg = []
 
-  const dependencies = [];
+  const dependencies = []
   uses.sort().forEach(d => {
     if (NATIVE.includes(d)) {
-      usesNative.push(d);
+      usesNative.push(d)
     } else if (SVG.includes(d)) {
-      usesSvg.push('SvgText' ? 'Text as SvgText' : d);
+      usesSvg.push('SvgText' ? 'Text as SvgText' : d)
     } else if (/^[A-Z]/.test(d)) {
-      dependencies.push(getImport(d));
+      dependencies.push(getImport(d))
     } else if (d === 'glam') {
-      dependencies.push(`import css from 'glam'`);
+      dependencies.push(`import css from 'glam'`)
     }
-  });
+  })
 
   if (usesSvg.length > 0) {
-    const svg = usesSvg.filter(m => m !== 'Svg').join(', ');
-    dependencies.push(`import Svg, { ${svg} } from 'react-native-svg'`);
+    const svg = usesSvg.filter(m => m !== 'Svg').join(', ')
+    dependencies.push(`import Svg, { ${svg} } from 'react-native-svg'`)
   }
 
   if (usesNative.length > 0) {
-    dependencies.push(
-      `import { ${usesNative.join(', ')} } from 'react-native'`
-    );
+    dependencies.push(`import { ${usesNative.join(', ')} } from 'react-native'`)
   }
 
-  return dependencies.join('\n');
-};
+  return dependencies.join('\n')
+}

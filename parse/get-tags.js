@@ -1,4 +1,10 @@
-import { isCode, isCodeInvalid, isMargin, isPadding, isStyle } from './helpers.js'
+import {
+  isCode,
+  isCodeInvalid,
+  isMargin,
+  isPadding,
+  isStyle,
+} from './helpers.js'
 
 export default (prop, value) => {
   const list = []

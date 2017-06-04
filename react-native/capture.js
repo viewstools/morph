@@ -21,7 +21,9 @@ function* Capture(
   if (!props.ref) {
     if (captureNext) {
       props.blurOnSubmit = '{false}'
-      props.onSubmitEditing = `{this.$capture${captureNext}? () => this.$capture${captureNext}.focus() : ${extractCode(onSubmit).code}}`
+      props.onSubmitEditing = `{this.$capture${captureNext}? () => this.$capture${captureNext}.focus() : ${extractCode(
+        onSubmit
+      ).code}}`
       props.returnKeyType = `{this.$capture${captureNext}? 'next' : 'go'}`
     } else {
       if (onSubmit) {

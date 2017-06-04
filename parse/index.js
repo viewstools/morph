@@ -70,8 +70,8 @@ export default text => {
 
     block.loc.end = {
       line: endLine,
-      column: (typeof prevLine === 'string' ? prevLine : lines[endLine])
-        .length - 1,
+      column:
+        (typeof prevLine === 'string' ? prevLine : lines[endLine]).length - 1,
     }
     // TODO review this
     // if we're past our line, use the previous line's end
@@ -200,7 +200,11 @@ export default text => {
       }
       if (newLinesBeforePreviousBlock > 2) {
         const linesToRemove = newLinesBeforePreviousBlock - 2
-        help.push(`remove ${linesToRemove} empty line${linesToRemove > 1 ? 's' : ''} before`)
+        help.push(
+          `remove ${linesToRemove} empty line${linesToRemove > 1
+            ? 's'
+            : ''} before`
+        )
       }
       warn(help.join(', '), block)
     }
@@ -440,8 +444,7 @@ export default text => {
   })
 
   if (stack.length > 0) {
-    while (!end(stack.pop(), lines.length)) {
-    }
+    while (!end(stack.pop(), lines.length)) {}
   }
 
   return {

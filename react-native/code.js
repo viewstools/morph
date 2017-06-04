@@ -16,6 +16,5 @@ export const extractCode = text => {
     isValid,
   }
 }
-export const hasCode = text => (
+export const hasCode = text =>
   typeof text === 'string' && START.test(text) && END.test(text)
-)
