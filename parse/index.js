@@ -9,7 +9,6 @@ import {
   isBlock,
   isCapture,
   isEmptyList,
-  isEmptyText,
   isEnd,
   isFontable,
   isGroup,
@@ -17,7 +16,6 @@ import {
   isList,
   isProp,
   isSection,
-  isText,
   isTodo,
   stemStylesFromProp,
   warn,
@@ -425,6 +423,7 @@ export default text => {
         parseProps(i, block)
       }
     } else if (isTodo(line)) {
+      // eslint-disable-next-line
       const [_, to, message] = getTodo(line)
 
       const todo = {

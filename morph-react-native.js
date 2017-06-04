@@ -394,8 +394,11 @@ const blacklist = [
   'teleportTo',
   'goTo',
 ]
+
+// TODO FIXME pass props to non basic blocks
 const isValidPropertyForBlock = (node, parent) =>
-  !node.isBasic || (node.isBasic && !blacklist.includes(node.key.value))
+  !blacklist.includes(node.key.value)
+// !node.isBasic || (node.isBasic &&
 
 const toComponent = ({ getImport, name, state }) => `import React from 'react'
 ${getDependencies(state.uses, getImport)}

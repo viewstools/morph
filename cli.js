@@ -32,6 +32,7 @@ if (help) {
     --as            target platform
                       react-dom (default)
                       react-native
+                      data
 
     --compile       if true, produces ES5 JS, defaults to false
     --pretty        format output code, defaults to true
