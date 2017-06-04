@@ -6,8 +6,11 @@ const globule = require('globule')
 const toPascalCase = require('to-pascal-case')
 const watch = require('gaze')
 
-const isJs = f => extname(f) === '.js'
+const isMorphedData = f => /\.data\.js$/.test(f)
 const isMorphedView = f => /\.view\.js$/.test(f)
+
+const isData = f => extname(f) === '.data'
+const isJs = f => extname(f) === '.js'
 const isView = f => extname(f) === '.view'
 
 module.exports = options => {
@@ -37,14 +40,15 @@ module.exports = options => {
   }
 
   const filter = fn => f => {
-    if (isMorphedView(f) || (isJs(f) && !isJsComponent(f))) return
+    if (isMorphedView(f) || isMorphedData(f) || (isJs(f) && !isJsComponent(f)))
+      return
 
     fn(f)
   }
 
   const getImportFileName = name => {
     const f = views[name]
-    return isView(f) ? `${f}.js` : f
+    return isView(f) || isData(f) ? `${f}.js` : f
   }
   const getImport = name =>
     views[name]
@@ -52,13 +56,21 @@ module.exports = options => {
       : viewNotFound(name)
 
   const views = map
+  const data = {}
 
   const addView = filter(f => {
     const { file, view } = toViewPath(f)
-    console.log(chalk.yellow('A'), view, chalk.dim(`-> ${f}`))
-    views[view] = file
+    const fileIsData = isData(file)
 
-    if (isView(file)) morphView(f)
+    console.log(chalk.yellow('A'), view, chalk.dim(`-> ${f}`))
+
+    if (fileIsData) {
+      data[view] = file
+    } else {
+      views[view] = file
+    }
+
+    if (isView(file) || fileIsData) morphView(f)
   })
 
   const morphView = filter(f => {
@@ -72,7 +84,7 @@ module.exports = options => {
 
       try {
         const code = morph(source, {
-          as,
+          as: isData(f) ? 'data' : as,
           compile,
           name: view,
           getImport,
@@ -94,7 +106,9 @@ module.exports = options => {
 
   const toViewPath = f => {
     const file = relative(src, f)
-    const view = toPascalCase(file.replace(/\.(view|js)/g, ''))
+    const view = isData(file)
+      ? file
+      : toPascalCase(file.replace(/\.(data|view|js)/g, ''))
 
     return {
       file: `./${file}`,
@@ -105,7 +119,11 @@ module.exports = options => {
   const watcherOptions = {
     filter: f => !/node_modules/.test(f) && !isMorphedView(f),
   }
-  const watcherPattern = [`${src}/**/*.js`, `${src}/**/*.view`]
+  const watcherPattern = [
+    `${src}/**/*.js`,
+    `${src}/**/*.view`,
+    `${src}/**/*.data`,
+  ]
   globule.find(watcherPattern, watcherOptions).forEach(addView)
 
   watch(watcherPattern, watcherOptions, (err, watcher) => {
@@ -123,7 +141,11 @@ module.exports = options => {
         const { view } = toViewPath(f)
         console.log(chalk.blue('D'), view)
 
-        delete views[view]
+        if (isData(f)) {
+          delete data[view]
+        } else {
+          delete views[view]
+        }
       })
     )
   })
