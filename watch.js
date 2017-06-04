@@ -1,12 +1,10 @@
-const { getViewNotFound, morph, types } = require('./lib.js');
+const { getViewNotFound, morph } = require('./lib.js');
 const { extname, relative } = require('path');
 const { readFile, readFileSync, writeFile } = require('fs');
 const chalk = require('chalk');
 const globule = require('globule');
 const toPascalCase = require('to-pascal-case');
 const watch = require('gaze');
-
-const { ACTION, TELEPORT } = types;
 
 const isJs = f => extname(f) === '.js';
 const isMorphedView = f => /\.view\.js$/.test(f);
@@ -16,9 +14,9 @@ module.exports = options => {
   let { as, compile, map, shared, src, pretty, viewNotFound } = Object.assign(
     {
       as: 'react-dom',
-      compile: true,
+      compile: false,
       map: {},
-      pretty: false,
+      pretty: true,
       src: process.cwd(),
     },
     options
@@ -48,17 +46,10 @@ module.exports = options => {
     const f = views[name];
     return isView(f) ? `${f}.js` : f;
   };
-  const getImport = name => {
-    switch (name) {
-      case ACTION:
-      case TELEPORT:
-        return `import { ${name} } from '${shared}'`;
-      default:
-        return views[name]
-          ? `import ${name} from '${getImportFileName(name)}'`
-          : viewNotFound(name);
-    }
-  };
+  const getImport = name =>
+    views[name]
+      ? `import ${name} from '${getImportFileName(name)}'`
+      : viewNotFound(name);
 
   const views = map;
 
