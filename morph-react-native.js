@@ -395,7 +395,7 @@ const blacklist = [
   'goTo',
 ]
 const isValidPropertyForBlock = (node, parent) =>
-  !blacklist.includes(node.key.value)
+  !node.isBasic || (node.isBasic && !blacklist.includes(node.key.value))
 
 const toComponent = ({ getImport, name, state }) => `import React from 'react'
 ${getDependencies(state.uses, getImport)}
