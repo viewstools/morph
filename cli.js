@@ -1,4 +1,4 @@
-const { readFileSync, statSync, writeFileSync } = require('fs');
+const { readFileSync, statSync } = require('fs');
 const { morph, pathToName } = require('./lib.js');
 const chalk = require('chalk');
 const startWatching = require('./watch');
