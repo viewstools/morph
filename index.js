@@ -2,10 +2,14 @@ import { basename, extname } from 'path'
 import buble from 'buble'
 import doMorph from './morphers.js'
 import doGetViewNotFound from './get-view-not-found.js'
+import toCamelCase from 'to-camel-case'
 import toPascalCase from 'to-pascal-case'
 import prettier from 'prettier'
 
-const DEFAULT_IMPORT = name => `import ${name} from './${name}.view.js'`
+const DEFAULT_IMPORT = name =>
+  /\.data$/.test(name)
+    ? `import ${toCamelCase(name)} from './${name}.js'`
+    : `import ${name} from './${name}.view.js'`
 
 export const morph = (
   code,

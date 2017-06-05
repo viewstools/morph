@@ -9,6 +9,7 @@ const CAPTURE = /^(CaptureEmail|CaptureFile|CaptureInput|CaptureNumber|CapturePh
 const CODE_EXPLICIT = /^{.+}$/
 const CODE_IMPLICIT = /(props|item)\./
 const COMMENT = /^#(.+)$/
+const DATA = /^.+\.data$/
 const EMPTY_LIST = /^is empty list$/i
 const EMPTY_TEXT = /^is empty text$/i
 const FLOAT = /^[0-9]+\.[0-9]+$/
@@ -35,6 +36,7 @@ export const isBasic = line => is(BASIC, line)
 export const isBlock = line => is(BLOCK, line)
 export const isBool = line => is(BOOL, line)
 export const isCapture = line => is(CAPTURE, line)
+export const isData = line => is(DATA, line)
 export const isCode = line =>
   isCodeOneWord(line) || is(CODE_EXPLICIT, line) || is(CODE_IMPLICIT, line)
 export const isCodeOneWord = line =>
@@ -92,7 +94,7 @@ export const getCodeData = line => {
     .replace(/^{/, '')
     .replace(/}$/, '')
     .split(' ')
-    .filter(l => isCodeOneWord(l) || /[.\[]/.test(l))
+    .filter(l => isCodeOneWord(l) || /[.[]/.test(l))
 }
 export const getComment = line => get(COMMENT, line).slice(1)
 export const getColor = line => get(COLOR, line)

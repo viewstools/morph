@@ -16,6 +16,7 @@ const Action = props =>
         <div>click me</div>
       </button>
     : null;
+
 export default Action;
 "
 `;
@@ -45,6 +46,7 @@ const BackgroundImage = props =>
       }}
     />
   </div>;
+
 export default BackgroundImage;
 "
 `;
@@ -64,6 +66,7 @@ const BoxShadow = props =>
     className={\`\${styles.h73hviv}\`}
     style={{ boxShadow: \`10px 5px 2px \${props.color}\` }}
   />;
+
 export default BoxShadow;
 "
 `;
@@ -82,6 +85,7 @@ color: red; }\`,
 
 const CaptureEmail = props =>
   <input onSubmit={props.onSubmit} className={\`\${styles.hvufezv}\`} />;
+
 export default CaptureEmail;
 "
 `;
@@ -90,6 +94,7 @@ exports[`react-dom parses react-dom CaptureFile 1`] = `
 "import React from 'react';
 
 const CaptureFile = props => <input />;
+
 export default CaptureFile;
 "
 `;
@@ -98,6 +103,7 @@ exports[`react-dom parses react-dom CaptureNumber 1`] = `
 "import React from 'react';
 
 const CaptureNumber = props => <input />;
+
 export default CaptureNumber;
 "
 `;
@@ -106,6 +112,7 @@ exports[`react-dom parses react-dom CapturePhone 1`] = `
 "import React from 'react';
 
 const CapturePhone = props => <input />;
+
 export default CapturePhone;
 "
 `;
@@ -114,6 +121,7 @@ exports[`react-dom parses react-dom CaptureSecure 1`] = `
 "import React from 'react';
 
 const CaptureSecure = props => <input />;
+
 export default CaptureSecure;
 "
 `;
@@ -122,6 +130,7 @@ exports[`react-dom parses react-dom CaptureText 1`] = `
 "import React from 'react';
 
 const CaptureText = props => <input />;
+
 export default CaptureText;
 "
 `;
@@ -140,6 +149,7 @@ const GoTo = props =>
   <a target=\\"_blank\\" href=\\"https://viewsdx.com\\" className={\`\${styles.h73hviv}\`}>
     <div>Go to ViewsDX website!</div>
   </a>;
+
 export default GoTo;
 "
 `;
@@ -156,6 +166,7 @@ border: 1px solid red; }\`,
 };
 
 const Horizontal = props => <div className={\`\${styles.h1vxlj3j}\`} />;
+
 export default Horizontal;
 "
 `;
@@ -180,6 +191,7 @@ const Hover = props =>
   <button onClick={props.onClick} className={\`\${styles.h1ven99o}\`}>
     <div className={\`\${styles.hanouj1}\`}>Hey!</div>
   </button>;
+
 export default Hover;
 "
 `;
@@ -205,6 +217,7 @@ const HoverProxy = props =>
     <props.icon from={props.icon} fill=\\"white\\" fillHover=\\"black\\" />
     <div className={\`\${styles.hanouj1}\`}>Hey!</div>
   </button>;
+
 export default HoverProxy;
 "
 `;
@@ -213,6 +226,7 @@ exports[`react-dom parses react-dom Image 1`] = `
 "import React from 'react';
 
 const Image = props => <img source=\\"https://viewsdx.com/rocks.jpg\\" />;
+
 export default Image;
 "
 `;
@@ -221,6 +235,7 @@ exports[`react-dom parses react-dom JustText 1`] = `
 "import React from 'react';
 
 const JustText = props => <div>hey!</div>;
+
 export default JustText;
 "
 `;
@@ -239,7 +254,28 @@ const ListOfSomething = props =>
   <div className={\`\${styles.h73hviv}\`}>
     {props.list.map((item, i) => <div key={i}>{item.name}</div>)}
   </div>;
+
 export default ListOfSomething;
+"
+`;
+
+exports[`react-dom parses react-dom ListWithData 1`] = `
+"import React from 'react';
+import css from 'glam';
+import usersData from './users.data.js';
+
+const styles = {
+  h73hviv: css('css-1s0kfvh', [], () => [
+    \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
+  ]),
+};
+
+const ListWithData = props =>
+  <div className={\`\${styles.h73hviv}\`}>
+    {usersData.map((item, i) => <div key={i}>{item.name}</div>)}
+  </div>;
+
+export default ListWithData;
 "
 `;
 
@@ -247,6 +283,7 @@ exports[`react-dom parses react-dom NameIsType 1`] = `
 "import React from 'react';
 
 const NameIsType = props => <div>iam</div>;
+
 export default NameIsType;
 "
 `;
@@ -256,6 +293,7 @@ exports[`react-dom parses react-dom Proxy 1`] = `
 
 const Proxy = props =>
   <div><props.icon from={props.icon} fill=\\"red\\" /><div>{props.text}</div></div>;
+
 export default Proxy;
 "
 `;
@@ -274,6 +312,7 @@ const Svg = props =>
     <Path d=\\"0 20\\" /><Circle cx={10} cy={5} r={5} />
     <G><Path d={1} /><Path d={2} /></G><text text=\\"hey\\" />
   </Svg>;
+
 export default Svg;
 "
 `;
@@ -291,6 +330,7 @@ const styles = {
 
 const Teleport = props =>
   <Link to=\\"..\\" className={\`\${styles.h4wk4vz}\`}><div>go back</div></Link>;
+
 export default Teleport;
 "
 `;
@@ -310,6 +350,7 @@ font-weight: 300; }\`,
 
 const Text = props =>
   <div className={\`\${styles.h11bw6cg}\`}>Hi, I'm some text</div>;
+
 export default Text;
 "
 `;
@@ -320,6 +361,7 @@ import Button from './Button.view.js';
 
 const UseOfProxy = props =>
   <div><Button color=\\"red\\" icon=\\"MyIcon\\" text=\\"I'm a button!\\" /></div>;
+
 export default UseOfProxy;
 "
 `;
@@ -336,7 +378,50 @@ background-color: red; }\`,
 };
 
 const Vertical = props => <div className={\`\${styles.h1lis1gl}\`} />;
+
 export default Vertical;
+"
+`;
+
+exports[`react-dom parses react-dom ViewAndListWithData 1`] = `
+"import React from 'react';
+import addressesData from './addresses.data.js';
+import css from 'glam';
+import userData from './user.data.js';
+
+const styles = {
+  h73hviv: css('css-1s0kfvh', [], () => [
+    \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
+  ]),
+};
+
+const ViewAndListWithData = props =>
+  <div className={\`\${styles.h73hviv}\`}>
+    <div>{props.name}</div>
+    <div className={\`\${styles.h73hviv}\`}>
+      {addressesData.map((item, i) => <div key={i}>{item.city}</div>)}
+    </div>
+  </div>;
+ViewAndListWithData.defaultProps = userData;
+export default ViewAndListWithData;
+"
+`;
+
+exports[`react-dom parses react-dom ViewWithData 1`] = `
+"import React from 'react';
+import css from 'glam';
+import userData from './user.data.js';
+
+const styles = {
+  h73hviv: css('css-1s0kfvh', [], () => [
+    \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
+  ]),
+};
+
+const ViewWithData = props =>
+  <div className={\`\${styles.h73hviv}\`}><div>{props.name}</div></div>;
+ViewWithData.defaultProps = userData;
+export default ViewWithData;
 "
 `;
 
@@ -345,6 +430,7 @@ exports[`react-dom parses react-dom When 1`] = `
 
 const When = props =>
   <div>{props.showMe ? <div>I may be hidden</div> : null}</div>;
+
 export default When;
 "
 `;
@@ -367,6 +453,7 @@ const WhenList = props =>
         </div>
       : null}
   </div>;
+
 export default WhenList;
 "
 `;
@@ -376,6 +463,7 @@ exports[`react-dom parses react-dom WhenTopLevel 1`] = `
 
 const WhenTopLevel = props =>
   props.showMe ? <div>I may be hidden</div> : null;
+
 export default WhenTopLevel;
 "
 `;
@@ -396,6 +484,7 @@ const Action = props =>
         <View style={styles.h18pdll5}><Text>click me</Text></View>
       </TouchableHighlight>
     : null;
+
 export default Action;
 "
 `;
@@ -421,6 +510,7 @@ const BackgroundImage = props =>
       style={styles.hp2cr4d}
     />
   </Image>;
+
 export default BackgroundImage;
 "
 `;
@@ -444,6 +534,7 @@ const BoxShadow = props =>
       },
     ]}
   />;
+
 export default BoxShadow;
 "
 `;
@@ -473,6 +564,7 @@ const CaptureEmail = props =>
       style={styles.hm4pcs}
     />
   </KeyboardAvoidingView>;
+
 export default CaptureEmail;
 "
 `;
@@ -482,6 +574,7 @@ exports[`react-native parses react-native CaptureFile 1`] = `
 import CaptureFile from './CaptureFile.view.js';
 
 const CaptureFile = props => <CaptureFile />;
+
 export default CaptureFile;
 "
 `;
@@ -494,6 +587,7 @@ const CaptureNumber = props =>
   <KeyboardAvoidingView behavior=\\"position\\">
     <TextInput />
   </KeyboardAvoidingView>;
+
 export default CaptureNumber;
 "
 `;
@@ -506,6 +600,7 @@ const CapturePhone = props =>
   <KeyboardAvoidingView behavior=\\"position\\">
     <TextInput />
   </KeyboardAvoidingView>;
+
 export default CapturePhone;
 "
 `;
@@ -518,6 +613,7 @@ const CaptureSecure = props =>
   <KeyboardAvoidingView behavior=\\"position\\">
     <TextInput />
   </KeyboardAvoidingView>;
+
 export default CaptureSecure;
 "
 `;
@@ -530,6 +626,7 @@ const CaptureText = props =>
   <KeyboardAvoidingView behavior=\\"position\\">
     <TextInput />
   </KeyboardAvoidingView>;
+
 export default CaptureText;
 "
 `;
@@ -542,6 +639,7 @@ const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
 const GoTo = props =>
   <View style={styles.h18pdll5}><Text>Go to ViewsDX website!</Text></View>;
+
 export default GoTo;
 "
 `;
@@ -560,6 +658,7 @@ const styles = StyleSheet.create({
 });
 
 const Horizontal = props => <View style={styles.h13qdyyc} />;
+
 export default Horizontal;
 "
 `;
@@ -583,6 +682,7 @@ const Hover = props =>
       <Text style={styles.hyfo4ef}>Hey!</Text>
     </View>
   </TouchableHighlight>;
+
 export default Hover;
 "
 `;
@@ -607,6 +707,7 @@ const HoverProxy = props =>
       <Text style={styles.hyfo4ef}>Hey!</Text>
     </View>
   </TouchableHighlight>;
+
 export default HoverProxy;
 "
 `;
@@ -616,6 +717,7 @@ exports[`react-native parses react-native Image 1`] = `
 import { Image } from 'react-native';
 
 const Image = props => <Image source=\\"https://viewsdx.com/rocks.jpg\\" />;
+
 export default Image;
 "
 `;
@@ -625,6 +727,7 @@ exports[`react-native parses react-native JustText 1`] = `
 import { Text } from 'react-native';
 
 const JustText = props => <Text>hey!</Text>;
+
 export default JustText;
 "
 `;
@@ -639,7 +742,24 @@ const ListOfSomething = props =>
   <View style={styles.h18pdll5}>
     {props.list.map((item, i) => <Text key={i}>{item.name}</Text>)}
   </View>;
+
 export default ListOfSomething;
+"
+`;
+
+exports[`react-native parses react-native ListWithData 1`] = `
+"import React from 'react';
+import usersData from './users.data.js';
+import { StyleSheet, Text, View } from 'react-native';
+
+const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
+
+const ListWithData = props =>
+  <View style={styles.h18pdll5}>
+    {usersData.map((item, i) => <Text key={i}>{item.name}</Text>)}
+  </View>;
+
+export default ListWithData;
 "
 `;
 
@@ -648,6 +768,7 @@ exports[`react-native parses react-native NameIsType 1`] = `
 import { Text } from 'react-native';
 
 const NameIsType = props => <Text>iam</Text>;
+
 export default NameIsType;
 "
 `;
@@ -660,6 +781,7 @@ const Proxy = props =>
   <View>
     <props.icon from={props.icon} fill=\\"red\\" /><Text>{props.text}</Text>
   </View>;
+
 export default Proxy;
 "
 `;
@@ -679,6 +801,7 @@ const Svg = props =>
     <Path d=\\"0 20\\" /><Circle cx={10} cy={5} r={5} />
     <G><Path d={1} /><Path d={2} /></G><SvgText text=\\"hey\\" />
   </Svg>;
+
 export default Svg;
 "
 `;
@@ -694,6 +817,7 @@ const Teleport = props =>
   <Link activeOpacity={0.7} to=\\"..\\" underlayColor=\\"transparent\\">
     <View style={styles.hp2cr4d}><Text>go back</Text></View>
   </Link>;
+
 export default Teleport;
 "
 `;
@@ -707,6 +831,7 @@ const styles = StyleSheet.create({
 });
 
 const Text = props => <Text style={styles.h11t0jc}>Hi, I'm some text</Text>;
+
 export default Text;
 "
 `;
@@ -718,6 +843,7 @@ import { View } from 'react-native';
 
 const UseOfProxy = props =>
   <View><Button color=\\"red\\" icon=\\"MyIcon\\" text=\\"I'm a button!\\" /></View>;
+
 export default UseOfProxy;
 "
 `;
@@ -731,7 +857,42 @@ const styles = StyleSheet.create({
 });
 
 const Vertical = props => <View style={styles.h1c5r919} />;
+
 export default Vertical;
+"
+`;
+
+exports[`react-native parses react-native ViewAndListWithData 1`] = `
+"import React from 'react';
+import addressesData from './addresses.data.js';
+import userData from './user.data.js';
+import { StyleSheet, Text, View } from 'react-native';
+
+const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
+
+const ViewAndListWithData = props =>
+  <View style={styles.h18pdll5}>
+    <Text>{props.name}</Text>
+    <View style={styles.h18pdll5}>
+      {addressesData.map((item, i) => <Text key={i}>{item.city}</Text>)}
+    </View>
+  </View>;
+ViewAndListWithData.defaultProps = userData;
+export default ViewAndListWithData;
+"
+`;
+
+exports[`react-native parses react-native ViewWithData 1`] = `
+"import React from 'react';
+import userData from './user.data.js';
+import { StyleSheet, Text, View } from 'react-native';
+
+const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
+
+const ViewWithData = props =>
+  <View style={styles.h18pdll5}><Text>{props.name}</Text></View>;
+ViewWithData.defaultProps = userData;
+export default ViewWithData;
 "
 `;
 
@@ -741,6 +902,7 @@ import { Text, View } from 'react-native';
 
 const When = props =>
   <View>{props.showMe ? <Text>I may be hidden</Text> : null}</View>;
+
 export default When;
 "
 `;
@@ -759,6 +921,7 @@ const WhenList = props =>
         </View>
       : null}
   </View>;
+
 export default WhenList;
 "
 `;
@@ -769,6 +932,7 @@ import { Text } from 'react-native';
 
 const WhenTopLevel = props =>
   props.showMe ? <Text>I may be hidden</Text> : null;
+
 export default WhenTopLevel;
 "
 `;

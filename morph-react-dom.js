@@ -8,6 +8,7 @@ import {
 import { makeVisitors, safe as safeProp, wrap } from './morph-react.js'
 import { transform } from 'babel-core'
 import getBody from './react-native/get-body.js'
+import getDefaultProps from './react-native/get-default-props.js'
 import getDependencies from './react-native/get-dependencies.js'
 import isUnitlessNumber from './react-native/is-unitless-number.js'
 import hash from './hash.js'
@@ -17,11 +18,15 @@ import toSlugCase from 'to-slug-case'
 export default ({ getImport, name, view }) => {
   const state = {
     captures: [],
+    defaultProps: false,
     fonts: [],
     render: [],
     styles: {},
     todos: [],
     uses: [],
+    // data(file) {
+    //   if (!state.data.includes(file)) state.data.push(file)
+    // },
     use(name) {
       if (!state.uses.includes(name) && !/props/.test(name))
         state.uses.push(name)
@@ -29,6 +34,7 @@ export default ({ getImport, name, view }) => {
   }
 
   const {
+    BlockDefaultProps,
     BlockExplicitChildren,
     BlockName,
     BlockWhen,
@@ -51,6 +57,7 @@ export default ({ getImport, name, view }) => {
       // BlockCapture.enter.call(this, node, parent, state)
       BlockTeleport.enter.call(this, node, parent, state)
       BlockGoTo.enter.call(this, node, parent, state)
+      BlockDefaultProps.enter.call(this, node, parent, state)
     },
     leave(node, parent, state) {
       BlockExplicitChildren.leave.call(this, node, parent, state)
@@ -310,6 +317,7 @@ ${getDependencies(state.uses, getImport)}
 ${getStyles(state.styles)}
 
 ${getBody({ state, name })}
+${getDefaultProps({ state, name })}
 export default ${name}`
 
 const interpolateCode = s => (/props|item/.test(s) ? '${' + s + '}' : s)

@@ -1,0 +1,8 @@
+User is Vertical
+from user.data
+Text
+text props.name
+Addresses is List
+from addresses.data
+Text
+text item.city

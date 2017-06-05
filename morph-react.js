@@ -1,4 +1,11 @@
-import { getProp, getStyleType, isCode, isStyle } from './morph-utils.js'
+import {
+  getProp,
+  getStyleType,
+  isCode,
+  isData,
+  isStyle,
+} from './morph-utils.js'
+import toCamelCase from 'to-camel-case'
 
 export const makeVisitors = ({
   getBlockName,
@@ -7,6 +14,18 @@ export const makeVisitors = ({
   isValidPropertyForBlock,
   PropertiesStyleLeave,
 }) => {
+  const BlockDefaultProps = {
+    enter(node, parent, state) {
+      if (parent || node.name.value === 'List') return
+
+      const from = getProp(node, 'from')
+      if (from && isData(from)) {
+        state.use(from.value.value)
+        state.defaultProps = toCamelCase(from.value.value)
+      }
+    },
+  }
+
   const BlockName = {
     enter(node, parent, state) {
       const name = getBlockName(node)
@@ -60,10 +79,17 @@ export const makeVisitors = ({
   const BlocksList = {
     enter(node, parent, state) {
       if (parent.name.value === 'List') {
-        const from = getProp(parent, 'from')
+        let from = getProp(parent, 'from')
         if (!from) return
 
-        state.render.push(`{${from.value.value}.map((item, i) => `)
+        if (isData(from)) {
+          state.use(from.value.value)
+          from = toCamelCase(from.value.value)
+        } else {
+          from = from.value.value
+        }
+
+        state.render.push(`{${from}.map((item, i) => `)
 
         node.list.forEach(n => (n.isInList = true))
       }
@@ -113,6 +139,15 @@ export const makeVisitors = ({
     },
     leave: PropertiesStyleLeave,
   }
+
+  // const PropertyData = {
+  //   enter(node, parent, state) {
+  //     if (isData(node)) {
+  //       state.render.push(``)
+  //       return true
+  //     }
+  //   }
+  // }
 
   const PropertyList = {
     enter(node, parent, state) {
@@ -177,6 +212,7 @@ export const makeVisitors = ({
   }
 
   return {
+    BlockDefaultProps,
     BlockExplicitChildren,
     BlockName,
     BlockWhen,
@@ -188,6 +224,7 @@ export const makeVisitors = ({
       enter(node, parent, state) {
         BlockWhen.enter.call(this, node, parent, state)
         BlockName.enter.call(this, node, parent, state)
+        BlockDefaultProps.enter.call(this, node, parent, state)
       },
       leave(node, parent, state) {
         BlockExplicitChildren.leave.call(this, node, parent, state)
@@ -218,9 +255,10 @@ export const makeVisitors = ({
 
     Property: {
       enter(node, parent, state) {
-        if (node.key.value === 'when') return
+        if (node.key.value === 'when' || isData(node)) return
         if (!isValidPropertyForBlock(node, parent)) return
 
+        // if (PropertyData.enter.call(this, node, parent, state)) return
         if (PropertyStyle.enter.call(this, node, parent, state)) return
         if (PropertyText.enter.call(this, node, parent, state)) return
         PropertyList.enter.call(this, node, parent, state)

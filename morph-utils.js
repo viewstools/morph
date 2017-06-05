@@ -33,6 +33,7 @@ export const hasProp = (node, key, match) => {
 }
 
 export const isCode = node => isTag(node, 'code')
+export const isData = node => isTag(node, 'data')
 export const isStyle = node => isTag(node, 'style')
 
 export const isTag = (node, tag) => node.tags.includes(tag)

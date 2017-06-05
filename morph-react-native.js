@@ -9,6 +9,7 @@ import {
 import { makeVisitors, safe, wrap } from './morph-react.js'
 import getBody from './react-native/get-body.js'
 import getColor from 'color'
+import getDefaultProps from './react-native/get-default-props.js'
 import getDependencies from './react-native/get-dependencies.js'
 import getStyles from './react-native/get-styles.js'
 import hash from './hash.js'
@@ -17,6 +18,7 @@ import morph from './morph.js'
 export default ({ getImport, name, view }) => {
   const state = {
     captures: [],
+    defaultProps: false,
     fonts: [],
     render: [],
     styles: {},
@@ -29,6 +31,7 @@ export default ({ getImport, name, view }) => {
   }
 
   const {
+    BlockDefaultProps,
     BlockExplicitChildren,
     BlockName,
     BlockWhen,
@@ -50,6 +53,7 @@ export default ({ getImport, name, view }) => {
       BlockName.enter.call(this, node, parent, state)
       BlockCapture.enter.call(this, node, parent, state)
       BlockBackgroundImage.enter.call(this, node, parent, state)
+      BlockDefaultProps.enter.call(this, node, parent, state)
     },
     leave(node, parent, state) {
       BlockExplicitChildren.leave.call(this, node, parent, state)
@@ -406,4 +410,5 @@ ${getDependencies(state.uses, getImport)}
 ${getStyles(state.styles)}
 
 ${getBody({ state, name })}
+${getDefaultProps({ state, name })}
 export default ${name}`

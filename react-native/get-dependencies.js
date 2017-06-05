@@ -21,7 +21,7 @@ export default (uses, getImport) => {
       usesNative.push(d)
     } else if (SVG.includes(d)) {
       usesSvg.push('SvgText' ? 'Text as SvgText' : d)
-    } else if (/^[A-Z]/.test(d)) {
+    } else if (/^[A-Z]/.test(d) || /\.data$/.test(d)) {
       dependencies.push(getImport(d))
     } else if (d === 'glam') {
       dependencies.push(`import css from 'glam'`)
