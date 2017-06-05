@@ -1,8 +1,9 @@
-const { getViewNotFound, morph } = require('./lib.js')
 const { extname, relative } = require('path')
+const { getViewNotFound, morph } = require('./lib.js')
 const { readFile, readFileSync, writeFile } = require('fs')
 const chalk = require('chalk')
 const globule = require('globule')
+const toCamelCase = require('to-camel-case')
 const toPascalCase = require('to-pascal-case')
 const watch = require('gaze')
 
@@ -14,7 +15,16 @@ const isJs = f => extname(f) === '.js'
 const isView = f => extname(f) === '.view'
 
 module.exports = options => {
-  let { as, compile, map, shared, src, pretty, viewNotFound } = Object.assign(
+  let {
+    as,
+    compile,
+    dataNotFound,
+    map,
+    shared,
+    src,
+    pretty,
+    viewNotFound,
+  } = Object.assign(
     {
       as: 'react-dom',
       compile: false,
@@ -26,6 +36,13 @@ module.exports = options => {
   )
 
   if (!shared) shared = `views-blocks-${as}`
+  if (!dataNotFound)
+    dataNotFound = name => {
+      const warning = `${src}/${name}.data doesn't exist but it is being used. Create the file!`
+      console.log(chalk.magenta(`! ${warning}`))
+      return getViewNotFound('data', name, warning)
+    }
+
   if (!viewNotFound)
     viewNotFound = name => {
       const warning = `${src}/${name}.view doesn't exist but it is being used. Create the file!`
@@ -47,13 +64,20 @@ module.exports = options => {
   }
 
   const getImportFileName = name => {
-    const f = views[name]
+    const f = views[name] || data[name]
     return isView(f) || isData(f) ? `${f}.js` : f
   }
-  const getImport = name =>
-    views[name]
-      ? `import ${name} from '${getImportFileName(name)}'`
-      : viewNotFound(name)
+  const getImport = name => {
+    if (isData(name)) {
+      return data[name]
+        ? `import ${toCamelCase(name)} from '${getImportFileName(name)}'`
+        : dataNotFound(name)
+    } else {
+      return views[name]
+        ? `import ${name} from '${getImportFileName(name)}'`
+        : viewNotFound(name)
+    }
+  }
 
   const views = map
   const data = {}
