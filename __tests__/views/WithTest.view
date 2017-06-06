@@ -1,0 +1,4 @@
+Vertical
+onClick props.change
+Text
+text props.text

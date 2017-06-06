@@ -30,7 +30,7 @@ const Property = {
 // name Dario
 // addresses
 // from addresses.data
-const getValue = property => {
+export const getValue = property => {
   switch (property.value.type) {
     case 'Literal':
       return property.value.value

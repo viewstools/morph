@@ -17,7 +17,7 @@ import hash from './hash.js'
 import morph from './morph.js'
 import toSlugCase from 'to-slug-case'
 
-export default ({ getImport, name, view }) => {
+export default ({ getImport, name, tests = false, view }) => {
   const state = {
     captures: [],
     defaultProps: false,
@@ -27,6 +27,7 @@ export default ({ getImport, name, view }) => {
     styles: {},
     todos: [],
     uses: [],
+    tests,
     // data(file) {
     //   if (!state.data.includes(file)) state.data.push(file)
     // },

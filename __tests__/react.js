@@ -1,6 +1,6 @@
 import { morph } from '../index.js'
 import { join } from 'path'
-import { readdirSync, readFileSync } from 'fs'
+import { existsSync, readdirSync, readFileSync } from 'fs'
 
 const isView = f => /\.view$/.test(f)
 const getPath = (f = '.') => join(__dirname, 'views', f)
@@ -9,9 +9,10 @@ const getPath = (f = '.') => join(__dirname, 'views', f)
     readdirSync(getPath()).filter(isView).forEach(f => {
       const name = f.replace(/\.view$/, '')
       const code = readFileSync(getPath(f), 'utf-8')
+      const tests = existsSync(getPath(`${f}.tests`))
 
       it(`parses ${as} ${name}`, () => {
-        expect(morph(code, { as, name, pretty: true })).toMatchSnapshot()
+        expect(morph(code, { as, name, pretty: true, tests })).toMatchSnapshot()
       })
     })
   })

@@ -1,0 +1,12 @@
+Main is Test
+width 360
+text it's Main!
+onClick Next
+
+Next is Test
+text it's Next!
+onClick EvenMore
+
+EvenMore is Test
+text it's EvenMore!
+onClick Main

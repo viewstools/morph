@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`tests parses tests MyView.view.tests 1`] = `
+"export default display => {
+  const Main = { width: 360, text: \\"it's Main!\\", onClick: () => display(Next) };
+  const Next = {
+    width: 360,
+    text: \\"it's Next!\\",
+    onClick: () => display(EvenMore),
+  };
+  const EvenMore = {
+    width: 360,
+    text: \\"it's EvenMore!\\",
+    onClick: () => display(Main),
+  };
+  return { _main: 'Main', Main, Next, EvenMore };
+};
+"
+`;

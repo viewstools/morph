@@ -13,6 +13,7 @@ const isMorphedView = f => /\.view\.js$/.test(f)
 const isData = f => extname(f) === '.data'
 const isJs = f => extname(f) === '.js'
 const isView = f => extname(f) === '.view'
+const isTests = f => extname(f) === '.tests'
 
 module.exports = options => {
   let {
@@ -81,6 +82,7 @@ module.exports = options => {
 
   const views = map
   const data = {}
+  const tests = {}
 
   const addView = filter(f => {
     const { file, view } = toViewPath(f)
@@ -88,13 +90,19 @@ module.exports = options => {
 
     console.log(chalk.yellow('A'), view, chalk.dim(`-> ${f}`))
 
+    let shouldMorph = isView(file)
+
     if (fileIsData) {
       data[view] = file
+      shouldMorph = true
+    } else if (isTests(file)) {
+      tests[view] = file
+      shouldMorph = true
     } else {
       views[view] = file
     }
 
-    if (isView(file) || fileIsData) morphView(f)
+    if (shouldMorph) morphView(f)
   })
 
   const morphView = filter(f => {
@@ -108,11 +116,12 @@ module.exports = options => {
 
       try {
         const code = morph(source, {
-          as: isData(f) ? 'data' : as,
+          as: isData(f) ? 'data' : isTests(f) ? 'tests' : as,
           compile,
           name: view,
           getImport,
           pretty,
+          tests: tests[`${view}.view.tests`],
         })
 
         writeFile(`${f}.js`, code, err => {
@@ -130,9 +139,9 @@ module.exports = options => {
 
   const toViewPath = f => {
     const file = relative(src, f)
-    const view = isData(file)
+    const view = isData(file) || isTests(file)
       ? file
-      : toPascalCase(file.replace(/\.(data|view|js)/g, ''))
+      : toPascalCase(file.replace(/\.(view|js)/g, ''))
 
     return {
       file: `./${file}`,
@@ -144,9 +153,10 @@ module.exports = options => {
     filter: f => !/node_modules/.test(f) && !isMorphedView(f),
   }
   const watcherPattern = [
+    `${src}/**/*.data`,
     `${src}/**/*.js`,
     `${src}/**/*.view`,
-    `${src}/**/*.data`,
+    `${src}/**/*.view.tests`,
   ]
   globule.find(watcherPattern, watcherOptions).forEach(addView)
 
@@ -167,6 +177,8 @@ module.exports = options => {
 
         if (isData(f)) {
           delete data[view]
+        } else if (isTests(f)) {
+          delete tests[view]
         } else {
           delete views[view]
         }

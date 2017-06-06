@@ -499,6 +499,40 @@ export default WhenTopLevel;
 "
 `;
 
+exports[`react-dom parses react-dom WithTest 1`] = `
+"import React from 'react';
+import css from 'glam';
+import makeTests from './WithTest.view.tests.js';
+
+const styles = {
+  h73hviv: css('css-1s0kfvh', [], () => [
+    \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
+  ]),
+};
+
+class TestsWithTest extends React.Component {
+  constructor(props) {
+    super(props);
+    this.tests = makeTests(this.display);
+    this.state = this.tests[this.tests._main];
+  }
+
+  display = next => this.setState(next);
+
+  render() {
+    return <WithTest {...this.props} {...this.state} />;
+  }
+}
+
+const WithTest = props =>
+  <button onClick={props.change} className={\`\${styles.h73hviv}\`}>
+    <div>{props.text}</div>
+  </button>;
+
+export default TestsWithTest;
+"
+`;
+
 exports[`react-native parses react-native Action 1`] = `
 "import React from 'react';
 import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
@@ -998,5 +1032,24 @@ const WhenTopLevel = props =>
   props.showMe ? <Text>I may be hidden</Text> : null;
 
 export default WhenTopLevel;
+"
+`;
+
+exports[`react-native parses react-native WithTest 1`] = `
+"import React from 'react';
+import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+
+const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
+
+const WithTest = props =>
+  <TouchableHighlight
+    activeOpacity={0.7}
+    onPress={props.change}
+    underlayColor=\\"transparent\\"
+  >
+    <View style={styles.h18pdll5}><Text>{props.text}</Text></View>
+  </TouchableHighlight>;
+
+export default WithTest;
 "
 `;

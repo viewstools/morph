@@ -295,6 +295,30 @@ export const makeVisitors = ({
 export const makeToggle = (fn, prop) =>
   `${fn} = () => this.setState({ ${prop}: !this.state.${prop} })`
 
+const getTests = ({ state, name }) => {
+  if (!state.tests) return false
+
+  const tests = {
+    name: `Tests${name}`,
+  }
+
+  tests.component = `class ${tests.name} extends React.Component {
+  constructor(props) {
+    super(props)
+    this.tests = makeTests(this.display)
+    this.state = this.tests[this.tests._main]
+  }
+
+  display = next => this.setState(next)
+
+  render() {
+    return <${name} {...this.props} {...this.state} />
+  }
+}`
+
+  return tests
+}
+
 const getRemap = ({ state, name }) => {
   if (Object.keys(state.remap).length === 0) return false
   const remap = {
@@ -327,17 +351,22 @@ render() {
 
 export const toComponent = ({ getImport, getStyles, name, state }) => {
   const remap = getRemap({ state, name })
+  let xport = remap ? remap.name : name
+  const tests = getTests({ state, name: xport })
+  xport = tests ? tests.name : xport
 
   return `import React from 'react'
 ${getDependencies(state.uses, getImport)}
+${tests ? `import makeTests from './${name}.view.tests.js'` : ''}
 
 ${getStyles(state.styles)}
 
+${tests ? tests.component : ''}
 ${remap ? remap.component : ''}
 
 ${getBody({ state, name })}
 ${getDefaultProps({ state, name })}
-export default ${remap ? remap.name : name}`
+export default ${xport}`
 }
 
 export const safe = (value, node) =>
