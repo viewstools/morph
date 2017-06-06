@@ -29,6 +29,7 @@ const STYLE = new RegExp(
 const TERNARY = /\?\s*['"]?\s*(.+)?\s*['"]?\s*:\s*['"]?\s*(.+)\s*['"]?\s*/
 const TEXT = /^Text$/
 const TODO = /TODO\s*(@([a-z]+))?\s*(.+)/i
+const TOGGLE = new RegExp(`^toggle (props|item).(.+)$`)
 const TRUE = /^true$/i
 
 export const is = (thing, line) => thing.test(line)
@@ -69,6 +70,7 @@ export const isText = line => is(TEXT, line)
 export const isSection = line => is(SECTION, line)
 export const isStyle = line => is(STYLE, line)
 export const isTodo = line => is(TODO, line)
+export const isToggle = line => is(TOGGLE, line)
 export const isTrue = line => is(TRUE, line)
 
 const get = (regex, line) => line.match(regex)
@@ -146,6 +148,7 @@ export const getMainFont = line => line.split(',')[0].replace(/['"]/g, '')
 export const getProp = line => get(PROP, line).slice(1)
 export const getSection = line => get(SECTION, line)[1]
 export const getTodo = line => get(TODO, line).slice(1)
+export const getToggle = line => get(TOGGLE, line)[2]
 export const getValue = value => {
   if (isFloat(value)) {
     return parseFloat(value, 10)

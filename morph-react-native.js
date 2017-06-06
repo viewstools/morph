@@ -5,21 +5,27 @@ import {
   hasProp,
   isCode,
   isTag,
+  isToggle,
 } from './morph-utils.js'
-import { makeVisitors, safe, wrap } from './morph-react.js'
-import getBody from './react-native/get-body.js'
+import {
+  makeToggle,
+  makeVisitors,
+  safe,
+  toComponent,
+  wrap,
+} from './morph-react.js'
 import getColor from 'color'
-import getDefaultProps from './react-native/get-default-props.js'
-import getDependencies from './react-native/get-dependencies.js'
 import getStyles from './react-native/get-styles.js'
 import hash from './hash.js'
 import morph from './morph.js'
+import toPascalCase from 'to-pascal-case'
 
 export default ({ getImport, name, view }) => {
   const state = {
     captures: [],
     defaultProps: false,
     fonts: [],
+    remap: {},
     render: [],
     styles: {},
     todos: [],
@@ -84,12 +90,12 @@ export default ({ getImport, name, view }) => {
 
   const finalGetImport = name => imports[name] || getImport(name)
 
-  return toComponent({ getImport: finalGetImport, name, state })
+  return toComponent({ getImport: finalGetImport, getStyles, name, state })
 }
 
 const BlockWrap = {
   enter(node, parent, state) {
-    const name = getBlockName(node)
+    const name = getBlockName(node, state)
 
     if (
       name === 'Text' &&
@@ -203,7 +209,7 @@ function PropertiesStyleLeave(node, parent, state) {
   }
 }
 
-const getBlockName = node => {
+const getBlockName = (node, state) => {
   switch (node.name.value) {
     case 'CaptureEmail':
     // case 'CaptureFile':
@@ -216,7 +222,7 @@ const getBlockName = node => {
 
     case 'Horizontal':
     case 'Vertical':
-      return getGroupBlockName(node)
+      return getGroupBlockName(node, state)
 
     case 'List':
       return getListBlockName(node)
@@ -231,7 +237,7 @@ const getBlockName = node => {
   }
 }
 
-const getGroupBlockName = node => {
+const getGroupBlockName = (node, state) => {
   let name = 'View'
 
   if (hasProp(node, 'teleportTo')) {
@@ -239,7 +245,21 @@ const getGroupBlockName = node => {
   } else if (hasProp(node, 'goTo')) {
     node.goTo = true
   } else if (hasProp(node, 'onClick')) {
-    node.action = getProp(node, 'onClick').value.value
+    const propNode = getProp(node, 'onClick')
+
+    if (isToggle(propNode)) {
+      const propToToggle = propNode.tags.toggle
+      const functionName = `toggle${toPascalCase(propToToggle)}`
+      state.remap[propToToggle] = {
+        body: makeToggle(functionName, propToToggle),
+        fn: functionName,
+      }
+
+      node.action = `props.${functionName}`
+      return
+    } else {
+      node.action = propNode.value.value
+    }
   }
 
   if (hasProp(node, 'backgroundImage')) {
@@ -403,12 +423,3 @@ const blacklist = [
 const isValidPropertyForBlock = (node, parent) =>
   !blacklist.includes(node.key.value)
 // !node.isBasic || (node.isBasic &&
-
-const toComponent = ({ getImport, name, state }) => `import React from 'react'
-${getDependencies(state.uses, getImport)}
-
-${getStyles(state.styles)}
-
-${getBody({ state, name })}
-${getDefaultProps({ state, name })}
-export default ${name}`

@@ -287,7 +287,7 @@ export default text => {
         const [prop, stemmedTag] = stemStylesFromProp(propRaw)
         const tags = getTags(prop, value)
         if (stemmedTag) {
-          tags.push(stemmedTag)
+          tags[stemmedTag] = true
         }
 
         let last = properties

@@ -24,6 +24,12 @@ const Property = {
   },
 }
 
+// TODO relations
+// eg
+// Data
+// name Dario
+// addresses
+// from addresses.data
 const getValue = property => {
   switch (property.value.type) {
     case 'Literal':

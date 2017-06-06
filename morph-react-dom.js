@@ -5,11 +5,13 @@ import {
   hasProp,
   isCode,
 } from './morph-utils.js'
-import { makeVisitors, safe as safeProp, wrap } from './morph-react.js'
+import {
+  makeVisitors,
+  safe as safeProp,
+  toComponent,
+  wrap,
+} from './morph-react.js'
 import { transform } from 'babel-core'
-import getBody from './react-native/get-body.js'
-import getDefaultProps from './react-native/get-default-props.js'
-import getDependencies from './react-native/get-dependencies.js'
 import isUnitlessNumber from './react-native/is-unitless-number.js'
 import hash from './hash.js'
 import morph from './morph.js'
@@ -20,6 +22,7 @@ export default ({ getImport, name, view }) => {
     captures: [],
     defaultProps: false,
     fonts: [],
+    remap: {},
     render: [],
     styles: {},
     todos: [],
@@ -80,7 +83,7 @@ export default ({ getImport, name, view }) => {
 
   const finalGetImport = name => imports[name] || getImport(name)
 
-  return toComponent({ getImport: finalGetImport, name, state })
+  return toComponent({ getImport: finalGetImport, getStyles, name, state })
 }
 
 const BlockGoTo = {
@@ -309,16 +312,6 @@ const transformGlam = code =>
     babelrc: false,
     plugins: [[require.resolve('glam/babel'), { inline: true }]],
   })
-
-// THE SAME
-const toComponent = ({ getImport, name, state }) => `import React from 'react'
-${getDependencies(state.uses, getImport)}
-
-${getStyles(state.styles)}
-
-${getBody({ state, name })}
-${getDefaultProps({ state, name })}
-export default ${name}`
 
 const interpolateCode = s => (/props|item/.test(s) ? '${' + s + '}' : s)
 const safe = s => '`' + s.split(' ').map(interpolateCode).join(' ') + '`'

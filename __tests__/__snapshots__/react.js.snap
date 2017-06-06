@@ -355,6 +355,37 @@ export default Text;
 "
 `;
 
+exports[`react-dom parses react-dom Toggle 1`] = `
+"import React from 'react';
+import css from 'glam';
+
+const styles = {
+  h73hviv: css('css-1s0kfvh', [], () => [
+    \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
+  ]),
+};
+
+class RemapToggle extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { isOn: props.isOn };
+  }
+  toggleIsOn = () => this.setState({ isOn: !this.state.isOn });
+
+  render() {
+    return (
+      <Toggle {...this.props} {...this.state} toggleIsOn={this.toggleIsOn} />
+    );
+  }
+}
+
+const Toggle = props =>
+  <button onClick={props.toggleIsOn} className={\`\${styles.h73hviv}\`} />;
+
+export default RemapToggle;
+"
+`;
+
 exports[`react-dom parses react-dom UseOfProxy 1`] = `
 "import React from 'react';
 import Button from './Button.view.js';
@@ -833,6 +864,39 @@ const styles = StyleSheet.create({
 const Text = props => <Text style={styles.h11t0jc}>Hi, I'm some text</Text>;
 
 export default Text;
+"
+`;
+
+exports[`react-native parses react-native Toggle 1`] = `
+"import React from 'react';
+import { StyleSheet, TouchableHighlight } from 'react-native';
+
+const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
+
+class RemapToggle extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { isOn: props.isOn };
+  }
+  toggleIsOn = () => this.setState({ isOn: !this.state.isOn });
+
+  render() {
+    return (
+      <Toggle {...this.props} {...this.state} toggleIsOn={this.toggleIsOn} />
+    );
+  }
+}
+
+const Toggle = props =>
+  <TouchableHighlight
+    activeOpacity={0.7}
+    onPress={props.toggleIsOn}
+    underlayColor=\\"transparent\\"
+  >
+    <undefined style={styles.h18pdll5} />
+  </TouchableHighlight>;
+
+export default RemapToggle;
 "
 `;
 

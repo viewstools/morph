@@ -4,8 +4,13 @@ import {
   isCode,
   isData,
   isStyle,
+  isToggle,
 } from './morph-utils.js'
+import getBody from './react-native/get-body.js'
+import getDefaultProps from './react-native/get-default-props.js'
+import getDependencies from './react-native/get-dependencies.js'
 import toCamelCase from 'to-camel-case'
+import toPascalCase from 'to-pascal-case'
 
 export const makeVisitors = ({
   getBlockName,
@@ -28,7 +33,7 @@ export const makeVisitors = ({
 
   const BlockName = {
     enter(node, parent, state) {
-      const name = getBlockName(node)
+      const name = getBlockName(node, state)
       if (name === null) return this.skip()
 
       node.name.finalValue = name
@@ -164,6 +169,17 @@ export const makeVisitors = ({
         !parent.skip &&
         !(node.key.value === 'from' && parent.parent.name.value === 'List')
       ) {
+        if (isToggle(node)) {
+          const propToToggle = node.tags.toggle
+          const functionName = `toggle${toPascalCase(propToToggle)}`
+          state.remap[propToToggle] = {
+            body: makeToggle(functionName, propToToggle),
+            fn: functionName,
+          }
+          state.render.push(` ${node.key.value}={props.${functionName}}`)
+          return
+        }
+
         const value = getValueForProperty(node, parent)
 
         if (value) {
@@ -274,6 +290,54 @@ export const makeVisitors = ({
       state.todos = list
     },
   }
+}
+
+export const makeToggle = (fn, prop) =>
+  `${fn} = () => this.setState({ ${prop}: !this.state.${prop} })`
+
+const getRemap = ({ state, name }) => {
+  if (Object.keys(state.remap).length === 0) return false
+  const remap = {
+    name: `Remap${name}`,
+  }
+
+  const localState = []
+  const fns = []
+  const methods = Object.keys(state.remap).map(prop => {
+    localState.push(`${prop}: props.${prop},`)
+    const { body, fn } = state.remap[prop]
+    fns.push(`${fn}={this.${fn}}`)
+    return body
+  })
+
+  remap.component = `class ${remap.name} extends React.Component {
+constructor(props) {
+super(props)
+this.state = ${wrap(localState.join('\n'))}
+}
+${methods.join('\n')}
+
+render() {
+  return <${name} {...this.props} {...this.state} ${fns.join(' ')} />
+}
+}`
+
+  return remap
+}
+
+export const toComponent = ({ getImport, getStyles, name, state }) => {
+  const remap = getRemap({ state, name })
+
+  return `import React from 'react'
+${getDependencies(state.uses, getImport)}
+
+${getStyles(state.styles)}
+
+${remap ? remap.component : ''}
+
+${getBody({ state, name })}
+${getDefaultProps({ state, name })}
+export default ${remap ? remap.name : name}`
 }
 
 export const safe = (value, node) =>

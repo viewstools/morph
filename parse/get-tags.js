@@ -1,21 +1,23 @@
 import {
+  getToggle,
   isCode,
   isCodeInvalid,
   isData,
   isMargin,
   isPadding,
   isStyle,
+  isToggle,
 } from './helpers.js'
 
 export default (prop, value) => {
-  const list = []
+  const tags = {}
 
-  isCode(value) && list.push('code')
-  isCodeInvalid(value) && list.push('code:invalid')
-  isData(value) && list.push('data')
-  isMargin(prop) && list.push('margin')
-  isPadding(prop) && list.push('padding')
-  isStyle(prop) && list.push('style')
+  if (isCode(value)) tags.code = isCodeInvalid(value) ? 'invalid' : true
+  if (isData(value)) tags.data = true
+  if (isMargin(prop)) tags.margin = true
+  if (isPadding(prop)) tags.padding = true
+  if (isStyle(prop)) tags.style = true
+  if (isToggle(value)) tags.toggle = getToggle(value)
 
-  return list
+  return tags
 }
