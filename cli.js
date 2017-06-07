@@ -3,7 +3,7 @@
 const { readFileSync, statSync } = require('fs')
 const { morph, pathToName } = require('./lib.js')
 const chalk = require('chalk')
-const startWatching = require('./watch')
+const watch = require('./watch.js')
 
 const {
   _,
@@ -11,7 +11,8 @@ const {
   compile,
   help,
   pretty,
-  watch,
+  tests,
+  watch: shouldWatch,
 } = require('minimist')(process.argv.slice(2), {
   alias: {
     help: 'h',
@@ -22,6 +23,7 @@ const {
     as: 'react-dom',
     compile: false,
     pretty: true,
+    tests: true,
     watch: false,
   },
 })
@@ -36,6 +38,8 @@ if (help) {
 
     --compile       if true, produces ES5 JS, defaults to false
     --pretty        format output code, defaults to true
+    --tests         if true, it includes the .view.tests files in
+                      the output, defaults to true
     --watch         watch a directory and produce .view.js files
   `)
 
@@ -51,7 +55,7 @@ if (!input) {
   process.exit()
 }
 
-if (watch) {
+if (shouldWatch) {
   if (!statSync(input).isDirectory()) {
     console.error(
       `You need to specify an input directory to watch. ${input} is a file.`
@@ -60,7 +64,9 @@ if (watch) {
   }
 
   console.log(
-    `Will morph files at '${chalk.green(input)}' as ${chalk.green(as)}\n`
+    `Will morph files at '${chalk.green(input)}' as ${chalk.green(
+      as
+    )} and ${tests ? 'will' : "won't"} include tests\n`
   )
   console.log(chalk.yellow('A'), ' = Added')
   console.log(chalk.blue('D'), ` = View deleted`)
@@ -69,11 +75,12 @@ if (watch) {
   console.log(chalk.magenta('!'), ` = View doesn't exist but is being used`)
   console.log('\n\nPress', chalk.blue('ctrl+c'), 'to stop at any time.\n\n')
 
-  startWatching({
+  watch({
     as,
     compile,
     pretty,
     src: input,
+    tests,
   })
 } else {
   const code = morph(readFileSync(input, 'utf-8'), {
@@ -81,6 +88,7 @@ if (watch) {
     compile,
     name: pathToName(input),
     pretty,
+    tests,
   })
 
   console.log(code)

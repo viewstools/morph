@@ -24,6 +24,7 @@ module.exports = options => {
     shared,
     src,
     pretty,
+    tests: shouldIncludeTests,
     viewNotFound,
   } = Object.assign(
     {
@@ -156,8 +157,8 @@ module.exports = options => {
     `${src}/**/*.data`,
     `${src}/**/*.js`,
     `${src}/**/*.view`,
-    `${src}/**/*.view.tests`,
-  ]
+    shouldIncludeTests && `${src}/**/*.view.tests`,
+  ].filter(Boolean)
   globule.find(watcherPattern, watcherOptions).forEach(addView)
 
   watch(watcherPattern, watcherOptions, (err, watcher) => {
