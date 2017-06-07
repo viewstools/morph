@@ -288,6 +288,35 @@ export default NameIsType;
 "
 `;
 
+exports[`react-dom parses react-dom NestedRoutes 1`] = `
+"import React from 'react';
+import { Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+import Topic from './Topic.view.js';
+import css from 'glam';
+
+const styles = {
+  h73hviv: css('css-1s0kfvh', [], () => [
+    \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
+  ]),
+};
+
+const NestedRoutes = props =>
+  <div>
+    <div>topics</div>
+    <Link to=\\"rendering\\" className={\`\${styles.h73hviv}\`}>
+      <div>Rendering with React</div>
+    </Link>
+    <Route
+      path={\`\${props.match.url}/:topic\`}
+      render={routeProps => <Topic {...routeProps} />}
+    />
+  </div>;
+
+export default NestedRoutes;
+"
+`;
+
 exports[`react-dom parses react-dom Proxy 1`] = `
 "import React from 'react';
 
@@ -295,6 +324,19 @@ const Proxy = props =>
   <div><props.icon from={props.icon} fill=\\"red\\" /><div>{props.text}</div></div>;
 
 export default Proxy;
+"
+`;
+
+exports[`react-dom parses react-dom Router 1`] = `
+"import React from 'react';
+import About from './About.view.js';
+import Home from './Home.view.js';
+import Topics from './Topics.view.js';
+
+const Router = props =>
+  <div><Home at=\\"/ exact\\" /><About at=\\"/about\\" /><Topics at=\\"/topics\\" /></div>;
+
+export default Router;
 "
 `;
 
@@ -838,6 +880,27 @@ export default NameIsType;
 "
 `;
 
+exports[`react-native parses react-native NestedRoutes 1`] = `
+"import React from 'react';
+import { Link } from 'react-router-native';
+import Topic from './Topic.view.js';
+import { StyleSheet, Text, View } from 'react-native';
+
+const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
+
+const NestedRoutes = props =>
+  <View>
+    <Text>topics</Text>
+    <Link activeOpacity={0.7} to=\\"rendering\\" underlayColor=\\"transparent\\">
+      <View style={styles.h18pdll5}><Text>Rendering with React</Text></View>
+    </Link>
+    <Topic at=\\":topic\\" />
+  </View>;
+
+export default NestedRoutes;
+"
+`;
+
 exports[`react-native parses react-native Proxy 1`] = `
 "import React from 'react';
 import { Text, View } from 'react-native';
@@ -848,6 +911,22 @@ const Proxy = props =>
   </View>;
 
 export default Proxy;
+"
+`;
+
+exports[`react-native parses react-native Router 1`] = `
+"import React from 'react';
+import About from './About.view.js';
+import Home from './Home.view.js';
+import Topics from './Topics.view.js';
+import { View } from 'react-native';
+
+const Router = props =>
+  <View>
+    <Home at=\\"/ exact\\" /><About at=\\"/about\\" /><Topics at=\\"/topics\\" />
+  </View>;
+
+export default Router;
 "
 `;
 

@@ -106,10 +106,48 @@ export const makeVisitors = ({
     },
   }
 
+  const BlockRoute = {
+    enter(node, parent, state) {
+      if (node.isBasic) return
+
+      const at = getProp(node, 'at')
+      if (at) {
+        let [path, isExact = false] = at.value.value.split(' ')
+        state.use('Route')
+
+        if (path === '/') state.use('Router')
+
+        if (!path.startsWith('/')) {
+          path = `\`\${props.match.url}/${path}\``
+        }
+
+        node.isRoute = true
+        state.render.push(
+          `<Route path=${safe(path)} ${isExact
+            ? 'exact'
+            : ''} render={routeProps => `
+        )
+      }
+    },
+    leave(node, parent, state) {
+      if (node.isRoute) {
+        state.render.push('} />')
+      }
+    },
+  }
+
   const PropertiesListKey = {
     leave(node, parent, state) {
       if (parent.isInList && !node.hasKey) {
         state.render.push(' key={i}')
+      }
+    },
+  }
+
+  const PropertiesRoute = {
+    leave(node, parent, state) {
+      if (parent.isRoute) {
+        state.render.push(' {...routeProps}')
       }
     },
   }
@@ -231,6 +269,7 @@ export const makeVisitors = ({
     BlockDefaultProps,
     BlockExplicitChildren,
     BlockName,
+    BlockRoute,
     BlockWhen,
 
     Block: {
@@ -239,12 +278,14 @@ export const makeVisitors = ({
       // TODO List without wrapper?
       enter(node, parent, state) {
         BlockWhen.enter.call(this, node, parent, state)
+        BlockRoute.enter.call(this, node, parent, state)
         BlockName.enter.call(this, node, parent, state)
         BlockDefaultProps.enter.call(this, node, parent, state)
       },
       leave(node, parent, state) {
         BlockExplicitChildren.leave.call(this, node, parent, state)
         BlockName.leave.call(this, node, parent, state)
+        BlockRoute.leave.call(this, node, parent, state)
         BlockWhen.leave.call(this, node, parent, state)
       },
     },
@@ -266,12 +307,18 @@ export const makeVisitors = ({
       leave(node, parent, state) {
         PropertiesStyle.leave.call(this, node, parent, state)
         PropertiesListKey.leave.call(this, node, parent, state)
+        PropertiesRoute.leave.call(this, node, parent, state)
       },
     },
 
     Property: {
       enter(node, parent, state) {
-        if (node.key.value === 'when' || isData(node)) return
+        if (
+          node.key.value === 'at' ||
+          node.key.value === 'when' ||
+          isData(node)
+        )
+          return
         if (!isValidPropertyForBlock(node, parent)) return
 
         // if (PropertyData.enter.call(this, node, parent, state)) return
@@ -370,7 +417,7 @@ export default ${xport}`
 }
 
 export const safe = (value, node) =>
-  typeof value === 'string' && !isCode(node)
+  typeof value === 'string' && !/props|item/.test(value)
     ? JSON.stringify(value)
     : wrap(value)
 

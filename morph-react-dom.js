@@ -41,6 +41,7 @@ export default ({ getImport, name, tests = false, view }) => {
     BlockDefaultProps,
     BlockExplicitChildren,
     BlockName,
+    BlockRoute,
     BlockWhen,
     ...visitors
   } = makeVisitors({
@@ -56,6 +57,7 @@ export default ({ getImport, name, tests = false, view }) => {
     // TODO List without wrapper?
     enter(node, parent, state) {
       BlockWhen.enter.call(this, node, parent, state)
+      BlockRoute.enter.call(this, node, parent, state)
       // BlockWrap.enter.call(this, node, parent, state)
       BlockName.enter.call(this, node, parent, state)
       // BlockCapture.enter.call(this, node, parent, state)
@@ -67,19 +69,25 @@ export default ({ getImport, name, tests = false, view }) => {
       BlockExplicitChildren.leave.call(this, node, parent, state)
       BlockName.leave.call(this, node, parent, state)
       // BlockWrap.leave.call(this, node, parent, state)
+      BlockRoute.leave.call(this, node, parent, state)
       BlockWhen.leave.call(this, node, parent, state)
     },
   }
 
   morph(view, state, visitors)
 
-  // TODO
   if (Object.keys(state.styles).length > 0) {
     state.uses.push('glam')
   }
 
+  if (state.uses.includes('Router')) {
+    state.render = ['<Router>', ...state.render, '</Router>']
+  }
+
   const imports = {
     Link: "import { Link } from 'react-router-dom'",
+    Route: "import { Route } from 'react-router-dom'",
+    Router: "import { BrowserRouter as Router } from 'react-router-dom'",
   }
 
   const finalGetImport = name => imports[name] || getImport(name)
