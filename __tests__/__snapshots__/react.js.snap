@@ -331,10 +331,23 @@ exports[`react-dom parses react-dom Router 1`] = `
 "import React from 'react';
 import About from './About.view.js';
 import Home from './Home.view.js';
+import { Route } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import Topics from './Topics.view.js';
 
 const Router = props =>
-  <div><Home at=\\"/ exact\\" /><About at=\\"/about\\" /><Topics at=\\"/topics\\" /></div>;
+  <Router>
+    <div>
+      <Route
+        path=\\"/\\"
+        exact
+        render={routeProps =>
+          <Home heigth={props.height} width={360} {...routeProps} />}
+      />
+      <Route path=\\"/about\\" render={routeProps => <About {...routeProps} />} />
+      <Route path=\\"/topics\\" render={routeProps => <Topics {...routeProps} />} />
+    </div>
+  </Router>;
 
 export default Router;
 "
@@ -883,6 +896,7 @@ export default NameIsType;
 exports[`react-native parses react-native NestedRoutes 1`] = `
 "import React from 'react';
 import { Link } from 'react-router-native';
+import { Route } from 'react-router-native';
 import Topic from './Topic.view.js';
 import { StyleSheet, Text, View } from 'react-native';
 
@@ -894,7 +908,10 @@ const NestedRoutes = props =>
     <Link activeOpacity={0.7} to=\\"rendering\\" underlayColor=\\"transparent\\">
       <View style={styles.h18pdll5}><Text>Rendering with React</Text></View>
     </Link>
-    <Topic at=\\":topic\\" />
+    <Route
+      path={\`\${props.match.url}/:topic\`}
+      render={routeProps => <Topic {...routeProps} />}
+    />
   </View>;
 
 export default NestedRoutes;
@@ -918,13 +935,24 @@ exports[`react-native parses react-native Router 1`] = `
 "import React from 'react';
 import About from './About.view.js';
 import Home from './Home.view.js';
+import { Route } from 'react-router-native';
+import { NativeRouter as Router } from 'react-router-native';
 import Topics from './Topics.view.js';
 import { View } from 'react-native';
 
 const Router = props =>
-  <View>
-    <Home at=\\"/ exact\\" /><About at=\\"/about\\" /><Topics at=\\"/topics\\" />
-  </View>;
+  <Router>
+    <View>
+      <Route
+        path=\\"/\\"
+        exact
+        render={routeProps =>
+          <Home heigth={props.height} width={360} {...routeProps} />}
+      />
+      <Route path=\\"/about\\" render={routeProps => <About {...routeProps} />} />
+      <Route path=\\"/topics\\" render={routeProps => <Topics {...routeProps} />} />
+    </View>
+  </Router>;
 
 export default Router;
 "

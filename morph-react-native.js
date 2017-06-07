@@ -40,6 +40,7 @@ export default ({ getImport, name, view }) => {
     BlockDefaultProps,
     BlockExplicitChildren,
     BlockName,
+    BlockRoute,
     BlockWhen,
     ...visitors
   } = makeVisitors({
@@ -55,6 +56,7 @@ export default ({ getImport, name, view }) => {
     // TODO FlatList
     enter(node, parent, state) {
       BlockWhen.enter.call(this, node, parent, state)
+      BlockRoute.enter.call(this, node, parent, state)
       BlockWrap.enter.call(this, node, parent, state)
       BlockName.enter.call(this, node, parent, state)
       BlockCapture.enter.call(this, node, parent, state)
@@ -65,6 +67,7 @@ export default ({ getImport, name, view }) => {
       BlockExplicitChildren.leave.call(this, node, parent, state)
       BlockName.leave.call(this, node, parent, state)
       BlockWrap.leave.call(this, node, parent, state)
+      BlockRoute.leave.call(this, node, parent, state)
       BlockWhen.leave.call(this, node, parent, state)
     },
   }
@@ -80,12 +83,18 @@ export default ({ getImport, name, view }) => {
     ]
   }
 
+  if (state.uses.includes('Router')) {
+    state.render = ['<Router>', ...state.render, '</Router>']
+  }
+
   if (Object.keys(state.styles).length > 0) {
     state.uses.push('StyleSheet')
   }
 
   const imports = {
     Link: "import { Link } from 'react-router-native'",
+    Route: "import { Route } from 'react-router-native'",
+    Router: "import { NativeRouter as Router } from 'react-router-native'",
   }
 
   const finalGetImport = name => imports[name] || getImport(name)
