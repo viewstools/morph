@@ -108,8 +108,6 @@ export const makeVisitors = ({
 
   const BlockRoute = {
     enter(node, parent, state) {
-      if (node.isBasic) return
-
       const at = getProp(node, 'at')
       if (at) {
         let [path, isExact = false] = at.value.value.split(' ')

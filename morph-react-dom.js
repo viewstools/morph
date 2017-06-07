@@ -109,6 +109,7 @@ const BlockGoTo = {
 const BlockTeleport = {
   enter(node, parent, state) {
     if (node.teleport) {
+      // TODO relative vs absolute
       const teleportTo = getProp(node, 'teleportTo')
       state.render.push(` to=${safeProp(teleportTo.value.value, teleportTo)}`)
     }
