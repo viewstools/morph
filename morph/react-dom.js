@@ -4,18 +4,16 @@ import {
   hasKeys,
   hasProp,
   isCode,
-} from './morph-utils.js'
-import {
-  makeVisitors,
-  safe as safeProp,
-  toComponent,
-  wrap,
-} from './morph-react.js'
+} from './utils.js'
 import { transform } from 'babel-core'
-import isUnitlessNumber from './react-native/is-unitless-number.js'
 import hash from './hash.js'
+import isUnitlessNumber from './react/is-unitless-number.js'
+import makeVisitors from './react/make-visitors.js'
 import morph from './morph.js'
+import safeProp from './react/safe.js'
+import toComponent from './react/to-component.js'
 import toSlugCase from 'to-slug-case'
+import wrap from './react/wrap.js'
 
 export default ({ getImport, name, tests = false, view }) => {
   const state = {

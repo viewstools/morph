@@ -1,4 +1,4 @@
-import SVG from '../svg.js'
+import SVG from './svg.js'
 
 const NATIVE = [
   'Image',

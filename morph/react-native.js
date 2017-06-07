@@ -6,19 +6,16 @@ import {
   isCode,
   isTag,
   isToggle,
-} from './morph-utils.js'
-import {
-  makeToggle,
-  makeVisitors,
-  safe,
-  toComponent,
-  wrap,
-} from './morph-react.js'
+} from './utils.js'
 import getColor from 'color'
-import getStyles from './react-native/get-styles.js'
 import hash from './hash.js'
+import makeToggle from './react/make-toggle.js'
+import makeVisitors from './react/make-visitors.js'
 import morph from './morph.js'
+import safe from './react/safe.js'
+import toComponent from './react/to-component.js'
 import toPascalCase from 'to-pascal-case'
+import wrap from './react/wrap.js'
 
 export default ({ getImport, name, view }) => {
   const state = {
@@ -397,6 +394,11 @@ const getStyleForProperty = (node, parent, code) => {
       }
   }
 }
+
+const getStyles = styles =>
+  hasKeys(styles)
+    ? `const styles = StyleSheet.create(${JSON.stringify(styles)})`
+    : ''
 
 const getValueForProperty = (node, parent) => {
   const key = node.key.value

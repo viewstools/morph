@@ -1,4 +1,4 @@
-import parse from './parse/index.js'
+import parse from '../parse/index.js'
 import walk from './walk.js'
 
 export default ({ view }) => {

@@ -1,4 +1,4 @@
-import { wrap } from './morph-react.js'
+import wrap from './react/wrap.js'
 
 export const getObjectAsString = obj =>
   wrap(

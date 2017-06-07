@@ -5,14 +5,14 @@ import {
   isData,
   isStyle,
   isToggle,
-} from './morph-utils.js'
-import getBody from './react-native/get-body.js'
-import getDefaultProps from './react-native/get-default-props.js'
-import getDependencies from './react-native/get-dependencies.js'
+} from '../utils.js'
+import makeToggle from './make-toggle.js'
+import safe from './safe.js'
 import toCamelCase from 'to-camel-case'
 import toPascalCase from 'to-pascal-case'
+import wrap from './wrap.js'
 
-export const makeVisitors = ({
+export default ({
   getBlockName,
   getStyleForProperty,
   getValueForProperty,
@@ -336,87 +336,3 @@ export const makeVisitors = ({
     },
   }
 }
-
-export const makeToggle = (fn, prop) =>
-  `${fn} = () => this.setState({ ${prop}: !this.state.${prop} })`
-
-const getTests = ({ state, name }) => {
-  if (!state.tests) return false
-
-  const tests = {
-    name: `Tests${name}`,
-  }
-
-  tests.component = `class ${tests.name} extends React.Component {
-  constructor(props) {
-    super(props)
-    this.tests = makeTests(this.display)
-    this.state = this.tests[this.tests._main]
-  }
-
-  display = next => this.setState(next)
-
-  render() {
-    return <${name} {...this.props} {...this.state} />
-  }
-}`
-
-  return tests
-}
-
-const getRemap = ({ state, name }) => {
-  if (Object.keys(state.remap).length === 0) return false
-  const remap = {
-    name: `Remap${name}`,
-  }
-
-  const localState = []
-  const fns = []
-  const methods = Object.keys(state.remap).map(prop => {
-    localState.push(`${prop}: props.${prop},`)
-    const { body, fn } = state.remap[prop]
-    fns.push(`${fn}={this.${fn}}`)
-    return body
-  })
-
-  remap.component = `class ${remap.name} extends React.Component {
-constructor(props) {
-super(props)
-this.state = ${wrap(localState.join('\n'))}
-}
-${methods.join('\n')}
-
-render() {
-  return <${name} {...this.props} {...this.state} ${fns.join(' ')} />
-}
-}`
-
-  return remap
-}
-
-export const toComponent = ({ getImport, getStyles, name, state }) => {
-  const remap = getRemap({ state, name })
-  let xport = remap ? remap.name : name
-  const tests = getTests({ state, name: xport })
-  xport = tests ? tests.name : xport
-
-  return `import React from 'react'
-${getDependencies(state.uses, getImport)}
-${tests ? `import makeTests from './${name}.view.tests.js'` : ''}
-
-${getStyles(state.styles)}
-
-${tests ? tests.component : ''}
-${remap ? remap.component : ''}
-
-${getBody({ state, name })}
-${getDefaultProps({ state, name })}
-export default ${xport}`
-}
-
-export const safe = (value, node) =>
-  typeof value === 'string' && !/props|item/.test(value)
-    ? JSON.stringify(value)
-    : wrap(value)
-
-export const wrap = s => `{${s}}`
