@@ -3,14 +3,16 @@ import { transform } from 'babel-core'
 import isUnitlessNumber from '../react/is-unitless-number.js'
 import toSlugCase from 'to-slug-case'
 
-export default styles => {
+export default ({ file, inlineStyles, styles }, name) => {
   if (!hasKeys(styles)) return ''
 
   const obj = Object.keys(styles)
     .map(k => `${JSON.stringify(k)}: css\`${toNestedCss(styles[k])}\``)
     .join(',')
 
-  return transformGlam(`const styles = {${obj}}`).code
+  const code = transformGlam(`const styles = {${obj}}`, inlineStyles, file.raw)
+  const maybeImport = inlineStyles ? '' : `import '${file.relative}.css'\n`
+  return `${maybeImport}${code}`
 }
 
 const getValue = (key, value) =>
@@ -53,8 +55,9 @@ const toNestedCss = ({
   return ret
 }
 
-const transformGlam = code =>
+const transformGlam = (code, inline, filename) =>
   transform(code, {
     babelrc: false,
-    plugins: [[require.resolve('glam/babel'), { inline: true }]],
-  })
+    filename,
+    plugins: [[require.resolve('glam/babel'), { inline }]],
+  }).code

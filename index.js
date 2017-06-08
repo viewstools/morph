@@ -13,10 +13,21 @@ const DEFAULT_IMPORT = name =>
 
 export const morph = (
   code,
-  { as, compile, getImport = DEFAULT_IMPORT, name, pretty = false, tests }
+  {
+    as,
+    compile,
+    file,
+    getImport = DEFAULT_IMPORT,
+    inlineStyles,
+    name,
+    pretty = false,
+    tests,
+  }
 ) => {
   let morphed = doMorph[as]({
+    file,
     getImport,
+    inlineStyles,
     name,
     view: code,
     tests,

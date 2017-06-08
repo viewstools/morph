@@ -14,7 +14,7 @@ export default ({ getImport, getStyles, name, state }) => {
 ${getDependencies(state.uses, getImport)}
 ${tests ? `import makeTests from './${name}.view.tests.js'` : ''}
 
-${getStyles(state.styles)}
+${getStyles(state, name)}
 
 ${tests ? tests.component : ''}
 ${remap ? remap.component : ''}

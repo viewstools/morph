@@ -18,11 +18,20 @@ const imports = {
   Router: "import { BrowserRouter as Router } from 'react-router-dom'",
 }
 
-export default ({ getImport, name, tests = false, view }) => {
+export default ({
+  getImport,
+  inlineStyles = true,
+  file,
+  name,
+  tests = false,
+  view,
+}) => {
   const state = {
     captures: [],
     defaultProps: false,
+    file,
     fonts: [],
+    inlineStyles,
     remap: {},
     render: [],
     styles: {},

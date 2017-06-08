@@ -20,6 +20,7 @@ module.exports = options => {
     as,
     compile,
     dataNotFound,
+    inlineStyles,
     map,
     shared,
     src,
@@ -107,7 +108,7 @@ module.exports = options => {
   })
 
   const morphView = filter(f => {
-    const { view } = toViewPath(f)
+    const { file, view } = toViewPath(f)
     if (isJs(f)) return
 
     readFile(f, 'utf-8', (err, source) => {
@@ -119,6 +120,8 @@ module.exports = options => {
         const code = morph(source, {
           as: isData(f) ? 'data' : isTests(f) ? 'tests' : as,
           compile,
+          inlineStyles,
+          file: { raw: f, relative: file },
           name: view,
           getImport,
           pretty,

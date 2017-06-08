@@ -10,6 +10,7 @@ const {
   as,
   compile,
   help,
+  inlineStyles,
   pretty,
   tests,
   watch: shouldWatch,
@@ -22,6 +23,7 @@ const {
   default: {
     as: 'react-dom',
     compile: false,
+    inlineStyles: false,
     pretty: true,
     tests: true,
     watch: false,
@@ -37,6 +39,10 @@ if (help) {
                       data
 
     --compile       if true, produces ES5 JS, defaults to false
+    --inline-styles if true, it will inline styles in react-dom,
+                      otherwise it will produce external .css
+                      files. Use this if you compile the CSS
+                      into its own file. Defaults to false
     --pretty        format output code, defaults to true
     --tests         if true, it includes the .view.tests files in
                       the output, defaults to true
@@ -78,6 +84,7 @@ if (shouldWatch) {
   watch({
     as,
     compile,
+    inlineStyles,
     pretty,
     src: input,
     tests,
@@ -86,6 +93,7 @@ if (shouldWatch) {
   const code = morph(readFileSync(input, 'utf-8'), {
     as,
     compile,
+    inlineStyles,
     name: pathToName(input),
     pretty,
     tests,
