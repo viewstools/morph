@@ -382,18 +382,12 @@ export default Router;
 
 exports[`react-dom parses react-dom Svg 1`] = `
 "import React from 'react';
-import Svg, {
-  Text as SvgText,
-  Text as SvgText,
-  Text as SvgText,
-  Text as SvgText,
-} from 'react-native-svg';
 
 const Svg = props =>
-  <Svg viewBox=\\"0 0 20 20\\">
-    <Path d=\\"0 20\\" /><Circle cx={10} cy={5} r={5} />
-    <G><Path d={1} /><Path d={2} /></G><text text=\\"hey\\" />
-  </Svg>;
+  <svg viewBox=\\"0 0 20 20\\">
+    <path d=\\"0 20\\" /><circle cx={10} cy={5} r={5} />
+    <g><path d={1} /><path d={2} /></g><text text=\\"hey\\" />
+  </svg>;
 
 export default Svg;
 "
@@ -595,6 +589,7 @@ const styles = {
 class TestsWithTest extends React.Component {
   constructor(props) {
     super(props);
+
     this.tests = makeTests(this.display);
     this.state = this.tests[this.tests._main];
   }

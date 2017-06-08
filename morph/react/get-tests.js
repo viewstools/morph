@@ -5,9 +5,11 @@ export default ({ state, name }) => {
     name: `Tests${name}`,
   }
 
-  tests.component = `class ${tests.name} extends React.Component {
+  tests.component = `
+  class ${tests.name} extends React.Component {
   constructor(props) {
     super(props)
+
     this.tests = makeTests(this.display)
     this.state = this.tests[this.tests._main]
   }
@@ -15,7 +17,7 @@ export default ({ state, name }) => {
   display = next => this.setState(next)
 
   render() {
-    return <${name} {...this.state} {...this.props} />
+    return <${name} {...this.props} {...this.state} />
   }
 }`
 

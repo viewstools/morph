@@ -30,6 +30,23 @@ export default node => {
     case 'SvgText':
       return 'text'
 
+    case 'Svg':
+    case 'Circle':
+    case 'Ellipse':
+    case 'G':
+    case 'LinearGradient':
+    case 'RadialGradient':
+    case 'Line':
+    case 'Path':
+    case 'Polygon':
+    case 'Polyline':
+    case 'Rect':
+    case 'Symbol':
+    case 'Use':
+    case 'Defs':
+    case 'Stop':
+      return node.name.value.toLowerCase()
+
     default:
       return node.name.value
   }
