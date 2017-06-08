@@ -16,7 +16,7 @@ export const morph = (
   {
     as,
     compile,
-    file,
+    file = {},
     getImport = DEFAULT_IMPORT,
     inlineStyles,
     name,

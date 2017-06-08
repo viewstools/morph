@@ -5,14 +5,14 @@ exports[`react-dom parses react-dom Action 1`] = `
 import css from 'glam';
 
 const styles = {
-  h73hviv: css('css-1s0kfvh', [], () => [
+  h1lmw638: css('css-1s0kfvh', [], () => [
     \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
   ]),
 };
 
 const Action = props =>
   props.check
-    ? <button onClick={props.clickMe} className={\`\${styles.h73hviv}\`}>
+    ? <button onClick={props.clickMe} className={\`\${styles.h1lmw638}\`}>
         <div>click me</div>
       </button>
     : null;
@@ -26,20 +26,20 @@ exports[`react-dom parses react-dom BackgroundImage 1`] = `
 import css from 'glam';
 
 const styles = {
-  h1ob536b: css('css-1bxi9t2', [], () => [
+  hzr7mx4: css('css-1bxi9t2', [], () => [
     \`.css-1bxi9t2 { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column;
 background-image: url(\\"https://viewsdx.com/image.jpg\\");
 background-size: cover; }\`,
   ]),
-  h4wk4vz: css('css-sw3yj', [], () => [
+  hg3iw2q: css('css-sw3yj', [], () => [
     \`.css-sw3yj { flex-direction: row; -webkit-box-direction: normal; -webkit-box-orient: horizontal; -ms-flex-direction: row; -webkit-flex-direction: row; }\`,
   ]),
 };
 
 const BackgroundImage = props =>
-  <div className={\`\${styles.h1ob536b}\`}>
+  <div className={\`\${styles.hzr7mx4}\`}>
     <div
-      className={\`\${styles.h4wk4vz}\`}
+      className={\`\${styles.hg3iw2q}\`}
       style={{
         backgroundImage: \`url(\${props.backgroundImage})\`,
         backgroundSize: cover,
@@ -56,14 +56,14 @@ exports[`react-dom parses react-dom BoxShadow 1`] = `
 import css from 'glam';
 
 const styles = {
-  h73hviv: css('css-1s0kfvh', [], () => [
+  h1lmw638: css('css-1s0kfvh', [], () => [
     \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
   ]),
 };
 
 const BoxShadow = props =>
   <div
-    className={\`\${styles.h73hviv}\`}
+    className={\`\${styles.h1lmw638}\`}
     style={{ boxShadow: \`10px 5px 2px \${props.color}\` }}
   />;
 
@@ -76,7 +76,7 @@ exports[`react-dom parses react-dom CaptureEmail 1`] = `
 import css from 'glam';
 
 const styles = {
-  hvufezv: css('css-17byui2', [], () => [
+  hevllt7: css('css-17byui2', [], () => [
     \`.css-17byui2 { border: 1px solid black;
 color: red; }\`,
     \`.css-17byui2::placeholder { color: blue; }\`,
@@ -84,7 +84,7 @@ color: red; }\`,
 };
 
 const CaptureEmail = props =>
-  <input onSubmit={props.onSubmit} className={\`\${styles.hvufezv}\`} />;
+  <input onSubmit={props.onSubmit} className={\`\${styles.hevllt7}\`} />;
 
 export default CaptureEmail;
 "
@@ -140,13 +140,17 @@ exports[`react-dom parses react-dom GoTo 1`] = `
 import css from 'glam';
 
 const styles = {
-  h73hviv: css('css-1s0kfvh', [], () => [
+  h1lmw638: css('css-1s0kfvh', [], () => [
     \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
   ]),
 };
 
 const GoTo = props =>
-  <a target=\\"_blank\\" href=\\"https://viewsdx.com\\" className={\`\${styles.h73hviv}\`}>
+  <a
+    target=\\"_blank\\"
+    href=\\"https://viewsdx.com\\"
+    className={\`\${styles.h1lmw638}\`}
+  >
     <div>Go to ViewsDX website!</div>
   </a>;
 
@@ -159,13 +163,13 @@ exports[`react-dom parses react-dom Horizontal 1`] = `
 import css from 'glam';
 
 const styles = {
-  h1vxlj3j: css('css-vkz5lf', [], () => [
+  h1nnugsi: css('css-vkz5lf', [], () => [
     \`.css-vkz5lf { flex-direction: row; -webkit-box-direction: normal; -webkit-box-orient: horizontal; -ms-flex-direction: row; -webkit-flex-direction: row;
 border: 1px solid red; }\`,
   ]),
 };
 
-const Horizontal = props => <div className={\`\${styles.h1vxlj3j}\`} />;
+const Horizontal = props => <div className={\`\${styles.h1nnugsi}\`} />;
 
 export default Horizontal;
 "
@@ -176,20 +180,20 @@ exports[`react-dom parses react-dom Hover 1`] = `
 import css from 'glam';
 
 const styles = {
-  h1ven99o: css('css-i58qmr', [], () => [
+  hpg1h4y: css('css-i58qmr', [], () => [
     \`.css-i58qmr { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column;
 background-color: black; }\`,
     \`.css-i58qmr:hover { background-color: white; }\`,
   ]),
-  hanouj1: css('css-9glvsj', [], () => [
+  h1669j73: css('css-9glvsj', [], () => [
     \`.css-9glvsj { color: white; }\`,
     \`.css-9glvsj:hover { color: black; }\`,
   ]),
 };
 
 const Hover = props =>
-  <button onClick={props.onClick} className={\`\${styles.h1ven99o}\`}>
-    <div className={\`\${styles.hanouj1}\`}>Hey!</div>
+  <button onClick={props.onClick} className={\`\${styles.hpg1h4y}\`}>
+    <div className={\`\${styles.h1669j73}\`}>Hey!</div>
   </button>;
 
 export default Hover;
@@ -201,21 +205,21 @@ exports[`react-dom parses react-dom HoverProxy 1`] = `
 import css from 'glam';
 
 const styles = {
-  h1ven99o: css('css-i58qmr', [], () => [
+  hpg1h4y: css('css-i58qmr', [], () => [
     \`.css-i58qmr { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column;
 background-color: black; }\`,
     \`.css-i58qmr:hover { background-color: white; }\`,
   ]),
-  hanouj1: css('css-9glvsj', [], () => [
+  h1669j73: css('css-9glvsj', [], () => [
     \`.css-9glvsj { color: white; }\`,
     \`.css-9glvsj:hover { color: black; }\`,
   ]),
 };
 
 const HoverProxy = props =>
-  <button onClick={props.onClick} className={\`\${styles.h1ven99o}\`}>
+  <button onClick={props.onClick} className={\`\${styles.hpg1h4y}\`}>
     <props.icon from={props.icon} fill=\\"white\\" fillHover=\\"black\\" />
-    <div className={\`\${styles.hanouj1}\`}>Hey!</div>
+    <div className={\`\${styles.h1669j73}\`}>Hey!</div>
   </button>;
 
 export default HoverProxy;
@@ -245,13 +249,13 @@ exports[`react-dom parses react-dom ListOfSomething 1`] = `
 import css from 'glam';
 
 const styles = {
-  h73hviv: css('css-1s0kfvh', [], () => [
+  h1lmw638: css('css-1s0kfvh', [], () => [
     \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
   ]),
 };
 
 const ListOfSomething = props =>
-  <div className={\`\${styles.h73hviv}\`}>
+  <div className={\`\${styles.h1lmw638}\`}>
     {props.list.map((item, i) => <div key={i}>{item.name}</div>)}
   </div>;
 
@@ -265,13 +269,13 @@ import css from 'glam';
 import usersData from './users.data.js';
 
 const styles = {
-  h73hviv: css('css-1s0kfvh', [], () => [
+  h1lmw638: css('css-1s0kfvh', [], () => [
     \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
   ]),
 };
 
 const ListWithData = props =>
-  <div className={\`\${styles.h73hviv}\`}>
+  <div className={\`\${styles.h1lmw638}\`}>
     {usersData.map((item, i) => <div key={i}>{item.name}</div>)}
   </div>;
 
@@ -296,7 +300,7 @@ import Topic from './Topic.view.js';
 import css from 'glam';
 
 const styles = {
-  h73hviv: css('css-1s0kfvh', [], () => [
+  h1lmw638: css('css-1s0kfvh', [], () => [
     \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
   ]),
 };
@@ -304,7 +308,7 @@ const styles = {
 const NestedRoutes = props =>
   <div>
     <div>topics</div>
-    <Link to=\\"rendering\\" className={\`\${styles.h73hviv}\`}>
+    <Link to=\\"rendering\\" className={\`\${styles.h1lmw638}\`}>
       <div>Rendering with React</div>
     </Link>
     <Route
@@ -314,6 +318,29 @@ const NestedRoutes = props =>
   </div>;
 
 export default NestedRoutes;
+"
+`;
+
+exports[`react-dom parses react-dom Print 1`] = `
+"import React from 'react';
+import css from 'glam';
+
+const styles = {
+  hrak8un: css('css-kbgujp', [], () => [
+    \`@media print {
+    .css-kbgujp {
+        display: none
+    }
+}\`,
+  ]),
+};
+
+const Print = props =>
+  <div>
+    <div className={\`\${styles.hrak8un}\`}>not in print</div><div>hey</div>
+  </div>;
+
+export default Print;
 "
 `;
 
@@ -378,13 +405,13 @@ import { Link } from 'react-router-dom';
 import css from 'glam';
 
 const styles = {
-  h4wk4vz: css('css-sw3yj', [], () => [
+  hg3iw2q: css('css-sw3yj', [], () => [
     \`.css-sw3yj { flex-direction: row; -webkit-box-direction: normal; -webkit-box-orient: horizontal; -ms-flex-direction: row; -webkit-flex-direction: row; }\`,
   ]),
 };
 
 const Teleport = props =>
-  <Link to=\\"..\\" className={\`\${styles.h4wk4vz}\`}><div>go back</div></Link>;
+  <Link to=\\"..\\" className={\`\${styles.hg3iw2q}\`}><div>go back</div></Link>;
 
 export default Teleport;
 "
@@ -395,7 +422,7 @@ exports[`react-dom parses react-dom Text 1`] = `
 import css from 'glam';
 
 const styles = {
-  h11bw6cg: css('css-1l09f9n', [], () => [
+  h1w7s7t6: css('css-1l09f9n', [], () => [
     \`.css-1l09f9n { color: blue;
 font-family: Montserrat, sans-serif;
 font-size: 16px;
@@ -404,7 +431,7 @@ font-weight: 300; }\`,
 };
 
 const Text = props =>
-  <div className={\`\${styles.h11bw6cg}\`}>Hi, I'm some text</div>;
+  <div className={\`\${styles.h1w7s7t6}\`}>Hi, I'm some text</div>;
 
 export default Text;
 "
@@ -415,7 +442,7 @@ exports[`react-dom parses react-dom Toggle 1`] = `
 import css from 'glam';
 
 const styles = {
-  h73hviv: css('css-1s0kfvh', [], () => [
+  h1lmw638: css('css-1s0kfvh', [], () => [
     \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
   ]),
 };
@@ -435,7 +462,7 @@ class RemapToggle extends React.Component {
 }
 
 const Toggle = props =>
-  <button onClick={props.toggleIsOn} className={\`\${styles.h73hviv}\`} />;
+  <button onClick={props.toggleIsOn} className={\`\${styles.h1lmw638}\`} />;
 
 export default RemapToggle;
 "
@@ -457,13 +484,13 @@ exports[`react-dom parses react-dom Vertical 1`] = `
 import css from 'glam';
 
 const styles = {
-  h1lis1gl: css('css-nxb3y5', [], () => [
+  h1vjf5pn: css('css-nxb3y5', [], () => [
     \`.css-nxb3y5 { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column;
 background-color: red; }\`,
   ]),
 };
 
-const Vertical = props => <div className={\`\${styles.h1lis1gl}\`} />;
+const Vertical = props => <div className={\`\${styles.h1vjf5pn}\`} />;
 
 export default Vertical;
 "
@@ -476,15 +503,15 @@ import css from 'glam';
 import userData from './user.data.js';
 
 const styles = {
-  h73hviv: css('css-1s0kfvh', [], () => [
+  h1lmw638: css('css-1s0kfvh', [], () => [
     \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
   ]),
 };
 
 const ViewAndListWithData = props =>
-  <div className={\`\${styles.h73hviv}\`}>
+  <div className={\`\${styles.h1lmw638}\`}>
     <div>{props.name}</div>
-    <div className={\`\${styles.h73hviv}\`}>
+    <div className={\`\${styles.h1lmw638}\`}>
       {addressesData.map((item, i) => <div key={i}>{item.city}</div>)}
     </div>
   </div>;
@@ -499,13 +526,13 @@ import css from 'glam';
 import userData from './user.data.js';
 
 const styles = {
-  h73hviv: css('css-1s0kfvh', [], () => [
+  h1lmw638: css('css-1s0kfvh', [], () => [
     \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
   ]),
 };
 
 const ViewWithData = props =>
-  <div className={\`\${styles.h73hviv}\`}><div>{props.name}</div></div>;
+  <div className={\`\${styles.h1lmw638}\`}><div>{props.name}</div></div>;
 ViewWithData.defaultProps = userData;
 export default ViewWithData;
 "
@@ -526,7 +553,7 @@ exports[`react-dom parses react-dom WhenList 1`] = `
 import css from 'glam';
 
 const styles = {
-  h73hviv: css('css-1s0kfvh', [], () => [
+  h1lmw638: css('css-1s0kfvh', [], () => [
     \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
   ]),
 };
@@ -534,7 +561,7 @@ const styles = {
 const WhenList = props =>
   <div>
     {props.showMe
-      ? <div className={\`\${styles.h73hviv}\`}>
+      ? <div className={\`\${styles.h1lmw638}\`}>
           {props.list.map((item, i) => <div key={i}>{item.thing}</div>)}
         </div>
       : null}
@@ -560,7 +587,7 @@ import css from 'glam';
 import makeTests from './WithTest.view.tests.js';
 
 const styles = {
-  h73hviv: css('css-1s0kfvh', [], () => [
+  h1lmw638: css('css-1s0kfvh', [], () => [
     \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
   ]),
 };
@@ -580,7 +607,7 @@ class TestsWithTest extends React.Component {
 }
 
 const WithTest = props =>
-  <button onClick={props.change} className={\`\${styles.h73hviv}\`}>
+  <button onClick={props.change} className={\`\${styles.h1lmw638}\`}>
     <div>{props.text}</div>
   </button>;
 
@@ -915,6 +942,16 @@ const NestedRoutes = props =>
   </View>;
 
 export default NestedRoutes;
+"
+`;
+
+exports[`react-native parses react-native Print 1`] = `
+"import React from 'react';
+import { Text, View } from 'react-native';
+
+const Print = props => <View><Text>not in print</Text><Text>hey</Text></View>;
+
+export default Print;
 "
 `;
 

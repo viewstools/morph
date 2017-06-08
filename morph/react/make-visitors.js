@@ -160,6 +160,7 @@ export default ({
           activeHover: {},
           disabled: {},
           placeholder: {},
+          print: {},
         },
         static: {
           base: {},
@@ -168,6 +169,7 @@ export default ({
           activeHover: {},
           disabled: {},
           placeholder: {},
+          print: {},
         },
       }
 

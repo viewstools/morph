@@ -20,11 +20,20 @@ export const getProp = (node, key) => {
   return node.properties && node.properties.list.find(finder)
 }
 
-const styleStems = ['active', 'hover', 'activeHover', 'placeholder', 'disabled']
+const styleStems = [
+  'active',
+  'hover',
+  'activeHover',
+  'placeholder',
+  'disabled',
+  'print',
+]
 export const getStyleType = node =>
   styleStems.find(tag => isTag(node, tag)) || 'base'
 
 export const hasKeys = obj => Object.keys(obj).length > 0
+export const hasKeysInChildren = obj =>
+  Object.keys(obj).some(k => hasKeys(obj[k]))
 
 export const hasProp = (node, key, match) => {
   const prop = getProp(node, key)

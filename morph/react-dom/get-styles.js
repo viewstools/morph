@@ -1,4 +1,4 @@
-import { hasKeys } from '../utils.js'
+import { hasKeys, hasKeysInChildren } from '../utils.js'
 import { transform } from 'babel-core'
 import isUnitlessNumber from '../react/is-unitless-number.js'
 import toSlugCase from 'to-slug-case'
@@ -7,6 +7,7 @@ export default ({ file, inlineStyles, styles }, name) => {
   if (!hasKeys(styles)) return ''
 
   const obj = Object.keys(styles)
+    .filter(k => hasKeysInChildren(styles[k]))
     .map(k => `${JSON.stringify(k)}: css\`${toNestedCss(styles[k])}\``)
     .join(',')
 
@@ -33,6 +34,7 @@ const toNestedCss = ({
   activeHover,
   disabled,
   placeholder,
+  print,
 }) => {
   const baseCss = toCss(base)
   const hoverCss = toCss(hover)
@@ -40,6 +42,7 @@ const toNestedCss = ({
   const activeHoverCss = toCss(activeHover)
   const disabledCss = toCss(disabled)
   const placeholderCss = toCss(placeholder)
+  const printCss = toCss(print)
 
   const ret = [
     baseCss,
@@ -48,6 +51,7 @@ const toNestedCss = ({
     activeHoverCss && `&.active:hover {${activeHoverCss}}`,
     disabledCss && `&:disabled {${disabledCss}}`,
     placeholderCss && `&::placeholder {${placeholderCss}}`,
+    printCss && `@media print {${printCss}}`,
   ]
     .filter(Boolean)
     .join('\n')

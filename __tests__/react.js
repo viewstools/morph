@@ -12,7 +12,15 @@ const getPath = (f = '.') => join(__dirname, 'views', f)
       const tests = existsSync(getPath(`${f}.tests`))
 
       it(`parses ${as} ${name}`, () => {
-        expect(morph(code, { as, name, pretty: true, tests })).toMatchSnapshot()
+        expect(
+          morph(code, {
+            as,
+            inlineStyles: true,
+            name,
+            pretty: true,
+            tests,
+          })
+        ).toMatchSnapshot()
       })
     })
   })
