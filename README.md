@@ -24,6 +24,7 @@ Feel free to add those files to `.gitignore` like:
 ```
 **/*.data.js
 **/*.view.js
+**/*.view.css
 **/*.view.tests.js
 ```
 

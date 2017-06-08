@@ -90,14 +90,26 @@ if (shouldWatch) {
     tests,
   })
 } else {
-  const code = morph(readFileSync(input, 'utf-8'), {
-    as,
-    compile,
-    inlineStyles,
-    name: pathToName(input),
-    pretty,
-    tests,
-  })
+  if (statSync(input).isDirectory()) {
+    watch({
+      as,
+      compile,
+      inlineStyles,
+      once: true,
+      pretty,
+      src: input,
+      tests,
+    })
+  } else {
+    const code = morph(readFileSync(input, 'utf-8'), {
+      as,
+      compile,
+      inlineStyles,
+      name: pathToName(input),
+      pretty,
+      tests,
+    })
 
-  console.log(code)
+    console.log(code)
+  }
 }

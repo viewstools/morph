@@ -22,9 +22,10 @@ module.exports = options => {
     dataNotFound,
     inlineStyles,
     map,
+    once,
+    pretty,
     shared,
     src,
-    pretty,
     tests: shouldIncludeTests,
     viewNotFound,
   } = Object.assign(
@@ -34,6 +35,7 @@ module.exports = options => {
       map: {},
       pretty: true,
       src: process.cwd(),
+      once: false,
     },
     options
   )
@@ -164,29 +166,31 @@ module.exports = options => {
   ].filter(Boolean)
   globule.find(watcherPattern, watcherOptions).forEach(addView)
 
-  watch(watcherPattern, watcherOptions, (err, watcher) => {
-    if (err) {
-      console.error(err)
-      return
-    }
+  if (!once) {
+    watch(watcherPattern, watcherOptions, (err, watcher) => {
+      if (err) {
+        console.error(err)
+        return
+      }
 
-    // TODO see how we can force a rebuild when a file gets added/deleted
-    watcher.on('added', addView)
-    watcher.on('changed', morphView)
-    watcher.on(
-      'deleted',
-      filter(f => {
-        const { view } = toViewPath(f)
-        console.log(chalk.blue('D'), view)
+      // TODO see how we can force a rebuild when a file gets added/deleted
+      watcher.on('added', addView)
+      watcher.on('changed', morphView)
+      watcher.on(
+        'deleted',
+        filter(f => {
+          const { view } = toViewPath(f)
+          console.log(chalk.blue('D'), view)
 
-        if (isData(f)) {
-          delete data[view]
-        } else if (isTests(f)) {
-          delete tests[view]
-        } else {
-          delete views[view]
-        }
-      })
-    )
-  })
+          if (isData(f)) {
+            delete data[view]
+          } else if (isTests(f)) {
+            delete tests[view]
+          } else {
+            delete views[view]
+          }
+        })
+      )
+    })
+  }
 }
