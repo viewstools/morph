@@ -15,7 +15,7 @@ export default ({ state, name }) => {
   display = next => this.setState(next)
 
   render() {
-    return <${name} {...this.props} {...this.state} />
+    return <${name} {...this.state} {...this.props} />
   }
 }`
 
