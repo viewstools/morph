@@ -70,11 +70,13 @@ export default ({ view }) => {
 // name Dario
 // addresses
 // from addresses.data
-export const getValue = (property, tests) => {
+export const getValue = (property, testsNames) => {
   switch (property.value.type) {
     case 'Literal':
       const v = property.value.value
-      return tests.includes(v) ? `<<DISPLAY>>() => display(${v})<<DISPLAY>>` : v
+      return testsNames.includes(v)
+        ? `<<DISPLAY>>() => display(${v})<<DISPLAY>>`
+        : v
 
     case 'ArrayExpression':
       return property.value.elements.map(getValue)
