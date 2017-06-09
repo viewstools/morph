@@ -12,6 +12,7 @@ import maybeUsesTextInput from './react-native/maybe-uses-text-input.js'
 import maybeUsesRouter from './react-native/maybe-uses-router.js'
 import maybeUsesStyleSheet from './react-native/maybe-uses-style-sheet.js'
 import morph from './morph.js'
+import restrictedNames from './react-native/restricted-names.js'
 import toComponent from './react/to-component.js'
 
 const imports = {
@@ -20,7 +21,16 @@ const imports = {
   Router: "import { NativeRouter as Router } from 'react-router-native'",
 }
 
-export default ({ getImport, name, view }) => {
+export default ({ getImport, name, tests = false, view, views = {} }) => {
+  const finalName = restrictedNames.includes(name) ? `${name}1` : name
+  if (name !== finalName) {
+    console.warn(
+      `// "${name}" is a Views reserved name.
+      We've renamed it to "${finalName}", so your view should work but this isn't ideal.
+      To fix this, change its file name to something else.`
+    )
+  }
+
   const state = {
     captures: [],
     defaultProps: false,
@@ -28,12 +38,20 @@ export default ({ getImport, name, view }) => {
     remap: {},
     render: [],
     styles: {},
+    tests,
     todos: [],
     uses: [],
-    use(name) {
-      if (!state.uses.includes(name) && !/props/.test(name))
-        state.uses.push(name)
+    use(block) {
+      if (
+        state.uses.includes(block) ||
+        /props/.test(block) ||
+        block === finalName
+      )
+        return
+
+      state.uses.push(block)
     },
+    views,
   }
 
   const {
@@ -84,5 +102,10 @@ export default ({ getImport, name, view }) => {
 
   const finalGetImport = name => imports[name] || getImport(name)
 
-  return toComponent({ getImport: finalGetImport, getStyles, name, state })
+  return toComponent({
+    getImport: finalGetImport,
+    getStyles,
+    name: finalName,
+    state,
+  })
 }

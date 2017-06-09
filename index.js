@@ -2,6 +2,7 @@ import { basename, extname } from 'path'
 import buble from 'buble'
 import doMorph from './morphers.js'
 import doGetViewNotFound from './get-view-not-found.js'
+import restrictedNames from './restricted-names.js'
 import toCamelCase from 'to-camel-case'
 import toPascalCase from 'to-pascal-case'
 import prettier from 'prettier'
@@ -22,6 +23,7 @@ export const morph = (
     name,
     pretty = false,
     tests,
+    views = {},
   }
 ) => {
   let morphed = doMorph[as]({
@@ -31,6 +33,7 @@ export const morph = (
     name,
     view: code,
     tests,
+    views,
   })
 
   if (compile) {
@@ -63,3 +66,6 @@ const sanitize = input =>
 
 export const pathToName = path =>
   toPascalCase(sanitize(basename(path).replace('.view', '')))
+
+export const isViewNameRestricted = (view, as) =>
+  restrictedNames[as].includes(view)

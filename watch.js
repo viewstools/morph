@@ -1,5 +1,5 @@
 const { extname, relative } = require('path')
-const { getViewNotFound, morph } = require('./lib.js')
+const { getViewNotFound, isViewNameRestricted, morph } = require('./lib.js')
 const { readFile, readFileSync, writeFile } = require('fs')
 const chalk = require('chalk')
 const globule = require('globule')
@@ -61,11 +61,11 @@ module.exports = options => {
     return (jsComponents[f] = /import React/.test(readFileSync(f, 'utf-8')))
   }
 
-  const filter = fn => f => {
+  const filter = fn => (f, a) => {
     if (isMorphedView(f) || isMorphedData(f) || (isJs(f) && !isJsComponent(f)))
       return
 
-    fn(f)
+    return fn(f, a)
   }
 
   const getImportFileName = name => {
@@ -88,8 +88,19 @@ module.exports = options => {
   const data = {}
   const tests = {}
 
-  const addView = filter(f => {
+  const addView = filter((f, skipMorph = false) => {
     const { file, view } = toViewPath(f)
+
+    if (isViewNameRestricted(view, as)) {
+      console.log(
+        chalk.magenta('X'),
+        view,
+        chalk.dim(`-> ${f}`),
+        'is a Views reserved name. To fix this, change its file name to something else.'
+      )
+      return
+    }
+
     const fileIsData = isData(file)
 
     console.log(chalk.yellow('A'), view, chalk.dim(`-> ${f}`))
@@ -106,11 +117,29 @@ module.exports = options => {
       views[view] = file
     }
 
-    if (shouldMorph) morphView(f)
+    if (shouldMorph) {
+      if (skipMorph) {
+        return f
+      } else {
+        morphView(f)
+      }
+    }
   })
+
+  const addViewSkipMorph = f => addView(f, true)
 
   const morphView = filter(f => {
     const { file, view } = toViewPath(f)
+    if (isViewNameRestricted(view, as)) {
+      console.log(
+        chalk.magenta('X'),
+        view,
+        chalk.dim(`-> ${f}`),
+        'is a Views reserved name. To fix this, change its file name to something else.'
+      )
+      return
+    }
+
     if (isJs(f)) return
 
     readFile(f, 'utf-8', (err, source) => {
@@ -128,6 +157,7 @@ module.exports = options => {
           getImport,
           pretty,
           tests: tests[`${view}.view.tests`],
+          views,
         })
 
         writeFile(`${f}.js`, code, err => {
@@ -164,7 +194,12 @@ module.exports = options => {
     `${src}/**/*.view`,
     shouldIncludeTests && `${src}/**/*.view.tests`,
   ].filter(Boolean)
-  globule.find(watcherPattern, watcherOptions).forEach(addView)
+
+  globule
+    .find(watcherPattern, watcherOptions)
+    .map(addViewSkipMorph)
+    .filter(Boolean)
+    .forEach(morphView)
 
   if (!once) {
     watch(watcherPattern, watcherOptions, (err, watcher) => {
@@ -180,6 +215,8 @@ module.exports = options => {
         'deleted',
         filter(f => {
           const { view } = toViewPath(f)
+          if (isViewNameRestricted(view, as)) return
+
           console.log(chalk.blue('D'), view)
 
           if (isData(f)) {

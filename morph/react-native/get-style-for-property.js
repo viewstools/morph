@@ -7,7 +7,11 @@ export default (node, parent, code) => {
 
   switch (key) {
     case 'border':
-      return getBorder(value)
+    case 'borderBottom':
+    case 'borderLeft':
+    case 'borderRight':
+    case 'borderTop':
+      return getBorder(value, key.replace('border', ''))
 
     case 'boxShadow':
       return getShadow(value)
@@ -94,12 +98,12 @@ const getShadow = value => {
   return ret
 }
 
-const getBorder = value => {
+const getBorder = (value, specific = '') => {
   const [borderWidth, borderStyle, borderColor] = value.split(' ')
 
   return {
-    borderColor,
-    borderStyle,
-    borderWidth: parseInt(borderWidth, 10),
+    [`border${specific}Color`]: borderColor,
+    /*[`border${specific}Style`]:*/ borderStyle,
+    [`border${specific}Width`]: parseInt(borderWidth, 10),
   }
 }

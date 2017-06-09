@@ -15,12 +15,23 @@ export default (uses, getImport) => {
   const usesNative = []
   const usesSvg = []
 
+  const useNative = d => {
+    if (!usesNative.includes(d)) {
+      usesNative.push(d)
+    }
+  }
+  const useSvg = d => {
+    if (!usesSvg.includes(d)) {
+      usesSvg.push(d)
+    }
+  }
+
   const dependencies = []
   uses.sort().forEach(d => {
     if (NATIVE.includes(d)) {
-      usesNative.push(d)
+      useNative(d)
     } else if (SVG.includes(d)) {
-      usesSvg.push('SvgText' ? 'Text as SvgText' : d)
+      useSvg(d === 'SvgText' ? 'Text as SvgText' : d)
     } else if (/^[A-Z]/.test(d) || /\.data$/.test(d)) {
       dependencies.push(getImport(d))
     } else if (d === 'glam') {

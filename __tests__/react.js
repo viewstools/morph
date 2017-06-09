@@ -19,6 +19,10 @@ const getPath = (f = '.') => join(__dirname, 'views', f)
             name,
             pretty: true,
             tests,
+            // for UseOfProxy.view
+            views: {
+              MyIcon: true,
+            },
           })
         ).toMatchSnapshot()
       })

@@ -465,9 +465,10 @@ export default RemapToggle;
 exports[`react-dom parses react-dom UseOfProxy 1`] = `
 "import React from 'react';
 import Button from './Button.view.js';
+import MyIcon from './MyIcon.view.js';
 
 const UseOfProxy = props =>
-  <div><Button color=\\"red\\" icon=\\"MyIcon\\" text=\\"I'm a button!\\" /></div>;
+  <div><Button color=\\"red\\" icon={MyIcon} text=\\"I'm a button!\\" /></div>;
 
 export default UseOfProxy;
 "
@@ -992,13 +993,7 @@ export default Router;
 
 exports[`react-native parses react-native Svg 1`] = `
 "import React from 'react';
-import Svg, {
-  Text as SvgText,
-  Text as SvgText,
-  Text as SvgText,
-  Text as SvgText,
-  Text as SvgText,
-} from 'react-native-svg';
+import Svg, { Circle, G, Path, Text as SvgText } from 'react-native-svg';
 
 const Svg = props =>
   <Svg viewBox=\\"0 0 20 20\\">
@@ -1177,8 +1172,24 @@ export default WhenTopLevel;
 exports[`react-native parses react-native WithTest 1`] = `
 "import React from 'react';
 import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import makeTests from './WithTest.view.tests.js';
 
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
+
+class TestsWithTest extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.tests = makeTests(this.display);
+    this.state = this.tests[this.tests._main];
+  }
+
+  display = next => this.setState(next);
+
+  render() {
+    return <WithTest {...this.props} {...this.state} />;
+  }
+}
 
 const WithTest = props =>
   <TouchableHighlight
@@ -1189,6 +1200,6 @@ const WithTest = props =>
     <View style={styles.h18pdll5}><Text>{props.text}</Text></View>
   </TouchableHighlight>;
 
-export default WithTest;
+export default TestsWithTest;
 "
 `;

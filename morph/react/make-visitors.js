@@ -218,6 +218,12 @@ export default ({
           return
         }
 
+        if (state.views[node.value.value]) {
+          state.render.push(` ${node.key.value}=${wrap(node.value.value)}`)
+          state.use(node.value.value)
+          return
+        }
+
         const value = getValueForProperty(node, parent)
 
         if (value) {
