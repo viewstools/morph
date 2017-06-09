@@ -71,70 +71,6 @@ export default BoxShadow;
 "
 `;
 
-exports[`react-dom parses react-dom CaptureEmail 1`] = `
-"import React from 'react';
-import css from 'glam';
-
-const styles = {
-  hevllt7: css('css-17byui2', [], () => [
-    \`.css-17byui2 { border: 1px solid black;
-color: red; }\`,
-    \`.css-17byui2::placeholder { color: blue; }\`,
-  ]),
-};
-
-const CaptureEmail = props =>
-  <input onSubmit={props.onSubmit} className={\`\${styles.hevllt7}\`} />;
-
-export default CaptureEmail;
-"
-`;
-
-exports[`react-dom parses react-dom CaptureFile 1`] = `
-"import React from 'react';
-
-const CaptureFile = props => <input />;
-
-export default CaptureFile;
-"
-`;
-
-exports[`react-dom parses react-dom CaptureNumber 1`] = `
-"import React from 'react';
-
-const CaptureNumber = props => <input />;
-
-export default CaptureNumber;
-"
-`;
-
-exports[`react-dom parses react-dom CapturePhone 1`] = `
-"import React from 'react';
-
-const CapturePhone = props => <input />;
-
-export default CapturePhone;
-"
-`;
-
-exports[`react-dom parses react-dom CaptureSecure 1`] = `
-"import React from 'react';
-
-const CaptureSecure = props => <input />;
-
-export default CaptureSecure;
-"
-`;
-
-exports[`react-dom parses react-dom CaptureText 1`] = `
-"import React from 'react';
-
-const CaptureText = props => <input />;
-
-export default CaptureText;
-"
-`;
-
 exports[`react-dom parses react-dom GoTo 1`] = `
 "import React from 'react';
 import css from 'glam';
@@ -155,23 +91,6 @@ const GoTo = props =>
   </a>;
 
 export default GoTo;
-"
-`;
-
-exports[`react-dom parses react-dom Horizontal 1`] = `
-"import React from 'react';
-import css from 'glam';
-
-const styles = {
-  h1nnugsi: css('css-vkz5lf', [], () => [
-    \`.css-vkz5lf { flex-direction: row; -webkit-box-direction: normal; -webkit-box-orient: horizontal; -ms-flex-direction: row; -webkit-flex-direction: row;
-border: 1px solid red; }\`,
-  ]),
-};
-
-const Horizontal = props => <div className={\`\${styles.h1nnugsi}\`} />;
-
-export default Horizontal;
 "
 `;
 
@@ -223,15 +142,6 @@ const HoverProxy = props =>
   </button>;
 
 export default HoverProxy;
-"
-`;
-
-exports[`react-dom parses react-dom Image 1`] = `
-"import React from 'react';
-
-const Image = props => <img source=\\"https://viewsdx.com/rocks.jpg\\" />;
-
-export default Image;
 "
 `;
 
@@ -344,55 +254,6 @@ export default Print;
 "
 `;
 
-exports[`react-dom parses react-dom Proxy 1`] = `
-"import React from 'react';
-
-const Proxy = props =>
-  <div><props.icon from={props.icon} fill=\\"red\\" /><div>{props.text}</div></div>;
-
-export default Proxy;
-"
-`;
-
-exports[`react-dom parses react-dom Router 1`] = `
-"import React from 'react';
-import About from './About.view.js';
-import Home from './Home.view.js';
-import { Route } from 'react-router-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
-import Topics from './Topics.view.js';
-
-const Router = props =>
-  <Router>
-    <div>
-      <Route
-        path=\\"/\\"
-        exact
-        render={routeProps =>
-          <Home heigth={props.height} width={360} {...routeProps} />}
-      />
-      <Route path=\\"/about\\" render={routeProps => <About {...routeProps} />} />
-      <Route path=\\"/topics\\" render={routeProps => <Topics {...routeProps} />} />
-    </div>
-  </Router>;
-
-export default Router;
-"
-`;
-
-exports[`react-dom parses react-dom Svg 1`] = `
-"import React from 'react';
-
-const Svg = props =>
-  <svg viewBox=\\"0 0 20 20\\">
-    <path d=\\"0 20\\" /><circle cx={10} cy={5} r={5} />
-    <g><path d={1} /><path d={2} /></g><text text=\\"hey\\" />
-  </svg>;
-
-export default Svg;
-"
-`;
-
 exports[`react-dom parses react-dom Teleport 1`] = `
 "import React from 'react';
 import { Link } from 'react-router-dom';
@@ -408,26 +269,6 @@ const Teleport = props =>
   <Link to=\\"..\\" className={\`\${styles.hg3iw2q}\`}><div>go back</div></Link>;
 
 export default Teleport;
-"
-`;
-
-exports[`react-dom parses react-dom Text 1`] = `
-"import React from 'react';
-import css from 'glam';
-
-const styles = {
-  h1w7s7t6: css('css-1l09f9n', [], () => [
-    \`.css-1l09f9n { color: blue;
-font-family: Montserrat, sans-serif;
-font-size: 16px;
-font-weight: 300; }\`,
-  ]),
-};
-
-const Text = props =>
-  <div className={\`\${styles.h1w7s7t6}\`}>Hi, I'm some text</div>;
-
-export default Text;
 "
 `;
 
@@ -462,6 +303,96 @@ export default RemapToggle;
 "
 `;
 
+exports[`react-dom parses react-dom UseCaptureEmail 1`] = `
+"import React from 'react';
+import css from 'glam';
+
+const styles = {
+  hevllt7: css('css-17byui2', [], () => [
+    \`.css-17byui2 { border: 1px solid black;
+color: red; }\`,
+    \`.css-17byui2::placeholder { color: blue; }\`,
+  ]),
+};
+
+const UseCaptureEmail = props =>
+  <input onSubmit={props.onSubmit} className={\`\${styles.hevllt7}\`} />;
+
+export default UseCaptureEmail;
+"
+`;
+
+exports[`react-dom parses react-dom UseCaptureFile 1`] = `
+"import React from 'react';
+
+const UseCaptureFile = props => <input />;
+
+export default UseCaptureFile;
+"
+`;
+
+exports[`react-dom parses react-dom UseCaptureNumber 1`] = `
+"import React from 'react';
+
+const UseCaptureNumber = props => <input />;
+
+export default UseCaptureNumber;
+"
+`;
+
+exports[`react-dom parses react-dom UseCapturePhone 1`] = `
+"import React from 'react';
+
+const UseCapturePhone = props => <input />;
+
+export default UseCapturePhone;
+"
+`;
+
+exports[`react-dom parses react-dom UseCaptureSecure 1`] = `
+"import React from 'react';
+
+const UseCaptureSecure = props => <input />;
+
+export default UseCaptureSecure;
+"
+`;
+
+exports[`react-dom parses react-dom UseCaptureText 1`] = `
+"import React from 'react';
+
+const UseCaptureText = props => <input />;
+
+export default UseCaptureText;
+"
+`;
+
+exports[`react-dom parses react-dom UseHorizontal 1`] = `
+"import React from 'react';
+import css from 'glam';
+
+const styles = {
+  h1nnugsi: css('css-vkz5lf', [], () => [
+    \`.css-vkz5lf { flex-direction: row; -webkit-box-direction: normal; -webkit-box-orient: horizontal; -ms-flex-direction: row; -webkit-flex-direction: row;
+border: 1px solid red; }\`,
+  ]),
+};
+
+const UseHorizontal = props => <div className={\`\${styles.h1nnugsi}\`} />;
+
+export default UseHorizontal;
+"
+`;
+
+exports[`react-dom parses react-dom UseImage 1`] = `
+"import React from 'react';
+
+const UseImage = props => <img source=\\"https://viewsdx.com/rocks.jpg\\" />;
+
+export default UseImage;
+"
+`;
+
 exports[`react-dom parses react-dom UseOfProxy 1`] = `
 "import React from 'react';
 import Button from './Button.view.js';
@@ -474,7 +405,76 @@ export default UseOfProxy;
 "
 `;
 
-exports[`react-dom parses react-dom Vertical 1`] = `
+exports[`react-dom parses react-dom UseProxy 1`] = `
+"import React from 'react';
+
+const UseProxy = props =>
+  <div><props.icon from={props.icon} fill=\\"red\\" /><div>{props.text}</div></div>;
+
+export default UseProxy;
+"
+`;
+
+exports[`react-dom parses react-dom UseRouter 1`] = `
+"import React from 'react';
+import About from './About.view.js';
+import Home from './Home.view.js';
+import { Route } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Topics from './Topics.view.js';
+
+const UseRouter = props =>
+  <Router>
+    <div>
+      <Route
+        path=\\"/\\"
+        exact
+        render={routeProps =>
+          <Home heigth={props.height} width={360} {...routeProps} />}
+      />
+      <Route path=\\"/about\\" render={routeProps => <About {...routeProps} />} />
+      <Route path=\\"/topics\\" render={routeProps => <Topics {...routeProps} />} />
+    </div>
+  </Router>;
+
+export default UseRouter;
+"
+`;
+
+exports[`react-dom parses react-dom UseSvg 1`] = `
+"import React from 'react';
+
+const UseSvg = props =>
+  <svg viewBox=\\"0 0 20 20\\">
+    <path d=\\"0 20\\" /><circle cx={10} cy={5} r={5} />
+    <g><path d={1} /><path d={2} /></g><text text=\\"hey\\" />
+  </svg>;
+
+export default UseSvg;
+"
+`;
+
+exports[`react-dom parses react-dom UseText 1`] = `
+"import React from 'react';
+import css from 'glam';
+
+const styles = {
+  h1w7s7t6: css('css-1l09f9n', [], () => [
+    \`.css-1l09f9n { color: blue;
+font-family: Montserrat, sans-serif;
+font-size: 16px;
+font-weight: 300; }\`,
+  ]),
+};
+
+const UseText = props =>
+  <div className={\`\${styles.h1w7s7t6}\`}>Hi, I'm some text</div>;
+
+export default UseText;
+"
+`;
+
+exports[`react-dom parses react-dom UseVertical 1`] = `
 "import React from 'react';
 import css from 'glam';
 
@@ -485,9 +485,9 @@ background-color: red; }\`,
   ]),
 };
 
-const Vertical = props => <div className={\`\${styles.h1vjf5pn}\`} />;
+const UseVertical = props => <div className={\`\${styles.h1vjf5pn}\`} />;
 
-export default Vertical;
+export default UseVertical;
 "
 `;
 
@@ -682,98 +682,6 @@ export default BoxShadow;
 "
 `;
 
-exports[`react-native parses react-native CaptureEmail 1`] = `
-"import React from 'react';
-import { KeyboardAvoidingView, StyleSheet, TextInput } from 'react-native';
-
-const styles = StyleSheet.create({
-  hm4pcs: {
-    borderColor: 'black',
-    borderStyle: 'solid',
-    borderWidth: 1,
-    color: 'red',
-  },
-});
-
-const CaptureEmail = props =>
-  <KeyboardAvoidingView behavior=\\"position\\">
-    <TextInput
-      onSubmitEditing={props.onSubmit}
-      returnKeyType=\\"go\\"
-      onChangeText={Email => this.setState({ Email })}
-      ref={$e => (this.$captureEmail = $e)}
-      value={state.Email}
-      placeholderTextColor=\\"blue\\"
-      style={styles.hm4pcs}
-    />
-  </KeyboardAvoidingView>;
-
-export default CaptureEmail;
-"
-`;
-
-exports[`react-native parses react-native CaptureFile 1`] = `
-"import React from 'react';
-import CaptureFile from './CaptureFile.view.js';
-
-const CaptureFile = props => <CaptureFile />;
-
-export default CaptureFile;
-"
-`;
-
-exports[`react-native parses react-native CaptureNumber 1`] = `
-"import React from 'react';
-import { KeyboardAvoidingView, TextInput } from 'react-native';
-
-const CaptureNumber = props =>
-  <KeyboardAvoidingView behavior=\\"position\\">
-    <TextInput />
-  </KeyboardAvoidingView>;
-
-export default CaptureNumber;
-"
-`;
-
-exports[`react-native parses react-native CapturePhone 1`] = `
-"import React from 'react';
-import { KeyboardAvoidingView, TextInput } from 'react-native';
-
-const CapturePhone = props =>
-  <KeyboardAvoidingView behavior=\\"position\\">
-    <TextInput />
-  </KeyboardAvoidingView>;
-
-export default CapturePhone;
-"
-`;
-
-exports[`react-native parses react-native CaptureSecure 1`] = `
-"import React from 'react';
-import { KeyboardAvoidingView, TextInput } from 'react-native';
-
-const CaptureSecure = props =>
-  <KeyboardAvoidingView behavior=\\"position\\">
-    <TextInput />
-  </KeyboardAvoidingView>;
-
-export default CaptureSecure;
-"
-`;
-
-exports[`react-native parses react-native CaptureText 1`] = `
-"import React from 'react';
-import { KeyboardAvoidingView, TextInput } from 'react-native';
-
-const CaptureText = props =>
-  <KeyboardAvoidingView behavior=\\"position\\">
-    <TextInput />
-  </KeyboardAvoidingView>;
-
-export default CaptureText;
-"
-`;
-
 exports[`react-native parses react-native GoTo 1`] = `
 "import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
@@ -784,25 +692,6 @@ const GoTo = props =>
   <View style={styles.h18pdll5}><Text>Go to ViewsDX website!</Text></View>;
 
 export default GoTo;
-"
-`;
-
-exports[`react-native parses react-native Horizontal 1`] = `
-"import React from 'react';
-import { StyleSheet, View } from 'react-native';
-
-const styles = StyleSheet.create({
-  h13qdyyc: {
-    flexDirection: 'row',
-    borderColor: 'red',
-    borderStyle: 'solid',
-    borderWidth: 1,
-  },
-});
-
-const Horizontal = props => <View style={styles.h13qdyyc} />;
-
-export default Horizontal;
 "
 `;
 
@@ -852,16 +741,6 @@ const HoverProxy = props =>
   </TouchableHighlight>;
 
 export default HoverProxy;
-"
-`;
-
-exports[`react-native parses react-native Image 1`] = `
-"import React from 'react';
-import { Image } from 'react-native';
-
-const Image = props => <Image source=\\"https://viewsdx.com/rocks.jpg\\" />;
-
-export default Image;
 "
 `;
 
@@ -951,60 +830,6 @@ export default Print;
 "
 `;
 
-exports[`react-native parses react-native Proxy 1`] = `
-"import React from 'react';
-import { Text, View } from 'react-native';
-
-const Proxy = props =>
-  <View>
-    <props.icon from={props.icon} fill=\\"red\\" /><Text>{props.text}</Text>
-  </View>;
-
-export default Proxy;
-"
-`;
-
-exports[`react-native parses react-native Router 1`] = `
-"import React from 'react';
-import About from './About.view.js';
-import Home from './Home.view.js';
-import { Route } from 'react-router-native';
-import { NativeRouter as Router } from 'react-router-native';
-import Topics from './Topics.view.js';
-import { View } from 'react-native';
-
-const Router = props =>
-  <Router>
-    <View>
-      <Route
-        path=\\"/\\"
-        exact
-        render={routeProps =>
-          <Home heigth={props.height} width={360} {...routeProps} />}
-      />
-      <Route path=\\"/about\\" render={routeProps => <About {...routeProps} />} />
-      <Route path=\\"/topics\\" render={routeProps => <Topics {...routeProps} />} />
-    </View>
-  </Router>;
-
-export default Router;
-"
-`;
-
-exports[`react-native parses react-native Svg 1`] = `
-"import React from 'react';
-import Svg, { Circle, G, Path, Text as SvgText } from 'react-native-svg';
-
-const Svg = props =>
-  <Svg viewBox=\\"0 0 20 20\\">
-    <Path d=\\"0 20\\" /><Circle cx={10} cy={5} r={5} />
-    <G><Path d={1} /><Path d={2} /></G><SvgText text=\\"hey\\" />
-  </Svg>;
-
-export default Svg;
-"
-`;
-
 exports[`react-native parses react-native Teleport 1`] = `
 "import React from 'react';
 import { Link } from 'react-router-native';
@@ -1018,20 +843,6 @@ const Teleport = props =>
   </Link>;
 
 export default Teleport;
-"
-`;
-
-exports[`react-native parses react-native Text 1`] = `
-"import React from 'react';
-import { StyleSheet, Text } from 'react-native';
-
-const styles = StyleSheet.create({
-  h11t0jc: { color: 'blue', fontFamily: 'Montserrat-300', fontSize: 16 },
-});
-
-const Text = props => <Text style={styles.h11t0jc}>Hi, I'm some text</Text>;
-
-export default Text;
 "
 `;
 
@@ -1068,19 +879,209 @@ export default RemapToggle;
 "
 `;
 
+exports[`react-native parses react-native UseCaptureEmail 1`] = `
+"import React from 'react';
+import { KeyboardAvoidingView, StyleSheet, TextInput } from 'react-native';
+
+const styles = StyleSheet.create({
+  hm4pcs: {
+    borderColor: 'black',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    color: 'red',
+  },
+});
+
+const UseCaptureEmail = props =>
+  <KeyboardAvoidingView behavior=\\"position\\">
+    <TextInput
+      onSubmitEditing={props.onSubmit}
+      returnKeyType=\\"go\\"
+      onChangeText={Email => this.setState({ Email })}
+      ref={$e => (this.$captureEmail = $e)}
+      value={state.Email}
+      placeholderTextColor=\\"blue\\"
+      style={styles.hm4pcs}
+    />
+  </KeyboardAvoidingView>;
+
+export default UseCaptureEmail;
+"
+`;
+
+exports[`react-native parses react-native UseCaptureFile 1`] = `
+"import React from 'react';
+import CaptureFile from './CaptureFile.view.js';
+
+const UseCaptureFile = props => <CaptureFile />;
+
+export default UseCaptureFile;
+"
+`;
+
+exports[`react-native parses react-native UseCaptureNumber 1`] = `
+"import React from 'react';
+import { KeyboardAvoidingView, TextInput } from 'react-native';
+
+const UseCaptureNumber = props =>
+  <KeyboardAvoidingView behavior=\\"position\\">
+    <TextInput />
+  </KeyboardAvoidingView>;
+
+export default UseCaptureNumber;
+"
+`;
+
+exports[`react-native parses react-native UseCapturePhone 1`] = `
+"import React from 'react';
+import { KeyboardAvoidingView, TextInput } from 'react-native';
+
+const UseCapturePhone = props =>
+  <KeyboardAvoidingView behavior=\\"position\\">
+    <TextInput />
+  </KeyboardAvoidingView>;
+
+export default UseCapturePhone;
+"
+`;
+
+exports[`react-native parses react-native UseCaptureSecure 1`] = `
+"import React from 'react';
+import { KeyboardAvoidingView, TextInput } from 'react-native';
+
+const UseCaptureSecure = props =>
+  <KeyboardAvoidingView behavior=\\"position\\">
+    <TextInput />
+  </KeyboardAvoidingView>;
+
+export default UseCaptureSecure;
+"
+`;
+
+exports[`react-native parses react-native UseCaptureText 1`] = `
+"import React from 'react';
+import { KeyboardAvoidingView, TextInput } from 'react-native';
+
+const UseCaptureText = props =>
+  <KeyboardAvoidingView behavior=\\"position\\">
+    <TextInput />
+  </KeyboardAvoidingView>;
+
+export default UseCaptureText;
+"
+`;
+
+exports[`react-native parses react-native UseHorizontal 1`] = `
+"import React from 'react';
+import { StyleSheet, View } from 'react-native';
+
+const styles = StyleSheet.create({
+  h13qdyyc: {
+    flexDirection: 'row',
+    borderColor: 'red',
+    borderStyle: 'solid',
+    borderWidth: 1,
+  },
+});
+
+const UseHorizontal = props => <View style={styles.h13qdyyc} />;
+
+export default UseHorizontal;
+"
+`;
+
+exports[`react-native parses react-native UseImage 1`] = `
+"import React from 'react';
+import { Image } from 'react-native';
+
+const UseImage = props => <Image source=\\"https://viewsdx.com/rocks.jpg\\" />;
+
+export default UseImage;
+"
+`;
+
 exports[`react-native parses react-native UseOfProxy 1`] = `
 "import React from 'react';
 import Button from './Button.view.js';
+import MyIcon from './MyIcon.view.js';
 import { View } from 'react-native';
 
 const UseOfProxy = props =>
-  <View><Button color=\\"red\\" icon=\\"MyIcon\\" text=\\"I'm a button!\\" /></View>;
+  <View><Button color=\\"red\\" icon={MyIcon} text=\\"I'm a button!\\" /></View>;
 
 export default UseOfProxy;
 "
 `;
 
-exports[`react-native parses react-native Vertical 1`] = `
+exports[`react-native parses react-native UseProxy 1`] = `
+"import React from 'react';
+import { Text, View } from 'react-native';
+
+const UseProxy = props =>
+  <View>
+    <props.icon from={props.icon} fill=\\"red\\" /><Text>{props.text}</Text>
+  </View>;
+
+export default UseProxy;
+"
+`;
+
+exports[`react-native parses react-native UseRouter 1`] = `
+"import React from 'react';
+import About from './About.view.js';
+import Home from './Home.view.js';
+import { Route } from 'react-router-native';
+import { NativeRouter as Router } from 'react-router-native';
+import Topics from './Topics.view.js';
+import { View } from 'react-native';
+
+const UseRouter = props =>
+  <Router>
+    <View>
+      <Route
+        path=\\"/\\"
+        exact
+        render={routeProps =>
+          <Home heigth={props.height} width={360} {...routeProps} />}
+      />
+      <Route path=\\"/about\\" render={routeProps => <About {...routeProps} />} />
+      <Route path=\\"/topics\\" render={routeProps => <Topics {...routeProps} />} />
+    </View>
+  </Router>;
+
+export default UseRouter;
+"
+`;
+
+exports[`react-native parses react-native UseSvg 1`] = `
+"import React from 'react';
+import Svg, { Circle, G, Path, Text as SvgText } from 'react-native-svg';
+
+const UseSvg = props =>
+  <Svg viewBox=\\"0 0 20 20\\">
+    <Path d=\\"0 20\\" /><Circle cx={10} cy={5} r={5} />
+    <G><Path d={1} /><Path d={2} /></G><SvgText text=\\"hey\\" />
+  </Svg>;
+
+export default UseSvg;
+"
+`;
+
+exports[`react-native parses react-native UseText 1`] = `
+"import React from 'react';
+import { StyleSheet, Text } from 'react-native';
+
+const styles = StyleSheet.create({
+  h11t0jc: { color: 'blue', fontFamily: 'Montserrat-300', fontSize: 16 },
+});
+
+const UseText = props => <Text style={styles.h11t0jc}>Hi, I'm some text</Text>;
+
+export default UseText;
+"
+`;
+
+exports[`react-native parses react-native UseVertical 1`] = `
 "import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
@@ -1088,9 +1089,9 @@ const styles = StyleSheet.create({
   h1c5r919: { flexDirection: 'column', backgroundColor: 'red' },
 });
 
-const Vertical = props => <View style={styles.h1c5r919} />;
+const UseVertical = props => <View style={styles.h1c5r919} />;
 
-export default Vertical;
+export default UseVertical;
 "
 `;
 
