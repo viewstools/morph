@@ -1,10 +1,18 @@
-import { getProp } from '../utils.js'
+import { getProp, isCode } from '../utils.js'
 import safe from '../react/safe.js'
 
 export const enter = (node, parent, state) => {
   if (node.teleport) {
-    // TODO relative vs absolute
-    const teleportTo = getProp(node, 'teleportTo')
-    state.render.push(` to=${safe(teleportTo.value.value, teleportTo)}`)
+    let to = getProp(node, 'teleportTo').value.value
+
+    if (to.startsWith('/')) {
+      to = safe(to)
+    } else {
+      to = isCode(to) ? `\${to}` : to
+      to = `{\`\${context.match.url}/${to}\`}`
+      state.usesRouterContext = true
+    }
+
+    state.render.push(` to=${to}`)
   }
 }

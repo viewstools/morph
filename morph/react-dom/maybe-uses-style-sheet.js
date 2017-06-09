@@ -1,5 +1,9 @@
+import { hasKeys } from '../utils.js'
+
+// TODO don't import glam if styles aren't inlined and there are no dynamic
+// styles
 export default state => {
-  if (Object.keys(state.styles).length > 0) {
+  if (hasKeys(state.styles)) {
     state.uses.push('glam')
   }
 }

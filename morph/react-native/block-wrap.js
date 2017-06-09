@@ -1,4 +1,4 @@
-import { getProp } from '../utils.js'
+import { getProp, isCode } from '../utils.js'
 import getBlockName from './get-block-name.js'
 import safe from '../react/safe.js'
 import wrap from '../react/wrap.js'
@@ -26,11 +26,20 @@ export const enter = (node, parent, state) => {
     node.wrapEnd = '</TouchableHighlight>'
   } else if (node.teleport) {
     state.use('Link')
-    const teleportTo = getProp(node, 'teleportTo')
+    let to = getProp(node, 'teleportTo').value.value
+
+    if (to.startsWith('/')) {
+      to = safe(to)
+    } else {
+      to = isCode(to) ? `\${to}` : to
+      to = `{\`\${context.match.url}/${to}\`}`
+      state.usesRouterContext = true
+    }
+
     state.render.push(
       `<Link
           activeOpacity={0.7}
-          to=${safe(teleportTo.value.value, teleportTo)}
+          to=${to}
           underlayColor='transparent'>`
     )
     node.wrapEnd = '</Link>'

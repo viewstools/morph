@@ -59,6 +59,7 @@ export default ({
 
       state.uses.push(block)
     },
+    usesRouterContext: false,
     views,
   }
 

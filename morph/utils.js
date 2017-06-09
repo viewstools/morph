@@ -41,7 +41,8 @@ export const hasProp = (node, key, match) => {
   return typeof match === 'function' ? match(prop.value.value) : true
 }
 
-export const isCode = node => isTag(node, 'code')
+export const isCode = node =>
+  typeof node === 'string' ? /props|item/.test(node) : isTag(node, 'code')
 export const isData = node => isTag(node, 'data')
 export const isStyle = node => isTag(node, 'style')
 export const isToggle = node => isTag(node, 'toggle')
