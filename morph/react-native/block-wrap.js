@@ -32,7 +32,7 @@ export const enter = (node, parent, state) => {
       to = safe(to)
     } else {
       to = isCode(to) ? `\${${to}}` : to
-      to = `{\`\${context.match.url}/${to}\`}`
+      to = `{\`\${context.router.match.url}/${to}\`}`
       state.usesRouterContext = true
     }
 

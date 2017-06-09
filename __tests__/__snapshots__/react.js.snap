@@ -220,7 +220,7 @@ const NestedRoutes = (props, context) =>
   <div>
     <div>topics</div>
     <Link
-      to={\`\${context.match.url}/rendering\`}
+      to={\`\${context.router.match.url}/rendering\`}
       className={\`\${styles.h1lmw638}\`}
     >
       <div>Rendering with React</div>
@@ -272,7 +272,7 @@ const styles = {
 };
 
 const Teleport = (props, context) =>
-  <Link to={\`\${context.match.url}/..\`} className={\`\${styles.hg3iw2q}\`}>
+  <Link to={\`\${context.router.match.url}/..\`} className={\`\${styles.hg3iw2q}\`}>
     <div>go back</div>
   </Link>;
 
@@ -824,7 +824,7 @@ const NestedRoutes = (props, context) =>
     <Text>topics</Text>
     <Link
       activeOpacity={0.7}
-      to={\`\${context.match.url}/rendering\`}
+      to={\`\${context.router.match.url}/rendering\`}
       underlayColor=\\"transparent\\"
     >
       <View style={styles.h18pdll5}><Text>Rendering with React</Text></View>
@@ -862,7 +862,7 @@ const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
 const Teleport = (props, context) =>
   <Link
     activeOpacity={0.7}
-    to={\`\${context.match.url}/..\`}
+    to={\`\${context.router.match.url}/..\`}
     underlayColor=\\"transparent\\"
   >
     <View style={styles.hp2cr4d}><Text>go back</Text></View>
