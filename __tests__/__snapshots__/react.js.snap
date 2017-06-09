@@ -204,7 +204,6 @@ export default NameIsType;
 
 exports[`react-dom parses react-dom NestedRoutes 1`] = `
 "import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Route } from 'react-router-dom';
 import Topic from './Topic.view.js';
@@ -219,10 +218,7 @@ const styles = {
 const NestedRoutes = (props, context) =>
   <div>
     <div>topics</div>
-    <Link
-      to={\`\${context.router.match.url}/rendering\`}
-      className={\`\${styles.h1lmw638}\`}
-    >
+    <Link to=\\"rendering\\" className={\`\${styles.h1lmw638}\`}>
       <div>Rendering with React</div>
     </Link>
     <Route
@@ -231,7 +227,6 @@ const NestedRoutes = (props, context) =>
     />
   </div>;
 
-NestedRoutes.contexTypes = { router: PropTypes.object };
 export default NestedRoutes;
 "
 `;
@@ -261,7 +256,6 @@ export default Print;
 
 exports[`react-dom parses react-dom Teleport 1`] = `
 "import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import css from 'glam';
 
@@ -272,11 +266,8 @@ const styles = {
 };
 
 const Teleport = (props, context) =>
-  <Link to={\`\${context.router.match.url}/..\`} className={\`\${styles.hg3iw2q}\`}>
-    <div>go back</div>
-  </Link>;
+  <Link to=\\"..\\" className={\`\${styles.hg3iw2q}\`}><div>go back</div></Link>;
 
-Teleport.contexTypes = { router: PropTypes.object };
 export default Teleport;
 "
 `;
@@ -811,7 +802,6 @@ export default NameIsType;
 
 exports[`react-native parses react-native NestedRoutes 1`] = `
 "import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-native';
 import { Route } from 'react-router-native';
 import Topic from './Topic.view.js';
@@ -822,11 +812,7 @@ const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 const NestedRoutes = (props, context) =>
   <View>
     <Text>topics</Text>
-    <Link
-      activeOpacity={0.7}
-      to={\`\${context.router.match.url}/rendering\`}
-      underlayColor=\\"transparent\\"
-    >
+    <Link activeOpacity={0.7} to=\\"rendering\\" underlayColor=\\"transparent\\">
       <View style={styles.h18pdll5}><Text>Rendering with React</Text></View>
     </Link>
     <Route
@@ -835,7 +821,6 @@ const NestedRoutes = (props, context) =>
     />
   </View>;
 
-NestedRoutes.contexTypes = { router: PropTypes.object };
 export default NestedRoutes;
 "
 `;
@@ -853,22 +838,16 @@ export default Print;
 
 exports[`react-native parses react-native Teleport 1`] = `
 "import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-native';
 import { StyleSheet, Text, View } from 'react-native';
 
 const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
 
 const Teleport = (props, context) =>
-  <Link
-    activeOpacity={0.7}
-    to={\`\${context.router.match.url}/..\`}
-    underlayColor=\\"transparent\\"
-  >
+  <Link activeOpacity={0.7} to=\\"..\\" underlayColor=\\"transparent\\">
     <View style={styles.hp2cr4d}><Text>go back</Text></View>
   </Link>;
 
-Teleport.contexTypes = { router: PropTypes.object };
 export default Teleport;
 "
 `;
