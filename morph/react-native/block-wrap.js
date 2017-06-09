@@ -31,7 +31,7 @@ export const enter = (node, parent, state) => {
     if (to.startsWith('/')) {
       to = safe(to)
     } else {
-      to = isCode(to) ? `\${to}` : to
+      to = isCode(to) ? `\${${to}}` : to
       to = `{\`\${context.match.url}/${to}\`}`
       state.usesRouterContext = true
     }
