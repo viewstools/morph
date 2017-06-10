@@ -21,7 +21,10 @@ export default ({ getImport, getStyles, name, state }) => {
     .filter(Boolean)
     .join('\n')
 
-  return `${dependencies}
+  // TODO Emojis should be wrapped in <span>, have role="img", and have an accessible description
+  // with aria-label or aria-labelledby  jsx-a11y/accessible-emoji
+  return `/* eslint-disable jsx-a11y/accessible-emoji */
+${dependencies}
 
 ${getStyles(state, name)}
 
