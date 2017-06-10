@@ -8,9 +8,9 @@ export default ({ state, name }) => {
   }
 
   render() {
-    const { context, props, state } = this
+    const { props, state } = this
     return (${render})
   }
 }`
-    : `const ${name} = (props, context) => (${render})`
+    : `const ${name} = (props) => (${render})`
 }

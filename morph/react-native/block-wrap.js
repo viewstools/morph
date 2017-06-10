@@ -28,13 +28,13 @@ export const enter = (node, parent, state) => {
     state.use('Link')
     let to = getProp(node, 'teleportTo').value.value
 
-    // if (to.startsWith('/')) {
-    to = safe(to)
-    // } else {
-    //   to = isCode(to) ? `\${${to}}` : to
-    //   to = `{\`\${context.router.route.match.url}/${to}\`}`
-    //   state.usesRouterContext = true
-    // }
+    if (to.startsWith('/') || to === '..') {
+      to = safe(to)
+    } else {
+      to = isCode(to) ? `\${${to}}` : to
+      to = `{\`\${props.match.url === '/' ? '' : props.match.url}/${to}\`}`
+      state.withRouter = true
+    }
 
     state.render.push(
       `<Link

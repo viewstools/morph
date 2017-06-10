@@ -59,8 +59,8 @@ export default ({
 
       state.uses.push(block)
     },
-    usesRouterContext: false,
     views,
+    withRouter: false,
   }
 
   if (name !== finalName) {

@@ -26,6 +26,8 @@ const getPath = (f = '.') => join(__dirname, 'views', f)
           })
         ).toMatchSnapshot()
       })
+
+      // TODO test rendered morphed view
     })
   })
 )

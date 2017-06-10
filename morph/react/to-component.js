@@ -1,20 +1,23 @@
 import getBody from './get-body.js'
-import getContext from './get-context.js'
 import getDefaultProps from './get-default-props.js'
 import getDependencies from './get-dependencies.js'
 import getRemap from './get-remap.js'
 import getTests from './get-tests.js'
 
 export default ({ getImport, getStyles, name, state }) => {
-  const context = getContext({ state, name })
   const remap = getRemap({ state, name })
   let xport = remap ? remap.name : name
+
   const tests = getTests({ state, name: xport })
-  xport = tests ? tests.name : xport
+  if (tests) xport = tests.name
+  // TODO remove withRouter when
+  // https://github.com/ReactTraining/react-router/issues/4571 is merged and
+  // relative links are supported
+  if (state.withRouter) xport = `withRouter(${xport})`
 
   const dependencies = [
     `import React from 'react'`,
-    context && `import PropTypes from 'prop-types'`,
+    state.withRouter && `import { withRouter } from 'react-router'`,
     tests && `import makeTests from './${name}.view.tests.js'`,
     getDependencies(state.uses, getImport),
   ]
@@ -33,6 +36,5 @@ ${remap ? remap.component : ''}
 
 ${getBody({ state, name })}
 ${getDefaultProps({ state, name })}
-${context ? context : ''}
 export default ${xport}`
 }

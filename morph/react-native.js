@@ -52,6 +52,7 @@ export default ({ getImport, name, tests = false, view, views = {} }) => {
       state.uses.push(block)
     },
     views,
+    withRouter: false,
   }
 
   const {
