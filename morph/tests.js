@@ -74,7 +74,9 @@ export const getValue = (property, tests) => {
   switch (property.value.type) {
     case 'Literal':
       const v = property.value.value
-      return tests.includes(v) ? `<<DISPLAY>>() => display(${v})<<DISPLAY>>` : v
+      return tests.includes(v)
+        ? `<<DISPLAY>>() => display(${v}, '${v}')<<DISPLAY>>`
+        : v
 
     case 'ArrayExpression':
       return property.value.elements.map(v => getValue(v, tests))

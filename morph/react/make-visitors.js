@@ -94,7 +94,9 @@ export default ({
           from = from.value.value
         }
 
-        state.render.push(`{${from}.map((item, i) => `)
+        state.render.push(
+          `{Array.isArray(${from}) && ${from}.map((item, i) => `
+        )
 
         node.list.forEach(n => (n.isInList = true))
       }
