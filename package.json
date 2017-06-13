@@ -1,6 +1,6 @@
 {
   "name": "views-morph",
-  "version": "0.1.25",
+  "version": "0.1.26",
   "description": "Views language morpher",
   "main": "lib.js",
   "bin": {
@@ -53,7 +53,8 @@
     "synesthesia": "^1.0.1",
     "to-camel-case": "^1.0.0",
     "to-pascal-case": "^1.0.0",
-    "to-slug-case": "^1.0.0"
+    "to-slug-case": "^1.0.0",
+    "viewsdx-view-from-svg": "^0.0.2"
   },
   "lint-staged": {
     "*.js": [

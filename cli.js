@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 
+const { extname } = require('path')
 const { readFileSync, statSync } = require('fs')
 const { morph, pathToName } = require('./lib.js')
 const chalk = require('chalk')
+const morphSvg = require('viewsdx-view-from-svg')
 const watch = require('./watch.js')
 
 const {
@@ -101,6 +103,8 @@ if (shouldWatch) {
       src: input,
       tests,
     })
+  } else if (extname(input) === '.svg') {
+    console.log(morphSvg(readFileSync(input, 'utf-8')))
   } else {
     const code = morph(readFileSync(input, 'utf-8'), {
       as,
