@@ -14,6 +14,7 @@ const isData = f => extname(f) === '.data'
 const isJs = f => extname(f) === '.js'
 const isView = f => extname(f) === '.view'
 const isTests = f => extname(f) === '.tests'
+const isLogic = f => /view\.logic\.js$/.test(f)
 
 module.exports = options => {
   let {
@@ -26,6 +27,7 @@ module.exports = options => {
     pretty,
     shared,
     src,
+    logic: shouldIncludeLogic,
     tests: shouldIncludeTests,
     viewNotFound,
   } = Object.assign(
@@ -58,11 +60,21 @@ module.exports = options => {
   const jsComponents = {}
   const isJsComponent = f => {
     if (jsComponents.hasOwnProperty(f)) return jsComponents[f]
-    return (jsComponents[f] = /import React/.test(readFileSync(f, 'utf-8')))
+    let is = false
+
+    try {
+      is = /React/.test(readFileSync(f, 'utf-8'))
+    } catch (err) {}
+
+    return (jsComponents[f] = is)
   }
 
   const filter = fn => (f, a) => {
-    if (isMorphedView(f) || isMorphedData(f) || (isJs(f) && !isJsComponent(f)))
+    if (
+      isMorphedView(f) ||
+      isMorphedData(f) ||
+      (isJs(f) && !(isJsComponent(f) || isLogic(f)))
+    )
       return
 
     return fn(f, a)
@@ -70,9 +82,17 @@ module.exports = options => {
 
   const getImportFileName = name => {
     const f = views[name] || data[name]
-    return isView(f) || isData(f) ? `${f}.js` : f
+    if (isData(f)) {
+      return `${f}.js`
+    } else if (isView(f)) {
+      return logic[`${name}.view.logic`] || `${f}.js`
+    } else {
+      return f
+    }
   }
   const getImport = name => {
+    // TODO track dependencies to make it easy to rebuild files as new ones get
+    // added
     if (isData(name)) {
       return data[name]
         ? `import ${toCamelCase(name)} from '${getImportFileName(name)}'`
@@ -86,6 +106,7 @@ module.exports = options => {
 
   const views = map
   const data = {}
+  const logic = {}
   const tests = {}
 
   const addView = filter((f, skipMorph = false) => {
@@ -113,6 +134,8 @@ module.exports = options => {
     } else if (isTests(file)) {
       tests[view] = file
       shouldMorph = true
+    } else if (isLogic(file)) {
+      logic[view] = file
     } else {
       views[view] = file
     }
@@ -139,6 +162,8 @@ module.exports = options => {
       )
       return
     }
+
+    // TODO if the file doesn't exist, add it to wherever it belongs
 
     if (isJs(f)) return
 
@@ -177,7 +202,9 @@ module.exports = options => {
     const file = relative(src, f)
     const view = isData(file) || isTests(file)
       ? file
-      : toPascalCase(file.replace(/\.(view|js)/g, ''))
+      : isLogic(file)
+        ? file.replace(/\.js/, '')
+        : toPascalCase(file.replace(/\.(view|js)/, ''))
 
     return {
       file: `./${file}`,
@@ -192,6 +219,7 @@ module.exports = options => {
     `${src}/**/*.data`,
     `${src}/**/*.js`,
     `${src}/**/*.view`,
+    shouldIncludeLogic && `${src}/**/*.view.logic.js`,
     shouldIncludeTests && `${src}/**/*.view.tests`,
   ].filter(Boolean)
 
@@ -223,6 +251,8 @@ module.exports = options => {
             delete data[view]
           } else if (isTests(f)) {
             delete tests[view]
+          } else if (isLogic(f)) {
+            delete logic[view]
           } else {
             delete views[view]
           }
