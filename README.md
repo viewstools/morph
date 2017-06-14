@@ -1,5 +1,7 @@
 # Views language morpher
 
+[There are some docs!!!](https://github.com/viewsdx/docs)
+
 The easiest way to integrate Views with your project is to run it as a
 standalone command. You can install it with:
 
