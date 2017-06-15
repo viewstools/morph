@@ -43,12 +43,12 @@ export default ({
     },
     leave(node, parent, state) {
       if (
-        !parent ||
+        (!parent && node.blocks) ||
         node.explicitChildren ||
         (node.blocks && node.blocks.list.length > 0)
       ) {
-        if (!parent) {
-          if (!node.blocks || (node.blocks && node.blocks.list.length === 0)) {
+        if (!parent && node.blocks) {
+          if (node.blocks.list.length === 0) {
             state.render.push('>')
           }
           state.render.push(`{props.children}`)
