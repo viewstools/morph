@@ -2,6 +2,7 @@ import { hasKeys, hasKeysInChildren } from '../utils.js'
 import { transform } from 'babel-core'
 import isUnitlessNumber from '../react/is-unitless-number.js'
 import toSlugCase from 'to-slug-case'
+import glam from 'glam/babel'
 
 export default ({ file, inlineStyles, styles }, name) => {
   if (!hasKeys(styles)) return ''
@@ -63,5 +64,5 @@ const transformGlam = (code, inline, filename) =>
   transform(code, {
     babelrc: false,
     filename,
-    plugins: [[require.resolve('glam/babel'), { inline }]],
+    plugins: [[glam, { inline }]],
   }).code
