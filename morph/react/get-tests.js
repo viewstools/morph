@@ -67,7 +67,7 @@ export default ({ state, name }) => {
   }
 
   display = (next, name) => {
-    this.setState(next, () => {
+    this.setState({ ...next, _on: true }, () => {
       g.tests.${name}.active = name
     })
   }
