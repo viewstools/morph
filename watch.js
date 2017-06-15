@@ -1,6 +1,6 @@
 const { extname, relative } = require('path')
 const { getViewNotFound, isViewNameRestricted, morph } = require('./lib.js')
-const { readFile, readFileSync, writeFile } = require('fs')
+const { readFile, readFileSync, statSync, writeFile } = require('fs')
 const chalk = require('chalk')
 const globule = require('globule')
 const toCamelCase = require('to-camel-case')
@@ -73,7 +73,8 @@ module.exports = options => {
     if (
       isMorphedView(f) ||
       isMorphedData(f) ||
-      (isJs(f) && !(isJsComponent(f) || isLogic(f)))
+      (isJs(f) && !(isJsComponent(f) || isLogic(f))) ||
+      statSync(f).isDirectory()
     )
       return
 
