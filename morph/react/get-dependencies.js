@@ -7,6 +7,7 @@ const NATIVE = [
   'StyleSheet',
   'Text',
   'TextInput',
+  'TouchableWithoutFeedback',
   'TouchableHighlight',
   'View',
 ]

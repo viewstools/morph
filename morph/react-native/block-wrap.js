@@ -16,14 +16,15 @@ export const enter = (node, parent, state) => {
   }
 
   if (node.action) {
-    state.use('TouchableHighlight')
+    const block = 'TouchableWithoutFeedback'
+    state.use(block)
     state.render.push(
-      `<TouchableHighlight
+      `<${block}
           activeOpacity={0.7}
           onPress=${wrap(node.action)}
           underlayColor='transparent'>`
     )
-    node.wrapEnd = '</TouchableHighlight>'
+    node.wrapEnd = `</${block}>`
   } else if (node.teleport) {
     state.use('Link')
     let to = getProp(node, 'teleportTo').value.value
