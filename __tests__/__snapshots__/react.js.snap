@@ -14,11 +14,12 @@ const styles = {
 const Action = props =>
   props.check
     ? <button onClick={props.clickMe} className={\`\${styles.h1lmw638}\`}>
-        <div>click me</div>
+        <div>click me</div>{props.children}
       </button>
     : null;
 
 export default Action;
+// fonts {}
 "
 `;
 
@@ -47,9 +48,11 @@ const BackgroundImage = props =>
         backgroundSize: cover,
       }}
     />
+    {props.children}
   </div>;
 
 export default BackgroundImage;
+// fonts {}
 "
 `;
 
@@ -68,9 +71,12 @@ const BoxShadow = props =>
   <div
     className={\`\${styles.h1lmw638}\`}
     style={{ boxShadow: \`10px 5px 2px \${props.color}\` }}
-  />;
+  >
+    {props.children}
+  </div>;
 
 export default BoxShadow;
+// fonts {}
 "
 `;
 
@@ -91,10 +97,11 @@ const GoTo = props =>
     href=\\"https://viewsdx.com\\"
     className={\`\${styles.h1lmw638}\`}
   >
-    <div>Go to ViewsDX website!</div>
+    <div>Go to ViewsDX website!</div>{props.children}
   </a>;
 
 export default GoTo;
+// fonts {}
 "
 `;
 
@@ -117,10 +124,11 @@ background-color: black; }\`,
 
 const Hover = props =>
   <button onClick={props.onClick} className={\`\${styles.hpg1h4y}\`}>
-    <div className={\`\${styles.h1669j73}\`}>Hey!</div>
+    <div className={\`\${styles.h1669j73}\`}>Hey!</div>{props.children}
   </button>;
 
 export default Hover;
+// fonts {}
 "
 `;
 
@@ -144,10 +152,11 @@ background-color: black; }\`,
 const HoverProxy = props =>
   <button onClick={props.onClick} className={\`\${styles.hpg1h4y}\`}>
     <props.icon from={props.icon} fill=\\"white\\" fillHover=\\"black\\" />
-    <div className={\`\${styles.h1669j73}\`}>Hey!</div>
+    <div className={\`\${styles.h1669j73}\`}>Hey!</div>{props.children}
   </button>;
 
 export default HoverProxy;
+// fonts {}
 "
 `;
 
@@ -158,6 +167,7 @@ import React from 'react';
 const JustText = props => <div>hey!</div>;
 
 export default JustText;
+// fonts {}
 "
 `;
 
@@ -174,10 +184,13 @@ const styles = {
 
 const ListOfSomething = props =>
   <div className={\`\${styles.h1lmw638}\`}>
-    {props.list.map((item, i) => <div key={i}>{item.name}</div>)}
+    {Array.isArray(props.list) &&
+      props.list.map((item, i) => <div key={i}>{item.name}</div>)}
+    {props.children}
   </div>;
 
 export default ListOfSomething;
+// fonts {}
 "
 `;
 
@@ -195,10 +208,13 @@ const styles = {
 
 const ListWithData = props =>
   <div className={\`\${styles.h1lmw638}\`}>
-    {usersData.map((item, i) => <div key={i}>{item.name}</div>)}
+    {Array.isArray(usersData) &&
+      usersData.map((item, i) => <div key={i}>{item.name}</div>)}
+    {props.children}
   </div>;
 
 export default ListWithData;
+// fonts {}
 "
 `;
 
@@ -209,6 +225,7 @@ import React from 'react';
 const NameIsType = props => <div>iam</div>;
 
 export default NameIsType;
+// fonts {}
 "
 `;
 
@@ -240,9 +257,11 @@ const NestedRoutes = props =>
       path={\`\${props.match.url}/:topic\`}
       render={routeProps => <Topic {...routeProps} />}
     />
+    {props.children}
   </div>;
 
 export default withRouter(NestedRoutes);
+// fonts {}
 "
 `;
 
@@ -264,9 +283,11 @@ const styles = {
 const Print = props =>
   <div>
     <div className={\`\${styles.hrak8un}\`}>not in print</div><div>hey</div>
+    {props.children}
   </div>;
 
 export default Print;
+// fonts {}
 "
 `;
 
@@ -283,9 +304,12 @@ const styles = {
 };
 
 const Teleport = props =>
-  <Link to=\\"..\\" className={\`\${styles.hg3iw2q}\`}><div>go back</div></Link>;
+  <Link to=\\"..\\" className={\`\${styles.hg3iw2q}\`}>
+    <div>go back</div>{props.children}
+  </Link>;
 
 export default Teleport;
+// fonts {}
 "
 `;
 
@@ -315,9 +339,12 @@ class RemapToggle extends React.Component {
 }
 
 const Toggle = props =>
-  <button onClick={props.toggleIsOn} className={\`\${styles.h1lmw638}\`} />;
+  <button onClick={props.toggleIsOn} className={\`\${styles.h1lmw638}\`}>
+    {props.children}
+  </button>;
 
 export default RemapToggle;
+// fonts {}
 "
 `;
 
@@ -338,6 +365,7 @@ const UseCaptureEmail = props =>
   <input onSubmit={props.onSubmit} className={\`\${styles.hevllt7}\`} />;
 
 export default UseCaptureEmail;
+// fonts {}
 "
 `;
 
@@ -348,6 +376,7 @@ import React from 'react';
 const UseCaptureFile = props => <input />;
 
 export default UseCaptureFile;
+// fonts {}
 "
 `;
 
@@ -358,6 +387,7 @@ import React from 'react';
 const UseCaptureNumber = props => <input />;
 
 export default UseCaptureNumber;
+// fonts {}
 "
 `;
 
@@ -368,6 +398,7 @@ import React from 'react';
 const UseCapturePhone = props => <input />;
 
 export default UseCapturePhone;
+// fonts {}
 "
 `;
 
@@ -378,6 +409,7 @@ import React from 'react';
 const UseCaptureSecure = props => <input />;
 
 export default UseCaptureSecure;
+// fonts {}
 "
 `;
 
@@ -388,6 +420,7 @@ import React from 'react';
 const UseCaptureText = props => <input />;
 
 export default UseCaptureText;
+// fonts {}
 "
 `;
 
@@ -403,9 +436,11 @@ border: 1px solid red; }\`,
   ]),
 };
 
-const UseHorizontal = props => <div className={\`\${styles.h1nnugsi}\`} />;
+const UseHorizontal = props =>
+  <div className={\`\${styles.h1nnugsi}\`}>{props.children}</div>;
 
 export default UseHorizontal;
+// fonts {}
 "
 `;
 
@@ -416,6 +451,7 @@ import React from 'react';
 const UseImage = props => <img source=\\"https://viewsdx.com/rocks.jpg\\" />;
 
 export default UseImage;
+// fonts {}
 "
 `;
 
@@ -426,9 +462,12 @@ import Button from './Button.view.js';
 import MyIcon from './MyIcon.view.js';
 
 const UseOfProxy = props =>
-  <div><Button color=\\"red\\" icon={MyIcon} text=\\"I'm a button!\\" /></div>;
+  <div>
+    <Button color=\\"red\\" icon={MyIcon} text=\\"I'm a button!\\" />{props.children}
+  </div>;
 
 export default UseOfProxy;
+// fonts {}
 "
 `;
 
@@ -437,9 +476,13 @@ exports[`react-dom parses react-dom UseProxy 1`] = `
 import React from 'react';
 
 const UseProxy = props =>
-  <div><props.icon from={props.icon} fill=\\"red\\" /><div>{props.text}</div></div>;
+  <div>
+    <props.icon from={props.icon} fill=\\"red\\" /><div>{props.text}</div>
+    {props.children}
+  </div>;
 
 export default UseProxy;
+// fonts {}
 "
 `;
 
@@ -463,10 +506,12 @@ const UseRouter = props =>
       />
       <Route path=\\"/about\\" render={routeProps => <About {...routeProps} />} />
       <Route path=\\"/topics\\" render={routeProps => <Topics {...routeProps} />} />
+      {props.children}
     </div>
   </Router>;
 
 export default UseRouter;
+// fonts {}
 "
 `;
 
@@ -477,10 +522,11 @@ import React from 'react';
 const UseSvg = props =>
   <svg viewBox=\\"0 0 20 20\\">
     <path d=\\"0 20\\" /><circle cx={10} cy={5} r={5} />
-    <g><path d={1} /><path d={2} /></g><text text=\\"hey\\" />
+    <g><path d={1} /><path d={2} /></g><text text=\\"hey\\" />{props.children}
   </svg>;
 
 export default UseSvg;
+// fonts {}
 "
 `;
 
@@ -502,6 +548,7 @@ const UseText = props =>
   <div className={\`\${styles.h1w7s7t6}\`}>Hi, I'm some text</div>;
 
 export default UseText;
+// fonts {\\"Montserrat\\":[\\"300\\"]}
 "
 `;
 
@@ -517,9 +564,11 @@ background-color: red; }\`,
   ]),
 };
 
-const UseVertical = props => <div className={\`\${styles.h1vjf5pn}\`} />;
+const UseVertical = props =>
+  <div className={\`\${styles.h1vjf5pn}\`}>{props.children}</div>;
 
 export default UseVertical;
+// fonts {}
 "
 `;
 
@@ -540,11 +589,14 @@ const ViewAndListWithData = props =>
   <div className={\`\${styles.h1lmw638}\`}>
     <div>{props.name}</div>
     <div className={\`\${styles.h1lmw638}\`}>
-      {addressesData.map((item, i) => <div key={i}>{item.city}</div>)}
+      {Array.isArray(addressesData) &&
+        addressesData.map((item, i) => <div key={i}>{item.city}</div>)}
     </div>
+    {props.children}
   </div>;
 ViewAndListWithData.defaultProps = userData;
 export default ViewAndListWithData;
+// fonts {}
 "
 `;
 
@@ -561,9 +613,12 @@ const styles = {
 };
 
 const ViewWithData = props =>
-  <div className={\`\${styles.h1lmw638}\`}><div>{props.name}</div></div>;
+  <div className={\`\${styles.h1lmw638}\`}>
+    <div>{props.name}</div>{props.children}
+  </div>;
 ViewWithData.defaultProps = userData;
 export default ViewWithData;
+// fonts {}
 "
 `;
 
@@ -572,9 +627,10 @@ exports[`react-dom parses react-dom When 1`] = `
 import React from 'react';
 
 const When = props =>
-  <div>{props.showMe ? <div>I may be hidden</div> : null}</div>;
+  <div>{props.showMe ? <div>I may be hidden</div> : null}{props.children}</div>;
 
 export default When;
+// fonts {}
 "
 `;
 
@@ -593,12 +649,15 @@ const WhenList = props =>
   <div>
     {props.showMe
       ? <div className={\`\${styles.h1lmw638}\`}>
-          {props.list.map((item, i) => <div key={i}>{item.thing}</div>)}
+          {Array.isArray(props.list) &&
+            props.list.map((item, i) => <div key={i}>{item.thing}</div>)}
         </div>
       : null}
+    {props.children}
   </div>;
 
 export default WhenList;
+// fonts {}
 "
 `;
 
@@ -610,6 +669,7 @@ const WhenTopLevel = props =>
   props.showMe ? <div>I may be hidden</div> : null;
 
 export default WhenTopLevel;
+// fonts {}
 "
 `;
 
@@ -625,49 +685,115 @@ const styles = {
   ]),
 };
 
+const g = typeof window === 'undefined' ? global : window;
+
 class TestsWithTest extends React.Component {
   constructor(props) {
     super(props);
 
-    this.tests = makeTests(this.display);
-    this.state = this.tests[this.tests._main];
+    const { _main, ...rest } = makeTests(this.display);
+    this.state = {
+      ...rest[_main],
+      _on: true,
+    };
+
+    const tests = {
+      active: _main,
+      on: this.on,
+      off: this.off,
+    };
+
+    Object.keys(rest).forEach(test => {
+      tests[test] = () => this.display(rest[test], test);
+    });
+
+    if (typeof g.tests === 'undefined') {
+      const validTests = k => !(k === 'off' || k === 'on');
+      g.tests = {
+        off: () =>
+          Object.keys(g.tests)
+            .filter(validTests)
+            .forEach(t => g.tests[t].off()),
+        on: () =>
+          Object.keys(g.tests).filter(validTests).forEach(t => g.tests[t].on()),
+      };
+    }
+
+    if (typeof g.tests.WithTest === 'undefined') {
+      g.tests.WithTest = tests;
+    } else if (Array.isArray(g.tests.WithTest)) {
+      g.tests.WithTest.push(tests);
+    } else {
+      g.tests.WithTest = [g.tests.WithTest, tests];
+      g.tests.WithTest.off = () => g.tests.WithTest.forEach(t => t.off());
+      g.tests.WithTest.on = () => g.tests.WithTest.forEach(t => t.on());
+    }
+
+    this.test = tests;
+
+    console.info('WithTest tests 👉', g.tests);
   }
 
-  display = next => this.setState(next);
+  componentWillUnmount() {
+    if (Array.isArray(g.tests.WithTest)) {
+      g.tests.WithTest = g.tests.WithTest.filter(t => t === this.tests);
+      if (g.tests.WithTest.length === 0) {
+        delete g.tests.WithTest;
+      }
+    } else {
+      delete g.tests.WithTest;
+    }
+  }
+
+  display = (next, name) => {
+    this.setState({ ...next, _on: true }, () => {
+      g.tests.WithTest.active = name;
+    });
+  };
+
+  off = () => this.setState({ _on: false });
+  on = () => this.setState({ _on: true });
 
   render() {
-    return <WithTest {...this.props} {...this.state} />;
+    const { _on, ...state } = this.state;
+    return _on
+      ? <WithTest {...this.props} {...state} />
+      : <WithTest {...this.props} />;
   }
 }
 
 const WithTest = props =>
   <button onClick={props.change} className={\`\${styles.h1lmw638}\`}>
-    <div>{props.text}</div>
+    <div>{props.text}</div>{props.children}
   </button>;
 
 export default TestsWithTest;
+// fonts {}
 "
 `;
 
 exports[`react-native parses react-native Action 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
-import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
 const Action = props =>
   props.check
-    ? <TouchableHighlight
+    ? <TouchableWithoutFeedback
         activeOpacity={0.7}
         onPress={props.clickMe}
         underlayColor=\\"transparent\\"
       >
-        <View style={styles.h18pdll5}><Text>click me</Text></View>
-      </TouchableHighlight>
+        <View style={styles.h18pdll5}>
+          <Text>click me</Text>{props.children}
+        </View>
+      </TouchableWithoutFeedback>
     : null;
 
 export default Action;
+// fonts {}
 "
 `;
 
@@ -692,9 +818,11 @@ const BackgroundImage = props =>
       source={{ uri: props.backgroundImage }}
       style={styles.hp2cr4d}
     />
+    {props.children}
   </Image>;
 
 export default BackgroundImage;
+// fonts {}
 "
 `;
 
@@ -717,9 +845,12 @@ const BoxShadow = props =>
         shadowOpacity: 1,
       },
     ]}
-  />;
+  >
+    {props.children}
+  </View>;
 
 export default BoxShadow;
+// fonts {}
 "
 `;
 
@@ -731,16 +862,19 @@ import { StyleSheet, Text, View } from 'react-native';
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
 const GoTo = props =>
-  <View style={styles.h18pdll5}><Text>Go to ViewsDX website!</Text></View>;
+  <View style={styles.h18pdll5}>
+    <Text>Go to ViewsDX website!</Text>{props.children}
+  </View>;
 
 export default GoTo;
+// fonts {}
 "
 `;
 
 exports[`react-native parses react-native Hover 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
-import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 
 const styles = StyleSheet.create({
   h1jrzrhl: { flexDirection: 'column', backgroundColor: 'black' },
@@ -748,24 +882,25 @@ const styles = StyleSheet.create({
 });
 
 const Hover = props =>
-  <TouchableHighlight
+  <TouchableWithoutFeedback
     activeOpacity={0.7}
     onPress={props.onClick}
     underlayColor=\\"transparent\\"
   >
     <View style={styles.h1jrzrhl}>
-      <Text style={styles.hyfo4ef}>Hey!</Text>
+      <Text style={styles.hyfo4ef}>Hey!</Text>{props.children}
     </View>
-  </TouchableHighlight>;
+  </TouchableWithoutFeedback>;
 
 export default Hover;
+// fonts {}
 "
 `;
 
 exports[`react-native parses react-native HoverProxy 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
-import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 
 const styles = StyleSheet.create({
   h1jrzrhl: { flexDirection: 'column', backgroundColor: 'black' },
@@ -773,18 +908,19 @@ const styles = StyleSheet.create({
 });
 
 const HoverProxy = props =>
-  <TouchableHighlight
+  <TouchableWithoutFeedback
     activeOpacity={0.7}
     onPress={props.onClick}
     underlayColor=\\"transparent\\"
   >
     <View style={styles.h1jrzrhl}>
       <props.icon from={props.icon} fill=\\"white\\" fillHover=\\"black\\" />
-      <Text style={styles.hyfo4ef}>Hey!</Text>
+      <Text style={styles.hyfo4ef}>Hey!</Text>{props.children}
     </View>
-  </TouchableHighlight>;
+  </TouchableWithoutFeedback>;
 
 export default HoverProxy;
+// fonts {}
 "
 `;
 
@@ -796,6 +932,7 @@ import { Text } from 'react-native';
 const JustText = props => <Text>hey!</Text>;
 
 export default JustText;
+// fonts {}
 "
 `;
 
@@ -808,10 +945,13 @@ const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
 const ListOfSomething = props =>
   <View style={styles.h18pdll5}>
-    {props.list.map((item, i) => <Text key={i}>{item.name}</Text>)}
+    {Array.isArray(props.list) &&
+      props.list.map((item, i) => <Text key={i}>{item.name}</Text>)}
+    {props.children}
   </View>;
 
 export default ListOfSomething;
+// fonts {}
 "
 `;
 
@@ -825,10 +965,13 @@ const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
 const ListWithData = props =>
   <View style={styles.h18pdll5}>
-    {usersData.map((item, i) => <Text key={i}>{item.name}</Text>)}
+    {Array.isArray(usersData) &&
+      usersData.map((item, i) => <Text key={i}>{item.name}</Text>)}
+    {props.children}
   </View>;
 
 export default ListWithData;
+// fonts {}
 "
 `;
 
@@ -840,6 +983,7 @@ import { Text } from 'react-native';
 const NameIsType = props => <Text>iam</Text>;
 
 export default NameIsType;
+// fonts {}
 "
 `;
 
@@ -868,9 +1012,11 @@ const NestedRoutes = props =>
       path={\`\${props.match.url}/:topic\`}
       render={routeProps => <Topic {...routeProps} />}
     />
+    {props.children}
   </View>;
 
 export default withRouter(NestedRoutes);
+// fonts {}
 "
 `;
 
@@ -879,9 +1025,11 @@ exports[`react-native parses react-native Print 1`] = `
 import React from 'react';
 import { Text, View } from 'react-native';
 
-const Print = props => <View><Text>not in print</Text><Text>hey</Text></View>;
+const Print = props =>
+  <View><Text>not in print</Text><Text>hey</Text>{props.children}</View>;
 
 export default Print;
+// fonts {}
 "
 `;
 
@@ -895,17 +1043,18 @@ const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
 
 const Teleport = props =>
   <Link activeOpacity={0.7} to=\\"..\\" underlayColor=\\"transparent\\">
-    <View style={styles.hp2cr4d}><Text>go back</Text></View>
+    <View style={styles.hp2cr4d}><Text>go back</Text>{props.children}</View>
   </Link>;
 
 export default Teleport;
+// fonts {}
 "
 `;
 
 exports[`react-native parses react-native Toggle 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
-import { StyleSheet, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
@@ -924,15 +1073,16 @@ class RemapToggle extends React.Component {
 }
 
 const Toggle = props =>
-  <TouchableHighlight
+  <TouchableWithoutFeedback
     activeOpacity={0.7}
     onPress={props.toggleIsOn}
     underlayColor=\\"transparent\\"
   >
-    <undefined style={styles.h18pdll5} />
-  </TouchableHighlight>;
+    <View style={styles.h18pdll5}><Text>hey</Text>{props.children}</View>
+  </TouchableWithoutFeedback>;
 
 export default RemapToggle;
+// fonts {}
 "
 `;
 
@@ -964,6 +1114,7 @@ const UseCaptureEmail = props =>
   </KeyboardAvoidingView>;
 
 export default UseCaptureEmail;
+// fonts {}
 "
 `;
 
@@ -975,6 +1126,7 @@ import CaptureFile from './CaptureFile.view.js';
 const UseCaptureFile = props => <CaptureFile />;
 
 export default UseCaptureFile;
+// fonts {}
 "
 `;
 
@@ -989,6 +1141,7 @@ const UseCaptureNumber = props =>
   </KeyboardAvoidingView>;
 
 export default UseCaptureNumber;
+// fonts {}
 "
 `;
 
@@ -1003,6 +1156,7 @@ const UseCapturePhone = props =>
   </KeyboardAvoidingView>;
 
 export default UseCapturePhone;
+// fonts {}
 "
 `;
 
@@ -1017,6 +1171,7 @@ const UseCaptureSecure = props =>
   </KeyboardAvoidingView>;
 
 export default UseCaptureSecure;
+// fonts {}
 "
 `;
 
@@ -1031,6 +1186,7 @@ const UseCaptureText = props =>
   </KeyboardAvoidingView>;
 
 export default UseCaptureText;
+// fonts {}
 "
 `;
 
@@ -1048,9 +1204,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const UseHorizontal = props => <View style={styles.h13qdyyc} />;
+const UseHorizontal = props =>
+  <View style={styles.h13qdyyc}>{props.children}</View>;
 
 export default UseHorizontal;
+// fonts {}
 "
 `;
 
@@ -1062,6 +1220,7 @@ import { Image } from 'react-native';
 const UseImage = props => <Image source=\\"https://viewsdx.com/rocks.jpg\\" />;
 
 export default UseImage;
+// fonts {}
 "
 `;
 
@@ -1073,9 +1232,12 @@ import MyIcon from './MyIcon.view.js';
 import { View } from 'react-native';
 
 const UseOfProxy = props =>
-  <View><Button color=\\"red\\" icon={MyIcon} text=\\"I'm a button!\\" /></View>;
+  <View>
+    <Button color=\\"red\\" icon={MyIcon} text=\\"I'm a button!\\" />{props.children}
+  </View>;
 
 export default UseOfProxy;
+// fonts {}
 "
 `;
 
@@ -1087,9 +1249,11 @@ import { Text, View } from 'react-native';
 const UseProxy = props =>
   <View>
     <props.icon from={props.icon} fill=\\"red\\" /><Text>{props.text}</Text>
+    {props.children}
   </View>;
 
 export default UseProxy;
+// fonts {}
 "
 `;
 
@@ -1114,10 +1278,12 @@ const UseRouter = props =>
       />
       <Route path=\\"/about\\" render={routeProps => <About {...routeProps} />} />
       <Route path=\\"/topics\\" render={routeProps => <Topics {...routeProps} />} />
+      {props.children}
     </View>
   </Router>;
 
 export default UseRouter;
+// fonts {}
 "
 `;
 
@@ -1129,10 +1295,11 @@ import Svg, { Circle, G, Path, Text as SvgText } from 'react-native-svg';
 const UseSvg = props =>
   <Svg viewBox=\\"0 0 20 20\\">
     <Path d=\\"0 20\\" /><Circle cx={10} cy={5} r={5} />
-    <G><Path d={1} /><Path d={2} /></G><SvgText text=\\"hey\\" />
+    <G><Path d={1} /><Path d={2} /></G><SvgText text=\\"hey\\" />{props.children}
   </Svg>;
 
 export default UseSvg;
+// fonts {}
 "
 `;
 
@@ -1148,6 +1315,7 @@ const styles = StyleSheet.create({
 const UseText = props => <Text style={styles.h11t0jc}>Hi, I'm some text</Text>;
 
 export default UseText;
+// fonts {\\"Montserrat\\":[\\"300\\"]}
 "
 `;
 
@@ -1160,9 +1328,11 @@ const styles = StyleSheet.create({
   h1c5r919: { flexDirection: 'column', backgroundColor: 'red' },
 });
 
-const UseVertical = props => <View style={styles.h1c5r919} />;
+const UseVertical = props =>
+  <View style={styles.h1c5r919}>{props.children}</View>;
 
 export default UseVertical;
+// fonts {}
 "
 `;
 
@@ -1179,11 +1349,14 @@ const ViewAndListWithData = props =>
   <View style={styles.h18pdll5}>
     <Text>{props.name}</Text>
     <View style={styles.h18pdll5}>
-      {addressesData.map((item, i) => <Text key={i}>{item.city}</Text>)}
+      {Array.isArray(addressesData) &&
+        addressesData.map((item, i) => <Text key={i}>{item.city}</Text>)}
     </View>
+    {props.children}
   </View>;
 ViewAndListWithData.defaultProps = userData;
 export default ViewAndListWithData;
+// fonts {}
 "
 `;
 
@@ -1196,9 +1369,12 @@ import { StyleSheet, Text, View } from 'react-native';
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
 const ViewWithData = props =>
-  <View style={styles.h18pdll5}><Text>{props.name}</Text></View>;
+  <View style={styles.h18pdll5}>
+    <Text>{props.name}</Text>{props.children}
+  </View>;
 ViewWithData.defaultProps = userData;
 export default ViewWithData;
+// fonts {}
 "
 `;
 
@@ -1208,9 +1384,12 @@ import React from 'react';
 import { Text, View } from 'react-native';
 
 const When = props =>
-  <View>{props.showMe ? <Text>I may be hidden</Text> : null}</View>;
+  <View>
+    {props.showMe ? <Text>I may be hidden</Text> : null}{props.children}
+  </View>;
 
 export default When;
+// fonts {}
 "
 `;
 
@@ -1225,12 +1404,15 @@ const WhenList = props =>
   <View>
     {props.showMe
       ? <View style={styles.h18pdll5}>
-          {props.list.map((item, i) => <Text key={i}>{item.thing}</Text>)}
+          {Array.isArray(props.list) &&
+            props.list.map((item, i) => <Text key={i}>{item.thing}</Text>)}
         </View>
       : null}
+    {props.children}
   </View>;
 
 export default WhenList;
+// fonts {}
 "
 `;
 
@@ -1243,6 +1425,7 @@ const WhenTopLevel = props =>
   props.showMe ? <Text>I may be hidden</Text> : null;
 
 export default WhenTopLevel;
+// fonts {}
 "
 `;
 
@@ -1250,34 +1433,99 @@ exports[`react-native parses react-native WithTest 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 import makeTests from './WithTest.view.tests.js';
-import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
+
+const g = typeof window === 'undefined' ? global : window;
 
 class TestsWithTest extends React.Component {
   constructor(props) {
     super(props);
 
-    this.tests = makeTests(this.display);
-    this.state = this.tests[this.tests._main];
+    const { _main, ...rest } = makeTests(this.display);
+    this.state = {
+      ...rest[_main],
+      _on: true,
+    };
+
+    const tests = {
+      active: _main,
+      on: this.on,
+      off: this.off,
+    };
+
+    Object.keys(rest).forEach(test => {
+      tests[test] = () => this.display(rest[test], test);
+    });
+
+    if (typeof g.tests === 'undefined') {
+      const validTests = k => !(k === 'off' || k === 'on');
+      g.tests = {
+        off: () =>
+          Object.keys(g.tests)
+            .filter(validTests)
+            .forEach(t => g.tests[t].off()),
+        on: () =>
+          Object.keys(g.tests).filter(validTests).forEach(t => g.tests[t].on()),
+      };
+    }
+
+    if (typeof g.tests.WithTest === 'undefined') {
+      g.tests.WithTest = tests;
+    } else if (Array.isArray(g.tests.WithTest)) {
+      g.tests.WithTest.push(tests);
+    } else {
+      g.tests.WithTest = [g.tests.WithTest, tests];
+      g.tests.WithTest.off = () => g.tests.WithTest.forEach(t => t.off());
+      g.tests.WithTest.on = () => g.tests.WithTest.forEach(t => t.on());
+    }
+
+    this.test = tests;
+
+    console.info('WithTest tests 👉', g.tests);
   }
 
-  display = next => this.setState(next);
+  componentWillUnmount() {
+    if (Array.isArray(g.tests.WithTest)) {
+      g.tests.WithTest = g.tests.WithTest.filter(t => t === this.tests);
+      if (g.tests.WithTest.length === 0) {
+        delete g.tests.WithTest;
+      }
+    } else {
+      delete g.tests.WithTest;
+    }
+  }
+
+  display = (next, name) => {
+    this.setState({ ...next, _on: true }, () => {
+      g.tests.WithTest.active = name;
+    });
+  };
+
+  off = () => this.setState({ _on: false });
+  on = () => this.setState({ _on: true });
 
   render() {
-    return <WithTest {...this.props} {...this.state} />;
+    const { _on, ...state } = this.state;
+    return _on
+      ? <WithTest {...this.props} {...state} />
+      : <WithTest {...this.props} />;
   }
 }
 
 const WithTest = props =>
-  <TouchableHighlight
+  <TouchableWithoutFeedback
     activeOpacity={0.7}
     onPress={props.change}
     underlayColor=\\"transparent\\"
   >
-    <View style={styles.h18pdll5}><Text>{props.text}</Text></View>
-  </TouchableHighlight>;
+    <View style={styles.h18pdll5}>
+      <Text>{props.text}</Text>{props.children}
+    </View>
+  </TouchableWithoutFeedback>;
 
 export default TestsWithTest;
+// fonts {}
 "
 `;
