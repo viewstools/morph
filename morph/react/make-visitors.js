@@ -43,9 +43,16 @@ export default ({
     },
     leave(node, parent, state) {
       if (
+        !parent ||
         node.explicitChildren ||
         (node.blocks && node.blocks.list.length > 0)
       ) {
+        if (!parent) {
+          if (!node.blocks || (node.blocks && node.blocks.list.length === 0)) {
+            state.render.push('>')
+          }
+          state.render.push(`{props.children}`)
+        }
         state.render.push(`</${node.name.finalValue}>`)
       } else {
         state.render.push('/>')
