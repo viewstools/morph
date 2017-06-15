@@ -1,6 +1,7 @@
 import getBody from './get-body.js'
 import getDefaultProps from './get-default-props.js'
 import getDependencies from './get-dependencies.js'
+import getFonts from './get-fonts.js'
 import getRemap from './get-remap.js'
 import getTests from './get-tests.js'
 
@@ -36,5 +37,6 @@ ${remap ? remap.component : ''}
 
 ${getBody({ state, name })}
 ${getDefaultProps({ state, name })}
-export default ${xport}`
+export default ${xport}
+${getFonts(state.fonts)}`
 }
