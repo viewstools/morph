@@ -1,0 +1,17 @@
+Tab is Vertical
+borderBottom 2px solid transparent
+borderBottomColorHover white
+borderBottomColorActive white
+cursor pointer
+cursorActive default
+isActive props.isActive
+onClick props.onClick
+padding 10px 20px
+transition border 0.25s linear
+textTransform uppercase
+Text
+color white
+fontFamily Montserrat, sans-serif
+fontSize 14
+fontWeight 600
+text props.text

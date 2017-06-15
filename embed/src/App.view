@@ -1,0 +1,8 @@
+App is Horizontal
+backgroundColor #282828
+flex 1
+overflow scroll
+height 100%
+width 100%
+Preview
+Editor

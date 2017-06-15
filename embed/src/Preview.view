@@ -1,0 +1,9 @@
+Preview is Vertical
+backgroundColor #fafafa
+borderRadius 4
+marginTop 20
+marginLeft 20
+marginBottom 20
+minWidth 180
+maxWidth 360
+overflow scroll

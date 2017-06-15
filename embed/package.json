@@ -1,0 +1,28 @@
+{
+  "name": "embed",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "debounce": "^1.0.2",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "synesthesia": "^1.0.1",
+    "views-morph": "^0.1.27",
+    "webfontloader": "^1.6.28"
+  },
+  "devDependencies": {
+    "concurrently": "^3.4.0",
+    "react-scripts": "1.0.7"
+  },
+  "scripts": {
+    "start": "concurrently  'npm run dev' 'npm run views'",
+    "lstart": "concurrently  'npm run dev' 'npm run lviews'",
+    "dev": "react-scripts start",
+    "prebuild": "~/views/morph/cli.js src --as react-dom --no-tests",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "views": "views-morph src --as react-dom --watch",
+    "lviews": "~/views/morph/cli.js src --as react-dom --watch"
+  }
+}
