@@ -49,7 +49,7 @@ const getGroupBlockName = (node, state) => {
       }
 
       node.action = `props.${functionName}`
-      return
+      return name
     } else {
       node.action = propNode.value.value
     }
