@@ -290,6 +290,10 @@ export default text => {
           tags[stemmedTag] = true
         }
 
+        if (tags.style && tags.code) {
+          block.maybeAnimated = true
+        }
+
         let last = properties
         if (nested[nested.length - 1]) {
           const lastValue = nested[nested.length - 1].value

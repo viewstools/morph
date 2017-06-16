@@ -4,7 +4,6 @@ exports[`react-dom parses react-dom Action 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 import css from 'glam';
-
 const styles = {
   h1lmw638: css('css-1s0kfvh', [], () => [
     \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
@@ -13,7 +12,7 @@ const styles = {
 
 const Action = props =>
   props.check
-    ? <button onClick={props.clickMe} className={\`\${styles.h1lmw638}\`}>
+    ? <button onClick={props.clickMe} className={styles.h1lmw638}>
         <div>click me</div>{props.children}
       </button>
     : null;
@@ -23,11 +22,37 @@ export default Action;
 "
 `;
 
+exports[`react-dom parses react-dom AnimatedButton 1`] = `
+"/* eslint-disable jsx-a11y/accessible-emoji */
+import React from 'react';
+import Animated from 'animated/lib/targets/react-dom.js';
+import css from 'glam';
+const styles = {
+  h1lmw638: css('css-1s0kfvh', [], () => [
+    \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
+  ]),
+};
+Animated.button = Animated.createAnimatedComponent('button');
+
+const AnimatedButton = props =>
+  <Animated.button
+    onClick={props.onClick}
+    className={styles.h1lmw638}
+    style={{ opacity: props.opacity }}
+  >
+    <div>hey</div>{props.children}
+  </Animated.button>;
+
+export default AnimatedButton;
+// fonts {}
+"
+`;
+
 exports[`react-dom parses react-dom BackgroundImage 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
+import Animated from 'animated/lib/targets/react-dom.js';
 import css from 'glam';
-
 const styles = {
   hzr7mx4: css('css-1bxi9t2', [], () => [
     \`.css-1bxi9t2 { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column;
@@ -40,9 +65,9 @@ background-size: cover; }\`,
 };
 
 const BackgroundImage = props =>
-  <div className={\`\${styles.hzr7mx4}\`}>
-    <div
-      className={\`\${styles.hg3iw2q}\`}
+  <div className={styles.hzr7mx4}>
+    <Animated.div
+      className={styles.hg3iw2q}
       style={{
         backgroundImage: \`url(\${props.backgroundImage})\`,
         backgroundSize: cover,
@@ -59,8 +84,8 @@ export default BackgroundImage;
 exports[`react-dom parses react-dom BoxShadow 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
+import Animated from 'animated/lib/targets/react-dom.js';
 import css from 'glam';
-
 const styles = {
   h1lmw638: css('css-1s0kfvh', [], () => [
     \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
@@ -68,12 +93,12 @@ const styles = {
 };
 
 const BoxShadow = props =>
-  <div
-    className={\`\${styles.h1lmw638}\`}
+  <Animated.div
+    className={styles.h1lmw638}
     style={{ boxShadow: \`10px 5px 2px \${props.color}\` }}
   >
     {props.children}
-  </div>;
+  </Animated.div>;
 
 export default BoxShadow;
 // fonts {}
@@ -84,7 +109,6 @@ exports[`react-dom parses react-dom GoTo 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 import css from 'glam';
-
 const styles = {
   h1lmw638: css('css-1s0kfvh', [], () => [
     \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
@@ -92,11 +116,7 @@ const styles = {
 };
 
 const GoTo = props =>
-  <a
-    target=\\"_blank\\"
-    href=\\"https://viewsdx.com\\"
-    className={\`\${styles.h1lmw638}\`}
-  >
+  <a target=\\"_blank\\" href=\\"https://viewsdx.com\\" className={styles.h1lmw638}>
     <div>Go to ViewsDX website!</div>{props.children}
   </a>;
 
@@ -109,7 +129,6 @@ exports[`react-dom parses react-dom Hover 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 import css from 'glam';
-
 const styles = {
   hpg1h4y: css('css-i58qmr', [], () => [
     \`.css-i58qmr { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column;
@@ -123,8 +142,8 @@ background-color: black; }\`,
 };
 
 const Hover = props =>
-  <button onClick={props.onClick} className={\`\${styles.hpg1h4y}\`}>
-    <div className={\`\${styles.h1669j73}\`}>Hey!</div>{props.children}
+  <button onClick={props.onClick} className={styles.hpg1h4y}>
+    <div className={styles.h1669j73}>Hey!</div>{props.children}
   </button>;
 
 export default Hover;
@@ -136,7 +155,6 @@ exports[`react-dom parses react-dom HoverProxy 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 import css from 'glam';
-
 const styles = {
   hpg1h4y: css('css-i58qmr', [], () => [
     \`.css-i58qmr { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column;
@@ -150,9 +168,9 @@ background-color: black; }\`,
 };
 
 const HoverProxy = props =>
-  <button onClick={props.onClick} className={\`\${styles.hpg1h4y}\`}>
+  <button onClick={props.onClick} className={styles.hpg1h4y}>
     <props.icon from={props.icon} fill=\\"white\\" fillHover=\\"black\\" />
-    <div className={\`\${styles.h1669j73}\`}>Hey!</div>{props.children}
+    <div className={styles.h1669j73}>Hey!</div>{props.children}
   </button>;
 
 export default HoverProxy;
@@ -175,7 +193,6 @@ exports[`react-dom parses react-dom ListOfSomething 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 import css from 'glam';
-
 const styles = {
   h1lmw638: css('css-1s0kfvh', [], () => [
     \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
@@ -183,7 +200,7 @@ const styles = {
 };
 
 const ListOfSomething = props =>
-  <div className={\`\${styles.h1lmw638}\`}>
+  <div className={styles.h1lmw638}>
     {Array.isArray(props.list) &&
       props.list.map((item, i) => <div key={i}>{item.name}</div>)}
     {props.children}
@@ -199,7 +216,6 @@ exports[`react-dom parses react-dom ListWithData 1`] = `
 import React from 'react';
 import css from 'glam';
 import usersData from './users.data.js';
-
 const styles = {
   h1lmw638: css('css-1s0kfvh', [], () => [
     \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
@@ -207,7 +223,7 @@ const styles = {
 };
 
 const ListWithData = props =>
-  <div className={\`\${styles.h1lmw638}\`}>
+  <div className={styles.h1lmw638}>
     {Array.isArray(usersData) &&
       usersData.map((item, i) => <div key={i}>{item.name}</div>)}
     {props.children}
@@ -237,7 +253,6 @@ import { Link } from 'react-router-dom';
 import { Route } from 'react-router-dom';
 import Topic from './Topic.view.js';
 import css from 'glam';
-
 const styles = {
   h1lmw638: css('css-1s0kfvh', [], () => [
     \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
@@ -249,7 +264,7 @@ const NestedRoutes = props =>
     <div>topics</div>
     <Link
       to={\`\${props.match.url === '/' ? '' : props.match.url}/rendering\`}
-      className={\`\${styles.h1lmw638}\`}
+      className={styles.h1lmw638}
     >
       <div>Rendering with React</div>
     </Link>
@@ -269,7 +284,6 @@ exports[`react-dom parses react-dom Print 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 import css from 'glam';
-
 const styles = {
   hrak8un: css('css-kbgujp', [], () => [
     \`@media print {
@@ -282,7 +296,7 @@ const styles = {
 
 const Print = props =>
   <div>
-    <div className={\`\${styles.hrak8un}\`}>not in print</div><div>hey</div>
+    <div className={styles.hrak8un}>not in print</div><div>hey</div>
     {props.children}
   </div>;
 
@@ -296,7 +310,6 @@ exports[`react-dom parses react-dom Teleport 1`] = `
 import React from 'react';
 import { Link } from 'react-router-dom';
 import css from 'glam';
-
 const styles = {
   hg3iw2q: css('css-sw3yj', [], () => [
     \`.css-sw3yj { flex-direction: row; -webkit-box-direction: normal; -webkit-box-orient: horizontal; -ms-flex-direction: row; -webkit-flex-direction: row; }\`,
@@ -304,7 +317,7 @@ const styles = {
 };
 
 const Teleport = props =>
-  <Link to=\\"..\\" className={\`\${styles.hg3iw2q}\`}>
+  <Link to=\\"..\\" className={styles.hg3iw2q}>
     <div>go back</div>{props.children}
   </Link>;
 
@@ -317,7 +330,6 @@ exports[`react-dom parses react-dom Toggle 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 import css from 'glam';
-
 const styles = {
   h1lmw638: css('css-1s0kfvh', [], () => [
     \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
@@ -339,8 +351,8 @@ class RemapToggle extends React.Component {
 }
 
 const Toggle = props =>
-  <button onClick={props.toggleIsOn} className={\`\${styles.h1lmw638}\`}>
-    {props.children}
+  <button onClick={props.toggleIsOn} className={styles.h1lmw638}>
+    <div>hey</div>{props.children}
   </button>;
 
 export default RemapToggle;
@@ -352,7 +364,6 @@ exports[`react-dom parses react-dom UseCaptureEmail 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 import css from 'glam';
-
 const styles = {
   hevllt7: css('css-17byui2', [], () => [
     \`.css-17byui2 { border: 1px solid black;
@@ -362,7 +373,7 @@ color: red; }\`,
 };
 
 const UseCaptureEmail = props =>
-  <input onSubmit={props.onSubmit} className={\`\${styles.hevllt7}\`} />;
+  <input onSubmit={props.onSubmit} className={styles.hevllt7} />;
 
 export default UseCaptureEmail;
 // fonts {}
@@ -428,7 +439,6 @@ exports[`react-dom parses react-dom UseHorizontal 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 import css from 'glam';
-
 const styles = {
   h1nnugsi: css('css-vkz5lf', [], () => [
     \`.css-vkz5lf { flex-direction: row; -webkit-box-direction: normal; -webkit-box-orient: horizontal; -ms-flex-direction: row; -webkit-flex-direction: row;
@@ -437,7 +447,7 @@ border: 1px solid red; }\`,
 };
 
 const UseHorizontal = props =>
-  <div className={\`\${styles.h1nnugsi}\`}>{props.children}</div>;
+  <div className={styles.h1nnugsi}>{props.children}</div>;
 
 export default UseHorizontal;
 // fonts {}
@@ -534,7 +544,6 @@ exports[`react-dom parses react-dom UseText 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 import css from 'glam';
-
 const styles = {
   h1w7s7t6: css('css-1l09f9n', [], () => [
     \`.css-1l09f9n { color: blue;
@@ -545,7 +554,7 @@ font-weight: 300; }\`,
 };
 
 const UseText = props =>
-  <div className={\`\${styles.h1w7s7t6}\`}>Hi, I'm some text</div>;
+  <div className={styles.h1w7s7t6}>Hi, I'm some text</div>;
 
 export default UseText;
 // fonts {\\"Montserrat\\":[\\"300\\"]}
@@ -556,7 +565,6 @@ exports[`react-dom parses react-dom UseVertical 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 import css from 'glam';
-
 const styles = {
   h1vjf5pn: css('css-nxb3y5', [], () => [
     \`.css-nxb3y5 { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column;
@@ -565,7 +573,7 @@ background-color: red; }\`,
 };
 
 const UseVertical = props =>
-  <div className={\`\${styles.h1vjf5pn}\`}>{props.children}</div>;
+  <div className={styles.h1vjf5pn}>{props.children}</div>;
 
 export default UseVertical;
 // fonts {}
@@ -578,7 +586,6 @@ import React from 'react';
 import addressesData from './addresses.data.js';
 import css from 'glam';
 import userData from './user.data.js';
-
 const styles = {
   h1lmw638: css('css-1s0kfvh', [], () => [
     \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
@@ -586,9 +593,9 @@ const styles = {
 };
 
 const ViewAndListWithData = props =>
-  <div className={\`\${styles.h1lmw638}\`}>
+  <div className={styles.h1lmw638}>
     <div>{props.name}</div>
-    <div className={\`\${styles.h1lmw638}\`}>
+    <div className={styles.h1lmw638}>
       {Array.isArray(addressesData) &&
         addressesData.map((item, i) => <div key={i}>{item.city}</div>)}
     </div>
@@ -605,7 +612,6 @@ exports[`react-dom parses react-dom ViewWithData 1`] = `
 import React from 'react';
 import css from 'glam';
 import userData from './user.data.js';
-
 const styles = {
   h1lmw638: css('css-1s0kfvh', [], () => [
     \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
@@ -613,7 +619,7 @@ const styles = {
 };
 
 const ViewWithData = props =>
-  <div className={\`\${styles.h1lmw638}\`}>
+  <div className={styles.h1lmw638}>
     <div>{props.name}</div>{props.children}
   </div>;
 ViewWithData.defaultProps = userData;
@@ -638,7 +644,6 @@ exports[`react-dom parses react-dom WhenList 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 import css from 'glam';
-
 const styles = {
   h1lmw638: css('css-1s0kfvh', [], () => [
     \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
@@ -648,7 +653,7 @@ const styles = {
 const WhenList = props =>
   <div>
     {props.showMe
-      ? <div className={\`\${styles.h1lmw638}\`}>
+      ? <div className={styles.h1lmw638}>
           {Array.isArray(props.list) &&
             props.list.map((item, i) => <div key={i}>{item.thing}</div>)}
         </div>
@@ -678,7 +683,6 @@ exports[`react-dom parses react-dom WithTest 1`] = `
 import React from 'react';
 import makeTests from './WithTest.view.tests.js';
 import css from 'glam';
-
 const styles = {
   h1lmw638: css('css-1s0kfvh', [], () => [
     \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
@@ -763,7 +767,7 @@ class TestsWithTest extends React.Component {
 }
 
 const WithTest = props =>
-  <button onClick={props.change} className={\`\${styles.h1lmw638}\`}>
+  <button onClick={props.change} className={styles.h1lmw638}>
     <div>{props.text}</div>{props.children}
   </button>;
 
@@ -776,7 +780,6 @@ exports[`react-native parses react-native Action 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
-
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
 const Action = props =>
@@ -797,11 +800,32 @@ export default Action;
 "
 `;
 
+exports[`react-native parses react-native AnimatedButton 1`] = `
+"/* eslint-disable jsx-a11y/accessible-emoji */
+import React from 'react';
+import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
+const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
+
+const AnimatedButton = props =>
+  <TouchableWithoutFeedback
+    activeOpacity={0.7}
+    onPress={props.onClick}
+    underlayColor=\\"transparent\\"
+  >
+    <View style={[styles.h18pdll5, { opacity: props.opacity }]}>
+      <Text>hey</Text>{props.children}
+    </View>
+  </TouchableWithoutFeedback>;
+
+export default AnimatedButton;
+// fonts {}
+"
+`;
+
 exports[`react-native parses react-native BackgroundImage 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 import { Image, StyleSheet } from 'react-native';
-
 const styles = StyleSheet.create({
   h18pdll5: { flexDirection: 'column' },
   hp2cr4d: { flexDirection: 'row' },
@@ -830,7 +854,6 @@ exports[`react-native parses react-native BoxShadow 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
 const BoxShadow = props =>
@@ -858,7 +881,6 @@ exports[`react-native parses react-native GoTo 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
 const GoTo = props =>
@@ -875,7 +897,6 @@ exports[`react-native parses react-native Hover 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
-
 const styles = StyleSheet.create({
   h1jrzrhl: { flexDirection: 'column', backgroundColor: 'black' },
   hyfo4ef: { color: 'white' },
@@ -901,7 +922,6 @@ exports[`react-native parses react-native HoverProxy 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
-
 const styles = StyleSheet.create({
   h1jrzrhl: { flexDirection: 'column', backgroundColor: 'black' },
   hyfo4ef: { color: 'white' },
@@ -940,7 +960,6 @@ exports[`react-native parses react-native ListOfSomething 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
 const ListOfSomething = props =>
@@ -960,7 +979,6 @@ exports[`react-native parses react-native ListWithData 1`] = `
 import React from 'react';
 import usersData from './users.data.js';
 import { StyleSheet, Text, View } from 'react-native';
-
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
 const ListWithData = props =>
@@ -995,7 +1013,6 @@ import { Link } from 'react-router-native';
 import { Route } from 'react-router-native';
 import Topic from './Topic.view.js';
 import { StyleSheet, Text, View } from 'react-native';
-
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
 const NestedRoutes = props =>
@@ -1038,7 +1055,6 @@ exports[`react-native parses react-native Teleport 1`] = `
 import React from 'react';
 import { Link } from 'react-router-native';
 import { StyleSheet, Text, View } from 'react-native';
-
 const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
 
 const Teleport = props =>
@@ -1055,7 +1071,6 @@ exports[`react-native parses react-native Toggle 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
-
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
 class RemapToggle extends React.Component {
@@ -1090,7 +1105,6 @@ exports[`react-native parses react-native UseCaptureEmail 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 import { KeyboardAvoidingView, StyleSheet, TextInput } from 'react-native';
-
 const styles = StyleSheet.create({
   hm4pcs: {
     borderColor: 'black',
@@ -1194,7 +1208,6 @@ exports[`react-native parses react-native UseHorizontal 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-
 const styles = StyleSheet.create({
   h13qdyyc: {
     flexDirection: 'row',
@@ -1307,7 +1320,6 @@ exports[`react-native parses react-native UseText 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 import { StyleSheet, Text } from 'react-native';
-
 const styles = StyleSheet.create({
   h11t0jc: { color: 'blue', fontFamily: 'Montserrat-300', fontSize: 16 },
 });
@@ -1323,7 +1335,6 @@ exports[`react-native parses react-native UseVertical 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-
 const styles = StyleSheet.create({
   h1c5r919: { flexDirection: 'column', backgroundColor: 'red' },
 });
@@ -1342,7 +1353,6 @@ import React from 'react';
 import addressesData from './addresses.data.js';
 import userData from './user.data.js';
 import { StyleSheet, Text, View } from 'react-native';
-
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
 const ViewAndListWithData = props =>
@@ -1365,7 +1375,6 @@ exports[`react-native parses react-native ViewWithData 1`] = `
 import React from 'react';
 import userData from './user.data.js';
 import { StyleSheet, Text, View } from 'react-native';
-
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
 const ViewWithData = props =>
@@ -1397,7 +1406,6 @@ exports[`react-native parses react-native WhenList 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
 const WhenList = props =>
@@ -1434,7 +1442,6 @@ exports[`react-native parses react-native WithTest 1`] = `
 import React from 'react';
 import makeTests from './WithTest.view.tests.js';
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
-
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
 const g = typeof window === 'undefined' ? global : window;
