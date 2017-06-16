@@ -1,14 +1,16 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react'
-import css from 'glam'
-
+import Animated from 'animated/lib/targets/react-dom.js'
 import './Preview.view.css'
-const styles = { h15teuz8: css('css-bjavay') }
+const styles = { h1d6giad: 'css-akv4zc' }
 
 const Preview = props =>
-  <div className={`${styles.h15teuz8}`} style={{ width: `${props.width}` }}>
+  <Animated.div
+    className={styles.h1d6giad}
+    style={{ marginRight: props.marginRight }}
+  >
     {props.children}
-  </div>
+  </Animated.div>
 
 export default Preview
 // fonts {}

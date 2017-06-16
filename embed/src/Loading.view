@@ -2,27 +2,30 @@ Loading is Horizontal
 flex 1
 margin 20
 alignSelf center
-# Dot is Vertical
-# backgroundColor #f7941e
-# borderRadius 15
-# height 15
-# opacity props.opacity1
-# width 15
+Dot is Vertical
+backgroundColor #f7941e
+borderRadius 10
+height 10
+opacity props.opacity1
+transform props.transform1
+width 10
 
 
-# Dot is Vertical
-# backgroundColor props.color
-# borderRadius 15
-# height 15
-# marginLeft 3
-# opacity props.opacity2
-# width 15
+Dot is Vertical
+backgroundColor #f7941e
+borderRadius 10
+height 10
+marginLeft 3
+opacity props.opacity2
+transform props.transform2
+width 10
 
 
-# Dot is Vertical
-# backgroundColor props.color
-# borderRadius 15
-# height 15
-# marginLeft 3
-# opacity props.opacity3
-# width 15
+Dot is Vertical
+backgroundColor #f7941e
+borderRadius 10
+height 10
+marginLeft 3
+opacity props.opacity3
+transform props.transform3
+width 10

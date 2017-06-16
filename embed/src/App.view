@@ -1,11 +1,13 @@
 App is Horizontal
 backgroundColor #282828
 flex 1
-overflow hidden
-height 100%
-width 100%
-Preview
-width 300
-Editor
+flexDirection props.width < 720 ? 'column' : 'row'
 height props.height
-width props.width - 300
+overflow hidden
+transform props.transform
+width props.width
+Preview
+marginRight props.width < 720 ? 20 : 0
+Editor
+height props.width < 720 ? props.height / 2 : props.height
+width props.width < 720 ? props.width : props.width - 300

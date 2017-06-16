@@ -2,18 +2,16 @@
 import React from 'react'
 import Code from './Code.js'
 import Tab from './Tab.view.js'
-import css from 'glam'
-
 import './Editor.view.css'
 const styles = {
-  hnx90gz: css('css-1j0qhzu'),
-  hozbj4v: css('css-copx'),
-  hm7nco4: css('css-1toe4k0'),
+  hnx90gz: 'css-1j0qhzu',
+  hozbj4v: 'css-copx',
+  hm7nco4: 'css-1toe4k0',
 }
 
 const Editor = props =>
-  <div className={`${styles.hnx90gz}`}>
-    <div className={`${styles.hozbj4v}`}>
+  <div className={styles.hnx90gz}>
+    <div className={styles.hozbj4v}>
       <Tab isActive={props.showingView} onClick={props.showView} text="View" />
       <Tab
         isActive={props.showingTests}
@@ -31,7 +29,7 @@ const Editor = props =>
         text="JS"
       />
     </div>
-    <div className={`${styles.hm7nco4}`}>
+    <div className={styles.hm7nco4}>
       <Code
         file={props.tab}
         height={props.height - 70}

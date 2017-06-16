@@ -1,3 +1,4 @@
+// import { timing, Value } from 'animated/lib/targets/react-dom.js'
 import Dimensions from './Dimensions.js'
 import React from 'react'
 import View from './App.view.js'

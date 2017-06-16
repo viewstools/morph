@@ -5,10 +5,9 @@
   "dependencies": {
     "animated": "^0.2.0",
     "debounce": "^1.0.2",
+    "invariant": "^2.2.2",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "react-motion": "^0.5.0",
-    "react-motion-loop": "^2.0.0",
     "synesthesia": "^1.0.1",
     "views-morph": "^0.1.27",
     "webfontloader": "^1.6.28"
