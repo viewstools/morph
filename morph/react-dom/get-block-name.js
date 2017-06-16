@@ -67,6 +67,10 @@ const getGroupBlockName = node => {
     name = 'div'
   }
 
+  if (node.maybeAnimated && name !== 'Link') {
+    name = `Animated.${name}`
+  }
+
   return name
 }
 

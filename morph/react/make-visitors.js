@@ -37,7 +37,7 @@ export default ({
       if (name === null) return this.skip()
 
       node.name.finalValue = name
-      state.use(name)
+      state.use(/Animated/.test(name) ? 'Animated' : name)
 
       state.render.push(`<${name}`)
     },

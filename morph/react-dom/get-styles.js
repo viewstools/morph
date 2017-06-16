@@ -60,9 +60,16 @@ const toNestedCss = ({
   return ret
 }
 
-const transformGlam = (code, inline, filename) =>
-  transform(code, {
+const transformGlam = (code, inline, filename) => {
+  let out = transform(code, {
     babelrc: false,
     filename,
     plugins: [[glam, { inline }]],
   }).code
+
+  if (!inline) {
+    out = out.replace(/css\(/g, '').replace(/\)/g, '')
+  }
+
+  return out
+}

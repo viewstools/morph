@@ -1,3 +1,4 @@
+import getAnimated from './get-animated.js'
 import getBody from './get-body.js'
 import getDefaultProps from './get-default-props.js'
 import getDependencies from './get-dependencies.js'
@@ -29,8 +30,8 @@ export default ({ getImport, getStyles, name, state }) => {
   // with aria-label or aria-labelledby  jsx-a11y/accessible-emoji
   return `/* eslint-disable jsx-a11y/accessible-emoji */
 ${dependencies}
-
 ${getStyles(state, name)}
+${getAnimated(state)}
 
 ${tests ? tests.component : ''}
 ${remap ? remap.component : ''}

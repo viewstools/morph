@@ -9,14 +9,11 @@ export const leave = (node, parent, state) => {
     parent.styleId = id
     const isActive = getProp(parent, 'isActive')
 
-    let className = [
-      `styles.${id}`,
-      isActive && `${isActive.value.value} && 'active'`,
-    ].filter(Boolean)
+    let className = `styles.${id}`
 
-    if (className.length > 0) {
-      className = className.map(k => `\${${k}}`).join(' ')
-      className = `\`${className}\``
+    if (isActive) {
+      const active = `${isActive.value.value} && 'active'`
+      className = `\`\${${className}} \${${active}}\``
     }
 
     state.render.push(` className=${wrap(className)}`)

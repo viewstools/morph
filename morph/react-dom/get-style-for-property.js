@@ -18,7 +18,9 @@ export default (node, parent, code) => {
 
     default:
       return {
-        [key]: code && !/(.+)\?(.+):(.+)/.test(value) ? safe(value) : value,
+        [key]: code && !/(.+)\?(.+):(.+)/.test(value) && /\s/.test(value)
+          ? safe(value)
+          : value,
       }
   }
 }
