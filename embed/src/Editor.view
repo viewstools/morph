@@ -1,4 +1,5 @@
 Editor is Vertical
+marginTop 10
 marginRight 20
 Tabs is Horizontal
 marginLeft 45
@@ -28,3 +29,5 @@ Vertical
 marginTop 20
 Code
 file props.tab
+height props.height - 70
+width props.width - 20

@@ -11,7 +11,7 @@ const trigger = () => {}
 
 const convertKey = k => `${k[0].toUpperCase()}${k.substr(1).replace(/-/g, '+')}`
 
-export default class Code extends PureComponent {
+export default class CodeEditor extends PureComponent {
   componentDidMount() {
     const { props } = this
 
@@ -90,16 +90,18 @@ export default class Code extends PureComponent {
   }
 
   render() {
+    const { props } = this
+
     return (
       <div
         className="editor-view"
-        id={this.props.file}
-        style={{ height: 600, width: 600 }}
+        id={props.file}
+        style={{ height: props.height, width: props.width }}
       />
     )
   }
 }
-Code.defaultProps = {
+CodeEditor.defaultProps = {
   cursorStart: -1,
   enableBasicAutocompletion: true,
   fontSize: 14,
@@ -112,34 +114,34 @@ Code.defaultProps = {
   wrap: 80,
   wrapEnabled: true,
 }
-Code.propTypes = {
-  bypassShortcuts: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
-  cursorStart: PropTypes.number,
-  enableBasicAutocompletion: PropTypes.bool,
-  fontSize: PropTypes.number,
-  getCompletions: PropTypes.func,
-  highlightActiveLine: PropTypes.bool,
-  id: PropTypes.string,
-  mode: PropTypes.any,
-  onClick: PropTypes.func,
-  onChange: PropTypes.func,
-  onChangeSelection: PropTypes.func,
-  onLoad: PropTypes.func,
-  onTokenizerUpdate: PropTypes.func,
-  shortcuts: PropTypes.arrayOf(
-    PropTypes.shape({
-      keys: PropTypes.arrayOf(PropTypes.string),
-      onPress: PropTypes.func,
-    })
-  ),
-  showGutter: PropTypes.bool,
-  showPrintMargin: PropTypes.bool,
-  tabSize: PropTypes.number,
-  // theme: PropTypes.string,
-  value: PropTypes.string,
-  wrap: PropTypes.number,
-  wrapEnabled: PropTypes.bool,
-}
+// CodeEditor.propTypes = {
+//   bypassShortcuts: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
+//   cursorStart: PropTypes.number,
+//   enableBasicAutocompletion: PropTypes.bool,
+//   fontSize: PropTypes.number,
+//   getCompletions: PropTypes.func,
+//   highlightActiveLine: PropTypes.bool,
+//   id: PropTypes.string,
+//   mode: PropTypes.any,
+//   onClick: PropTypes.func,
+//   onChange: PropTypes.func,
+//   onChangeSelection: PropTypes.func,
+//   onLoad: PropTypes.func,
+//   onTokenizerUpdate: PropTypes.func,
+//   shortcuts: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       keys: PropTypes.arrayOf(PropTypes.string),
+//       onPress: PropTypes.func,
+//     })
+//   ),
+//   showGutter: PropTypes.bool,
+//   showPrintMargin: PropTypes.bool,
+//   tabSize: PropTypes.number,
+//   // theme: PropTypes.string,
+//   value: PropTypes.string,
+//   wrap: PropTypes.number,
+//   wrapEnabled: PropTypes.bool,
+// }
 
 //   getCommandsFor(tab) {
 //     let commands = [{

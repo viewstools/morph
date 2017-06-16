@@ -1,7 +1,7 @@
 import View from './Editor.view.js'
 import React from 'react'
 
-export default class Editor extends React.Component {
+export default class EditorLogic extends React.Component {
   state = {
     tab: 'view',
   }
@@ -12,10 +12,12 @@ export default class Editor extends React.Component {
   showViewJs = () => this.setState({ tab: 'viewjs' })
 
   render() {
+    const { props } = this
     const { tab } = this.state
 
     return (
       <View
+        {...props}
         showLogic={this.showLogic}
         showTests={this.showTests}
         showView={this.showView}

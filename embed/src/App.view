@@ -1,8 +1,11 @@
 App is Horizontal
 backgroundColor #282828
 flex 1
-overflow scroll
+overflow hidden
 height 100%
 width 100%
 Preview
+width 300
 Editor
+height props.height
+width props.width - 300

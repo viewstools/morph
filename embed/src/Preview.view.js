@@ -3,10 +3,12 @@ import React from 'react'
 import css from 'glam'
 
 import './Preview.view.css'
-const styles = { hd6qdgv: css('css-1o54ijk') }
+const styles = { h15teuz8: css('css-bjavay') }
 
 const Preview = props =>
-  <div className={`${styles.hd6qdgv}`}>{props.children}</div>
+  <div className={`${styles.h15teuz8}`} style={{ width: `${props.width}` }}>
+    {props.children}
+  </div>
 
 export default Preview
 // fonts {}

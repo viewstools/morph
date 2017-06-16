@@ -328,10 +328,12 @@ export default ({
 
     Property: {
       enter(node, parent, state) {
+        const key = node.key.value
         if (
-          node.key.value === 'at' ||
-          node.key.value === 'when' ||
-          isData(node)
+          key === 'at' ||
+          key === 'when' ||
+          isData(node) ||
+          (key === 'isActive' && parent.parent.isBasic)
         )
           return
         if (!isValidPropertyForBlock(node, parent)) return

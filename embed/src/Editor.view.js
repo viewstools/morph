@@ -6,20 +6,38 @@ import css from 'glam'
 
 import './Editor.view.css'
 const styles = {
-  hhug0vo: css('css-1ynz1qo'),
+  hnx90gz: css('css-1j0qhzu'),
   hozbj4v: css('css-copx'),
   hm7nco4: css('css-1toe4k0'),
 }
 
 const Editor = props =>
-  <div className={`${styles.hhug0vo}`}>
+  <div className={`${styles.hnx90gz}`}>
     <div className={`${styles.hozbj4v}`}>
-      <Tab onClick={props.showView} text="View" />
-      <Tab onClick={props.showTests} text="Tests" />
-      <Tab onClick={props.showLogic} text="Logic" />
-      <Tab onClick={props.showViewJs} text="JS" />
+      <Tab isActive={props.showingView} onClick={props.showView} text="View" />
+      <Tab
+        isActive={props.showingTests}
+        onClick={props.showTests}
+        text="Tests"
+      />
+      <Tab
+        isActive={props.showingLogic}
+        onClick={props.showLogic}
+        text="Logic"
+      />
+      <Tab
+        isActive={props.showingViewJs}
+        onClick={props.showViewJs}
+        text="JS"
+      />
     </div>
-    <div className={`${styles.hm7nco4}`}><Code file={props.tab} /></div>
+    <div className={`${styles.hm7nco4}`}>
+      <Code
+        file={props.tab}
+        height={props.height - 70}
+        width={props.width - 20}
+      />
+    </div>
     {props.children}
   </div>
 

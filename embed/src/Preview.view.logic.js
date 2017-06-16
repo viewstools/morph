@@ -1,10 +1,11 @@
 import { onView } from './view.js'
+import Loading from './Loading.view.logic.js'
 import React from 'react'
 import View from './Preview.view.js'
 
-export default class Preview extends React.Component {
+export default class PreviewLogic extends React.Component {
   state = {
-    view: () => {},
+    view: Loading,
   }
 
   componentDidMount() {

@@ -6,7 +6,8 @@ cursor pointer
 cursorActive default
 isActive props.isActive
 onClick props.onClick
-padding 10px 20px
+padding 10px 0px
+marginRight 10
 transition border 0.25s linear
 textTransform uppercase
 Text
