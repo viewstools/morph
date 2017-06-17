@@ -227,6 +227,7 @@ export default ({
           return
         }
 
+        // maybe pass block as proxy
         if (state.views[node.value.value]) {
           state.render.push(` ${node.key.value}=${wrap(node.value.value)}`)
           state.use(node.value.value)

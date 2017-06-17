@@ -1,4 +1,5 @@
 /* eslint-disable no-restricted-globals */
+// views-disable
 let call
 
 export const onView = fn => (call = fn)
@@ -30,7 +31,15 @@ function replaceHash(hash) {
 }
 
 let files = {
-  logic: '',
+  logic: `import View from './View.view.js'
+import React from 'react'
+
+export default class Logic extends React.Component {
+  render() {
+    return <View {...this.props} />
+  }
+}
+`,
   tests: '',
   view: `Vertical
 alignItems center

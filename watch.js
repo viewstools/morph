@@ -63,7 +63,8 @@ module.exports = options => {
     let is = false
 
     try {
-      is = /React/.test(readFileSync(f, 'utf-8'))
+      const content = readFileSync(f, 'utf-8')
+      is = /import React/.test(content) && !/views-disable/.test(content)
     } catch (err) {}
 
     return (jsComponents[f] = is)

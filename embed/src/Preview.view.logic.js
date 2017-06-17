@@ -9,11 +9,11 @@ export default class PreviewLogic extends React.Component {
   }
 
   componentDidMount() {
-    onView(view => {
-      this.setState({
-        view,
-      })
-    })
+    // onView(view => {
+    //   this.setState({
+    //     view,
+    //   })
+    // })
   }
 
   render() {
