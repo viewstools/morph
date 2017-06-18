@@ -35,6 +35,7 @@ export default ({ getImport, name, tests = false, view, views = {} }) => {
     captures: [],
     defaultProps: false,
     fonts: [],
+    isReactNative: true,
     remap: {},
     render: [],
     styles: {},

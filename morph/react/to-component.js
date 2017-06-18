@@ -21,7 +21,7 @@ export default ({ getImport, getStyles, name, state }) => {
     `import React from 'react'`,
     state.withRouter && `import { withRouter } from 'react-router'`,
     tests && `import makeTests from './${name}.view.tests.js'`,
-    getDependencies(state.uses, getImport),
+    getDependencies(state, getImport),
   ]
     .filter(Boolean)
     .join('\n')

@@ -47,6 +47,7 @@ export default ({
     file,
     fonts: [],
     inlineStyles,
+    isReactNative: false,
     remap: {},
     render: [],
     styles: {},

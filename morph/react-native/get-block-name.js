@@ -66,6 +66,10 @@ const getGroupBlockName = (node, state) => {
     name = 'ScrollView'
   }
 
+  if (node.maybeAnimated && name !== 'Link') {
+    name = `Animated.${name}`
+  }
+
   return name
 }
 

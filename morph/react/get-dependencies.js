@@ -1,6 +1,7 @@
 import SVG from './svg.js'
 
 const NATIVE = [
+  'Animated',
   'Image',
   'KeyboardAvoidingView',
   'ScrollView',
@@ -12,7 +13,7 @@ const NATIVE = [
   'View',
 ]
 
-export default (uses, getImport) => {
+export default ({ isReactNative, uses }, getImport) => {
   const usesNative = []
   const usesSvg = []
 
@@ -29,9 +30,9 @@ export default (uses, getImport) => {
 
   const dependencies = []
   uses.sort().forEach(d => {
-    if (NATIVE.includes(d)) {
+    if (isReactNative && NATIVE.includes(d)) {
       useNative(d)
-    } else if (SVG.includes(d)) {
+    } else if (isReactNative && SVG.includes(d)) {
       useSvg(d === 'SvgText' ? 'Text as SvgText' : d)
     } else if (/^[A-Z]/.test(d) || /\.data$/.test(d)) {
       dependencies.push(getImport(d))

@@ -803,7 +803,12 @@ export default Action;
 exports[`react-native parses react-native AnimatedButton 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
-import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
+import {
+  Animated,
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+} from 'react-native';
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
 const AnimatedButton = props =>
@@ -812,9 +817,9 @@ const AnimatedButton = props =>
     onPress={props.onClick}
     underlayColor=\\"transparent\\"
   >
-    <View style={[styles.h18pdll5, { opacity: props.opacity }]}>
+    <Animated.View style={[styles.h18pdll5, { opacity: props.opacity }]}>
       <Text>hey</Text>{props.children}
-    </View>
+    </Animated.View>
   </TouchableWithoutFeedback>;
 
 export default AnimatedButton;
@@ -825,7 +830,7 @@ export default AnimatedButton;
 exports[`react-native parses react-native BackgroundImage 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
-import { Image, StyleSheet } from 'react-native';
+import { Animated, Image, StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   h18pdll5: { flexDirection: 'column' },
   hp2cr4d: { flexDirection: 'row' },
@@ -837,7 +842,7 @@ const BackgroundImage = props =>
     source={{ uri: 'https://viewsdx.com/image.jpg' }}
     style={styles.h18pdll5}
   >
-    <Image
+    <Animated.Image
       resizeMode=\\"cover\\"
       source={{ uri: props.backgroundImage }}
       style={styles.hp2cr4d}
@@ -853,11 +858,11 @@ export default BackgroundImage;
 exports[`react-native parses react-native BoxShadow 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Animated, StyleSheet } from 'react-native';
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
 const BoxShadow = props =>
-  <View
+  <Animated.View
     style={[
       styles.h18pdll5,
       {
@@ -870,7 +875,7 @@ const BoxShadow = props =>
     ]}
   >
     {props.children}
-  </View>;
+  </Animated.View>;
 
 export default BoxShadow;
 // fonts {}
