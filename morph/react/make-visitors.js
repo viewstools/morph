@@ -334,10 +334,9 @@ export default ({
           key === 'at' ||
           key === 'when' ||
           isData(node) ||
-          (key === 'isActive' && parent.parent.isBasic)
+          (!isValidPropertyForBlock(node, parent) && parent.parent.isBasic)
         )
           return
-        if (!isValidPropertyForBlock(node, parent)) return
 
         // if (PropertyData.enter.call(this, node, parent, state)) return
         if (PropertyStyle.enter.call(this, node, parent, state)) return

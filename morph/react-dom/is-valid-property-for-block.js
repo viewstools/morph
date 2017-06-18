@@ -1,2 +1,2 @@
-const blacklist = ['backgroundSize', 'teleportTo', 'goTo']
+const blacklist = ['backgroundSize', 'isActive', 'teleportTo', 'goTo']
 export default (node, parent) => !blacklist.includes(node.key.value)
