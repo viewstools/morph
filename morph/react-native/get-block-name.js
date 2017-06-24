@@ -6,7 +6,6 @@ export default (node, state) => {
   switch (node.name.value) {
     case 'CaptureEmail':
     // case 'CaptureFile':
-    case 'CaptureInput':
     case 'CaptureNumber':
     case 'CapturePhone':
     case 'CaptureSecure':
@@ -24,6 +23,9 @@ export default (node, state) => {
       return getProxyBlockName(node)
     // TODO SvgText should be just Text but the import should be determined from the parent
     // being Svg
+
+    case 'Text':
+      return node.maybeAnimated ? `Animated.Text` : 'Text'
 
     default:
       return node.name.value

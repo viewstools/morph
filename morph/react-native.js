@@ -16,6 +16,7 @@ import restrictedNames from './react-native/restricted-names.js'
 import toComponent from './react/to-component.js'
 
 const imports = {
+  DismissKeyboard: `import dismissKeyboard from 'dismissKeyboard'`,
   Link: "import { Link } from 'react-router-native'",
   Route: "import { Route } from 'react-router-native'",
   Router: "import { NativeRouter as Router } from 'react-router-native'",

@@ -1,7 +1,17 @@
 import { hasProp, getProp } from '../utils.js'
+import safe from '../react/safe.js'
+
+const keyboardType = {
+  CaptureEmail: 'email-address',
+  CaptureText: 'default',
+  CaptureNumber: 'numeric',
+  CapturePhone: 'phone-pad',
+}
 
 export const enter = (node, parent, state) => {
   if (/Capture/.test(node.name.value)) {
+    state.captures.push(node.is || node.name.value)
+
     if (node.properties && !hasProp(node, 'ref')) {
       node.properties.skip = true
 
@@ -30,6 +40,28 @@ export const enter = (node, parent, state) => {
       )
       state.render.push(` ref={$e => this.$capture${node.is} = $e}`)
       state.render.push(` value={state.${node.is}}`)
+
+      if (node.name.value === 'CaptureSecure') {
+        state.render.push(` secureTextEntry`)
+      } else {
+        state.render.push(` keyboardType='${keyboardType[node.name.value]}'`)
+      }
+
+      // TODO rest of props
+      const onBlur = getProp(node, 'onBlur')
+      if (onBlur) {
+        state.render.push(` onBlur=${safe(onBlur.value.value)}`)
+      }
+
+      const onFocus = getProp(node, 'onFocus')
+      if (onFocus) {
+        state.render.push(` onFocus=${safe(onFocus.value.value)}`)
+      }
+
+      const placeholder = getProp(node, 'placeholder')
+      if (placeholder) {
+        state.render.push(` placeholder=${safe(placeholder.value.value)}`)
+      }
     }
   }
 }

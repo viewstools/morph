@@ -1109,6 +1109,7 @@ export default RemapToggle;
 exports[`react-native parses react-native UseCaptureEmail 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
+import dismissKeyboard from 'dismissKeyboard';
 import { KeyboardAvoidingView, StyleSheet, TextInput } from 'react-native';
 const styles = StyleSheet.create({
   hm4pcs: {
@@ -1119,18 +1120,32 @@ const styles = StyleSheet.create({
   },
 });
 
-const UseCaptureEmail = props =>
-  <KeyboardAvoidingView behavior=\\"position\\">
-    <TextInput
-      onSubmitEditing={props.onSubmit}
-      returnKeyType=\\"go\\"
-      onChangeText={Email => this.setState({ Email })}
-      ref={$e => (this.$captureEmail = $e)}
-      value={state.Email}
-      placeholderTextColor=\\"blue\\"
-      style={styles.hm4pcs}
-    />
-  </KeyboardAvoidingView>;
+class UseCaptureEmail extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const { props, state } = this;
+    return (
+      <KeyboardAvoidingView behavior=\\"position\\">
+        <TouchableWithoutFeedback onPress={dismissKeyboard}>
+          <TextInput
+            onSubmitEditing={props.onSubmit}
+            returnKeyType=\\"go\\"
+            onChangeText={Email => this.setState({ Email })}
+            ref={$e => (this.$captureEmail = $e)}
+            value={state.Email}
+            keyboardType=\\"email-address\\"
+            placeholderTextColor=\\"blue\\"
+            style={styles.hm4pcs}
+          />
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
+    );
+  }
+}
 
 export default UseCaptureEmail;
 // fonts {}
@@ -1142,7 +1157,17 @@ exports[`react-native parses react-native UseCaptureFile 1`] = `
 import React from 'react';
 import CaptureFile from './CaptureFile.view.js';
 
-const UseCaptureFile = props => <CaptureFile />;
+class UseCaptureFile extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const { props, state } = this;
+    return <CaptureFile />;
+  }
+}
 
 export default UseCaptureFile;
 // fonts {}
@@ -1152,12 +1177,26 @@ export default UseCaptureFile;
 exports[`react-native parses react-native UseCaptureNumber 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
+import dismissKeyboard from 'dismissKeyboard';
 import { KeyboardAvoidingView, TextInput } from 'react-native';
 
-const UseCaptureNumber = props =>
-  <KeyboardAvoidingView behavior=\\"position\\">
-    <TextInput />
-  </KeyboardAvoidingView>;
+class UseCaptureNumber extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const { props, state } = this;
+    return (
+      <KeyboardAvoidingView behavior=\\"position\\">
+        <TouchableWithoutFeedback onPress={dismissKeyboard}>
+          <TextInput />
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
+    );
+  }
+}
 
 export default UseCaptureNumber;
 // fonts {}
@@ -1167,12 +1206,26 @@ export default UseCaptureNumber;
 exports[`react-native parses react-native UseCapturePhone 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
+import dismissKeyboard from 'dismissKeyboard';
 import { KeyboardAvoidingView, TextInput } from 'react-native';
 
-const UseCapturePhone = props =>
-  <KeyboardAvoidingView behavior=\\"position\\">
-    <TextInput />
-  </KeyboardAvoidingView>;
+class UseCapturePhone extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const { props, state } = this;
+    return (
+      <KeyboardAvoidingView behavior=\\"position\\">
+        <TouchableWithoutFeedback onPress={dismissKeyboard}>
+          <TextInput />
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
+    );
+  }
+}
 
 export default UseCapturePhone;
 // fonts {}
@@ -1182,12 +1235,26 @@ export default UseCapturePhone;
 exports[`react-native parses react-native UseCaptureSecure 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
+import dismissKeyboard from 'dismissKeyboard';
 import { KeyboardAvoidingView, TextInput } from 'react-native';
 
-const UseCaptureSecure = props =>
-  <KeyboardAvoidingView behavior=\\"position\\">
-    <TextInput />
-  </KeyboardAvoidingView>;
+class UseCaptureSecure extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const { props, state } = this;
+    return (
+      <KeyboardAvoidingView behavior=\\"position\\">
+        <TouchableWithoutFeedback onPress={dismissKeyboard}>
+          <TextInput />
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
+    );
+  }
+}
 
 export default UseCaptureSecure;
 // fonts {}
@@ -1197,12 +1264,26 @@ export default UseCaptureSecure;
 exports[`react-native parses react-native UseCaptureText 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
+import dismissKeyboard from 'dismissKeyboard';
 import { KeyboardAvoidingView, TextInput } from 'react-native';
 
-const UseCaptureText = props =>
-  <KeyboardAvoidingView behavior=\\"position\\">
-    <TextInput />
-  </KeyboardAvoidingView>;
+class UseCaptureText extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const { props, state } = this;
+    return (
+      <KeyboardAvoidingView behavior=\\"position\\">
+        <TouchableWithoutFeedback onPress={dismissKeyboard}>
+          <TextInput />
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
+    );
+  }
+}
 
 export default UseCaptureText;
 // fonts {}
@@ -1235,7 +1316,8 @@ exports[`react-native parses react-native UseImage 1`] = `
 import React from 'react';
 import { Image } from 'react-native';
 
-const UseImage = props => <Image source=\\"https://viewsdx.com/rocks.jpg\\" />;
+const UseImage = props =>
+  <Image source={{ uri: 'https://viewsdx.com/rocks.jpg' }} />;
 
 export default UseImage;
 // fonts {}

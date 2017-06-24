@@ -1,3 +1,4 @@
+import { isCode } from '../utils.js'
 import safe from '../react/safe.js'
 
 export default (node, parent) => {
@@ -6,8 +7,16 @@ export default (node, parent) => {
 
   switch (node.value.type) {
     case 'Literal':
-      return {
-        [key]: safe(value, node),
+      if (key === 'source' && parent.parent.name.value === 'Image') {
+        const uri = isCode(value) ? value : `"${value}"`
+
+        return {
+          source: `{{ uri: ${uri}}}`,
+        }
+      } else {
+        return {
+          [key]: safe(value, node),
+        }
       }
     // TODO lists
     case 'ArrayExpression':
