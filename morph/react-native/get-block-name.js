@@ -75,10 +75,12 @@ const getGroupBlockName = (node, state) => {
   return name
 }
 
-const getListBlockName = node =>
-  hasProp(node, /^overflow/, v => v === 'auto' || v === 'scroll')
+const getListBlockName = node => {
+  const base = hasProp(node, /^overflow/, v => v === 'auto' || v === 'scroll')
     ? 'ScrollView'
     : 'View'
+  return node.maybeAnimated ? `Animated.${base}` : base
+}
 
 const getProxyBlockName = node => {
   const from = getProp(node, 'from')
