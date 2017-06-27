@@ -24,7 +24,9 @@ import getLoc from './get-loc.js'
 import getMeta from './get-meta.js'
 import getTags from './get-tags.js'
 
-export default text => {
+export default rtext => {
+  // convert crlf to lf
+  const text = rtext.replace(/\r\n/g, '\n')
   const fonts = {}
   const lines = text.split('\n')
   const stack = []
