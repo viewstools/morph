@@ -1,6 +1,6 @@
 {
   "name": "views-morph",
-  "version": "0.1.41",
+  "version": "0.1.43",
   "description": "Views language morpher",
   "main": "lib.js",
   "bin": {
@@ -10,7 +10,7 @@
     "preembed": "npm run prepublish",
     "embed": "browserify -x prettier --standalone views lib.js > embed/public/views-morph.js",
     "precommit": "lint-staged",
-    "prepublish": "NODE_ENV=production rollup --config rollup.config.js",
+    "prepublish": "NODE_ENV=production rollup --config rollup.config.js; NODE_ENV=production rollup --config rollup.config.parse.js;",
     "test": "jest",
     "watch": "rollup --config rollup.config.js --watch"
   },

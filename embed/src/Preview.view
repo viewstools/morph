@@ -1,9 +1,0 @@
-Preview is Vertical
-backgroundColor #fafafa
-borderRadius 4
-marginTop 20
-marginLeft 20
-marginRight props.marginRight
-marginBottom 20
-overflow scroll
-flex 1
