@@ -24,7 +24,7 @@ export const enter = (node, parent, state) => {
         state.render.push(
           ` onSubmitEditing={this.$capture${captureNext}? () => this.$capture${captureNext}.focus() : ${onSubmit}}`
         )
-        state.render(
+        state.render.push(
           ` returnKeyType = {this.$capture${captureNext}? 'next' : 'go'}`
         )
       } else {
