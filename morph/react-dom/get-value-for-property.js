@@ -1,5 +1,5 @@
 import { isCode } from '../utils.js'
-import wrap from '../react/wrap.js'
+import safe from '../react/safe.js'
 
 export default (node, parent) => {
   const key = node.key.value
@@ -7,10 +7,14 @@ export default (node, parent) => {
 
   switch (node.value.type) {
     case 'Literal':
-      return {
-        [key]: typeof value === 'string' && !isCode(node)
-          ? JSON.stringify(value)
-          : wrap(value),
+      if (key === 'source' && parent.parent.name.value === 'Image') {
+        return {
+          src: safe(value, node),
+        }
+      } else {
+        return {
+          [key]: safe(value, node),
+        }
       }
     // TODO lists
     case 'ArrayExpression':

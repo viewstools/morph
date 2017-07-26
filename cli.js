@@ -13,6 +13,7 @@ const {
   compile,
   help,
   inlineStyles,
+  logic,
   pretty,
   tests,
   watch: shouldWatch,
@@ -26,8 +27,9 @@ const {
     as: 'react-dom',
     compile: false,
     inlineStyles: false,
+    logic: true,
     pretty: true,
-    tests: true,
+    tests: false,
     watch: false,
   },
 })
@@ -45,9 +47,11 @@ if (help) {
                       otherwise it will produce external .css
                       files. Use this if you compile the CSS
                       into its own file. Defaults to false
+    --logic         if true, it includes .view.logic.js files in
+                      the output, defaults to true
     --pretty        format output code, defaults to true
     --tests         if true, it includes the .view.tests files in
-                      the output, defaults to true
+                      the output, defaults to false
     --watch         watch a directory and produce .view.js files
   `)
 
@@ -88,6 +92,7 @@ if (shouldWatch) {
     as,
     compile,
     inlineStyles,
+    logic,
     pretty,
     src: input,
     tests,
@@ -98,6 +103,7 @@ if (shouldWatch) {
       as,
       compile,
       inlineStyles,
+      logic,
       once: true,
       pretty,
       src: input,

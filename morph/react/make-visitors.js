@@ -125,7 +125,8 @@ export default ({
         if (path === '/') state.use('Router')
 
         if (!path.startsWith('/')) {
-          path = `\`\${props.match.url}/${path}\``
+          path = isCode(path) ? `\`\${${path}}\`` : path
+          // path = `\`\${props.match.url}/${to}\``
         }
 
         node.isRoute = true
