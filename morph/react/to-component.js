@@ -20,7 +20,7 @@ export default ({ getImport, getStyles, name, state }) => {
   const dependencies = [
     `import React from 'react'`,
     state.withRouter && `import { withRouter } from 'react-router'`,
-    tests && `import makeTests from './${name}.view.tests.js'`,
+    tests && `import makeTests from './${name}.view.tests'`,
     getDependencies(state, getImport),
   ]
     .filter(Boolean)

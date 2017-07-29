@@ -2,6 +2,7 @@ const { extname, relative } = require('path')
 const { getViewNotFound, isViewNameRestricted, morph } = require('./lib.js')
 const { readFile, readFileSync, statSync, writeFile } = require('fs')
 const chalk = require('chalk')
+const clean = require('./clean.js')
 const globule = require('globule')
 const toCamelCase = require('to-camel-case')
 const toPascalCase = require('to-pascal-case')
@@ -45,6 +46,8 @@ module.exports = options => {
       options
     )
 
+    clean(src)
+
     if (!shared) shared = `views-blocks-${as}`
     if (!dataNotFound)
       dataNotFound = name => {
@@ -67,7 +70,7 @@ module.exports = options => {
 
       try {
         const content = readFileSync(f, 'utf-8')
-        is = /import React/.test(content) && !/views-disable/.test(content)
+        is = /\/\/ @view/.test(content)
       } catch (err) {}
 
       return (jsComponents[f] = is)
@@ -77,7 +80,8 @@ module.exports = options => {
       if (
         isMorphedView(f) ||
         isMorphedData(f) ||
-        (isJs(f) && !(isJsComponent(f) || isLogic(f))) ||
+        (isJs(f) && !isLogic(f) && !isJsComponent(f)) ||
+        (!shouldIncludeLogic && isLogic(f)) ||
         statSync(f).isDirectory()
       )
         return

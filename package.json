@@ -1,6 +1,6 @@
 {
   "name": "views-morph",
-  "version": "0.1.45",
+  "version": "0.1.46",
   "description": "Views language morpher",
   "main": "lib.js",
   "bin": {
