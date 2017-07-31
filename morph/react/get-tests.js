@@ -5,49 +5,45 @@ export default ({ state, name }) => {
     name: `Tests${name}`,
   }
 
-  // TODO track choices in sessionStorage
-  tests.component = `
-  class ${tests.name} extends React.Component {
+  tests.component = `class ${tests.name} extends React.Component {
   constructor(props) {
     super(props)
 
     this.display = this.display.bind(this)
-    this.on = this.on.bind(this)
-    this.off = this.off.bind(this)
+    this.tests = fromTests.make(this.display)
 
-    const made = makeTests(this.display)
-    this.state = Object.assign({}, made[made._main], { _on: true })
-
-    const tests = {
-      active: made._main,
-      on: this.on,
-      off: this.off,
+    this.state = {
+      active: props.test,
+      data: this.tests[props.test],
     }
+  }
 
-    Object.keys(made).filter(m => m !== '_main').forEach(test => {
-      tests[test] = () => this.display(made[test], test)
+  display(data, active) {
+    this.setState({
+      active,
+      data,
+    }, () => {
+      if (typeof this.props.onInteraction === 'function') {
+        this.props.onInteraction()
+      }
     })
-
-    this.tests = tests
   }
 
-  display(next, name) {
-    this.setState(Object.assign({}, next, { _on: true }))
-  }
-
-  off() {
-    this.setState({ _on: false })
-  }
-
-  on() {
-    this.setState({ _on: true })
+  componentWillReceiveProps(next) {
+    if (this.state.active !== next.test) {
+      this.setState({
+        active: next.test,
+        data: this.tests[next.test],
+      })
+    }
   }
 
   render() {
     const { props, state } = this
-    return state._on ? <${name} {...props} {...state} /> : <${name} {...props} />
+    return <${name} {...state.data} {...props} />
   }
-}`
+}
+${tests.name}.tests = fromTests.names`
 
   return tests
 }

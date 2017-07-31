@@ -1,4 +1,3 @@
-import * as BlockAnimated from './react-dom/block-animated.js'
 import * as BlockGoTo from './react-dom/block-go-to.js'
 import * as BlockTeleport from './react-dom/block-teleport.js'
 import { leave as PropertiesStyleLeave } from './react-dom/properties-style.js'
@@ -15,7 +14,7 @@ import restrictedNames from './react-dom/restricted-names.js'
 import toComponent from './react/to-component.js'
 
 const imports = {
-  Animated: "import Animated from 'animated/lib/targets/react-dom.js'",
+  Animated: "import Animated from 'react-dom-animated'",
   Link: "import { Link } from 'react-router-dom'",
   Route: "import { Route } from 'react-router-dom'",
   Router: "import { BrowserRouter as Router } from 'react-router-dom'",
@@ -100,7 +99,6 @@ export default ({
         BlockTeleport.enter,
         BlockGoTo.enter,
         BlockDefaultProps.enter,
-        BlockAnimated.enter,
       ].forEach(fn => fn.call(this, node, parent, state))
     },
     leave(node, parent, state) {

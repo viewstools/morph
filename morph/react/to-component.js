@@ -1,4 +1,3 @@
-import getAnimated from './get-animated.js'
 import getBody from './get-body.js'
 import getDefaultProps from './get-default-props.js'
 import getDependencies from './get-dependencies.js'
@@ -20,7 +19,7 @@ export default ({ getImport, getStyles, name, state }) => {
   const dependencies = [
     `import React from 'react'`,
     state.withRouter && `import { withRouter } from 'react-router'`,
-    tests && `import makeTests from './${name}.view.tests'`,
+    tests && `import * as fromTests from './${name}.view.tests'`,
     getDependencies(state, getImport),
   ]
     .filter(Boolean)
@@ -31,7 +30,6 @@ export default ({ getImport, getStyles, name, state }) => {
   return `/* eslint-disable jsx-a11y/accessible-emoji */
 ${dependencies}
 ${getStyles(state, name)}
-${getAnimated(state)}
 
 ${tests ? tests.component : ''}
 ${remap ? remap.component : ''}

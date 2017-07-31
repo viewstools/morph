@@ -48,21 +48,26 @@ export default ({ view }) => {
   const body = tests
     .map(({ name, test }, index) => {
       // every test after the first one inherits the first one
-      const data = index > 0
-        ? {
-            ...tests[0].test,
-            ...test,
-          }
-        : test
+      const data =
+        index > 0
+          ? {
+              ...tests[0].test,
+              ...test,
+            }
+          : test
 
       return `const ${name} = ${JSON.stringify(data)}`
     })
     .join('\n')
 
-  return `export default display => {
+  return `
+    export const names = ${JSON.stringify(names)}
+
+    export const make = display => {
     ${body.replace(/"?<<DISPLAY>>"?/g, '')}
     return { _main: '${names[0]}', ${names.join(',')} }
   }`
+  // TODO review, I think _main doesn't matter anymore
 }
 
 // TODO embed data
