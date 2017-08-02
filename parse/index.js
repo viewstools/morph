@@ -286,7 +286,7 @@ export default rtext => {
         }
       } else if (isProp(line)) {
         const [propRaw, value] = getProp(line)
-        const [prop, stemmedTag] = stemStylesFromProp(propRaw)
+        const [prop, stemmedTag] = stemStylesFromProp(block, propRaw)
         const tags = getTags(prop, value)
         if (stemmedTag) {
           tags[stemmedTag] = true

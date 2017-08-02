@@ -163,7 +163,9 @@ export const getValue = value => {
   }
 }
 
-export const stemStylesFromProp = raw => {
+export const stemStylesFromProp = (block, raw) => {
+  if (!block.isBasic) return [raw, false]
+
   const [prop, tag] = get(PROP_STYLE_STEMS, raw).slice(1)
 
   return tag && !isStyle(prop)

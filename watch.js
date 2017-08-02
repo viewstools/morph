@@ -17,6 +17,11 @@ const isView = f => extname(f) === '.view'
 const isTests = f => extname(f) === '.tests'
 const isLogic = f => /view\.logic\.js$/.test(f)
 
+const relativise = (from, to) => {
+  const r = relative(from, to)
+  return r.substr(r.startsWith('../..') ? 3 : 1)
+}
+
 module.exports = options => {
   return new Promise((resolve, reject) => {
     let {
@@ -99,19 +104,6 @@ module.exports = options => {
         return f
       }
     }
-    const getImport = name => {
-      // TODO track dependencies to make it easy to rebuild files as new ones get
-      // added
-      if (isData(name)) {
-        return data[name]
-          ? `import ${toCamelCase(name)} from '${getImportFileName(name)}'`
-          : dataNotFound(name)
-      } else {
-        return views[name]
-          ? `import ${name} from '${getImportFileName(name)}'`
-          : viewNotFound(name)
-      }
-    }
 
     const views = map
     const data = {}
@@ -178,6 +170,26 @@ module.exports = options => {
 
       if (isJs(f)) return
 
+      const getImport = name => {
+        // TODO track dependencies to make it easy to rebuild files as new ones get
+        // added
+        if (isData(name)) {
+          return data[name]
+            ? `import ${toCamelCase(name)} from '${relativise(
+                file,
+                getImportFileName(name)
+              )}'`
+            : dataNotFound(name)
+        } else {
+          return views[name]
+            ? `import ${name} from '${relativise(
+                file,
+                getImportFileName(name)
+              )}'`
+            : viewNotFound(name)
+        }
+      }
+
       readFile(f, 'utf-8', (err, source) => {
         if (err) {
           return verbose && console.error(chalk.red('M'), view, err)
@@ -223,7 +235,7 @@ module.exports = options => {
         isData(file) || isTests(file)
           ? file
           : isLogic(file)
-            ? file.replace(/\.js/, '')
+            ? file.replace(/\.js/, '').replace(/\//g, '')
             : toPascalCase(file.replace(/\.(view|js)/, ''))
 
       return {

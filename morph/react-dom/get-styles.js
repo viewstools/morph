@@ -13,13 +13,15 @@ export default ({ file, inlineStyles, styles }, name) => {
     .join(',')
 
   const code = transformGlam(`const styles = {${obj}}`, inlineStyles, file.raw)
-  const maybeImport = inlineStyles ? '' : `import '${file.relative}.css'\n`
+  const maybeImport = inlineStyles
+    ? ''
+    : `import './${file.relative.split('/').pop()}.css'\n`
   return `${maybeImport}${code}`
 }
 
 const getValue = (key, value) =>
   typeof value === 'number' &&
-    !(isUnitlessNumber.hasOwnProperty(key) && isUnitlessNumber[key])
+  !(isUnitlessNumber.hasOwnProperty(key) && isUnitlessNumber[key])
     ? `${value}px`
     : `${value}`
 
