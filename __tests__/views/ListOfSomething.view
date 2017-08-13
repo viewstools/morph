@@ -1,4 +1,6 @@
 List
 from props.list
 Text
-text item.name
+dataIndex index
+color item.color
+text index

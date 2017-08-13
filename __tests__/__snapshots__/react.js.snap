@@ -202,7 +202,11 @@ const styles = {
 const ListOfSomething = props =>
   <div className={styles.h1lmw638}>
     {Array.isArray(props.list) &&
-      props.list.map((item, i) => <div key={i}>{item.name}</div>)}
+      props.list.map((item, index) =>
+        <div dataIndex={index} style={{ color: item.color }} key={index}>
+          {index}
+        </div>
+      )}
     {props.children}
   </div>;
 

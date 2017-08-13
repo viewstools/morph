@@ -7,7 +7,7 @@ const BLOCK = /^([A-Z][a-zA-Z0-9]*)(\s+[a-z\s]*([A-Z][a-zA-Z0-9]*))?$/
 const BOOL = /^(false|true)$/i
 const CAPTURE = /^(CaptureEmail|CaptureFile|CaptureInput|CaptureNumber|CapturePhone|CaptureSecure|CaptureText)$/i
 const CODE_EXPLICIT = /^{.+}$/
-const CODE_IMPLICIT = /(props|item)\./
+const CODE_IMPLICIT = /(props|item|index)\./
 const COMMENT = /^#(.+)$/
 const DATA = /^.+\.data$/
 const EMPTY_LIST = /^is empty list$/i
@@ -41,7 +41,7 @@ export const isData = line => is(DATA, line)
 export const isCode = line =>
   isCodeOneWord(line) || is(CODE_EXPLICIT, line) || is(CODE_IMPLICIT, line)
 export const isCodeOneWord = line =>
-  line === 'props' || line === 'item' || line === 'i'
+  line === 'props' || line === 'item' || line === 'index'
 // TODO
 export const isCodeInvalid = line => {
   return getCodeData(line).find(

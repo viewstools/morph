@@ -102,7 +102,7 @@ export default ({
         }
 
         state.render.push(
-          `{Array.isArray(${from}) && ${from}.map((item, i) => `
+          `{Array.isArray(${from}) && ${from}.map((item, index) => `
         )
 
         node.list.forEach(n => (n.isInList = true))
@@ -147,7 +147,7 @@ export default ({
   const PropertiesListKey = {
     leave(node, parent, state) {
       if (parent.isInList && !node.hasKey) {
-        state.render.push(' key={i}')
+        state.render.push(' key={index}')
       }
     },
   }
