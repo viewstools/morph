@@ -8,7 +8,6 @@ export default (node, parent, code) => {
     case 'backgroundImage':
       return {
         backgroundImage: code ? `\`url(\${${value}})\`` : `url("${value}")`,
-        backgroundSize: 'cover',
       }
 
     case 'zIndex':
