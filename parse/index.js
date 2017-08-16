@@ -355,6 +355,7 @@ export default rtext => {
               type: 'Literal',
               // TODO should we use propRaw as value here?
               value: prop,
+              valueRaw: propRaw,
               loc: getLoc(
                 lineIndex,
                 l.indexOf(propRaw),
