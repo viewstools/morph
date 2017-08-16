@@ -12,11 +12,11 @@ const isMorphedData = f => /\.data\.js$/.test(f)
 const isMorphedView = f => /\.view\.js$/.test(f)
 
 const isData = f => /\.view\.data$/.test(f)
-const isFake = f => /\.view\.fake$/.test(f)
+// const isFake = f => /\.view\.fake$/.test(f)
 const isJs = f => path.extname(f) === '.js'
 const isLogic = f => /\.view\.logic\.js$/.test(f)
 const isTests = f => /\.view\.tests$/.test(f)
-const isView = f => path.extname(f) === '.view'
+const isView = f => path.extname(f) === '.view' || /\.view\.fake$/.test(f)
 
 const relativise = (from, to) => {
   const r = path.relative(from, to)
@@ -110,14 +110,15 @@ module.exports = options => {
     }
 
     const getImportFileName = (name, file) => {
-      let f = views[name] || data[name] || fakes[name]
+      let f = views[name] || data[name] // || fakes[name]
 
-      if (isView(f) || isFake(f)) {
+      if (isView(f)) {
+        // || isFake(f)) {
         const logicFile = logic[`${name}.view.logic`]
         if (logicFile) f = logicFile
 
-        const fakeFile = fakes[name]
-        if (fakeFile) f = fakeFile
+        // const fakeFile = fakes[name]
+        // if (fakeFile) f = fakeFile
       }
 
       const ret = relativise(file, f)
@@ -125,32 +126,41 @@ module.exports = options => {
       return isJs(ret) ? ret : `${ret}.js`
     }
 
-    const makeGetImport = file => name => {
-      // TODO track dependencies to make it easy to rebuild files as new ones get
-      // added
-      if (isData(name)) {
-        return data[name]
-          ? `import ${toCamelCase(name)} from '${getImportFileName(
-              name,
-              file
-            )}'`
-          : dataNotFound(name)
-      } else {
-        return views[name] || fakes[name]
-          ? `import ${name} from '${getImportFileName(name, file)}'`
-          : viewNotFound(name)
+    const makeGetImport = (view, file) => {
+      dependsOn[view] = []
+
+      return name => {
+        if (!dependsOn[view].includes(name)) {
+          dependsOn[view].push(name)
+        }
+        // TODO track dependencies to make it easy to rebuild files as new ones get
+        // added
+        if (isData(name)) {
+          return data[name]
+            ? `import ${toCamelCase(name)} from '${getImportFileName(
+                name,
+                file
+              )}'`
+            : dataNotFound(name)
+        } else {
+          return views[name] // || fakes[name]
+            ? `import ${name} from '${getImportFileName(name, file)}'`
+            : viewNotFound(name)
+        }
       }
     }
 
     const data = {}
-    const fakes = {}
+    const dependsOn = {}
+    // const fakes = {}
     const logic = {}
     const tests = {}
     const views = Object.assign({}, map)
 
     const instance = {
       data,
-      fakes,
+      dependsOn,
+      // fakes,
       logic,
       tests,
       views,
@@ -175,7 +185,7 @@ module.exports = options => {
 
       verbose && console.log(chalk.yellow('A'), view, chalk.dim(`-> ${f}`))
 
-      let shouldMorph = isView(file)
+      let shouldMorph = isView(file) // || isFake(view)
 
       if (fileIsData) {
         data[view] = file
@@ -185,15 +195,10 @@ module.exports = options => {
         shouldMorph = true
       } else if (isLogic(file)) {
         logic[view] = file
-      } else if (isFake(file)) {
-        fakes[view] = file
       } else {
         if (!maybeFakeJs(f, file, view)) {
           views[view] = file
         }
-      }
-      {
-        views[view] = file
       }
 
       if (shouldMorph) {
@@ -208,8 +213,7 @@ module.exports = options => {
     const maybeFakeJs = (f, file, view) => {
       const fakeView = `${view}.view.fake`
 
-      if (!(isJsComponent(f) && shouldIncludeFake && !fakes[fakeView]))
-        return false
+      if (!(isJsComponent(f) && shouldIncludeFake && !views[view])) return false
 
       const fakeFile = path.join(path.dirname(f), fakeView)
 
@@ -258,11 +262,9 @@ height 100`
         return
       }
 
-      // TODO if the file doesn't exist, add it to wherever it belongs
-
       if (isJs(f)) return
 
-      const getImport = makeGetImport(file)
+      const getImport = makeGetImport(view, file)
 
       fs.readFile(f, 'utf-8', async (err, source) => {
         if (err) {
@@ -282,7 +284,13 @@ height 100`
             views,
           })
 
-          await onMorph({ code, file: f, source, view })
+          await onMorph({
+            code,
+            dependsOn: dependsOn[view],
+            file: f,
+            source,
+            view,
+          })
 
           maybeIsReady()
 
@@ -300,7 +308,7 @@ height 100`
           ? file
           : isLogic(file)
             ? file.replace(/\.js/, '').replace(/\//g, '')
-            : toPascalCase(file.replace(/\.(view|js)/, ''))
+            : toPascalCase(file.replace(/\.(view\.fake|js|view)/, ''))
 
       return {
         file: `./${file}`,
@@ -309,6 +317,7 @@ height 100`
     }
 
     const watcherOptions = {
+      debounceDelay: 50,
       filter: f => !/node_modules/.test(f) && !isMorphedView(f),
     }
     const watcherPattern = [
@@ -319,8 +328,6 @@ height 100`
       shouldIncludeTests && `${src}/**/*.view.tests`,
       shouldIncludeFake && `${src}/**/*.view.fake`,
     ].filter(Boolean)
-
-    console.log('watcherPattern', watcherPattern)
 
     const viewsToMorph = globule
       .find(watcherPattern, watcherOptions)
@@ -339,6 +346,10 @@ height 100`
 
         instance.stop = () => watcher.close()
 
+        watcher.on('error', () => {
+          console.error('watcher error', args)
+        })
+
         // TODO see how we can force a rebuild when a file gets added/deleted
         watcher.on('added', addView)
         watcher.on('changed', morphView)
@@ -356,8 +367,6 @@ height 100`
               delete tests[view]
             } else if (isLogic(f)) {
               delete logic[view]
-            } else if (isFake(f)) {
-              delete fakes[view]
             } else {
               delete views[view]
             }
