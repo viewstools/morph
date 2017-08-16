@@ -1,12 +1,12 @@
 const { getViewNotFound, isViewNameRestricted, morph } = require('./lib.js')
 const chalk = require('chalk')
+const chokidar = require('chokidar')
 const clean = require('./clean.js')
 const fs = require('fs')
 const globule = require('globule')
 const path = require('path')
 const toCamelCase = require('to-camel-case')
 const toPascalCase = require('to-pascal-case')
-const watch = require('gaze')
 
 const isMorphedData = f => /\.data\.js$/.test(f)
 const isMorphedView = f => /\.view\.js$/.test(f)
@@ -46,6 +46,7 @@ module.exports = options => {
       logic: shouldIncludeLogic,
       once,
       onMorph,
+      onRemove,
       pretty,
       src,
       tests: shouldIncludeTests,
@@ -96,13 +97,21 @@ module.exports = options => {
       return (jsComponents[f] = is)
     }
 
+    const isDirectory = f => {
+      try {
+        return fs.statSync(f).isDirectory()
+      } catch (err) {
+        return false
+      }
+    }
+
     const filter = fn => (f, a) => {
       if (
         isMorphedView(f) ||
         isMorphedData(f) ||
         (isJs(f) && !isJsComponent(f) && !isLogic(f)) ||
         (!shouldIncludeLogic && isLogic(f)) ||
-        fs.statSync(f).isDirectory()
+        isDirectory(f)
       )
         return
 
@@ -110,15 +119,11 @@ module.exports = options => {
     }
 
     const getImportFileName = (name, file) => {
-      let f = views[name] || data[name] // || fakes[name]
+      let f = views[name] || data[name]
 
       if (isView(f)) {
-        // || isFake(f)) {
         const logicFile = logic[`${name}.view.logic`]
         if (logicFile) f = logicFile
-
-        // const fakeFile = fakes[name]
-        // if (fakeFile) f = fakeFile
       }
 
       const ret = relativise(file, f)
@@ -134,7 +139,7 @@ module.exports = options => {
           dependsOn[view].push(name)
         }
         // TODO track dependencies to make it easy to rebuild files as new ones get
-        // added
+        // added, eg logic is added, we need to rebuild upwards
         if (isData(name)) {
           return data[name]
             ? `import ${toCamelCase(name)} from '${getImportFileName(
@@ -143,7 +148,7 @@ module.exports = options => {
               )}'`
             : dataNotFound(name)
         } else {
-          return views[name] // || fakes[name]
+          return views[name]
             ? `import ${name} from '${getImportFileName(name, file)}'`
             : viewNotFound(name)
         }
@@ -152,7 +157,6 @@ module.exports = options => {
 
     const data = {}
     const dependsOn = {}
-    // const fakes = {}
     const logic = {}
     const tests = {}
     const views = Object.assign({}, map)
@@ -160,7 +164,6 @@ module.exports = options => {
     const instance = {
       data,
       dependsOn,
-      // fakes,
       logic,
       tests,
       views,
@@ -181,6 +184,11 @@ module.exports = options => {
         return
       }
 
+      if (isJsComponent(f) && shouldIncludeFake) {
+        maybeFakeJs(f, file, view)
+        return
+      }
+
       const fileIsData = isData(file)
 
       verbose && console.log(chalk.yellow('A'), view, chalk.dim(`-> ${f}`))
@@ -195,10 +203,12 @@ module.exports = options => {
         shouldMorph = true
       } else if (isLogic(file)) {
         logic[view] = file
-      } else {
-        if (!maybeFakeJs(f, file, view)) {
-          views[view] = file
+
+        if (viewsLeftToBeReady === 0) {
+          remorphDependenciesFor(view)
         }
+      } else {
+        views[view] = file
       }
 
       if (shouldMorph) {
@@ -228,7 +238,6 @@ height 100`
       )
 
       const finalFake = toViewPath(fakeFile)
-      fakes[finalFake.view] = finalFake.file
       console.log(
         chalk.green('🐿 '),
         finalFake.view,
@@ -301,14 +310,23 @@ height 100`
       })
     })
 
+    const remorphDependenciesFor = viewRaw => {
+      const view = viewRaw.split('.')[0]
+
+      Object.keys(dependsOn).forEach(dep => {
+        if (dependsOn[dep].includes(view)) {
+          morphView(path.join(src, views[dep]))
+        }
+      })
+    }
+
     const toViewPath = f => {
       const file = path.relative(src, f)
-      const view =
-        isData(file) || isTests(file)
-          ? file
-          : isLogic(file)
-            ? file.replace(/\.js/, '').replace(/\//g, '')
-            : toPascalCase(file.replace(/\.(view\.fake|js|view)/, ''))
+      const view = isData(file) || isTests(file)
+        ? file
+        : isLogic(file)
+          ? file.replace(/\.js/, '').replace(/\//g, '')
+          : toPascalCase(file.replace(/\.(view\.fake|js|view)/, ''))
 
       return {
         file: `./${file}`,
@@ -317,7 +335,6 @@ height 100`
     }
 
     const watcherOptions = {
-      debounceDelay: 50,
       filter: f => !/node_modules/.test(f) && !isMorphedView(f),
     }
     const watcherPattern = [
@@ -329,50 +346,58 @@ height 100`
       shouldIncludeFake && `${src}/**/*.view.fake`,
     ].filter(Boolean)
 
+    let viewsLeftToBeReady = null
+
     const viewsToMorph = globule
       .find(watcherPattern, watcherOptions)
       .map(addViewSkipMorph)
       .filter(Boolean)
 
-    let viewsLeftToBeReady = viewsToMorph.length
+    viewsLeftToBeReady = viewsToMorph.length
     viewsToMorph.forEach(morphView)
 
     if (!once) {
-      watch(watcherPattern, watcherOptions, (err, watcher) => {
-        if (err) {
-          verbose && console.error(err)
-          return
-        }
-
-        instance.stop = () => watcher.close()
-
-        watcher.on('error', () => {
-          console.error('watcher error', args)
-        })
-
-        // TODO see how we can force a rebuild when a file gets added/deleted
-        watcher.on('added', addView)
-        watcher.on('changed', morphView)
-        watcher.on(
-          'deleted',
-          filter(f => {
-            const { view } = toViewPath(f)
-            if (isViewNameRestricted(view, as)) return
-
-            verbose && console.log(chalk.blue('D'), view)
-
-            if (isData(f)) {
-              delete data[view]
-            } else if (isTests(f)) {
-              delete tests[view]
-            } else if (isLogic(f)) {
-              delete logic[view]
-            } else {
-              delete views[view]
-            }
-          })
-        )
+      const watcher = chokidar.watch(watcherPattern, {
+        ignored: /(node_modules|\.view.js)/,
+        ignoreInitial: true,
       })
+
+      if (verbose) {
+        watcher.on('error', console.error.bind(console))
+      }
+
+      instance.stop = () => watcher.close()
+
+      // TODO see how we can force a rebuild when a file gets added/deleted
+      watcher.on('add', addView)
+      watcher.on('change', morphView)
+      watcher.on(
+        'unlink',
+        filter(f => {
+          const { view } = toViewPath(f)
+          if (isViewNameRestricted(view, as)) return
+
+          verbose && console.log(chalk.blue('D'), view)
+
+          if (isData(f)) {
+            delete data[view]
+          } else if (isTests(f)) {
+            delete tests[view]
+          } else if (isLogic(f)) {
+            delete logic[view]
+          } else {
+            delete views[view]
+          }
+
+          if (typeof onRemove === 'function') {
+            onRemove(view)
+          }
+
+          remorphDependenciesFor(view)
+
+          delete dependsOn[view]
+        })
+      )
     }
   })
 }
