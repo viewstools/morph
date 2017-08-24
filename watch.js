@@ -2,11 +2,13 @@ const { getViewNotFound, isViewNameRestricted, morph } = require('./lib.js')
 const chalk = require('chalk')
 const chokidar = require('chokidar')
 const clean = require('./clean.js')
-const fs = require('fs')
+const flatten = require('flatten')
+const fs = require('mz/fs')
 const globule = require('globule')
 const path = require('path')
 const toCamelCase = require('to-camel-case')
 const toPascalCase = require('to-pascal-case')
+const uniq = require('array-uniq')
 
 const isMorphedData = f => /\.data\.js$/.test(f)
 const isMorphedView = f => /\.view\.js$/.test(f)
@@ -23,16 +25,7 @@ const relativise = (from, to) => {
   return r.substr(r.startsWith('../..') ? 3 : 1)
 }
 
-const onMorphWriteFile = ({ file, code }) =>
-  new Promise((resolve, reject) => {
-    fs.writeFile(`${file}.js`, code, err => {
-      if (err) {
-        reject(err)
-      } else {
-        resolve()
-      }
-    })
-  })
+const onMorphWriteFile = ({ file, code }) => fs.writeFile(`${file}.js`, code)
 
 module.exports = options => {
   return new Promise((resolve, reject) => {
@@ -90,6 +83,7 @@ module.exports = options => {
       let is = false
 
       try {
+        // TODO async
         const content = fs.readFileSync(f, 'utf-8')
         is = /\/\/ @view/.test(content)
       } catch (err) {}
@@ -99,6 +93,7 @@ module.exports = options => {
 
     const isDirectory = f => {
       try {
+        // TODO async
         return fs.statSync(f).isDirectory()
       } catch (err) {
         return false
@@ -227,8 +222,10 @@ module.exports = options => {
 
       const fakeFile = path.join(path.dirname(f), fakeView)
 
+      // TODO async
       if (fs.existsSync(fakeFile)) return true
 
+      // TODO async
       fs.writeFileSync(
         fakeFile,
         `${view}Fake is Vertical
@@ -247,6 +244,10 @@ height 100`
     }
 
     const maybeIsReady = () => {
+      const isReady = viewsLeftToBeReady === 0
+
+      if (isReady) return true
+
       if (viewsLeftToBeReady > 0) {
         viewsLeftToBeReady--
 
@@ -256,9 +257,19 @@ height 100`
       }
     }
 
+    const getDependendUpon = view => {
+      const dependendUpon = Object.keys(dependsOn).filter(dep =>
+        dependsOn[dep].includes(view)
+      )
+
+      return dependendUpon.concat(dependendUpon.map(getDependendUpon))
+    }
+
     const addViewSkipMorph = f => addView(f, true)
 
-    const morphView = filter(f => {
+    let toMorphQueue = null
+
+    const morphView = filter(async (f, skipRemorph) => {
       const { file, view } = toViewPath(f)
       if (isViewNameRestricted(view, as)) {
         verbose &&
@@ -275,49 +286,60 @@ height 100`
 
       const getImport = makeGetImport(view, file)
 
-      fs.readFile(f, 'utf-8', async (err, source) => {
-        if (err) {
-          return verbose && console.error(chalk.red('M'), view, err)
+      try {
+        const source = await fs.readFile(f, 'utf-8')
+
+        const code = morph(source, {
+          as: isData(f) ? 'data' : isTests(f) ? 'tests' : as,
+          compile,
+          inlineStyles,
+          file: { raw: f, relative: file },
+          name: view,
+          getImport,
+          pretty,
+          tests: tests[`${view}.view.tests`],
+          views,
+        })
+
+        const toMorph = {
+          code,
+          dependsOn: dependsOn[view],
+          file: f,
+          source,
+          view,
         }
 
-        try {
-          const code = morph(source, {
-            as: isData(f) ? 'data' : isTests(f) ? 'tests' : as,
-            compile,
-            inlineStyles,
-            file: { raw: f, relative: file },
-            name: view,
-            getImport,
-            pretty,
-            tests: tests[`${view}.view.tests`],
-            views,
-          })
+        if (maybeIsReady()) {
+          if (toMorphQueue === null) {
+            toMorphQueue = []
+          }
+          toMorphQueue.push(toMorph)
 
-          await onMorph({
-            code,
-            dependsOn: dependsOn[view],
-            file: f,
-            source,
-            view,
-          })
-
-          maybeIsReady()
-
-          verbose && console.log(chalk.green('M'), view)
-        } catch (err) {
-          verbose && console.error(chalk.red('M'), view, err)
+          if (!skipRemorph) {
+            await remorphDependenciesFor(view)
+            await Promise.all(toMorphQueue.map(onMorph))
+            toMorphQueue = null
+          }
+        } else {
+          await onMorph(toMorph)
         }
-      })
+
+        verbose && console.log(chalk.green('M'), view)
+      } catch (err) {
+        verbose && console.error(chalk.red('M'), view, err)
+      }
     })
 
-    const remorphDependenciesFor = viewRaw => {
+    const remorphDependenciesFor = async viewRaw => {
       const view = viewRaw.split('.')[0]
 
-      Object.keys(dependsOn).forEach(dep => {
-        if (dependsOn[dep].includes(view)) {
-          morphView(path.join(src, views[dep]))
-        }
-      })
+      const dependendUpon = uniq(flatten(getDependendUpon(view)))
+
+      await Promise.all(
+        dependendUpon.map(dep => {
+          return morphView(path.join(src, views[dep]), true)
+        })
+      )
     }
 
     const toViewPath = f => {
@@ -368,9 +390,8 @@ height 100`
 
       instance.stop = () => watcher.close()
 
-      // TODO see how we can force a rebuild when a file gets added/deleted
       watcher.on('add', addView)
-      watcher.on('change', morphView)
+      watcher.on('change', f => morphView(f))
       watcher.on(
         'unlink',
         filter(f => {
