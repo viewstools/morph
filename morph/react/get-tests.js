@@ -14,7 +14,7 @@ export default ({ state, name }) => {
 
     this.state = {
       active: props.test,
-      data: this.tests[props.test],
+      data: this.tests[props.test] || this.tests[this.tests._main],
     }
   }
 
