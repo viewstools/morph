@@ -67,14 +67,17 @@ export default ({
       if (when) {
         node.when = true
 
-        if (parent) state.render.push('{')
+        if (parent && parent.parent.name.value !== 'List')
+          state.render.push('{')
+
         state.render.push(`${when.value.value} ? `)
       }
     },
     leave(node, parent, state) {
       if (node.when) {
         state.render.push(` : null`)
-        if (parent) state.render.push('}')
+        if (parent && parent.parent.name.value !== 'List')
+          state.render.push('}')
       }
     },
   }
