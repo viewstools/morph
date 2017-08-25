@@ -257,12 +257,23 @@ height 100`
       }
     }
 
-    const getDependendUpon = view => {
-      const dependendUpon = Object.keys(dependsOn).filter(dep =>
-        dependsOn[dep].includes(view)
-      )
+    const getPointsOfUseFor = view =>
+      Object.keys(dependsOn).filter(dep => dependsOn[dep].includes(view))
 
-      return dependendUpon.concat(dependendUpon.map(getDependendUpon))
+    const getDependedUpon = view => {
+      const dependedUpon = []
+      const left = getPointsOfUseFor(view)
+
+      while (left.length > 0) {
+        const next = left.pop()
+
+        if (!dependedUpon.includes(next)) {
+          dependedUpon.push(next)
+          getPointsOfUseFor(next).forEach(dep => left.push(dep))
+        }
+      }
+
+      return dependedUpon
     }
 
     const addViewSkipMorph = f => addView(f, true)
@@ -333,10 +344,10 @@ height 100`
     const remorphDependenciesFor = async viewRaw => {
       const view = viewRaw.split('.')[0]
 
-      const dependendUpon = uniq(flatten(getDependendUpon(view)))
+      const dependedUpon = uniq(flatten(getDependedUpon(view)))
 
       await Promise.all(
-        dependendUpon.map(dep => {
+        dependedUpon.map(dep => {
           return morphView(path.join(src, views[dep]), true)
         })
       )
@@ -344,11 +355,12 @@ height 100`
 
     const toViewPath = f => {
       const file = path.relative(src, f)
-      const view = isData(file) || isTests(file)
-        ? file
-        : isLogic(file)
-          ? file.replace(/\.js/, '').replace(/\//g, '')
-          : toPascalCase(file.replace(/\.(view\.fake|js|view)/, ''))
+      const view =
+        isData(file) || isTests(file)
+          ? file
+          : isLogic(file)
+            ? file.replace(/\.js/, '').replace(/\//g, '')
+            : toPascalCase(file.replace(/\.(view\.fake|js|view)/, ''))
 
       return {
         file: `./${file}`,
