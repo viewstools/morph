@@ -1,5 +1,6 @@
 import {
   getBlock,
+  getComment,
   getFontInfo,
   getProp,
   getSection,
@@ -8,6 +9,7 @@ import {
   isBasic,
   isBlock,
   isCapture,
+  isComment,
   isEmptyList,
   isEnd,
   isFontable,
@@ -24,7 +26,7 @@ import getLoc from './get-loc.js'
 import getMeta from './get-meta.js'
 import getTags from './get-tags.js'
 
-export default rtext => {
+export default (rtext, skipComments = true) => {
   // convert crlf to lf
   const text = rtext.replace(/\r\n/g, '\n')
   const fonts = {}
@@ -40,6 +42,8 @@ export default rtext => {
       let fontWeight
 
       block.properties.list.forEach(p => {
+        if (p.tags && p.tags.comment) return
+
         if (p.key.value === 'fontFamily') {
           fontFamily = p.value.value
         } else if (p.key.value === 'fontWeight') {
@@ -385,6 +389,19 @@ export default rtext => {
             }
           }
         }
+      } else if (isComment(line) && !skipComments) {
+        const [value] = getComment(line)
+
+        properties.push({
+          type: 'Property',
+          loc: getLoc(lineIndex, 0, l.length - 1),
+          value: {
+            type: 'Literal',
+            value,
+            loc: getLoc(lineIndex, l.indexOf(value), l.length - 1),
+          },
+          tags: { comment: true },
+        })
       }
     }
 
@@ -418,9 +435,10 @@ export default rtext => {
 
     if (isBlock(line)) {
       parseBlock(l, i, line, lineIndex)
-    } else if (isProp(line) || isSection(line)) {
+    } else if (isProp(line) || isSection(line) || isComment(line)) {
       let block = stack[stack.length - 1] || views[views.length - 1]
       // TODO add warning
+      // TODO edge case of comments before any block
       if (!block) return
       if (block.blocks && block.blocks.list.length > 0) {
         block = block.blocks.list[block.blocks.list.length - 1]
