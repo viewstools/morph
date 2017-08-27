@@ -60,14 +60,15 @@ export default ({ view }) => {
     })
     .join('\n')
 
-  return `
-    export const names = ${JSON.stringify(names)}
+  return {
+    code: `
+  export const names = ${JSON.stringify(names)}
 
-    export const make = display => {
-    ${body.replace(/"?<<DISPLAY>>"?/g, '')}
-    return { _main: '${names[0]}', ${names.join(',')} }
-  }`
-  // TODO review, I think _main doesn't matter anymore
+  export const make = display => {
+  ${body.replace(/"?<<DISPLAY>>"?/g, '')}
+  return { _main: '${names[0]}', ${names.join(',')} }
+}`,
+  }
 }
 
 // TODO embed data

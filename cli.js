@@ -112,7 +112,7 @@ if (shouldWatch) {
   } else if (extname(input) === '.svg') {
     console.log(morphSvg(readFileSync(input, 'utf-8')))
   } else {
-    const code = morph(readFileSync(input, 'utf-8'), {
+    const { code } = morph(readFileSync(input, 'utf-8'), {
       as,
       compile,
       inlineStyles,

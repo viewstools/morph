@@ -9,7 +9,9 @@ export default ({ view }) => {
 
   morph(view, state, visitors)
 
-  return `export default ${JSON.stringify(state.default || state)}`
+  return {
+    code: `export default ${JSON.stringify(state.default || state)}`,
+  }
 }
 
 const Property = {

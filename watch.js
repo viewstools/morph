@@ -300,7 +300,7 @@ height 100`
       try {
         const source = await fs.readFile(f, 'utf-8')
 
-        const code = morph(source, {
+        const res = morph(source, {
           as: isData(f) ? 'data' : isTests(f) ? 'tests' : as,
           compile,
           inlineStyles,
@@ -313,10 +313,12 @@ height 100`
         })
 
         const toMorph = {
-          code,
+          code: res.code,
           dependsOn: dependsOn[view],
           file: f,
+          fonts: res.fonts,
           source,
+          todos: res.todos,
           view,
         }
 

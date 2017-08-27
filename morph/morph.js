@@ -20,6 +20,6 @@ export default (code, state, visitors) => {
     },
   })
 
-  if (visitors.Fonts) visitors.Fonts(parsed.fonts, state)
-  if (visitors.Todos) visitors.Todos(parsed.todos, state)
+  state.fonts = parsed.fonts
+  state.todos = parsed.todos
 }

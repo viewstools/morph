@@ -118,10 +118,14 @@ export default ({
 
   const finalGetImport = name => imports[name] || getImport(name)
 
-  return toComponent({
-    getImport: finalGetImport,
-    getStyles,
-    name: finalName,
-    state,
-  })
+  return {
+    code: toComponent({
+      getImport: finalGetImport,
+      getStyles,
+      name: finalName,
+      state,
+    }),
+    fonts: state.fonts,
+    todos: state.todos,
+  }
 }

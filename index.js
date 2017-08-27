@@ -37,7 +37,7 @@ export const morph = (
   })
 
   if (compile) {
-    morphed = buble.transform(morphed, {
+    morphed.code = buble.transform(morphed.code, {
       objectAssign: 'Object.assign',
       transforms: {
         modules: false,
@@ -45,12 +45,14 @@ export const morph = (
     }).code
   }
 
-  return pretty
-    ? prettier.format(morphed, {
-        singleQuote: true,
-        trailingComma: 'es5',
-      })
-    : morphed
+  if (pretty) {
+    morphed.code = prettier.format(morphed.code, {
+      singleQuote: true,
+      trailingComma: 'es5',
+    })
+  }
+
+  return morphed
 }
 
 export const getViewNotFound = (as, name, warning) =>
