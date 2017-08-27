@@ -19,6 +19,7 @@ import {
   isProp,
   isSection,
   isTodo,
+  onlyMainFont,
   stemStylesFromProp,
   warn,
 } from './helpers.js'
@@ -45,7 +46,7 @@ export default (rtext, skipComments = true) => {
         if (p.tags && p.tags.comment) return
 
         if (p.key.value === 'fontFamily') {
-          fontFamily = p.value.value
+          fontFamily = p.value.value = onlyMainFont(p.value.value)
         } else if (p.key.value === 'fontWeight') {
           fontWeight = p.value.value
         }

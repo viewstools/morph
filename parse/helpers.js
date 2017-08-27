@@ -144,7 +144,8 @@ export const getFontInfo = (fontFamily, fontWeight) => {
 
   return fonts
 }
-export const getMainFont = line => line.split(',')[0].replace(/['"]/g, '')
+export const getMainFont = line =>
+  line ? line.split(',')[0].replace(/['"]/g, '') : ''
 export const getProp = line => get(PROP, line).slice(1)
 export const getSection = line => get(SECTION, line)[1]
 export const getTodo = line => get(TODO, line).slice(1)
@@ -161,6 +162,14 @@ export const getValue = value => {
   } else {
     return value
   }
+}
+
+export const onlyMainFont = value => {
+  const t = value && value.match(TERNARY)
+
+  return t
+    ? `${t[0]} ? '${getMainFont(t[1])}' : '${getMainFont(t[2])}'`
+    : getMainFont(value)
 }
 
 export const stemStylesFromProp = (block, raw) => {

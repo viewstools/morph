@@ -1,3 +1,4 @@
+import { maybeAddFallbackFont } from '../fonts.js'
 import safe from './safe.js'
 
 export default (node, parent, code) => {
@@ -8,6 +9,11 @@ export default (node, parent, code) => {
     case 'backgroundImage':
       return {
         backgroundImage: code ? `\`url(\${${value}})\`` : `url("${value}")`,
+      }
+
+    case 'fontFamily':
+      return {
+        fontFamily: code ? value : maybeAddFallbackFont(value),
       }
 
     case 'zIndex':
