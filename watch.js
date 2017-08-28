@@ -357,12 +357,11 @@ height 100`
 
     const toViewPath = f => {
       const file = path.relative(src, f)
-      const view =
-        isData(file) || isTests(file)
-          ? file
-          : isLogic(file)
-            ? file.replace(/\.js/, '').replace(/\//g, '')
-            : toPascalCase(file.replace(/\.(view\.fake|js|view)/, ''))
+      const view = isData(file) || isTests(file)
+        ? file
+        : isLogic(file)
+          ? file.replace(/\.js/, '').replace(/\//g, '')
+          : toPascalCase(file.replace(/\.(view\.fake|js|view)/, ''))
 
       return {
         file: `./${file}`,
@@ -404,7 +403,7 @@ height 100`
 
       instance.stop = () => watcher.close()
 
-      watcher.on('add', addView)
+      watcher.on('add', f => addView(f))
       watcher.on('change', f => morphView(f))
       watcher.on(
         'unlink',
