@@ -40,6 +40,16 @@ export default ({
       state.use(/Animated/.test(name) ? 'Animated' : name)
 
       state.render.push(`<${name}`)
+
+      if (state.debug && node.isBasic && !node.properties) {
+        node.isDebugged = true
+
+        state.render.push(
+          ` onClick={(e) => context.selectBlock(e, ${node.loc.start.line})}
+            onMouseOver={(e) => context.hoverBlock(e, '${node.is ||
+              node.name.value}')}`
+        )
+      }
     },
     leave(node, parent, state) {
       if (
@@ -147,6 +157,18 @@ export default ({
     },
   }
 
+  const PropertiesDebug = {
+    leave(node, parent, state) {
+      if (state.debug && parent.isBasic && !parent.isDebugged) {
+        state.render.push(
+          ` onClick={(e) => context.selectBlock(e, ${parent.loc.start.line})}
+            onMouseOver={(e) => context.hoverBlock(e, '${parent.is ||
+              parent.name.value}')}`
+        )
+      }
+    },
+  }
+
   const PropertiesListKey = {
     leave(node, parent, state) {
       if (parent.isInList && !node.hasKey) {
@@ -220,6 +242,7 @@ export default ({
         !parent.skip &&
         !(node.key.value === 'from' && parent.parent.name.value === 'List')
       ) {
+        // TODO remove toggle
         if (isToggle(node)) {
           const propToToggle = node.tags.toggle
           const functionName = `toggle${toPascalCase(propToToggle)}`
@@ -231,10 +254,34 @@ export default ({
           return
         }
 
+        // TODO rework proxy as discussed
         // maybe pass block as proxy
         if (state.views[node.value.value]) {
           state.render.push(` ${node.key.value}=${wrap(node.value.value)}`)
           state.use(node.value.value)
+          return
+        }
+
+        if (
+          state.debug &&
+          parent.parent.isBasic &&
+          node.key.value === 'onClick'
+        ) {
+          parent.parent.isDebugged = true
+
+          state.render.push(
+            ` onClick={(e) => {
+                  if (!context.selectBlock(e, ${parent.parent.loc.start
+                    .line})) {
+                    try {
+                      (${node.value.value})();
+                    } catch(err) {
+                    }
+                  }
+                }}
+                onMouseOver={(e) => context.hoverBlock(e, '${parent.parent.is ||
+                  parent.parent.name.value}')}`
+          )
           return
         }
 
@@ -328,6 +375,7 @@ export default ({
         PropertiesStyle.leave.call(this, node, parent, state)
         PropertiesListKey.leave.call(this, node, parent, state)
         PropertiesRoute.leave.call(this, node, parent, state)
+        PropertiesDebug.leave.call(this, node, parent, state)
       },
     },
 
