@@ -101,6 +101,42 @@ export default ({
     },
   }
 
+  const BlockMaybeNeedsProperties = {
+    enter(node, parent, state) {
+      const name = node.name.value
+
+      if (
+        !node.properties &&
+        (name === 'Vertical' || name === 'List' || name === 'Horizontal')
+      ) {
+        node.properties = {
+          type: 'Properties',
+          list: [
+            {
+              type: 'Property',
+              loc: {},
+              key: {
+                type: 'Literal',
+                value: 'flexDirection',
+                valueRaw: 'flexDirection',
+                loc: {},
+              },
+              value: {
+                type: 'Literal',
+                loc: {},
+                value: name === 'Horizontal' ? 'row' : 'column',
+              },
+              meta: {},
+              tags: {
+                style: true,
+              },
+            },
+          ],
+        }
+      }
+    },
+  }
+
   const BlocksList = {
     enter(node, parent, state) {
       if (parent.name.value === 'List') {
@@ -335,6 +371,7 @@ export default ({
   return {
     BlockDefaultProps,
     BlockExplicitChildren,
+    BlockMaybeNeedsProperties,
     BlockName,
     BlockRoute,
     BlockWhen,
@@ -348,6 +385,7 @@ export default ({
         BlockRoute.enter.call(this, node, parent, state)
         BlockName.enter.call(this, node, parent, state)
         BlockDefaultProps.enter.call(this, node, parent, state)
+        BlockMaybeNeedsProperties.enter.call(this, node, parent, state)
       },
       leave(node, parent, state) {
         BlockExplicitChildren.leave.call(this, node, parent, state)

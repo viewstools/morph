@@ -78,6 +78,7 @@ export default ({
   const {
     BlockDefaultProps,
     BlockExplicitChildren,
+    BlockMaybeNeedsProperties,
     BlockName,
     BlockRoute,
     BlockWhen,
@@ -101,6 +102,7 @@ export default ({
         BlockTeleport.enter,
         BlockGoTo.enter,
         BlockDefaultProps.enter,
+        BlockMaybeNeedsProperties.enter,
       ].forEach(fn => fn.call(this, node, parent, state))
     },
     leave(node, parent, state) {

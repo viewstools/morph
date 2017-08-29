@@ -60,6 +60,7 @@ export default ({ getImport, name, tests = false, view, views = {} }) => {
   const {
     BlockDefaultProps,
     BlockExplicitChildren,
+    BlockMaybeNeedsProperties,
     BlockName,
     BlockRoute,
     BlockWhen,
@@ -80,6 +81,7 @@ export default ({ getImport, name, tests = false, view, views = {} }) => {
         BlockWhen.enter,
         BlockRoute.enter,
         BlockWrap.enter,
+        BlockMaybeNeedsProperties.enter,
         BlockName.enter,
         BlockCapture.enter,
         BlockBackgroundImage.enter,

@@ -116,6 +116,7 @@ if (shouldWatch) {
       as,
       compile,
       inlineStyles,
+      file: { raw: input, relative: input },
       name: pathToName(input),
       pretty,
       tests,

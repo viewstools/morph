@@ -70,7 +70,10 @@ const transformGlam = (code, inline, filename) => {
   }).code
 
   if (!inline) {
-    out = out.replace(/css\(/g, '').replace(/,\s*\[\]/g, '').replace(/\)/g, '')
+    out = out
+      .replace(/css\(/g, '')
+      .replace(/,\s*\[\]/g, '')
+      .replace(/\)/g, '')
   }
 
   return out
