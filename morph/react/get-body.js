@@ -1,9 +1,12 @@
 export default ({ state, name }) => {
   const render = state.render.join('')
   const hasContext = state.debug
+  const maybeChildrenArray = state.usesChildrenArray
+    ? `const childrenArray = React.Children.toArray(props.children)`
+    : ''
 
-  return state.captures.length > 0
-    ? `class ${name} extends React.Component {
+  if (state.captures.length > 0) {
+    return `class ${name} extends React.Component {
   constructor(props) {
     super(props)
     this.state = {}
@@ -11,8 +14,14 @@ export default ({ state, name }) => {
 
   render() {
     const { ${hasContext ? 'context, ' : ''}props, state } = this
+    ${maybeChildrenArray}
     return (${render})
   }
 }`
-    : `const ${name} = (props${hasContext ? ', context' : ''}) => (${render})`
+  } else {
+    return `const ${name} = (props${hasContext ? ', context' : ''}) => {
+  ${maybeChildrenArray}
+  return (${render})
+}`
+  }
 }

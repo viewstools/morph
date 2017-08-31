@@ -1,5 +1,7 @@
 import {
+  getObjectAsString,
   getProp,
+  getPropertiesAsObject,
   getStyleType,
   isCode,
   isData,
@@ -33,7 +35,7 @@ export default ({
 
   const BlockName = {
     enter(node, parent, state) {
-      const name = getBlockName(node, state)
+      const name = getBlockName(node, parent, state)
       if (name === null) return this.skip()
 
       node.name.finalValue = name
@@ -61,12 +63,80 @@ export default ({
           if (node.blocks.list.length === 0) {
             state.render.push('>')
           }
-          state.render.push(`{props.children}`)
+
+          if (!node.usesProxy) {
+            state.render.push(`{props.children}`)
+          }
         }
         state.render.push(`</${node.name.finalValue}>`)
       } else {
         state.render.push('/>')
       }
+    },
+  }
+
+  const BlockProxy = {
+    enter(node, parent, state) {
+      if (node.name.value !== 'Proxy') return
+
+      let prevParent = parent
+      while (prevParent) {
+        if (prevParent.type === 'Block' && !prevParent.parent) {
+          prevParent.usesProxy = true
+        }
+        prevParent = prevParent.parent
+      }
+
+      if (!node.properties) return
+
+      let proxied = node.properties.list.find(p => p.key.value === 'from')
+      if (!proxied) return
+      proxied = proxied.value.value
+
+      const otherProperties = node.properties.list.filter(
+        p => p.key.value !== 'from' && p.key.value !== 'when'
+      )
+
+      if (!node.when) {
+        state.render.push('{')
+      }
+
+      if (proxied === 'all') {
+        const childContent =
+          otherProperties.length > 0
+            ? `React.Children.map(props.children, child => React.cloneElement(child, ${getPropertiesAsObject(
+                otherProperties
+              )}))`
+            : 'props.children'
+
+        state.render.push(childContent)
+      } else {
+        const child = `childrenArray[props.chidrenProxyMap['${proxied}']]`
+
+        if (otherProperties.length > 0) {
+          if (node.when) {
+            if (state.render[state.render.length - 1].endsWith(' ? ')) {
+              state.render[state.render.length - 1] = state.render[
+                state.render.length - 1
+              ].replace(' ? ', ' ')
+            }
+          }
+
+          state.render.push(
+            `&& ${child} ? React.cloneElement(${child}, ${getPropertiesAsObject(
+              otherProperties
+            )}) : null`
+          )
+        } else {
+          state.render.push(child)
+        }
+
+        state.usesChildrenArray = true
+      }
+
+      state.render.push('}')
+
+      this.skip()
     },
   }
 
@@ -134,6 +204,15 @@ export default ({
           ],
         }
       }
+
+      // fake properites so that our childrenProxyMap gets picked up in case
+      // there are no custom props
+      if (node.childrenProxyMap && !node.properties) {
+        node.properties = {
+          type: 'Properties',
+          list: [],
+        }
+      }
     },
   }
 
@@ -189,6 +268,16 @@ export default ({
     leave(node, parent, state) {
       if (node.isRoute) {
         state.render.push('} />')
+      }
+    },
+  }
+
+  const PropertiesChildrenProxyMap = {
+    leave(node, parent, state) {
+      if (parent.childrenProxyMap) {
+        state.render.push(
+          ` childrenProxyMap={${getObjectAsString(parent.childrenProxyMap)}}`
+        )
       }
     },
   }
@@ -290,14 +379,6 @@ export default ({
           return
         }
 
-        // TODO rework proxy as discussed
-        // maybe pass block as proxy
-        if (state.views[node.value.value]) {
-          state.render.push(` ${node.key.value}=${wrap(node.value.value)}`)
-          state.use(node.value.value)
-          return
-        }
-
         if (
           state.debug &&
           parent.parent.isBasic &&
@@ -373,6 +454,7 @@ export default ({
     BlockExplicitChildren,
     BlockMaybeNeedsProperties,
     BlockName,
+    BlockProxy,
     BlockRoute,
     BlockWhen,
 
@@ -386,6 +468,7 @@ export default ({
         BlockName.enter.call(this, node, parent, state)
         BlockDefaultProps.enter.call(this, node, parent, state)
         BlockMaybeNeedsProperties.enter.call(this, node, parent, state)
+        BlockProxy.enter.call(this, node, parent, state)
       },
       leave(node, parent, state) {
         BlockExplicitChildren.leave.call(this, node, parent, state)
@@ -414,6 +497,7 @@ export default ({
         PropertiesListKey.leave.call(this, node, parent, state)
         PropertiesRoute.leave.call(this, node, parent, state)
         PropertiesDebug.leave.call(this, node, parent, state)
+        PropertiesChildrenProxyMap.leave.call(this, node, parent, state)
       },
     },
 

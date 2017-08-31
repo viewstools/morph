@@ -13,6 +13,16 @@ export const getObjectAsString = obj =>
       .join(',')
   )
 
+export const getPropertiesAsObject = list => {
+  const obj = {}
+
+  list.forEach(prop => {
+    obj[prop.key.value] = prop.value.value
+  })
+
+  return getObjectAsString(obj)
+}
+
 export const getProp = (node, key) => {
   const finder =
     typeof key === 'string'

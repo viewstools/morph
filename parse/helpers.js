@@ -2,7 +2,7 @@ import { all as COLOR } from 'synesthesia'
 import cssProperties from 'css-properties'
 import toCamelCase from 'to-camel-case'
 
-const BASIC = /^(CaptureEmail|CaptureFile|CaptureInput|CaptureNumber|CapturePhone|CaptureSecure|CaptureText|G|Horizontal|Image|Input|List|Select|Style|Svg|SvgDefs|SvgFeMerge|SvgFilter|Text|Vertical)$/i
+const BASIC = /^(CaptureEmail|CaptureFile|CaptureInput|CaptureNumber|CapturePhone|CaptureSecure|CaptureText|G|Horizontal|Image|List|Svg|SvgCircle|SvgEllipse|SvgDefs|SvgGroup|SvgLinearGradient|SvgRadialGradient|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgSymbol|SvgText|SvgUse|SvgStop|Text|Vertical)$/i
 const BLOCK = /^([A-Z][a-zA-Z0-9]*)(\s+[a-z\s]*([A-Z][a-zA-Z0-9]*))?$/
 const BOOL = /^(false|true)$/i
 const CAPTURE = /^(CaptureEmail|CaptureFile|CaptureInput|CaptureNumber|CapturePhone|CaptureSecure|CaptureText)$/i
@@ -14,11 +14,11 @@ const EMPTY_LIST = /^is empty list$/i
 const EMPTY_TEXT = /^is empty text$/i
 const FLOAT = /^[0-9]+\.[0-9]+$/
 const FONTABLE = /^(CaptureEmail|CaptureInput|CaptureNumber|CapturePhone|CaptureSecure|CaptureText|Input|Text)$/
-const GROUP = /^(G|Horizontal|List|Svg|SvgDefs|SvgFeMerge|SvgFilter|Vertical)$/i
 const LIST = /^List$/
 const INT = /^[0-9]+$/
 const ITEM = /^item[A-Z]*$/
 const MARGIN = /^margin/
+const NOT_GROUP = /^(Image|Test|Text|Proxy|SvgCircle|SvgEllipse|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgText|SvgStop)$/i
 const PADDING = /^padding/
 const PROP = /^([a-z][a-zA-Z0-9]*)\s+(.+)$/
 const PROP_STYLE_STEMS = /^([a-z][A-Z0-9]*?)(Active|ActiveHover|Hover|Placeholder|Disabled|Print)?$/i
@@ -59,7 +59,7 @@ export const isEmptyText = line => is(EMPTY_TEXT, line)
 export const isEnd = line => line === ''
 export const isFloat = line => is(FLOAT, line)
 export const isFontable = line => is(FONTABLE, line)
-export const isGroup = line => is(GROUP, line)
+export const isGroup = line => !is(NOT_GROUP, line) && !isCapture(line)
 export const isList = line => is(LIST, line)
 export const isInt = line => is(INT, line)
 export const isItem = line => is(ITEM, line)

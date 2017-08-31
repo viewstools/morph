@@ -33,7 +33,13 @@ export default ({ isReactNative, uses }, getImport) => {
     if (isReactNative && NATIVE.includes(d)) {
       useNative(d)
     } else if (isReactNative && SVG.includes(d)) {
-      useSvg(d === 'SvgText' ? 'Text as SvgText' : d)
+      useSvg(
+        d === 'Svg'
+          ? d
+          : d === 'SvgGroup'
+            ? `G as SvgGroup`
+            : `${d.replace('Svg', '')} as ${d}`
+      )
     } else if (/^[A-Z]/.test(d) || /\.data$/.test(d)) {
       dependencies.push(getImport(d))
     } else if (d === 'glam') {

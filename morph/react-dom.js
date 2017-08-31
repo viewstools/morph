@@ -80,6 +80,7 @@ export default ({
     BlockExplicitChildren,
     BlockMaybeNeedsProperties,
     BlockName,
+    BlockProxy,
     BlockRoute,
     BlockWhen,
     ...visitors
@@ -103,6 +104,7 @@ export default ({
         BlockGoTo.enter,
         BlockDefaultProps.enter,
         BlockMaybeNeedsProperties.enter,
+        BlockProxy.enter,
       ].forEach(fn => fn.call(this, node, parent, state))
     },
     leave(node, parent, state) {

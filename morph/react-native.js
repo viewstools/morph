@@ -62,6 +62,7 @@ export default ({ getImport, name, tests = false, view, views = {} }) => {
     BlockExplicitChildren,
     BlockMaybeNeedsProperties,
     BlockName,
+    BlockProxy,
     BlockRoute,
     BlockWhen,
     ...visitors
@@ -86,6 +87,7 @@ export default ({ getImport, name, tests = false, view, views = {} }) => {
         BlockCapture.enter,
         BlockBackgroundImage.enter,
         BlockDefaultProps.enter,
+        BlockProxy.enter,
       ].forEach(fn => fn.call(this, node, parent, state))
     },
     leave(node, parent, state) {

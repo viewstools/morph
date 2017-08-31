@@ -37,6 +37,23 @@ export default (rtext, skipComments = true) => {
   const views = []
   let lastCapture
 
+  const getChildrenProxyMap = block => {
+    const childrenProxyMap = {}
+
+    block.blocks.list.forEach((child, i) => {
+      let maybeName = child.is || child.name.value
+      let name = maybeName
+      let next = 1
+      while (name in childrenProxyMap) {
+        name = `${maybeName}${next}`
+        next++
+      }
+      childrenProxyMap[name] = i
+    })
+
+    return Object.keys(childrenProxyMap).length === 0 ? null : childrenProxyMap
+  }
+
   const lookForFonts = block => {
     if (block.properties && (isFontable(block.name.value) || !block.isBasic)) {
       let fontFamily
@@ -102,6 +119,10 @@ export default (rtext, skipComments = true) => {
 
     if (block.blocks) {
       block.blocks.list.forEach(lookForFonts)
+
+      if (!block.isBasic) {
+        block.childrenProxyMap = getChildrenProxyMap(block)
+      }
     }
 
     if (stack.length > 0) {
@@ -220,6 +241,7 @@ export default (rtext, skipComments = true) => {
         list: [],
         loc: getLoc(lineIndex + 1, 0),
       }
+
       shouldPushToStack = true
     }
 

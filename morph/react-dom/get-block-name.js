@@ -1,6 +1,7 @@
 import { getProp, hasProp } from '../utils.js'
+import toCamelCase from 'to-camel-case'
 
-export default node => {
+export default (node, parent, state) => {
   switch (node.name.value) {
     case 'CaptureEmail':
     case 'CaptureFile':
@@ -13,7 +14,7 @@ export default node => {
 
     case 'Horizontal':
     case 'Vertical':
-      return getGroupBlockName(node)
+      return getGroupBlockName(node, parent)
 
     case 'Image':
       return 'img'
@@ -23,36 +24,36 @@ export default node => {
       return 'div'
 
     case 'Proxy':
-      return getProxyBlockName(node)
-    // TODO SvgText should be just Text but the import should be determined from the parent
-    // being Svg
-
-    case 'SvgText':
-      return 'text'
+      return null
 
     case 'Svg':
-    case 'Circle':
-    case 'Ellipse':
-    case 'G':
-    case 'LinearGradient':
-    case 'RadialGradient':
-    case 'Line':
-    case 'Path':
-    case 'Polygon':
-    case 'Polyline':
-    case 'Rect':
-    case 'Symbol':
-    case 'Use':
-    case 'Defs':
-    case 'Stop':
-      return node.name.value.toLowerCase()
+      return 'svg'
+
+    case 'SvgGroup':
+      return 'g'
+
+    case 'SvgCircle':
+    case 'SvgEllipse':
+    case 'SvgLinearGradient':
+    case 'SvgRadialGradient':
+    case 'SvgLine':
+    case 'SvgText':
+    case 'SvgPath':
+    case 'SvgPolygon':
+    case 'SvgPolyline':
+    case 'SvgRect':
+    case 'SvgSymbol':
+    case 'SvgUse':
+    case 'SvgDefs':
+    case 'SvgStop':
+      return toCamelCase(node.name.value.replace('Svg', ''))
 
     default:
       return node.name.value
   }
 }
 
-const getGroupBlockName = node => {
+const getGroupBlockName = (node, parent) => {
   let name = 'div'
 
   if (hasProp(node, 'teleportTo')) {
@@ -62,7 +63,19 @@ const getGroupBlockName = node => {
     name = 'a'
     node.goTo = true
   } else if (hasProp(node, 'onClick')) {
-    name = 'button'
+    let prevParent = parent
+    let canBeButton = true
+
+    while (prevParent && canBeButton) {
+      if (prevParent.type === 'Block') {
+        canBeButton = !hasProp(prevParent, 'onClick')
+      }
+      prevParent = prevParent.parent
+    }
+
+    if (canBeButton) {
+      name = 'button'
+    }
   } else if (hasProp(node, 'overflowY', v => v === 'auto' || v === 'scroll')) {
     name = 'div'
   }
@@ -72,9 +85,4 @@ const getGroupBlockName = node => {
   }
 
   return name
-}
-
-const getProxyBlockName = node => {
-  const from = getProp(node, 'from')
-  return from && from.value.value
 }

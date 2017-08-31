@@ -2,7 +2,7 @@ import { getProp, hasProp, isCode, isToggle } from '../utils.js'
 import makeToggle from '../react/make-toggle.js'
 import toPascalCase from 'to-pascal-case'
 
-export default (node, state) => {
+export default (node, parent, state) => {
   switch (node.name.value) {
     case 'CaptureEmail':
     // case 'CaptureFile':
@@ -20,9 +20,7 @@ export default (node, state) => {
       return getListBlockName(node)
 
     case 'Proxy':
-      return getProxyBlockName(node)
-    // TODO SvgText should be just Text but the import should be determined from the parent
-    // being Svg
+      return null
 
     case 'Text':
       return node.maybeAnimated ? `Animated.Text` : 'Text'
@@ -80,9 +78,4 @@ const getListBlockName = node => {
     ? 'ScrollView'
     : 'View'
   return node.maybeAnimated ? `Animated.${base}` : base
-}
-
-const getProxyBlockName = node => {
-  const from = getProp(node, 'from')
-  return from && from.value.value
 }
