@@ -336,6 +336,13 @@ height 100`
             await Promise.all(toMorphQueue.map(onMorph))
             toMorphQueue = null
           }
+
+          if (isTests(f)) {
+            const viewForTest = view.replace('.view.tests', '')
+            if (views[viewForTest]) {
+              morphView(path.join(src, views[viewForTest]))
+            }
+          }
         } else {
           await onMorph(toMorph)
         }
@@ -421,6 +428,11 @@ height 100`
             delete data[view]
           } else if (isTests(f)) {
             delete tests[view]
+
+            const viewForTest = view.replace('.view.tests', '')
+            if (views[viewForTest]) {
+              morphView(path.join(src, views[viewForTest]))
+            }
           } else if (isLogic(f)) {
             delete logic[view]
           } else {
