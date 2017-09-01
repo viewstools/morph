@@ -154,6 +154,7 @@ module.exports = options => {
 
     const data = {}
     const dependsOn = {}
+    const dependedUpon = {}
     const logic = {}
     const tests = {}
     const views = Object.assign({}, map)
@@ -161,6 +162,7 @@ module.exports = options => {
     const instance = {
       data,
       dependsOn,
+      dependedUpon,
       logic,
       tests,
       views,
@@ -217,6 +219,10 @@ module.exports = options => {
       }
     })
 
+    const makeDependendUpon = () => {
+      Object.keys(views).forEach(updateDependedUpon)
+    }
+
     const maybeFakeJs = (f, file, view) => {
       const fakeView = `${view}.view.fake`
 
@@ -254,6 +260,8 @@ height 100`
         viewsLeftToBeReady--
 
         if (viewsLeftToBeReady === 0) {
+          makeDependendUpon()
+
           resolve(instance)
         }
       }
@@ -262,20 +270,23 @@ height 100`
     const getPointsOfUseFor = view =>
       Object.keys(dependsOn).filter(dep => dependsOn[dep].includes(view))
 
-    const getDependedUpon = view => {
-      const dependedUpon = []
+    const updateDependedUpon = viewRaw => {
+      const view = viewRaw.split('.')[0]
+      const list = []
       const left = getPointsOfUseFor(view)
 
       while (left.length > 0) {
         const next = left.pop()
 
-        if (!dependedUpon.includes(next)) {
-          dependedUpon.push(next)
+        if (!list.includes(next)) {
+          list.push(next)
           getPointsOfUseFor(next).forEach(dep => left.push(dep))
         }
       }
 
-      return dependedUpon
+      dependedUpon[view] = uniq(flatten(list))
+
+      return dependedUpon[view]
     }
 
     const addViewSkipMorph = f => addView(f, true)
@@ -318,6 +329,7 @@ height 100`
         const toMorph = {
           code: res.code,
           dependsOn: dependsOn[view],
+          // dependedUpon: dependedUpon[view],
           file: f,
           fonts: res.fonts,
           source,
@@ -326,6 +338,10 @@ height 100`
         }
 
         if (maybeIsReady()) {
+          // TODO revisit effect of rawView vs view here
+          updateDependedUpon(view)
+          toMorph.dependedUpon = dependedUpon[view]
+
           if (toMorphQueue === null) {
             toMorphQueue = []
           }
@@ -356,10 +372,8 @@ height 100`
     const remorphDependenciesFor = async viewRaw => {
       const view = viewRaw.split('.')[0]
 
-      const dependedUpon = uniq(flatten(getDependedUpon(view)))
-
       await Promise.all(
-        dependedUpon.map(dep => {
+        dependedUpon[view].map(dep => {
           return morphView(path.join(src, views[dep]), true)
         })
       )
@@ -442,6 +456,8 @@ height 100`
           if (typeof onRemove === 'function') {
             onRemove(view)
           }
+
+          updateDependedUpon(view)
 
           remorphDependenciesFor(view)
 
