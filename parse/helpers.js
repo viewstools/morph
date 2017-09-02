@@ -24,13 +24,14 @@ const PROP = /^([a-z][a-zA-Z0-9]*)\s+(.+)$/
 const PROP_STYLE_STEMS = /^([a-z][A-Z0-9]*?)(Active|ActiveHover|Hover|Placeholder|Disabled|Print)?$/i
 const SECTION = /^([a-z][a-zA-Z0-9]*)$/
 const STYLE = new RegExp(
-  `^(${cssProperties.map(toCamelCase).join('|')}|heightBlocked)$`
+  `^(${cssProperties.map(toCamelCase).join('|')}|heightBlocked|pointerEvents)$`
 )
 const TERNARY = /\?\s*['"]?\s*(.+)?\s*['"]?\s*:\s*['"]?\s*(.+)\s*['"]?\s*/
 const TEXT = /^Text$/
 const TODO = /TODO\s*(@([a-z]+))?\s*(.+)/i
 const TOGGLE = new RegExp(`^toggle (props|item).(.+)$`)
 const TRUE = /^true$/i
+const USER_COMMENT = /^##\s*(.+)$/
 
 export const is = (thing, line) => thing.test(line)
 export const isBasic = line => is(BASIC, line)
@@ -72,6 +73,7 @@ export const isStyle = line => is(STYLE, line)
 export const isTodo = line => is(TODO, line)
 export const isToggle = line => is(TOGGLE, line)
 export const isTrue = line => is(TRUE, line)
+export const isUserComment = line => is(USER_COMMENT, line)
 
 const get = (regex, line) => line.match(regex)
 

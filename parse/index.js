@@ -19,6 +19,7 @@ import {
   isProp,
   isSection,
   isTodo,
+  isUserComment,
   onlyMainFont,
   stemStylesFromProp,
   warn,
@@ -413,7 +414,12 @@ export default (rtext, skipComments = true) => {
           }
         }
       } else if (isComment(line) && !skipComments) {
-        const [value] = getComment(line)
+        let [value] = getComment(line)
+
+        const userComment = isUserComment(line)
+        if (userComment) {
+          value = getComment(value)
+        }
 
         properties.push({
           type: 'Property',
@@ -423,7 +429,7 @@ export default (rtext, skipComments = true) => {
             value,
             loc: getLoc(lineIndex, l.indexOf(value), l.length - 1),
           },
-          tags: { comment: true },
+          tags: { comment: true, userComment },
         })
       }
     }
