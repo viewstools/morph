@@ -2,18 +2,18 @@ import { all as COLOR } from 'synesthesia'
 import cssProperties from 'css-properties'
 import toCamelCase from 'to-camel-case'
 
-const BASIC = /^(CaptureEmail|CaptureFile|CaptureInput|CaptureNumber|CapturePhone|CaptureSecure|CaptureText|G|Horizontal|Image|List|Svg|SvgCircle|SvgEllipse|SvgDefs|SvgGroup|SvgLinearGradient|SvgRadialGradient|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgSymbol|SvgText|SvgUse|SvgStop|Text|Vertical)$/i
+const BASIC = /^(CaptureEmail|CaptureFile|CaptureNumber|CapturePhone|CaptureSecure|CaptureText|CaptureTextArea|G|Horizontal|Image|List|Svg|SvgCircle|SvgEllipse|SvgDefs|SvgGroup|SvgLinearGradient|SvgRadialGradient|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgSymbol|SvgText|SvgUse|SvgStop|Text|Vertical)$/i
 const BLOCK = /^([A-Z][a-zA-Z0-9]*)(\s+[a-z\s]*([A-Z][a-zA-Z0-9]*))?$/
 const BOOL = /^(false|true)$/i
-const CAPTURE = /^(CaptureEmail|CaptureFile|CaptureInput|CaptureNumber|CapturePhone|CaptureSecure|CaptureText)$/i
+const CAPTURE = /^(CaptureEmail|CaptureFile|CaptureNumber|CapturePhone|CaptureSecure|CaptureText|CaptureTextArea)$/i
 const CODE_EXPLICIT = /^{.+}$/
 const CODE_IMPLICIT = /(props|item|index)\./
-const COMMENT = /^#\s*(.+)$/
+const COMMENT = /^#(.+)$/
 const DATA = /^.+\.data$/
 const EMPTY_LIST = /^is empty list$/i
 const EMPTY_TEXT = /^is empty text$/i
 const FLOAT = /^[0-9]+\.[0-9]+$/
-const FONTABLE = /^(CaptureEmail|CaptureInput|CaptureNumber|CapturePhone|CaptureSecure|CaptureText|Input|Text)$/
+const FONTABLE = /^(CaptureEmail|CaptureNumber|CapturePhone|CaptureSecure|CaptureText|CaptureTextArea|Text)$/
 const LIST = /^List$/
 const INT = /^[0-9]+$/
 const ITEM = /^item[A-Z]*$/
@@ -31,7 +31,7 @@ const TEXT = /^Text$/
 const TODO = /TODO\s*(@([a-z]+))?\s*(.+)/i
 const TOGGLE = new RegExp(`^toggle (props|item).(.+)$`)
 const TRUE = /^true$/i
-const USER_COMMENT = /^##\s*(.+)$/
+const USER_COMMENT = /^##(.*)$/
 
 export const is = (thing, line) => thing.test(line)
 export const isBasic = line => is(BASIC, line)
@@ -100,7 +100,13 @@ export const getCodeData = line => {
     .split(' ')
     .filter(l => isCodeOneWord(l) || /[.[]/.test(l))
 }
-export const getComment = line => get(COMMENT, line).slice(1)
+export const getComment = line => {
+  try {
+    return get(COMMENT, line).slice(1)
+  } catch (err) {
+    return ''
+  }
+}
 export const getColor = line => get(COLOR, line)
 export const getFontInfo = (fontFamily, fontWeight) => {
   const fonts = []

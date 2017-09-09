@@ -10,6 +10,8 @@ export default (node, parent, state) => {
     case 'CapturePhone':
     case 'CaptureSecure':
     case 'CaptureText':
+    // TODO multiline={true}
+    case 'CaptureTextArea':
       return 'TextInput'
 
     case 'Horizontal':

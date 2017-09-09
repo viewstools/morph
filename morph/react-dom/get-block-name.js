@@ -5,12 +5,14 @@ export default (node, parent, state) => {
   switch (node.name.value) {
     case 'CaptureEmail':
     case 'CaptureFile':
-    case 'CaptureInput':
     case 'CaptureNumber':
     case 'CapturePhone':
     case 'CaptureSecure':
     case 'CaptureText':
       return 'input'
+
+    case 'CaptureTextArea':
+      return 'textarea'
 
     case 'Horizontal':
     case 'Vertical':
