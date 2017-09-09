@@ -140,6 +140,15 @@ export default (rtext, skipComments = true) => {
     }
   }
 
+  const maybeBlockUsesPermissiveNewLine = (block, i) => {
+    // permissive nesting may be happening
+    const prevLine0 = lines[i - 2]
+    const prevLine1 = lines[i - 1]
+    if (isEnd(prevLine1) && !isEnd(prevLine0)) {
+      block.usesPermissiveNewLine = true
+    }
+  }
+
   const parseBlock = (l, i, line, lineIndex) => {
     const { block: name, is } = getBlock(line)
     let shouldPushToStack = false
@@ -192,10 +201,13 @@ export default (rtext, skipComments = true) => {
             warn(`add Vertical at the top`, block)
           }
           // shouldPushToStack = true
+        } else {
+          maybeBlockUsesPermissiveNewLine(block, i)
         }
 
         last.blocks.list.push(block)
       } else {
+        maybeBlockUsesPermissiveNewLine(block, i)
         // the block is inside a block that isn't a group
         end(stack.pop(), lineIndex - 1)
         const topLevelIsGroup = !!views[0].blocks
