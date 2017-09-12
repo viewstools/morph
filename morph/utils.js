@@ -1,5 +1,11 @@
 import wrap from './react/wrap.js'
 
+const INTERPOLATION = /\${(.+)}/
+export const deinterpolate = str => {
+  const match = str.match(INTERPOLATION)
+  return match ? match[1] : str
+}
+
 export const getObjectAsString = obj =>
   wrap(
     Object.keys(obj)

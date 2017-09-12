@@ -1,4 +1,4 @@
-import { isTag } from '../utils.js'
+import { deinterpolate, isTag } from '../utils.js'
 import getColor from 'color'
 
 export default (node, parent, code) => {
@@ -86,7 +86,7 @@ const getShadow = value => {
   if (color) {
     // TODO what if the color is a prop? do we calculate this on the fly, how?
     if (/props/.test(color)) {
-      ret.shadowColor = color
+      ret.shadowColor = deinterpolate(color)
       ret.shadowOpacity = 1
     } else {
       color = getColor(color)
