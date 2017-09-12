@@ -62,6 +62,14 @@ export const enter = (node, parent, state) => {
       if (placeholder) {
         state.render.push(` placeholder=${safe(placeholder.value.value)}`)
       }
+
+      const underlineColorAndroid = getProp(node, 'underlineColorAndroid')
+      const underlineColorAndroidValue = underlineColorAndroid
+        ? underlineColorAndroid.value.value
+        : 'transparent'
+      state.render.push(
+        ` underlineColorAndroid=${safe(underlineColorAndroidValue)}`
+      )
     }
   }
 }
