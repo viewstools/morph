@@ -40,7 +40,14 @@ export default ({ state, name }) => {
 
   render() {
     const { props, state } = this
-    return <${name} {...state.data} {...props} />
+    return (
+      <${name}
+        width={props.widthFromViewsArtboard}
+        height={props.heightFromViewsArtboard}
+        {...state.data}
+        {...props}
+      />
+    )
   }
 }
 ${tests.name}.tests = fromTests.names`
