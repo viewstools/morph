@@ -125,7 +125,7 @@ module.exports = options => {
 
       const ret = relativise(file, f)
 
-      return isJs(ret) ? ret : `${ret}.js`
+      return isJs(ret) ? ret.replace(/\.js$/, '') : `${ret}.js`
     }
 
     const makeGetImport = (view, file) => {
@@ -380,7 +380,7 @@ height 100`
     }
 
     const toViewPath = f => {
-      const file = path.relative(src, f)
+      const file = path.relative(src, f.replace(/(\.ios|\.android|\.web)/, ''))
       const view =
         isData(file) || isTests(file)
           ? file
