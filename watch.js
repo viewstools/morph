@@ -184,8 +184,7 @@ module.exports = options => {
       }
 
       if (isJsComponent(f) && shouldIncludeFake) {
-        maybeFakeJs(f, file, view)
-        return
+        return maybeFakeJs(f, file, view)
       }
 
       const fileIsData = isData(file)
@@ -226,29 +225,27 @@ module.exports = options => {
     const maybeFakeJs = (f, file, view) => {
       const fakeView = `${view}.view.fake`
 
-      if (!(isJsComponent(f) && shouldIncludeFake && !views[view])) return false
+      if (!(isJsComponent(f) && shouldIncludeFake && !views[view])) return
 
       const fakeFile = path.join(path.dirname(f), fakeView)
 
       // TODO async
-      if (fs.existsSync(fakeFile)) return true
-
-      // TODO async
-      fs.writeFileSync(
-        fakeFile,
-        `${view}Fake is Vertical
+      if (!fs.existsSync(fakeFile)) {
+        // TODO async
+        fs.writeFileSync(
+          fakeFile,
+          `${view}Fake is Vertical
 backgroundColor rgba(53,63,69,0.5)
 width 100
 height 100`
-      )
+        )
 
-      const finalFake = toViewPath(fakeFile)
-      console.log(
-        chalk.green('🐿 '),
-        finalFake.view,
-        chalk.dim(`-> ${finalFake.fakeFile}`)
-      )
-      return true
+        // const finalFake = toViewPath(fakeFile)
+      }
+      console.log(chalk.green('🐿 '), view, chalk.dim(`-> ${fakeFile}`))
+
+      views[view] = fakeFile
+      return fakeFile
     }
 
     const maybeIsReady = () => {
