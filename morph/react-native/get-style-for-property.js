@@ -63,7 +63,7 @@ const getFontFamily = (node, parent) => {
 // https://developer.mozilla.org/en/docs/Web/CSS/box-shadow?v=example
 // prop mapping https://github.com/necolas/react-native-web/issues/44#issuecomment-269031472
 const getShadow = value => {
-  const [offsetX, offsetY, ...parts] = value.split(' ')
+  const [offsetX, offsetY, ...parts] = value.replace(/`/g, '').split(' ')
 
   const ret = {
     // Android
@@ -76,11 +76,18 @@ const getShadow = value => {
   }
 
   let color
-  if (parts.length === 1) {
-    color = parts[0]
-  } else if (parts.length === 2) {
-    color = parts[1]
-    ret.shadowRadius = parseInt(parts[0], 10)
+  switch (parts.length) {
+    case 1:
+      color = parts[0]
+      break
+    case 2:
+      color = parts[1]
+      ret.shadowRadius = parseInt(parts[0], 10)
+      break
+    case 3:
+      color = parts[2]
+      ret.shadowRadius = parseInt(parts[0], 10)
+      break
   }
 
   if (color) {
