@@ -42,13 +42,20 @@ export default ({ state, name }) => {
     const { props, state } = this
     return (
       <${name}
-        width={props.widthFromViewsArtboard}
-        height={props.heightFromViewsArtboard}
+        width={props.width}
+        height={props.height}
         {...state.data}
-        {...props}
+        {...clean(props)}
       />
     )
   }
+}
+function clean(props) {
+  const ret = {}
+  Object.keys(props)
+    .filter(prop => prop !== 'height' && prop !== 'width' && prop !== 'test')
+    .forEach(prop => ret[prop] = props[prop])
+  return ret
 }
 ${tests.name}.tests = fromTests.names`
 
