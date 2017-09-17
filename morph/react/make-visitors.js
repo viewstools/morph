@@ -1,4 +1,5 @@
 import {
+  asScopedValue,
   getObjectAsString,
   getProp,
   getPropertiesAsObject,
@@ -118,12 +119,12 @@ export default ({
             if (state.render[state.render.length - 1].endsWith(' ? ')) {
               state.render[state.render.length - 1] = state.render[
                 state.render.length - 1
-              ].replace(' ? ', ' ')
+              ].replace(' ? ', ' && ')
             }
           }
 
           state.render.push(
-            `&& ${child} ? React.cloneElement(${child}, ${getPropertiesAsObject(
+            ` ${child} ? React.cloneElement(${child}, ${getPropertiesAsObject(
               otherProperties
             )}) : null`
           )
@@ -440,9 +441,15 @@ export default ({
   const PropertyText = {
     enter(node, parent, state) {
       if (node.key.value === 'text' && parent.parent.name.value === 'Text') {
-        parent.parent.explicitChildren = isCode(node)
-          ? wrap(node.value.value)
-          : node.value.value
+        if (parent.parent.scoped.text) {
+          parent.parent.explicitChildren = wrap(
+            asScopedValue(parent.parent.scoped.text, node.value.value, parent)
+          )
+        } else {
+          parent.parent.explicitChildren = isCode(node)
+            ? wrap(node.value.value)
+            : node.value.value
+        }
 
         return true
       }
@@ -508,7 +515,9 @@ export default ({
           key === 'at' ||
           key === 'when' ||
           isData(node) ||
-          (!isValidPropertyForBlock(node, parent) && parent.parent.isBasic)
+          (!isValidPropertyForBlock(node, parent) && parent.parent.isBasic) ||
+          node.tags.scope ||
+          node.inScope
         )
           return
 

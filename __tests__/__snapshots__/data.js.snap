@@ -1,14 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`data parses data fields.data 1`] = `
-"export default { city: 'Dublin', country: 'Ireland' };
-"
+Object {
+  "code": "export default { city: 'Dublin', country: 'Ireland', fonts: {}, todos: [] };
+",
+}
 `;
 
 exports[`data parses data list.data 1`] = `
-"export default [
+Object {
+  "code": "export default [
   { name: 'Dario', surname: 'Cravero' },
   { name: 'Tom', surname: 'Parandyk' },
 ];
-"
+",
+}
 `;

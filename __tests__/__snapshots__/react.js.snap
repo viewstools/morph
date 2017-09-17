@@ -10,12 +10,13 @@ const styles = {
   ]),
 };
 
-const Action = props =>
-  props.check
+const Action = props => {
+  return props.check
     ? <button onClick={props.clickMe} className={styles.h1lmw638}>
         <div>click me</div>{props.children}
       </button>
     : null;
+};
 
 export default Action;
 // fonts {}
@@ -25,23 +26,25 @@ export default Action;
 exports[`react-dom parses react-dom AnimatedButton 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
-import Animated from 'animated/lib/targets/react-dom.js';
+import Animated from 'react-dom-animated';
 import css from 'glam';
 const styles = {
   h1lmw638: css('css-1s0kfvh', [], () => [
     \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
   ]),
 };
-Animated.button = Animated.createAnimatedComponent('button');
 
-const AnimatedButton = props =>
-  <Animated.button
-    onClick={props.onClick}
-    className={styles.h1lmw638}
-    style={{ opacity: props.opacity }}
-  >
-    <div>hey</div>{props.children}
-  </Animated.button>;
+const AnimatedButton = props => {
+  return (
+    <Animated.button
+      onClick={props.onClick}
+      className={styles.h1lmw638}
+      style={{ opacity: props.opacity }}
+    >
+      <div>hey</div>{props.children}
+    </Animated.button>
+  );
+};
 
 export default AnimatedButton;
 // fonts {}
@@ -51,30 +54,29 @@ export default AnimatedButton;
 exports[`react-dom parses react-dom BackgroundImage 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
-import Animated from 'animated/lib/targets/react-dom.js';
+import Animated from 'react-dom-animated';
 import css from 'glam';
 const styles = {
-  hzr7mx4: css('css-1bxi9t2', [], () => [
-    \`.css-1bxi9t2 { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column;
-background-image: url(\\"https://viewsdx.com/image.jpg\\");
-background-size: cover; }\`,
+  h1bfz4lt: css('css-1lgf2gr', [], () => [
+    \`.css-1lgf2gr { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column;
+background-image: url(\\"https://viewsdx.com/image.jpg\\"); }\`,
   ]),
   hg3iw2q: css('css-sw3yj', [], () => [
     \`.css-sw3yj { flex-direction: row; -webkit-box-direction: normal; -webkit-box-orient: horizontal; -ms-flex-direction: row; -webkit-flex-direction: row; }\`,
   ]),
 };
 
-const BackgroundImage = props =>
-  <div className={styles.hzr7mx4}>
-    <Animated.div
-      className={styles.hg3iw2q}
-      style={{
-        backgroundImage: \`url(\${props.backgroundImage})\`,
-        backgroundSize: cover,
-      }}
-    />
-    {props.children}
-  </div>;
+const BackgroundImage = props => {
+  return (
+    <div className={styles.h1bfz4lt}>
+      <Animated.div
+        className={styles.hg3iw2q}
+        style={{ backgroundImage: \`url(\${props.backgroundImage})\` }}
+      />
+      {props.children}
+    </div>
+  );
+};
 
 export default BackgroundImage;
 // fonts {}
@@ -84,7 +86,7 @@ export default BackgroundImage;
 exports[`react-dom parses react-dom BoxShadow 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
-import Animated from 'animated/lib/targets/react-dom.js';
+import Animated from 'react-dom-animated';
 import css from 'glam';
 const styles = {
   h1lmw638: css('css-1s0kfvh', [], () => [
@@ -92,13 +94,16 @@ const styles = {
   ]),
 };
 
-const BoxShadow = props =>
-  <Animated.div
-    className={styles.h1lmw638}
-    style={{ boxShadow: \`10px 5px 2px \${props.color}\` }}
-  >
-    {props.children}
-  </Animated.div>;
+const BoxShadow = props => {
+  return (
+    <Animated.div
+      className={styles.h1lmw638}
+      style={{ boxShadow: \`10px 5px 2px \${props.color}\` }}
+    >
+      {props.children}
+    </Animated.div>
+  );
+};
 
 export default BoxShadow;
 // fonts {}
@@ -115,10 +120,18 @@ const styles = {
   ]),
 };
 
-const GoTo = props =>
-  <a target=\\"_blank\\" href=\\"https://viewsdx.com\\" className={styles.h1lmw638}>
-    <div>Go to ViewsDX website!</div>{props.children}
-  </a>;
+const GoTo = props => {
+  return (
+    <a
+      href=\\"https://viewsdx.com\\"
+      rel=\\"noopener noreferrer\\"
+      target=\\"_blank\\"
+      className={styles.h1lmw638}
+    >
+      <div>Go to ViewsDX website!</div>{props.children}
+    </a>
+  );
+};
 
 export default GoTo;
 // fonts {}
@@ -141,10 +154,13 @@ background-color: black; }\`,
   ]),
 };
 
-const Hover = props =>
-  <button onClick={props.onClick} className={styles.hpg1h4y}>
-    <div className={styles.h1669j73}>Hey!</div>{props.children}
-  </button>;
+const Hover = props => {
+  return (
+    <button onClick={props.onClick} className={styles.hpg1h4y}>
+      <div className={styles.h1669j73}>Hey!</div>{props.children}
+    </button>
+  );
+};
 
 export default Hover;
 // fonts {}
@@ -167,11 +183,20 @@ background-color: black; }\`,
   ]),
 };
 
-const HoverProxy = props =>
-  <button onClick={props.onClick} className={styles.hpg1h4y}>
-    <props.icon from={props.icon} fill=\\"white\\" fillHover=\\"black\\" />
-    <div className={styles.h1669j73}>Hey!</div>{props.children}
-  </button>;
+const HoverProxy = props => {
+  const childrenArray = React.Children.toArray(props.children);
+  return (
+    <button onClick={props.onClick} className={styles.hpg1h4y}>
+      {childrenArray[props.chidrenProxyMap['props.icon']]
+        ? React.cloneElement(
+            childrenArray[props.chidrenProxyMap['props.icon']],
+            { fill: 'white', fillHover: 'black' }
+          )
+        : null}
+      <div className={styles.h1669j73}>Hey!</div>
+    </button>
+  );
+};
 
 export default HoverProxy;
 // fonts {}
@@ -182,7 +207,9 @@ exports[`react-dom parses react-dom JustText 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 
-const JustText = props => <div>hey!</div>;
+const JustText = props => {
+  return <div>hey!</div>;
+};
 
 export default JustText;
 // fonts {}
@@ -199,16 +226,19 @@ const styles = {
   ]),
 };
 
-const ListOfSomething = props =>
-  <div className={styles.h1lmw638}>
-    {Array.isArray(props.list) &&
-      props.list.map((item, index) =>
-        <div dataIndex={index} style={{ color: item.color }} key={index}>
-          {index}
-        </div>
-      )}
-    {props.children}
-  </div>;
+const ListOfSomething = props => {
+  return (
+    <div className={styles.h1lmw638}>
+      {Array.isArray(props.list) &&
+        props.list.map((item, index) =>
+          <div dataIndex={index} style={{ color: item.color }} key={index}>
+            {index}
+          </div>
+        )}
+      {props.children}
+    </div>
+  );
+};
 
 export default ListOfSomething;
 // fonts {}
@@ -226,12 +256,15 @@ const styles = {
   ]),
 };
 
-const ListWithData = props =>
-  <div className={styles.h1lmw638}>
-    {Array.isArray(usersData) &&
-      usersData.map((item, i) => <div key={i}>{item.name}</div>)}
-    {props.children}
-  </div>;
+const ListWithData = props => {
+  return (
+    <div className={styles.h1lmw638}>
+      {Array.isArray(usersData) &&
+        usersData.map((item, index) => <div key={index}>{item.name}</div>)}
+      {props.children}
+    </div>
+  );
+};
 
 export default ListWithData;
 // fonts {}
@@ -242,7 +275,9 @@ exports[`react-dom parses react-dom NameIsType 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 
-const NameIsType = props => <div>iam</div>;
+const NameIsType = props => {
+  return <div>iam</div>;
+};
 
 export default NameIsType;
 // fonts {}
@@ -263,21 +298,21 @@ const styles = {
   ]),
 };
 
-const NestedRoutes = props =>
-  <div>
-    <div>topics</div>
-    <Link
-      to={\`\${props.match.url === '/' ? '' : props.match.url}/rendering\`}
-      className={styles.h1lmw638}
-    >
-      <div>Rendering with React</div>
-    </Link>
-    <Route
-      path={\`\${props.match.url}/:topic\`}
-      render={routeProps => <Topic {...routeProps} />}
-    />
-    {props.children}
-  </div>;
+const NestedRoutes = props => {
+  return (
+    <div className={styles.h1lmw638}>
+      <div>topics</div>
+      <Link
+        to={\`\${props.match.url === '/' ? '' : props.match.url}/rendering\`}
+        className={styles.h1lmw638}
+      >
+        <div>Rendering with React</div>
+      </Link>
+      <Route path=\\":topic\\" render={routeProps => <Topic {...routeProps} />} />
+      {props.children}
+    </div>
+  );
+};
 
 export default withRouter(NestedRoutes);
 // fonts {}
@@ -289,6 +324,9 @@ exports[`react-dom parses react-dom Print 1`] = `
 import React from 'react';
 import css from 'glam';
 const styles = {
+  h1lmw638: css('css-1s0kfvh', [], () => [
+    \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
+  ]),
   hrak8un: css('css-kbgujp', [], () => [
     \`@media print {
     .css-kbgujp {
@@ -298,13 +336,74 @@ const styles = {
   ]),
 };
 
-const Print = props =>
-  <div>
-    <div className={styles.hrak8un}>not in print</div><div>hey</div>
-    {props.children}
-  </div>;
+const Print = props => {
+  return (
+    <div className={styles.h1lmw638}>
+      <div className={styles.hrak8un}>not in print</div><div>hey</div>
+      {props.children}
+    </div>
+  );
+};
 
 export default Print;
+// fonts {}
+"
+`;
+
+exports[`react-dom parses react-dom ProxyTest 1`] = `
+"/* eslint-disable jsx-a11y/accessible-emoji */
+import React from 'react';
+import css from 'glam';
+const styles = {
+  h1lmw638: css('css-1s0kfvh', [], () => [
+    \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
+  ]),
+  hg3iw2q: css('css-sw3yj', [], () => [
+    \`.css-sw3yj { flex-direction: row; -webkit-box-direction: normal; -webkit-box-orient: horizontal; -ms-flex-direction: row; -webkit-flex-direction: row; }\`,
+  ]),
+};
+
+const ProxyTest = props => {
+  const childrenArray = React.Children.toArray(props.children);
+  return (
+    <div className={styles.h1lmw638}>
+      <div className={styles.hg3iw2q}>
+        {props.bla && childrenArray[props.chidrenProxyMap['Something']]
+          ? React.cloneElement(
+              childrenArray[props.chidrenProxyMap['Something']],
+              { onClick: props.onClickRemapped }
+            )
+          : null}
+        {childrenArray[props.chidrenProxyMap['View1']]}
+      </div>
+    </div>
+  );
+};
+
+export default ProxyTest;
+// fonts {}
+"
+`;
+
+exports[`react-dom parses react-dom Scope 1`] = `
+"/* eslint-disable jsx-a11y/accessible-emoji */
+import React from 'react';
+import css from 'glam';
+const styles = {
+  h1lv6cq4: css('css-jk0pkr', [], () => [\`.css-jk0pkr { color: red; }\`]),
+};
+
+const Scope = props => {
+  return (
+    <div className={styles.h1lv6cq4}>
+      {props.somethingGreen
+        ? '2 green'
+        : props.whatMakesBlue ? props.blue : '1 red'}
+    </div>
+  );
+};
+
+export default Scope;
 // fonts {}
 "
 `;
@@ -320,12 +419,33 @@ const styles = {
   ]),
 };
 
-const Teleport = props =>
-  <Link to=\\"..\\" className={styles.hg3iw2q}>
-    <div>go back</div>{props.children}
-  </Link>;
+const Teleport = props => {
+  return (
+    <Link to=\\"..\\" className={styles.hg3iw2q}>
+      <div>go back</div>{props.children}
+    </Link>
+  );
+};
 
 export default Teleport;
+// fonts {}
+"
+`;
+
+exports[`react-dom parses react-dom Test 1`] = `
+"/* eslint-disable jsx-a11y/accessible-emoji */
+import React from 'react';
+import Custom from './Custom.view.js';
+
+const Test = props => {
+  return (
+    <Custom stuff=\\"eqweqw\\" childrenProxyMap={{ Something: 0, Another: 1 }}>
+      <div>v1vh1t1</div><div>inside custom</div>{props.children}
+    </Custom>
+  );
+};
+
+export default Test;
 // fonts {}
 "
 `;
@@ -354,10 +474,13 @@ class RemapToggle extends React.Component {
   }
 }
 
-const Toggle = props =>
-  <button onClick={props.toggleIsOn} className={styles.h1lmw638}>
-    <div>hey</div>{props.children}
-  </button>;
+const Toggle = props => {
+  return (
+    <button onClick={props.toggleIsOn} className={styles.h1lmw638}>
+      <div>hey</div>{props.children}
+    </button>
+  );
+};
 
 export default RemapToggle;
 // fonts {}
@@ -376,8 +499,9 @@ color: red; }\`,
   ]),
 };
 
-const UseCaptureEmail = props =>
-  <input onSubmit={props.onSubmit} className={styles.hevllt7} />;
+const UseCaptureEmail = props => {
+  return <input onSubmit={props.onSubmit} className={styles.hevllt7} />;
+};
 
 export default UseCaptureEmail;
 // fonts {}
@@ -388,7 +512,9 @@ exports[`react-dom parses react-dom UseCaptureFile 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 
-const UseCaptureFile = props => <input />;
+const UseCaptureFile = props => {
+  return <input />;
+};
 
 export default UseCaptureFile;
 // fonts {}
@@ -399,7 +525,9 @@ exports[`react-dom parses react-dom UseCaptureNumber 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 
-const UseCaptureNumber = props => <input />;
+const UseCaptureNumber = props => {
+  return <input />;
+};
 
 export default UseCaptureNumber;
 // fonts {}
@@ -410,7 +538,9 @@ exports[`react-dom parses react-dom UseCapturePhone 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 
-const UseCapturePhone = props => <input />;
+const UseCapturePhone = props => {
+  return <input />;
+};
 
 export default UseCapturePhone;
 // fonts {}
@@ -421,7 +551,9 @@ exports[`react-dom parses react-dom UseCaptureSecure 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 
-const UseCaptureSecure = props => <input />;
+const UseCaptureSecure = props => {
+  return <input />;
+};
 
 export default UseCaptureSecure;
 // fonts {}
@@ -432,7 +564,9 @@ exports[`react-dom parses react-dom UseCaptureText 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 
-const UseCaptureText = props => <input />;
+const UseCaptureText = props => {
+  return <input />;
+};
 
 export default UseCaptureText;
 // fonts {}
@@ -450,8 +584,9 @@ border: 1px solid red; }\`,
   ]),
 };
 
-const UseHorizontal = props =>
-  <div className={styles.h1nnugsi}>{props.children}</div>;
+const UseHorizontal = props => {
+  return <div className={styles.h1nnugsi}>{props.children}</div>;
+};
 
 export default UseHorizontal;
 // fonts {}
@@ -462,7 +597,9 @@ exports[`react-dom parses react-dom UseImage 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 
-const UseImage = props => <img source=\\"https://viewsdx.com/rocks.jpg\\" />;
+const UseImage = props => {
+  return <img src=\\"https://viewsdx.com/rocks.jpg\\" />;
+};
 
 export default UseImage;
 // fonts {}
@@ -473,12 +610,20 @@ exports[`react-dom parses react-dom UseOfProxy 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 import Button from './Button.view.js';
-import MyIcon from './MyIcon.view.js';
+import css from 'glam';
+const styles = {
+  hg3iw2q: css('css-sw3yj', [], () => [
+    \`.css-sw3yj { flex-direction: row; -webkit-box-direction: normal; -webkit-box-orient: horizontal; -ms-flex-direction: row; -webkit-flex-direction: row; }\`,
+  ]),
+};
 
-const UseOfProxy = props =>
-  <div>
-    <Button color=\\"red\\" icon={MyIcon} text=\\"I'm a button!\\" />{props.children}
-  </div>;
+const UseOfProxy = props => {
+  return (
+    <div className={styles.hg3iw2q}>
+      <Button color=\\"red\\" icon=\\"MyIcon\\" text=\\"I'm a button!\\" />{props.children}
+    </div>
+  );
+};
 
 export default UseOfProxy;
 // fonts {}
@@ -488,12 +633,27 @@ export default UseOfProxy;
 exports[`react-dom parses react-dom UseProxy 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
+import css from 'glam';
+const styles = {
+  hg3iw2q: css('css-sw3yj', [], () => [
+    \`.css-sw3yj { flex-direction: row; -webkit-box-direction: normal; -webkit-box-orient: horizontal; -ms-flex-direction: row; -webkit-flex-direction: row; }\`,
+  ]),
+};
 
-const UseProxy = props =>
-  <div>
-    <props.icon from={props.icon} fill=\\"red\\" /><div>{props.text}</div>
-    {props.children}
-  </div>;
+const UseProxy = props => {
+  const childrenArray = React.Children.toArray(props.children);
+  return (
+    <div className={styles.hg3iw2q}>
+      {childrenArray[props.chidrenProxyMap['props.icon']]
+        ? React.cloneElement(
+            childrenArray[props.chidrenProxyMap['props.icon']],
+            { fill: 'red' }
+          )
+        : null}
+      <div>{props.text}</div>
+    </div>
+  );
+};
 
 export default UseProxy;
 // fonts {}
@@ -508,21 +668,44 @@ import Home from './Home.view.js';
 import { Route } from 'react-router-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Topics from './Topics.view.js';
+import css from 'glam';
+const styles = {
+  hg3iw2q: css('css-sw3yj', [], () => [
+    \`.css-sw3yj { flex-direction: row; -webkit-box-direction: normal; -webkit-box-orient: horizontal; -ms-flex-direction: row; -webkit-flex-direction: row; }\`,
+  ]),
+};
 
-const UseRouter = props =>
-  <Router>
-    <div>
-      <Route
-        path=\\"/\\"
-        exact
-        render={routeProps =>
-          <Home heigth={props.height} width={360} {...routeProps} />}
-      />
-      <Route path=\\"/about\\" render={routeProps => <About {...routeProps} />} />
-      <Route path=\\"/topics\\" render={routeProps => <Topics {...routeProps} />} />
-      {props.children}
-    </div>
-  </Router>;
+const UseRouter = props => {
+  return (
+    <Router>
+      <div className={styles.hg3iw2q}>
+        <Route
+          path=\\"/\\"
+          exact
+          render={routeProps =>
+            <Home
+              heigth={props.height}
+              width={360}
+              {...routeProps}
+              childrenProxyMap={{ About: 0 }}
+            >
+              <Route
+                path=\\"/about\\"
+                render={routeProps =>
+                  <About {...routeProps} childrenProxyMap={{ Topics: 0 }}>
+                    <Route
+                      path=\\"/topics\\"
+                      render={routeProps => <Topics {...routeProps} />}
+                    />
+                  </About>}
+              />
+            </Home>}
+        />
+        {props.children}
+      </div>
+    </Router>
+  );
+};
 
 export default UseRouter;
 // fonts {}
@@ -532,12 +715,26 @@ export default UseRouter;
 exports[`react-dom parses react-dom UseSvg 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
+import Circle from './Circle.view.js';
+import G from './G.view.js';
+import Path from './Path.view.js';
 
-const UseSvg = props =>
-  <svg viewBox=\\"0 0 20 20\\">
-    <path d=\\"0 20\\" /><circle cx={10} cy={5} r={5} />
-    <g><path d={1} /><path d={2} /></g><text text=\\"hey\\" />{props.children}
-  </svg>;
+const UseSvg = props => {
+  return (
+    <svg viewBox=\\"0 0 20 20\\">
+      <Path d=\\"0 20\\" childrenProxyMap={{ Circle: 0 }}>
+        <Circle cx={10} cy={5} r={5} childrenProxyMap={{ G: 0 }}>
+          <G>
+            <Path d={1} childrenProxyMap={{ Path: 0, SvgText: 1 }}>
+              <Path d={2} /><text text=\\"hey\\" />
+            </Path>
+          </G>
+        </Circle>
+      </Path>
+      {props.children}
+    </svg>
+  );
+};
 
 export default UseSvg;
 // fonts {}
@@ -557,8 +754,9 @@ font-weight: 300; }\`,
   ]),
 };
 
-const UseText = props =>
-  <div className={styles.h1w7s7t6}>Hi, I'm some text</div>;
+const UseText = props => {
+  return <div className={styles.h1w7s7t6}>Hi, I'm some text</div>;
+};
 
 export default UseText;
 // fonts {\\"Montserrat\\":[\\"300\\"]}
@@ -576,8 +774,9 @@ background-color: red; }\`,
   ]),
 };
 
-const UseVertical = props =>
-  <div className={styles.h1vjf5pn}>{props.children}</div>;
+const UseVertical = props => {
+  return <div className={styles.h1vjf5pn}>{props.children}</div>;
+};
 
 export default UseVertical;
 // fonts {}
@@ -596,16 +795,22 @@ const styles = {
   ]),
 };
 
-const ViewAndListWithData = props =>
-  <div className={styles.h1lmw638}>
-    <div>{props.name}</div>
+const ViewAndListWithData = props => {
+  return (
     <div className={styles.h1lmw638}>
-      {Array.isArray(addressesData) &&
-        addressesData.map((item, i) => <div key={i}>{item.city}</div>)}
+      <div>{props.name}</div>
+      <div className={styles.h1lmw638}>
+        {Array.isArray(addressesData) &&
+          addressesData.map((item, index) =>
+            <div key={index}>{item.city}</div>
+          )}
+      </div>
+      {props.children}
     </div>
-    {props.children}
-  </div>;
+  );
+};
 ViewAndListWithData.defaultProps = userData;
+
 export default ViewAndListWithData;
 // fonts {}
 "
@@ -622,11 +827,15 @@ const styles = {
   ]),
 };
 
-const ViewWithData = props =>
-  <div className={styles.h1lmw638}>
-    <div>{props.name}</div>{props.children}
-  </div>;
+const ViewWithData = props => {
+  return (
+    <div className={styles.h1lmw638}>
+      <div>{props.name}</div>{props.children}
+    </div>
+  );
+};
 ViewWithData.defaultProps = userData;
+
 export default ViewWithData;
 // fonts {}
 "
@@ -635,9 +844,20 @@ export default ViewWithData;
 exports[`react-dom parses react-dom When 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
+import css from 'glam';
+const styles = {
+  hg3iw2q: css('css-sw3yj', [], () => [
+    \`.css-sw3yj { flex-direction: row; -webkit-box-direction: normal; -webkit-box-orient: horizontal; -ms-flex-direction: row; -webkit-flex-direction: row; }\`,
+  ]),
+};
 
-const When = props =>
-  <div>{props.showMe ? <div>I may be hidden</div> : null}{props.children}</div>;
+const When = props => {
+  return (
+    <div className={styles.hg3iw2q}>
+      {props.showMe ? <div>I may be hidden</div> : null}{props.children}
+    </div>
+  );
+};
 
 export default When;
 // fonts {}
@@ -649,21 +869,29 @@ exports[`react-dom parses react-dom WhenList 1`] = `
 import React from 'react';
 import css from 'glam';
 const styles = {
+  hg3iw2q: css('css-sw3yj', [], () => [
+    \`.css-sw3yj { flex-direction: row; -webkit-box-direction: normal; -webkit-box-orient: horizontal; -ms-flex-direction: row; -webkit-flex-direction: row; }\`,
+  ]),
   h1lmw638: css('css-1s0kfvh', [], () => [
     \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
   ]),
 };
 
-const WhenList = props =>
-  <div>
-    {props.showMe
-      ? <div className={styles.h1lmw638}>
-          {Array.isArray(props.list) &&
-            props.list.map((item, i) => <div key={i}>{item.thing}</div>)}
-        </div>
-      : null}
-    {props.children}
-  </div>;
+const WhenList = props => {
+  return (
+    <div className={styles.hg3iw2q}>
+      {props.showMe
+        ? <div className={styles.h1lmw638}>
+            {Array.isArray(props.list) &&
+              props.list.map((item, index) =>
+                <div key={index}>{item.thing}</div>
+              )}
+          </div>
+        : null}
+      {props.children}
+    </div>
+  );
+};
 
 export default WhenList;
 // fonts {}
@@ -674,8 +902,9 @@ exports[`react-dom parses react-dom WhenTopLevel 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 
-const WhenTopLevel = props =>
-  props.showMe ? <div>I may be hidden</div> : null;
+const WhenTopLevel = props => {
+  return props.showMe ? <div>I may be hidden</div> : null;
+};
 
 export default WhenTopLevel;
 // fonts {}
@@ -685,7 +914,7 @@ export default WhenTopLevel;
 exports[`react-dom parses react-dom WithTest 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
-import makeTests from './WithTest.view.tests.js';
+import * as fromTests from './WithTest.view.tests';
 import css from 'glam';
 const styles = {
   h1lmw638: css('css-1s0kfvh', [], () => [
@@ -693,87 +922,70 @@ const styles = {
   ]),
 };
 
-const g = typeof window === 'undefined' ? global : window;
-
 class TestsWithTest extends React.Component {
   constructor(props) {
     super(props);
 
-    const { _main, ...rest } = makeTests(this.display);
+    this.display = this.display.bind(this);
+    this.tests = fromTests.make(this.display);
+
     this.state = {
-      ...rest[_main],
-      _on: true,
+      active: props.test,
+      data: this.tests[props.test] || this.tests[this.tests._main],
     };
-
-    const tests = {
-      active: _main,
-      on: this.on,
-      off: this.off,
-    };
-
-    Object.keys(rest).forEach(test => {
-      tests[test] = () => this.display(rest[test], test);
-    });
-
-    if (typeof g.tests === 'undefined') {
-      const validTests = k => !(k === 'off' || k === 'on');
-      g.tests = {
-        off: () =>
-          Object.keys(g.tests)
-            .filter(validTests)
-            .forEach(t => g.tests[t].off()),
-        on: () =>
-          Object.keys(g.tests).filter(validTests).forEach(t => g.tests[t].on()),
-      };
-    }
-
-    if (typeof g.tests.WithTest === 'undefined') {
-      g.tests.WithTest = tests;
-    } else if (Array.isArray(g.tests.WithTest)) {
-      g.tests.WithTest.push(tests);
-    } else {
-      g.tests.WithTest = [g.tests.WithTest, tests];
-      g.tests.WithTest.off = () => g.tests.WithTest.forEach(t => t.off());
-      g.tests.WithTest.on = () => g.tests.WithTest.forEach(t => t.on());
-    }
-
-    this.test = tests;
-
-    console.info('WithTest tests 👉', g.tests);
   }
 
-  componentWillUnmount() {
-    if (Array.isArray(g.tests.WithTest)) {
-      g.tests.WithTest = g.tests.WithTest.filter(t => t === this.tests);
-      if (g.tests.WithTest.length === 0) {
-        delete g.tests.WithTest;
+  display(data, active) {
+    this.setState(
+      {
+        active,
+        data,
+      },
+      () => {
+        if (typeof this.props.onInteraction === 'function') {
+          this.props.onInteraction();
+        }
       }
-    } else {
-      delete g.tests.WithTest;
-    }
+    );
   }
 
-  display = (next, name) => {
-    this.setState({ ...next, _on: true }, () => {
-      g.tests.WithTest.active = name;
-    });
-  };
-
-  off = () => this.setState({ _on: false });
-  on = () => this.setState({ _on: true });
+  componentWillReceiveProps(next) {
+    if (this.state.active !== next.test) {
+      this.setState({
+        active: next.test,
+        data: this.tests[next.test],
+      });
+    }
+  }
 
   render() {
-    const { _on, ...state } = this.state;
-    return _on
-      ? <WithTest {...this.props} {...state} />
-      : <WithTest {...this.props} />;
+    const { props, state } = this;
+    return (
+      <WithTest
+        width={props.width}
+        height={props.height}
+        {...state.data}
+        {...clean(props)}
+      />
+    );
   }
 }
+function clean(props) {
+  const ret = {};
+  Object.keys(props)
+    .filter(prop => prop !== 'height' && prop !== 'width' && prop !== 'test')
+    .forEach(prop => (ret[prop] = props[prop]));
+  return ret;
+}
+TestsWithTest.tests = fromTests.names;
 
-const WithTest = props =>
-  <button onClick={props.change} className={styles.h1lmw638}>
-    <div>{props.text}</div>{props.children}
-  </button>;
+const WithTest = props => {
+  return (
+    <button onClick={props.change} className={styles.h1lmw638}>
+      <div>{props.text}</div>{props.children}
+    </button>
+  );
+};
 
 export default TestsWithTest;
 // fonts {}
@@ -786,8 +998,8 @@ import React from 'react';
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
-const Action = props =>
-  props.check
+const Action = props => {
+  return props.check
     ? <TouchableWithoutFeedback
         activeOpacity={0.7}
         onPress={props.clickMe}
@@ -798,6 +1010,7 @@ const Action = props =>
         </View>
       </TouchableWithoutFeedback>
     : null;
+};
 
 export default Action;
 // fonts {}
@@ -815,16 +1028,19 @@ import {
 } from 'react-native';
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
-const AnimatedButton = props =>
-  <TouchableWithoutFeedback
-    activeOpacity={0.7}
-    onPress={props.onClick}
-    underlayColor=\\"transparent\\"
-  >
-    <Animated.View style={[styles.h18pdll5, { opacity: props.opacity }]}>
-      <Text>hey</Text>{props.children}
-    </Animated.View>
-  </TouchableWithoutFeedback>;
+const AnimatedButton = props => {
+  return (
+    <TouchableWithoutFeedback
+      activeOpacity={0.7}
+      onPress={props.onClick}
+      underlayColor=\\"transparent\\"
+    >
+      <Animated.View style={[styles.h18pdll5, { opacity: props.opacity }]}>
+        <Text>hey</Text>{props.children}
+      </Animated.View>
+    </TouchableWithoutFeedback>
+  );
+};
 
 export default AnimatedButton;
 // fonts {}
@@ -840,19 +1056,22 @@ const styles = StyleSheet.create({
   hp2cr4d: { flexDirection: 'row' },
 });
 
-const BackgroundImage = props =>
-  <Image
-    resizeMode=\\"cover\\"
-    source={{ uri: 'https://viewsdx.com/image.jpg' }}
-    style={styles.h18pdll5}
-  >
-    <Animated.Image
+const BackgroundImage = props => {
+  return (
+    <Image
       resizeMode=\\"cover\\"
-      source={{ uri: props.backgroundImage }}
-      style={styles.hp2cr4d}
-    />
-    {props.children}
-  </Image>;
+      source={{ uri: 'https://viewsdx.com/image.jpg' }}
+      style={styles.h18pdll5}
+    >
+      <Animated.Image
+        resizeMode=\\"cover\\"
+        source={{ uri: props.backgroundImage }}
+        style={styles.hp2cr4d}
+      />
+      {props.children}
+    </Image>
+  );
+};
 
 export default BackgroundImage;
 // fonts {}
@@ -865,21 +1084,24 @@ import React from 'react';
 import { Animated, StyleSheet } from 'react-native';
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
-const BoxShadow = props =>
-  <Animated.View
-    style={[
-      styles.h18pdll5,
-      {
-        elevation: 1,
-        shadowOffset: { height: 10, width: 5 },
-        shadowRadius: 2,
-        shadowColor: props.color,
-        shadowOpacity: 1,
-      },
-    ]}
-  >
-    {props.children}
-  </Animated.View>;
+const BoxShadow = props => {
+  return (
+    <Animated.View
+      style={[
+        styles.h18pdll5,
+        {
+          elevation: 1,
+          shadowOffset: { height: 10, width: 5 },
+          shadowRadius: 2,
+          shadowColor: props.color,
+          shadowOpacity: 1,
+        },
+      ]}
+    >
+      {props.children}
+    </Animated.View>
+  );
+};
 
 export default BoxShadow;
 // fonts {}
@@ -892,10 +1114,13 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
-const GoTo = props =>
-  <View style={styles.h18pdll5}>
-    <Text>Go to ViewsDX website!</Text>{props.children}
-  </View>;
+const GoTo = props => {
+  return (
+    <View style={styles.h18pdll5}>
+      <Text>Go to ViewsDX website!</Text>{props.children}
+    </View>
+  );
+};
 
 export default GoTo;
 // fonts {}
@@ -911,16 +1136,19 @@ const styles = StyleSheet.create({
   hyfo4ef: { color: 'white' },
 });
 
-const Hover = props =>
-  <TouchableWithoutFeedback
-    activeOpacity={0.7}
-    onPress={props.onClick}
-    underlayColor=\\"transparent\\"
-  >
-    <View style={styles.h1jrzrhl}>
-      <Text style={styles.hyfo4ef}>Hey!</Text>{props.children}
-    </View>
-  </TouchableWithoutFeedback>;
+const Hover = props => {
+  return (
+    <TouchableWithoutFeedback
+      activeOpacity={0.7}
+      onPress={props.onClick}
+      underlayColor=\\"transparent\\"
+    >
+      <View style={styles.h1jrzrhl}>
+        <Text style={styles.hyfo4ef}>Hey!</Text>{props.children}
+      </View>
+    </TouchableWithoutFeedback>
+  );
+};
 
 export default Hover;
 // fonts {}
@@ -936,17 +1164,26 @@ const styles = StyleSheet.create({
   hyfo4ef: { color: 'white' },
 });
 
-const HoverProxy = props =>
-  <TouchableWithoutFeedback
-    activeOpacity={0.7}
-    onPress={props.onClick}
-    underlayColor=\\"transparent\\"
-  >
-    <View style={styles.h1jrzrhl}>
-      <props.icon from={props.icon} fill=\\"white\\" fillHover=\\"black\\" />
-      <Text style={styles.hyfo4ef}>Hey!</Text>{props.children}
-    </View>
-  </TouchableWithoutFeedback>;
+const HoverProxy = props => {
+  const childrenArray = React.Children.toArray(props.children);
+  return (
+    <TouchableWithoutFeedback
+      activeOpacity={0.7}
+      onPress={props.onClick}
+      underlayColor=\\"transparent\\"
+    >
+      <View style={styles.h1jrzrhl}>
+        {childrenArray[props.chidrenProxyMap['props.icon']]
+          ? React.cloneElement(
+              childrenArray[props.chidrenProxyMap['props.icon']],
+              { fill: 'white', fillHover: 'black' }
+            )
+          : null}
+        <Text style={styles.hyfo4ef}>Hey!</Text>
+      </View>
+    </TouchableWithoutFeedback>
+  );
+};
 
 export default HoverProxy;
 // fonts {}
@@ -958,7 +1195,9 @@ exports[`react-native parses react-native JustText 1`] = `
 import React from 'react';
 import { Text } from 'react-native';
 
-const JustText = props => <Text>hey!</Text>;
+const JustText = props => {
+  return <Text>hey!</Text>;
+};
 
 export default JustText;
 // fonts {}
@@ -968,15 +1207,26 @@ export default JustText;
 exports[`react-native parses react-native ListOfSomething 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Animated, StyleSheet, View } from 'react-native';
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
-const ListOfSomething = props =>
-  <View style={styles.h18pdll5}>
-    {Array.isArray(props.list) &&
-      props.list.map((item, i) => <Text key={i}>{item.name}</Text>)}
-    {props.children}
-  </View>;
+const ListOfSomething = props => {
+  return (
+    <View style={styles.h18pdll5}>
+      {Array.isArray(props.list) &&
+        props.list.map((item, index) =>
+          <Animated.Text
+            dataIndex={index}
+            style={{ color: item.color }}
+            key={index}
+          >
+            {index}
+          </Animated.Text>
+        )}
+      {props.children}
+    </View>
+  );
+};
 
 export default ListOfSomething;
 // fonts {}
@@ -990,12 +1240,15 @@ import usersData from './users.data.js';
 import { StyleSheet, Text, View } from 'react-native';
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
-const ListWithData = props =>
-  <View style={styles.h18pdll5}>
-    {Array.isArray(usersData) &&
-      usersData.map((item, i) => <Text key={i}>{item.name}</Text>)}
-    {props.children}
-  </View>;
+const ListWithData = props => {
+  return (
+    <View style={styles.h18pdll5}>
+      {Array.isArray(usersData) &&
+        usersData.map((item, index) => <Text key={index}>{item.name}</Text>)}
+      {props.children}
+    </View>
+  );
+};
 
 export default ListWithData;
 // fonts {}
@@ -1007,7 +1260,9 @@ exports[`react-native parses react-native NameIsType 1`] = `
 import React from 'react';
 import { Text } from 'react-native';
 
-const NameIsType = props => <Text>iam</Text>;
+const NameIsType = props => {
+  return <Text>iam</Text>;
+};
 
 export default NameIsType;
 // fonts {}
@@ -1024,22 +1279,22 @@ import Topic from './Topic.view.js';
 import { StyleSheet, Text, View } from 'react-native';
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
-const NestedRoutes = props =>
-  <View>
-    <Text>topics</Text>
-    <Link
-      activeOpacity={0.7}
-      to={\`\${props.match.url === '/' ? '' : props.match.url}/rendering\`}
-      underlayColor=\\"transparent\\"
-    >
-      <View style={styles.h18pdll5}><Text>Rendering with React</Text></View>
-    </Link>
-    <Route
-      path={\`\${props.match.url}/:topic\`}
-      render={routeProps => <Topic {...routeProps} />}
-    />
-    {props.children}
-  </View>;
+const NestedRoutes = props => {
+  return (
+    <View style={styles.h18pdll5}>
+      <Text>topics</Text>
+      <Link
+        activeOpacity={0.7}
+        to={\`\${props.match.url === '/' ? '' : props.match.url}/rendering\`}
+        underlayColor=\\"transparent\\"
+      >
+        <View style={styles.h18pdll5}><Text>Rendering with React</Text></View>
+      </Link>
+      <Route path=\\":topic\\" render={routeProps => <Topic {...routeProps} />} />
+      {props.children}
+    </View>
+  );
+};
 
 export default withRouter(NestedRoutes);
 // fonts {}
@@ -1049,12 +1304,70 @@ export default withRouter(NestedRoutes);
 exports[`react-native parses react-native Print 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
-import { Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
-const Print = props =>
-  <View><Text>not in print</Text><Text>hey</Text>{props.children}</View>;
+const Print = props => {
+  return (
+    <View style={styles.h18pdll5}>
+      <Text>not in print</Text><Text>hey</Text>{props.children}
+    </View>
+  );
+};
 
 export default Print;
+// fonts {}
+"
+`;
+
+exports[`react-native parses react-native ProxyTest 1`] = `
+"/* eslint-disable jsx-a11y/accessible-emoji */
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+const styles = StyleSheet.create({
+  h18pdll5: { flexDirection: 'column' },
+  hp2cr4d: { flexDirection: 'row' },
+});
+
+const ProxyTest = props => {
+  const childrenArray = React.Children.toArray(props.children);
+  return (
+    <View style={styles.h18pdll5}>
+      <View style={styles.hp2cr4d}>
+        {props.bla && childrenArray[props.chidrenProxyMap['Something']]
+          ? React.cloneElement(
+              childrenArray[props.chidrenProxyMap['Something']],
+              { onClick: props.onClickRemapped }
+            )
+          : null}
+        {childrenArray[props.chidrenProxyMap['View1']]}
+      </View>
+    </View>
+  );
+};
+
+export default ProxyTest;
+// fonts {}
+"
+`;
+
+exports[`react-native parses react-native Scope 1`] = `
+"/* eslint-disable jsx-a11y/accessible-emoji */
+import React from 'react';
+import { StyleSheet, Text } from 'react-native';
+const styles = StyleSheet.create({ h1g2xbng: { color: 'red' } });
+
+const Scope = props => {
+  return (
+    <Text style={styles.h1g2xbng}>
+      {props.somethingGreen
+        ? '2 green'
+        : props.whatMakesBlue ? props.blue : '1 red'}
+    </Text>
+  );
+};
+
+export default Scope;
 // fonts {}
 "
 `;
@@ -1066,12 +1379,34 @@ import { Link } from 'react-router-native';
 import { StyleSheet, Text, View } from 'react-native';
 const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
 
-const Teleport = props =>
-  <Link activeOpacity={0.7} to=\\"..\\" underlayColor=\\"transparent\\">
-    <View style={styles.hp2cr4d}><Text>go back</Text>{props.children}</View>
-  </Link>;
+const Teleport = props => {
+  return (
+    <Link activeOpacity={0.7} to=\\"..\\" underlayColor=\\"transparent\\">
+      <View style={styles.hp2cr4d}><Text>go back</Text>{props.children}</View>
+    </Link>
+  );
+};
 
 export default Teleport;
+// fonts {}
+"
+`;
+
+exports[`react-native parses react-native Test 1`] = `
+"/* eslint-disable jsx-a11y/accessible-emoji */
+import React from 'react';
+import Custom from './Custom.view.js';
+import { Text } from 'react-native';
+
+const Test = props => {
+  return (
+    <Custom stuff=\\"eqweqw\\" childrenProxyMap={{ Something: 0, Another: 1 }}>
+      <Text>v1vh1t1</Text><Text>inside custom</Text>{props.children}
+    </Custom>
+  );
+};
+
+export default Test;
 // fonts {}
 "
 `;
@@ -1096,14 +1431,17 @@ class RemapToggle extends React.Component {
   }
 }
 
-const Toggle = props =>
-  <TouchableWithoutFeedback
-    activeOpacity={0.7}
-    onPress={props.toggleIsOn}
-    underlayColor=\\"transparent\\"
-  >
-    <View style={styles.h18pdll5}><Text>hey</Text>{props.children}</View>
-  </TouchableWithoutFeedback>;
+const Toggle = props => {
+  return (
+    <TouchableWithoutFeedback
+      activeOpacity={0.7}
+      onPress={props.toggleIsOn}
+      underlayColor=\\"transparent\\"
+    >
+      <View style={styles.h18pdll5}><Text>hey</Text>{props.children}</View>
+    </TouchableWithoutFeedback>
+  );
+};
 
 export default RemapToggle;
 // fonts {}
@@ -1132,6 +1470,7 @@ class UseCaptureEmail extends React.Component {
 
   render() {
     const { props, state } = this;
+
     return (
       <KeyboardAvoidingView behavior=\\"position\\">
         <TouchableWithoutFeedback onPress={dismissKeyboard}>
@@ -1142,6 +1481,7 @@ class UseCaptureEmail extends React.Component {
             ref={$e => (this.$captureEmail = $e)}
             value={state.Email}
             keyboardType=\\"email-address\\"
+            underlineColorAndroid=\\"transparent\\"
             placeholderTextColor=\\"blue\\"
             style={styles.hm4pcs}
           />
@@ -1169,6 +1509,7 @@ class UseCaptureFile extends React.Component {
 
   render() {
     const { props, state } = this;
+
     return <CaptureFile />;
   }
 }
@@ -1192,6 +1533,7 @@ class UseCaptureNumber extends React.Component {
 
   render() {
     const { props, state } = this;
+
     return (
       <KeyboardAvoidingView behavior=\\"position\\">
         <TouchableWithoutFeedback onPress={dismissKeyboard}>
@@ -1221,6 +1563,7 @@ class UseCapturePhone extends React.Component {
 
   render() {
     const { props, state } = this;
+
     return (
       <KeyboardAvoidingView behavior=\\"position\\">
         <TouchableWithoutFeedback onPress={dismissKeyboard}>
@@ -1250,6 +1593,7 @@ class UseCaptureSecure extends React.Component {
 
   render() {
     const { props, state } = this;
+
     return (
       <KeyboardAvoidingView behavior=\\"position\\">
         <TouchableWithoutFeedback onPress={dismissKeyboard}>
@@ -1279,6 +1623,7 @@ class UseCaptureText extends React.Component {
 
   render() {
     const { props, state } = this;
+
     return (
       <KeyboardAvoidingView behavior=\\"position\\">
         <TouchableWithoutFeedback onPress={dismissKeyboard}>
@@ -1307,8 +1652,9 @@ const styles = StyleSheet.create({
   },
 });
 
-const UseHorizontal = props =>
-  <View style={styles.h13qdyyc}>{props.children}</View>;
+const UseHorizontal = props => {
+  return <View style={styles.h13qdyyc}>{props.children}</View>;
+};
 
 export default UseHorizontal;
 // fonts {}
@@ -1320,8 +1666,9 @@ exports[`react-native parses react-native UseImage 1`] = `
 import React from 'react';
 import { Image } from 'react-native';
 
-const UseImage = props =>
-  <Image source={{ uri: 'https://viewsdx.com/rocks.jpg' }} />;
+const UseImage = props => {
+  return <Image source={{ uri: 'https://viewsdx.com/rocks.jpg' }} />;
+};
 
 export default UseImage;
 // fonts {}
@@ -1332,13 +1679,16 @@ exports[`react-native parses react-native UseOfProxy 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 import Button from './Button.view.js';
-import MyIcon from './MyIcon.view.js';
-import { View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
 
-const UseOfProxy = props =>
-  <View>
-    <Button color=\\"red\\" icon={MyIcon} text=\\"I'm a button!\\" />{props.children}
-  </View>;
+const UseOfProxy = props => {
+  return (
+    <View style={styles.hp2cr4d}>
+      <Button color=\\"red\\" icon=\\"MyIcon\\" text=\\"I'm a button!\\" />{props.children}
+    </View>
+  );
+};
 
 export default UseOfProxy;
 // fonts {}
@@ -1348,13 +1698,23 @@ export default UseOfProxy;
 exports[`react-native parses react-native UseProxy 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
-import { Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
 
-const UseProxy = props =>
-  <View>
-    <props.icon from={props.icon} fill=\\"red\\" /><Text>{props.text}</Text>
-    {props.children}
-  </View>;
+const UseProxy = props => {
+  const childrenArray = React.Children.toArray(props.children);
+  return (
+    <View style={styles.hp2cr4d}>
+      {childrenArray[props.chidrenProxyMap['props.icon']]
+        ? React.cloneElement(
+            childrenArray[props.chidrenProxyMap['props.icon']],
+            { fill: 'red' }
+          )
+        : null}
+      <Text>{props.text}</Text>
+    </View>
+  );
+};
 
 export default UseProxy;
 // fonts {}
@@ -1369,22 +1729,40 @@ import Home from './Home.view.js';
 import { Route } from 'react-router-native';
 import { NativeRouter as Router } from 'react-router-native';
 import Topics from './Topics.view.js';
-import { View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
 
-const UseRouter = props =>
-  <Router>
-    <View>
-      <Route
-        path=\\"/\\"
-        exact
-        render={routeProps =>
-          <Home heigth={props.height} width={360} {...routeProps} />}
-      />
-      <Route path=\\"/about\\" render={routeProps => <About {...routeProps} />} />
-      <Route path=\\"/topics\\" render={routeProps => <Topics {...routeProps} />} />
-      {props.children}
-    </View>
-  </Router>;
+const UseRouter = props => {
+  return (
+    <Router>
+      <View style={styles.hp2cr4d}>
+        <Route
+          path=\\"/\\"
+          exact
+          render={routeProps =>
+            <Home
+              heigth={props.height}
+              width={360}
+              {...routeProps}
+              childrenProxyMap={{ About: 0 }}
+            >
+              <Route
+                path=\\"/about\\"
+                render={routeProps =>
+                  <About {...routeProps} childrenProxyMap={{ Topics: 0 }}>
+                    <Route
+                      path=\\"/topics\\"
+                      render={routeProps => <Topics {...routeProps} />}
+                    />
+                  </About>}
+              />
+            </Home>}
+        />
+        {props.children}
+      </View>
+    </Router>
+  );
+};
 
 export default UseRouter;
 // fonts {}
@@ -1394,13 +1772,27 @@ export default UseRouter;
 exports[`react-native parses react-native UseSvg 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
-import Svg, { Circle, G, Path, Text as SvgText } from 'react-native-svg';
+import Circle from './Circle.view.js';
+import G from './G.view.js';
+import Path from './Path.view.js';
+import Svg, { Text as SvgText } from 'react-native-svg';
 
-const UseSvg = props =>
-  <Svg viewBox=\\"0 0 20 20\\">
-    <Path d=\\"0 20\\" /><Circle cx={10} cy={5} r={5} />
-    <G><Path d={1} /><Path d={2} /></G><SvgText text=\\"hey\\" />{props.children}
-  </Svg>;
+const UseSvg = props => {
+  return (
+    <Svg viewBox=\\"0 0 20 20\\">
+      <Path d=\\"0 20\\" childrenProxyMap={{ Circle: 0 }}>
+        <Circle cx={10} cy={5} r={5} childrenProxyMap={{ G: 0 }}>
+          <G>
+            <Path d={1} childrenProxyMap={{ Path: 0, SvgText: 1 }}>
+              <Path d={2} /><SvgText text=\\"hey\\" />
+            </Path>
+          </G>
+        </Circle>
+      </Path>
+      {props.children}
+    </Svg>
+  );
+};
 
 export default UseSvg;
 // fonts {}
@@ -1415,7 +1807,9 @@ const styles = StyleSheet.create({
   h11t0jc: { color: 'blue', fontFamily: 'Montserrat-300', fontSize: 16 },
 });
 
-const UseText = props => <Text style={styles.h11t0jc}>Hi, I'm some text</Text>;
+const UseText = props => {
+  return <Text style={styles.h11t0jc}>Hi, I'm some text</Text>;
+};
 
 export default UseText;
 // fonts {\\"Montserrat\\":[\\"300\\"]}
@@ -1430,8 +1824,9 @@ const styles = StyleSheet.create({
   h1c5r919: { flexDirection: 'column', backgroundColor: 'red' },
 });
 
-const UseVertical = props =>
-  <View style={styles.h1c5r919}>{props.children}</View>;
+const UseVertical = props => {
+  return <View style={styles.h1c5r919}>{props.children}</View>;
+};
 
 export default UseVertical;
 // fonts {}
@@ -1446,16 +1841,22 @@ import userData from './user.data.js';
 import { StyleSheet, Text, View } from 'react-native';
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
-const ViewAndListWithData = props =>
-  <View style={styles.h18pdll5}>
-    <Text>{props.name}</Text>
+const ViewAndListWithData = props => {
+  return (
     <View style={styles.h18pdll5}>
-      {Array.isArray(addressesData) &&
-        addressesData.map((item, i) => <Text key={i}>{item.city}</Text>)}
+      <Text>{props.name}</Text>
+      <View style={styles.h18pdll5}>
+        {Array.isArray(addressesData) &&
+          addressesData.map((item, index) =>
+            <Text key={index}>{item.city}</Text>
+          )}
+      </View>
+      {props.children}
     </View>
-    {props.children}
-  </View>;
+  );
+};
 ViewAndListWithData.defaultProps = userData;
+
 export default ViewAndListWithData;
 // fonts {}
 "
@@ -1468,11 +1869,15 @@ import userData from './user.data.js';
 import { StyleSheet, Text, View } from 'react-native';
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
-const ViewWithData = props =>
-  <View style={styles.h18pdll5}>
-    <Text>{props.name}</Text>{props.children}
-  </View>;
+const ViewWithData = props => {
+  return (
+    <View style={styles.h18pdll5}>
+      <Text>{props.name}</Text>{props.children}
+    </View>
+  );
+};
 ViewWithData.defaultProps = userData;
+
 export default ViewWithData;
 // fonts {}
 "
@@ -1481,12 +1886,16 @@ export default ViewWithData;
 exports[`react-native parses react-native When 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
-import { Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
 
-const When = props =>
-  <View>
-    {props.showMe ? <Text>I may be hidden</Text> : null}{props.children}
-  </View>;
+const When = props => {
+  return (
+    <View style={styles.hp2cr4d}>
+      {props.showMe ? <Text>I may be hidden</Text> : null}{props.children}
+    </View>
+  );
+};
 
 export default When;
 // fonts {}
@@ -1497,18 +1906,26 @@ exports[`react-native parses react-native WhenList 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
+const styles = StyleSheet.create({
+  hp2cr4d: { flexDirection: 'row' },
+  h18pdll5: { flexDirection: 'column' },
+});
 
-const WhenList = props =>
-  <View>
-    {props.showMe
-      ? <View style={styles.h18pdll5}>
-          {Array.isArray(props.list) &&
-            props.list.map((item, i) => <Text key={i}>{item.thing}</Text>)}
-        </View>
-      : null}
-    {props.children}
-  </View>;
+const WhenList = props => {
+  return (
+    <View style={styles.hp2cr4d}>
+      {props.showMe
+        ? <View style={styles.h18pdll5}>
+            {Array.isArray(props.list) &&
+              props.list.map((item, index) =>
+                <Text key={index}>{item.thing}</Text>
+              )}
+          </View>
+        : null}
+      {props.children}
+    </View>
+  );
+};
 
 export default WhenList;
 // fonts {}
@@ -1520,8 +1937,9 @@ exports[`react-native parses react-native WhenTopLevel 1`] = `
 import React from 'react';
 import { Text } from 'react-native';
 
-const WhenTopLevel = props =>
-  props.showMe ? <Text>I may be hidden</Text> : null;
+const WhenTopLevel = props => {
+  return props.showMe ? <Text>I may be hidden</Text> : null;
+};
 
 export default WhenTopLevel;
 // fonts {}
@@ -1531,97 +1949,80 @@ export default WhenTopLevel;
 exports[`react-native parses react-native WithTest 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
-import makeTests from './WithTest.view.tests.js';
+import * as fromTests from './WithTest.view.tests';
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
-
-const g = typeof window === 'undefined' ? global : window;
 
 class TestsWithTest extends React.Component {
   constructor(props) {
     super(props);
 
-    const { _main, ...rest } = makeTests(this.display);
+    this.display = this.display.bind(this);
+    this.tests = fromTests.make(this.display);
+
     this.state = {
-      ...rest[_main],
-      _on: true,
+      active: props.test,
+      data: this.tests[props.test] || this.tests[this.tests._main],
     };
-
-    const tests = {
-      active: _main,
-      on: this.on,
-      off: this.off,
-    };
-
-    Object.keys(rest).forEach(test => {
-      tests[test] = () => this.display(rest[test], test);
-    });
-
-    if (typeof g.tests === 'undefined') {
-      const validTests = k => !(k === 'off' || k === 'on');
-      g.tests = {
-        off: () =>
-          Object.keys(g.tests)
-            .filter(validTests)
-            .forEach(t => g.tests[t].off()),
-        on: () =>
-          Object.keys(g.tests).filter(validTests).forEach(t => g.tests[t].on()),
-      };
-    }
-
-    if (typeof g.tests.WithTest === 'undefined') {
-      g.tests.WithTest = tests;
-    } else if (Array.isArray(g.tests.WithTest)) {
-      g.tests.WithTest.push(tests);
-    } else {
-      g.tests.WithTest = [g.tests.WithTest, tests];
-      g.tests.WithTest.off = () => g.tests.WithTest.forEach(t => t.off());
-      g.tests.WithTest.on = () => g.tests.WithTest.forEach(t => t.on());
-    }
-
-    this.test = tests;
-
-    console.info('WithTest tests 👉', g.tests);
   }
 
-  componentWillUnmount() {
-    if (Array.isArray(g.tests.WithTest)) {
-      g.tests.WithTest = g.tests.WithTest.filter(t => t === this.tests);
-      if (g.tests.WithTest.length === 0) {
-        delete g.tests.WithTest;
+  display(data, active) {
+    this.setState(
+      {
+        active,
+        data,
+      },
+      () => {
+        if (typeof this.props.onInteraction === 'function') {
+          this.props.onInteraction();
+        }
       }
-    } else {
-      delete g.tests.WithTest;
-    }
+    );
   }
 
-  display = (next, name) => {
-    this.setState({ ...next, _on: true }, () => {
-      g.tests.WithTest.active = name;
-    });
-  };
-
-  off = () => this.setState({ _on: false });
-  on = () => this.setState({ _on: true });
+  componentWillReceiveProps(next) {
+    if (this.state.active !== next.test) {
+      this.setState({
+        active: next.test,
+        data: this.tests[next.test],
+      });
+    }
+  }
 
   render() {
-    const { _on, ...state } = this.state;
-    return _on
-      ? <WithTest {...this.props} {...state} />
-      : <WithTest {...this.props} />;
+    const { props, state } = this;
+    return (
+      <WithTest
+        width={props.width}
+        height={props.height}
+        {...state.data}
+        {...clean(props)}
+      />
+    );
   }
 }
+function clean(props) {
+  const ret = {};
+  Object.keys(props)
+    .filter(prop => prop !== 'height' && prop !== 'width' && prop !== 'test')
+    .forEach(prop => (ret[prop] = props[prop]));
+  return ret;
+}
+TestsWithTest.tests = fromTests.names;
 
-const WithTest = props =>
-  <TouchableWithoutFeedback
-    activeOpacity={0.7}
-    onPress={props.change}
-    underlayColor=\\"transparent\\"
-  >
-    <View style={styles.h18pdll5}>
-      <Text>{props.text}</Text>{props.children}
-    </View>
-  </TouchableWithoutFeedback>;
+const WithTest = props => {
+  return (
+    <TouchableWithoutFeedback
+      activeOpacity={0.7}
+      onPress={props.change}
+      underlayColor=\\"transparent\\"
+    >
+      <View style={styles.h18pdll5}>
+        <Text>{props.text}</Text>{props.children}
+      </View>
+    </TouchableWithoutFeedback>
+  );
+};
 
 export default TestsWithTest;
 // fonts {}

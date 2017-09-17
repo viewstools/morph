@@ -22,6 +22,7 @@ const NOT_GROUP = /^(Image|Test|Text|Proxy|SvgCircle|SvgEllipse|SvgLine|SvgPath|
 const PADDING = /^padding/
 const PROP = /^([a-z][a-zA-Z0-9]*)\s+(.+)$/
 const PROP_STYLE_STEMS = /^([a-z][A-Z0-9]*?)(Active|ActiveHover|Hover|Placeholder|Disabled|Print)?$/i
+const SCOPE = /^when\s+(.+)$/
 const SECTION = /^([a-z][a-zA-Z0-9]*)$/
 const STYLE = new RegExp(
   `^(${cssProperties.map(toCamelCase).join('|')}|heightBlocked|pointerEvents)$`
@@ -68,6 +69,7 @@ export const isMargin = line => is(MARGIN, line)
 export const isPadding = line => is(PADDING, line)
 export const isProp = line => is(PROP, line)
 export const isText = line => is(TEXT, line)
+export const isScope = line => is(SCOPE, line) && isCode(getScope(line))
 export const isSection = line => is(SECTION, line)
 export const isStyle = line => is(STYLE, line)
 export const isTodo = line => is(TODO, line)
@@ -155,6 +157,7 @@ export const getFontInfo = (fontFamily, fontWeight) => {
 export const getMainFont = line =>
   line ? line.split(',')[0].replace(/['"]/g, '') : ''
 export const getProp = line => get(PROP, line).slice(1)
+export const getScope = line => get(SCOPE, line)[1]
 export const getSection = line => get(SECTION, line)[1]
 export const getTodo = line => get(TODO, line).slice(1)
 export const getToggle = line => get(TOGGLE, line)[2]

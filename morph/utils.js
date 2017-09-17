@@ -1,4 +1,19 @@
+import safe from './react/safe.js'
 import wrap from './react/wrap.js'
+
+const safeScope = value =>
+  typeof value === 'string' && !isCode(value) ? JSON.stringify(value) : value
+
+export const asScopedValue = (obj, defaultValue, properties) => {
+  let value = []
+
+  for (const scope in obj) {
+    const scopeValue = properties.list[obj[scope]].value.value
+    value.push(`${scope}? ${safeScope(scopeValue)}`)
+  }
+
+  return `${value.join(' : ')} : ${safeScope(defaultValue)}`
+}
 
 const INTERPOLATION = /\${(.+)}/
 export const deinterpolate = str => {
@@ -23,7 +38,7 @@ export const getPropertiesAsObject = list => {
   const obj = {}
 
   list.forEach(prop => {
-    obj[prop.key.value] = prop.value.value
+    obj[prop.key.value] = safeScope(prop.value.value)
   })
 
   return getObjectAsString(obj)

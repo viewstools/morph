@@ -1,0 +1,15 @@
+Text
+color red
+text 1 red
+
+green when props.somethingGreen
+color rgb(0,255,0)
+text 2 green
+
+blue when props.whatMakesBlue
+color rgb(0,0,255)
+text props.blue
+
+# another when props.whatMakesBlue2
+# color rgb(255,0,255)
+# text 4 redblue

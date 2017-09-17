@@ -1,0 +1,22 @@
+Popup Vertical
+Toggle Vertical
+onClick props.toggle
+Text
+text toggle popup
+
+
+Content Vertical
+opacity 0
+scale 0
+
+show when props.isShown
+opacity 1
+scale 1
+
+magnifier when props.isSuperVisible
+opacity 1
+scale 2
+
+Text
+# when props.isShown
+text I'm inside the popup

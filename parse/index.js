@@ -165,6 +165,7 @@ export default (rtext, skipComments = true) => {
       parents: stack
         .filter(b => b.type === 'Block')
         .map(b => b.is || b.name.value),
+      scoped: {},
     }
     if (is) {
       block.is = is
@@ -275,6 +276,8 @@ export default (rtext, skipComments = true) => {
     const properties = []
     const nested = []
 
+    let inScope = false
+
     for (let j = i; j <= endOfBlockIndex; j++) {
       const l = lines[j]
       const line = l.trim()
@@ -334,6 +337,13 @@ export default (rtext, skipComments = true) => {
 
         if (tags.style && tags.code) {
           block.maybeAnimated = true
+        }
+
+        if (tags.scope) {
+          inScope = tags.scope
+        } else if (inScope) {
+          if (!block.scoped[prop]) block.scoped[prop] = {}
+          block.scoped[prop][inScope] = properties.length
         }
 
         let last = properties
@@ -402,6 +412,7 @@ export default (rtext, skipComments = true) => {
                 l.indexOf(propRaw) + propRaw.length - 1
               ),
             },
+            inScope,
             tags,
             meta: getMeta(value, l, lineIndex),
             value: propValue,

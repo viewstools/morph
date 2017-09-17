@@ -6,28 +6,25 @@ const isView = f => /\.view$/.test(f)
 const getPath = (f = '.') => join(__dirname, 'views', f)
 ;['react-dom', 'react-native'].forEach(as =>
   describe(as, () => {
-    readdirSync(getPath()).filter(isView).forEach(f => {
-      const name = f.replace(/\.view$/, '')
-      const code = readFileSync(getPath(f), 'utf-8')
-      const tests = existsSync(getPath(`${f}.tests`))
+    readdirSync(getPath())
+      .filter(isView)
+      .forEach(f => {
+        const name = f.replace(/\.view$/, '')
+        const code = readFileSync(getPath(f), 'utf-8')
+        const tests = existsSync(getPath(`${f}.tests`))
 
-      it(`parses ${as} ${name}`, () => {
-        expect(
-          morph(code, {
+        it(`parses ${as} ${name}`, () => {
+          const component = morph(code, {
             as,
             inlineStyles: true,
             name,
             pretty: true,
             tests,
-            // for UseOfProxy.view
-            views: {
-              MyIcon: true,
-            },
           })
-        ).toMatchSnapshot()
-      })
+          expect(component.code).toMatchSnapshot()
+        })
 
-      // TODO test rendered morphed view
-    })
+        // TODO test rendered morphed view
+      })
   })
 )

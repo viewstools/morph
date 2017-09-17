@@ -10,11 +10,3 @@ Text
 color white
 colorHover black
 text Hey!
-
-
-# Icon is Svg
-# Path
-# d svg-stuff...
-# fill props.fill
-# fillHover props.fillHover
-

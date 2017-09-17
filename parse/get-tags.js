@@ -1,10 +1,12 @@
 import {
+  getScope,
   getToggle,
   isCode,
   isCodeInvalid,
   isData,
   isMargin,
   isPadding,
+  isScope,
   isStyle,
   isToggle,
 } from './helpers.js'
@@ -17,6 +19,7 @@ export default (prop, value) => {
   if (isMargin(prop)) tags.margin = true
   if (isPadding(prop)) tags.padding = true
   if (isStyle(prop)) tags.style = true
+  if (isScope(value)) tags.scope = getScope(value)
   if (isToggle(value)) tags.toggle = getToggle(value)
 
   return tags

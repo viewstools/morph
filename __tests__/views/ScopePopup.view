@@ -1,0 +1,21 @@
+Popup Vertical
+animate pop
+Toggle Vertical
+onClick props.toggle
+# animateClick pop spring
+# animateHover explode spring
+Text
+text toggle popup
+
+
+Content Vertical
+(opacity 0)
+(scale 0)
+
+show when props.isShown
+animate [predefined] spring
+(opacity 1)
+(scale 1)
+
+Text
+text I'm inside the popup
