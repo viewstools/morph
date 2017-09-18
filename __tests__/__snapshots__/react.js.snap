@@ -202,9 +202,7 @@ const HoverProxy = props => {
             { fill: 'white', fillHover: 'black' }
           )
         : null}
-      {' '}data-test-id=\\"HoverProxy.Icon\\"<div className={styles.h1669j73}>
-        Hey!
-      </div>
+      <div className={styles.h1669j73}>Hey!</div>
     </button>
   );
 };
@@ -390,10 +388,7 @@ const ProxyTest = props => {
               { onClick: props.onClickRemapped }
             )
           : null}
-        {' '}data-test-id=\\"ProxyTest.Proxy\\"{
-          childrenArray[props.chidrenProxyMap['View1']]
-        }
-        {' '}data-test-id=\\"ProxyTest.Proxy\\"
+        {childrenArray[props.chidrenProxyMap['View1']]}
       </div>
     </div>
   );
@@ -760,7 +755,7 @@ const UseProxy = props => {
             { fill: 'red' }
           )
         : null}
-      {' '}data-test-id=\\"UseProxy.Icon\\"<div>{props.text}</div>
+      <div>{props.text}</div>
     </div>
   );
 };
@@ -1315,7 +1310,7 @@ const HoverProxy = props => {
               { fill: 'white', fillHover: 'black' }
             )
           : null}
-        {' '}testID=\\"HoverProxy.Icon\\"<Text style={styles.hyfo4ef}>Hey!</Text>
+        <Text style={styles.hyfo4ef}>Hey!</Text>
       </View>
     </TouchableWithoutFeedback>
   );
@@ -1482,10 +1477,7 @@ const ProxyTest = props => {
               { onClick: props.onClickRemapped }
             )
           : null}
-        {' '}testID=\\"ProxyTest.Proxy\\"{
-          childrenArray[props.chidrenProxyMap['View1']]
-        }
-        {' '}testID=\\"ProxyTest.Proxy\\"
+        {childrenArray[props.chidrenProxyMap['View1']]}
       </View>
     </View>
   );
@@ -1933,7 +1925,7 @@ const UseProxy = props => {
             { fill: 'red' }
           )
         : null}
-      {' '}testID=\\"UseProxy.Icon\\"<Text>{props.text}</Text>
+      <Text>{props.text}</Text>
     </View>
   );
 };
