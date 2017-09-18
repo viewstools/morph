@@ -6,12 +6,17 @@ const as = 'tests'
 const isData = f => /\.view.tests$/.test(f)
 const getPath = (f = '.') => join(__dirname, 'tests', f)
 describe(as, () => {
-  readdirSync(getPath()).filter(isData).forEach(f => {
-    const name = f.replace(/\.view$/, '')
-    const code = readFileSync(getPath(f), 'utf-8')
+  readdirSync(getPath())
+    .filter(isData)
+    .forEach(f => {
+      const name = f.replace(/\.view$/, '')
+      const raw = getPath(f)
+      const code = readFileSync(raw, 'utf-8')
 
-    it(`parses ${as} ${name}`, () => {
-      expect(morph(code, { as, name, pretty: true })).toMatchSnapshot()
+      it(`parses ${as} ${name}`, () => {
+        expect(
+          morph(code, { as, file: { raw }, name, pretty: true })
+        ).toMatchSnapshot()
+      })
     })
-  })
 })

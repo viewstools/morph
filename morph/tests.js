@@ -1,7 +1,9 @@
+import fs from 'fs'
 import parse from '../parse/index.js'
+import path from 'path'
 import walk from './walk.js'
 
-export default ({ view }) => {
+export default ({ file, view }) => {
   // because the walker mutates the AST, we need to get a new one each time
   // get the names first
   const names = parse(view).views.map((view, index) => {
@@ -22,13 +24,30 @@ export default ({ view }) => {
   const tests = parse(view).views.map((view, index) => {
     const test = {}
     let name
+    let resource = false
 
     walk(view, {
       enter(node, parent) {
         if (node.type === 'Block') {
           name = node.is || `Test${index}`
         } else if (node.type === 'Property') {
-          test[node.key.value] = getValue(node, names)
+          if (node.key.value === 'from') {
+            const resourceFile = path.resolve(
+              path.dirname(file.raw),
+              getValue(node, names)
+            )
+
+            if (fs.existsSync(resourceFile)) {
+              resource = fs.readFileSync(resourceFile, 'utf8')
+            }
+            // const importStatement = `import ${resource} from '${file}'`
+
+            // if (!imports.includes(importStatement)) {
+            //   imports.push(importStatement)
+            // }
+          } else {
+            test[node.key.value] = getValue(node, names)
+          }
 
           if (
             node.value.type === 'ArrayExpression' ||
@@ -41,12 +60,13 @@ export default ({ view }) => {
 
     return {
       name,
+      resource,
       test,
     }
   })
 
   const body = tests
-    .map(({ name, test }, index) => {
+    .map(({ name, resource, test }, index) => {
       // every test after the first one inherits the first one
       const data =
         index > 0
@@ -56,7 +76,19 @@ export default ({ view }) => {
             }
           : test
 
-      return `const ${name} = ${JSON.stringify(data)}`
+      const code = [`const ${name} = `]
+
+      if (resource) {
+        code.push(`Object.assign(`)
+      }
+
+      code.push(JSON.stringify(data))
+
+      if (resource) {
+        code.push(`, ${resource})`)
+      }
+
+      return code.join(' ')
     })
     .join('\n')
 

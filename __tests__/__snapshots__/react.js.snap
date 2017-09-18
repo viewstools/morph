@@ -61,8 +61,9 @@ const styles = {
     \`.css-1lgf2gr { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column;
 background-image: url(\\"https://viewsdx.com/image.jpg\\"); }\`,
   ]),
-  hg3iw2q: css('css-sw3yj', [], () => [
-    \`.css-sw3yj { flex-direction: row; -webkit-box-direction: normal; -webkit-box-orient: horizontal; -ms-flex-direction: row; -webkit-flex-direction: row; }\`,
+  h1dhb6n: css('css-ii8p9n', [], () => [
+    \`.css-ii8p9n { flex-direction: row; -webkit-box-direction: normal; -webkit-box-orient: horizontal; -ms-flex-direction: row; -webkit-flex-direction: row;
+background-size: contain; }\`,
   ]),
 };
 
@@ -70,7 +71,7 @@ const BackgroundImage = props => {
   return (
     <div className={styles.h1bfz4lt}>
       <Animated.div
-        className={styles.hg3iw2q}
+        className={styles.h1dhb6n}
         style={{ backgroundImage: \`url(\${props.backgroundImage})\` }}
       />
       {props.children}
@@ -1124,7 +1125,7 @@ const BackgroundImage = props => {
       style={styles.h18pdll5}
     >
       <Animated.Image
-        resizeMode=\\"cover\\"
+        resizeMode=\\"contain\\"
         source={{ uri: props.backgroundImage }}
         style={styles.hp2cr4d}
       />

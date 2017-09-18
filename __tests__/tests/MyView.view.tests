@@ -10,3 +10,6 @@ onClick EvenMore
 EvenMore is Test
 text it's EvenMore!
 onClick Main
+
+Data Test
+from ./file.json

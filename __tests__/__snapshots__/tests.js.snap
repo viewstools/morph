@@ -2,7 +2,7 @@
 
 exports[`tests parses tests MyView.view.tests 1`] = `
 Object {
-  "code": "export const names = ['Main', 'Next', 'EvenMore'];
+  "code": "export const names = ['Main', 'Next', 'EvenMore', 'Data'];
 
 export const make = display => {
   const Main = {
@@ -20,7 +20,13 @@ export const make = display => {
     text: \\"it's EvenMore!\\",
     onClick: () => display(Main, 'Main'),
   };
-  return { _main: 'Main', Main, Next, EvenMore };
+  const Data = Object.assign(
+    { width: 360, text: \\"it's Main!\\", onClick: () => display(Next, 'Next') },
+    {
+      this: 'came from a json file',
+    }
+  );
+  return { _main: 'Main', Main, Next, EvenMore, Data };
 };
 ",
 }
