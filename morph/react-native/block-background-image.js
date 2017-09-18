@@ -1,4 +1,5 @@
 import { hasProp, getObjectAsString, getProp } from '../utils.js'
+import safe from '../react/safe.js'
 import wrap from '../react/wrap.js'
 
 const BORDER_RADIUS = [
@@ -12,7 +13,11 @@ const BORDER_RADIUS = [
 export const enter = (node, parent, state) => {
   if (node.backgroundImage) {
     const source = wrap(getObjectAsString({ uri: node.backgroundImage }))
-    state.render.push(` resizeMode="cover" source=${source}`)
+
+    let resizeMode = getProp(node, 'backgroundSize')
+    resizeMode = safe(resizeMode ? resizeMode.value.value : 'cover')
+
+    state.render.push(` resizeMode=${resizeMode} source=${source}`)
 
     // hack until https://github.com/facebook/react-native/issues/8885
     // is fixed

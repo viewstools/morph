@@ -2,3 +2,4 @@ Vertical
 backgroundImage https://viewsdx.com/image.jpg
 Horizontal
 backgroundImage props.backgroundImage
+backgroundSize contain

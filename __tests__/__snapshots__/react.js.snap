@@ -408,6 +408,66 @@ export default Scope;
 "
 `;
 
+exports[`react-dom parses react-dom ScopePopup 1`] = `
+"/* eslint-disable jsx-a11y/accessible-emoji */
+import React from 'react';
+import css from 'glam';
+const styles = {
+  h1lmw638: css('css-1s0kfvh', [], () => [
+    \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
+  ]),
+};
+
+const ScopePopup = props => {
+  return (
+    <div animate=\\"pop\\" className={styles.h1lmw638}>
+      <button onClick={props.toggle} className={styles.h1lmw638}>
+        <div>toggle popup</div>
+      </button>
+      <div className={styles.h1lmw638}><div>I'm inside the popup</div></div>
+      {props.children}
+    </div>
+  );
+};
+
+export default ScopePopup;
+// fonts {}
+"
+`;
+
+exports[`react-dom parses react-dom ScopePopup2 1`] = `
+"/* eslint-disable jsx-a11y/accessible-emoji */
+import React from 'react';
+import css from 'glam';
+const styles = {
+  h1lmw638: css('css-1s0kfvh', [], () => [
+    \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
+  ]),
+  hfwrjqy: css('css-4l3qiu', [], () => [
+    \`.css-4l3qiu { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column;
+opacity: 0; }\`,
+  ]),
+};
+
+const ScopePopup2 = props => {
+  return (
+    <div className={styles.h1lmw638}>
+      <button onClick={props.toggle} className={styles.h1lmw638}>
+        <div>toggle popup</div>
+      </button>
+      <div scale={0} className={styles.hfwrjqy}>
+        <div>I'm inside the popup</div>
+      </div>
+      {props.children}
+    </div>
+  );
+};
+
+export default ScopePopup2;
+// fonts {}
+"
+`;
+
 exports[`react-dom parses react-dom Teleport 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
@@ -1368,6 +1428,65 @@ const Scope = props => {
 };
 
 export default Scope;
+// fonts {}
+"
+`;
+
+exports[`react-native parses react-native ScopePopup 1`] = `
+"/* eslint-disable jsx-a11y/accessible-emoji */
+import React from 'react';
+import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
+const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
+
+const ScopePopup = props => {
+  return (
+    <View animate=\\"pop\\" style={styles.h18pdll5}>
+      <TouchableWithoutFeedback
+        activeOpacity={0.7}
+        onPress={props.toggle}
+        underlayColor=\\"transparent\\"
+      >
+        <View style={styles.h18pdll5}><Text>toggle popup</Text></View>
+      </TouchableWithoutFeedback>
+      <View style={styles.h18pdll5}><Text>I'm inside the popup</Text></View>
+      {props.children}
+    </View>
+  );
+};
+
+export default ScopePopup;
+// fonts {}
+"
+`;
+
+exports[`react-native parses react-native ScopePopup2 1`] = `
+"/* eslint-disable jsx-a11y/accessible-emoji */
+import React from 'react';
+import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
+const styles = StyleSheet.create({
+  h18pdll5: { flexDirection: 'column' },
+  hminotx: { flexDirection: 'column', opacity: 0 },
+});
+
+const ScopePopup2 = props => {
+  return (
+    <View style={styles.h18pdll5}>
+      <TouchableWithoutFeedback
+        activeOpacity={0.7}
+        onPress={props.toggle}
+        underlayColor=\\"transparent\\"
+      >
+        <View style={styles.h18pdll5}><Text>toggle popup</Text></View>
+      </TouchableWithoutFeedback>
+      <View scale={0} style={styles.hminotx}>
+        <Text>I'm inside the popup</Text>
+      </View>
+      {props.children}
+    </View>
+  );
+};
+
+export default ScopePopup2;
 // fonts {}
 "
 `;
