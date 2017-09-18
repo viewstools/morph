@@ -1,6 +1,7 @@
 import * as BlockGoTo from './react-dom/block-go-to.js'
 import * as BlockTeleport from './react-dom/block-teleport.js'
 import { leave as PropertiesStyleLeave } from './react-dom/properties-style.js'
+import { enter as BlockTestIdEnter } from './react-dom/block-test-id.js'
 import getBlockName from './react-dom/get-block-name.js'
 import getStyleForProperty from './react-dom/get-style-for-property.js'
 import getStyles from './react-dom/get-styles.js'
@@ -49,6 +50,7 @@ export default ({
     fonts: [],
     inlineStyles,
     isReactNative: false,
+    name: finalName,
     remap: {},
     render: [],
     styles: {},
@@ -105,6 +107,7 @@ export default ({
         BlockDefaultProps.enter,
         BlockMaybeNeedsProperties.enter,
         BlockProxy.enter,
+        BlockTestIdEnter,
       ].forEach(fn => fn.call(this, node, parent, state))
     },
     leave(node, parent, state) {

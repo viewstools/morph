@@ -2,6 +2,7 @@ import * as BlockBackgroundImage from './react-native/block-background-image.js'
 import * as BlockCapture from './react-native/block-capture.js'
 import * as BlockWrap from './react-native/block-wrap.js'
 import { leave as PropertiesStyleLeave } from './react-native/properties-style.js'
+import { enter as BlockTestIdEnter } from './react-native/block-test-id.js'
 import getBlockName from './react-native/get-block-name.js'
 import getStyleForProperty from './react-native/get-style-for-property.js'
 import getStyles from './react-native/get-styles.js'
@@ -37,6 +38,7 @@ export default ({ getImport, name, tests = false, view, views = {} }) => {
     defaultProps: false,
     fonts: [],
     isReactNative: true,
+    name: finalName,
     remap: {},
     render: [],
     styles: {},
@@ -88,6 +90,7 @@ export default ({ getImport, name, tests = false, view, views = {} }) => {
         BlockBackgroundImage.enter,
         BlockDefaultProps.enter,
         BlockProxy.enter,
+        BlockTestIdEnter,
       ].forEach(fn => fn.call(this, node, parent, state))
     },
     leave(node, parent, state) {

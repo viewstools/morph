@@ -157,7 +157,11 @@ background-color: black; }\`,
 
 const Hover = props => {
   return (
-    <button onClick={props.onClick} className={styles.hpg1h4y}>
+    <button
+      data-test-id=\\"Button\\"
+      onClick={props.onClick}
+      className={styles.hpg1h4y}
+    >
       <div className={styles.h1669j73}>Hey!</div>{props.children}
     </button>
   );
@@ -187,14 +191,20 @@ background-color: black; }\`,
 const HoverProxy = props => {
   const childrenArray = React.Children.toArray(props.children);
   return (
-    <button onClick={props.onClick} className={styles.hpg1h4y}>
+    <button
+      data-test-id=\\"Button\\"
+      onClick={props.onClick}
+      className={styles.hpg1h4y}
+    >
       {childrenArray[props.chidrenProxyMap['props.icon']]
         ? React.cloneElement(
             childrenArray[props.chidrenProxyMap['props.icon']],
             { fill: 'white', fillHover: 'black' }
           )
         : null}
-      <div className={styles.h1669j73}>Hey!</div>
+      {' '}data-test-id=\\"HoverProxy.Icon\\"<div className={styles.h1669j73}>
+        Hey!
+      </div>
     </button>
   );
 };
@@ -277,7 +287,7 @@ exports[`react-dom parses react-dom NameIsType 1`] = `
 import React from 'react';
 
 const NameIsType = props => {
-  return <div>iam</div>;
+  return <div data-test-id=\\"Texto\\">iam</div>;
 };
 
 export default NameIsType;
@@ -301,15 +311,20 @@ const styles = {
 
 const NestedRoutes = props => {
   return (
-    <div className={styles.h1lmw638}>
+    <div data-test-id=\\"Topics\\" className={styles.h1lmw638}>
       <div>topics</div>
       <Link
         to={\`\${props.match.url === '/' ? '' : props.match.url}/rendering\`}
+        data-test-id=\\"NestedRoutes.Link\\"
         className={styles.h1lmw638}
       >
         <div>Rendering with React</div>
       </Link>
-      <Route path=\\":topic\\" render={routeProps => <Topic {...routeProps} />} />
+      <Route
+        path=\\":topic\\"
+        render={routeProps =>
+          <Topic data-test-id=\\"NestedRoutes.Topic\\" {...routeProps} />}
+      />
       {props.children}
     </div>
   );
@@ -375,7 +390,10 @@ const ProxyTest = props => {
               { onClick: props.onClickRemapped }
             )
           : null}
-        {childrenArray[props.chidrenProxyMap['View1']]}
+        {' '}data-test-id=\\"ProxyTest.Proxy\\"{
+          childrenArray[props.chidrenProxyMap['View1']]
+        }
+        {' '}data-test-id=\\"ProxyTest.Proxy\\"
       </div>
     </div>
   );
@@ -421,11 +439,17 @@ const styles = {
 
 const ScopePopup = props => {
   return (
-    <div animate=\\"pop\\" className={styles.h1lmw638}>
-      <button onClick={props.toggle} className={styles.h1lmw638}>
+    <div data-test-id=\\"Popup\\" animate=\\"pop\\" className={styles.h1lmw638}>
+      <button
+        data-test-id=\\"ScopePopup.Toggle\\"
+        onClick={props.toggle}
+        className={styles.h1lmw638}
+      >
         <div>toggle popup</div>
       </button>
-      <div className={styles.h1lmw638}><div>I'm inside the popup</div></div>
+      <div data-test-id=\\"ScopePopup.Content\\" className={styles.h1lmw638}>
+        <div>I'm inside the popup</div>
+      </div>
       {props.children}
     </div>
   );
@@ -452,11 +476,19 @@ opacity: 0; }\`,
 
 const ScopePopup2 = props => {
   return (
-    <div className={styles.h1lmw638}>
-      <button onClick={props.toggle} className={styles.h1lmw638}>
+    <div data-test-id=\\"Popup\\" className={styles.h1lmw638}>
+      <button
+        data-test-id=\\"ScopePopup2.Toggle\\"
+        onClick={props.toggle}
+        className={styles.h1lmw638}
+      >
         <div>toggle popup</div>
       </button>
-      <div scale={0} className={styles.hfwrjqy}>
+      <div
+        data-test-id=\\"ScopePopup2.Content\\"
+        scale={0}
+        className={styles.hfwrjqy}
+      >
         <div>I'm inside the popup</div>
       </div>
       {props.children}
@@ -500,8 +532,13 @@ import Custom from './Custom.view.js';
 
 const Test = props => {
   return (
-    <Custom stuff=\\"eqweqw\\" childrenProxyMap={{ Something: 0, Another: 1 }}>
-      <div>v1vh1t1</div><div>inside custom</div>{props.children}
+    <Custom
+      data-test-id=\\"Custom\\"
+      stuff=\\"eqweqw\\"
+      childrenProxyMap={{ Something: 0, Another: 1 }}
+    >
+      <div data-test-id=\\"Test.Something\\">v1vh1t1</div>
+      <div data-test-id=\\"Test.Another\\">inside custom</div>{props.children}
     </Custom>
   );
 };
@@ -561,7 +598,13 @@ color: red; }\`,
 };
 
 const UseCaptureEmail = props => {
-  return <input onSubmit={props.onSubmit} className={styles.hevllt7} />;
+  return (
+    <input
+      data-test-id=\\"Email\\"
+      onSubmit={props.onSubmit}
+      className={styles.hevllt7}
+    />
+  );
 };
 
 export default UseCaptureEmail;
@@ -574,7 +617,7 @@ exports[`react-dom parses react-dom UseCaptureFile 1`] = `
 import React from 'react';
 
 const UseCaptureFile = props => {
-  return <input />;
+  return <input data-test-id=\\"File\\" />;
 };
 
 export default UseCaptureFile;
@@ -587,7 +630,7 @@ exports[`react-dom parses react-dom UseCaptureNumber 1`] = `
 import React from 'react';
 
 const UseCaptureNumber = props => {
-  return <input />;
+  return <input data-test-id=\\"Number\\" />;
 };
 
 export default UseCaptureNumber;
@@ -600,7 +643,7 @@ exports[`react-dom parses react-dom UseCapturePhone 1`] = `
 import React from 'react';
 
 const UseCapturePhone = props => {
-  return <input />;
+  return <input data-test-id=\\"Phone\\" />;
 };
 
 export default UseCapturePhone;
@@ -613,7 +656,7 @@ exports[`react-dom parses react-dom UseCaptureSecure 1`] = `
 import React from 'react';
 
 const UseCaptureSecure = props => {
-  return <input />;
+  return <input data-test-id=\\"Secure\\" />;
 };
 
 export default UseCaptureSecure;
@@ -626,7 +669,7 @@ exports[`react-dom parses react-dom UseCaptureText 1`] = `
 import React from 'react';
 
 const UseCaptureText = props => {
-  return <input />;
+  return <input data-test-id=\\"Text\\" />;
 };
 
 export default UseCaptureText;
@@ -680,8 +723,14 @@ const styles = {
 
 const UseOfProxy = props => {
   return (
-    <div className={styles.hg3iw2q}>
-      <Button color=\\"red\\" icon=\\"MyIcon\\" text=\\"I'm a button!\\" />{props.children}
+    <div data-test-id=\\"App\\" className={styles.hg3iw2q}>
+      <Button
+        data-test-id=\\"UseOfProxy.Button\\"
+        color=\\"red\\"
+        icon=\\"MyIcon\\"
+        text=\\"I'm a button!\\"
+      />
+      {props.children}
     </div>
   );
 };
@@ -704,14 +753,14 @@ const styles = {
 const UseProxy = props => {
   const childrenArray = React.Children.toArray(props.children);
   return (
-    <div className={styles.hg3iw2q}>
+    <div data-test-id=\\"Button\\" className={styles.hg3iw2q}>
       {childrenArray[props.chidrenProxyMap['props.icon']]
         ? React.cloneElement(
             childrenArray[props.chidrenProxyMap['props.icon']],
             { fill: 'red' }
           )
         : null}
-      <div>{props.text}</div>
+      {' '}data-test-id=\\"UseProxy.Icon\\"<div>{props.text}</div>
     </div>
   );
 };
@@ -745,6 +794,7 @@ const UseRouter = props => {
           exact
           render={routeProps =>
             <Home
+              data-test-id=\\"UseRouter.Home\\"
               heigth={props.height}
               width={360}
               {...routeProps}
@@ -753,10 +803,18 @@ const UseRouter = props => {
               <Route
                 path=\\"/about\\"
                 render={routeProps =>
-                  <About {...routeProps} childrenProxyMap={{ Topics: 0 }}>
+                  <About
+                    data-test-id=\\"UseRouter.About\\"
+                    {...routeProps}
+                    childrenProxyMap={{ Topics: 0 }}
+                  >
                     <Route
                       path=\\"/topics\\"
-                      render={routeProps => <Topics {...routeProps} />}
+                      render={routeProps =>
+                        <Topics
+                          data-test-id=\\"UseRouter.Topics\\"
+                          {...routeProps}
+                        />}
                     />
                   </About>}
               />
@@ -783,11 +841,25 @@ import Path from './Path.view.js';
 const UseSvg = props => {
   return (
     <svg viewBox=\\"0 0 20 20\\">
-      <Path d=\\"0 20\\" childrenProxyMap={{ Circle: 0 }}>
-        <Circle cx={10} cy={5} r={5} childrenProxyMap={{ G: 0 }}>
+      <Path
+        data-test-id=\\"UseSvg.Path\\"
+        d=\\"0 20\\"
+        childrenProxyMap={{ Circle: 0 }}
+      >
+        <Circle
+          data-test-id=\\"UseSvg.Circle\\"
+          cx={10}
+          cy={5}
+          r={5}
+          childrenProxyMap={{ G: 0 }}
+        >
           <G>
-            <Path d={1} childrenProxyMap={{ Path: 0, SvgText: 1 }}>
-              <Path d={2} /><text text=\\"hey\\" />
+            <Path
+              data-test-id=\\"UseSvg.Path\\"
+              d={1}
+              childrenProxyMap={{ Path: 0, SvgText: 1 }}
+            >
+              <Path data-test-id=\\"UseSvg.Path\\" d={2} /><text text=\\"hey\\" />
             </Path>
           </G>
         </Circle>
@@ -858,9 +930,12 @@ const styles = {
 
 const ViewAndListWithData = props => {
   return (
-    <div className={styles.h1lmw638}>
+    <div data-test-id=\\"User\\" className={styles.h1lmw638}>
       <div>{props.name}</div>
-      <div className={styles.h1lmw638}>
+      <div
+        data-test-id=\\"ViewAndListWithData.Addresses\\"
+        className={styles.h1lmw638}
+      >
         {Array.isArray(addressesData) &&
           addressesData.map((item, index) =>
             <div key={index}>{item.city}</div>
@@ -890,7 +965,7 @@ const styles = {
 
 const ViewWithData = props => {
   return (
-    <div className={styles.h1lmw638}>
+    <div data-test-id=\\"User\\" className={styles.h1lmw638}>
       <div>{props.name}</div>{props.children}
     </div>
   );
@@ -914,7 +989,7 @@ const styles = {
 
 const When = props => {
   return (
-    <div className={styles.hg3iw2q}>
+    <div data-test-id=\\"App\\" className={styles.hg3iw2q}>
       {props.showMe ? <div>I may be hidden</div> : null}{props.children}
     </div>
   );
@@ -940,7 +1015,7 @@ const styles = {
 
 const WhenList = props => {
   return (
-    <div className={styles.hg3iw2q}>
+    <div data-test-id=\\"App\\" className={styles.hg3iw2q}>
       {props.showMe
         ? <div className={styles.h1lmw638}>
             {Array.isArray(props.list) &&
@@ -1204,7 +1279,7 @@ const Hover = props => {
       onPress={props.onClick}
       underlayColor=\\"transparent\\"
     >
-      <View style={styles.h1jrzrhl}>
+      <View testID=\\"Button\\" style={styles.h1jrzrhl}>
         <Text style={styles.hyfo4ef}>Hey!</Text>{props.children}
       </View>
     </TouchableWithoutFeedback>
@@ -1233,14 +1308,14 @@ const HoverProxy = props => {
       onPress={props.onClick}
       underlayColor=\\"transparent\\"
     >
-      <View style={styles.h1jrzrhl}>
+      <View testID=\\"Button\\" style={styles.h1jrzrhl}>
         {childrenArray[props.chidrenProxyMap['props.icon']]
           ? React.cloneElement(
               childrenArray[props.chidrenProxyMap['props.icon']],
               { fill: 'white', fillHover: 'black' }
             )
           : null}
-        <Text style={styles.hyfo4ef}>Hey!</Text>
+        {' '}testID=\\"HoverProxy.Icon\\"<Text style={styles.hyfo4ef}>Hey!</Text>
       </View>
     </TouchableWithoutFeedback>
   );
@@ -1322,7 +1397,7 @@ import React from 'react';
 import { Text } from 'react-native';
 
 const NameIsType = props => {
-  return <Text>iam</Text>;
+  return <Text testID=\\"Texto\\">iam</Text>;
 };
 
 export default NameIsType;
@@ -1342,16 +1417,22 @@ const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
 const NestedRoutes = props => {
   return (
-    <View style={styles.h18pdll5}>
+    <View testID=\\"Topics\\" style={styles.h18pdll5}>
       <Text>topics</Text>
       <Link
         activeOpacity={0.7}
         to={\`\${props.match.url === '/' ? '' : props.match.url}/rendering\`}
         underlayColor=\\"transparent\\"
       >
-        <View style={styles.h18pdll5}><Text>Rendering with React</Text></View>
+        <View testID=\\"NestedRoutes.Link\\" style={styles.h18pdll5}>
+          <Text>Rendering with React</Text>
+        </View>
       </Link>
-      <Route path=\\":topic\\" render={routeProps => <Topic {...routeProps} />} />
+      <Route
+        path=\\":topic\\"
+        render={routeProps =>
+          <Topic testID=\\"NestedRoutes.Topic\\" {...routeProps} />}
+      />
       {props.children}
     </View>
   );
@@ -1401,7 +1482,10 @@ const ProxyTest = props => {
               { onClick: props.onClickRemapped }
             )
           : null}
-        {childrenArray[props.chidrenProxyMap['View1']]}
+        {' '}testID=\\"ProxyTest.Proxy\\"{
+          childrenArray[props.chidrenProxyMap['View1']]
+        }
+        {' '}testID=\\"ProxyTest.Proxy\\"
       </View>
     </View>
   );
@@ -1441,15 +1525,19 @@ const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
 const ScopePopup = props => {
   return (
-    <View animate=\\"pop\\" style={styles.h18pdll5}>
+    <View testID=\\"Popup\\" animate=\\"pop\\" style={styles.h18pdll5}>
       <TouchableWithoutFeedback
         activeOpacity={0.7}
         onPress={props.toggle}
         underlayColor=\\"transparent\\"
       >
-        <View style={styles.h18pdll5}><Text>toggle popup</Text></View>
+        <View testID=\\"ScopePopup.Toggle\\" style={styles.h18pdll5}>
+          <Text>toggle popup</Text>
+        </View>
       </TouchableWithoutFeedback>
-      <View style={styles.h18pdll5}><Text>I'm inside the popup</Text></View>
+      <View testID=\\"ScopePopup.Content\\" style={styles.h18pdll5}>
+        <Text>I'm inside the popup</Text>
+      </View>
       {props.children}
     </View>
   );
@@ -1471,15 +1559,17 @@ const styles = StyleSheet.create({
 
 const ScopePopup2 = props => {
   return (
-    <View style={styles.h18pdll5}>
+    <View testID=\\"Popup\\" style={styles.h18pdll5}>
       <TouchableWithoutFeedback
         activeOpacity={0.7}
         onPress={props.toggle}
         underlayColor=\\"transparent\\"
       >
-        <View style={styles.h18pdll5}><Text>toggle popup</Text></View>
+        <View testID=\\"ScopePopup2.Toggle\\" style={styles.h18pdll5}>
+          <Text>toggle popup</Text>
+        </View>
       </TouchableWithoutFeedback>
-      <View scale={0} style={styles.hminotx}>
+      <View testID=\\"ScopePopup2.Content\\" scale={0} style={styles.hminotx}>
         <Text>I'm inside the popup</Text>
       </View>
       {props.children}
@@ -1520,8 +1610,13 @@ import { Text } from 'react-native';
 
 const Test = props => {
   return (
-    <Custom stuff=\\"eqweqw\\" childrenProxyMap={{ Something: 0, Another: 1 }}>
-      <Text>v1vh1t1</Text><Text>inside custom</Text>{props.children}
+    <Custom
+      testID=\\"Custom\\"
+      stuff=\\"eqweqw\\"
+      childrenProxyMap={{ Something: 0, Another: 1 }}
+    >
+      <Text testID=\\"Test.Something\\">v1vh1t1</Text>
+      <Text testID=\\"Test.Another\\">inside custom</Text>{props.children}
     </Custom>
   );
 };
@@ -1602,6 +1697,7 @@ class UseCaptureEmail extends React.Component {
             value={state.Email}
             keyboardType=\\"email-address\\"
             underlineColorAndroid=\\"transparent\\"
+            testID=\\"Email\\"
             placeholderTextColor=\\"blue\\"
             style={styles.hm4pcs}
           />
@@ -1630,7 +1726,7 @@ class UseCaptureFile extends React.Component {
   render() {
     const { props, state } = this;
 
-    return <CaptureFile />;
+    return <CaptureFile testID=\\"File\\" />;
   }
 }
 
@@ -1657,7 +1753,7 @@ class UseCaptureNumber extends React.Component {
     return (
       <KeyboardAvoidingView behavior=\\"position\\">
         <TouchableWithoutFeedback onPress={dismissKeyboard}>
-          <TextInput />
+          <TextInput testID=\\"Number\\" />
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
     );
@@ -1687,7 +1783,7 @@ class UseCapturePhone extends React.Component {
     return (
       <KeyboardAvoidingView behavior=\\"position\\">
         <TouchableWithoutFeedback onPress={dismissKeyboard}>
-          <TextInput />
+          <TextInput testID=\\"Phone\\" />
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
     );
@@ -1717,7 +1813,7 @@ class UseCaptureSecure extends React.Component {
     return (
       <KeyboardAvoidingView behavior=\\"position\\">
         <TouchableWithoutFeedback onPress={dismissKeyboard}>
-          <TextInput />
+          <TextInput testID=\\"Secure\\" />
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
     );
@@ -1747,7 +1843,7 @@ class UseCaptureText extends React.Component {
     return (
       <KeyboardAvoidingView behavior=\\"position\\">
         <TouchableWithoutFeedback onPress={dismissKeyboard}>
-          <TextInput />
+          <TextInput testID=\\"Text\\" />
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
     );
@@ -1804,8 +1900,14 @@ const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
 
 const UseOfProxy = props => {
   return (
-    <View style={styles.hp2cr4d}>
-      <Button color=\\"red\\" icon=\\"MyIcon\\" text=\\"I'm a button!\\" />{props.children}
+    <View testID=\\"App\\" style={styles.hp2cr4d}>
+      <Button
+        testID=\\"UseOfProxy.Button\\"
+        color=\\"red\\"
+        icon=\\"MyIcon\\"
+        text=\\"I'm a button!\\"
+      />
+      {props.children}
     </View>
   );
 };
@@ -1824,14 +1926,14 @@ const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
 const UseProxy = props => {
   const childrenArray = React.Children.toArray(props.children);
   return (
-    <View style={styles.hp2cr4d}>
+    <View testID=\\"Button\\" style={styles.hp2cr4d}>
       {childrenArray[props.chidrenProxyMap['props.icon']]
         ? React.cloneElement(
             childrenArray[props.chidrenProxyMap['props.icon']],
             { fill: 'red' }
           )
         : null}
-      <Text>{props.text}</Text>
+      {' '}testID=\\"UseProxy.Icon\\"<Text>{props.text}</Text>
     </View>
   );
 };
@@ -1861,6 +1963,7 @@ const UseRouter = props => {
           exact
           render={routeProps =>
             <Home
+              testID=\\"UseRouter.Home\\"
               heigth={props.height}
               width={360}
               {...routeProps}
@@ -1869,10 +1972,15 @@ const UseRouter = props => {
               <Route
                 path=\\"/about\\"
                 render={routeProps =>
-                  <About {...routeProps} childrenProxyMap={{ Topics: 0 }}>
+                  <About
+                    testID=\\"UseRouter.About\\"
+                    {...routeProps}
+                    childrenProxyMap={{ Topics: 0 }}
+                  >
                     <Route
                       path=\\"/topics\\"
-                      render={routeProps => <Topics {...routeProps} />}
+                      render={routeProps =>
+                        <Topics testID=\\"UseRouter.Topics\\" {...routeProps} />}
                     />
                   </About>}
               />
@@ -1900,11 +2008,21 @@ import Svg, { Text as SvgText } from 'react-native-svg';
 const UseSvg = props => {
   return (
     <Svg viewBox=\\"0 0 20 20\\">
-      <Path d=\\"0 20\\" childrenProxyMap={{ Circle: 0 }}>
-        <Circle cx={10} cy={5} r={5} childrenProxyMap={{ G: 0 }}>
+      <Path testID=\\"UseSvg.Path\\" d=\\"0 20\\" childrenProxyMap={{ Circle: 0 }}>
+        <Circle
+          testID=\\"UseSvg.Circle\\"
+          cx={10}
+          cy={5}
+          r={5}
+          childrenProxyMap={{ G: 0 }}
+        >
           <G>
-            <Path d={1} childrenProxyMap={{ Path: 0, SvgText: 1 }}>
-              <Path d={2} /><SvgText text=\\"hey\\" />
+            <Path
+              testID=\\"UseSvg.Path\\"
+              d={1}
+              childrenProxyMap={{ Path: 0, SvgText: 1 }}
+            >
+              <Path testID=\\"UseSvg.Path\\" d={2} /><SvgText text=\\"hey\\" />
             </Path>
           </G>
         </Circle>
@@ -1963,9 +2081,9 @@ const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
 const ViewAndListWithData = props => {
   return (
-    <View style={styles.h18pdll5}>
+    <View testID=\\"User\\" style={styles.h18pdll5}>
       <Text>{props.name}</Text>
-      <View style={styles.h18pdll5}>
+      <View testID=\\"ViewAndListWithData.Addresses\\" style={styles.h18pdll5}>
         {Array.isArray(addressesData) &&
           addressesData.map((item, index) =>
             <Text key={index}>{item.city}</Text>
@@ -1991,7 +2109,7 @@ const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
 const ViewWithData = props => {
   return (
-    <View style={styles.h18pdll5}>
+    <View testID=\\"User\\" style={styles.h18pdll5}>
       <Text>{props.name}</Text>{props.children}
     </View>
   );
@@ -2011,7 +2129,7 @@ const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
 
 const When = props => {
   return (
-    <View style={styles.hp2cr4d}>
+    <View testID=\\"App\\" style={styles.hp2cr4d}>
       {props.showMe ? <Text>I may be hidden</Text> : null}{props.children}
     </View>
   );
@@ -2033,7 +2151,7 @@ const styles = StyleSheet.create({
 
 const WhenList = props => {
   return (
-    <View style={styles.hp2cr4d}>
+    <View testID=\\"App\\" style={styles.hp2cr4d}>
       {props.showMe
         ? <View style={styles.h18pdll5}>
             {Array.isArray(props.list) &&
