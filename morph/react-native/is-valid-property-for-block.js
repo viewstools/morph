@@ -1,6 +1,8 @@
 const blacklist = [
+  'appRegion',
   'backgroundImage',
   'backgroundSize',
+  'clipPath',
   'cursor',
   'isActive',
   'goTo',

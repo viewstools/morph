@@ -6,6 +6,11 @@ export default (node, parent, code) => {
   const value = node.value.value
 
   switch (key) {
+    case 'appRegion':
+      return {
+        WebkitAppRegion: value,
+      }
+
     case 'backgroundImage':
       return {
         backgroundImage: code ? `\`url(\${${value}})\`` : `url("${value}")`,

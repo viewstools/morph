@@ -19,6 +19,11 @@ export default ({ file, inlineStyles, styles }, name) => {
   return `${maybeImport}${code}`
 }
 
+const getKey = raw => {
+  const key = toSlugCase(raw)
+  return raw.startsWith('Webkit') ? `-${key}` : key
+}
+
 const getValue = (key, value) =>
   typeof value === 'number' &&
   !(isUnitlessNumber.hasOwnProperty(key) && isUnitlessNumber[key])
@@ -27,7 +32,7 @@ const getValue = (key, value) =>
 
 const toCss = obj =>
   Object.keys(obj)
-    .map(k => `${toSlugCase(k)}: ${getValue(k, obj[k])};`)
+    .map(k => `${getKey(k)}: ${getValue(k, obj[k])};`)
     .join('\n')
 
 const toNestedCss = ({

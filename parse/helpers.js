@@ -25,7 +25,9 @@ const PROP_STYLE_STEMS = /^([a-z][A-Z0-9]*?)(Active|ActiveHover|Hover|Placeholde
 const SCOPE = /^when\s+(.+)$/
 const SECTION = /^([a-z][a-zA-Z0-9]*)$/
 const STYLE = new RegExp(
-  `^(${cssProperties.map(toCamelCase).join('|')}|heightBlocked|pointerEvents)$`
+  `^(${cssProperties
+    .map(toCamelCase)
+    .join('|')}|pointerEvents|clipPath|appRegion)$`
 )
 const TERNARY = /\?\s*['"]?\s*(.+)?\s*['"]?\s*:\s*['"]?\s*(.+)\s*['"]?\s*/
 const TEXT = /^Text$/
