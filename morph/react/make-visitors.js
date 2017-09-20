@@ -48,9 +48,10 @@ export default ({
         node.isDebugged = true
 
         state.render.push(
-          ` onClick={(e) => context.selectBlock(e, ${node.loc.start.line})}
+          ` onClick={(e) => context.selectBlock(e, ${node.loc.start
+            .line}, '${state.name}')}
             onMouseOver={(e) => context.hoverBlock(e, '${node.is ||
-              node.name.value}')}`
+              node.name.value}', '${state.name}')}`
         )
       }
     },
@@ -287,9 +288,10 @@ export default ({
     leave(node, parent, state) {
       if (state.debug && parent.isBasic && !parent.isDebugged) {
         state.render.push(
-          ` onClick={(e) => context.selectBlock(e, ${parent.loc.start.line})}
+          ` onClick={(e) => context.selectBlock(e, ${parent.loc.start
+            .line}, '${state.name}')}
             onMouseOver={(e) => context.hoverBlock(e, '${parent.is ||
-              parent.name.value}')}`
+              parent.name.value}', '${state.name}')}`
         )
       }
     },
@@ -390,7 +392,7 @@ export default ({
           state.render.push(
             ` onClick={(e) => {
                   if (!context.selectBlock(e, ${parent.parent.loc.start
-                    .line})) {
+                    .line}, '${state.name}')) {
                     try {
                       (${node.value.value})();
                     } catch(err) {
@@ -398,7 +400,7 @@ export default ({
                   }
                 }}
                 onMouseOver={(e) => context.hoverBlock(e, '${parent.parent.is ||
-                  parent.parent.name.value}')}`
+                  parent.parent.name.value}', '${state.name}')}`
           )
           return
         }
