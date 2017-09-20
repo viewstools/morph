@@ -21,7 +21,7 @@ export default ({ getImport, getStyles, name, state }) => {
   const dependencies = [
     `import React from 'react'`,
     state.withRouter && `import { withRouter } from 'react-router'`,
-    tests && `import * as fromTests from './${name}.view.tests'`,
+    tests && `import * as fromTests from './${name}.view.tests.js'`,
     hasContext && `import PropTypes from 'prop-types'`,
     getDependencies(state, getImport),
   ]
