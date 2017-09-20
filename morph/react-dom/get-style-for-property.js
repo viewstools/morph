@@ -21,6 +21,11 @@ export default (node, parent, code) => {
         fontFamily: code ? value : maybeAddFallbackFont(value),
       }
 
+    case 'userSelect':
+      return {
+        WebkitUserSelect: value,
+      }
+
     case 'zIndex':
       return {
         zIndex: code ? value : parseInt(value, 10),

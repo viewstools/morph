@@ -27,7 +27,7 @@ const SECTION = /^([a-z][a-zA-Z0-9]*)$/
 const STYLE = new RegExp(
   `^(${cssProperties
     .map(toCamelCase)
-    .join('|')}|pointerEvents|clipPath|appRegion)$`
+    .join('|')}|pointerEvents|clipPath|appRegion|userSelect)$`
 )
 const TERNARY = /\?\s*['"]?\s*(.+)?\s*['"]?\s*:\s*['"]?\s*(.+)\s*['"]?\s*/
 const TEXT = /^Text$/

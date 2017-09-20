@@ -15,6 +15,7 @@ const blacklist = [
   'teleportTo',
   // TODO convert to upper case...
   'textTransform',
+  'userSelect',
 ]
 
 // TODO whitelist instead
