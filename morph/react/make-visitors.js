@@ -113,7 +113,10 @@ export default ({
 
         state.render.push(childContent)
       } else {
-        const child = `childrenArray[props.chidrenProxyMap['${proxied}']]`
+        if (!node.when) {
+          state.render.push('props.childrenProxyMap && ')
+        }
+        const child = `childrenArray[props.childrenProxyMap['${proxied}']]`
 
         if (otherProperties.length > 0) {
           if (node.when) {
