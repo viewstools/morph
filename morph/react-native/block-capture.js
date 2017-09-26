@@ -58,6 +58,13 @@ export const enter = (node, parent, state) => {
         state.render.push(` onFocus=${safe(onFocus.value.value)}`)
       }
 
+      const autoCorrect = getProp(node, 'autoCorrect')
+      state.render.push(
+        ` autoCorrect=${autoCorrect
+          ? safe(autoCorrect.value.value)
+          : '{false}'}`
+      )
+
       const placeholder = getProp(node, 'placeholder')
       if (placeholder) {
         state.render.push(` placeholder=${safe(placeholder.value.value)}`)
