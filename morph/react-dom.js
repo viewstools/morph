@@ -1,3 +1,4 @@
+import * as BlockCapture from './react-dom/block-capture.js'
 import * as BlockGoTo from './react-dom/block-go-to.js'
 import * as BlockTeleport from './react-dom/block-teleport.js'
 import { leave as PropertiesStyleLeave } from './react-dom/properties-style.js'
@@ -102,6 +103,7 @@ export default ({
         BlockWhen.enter,
         BlockRoute.enter,
         BlockName.enter,
+        BlockCapture.enter,
         BlockTeleport.enter,
         BlockGoTo.enter,
         BlockDefaultProps.enter,
