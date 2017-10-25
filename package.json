@@ -1,6 +1,6 @@
 {
   "name": "views-morph",
-  "version": "0.5.2",
+  "version": "0.5.4",
   "description": "Views language morpher",
   "main": "lib.js",
   "bin": {
@@ -25,12 +25,12 @@
   },
   "homepage": "https://github.com/viewsdx/morph#readme",
   "devDependencies": {
-    "babel-core": "^6.26.0",
     "babel-eslint": "^7.2.3",
     "babel-jest": "^20.0.3",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-preset-env": "^1.6.0",
     "eslint": "^3.19.0",
     "husky": "^0.13.4",
     "import-export": "^1.0.1",
@@ -42,6 +42,7 @@
   },
   "dependencies": {
     "array-uniq": "^1.0.3",
+    "babel-core": "^6.26.0",
     "browserify": "^14.4.0",
     "buble": "^0.15.2",
     "chalk": "^1.1.3",
