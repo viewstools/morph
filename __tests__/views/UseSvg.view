@@ -1,17 +1,16 @@
 Svg
 viewBox 0 0 20 20
-Path
+SvgPath
 d 0 20
-Circle
+SvgCircle
 cx 10
 cy 5
 r 5
-G
-Path
+SvgGroup
+SvgPath
 d 1
-Path
+SvgPath
 d 2
-
 
 SvgText
 text hey

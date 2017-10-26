@@ -196,9 +196,10 @@ const HoverProxy = props => {
       onClick={props.onClick}
       className={styles.hpg1h4y}
     >
-      {childrenArray[props.chidrenProxyMap['props.icon']]
+      {props.childrenProxyMap &&
+        childrenArray[props.childrenProxyMap['props.icon']]
         ? React.cloneElement(
-            childrenArray[props.chidrenProxyMap['props.icon']],
+            childrenArray[props.childrenProxyMap['props.icon']],
             { fill: 'white', fillHover: 'black' }
           )
         : null}
@@ -382,14 +383,14 @@ const ProxyTest = props => {
   return (
     <div className={styles.h1lmw638}>
       <div className={styles.hg3iw2q}>
-        {props.bla && childrenArray[props.chidrenProxyMap['Something']]
+        {props.bla && childrenArray[props.childrenProxyMap['Something']]
           ? React.cloneElement(
-              childrenArray[props.chidrenProxyMap['Something']],
+              childrenArray[props.childrenProxyMap['Something']],
               { onClick: props.onClickRemapped }
             )
           : null}
-        {childrenArray[props.chidrenProxyMap['View1']]}
       </div>
+      {props.childrenProxyMap && childrenArray[props.childrenProxyMap['View1']]}
     </div>
   );
 };
@@ -442,9 +443,6 @@ const ScopePopup = props => {
       >
         <div>toggle popup</div>
       </button>
-      <div data-test-id=\\"ScopePopup.Content\\" className={styles.h1lmw638}>
-        <div>I'm inside the popup</div>
-      </div>
       {props.children}
     </div>
   );
@@ -463,10 +461,6 @@ const styles = {
   h1lmw638: css('css-1s0kfvh', [], () => [
     \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
   ]),
-  hfwrjqy: css('css-4l3qiu', [], () => [
-    \`.css-4l3qiu { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column;
-opacity: 0; }\`,
-  ]),
 };
 
 const ScopePopup2 = props => {
@@ -479,13 +473,6 @@ const ScopePopup2 = props => {
       >
         <div>toggle popup</div>
       </button>
-      <div
-        data-test-id=\\"ScopePopup2.Content\\"
-        scale={0}
-        className={styles.hfwrjqy}
-      >
-        <div>I'm inside the popup</div>
-      </div>
       {props.children}
     </div>
   );
@@ -749,9 +736,10 @@ const UseProxy = props => {
   const childrenArray = React.Children.toArray(props.children);
   return (
     <div data-test-id=\\"Button\\" className={styles.hg3iw2q}>
-      {childrenArray[props.chidrenProxyMap['props.icon']]
+      {props.childrenProxyMap &&
+        childrenArray[props.childrenProxyMap['props.icon']]
         ? React.cloneElement(
-            childrenArray[props.chidrenProxyMap['props.icon']],
+            childrenArray[props.childrenProxyMap['props.icon']],
             { fill: 'red' }
           )
         : null}
@@ -793,27 +781,17 @@ const UseRouter = props => {
               heigth={props.height}
               width={360}
               {...routeProps}
-              childrenProxyMap={{ About: 0 }}
-            >
-              <Route
-                path=\\"/about\\"
-                render={routeProps =>
-                  <About
-                    data-test-id=\\"UseRouter.About\\"
-                    {...routeProps}
-                    childrenProxyMap={{ Topics: 0 }}
-                  >
-                    <Route
-                      path=\\"/topics\\"
-                      render={routeProps =>
-                        <Topics
-                          data-test-id=\\"UseRouter.Topics\\"
-                          {...routeProps}
-                        />}
-                    />
-                  </About>}
-              />
-            </Home>}
+            />}
+        />
+        <Route
+          path=\\"/about\\"
+          render={routeProps =>
+            <About data-test-id=\\"UseRouter.About\\" {...routeProps} />}
+        />
+        <Route
+          path=\\"/topics\\"
+          render={routeProps =>
+            <Topics data-test-id=\\"UseRouter.Topics\\" {...routeProps} />}
         />
         {props.children}
       </div>
@@ -829,37 +807,12 @@ export default UseRouter;
 exports[`react-dom parses react-dom UseSvg 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
-import Circle from './Circle.view.js';
-import G from './G.view.js';
-import Path from './Path.view.js';
 
 const UseSvg = props => {
   return (
     <svg viewBox=\\"0 0 20 20\\">
-      <Path
-        data-test-id=\\"UseSvg.Path\\"
-        d=\\"0 20\\"
-        childrenProxyMap={{ Circle: 0 }}
-      >
-        <Circle
-          data-test-id=\\"UseSvg.Circle\\"
-          cx={10}
-          cy={5}
-          r={5}
-          childrenProxyMap={{ G: 0 }}
-        >
-          <G>
-            <Path
-              data-test-id=\\"UseSvg.Path\\"
-              d={1}
-              childrenProxyMap={{ Path: 0, SvgText: 1 }}
-            >
-              <Path data-test-id=\\"UseSvg.Path\\" d={2} /><text text=\\"hey\\" />
-            </Path>
-          </G>
-        </Circle>
-      </Path>
-      {props.children}
+      <path d=\\"0 20\\" /><circle cx={10} cy={5} r={5} />
+      <g><path d={1} /><path d={2} /></g><text text=\\"hey\\" />{props.children}
     </svg>
   );
 };
@@ -1045,7 +998,7 @@ export default WhenTopLevel;
 exports[`react-dom parses react-dom WithTest 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
-import * as fromTests from './WithTest.view.tests';
+import * as fromTests from './WithTest.view.tests.js';
 import css from 'glam';
 const styles = {
   h1lmw638: css('css-1s0kfvh', [], () => [
@@ -1304,9 +1257,10 @@ const HoverProxy = props => {
       underlayColor=\\"transparent\\"
     >
       <View testID=\\"Button\\" style={styles.h1jrzrhl}>
-        {childrenArray[props.chidrenProxyMap['props.icon']]
+        {props.childrenProxyMap &&
+          childrenArray[props.childrenProxyMap['props.icon']]
           ? React.cloneElement(
-              childrenArray[props.chidrenProxyMap['props.icon']],
+              childrenArray[props.childrenProxyMap['props.icon']],
               { fill: 'white', fillHover: 'black' }
             )
           : null}
@@ -1471,14 +1425,14 @@ const ProxyTest = props => {
   return (
     <View style={styles.h18pdll5}>
       <View style={styles.hp2cr4d}>
-        {props.bla && childrenArray[props.chidrenProxyMap['Something']]
+        {props.bla && childrenArray[props.childrenProxyMap['Something']]
           ? React.cloneElement(
-              childrenArray[props.chidrenProxyMap['Something']],
+              childrenArray[props.childrenProxyMap['Something']],
               { onClick: props.onClickRemapped }
             )
           : null}
-        {childrenArray[props.chidrenProxyMap['View1']]}
       </View>
+      {props.childrenProxyMap && childrenArray[props.childrenProxyMap['View1']]}
     </View>
   );
 };
@@ -1527,9 +1481,6 @@ const ScopePopup = props => {
           <Text>toggle popup</Text>
         </View>
       </TouchableWithoutFeedback>
-      <View testID=\\"ScopePopup.Content\\" style={styles.h18pdll5}>
-        <Text>I'm inside the popup</Text>
-      </View>
       {props.children}
     </View>
   );
@@ -1544,10 +1495,7 @@ exports[`react-native parses react-native ScopePopup2 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
-const styles = StyleSheet.create({
-  h18pdll5: { flexDirection: 'column' },
-  hminotx: { flexDirection: 'column', opacity: 0 },
-});
+const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
 const ScopePopup2 = props => {
   return (
@@ -1561,9 +1509,6 @@ const ScopePopup2 = props => {
           <Text>toggle popup</Text>
         </View>
       </TouchableWithoutFeedback>
-      <View testID=\\"ScopePopup2.Content\\" scale={0} style={styles.hminotx}>
-        <Text>I'm inside the popup</Text>
-      </View>
       {props.children}
     </View>
   );
@@ -1658,8 +1603,7 @@ export default RemapToggle;
 exports[`react-native parses react-native UseCaptureEmail 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
-import dismissKeyboard from 'dismissKeyboard';
-import { KeyboardAvoidingView, StyleSheet, TextInput } from 'react-native';
+import { StyleSheet, TextInput } from 'react-native';
 const styles = StyleSheet.create({
   hm4pcs: {
     borderColor: 'black',
@@ -1679,22 +1623,19 @@ class UseCaptureEmail extends React.Component {
     const { props, state } = this;
 
     return (
-      <KeyboardAvoidingView behavior=\\"position\\">
-        <TouchableWithoutFeedback onPress={dismissKeyboard}>
-          <TextInput
-            onSubmitEditing={props.onSubmit}
-            returnKeyType=\\"go\\"
-            onChangeText={Email => this.setState({ Email })}
-            ref={$e => (this.$captureEmail = $e)}
-            value={state.Email}
-            keyboardType=\\"email-address\\"
-            underlineColorAndroid=\\"transparent\\"
-            testID=\\"Email\\"
-            placeholderTextColor=\\"blue\\"
-            style={styles.hm4pcs}
-          />
-        </TouchableWithoutFeedback>
-      </KeyboardAvoidingView>
+      <TextInput
+        onSubmitEditing={props.onSubmit}
+        returnKeyType=\\"go\\"
+        onChangeText={Email => this.setState({ Email })}
+        ref={$e => (this.$captureEmail = $e)}
+        value={state.Email}
+        keyboardType=\\"email-address\\"
+        autoCorrect={false}
+        underlineColorAndroid=\\"transparent\\"
+        testID=\\"Email\\"
+        placeholderTextColor=\\"blue\\"
+        style={styles.hm4pcs}
+      />
     );
   }
 }
@@ -1730,8 +1671,7 @@ export default UseCaptureFile;
 exports[`react-native parses react-native UseCaptureNumber 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
-import dismissKeyboard from 'dismissKeyboard';
-import { KeyboardAvoidingView, TextInput } from 'react-native';
+import { TextInput } from 'react-native';
 
 class UseCaptureNumber extends React.Component {
   constructor(props) {
@@ -1742,13 +1682,7 @@ class UseCaptureNumber extends React.Component {
   render() {
     const { props, state } = this;
 
-    return (
-      <KeyboardAvoidingView behavior=\\"position\\">
-        <TouchableWithoutFeedback onPress={dismissKeyboard}>
-          <TextInput testID=\\"Number\\" />
-        </TouchableWithoutFeedback>
-      </KeyboardAvoidingView>
-    );
+    return <TextInput testID=\\"Number\\" />;
   }
 }
 
@@ -1760,8 +1694,7 @@ export default UseCaptureNumber;
 exports[`react-native parses react-native UseCapturePhone 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
-import dismissKeyboard from 'dismissKeyboard';
-import { KeyboardAvoidingView, TextInput } from 'react-native';
+import { TextInput } from 'react-native';
 
 class UseCapturePhone extends React.Component {
   constructor(props) {
@@ -1772,13 +1705,7 @@ class UseCapturePhone extends React.Component {
   render() {
     const { props, state } = this;
 
-    return (
-      <KeyboardAvoidingView behavior=\\"position\\">
-        <TouchableWithoutFeedback onPress={dismissKeyboard}>
-          <TextInput testID=\\"Phone\\" />
-        </TouchableWithoutFeedback>
-      </KeyboardAvoidingView>
-    );
+    return <TextInput testID=\\"Phone\\" />;
   }
 }
 
@@ -1790,8 +1717,7 @@ export default UseCapturePhone;
 exports[`react-native parses react-native UseCaptureSecure 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
-import dismissKeyboard from 'dismissKeyboard';
-import { KeyboardAvoidingView, TextInput } from 'react-native';
+import { TextInput } from 'react-native';
 
 class UseCaptureSecure extends React.Component {
   constructor(props) {
@@ -1802,13 +1728,7 @@ class UseCaptureSecure extends React.Component {
   render() {
     const { props, state } = this;
 
-    return (
-      <KeyboardAvoidingView behavior=\\"position\\">
-        <TouchableWithoutFeedback onPress={dismissKeyboard}>
-          <TextInput testID=\\"Secure\\" />
-        </TouchableWithoutFeedback>
-      </KeyboardAvoidingView>
-    );
+    return <TextInput testID=\\"Secure\\" />;
   }
 }
 
@@ -1820,8 +1740,7 @@ export default UseCaptureSecure;
 exports[`react-native parses react-native UseCaptureText 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
-import dismissKeyboard from 'dismissKeyboard';
-import { KeyboardAvoidingView, TextInput } from 'react-native';
+import { TextInput } from 'react-native';
 
 class UseCaptureText extends React.Component {
   constructor(props) {
@@ -1832,13 +1751,7 @@ class UseCaptureText extends React.Component {
   render() {
     const { props, state } = this;
 
-    return (
-      <KeyboardAvoidingView behavior=\\"position\\">
-        <TouchableWithoutFeedback onPress={dismissKeyboard}>
-          <TextInput testID=\\"Text\\" />
-        </TouchableWithoutFeedback>
-      </KeyboardAvoidingView>
-    );
+    return <TextInput testID=\\"Text\\" />;
   }
 }
 
@@ -1919,9 +1832,10 @@ const UseProxy = props => {
   const childrenArray = React.Children.toArray(props.children);
   return (
     <View testID=\\"Button\\" style={styles.hp2cr4d}>
-      {childrenArray[props.chidrenProxyMap['props.icon']]
+      {props.childrenProxyMap &&
+        childrenArray[props.childrenProxyMap['props.icon']]
         ? React.cloneElement(
-            childrenArray[props.chidrenProxyMap['props.icon']],
+            childrenArray[props.childrenProxyMap['props.icon']],
             { fill: 'red' }
           )
         : null}
@@ -1959,24 +1873,17 @@ const UseRouter = props => {
               heigth={props.height}
               width={360}
               {...routeProps}
-              childrenProxyMap={{ About: 0 }}
-            >
-              <Route
-                path=\\"/about\\"
-                render={routeProps =>
-                  <About
-                    testID=\\"UseRouter.About\\"
-                    {...routeProps}
-                    childrenProxyMap={{ Topics: 0 }}
-                  >
-                    <Route
-                      path=\\"/topics\\"
-                      render={routeProps =>
-                        <Topics testID=\\"UseRouter.Topics\\" {...routeProps} />}
-                    />
-                  </About>}
-              />
-            </Home>}
+            />}
+        />
+        <Route
+          path=\\"/about\\"
+          render={routeProps =>
+            <About testID=\\"UseRouter.About\\" {...routeProps} />}
+        />
+        <Route
+          path=\\"/topics\\"
+          render={routeProps =>
+            <Topics testID=\\"UseRouter.Topics\\" {...routeProps} />}
         />
         {props.children}
       </View>
@@ -1992,34 +1899,19 @@ export default UseRouter;
 exports[`react-native parses react-native UseSvg 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
-import Circle from './Circle.view.js';
-import G from './G.view.js';
-import Path from './Path.view.js';
-import Svg, { Text as SvgText } from 'react-native-svg';
+import Svg, {
+  Circle as SvgCircle,
+  G as SvgGroup,
+  Path as SvgPath,
+  Text as SvgText,
+} from 'react-native-svg';
 
 const UseSvg = props => {
   return (
     <Svg viewBox=\\"0 0 20 20\\">
-      <Path testID=\\"UseSvg.Path\\" d=\\"0 20\\" childrenProxyMap={{ Circle: 0 }}>
-        <Circle
-          testID=\\"UseSvg.Circle\\"
-          cx={10}
-          cy={5}
-          r={5}
-          childrenProxyMap={{ G: 0 }}
-        >
-          <G>
-            <Path
-              testID=\\"UseSvg.Path\\"
-              d={1}
-              childrenProxyMap={{ Path: 0, SvgText: 1 }}
-            >
-              <Path testID=\\"UseSvg.Path\\" d={2} /><SvgText text=\\"hey\\" />
-            </Path>
-          </G>
-        </Circle>
-      </Path>
-      {props.children}
+      <SvgPath d=\\"0 20\\" /><SvgCircle cx={10} cy={5} r={5} />
+      <SvgGroup><SvgPath d={1} /><SvgPath d={2} /></SvgGroup>
+      <SvgText text=\\"hey\\" />{props.children}
     </Svg>
   );
 };
@@ -2179,7 +2071,7 @@ export default WhenTopLevel;
 exports[`react-native parses react-native WithTest 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
-import * as fromTests from './WithTest.view.tests';
+import * as fromTests from './WithTest.view.tests.js';
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
