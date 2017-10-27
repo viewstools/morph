@@ -6,6 +6,10 @@ export default ({ state, name }) => {
     : ''
 
   if (state.captures.length > 0) {
+    // const componentState = state.captures
+    //   .map(prop => `${prop}: props.${prop} || ''`)
+    //   .join(',\n')
+
     return `class ${name} extends React.Component {
   constructor(props) {
     super(props)

@@ -104,12 +104,11 @@ export default ({
       }
 
       if (proxied === 'all') {
-        const childContent =
-          otherProperties.length > 0
-            ? `React.Children.map(props.children, child => React.cloneElement(child, ${getPropertiesAsObject(
-                otherProperties
-              )}))`
-            : 'props.children'
+        const childContent = otherProperties.length > 0
+          ? `React.Children.map(props.children, child => React.cloneElement(child, ${getPropertiesAsObject(
+              otherProperties
+            )}))`
+          : 'props.children'
 
         state.render.push(childContent)
       } else {
@@ -384,6 +383,13 @@ export default ({
           state.render.push(` ${node.key.value}={props.${functionName}}`)
           return
         }
+
+        // if (node.key.value === 'onSubmit') {
+        //   state.render.push(
+        //     ` ${node.key.value}={() => ${node.value.value}(state)}`
+        //   )
+        //   return
+        // }
 
         if (
           state.debug &&

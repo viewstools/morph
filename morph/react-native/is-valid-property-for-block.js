@@ -11,6 +11,7 @@ const blacklist = [
   'overflowY',
   'fontWeight',
   'onClick',
+  'onSubmit',
   'pageBreakInside',
   'teleportTo',
   // TODO convert to upper case...

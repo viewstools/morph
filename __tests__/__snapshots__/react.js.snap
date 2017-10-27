@@ -111,6 +111,74 @@ export default BoxShadow;
 "
 `;
 
+exports[`react-dom parses react-dom Form 1`] = `
+"/* eslint-disable jsx-a11y/accessible-emoji */
+import React from 'react';
+import css from 'glam';
+const styles = {
+  h1lmw638: css('css-1s0kfvh', [], () => [
+    \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
+  ]),
+};
+
+class Form extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const { props, state } = this;
+
+    return (
+      <form
+        data-test-id=\\"Form\\"
+        onSubmit={() => props.onSubmit(state)}
+        className={styles.h1lmw638}
+      >
+        <input
+          type=\\"text\\"
+          onChange={event => this.setState({ name: event.target.value })}
+          value={state.name}
+          data-test-id=\\"Form.Name\\"
+        />
+        <input
+          type=\\"text\\"
+          onChange={event => this.setState({ surname: event.target.value })}
+          value={state.surname}
+          data-test-id=\\"Form.Surname\\"
+        />
+        <input
+          type=\\"password\\"
+          onChange={event => this.setState({ password: event.target.value })}
+          value={state.password}
+          data-test-id=\\"Form.Password\\"
+        />
+        <input
+          type=\\"email\\"
+          onChange={event => this.setState({ email: event.target.value })}
+          value={state.email}
+          data-test-id=\\"Form.Email\\"
+          defaultValue=\\"morph@viewsdx.com\\"
+        />
+        <button
+          data-test-id=\\"Form.Button\\"
+          onClick={() => props.onSubmit(state)}
+          className={styles.h1lmw638}
+        >
+          <div>Send!</div>
+        </button>
+        {props.children}
+      </form>
+    );
+  }
+}
+
+export default Form;
+// fonts {}
+"
+`;
+
 exports[`react-dom parses react-dom GoTo 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
@@ -251,32 +319,6 @@ const ListOfSomething = props => {
 };
 
 export default ListOfSomething;
-// fonts {}
-"
-`;
-
-exports[`react-dom parses react-dom ListWithData 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
-import React from 'react';
-import css from 'glam';
-import usersData from './users.data.js';
-const styles = {
-  h1lmw638: css('css-1s0kfvh', [], () => [
-    \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
-  ]),
-};
-
-const ListWithData = props => {
-  return (
-    <div className={styles.h1lmw638}>
-      {Array.isArray(usersData) &&
-        usersData.map((item, index) => <div key={index}>{item.name}</div>)}
-      {props.children}
-    </div>
-  );
-};
-
-export default ListWithData;
 // fonts {}
 "
 `;
@@ -533,36 +575,12 @@ export default Test;
 exports[`react-dom parses react-dom Toggle 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
-import css from 'glam';
-const styles = {
-  h1lmw638: css('css-1s0kfvh', [], () => [
-    \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
-  ]),
-};
-
-class RemapToggle extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { isOn: props.isOn };
-  }
-  toggleIsOn = () => this.setState({ isOn: !this.state.isOn });
-
-  render() {
-    return (
-      <Toggle {...this.props} {...this.state} toggleIsOn={this.toggleIsOn} />
-    );
-  }
-}
 
 const Toggle = props => {
-  return (
-    <button onClick={props.toggleIsOn} className={styles.h1lmw638}>
-      <div>hey</div>{props.children}
-    </button>
-  );
+  return <div>NOPE</div>;
 };
 
-export default RemapToggle;
+export default Toggle;
 // fonts {}
 "
 `;
@@ -579,15 +597,27 @@ color: red; }\`,
   ]),
 };
 
-const UseCaptureEmail = props => {
-  return (
-    <input
-      data-test-id=\\"Email\\"
-      onSubmit={props.onSubmit}
-      className={styles.hevllt7}
-    />
-  );
-};
+class UseCaptureEmail extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const { props, state } = this;
+
+    return (
+      <input
+        type=\\"email\\"
+        onChange={event => this.setState({ email: event.target.value })}
+        value={state.email}
+        data-test-id=\\"Email\\"
+        onSubmit={props.onSubmit}
+        className={styles.hevllt7}
+      />
+    );
+  }
+}
 
 export default UseCaptureEmail;
 // fonts {}
@@ -598,9 +628,24 @@ exports[`react-dom parses react-dom UseCaptureFile 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 
-const UseCaptureFile = props => {
-  return <input data-test-id=\\"File\\" />;
-};
+class UseCaptureFile extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const { props, state } = this;
+
+    return (
+      <input
+        onChange={event => this.setState({ file: event.target.value })}
+        value={state.file}
+        data-test-id=\\"File\\"
+      />
+    );
+  }
+}
 
 export default UseCaptureFile;
 // fonts {}
@@ -611,9 +656,25 @@ exports[`react-dom parses react-dom UseCaptureNumber 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 
-const UseCaptureNumber = props => {
-  return <input data-test-id=\\"Number\\" />;
-};
+class UseCaptureNumber extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const { props, state } = this;
+
+    return (
+      <input
+        type=\\"number\\"
+        onChange={event => this.setState({ number: event.target.value })}
+        value={state.number}
+        data-test-id=\\"Number\\"
+      />
+    );
+  }
+}
 
 export default UseCaptureNumber;
 // fonts {}
@@ -624,9 +685,25 @@ exports[`react-dom parses react-dom UseCapturePhone 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 
-const UseCapturePhone = props => {
-  return <input data-test-id=\\"Phone\\" />;
-};
+class UseCapturePhone extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const { props, state } = this;
+
+    return (
+      <input
+        type=\\"tel\\"
+        onChange={event => this.setState({ phone: event.target.value })}
+        value={state.phone}
+        data-test-id=\\"Phone\\"
+      />
+    );
+  }
+}
 
 export default UseCapturePhone;
 // fonts {}
@@ -637,9 +714,25 @@ exports[`react-dom parses react-dom UseCaptureSecure 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 
-const UseCaptureSecure = props => {
-  return <input data-test-id=\\"Secure\\" />;
-};
+class UseCaptureSecure extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const { props, state } = this;
+
+    return (
+      <input
+        type=\\"password\\"
+        onChange={event => this.setState({ secure: event.target.value })}
+        value={state.secure}
+        data-test-id=\\"Secure\\"
+      />
+    );
+  }
+}
 
 export default UseCaptureSecure;
 // fonts {}
@@ -650,11 +743,77 @@ exports[`react-dom parses react-dom UseCaptureText 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 
-const UseCaptureText = props => {
-  return <input data-test-id=\\"Text\\" />;
-};
+class UseCaptureText extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const { props, state } = this;
+
+    return (
+      <input
+        type=\\"text\\"
+        onChange={event => this.setState({ text: event.target.value })}
+        value={state.text}
+        data-test-id=\\"Text\\"
+      />
+    );
+  }
+}
 
 export default UseCaptureText;
+// fonts {}
+"
+`;
+
+exports[`react-dom parses react-dom UseCaptureTextArea 1`] = `
+"/* eslint-disable jsx-a11y/accessible-emoji */
+import React from 'react';
+
+class UseCaptureTextArea extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const { props, state } = this;
+
+    return (
+      <textarea
+        onChange={event =>
+          this.setState({ captureTextArea: event.target.value })}
+        value={state.captureTextArea}
+      />
+    );
+  }
+}
+
+export default UseCaptureTextArea;
+// fonts {}
+"
+`;
+
+exports[`react-dom parses react-dom UseCaptureTextManagedFromOutside 1`] = `
+"/* eslint-disable jsx-a11y/accessible-emoji */
+import React from 'react';
+
+class UseCaptureTextManagedFromOutside extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const { props, state } = this;
+
+    return <input type=\\"text\\" value={props.external} />;
+  }
+}
+
+export default UseCaptureTextManagedFromOutside;
 // fonts {}
 "
 `;
@@ -860,67 +1019,6 @@ const UseVertical = props => {
 };
 
 export default UseVertical;
-// fonts {}
-"
-`;
-
-exports[`react-dom parses react-dom ViewAndListWithData 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
-import React from 'react';
-import addressesData from './addresses.data.js';
-import css from 'glam';
-import userData from './user.data.js';
-const styles = {
-  h1lmw638: css('css-1s0kfvh', [], () => [
-    \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
-  ]),
-};
-
-const ViewAndListWithData = props => {
-  return (
-    <div data-test-id=\\"User\\" className={styles.h1lmw638}>
-      <div>{props.name}</div>
-      <div
-        data-test-id=\\"ViewAndListWithData.Addresses\\"
-        className={styles.h1lmw638}
-      >
-        {Array.isArray(addressesData) &&
-          addressesData.map((item, index) =>
-            <div key={index}>{item.city}</div>
-          )}
-      </div>
-      {props.children}
-    </div>
-  );
-};
-ViewAndListWithData.defaultProps = userData;
-
-export default ViewAndListWithData;
-// fonts {}
-"
-`;
-
-exports[`react-dom parses react-dom ViewWithData 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
-import React from 'react';
-import css from 'glam';
-import userData from './user.data.js';
-const styles = {
-  h1lmw638: css('css-1s0kfvh', [], () => [
-    \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
-  ]),
-};
-
-const ViewWithData = props => {
-  return (
-    <div data-test-id=\\"User\\" className={styles.h1lmw638}>
-      <div>{props.name}</div>{props.children}
-    </div>
-  );
-};
-ViewWithData.defaultProps = userData;
-
-export default ViewWithData;
 // fonts {}
 "
 `;
@@ -1192,6 +1290,61 @@ export default BoxShadow;
 "
 `;
 
+exports[`react-native parses react-native Form 1`] = `
+"/* eslint-disable jsx-a11y/accessible-emoji */
+import React from 'react';
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
+const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
+
+class Form extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const { props, state } = this;
+
+    return (
+      <View testID=\\"Form\\" style={styles.h18pdll5}>
+        <TextInput testID=\\"Form.Name\\" /><TextInput testID=\\"Form.Surname\\" />
+        <TextInput testID=\\"Form.Password\\" />
+        <TextInput
+          returnKeyType=\\"done\\"
+          onChangeText={Email => this.setState({ Email })}
+          ref={$e => (this.$captureEmail = $e)}
+          value={state.Email}
+          keyboardType=\\"email-address\\"
+          autoCorrect={false}
+          underlineColorAndroid=\\"transparent\\"
+          testID=\\"Form.Email\\"
+        />
+        <TouchableWithoutFeedback
+          activeOpacity={0.7}
+          onPress={() => props.onSubmit(state)}
+          underlayColor=\\"transparent\\"
+        >
+          <View testID=\\"Form.Button\\" style={styles.h18pdll5}>
+            <Text>Send!</Text>
+          </View>
+        </TouchableWithoutFeedback>
+        {props.children}
+      </View>
+    );
+  }
+}
+
+export default Form;
+// fonts {}
+"
+`;
+
 exports[`react-native parses react-native GoTo 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
@@ -1314,28 +1467,6 @@ const ListOfSomething = props => {
 };
 
 export default ListOfSomething;
-// fonts {}
-"
-`;
-
-exports[`react-native parses react-native ListWithData 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
-import React from 'react';
-import usersData from './users.data.js';
-import { StyleSheet, Text, View } from 'react-native';
-const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
-
-const ListWithData = props => {
-  return (
-    <View style={styles.h18pdll5}>
-      {Array.isArray(usersData) &&
-        usersData.map((item, index) => <Text key={index}>{item.name}</Text>)}
-      {props.children}
-    </View>
-  );
-};
-
-export default ListWithData;
 // fonts {}
 "
 `;
@@ -1566,36 +1697,13 @@ export default Test;
 exports[`react-native parses react-native Toggle 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
-import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
-const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
-
-class RemapToggle extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { isOn: props.isOn };
-  }
-  toggleIsOn = () => this.setState({ isOn: !this.state.isOn });
-
-  render() {
-    return (
-      <Toggle {...this.props} {...this.state} toggleIsOn={this.toggleIsOn} />
-    );
-  }
-}
+import { Text } from 'react-native';
 
 const Toggle = props => {
-  return (
-    <TouchableWithoutFeedback
-      activeOpacity={0.7}
-      onPress={props.toggleIsOn}
-      underlayColor=\\"transparent\\"
-    >
-      <View style={styles.h18pdll5}><Text>hey</Text>{props.children}</View>
-    </TouchableWithoutFeedback>
-  );
+  return <Text>NOPE</Text>;
 };
 
-export default RemapToggle;
+export default Toggle;
 // fonts {}
 "
 `;
@@ -1756,6 +1864,62 @@ class UseCaptureText extends React.Component {
 }
 
 export default UseCaptureText;
+// fonts {}
+"
+`;
+
+exports[`react-native parses react-native UseCaptureTextArea 1`] = `
+"/* eslint-disable jsx-a11y/accessible-emoji */
+import React from 'react';
+import { TextInput } from 'react-native';
+
+class UseCaptureTextArea extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const { props, state } = this;
+
+    return <TextInput />;
+  }
+}
+
+export default UseCaptureTextArea;
+// fonts {}
+"
+`;
+
+exports[`react-native parses react-native UseCaptureTextManagedFromOutside 1`] = `
+"/* eslint-disable jsx-a11y/accessible-emoji */
+import React from 'react';
+import { TextInput } from 'react-native';
+
+class UseCaptureTextManagedFromOutside extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const { props, state } = this;
+
+    return (
+      <TextInput
+        returnKeyType=\\"done\\"
+        onChangeText={undefined => this.setState({ undefined })}
+        ref={$e => (this.$captureundefined = $e)}
+        value={state.undefined}
+        keyboardType=\\"default\\"
+        autoCorrect={false}
+        underlineColorAndroid=\\"transparent\\"
+      />
+    );
+  }
+}
+
+export default UseCaptureTextManagedFromOutside;
 // fonts {}
 "
 `;
@@ -1951,56 +2115,6 @@ const UseVertical = props => {
 };
 
 export default UseVertical;
-// fonts {}
-"
-`;
-
-exports[`react-native parses react-native ViewAndListWithData 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
-import React from 'react';
-import addressesData from './addresses.data.js';
-import userData from './user.data.js';
-import { StyleSheet, Text, View } from 'react-native';
-const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
-
-const ViewAndListWithData = props => {
-  return (
-    <View testID=\\"User\\" style={styles.h18pdll5}>
-      <Text>{props.name}</Text>
-      <View testID=\\"ViewAndListWithData.Addresses\\" style={styles.h18pdll5}>
-        {Array.isArray(addressesData) &&
-          addressesData.map((item, index) =>
-            <Text key={index}>{item.city}</Text>
-          )}
-      </View>
-      {props.children}
-    </View>
-  );
-};
-ViewAndListWithData.defaultProps = userData;
-
-export default ViewAndListWithData;
-// fonts {}
-"
-`;
-
-exports[`react-native parses react-native ViewWithData 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
-import React from 'react';
-import userData from './user.data.js';
-import { StyleSheet, Text, View } from 'react-native';
-const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
-
-const ViewWithData = props => {
-  return (
-    <View testID=\\"User\\" style={styles.h18pdll5}>
-      <Text>{props.name}</Text>{props.children}
-    </View>
-  );
-};
-ViewWithData.defaultProps = userData;
-
-export default ViewWithData;
 // fonts {}
 "
 `;

@@ -80,9 +80,11 @@ const getGroupBlockName = (node, parent) => {
     }
   } else if (hasProp(node, 'overflowY', v => v === 'auto' || v === 'scroll')) {
     name = 'div'
+  } else if (hasProp(node, 'onSubmit')) {
+    name = 'form'
   }
 
-  if (node.maybeAnimated && name !== 'Link') {
+  if (node.maybeAnimated && name !== 'Link' && name !== 'form') {
     name = `Animated.${name}`
   }
 
