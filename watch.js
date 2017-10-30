@@ -33,7 +33,6 @@ module.exports = options => {
       as,
       compile,
       dataNotFound,
-      debug,
       fake: shouldIncludeFake,
       inlineStyles,
       map,
@@ -50,7 +49,6 @@ module.exports = options => {
       {
         as: 'react-dom',
         compile: false,
-        debug: false,
         fake: false,
         map: {},
         logic: true,
@@ -313,7 +311,6 @@ height 100`
         const res = morph(source, {
           as: isData(f) ? 'data' : isTests(f) ? 'tests' : as,
           compile,
-          debug,
           inlineStyles,
           file: { raw: f, relative: file },
           name: view,
@@ -383,12 +380,11 @@ height 100`
 
     const toViewPath = f => {
       const file = path.relative(src, f.replace(/(\.ios|\.android|\.web)/, ''))
-      const view =
-        isData(file) || isTests(file)
-          ? file
-          : isLogic(file)
-            ? file.replace(/\.js/, '').replace(/\//g, '')
-            : toPascalCase(file.replace(/\.(view\.fake|js|view)/, ''))
+      const view = isData(file) || isTests(file)
+        ? file
+        : isLogic(file)
+          ? file.replace(/\.js/, '').replace(/\//g, '')
+          : toPascalCase(file.replace(/\.(view\.fake|js|view)/, ''))
 
       return {
         file: `./${file}`,

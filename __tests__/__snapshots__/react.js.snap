@@ -12,8 +12,15 @@ const styles = {
 
 const Action = props => {
   return props.check
-    ? <button onClick={props.clickMe} className={styles.h1lmw638}>
-        <div>click me</div>{props.children}
+    ? <button
+        data-test-id={props['data-test-id'] || 'Vertical'}
+        onClick={props.clickMe}
+        className={styles.h1lmw638}
+      >
+        <div data-test-id={props['data-test-id'] || 'Action.Text'}>
+          click me
+        </div>
+        {props.children}
       </button>
     : null;
 };
@@ -36,11 +43,15 @@ const styles = {
 const AnimatedButton = props => {
   return (
     <Animated.button
+      data-test-id={props['data-test-id'] || 'Vertical'}
       onClick={props.onClick}
       className={styles.h1lmw638}
       style={{ opacity: props.opacity }}
     >
-      <div>hey</div>{props.children}
+      <div data-test-id={props['data-test-id'] || 'AnimatedButton.Text'}>
+        hey
+      </div>
+      {props.children}
     </Animated.button>
   );
 };
@@ -67,8 +78,12 @@ background-size: contain; }\`,
 
 const BackgroundImage = props => {
   return (
-    <div className={styles.h1bfz4lt}>
+    <div
+      data-test-id={props['data-test-id'] || 'Vertical'}
+      className={styles.h1bfz4lt}
+    >
       <Animated.div
+        data-test-id={props['data-test-id'] || 'BackgroundImage.Horizontal'}
         className={styles.h1dhb6n}
         style={{ backgroundImage: \`url(\${props.backgroundImage})\` }}
       />
@@ -95,6 +110,7 @@ const styles = {
 const BoxShadow = props => {
   return (
     <Animated.div
+      data-test-id={props['data-test-id'] || 'Vertical'}
       className={styles.h1lmw638}
       style={{ boxShadow: \`10px 5px 2px \${props.color}\` }}
     >
@@ -128,7 +144,7 @@ class Form extends React.Component {
 
     return (
       <form
-        data-test-id=\\"Form\\"
+        data-test-id={props['data-test-id'] || 'Form'}
         onSubmit={() => props.onSubmit(state)}
         className={styles.h1lmw638}
       >
@@ -136,33 +152,33 @@ class Form extends React.Component {
           type=\\"text\\"
           onChange={event => this.setState({ name: event.target.value })}
           value={state.name}
-          data-test-id=\\"Form.Name\\"
+          data-test-id={props['data-test-id'] || 'Form.Name'}
         />
         <input
           type=\\"text\\"
           onChange={event => this.setState({ surname: event.target.value })}
           value={state.surname}
-          data-test-id=\\"Form.Surname\\"
+          data-test-id={props['data-test-id'] || 'Form.Surname'}
         />
         <input
           type=\\"password\\"
           onChange={event => this.setState({ password: event.target.value })}
           value={state.password}
-          data-test-id=\\"Form.Password\\"
+          data-test-id={props['data-test-id'] || 'Form.Password'}
         />
         <input
           type=\\"email\\"
           onChange={event => this.setState({ email: event.target.value })}
           value={state.email}
-          data-test-id=\\"Form.Email\\"
+          data-test-id={props['data-test-id'] || 'Form.Email'}
           defaultValue=\\"morph@viewsdx.com\\"
         />
         <button
-          data-test-id=\\"Form.Button\\"
+          data-test-id={props['data-test-id'] || 'Form.Button'}
           onClick={() => props.onSubmit(state)}
           className={styles.h1lmw638}
         >
-          <div>Send!</div>
+          <div data-test-id={props['data-test-id'] || 'Form.Text'}>Send!</div>
         </button>
         {props.children}
       </form>
@@ -190,9 +206,13 @@ const GoTo = props => {
       href=\\"https://viewsdx.com\\"
       rel=\\"noopener noreferrer\\"
       target=\\"_blank\\"
+      data-test-id={props['data-test-id'] || 'Vertical'}
       className={styles.h1lmw638}
     >
-      <div>Go to ViewsDX website!</div>{props.children}
+      <div data-test-id={props['data-test-id'] || 'GoTo.Text'}>
+        Go to ViewsDX website!
+      </div>
+      {props.children}
     </a>
   );
 };
@@ -220,11 +240,17 @@ background-color: black; }\`,
 const Hover = props => {
   return (
     <button
-      data-test-id=\\"Button\\"
+      data-test-id={props['data-test-id'] || 'Button'}
       onClick={props.onClick}
       className={styles.hpg1h4y}
     >
-      <div className={styles.h1669j73}>Hey!</div>{props.children}
+      <div
+        data-test-id={props['data-test-id'] || 'Hover.Text'}
+        className={styles.h1669j73}
+      >
+        Hey!
+      </div>
+      {props.children}
     </button>
   );
 };
@@ -253,7 +279,7 @@ const HoverProxy = props => {
   const childrenArray = React.Children.toArray(props.children);
   return (
     <button
-      data-test-id=\\"Button\\"
+      data-test-id={props['data-test-id'] || 'Button'}
       onClick={props.onClick}
       className={styles.hpg1h4y}
     >
@@ -264,7 +290,12 @@ const HoverProxy = props => {
             { fill: 'white', fillHover: 'black' }
           )
         : null}
-      <div className={styles.h1669j73}>Hey!</div>
+      <div
+        data-test-id={props['data-test-id'] || 'HoverProxy.Text'}
+        className={styles.h1669j73}
+      >
+        Hey!
+      </div>
     </button>
   );
 };
@@ -278,7 +309,7 @@ exports[`react-dom parses react-dom JustText 1`] = `
 import React from 'react';
 
 const JustText = props => {
-  return <div>hey!</div>;
+  return <div data-test-id={props['data-test-id'] || 'Text'}>hey!</div>;
 };
 
 export default JustText;
@@ -297,10 +328,18 @@ const styles = {
 
 const ListOfSomething = props => {
   return (
-    <div className={styles.h1lmw638}>
+    <div
+      data-test-id={props['data-test-id'] || 'List'}
+      className={styles.h1lmw638}
+    >
       {Array.isArray(props.list) &&
         props.list.map((item, index) =>
-          <div dataIndex={index} style={{ color: item.color }} key={index}>
+          <div
+            data-test-id={props['data-test-id'] || 'ListOfSomething.Text'}
+            dataIndex={index}
+            style={{ color: item.color }}
+            key={index}
+          >
             {index}
           </div>
         )}
@@ -318,7 +357,7 @@ exports[`react-dom parses react-dom NameIsType 1`] = `
 import React from 'react';
 
 const NameIsType = props => {
-  return <div data-test-id=\\"Texto\\">iam</div>;
+  return <div data-test-id={props['data-test-id'] || 'Texto'}>iam</div>;
 };
 
 export default NameIsType;
@@ -341,19 +380,29 @@ const styles = {
 
 const NestedRoutes = props => {
   return (
-    <div data-test-id=\\"Topics\\" className={styles.h1lmw638}>
-      <div>topics</div>
+    <div
+      data-test-id={props['data-test-id'] || 'Topics'}
+      className={styles.h1lmw638}
+    >
+      <div data-test-id={props['data-test-id'] || 'NestedRoutes.Text'}>
+        topics
+      </div>
       <Link
         to={\`\${props.match.url === '/' ? '' : props.match.url}/rendering\`}
-        data-test-id=\\"NestedRoutes.Link\\"
+        data-test-id={props['data-test-id'] || 'NestedRoutes.Link'}
         className={styles.h1lmw638}
       >
-        <div>Rendering with React</div>
+        <div data-test-id={props['data-test-id'] || 'NestedRoutes.Text:1'}>
+          Rendering with React
+        </div>
       </Link>
       <Route
         path=\\":topic\\"
         render={routeProps =>
-          <Topic data-test-id=\\"NestedRoutes.Topic\\" {...routeProps} />}
+          <Topic
+            data-test-id={props['data-test-id'] || 'NestedRoutes.Topic'}
+            {...routeProps}
+          />}
       />
       {props.children}
     </div>
@@ -383,8 +432,17 @@ const styles = {
 
 const Print = props => {
   return (
-    <div className={styles.h1lmw638}>
-      <div className={styles.hrak8un}>not in print</div><div>hey</div>
+    <div
+      data-test-id={props['data-test-id'] || 'Vertical'}
+      className={styles.h1lmw638}
+    >
+      <div
+        data-test-id={props['data-test-id'] || 'Print.Text'}
+        className={styles.hrak8un}
+      >
+        not in print
+      </div>
+      <div data-test-id={props['data-test-id'] || 'Print.Text:1'}>hey</div>
       {props.children}
     </div>
   );
@@ -410,8 +468,14 @@ const styles = {
 const ProxyTest = props => {
   const childrenArray = React.Children.toArray(props.children);
   return (
-    <div className={styles.h1lmw638}>
-      <div className={styles.hg3iw2q}>
+    <div
+      data-test-id={props['data-test-id'] || 'Vertical'}
+      className={styles.h1lmw638}
+    >
+      <div
+        data-test-id={props['data-test-id'] || 'ProxyTest.Horizontal'}
+        className={styles.hg3iw2q}
+      >
         {props.bla && childrenArray[props.childrenProxyMap['Something']]
           ? React.cloneElement(
               childrenArray[props.childrenProxyMap['Something']],
@@ -438,7 +502,10 @@ const styles = {
 
 const Scope = props => {
   return (
-    <div className={styles.h1lv6cq4}>
+    <div
+      data-test-id={props['data-test-id'] || 'Text'}
+      className={styles.h1lv6cq4}
+    >
       {props.somethingGreen
         ? '2 green'
         : props.whatMakesBlue ? props.blue : '1 red'}
@@ -462,13 +529,19 @@ const styles = {
 
 const ScopePopup = props => {
   return (
-    <div data-test-id=\\"Popup\\" animate=\\"pop\\" className={styles.h1lmw638}>
+    <div
+      data-test-id={props['data-test-id'] || 'Popup'}
+      animate=\\"pop\\"
+      className={styles.h1lmw638}
+    >
       <button
-        data-test-id=\\"ScopePopup.Toggle\\"
+        data-test-id={props['data-test-id'] || 'ScopePopup.Toggle'}
         onClick={props.toggle}
         className={styles.h1lmw638}
       >
-        <div>toggle popup</div>
+        <div data-test-id={props['data-test-id'] || 'ScopePopup.Text'}>
+          toggle popup
+        </div>
       </button>
       {props.children}
     </div>
@@ -491,13 +564,18 @@ const styles = {
 
 const ScopePopup2 = props => {
   return (
-    <div data-test-id=\\"Popup\\" className={styles.h1lmw638}>
+    <div
+      data-test-id={props['data-test-id'] || 'Popup'}
+      className={styles.h1lmw638}
+    >
       <button
-        data-test-id=\\"ScopePopup2.Toggle\\"
+        data-test-id={props['data-test-id'] || 'ScopePopup2.Toggle'}
         onClick={props.toggle}
         className={styles.h1lmw638}
       >
-        <div>toggle popup</div>
+        <div data-test-id={props['data-test-id'] || 'ScopePopup2.Text'}>
+          toggle popup
+        </div>
       </button>
       {props.children}
     </div>
@@ -521,8 +599,13 @@ const styles = {
 
 const Teleport = props => {
   return (
-    <Link to=\\"..\\" className={styles.hg3iw2q}>
-      <div>go back</div>{props.children}
+    <Link
+      to=\\"..\\"
+      data-test-id={props['data-test-id'] || 'Horizontal'}
+      className={styles.hg3iw2q}
+    >
+      <div data-test-id={props['data-test-id'] || 'Teleport.Text'}>go back</div>
+      {props.children}
     </Link>
   );
 };
@@ -539,12 +622,17 @@ import Custom from './Custom.view.js';
 const Test = props => {
   return (
     <Custom
-      data-test-id=\\"Custom\\"
+      data-test-id={props['data-test-id'] || 'Custom'}
       stuff=\\"eqweqw\\"
       childrenProxyMap={{ Something: 0, Another: 1 }}
     >
-      <div data-test-id=\\"Test.Something\\">v1vh1t1</div>
-      <div data-test-id=\\"Test.Another\\">inside custom</div>{props.children}
+      <div data-test-id={props['data-test-id'] || 'Test.Something'}>
+        v1vh1t1
+      </div>
+      <div data-test-id={props['data-test-id'] || 'Test.Another'}>
+        inside custom
+      </div>
+      {props.children}
     </Custom>
   );
 };
@@ -553,12 +641,42 @@ export default Test;
 "
 `;
 
+exports[`react-dom parses react-dom TestIds 1`] = `
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import External from './External.view.js';
+import css from 'glam';
+const styles = {
+  h1lmw638: css('css-1s0kfvh', [], () => [
+    \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
+  ]),
+};
+
+const TestIds = props => {
+  return (
+    <div
+      data-test-id={props['data-test-id'] || 'App'}
+      className={styles.h1lmw638}
+    >
+      <div data-test-id={props['data-test-id'] || 'TestIds.Text'}>1</div>
+      <div data-test-id={props['data-test-id'] || 'TestIds.Text:1'}>2</div>
+      <External data-test-id={props['data-test-id'] || 'TestIds.External'} />
+      <div data-test-id={props['data-test-id'] || 'TestIds.Name'}>name</div>
+      {props.children}
+    </div>
+  );
+};
+
+export default TestIds;
+"
+`;
+
 exports[`react-dom parses react-dom Toggle 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 
 const Toggle = props => {
-  return <div>NOPE</div>;
+  return <div data-test-id={props['data-test-id'] || 'Text'}>NOPE</div>;
 };
 
 export default Toggle;
@@ -591,7 +709,7 @@ class UseCaptureEmail extends React.Component {
         type=\\"email\\"
         onChange={event => this.setState({ email: event.target.value })}
         value={state.email}
-        data-test-id=\\"Email\\"
+        data-test-id={props['data-test-id'] || 'Email'}
         onSubmit={props.onSubmit}
         className={styles.hevllt7}
       />
@@ -620,7 +738,7 @@ class UseCaptureFile extends React.Component {
       <input
         onChange={event => this.setState({ file: event.target.value })}
         value={state.file}
-        data-test-id=\\"File\\"
+        data-test-id={props['data-test-id'] || 'File'}
       />
     );
   }
@@ -648,7 +766,7 @@ class UseCaptureNumber extends React.Component {
         type=\\"number\\"
         onChange={event => this.setState({ number: event.target.value })}
         value={state.number}
-        data-test-id=\\"Number\\"
+        data-test-id={props['data-test-id'] || 'Number'}
       />
     );
   }
@@ -676,7 +794,7 @@ class UseCapturePhone extends React.Component {
         type=\\"tel\\"
         onChange={event => this.setState({ phone: event.target.value })}
         value={state.phone}
-        data-test-id=\\"Phone\\"
+        data-test-id={props['data-test-id'] || 'Phone'}
       />
     );
   }
@@ -704,7 +822,7 @@ class UseCaptureSecure extends React.Component {
         type=\\"password\\"
         onChange={event => this.setState({ secure: event.target.value })}
         value={state.secure}
-        data-test-id=\\"Secure\\"
+        data-test-id={props['data-test-id'] || 'Secure'}
       />
     );
   }
@@ -732,7 +850,7 @@ class UseCaptureText extends React.Component {
         type=\\"text\\"
         onChange={event => this.setState({ text: event.target.value })}
         value={state.text}
-        data-test-id=\\"Text\\"
+        data-test-id={props['data-test-id'] || 'Text'}
       />
     );
   }
@@ -760,6 +878,7 @@ class UseCaptureTextArea extends React.Component {
         onChange={event =>
           this.setState({ captureTextArea: event.target.value })}
         value={state.captureTextArea}
+        data-test-id={props['data-test-id'] || 'CaptureTextArea'}
       />
     );
   }
@@ -782,7 +901,13 @@ class UseCaptureTextManagedFromOutside extends React.Component {
   render() {
     const { props, state } = this;
 
-    return <input type=\\"text\\" value={props.external} />;
+    return (
+      <input
+        type=\\"text\\"
+        data-test-id={props['data-test-id'] || 'CaptureText'}
+        value={props.external}
+      />
+    );
   }
 }
 
@@ -802,7 +927,14 @@ border: 1px solid red; }\`,
 };
 
 const UseHorizontal = props => {
-  return <div className={styles.h1nnugsi}>{props.children}</div>;
+  return (
+    <div
+      data-test-id={props['data-test-id'] || 'Horizontal'}
+      className={styles.h1nnugsi}
+    >
+      {props.children}
+    </div>
+  );
 };
 
 export default UseHorizontal;
@@ -814,7 +946,12 @@ exports[`react-dom parses react-dom UseImage 1`] = `
 import React from 'react';
 
 const UseImage = props => {
-  return <img src=\\"https://viewsdx.com/rocks.jpg\\" />;
+  return (
+    <img
+      data-test-id={props['data-test-id'] || 'Image'}
+      src=\\"https://viewsdx.com/rocks.jpg\\"
+    />
+  );
 };
 
 export default UseImage;
@@ -834,9 +971,12 @@ const styles = {
 
 const UseOfProxy = props => {
   return (
-    <div data-test-id=\\"App\\" className={styles.hg3iw2q}>
+    <div
+      data-test-id={props['data-test-id'] || 'App'}
+      className={styles.hg3iw2q}
+    >
       <Button
-        data-test-id=\\"UseOfProxy.Button\\"
+        data-test-id={props['data-test-id'] || 'UseOfProxy.Button'}
         color=\\"red\\"
         icon=\\"MyIcon\\"
         text=\\"I'm a button!\\"
@@ -863,7 +1003,10 @@ const styles = {
 const UseProxy = props => {
   const childrenArray = React.Children.toArray(props.children);
   return (
-    <div data-test-id=\\"Button\\" className={styles.hg3iw2q}>
+    <div
+      data-test-id={props['data-test-id'] || 'Button'}
+      className={styles.hg3iw2q}
+    >
       {props.childrenProxyMap &&
         childrenArray[props.childrenProxyMap['props.icon']]
         ? React.cloneElement(
@@ -871,7 +1014,9 @@ const UseProxy = props => {
             { fill: 'red' }
           )
         : null}
-      <div>{props.text}</div>
+      <div data-test-id={props['data-test-id'] || 'UseProxy.Text'}>
+        {props.text}
+      </div>
     </div>
   );
 };
@@ -898,13 +1043,16 @@ const styles = {
 const UseRouter = props => {
   return (
     <Router>
-      <div className={styles.hg3iw2q}>
+      <div
+        data-test-id={props['data-test-id'] || 'Horizontal'}
+        className={styles.hg3iw2q}
+      >
         <Route
           path=\\"/\\"
           exact
           render={routeProps =>
             <Home
-              data-test-id=\\"UseRouter.Home\\"
+              data-test-id={props['data-test-id'] || 'UseRouter.Home'}
               heigth={props.height}
               width={360}
               {...routeProps}
@@ -913,12 +1061,18 @@ const UseRouter = props => {
         <Route
           path=\\"/about\\"
           render={routeProps =>
-            <About data-test-id=\\"UseRouter.About\\" {...routeProps} />}
+            <About
+              data-test-id={props['data-test-id'] || 'UseRouter.About'}
+              {...routeProps}
+            />}
         />
         <Route
           path=\\"/topics\\"
           render={routeProps =>
-            <Topics data-test-id=\\"UseRouter.Topics\\" {...routeProps} />}
+            <Topics
+              data-test-id={props['data-test-id'] || 'UseRouter.Topics'}
+              {...routeProps}
+            />}
         />
         {props.children}
       </div>
@@ -936,9 +1090,29 @@ import React from 'react';
 
 const UseSvg = props => {
   return (
-    <svg viewBox=\\"0 0 20 20\\">
-      <path d=\\"0 20\\" /><circle cx={10} cy={5} r={5} />
-      <g><path d={1} /><path d={2} /></g><text text=\\"hey\\" />{props.children}
+    <svg data-test-id={props['data-test-id'] || 'Svg'} viewBox=\\"0 0 20 20\\">
+      <path data-test-id={props['data-test-id'] || 'UseSvg.SvgPath'} d=\\"0 20\\" />
+      <circle
+        data-test-id={props['data-test-id'] || 'UseSvg.SvgCircle'}
+        cx={10}
+        cy={5}
+        r={5}
+      />
+      <g data-test-id={props['data-test-id'] || 'UseSvg.SvgGroup'}>
+        <path
+          data-test-id={props['data-test-id'] || 'UseSvg.SvgPath:1'}
+          d={1}
+        />
+        <path
+          data-test-id={props['data-test-id'] || 'UseSvg.SvgPath:2'}
+          d={2}
+        />
+      </g>
+      <text
+        data-test-id={props['data-test-id'] || 'UseSvg.SvgText'}
+        text=\\"hey\\"
+      />
+      {props.children}
     </svg>
   );
 };
@@ -961,7 +1135,14 @@ font-weight: 300; }\`,
 };
 
 const UseText = props => {
-  return <div className={styles.h1w7s7t6}>Hi, I'm some text</div>;
+  return (
+    <div
+      data-test-id={props['data-test-id'] || 'Text'}
+      className={styles.h1w7s7t6}
+    >
+      Hi, I'm some text
+    </div>
+  );
 };
 
 export default UseText;
@@ -980,7 +1161,14 @@ background-color: red; }\`,
 };
 
 const UseVertical = props => {
-  return <div className={styles.h1vjf5pn}>{props.children}</div>;
+  return (
+    <div
+      data-test-id={props['data-test-id'] || 'Vertical'}
+      className={styles.h1vjf5pn}
+    >
+      {props.children}
+    </div>
+  );
 };
 
 export default UseVertical;
@@ -999,8 +1187,16 @@ const styles = {
 
 const When = props => {
   return (
-    <div data-test-id=\\"App\\" className={styles.hg3iw2q}>
-      {props.showMe ? <div>I may be hidden</div> : null}{props.children}
+    <div
+      data-test-id={props['data-test-id'] || 'App'}
+      className={styles.hg3iw2q}
+    >
+      {props.showMe
+        ? <div data-test-id={props['data-test-id'] || 'When.Text'}>
+            I may be hidden
+          </div>
+        : null}
+      {props.children}
     </div>
   );
 };
@@ -1024,12 +1220,23 @@ const styles = {
 
 const WhenList = props => {
   return (
-    <div data-test-id=\\"App\\" className={styles.hg3iw2q}>
+    <div
+      data-test-id={props['data-test-id'] || 'App'}
+      className={styles.hg3iw2q}
+    >
       {props.showMe
-        ? <div className={styles.h1lmw638}>
+        ? <div
+            data-test-id={props['data-test-id'] || 'WhenList.List'}
+            className={styles.h1lmw638}
+          >
             {Array.isArray(props.list) &&
               props.list.map((item, index) =>
-                <div key={index}>{item.thing}</div>
+                <div
+                  data-test-id={props['data-test-id'] || 'WhenList.Text'}
+                  key={index}
+                >
+                  {item.thing}
+                </div>
               )}
           </div>
         : null}
@@ -1047,7 +1254,9 @@ exports[`react-dom parses react-dom WhenTopLevel 1`] = `
 import React from 'react';
 
 const WhenTopLevel = props => {
-  return props.showMe ? <div>I may be hidden</div> : null;
+  return props.showMe
+    ? <div data-test-id={props['data-test-id'] || 'Text'}>I may be hidden</div>
+    : null;
 };
 
 export default WhenTopLevel;
@@ -1124,8 +1333,15 @@ TestsWithTest.tests = fromTests.names;
 
 const WithTest = props => {
   return (
-    <button onClick={props.change} className={styles.h1lmw638}>
-      <div>{props.text}</div>{props.children}
+    <button
+      data-test-id={props['data-test-id'] || 'Vertical'}
+      onClick={props.change}
+      className={styles.h1lmw638}
+    >
+      <div data-test-id={props['data-test-id'] || 'WithTest.Text'}>
+        {props.text}
+      </div>
+      {props.children}
     </button>
   );
 };
@@ -1147,8 +1363,9 @@ const Action = props => {
         onPress={props.clickMe}
         underlayColor=\\"transparent\\"
       >
-        <View style={styles.h18pdll5}>
-          <Text>click me</Text>{props.children}
+        <View testID={props['testID'] || 'Vertical'} style={styles.h18pdll5}>
+          <Text testID={props['testID'] || 'Action.Text'}>click me</Text>
+          {props.children}
         </View>
       </TouchableWithoutFeedback>
     : null;
@@ -1176,8 +1393,12 @@ const AnimatedButton = props => {
       onPress={props.onClick}
       underlayColor=\\"transparent\\"
     >
-      <Animated.View style={[styles.h18pdll5, { opacity: props.opacity }]}>
-        <Text>hey</Text>{props.children}
+      <Animated.View
+        testID={props['testID'] || 'Vertical'}
+        style={[styles.h18pdll5, { opacity: props.opacity }]}
+      >
+        <Text testID={props['testID'] || 'AnimatedButton.Text'}>hey</Text>
+        {props.children}
       </Animated.View>
     </TouchableWithoutFeedback>
   );
@@ -1201,11 +1422,13 @@ const BackgroundImage = props => {
     <Image
       resizeMode=\\"cover\\"
       source={{ uri: 'https://viewsdx.com/image.jpg' }}
+      testID={props['testID'] || 'Vertical'}
       style={styles.h18pdll5}
     >
       <Animated.Image
         resizeMode=\\"contain\\"
         source={{ uri: props.backgroundImage }}
+        testID={props['testID'] || 'BackgroundImage.Horizontal'}
         style={styles.hp2cr4d}
       />
       {props.children}
@@ -1226,6 +1449,7 @@ const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 const BoxShadow = props => {
   return (
     <Animated.View
+      testID={props['testID'] || 'Vertical'}
       style={[
         styles.h18pdll5,
         {
@@ -1268,9 +1492,10 @@ class Form extends React.Component {
     const { props, state } = this;
 
     return (
-      <View testID=\\"Form\\" style={styles.h18pdll5}>
-        <TextInput testID=\\"Form.Name\\" /><TextInput testID=\\"Form.Surname\\" />
-        <TextInput testID=\\"Form.Password\\" />
+      <View testID={props['testID'] || 'Form'} style={styles.h18pdll5}>
+        <TextInput testID={props['testID'] || 'Form.Name'} />
+        <TextInput testID={props['testID'] || 'Form.Surname'} />
+        <TextInput testID={props['testID'] || 'Form.Password'} />
         <TextInput
           returnKeyType=\\"done\\"
           onChangeText={Email => this.setState({ Email })}
@@ -1279,15 +1504,18 @@ class Form extends React.Component {
           keyboardType=\\"email-address\\"
           autoCorrect={false}
           underlineColorAndroid=\\"transparent\\"
-          testID=\\"Form.Email\\"
+          testID={props['testID'] || 'Form.Email'}
         />
         <TouchableWithoutFeedback
           activeOpacity={0.7}
           onPress={() => props.onSubmit(state)}
           underlayColor=\\"transparent\\"
         >
-          <View testID=\\"Form.Button\\" style={styles.h18pdll5}>
-            <Text>Send!</Text>
+          <View
+            testID={props['testID'] || 'Form.Button'}
+            style={styles.h18pdll5}
+          >
+            <Text testID={props['testID'] || 'Form.Text'}>Send!</Text>
           </View>
         </TouchableWithoutFeedback>
         {props.children}
@@ -1308,8 +1536,11 @@ const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
 const GoTo = props => {
   return (
-    <View style={styles.h18pdll5}>
-      <Text>Go to ViewsDX website!</Text>{props.children}
+    <View testID={props['testID'] || 'Vertical'} style={styles.h18pdll5}>
+      <Text testID={props['testID'] || 'GoTo.Text'}>
+        Go to ViewsDX website!
+      </Text>
+      {props.children}
     </View>
   );
 };
@@ -1334,8 +1565,11 @@ const Hover = props => {
       onPress={props.onClick}
       underlayColor=\\"transparent\\"
     >
-      <View testID=\\"Button\\" style={styles.h1jrzrhl}>
-        <Text style={styles.hyfo4ef}>Hey!</Text>{props.children}
+      <View testID={props['testID'] || 'Button'} style={styles.h1jrzrhl}>
+        <Text testID={props['testID'] || 'Hover.Text'} style={styles.hyfo4ef}>
+          Hey!
+        </Text>
+        {props.children}
       </View>
     </TouchableWithoutFeedback>
   );
@@ -1362,7 +1596,7 @@ const HoverProxy = props => {
       onPress={props.onClick}
       underlayColor=\\"transparent\\"
     >
-      <View testID=\\"Button\\" style={styles.h1jrzrhl}>
+      <View testID={props['testID'] || 'Button'} style={styles.h1jrzrhl}>
         {props.childrenProxyMap &&
           childrenArray[props.childrenProxyMap['props.icon']]
           ? React.cloneElement(
@@ -1370,7 +1604,12 @@ const HoverProxy = props => {
               { fill: 'white', fillHover: 'black' }
             )
           : null}
-        <Text style={styles.hyfo4ef}>Hey!</Text>
+        <Text
+          testID={props['testID'] || 'HoverProxy.Text'}
+          style={styles.hyfo4ef}
+        >
+          Hey!
+        </Text>
       </View>
     </TouchableWithoutFeedback>
   );
@@ -1386,7 +1625,7 @@ import React from 'react';
 import { Text } from 'react-native';
 
 const JustText = props => {
-  return <Text>hey!</Text>;
+  return <Text testID={props['testID'] || 'Text'}>hey!</Text>;
 };
 
 export default JustText;
@@ -1401,10 +1640,11 @@ const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
 const ListOfSomething = props => {
   return (
-    <View style={styles.h18pdll5}>
+    <View testID={props['testID'] || 'List'} style={styles.h18pdll5}>
       {Array.isArray(props.list) &&
         props.list.map((item, index) =>
           <Animated.Text
+            testID={props['testID'] || 'ListOfSomething.Text'}
             dataIndex={index}
             style={{ color: item.color }}
             key={index}
@@ -1427,7 +1667,7 @@ import React from 'react';
 import { Text } from 'react-native';
 
 const NameIsType = props => {
-  return <Text testID=\\"Texto\\">iam</Text>;
+  return <Text testID={props['testID'] || 'Texto'}>iam</Text>;
 };
 
 export default NameIsType;
@@ -1446,21 +1686,29 @@ const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
 const NestedRoutes = props => {
   return (
-    <View testID=\\"Topics\\" style={styles.h18pdll5}>
-      <Text>topics</Text>
+    <View testID={props['testID'] || 'Topics'} style={styles.h18pdll5}>
+      <Text testID={props['testID'] || 'NestedRoutes.Text'}>topics</Text>
       <Link
         activeOpacity={0.7}
         to={\`\${props.match.url === '/' ? '' : props.match.url}/rendering\`}
         underlayColor=\\"transparent\\"
       >
-        <View testID=\\"NestedRoutes.Link\\" style={styles.h18pdll5}>
-          <Text>Rendering with React</Text>
+        <View
+          testID={props['testID'] || 'NestedRoutes.Link'}
+          style={styles.h18pdll5}
+        >
+          <Text testID={props['testID'] || 'NestedRoutes.Text:1'}>
+            Rendering with React
+          </Text>
         </View>
       </Link>
       <Route
         path=\\":topic\\"
         render={routeProps =>
-          <Topic testID=\\"NestedRoutes.Topic\\" {...routeProps} />}
+          <Topic
+            testID={props['testID'] || 'NestedRoutes.Topic'}
+            {...routeProps}
+          />}
       />
       {props.children}
     </View>
@@ -1479,8 +1727,10 @@ const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
 const Print = props => {
   return (
-    <View style={styles.h18pdll5}>
-      <Text>not in print</Text><Text>hey</Text>{props.children}
+    <View testID={props['testID'] || 'Vertical'} style={styles.h18pdll5}>
+      <Text testID={props['testID'] || 'Print.Text'}>not in print</Text>
+      <Text testID={props['testID'] || 'Print.Text:1'}>hey</Text>
+      {props.children}
     </View>
   );
 };
@@ -1501,8 +1751,11 @@ const styles = StyleSheet.create({
 const ProxyTest = props => {
   const childrenArray = React.Children.toArray(props.children);
   return (
-    <View style={styles.h18pdll5}>
-      <View style={styles.hp2cr4d}>
+    <View testID={props['testID'] || 'Vertical'} style={styles.h18pdll5}>
+      <View
+        testID={props['testID'] || 'ProxyTest.Horizontal'}
+        style={styles.hp2cr4d}
+      >
         {props.bla && childrenArray[props.childrenProxyMap['Something']]
           ? React.cloneElement(
               childrenArray[props.childrenProxyMap['Something']],
@@ -1527,7 +1780,7 @@ const styles = StyleSheet.create({ h1g2xbng: { color: 'red' } });
 
 const Scope = props => {
   return (
-    <Text style={styles.h1g2xbng}>
+    <Text testID={props['testID'] || 'Text'} style={styles.h1g2xbng}>
       {props.somethingGreen
         ? '2 green'
         : props.whatMakesBlue ? props.blue : '1 red'}
@@ -1547,14 +1800,23 @@ const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
 const ScopePopup = props => {
   return (
-    <View testID=\\"Popup\\" animate=\\"pop\\" style={styles.h18pdll5}>
+    <View
+      testID={props['testID'] || 'Popup'}
+      animate=\\"pop\\"
+      style={styles.h18pdll5}
+    >
       <TouchableWithoutFeedback
         activeOpacity={0.7}
         onPress={props.toggle}
         underlayColor=\\"transparent\\"
       >
-        <View testID=\\"ScopePopup.Toggle\\" style={styles.h18pdll5}>
-          <Text>toggle popup</Text>
+        <View
+          testID={props['testID'] || 'ScopePopup.Toggle'}
+          style={styles.h18pdll5}
+        >
+          <Text testID={props['testID'] || 'ScopePopup.Text'}>
+            toggle popup
+          </Text>
         </View>
       </TouchableWithoutFeedback>
       {props.children}
@@ -1574,14 +1836,19 @@ const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
 const ScopePopup2 = props => {
   return (
-    <View testID=\\"Popup\\" style={styles.h18pdll5}>
+    <View testID={props['testID'] || 'Popup'} style={styles.h18pdll5}>
       <TouchableWithoutFeedback
         activeOpacity={0.7}
         onPress={props.toggle}
         underlayColor=\\"transparent\\"
       >
-        <View testID=\\"ScopePopup2.Toggle\\" style={styles.h18pdll5}>
-          <Text>toggle popup</Text>
+        <View
+          testID={props['testID'] || 'ScopePopup2.Toggle'}
+          style={styles.h18pdll5}
+        >
+          <Text testID={props['testID'] || 'ScopePopup2.Text'}>
+            toggle popup
+          </Text>
         </View>
       </TouchableWithoutFeedback>
       {props.children}
@@ -1603,7 +1870,10 @@ const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
 const Teleport = props => {
   return (
     <Link activeOpacity={0.7} to=\\"..\\" underlayColor=\\"transparent\\">
-      <View style={styles.hp2cr4d}><Text>go back</Text>{props.children}</View>
+      <View testID={props['testID'] || 'Horizontal'} style={styles.hp2cr4d}>
+        <Text testID={props['testID'] || 'Teleport.Text'}>go back</Text>
+        {props.children}
+      </View>
     </Link>
   );
 };
@@ -1621,17 +1891,41 @@ import { Text } from 'react-native';
 const Test = props => {
   return (
     <Custom
-      testID=\\"Custom\\"
+      testID={props['testID'] || 'Custom'}
       stuff=\\"eqweqw\\"
       childrenProxyMap={{ Something: 0, Another: 1 }}
     >
-      <Text testID=\\"Test.Something\\">v1vh1t1</Text>
-      <Text testID=\\"Test.Another\\">inside custom</Text>{props.children}
+      <Text testID={props['testID'] || 'Test.Something'}>v1vh1t1</Text>
+      <Text testID={props['testID'] || 'Test.Another'}>inside custom</Text>
+      {props.children}
     </Custom>
   );
 };
 
 export default Test;
+"
+`;
+
+exports[`react-native parses react-native TestIds 1`] = `
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import External from './External.view.js';
+import { StyleSheet, Text, View } from 'react-native';
+const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
+
+const TestIds = props => {
+  return (
+    <View testID={props['testID'] || 'App'} style={styles.h18pdll5}>
+      <Text testID={props['testID'] || 'TestIds.Text'}>1</Text>
+      <Text testID={props['testID'] || 'TestIds.Text:1'}>2</Text>
+      <External testID={props['testID'] || 'TestIds.External'} />
+      <Text testID={props['testID'] || 'TestIds.Name'}>name</Text>
+      {props.children}
+    </View>
+  );
+};
+
+export default TestIds;
 "
 `;
 
@@ -1641,7 +1935,7 @@ import React from 'react';
 import { Text } from 'react-native';
 
 const Toggle = props => {
-  return <Text>NOPE</Text>;
+  return <Text testID={props['testID'] || 'Text'}>NOPE</Text>;
 };
 
 export default Toggle;
@@ -1680,7 +1974,7 @@ class UseCaptureEmail extends React.Component {
         keyboardType=\\"email-address\\"
         autoCorrect={false}
         underlineColorAndroid=\\"transparent\\"
-        testID=\\"Email\\"
+        testID={props['testID'] || 'Email'}
         placeholderTextColor=\\"blue\\"
         style={styles.hm4pcs}
       />
@@ -1706,7 +2000,7 @@ class UseCaptureFile extends React.Component {
   render() {
     const { props, state } = this;
 
-    return <CaptureFile testID=\\"File\\" />;
+    return <CaptureFile testID={props['testID'] || 'File'} />;
   }
 }
 
@@ -1728,7 +2022,7 @@ class UseCaptureNumber extends React.Component {
   render() {
     const { props, state } = this;
 
-    return <TextInput testID=\\"Number\\" />;
+    return <TextInput testID={props['testID'] || 'Number'} />;
   }
 }
 
@@ -1750,7 +2044,7 @@ class UseCapturePhone extends React.Component {
   render() {
     const { props, state } = this;
 
-    return <TextInput testID=\\"Phone\\" />;
+    return <TextInput testID={props['testID'] || 'Phone'} />;
   }
 }
 
@@ -1772,7 +2066,7 @@ class UseCaptureSecure extends React.Component {
   render() {
     const { props, state } = this;
 
-    return <TextInput testID=\\"Secure\\" />;
+    return <TextInput testID={props['testID'] || 'Secure'} />;
   }
 }
 
@@ -1794,7 +2088,7 @@ class UseCaptureText extends React.Component {
   render() {
     const { props, state } = this;
 
-    return <TextInput testID=\\"Text\\" />;
+    return <TextInput testID={props['testID'] || 'Text'} />;
   }
 }
 
@@ -1816,7 +2110,7 @@ class UseCaptureTextArea extends React.Component {
   render() {
     const { props, state } = this;
 
-    return <TextInput />;
+    return <TextInput testID={props['testID'] || 'CaptureTextArea'} />;
   }
 }
 
@@ -1847,6 +2141,7 @@ class UseCaptureTextManagedFromOutside extends React.Component {
         keyboardType=\\"default\\"
         autoCorrect={false}
         underlineColorAndroid=\\"transparent\\"
+        testID={props['testID'] || 'CaptureText'}
       />
     );
   }
@@ -1870,7 +2165,11 @@ const styles = StyleSheet.create({
 });
 
 const UseHorizontal = props => {
-  return <View style={styles.h13qdyyc}>{props.children}</View>;
+  return (
+    <View testID={props['testID'] || 'Horizontal'} style={styles.h13qdyyc}>
+      {props.children}
+    </View>
+  );
 };
 
 export default UseHorizontal;
@@ -1883,7 +2182,12 @@ import React from 'react';
 import { Image } from 'react-native';
 
 const UseImage = props => {
-  return <Image source={{ uri: 'https://viewsdx.com/rocks.jpg' }} />;
+  return (
+    <Image
+      testID={props['testID'] || 'Image'}
+      source={{ uri: 'https://viewsdx.com/rocks.jpg' }}
+    />
+  );
 };
 
 export default UseImage;
@@ -1899,9 +2203,9 @@ const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
 
 const UseOfProxy = props => {
   return (
-    <View testID=\\"App\\" style={styles.hp2cr4d}>
+    <View testID={props['testID'] || 'App'} style={styles.hp2cr4d}>
       <Button
-        testID=\\"UseOfProxy.Button\\"
+        testID={props['testID'] || 'UseOfProxy.Button'}
         color=\\"red\\"
         icon=\\"MyIcon\\"
         text=\\"I'm a button!\\"
@@ -1924,7 +2228,7 @@ const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
 const UseProxy = props => {
   const childrenArray = React.Children.toArray(props.children);
   return (
-    <View testID=\\"Button\\" style={styles.hp2cr4d}>
+    <View testID={props['testID'] || 'Button'} style={styles.hp2cr4d}>
       {props.childrenProxyMap &&
         childrenArray[props.childrenProxyMap['props.icon']]
         ? React.cloneElement(
@@ -1932,7 +2236,7 @@ const UseProxy = props => {
             { fill: 'red' }
           )
         : null}
-      <Text>{props.text}</Text>
+      <Text testID={props['testID'] || 'UseProxy.Text'}>{props.text}</Text>
     </View>
   );
 };
@@ -1955,13 +2259,13 @@ const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
 const UseRouter = props => {
   return (
     <Router>
-      <View style={styles.hp2cr4d}>
+      <View testID={props['testID'] || 'Horizontal'} style={styles.hp2cr4d}>
         <Route
           path=\\"/\\"
           exact
           render={routeProps =>
             <Home
-              testID=\\"UseRouter.Home\\"
+              testID={props['testID'] || 'UseRouter.Home'}
               heigth={props.height}
               width={360}
               {...routeProps}
@@ -1970,12 +2274,18 @@ const UseRouter = props => {
         <Route
           path=\\"/about\\"
           render={routeProps =>
-            <About testID=\\"UseRouter.About\\" {...routeProps} />}
+            <About
+              testID={props['testID'] || 'UseRouter.About'}
+              {...routeProps}
+            />}
         />
         <Route
           path=\\"/topics\\"
           render={routeProps =>
-            <Topics testID=\\"UseRouter.Topics\\" {...routeProps} />}
+            <Topics
+              testID={props['testID'] || 'UseRouter.Topics'}
+              {...routeProps}
+            />}
         />
         {props.children}
       </View>
@@ -1999,10 +2309,20 @@ import Svg, {
 
 const UseSvg = props => {
   return (
-    <Svg viewBox=\\"0 0 20 20\\">
-      <SvgPath d=\\"0 20\\" /><SvgCircle cx={10} cy={5} r={5} />
-      <SvgGroup><SvgPath d={1} /><SvgPath d={2} /></SvgGroup>
-      <SvgText text=\\"hey\\" />{props.children}
+    <Svg testID={props['testID'] || 'Svg'} viewBox=\\"0 0 20 20\\">
+      <SvgPath testID={props['testID'] || 'UseSvg.SvgPath'} d=\\"0 20\\" />
+      <SvgCircle
+        testID={props['testID'] || 'UseSvg.SvgCircle'}
+        cx={10}
+        cy={5}
+        r={5}
+      />
+      <SvgGroup testID={props['testID'] || 'UseSvg.SvgGroup'}>
+        <SvgPath testID={props['testID'] || 'UseSvg.SvgPath:1'} d={1} />
+        <SvgPath testID={props['testID'] || 'UseSvg.SvgPath:2'} d={2} />
+      </SvgGroup>
+      <SvgText testID={props['testID'] || 'UseSvg.SvgText'} text=\\"hey\\" />
+      {props.children}
     </Svg>
   );
 };
@@ -2020,7 +2340,11 @@ const styles = StyleSheet.create({
 });
 
 const UseText = props => {
-  return <Text style={styles.h11t0jc}>Hi, I'm some text</Text>;
+  return (
+    <Text testID={props['testID'] || 'Text'} style={styles.h11t0jc}>
+      Hi, I'm some text
+    </Text>
+  );
 };
 
 export default UseText;
@@ -2036,7 +2360,11 @@ const styles = StyleSheet.create({
 });
 
 const UseVertical = props => {
-  return <View style={styles.h1c5r919}>{props.children}</View>;
+  return (
+    <View testID={props['testID'] || 'Vertical'} style={styles.h1c5r919}>
+      {props.children}
+    </View>
+  );
 };
 
 export default UseVertical;
@@ -2051,8 +2379,11 @@ const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
 
 const When = props => {
   return (
-    <View testID=\\"App\\" style={styles.hp2cr4d}>
-      {props.showMe ? <Text>I may be hidden</Text> : null}{props.children}
+    <View testID={props['testID'] || 'App'} style={styles.hp2cr4d}>
+      {props.showMe
+        ? <Text testID={props['testID'] || 'When.Text'}>I may be hidden</Text>
+        : null}
+      {props.children}
     </View>
   );
 };
@@ -2072,12 +2403,17 @@ const styles = StyleSheet.create({
 
 const WhenList = props => {
   return (
-    <View testID=\\"App\\" style={styles.hp2cr4d}>
+    <View testID={props['testID'] || 'App'} style={styles.hp2cr4d}>
       {props.showMe
-        ? <View style={styles.h18pdll5}>
+        ? <View
+            testID={props['testID'] || 'WhenList.List'}
+            style={styles.h18pdll5}
+          >
             {Array.isArray(props.list) &&
               props.list.map((item, index) =>
-                <Text key={index}>{item.thing}</Text>
+                <Text testID={props['testID'] || 'WhenList.Text'} key={index}>
+                  {item.thing}
+                </Text>
               )}
           </View>
         : null}
@@ -2096,7 +2432,9 @@ import React from 'react';
 import { Text } from 'react-native';
 
 const WhenTopLevel = props => {
-  return props.showMe ? <Text>I may be hidden</Text> : null;
+  return props.showMe
+    ? <Text testID={props['testID'] || 'Text'}>I may be hidden</Text>
+    : null;
 };
 
 export default WhenTopLevel;
@@ -2174,8 +2512,9 @@ const WithTest = props => {
       onPress={props.change}
       underlayColor=\\"transparent\\"
     >
-      <View style={styles.h18pdll5}>
-        <Text>{props.text}</Text>{props.children}
+      <View testID={props['testID'] || 'Vertical'} style={styles.h18pdll5}>
+        <Text testID={props['testID'] || 'WithTest.Text'}>{props.text}</Text>
+        {props.children}
       </View>
     </TouchableWithoutFeedback>
   );

@@ -42,6 +42,7 @@ export default ({ getImport, name, tests = false, view, views = {} }) => {
     remap: {},
     render: [],
     styles: {},
+    testIds: {},
     tests,
     todos: [],
     uses: [],

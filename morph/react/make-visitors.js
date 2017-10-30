@@ -43,17 +43,6 @@ export default ({
       state.use(/Animated/.test(name) ? 'Animated' : name)
 
       state.render.push(`<${name}`)
-
-      if (state.debug && node.isBasic && !node.properties) {
-        node.isDebugged = true
-
-        state.render.push(
-          ` onClick={(e) => context.selectBlock(e, ${node.loc.start
-            .line}, '${state.name}')}
-            onMouseOver={(e) => context.hoverBlock(e, '${node.is ||
-              node.name.value}', '${state.name}')}`
-        )
-      }
     },
     leave(node, parent, state) {
       if (
@@ -286,19 +275,6 @@ export default ({
     },
   }
 
-  const PropertiesDebug = {
-    leave(node, parent, state) {
-      if (state.debug && parent.isBasic && !parent.isDebugged) {
-        state.render.push(
-          ` onClick={(e) => context.selectBlock(e, ${parent.loc.start
-            .line}, '${state.name}')}
-            onMouseOver={(e) => context.hoverBlock(e, '${parent.is ||
-              parent.name.value}', '${state.name}')}`
-        )
-      }
-    },
-  }
-
   const PropertiesListKey = {
     leave(node, parent, state) {
       if (parent.isInList && !node.hasKey) {
@@ -390,29 +366,6 @@ export default ({
         //   )
         //   return
         // }
-
-        if (
-          state.debug &&
-          parent.parent.isBasic &&
-          node.key.value === 'onClick'
-        ) {
-          parent.parent.isDebugged = true
-
-          state.render.push(
-            ` onClick={(e) => {
-                  if (!context.selectBlock(e, ${parent.parent.loc.start
-                    .line}, '${state.name}')) {
-                    try {
-                      (${node.value.value})();
-                    } catch(err) {
-                    }
-                  }
-                }}
-                onMouseOver={(e) => context.hoverBlock(e, '${parent.parent.is ||
-                  parent.parent.name.value}', '${state.name}')}`
-          )
-          return
-        }
 
         const value = getValueForProperty(node, parent)
 
@@ -514,7 +467,6 @@ export default ({
         PropertiesStyle.leave.call(this, node, parent, state)
         PropertiesListKey.leave.call(this, node, parent, state)
         PropertiesRoute.leave.call(this, node, parent, state)
-        PropertiesDebug.leave.call(this, node, parent, state)
         PropertiesChildrenProxyMap.leave.call(this, node, parent, state)
       },
     },
