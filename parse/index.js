@@ -83,27 +83,28 @@ export default (rtext, skipComments = true) => {
     }
   }
 
-  const end = (block, maybeEndLine) => {
-    let endLine = maybeEndLine
-    while (lines[endLine] === '' && endLine > 0) {
-      endLine--
-    }
+  const end = (block, endLine) => {
+    // let endLine = maybeEndLine
+    // while (lines[endLine] === '' && endLine > 0) {
+    //   endLine--
+    // }
 
-    const prevLine = lines[endLine - 1]
+    // const prevLine = lines[endLine - 1]
 
     block.loc.end = {
       line: endLine,
-      column:
-        (typeof prevLine === 'string' ? prevLine : lines[endLine]).length - 1,
+      column: Math.max(0, lines[endLine].length - 1),
+      // (typeof prevLine === 'string' ? prevLine : lines[endLine]).length - 1,
     }
+
     // TODO review this
     // if we're past our line, use the previous line's end
-    if (block.loc.end.column < 0) {
-      block.loc.end = {
-        line: endLine - 1,
-        column: lines[endLine - 2].length - 1,
-      }
-    }
+    // if (block.loc.end.column < 0) {
+    //   block.loc.end = {
+    //     line: endLine - 1,
+    //     column: lines[endLine - 2].length - 1,
+    //   }
+    // }
 
     // TODO define end location of blocks inside this
     // block.blocks.forEach(innerBlock => {
@@ -120,6 +121,9 @@ export default (rtext, skipComments = true) => {
 
     if (block.blocks) {
       block.blocks.list.forEach(lookForFonts)
+
+      const last = block.blocks.list[block.blocks.list.length - 1]
+      block.blocks.loc.end = last ? last.loc.end : block.loc.end
 
       if (!block.isBasic) {
         block.childrenProxyMap = getChildrenProxyMap(block)
@@ -140,7 +144,7 @@ export default (rtext, skipComments = true) => {
     }
   }
 
-  const parseBlock = (l, i, line, lineIndex) => {
+  const parseBlock = (l, i, line) => {
     const { block: name, is } = getBlock(line)
     let shouldPushToStack = false
 
@@ -149,10 +153,10 @@ export default (rtext, skipComments = true) => {
       name: {
         type: 'Literal',
         value: name,
-        loc: getLoc(lineIndex, l.indexOf(line), l.length - 1),
+        loc: getLoc(i, l.indexOf(line), l.length - 1),
       },
       isBasic: isBasic(name),
-      loc: getLoc(lineIndex, l.indexOf(line)),
+      loc: getLoc(i, l.indexOf(line)),
       parents: stack
         .filter(b => b.type === 'Block')
         .map(b => b.is || b.name.value),
@@ -198,7 +202,7 @@ export default (rtext, skipComments = true) => {
         last.blocks.list.push(block)
       } else {
         // the block is inside a block that isn't a group
-        end(stack.pop(), lineIndex - 1)
+        end(stack.pop(), i)
         const topLevelIsGroup = !!views[0].blocks
 
         if (topLevelIsGroup) {
@@ -241,7 +245,7 @@ export default (rtext, skipComments = true) => {
       block.blocks = {
         type: 'Blocks',
         list: [],
-        loc: getLoc(lineIndex + 1, 0),
+        loc: getLoc(i + 1, 0),
       }
 
       shouldPushToStack = true
@@ -256,7 +260,7 @@ export default (rtext, skipComments = true) => {
     let endOfBlockIndex = i
     while (
       endOfBlockIndex < lines.length - 1 &&
-      !isBlock(lines[endOfBlockIndex])
+      !isBlock(lines[endOfBlockIndex + 1])
     ) {
       endOfBlockIndex++
     }
@@ -269,7 +273,6 @@ export default (rtext, skipComments = true) => {
     for (let j = i; j <= endOfBlockIndex; j++) {
       const l = lines[j]
       const line = l.trim()
-      const lineIndex = j + 1
 
       if (isSection(line)) {
         const prop = getSection(line)
@@ -280,7 +283,7 @@ export default (rtext, skipComments = true) => {
             value: {
               type: 'ObjectExpression',
               properties: [],
-              loc: getLoc(lineIndex + 1, 0),
+              loc: getLoc(j, 0),
             },
           }
 
@@ -298,12 +301,12 @@ export default (rtext, skipComments = true) => {
         } else {
           nested.push({
             type: 'Property',
-            loc: getLoc(lineIndex, l.indexOf(prop), l.length - 1),
+            loc: getLoc(j, l.indexOf(prop), l.length - 1),
             key: {
               type: 'Literal',
               value: prop,
               loc: getLoc(
-                lineIndex,
+                j,
                 l.indexOf(prop),
                 l.indexOf(prop) + prop.length - 1
               ),
@@ -311,7 +314,7 @@ export default (rtext, skipComments = true) => {
             value: {
               type: 'ObjectExpression',
               properties: [],
-              loc: getLoc(lineIndex + 1, 0),
+              loc: getLoc(j, 0),
             },
           })
         }
@@ -363,7 +366,7 @@ export default (rtext, skipComments = true) => {
               type: 'Literal',
               value: getValue(value),
               loc: getLoc(
-                lineIndex,
+                j,
                 l.indexOf(value),
                 l.indexOf(value) + value.length - 1
               ),
@@ -381,28 +384,28 @@ export default (rtext, skipComments = true) => {
               }
 
           propValue.loc = getLoc(
-            lineIndex,
+            j,
             l.indexOf(value),
             l.indexOf(value) + value.length - 1
           )
 
           last.push({
             type: 'Property',
-            loc: getLoc(lineIndex, l.indexOf(propRaw), l.length - 1),
+            loc: getLoc(j, l.indexOf(propRaw), l.length - 1),
             key: {
               type: 'Literal',
               // TODO should we use propRaw as value here?
               value: prop,
               valueRaw: propRaw,
               loc: getLoc(
-                lineIndex,
+                j,
                 l.indexOf(propRaw),
                 l.indexOf(propRaw) + propRaw.length - 1
               ),
             },
             inScope,
             tags,
-            meta: getMeta(value, l, lineIndex),
+            meta: getMeta(value, l, j),
             value: propValue,
           })
         }
@@ -434,18 +437,18 @@ export default (rtext, skipComments = true) => {
 
         properties.push({
           type: 'Property',
-          loc: getLoc(lineIndex, 0, l.length - 1),
+          loc: getLoc(j, 0, l.length - 1),
           value: {
             type: 'Literal',
             value,
-            loc: getLoc(lineIndex, l.indexOf(value), l.length - 1),
+            loc: getLoc(j, l.indexOf(value), l.length - 1),
           },
           tags: { comment: true, userComment },
         })
       }
     }
 
-    const loc = getLoc(i + 1, 0, lines[endOfBlockIndex].length - 1)
+    const loc = getLoc(i, 0, lines[endOfBlockIndex].length - 1)
     loc.end.line = endOfBlockIndex
 
     while (nested.length > 0) {
@@ -471,10 +474,9 @@ export default (rtext, skipComments = true) => {
 
   lines.forEach((l, i) => {
     const line = l.trim()
-    const lineIndex = i + 1
 
     if (isBlock(line)) {
-      parseBlock(l, i, line, lineIndex)
+      parseBlock(l, i, line)
     } else if (isProp(line) || isSection(line) || isComment(line)) {
       let block = stack[stack.length - 1] || views[views.length - 1]
       // TODO add warning
@@ -486,6 +488,9 @@ export default (rtext, skipComments = true) => {
 
       if (!block.properties) {
         parseProps(i, block)
+        if (block.properties) {
+          block.loc.end = block.properties.loc.end
+        }
       }
     } else if (isTodo(line)) {
       // eslint-disable-next-line
@@ -493,19 +498,19 @@ export default (rtext, skipComments = true) => {
 
       const todo = {
         type: 'Todo',
-        loc: getLoc(lineIndex, l.indexOf('#') + 1, l.length - 1),
+        loc: getLoc(i, l.indexOf('#') + 1, l.length - 1),
         to,
         message: message.trim(),
       }
 
       todos.push(todo)
     } else if (isEnd(line) && stack.length > 0) {
-      end(stack.pop(), lineIndex)
+      end(stack.pop(), i)
     }
   })
 
   if (stack.length > 0) {
-    while (!end(stack.pop(), lines.length)) {}
+    while (!end(stack.pop(), lines.length - 1)) {}
   }
 
   return {

@@ -1,0 +1,727 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#parse 1`] = `
+Object {
+  "fonts": Object {},
+  "todos": Array [],
+  "views": Array [
+    Object {
+      "blocks": Object {
+        "list": Array [],
+        "loc": Object {
+          "end": Object {
+            "column": 12,
+            "line": 0,
+          },
+          "start": Object {
+            "column": 0,
+            "line": 1,
+          },
+        },
+        "type": "Blocks",
+      },
+      "is": "Main",
+      "isBasic": true,
+      "loc": Object {
+        "end": Object {
+          "column": 12,
+          "line": 0,
+        },
+        "start": Object {
+          "column": 0,
+          "line": 0,
+        },
+      },
+      "name": Object {
+        "loc": Object {
+          "end": Object {
+            "column": 12,
+            "line": 0,
+          },
+          "start": Object {
+            "column": 0,
+            "line": 0,
+          },
+        },
+        "type": "Literal",
+        "value": "Vertical",
+      },
+      "parents": Array [],
+      "scoped": Object {},
+      "type": "Block",
+    },
+  ],
+}
+`;
+
+exports[`#parse 2`] = `
+Object {
+  "fonts": Object {},
+  "todos": Array [],
+  "views": Array [
+    Object {
+      "blocks": Object {
+        "list": Array [
+          Object {
+            "isBasic": true,
+            "loc": Object {
+              "end": Object {
+                "column": undefined,
+                "line": 1,
+              },
+              "start": Object {
+                "column": 0,
+                "line": 1,
+              },
+            },
+            "name": Object {
+              "loc": Object {
+                "end": Object {
+                  "column": 3,
+                  "line": 1,
+                },
+                "start": Object {
+                  "column": 0,
+                  "line": 1,
+                },
+              },
+              "type": "Literal",
+              "value": "Text",
+            },
+            "parents": Array [
+              "Main",
+            ],
+            "scoped": Object {},
+            "type": "Block",
+          },
+        ],
+        "loc": Object {
+          "end": Object {
+            "column": undefined,
+            "line": 1,
+          },
+          "start": Object {
+            "column": 0,
+            "line": 1,
+          },
+        },
+        "type": "Blocks",
+      },
+      "is": "Main",
+      "isBasic": true,
+      "loc": Object {
+        "end": Object {
+          "column": 3,
+          "line": 1,
+        },
+        "start": Object {
+          "column": 0,
+          "line": 0,
+        },
+      },
+      "name": Object {
+        "loc": Object {
+          "end": Object {
+            "column": 12,
+            "line": 0,
+          },
+          "start": Object {
+            "column": 0,
+            "line": 0,
+          },
+        },
+        "type": "Literal",
+        "value": "Vertical",
+      },
+      "parents": Array [],
+      "scoped": Object {},
+      "type": "Block",
+    },
+  ],
+}
+`;
+
+exports[`#parse 3`] = `
+Object {
+  "fonts": Object {},
+  "todos": Array [],
+  "views": Array [
+    Object {
+      "blocks": Object {
+        "list": Array [
+          Object {
+            "is": "Before",
+            "isBasic": true,
+            "loc": Object {
+              "end": Object {
+                "column": undefined,
+                "line": 1,
+              },
+              "start": Object {
+                "column": 0,
+                "line": 1,
+              },
+            },
+            "name": Object {
+              "loc": Object {
+                "end": Object {
+                  "column": 10,
+                  "line": 1,
+                },
+                "start": Object {
+                  "column": 0,
+                  "line": 1,
+                },
+              },
+              "type": "Literal",
+              "value": "Text",
+            },
+            "parents": Array [
+              "BlueButton",
+            ],
+            "scoped": Object {},
+            "type": "Block",
+          },
+          Object {
+            "blocks": Object {
+              "list": Array [
+                Object {
+                  "is": "ImageInside",
+                  "isBasic": true,
+                  "loc": Object {
+                    "end": Object {
+                      "column": 32,
+                      "line": 4,
+                    },
+                    "start": Object {
+                      "column": 0,
+                      "line": 3,
+                    },
+                  },
+                  "name": Object {
+                    "loc": Object {
+                      "end": Object {
+                        "column": 16,
+                        "line": 3,
+                      },
+                      "start": Object {
+                        "column": 0,
+                        "line": 3,
+                      },
+                    },
+                    "type": "Literal",
+                    "value": "Image",
+                  },
+                  "parents": Array [
+                    "BlueButton",
+                    "Nested",
+                  ],
+                  "properties": Object {
+                    "list": Array [
+                      Object {
+                        "inScope": false,
+                        "key": Object {
+                          "loc": Object {
+                            "end": Object {
+                              "column": 5,
+                              "line": 4,
+                            },
+                            "start": Object {
+                              "column": 0,
+                              "line": 4,
+                            },
+                          },
+                          "type": "Literal",
+                          "value": "source",
+                          "valueRaw": "source",
+                        },
+                        "loc": Object {
+                          "end": Object {
+                            "column": 32,
+                            "line": 4,
+                          },
+                          "start": Object {
+                            "column": 0,
+                            "line": 4,
+                          },
+                        },
+                        "meta": null,
+                        "tags": Object {},
+                        "type": "Property",
+                        "value": Object {
+                          "loc": Object {
+                            "end": Object {
+                              "column": 32,
+                              "line": 4,
+                            },
+                            "start": Object {
+                              "column": 7,
+                              "line": 4,
+                            },
+                          },
+                          "type": "Literal",
+                          "value": "https://image.com/file.jpg",
+                        },
+                      },
+                    ],
+                    "loc": Object {
+                      "end": Object {
+                        "column": 32,
+                        "line": 4,
+                      },
+                      "start": Object {
+                        "column": 0,
+                        "line": 4,
+                      },
+                    },
+                    "type": "Properties",
+                  },
+                  "scoped": Object {},
+                  "type": "Block",
+                },
+                Object {
+                  "blocks": Object {
+                    "list": Array [],
+                    "loc": Object {
+                      "end": Object {
+                        "column": 0,
+                        "line": 6,
+                      },
+                      "start": Object {
+                        "column": 0,
+                        "line": 6,
+                      },
+                    },
+                    "type": "Blocks",
+                  },
+                  "is": "VerticalInside",
+                  "isBasic": true,
+                  "loc": Object {
+                    "end": Object {
+                      "column": 0,
+                      "line": 6,
+                    },
+                    "start": Object {
+                      "column": 0,
+                      "line": 5,
+                    },
+                  },
+                  "name": Object {
+                    "loc": Object {
+                      "end": Object {
+                        "column": 22,
+                        "line": 5,
+                      },
+                      "start": Object {
+                        "column": 0,
+                        "line": 5,
+                      },
+                    },
+                    "type": "Literal",
+                    "value": "Vertical",
+                  },
+                  "parents": Array [
+                    "BlueButton",
+                    "Nested",
+                  ],
+                  "scoped": Object {},
+                  "type": "Block",
+                },
+              ],
+              "loc": Object {
+                "end": Object {
+                  "column": 0,
+                  "line": 6,
+                },
+                "start": Object {
+                  "column": 0,
+                  "line": 3,
+                },
+              },
+              "type": "Blocks",
+            },
+            "is": "Nested",
+            "isBasic": true,
+            "loc": Object {
+              "end": Object {
+                "column": 0,
+                "line": 7,
+              },
+              "start": Object {
+                "column": 0,
+                "line": 2,
+              },
+            },
+            "name": Object {
+              "loc": Object {
+                "end": Object {
+                  "column": 14,
+                  "line": 2,
+                },
+                "start": Object {
+                  "column": 0,
+                  "line": 2,
+                },
+              },
+              "type": "Literal",
+              "value": "Vertical",
+            },
+            "parents": Array [
+              "BlueButton",
+            ],
+            "scoped": Object {},
+            "type": "Block",
+          },
+          Object {
+            "is": "After",
+            "isBasic": true,
+            "loc": Object {
+              "end": Object {
+                "column": 11,
+                "line": 10,
+              },
+              "start": Object {
+                "column": 0,
+                "line": 8,
+              },
+            },
+            "name": Object {
+              "loc": Object {
+                "end": Object {
+                  "column": 9,
+                  "line": 8,
+                },
+                "start": Object {
+                  "column": 0,
+                  "line": 8,
+                },
+              },
+              "type": "Literal",
+              "value": "Text",
+            },
+            "parents": Array [
+              "BlueButton",
+            ],
+            "properties": Object {
+              "list": Array [
+                Object {
+                  "inScope": false,
+                  "key": Object {
+                    "loc": Object {
+                      "end": Object {
+                        "column": 3,
+                        "line": 9,
+                      },
+                      "start": Object {
+                        "column": 0,
+                        "line": 9,
+                      },
+                    },
+                    "type": "Literal",
+                    "value": "text",
+                    "valueRaw": "text",
+                  },
+                  "loc": Object {
+                    "end": Object {
+                      "column": 9,
+                      "line": 9,
+                    },
+                    "start": Object {
+                      "column": 0,
+                      "line": 9,
+                    },
+                  },
+                  "meta": null,
+                  "tags": Object {},
+                  "type": "Property",
+                  "value": Object {
+                    "loc": Object {
+                      "end": Object {
+                        "column": 9,
+                        "line": 9,
+                      },
+                      "start": Object {
+                        "column": 5,
+                        "line": 9,
+                      },
+                    },
+                    "type": "Literal",
+                    "value": "after",
+                  },
+                },
+                Object {
+                  "inScope": false,
+                  "key": Object {
+                    "loc": Object {
+                      "end": Object {
+                        "column": 4,
+                        "line": 10,
+                      },
+                      "start": Object {
+                        "column": 0,
+                        "line": 10,
+                      },
+                    },
+                    "type": "Literal",
+                    "value": "color",
+                    "valueRaw": "color",
+                  },
+                  "loc": Object {
+                    "end": Object {
+                      "column": 11,
+                      "line": 10,
+                    },
+                    "start": Object {
+                      "column": 0,
+                      "line": 10,
+                    },
+                  },
+                  "meta": Object {
+                    "elements": Array [
+                      Object {
+                        "loc": Object {
+                          "end": Object {
+                            "column": 11,
+                            "line": 10,
+                          },
+                          "start": Object {
+                            "column": 6,
+                            "line": 10,
+                          },
+                        },
+                        "tag": "color",
+                        "type": "Literal",
+                        "value": "purple",
+                      },
+                    ],
+                    "loc": Object {
+                      "end": Object {
+                        "column": 11,
+                        "line": 10,
+                      },
+                      "start": Object {
+                        "column": 0,
+                        "line": 10,
+                      },
+                    },
+                    "type": "ArrayExpression",
+                  },
+                  "tags": Object {
+                    "style": true,
+                  },
+                  "type": "Property",
+                  "value": Object {
+                    "loc": Object {
+                      "end": Object {
+                        "column": 11,
+                        "line": 10,
+                      },
+                      "start": Object {
+                        "column": 6,
+                        "line": 10,
+                      },
+                    },
+                    "type": "Literal",
+                    "value": "purple",
+                  },
+                },
+              ],
+              "loc": Object {
+                "end": Object {
+                  "column": 11,
+                  "line": 10,
+                },
+                "start": Object {
+                  "column": 0,
+                  "line": 9,
+                },
+              },
+              "type": "Properties",
+            },
+            "scoped": Object {},
+            "type": "Block",
+          },
+          Object {
+            "blocks": Object {
+              "list": Array [],
+              "loc": Object {
+                "end": Object {
+                  "column": 19,
+                  "line": 12,
+                },
+                "start": Object {
+                  "column": 0,
+                  "line": 12,
+                },
+              },
+              "type": "Blocks",
+            },
+            "is": "Last",
+            "isBasic": true,
+            "loc": Object {
+              "end": Object {
+                "column": 19,
+                "line": 12,
+              },
+              "start": Object {
+                "column": 0,
+                "line": 11,
+              },
+            },
+            "name": Object {
+              "loc": Object {
+                "end": Object {
+                  "column": 12,
+                  "line": 11,
+                },
+                "start": Object {
+                  "column": 0,
+                  "line": 11,
+                },
+              },
+              "type": "Literal",
+              "value": "Vertical",
+            },
+            "parents": Array [
+              "BlueButton",
+            ],
+            "properties": Object {
+              "list": Array [
+                Object {
+                  "inScope": false,
+                  "key": Object {
+                    "loc": Object {
+                      "end": Object {
+                        "column": 14,
+                        "line": 12,
+                      },
+                      "start": Object {
+                        "column": 0,
+                        "line": 12,
+                      },
+                    },
+                    "type": "Literal",
+                    "value": "backgroundColor",
+                    "valueRaw": "backgroundColor",
+                  },
+                  "loc": Object {
+                    "end": Object {
+                      "column": 19,
+                      "line": 12,
+                    },
+                    "start": Object {
+                      "column": 0,
+                      "line": 12,
+                    },
+                  },
+                  "meta": Object {
+                    "elements": Array [
+                      Object {
+                        "loc": Object {
+                          "end": Object {
+                            "column": 19,
+                            "line": 12,
+                          },
+                          "start": Object {
+                            "column": 16,
+                            "line": 12,
+                          },
+                        },
+                        "tag": "color",
+                        "type": "Literal",
+                        "value": "blue",
+                      },
+                    ],
+                    "loc": Object {
+                      "end": Object {
+                        "column": 19,
+                        "line": 12,
+                      },
+                      "start": Object {
+                        "column": 0,
+                        "line": 12,
+                      },
+                    },
+                    "type": "ArrayExpression",
+                  },
+                  "tags": Object {
+                    "style": true,
+                  },
+                  "type": "Property",
+                  "value": Object {
+                    "loc": Object {
+                      "end": Object {
+                        "column": 19,
+                        "line": 12,
+                      },
+                      "start": Object {
+                        "column": 16,
+                        "line": 12,
+                      },
+                    },
+                    "type": "Literal",
+                    "value": "blue",
+                  },
+                },
+              ],
+              "loc": Object {
+                "end": Object {
+                  "column": 19,
+                  "line": 12,
+                },
+                "start": Object {
+                  "column": 0,
+                  "line": 12,
+                },
+              },
+              "type": "Properties",
+            },
+            "scoped": Object {},
+            "type": "Block",
+          },
+        ],
+        "loc": Object {
+          "end": Object {
+            "column": 19,
+            "line": 12,
+          },
+          "start": Object {
+            "column": 0,
+            "line": 1,
+          },
+        },
+        "type": "Blocks",
+      },
+      "is": "BlueButton",
+      "isBasic": true,
+      "loc": Object {
+        "end": Object {
+          "column": 19,
+          "line": 12,
+        },
+        "start": Object {
+          "column": 0,
+          "line": 0,
+        },
+      },
+      "name": Object {
+        "loc": Object {
+          "end": Object {
+            "column": 18,
+            "line": 0,
+          },
+          "start": Object {
+            "column": 0,
+            "line": 0,
+          },
+        },
+        "type": "Literal",
+        "value": "Vertical",
+      },
+      "parents": Array [],
+      "scoped": Object {},
+      "type": "Block",
+    },
+  ],
+}
+`;

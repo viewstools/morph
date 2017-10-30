@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`react-dom parses react-dom Action 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import css from 'glam';
 const styles = {
@@ -19,12 +19,11 @@ const Action = props => {
 };
 
 export default Action;
-// fonts {}
 "
 `;
 
 exports[`react-dom parses react-dom AnimatedButton 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import Animated from 'react-dom-animated';
 import css from 'glam';
@@ -47,12 +46,11 @@ const AnimatedButton = props => {
 };
 
 export default AnimatedButton;
-// fonts {}
 "
 `;
 
 exports[`react-dom parses react-dom BackgroundImage 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import Animated from 'react-dom-animated';
 import css from 'glam';
@@ -80,12 +78,11 @@ const BackgroundImage = props => {
 };
 
 export default BackgroundImage;
-// fonts {}
 "
 `;
 
 exports[`react-dom parses react-dom BoxShadow 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import Animated from 'react-dom-animated';
 import css from 'glam';
@@ -107,12 +104,11 @@ const BoxShadow = props => {
 };
 
 export default BoxShadow;
-// fonts {}
 "
 `;
 
 exports[`react-dom parses react-dom Form 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import css from 'glam';
 const styles = {
@@ -175,12 +171,11 @@ class Form extends React.Component {
 }
 
 export default Form;
-// fonts {}
 "
 `;
 
 exports[`react-dom parses react-dom GoTo 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import css from 'glam';
 const styles = {
@@ -203,12 +198,11 @@ const GoTo = props => {
 };
 
 export default GoTo;
-// fonts {}
 "
 `;
 
 exports[`react-dom parses react-dom Hover 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import css from 'glam';
 const styles = {
@@ -236,12 +230,11 @@ const Hover = props => {
 };
 
 export default Hover;
-// fonts {}
 "
 `;
 
 exports[`react-dom parses react-dom HoverProxy 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import css from 'glam';
 const styles = {
@@ -277,12 +270,11 @@ const HoverProxy = props => {
 };
 
 export default HoverProxy;
-// fonts {}
 "
 `;
 
 exports[`react-dom parses react-dom JustText 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 
 const JustText = props => {
@@ -290,12 +282,11 @@ const JustText = props => {
 };
 
 export default JustText;
-// fonts {}
 "
 `;
 
 exports[`react-dom parses react-dom ListOfSomething 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import css from 'glam';
 const styles = {
@@ -319,12 +310,11 @@ const ListOfSomething = props => {
 };
 
 export default ListOfSomething;
-// fonts {}
 "
 `;
 
 exports[`react-dom parses react-dom NameIsType 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 
 const NameIsType = props => {
@@ -332,12 +322,11 @@ const NameIsType = props => {
 };
 
 export default NameIsType;
-// fonts {}
 "
 `;
 
 exports[`react-dom parses react-dom NestedRoutes 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
@@ -372,12 +361,11 @@ const NestedRoutes = props => {
 };
 
 export default withRouter(NestedRoutes);
-// fonts {}
 "
 `;
 
 exports[`react-dom parses react-dom Print 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import css from 'glam';
 const styles = {
@@ -403,12 +391,11 @@ const Print = props => {
 };
 
 export default Print;
-// fonts {}
 "
 `;
 
 exports[`react-dom parses react-dom ProxyTest 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import css from 'glam';
 const styles = {
@@ -438,12 +425,11 @@ const ProxyTest = props => {
 };
 
 export default ProxyTest;
-// fonts {}
 "
 `;
 
 exports[`react-dom parses react-dom Scope 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import css from 'glam';
 const styles = {
@@ -461,12 +447,11 @@ const Scope = props => {
 };
 
 export default Scope;
-// fonts {}
 "
 `;
 
 exports[`react-dom parses react-dom ScopePopup 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import css from 'glam';
 const styles = {
@@ -491,12 +476,11 @@ const ScopePopup = props => {
 };
 
 export default ScopePopup;
-// fonts {}
 "
 `;
 
 exports[`react-dom parses react-dom ScopePopup2 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import css from 'glam';
 const styles = {
@@ -521,12 +505,11 @@ const ScopePopup2 = props => {
 };
 
 export default ScopePopup2;
-// fonts {}
 "
 `;
 
 exports[`react-dom parses react-dom Teleport 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import css from 'glam';
@@ -545,12 +528,11 @@ const Teleport = props => {
 };
 
 export default Teleport;
-// fonts {}
 "
 `;
 
 exports[`react-dom parses react-dom Test 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import Custom from './Custom.view.js';
 
@@ -568,12 +550,11 @@ const Test = props => {
 };
 
 export default Test;
-// fonts {}
 "
 `;
 
 exports[`react-dom parses react-dom Toggle 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 
 const Toggle = props => {
@@ -581,12 +562,11 @@ const Toggle = props => {
 };
 
 export default Toggle;
-// fonts {}
 "
 `;
 
 exports[`react-dom parses react-dom UseCaptureEmail 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import css from 'glam';
 const styles = {
@@ -620,12 +600,11 @@ class UseCaptureEmail extends React.Component {
 }
 
 export default UseCaptureEmail;
-// fonts {}
 "
 `;
 
 exports[`react-dom parses react-dom UseCaptureFile 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 
 class UseCaptureFile extends React.Component {
@@ -648,12 +627,11 @@ class UseCaptureFile extends React.Component {
 }
 
 export default UseCaptureFile;
-// fonts {}
 "
 `;
 
 exports[`react-dom parses react-dom UseCaptureNumber 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 
 class UseCaptureNumber extends React.Component {
@@ -677,12 +655,11 @@ class UseCaptureNumber extends React.Component {
 }
 
 export default UseCaptureNumber;
-// fonts {}
 "
 `;
 
 exports[`react-dom parses react-dom UseCapturePhone 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 
 class UseCapturePhone extends React.Component {
@@ -706,12 +683,11 @@ class UseCapturePhone extends React.Component {
 }
 
 export default UseCapturePhone;
-// fonts {}
 "
 `;
 
 exports[`react-dom parses react-dom UseCaptureSecure 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 
 class UseCaptureSecure extends React.Component {
@@ -735,12 +711,11 @@ class UseCaptureSecure extends React.Component {
 }
 
 export default UseCaptureSecure;
-// fonts {}
 "
 `;
 
 exports[`react-dom parses react-dom UseCaptureText 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 
 class UseCaptureText extends React.Component {
@@ -764,12 +739,11 @@ class UseCaptureText extends React.Component {
 }
 
 export default UseCaptureText;
-// fonts {}
 "
 `;
 
 exports[`react-dom parses react-dom UseCaptureTextArea 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 
 class UseCaptureTextArea extends React.Component {
@@ -792,12 +766,11 @@ class UseCaptureTextArea extends React.Component {
 }
 
 export default UseCaptureTextArea;
-// fonts {}
 "
 `;
 
 exports[`react-dom parses react-dom UseCaptureTextManagedFromOutside 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 
 class UseCaptureTextManagedFromOutside extends React.Component {
@@ -814,12 +787,11 @@ class UseCaptureTextManagedFromOutside extends React.Component {
 }
 
 export default UseCaptureTextManagedFromOutside;
-// fonts {}
 "
 `;
 
 exports[`react-dom parses react-dom UseHorizontal 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import css from 'glam';
 const styles = {
@@ -834,12 +806,11 @@ const UseHorizontal = props => {
 };
 
 export default UseHorizontal;
-// fonts {}
 "
 `;
 
 exports[`react-dom parses react-dom UseImage 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 
 const UseImage = props => {
@@ -847,12 +818,11 @@ const UseImage = props => {
 };
 
 export default UseImage;
-// fonts {}
 "
 `;
 
 exports[`react-dom parses react-dom UseOfProxy 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import Button from './Button.view.js';
 import css from 'glam';
@@ -877,12 +847,11 @@ const UseOfProxy = props => {
 };
 
 export default UseOfProxy;
-// fonts {}
 "
 `;
 
 exports[`react-dom parses react-dom UseProxy 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import css from 'glam';
 const styles = {
@@ -908,12 +877,11 @@ const UseProxy = props => {
 };
 
 export default UseProxy;
-// fonts {}
 "
 `;
 
 exports[`react-dom parses react-dom UseRouter 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import About from './About.view.js';
 import Home from './Home.view.js';
@@ -959,12 +927,11 @@ const UseRouter = props => {
 };
 
 export default UseRouter;
-// fonts {}
 "
 `;
 
 exports[`react-dom parses react-dom UseSvg 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 
 const UseSvg = props => {
@@ -977,12 +944,11 @@ const UseSvg = props => {
 };
 
 export default UseSvg;
-// fonts {}
 "
 `;
 
 exports[`react-dom parses react-dom UseText 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import css from 'glam';
 const styles = {
@@ -999,12 +965,11 @@ const UseText = props => {
 };
 
 export default UseText;
-// fonts {\\"Montserrat\\":[\\"300\\"]}
 "
 `;
 
 exports[`react-dom parses react-dom UseVertical 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import css from 'glam';
 const styles = {
@@ -1019,12 +984,11 @@ const UseVertical = props => {
 };
 
 export default UseVertical;
-// fonts {}
 "
 `;
 
 exports[`react-dom parses react-dom When 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import css from 'glam';
 const styles = {
@@ -1042,12 +1006,11 @@ const When = props => {
 };
 
 export default When;
-// fonts {}
 "
 `;
 
 exports[`react-dom parses react-dom WhenList 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import css from 'glam';
 const styles = {
@@ -1076,12 +1039,11 @@ const WhenList = props => {
 };
 
 export default WhenList;
-// fonts {}
 "
 `;
 
 exports[`react-dom parses react-dom WhenTopLevel 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 
 const WhenTopLevel = props => {
@@ -1089,12 +1051,11 @@ const WhenTopLevel = props => {
 };
 
 export default WhenTopLevel;
-// fonts {}
 "
 `;
 
 exports[`react-dom parses react-dom WithTest 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import * as fromTests from './WithTest.view.tests.js';
 import css from 'glam';
@@ -1170,12 +1131,11 @@ const WithTest = props => {
 };
 
 export default TestsWithTest;
-// fonts {}
 "
 `;
 
 exports[`react-native parses react-native Action 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
@@ -1195,12 +1155,11 @@ const Action = props => {
 };
 
 export default Action;
-// fonts {}
 "
 `;
 
 exports[`react-native parses react-native AnimatedButton 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import {
   Animated,
@@ -1225,12 +1184,11 @@ const AnimatedButton = props => {
 };
 
 export default AnimatedButton;
-// fonts {}
 "
 `;
 
 exports[`react-native parses react-native BackgroundImage 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { Animated, Image, StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
@@ -1256,12 +1214,11 @@ const BackgroundImage = props => {
 };
 
 export default BackgroundImage;
-// fonts {}
 "
 `;
 
 exports[`react-native parses react-native BoxShadow 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { Animated, StyleSheet } from 'react-native';
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
@@ -1286,12 +1243,11 @@ const BoxShadow = props => {
 };
 
 export default BoxShadow;
-// fonts {}
 "
 `;
 
 exports[`react-native parses react-native Form 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import {
   StyleSheet,
@@ -1341,12 +1297,11 @@ class Form extends React.Component {
 }
 
 export default Form;
-// fonts {}
 "
 `;
 
 exports[`react-native parses react-native GoTo 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
@@ -1360,12 +1315,11 @@ const GoTo = props => {
 };
 
 export default GoTo;
-// fonts {}
 "
 `;
 
 exports[`react-native parses react-native Hover 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 const styles = StyleSheet.create({
@@ -1388,12 +1342,11 @@ const Hover = props => {
 };
 
 export default Hover;
-// fonts {}
 "
 `;
 
 exports[`react-native parses react-native HoverProxy 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 const styles = StyleSheet.create({
@@ -1424,12 +1377,11 @@ const HoverProxy = props => {
 };
 
 export default HoverProxy;
-// fonts {}
 "
 `;
 
 exports[`react-native parses react-native JustText 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { Text } from 'react-native';
 
@@ -1438,12 +1390,11 @@ const JustText = props => {
 };
 
 export default JustText;
-// fonts {}
 "
 `;
 
 exports[`react-native parses react-native ListOfSomething 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { Animated, StyleSheet, View } from 'react-native';
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
@@ -1467,12 +1418,11 @@ const ListOfSomething = props => {
 };
 
 export default ListOfSomething;
-// fonts {}
 "
 `;
 
 exports[`react-native parses react-native NameIsType 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { Text } from 'react-native';
 
@@ -1481,12 +1431,11 @@ const NameIsType = props => {
 };
 
 export default NameIsType;
-// fonts {}
 "
 `;
 
 exports[`react-native parses react-native NestedRoutes 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-native';
@@ -1519,12 +1468,11 @@ const NestedRoutes = props => {
 };
 
 export default withRouter(NestedRoutes);
-// fonts {}
 "
 `;
 
 exports[`react-native parses react-native Print 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
@@ -1538,12 +1486,11 @@ const Print = props => {
 };
 
 export default Print;
-// fonts {}
 "
 `;
 
 exports[`react-native parses react-native ProxyTest 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 const styles = StyleSheet.create({
@@ -1569,12 +1516,11 @@ const ProxyTest = props => {
 };
 
 export default ProxyTest;
-// fonts {}
 "
 `;
 
 exports[`react-native parses react-native Scope 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 const styles = StyleSheet.create({ h1g2xbng: { color: 'red' } });
@@ -1590,12 +1536,11 @@ const Scope = props => {
 };
 
 export default Scope;
-// fonts {}
 "
 `;
 
 exports[`react-native parses react-native ScopePopup 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
@@ -1618,12 +1563,11 @@ const ScopePopup = props => {
 };
 
 export default ScopePopup;
-// fonts {}
 "
 `;
 
 exports[`react-native parses react-native ScopePopup2 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
@@ -1646,12 +1590,11 @@ const ScopePopup2 = props => {
 };
 
 export default ScopePopup2;
-// fonts {}
 "
 `;
 
 exports[`react-native parses react-native Teleport 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { Link } from 'react-router-native';
 import { StyleSheet, Text, View } from 'react-native';
@@ -1666,12 +1609,11 @@ const Teleport = props => {
 };
 
 export default Teleport;
-// fonts {}
 "
 `;
 
 exports[`react-native parses react-native Test 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import Custom from './Custom.view.js';
 import { Text } from 'react-native';
@@ -1690,12 +1632,11 @@ const Test = props => {
 };
 
 export default Test;
-// fonts {}
 "
 `;
 
 exports[`react-native parses react-native Toggle 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { Text } from 'react-native';
 
@@ -1704,12 +1645,11 @@ const Toggle = props => {
 };
 
 export default Toggle;
-// fonts {}
 "
 `;
 
 exports[`react-native parses react-native UseCaptureEmail 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { StyleSheet, TextInput } from 'react-native';
 const styles = StyleSheet.create({
@@ -1749,12 +1689,11 @@ class UseCaptureEmail extends React.Component {
 }
 
 export default UseCaptureEmail;
-// fonts {}
 "
 `;
 
 exports[`react-native parses react-native UseCaptureFile 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import CaptureFile from './CaptureFile.view.js';
 
@@ -1772,12 +1711,11 @@ class UseCaptureFile extends React.Component {
 }
 
 export default UseCaptureFile;
-// fonts {}
 "
 `;
 
 exports[`react-native parses react-native UseCaptureNumber 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { TextInput } from 'react-native';
 
@@ -1795,12 +1733,11 @@ class UseCaptureNumber extends React.Component {
 }
 
 export default UseCaptureNumber;
-// fonts {}
 "
 `;
 
 exports[`react-native parses react-native UseCapturePhone 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { TextInput } from 'react-native';
 
@@ -1818,12 +1755,11 @@ class UseCapturePhone extends React.Component {
 }
 
 export default UseCapturePhone;
-// fonts {}
 "
 `;
 
 exports[`react-native parses react-native UseCaptureSecure 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { TextInput } from 'react-native';
 
@@ -1841,12 +1777,11 @@ class UseCaptureSecure extends React.Component {
 }
 
 export default UseCaptureSecure;
-// fonts {}
 "
 `;
 
 exports[`react-native parses react-native UseCaptureText 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { TextInput } from 'react-native';
 
@@ -1864,12 +1799,11 @@ class UseCaptureText extends React.Component {
 }
 
 export default UseCaptureText;
-// fonts {}
 "
 `;
 
 exports[`react-native parses react-native UseCaptureTextArea 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { TextInput } from 'react-native';
 
@@ -1887,12 +1821,11 @@ class UseCaptureTextArea extends React.Component {
 }
 
 export default UseCaptureTextArea;
-// fonts {}
 "
 `;
 
 exports[`react-native parses react-native UseCaptureTextManagedFromOutside 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { TextInput } from 'react-native';
 
@@ -1920,12 +1853,11 @@ class UseCaptureTextManagedFromOutside extends React.Component {
 }
 
 export default UseCaptureTextManagedFromOutside;
-// fonts {}
 "
 `;
 
 exports[`react-native parses react-native UseHorizontal 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 const styles = StyleSheet.create({
@@ -1942,12 +1874,11 @@ const UseHorizontal = props => {
 };
 
 export default UseHorizontal;
-// fonts {}
 "
 `;
 
 exports[`react-native parses react-native UseImage 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { Image } from 'react-native';
 
@@ -1956,12 +1887,11 @@ const UseImage = props => {
 };
 
 export default UseImage;
-// fonts {}
 "
 `;
 
 exports[`react-native parses react-native UseOfProxy 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import Button from './Button.view.js';
 import { StyleSheet, View } from 'react-native';
@@ -1982,12 +1912,11 @@ const UseOfProxy = props => {
 };
 
 export default UseOfProxy;
-// fonts {}
 "
 `;
 
 exports[`react-native parses react-native UseProxy 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
@@ -2009,12 +1938,11 @@ const UseProxy = props => {
 };
 
 export default UseProxy;
-// fonts {}
 "
 `;
 
 exports[`react-native parses react-native UseRouter 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import About from './About.view.js';
 import Home from './Home.view.js';
@@ -2056,12 +1984,11 @@ const UseRouter = props => {
 };
 
 export default UseRouter;
-// fonts {}
 "
 `;
 
 exports[`react-native parses react-native UseSvg 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import Svg, {
   Circle as SvgCircle,
@@ -2081,12 +2008,11 @@ const UseSvg = props => {
 };
 
 export default UseSvg;
-// fonts {}
 "
 `;
 
 exports[`react-native parses react-native UseText 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 const styles = StyleSheet.create({
@@ -2098,12 +2024,11 @@ const UseText = props => {
 };
 
 export default UseText;
-// fonts {\\"Montserrat\\":[\\"300\\"]}
 "
 `;
 
 exports[`react-native parses react-native UseVertical 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 const styles = StyleSheet.create({
@@ -2115,12 +2040,11 @@ const UseVertical = props => {
 };
 
 export default UseVertical;
-// fonts {}
 "
 `;
 
 exports[`react-native parses react-native When 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
@@ -2134,12 +2058,11 @@ const When = props => {
 };
 
 export default When;
-// fonts {}
 "
 `;
 
 exports[`react-native parses react-native WhenList 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 const styles = StyleSheet.create({
@@ -2164,12 +2087,11 @@ const WhenList = props => {
 };
 
 export default WhenList;
-// fonts {}
 "
 `;
 
 exports[`react-native parses react-native WhenTopLevel 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { Text } from 'react-native';
 
@@ -2178,12 +2100,11 @@ const WhenTopLevel = props => {
 };
 
 export default WhenTopLevel;
-// fonts {}
 "
 `;
 
 exports[`react-native parses react-native WithTest 1`] = `
-"/* eslint-disable jsx-a11y/accessible-emoji */
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import * as fromTests from './WithTest.view.tests.js';
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
@@ -2261,6 +2182,5 @@ const WithTest = props => {
 };
 
 export default TestsWithTest;
-// fonts {}
 "
 `;
