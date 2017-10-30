@@ -448,9 +448,6 @@ export default (rtext, skipComments = true) => {
       }
     }
 
-    const loc = getLoc(i, 0, lines[endOfBlockIndex].length - 1)
-    loc.end.line = endOfBlockIndex
-
     while (nested.length > 0) {
       const props = nested.pop()
 
@@ -464,10 +461,16 @@ export default (rtext, skipComments = true) => {
     }
 
     if (properties.length > 0) {
+      const start = properties[0].loc.start
+      const end = properties[properties.length - 1].loc.end
+
       block.properties = {
         type: 'Properties',
         list: properties,
-        loc,
+        loc: {
+          start,
+          end,
+        },
       }
     }
   }
