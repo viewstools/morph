@@ -10,7 +10,6 @@ const typesMap = {
   CaptureSecure: 'password',
 }
 
-// TODO textarea
 export const enter = (node, parent, state) => {
   const blockType = node.name.value
 

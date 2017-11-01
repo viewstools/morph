@@ -1,5 +1,6 @@
 import { hasProp, getProp } from '../utils.js'
 import safe from '../react/safe.js'
+import toCamelCase from 'to-camel-case'
 
 const keyboardType = {
   CaptureEmail: 'email-address',
@@ -10,7 +11,8 @@ const keyboardType = {
 
 export const enter = (node, parent, state) => {
   if (/Capture/.test(node.name.value)) {
-    state.captures.push(node.is || node.name.value)
+    const name = toCamelCase(node.is || node.name.value)
+    state.captures.push(name)
 
     if (node.properties && !hasProp(node, 'ref')) {
       node.properties.skip = true
@@ -22,10 +24,10 @@ export const enter = (node, parent, state) => {
       if (captureNext) {
         state.render.push(` blurOnSubmit={false}`)
         state.render.push(
-          ` onSubmitEditing={this.$capture${captureNext}? () => this.$capture${captureNext}.focus() : ${onSubmit}}`
+          ` onSubmitEditing={this.$${captureNext}? () => this.$${captureNext}.focus() : ${onSubmit}}`
         )
         state.render.push(
-          ` returnKeyType = {this.$capture${captureNext}? 'next' : 'go'}`
+          ` returnKeyType = {this.$${captureNext}? 'next' : 'go'}`
         )
       } else {
         if (onSubmit) {
@@ -36,10 +38,10 @@ export const enter = (node, parent, state) => {
         }
       }
       state.render.push(
-        ` onChangeText = {${node.is} => this.setState({ ${node.is} })}`
+        ` onChangeText = {${name} => this.setState({ ${name} })}`
       )
-      state.render.push(` ref={$e => this.$capture${node.is} = $e}`)
-      state.render.push(` value={state.${node.is}}`)
+      state.render.push(` ref={$e => this.$${name} = $e}`)
+      state.render.push(` value={state.${name}}`)
 
       if (node.name.value === 'CaptureSecure') {
         state.render.push(` secureTextEntry`)
@@ -68,6 +70,11 @@ export const enter = (node, parent, state) => {
       const placeholder = getProp(node, 'placeholder')
       if (placeholder) {
         state.render.push(` placeholder=${safe(placeholder.value.value)}`)
+      }
+
+      const defaultValue = getProp(node, 'defaultValue')
+      if (defaultValue) {
+        state.render.push(` defaultValue=${safe(defaultValue.value.value)}`)
       }
 
       const underlineColorAndroid = getProp(node, 'underlineColorAndroid')

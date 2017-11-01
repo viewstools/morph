@@ -1,5 +1,6 @@
-Email is CaptureEmail
+Email CaptureEmail
 border 1px solid black
 color red
 colorPlaceholder blue
+defaultValue hey this is a default value
 onSubmit props.onSubmit

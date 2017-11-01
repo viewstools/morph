@@ -710,6 +710,7 @@ class UseCaptureEmail extends React.Component {
         onChange={event => this.setState({ email: event.target.value })}
         value={state.email}
         data-test-id={props['data-test-id'] || 'Email'}
+        defaultValue=\\"hey this is a default value\\"
         onSubmit={props.onSubmit}
         className={styles.hevllt7}
       />
@@ -1498,11 +1499,12 @@ class Form extends React.Component {
         <TextInput testID={props['testID'] || 'Form.Password'} />
         <TextInput
           returnKeyType=\\"done\\"
-          onChangeText={Email => this.setState({ Email })}
-          ref={$e => (this.$captureEmail = $e)}
-          value={state.Email}
+          onChangeText={email => this.setState({ email })}
+          ref={$e => (this.$email = $e)}
+          value={state.email}
           keyboardType=\\"email-address\\"
           autoCorrect={false}
+          defaultValue=\\"morph@viewsdx.com\\"
           underlineColorAndroid=\\"transparent\\"
           testID={props['testID'] || 'Form.Email'}
         />
@@ -1968,11 +1970,12 @@ class UseCaptureEmail extends React.Component {
       <TextInput
         onSubmitEditing={props.onSubmit}
         returnKeyType=\\"go\\"
-        onChangeText={Email => this.setState({ Email })}
-        ref={$e => (this.$captureEmail = $e)}
-        value={state.Email}
+        onChangeText={email => this.setState({ email })}
+        ref={$e => (this.$email = $e)}
+        value={state.email}
         keyboardType=\\"email-address\\"
         autoCorrect={false}
+        defaultValue=\\"hey this is a default value\\"
         underlineColorAndroid=\\"transparent\\"
         testID={props['testID'] || 'Email'}
         placeholderTextColor=\\"blue\\"
@@ -2135,9 +2138,9 @@ class UseCaptureTextManagedFromOutside extends React.Component {
     return (
       <TextInput
         returnKeyType=\\"done\\"
-        onChangeText={undefined => this.setState({ undefined })}
-        ref={$e => (this.$captureundefined = $e)}
-        value={state.undefined}
+        onChangeText={captureText => this.setState({ captureText })}
+        ref={$e => (this.$captureText = $e)}
+        value={state.captureText}
         keyboardType=\\"default\\"
         autoCorrect={false}
         underlineColorAndroid=\\"transparent\\"
