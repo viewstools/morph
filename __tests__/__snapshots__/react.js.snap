@@ -153,6 +153,7 @@ class Form extends React.Component {
           onChange={event => this.setState({ name: event.target.value })}
           value={state.name}
           data-test-id={props['data-test-id'] || 'Form.Name'}
+          autoFocus={true}
         />
         <input
           type=\\"text\\"
@@ -1494,9 +1495,43 @@ class Form extends React.Component {
 
     return (
       <View testID={props['testID'] || 'Form'} style={styles.h18pdll5}>
-        <TextInput testID={props['testID'] || 'Form.Name'} />
-        <TextInput testID={props['testID'] || 'Form.Surname'} />
-        <TextInput testID={props['testID'] || 'Form.Password'} />
+        <TextInput
+          blurOnSubmit={false}
+          onSubmitEditing={this.$Surname ? () => this.$Surname.focus() : null}
+          returnKeyType={this.$Surname ? 'next' : 'go'}
+          onChangeText={name => this.setState({ name })}
+          ref={$e => (this.$name = $e)}
+          value={state.name}
+          keyboardType=\\"default\\"
+          autoCorrect={false}
+          underlineColorAndroid=\\"transparent\\"
+          testID={props['testID'] || 'Form.Name'}
+          autoFocus={true}
+        />
+        <TextInput
+          blurOnSubmit={false}
+          onSubmitEditing={this.$Password ? () => this.$Password.focus() : null}
+          returnKeyType={this.$Password ? 'next' : 'go'}
+          onChangeText={surname => this.setState({ surname })}
+          ref={$e => (this.$surname = $e)}
+          value={state.surname}
+          keyboardType=\\"default\\"
+          autoCorrect={false}
+          underlineColorAndroid=\\"transparent\\"
+          testID={props['testID'] || 'Form.Surname'}
+        />
+        <TextInput
+          blurOnSubmit={false}
+          onSubmitEditing={this.$Email ? () => this.$Email.focus() : null}
+          returnKeyType={this.$Email ? 'next' : 'go'}
+          onChangeText={password => this.setState({ password })}
+          ref={$e => (this.$password = $e)}
+          value={state.password}
+          secureTextEntry
+          autoCorrect={false}
+          underlineColorAndroid=\\"transparent\\"
+          testID={props['testID'] || 'Form.Password'}
+        />
         <TextInput
           returnKeyType=\\"done\\"
           onChangeText={email => this.setState({ email })}
@@ -1507,6 +1542,7 @@ class Form extends React.Component {
           defaultValue=\\"morph@viewsdx.com\\"
           underlineColorAndroid=\\"transparent\\"
           testID={props['testID'] || 'Form.Email'}
+          defaultValue=\\"morph@viewsdx.com\\"
         />
         <TouchableWithoutFeedback
           activeOpacity={0.7}
@@ -1979,6 +2015,7 @@ class UseCaptureEmail extends React.Component {
         underlineColorAndroid=\\"transparent\\"
         testID={props['testID'] || 'Email'}
         placeholderTextColor=\\"blue\\"
+        defaultValue=\\"hey this is a default value\\"
         style={styles.hm4pcs}
       />
     );
@@ -2003,7 +2040,18 @@ class UseCaptureFile extends React.Component {
   render() {
     const { props, state } = this;
 
-    return <CaptureFile testID={props['testID'] || 'File'} />;
+    return (
+      <CaptureFile
+        returnKeyType=\\"done\\"
+        onChangeText={file => this.setState({ file })}
+        ref={$e => (this.$file = $e)}
+        value={state.file}
+        keyboardType=\\"undefined\\"
+        autoCorrect={false}
+        underlineColorAndroid=\\"transparent\\"
+        testID={props['testID'] || 'File'}
+      />
+    );
   }
 }
 
@@ -2025,7 +2073,18 @@ class UseCaptureNumber extends React.Component {
   render() {
     const { props, state } = this;
 
-    return <TextInput testID={props['testID'] || 'Number'} />;
+    return (
+      <TextInput
+        returnKeyType=\\"done\\"
+        onChangeText={number => this.setState({ number })}
+        ref={$e => (this.$number = $e)}
+        value={state.number}
+        keyboardType=\\"numeric\\"
+        autoCorrect={false}
+        underlineColorAndroid=\\"transparent\\"
+        testID={props['testID'] || 'Number'}
+      />
+    );
   }
 }
 
@@ -2047,7 +2106,18 @@ class UseCapturePhone extends React.Component {
   render() {
     const { props, state } = this;
 
-    return <TextInput testID={props['testID'] || 'Phone'} />;
+    return (
+      <TextInput
+        returnKeyType=\\"done\\"
+        onChangeText={phone => this.setState({ phone })}
+        ref={$e => (this.$phone = $e)}
+        value={state.phone}
+        keyboardType=\\"phone-pad\\"
+        autoCorrect={false}
+        underlineColorAndroid=\\"transparent\\"
+        testID={props['testID'] || 'Phone'}
+      />
+    );
   }
 }
 
@@ -2069,7 +2139,18 @@ class UseCaptureSecure extends React.Component {
   render() {
     const { props, state } = this;
 
-    return <TextInput testID={props['testID'] || 'Secure'} />;
+    return (
+      <TextInput
+        returnKeyType=\\"done\\"
+        onChangeText={secure => this.setState({ secure })}
+        ref={$e => (this.$secure = $e)}
+        value={state.secure}
+        secureTextEntry
+        autoCorrect={false}
+        underlineColorAndroid=\\"transparent\\"
+        testID={props['testID'] || 'Secure'}
+      />
+    );
   }
 }
 
@@ -2091,7 +2172,18 @@ class UseCaptureText extends React.Component {
   render() {
     const { props, state } = this;
 
-    return <TextInput testID={props['testID'] || 'Text'} />;
+    return (
+      <TextInput
+        returnKeyType=\\"done\\"
+        onChangeText={text => this.setState({ text })}
+        ref={$e => (this.$text = $e)}
+        value={state.text}
+        keyboardType=\\"default\\"
+        autoCorrect={false}
+        underlineColorAndroid=\\"transparent\\"
+        testID={props['testID'] || 'Text'}
+      />
+    );
   }
 }
 
@@ -2113,7 +2205,18 @@ class UseCaptureTextArea extends React.Component {
   render() {
     const { props, state } = this;
 
-    return <TextInput testID={props['testID'] || 'CaptureTextArea'} />;
+    return (
+      <TextInput
+        returnKeyType=\\"done\\"
+        onChangeText={captureTextArea => this.setState({ captureTextArea })}
+        ref={$e => (this.$captureTextArea = $e)}
+        value={state.captureTextArea}
+        keyboardType=\\"undefined\\"
+        autoCorrect={false}
+        underlineColorAndroid=\\"transparent\\"
+        testID={props['testID'] || 'CaptureTextArea'}
+      />
+    );
   }
 }
 
@@ -2145,6 +2248,7 @@ class UseCaptureTextManagedFromOutside extends React.Component {
         autoCorrect={false}
         underlineColorAndroid=\\"transparent\\"
         testID={props['testID'] || 'CaptureText'}
+        value={props.external}
       />
     );
   }

@@ -15,7 +15,7 @@ export const enter = (node, parent, state) => {
 
   if (!/Capture/.test(blockType)) return
 
-  const name = toCamelCase(node.is || node.name.value)
+  const name = toCamelCase(node.is || blockType)
   state.captures.push(name)
 
   if (typesMap[blockType]) {

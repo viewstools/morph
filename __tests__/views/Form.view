@@ -1,6 +1,7 @@
 Form Vertical
 onSubmit () => props.onSubmit(state)
 Name CaptureText
+autoFocus true
 Surname CaptureText
 Password CaptureSecure
 Email CaptureEmail

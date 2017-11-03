@@ -10,80 +10,72 @@ const keyboardType = {
 }
 
 export const enter = (node, parent, state) => {
-  if (/Capture/.test(node.name.value)) {
-    const name = toCamelCase(node.is || node.name.value)
-    state.captures.push(name)
+  const blockType = node.name.value
 
-    if (node.properties && !hasProp(node, 'ref')) {
-      node.properties.skip = true
+  if (!/Capture/.test(node.name.value)) return
 
-      const { captureNext } = node
-      let onSubmit = getProp(node, 'onSubmit') || null
-      if (onSubmit) onSubmit = onSubmit.value.value
+  const name = toCamelCase(node.is || blockType)
+  state.captures.push(name)
 
-      if (captureNext) {
-        state.render.push(` blurOnSubmit={false}`)
-        state.render.push(
-          ` onSubmitEditing={this.$${captureNext}? () => this.$${captureNext}.focus() : ${onSubmit}}`
-        )
-        state.render.push(
-          ` returnKeyType = {this.$${captureNext}? 'next' : 'go'}`
-        )
-      } else {
-        if (onSubmit) {
-          state.render.push(` onSubmitEditing={${onSubmit}}`)
-          state.render.push(` returnKeyType="go"`)
-        } else {
-          state.render.push(` returnKeyType="done"`)
-        }
-      }
-      state.render.push(
-        ` onChangeText = {${name} => this.setState({ ${name} })}`
-      )
-      state.render.push(` ref={$e => this.$${name} = $e}`)
-      state.render.push(` value={state.${name}}`)
+  const { captureNext } = node
+  let onSubmit = getProp(node, 'onSubmit') || null
+  if (onSubmit) onSubmit = onSubmit.value.value
 
-      if (node.name.value === 'CaptureSecure') {
-        state.render.push(` secureTextEntry`)
-      } else {
-        state.render.push(` keyboardType='${keyboardType[node.name.value]}'`)
-      }
-
-      // TODO rest of props
-      const onBlur = getProp(node, 'onBlur')
-      if (onBlur) {
-        state.render.push(` onBlur=${safe(onBlur.value.value)}`)
-      }
-
-      const onFocus = getProp(node, 'onFocus')
-      if (onFocus) {
-        state.render.push(` onFocus=${safe(onFocus.value.value)}`)
-      }
-
-      const autoCorrect = getProp(node, 'autoCorrect')
-      state.render.push(
-        ` autoCorrect=${autoCorrect
-          ? safe(autoCorrect.value.value)
-          : '{false}'}`
-      )
-
-      const placeholder = getProp(node, 'placeholder')
-      if (placeholder) {
-        state.render.push(` placeholder=${safe(placeholder.value.value)}`)
-      }
-
-      const defaultValue = getProp(node, 'defaultValue')
-      if (defaultValue) {
-        state.render.push(` defaultValue=${safe(defaultValue.value.value)}`)
-      }
-
-      const underlineColorAndroid = getProp(node, 'underlineColorAndroid')
-      const underlineColorAndroidValue = underlineColorAndroid
-        ? underlineColorAndroid.value.value
-        : 'transparent'
-      state.render.push(
-        ` underlineColorAndroid=${safe(underlineColorAndroidValue)}`
-      )
+  if (captureNext) {
+    state.render.push(` blurOnSubmit={false}`)
+    state.render.push(
+      ` onSubmitEditing={this.$${captureNext}? () => this.$${captureNext}.focus() : ${onSubmit}}`
+    )
+    state.render.push(` returnKeyType = {this.$${captureNext}? 'next' : 'go'}`)
+  } else {
+    if (onSubmit) {
+      state.render.push(` onSubmitEditing={${onSubmit}}`)
+      state.render.push(` returnKeyType="go"`)
+    } else {
+      state.render.push(` returnKeyType="done"`)
     }
   }
+  state.render.push(` onChangeText = {${name} => this.setState({ ${name} })}`)
+  state.render.push(` ref={$e => this.$${name} = $e}`)
+  state.render.push(` value={state.${name}}`)
+
+  if (node.name.value === 'CaptureSecure') {
+    state.render.push(` secureTextEntry`)
+  } else {
+    state.render.push(` keyboardType='${keyboardType[blockType]}'`)
+  }
+
+  // TODO rest of props
+  const onBlur = getProp(node, 'onBlur')
+  if (onBlur) {
+    state.render.push(` onBlur=${safe(onBlur.value.value)}`)
+  }
+
+  const onFocus = getProp(node, 'onFocus')
+  if (onFocus) {
+    state.render.push(` onFocus=${safe(onFocus.value.value)}`)
+  }
+
+  const autoCorrect = getProp(node, 'autoCorrect')
+  state.render.push(
+    ` autoCorrect=${autoCorrect ? safe(autoCorrect.value.value) : '{false}'}`
+  )
+
+  const placeholder = getProp(node, 'placeholder')
+  if (placeholder) {
+    state.render.push(` placeholder=${safe(placeholder.value.value)}`)
+  }
+
+  const defaultValue = getProp(node, 'defaultValue')
+  if (defaultValue) {
+    state.render.push(` defaultValue=${safe(defaultValue.value.value)}`)
+  }
+
+  const underlineColorAndroid = getProp(node, 'underlineColorAndroid')
+  const underlineColorAndroidValue = underlineColorAndroid
+    ? underlineColorAndroid.value.value
+    : 'transparent'
+  state.render.push(
+    ` underlineColorAndroid=${safe(underlineColorAndroidValue)}`
+  )
 }
