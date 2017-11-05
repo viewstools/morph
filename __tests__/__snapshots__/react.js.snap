@@ -5,24 +5,24 @@ exports[`react-dom parses react-dom Action 1`] = `
 import React from 'react';
 import css from 'glam';
 const styles = {
-  h1lmw638: css('css-1s0kfvh', [], () => [
-    \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
-  ]),
+  h1lmw638: css('css-1s0kfvh', [], function inlineCss() {
+    return [
+      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
+    ];
+  }),
 };
 
 const Action = props => {
-  return props.check
-    ? <button
-        data-test-id={props['data-test-id'] || 'Vertical'}
-        onClick={props.clickMe}
-        className={styles.h1lmw638}
-      >
-        <div data-test-id={props['data-test-id'] || 'Action.Text'}>
-          click me
-        </div>
-        {props.children}
-      </button>
-    : null;
+  return props.check ? (
+    <button
+      data-test-id={props['data-test-id'] || 'Vertical'}
+      onClick={props.clickMe}
+      className={styles.h1lmw638}
+    >
+      <div data-test-id={props['data-test-id'] || 'Action.Text'}>click me</div>
+      {props.children}
+    </button>
+  ) : null;
 };
 
 export default Action;
@@ -35,9 +35,11 @@ import React from 'react';
 import Animated from 'react-dom-animated';
 import css from 'glam';
 const styles = {
-  h1lmw638: css('css-1s0kfvh', [], () => [
-    \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
-  ]),
+  h1lmw638: css('css-1s0kfvh', [], function inlineCss() {
+    return [
+      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
+    ];
+  }),
 };
 
 const AnimatedButton = props => {
@@ -66,14 +68,18 @@ import React from 'react';
 import Animated from 'react-dom-animated';
 import css from 'glam';
 const styles = {
-  h1bfz4lt: css('css-1lgf2gr', [], () => [
-    \`.css-1lgf2gr { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column;
+  h1bfz4lt: css('css-1lgf2gr', [], function inlineCss() {
+    return [
+      \`.css-1lgf2gr { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column;
 background-image: url(\\"https://viewsdx.com/image.jpg\\"); }\`,
-  ]),
-  h1dhb6n: css('css-ii8p9n', [], () => [
-    \`.css-ii8p9n { flex-direction: row; -webkit-box-direction: normal; -webkit-box-orient: horizontal; -ms-flex-direction: row; -webkit-flex-direction: row;
+    ];
+  }),
+  h1dhb6n: css('css-ii8p9n', [], function inlineCss() {
+    return [
+      \`.css-ii8p9n { -webkit-flex-direction: row; -ms-flex-direction: row; -webkit-box-orient: horizontal; -webkit-box-direction: normal; flex-direction: row;
 background-size: contain; }\`,
-  ]),
+    ];
+  }),
 };
 
 const BackgroundImage = props => {
@@ -102,9 +108,11 @@ import React from 'react';
 import Animated from 'react-dom-animated';
 import css from 'glam';
 const styles = {
-  h1lmw638: css('css-1s0kfvh', [], () => [
-    \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
-  ]),
+  h1lmw638: css('css-1s0kfvh', [], function inlineCss() {
+    return [
+      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
+    ];
+  }),
 };
 
 const BoxShadow = props => {
@@ -128,9 +136,11 @@ exports[`react-dom parses react-dom Form 1`] = `
 import React from 'react';
 import css from 'glam';
 const styles = {
-  h1lmw638: css('css-1s0kfvh', [], () => [
-    \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
-  ]),
+  h1lmw638: css('css-1s0kfvh', [], function inlineCss() {
+    return [
+      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
+    ];
+  }),
 };
 
 class Form extends React.Component {
@@ -196,9 +206,11 @@ exports[`react-dom parses react-dom GoTo 1`] = `
 import React from 'react';
 import css from 'glam';
 const styles = {
-  h1lmw638: css('css-1s0kfvh', [], () => [
-    \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
-  ]),
+  h1lmw638: css('css-1s0kfvh', [], function inlineCss() {
+    return [
+      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
+    ];
+  }),
 };
 
 const GoTo = props => {
@@ -227,15 +239,19 @@ exports[`react-dom parses react-dom Hover 1`] = `
 import React from 'react';
 import css from 'glam';
 const styles = {
-  hpg1h4y: css('css-i58qmr', [], () => [
-    \`.css-i58qmr { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column;
+  hpg1h4y: css('css-i58qmr', [], function inlineCss() {
+    return [
+      \`.css-i58qmr { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column;
 background-color: black; }\`,
-    \`.css-i58qmr:hover { background-color: white; }\`,
-  ]),
-  h1669j73: css('css-9glvsj', [], () => [
-    \`.css-9glvsj { color: white; }\`,
-    \`.css-9glvsj:hover { color: black; }\`,
-  ]),
+      \`.css-i58qmr:hover { background-color: white; }\`,
+    ];
+  }),
+  h1669j73: css('css-9glvsj', [], function inlineCss() {
+    return [
+      \`.css-9glvsj { color: white; }\`,
+      \`.css-9glvsj:hover { color: black; }\`,
+    ];
+  }),
 };
 
 const Hover = props => {
@@ -265,15 +281,19 @@ exports[`react-dom parses react-dom HoverProxy 1`] = `
 import React from 'react';
 import css from 'glam';
 const styles = {
-  hpg1h4y: css('css-i58qmr', [], () => [
-    \`.css-i58qmr { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column;
+  hpg1h4y: css('css-i58qmr', [], function inlineCss() {
+    return [
+      \`.css-i58qmr { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column;
 background-color: black; }\`,
-    \`.css-i58qmr:hover { background-color: white; }\`,
-  ]),
-  h1669j73: css('css-9glvsj', [], () => [
-    \`.css-9glvsj { color: white; }\`,
-    \`.css-9glvsj:hover { color: black; }\`,
-  ]),
+      \`.css-i58qmr:hover { background-color: white; }\`,
+    ];
+  }),
+  h1669j73: css('css-9glvsj', [], function inlineCss() {
+    return [
+      \`.css-9glvsj { color: white; }\`,
+      \`.css-9glvsj:hover { color: black; }\`,
+    ];
+  }),
 };
 
 const HoverProxy = props => {
@@ -285,7 +305,7 @@ const HoverProxy = props => {
       className={styles.hpg1h4y}
     >
       {props.childrenProxyMap &&
-        childrenArray[props.childrenProxyMap['props.icon']]
+      childrenArray[props.childrenProxyMap['props.icon']]
         ? React.cloneElement(
             childrenArray[props.childrenProxyMap['props.icon']],
             { fill: 'white', fillHover: 'black' }
@@ -322,9 +342,11 @@ exports[`react-dom parses react-dom ListOfSomething 1`] = `
 import React from 'react';
 import css from 'glam';
 const styles = {
-  h1lmw638: css('css-1s0kfvh', [], () => [
-    \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
-  ]),
+  h1lmw638: css('css-1s0kfvh', [], function inlineCss() {
+    return [
+      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
+    ];
+  }),
 };
 
 const ListOfSomething = props => {
@@ -334,7 +356,7 @@ const ListOfSomething = props => {
       className={styles.h1lmw638}
     >
       {Array.isArray(props.list) &&
-        props.list.map((item, index) =>
+        props.list.map((item, index) => (
           <div
             data-test-id={props['data-test-id'] || 'ListOfSomething.Text'}
             dataIndex={index}
@@ -343,7 +365,7 @@ const ListOfSomething = props => {
           >
             {index}
           </div>
-        )}
+        ))}
       {props.children}
     </div>
   );
@@ -374,9 +396,11 @@ import { Route } from 'react-router-dom';
 import Topic from './Topic.view.js';
 import css from 'glam';
 const styles = {
-  h1lmw638: css('css-1s0kfvh', [], () => [
-    \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
-  ]),
+  h1lmw638: css('css-1s0kfvh', [], function inlineCss() {
+    return [
+      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
+    ];
+  }),
 };
 
 const NestedRoutes = props => {
@@ -399,11 +423,12 @@ const NestedRoutes = props => {
       </Link>
       <Route
         path=\\":topic\\"
-        render={routeProps =>
+        render={routeProps => (
           <Topic
             data-test-id={props['data-test-id'] || 'NestedRoutes.Topic'}
             {...routeProps}
-          />}
+          />
+        )}
       />
       {props.children}
     </div>
@@ -419,16 +444,20 @@ exports[`react-dom parses react-dom Print 1`] = `
 import React from 'react';
 import css from 'glam';
 const styles = {
-  h1lmw638: css('css-1s0kfvh', [], () => [
-    \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
-  ]),
-  hrak8un: css('css-kbgujp', [], () => [
-    \`@media print {
+  h1lmw638: css('css-1s0kfvh', [], function inlineCss() {
+    return [
+      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
+    ];
+  }),
+  hrak8un: css('css-kbgujp', [], function inlineCss() {
+    return [
+      \`@media print {
     .css-kbgujp {
         display: none
     }
 }\`,
-  ]),
+    ];
+  }),
 };
 
 const Print = props => {
@@ -458,12 +487,16 @@ exports[`react-dom parses react-dom ProxyTest 1`] = `
 import React from 'react';
 import css from 'glam';
 const styles = {
-  h1lmw638: css('css-1s0kfvh', [], () => [
-    \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
-  ]),
-  hg3iw2q: css('css-sw3yj', [], () => [
-    \`.css-sw3yj { flex-direction: row; -webkit-box-direction: normal; -webkit-box-orient: horizontal; -ms-flex-direction: row; -webkit-flex-direction: row; }\`,
-  ]),
+  h1lmw638: css('css-1s0kfvh', [], function inlineCss() {
+    return [
+      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
+    ];
+  }),
+  hg3iw2q: css('css-sw3yj', [], function inlineCss() {
+    return [
+      \`.css-sw3yj { -webkit-flex-direction: row; -ms-flex-direction: row; -webkit-box-orient: horizontal; -webkit-box-direction: normal; flex-direction: row; }\`,
+    ];
+  }),
 };
 
 const ProxyTest = props => {
@@ -498,7 +531,9 @@ exports[`react-dom parses react-dom Scope 1`] = `
 import React from 'react';
 import css from 'glam';
 const styles = {
-  h1lv6cq4: css('css-jk0pkr', [], () => [\`.css-jk0pkr { color: red; }\`]),
+  h1lv6cq4: css('css-jk0pkr', [], function inlineCss() {
+    return [\`.css-jk0pkr { color: red; }\`];
+  }),
 };
 
 const Scope = props => {
@@ -523,9 +558,11 @@ exports[`react-dom parses react-dom ScopePopup 1`] = `
 import React from 'react';
 import css from 'glam';
 const styles = {
-  h1lmw638: css('css-1s0kfvh', [], () => [
-    \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
-  ]),
+  h1lmw638: css('css-1s0kfvh', [], function inlineCss() {
+    return [
+      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
+    ];
+  }),
 };
 
 const ScopePopup = props => {
@@ -558,9 +595,11 @@ exports[`react-dom parses react-dom ScopePopup2 1`] = `
 import React from 'react';
 import css from 'glam';
 const styles = {
-  h1lmw638: css('css-1s0kfvh', [], () => [
-    \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
-  ]),
+  h1lmw638: css('css-1s0kfvh', [], function inlineCss() {
+    return [
+      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
+    ];
+  }),
 };
 
 const ScopePopup2 = props => {
@@ -593,9 +632,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import css from 'glam';
 const styles = {
-  hg3iw2q: css('css-sw3yj', [], () => [
-    \`.css-sw3yj { flex-direction: row; -webkit-box-direction: normal; -webkit-box-orient: horizontal; -ms-flex-direction: row; -webkit-flex-direction: row; }\`,
-  ]),
+  hg3iw2q: css('css-sw3yj', [], function inlineCss() {
+    return [
+      \`.css-sw3yj { -webkit-flex-direction: row; -ms-flex-direction: row; -webkit-box-orient: horizontal; -webkit-box-direction: normal; flex-direction: row; }\`,
+    ];
+  }),
 };
 
 const Teleport = props => {
@@ -648,9 +689,11 @@ import React from 'react';
 import External from './External.view.js';
 import css from 'glam';
 const styles = {
-  h1lmw638: css('css-1s0kfvh', [], () => [
-    \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
-  ]),
+  h1lmw638: css('css-1s0kfvh', [], function inlineCss() {
+    return [
+      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
+    ];
+  }),
 };
 
 const TestIds = props => {
@@ -689,11 +732,13 @@ exports[`react-dom parses react-dom UseCaptureEmail 1`] = `
 import React from 'react';
 import css from 'glam';
 const styles = {
-  hevllt7: css('css-17byui2', [], () => [
-    \`.css-17byui2 { border: 1px solid black;
+  hevllt7: css('css-17byui2', [], function inlineCss() {
+    return [
+      \`.css-17byui2 { border: 1px solid black;
 color: red; }\`,
-    \`.css-17byui2::placeholder { color: blue; }\`,
-  ]),
+      \`.css-17byui2::placeholder { color: blue; }\`,
+    ];
+  }),
 };
 
 class UseCaptureEmail extends React.Component {
@@ -922,10 +967,12 @@ exports[`react-dom parses react-dom UseHorizontal 1`] = `
 import React from 'react';
 import css from 'glam';
 const styles = {
-  h1nnugsi: css('css-vkz5lf', [], () => [
-    \`.css-vkz5lf { flex-direction: row; -webkit-box-direction: normal; -webkit-box-orient: horizontal; -ms-flex-direction: row; -webkit-flex-direction: row;
+  h1nnugsi: css('css-vkz5lf', [], function inlineCss() {
+    return [
+      \`.css-vkz5lf { -webkit-flex-direction: row; -ms-flex-direction: row; -webkit-box-orient: horizontal; -webkit-box-direction: normal; flex-direction: row;
 border: 1px solid red; }\`,
-  ]),
+    ];
+  }),
 };
 
 const UseHorizontal = props => {
@@ -966,9 +1013,11 @@ import React from 'react';
 import Button from './Button.view.js';
 import css from 'glam';
 const styles = {
-  hg3iw2q: css('css-sw3yj', [], () => [
-    \`.css-sw3yj { flex-direction: row; -webkit-box-direction: normal; -webkit-box-orient: horizontal; -ms-flex-direction: row; -webkit-flex-direction: row; }\`,
-  ]),
+  hg3iw2q: css('css-sw3yj', [], function inlineCss() {
+    return [
+      \`.css-sw3yj { -webkit-flex-direction: row; -ms-flex-direction: row; -webkit-box-orient: horizontal; -webkit-box-direction: normal; flex-direction: row; }\`,
+    ];
+  }),
 };
 
 const UseOfProxy = props => {
@@ -997,9 +1046,11 @@ exports[`react-dom parses react-dom UseProxy 1`] = `
 import React from 'react';
 import css from 'glam';
 const styles = {
-  hg3iw2q: css('css-sw3yj', [], () => [
-    \`.css-sw3yj { flex-direction: row; -webkit-box-direction: normal; -webkit-box-orient: horizontal; -ms-flex-direction: row; -webkit-flex-direction: row; }\`,
-  ]),
+  hg3iw2q: css('css-sw3yj', [], function inlineCss() {
+    return [
+      \`.css-sw3yj { -webkit-flex-direction: row; -ms-flex-direction: row; -webkit-box-orient: horizontal; -webkit-box-direction: normal; flex-direction: row; }\`,
+    ];
+  }),
 };
 
 const UseProxy = props => {
@@ -1010,7 +1061,7 @@ const UseProxy = props => {
       className={styles.hg3iw2q}
     >
       {props.childrenProxyMap &&
-        childrenArray[props.childrenProxyMap['props.icon']]
+      childrenArray[props.childrenProxyMap['props.icon']]
         ? React.cloneElement(
             childrenArray[props.childrenProxyMap['props.icon']],
             { fill: 'red' }
@@ -1037,9 +1088,11 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import Topics from './Topics.view.js';
 import css from 'glam';
 const styles = {
-  hg3iw2q: css('css-sw3yj', [], () => [
-    \`.css-sw3yj { flex-direction: row; -webkit-box-direction: normal; -webkit-box-orient: horizontal; -ms-flex-direction: row; -webkit-flex-direction: row; }\`,
-  ]),
+  hg3iw2q: css('css-sw3yj', [], function inlineCss() {
+    return [
+      \`.css-sw3yj { -webkit-flex-direction: row; -ms-flex-direction: row; -webkit-box-orient: horizontal; -webkit-box-direction: normal; flex-direction: row; }\`,
+    ];
+  }),
 };
 
 const UseRouter = props => {
@@ -1052,29 +1105,32 @@ const UseRouter = props => {
         <Route
           path=\\"/\\"
           exact
-          render={routeProps =>
+          render={routeProps => (
             <Home
               data-test-id={props['data-test-id'] || 'UseRouter.Home'}
               heigth={props.height}
               width={360}
               {...routeProps}
-            />}
+            />
+          )}
         />
         <Route
           path=\\"/about\\"
-          render={routeProps =>
+          render={routeProps => (
             <About
               data-test-id={props['data-test-id'] || 'UseRouter.About'}
               {...routeProps}
-            />}
+            />
+          )}
         />
         <Route
           path=\\"/topics\\"
-          render={routeProps =>
+          render={routeProps => (
             <Topics
               data-test-id={props['data-test-id'] || 'UseRouter.Topics'}
               {...routeProps}
-            />}
+            />
+          )}
         />
         {props.children}
       </div>
@@ -1128,12 +1184,14 @@ exports[`react-dom parses react-dom UseText 1`] = `
 import React from 'react';
 import css from 'glam';
 const styles = {
-  h1w7s7t6: css('css-1l09f9n', [], () => [
-    \`.css-1l09f9n { color: blue;
+  h1w7s7t6: css('css-1l09f9n', [], function inlineCss() {
+    return [
+      \`.css-1l09f9n { color: blue;
 font-family: Montserrat, sans-serif;
 font-size: 16px;
 font-weight: 300; }\`,
-  ]),
+    ];
+  }),
 };
 
 const UseText = props => {
@@ -1156,10 +1214,12 @@ exports[`react-dom parses react-dom UseVertical 1`] = `
 import React from 'react';
 import css from 'glam';
 const styles = {
-  h1vjf5pn: css('css-nxb3y5', [], () => [
-    \`.css-nxb3y5 { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column;
+  h1vjf5pn: css('css-nxb3y5', [], function inlineCss() {
+    return [
+      \`.css-nxb3y5 { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column;
 background-color: red; }\`,
-  ]),
+    ];
+  }),
 };
 
 const UseVertical = props => {
@@ -1182,9 +1242,11 @@ exports[`react-dom parses react-dom When 1`] = `
 import React from 'react';
 import css from 'glam';
 const styles = {
-  hg3iw2q: css('css-sw3yj', [], () => [
-    \`.css-sw3yj { flex-direction: row; -webkit-box-direction: normal; -webkit-box-orient: horizontal; -ms-flex-direction: row; -webkit-flex-direction: row; }\`,
-  ]),
+  hg3iw2q: css('css-sw3yj', [], function inlineCss() {
+    return [
+      \`.css-sw3yj { -webkit-flex-direction: row; -ms-flex-direction: row; -webkit-box-orient: horizontal; -webkit-box-direction: normal; flex-direction: row; }\`,
+    ];
+  }),
 };
 
 const When = props => {
@@ -1193,11 +1255,11 @@ const When = props => {
       data-test-id={props['data-test-id'] || 'App'}
       className={styles.hg3iw2q}
     >
-      {props.showMe
-        ? <div data-test-id={props['data-test-id'] || 'When.Text'}>
-            I may be hidden
-          </div>
-        : null}
+      {props.showMe ? (
+        <div data-test-id={props['data-test-id'] || 'When.Text'}>
+          I may be hidden
+        </div>
+      ) : null}
       {props.children}
     </div>
   );
@@ -1212,12 +1274,16 @@ exports[`react-dom parses react-dom WhenList 1`] = `
 import React from 'react';
 import css from 'glam';
 const styles = {
-  hg3iw2q: css('css-sw3yj', [], () => [
-    \`.css-sw3yj { flex-direction: row; -webkit-box-direction: normal; -webkit-box-orient: horizontal; -ms-flex-direction: row; -webkit-flex-direction: row; }\`,
-  ]),
-  h1lmw638: css('css-1s0kfvh', [], () => [
-    \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
-  ]),
+  hg3iw2q: css('css-sw3yj', [], function inlineCss() {
+    return [
+      \`.css-sw3yj { -webkit-flex-direction: row; -ms-flex-direction: row; -webkit-box-orient: horizontal; -webkit-box-direction: normal; flex-direction: row; }\`,
+    ];
+  }),
+  h1lmw638: css('css-1s0kfvh', [], function inlineCss() {
+    return [
+      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
+    ];
+  }),
 };
 
 const WhenList = props => {
@@ -1226,22 +1292,22 @@ const WhenList = props => {
       data-test-id={props['data-test-id'] || 'App'}
       className={styles.hg3iw2q}
     >
-      {props.showMe
-        ? <div
-            data-test-id={props['data-test-id'] || 'WhenList.List'}
-            className={styles.h1lmw638}
-          >
-            {Array.isArray(props.list) &&
-              props.list.map((item, index) =>
-                <div
-                  data-test-id={props['data-test-id'] || 'WhenList.Text'}
-                  key={index}
-                >
-                  {item.thing}
-                </div>
-              )}
-          </div>
-        : null}
+      {props.showMe ? (
+        <div
+          data-test-id={props['data-test-id'] || 'WhenList.List'}
+          className={styles.h1lmw638}
+        >
+          {Array.isArray(props.list) &&
+            props.list.map((item, index) => (
+              <div
+                data-test-id={props['data-test-id'] || 'WhenList.Text'}
+                key={index}
+              >
+                {item.thing}
+              </div>
+            ))}
+        </div>
+      ) : null}
       {props.children}
     </div>
   );
@@ -1256,9 +1322,9 @@ exports[`react-dom parses react-dom WhenTopLevel 1`] = `
 import React from 'react';
 
 const WhenTopLevel = props => {
-  return props.showMe
-    ? <div data-test-id={props['data-test-id'] || 'Text'}>I may be hidden</div>
-    : null;
+  return props.showMe ? (
+    <div data-test-id={props['data-test-id'] || 'Text'}>I may be hidden</div>
+  ) : null;
 };
 
 export default WhenTopLevel;
@@ -1271,9 +1337,11 @@ import React from 'react';
 import * as fromTests from './WithTest.view.tests.js';
 import css from 'glam';
 const styles = {
-  h1lmw638: css('css-1s0kfvh', [], () => [
-    \`.css-1s0kfvh { flex-direction: column; -webkit-box-direction: normal; -webkit-box-orient: vertical; -ms-flex-direction: column; -webkit-flex-direction: column; }\`,
-  ]),
+  h1lmw638: css('css-1s0kfvh', [], function inlineCss() {
+    return [
+      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
+    ];
+  }),
 };
 
 class TestsWithTest extends React.Component {
@@ -1359,18 +1427,18 @@ import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
 const Action = props => {
-  return props.check
-    ? <TouchableWithoutFeedback
-        activeOpacity={0.7}
-        onPress={props.clickMe}
-        underlayColor=\\"transparent\\"
-      >
-        <View testID={props['testID'] || 'Vertical'} style={styles.h18pdll5}>
-          <Text testID={props['testID'] || 'Action.Text'}>click me</Text>
-          {props.children}
-        </View>
-      </TouchableWithoutFeedback>
-    : null;
+  return props.check ? (
+    <TouchableWithoutFeedback
+      activeOpacity={0.7}
+      onPress={props.clickMe}
+      underlayColor=\\"transparent\\"
+    >
+      <View testID={props['testID'] || 'Vertical'} style={styles.h18pdll5}>
+        <Text testID={props['testID'] || 'Action.Text'}>click me</Text>
+        {props.children}
+      </View>
+    </TouchableWithoutFeedback>
+  ) : null;
 };
 
 export default Action;
@@ -1636,7 +1704,7 @@ const HoverProxy = props => {
     >
       <View testID={props['testID'] || 'Button'} style={styles.h1jrzrhl}>
         {props.childrenProxyMap &&
-          childrenArray[props.childrenProxyMap['props.icon']]
+        childrenArray[props.childrenProxyMap['props.icon']]
           ? React.cloneElement(
               childrenArray[props.childrenProxyMap['props.icon']],
               { fill: 'white', fillHover: 'black' }
@@ -1680,7 +1748,7 @@ const ListOfSomething = props => {
   return (
     <View testID={props['testID'] || 'List'} style={styles.h18pdll5}>
       {Array.isArray(props.list) &&
-        props.list.map((item, index) =>
+        props.list.map((item, index) => (
           <Animated.Text
             testID={props['testID'] || 'ListOfSomething.Text'}
             dataIndex={index}
@@ -1689,7 +1757,7 @@ const ListOfSomething = props => {
           >
             {index}
           </Animated.Text>
-        )}
+        ))}
       {props.children}
     </View>
   );
@@ -1742,11 +1810,12 @@ const NestedRoutes = props => {
       </Link>
       <Route
         path=\\":topic\\"
-        render={routeProps =>
+        render={routeProps => (
           <Topic
             testID={props['testID'] || 'NestedRoutes.Topic'}
             {...routeProps}
-          />}
+          />
+        )}
       />
       {props.children}
     </View>
@@ -2337,7 +2406,7 @@ const UseProxy = props => {
   return (
     <View testID={props['testID'] || 'Button'} style={styles.hp2cr4d}>
       {props.childrenProxyMap &&
-        childrenArray[props.childrenProxyMap['props.icon']]
+      childrenArray[props.childrenProxyMap['props.icon']]
         ? React.cloneElement(
             childrenArray[props.childrenProxyMap['props.icon']],
             { fill: 'red' }
@@ -2370,29 +2439,32 @@ const UseRouter = props => {
         <Route
           path=\\"/\\"
           exact
-          render={routeProps =>
+          render={routeProps => (
             <Home
               testID={props['testID'] || 'UseRouter.Home'}
               heigth={props.height}
               width={360}
               {...routeProps}
-            />}
+            />
+          )}
         />
         <Route
           path=\\"/about\\"
-          render={routeProps =>
+          render={routeProps => (
             <About
               testID={props['testID'] || 'UseRouter.About'}
               {...routeProps}
-            />}
+            />
+          )}
         />
         <Route
           path=\\"/topics\\"
-          render={routeProps =>
+          render={routeProps => (
             <Topics
               testID={props['testID'] || 'UseRouter.Topics'}
               {...routeProps}
-            />}
+            />
+          )}
         />
         {props.children}
       </View>
@@ -2487,9 +2559,9 @@ const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
 const When = props => {
   return (
     <View testID={props['testID'] || 'App'} style={styles.hp2cr4d}>
-      {props.showMe
-        ? <Text testID={props['testID'] || 'When.Text'}>I may be hidden</Text>
-        : null}
+      {props.showMe ? (
+        <Text testID={props['testID'] || 'When.Text'}>I may be hidden</Text>
+      ) : null}
       {props.children}
     </View>
   );
@@ -2511,19 +2583,19 @@ const styles = StyleSheet.create({
 const WhenList = props => {
   return (
     <View testID={props['testID'] || 'App'} style={styles.hp2cr4d}>
-      {props.showMe
-        ? <View
-            testID={props['testID'] || 'WhenList.List'}
-            style={styles.h18pdll5}
-          >
-            {Array.isArray(props.list) &&
-              props.list.map((item, index) =>
-                <Text testID={props['testID'] || 'WhenList.Text'} key={index}>
-                  {item.thing}
-                </Text>
-              )}
-          </View>
-        : null}
+      {props.showMe ? (
+        <View
+          testID={props['testID'] || 'WhenList.List'}
+          style={styles.h18pdll5}
+        >
+          {Array.isArray(props.list) &&
+            props.list.map((item, index) => (
+              <Text testID={props['testID'] || 'WhenList.Text'} key={index}>
+                {item.thing}
+              </Text>
+            ))}
+        </View>
+      ) : null}
       {props.children}
     </View>
   );
@@ -2539,9 +2611,9 @@ import React from 'react';
 import { Text } from 'react-native';
 
 const WhenTopLevel = props => {
-  return props.showMe
-    ? <Text testID={props['testID'] || 'Text'}>I may be hidden</Text>
-    : null;
+  return props.showMe ? (
+    <Text testID={props['testID'] || 'Text'}>I may be hidden</Text>
+  ) : null;
 };
 
 export default WhenTopLevel;
