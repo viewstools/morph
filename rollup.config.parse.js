@@ -1,10 +1,14 @@
 import babel from 'rollup-plugin-babel'
+import pkg from './package.json'
 
 export default {
-  entry: 'parse/index.js',
-  external: Object.keys(require('./package.json').dependencies).concat('path'),
-  dest: 'parse.js',
-  format: 'cjs',
+  input: 'parse/index.js',
+  external: Object.keys(pkg.dependencies).concat('path'),
+  output: {
+    file: 'parse.js',
+    format: 'cjs',
+    sourcemap: true,
+  },
   plugins: [
     babel({
       plugins: ['external-helpers', 'transform-object-rest-spread'],

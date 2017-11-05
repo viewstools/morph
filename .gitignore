@@ -3,5 +3,7 @@ node_modules
 *.tmp
 .DS_Store
 lib.js
+lib.js.map
 parse.js
+parse.js.map
 TODO
