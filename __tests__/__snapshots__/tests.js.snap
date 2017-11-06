@@ -29,5 +29,11 @@ export const make = display => {
   return { _main: 'Main', Main, Next, EvenMore, Data };
 };
 ",
+  "tests": Array [
+    "Main",
+    "Next",
+    "EvenMore",
+    "Data",
+  ],
 }
 `;

@@ -100,6 +100,7 @@ export default ({ file, view }) => {
   ${body.replace(/"?<<DISPLAY>>"?/g, '')}
   return { _main: '${names[0]}', ${names.join(',')} }
 }`,
+    tests: names,
   }
 }
 
