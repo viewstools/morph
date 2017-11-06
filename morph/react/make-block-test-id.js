@@ -9,8 +9,10 @@ export const enter = key => (node, parent, state) => {
       state.testIds[blockName] = 0
     }
 
-    const testId = parent ? `${state.name}.${blockName}` : blockName
-
-    state.render.push(` ${key}={props["${key}"] || "${testId}"}`)
+    if (parent) {
+      state.render.push(` ${key}="${state.name}.${blockName}"`)
+    } else {
+      state.render.push(` ${key}={props["${key}"] || "${blockName}"}`)
+    }
   }
 }

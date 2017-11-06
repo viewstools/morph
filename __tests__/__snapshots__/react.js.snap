@@ -19,7 +19,7 @@ const Action = props => {
       onClick={props.clickMe}
       className={styles.h1lmw638}
     >
-      <div data-test-id={props['data-test-id'] || 'Action.Text'}>click me</div>
+      <div data-test-id=\\"Action.Text\\">click me</div>
       {props.children}
     </button>
   ) : null;
@@ -50,9 +50,7 @@ const AnimatedButton = props => {
       className={styles.h1lmw638}
       style={{ opacity: props.opacity }}
     >
-      <div data-test-id={props['data-test-id'] || 'AnimatedButton.Text'}>
-        hey
-      </div>
+      <div data-test-id=\\"AnimatedButton.Text\\">hey</div>
       {props.children}
     </Animated.button>
   );
@@ -89,7 +87,7 @@ const BackgroundImage = props => {
       className={styles.h1bfz4lt}
     >
       <Animated.div
-        data-test-id={props['data-test-id'] || 'BackgroundImage.Horizontal'}
+        data-test-id=\\"BackgroundImage.Horizontal\\"
         className={styles.h1dhb6n}
         style={{ backgroundImage: \`url(\${props.backgroundImage})\` }}
       />
@@ -162,34 +160,34 @@ class Form extends React.Component {
           type=\\"text\\"
           onChange={event => this.setState({ name: event.target.value })}
           value={state.name}
-          data-test-id={props['data-test-id'] || 'Form.Name'}
+          data-test-id=\\"Form.Name\\"
           autoFocus={true}
         />
         <input
           type=\\"text\\"
           onChange={event => this.setState({ surname: event.target.value })}
           value={state.surname}
-          data-test-id={props['data-test-id'] || 'Form.Surname'}
+          data-test-id=\\"Form.Surname\\"
         />
         <input
           type=\\"password\\"
           onChange={event => this.setState({ password: event.target.value })}
           value={state.password}
-          data-test-id={props['data-test-id'] || 'Form.Password'}
+          data-test-id=\\"Form.Password\\"
         />
         <input
           type=\\"email\\"
           onChange={event => this.setState({ email: event.target.value })}
           value={state.email}
-          data-test-id={props['data-test-id'] || 'Form.Email'}
+          data-test-id=\\"Form.Email\\"
           defaultValue=\\"morph@viewsdx.com\\"
         />
         <button
-          data-test-id={props['data-test-id'] || 'Form.Button'}
+          data-test-id=\\"Form.Button\\"
           onClick={() => props.onSubmit(state)}
           className={styles.h1lmw638}
         >
-          <div data-test-id={props['data-test-id'] || 'Form.Text'}>Send!</div>
+          <div data-test-id=\\"Form.Text\\">Send!</div>
         </button>
         {props.children}
       </form>
@@ -222,9 +220,7 @@ const GoTo = props => {
       data-test-id={props['data-test-id'] || 'Vertical'}
       className={styles.h1lmw638}
     >
-      <div data-test-id={props['data-test-id'] || 'GoTo.Text'}>
-        Go to ViewsDX website!
-      </div>
+      <div data-test-id=\\"GoTo.Text\\">Go to ViewsDX website!</div>
       {props.children}
     </a>
   );
@@ -261,10 +257,7 @@ const Hover = props => {
       onClick={props.onClick}
       className={styles.hpg1h4y}
     >
-      <div
-        data-test-id={props['data-test-id'] || 'Hover.Text'}
-        className={styles.h1669j73}
-      >
+      <div data-test-id=\\"Hover.Text\\" className={styles.h1669j73}>
         Hey!
       </div>
       {props.children}
@@ -311,10 +304,7 @@ const HoverProxy = props => {
             { fill: 'white', fillHover: 'black' }
           )
         : null}
-      <div
-        data-test-id={props['data-test-id'] || 'HoverProxy.Text'}
-        className={styles.h1669j73}
-      >
+      <div data-test-id=\\"HoverProxy.Text\\" className={styles.h1669j73}>
         Hey!
       </div>
     </button>
@@ -358,7 +348,7 @@ const ListOfSomething = props => {
       {Array.isArray(props.list) &&
         props.list.map((item, index) => (
           <div
-            data-test-id={props['data-test-id'] || 'ListOfSomething.Text'}
+            data-test-id=\\"ListOfSomething.Text\\"
             dataIndex={index}
             style={{ color: item.color }}
             key={index}
@@ -409,25 +399,18 @@ const NestedRoutes = props => {
       data-test-id={props['data-test-id'] || 'Topics'}
       className={styles.h1lmw638}
     >
-      <div data-test-id={props['data-test-id'] || 'NestedRoutes.Text'}>
-        topics
-      </div>
+      <div data-test-id=\\"NestedRoutes.Text\\">topics</div>
       <Link
         to={\`\${props.match.url === '/' ? '' : props.match.url}/rendering\`}
-        data-test-id={props['data-test-id'] || 'NestedRoutes.Link'}
+        data-test-id=\\"NestedRoutes.Link\\"
         className={styles.h1lmw638}
       >
-        <div data-test-id={props['data-test-id'] || 'NestedRoutes.Text:1'}>
-          Rendering with React
-        </div>
+        <div data-test-id=\\"NestedRoutes.Text:1\\">Rendering with React</div>
       </Link>
       <Route
         path=\\":topic\\"
         render={routeProps => (
-          <Topic
-            data-test-id={props['data-test-id'] || 'NestedRoutes.Topic'}
-            {...routeProps}
-          />
+          <Topic data-test-id=\\"NestedRoutes.Topic\\" {...routeProps} />
         )}
       />
       {props.children}
@@ -466,13 +449,10 @@ const Print = props => {
       data-test-id={props['data-test-id'] || 'Vertical'}
       className={styles.h1lmw638}
     >
-      <div
-        data-test-id={props['data-test-id'] || 'Print.Text'}
-        className={styles.hrak8un}
-      >
+      <div data-test-id=\\"Print.Text\\" className={styles.hrak8un}>
         not in print
       </div>
-      <div data-test-id={props['data-test-id'] || 'Print.Text:1'}>hey</div>
+      <div data-test-id=\\"Print.Text:1\\">hey</div>
       {props.children}
     </div>
   );
@@ -506,10 +486,7 @@ const ProxyTest = props => {
       data-test-id={props['data-test-id'] || 'Vertical'}
       className={styles.h1lmw638}
     >
-      <div
-        data-test-id={props['data-test-id'] || 'ProxyTest.Horizontal'}
-        className={styles.hg3iw2q}
-      >
+      <div data-test-id=\\"ProxyTest.Horizontal\\" className={styles.hg3iw2q}>
         {props.bla && childrenArray[props.childrenProxyMap['Something']]
           ? React.cloneElement(
               childrenArray[props.childrenProxyMap['Something']],
@@ -573,13 +550,11 @@ const ScopePopup = props => {
       className={styles.h1lmw638}
     >
       <button
-        data-test-id={props['data-test-id'] || 'ScopePopup.Toggle'}
+        data-test-id=\\"ScopePopup.Toggle\\"
         onClick={props.toggle}
         className={styles.h1lmw638}
       >
-        <div data-test-id={props['data-test-id'] || 'ScopePopup.Text'}>
-          toggle popup
-        </div>
+        <div data-test-id=\\"ScopePopup.Text\\">toggle popup</div>
       </button>
       {props.children}
     </div>
@@ -609,13 +584,11 @@ const ScopePopup2 = props => {
       className={styles.h1lmw638}
     >
       <button
-        data-test-id={props['data-test-id'] || 'ScopePopup2.Toggle'}
+        data-test-id=\\"ScopePopup2.Toggle\\"
         onClick={props.toggle}
         className={styles.h1lmw638}
       >
-        <div data-test-id={props['data-test-id'] || 'ScopePopup2.Text'}>
-          toggle popup
-        </div>
+        <div data-test-id=\\"ScopePopup2.Text\\">toggle popup</div>
       </button>
       {props.children}
     </div>
@@ -646,7 +619,7 @@ const Teleport = props => {
       data-test-id={props['data-test-id'] || 'Horizontal'}
       className={styles.hg3iw2q}
     >
-      <div data-test-id={props['data-test-id'] || 'Teleport.Text'}>go back</div>
+      <div data-test-id=\\"Teleport.Text\\">go back</div>
       {props.children}
     </Link>
   );
@@ -668,12 +641,8 @@ const Test = props => {
       stuff=\\"eqweqw\\"
       childrenProxyMap={{ Something: 0, Another: 1 }}
     >
-      <div data-test-id={props['data-test-id'] || 'Test.Something'}>
-        v1vh1t1
-      </div>
-      <div data-test-id={props['data-test-id'] || 'Test.Another'}>
-        inside custom
-      </div>
+      <div data-test-id=\\"Test.Something\\">v1vh1t1</div>
+      <div data-test-id=\\"Test.Another\\">inside custom</div>
       {props.children}
     </Custom>
   );
@@ -702,10 +671,10 @@ const TestIds = props => {
       data-test-id={props['data-test-id'] || 'App'}
       className={styles.h1lmw638}
     >
-      <div data-test-id={props['data-test-id'] || 'TestIds.Text'}>1</div>
-      <div data-test-id={props['data-test-id'] || 'TestIds.Text:1'}>2</div>
-      <External data-test-id={props['data-test-id'] || 'TestIds.External'} />
-      <div data-test-id={props['data-test-id'] || 'TestIds.Name'}>name</div>
+      <div data-test-id=\\"TestIds.Text\\">1</div>
+      <div data-test-id=\\"TestIds.Text:1\\">2</div>
+      <External data-test-id=\\"TestIds.External\\" />
+      <div data-test-id=\\"TestIds.Name\\">name</div>
       {props.children}
     </div>
   );
@@ -1027,7 +996,7 @@ const UseOfProxy = props => {
       className={styles.hg3iw2q}
     >
       <Button
-        data-test-id={props['data-test-id'] || 'UseOfProxy.Button'}
+        data-test-id=\\"UseOfProxy.Button\\"
         color=\\"red\\"
         icon=\\"MyIcon\\"
         text=\\"I'm a button!\\"
@@ -1067,9 +1036,7 @@ const UseProxy = props => {
             { fill: 'red' }
           )
         : null}
-      <div data-test-id={props['data-test-id'] || 'UseProxy.Text'}>
-        {props.text}
-      </div>
+      <div data-test-id=\\"UseProxy.Text\\">{props.text}</div>
     </div>
   );
 };
@@ -1107,7 +1074,7 @@ const UseRouter = props => {
           exact
           render={routeProps => (
             <Home
-              data-test-id={props['data-test-id'] || 'UseRouter.Home'}
+              data-test-id=\\"UseRouter.Home\\"
               heigth={props.height}
               width={360}
               {...routeProps}
@@ -1117,19 +1084,13 @@ const UseRouter = props => {
         <Route
           path=\\"/about\\"
           render={routeProps => (
-            <About
-              data-test-id={props['data-test-id'] || 'UseRouter.About'}
-              {...routeProps}
-            />
+            <About data-test-id=\\"UseRouter.About\\" {...routeProps} />
           )}
         />
         <Route
           path=\\"/topics\\"
           render={routeProps => (
-            <Topics
-              data-test-id={props['data-test-id'] || 'UseRouter.Topics'}
-              {...routeProps}
-            />
+            <Topics data-test-id=\\"UseRouter.Topics\\" {...routeProps} />
           )}
         />
         {props.children}
@@ -1149,27 +1110,13 @@ import React from 'react';
 const UseSvg = props => {
   return (
     <svg data-test-id={props['data-test-id'] || 'Svg'} viewBox=\\"0 0 20 20\\">
-      <path data-test-id={props['data-test-id'] || 'UseSvg.SvgPath'} d=\\"0 20\\" />
-      <circle
-        data-test-id={props['data-test-id'] || 'UseSvg.SvgCircle'}
-        cx={10}
-        cy={5}
-        r={5}
-      />
-      <g data-test-id={props['data-test-id'] || 'UseSvg.SvgGroup'}>
-        <path
-          data-test-id={props['data-test-id'] || 'UseSvg.SvgPath:1'}
-          d={1}
-        />
-        <path
-          data-test-id={props['data-test-id'] || 'UseSvg.SvgPath:2'}
-          d={2}
-        />
+      <path data-test-id=\\"UseSvg.SvgPath\\" d=\\"0 20\\" />
+      <circle data-test-id=\\"UseSvg.SvgCircle\\" cx={10} cy={5} r={5} />
+      <g data-test-id=\\"UseSvg.SvgGroup\\">
+        <path data-test-id=\\"UseSvg.SvgPath:1\\" d={1} />
+        <path data-test-id=\\"UseSvg.SvgPath:2\\" d={2} />
       </g>
-      <text
-        data-test-id={props['data-test-id'] || 'UseSvg.SvgText'}
-        text=\\"hey\\"
-      />
+      <text data-test-id=\\"UseSvg.SvgText\\" text=\\"hey\\" />
       {props.children}
     </svg>
   );
@@ -1256,9 +1203,7 @@ const When = props => {
       className={styles.hg3iw2q}
     >
       {props.showMe ? (
-        <div data-test-id={props['data-test-id'] || 'When.Text'}>
-          I may be hidden
-        </div>
+        <div data-test-id=\\"When.Text\\">I may be hidden</div>
       ) : null}
       {props.children}
     </div>
@@ -1293,16 +1238,10 @@ const WhenList = props => {
       className={styles.hg3iw2q}
     >
       {props.showMe ? (
-        <div
-          data-test-id={props['data-test-id'] || 'WhenList.List'}
-          className={styles.h1lmw638}
-        >
+        <div data-test-id=\\"WhenList.List\\" className={styles.h1lmw638}>
           {Array.isArray(props.list) &&
             props.list.map((item, index) => (
-              <div
-                data-test-id={props['data-test-id'] || 'WhenList.Text'}
-                key={index}
-              >
+              <div data-test-id=\\"WhenList.Text\\" key={index}>
                 {item.thing}
               </div>
             ))}
@@ -1408,9 +1347,7 @@ const WithTest = props => {
       onClick={props.change}
       className={styles.h1lmw638}
     >
-      <div data-test-id={props['data-test-id'] || 'WithTest.Text'}>
-        {props.text}
-      </div>
+      <div data-test-id=\\"WithTest.Text\\">{props.text}</div>
       {props.children}
     </button>
   );
@@ -1434,7 +1371,7 @@ const Action = props => {
       underlayColor=\\"transparent\\"
     >
       <View testID={props['testID'] || 'Vertical'} style={styles.h18pdll5}>
-        <Text testID={props['testID'] || 'Action.Text'}>click me</Text>
+        <Text testID=\\"Action.Text\\">click me</Text>
         {props.children}
       </View>
     </TouchableWithoutFeedback>
@@ -1467,7 +1404,7 @@ const AnimatedButton = props => {
         testID={props['testID'] || 'Vertical'}
         style={[styles.h18pdll5, { opacity: props.opacity }]}
       >
-        <Text testID={props['testID'] || 'AnimatedButton.Text'}>hey</Text>
+        <Text testID=\\"AnimatedButton.Text\\">hey</Text>
         {props.children}
       </Animated.View>
     </TouchableWithoutFeedback>
@@ -1498,7 +1435,7 @@ const BackgroundImage = props => {
       <Animated.Image
         resizeMode=\\"contain\\"
         source={{ uri: props.backgroundImage }}
-        testID={props['testID'] || 'BackgroundImage.Horizontal'}
+        testID=\\"BackgroundImage.Horizontal\\"
         style={styles.hp2cr4d}
       />
       {props.children}
@@ -1573,7 +1510,7 @@ class Form extends React.Component {
           keyboardType=\\"default\\"
           autoCorrect={false}
           underlineColorAndroid=\\"transparent\\"
-          testID={props['testID'] || 'Form.Name'}
+          testID=\\"Form.Name\\"
           autoFocus={true}
         />
         <TextInput
@@ -1586,7 +1523,7 @@ class Form extends React.Component {
           keyboardType=\\"default\\"
           autoCorrect={false}
           underlineColorAndroid=\\"transparent\\"
-          testID={props['testID'] || 'Form.Surname'}
+          testID=\\"Form.Surname\\"
         />
         <TextInput
           blurOnSubmit={false}
@@ -1598,7 +1535,7 @@ class Form extends React.Component {
           secureTextEntry
           autoCorrect={false}
           underlineColorAndroid=\\"transparent\\"
-          testID={props['testID'] || 'Form.Password'}
+          testID=\\"Form.Password\\"
         />
         <TextInput
           returnKeyType=\\"done\\"
@@ -1609,7 +1546,7 @@ class Form extends React.Component {
           autoCorrect={false}
           defaultValue=\\"morph@viewsdx.com\\"
           underlineColorAndroid=\\"transparent\\"
-          testID={props['testID'] || 'Form.Email'}
+          testID=\\"Form.Email\\"
           defaultValue=\\"morph@viewsdx.com\\"
         />
         <TouchableWithoutFeedback
@@ -1617,11 +1554,8 @@ class Form extends React.Component {
           onPress={() => props.onSubmit(state)}
           underlayColor=\\"transparent\\"
         >
-          <View
-            testID={props['testID'] || 'Form.Button'}
-            style={styles.h18pdll5}
-          >
-            <Text testID={props['testID'] || 'Form.Text'}>Send!</Text>
+          <View testID=\\"Form.Button\\" style={styles.h18pdll5}>
+            <Text testID=\\"Form.Text\\">Send!</Text>
           </View>
         </TouchableWithoutFeedback>
         {props.children}
@@ -1643,9 +1577,7 @@ const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 const GoTo = props => {
   return (
     <View testID={props['testID'] || 'Vertical'} style={styles.h18pdll5}>
-      <Text testID={props['testID'] || 'GoTo.Text'}>
-        Go to ViewsDX website!
-      </Text>
+      <Text testID=\\"GoTo.Text\\">Go to ViewsDX website!</Text>
       {props.children}
     </View>
   );
@@ -1672,7 +1604,7 @@ const Hover = props => {
       underlayColor=\\"transparent\\"
     >
       <View testID={props['testID'] || 'Button'} style={styles.h1jrzrhl}>
-        <Text testID={props['testID'] || 'Hover.Text'} style={styles.hyfo4ef}>
+        <Text testID=\\"Hover.Text\\" style={styles.hyfo4ef}>
           Hey!
         </Text>
         {props.children}
@@ -1710,10 +1642,7 @@ const HoverProxy = props => {
               { fill: 'white', fillHover: 'black' }
             )
           : null}
-        <Text
-          testID={props['testID'] || 'HoverProxy.Text'}
-          style={styles.hyfo4ef}
-        >
+        <Text testID=\\"HoverProxy.Text\\" style={styles.hyfo4ef}>
           Hey!
         </Text>
       </View>
@@ -1750,7 +1679,7 @@ const ListOfSomething = props => {
       {Array.isArray(props.list) &&
         props.list.map((item, index) => (
           <Animated.Text
-            testID={props['testID'] || 'ListOfSomething.Text'}
+            testID=\\"ListOfSomething.Text\\"
             dataIndex={index}
             style={{ color: item.color }}
             key={index}
@@ -1793,28 +1722,20 @@ const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 const NestedRoutes = props => {
   return (
     <View testID={props['testID'] || 'Topics'} style={styles.h18pdll5}>
-      <Text testID={props['testID'] || 'NestedRoutes.Text'}>topics</Text>
+      <Text testID=\\"NestedRoutes.Text\\">topics</Text>
       <Link
         activeOpacity={0.7}
         to={\`\${props.match.url === '/' ? '' : props.match.url}/rendering\`}
         underlayColor=\\"transparent\\"
       >
-        <View
-          testID={props['testID'] || 'NestedRoutes.Link'}
-          style={styles.h18pdll5}
-        >
-          <Text testID={props['testID'] || 'NestedRoutes.Text:1'}>
-            Rendering with React
-          </Text>
+        <View testID=\\"NestedRoutes.Link\\" style={styles.h18pdll5}>
+          <Text testID=\\"NestedRoutes.Text:1\\">Rendering with React</Text>
         </View>
       </Link>
       <Route
         path=\\":topic\\"
         render={routeProps => (
-          <Topic
-            testID={props['testID'] || 'NestedRoutes.Topic'}
-            {...routeProps}
-          />
+          <Topic testID=\\"NestedRoutes.Topic\\" {...routeProps} />
         )}
       />
       {props.children}
@@ -1835,8 +1756,8 @@ const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 const Print = props => {
   return (
     <View testID={props['testID'] || 'Vertical'} style={styles.h18pdll5}>
-      <Text testID={props['testID'] || 'Print.Text'}>not in print</Text>
-      <Text testID={props['testID'] || 'Print.Text:1'}>hey</Text>
+      <Text testID=\\"Print.Text\\">not in print</Text>
+      <Text testID=\\"Print.Text:1\\">hey</Text>
       {props.children}
     </View>
   );
@@ -1859,10 +1780,7 @@ const ProxyTest = props => {
   const childrenArray = React.Children.toArray(props.children);
   return (
     <View testID={props['testID'] || 'Vertical'} style={styles.h18pdll5}>
-      <View
-        testID={props['testID'] || 'ProxyTest.Horizontal'}
-        style={styles.hp2cr4d}
-      >
+      <View testID=\\"ProxyTest.Horizontal\\" style={styles.hp2cr4d}>
         {props.bla && childrenArray[props.childrenProxyMap['Something']]
           ? React.cloneElement(
               childrenArray[props.childrenProxyMap['Something']],
@@ -1917,13 +1835,8 @@ const ScopePopup = props => {
         onPress={props.toggle}
         underlayColor=\\"transparent\\"
       >
-        <View
-          testID={props['testID'] || 'ScopePopup.Toggle'}
-          style={styles.h18pdll5}
-        >
-          <Text testID={props['testID'] || 'ScopePopup.Text'}>
-            toggle popup
-          </Text>
+        <View testID=\\"ScopePopup.Toggle\\" style={styles.h18pdll5}>
+          <Text testID=\\"ScopePopup.Text\\">toggle popup</Text>
         </View>
       </TouchableWithoutFeedback>
       {props.children}
@@ -1949,13 +1862,8 @@ const ScopePopup2 = props => {
         onPress={props.toggle}
         underlayColor=\\"transparent\\"
       >
-        <View
-          testID={props['testID'] || 'ScopePopup2.Toggle'}
-          style={styles.h18pdll5}
-        >
-          <Text testID={props['testID'] || 'ScopePopup2.Text'}>
-            toggle popup
-          </Text>
+        <View testID=\\"ScopePopup2.Toggle\\" style={styles.h18pdll5}>
+          <Text testID=\\"ScopePopup2.Text\\">toggle popup</Text>
         </View>
       </TouchableWithoutFeedback>
       {props.children}
@@ -1978,7 +1886,7 @@ const Teleport = props => {
   return (
     <Link activeOpacity={0.7} to=\\"..\\" underlayColor=\\"transparent\\">
       <View testID={props['testID'] || 'Horizontal'} style={styles.hp2cr4d}>
-        <Text testID={props['testID'] || 'Teleport.Text'}>go back</Text>
+        <Text testID=\\"Teleport.Text\\">go back</Text>
         {props.children}
       </View>
     </Link>
@@ -2002,8 +1910,8 @@ const Test = props => {
       stuff=\\"eqweqw\\"
       childrenProxyMap={{ Something: 0, Another: 1 }}
     >
-      <Text testID={props['testID'] || 'Test.Something'}>v1vh1t1</Text>
-      <Text testID={props['testID'] || 'Test.Another'}>inside custom</Text>
+      <Text testID=\\"Test.Something\\">v1vh1t1</Text>
+      <Text testID=\\"Test.Another\\">inside custom</Text>
       {props.children}
     </Custom>
   );
@@ -2023,10 +1931,10 @@ const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 const TestIds = props => {
   return (
     <View testID={props['testID'] || 'App'} style={styles.h18pdll5}>
-      <Text testID={props['testID'] || 'TestIds.Text'}>1</Text>
-      <Text testID={props['testID'] || 'TestIds.Text:1'}>2</Text>
-      <External testID={props['testID'] || 'TestIds.External'} />
-      <Text testID={props['testID'] || 'TestIds.Name'}>name</Text>
+      <Text testID=\\"TestIds.Text\\">1</Text>
+      <Text testID=\\"TestIds.Text:1\\">2</Text>
+      <External testID=\\"TestIds.External\\" />
+      <Text testID=\\"TestIds.Name\\">name</Text>
       {props.children}
     </View>
   );
@@ -2381,7 +2289,7 @@ const UseOfProxy = props => {
   return (
     <View testID={props['testID'] || 'App'} style={styles.hp2cr4d}>
       <Button
-        testID={props['testID'] || 'UseOfProxy.Button'}
+        testID=\\"UseOfProxy.Button\\"
         color=\\"red\\"
         icon=\\"MyIcon\\"
         text=\\"I'm a button!\\"
@@ -2412,7 +2320,7 @@ const UseProxy = props => {
             { fill: 'red' }
           )
         : null}
-      <Text testID={props['testID'] || 'UseProxy.Text'}>{props.text}</Text>
+      <Text testID=\\"UseProxy.Text\\">{props.text}</Text>
     </View>
   );
 };
@@ -2441,7 +2349,7 @@ const UseRouter = props => {
           exact
           render={routeProps => (
             <Home
-              testID={props['testID'] || 'UseRouter.Home'}
+              testID=\\"UseRouter.Home\\"
               heigth={props.height}
               width={360}
               {...routeProps}
@@ -2451,19 +2359,13 @@ const UseRouter = props => {
         <Route
           path=\\"/about\\"
           render={routeProps => (
-            <About
-              testID={props['testID'] || 'UseRouter.About'}
-              {...routeProps}
-            />
+            <About testID=\\"UseRouter.About\\" {...routeProps} />
           )}
         />
         <Route
           path=\\"/topics\\"
           render={routeProps => (
-            <Topics
-              testID={props['testID'] || 'UseRouter.Topics'}
-              {...routeProps}
-            />
+            <Topics testID=\\"UseRouter.Topics\\" {...routeProps} />
           )}
         />
         {props.children}
@@ -2489,18 +2391,13 @@ import Svg, {
 const UseSvg = props => {
   return (
     <Svg testID={props['testID'] || 'Svg'} viewBox=\\"0 0 20 20\\">
-      <SvgPath testID={props['testID'] || 'UseSvg.SvgPath'} d=\\"0 20\\" />
-      <SvgCircle
-        testID={props['testID'] || 'UseSvg.SvgCircle'}
-        cx={10}
-        cy={5}
-        r={5}
-      />
-      <SvgGroup testID={props['testID'] || 'UseSvg.SvgGroup'}>
-        <SvgPath testID={props['testID'] || 'UseSvg.SvgPath:1'} d={1} />
-        <SvgPath testID={props['testID'] || 'UseSvg.SvgPath:2'} d={2} />
+      <SvgPath testID=\\"UseSvg.SvgPath\\" d=\\"0 20\\" />
+      <SvgCircle testID=\\"UseSvg.SvgCircle\\" cx={10} cy={5} r={5} />
+      <SvgGroup testID=\\"UseSvg.SvgGroup\\">
+        <SvgPath testID=\\"UseSvg.SvgPath:1\\" d={1} />
+        <SvgPath testID=\\"UseSvg.SvgPath:2\\" d={2} />
       </SvgGroup>
-      <SvgText testID={props['testID'] || 'UseSvg.SvgText'} text=\\"hey\\" />
+      <SvgText testID=\\"UseSvg.SvgText\\" text=\\"hey\\" />
       {props.children}
     </Svg>
   );
@@ -2559,9 +2456,7 @@ const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
 const When = props => {
   return (
     <View testID={props['testID'] || 'App'} style={styles.hp2cr4d}>
-      {props.showMe ? (
-        <Text testID={props['testID'] || 'When.Text'}>I may be hidden</Text>
-      ) : null}
+      {props.showMe ? <Text testID=\\"When.Text\\">I may be hidden</Text> : null}
       {props.children}
     </View>
   );
@@ -2584,13 +2479,10 @@ const WhenList = props => {
   return (
     <View testID={props['testID'] || 'App'} style={styles.hp2cr4d}>
       {props.showMe ? (
-        <View
-          testID={props['testID'] || 'WhenList.List'}
-          style={styles.h18pdll5}
-        >
+        <View testID=\\"WhenList.List\\" style={styles.h18pdll5}>
           {Array.isArray(props.list) &&
             props.list.map((item, index) => (
-              <Text testID={props['testID'] || 'WhenList.Text'} key={index}>
+              <Text testID=\\"WhenList.Text\\" key={index}>
                 {item.thing}
               </Text>
             ))}
@@ -2692,7 +2584,7 @@ const WithTest = props => {
       underlayColor=\\"transparent\\"
     >
       <View testID={props['testID'] || 'Vertical'} style={styles.h18pdll5}>
-        <Text testID={props['testID'] || 'WithTest.Text'}>{props.text}</Text>
+        <Text testID=\\"WithTest.Text\\">{props.text}</Text>
         {props.children}
       </View>
     </TouchableWithoutFeedback>
