@@ -111,6 +111,12 @@ const styles = {
       \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
     ];
   }),
+  h167lc5n: css('css-16jqtdw', [], function inlineCss() {
+    return [
+      \`.css-16jqtdw { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column;
+box-shadow: 0px 8px 15px 0px rgba(0,0,0,0.1); }\`,
+    ];
+  }),
 };
 
 const BoxShadow = props => {
@@ -120,6 +126,7 @@ const BoxShadow = props => {
       className={styles.h1lmw638}
       style={{ boxShadow: \`10px 5px 2px \${props.color}\` }}
     >
+      <div data-test-id=\\"BoxShadow.Vertical:1\\" className={styles.h167lc5n} />
       {props.children}
     </Animated.div>
   );
@@ -1450,8 +1457,18 @@ export default BackgroundImage;
 exports[`react-native parses react-native BoxShadow 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { Animated, StyleSheet } from 'react-native';
-const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
+import { Animated, StyleSheet, View } from 'react-native';
+const styles = StyleSheet.create({
+  h18pdll5: { flexDirection: 'column' },
+  h1uxjfb1: {
+    flexDirection: 'column',
+    elevation: 1,
+    shadowOffset: { height: 0, width: 8 },
+    shadowRadius: 15,
+    shadowOpacity: 1,
+    shadowColor: 'rgba(0, 0, 0, 0.1)',
+  },
+});
 
 const BoxShadow = props => {
   return (
@@ -1463,11 +1480,12 @@ const BoxShadow = props => {
           elevation: 1,
           shadowOffset: { height: 10, width: 5 },
           shadowRadius: 2,
-          shadowColor: props.color,
           shadowOpacity: 1,
+          shadowColor: props.color,
         },
       ]}
     >
+      <View testID=\\"BoxShadow.Vertical:1\\" style={styles.h1uxjfb1} />
       {props.children}
     </Animated.View>
   );

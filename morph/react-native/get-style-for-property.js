@@ -91,15 +91,11 @@ const getShadow = value => {
   }
 
   if (color) {
+    ret.shadowOpacity = 1
     // TODO what if the color is a prop? do we calculate this on the fly, how?
-    if (/props/.test(color)) {
-      ret.shadowColor = deinterpolate(color)
-      ret.shadowOpacity = 1
-    } else {
-      color = getColor(color)
-      ret.shadowColor = color.string()
-      ret.shadowOpacity = color.valpha
-    }
+    ret.shadowColor = /props/.test(color)
+      ? deinterpolate(color)
+      : getColor(color).string()
   }
 
   return ret
