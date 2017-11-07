@@ -327,6 +327,7 @@ height 100`
           file: f,
           fonts: res.fonts,
           source,
+          tests: res.tests,
           todos: res.todos,
           view,
         }
@@ -380,11 +381,12 @@ height 100`
 
     const toViewPath = f => {
       const file = path.relative(src, f.replace(/(\.ios|\.android|\.web)/, ''))
-      const view = isData(file) || isTests(file)
-        ? file
-        : isLogic(file)
-          ? file.replace(/\.js/, '').replace(/\//g, '')
-          : toPascalCase(file.replace(/\.(view\.fake|js|view)/, ''))
+      const view =
+        isData(file) || isTests(file)
+          ? file
+          : isLogic(file)
+            ? file.replace(/\.js/, '').replace(/\//g, '')
+            : toPascalCase(file.replace(/\.(view\.fake|js|view)/, ''))
 
       return {
         file: `./${file}`,
