@@ -32,7 +32,7 @@ export default (rtext, skipComments = true) => {
   // convert crlf to lf
   const text = rtext.replace(/\r\n/g, '\n')
   const fonts = {}
-  const lines = text.split('\n')
+  const lines = text.split('\n').map(line => line.trim())
   const stack = []
   const todos = []
   const views = []
@@ -144,7 +144,7 @@ export default (rtext, skipComments = true) => {
     }
   }
 
-  const parseBlock = (l, i, line) => {
+  const parseBlock = (line, i) => {
     const { block: name, is } = getBlock(line)
     let shouldPushToStack = false
 
@@ -153,10 +153,10 @@ export default (rtext, skipComments = true) => {
       name: {
         type: 'Literal',
         value: name,
-        loc: getLoc(i, l.indexOf(line), l.length - 1),
+        loc: getLoc(i, 0, line.length - 1),
       },
       isBasic: isBasic(name),
-      loc: getLoc(i, l.indexOf(line)),
+      loc: getLoc(i, 0),
       parents: stack
         .filter(b => b.type === 'Block')
         .map(b => b.is || b.name.value),
@@ -271,8 +271,7 @@ export default (rtext, skipComments = true) => {
     let inScope = false
 
     for (let j = i; j <= endOfBlockIndex; j++) {
-      const l = lines[j]
-      const line = l.trim()
+      const line = lines[j]
 
       if (isSection(line)) {
         const prop = getSection(line)
@@ -301,14 +300,14 @@ export default (rtext, skipComments = true) => {
         } else {
           nested.push({
             type: 'Property',
-            loc: getLoc(j, l.indexOf(prop), l.length - 1),
+            loc: getLoc(j, line.indexOf(prop), line.length - 1),
             key: {
               type: 'Literal',
               value: prop,
               loc: getLoc(
                 j,
-                l.indexOf(prop),
-                l.indexOf(prop) + prop.length - 1
+                line.indexOf(prop),
+                line.indexOf(prop) + prop.length - 1
               ),
             },
             value: {
@@ -367,8 +366,8 @@ export default (rtext, skipComments = true) => {
               value: getValue(value),
               loc: getLoc(
                 j,
-                l.indexOf(value),
-                l.indexOf(value) + value.length - 1
+                line.indexOf(value),
+                line.indexOf(value) + value.length - 1
               ),
             },
           })
@@ -385,13 +384,13 @@ export default (rtext, skipComments = true) => {
 
           propValue.loc = getLoc(
             j,
-            l.indexOf(value),
-            l.indexOf(value) + value.length - 1
+            line.indexOf(value),
+            line.indexOf(value) + value.length - 1
           )
 
           last.push({
             type: 'Property',
-            loc: getLoc(j, l.indexOf(propRaw), l.length - 1),
+            loc: getLoc(j, line.indexOf(propRaw), line.length - 1),
             key: {
               type: 'Literal',
               // TODO should we use propRaw as value here?
@@ -399,13 +398,13 @@ export default (rtext, skipComments = true) => {
               valueRaw: propRaw,
               loc: getLoc(
                 j,
-                l.indexOf(propRaw),
-                l.indexOf(propRaw) + propRaw.length - 1
+                line.indexOf(propRaw),
+                line.indexOf(propRaw) + propRaw.length - 1
               ),
             },
             inScope,
             tags,
-            meta: getMeta(value, l, j),
+            meta: getMeta(value, line, j),
             value: propValue,
           })
         }
@@ -437,11 +436,11 @@ export default (rtext, skipComments = true) => {
 
         properties.push({
           type: 'Property',
-          loc: getLoc(j, 0, l.length - 1),
+          loc: getLoc(j, 0, line.length - 1),
           value: {
             type: 'Literal',
             value,
-            loc: getLoc(j, l.indexOf(value), l.length - 1),
+            loc: getLoc(j, line.indexOf(value), line.length - 1),
           },
           tags: { comment: true, userComment },
         })
@@ -475,11 +474,9 @@ export default (rtext, skipComments = true) => {
     }
   }
 
-  lines.forEach((l, i) => {
-    const line = l.trim()
-
+  lines.forEach((line, i) => {
     if (isBlock(line)) {
-      parseBlock(l, i, line)
+      parseBlock(line, i)
     } else if (isProp(line) || isSection(line) || isComment(line)) {
       let block = stack[stack.length - 1] || views[views.length - 1]
       // TODO add warning
@@ -501,7 +498,7 @@ export default (rtext, skipComments = true) => {
 
       const todo = {
         type: 'Todo',
-        loc: getLoc(i, l.indexOf('#') + 1, l.length - 1),
+        loc: getLoc(i, line.indexOf('#') + 1, line.length - 1),
         to,
         message: message.trim(),
       }
