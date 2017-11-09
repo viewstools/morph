@@ -1,28 +1,20 @@
-const globule = require('globule')
+const glob = require('fast-glob')
 const fs = require('fs')
 
-module.exports = src => {
+module.exports = async src => {
   const options = {
-    filter: f => !/node_modules/.test(f),
+    cwd: src,
+    ignore: '*node_modules*',
+    // filter: f => !/node_modules/.test(f),
   }
 
-  const created = globule.find(
-    [
-      `${src}/**/*.data`,
-      `${src}/**/*.view`,
-      `${src}/**/*.view.logic.js`,
-      `${src}/**/*.view.tests`,
-    ],
+  const created = await glob(
+    ['**/*.view', '**/*.view.logic.js', '**/*.view.tests'],
     options
   )
 
-  const morphed = globule.find(
-    [
-      `${src}/**/*.data.js`,
-      `${src}/**/*.view.css`,
-      `${src}/**/*.view.js`,
-      `${src}/**/*.view.tests.js`,
-    ],
+  const morphed = await glob(
+    ['**/*.view.css', '**/*.view.js', '**/*.view.tests.js'],
     options
   )
 

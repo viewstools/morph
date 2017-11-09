@@ -4,16 +4,13 @@ const chokidar = require('chokidar')
 const clean = require('./clean.js')
 const flatten = require('flatten')
 const fs = require('mz/fs')
-const globule = require('globule')
+const glob = require('fast-glob')
 const path = require('path')
-const toCamelCase = require('to-camel-case')
 const toPascalCase = require('to-pascal-case')
 const uniq = require('array-uniq')
 
-const isMorphedData = f => /\.data\.js$/.test(f)
 const isMorphedView = f => /\.view\.js$/.test(f)
 
-const isData = f => /\.view\.data$/.test(f)
 // const isFake = f => /\.view\.fake$/.test(f)
 const isJs = f => path.extname(f) === '.js'
 const isLogic = f => /\.view\.logic\.js$/.test(f)
@@ -28,11 +25,10 @@ const relativise = (from, to) => {
 const onMorphWriteFile = ({ file, code }) => fs.writeFile(`${file}.js`, code)
 
 module.exports = options => {
-  return new Promise((resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     let {
       as,
       compile,
-      dataNotFound,
       fake: shouldIncludeFake,
       inlineStyles,
       map,
@@ -62,13 +58,6 @@ module.exports = options => {
     )
 
     clean(src)
-
-    if (!dataNotFound)
-      dataNotFound = name => {
-        const warning = `${src}/${name}.data doesn't exist but it is being used. Create the file!`
-        verbose && console.log(chalk.magenta(`! ${warning}`))
-        return getViewNotFound('data', name, warning)
-      }
 
     if (!viewNotFound)
       viewNotFound = name => {
@@ -103,7 +92,6 @@ module.exports = options => {
     const filter = fn => (f, a) => {
       if (
         isMorphedView(f) ||
-        isMorphedData(f) ||
         (isJs(f) && !isJsComponent(f) && !isLogic(f)) ||
         (!shouldIncludeLogic && isLogic(f)) ||
         isDirectory(f)
@@ -114,7 +102,7 @@ module.exports = options => {
     }
 
     const getImportFileName = (name, file) => {
-      let f = views[name] || data[name]
+      let f = views[name]
 
       if (isView(f)) {
         const logicFile = logic[`${name}.view.logic`]
@@ -135,22 +123,13 @@ module.exports = options => {
         }
         // TODO track dependencies to make it easy to rebuild files as new ones get
         // added, eg logic is added, we need to rebuild upwards
-        if (isData(name)) {
-          return data[name]
-            ? `import ${toCamelCase(name)} from '${getImportFileName(
-                name,
-                file
-              )}'`
-            : dataNotFound(name)
-        } else {
-          return views[name]
-            ? `import ${name} from '${getImportFileName(name, file)}'`
-            : viewNotFound(name)
-        }
+
+        return views[name]
+          ? `import ${name} from '${getImportFileName(name, file)}'`
+          : viewNotFound(name)
       }
     }
 
-    const data = {}
     const dependsOn = {}
     const dependedUpon = {}
     const logic = {}
@@ -158,7 +137,6 @@ module.exports = options => {
     const views = Object.assign({}, map)
 
     const instance = {
-      data,
       dependsOn,
       dependedUpon,
       logic,
@@ -185,16 +163,11 @@ module.exports = options => {
         return maybeFakeJs(f, file, view)
       }
 
-      const fileIsData = isData(file)
-
       verbose && console.log(chalk.yellow('A'), view, chalk.dim(`-> ${f}`))
 
       let shouldMorph = isView(file) // || isFake(view)
 
-      if (fileIsData) {
-        data[view] = file
-        shouldMorph = true
-      } else if (isTests(file)) {
+      if (isTests(file)) {
         tests[view] = file
         shouldMorph = true
       } else if (isLogic(file)) {
@@ -306,13 +279,14 @@ height 100`
       const getImport = makeGetImport(view, file)
 
       try {
-        const source = await fs.readFile(f, 'utf-8')
+        const rawFile = path.join(src, f)
+        const source = await fs.readFile(rawFile, 'utf-8')
 
         const res = morph(source, {
-          as: isData(f) ? 'data' : isTests(f) ? 'tests' : as,
+          as: isTests(f) ? 'tests' : as,
           compile,
           inlineStyles,
-          file: { raw: f, relative: file },
+          file: { raw: rawFile, relative: file },
           name: view,
           getImport,
           pretty,
@@ -324,7 +298,7 @@ height 100`
           code: res.code,
           dependsOn: dependsOn[view],
           // dependedUpon: dependedUpon[view],
-          file: f,
+          file: rawFile,
           fonts: res.fonts,
           source,
           tests: res.tests,
@@ -380,13 +354,16 @@ height 100`
     }
 
     const toViewPath = f => {
-      const file = path.relative(src, f.replace(/(\.ios|\.android|\.web)/, ''))
-      const view =
-        isData(file) || isTests(file)
-          ? file
-          : isLogic(file)
-            ? file.replace(/\.js/, '').replace(/\//g, '')
-            : toPascalCase(file.replace(/\.(view\.fake|js|view)/, ''))
+      const file = f.replace(/(\.ios|\.android|\.web)/, '')
+
+      let view = path.basename(file)
+      if (!isTests(file)) {
+        if (isLogic(file)) {
+          view = view.replace(/\.js/, '')
+        } else {
+          view = toPascalCase(view.replace(/\.(view\.fake|js|view)/, ''))
+        }
+      }
 
       return {
         file: `./${file}`,
@@ -395,23 +372,22 @@ height 100`
     }
 
     const watcherOptions = {
-      filter: f => !/node_modules/.test(f) && !isMorphedView(f),
+      // filter: f => !/node_modules/.test(f) && !isMorphedView(f),
+      cwd: src,
+      ignore: ['**/node_modules/**', '**/*.view.js'],
     }
     const watcherPattern = [
-      `${src}/**/*.data`,
-      `${src}/**/*.js`,
-      `${src}/**/*.view`,
-      shouldIncludeLogic && `${src}/**/*.view.logic.js`,
-      shouldIncludeTests && `${src}/**/*.view.tests`,
-      shouldIncludeFake && `${src}/**/*.view.fake`,
+      `**/*.js`,
+      `**/*.view`,
+      shouldIncludeLogic && `**/*.view.logic.js`,
+      shouldIncludeTests && `**/*.view.tests`,
+      shouldIncludeFake && `**/*.view.fake`,
     ].filter(Boolean)
 
     let viewsLeftToBeReady = null
 
-    const viewsToMorph = globule
-      .find(watcherPattern, watcherOptions)
-      .map(addViewSkipMorph)
-      .filter(Boolean)
+    const listToMorph = await glob(watcherPattern, watcherOptions)
+    const viewsToMorph = listToMorph.map(addViewSkipMorph).filter(Boolean)
 
     viewsLeftToBeReady = viewsToMorph.length
     viewsToMorph.forEach(morphView)
@@ -438,9 +414,7 @@ height 100`
 
           verbose && console.log(chalk.blue('D'), view)
 
-          if (isData(f)) {
-            delete data[view]
-          } else if (isTests(f)) {
+          if (isTests(f)) {
             delete tests[view]
 
             const viewForTest = view.replace('.view.tests', '')

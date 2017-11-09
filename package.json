@@ -47,6 +47,7 @@
     "chokidar": "^1.7.0",
     "color": "^1.0.3",
     "css-properties": "^2.0.2",
+    "fast-glob": "^1.0.1",
     "flatten": "^1.0.2",
     "glam": "^4.0.3",
     "globule": "^1.1.0",
