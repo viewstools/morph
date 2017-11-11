@@ -1460,10 +1460,10 @@ import React from 'react';
 import { Animated, StyleSheet, View } from 'react-native';
 const styles = StyleSheet.create({
   h18pdll5: { flexDirection: 'column' },
-  h1uxjfb1: {
+  h141a9qm: {
     flexDirection: 'column',
     elevation: 1,
-    shadowOffset: { height: 0, width: 8 },
+    shadowOffset: { width: 0, height: 8 },
     shadowRadius: 15,
     shadowOpacity: 1,
     shadowColor: 'rgba(0, 0, 0, 0.1)',
@@ -1478,14 +1478,14 @@ const BoxShadow = props => {
         styles.h18pdll5,
         {
           elevation: 1,
-          shadowOffset: { height: 10, width: 5 },
+          shadowOffset: { width: 10, height: 5 },
           shadowRadius: 2,
           shadowOpacity: 1,
           shadowColor: props.color,
         },
       ]}
     >
-      <View testID=\\"BoxShadow.Vertical:1\\" style={styles.h1uxjfb1} />
+      <View testID=\\"BoxShadow.Vertical:1\\" style={styles.h141a9qm} />
       {props.children}
     </Animated.View>
   );

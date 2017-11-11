@@ -70,8 +70,8 @@ const getShadow = value => {
     elevation: 1,
     // iOS,
     shadowOffset: {
-      height: parseInt(offsetX, 10),
-      width: parseInt(offsetY, 10),
+      width: parseInt(offsetX, 10),
+      height: parseInt(offsetY, 10),
     },
   }
 
