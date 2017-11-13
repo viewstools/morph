@@ -22,7 +22,8 @@ export const enter = (node, parent, state) => {
       `<${block}
           activeOpacity={0.7}
           onPress=${wrap(node.action)}
-          underlayColor='transparent'>`
+          underlayColor='transparent'
+          ${node.isInList ? 'key={index}' : ''}>`
     )
     node.wrapEnd = `</${block}>`
   } else if (node.teleport) {
