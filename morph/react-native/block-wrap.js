@@ -1,13 +1,13 @@
-import { getProp, isCode } from "../utils.js";
-import getBlockName from "./get-block-name.js";
-import safe from "../react/safe.js";
-import wrap from "../react/wrap.js";
+import { getProp, isCode } from '../utils.js';
+import getBlockName from './get-block-name.js';
+import safe from '../react/safe.js';
+import wrap from '../react/wrap.js';
 
 export const enter = (node, parent, state) => {
   const name = getBlockName(node, parent, state);
 
   if (
-    name === "Text" &&
+    name === 'Text' &&
     parent &&
     parent.parent &&
     (parent.parent.backgroundImage || parent.parent.ensureBackgroundColor)
@@ -16,7 +16,7 @@ export const enter = (node, parent, state) => {
   }
 
   if (node.action) {
-    const block = "TouchableNativeFeedback";
+    const block = 'TouchableNativeFeedback';
     state.use(block);
     state.render.push(
       `<${block}
@@ -26,10 +26,10 @@ export const enter = (node, parent, state) => {
     );
     node.wrapEnd = `</${block}>`;
   } else if (node.teleport) {
-    state.use("Link");
-    let to = getProp(node, "teleportTo").value.value;
+    state.use('Link');
+    let to = getProp(node, 'teleportTo').value.value;
 
-    if (to.startsWith("/") || to === "..") {
+    if (to.startsWith('/') || to === '..') {
       to = safe(to);
     } else {
       to = isCode(to) ? `\${${to}}` : to;
@@ -43,7 +43,7 @@ export const enter = (node, parent, state) => {
           to=${to}
           underlayColor='transparent'>`
     );
-    node.wrapEnd = "</Link>";
+    node.wrapEnd = '</Link>';
   } else if (node.goTo) {
     // const goTo = getProp(node, 'goTo')
     // TODO https://facebook.github.io/react-native/docs/linking.html
