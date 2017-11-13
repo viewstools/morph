@@ -334,6 +334,49 @@ export default JustText;
 "
 `;
 
+exports[`react-dom parses react-dom ListOfButtons 1`] = `
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import css from 'glam';
+const styles = {
+  h1lmw638: css('css-1s0kfvh', [], function inlineCss() {
+    return [
+      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
+    ];
+  }),
+};
+
+const ListOfButtons = props => {
+  return (
+    <div
+      data-test-id={props['data-test-id'] || 'List'}
+      className={styles.h1lmw638}
+    >
+      {Array.isArray(props.list) &&
+        props.list.map((item, index) => (
+          <button
+            data-test-id=\\"ListOfButtons.Vertical\\"
+            onClick={props.onClick}
+            className={styles.h1lmw638}
+            key={index}
+          >
+            <div
+              data-test-id=\\"ListOfButtons.Text\\"
+              style={{ color: item.color }}
+            >
+              {index}
+            </div>
+          </button>
+        ))}
+      {props.children}
+    </div>
+  );
+};
+
+export default ListOfButtons;
+"
+`;
+
 exports[`react-dom parses react-dom ListOfSomething 1`] = `
 "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
@@ -1682,6 +1725,47 @@ const JustText = props => {
 };
 
 export default JustText;
+"
+`;
+
+exports[`react-native parses react-native ListOfButtons 1`] = `
+"/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import {
+  Animated,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
+const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
+
+const ListOfButtons = props => {
+  return (
+    <View testID={props['testID'] || 'List'} style={styles.h18pdll5}>
+      {Array.isArray(props.list) &&
+        props.list.map((item, index) => (
+          <TouchableWithoutFeedback
+            activeOpacity={0.7}
+            onPress={props.onClick}
+            underlayColor=\\"transparent\\"
+            key={index}
+          >
+            <View testID=\\"ListOfButtons.Vertical\\" style={styles.h18pdll5}>
+              <Animated.Text
+                testID=\\"ListOfButtons.Text\\"
+                style={{ color: item.color }}
+              >
+                {index}
+              </Animated.Text>
+            </View>
+          </TouchableWithoutFeedback>
+        ))}
+      {props.children}
+    </View>
+  );
+};
+
+export default ListOfButtons;
 "
 `;
 
