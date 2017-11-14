@@ -16,7 +16,7 @@ export const enter = (node, parent, state) => {
   }
 
   if (node.action) {
-    const block = 'TouchableWithoutFeedback'
+    const block = 'TouchableHighlight'
     state.use(block)
     state.render.push(
       `<${block}
