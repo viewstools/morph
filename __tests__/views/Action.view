@@ -1,5 +1,6 @@
 Vertical
 onClick props.clickMe
+disabled props.isDisabled ? props.isDisabled : ''
 when props.check
 Text
 text click me
