@@ -22,6 +22,7 @@ export const enter = (node, parent, state) => {
       `<${block}
           activeOpacity={0.7}
           onPress=${wrap(node.action)}
+          ${node.disabled ? `disabled=${wrap(node.disabled)}` : ''}
           underlayColor='transparent'
           ${node.isInList ? 'key={index}' : ''}>`
     )

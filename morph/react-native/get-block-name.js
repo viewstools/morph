@@ -57,6 +57,11 @@ const getGroupBlockName = (node, state) => {
     }
   }
 
+  if (hasProp(node, 'disabled')) {
+    const propNode = getProp(node, 'disabled')
+    node.disabled = propNode.value.value
+  }
+
   if (hasProp(node, 'backgroundImage')) {
     const propNode = getProp(node, 'backgroundImage')
     node.backgroundImage = isCode(propNode)
