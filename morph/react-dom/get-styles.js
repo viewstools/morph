@@ -38,6 +38,7 @@ const toCss = obj =>
 const toNestedCss = ({
   base,
   hover,
+  focus,
   active,
   activeHover,
   disabled,
@@ -46,15 +47,18 @@ const toNestedCss = ({
 }) => {
   const baseCss = toCss(base)
   const hoverCss = toCss(hover)
+  const focusCss = toCss(focus)
   const activeCss = toCss(active)
   const activeHoverCss = toCss(activeHover)
   const disabledCss = toCss(disabled)
   const placeholderCss = toCss(placeholder)
   const printCss = toCss(print)
 
+  debugger
   const ret = [
     baseCss,
     hoverCss && `&:hover {${hoverCss}}`,
+    focusCss && `&:focus {${focusCss}}`,
     activeCss && `&.active {${activeCss}}`,
     activeHoverCss && `&.active:hover {${activeHoverCss}}`,
     disabledCss && `&:disabled {${disabledCss}}`,
