@@ -1424,7 +1424,7 @@ const Action = props => {
     >
       <View
         testID={props['testID'] || 'Vertical'}
-        disabled={props.isDisabled}
+        isDisabled={props.isDisabled}
         style={styles.h18pdll5}
       >
         <Text testID=\\"Action.Text\\">click me</Text>
