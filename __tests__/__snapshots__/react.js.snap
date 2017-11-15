@@ -17,7 +17,7 @@ const Action = props => {
     <button
       data-test-id={props['data-test-id'] || 'Vertical'}
       onClick={props.clickMe}
-      disabled={props.isDisabled ? props.isDisabled : ''}
+      isDisabled={props.isDisabled}
       className={styles.h1lmw638}
     >
       <div data-test-id=\\"Action.Text\\">click me</div>
@@ -1419,12 +1419,12 @@ const Action = props => {
     <TouchableWithoutFeedback
       activeOpacity={0.7}
       onPress={props.clickMe}
-      disabled={props.isDisabled ? props.isDisabled : ''}
+      disabled={props.isDisabled}
       underlayColor=\\"transparent\\"
     >
       <View
         testID={props['testID'] || 'Vertical'}
-        disabled={props.isDisabled ? props.isDisabled : ''}
+        disabled={props.isDisabled}
         style={styles.h18pdll5}
       >
         <Text testID=\\"Action.Text\\">click me</Text>
