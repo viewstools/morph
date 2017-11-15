@@ -56,6 +56,7 @@ export const getProp = (node, key) => {
 const styleStems = [
   'active',
   'hover',
+  'focus',
   'activeHover',
   'placeholder',
   'disabled',
