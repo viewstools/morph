@@ -54,7 +54,6 @@ const toNestedCss = ({
   const placeholderCss = toCss(placeholder)
   const printCss = toCss(print)
 
-  debugger
   const ret = [
     baseCss,
     hoverCss && `&:hover {${hoverCss}}`,
