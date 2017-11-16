@@ -5,7 +5,7 @@ exports[`react-dom parses react-dom Action 1`] = `
 import React from 'react';
 import css from 'glam';
 const styles = {
-  h1lmw638: css('css-1s0kfvh', [], function inlineCss() {
+  h18or678: css('css-1s0kfvh', [], function inlineCss() {
     return [
       \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
     ];
@@ -17,7 +17,7 @@ const Action = props => {
     <button
       data-test-id={props['data-test-id'] || 'Vertical'}
       onClick={props.clickMe}
-      className={styles.h1lmw638}
+      className={styles.h18or678}
     >
       <div data-test-id=\\"Action.Text\\">click me</div>
       {props.children}
@@ -35,7 +35,7 @@ import React from 'react';
 import Animated from 'react-dom-animated';
 import css from 'glam';
 const styles = {
-  h1lmw638: css('css-1s0kfvh', [], function inlineCss() {
+  h18or678: css('css-1s0kfvh', [], function inlineCss() {
     return [
       \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
     ];
@@ -47,7 +47,7 @@ const AnimatedButton = props => {
     <Animated.button
       data-test-id={props['data-test-id'] || 'Vertical'}
       onClick={props.onClick}
-      className={styles.h1lmw638}
+      className={styles.h18or678}
       style={{ opacity: props.opacity }}
     >
       <div data-test-id=\\"AnimatedButton.Text\\">hey</div>
@@ -66,13 +66,13 @@ import React from 'react';
 import Animated from 'react-dom-animated';
 import css from 'glam';
 const styles = {
-  h1bfz4lt: css('css-1lgf2gr', [], function inlineCss() {
+  h1omhxf4: css('css-1lgf2gr', [], function inlineCss() {
     return [
       \`.css-1lgf2gr { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column;
 background-image: url(\\"https://viewsdx.com/image.jpg\\"); }\`,
     ];
   }),
-  h1dhb6n: css('css-ii8p9n', [], function inlineCss() {
+  h1peh4ml: css('css-ii8p9n', [], function inlineCss() {
     return [
       \`.css-ii8p9n { -webkit-flex-direction: row; -ms-flex-direction: row; -webkit-box-orient: horizontal; -webkit-box-direction: normal; flex-direction: row;
 background-size: contain; }\`,
@@ -84,11 +84,11 @@ const BackgroundImage = props => {
   return (
     <div
       data-test-id={props['data-test-id'] || 'Vertical'}
-      className={styles.h1bfz4lt}
+      className={styles.h1omhxf4}
     >
       <Animated.div
         data-test-id=\\"BackgroundImage.Horizontal\\"
-        className={styles.h1dhb6n}
+        className={styles.h1peh4ml}
         style={{ backgroundImage: \`url(\${props.backgroundImage})\` }}
       />
       {props.children}
@@ -106,12 +106,12 @@ import React from 'react';
 import Animated from 'react-dom-animated';
 import css from 'glam';
 const styles = {
-  h1lmw638: css('css-1s0kfvh', [], function inlineCss() {
+  h18or678: css('css-1s0kfvh', [], function inlineCss() {
     return [
       \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
     ];
   }),
-  h167lc5n: css('css-16jqtdw', [], function inlineCss() {
+  h18mfro8: css('css-16jqtdw', [], function inlineCss() {
     return [
       \`.css-16jqtdw { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column;
 box-shadow: 0px 8px 15px 0px rgba(0,0,0,0.1); }\`,
@@ -123,10 +123,10 @@ const BoxShadow = props => {
   return (
     <Animated.div
       data-test-id={props['data-test-id'] || 'Vertical'}
-      className={styles.h1lmw638}
+      className={styles.h18or678}
       style={{ boxShadow: \`10px 5px 2px \${props.color}\` }}
     >
-      <div data-test-id=\\"BoxShadow.Vertical:1\\" className={styles.h167lc5n} />
+      <div data-test-id=\\"BoxShadow.Vertical:1\\" className={styles.h18mfro8} />
       {props.children}
     </Animated.div>
   );
@@ -141,7 +141,7 @@ exports[`react-dom parses react-dom Form 1`] = `
 import React from 'react';
 import css from 'glam';
 const styles = {
-  h1lmw638: css('css-1s0kfvh', [], function inlineCss() {
+  h18or678: css('css-1s0kfvh', [], function inlineCss() {
     return [
       \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
     ];
@@ -161,7 +161,7 @@ class Form extends React.Component {
       <form
         data-test-id={props['data-test-id'] || 'Form'}
         onSubmit={() => props.onSubmit(state)}
-        className={styles.h1lmw638}
+        className={styles.h18or678}
       >
         <input
           type=\\"text\\"
@@ -192,7 +192,7 @@ class Form extends React.Component {
         <button
           data-test-id=\\"Form.Button\\"
           onClick={() => props.onSubmit(state)}
-          className={styles.h1lmw638}
+          className={styles.h18or678}
         >
           <div data-test-id=\\"Form.Text\\">Send!</div>
         </button>
@@ -211,7 +211,7 @@ exports[`react-dom parses react-dom GoTo 1`] = `
 import React from 'react';
 import css from 'glam';
 const styles = {
-  h1lmw638: css('css-1s0kfvh', [], function inlineCss() {
+  h18or678: css('css-1s0kfvh', [], function inlineCss() {
     return [
       \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
     ];
@@ -225,7 +225,7 @@ const GoTo = props => {
       rel=\\"noopener noreferrer\\"
       target=\\"_blank\\"
       data-test-id={props['data-test-id'] || 'Vertical'}
-      className={styles.h1lmw638}
+      className={styles.h18or678}
     >
       <div data-test-id=\\"GoTo.Text\\">Go to ViewsDX website!</div>
       {props.children}
@@ -242,14 +242,14 @@ exports[`react-dom parses react-dom Hover 1`] = `
 import React from 'react';
 import css from 'glam';
 const styles = {
-  hpg1h4y: css('css-i58qmr', [], function inlineCss() {
+  h1mc7g7i: css('css-i58qmr', [], function inlineCss() {
     return [
       \`.css-i58qmr { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column;
 background-color: black; }\`,
       \`.css-i58qmr:hover { background-color: white; }\`,
     ];
   }),
-  h1669j73: css('css-9glvsj', [], function inlineCss() {
+  h1mgvy2v: css('css-9glvsj', [], function inlineCss() {
     return [
       \`.css-9glvsj { color: white; }\`,
       \`.css-9glvsj:hover { color: black; }\`,
@@ -262,9 +262,9 @@ const Hover = props => {
     <button
       data-test-id={props['data-test-id'] || 'Button'}
       onClick={props.onClick}
-      className={styles.hpg1h4y}
+      className={styles.h1mc7g7i}
     >
-      <div data-test-id=\\"Hover.Text\\" className={styles.h1669j73}>
+      <div data-test-id=\\"Hover.Text\\" className={styles.h1mgvy2v}>
         Hey!
       </div>
       {props.children}
@@ -281,14 +281,14 @@ exports[`react-dom parses react-dom HoverProxy 1`] = `
 import React from 'react';
 import css from 'glam';
 const styles = {
-  hpg1h4y: css('css-i58qmr', [], function inlineCss() {
+  h1mc7g7i: css('css-i58qmr', [], function inlineCss() {
     return [
       \`.css-i58qmr { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column;
 background-color: black; }\`,
       \`.css-i58qmr:hover { background-color: white; }\`,
     ];
   }),
-  h1669j73: css('css-9glvsj', [], function inlineCss() {
+  h1mgvy2v: css('css-9glvsj', [], function inlineCss() {
     return [
       \`.css-9glvsj { color: white; }\`,
       \`.css-9glvsj:hover { color: black; }\`,
@@ -302,7 +302,7 @@ const HoverProxy = props => {
     <button
       data-test-id={props['data-test-id'] || 'Button'}
       onClick={props.onClick}
-      className={styles.hpg1h4y}
+      className={styles.h1mc7g7i}
     >
       {props.childrenProxyMap &&
       childrenArray[props.childrenProxyMap['props.icon']]
@@ -311,7 +311,7 @@ const HoverProxy = props => {
             { fill: 'white', fillHover: 'black' }
           )
         : null}
-      <div data-test-id=\\"HoverProxy.Text\\" className={styles.h1669j73}>
+      <div data-test-id=\\"HoverProxy.Text\\" className={styles.h1mgvy2v}>
         Hey!
       </div>
     </button>
@@ -339,7 +339,7 @@ exports[`react-dom parses react-dom ListOfButtons 1`] = `
 import React from 'react';
 import css from 'glam';
 const styles = {
-  h1lmw638: css('css-1s0kfvh', [], function inlineCss() {
+  h18or678: css('css-1s0kfvh', [], function inlineCss() {
     return [
       \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
     ];
@@ -350,14 +350,14 @@ const ListOfButtons = props => {
   return (
     <div
       data-test-id={props['data-test-id'] || 'List'}
-      className={styles.h1lmw638}
+      className={styles.h18or678}
     >
       {Array.isArray(props.list) &&
         props.list.map((item, index) => (
           <button
             data-test-id=\\"ListOfButtons.Vertical\\"
             onClick={props.onClick}
-            className={styles.h1lmw638}
+            className={styles.h18or678}
             key={index}
           >
             <div
@@ -382,7 +382,7 @@ exports[`react-dom parses react-dom ListOfSomething 1`] = `
 import React from 'react';
 import css from 'glam';
 const styles = {
-  h1lmw638: css('css-1s0kfvh', [], function inlineCss() {
+  h18or678: css('css-1s0kfvh', [], function inlineCss() {
     return [
       \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
     ];
@@ -393,7 +393,7 @@ const ListOfSomething = props => {
   return (
     <div
       data-test-id={props['data-test-id'] || 'List'}
-      className={styles.h1lmw638}
+      className={styles.h18or678}
     >
       {Array.isArray(props.list) &&
         props.list.map((item, index) => (
@@ -436,7 +436,7 @@ import { Route } from 'react-router-dom';
 import Topic from './Topic.view.js';
 import css from 'glam';
 const styles = {
-  h1lmw638: css('css-1s0kfvh', [], function inlineCss() {
+  h18or678: css('css-1s0kfvh', [], function inlineCss() {
     return [
       \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
     ];
@@ -447,13 +447,13 @@ const NestedRoutes = props => {
   return (
     <div
       data-test-id={props['data-test-id'] || 'Topics'}
-      className={styles.h1lmw638}
+      className={styles.h18or678}
     >
       <div data-test-id=\\"NestedRoutes.Text\\">topics</div>
       <Link
         to={\`\${props.match.url === '/' ? '' : props.match.url}/rendering\`}
         data-test-id=\\"NestedRoutes.Link\\"
-        className={styles.h1lmw638}
+        className={styles.h18or678}
       >
         <div data-test-id=\\"NestedRoutes.Text:1\\">Rendering with React</div>
       </Link>
@@ -477,12 +477,12 @@ exports[`react-dom parses react-dom Print 1`] = `
 import React from 'react';
 import css from 'glam';
 const styles = {
-  h1lmw638: css('css-1s0kfvh', [], function inlineCss() {
+  h18or678: css('css-1s0kfvh', [], function inlineCss() {
     return [
       \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
     ];
   }),
-  hrak8un: css('css-kbgujp', [], function inlineCss() {
+  h12h5uqm: css('css-kbgujp', [], function inlineCss() {
     return [
       \`@media print {
     .css-kbgujp {
@@ -497,9 +497,9 @@ const Print = props => {
   return (
     <div
       data-test-id={props['data-test-id'] || 'Vertical'}
-      className={styles.h1lmw638}
+      className={styles.h18or678}
     >
-      <div data-test-id=\\"Print.Text\\" className={styles.hrak8un}>
+      <div data-test-id=\\"Print.Text\\" className={styles.h12h5uqm}>
         not in print
       </div>
       <div data-test-id=\\"Print.Text:1\\">hey</div>
@@ -517,12 +517,12 @@ exports[`react-dom parses react-dom ProxyTest 1`] = `
 import React from 'react';
 import css from 'glam';
 const styles = {
-  h1lmw638: css('css-1s0kfvh', [], function inlineCss() {
+  h18or678: css('css-1s0kfvh', [], function inlineCss() {
     return [
       \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
     ];
   }),
-  hg3iw2q: css('css-sw3yj', [], function inlineCss() {
+  hnpb55i: css('css-sw3yj', [], function inlineCss() {
     return [
       \`.css-sw3yj { -webkit-flex-direction: row; -ms-flex-direction: row; -webkit-box-orient: horizontal; -webkit-box-direction: normal; flex-direction: row; }\`,
     ];
@@ -534,9 +534,9 @@ const ProxyTest = props => {
   return (
     <div
       data-test-id={props['data-test-id'] || 'Vertical'}
-      className={styles.h1lmw638}
+      className={styles.h18or678}
     >
-      <div data-test-id=\\"ProxyTest.Horizontal\\" className={styles.hg3iw2q}>
+      <div data-test-id=\\"ProxyTest.Horizontal\\" className={styles.hnpb55i}>
         {props.bla && childrenArray[props.childrenProxyMap['Something']]
           ? React.cloneElement(
               childrenArray[props.childrenProxyMap['Something']],
@@ -558,7 +558,7 @@ exports[`react-dom parses react-dom Scope 1`] = `
 import React from 'react';
 import css from 'glam';
 const styles = {
-  h1lv6cq4: css('css-jk0pkr', [], function inlineCss() {
+  ha1tv9a: css('css-jk0pkr', [], function inlineCss() {
     return [\`.css-jk0pkr { color: red; }\`];
   }),
 };
@@ -567,7 +567,7 @@ const Scope = props => {
   return (
     <div
       data-test-id={props['data-test-id'] || 'Text'}
-      className={styles.h1lv6cq4}
+      className={styles.ha1tv9a}
     >
       {props.somethingGreen
         ? '2 green'
@@ -585,7 +585,7 @@ exports[`react-dom parses react-dom ScopePopup 1`] = `
 import React from 'react';
 import css from 'glam';
 const styles = {
-  h1lmw638: css('css-1s0kfvh', [], function inlineCss() {
+  h18or678: css('css-1s0kfvh', [], function inlineCss() {
     return [
       \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
     ];
@@ -597,12 +597,12 @@ const ScopePopup = props => {
     <div
       data-test-id={props['data-test-id'] || 'Popup'}
       animate=\\"pop\\"
-      className={styles.h1lmw638}
+      className={styles.h18or678}
     >
       <button
         data-test-id=\\"ScopePopup.Toggle\\"
         onClick={props.toggle}
-        className={styles.h1lmw638}
+        className={styles.h18or678}
       >
         <div data-test-id=\\"ScopePopup.Text\\">toggle popup</div>
       </button>
@@ -620,7 +620,7 @@ exports[`react-dom parses react-dom ScopePopup2 1`] = `
 import React from 'react';
 import css from 'glam';
 const styles = {
-  h1lmw638: css('css-1s0kfvh', [], function inlineCss() {
+  h18or678: css('css-1s0kfvh', [], function inlineCss() {
     return [
       \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
     ];
@@ -631,12 +631,12 @@ const ScopePopup2 = props => {
   return (
     <div
       data-test-id={props['data-test-id'] || 'Popup'}
-      className={styles.h1lmw638}
+      className={styles.h18or678}
     >
       <button
         data-test-id=\\"ScopePopup2.Toggle\\"
         onClick={props.toggle}
-        className={styles.h1lmw638}
+        className={styles.h18or678}
       >
         <div data-test-id=\\"ScopePopup2.Text\\">toggle popup</div>
       </button>
@@ -655,7 +655,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import css from 'glam';
 const styles = {
-  hg3iw2q: css('css-sw3yj', [], function inlineCss() {
+  hnpb55i: css('css-sw3yj', [], function inlineCss() {
     return [
       \`.css-sw3yj { -webkit-flex-direction: row; -ms-flex-direction: row; -webkit-box-orient: horizontal; -webkit-box-direction: normal; flex-direction: row; }\`,
     ];
@@ -667,7 +667,7 @@ const Teleport = props => {
     <Link
       to=\\"..\\"
       data-test-id={props['data-test-id'] || 'Horizontal'}
-      className={styles.hg3iw2q}
+      className={styles.hnpb55i}
     >
       <div data-test-id=\\"Teleport.Text\\">go back</div>
       {props.children}
@@ -708,7 +708,7 @@ import React from 'react';
 import External from './External.view.js';
 import css from 'glam';
 const styles = {
-  h1lmw638: css('css-1s0kfvh', [], function inlineCss() {
+  h18or678: css('css-1s0kfvh', [], function inlineCss() {
     return [
       \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
     ];
@@ -719,7 +719,7 @@ const TestIds = props => {
   return (
     <div
       data-test-id={props['data-test-id'] || 'App'}
-      className={styles.h1lmw638}
+      className={styles.h18or678}
     >
       <div data-test-id=\\"TestIds.Text\\">1</div>
       <div data-test-id=\\"TestIds.Text:1\\">2</div>
@@ -751,7 +751,7 @@ exports[`react-dom parses react-dom UseCaptureEmail 1`] = `
 import React from 'react';
 import css from 'glam';
 const styles = {
-  hevllt7: css('css-17byui2', [], function inlineCss() {
+  h10b81ay: css('css-17byui2', [], function inlineCss() {
     return [
       \`.css-17byui2 { border: 1px solid black;
 color: red; }\`,
@@ -777,7 +777,7 @@ class UseCaptureEmail extends React.Component {
         data-test-id={props['data-test-id'] || 'Email'}
         defaultValue=\\"hey this is a default value\\"
         onSubmit={props.onSubmit}
-        className={styles.hevllt7}
+        className={styles.h10b81ay}
       />
     );
   }
@@ -986,7 +986,7 @@ exports[`react-dom parses react-dom UseHorizontal 1`] = `
 import React from 'react';
 import css from 'glam';
 const styles = {
-  h1nnugsi: css('css-vkz5lf', [], function inlineCss() {
+  h1d1hac2: css('css-vkz5lf', [], function inlineCss() {
     return [
       \`.css-vkz5lf { -webkit-flex-direction: row; -ms-flex-direction: row; -webkit-box-orient: horizontal; -webkit-box-direction: normal; flex-direction: row;
 border: 1px solid red; }\`,
@@ -998,7 +998,7 @@ const UseHorizontal = props => {
   return (
     <div
       data-test-id={props['data-test-id'] || 'Horizontal'}
-      className={styles.h1nnugsi}
+      className={styles.h1d1hac2}
     >
       {props.children}
     </div>
@@ -1032,7 +1032,7 @@ import React from 'react';
 import Button from './Button.view.js';
 import css from 'glam';
 const styles = {
-  hg3iw2q: css('css-sw3yj', [], function inlineCss() {
+  hnpb55i: css('css-sw3yj', [], function inlineCss() {
     return [
       \`.css-sw3yj { -webkit-flex-direction: row; -ms-flex-direction: row; -webkit-box-orient: horizontal; -webkit-box-direction: normal; flex-direction: row; }\`,
     ];
@@ -1043,7 +1043,7 @@ const UseOfProxy = props => {
   return (
     <div
       data-test-id={props['data-test-id'] || 'App'}
-      className={styles.hg3iw2q}
+      className={styles.hnpb55i}
     >
       <Button
         data-test-id=\\"UseOfProxy.Button\\"
@@ -1065,7 +1065,7 @@ exports[`react-dom parses react-dom UseProxy 1`] = `
 import React from 'react';
 import css from 'glam';
 const styles = {
-  hg3iw2q: css('css-sw3yj', [], function inlineCss() {
+  hnpb55i: css('css-sw3yj', [], function inlineCss() {
     return [
       \`.css-sw3yj { -webkit-flex-direction: row; -ms-flex-direction: row; -webkit-box-orient: horizontal; -webkit-box-direction: normal; flex-direction: row; }\`,
     ];
@@ -1077,7 +1077,7 @@ const UseProxy = props => {
   return (
     <div
       data-test-id={props['data-test-id'] || 'Button'}
-      className={styles.hg3iw2q}
+      className={styles.hnpb55i}
     >
       {props.childrenProxyMap &&
       childrenArray[props.childrenProxyMap['props.icon']]
@@ -1105,7 +1105,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import Topics from './Topics.view.js';
 import css from 'glam';
 const styles = {
-  hg3iw2q: css('css-sw3yj', [], function inlineCss() {
+  hnpb55i: css('css-sw3yj', [], function inlineCss() {
     return [
       \`.css-sw3yj { -webkit-flex-direction: row; -ms-flex-direction: row; -webkit-box-orient: horizontal; -webkit-box-direction: normal; flex-direction: row; }\`,
     ];
@@ -1117,7 +1117,7 @@ const UseRouter = props => {
     <Router>
       <div
         data-test-id={props['data-test-id'] || 'Horizontal'}
-        className={styles.hg3iw2q}
+        className={styles.hnpb55i}
       >
         <Route
           path=\\"/\\"
@@ -1181,7 +1181,7 @@ exports[`react-dom parses react-dom UseText 1`] = `
 import React from 'react';
 import css from 'glam';
 const styles = {
-  h1w7s7t6: css('css-1l09f9n', [], function inlineCss() {
+  h1bamxte: css('css-1l09f9n', [], function inlineCss() {
     return [
       \`.css-1l09f9n { color: blue;
 font-family: Montserrat, sans-serif;
@@ -1195,7 +1195,7 @@ const UseText = props => {
   return (
     <div
       data-test-id={props['data-test-id'] || 'Text'}
-      className={styles.h1w7s7t6}
+      className={styles.h1bamxte}
     >
       Hi, I'm some text
     </div>
@@ -1211,7 +1211,7 @@ exports[`react-dom parses react-dom UseVertical 1`] = `
 import React from 'react';
 import css from 'glam';
 const styles = {
-  h1vjf5pn: css('css-nxb3y5', [], function inlineCss() {
+  h1k352l5: css('css-nxb3y5', [], function inlineCss() {
     return [
       \`.css-nxb3y5 { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column;
 background-color: red; }\`,
@@ -1223,7 +1223,7 @@ const UseVertical = props => {
   return (
     <div
       data-test-id={props['data-test-id'] || 'Vertical'}
-      className={styles.h1vjf5pn}
+      className={styles.h1k352l5}
     >
       {props.children}
     </div>
@@ -1239,7 +1239,7 @@ exports[`react-dom parses react-dom When 1`] = `
 import React from 'react';
 import css from 'glam';
 const styles = {
-  hg3iw2q: css('css-sw3yj', [], function inlineCss() {
+  hnpb55i: css('css-sw3yj', [], function inlineCss() {
     return [
       \`.css-sw3yj { -webkit-flex-direction: row; -ms-flex-direction: row; -webkit-box-orient: horizontal; -webkit-box-direction: normal; flex-direction: row; }\`,
     ];
@@ -1250,7 +1250,7 @@ const When = props => {
   return (
     <div
       data-test-id={props['data-test-id'] || 'App'}
-      className={styles.hg3iw2q}
+      className={styles.hnpb55i}
     >
       {props.showMe ? (
         <div data-test-id=\\"When.Text\\">I may be hidden</div>
@@ -1269,12 +1269,12 @@ exports[`react-dom parses react-dom WhenList 1`] = `
 import React from 'react';
 import css from 'glam';
 const styles = {
-  hg3iw2q: css('css-sw3yj', [], function inlineCss() {
+  hnpb55i: css('css-sw3yj', [], function inlineCss() {
     return [
       \`.css-sw3yj { -webkit-flex-direction: row; -ms-flex-direction: row; -webkit-box-orient: horizontal; -webkit-box-direction: normal; flex-direction: row; }\`,
     ];
   }),
-  h1lmw638: css('css-1s0kfvh', [], function inlineCss() {
+  h18or678: css('css-1s0kfvh', [], function inlineCss() {
     return [
       \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
     ];
@@ -1285,10 +1285,10 @@ const WhenList = props => {
   return (
     <div
       data-test-id={props['data-test-id'] || 'App'}
-      className={styles.hg3iw2q}
+      className={styles.hnpb55i}
     >
       {props.showMe ? (
-        <div data-test-id=\\"WhenList.List\\" className={styles.h1lmw638}>
+        <div data-test-id=\\"WhenList.List\\" className={styles.h18or678}>
           {Array.isArray(props.list) &&
             props.list.map((item, index) => (
               <div data-test-id=\\"WhenList.Text\\" key={index}>
@@ -1326,7 +1326,7 @@ import React from 'react';
 import * as fromTests from './WithTest.view.tests.js';
 import css from 'glam';
 const styles = {
-  h1lmw638: css('css-1s0kfvh', [], function inlineCss() {
+  h18or678: css('css-1s0kfvh', [], function inlineCss() {
     return [
       \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
     ];
@@ -1395,7 +1395,7 @@ const WithTest = props => {
     <button
       data-test-id={props['data-test-id'] || 'Vertical'}
       onClick={props.change}
-      className={styles.h1lmw638}
+      className={styles.h18or678}
     >
       <div data-test-id=\\"WithTest.Text\\">{props.text}</div>
       {props.children}
