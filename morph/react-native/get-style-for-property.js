@@ -1,9 +1,4 @@
-import {
-  deinterpolate,
-  // getProp,
-  // getPropertiesAsObject,
-  isTag,
-} from '../utils.js'
+import { deinterpolate, isTag } from '../utils.js'
 import getColor from 'color'
 
 export default (node, parent, code) => {
