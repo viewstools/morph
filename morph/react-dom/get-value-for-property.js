@@ -11,6 +11,10 @@ export default (node, parent) => {
         return {
           src: safe(value, node),
         }
+      } else if (key === 'isDisabled') {
+        return {
+          disabled: safe(value, node),
+        }
       } else {
         return {
           [key]: safe(value, node),
