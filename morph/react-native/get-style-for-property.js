@@ -36,6 +36,16 @@ export default (node, parent, code) => {
           placeholderTextColor: value,
         }
       }
+      // Just returning the value in cases where if statement is not true
+      // Otherwise it was falling through to the next case.
+      return {
+        color: value,
+      }
+
+    case 'lineHeight':
+      return {
+        lineHeight: getLineHeight(node, parent),
+      }
 
     default:
       return {
@@ -50,6 +60,13 @@ const getFontFamily = (node, parent) => {
   const fontFamily = node.value.value.split(',')[0].replace(/\s/g, '')
 
   return fontWeight ? `${fontFamily}-${fontWeight.value.value}` : fontFamily
+}
+
+const getLineHeight = (node, parent) => {
+  const fontSize = parent.list.find(n => n.key.value === 'fontSize')
+  // using a default font size of 16 if none specified
+  const fontSizeValue = fontSize ? fontSize.value.value : 16
+  return node.value.value * fontSizeValue
 }
 
 // support
