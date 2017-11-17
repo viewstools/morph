@@ -23,6 +23,7 @@ const imports = {
 }
 
 export default ({
+  debug,
   file,
   getImport,
   inlineStyles = true,
@@ -45,6 +46,7 @@ export default ({
     animatedButton: false,
     captures: [],
     defaultProps: false,
+    debug,
     file,
     fonts: [],
     inlineStyles,
