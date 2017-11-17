@@ -64,8 +64,8 @@ const getFontFamily = (node, parent) => {
 
 const getLineHeight = (node, parent) => {
   const fontSize = parent.list.find(n => n.key.value === 'fontSize')
-  // using a default font size of 18 if none specified
-  const fontSizeValue = fontSize ? fontSize.value.value : 18
+  // using a default font size of 16 if none specified
+  const fontSizeValue = fontSize ? fontSize.value.value : 16
   return node.value.value * fontSizeValue
 }
 
