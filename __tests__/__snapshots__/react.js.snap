@@ -1181,11 +1181,12 @@ exports[`react-dom parses react-dom UseText 1`] = `
 import React from 'react';
 import css from 'glam';
 const styles = {
-  h1w7s7t6: css('css-1l09f9n', [], function inlineCss() {
+  htas5du: css('css-1m3prkm', [], function inlineCss() {
     return [
-      \`.css-1l09f9n { color: blue;
+      \`.css-1m3prkm { color: blue;
 font-family: Montserrat, sans-serif;
 font-size: 16px;
+line-height: 1.5;
 font-weight: 300; }\`,
     ];
   }),
@@ -1195,7 +1196,7 @@ const UseText = props => {
   return (
     <div
       data-test-id={props['data-test-id'] || 'Text'}
-      className={styles.h1w7s7t6}
+      className={styles.htas5du}
     >
       Hi, I'm some text
     </div>
@@ -2514,12 +2515,17 @@ exports[`react-native parses react-native UseText 1`] = `
 import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 const styles = StyleSheet.create({
-  h11t0jc: { color: 'blue', fontFamily: 'Montserrat-300', fontSize: 16 },
+  h1gml2rz: {
+    color: 'blue',
+    fontFamily: 'Montserrat-300',
+    fontSize: 16,
+    lineHeight: 24,
+  },
 });
 
 const UseText = props => {
   return (
-    <Text testID={props['testID'] || 'Text'} style={styles.h11t0jc}>
+    <Text testID={props['testID'] || 'Text'} style={styles.h1gml2rz}>
       Hi, I'm some text
     </Text>
   );
