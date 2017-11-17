@@ -752,11 +752,12 @@ exports[`react-dom parses react-dom UseCaptureEmail 1`] = `
 import React from 'react';
 import css from 'glam';
 const styles = {
-  h10b81ay: css('css-17byui2', [], function inlineCss() {
+  hzek9vx: css('css-f7ztup', [], function inlineCss() {
     return [
-      \`.css-17byui2 { border: 1px solid black;
+      \`.css-f7ztup { border: 1px solid black;
 color: red; }\`,
-      \`.css-17byui2::placeholder { color: blue; }\`,
+      \`.css-f7ztup:focus { color: purple; }\`,
+      \`.css-f7ztup::placeholder { color: blue; }\`,
     ];
   }),
 };
@@ -778,7 +779,7 @@ class UseCaptureEmail extends React.Component {
         data-test-id={props['data-test-id'] || 'Email'}
         defaultValue=\\"hey this is a default value\\"
         onSubmit={props.onSubmit}
-        className={styles.h10b81ay}
+        className={styles.hzek9vx}
       />
     );
   }
