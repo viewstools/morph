@@ -17,7 +17,7 @@ const Action = props => {
     <button
       data-test-id={props['data-test-id'] || 'Vertical'}
       onClick={props.clickMe}
-      isDisabled={props.isDisabled}
+      disabled={props.isDisabled}
       className={styles.h1lmw638}
     >
       <div data-test-id=\\"Action.Text\\">click me</div>
