@@ -17,12 +17,18 @@ export const enter = (node, parent, state) => {
 
   if (node.action) {
     const block = 'TouchableWithoutFeedback'
+    const isDisabled = getProp(node, 'isDisabled')
+      ? getProp(node, 'isDisabled').value.value
+      : null
     state.use(block)
+
     state.render.push(
       `<${block}
           activeOpacity={0.7}
           onPress=${wrap(node.action)}
-          underlayColor='transparent'>`
+          ${isDisabled ? `disabled=${wrap(isDisabled)}` : ''}
+          underlayColor='transparent'
+          ${node.isInList ? 'key={index}' : ''}>`
     )
     node.wrapEnd = `</${block}>`
   } else if (node.teleport) {

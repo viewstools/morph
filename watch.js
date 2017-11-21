@@ -29,6 +29,7 @@ module.exports = options => {
     let {
       as,
       compile,
+      debug,
       fake: shouldIncludeFake,
       inlineStyles,
       map,
@@ -45,6 +46,7 @@ module.exports = options => {
       {
         as: 'react-dom',
         compile: false,
+        debug: false,
         fake: false,
         map: {},
         logic: true,
@@ -285,6 +287,7 @@ height 100`
         const res = morph(source, {
           as: isTests(f) ? 'tests' : as,
           compile,
+          debug,
           inlineStyles,
           file: { raw: rawFile, relative: file },
           name: view,

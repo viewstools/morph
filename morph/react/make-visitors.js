@@ -93,11 +93,12 @@ export default ({
       }
 
       if (proxied === 'all') {
-        const childContent = otherProperties.length > 0
-          ? `React.Children.map(props.children, child => React.cloneElement(child, ${getPropertiesAsObject(
-              otherProperties
-            )}))`
-          : 'props.children'
+        const childContent =
+          otherProperties.length > 0
+            ? `React.Children.map(props.children, child => React.cloneElement(child, ${getPropertiesAsObject(
+                otherProperties
+              )}))`
+            : 'props.children'
 
         state.render.push(childContent)
       } else {
@@ -277,7 +278,7 @@ export default ({
 
   const PropertiesListKey = {
     leave(node, parent, state) {
-      if (parent.isInList && !node.hasKey) {
+      if (parent.isInList && !node.hasKey && !parent.wrapEnd) {
         state.render.push(' key={index}')
       }
     },
@@ -298,6 +299,7 @@ export default ({
           base: {},
           active: {},
           hover: {},
+          focus: {},
           activeHover: {},
           disabled: {},
           placeholder: {},
@@ -307,6 +309,7 @@ export default ({
           base: {},
           active: {},
           hover: {},
+          focus: {},
           activeHover: {},
           disabled: {},
           placeholder: {},
