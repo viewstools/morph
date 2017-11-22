@@ -166,6 +166,14 @@ module.exports = options => {
         return maybeFakeJs(f, file, view)
       }
 
+      if (views[view]) {
+        return console.log(
+          chalk.magenta('X'),
+          chalk.dim(`-> ${f}`),
+          `This view will not be morphed as a view with the name ${view} already exists. If you did intend to morph this view please give it a unique name.`
+        )
+      }
+
       verbose && console.log(chalk.yellow('A'), view, chalk.dim(`-> ${f}`))
 
       let shouldMorph = isView(file) // || isFake(view)
