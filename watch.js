@@ -398,6 +398,7 @@ height 50`
 
     const watcherOptions = {
       // filter: f => !/node_modules/.test(f) && !isMorphedView(f),
+      bashNative: ['linux'],
       cwd: src,
       ignore: ['**/node_modules/**', '**/*.view.js'],
     }
