@@ -192,7 +192,7 @@ module.exports = options => {
       }
     })
 
-    const makeDependendUpon = () => {
+    const makeResponsibleFor = () => {
       Object.keys(views).forEach(updateResponsibleFor)
     }
 
@@ -231,7 +231,7 @@ height 100`
         viewsLeftToBeReady--
 
         if (viewsLeftToBeReady === 0) {
-          makeDependendUpon()
+          makeResponsibleFor()
 
           resolve(instance)
         }
