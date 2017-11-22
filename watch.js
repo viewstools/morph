@@ -134,14 +134,14 @@ module.exports = options => {
     }
 
     const dependsOn = {}
-    const dependedUpon = {}
+    const responsibleFor = {}
     const logic = {}
     const tests = {}
     const views = Object.assign({}, map)
 
     const instance = {
       dependsOn,
-      dependedUpon,
+      responsibleFor,
       logic,
       tests,
       views,
@@ -193,7 +193,7 @@ module.exports = options => {
     })
 
     const makeDependendUpon = () => {
-      Object.keys(views).forEach(updateDependedUpon)
+      Object.keys(views).forEach(updateResponsibleFor)
     }
 
     const maybeFakeJs = (f, file, view) => {
@@ -241,7 +241,7 @@ height 100`
     const getPointsOfUseFor = view =>
       Object.keys(dependsOn).filter(dep => dependsOn[dep].includes(view))
 
-    const updateDependedUpon = viewRaw => {
+    const updateResponsibleFor = viewRaw => {
       const view = viewRaw.split('.')[0]
       const list = []
       const left = getPointsOfUseFor(view)
@@ -255,9 +255,9 @@ height 100`
         }
       }
 
-      dependedUpon[view] = uniq(flatten(list))
+      responsibleFor[view] = uniq(flatten(list))
 
-      return dependedUpon[view]
+      return responsibleFor[view]
     }
 
     const addViewSkipMorph = f => addView(f, true)
@@ -301,7 +301,7 @@ height 100`
         const toMorph = {
           code: res.code,
           dependsOn: dependsOn[view],
-          // dependedUpon: dependedUpon[view],
+          // responsibleFor: responsibleFor[view],
           file: rawFile,
           fonts: res.fonts,
           source,
@@ -312,8 +312,8 @@ height 100`
 
         if (maybeIsReady()) {
           // TODO revisit effect of rawView vs view here
-          updateDependedUpon(view)
-          toMorph.dependedUpon = dependedUpon[view]
+          updateResponsibleFor(view)
+          toMorph.responsibleFor = responsibleFor[view]
 
           if (toMorphQueue === null) {
             toMorphQueue = []
@@ -351,7 +351,7 @@ height 100`
       const view = viewRaw.split('.')[0]
 
       await Promise.all(
-        dependedUpon[view].map(dep => {
+        responsibleFor[view].map(dep => {
           return morphView(path.join(src, views[dep]), true)
         })
       )
@@ -435,7 +435,7 @@ height 100`
             onRemove(view)
           }
 
-          updateDependedUpon(view)
+          updateResponsibleFor(view)
 
           remorphDependenciesFor(view)
 
