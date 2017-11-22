@@ -18,6 +18,7 @@ export const morph = (
     as,
     compile,
     debug,
+    enableAnimated,
     file = {},
     getImport = DEFAULT_IMPORT,
     inlineStyles,
@@ -29,6 +30,7 @@ export const morph = (
 ) => {
   let morphed = doMorph[as]({
     debug,
+    enableAnimated,
     file,
     getImport,
     inlineStyles,

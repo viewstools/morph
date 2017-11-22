@@ -26,6 +26,7 @@ import {
 } from './helpers.js'
 import getLoc from './get-loc.js'
 import getMeta from './get-meta.js'
+import getPropTypes from './get-prop-types.js'
 import getTags from './get-tags.js'
 
 export default (rtext, skipComments = true) => {
@@ -33,6 +34,7 @@ export default (rtext, skipComments = true) => {
   const text = rtext.replace(/\r\n/g, '\n')
   const fonts = {}
   const lines = text.split('\n').map(line => line.trim())
+  const props = []
   const stack = []
   const todos = []
   const views = []
@@ -325,6 +327,10 @@ export default (rtext, skipComments = true) => {
           tags[stemmedTag] = true
         }
 
+        if (tags.code) {
+          props.push({ type: block.name.value, prop, value })
+        }
+
         if (tags.style && tags.code) {
           block.maybeAnimated = true
         }
@@ -515,6 +521,7 @@ export default (rtext, skipComments = true) => {
 
   return {
     fonts,
+    props: getPropTypes(props),
     todos,
     views,
   }

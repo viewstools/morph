@@ -121,6 +121,7 @@ export default ({ getImport, name, tests = false, view, views = {} }) => {
       state,
     }),
     fonts: state.fonts,
+    props: state.props,
     todos: state.todos,
   }
 }

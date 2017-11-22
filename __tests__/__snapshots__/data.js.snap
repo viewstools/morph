@@ -2,7 +2,13 @@
 
 exports[`data parses data fields.data 1`] = `
 Object {
-  "code": "export default { city: 'Dublin', country: 'Ireland', fonts: {}, todos: [] };
+  "code": "export default {
+  city: 'Dublin',
+  country: 'Ireland',
+  fonts: {},
+  props: {},
+  todos: [],
+};
 ",
 }
 `;

@@ -1,4 +1,4 @@
-import { getProp, hasProp } from '../utils.js'
+import { hasProp } from '../utils.js'
 import toCamelCase from 'to-camel-case'
 
 export default (node, parent, state) => {
@@ -16,7 +16,7 @@ export default (node, parent, state) => {
 
     case 'Horizontal':
     case 'Vertical':
-      return getGroupBlockName(node, parent)
+      return getGroupBlockName(node, parent, state)
 
     case 'Image':
       return 'img'
@@ -55,7 +55,7 @@ export default (node, parent, state) => {
   }
 }
 
-const getGroupBlockName = (node, parent) => {
+const getGroupBlockName = (node, parent, state) => {
   let name = 'div'
 
   if (hasProp(node, 'teleportTo')) {
@@ -84,7 +84,12 @@ const getGroupBlockName = (node, parent) => {
     name = 'form'
   }
 
-  if (node.maybeAnimated && name !== 'Link' && name !== 'form') {
+  if (
+    node.maybeAnimated &&
+    state.enableAnimated &&
+    name !== 'Link' &&
+    name !== 'form'
+  ) {
     name = `Animated.${name}`
   }
 

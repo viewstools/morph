@@ -24,6 +24,7 @@ const imports = {
 
 export default ({
   debug,
+  enableAnimated = true,
   file,
   getImport,
   inlineStyles = true,
@@ -45,6 +46,7 @@ export default ({
     animatedA: false,
     animatedButton: false,
     captures: [],
+    enableAnimated,
     defaultProps: false,
     debug,
     file,
@@ -138,6 +140,7 @@ export default ({
       state,
     }),
     fonts: state.fonts,
+    props: state.props,
     todos: state.todos,
   }
 }

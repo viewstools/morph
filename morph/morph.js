@@ -21,5 +21,6 @@ export default (code, state, visitors) => {
   })
 
   state.fonts = parsed.fonts
+  state.props = parsed.props
   state.todos = parsed.todos
 }
