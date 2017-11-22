@@ -40,7 +40,6 @@ module.exports = options => {
       onRemove,
       pretty,
       src,
-      tests: shouldIncludeTests,
       verbose,
       viewNotFound,
     } = Object.assign(
@@ -143,14 +142,12 @@ module.exports = options => {
     const dependsOn = {}
     const responsibleFor = {}
     const logic = {}
-    const tests = {}
     const views = Object.assign({}, map)
 
     const instance = {
       dependsOn,
       responsibleFor,
       logic,
-      tests,
       views,
       stop() {},
     }
@@ -166,6 +163,15 @@ module.exports = options => {
             chalk.dim(`-> ${f}`),
             'is a Views reserved name. To fix this, change its file name to something else.'
           )
+        return
+      }
+
+      if (isTests(file)) {
+        console.log(chalk.yellow('T'), view, chalk.dim(`-> ${f}`))
+        const testHasView = views[view.replace(/Tests$/, '')]
+        if (testHasView && !skipMorph) {
+          morphView(f.replace(/\.tests$/, ''))
+        }
         return
       }
 
@@ -188,10 +194,7 @@ module.exports = options => {
 
       let shouldMorph = isView(file)
 
-      if (isTests(file)) {
-        tests[view] = file
-        shouldMorph = true
-      } else if (isLogic(file)) {
+      if (isLogic(file)) {
         logic[view] = file
 
         if (viewsLeftToBeReady === 0) {
@@ -222,16 +225,16 @@ module.exports = options => {
       const fakeFile = path.join(path.dirname(f), fakeView)
 
       // TODO async
-      if (!fs.existsSync(path.join(src, fakeFile))) {
-        // TODO async
-        fs.writeFileSync(
-          fakeFile,
-          `${view}Fake Vertical
+      if (fs.existsSync(path.join(src, fakeFile))) return
+
+      // TODO async
+      fs.writeFileSync(
+        fakeFile,
+        `${view}Fake Vertical
 backgroundColor rgba(53,63,69,0.5)
 width 50
 height 50`
-        )
-      }
+      )
       console.log(chalk.green('🐿 '), view, chalk.dim(`-> ${fakeFile}`))
 
       return fakeFile
@@ -277,9 +280,18 @@ height 50`
 
     const addViewSkipMorph = f => addView(f, true)
 
+    const maybeGetTests = async viewFile => {
+      const testsFile = `${viewFile}.tests`
+      if (await fs.exists(testsFile)) {
+        return await fs.readFile(testsFile, 'utf-8')
+      }
+    }
+
     let toMorphQueue = null
 
-    const morphView = filter(async (f, skipRemorph) => {
+    const morphView = filter(async (maybeF, skipRemorph) => {
+      const f = maybeF.replace(/\.tests$/, '')
+
       const { file, view } = toViewPath(f)
       if (isViewNameRestricted(view, as)) {
         verbose &&
@@ -299,9 +311,10 @@ height 50`
       try {
         const rawFile = path.join(src, f)
         const source = await fs.readFile(rawFile, 'utf-8')
+        const tests = await maybeGetTests(rawFile)
 
         const res = morph(source, {
-          as: isTests(f) ? 'tests' : as,
+          as,
           compile,
           debug,
           enableAnimated,
@@ -310,7 +323,7 @@ height 50`
           name: view,
           getImport,
           pretty,
-          tests: tests[`${view}.view.tests`],
+          tests,
           views,
         })
 
@@ -342,13 +355,6 @@ height 50`
             await Promise.all(toMorphQueue.map(onMorph))
             toMorphQueue = null
           }
-
-          if (isTests(f)) {
-            const viewForTest = view.replace('.view.tests', '')
-            if (views[viewForTest]) {
-              morphView(path.join(src, views[viewForTest]))
-            }
-          }
         } else {
           await onMorph(toMorph)
         }
@@ -378,12 +384,10 @@ height 50`
       const file = f.replace(/(\.ios|\.android|\.web)/, '')
 
       let view = path.basename(file)
-      if (!isTests(file)) {
-        if (isLogic(file)) {
-          view = view.replace(/\.js/, '')
-        } else {
-          view = toPascalCase(view.replace(/\.(view\.fake|js|view)/, ''))
-        }
+      if (isLogic(file)) {
+        view = view.replace(/\.js/, '')
+      } else {
+        view = toPascalCase(view.replace(/\.(view\.fake|js|view)/, ''))
       }
 
       return {
@@ -401,7 +405,7 @@ height 50`
       `**/*.js`,
       `**/*.view`,
       shouldIncludeLogic && `**/*.view.logic.js`,
-      shouldIncludeTests && `**/*.view.tests`,
+      `**/*.view.tests`,
       shouldIncludeFake && `**/*.view.fake`,
     ].filter(Boolean)
 
@@ -437,11 +441,9 @@ height 50`
           verbose && console.log(chalk.blue('D'), view)
 
           if (isTests(f)) {
-            delete tests[view]
-
-            const viewForTest = view.replace('.view.tests', '')
+            const viewForTest = view.replace(/Tests$/, '')
             if (views[viewForTest]) {
-              morphView(path.join(src, views[viewForTest]))
+              morphView(views[viewForTest])
             }
           } else if (isLogic(f)) {
             delete logic[view]

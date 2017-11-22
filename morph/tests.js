@@ -3,6 +3,8 @@ import parse from '../parse/index.js'
 import path from 'path'
 import walk from './walk.js'
 
+export const EMPTY_TEST = 'Main Test'
+
 export default ({ file, view }) => {
   // because the walker mutates the AST, we need to get a new one each time
   // get the names first
@@ -38,7 +40,14 @@ export default ({ file, view }) => {
             )
 
             if (fs.existsSync(resourceFile)) {
-              resource = fs.readFileSync(resourceFile, 'utf8')
+              try {
+                resource = JSON.parse(fs.readFileSync(resourceFile, 'utf8'))
+              } catch (error) {
+                console.error(
+                  `${file}: Can't parse resource ${resourceFile}`,
+                  error
+                )
+              }
             }
             // const importStatement = `import ${resource} from '${file}'`
 
@@ -65,57 +74,35 @@ export default ({ file, view }) => {
     }
   })
 
-  const body = tests
-    .map(({ name, resource, test }, index) => {
-      // every test after the first one inherits the first one
-      const data =
-        index > 0
-          ? {
-              ...tests[0].test,
-              ...test,
-            }
-          : test
+  return tests.map(({ name, resource, test }, index) => {
+    // every test after the first one inherits the first one
+    let data =
+      index > 0
+        ? {
+            ...tests[0].test,
+            ...test,
+          }
+        : test
 
-      const code = [`const ${name} = `]
-
-      if (resource) {
-        code.push(`Object.assign(`)
+    if (resource) {
+      data = {
+        ...data,
+        ...resource,
       }
+    }
 
-      code.push(JSON.stringify(data))
-
-      if (resource) {
-        code.push(`, ${resource})`)
-      }
-
-      return code.join(' ')
-    })
-    .join('\n')
-
-  return {
-    code: `
-  export const names = ${JSON.stringify(names)}
-
-  export const make = display => {
-  ${body.replace(/"?<<DISPLAY>>"?/g, '')}
-  return { _main: '${names[0]}', ${names.join(',')} }
-}`,
-    tests: names,
-  }
+    return {
+      name,
+      data,
+    }
+  })
 }
 
-// TODO embed data
-// Test
-// name Dario
-// addresses
-// from addresses.data
 export const getValue = (property, tests) => {
   switch (property.value.type) {
     case 'Literal':
       const v = property.value.value
-      return tests.includes(v)
-        ? `<<DISPLAY>>() => display(${v}, '${v}')<<DISPLAY>>`
-        : v
+      return tests.includes(v) ? `display:${v}` : v
 
     case 'ArrayExpression':
       return property.value.elements.map(v => getValue(v, tests))

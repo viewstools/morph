@@ -11,19 +11,21 @@ const getPath = (f = '.') => join(__dirname, 'views', f)
       .forEach(f => {
         const name = f.replace(/\.view$/, '')
         const code = readFileSync(getPath(f), 'utf-8')
-        const tests = existsSync(getPath(`${f}.tests`))
+        const testFile = getPath(`${f}.tests`)
+        const tests = existsSync(testFile)
+          ? readFileSync(testFile, 'utf-8')
+          : undefined
 
         it(`parses ${as} ${name}`, () => {
-          const component = morph(code, {
+          const morphed = morph(code, {
             as,
             inlineStyles: true,
             name,
             pretty: true,
             tests,
           })
-          expect(component.code).toMatchSnapshot()
+          expect(morphed).toMatchSnapshot()
         })
-
         // TODO test rendered morphed view
       })
   })

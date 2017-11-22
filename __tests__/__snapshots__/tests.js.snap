@@ -1,39 +1,39 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`tests parses tests MyView.view.tests 1`] = `
-Object {
-  "code": "export const names = ['Main', 'Next', 'EvenMore', 'Data'];
-
-export const make = display => {
-  const Main = {
-    width: 360,
-    text: \\"it's Main!\\",
-    onClick: () => display(Next, 'Next'),
-  };
-  const Next = {
-    width: 360,
-    text: \\"it's Next!\\",
-    onClick: () => display(EvenMore, 'EvenMore'),
-  };
-  const EvenMore = {
-    width: 360,
-    text: \\"it's EvenMore!\\",
-    onClick: () => display(Main, 'Main'),
-  };
-  const Data = Object.assign(
-    { width: 360, text: \\"it's Main!\\", onClick: () => display(Next, 'Next') },
-    {
-      this: 'came from a json file',
-    }
-  );
-  return { _main: 'Main', Main, Next, EvenMore, Data };
-};
-",
-  "tests": Array [
-    "Main",
-    "Next",
-    "EvenMore",
-    "Data",
-  ],
-}
+Array [
+  Object {
+    "data": Object {
+      "onClick": "display:Next",
+      "text": "it's Main!",
+      "width": 360,
+    },
+    "name": "Main",
+  },
+  Object {
+    "data": Object {
+      "onClick": "display:EvenMore",
+      "text": "it's Next!",
+      "width": 360,
+    },
+    "name": "Next",
+  },
+  Object {
+    "data": Object {
+      "onClick": "display:Main",
+      "text": "it's EvenMore!",
+      "width": 360,
+    },
+    "name": "EvenMore",
+  },
+  Object {
+    "data": Object {
+      "onClick": "display:Next",
+      "text": "it's Main!",
+      "this": "came from a json file",
+      "width": 360,
+    },
+    "name": "Data",
+  },
+]
 `;

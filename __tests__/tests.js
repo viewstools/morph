@@ -1,6 +1,6 @@
-import { morph } from '../index.js'
 import { join } from 'path'
 import { readdirSync, readFileSync } from 'fs'
+import morph from '../morph/tests.js'
 
 const as = 'tests'
 const isData = f => /\.view.tests$/.test(f)
@@ -14,9 +14,7 @@ describe(as, () => {
       const code = readFileSync(raw, 'utf-8')
 
       it(`parses ${as} ${name}`, () => {
-        expect(
-          morph(code, { as, file: { raw }, name, pretty: true })
-        ).toMatchSnapshot()
+        expect(morph({ file: { raw }, view: code })).toMatchSnapshot()
       })
     })
 })

@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-const { extname } = require('path')
 const { readFileSync, statSync } = require('fs')
 const { morph, pathToName } = require('./lib.js')
 const chalk = require('chalk')
@@ -14,7 +13,6 @@ const {
   inlineStyles,
   logic,
   pretty,
-  tests,
   watch: shouldWatch,
 } = require('minimist')(process.argv.slice(2), {
   alias: {
@@ -28,7 +26,6 @@ const {
     inlineStyles: false,
     logic: true,
     pretty: true,
-    tests: false,
     watch: false,
   },
 })
@@ -39,7 +36,6 @@ if (help) {
     --as            target platform
                       react-dom (default)
                       react-native
-                      data
 
     --compile       if true, produces ES5 JS, defaults to false
     --inline-styles if true, it will inline styles in react-dom,
@@ -49,8 +45,6 @@ if (help) {
     --logic         if true, it includes .view.logic.js files in
                       the output, defaults to true
     --pretty        format output code, defaults to true
-    --tests         if true, it includes the .view.tests files in
-                      the output, defaults to false
     --watch         watch a directory and produce .view.js files
   `)
 
@@ -75,9 +69,7 @@ if (shouldWatch) {
   }
 
   console.log(
-    `Will morph files at '${chalk.green(input)}' as ${chalk.green(
-      as
-    )} and ${tests ? 'will' : "won't"} include tests\n`
+    `Will morph files at '${chalk.green(input)}' as ${chalk.green(as)}\n`
   )
   console.log(chalk.yellow('A'), ' = Added')
   console.log(chalk.blue('D'), ` = View deleted`)
@@ -94,7 +86,6 @@ if (shouldWatch) {
     logic,
     pretty,
     src: input,
-    tests,
   })
 } else {
   if (statSync(input).isDirectory()) {
@@ -106,7 +97,6 @@ if (shouldWatch) {
       once: true,
       pretty,
       src: input,
-      tests,
     })
   } else {
     const { code } = morph(readFileSync(input, 'utf-8'), {
@@ -116,7 +106,6 @@ if (shouldWatch) {
       file: { raw: input, relative: input },
       name: pathToName(input),
       pretty,
-      tests,
     })
 
     console.log(code)

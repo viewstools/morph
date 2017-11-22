@@ -1,8 +1,8 @@
 import * as BlockCapture from './react-dom/block-capture.js'
 import * as BlockGoTo from './react-dom/block-go-to.js'
 import * as BlockTeleport from './react-dom/block-teleport.js'
-import { leave as PropertiesStyleLeave } from './react-dom/properties-style.js'
 import { enter as BlockTestIdEnter } from './react-dom/block-test-id.js'
+import { leave as PropertiesStyleLeave } from './react-dom/properties-style.js'
 import getBlockName from './react-dom/get-block-name.js'
 import getStyleForProperty from './react-dom/get-style-for-property.js'
 import getStyles from './react-dom/get-styles.js'
@@ -12,6 +12,7 @@ import makeVisitors from './react/make-visitors.js'
 import maybeUsesRouter from './react-dom/maybe-uses-router.js'
 import maybeUsesStyleSheet from './react-dom/maybe-uses-style-sheet.js'
 import morph from './morph.js'
+import morphTests, { EMPTY_TEST } from './tests.js'
 import restrictedNames from './react-dom/restricted-names.js'
 import toComponent from './react/to-component.js'
 
@@ -29,7 +30,7 @@ export default ({
   getImport,
   inlineStyles = true,
   name,
-  tests = false,
+  tests = EMPTY_TEST,
   view,
   views = {},
 }) => {
@@ -37,7 +38,9 @@ export default ({
   if (name !== finalName) {
     console.warn(
       `// "${name}" is a Views reserved name.
-      We've renamed it to "${finalName}", so your view should work but this isn't ideal.
+      We've renamed it to "${
+        finalName
+      }", so your view should work but this isn't ideal.
       To fix this, change its file name to something else.`
     )
   }
@@ -60,7 +63,7 @@ export default ({
     todos: [],
     uses: [],
     testIds: {},
-    tests,
+    tests: morphTests({ view: tests, file }),
     use(block) {
       if (
         state.uses.includes(block) ||
@@ -77,7 +80,9 @@ export default ({
 
   if (name !== finalName) {
     console.warn(
-      `// ${name} is a Views reserved name. To fix this, change its file name to something else.`
+      `// ${
+        name
+      } is a Views reserved name. To fix this, change its file name to something else.`
     )
   }
 
@@ -141,6 +146,7 @@ export default ({
     }),
     fonts: state.fonts,
     props: state.props,
+    tests: state.tests,
     todos: state.todos,
   }
 }

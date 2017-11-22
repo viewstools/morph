@@ -1,8 +1,8 @@
 import * as BlockBackgroundImage from './react-native/block-background-image.js'
 import * as BlockCapture from './react-native/block-capture.js'
 import * as BlockWrap from './react-native/block-wrap.js'
-import { leave as PropertiesStyleLeave } from './react-native/properties-style.js'
 import { enter as BlockTestIdEnter } from './react-native/block-test-id.js'
+import { leave as PropertiesStyleLeave } from './react-native/properties-style.js'
 import getBlockName from './react-native/get-block-name.js'
 import getStyleForProperty from './react-native/get-style-for-property.js'
 import getStyles from './react-native/get-styles.js'
@@ -13,6 +13,7 @@ import maybeUsesTextInput from './react-native/maybe-uses-text-input.js'
 import maybeUsesRouter from './react-native/maybe-uses-router.js'
 import maybeUsesStyleSheet from './react-native/maybe-uses-style-sheet.js'
 import morph from './morph.js'
+import morphTests, { EMPTY_TEST } from './tests.js'
 import restrictedNames from './react-native/restricted-names.js'
 import toComponent from './react/to-component.js'
 
@@ -23,12 +24,21 @@ const imports = {
   Router: "import { NativeRouter as Router } from 'react-router-native'",
 }
 
-export default ({ getImport, name, tests = false, view, views = {} }) => {
+export default ({
+  file,
+  getImport,
+  name,
+  tests = EMPTY_TEST,
+  view,
+  views = {},
+}) => {
   const finalName = restrictedNames.includes(name) ? `${name}1` : name
   if (name !== finalName) {
     console.warn(
       `// "${name}" is a Views reserved name.
-      We've renamed it to "${finalName}", so your view should work but this isn't ideal.
+      We've renamed it to "${
+        finalName
+      }", so your view should work but this isn't ideal.
       To fix this, change its file name to something else.`
     )
   }
@@ -43,7 +53,7 @@ export default ({ getImport, name, tests = false, view, views = {} }) => {
     render: [],
     styles: {},
     testIds: {},
-    tests,
+    tests: morphTests({ view: tests, file }),
     todos: [],
     uses: [],
     use(block) {
@@ -122,6 +132,7 @@ export default ({ getImport, name, tests = false, view, views = {} }) => {
     }),
     fonts: state.fonts,
     props: state.props,
+    tests: state.tests,
     todos: state.todos,
   }
 }
