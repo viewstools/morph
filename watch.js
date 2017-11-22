@@ -28,6 +28,7 @@ module.exports = options => {
   return new Promise(async (resolve, reject) => {
     let {
       as,
+      clean: shouldClean,
       compile,
       debug,
       fake: shouldIncludeFake,
@@ -45,6 +46,7 @@ module.exports = options => {
     } = Object.assign(
       {
         as: 'react-dom',
+        clean: true,
         compile: false,
         debug: false,
         fake: false,
@@ -59,11 +61,15 @@ module.exports = options => {
       options
     )
 
-    clean(src)
+    if (shouldClean) {
+      clean(src)
+    }
 
     if (!viewNotFound)
       viewNotFound = name => {
-        const warning = `${src}/${name}.view doesn't exist but it is being used. Create the file!`
+        const warning = `${src}/${
+          name
+        }.view doesn't exist but it is being used. Create the file!`
         verbose && console.log(chalk.magenta(`! ${warning}`))
         return getViewNotFound(as, name, warning)
       }
@@ -170,7 +176,9 @@ module.exports = options => {
         return console.log(
           chalk.magenta('X'),
           chalk.dim(`-> ${f}`),
-          `This view will not be morphed as a view with the name ${view} already exists. If you did intend to morph this view please give it a unique name.`
+          `This view will not be morphed as a view with the name ${
+            view
+          } already exists. If you did intend to morph this view please give it a unique name.`
         )
       }
 
@@ -360,7 +368,7 @@ height 100`
 
       await Promise.all(
         responsibleFor[view].map(dep => {
-          return morphView(path.join(src, views[dep]), true)
+          return morphView(views[dep], true)
         })
       )
     }
@@ -406,6 +414,7 @@ height 100`
 
     if (!once) {
       const watcher = chokidar.watch(watcherPattern, {
+        cwd: src,
         ignored: /(node_modules|\.view.js)/,
         ignoreInitial: true,
       })

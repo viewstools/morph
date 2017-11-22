@@ -1,6 +1,6 @@
 {
   "name": "views-morph",
-  "version": "0.6.19",
+  "version": "0.6.20",
   "description": "Views language morpher",
   "main": "lib.js",
   "bin": {
@@ -50,7 +50,6 @@
     "fast-glob": "^1.0.1",
     "flatten": "^1.0.2",
     "glam": "^4.0.3",
-    "globule": "^1.1.0",
     "google-fonts-complete": "^1.1.1",
     "minimist": "^1.2.0",
     "mz": "^2.6.0",

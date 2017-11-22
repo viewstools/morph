@@ -1,5 +1,6 @@
 const glob = require('fast-glob')
 const fs = require('fs')
+const path = require('path')
 
 module.exports = async src => {
   const options = {
@@ -22,5 +23,5 @@ module.exports = async src => {
     m => !created.includes(m.replace(/\.(js|css)$/, ''))
   )
 
-  toRemove.forEach(f => fs.unlinkSync(f))
+  toRemove.forEach(f => fs.unlink(path.join(src, f)))
 }
