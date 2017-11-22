@@ -75,7 +75,8 @@ module.exports = options => {
 
       try {
         // TODO async
-        const content = fs.readFileSync(f, 'utf-8')
+        const filePath = path.join(src, f)
+        const content = fs.readFileSync(filePath, 'utf-8')
         is = /\/\/ @view/.test(content)
       } catch (err) {}
 
