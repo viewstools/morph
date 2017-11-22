@@ -11,7 +11,6 @@ const uniq = require('array-uniq')
 
 const isMorphedView = f => /\.view\.js$/.test(f)
 
-// const isFake = f => /\.view\.fake$/.test(f)
 const isJs = f => path.extname(f) === '.js'
 const isLogic = f => /\.view\.logic\.js$/.test(f)
 const isTests = f => /\.view\.tests$/.test(f)
@@ -168,23 +167,24 @@ module.exports = options => {
         return
       }
 
-      if (isJsComponent(f) && shouldIncludeFake) {
-        return maybeFakeJs(f, file, view)
-      }
-
       if (views[view]) {
-        return console.log(
+        console.log(
           chalk.magenta('X'),
           chalk.dim(`-> ${f}`),
           `This view will not be morphed as a view with the name ${
             view
           } already exists. If you did intend to morph this view please give it a unique name.`
         )
+        return
+      }
+
+      if (isJsComponent(f) && shouldIncludeFake) {
+        return maybeFakeJs(f, file, view)
       }
 
       verbose && console.log(chalk.yellow('A'), view, chalk.dim(`-> ${f}`))
 
-      let shouldMorph = isView(file) // || isFake(view)
+      let shouldMorph = isView(file)
 
       if (isTests(file)) {
         tests[view] = file
@@ -220,21 +220,18 @@ module.exports = options => {
       const fakeFile = path.join(path.dirname(f), fakeView)
 
       // TODO async
-      if (!fs.existsSync(fakeFile)) {
+      if (!fs.existsSync(path.join(src, fakeFile))) {
         // TODO async
         fs.writeFileSync(
           fakeFile,
-          `${view}Fake is Vertical
+          `${view}Fake Vertical
 backgroundColor rgba(53,63,69,0.5)
-width 100
-height 100`
+width 50
+height 50`
         )
-
-        // const finalFake = toViewPath(fakeFile)
       }
       console.log(chalk.green('🐿 '), view, chalk.dim(`-> ${fakeFile}`))
 
-      views[view] = fakeFile
       return fakeFile
     }
 
