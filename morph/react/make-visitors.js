@@ -396,12 +396,12 @@ export default ({
             ),
           }
         } else {
-          // code = isCode(node);
-          let { _isProp, ...styleForProperty } = getStyleForProperty(
+          const code = isCode(node)
+          ;({ _isProp, ...styleForProperty } = getStyleForProperty(
             node,
-            parent
-            // code
-          )
+            parent,
+            code
+          ))
         }
 
         if (_isProp) {
