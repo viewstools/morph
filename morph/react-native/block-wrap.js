@@ -20,12 +20,23 @@ export const enter = (node, parent, state) => {
     const isDisabled = getProp(node, 'isDisabled')
       ? getProp(node, 'isDisabled').value.value
       : null
+    const hasScopedActions = node.scoped.hasOwnProperty('onClick')
+
+    const scopedActions = node.properties.list.filter(
+      prop => prop.key.value === 'onClick' && prop.inScope
+    )
+
+    const scopedConditional = `${scopedActions[0].inScope} ? ${scopedActions[0]
+      .value.value} : ${node.action}`
+
     state.use(block)
 
     state.render.push(
       `<${block}
           activeOpacity={0.7}
-          onPress=${wrap(node.action)}
+          ${hasScopedActions
+            ? `onPress=${wrap(scopedConditional)}`
+            : `onPress=${wrap(node.action)}`}
           ${isDisabled ? `disabled=${wrap(isDisabled)}` : ''}
           underlayColor='transparent'
           ${node.isInList ? 'key={index}' : ''}>`
