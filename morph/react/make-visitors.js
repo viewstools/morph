@@ -392,7 +392,7 @@ export default ({
           styleForProperty = {
             [node.key.value]: asScopedValue(
               parent.parent.scoped[node.key.value],
-              node.value.value,
+              node,
               parent
             ),
           }
@@ -426,7 +426,7 @@ export default ({
       if (node.key.value === 'text' && parent.parent.name.value === 'Text') {
         if (parent.parent.scoped.text) {
           parent.parent.explicitChildren = wrap(
-            asScopedValue(parent.parent.scoped.text, node.value.value, parent)
+            asScopedValue(parent.parent.scoped.text, node, parent)
           )
         } else {
           parent.parent.explicitChildren = isCode(node)

@@ -4,7 +4,8 @@ import wrap from './react/wrap.js'
 const safeScope = value =>
   typeof value === 'string' && !isCode(value) ? JSON.stringify(value) : value
 
-export const asScopedValue = (obj, defaultValue, properties) => {
+export const asScopedValue = (obj, node, properties) => {
+  const defaultValue = node.inScope ? null : node.value.value
   let value = []
 
   for (const scope in obj) {
@@ -75,11 +76,8 @@ export const hasProp = (node, key, match) => {
   return typeof match === 'function' ? match(prop.value.value) : true
 }
 
-export const hasDefaultProp = (node, parent) => {
-  return parent.list.some(
-    prop => prop.key.value === node.key.value && !prop.inScope
-  )
-}
+export const hasDefaultProp = (node, parent) =>
+  parent.list.some(prop => prop.key.value === node.key.value && !prop.inScope)
 
 export const isCode = node =>
   typeof node === 'string' ? /props|item|index/.test(node) : isTag(node, 'code')
