@@ -4,6 +4,7 @@ import {
   getProp,
   getPropertiesAsObject,
   getStyleType,
+  hasDefaultProp,
   isCode,
   isData,
   isStyle,
@@ -498,7 +499,7 @@ export default ({
           isData(node) ||
           (!isValidPropertyForBlock(node, parent) && parent.parent.isBasic) ||
           node.tags.scope ||
-          node.inScope
+          (node.inScope && hasDefaultProp(node, parent))
         )
           return
 

@@ -75,6 +75,12 @@ export const hasProp = (node, key, match) => {
   return typeof match === 'function' ? match(prop.value.value) : true
 }
 
+export const hasDefaultProp = (node, parent) => {
+  return parent.list.some(
+    prop => prop.key.value === node.key.value && !prop.inScope
+  )
+}
+
 export const isCode = node =>
   typeof node === 'string' ? /props|item|index/.test(node) : isTag(node, 'code')
 export const isData = node => isTag(node, 'data')
