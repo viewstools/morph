@@ -87,8 +87,6 @@ export default ({
     PropertiesStyleLeave,
   })
 
-  debugger
-
   visitors.Block = {
     // TODO Capture*
     // TODO FlatList

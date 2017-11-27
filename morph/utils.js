@@ -54,6 +54,9 @@ export const getProp = (node, key) => {
   return node.properties && node.properties.list.find(finder)
 }
 
+export const getScope = (node, key) =>
+  getProp(node, key).value.value.split('when ')[1]
+
 const styleStems = [
   'active',
   'hover',
