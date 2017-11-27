@@ -57,6 +57,21 @@ export const getProp = (node, key) => {
 export const getScope = (node, key) =>
   getProp(node, key).value.value.split('when ')[1]
 
+export const getScopedActions = node => {
+  const scopedActions = node.properties.list.filter(
+    prop => prop.key.value === 'onClick' && prop.inScope
+  )
+
+  let scopedConditional = `${node.action}`
+
+  scopedActions.forEach(action => {
+    scopedConditional =
+      `${action.inScope} ? ${action.value.value} : ` + scopedConditional
+  })
+
+  return scopedConditional
+}
+
 const styleStems = [
   'active',
   'hover',

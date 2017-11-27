@@ -1,4 +1,4 @@
-import { getScope, getProp, isCode } from '../utils.js'
+import { getScope, getScopedActions, getProp, isCode } from '../utils.js'
 import getBlockName from './get-block-name.js'
 import safe from '../react/safe.js'
 import wrap from '../react/wrap.js'
@@ -20,18 +20,8 @@ export const enter = (node, parent, state) => {
     const isDisabled = getScope(node, 'isDisabled')
       ? getScope(node, 'isDisabled')
       : null
+
     const hasScopedActions = node.scoped.hasOwnProperty('onClick')
-
-    const scopedActions = node.properties.list.filter(
-      prop => prop.key.value === 'onClick' && prop.inScope
-    )
-
-    let scopedConditional = `${node.action}`
-
-    scopedActions.forEach(action => {
-      scopedConditional =
-        `${action.inScope} ? ${action.value.value} : ` + scopedConditional
-    })
 
     state.use(block)
 
@@ -39,7 +29,7 @@ export const enter = (node, parent, state) => {
       `<${block}
           activeOpacity={0.7}
           ${hasScopedActions
-            ? `onPress=${wrap(scopedConditional)}`
+            ? `onPress=${wrap(getScopedActions(node))}`
             : `onPress=${wrap(node.action)}`}
           ${isDisabled ? `disabled=${wrap(isDisabled)}` : ''}
           underlayColor='transparent'
