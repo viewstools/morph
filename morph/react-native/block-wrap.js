@@ -26,9 +26,14 @@ export const enter = (node, parent, state) => {
       prop => prop.key.value === 'onClick' && prop.inScope
     )
 
-    const scopedConditional = `${scopedActions[0].inScope} ? ${scopedActions[0]
-      .value.value} : ${node.action}`
+    let scopedConditional = `${node.action}`
 
+    scopedActions.forEach(action => {
+      scopedConditional =
+        `${action.inScope} ? ${action.value.value} : ` + scopedConditional
+    })
+
+    debugger
     state.use(block)
 
     state.render.push(
