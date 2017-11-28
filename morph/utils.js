@@ -54,19 +54,18 @@ export const getProp = (node, key) => {
   return node.properties && node.properties.list.find(finder)
 }
 
-export const getScope = (node, key) =>
-  getProp(node, key).value.value.split('when ')[1]
+export const getScope = node => node.value.value.split('when ')[1]
 
-export const getScopedActions = node => {
-  const scopedActions = node.properties.list.filter(
-    prop => prop.key.value === 'onClick' && prop.inScope
+export const getScopedProps = (node, key) => {
+  const scopedProps = node.properties.list.filter(
+    prop => prop.key.value === key && prop.inScope
   )
 
   let scopedConditional = `${node.action}`
 
-  scopedActions.forEach(action => {
+  scopedProps.forEach(prop => {
     scopedConditional =
-      `${action.inScope} ? ${action.value.value} : ` + scopedConditional
+      `${prop.inScope} ? ${prop.value.value} : ` + scopedConditional
   })
 
   return scopedConditional

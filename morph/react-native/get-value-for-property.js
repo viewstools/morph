@@ -13,7 +13,7 @@ export default (node, parent) => {
         return {
           source: `{{ uri: ${uri}}}`,
         }
-      } else {
+      } else if (key !== 'isDisabled') {
         return {
           [key]: safe(value, node),
         }

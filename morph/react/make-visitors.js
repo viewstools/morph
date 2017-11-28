@@ -498,7 +498,7 @@ export default ({
           key === 'when' ||
           isData(node) ||
           (!isValidPropertyForBlock(node, parent) && parent.parent.isBasic) ||
-          node.tags.scope ||
+          (node.tags.scope && node.tags.scope !== 'props.isDisabled') ||
           (node.inScope && hasDefaultProp(node, parent))
         )
           return
