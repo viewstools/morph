@@ -12,6 +12,7 @@ const COMMENT = /^#(.+)$/
 const DATA = /^.+\.data$/
 const EMPTY_LIST = /^is empty list$/i
 const EMPTY_TEXT = /^is empty text$/i
+const EXPRESSION = /\${.+}/
 const FLOAT = /^[0-9]+\.[0-9]+$/
 const FONTABLE = /^(CaptureEmail|CaptureNumber|CapturePhone|CaptureSecure|CaptureText|CaptureTextArea|Text)$/
 const LIST = /^List$/
@@ -29,6 +30,7 @@ const STYLE = new RegExp(
     .map(toCamelCase)
     .join('|')}|pointerEvents|clipPath|appRegion|userSelect)$`
 )
+const TEMPLATE_LITERAL = /^`.+`$/
 const TERNARY = /\?\s*['"]?\s*(.+)?\s*['"]?\s*:\s*['"]?\s*(.+)\s*['"]?\s*/
 const TEXT = /^Text$/
 const TODO = /TODO\s*(@([a-z]+))?\s*(.+)/i
@@ -61,6 +63,7 @@ export const isColor = line => is(COLOR, line)
 export const isEmptyList = line => is(EMPTY_LIST, line)
 export const isEmptyText = line => is(EMPTY_TEXT, line)
 export const isEnd = line => line === ''
+export const isExpression = line => is(EXPRESSION, line)
 export const isFloat = line => is(FLOAT, line)
 export const isFontable = line => is(FONTABLE, line)
 export const isGroup = line => !is(NOT_GROUP, line) && !isCapture(line)
@@ -71,6 +74,7 @@ export const isMargin = line => is(MARGIN, line)
 export const isPadding = line => is(PADDING, line)
 export const isProp = line => is(PROP, line)
 export const isText = line => is(TEXT, line)
+export const isTemplateLiteral = line => is(TEMPLATE_LITERAL, line)
 export const isScope = line => is(SCOPE, line) && isCode(getScope(line))
 export const isSection = line => is(SECTION, line)
 export const isStyle = line => is(STYLE, line)
@@ -172,10 +176,15 @@ export const getValue = value => {
     return ''
   } else if (isBool(value)) {
     return isTrue(value)
+  } else if (isExpression(value)) {
+    return fixBackticks(value)
   } else {
     return value
   }
 }
+
+export const fixBackticks = value =>
+  isTemplateLiteral(value) ? value : `\`${value}\``
 
 export const onlyMainFont = value => {
   const t = value && value.match(TERNARY)
