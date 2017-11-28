@@ -65,6 +65,7 @@ const getGroupBlockName = (node, parent, state) => {
     name = 'a'
     node.goTo = true
   } else if (hasProp(node, 'onClick')) {
+    const propNode = getProp(node, 'onClick')
     let prevParent = parent
     let canBeButton = true
 
@@ -77,6 +78,7 @@ const getGroupBlockName = (node, parent, state) => {
 
     if (canBeButton) {
       name = 'button'
+      node.action = propNode.value.value
     }
   } else if (hasProp(node, 'overflowY', v => v === 'auto' || v === 'scroll')) {
     name = 'div'

@@ -29,7 +29,7 @@ export const enter = (node, parent, state) => {
       `<${block}
           activeOpacity={0.7}
           ${hasScopedActions
-            ? `onPress=${wrap(getScopedProps(node))}`
+            ? `onPress=${wrap(getScopedProps(node, 'onClick'))}`
             : `onPress=${wrap(node.action)}`}
           ${isDisabled ? `disabled=${wrap(isDisabled)}` : ''}
           underlayColor='transparent'

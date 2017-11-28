@@ -18,6 +18,10 @@ export default (node, parent) => {
         return {
           disabled: safe(getScope(node)),
         }
+      } else if (getScopedProps(parent.parent, key)) {
+        return {
+          [key]: safe(getScopedProps(parent.parent, key)),
+        }
       } else {
         return {
           [key]: safe(value, node),
