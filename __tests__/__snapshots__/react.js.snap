@@ -764,6 +764,11 @@ const Scope = props => {
   return (
     <div
       data-test-id={props['data-test-id'] || 'Text'}
+      onClick={
+        props.whatMakesBlue
+          ? props.onClickBlue
+          : props.somethingGreen ? props.onClickGreen : undefined
+      }
       style={{
         color: props.somethingGreen
           ? 'rgb(0,255,0)'
