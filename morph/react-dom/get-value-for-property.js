@@ -18,7 +18,7 @@ export default (node, parent) => {
         return {
           disabled: safe(getScope(node)),
         }
-      } else if (getScopedProps(parent.parent, key)) {
+      } else if (parent.parent.scoped.hasOwnProperty(node.key.value)) {
         return {
           [key]: safe(getScopedProps(parent.parent, key)),
         }

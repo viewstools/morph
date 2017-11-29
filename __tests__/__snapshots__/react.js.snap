@@ -3378,7 +3378,7 @@ const UseRouter = props => {
           render={routeProps => (
             <Home
               testID=\\"UseRouter.Home\\"
-              heigth={props.height}
+              height={props.height}
               width={360}
               {...routeProps}
             />
