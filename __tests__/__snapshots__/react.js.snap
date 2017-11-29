@@ -764,11 +764,6 @@ const Scope = props => {
   return (
     <div
       data-test-id={props['data-test-id'] || 'Text'}
-      onClick={
-        props.whatMakesBlue
-          ? props.onClickBlue
-          : props.somethingGreen ? props.onClickGreen : undefined
-      }
       style={{
         color: props.somethingGreen
           ? 'rgb(0,255,0)'
@@ -822,7 +817,11 @@ const ScopePopup = props => {
     >
       <button
         data-test-id=\\"ScopePopup.Toggle\\"
-        onClick={props.toggle}
+        onClick={
+          props.whatMakesBlue
+            ? props.onClickBlue
+            : props.somethingGreen ? props.onClickGreen : props.toggle
+        }
         className={styles.h18or678}
       >
         <div data-test-id=\\"ScopePopup.Text\\">toggle popup</div>
@@ -2653,7 +2652,11 @@ const ScopePopup = props => {
     >
       <TouchableWithoutFeedback
         activeOpacity={0.7}
-        onPress={props.toggle}
+        onPress={
+          props.whatMakesBlue
+            ? props.onClickBlue
+            : props.somethingGreen ? props.onClickGreen : props.toggle
+        }
         underlayColor=\\"transparent\\"
       >
         <View testID=\\"ScopePopup.Toggle\\" style={styles.h18pdll5}>
