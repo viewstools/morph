@@ -13,12 +13,12 @@ export default (node, parent) => {
         }
       } else if (
         key === 'isDisabled' &&
-        node.value.value.toString().indexOf('when') > -1
+        value.toString().indexOf('when') > -1
       ) {
         return {
           disabled: safe(getScope(node)),
         }
-      } else if (parent.parent.scoped.hasOwnProperty(node.key.value)) {
+      } else if (parent.parent.scoped.hasOwnProperty(key)) {
         return {
           [key]: safe(getScopedProps(parent.parent, key)),
         }
