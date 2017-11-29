@@ -2,6 +2,10 @@ Popup Vertical
 animate pop
 Toggle Vertical
 onClick props.toggle
+green when props.somethingGreen
+onClick props.onClickGreen
+blue when props.whatMakesBlue
+onClick props.onClickBlue
 # animateClick pop spring
 # animateHover explode spring
 Text
