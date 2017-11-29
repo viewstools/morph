@@ -759,18 +759,16 @@ exports[`react-dom parses react-dom Scope 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import css from 'glam';
-const styles = {
-  ha1tv9a: css('css-jk0pkr', [], function inlineCss() {
-    return [\`.css-jk0pkr { color: red; }\`];
-  }),
-};
 
 const Scope = props => {
   return (
     <div
       data-test-id={props['data-test-id'] || 'Text'}
-      className={styles.ha1tv9a}
+      style={{
+        color: props.somethingGreen
+          ? 'rgb(0,255,0)'
+          : props.whatMakesBlue ? 'rgb(0,0,255)' : 'red',
+      }}
     >
       {props.somethingGreen
         ? '2 green'
@@ -1556,7 +1554,7 @@ const UseRouter = props => {
           render={routeProps => (
             <Home
               data-test-id=\\"UseRouter.Home\\"
-              heigth={props.height}
+              height={props.height}
               width={360}
               {...routeProps}
             />
@@ -1914,11 +1912,7 @@ const Action = props => {
       disabled={props.isDisabled}
       underlayColor=\\"transparent\\"
     >
-      <View
-        testID={props['testID'] || 'Vertical'}
-        isDisabled={props.isDisabled}
-        style={styles.h18pdll5}
-      >
+      <View testID={props['testID'] || 'Vertical'} style={styles.h18pdll5}>
         <Text testID=\\"Action.Text\\">click me</Text>
         {props.children}
       </View>
@@ -2601,12 +2595,18 @@ exports[`react-native parses react-native Scope 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { StyleSheet, Text } from 'react-native';
-const styles = StyleSheet.create({ h1g2xbng: { color: 'red' } });
+import { Text } from 'react-native';
 
 const Scope = props => {
   return (
-    <Text testID={props['testID'] || 'Text'} style={styles.h1g2xbng}>
+    <Text
+      testID={props['testID'] || 'Text'}
+      style={{
+        color: props.somethingGreen
+          ? 'rgb(0,255,0)'
+          : props.whatMakesBlue ? 'rgb(0,0,255)' : 'red',
+      }}
+    >
       {props.somethingGreen
         ? '2 green'
         : props.whatMakesBlue ? props.blue : '1 red'}
