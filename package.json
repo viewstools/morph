@@ -8,8 +8,7 @@
   },
   "scripts": {
     "precommit": "lint-staged",
-    "prepare":
-      "NODE_ENV=production rollup --config rollup.config.js; NODE_ENV=production rollup --config rollup.config.parse.js;",
+    "prepare": "NODE_ENV=production rollup --config rollup.config.js; NODE_ENV=production rollup --config rollup.config.parse.js;",
     "test": "jest",
     "watch": "rollup --config rollup.config.js --watch"
   },
@@ -61,9 +60,6 @@
     "to-slug-case": "^1.0.0"
   },
   "lint-staged": {
-    "*.js": [
-      "prettier --trailing-comma es5 --single-quote --no-semi --write",
-      "git add"
-    ]
+    "*.js": ["prettier --trailing-comma es5 --single-quote --no-semi --write", "git add"]
   }
 }
