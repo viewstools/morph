@@ -21,7 +21,6 @@ export const enter = (node, parent, state) => {
       ? getScope(getProp(node, 'isDisabled'))
       : null
 
-    debugger
     const hasScopedActions = node.scoped.hasOwnProperty('onClick')
 
     state.use(block)

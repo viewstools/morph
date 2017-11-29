@@ -386,6 +386,8 @@ export default ({
     enter(node, parent, state) {
       let styleForProperty, isScopedVal, _isProp
       if (isStyle(node) && parent.parent.isBasic) {
+        const code = isCode(node)
+
         if (parent.parent.scoped.hasOwnProperty(node.key.value)) {
           isScopedVal = true
 
@@ -397,7 +399,6 @@ export default ({
             ),
           }
         } else {
-          const code = isCode(node)
           ;({ _isProp, ...styleForProperty } = getStyleForProperty(
             node,
             parent,
@@ -410,9 +411,8 @@ export default ({
             state.render.push(` ${k}=${safe(styleForProperty[k], node)}`)
           )
         } else {
-          const target = isScopedVal
-            ? parent.style.dynamic
-            : parent.style.static
+          const target =
+            code || isScopedVal ? parent.style.dynamic : parent.style.static
           Object.assign(target[getStyleType(node)], styleForProperty)
         }
 
