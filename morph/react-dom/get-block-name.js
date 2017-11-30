@@ -1,4 +1,4 @@
-import { hasProp } from '../utils.js'
+import { getProp, hasProp } from '../utils.js'
 import toCamelCase from 'to-camel-case'
 
 export default (node, parent, state) => {
