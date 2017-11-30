@@ -12,7 +12,7 @@ const COMMENT = /^#(.+)$/
 const DATA = /^.+\.data$/
 const EMPTY_LIST = /^is empty list$/i
 const EMPTY_TEXT = /^is empty text$/i
-const EXPRESSION = /\${.+}/
+const INTERPOLATED_EXPRESSION = /\${.+}/
 const FLOAT = /^[0-9]+\.[0-9]+$/
 const FONTABLE = /^(CaptureEmail|CaptureNumber|CapturePhone|CaptureSecure|CaptureText|CaptureTextArea|Text)$/
 const LIST = /^List$/
@@ -63,7 +63,8 @@ export const isColor = line => is(COLOR, line)
 export const isEmptyList = line => is(EMPTY_LIST, line)
 export const isEmptyText = line => is(EMPTY_TEXT, line)
 export const isEnd = line => line === ''
-export const isExpression = line => is(EXPRESSION, line)
+export const isInterpolatedExpression = line =>
+  is(INTERPOLATED_EXPRESSION, line)
 export const isFloat = line => is(FLOAT, line)
 export const isFontable = line => is(FONTABLE, line)
 export const isGroup = line => !is(NOT_GROUP, line) && !isCapture(line)
@@ -75,6 +76,7 @@ export const isPadding = line => is(PADDING, line)
 export const isProp = line => is(PROP, line)
 export const isText = line => is(TEXT, line)
 export const isTemplateLiteral = line => is(TEMPLATE_LITERAL, line)
+export const isTernary = line => is(TERNARY, line)
 export const isScope = line => is(SCOPE, line) && isCode(getScope(line))
 export const isSection = line => is(SECTION, line)
 export const isStyle = line => is(STYLE, line)
@@ -176,7 +178,7 @@ export const getValue = value => {
     return ''
   } else if (isBool(value)) {
     return isTrue(value)
-  } else if (isExpression(value)) {
+  } else if (isInterpolatedExpression(value) && !isTernary(value)) {
     return fixBackticks(value)
   } else {
     return value

@@ -1,4 +1,4 @@
-import { isCode } from '../utils.js'
+import { isCode, getScopedProps } from '../utils.js'
 import safe from '../react/safe.js'
 
 export default (node, parent) => {
@@ -12,6 +12,10 @@ export default (node, parent) => {
 
         return {
           source: `{{ uri: ${uri}}}`,
+        }
+      } else if (parent.parent.scoped.hasOwnProperty(key)) {
+        return {
+          [key]: safe(getScopedProps(node, parent.parent)),
         }
       } else {
         return {

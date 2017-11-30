@@ -5,6 +5,7 @@ const blacklist = [
   'clipPath',
   'cursor',
   'isActive',
+  'isDisabled',
   'goTo',
   'overflow',
   'overflowX',

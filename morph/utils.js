@@ -4,7 +4,8 @@ import wrap from './react/wrap.js'
 const safeScope = value =>
   typeof value === 'string' && !isCode(value) ? JSON.stringify(value) : value
 
-export const asScopedValue = (obj, defaultValue, properties) => {
+export const asScopedValue = (obj, node, properties) => {
+  const defaultValue = node.inScope ? null : node.value.value
   let value = []
 
   for (const scope in obj) {
@@ -53,6 +54,30 @@ export const getProp = (node, key) => {
   return node.properties && node.properties.list.find(finder)
 }
 
+export const getScope = node => node.value.value.split('when ')[1]
+
+const maybeSafe = node =>
+  node.tags.code
+    ? node.value.value
+    : typeof node.value.value === 'string'
+      ? safe(node.value.value)
+      : node.value.value
+
+export const getScopedProps = (propNode, blockNode) => {
+  const scopedProps = blockNode.properties.list
+    .filter(prop => prop.key.value === propNode.key.value && prop.inScope)
+    .reverse()
+
+  let scopedConditional = maybeSafe(propNode)
+
+  scopedProps.forEach(prop => {
+    scopedConditional =
+      `${prop.inScope} ? ${maybeSafe(prop)} : ` + scopedConditional
+  })
+
+  return scopedConditional
+}
+
 const styleStems = [
   'active',
   'hover',
@@ -74,6 +99,9 @@ export const hasProp = (node, key, match) => {
   if (!prop) return false
   return typeof match === 'function' ? match(prop.value.value) : true
 }
+
+export const hasDefaultProp = (node, parent) =>
+  parent.list.some(prop => prop.key.value === node.key.value && !prop.inScope)
 
 export const isCode = node =>
   typeof node === 'string' ? /props|item|index/.test(node) : isTag(node, 'code')

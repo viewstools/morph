@@ -759,18 +759,16 @@ exports[`react-dom parses react-dom Scope 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import css from 'glam';
-const styles = {
-  ha1tv9a: css('css-jk0pkr', [], function inlineCss() {
-    return [\`.css-jk0pkr { color: red; }\`];
-  }),
-};
 
 const Scope = props => {
   return (
     <div
       data-test-id={props['data-test-id'] || 'Text'}
-      className={styles.ha1tv9a}
+      style={{
+        color: props.somethingGreen
+          ? 'rgb(0,255,0)'
+          : props.whatMakesBlue ? 'rgb(0,0,255)' : 'red',
+      }}
     >
       {props.somethingGreen
         ? '2 green'
@@ -786,6 +784,42 @@ export default Scope;
     "blue": "string",
     "somethingGreen": "string",
     "whatMakesBlue": "string",
+  },
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom ScopeOnCustomView 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import Button from './Button.view.js';
+
+const ScopeOnCustomView = props => {
+  return (
+    <Button
+      data-test-id={props['data-test-id'] || 'Button'}
+      label={props.a ? 'ho' : props.b ? 'this is b' : 'hey'}
+      another={props.a ? 1 : 0}
+      more={props.a ? props.different : props.more}
+    >
+      {props.children}
+    </Button>
+  );
+};
+
+export default ScopeOnCustomView;
+",
+  "fonts": Object {},
+  "props": Object {
+    "different": "string",
+    "more": "string",
   },
   "tests": Array [
     Object {
@@ -819,7 +853,11 @@ const ScopePopup = props => {
     >
       <button
         data-test-id=\\"ScopePopup.Toggle\\"
-        onClick={props.toggle}
+        onClick={
+          props.somethingGreen
+            ? props.onClickGreen
+            : props.whatMakesBlue ? props.onClickBlue : props.toggle
+        }
         className={styles.h18or678}
       >
         <div data-test-id=\\"ScopePopup.Text\\">toggle popup</div>
@@ -834,7 +872,11 @@ export default ScopePopup;
   "fonts": Object {},
   "props": Object {
     "isShown": "string",
+    "onClickBlue": "function",
+    "onClickGreen": "function",
+    "somethingGreen": "string",
     "toggle": "function",
+    "whatMakesBlue": "string",
   },
   "tests": Array [
     Object {
@@ -1003,6 +1045,50 @@ export default TestIds;
 ",
   "fonts": Object {},
   "props": Object {},
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom TextInterpolation 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import css from 'glam';
+const styles = {
+  h18or678: css('css-1s0kfvh', [], function inlineCss() {
+    return [
+      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
+    ];
+  }),
+};
+
+const TextInterpolation = props => {
+  return (
+    <div
+      data-test-id={props['data-test-id'] || 'Vertical'}
+      className={styles.h18or678}
+    >
+      <div data-test-id=\\"TextInterpolation.Text\\">{\`\${props.name} test\`}</div>
+      <div data-test-id=\\"TextInterpolation.Text:1\\">
+        {props.name ? \`\${props.name} here\` : 'other'}
+      </div>
+      {props.children}
+    </div>
+  );
+};
+
+export default TextInterpolation;
+",
+  "fonts": Object {},
+  "props": Object {
+    "name": "string",
+  },
   "tests": Array [
     Object {
       "data": Object {},
@@ -1556,7 +1642,7 @@ const UseRouter = props => {
           render={routeProps => (
             <Home
               data-test-id=\\"UseRouter.Home\\"
-              heigth={props.height}
+              height={props.height}
               width={360}
               {...routeProps}
             />
@@ -1584,7 +1670,7 @@ export default UseRouter;
 ",
   "fonts": Object {},
   "props": Object {
-    "height": "string",
+    "height": "number",
   },
   "tests": Array [
     Object {
@@ -1914,11 +2000,7 @@ const Action = props => {
       disabled={props.isDisabled}
       underlayColor=\\"transparent\\"
     >
-      <View
-        testID={props['testID'] || 'Vertical'}
-        isDisabled={props.isDisabled}
-        style={styles.h18pdll5}
-      >
+      <View testID={props['testID'] || 'Vertical'} style={styles.h18pdll5}>
         <Text testID=\\"Action.Text\\">click me</Text>
         {props.children}
       </View>
@@ -2601,12 +2683,18 @@ exports[`react-native parses react-native Scope 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { StyleSheet, Text } from 'react-native';
-const styles = StyleSheet.create({ h1g2xbng: { color: 'red' } });
+import { Text } from 'react-native';
 
 const Scope = props => {
   return (
-    <Text testID={props['testID'] || 'Text'} style={styles.h1g2xbng}>
+    <Text
+      testID={props['testID'] || 'Text'}
+      style={{
+        color: props.somethingGreen
+          ? 'rgb(0,255,0)'
+          : props.whatMakesBlue ? 'rgb(0,0,255)' : 'red',
+      }}
+    >
       {props.somethingGreen
         ? '2 green'
         : props.whatMakesBlue ? props.blue : '1 red'}
@@ -2621,6 +2709,42 @@ export default Scope;
     "blue": "string",
     "somethingGreen": "string",
     "whatMakesBlue": "string",
+  },
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-native parses react-native ScopeOnCustomView 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import Button from './Button.view.js';
+
+const ScopeOnCustomView = props => {
+  return (
+    <Button
+      testID={props['testID'] || 'Button'}
+      label={props.a ? 'ho' : props.b ? 'this is b' : 'hey'}
+      another={props.a ? 1 : 0}
+      more={props.a ? props.different : props.more}
+    >
+      {props.children}
+    </Button>
+  );
+};
+
+export default ScopeOnCustomView;
+",
+  "fonts": Object {},
+  "props": Object {
+    "different": "string",
+    "more": "string",
   },
   "tests": Array [
     Object {
@@ -2648,7 +2772,11 @@ const ScopePopup = props => {
     >
       <TouchableWithoutFeedback
         activeOpacity={0.7}
-        onPress={props.toggle}
+        onPress={
+          props.somethingGreen
+            ? props.onClickGreen
+            : props.whatMakesBlue ? props.onClickBlue : props.toggle
+        }
         underlayColor=\\"transparent\\"
       >
         <View testID=\\"ScopePopup.Toggle\\" style={styles.h18pdll5}>
@@ -2665,7 +2793,11 @@ export default ScopePopup;
   "fonts": Object {},
   "props": Object {
     "isShown": "string",
+    "onClickBlue": "function",
+    "onClickGreen": "function",
+    "somethingGreen": "string",
     "toggle": "function",
+    "whatMakesBlue": "string",
   },
   "tests": Array [
     Object {
@@ -2811,6 +2943,41 @@ export default TestIds;
 ",
   "fonts": Object {},
   "props": Object {},
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-native parses react-native TextInterpolation 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
+
+const TextInterpolation = props => {
+  return (
+    <View testID={props['testID'] || 'Vertical'} style={styles.h18pdll5}>
+      <Text testID=\\"TextInterpolation.Text\\">{\`\${props.name} test\`}</Text>
+      <Text testID=\\"TextInterpolation.Text:1\\">
+        {props.name ? \`\${props.name} here\` : 'other'}
+      </Text>
+      {props.children}
+    </View>
+  );
+};
+
+export default TextInterpolation;
+",
+  "fonts": Object {},
+  "props": Object {
+    "name": "string",
+  },
   "tests": Array [
     Object {
       "data": Object {},
@@ -3378,7 +3545,7 @@ const UseRouter = props => {
           render={routeProps => (
             <Home
               testID=\\"UseRouter.Home\\"
-              heigth={props.height}
+              height={props.height}
               width={360}
               {...routeProps}
             />
@@ -3406,7 +3573,7 @@ export default UseRouter;
 ",
   "fonts": Object {},
   "props": Object {
-    "height": "string",
+    "height": "number",
   },
   "tests": Array [
     Object {
