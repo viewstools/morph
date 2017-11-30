@@ -64,9 +64,9 @@ const maybeSafe = node =>
       : node.value.value
 
 export const getScopedProps = (propNode, blockNode) => {
-  const scopedProps = blockNode.properties.list.filter(
-    prop => prop.key.value === propNode.key.value && prop.inScope
-  )
+  const scopedProps = blockNode.properties.list
+    .filter(prop => prop.key.value === propNode.key.value && prop.inScope)
+    .reverse()
 
   let scopedConditional = maybeSafe(propNode)
 

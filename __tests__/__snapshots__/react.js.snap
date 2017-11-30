@@ -805,7 +805,7 @@ const ScopeOnCustomView = props => {
   return (
     <Button
       data-test-id={props['data-test-id'] || 'Button'}
-      label={props.b ? 'this is b' : props.a ? 'ho' : 'hey'}
+      label={props.a ? 'ho' : props.b ? 'this is b' : 'hey'}
       another={props.a ? 1 : 0}
       more={props.a ? props.different : props.more}
     >
@@ -854,9 +854,9 @@ const ScopePopup = props => {
       <button
         data-test-id=\\"ScopePopup.Toggle\\"
         onClick={
-          props.whatMakesBlue
-            ? props.onClickBlue
-            : props.somethingGreen ? props.onClickGreen : props.toggle
+          props.somethingGreen
+            ? props.onClickGreen
+            : props.whatMakesBlue ? props.onClickBlue : props.toggle
         }
         className={styles.h18or678}
       >
@@ -2730,7 +2730,7 @@ const ScopeOnCustomView = props => {
   return (
     <Button
       testID={props['testID'] || 'Button'}
-      label={props.b ? 'this is b' : props.a ? 'ho' : 'hey'}
+      label={props.a ? 'ho' : props.b ? 'this is b' : 'hey'}
       another={props.a ? 1 : 0}
       more={props.a ? props.different : props.more}
     >
@@ -2773,9 +2773,9 @@ const ScopePopup = props => {
       <TouchableWithoutFeedback
         activeOpacity={0.7}
         onPress={
-          props.whatMakesBlue
-            ? props.onClickBlue
-            : props.somethingGreen ? props.onClickGreen : props.toggle
+          props.somethingGreen
+            ? props.onClickGreen
+            : props.whatMakesBlue ? props.onClickBlue : props.toggle
         }
         underlayColor=\\"transparent\\"
       >
