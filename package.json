@@ -1,6 +1,6 @@
 {
   "name": "views-morph",
-  "version": "0.7.2",
+  "version": "0.7.3",
   "description": "Views language morpher",
   "main": "lib.js",
   "bin": {
@@ -60,6 +60,9 @@
     "to-slug-case": "^1.0.0"
   },
   "lint-staged": {
-    "*.js": ["prettier --trailing-comma es5 --single-quote --no-semi --write", "git add"]
+    "*.js": [
+      "prettier --trailing-comma es5 --single-quote --no-semi --write",
+      "git add"
+    ]
   }
 }
