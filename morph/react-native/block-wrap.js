@@ -28,9 +28,13 @@ export const enter = (node, parent, state) => {
     state.render.push(
       `<${block}
           activeOpacity={0.7}
-          ${hasScopedActions
-            ? `onPress=${wrap(getScopedProps(node, 'onClick'))}`
-            : `onPress=${wrap(node.action)}`}
+          ${
+            hasScopedActions
+              ? `onPress=${wrap(
+                  getScopedProps(getProp(node, 'onClick'), node)
+                )}`
+              : `onPress=${wrap(node.action)}`
+          }
           ${isDisabled ? `disabled=${wrap(isDisabled)}` : ''}
           underlayColor='transparent'
           ${node.isInList ? 'key={index}' : ''}>`

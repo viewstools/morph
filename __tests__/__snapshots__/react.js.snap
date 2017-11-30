@@ -795,6 +795,42 @@ export default Scope;
 }
 `;
 
+exports[`react-dom parses react-dom ScopeOnCustomView 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import Button from './Button.view.js';
+
+const ScopeOnCustomView = props => {
+  return (
+    <Button
+      data-test-id={props['data-test-id'] || 'Button'}
+      label={props.b ? 'this is b' : props.a ? 'ho' : 'hey'}
+      another={props.a ? 1 : 0}
+      more={props.a ? props.different : props.more}
+    >
+      {props.children}
+    </Button>
+  );
+};
+
+export default ScopeOnCustomView;
+",
+  "fonts": Object {},
+  "props": Object {
+    "different": "string",
+    "more": "string",
+  },
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
 exports[`react-dom parses react-dom ScopePopup 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -2673,6 +2709,42 @@ export default Scope;
     "blue": "string",
     "somethingGreen": "string",
     "whatMakesBlue": "string",
+  },
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-native parses react-native ScopeOnCustomView 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import Button from './Button.view.js';
+
+const ScopeOnCustomView = props => {
+  return (
+    <Button
+      testID={props['testID'] || 'Button'}
+      label={props.b ? 'this is b' : props.a ? 'ho' : 'hey'}
+      another={props.a ? 1 : 0}
+      more={props.a ? props.different : props.more}
+    >
+      {props.children}
+    </Button>
+  );
+};
+
+export default ScopeOnCustomView;
+",
+  "fonts": Object {},
+  "props": Object {
+    "different": "string",
+    "more": "string",
   },
   "tests": Array [
     Object {

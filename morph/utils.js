@@ -56,16 +56,23 @@ export const getProp = (node, key) => {
 
 export const getScope = node => node.value.value.split('when ')[1]
 
-export const getScopedProps = (node, key) => {
-  const scopedProps = node.properties.list.filter(
-    prop => prop.key.value === key && prop.inScope
+const maybeSafe = node =>
+  node.tags.code
+    ? node.value.value
+    : typeof node.value.value === 'string'
+      ? safe(node.value.value)
+      : node.value.value
+
+export const getScopedProps = (propNode, blockNode) => {
+  const scopedProps = blockNode.properties.list.filter(
+    prop => prop.key.value === propNode.key.value && prop.inScope
   )
 
-  let scopedConditional = `${node.action}`
+  let scopedConditional = maybeSafe(propNode)
 
   scopedProps.forEach(prop => {
     scopedConditional =
-      `${prop.inScope} ? ${prop.value.value} : ` + scopedConditional
+      `${prop.inScope} ? ${maybeSafe(prop)} : ` + scopedConditional
   })
 
   return scopedConditional
