@@ -570,6 +570,52 @@ export default ListOfSomething;
 }
 `;
 
+exports[`react-dom parses react-dom ListWithKey 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import css from 'glam';
+const styles = {
+  h18or678: css('css-1s0kfvh', [], function inlineCss() {
+    return [
+      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
+    ];
+  }),
+};
+
+const ListWithKey = props => {
+  return (
+    <div
+      data-test-id={props['data-test-id'] || 'List'}
+      className={styles.h18or678}
+    >
+      {Array.isArray(props.list) &&
+        props.list.map((item, index) => (
+          <div data-test-id=\\"ListWithKey.Text\\" key={item}>
+            {item}
+          </div>
+        ))}
+      {props.children}
+    </div>
+  );
+};
+
+export default ListWithKey;
+",
+  "fonts": Object {},
+  "props": Object {
+    "list": "string",
+  },
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
 exports[`react-dom parses react-dom NameIsType 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -2520,6 +2566,43 @@ export default ListOfSomething;
       },
       "type": "array",
     },
+  },
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-native parses react-native ListWithKey 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
+
+const ListWithKey = props => {
+  return (
+    <View testID={props['testID'] || 'List'} style={styles.h18pdll5}>
+      {Array.isArray(props.list) &&
+        props.list.map((item, index) => (
+          <Text testID=\\"ListWithKey.Text\\" key={item}>
+            {item}
+          </Text>
+        ))}
+      {props.children}
+    </View>
+  );
+};
+
+export default ListWithKey;
+",
+  "fonts": Object {},
+  "props": Object {
+    "list": "string",
   },
   "tests": Array [
     Object {

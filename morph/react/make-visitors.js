@@ -254,9 +254,9 @@ export default ({
 
         node.isRoute = true
         state.render.push(
-          `<Route path=${safe(path)} ${isExact
-            ? 'exact'
-            : ''} render={routeProps => `
+          `<Route path=${safe(path)} ${
+            isExact ? 'exact' : ''
+          } render={routeProps => `
         )
       }
     },
@@ -340,7 +340,7 @@ export default ({
   const PropertyList = {
     enter(node, parent, state) {
       // block is inside List
-      if (parent.isInList === 'List' && node.key.value === 'key') {
+      if (parent.parent.isInList && node.key.value === 'key') {
         parent.hasKey = true
       }
     },
