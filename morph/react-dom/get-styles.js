@@ -1,10 +1,14 @@
 import { hasKeys, hasKeysInChildren } from '../utils.js'
-import { transform } from 'babel-core'
+// import { transform } from 'babel-core'
 import isUnitlessNumber from '../react/is-unitless-number.js'
 import toSlugCase from 'to-slug-case'
-import glam from 'glam/babel'
+// import glam from 'glam/babel'
 
-export default ({ debug, file, inlineStyles, styles }, name) => {
+// TODO use emotion instead of glam
+// TODO don't produce CSS files, just inline
+
+export default ({ debug, styles, stylesDynamic }, name) => {
+  // TODO check both, styles and stylesDynamic
   if (!hasKeys(styles)) return ''
 
   const obj = Object.keys(styles)
@@ -12,11 +16,17 @@ export default ({ debug, file, inlineStyles, styles }, name) => {
     .map(k => `${JSON.stringify(k)}: css\`${toNestedCss(styles[k], debug)}\``)
     .join(',')
 
-  const code = transformGlam(`const styles = {${obj}}`, inlineStyles, file.raw)
-  const maybeImport = inlineStyles
-    ? ''
-    : `import './${file.relative.split('/').pop()}.css'\n`
-  return `${maybeImport}${code}`
+  const code = `const styles = {${obj}}`
+  const maybeImport = [
+    // inlineStyles ? '' : `import './${file.relative.split('/').pop()}.css'\n`,
+    stylesDynamic.length > 0
+      ? 'import styled, { css } from "react-emotion"'
+      : false,
+  ]
+    .filter(Boolean)
+    .join(';\n')
+
+  return `${maybeImport}\n${code}${stylesDynamic.join('\n')}`
 }
 
 const getKey = raw => {
@@ -66,19 +76,19 @@ const toNestedCss = (
   return ret
 }
 
-const transformGlam = (code, inline, filename) => {
-  let out = transform(code, {
-    babelrc: false,
-    filename,
-    plugins: [[glam, { inline }]],
-  }).code
+// const transformGlam = (code, inline, filename) => {
+//   let out = transform(code, {
+//     babelrc: false,
+//     filename,
+//     plugins: [[glam, { inline }]],
+//   }).code
 
-  if (!inline) {
-    out = out
-      .replace(/css\(/g, '')
-      .replace(/,\s*\[\]/g, '')
-      .replace(/\)/g, '')
-  }
+//   if (!inline) {
+//     out = out
+//       .replace(/css\(/g, '')
+//       .replace(/,\s*\[\]/g, '')
+//       .replace(/\)/g, '')
+//   }
 
-  return out
-}
+//   return out
+// }

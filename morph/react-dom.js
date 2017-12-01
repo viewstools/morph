@@ -45,8 +45,6 @@ export default ({
   }
 
   const state = {
-    animatedA: false,
-    animatedButton: false,
     captures: [],
     enableAnimated,
     defaultProps: false,
@@ -63,6 +61,9 @@ export default ({
     svgs: [],
     todos: [],
     uses: [],
+    styles: {},
+    stylesDynamic: [],
+    stylesDynamicNames: [],
     testIds: {},
     tests: morphTests({ view: tests, file }),
     use(block) {
