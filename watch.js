@@ -229,7 +229,7 @@ module.exports = options => {
 
       // TODO async
       fs.writeFileSync(
-        fakeFile,
+        path.join(src, fakeFile),
         `${view}Fake Vertical
 backgroundColor rgba(53,63,69,0.5)
 width 50
