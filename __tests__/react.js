@@ -17,14 +17,28 @@ const getPath = (f = '.') => join(__dirname, 'views', f)
           : undefined
 
         it(`parses ${as} ${name}`, () => {
-          const morphed = morph(code, {
-            as,
-            inlineStyles: true,
-            name,
-            pretty: true,
-            tests,
-          })
-          expect(morphed).toMatchSnapshot()
+          expect(
+            morph(code, {
+              as,
+              inlineStyles: true,
+              name,
+              pretty: true,
+              tests,
+            })
+          ).toMatchSnapshot()
+
+          if (as === 'react-dom') {
+            expect(
+              morph(code, {
+                as,
+                debug: true,
+                inlineStyles: true,
+                name,
+                pretty: true,
+                tests,
+              })
+            ).toMatchSnapshot(`${as} parses ${as} ${name} debug`)
+          }
         })
         // TODO test rendered morphed view
       })

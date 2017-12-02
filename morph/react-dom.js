@@ -1,6 +1,7 @@
 import * as BlockCapture from './react-dom/block-capture.js'
 import * as BlockGoTo from './react-dom/block-go-to.js'
 import * as BlockTeleport from './react-dom/block-teleport.js'
+import * as PropertiesClassName from './react-dom/properties-class-name.js'
 import { enter as BlockTestIdEnter } from './react-dom/block-test-id.js'
 import { leave as PropertiesStyleLeave } from './react-dom/properties-style.js'
 import getBlockName from './react-dom/get-block-name.js'
@@ -100,6 +101,7 @@ export default ({
     getStyleForProperty,
     getValueForProperty,
     isValidPropertyForBlock,
+    PropertiesClassName,
     PropertiesStyleLeave,
   })
 

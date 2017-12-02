@@ -21,6 +21,7 @@ export default ({
   getStyleForProperty,
   getValueForProperty,
   isValidPropertyForBlock,
+  PropertiesClassName,
   PropertiesStyleLeave,
 }) => {
   const BlockDefaultProps = {
@@ -480,6 +481,9 @@ export default ({
 
     Properties: {
       enter(node, parent, state) {
+        if (PropertiesClassName) {
+          PropertiesClassName.enter.call(this, node, parent, state)
+        }
         PropertiesStyle.enter.call(this, node, parent, state)
       },
       leave(node, parent, state) {
@@ -487,6 +491,9 @@ export default ({
         PropertiesListKey.leave.call(this, node, parent, state)
         PropertiesRoute.leave.call(this, node, parent, state)
         PropertiesChildrenProxyMap.leave.call(this, node, parent, state)
+        if (PropertiesClassName) {
+          PropertiesClassName.leave.call(this, node, parent, state)
+        }
       },
     },
 
@@ -497,7 +504,8 @@ export default ({
           key === 'at' ||
           key === 'when' ||
           isData(node) ||
-          (!isValidPropertyForBlock(node, parent) && parent.parent.isBasic) ||
+          (!isValidPropertyForBlock(node, parent, state) &&
+            parent.parent.isBasic) ||
           (node.tags.scope && node.tags.scope !== 'props.isDisabled') ||
           (node.inScope && hasDefaultProp(node, parent))
         )

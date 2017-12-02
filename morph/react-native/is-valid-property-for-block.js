@@ -1,24 +1,25 @@
 const blacklist = [
-  'appRegion',
-  'backgroundImage',
-  'backgroundSize',
-  'clipPath',
+  'appregion',
+  'backgroundimage',
+  'backgroundsize',
+  'classname',
+  'clippath',
   'cursor',
-  'isActive',
-  'isDisabled',
-  'goTo',
+  'isactive',
+  'isdisabled',
+  'goto',
   'overflow',
-  'overflowX',
-  'overflowY',
-  'fontWeight',
-  'onClick',
-  'onSubmit',
-  'pageBreakInside',
-  'teleportTo',
-  // TODO convert to upper case...
-  'textTransform',
-  'userSelect',
+  'overflowx',
+  'overflowy',
+  'fontweight',
+  'onclick',
+  'onsubmit',
+  'pagebreakinside',
+  'teleportto',
+  // todo convert to upper case...
+  'texttransform',
+  'userselect',
 ]
 
-// TODO whitelist instead
-export default (node, parent) => !blacklist.includes(node.key.value)
+export default (node, parent, state) =>
+  !blacklist.includes(node.key.value.toLowerCase())

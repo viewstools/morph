@@ -17,6 +17,7 @@ export const asScopedValue = (obj, node, properties) => {
 }
 
 const INTERPOLATION = /\${(.+)}/
+export const isInterpolation = str => INTERPOLATION.test(str)
 export const deinterpolate = str => {
   const match = str.match(INTERPOLATION)
   return match ? match[1] : str

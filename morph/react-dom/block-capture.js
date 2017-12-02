@@ -1,5 +1,4 @@
-import { hasProp, getProp } from '../utils.js'
-import safe from '../react/safe.js'
+import { getProp } from '../utils.js'
 import toCamelCase from 'to-camel-case'
 
 const typesMap = {
@@ -14,6 +13,8 @@ export const enter = (node, parent, state) => {
   const blockType = node.name.value
 
   if (!/Capture/.test(blockType)) return
+
+  node.isCapture = true
 
   const name = toCamelCase(node.is || blockType)
   state.captures.push(name)
@@ -30,4 +31,8 @@ export const enter = (node, parent, state) => {
     ` onChange={event => this.setState({ ${name}: event.target.value })}`
   )
   state.render.push(` value={state.${name}}`)
+
+  if (state.debug) {
+    state.render.push(` tabIndex={-1}`)
+  }
 }

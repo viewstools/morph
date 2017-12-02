@@ -1,4 +1,4 @@
-import { hasProp, getProp } from '../utils.js'
+import { getProp } from '../utils.js'
 import safe from '../react/safe.js'
 import toCamelCase from 'to-camel-case'
 
@@ -13,6 +13,7 @@ export const enter = (node, parent, state) => {
   const blockType = node.name.value
 
   if (!/Capture/.test(node.name.value)) return
+  node.isCapture = true
 
   const name = toCamelCase(node.is || blockType)
   state.captures.push(name)
@@ -24,7 +25,9 @@ export const enter = (node, parent, state) => {
   if (captureNext) {
     state.render.push(` blurOnSubmit={false}`)
     state.render.push(
-      ` onSubmitEditing={this.$${captureNext}? () => this.$${captureNext}.focus() : ${onSubmit}}`
+      ` onSubmitEditing={this.$${captureNext}? () => this.$${
+        captureNext
+      }.focus() : ${onSubmit}}`
     )
     state.render.push(` returnKeyType = {this.$${captureNext}? 'next' : 'go'}`)
   } else {

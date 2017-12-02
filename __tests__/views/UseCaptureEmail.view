@@ -1,4 +1,5 @@
 Email CaptureEmail
+autoFocus true
 border 1px solid black
 color red
 colorPlaceholder blue
