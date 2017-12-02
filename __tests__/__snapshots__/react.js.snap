@@ -21,7 +21,7 @@ const Action = props => {
       disabled={props.isDisabled}
       className={styles.h18or678}
     >
-      <div data-test-id=\\"Action.Text\\">click me</div>
+      <span data-test-id=\\"Action.Text\\">click me</span>
       {props.children}
     </button>
   ) : null;
@@ -67,7 +67,7 @@ const AnimatedButton = props => {
       className={styles.h18or678}
       style={{ opacity: props.opacity }}
     >
-      <div data-test-id=\\"AnimatedButton.Text\\">hey</div>
+      <span data-test-id=\\"AnimatedButton.Text\\">hey</span>
       {props.children}
     </Animated.button>
   );
@@ -251,7 +251,7 @@ class Form extends React.Component {
           onClick={() => props.onSubmit(state)}
           className={styles.h18or678}
         >
-          <div data-test-id=\\"Form.Text\\">Send!</div>
+          <span data-test-id=\\"Form.Text\\">Send!</span>
         </button>
         {props.children}
       </form>
@@ -297,7 +297,7 @@ const GoTo = props => {
       data-test-id={props['data-test-id'] || 'Vertical'}
       className={styles.h18or678}
     >
-      <div data-test-id=\\"GoTo.Text\\">Go to ViewsDX website!</div>
+      <span data-test-id=\\"GoTo.Text\\">Go to ViewsDX website!</span>
       {props.children}
     </a>
   );
@@ -345,9 +345,9 @@ const Hover = props => {
       onClick={props.onClick}
       className={styles.h1mc7g7i}
     >
-      <div data-test-id=\\"Hover.Text\\" className={styles.h1mgvy2v}>
+      <span data-test-id=\\"Hover.Text\\" className={styles.h1mgvy2v}>
         Hey!
-      </div>
+      </span>
       {props.children}
     </button>
   );
@@ -405,9 +405,9 @@ const HoverProxy = props => {
             { fill: 'white', fillHover: 'black' }
           )
         : null}
-      <div data-test-id=\\"HoverProxy.Text\\" className={styles.h1mgvy2v}>
+      <span data-test-id=\\"HoverProxy.Text\\" className={styles.h1mgvy2v}>
         Hey!
-      </div>
+      </span>
     </button>
   );
 };
@@ -435,7 +435,7 @@ Object {
 import React from 'react';
 
 const JustText = props => {
-  return <div data-test-id={props['data-test-id'] || 'Text'}>hey!</div>;
+  return <span data-test-id={props['data-test-id'] || 'Text'}>hey!</span>;
 };
 
 export default JustText;
@@ -479,12 +479,12 @@ const ListOfButtons = props => {
             className={styles.h18or678}
             key={index}
           >
-            <div
+            <span
               data-test-id=\\"ListOfButtons.Text\\"
               style={{ color: item.color }}
             >
               {index}
-            </div>
+            </span>
           </button>
         ))}
       {props.children}
@@ -535,14 +535,14 @@ const ListOfSomething = props => {
     >
       {Array.isArray(props.list) &&
         props.list.map((item, index) => (
-          <div
+          <span
             data-test-id=\\"ListOfSomething.Text\\"
             dataIndex={index}
             style={{ color: item.color }}
             key={index}
           >
             {index}
-          </div>
+          </span>
         ))}
       {props.children}
     </div>
@@ -591,9 +591,9 @@ const ListWithKey = props => {
     >
       {Array.isArray(props.list) &&
         props.list.map((item, index) => (
-          <div data-test-id=\\"ListWithKey.Text\\" key={item}>
+          <span data-test-id=\\"ListWithKey.Text\\" key={item}>
             {item}
-          </div>
+          </span>
         ))}
       {props.children}
     </div>
@@ -622,7 +622,7 @@ Object {
 import React from 'react';
 
 const NameIsType = props => {
-  return <div data-test-id={props['data-test-id'] || 'Texto'}>iam</div>;
+  return <span data-test-id={props['data-test-id'] || 'Texto'}>iam</span>;
 };
 
 export default NameIsType;
@@ -662,13 +662,13 @@ const NestedRoutes = props => {
       data-test-id={props['data-test-id'] || 'Topics'}
       className={styles.h18or678}
     >
-      <div data-test-id=\\"NestedRoutes.Text\\">topics</div>
+      <span data-test-id=\\"NestedRoutes.Text\\">topics</span>
       <Link
         to={\`\${props.match.url === '/' ? '' : props.match.url}/rendering\`}
         data-test-id=\\"NestedRoutes.Link\\"
         className={styles.h18or678}
       >
-        <div data-test-id=\\"NestedRoutes.Text:1\\">Rendering with React</div>
+        <span data-test-id=\\"NestedRoutes.Text:1\\">Rendering with React</span>
       </Link>
       <Route
         path=\\":topic\\"
@@ -723,10 +723,10 @@ const Print = props => {
       data-test-id={props['data-test-id'] || 'Vertical'}
       className={styles.h18or678}
     >
-      <div data-test-id=\\"Print.Text\\" className={styles.h12h5uqm}>
+      <span data-test-id=\\"Print.Text\\" className={styles.h12h5uqm}>
         not in print
-      </div>
-      <div data-test-id=\\"Print.Text:1\\">hey</div>
+      </span>
+      <span data-test-id=\\"Print.Text:1\\">hey</span>
       {props.children}
     </div>
   );
@@ -808,7 +808,7 @@ import React from 'react';
 
 const Scope = props => {
   return (
-    <div
+    <span
       data-test-id={props['data-test-id'] || 'Text'}
       style={{
         color: props.somethingGreen
@@ -819,7 +819,7 @@ const Scope = props => {
       {props.somethingGreen
         ? '2 green'
         : props.whatMakesBlue ? props.blue : '1 red'}
-    </div>
+    </span>
   );
 };
 
@@ -906,7 +906,7 @@ const ScopePopup = props => {
         }
         className={styles.h18or678}
       >
-        <div data-test-id=\\"ScopePopup.Text\\">toggle popup</div>
+        <span data-test-id=\\"ScopePopup.Text\\">toggle popup</span>
       </button>
       {props.children}
     </div>
@@ -958,7 +958,7 @@ const ScopePopup2 = props => {
         onClick={props.toggle}
         className={styles.h18or678}
       >
-        <div data-test-id=\\"ScopePopup2.Text\\">toggle popup</div>
+        <span data-test-id=\\"ScopePopup2.Text\\">toggle popup</span>
       </button>
       {props.children}
     </div>
@@ -1004,7 +1004,7 @@ const Teleport = props => {
       data-test-id={props['data-test-id'] || 'Horizontal'}
       className={styles.hnpb55i}
     >
-      <div data-test-id=\\"Teleport.Text\\">go back</div>
+      <span data-test-id=\\"Teleport.Text\\">go back</span>
       {props.children}
     </Link>
   );
@@ -1037,8 +1037,8 @@ const Test = props => {
       stuff=\\"eqweqw\\"
       childrenProxyMap={{ Something: 0, Another: 1 }}
     >
-      <div data-test-id=\\"Test.Something\\">v1vh1t1</div>
-      <div data-test-id=\\"Test.Another\\">inside custom</div>
+      <span data-test-id=\\"Test.Something\\">v1vh1t1</span>
+      <span data-test-id=\\"Test.Another\\">inside custom</span>
       {props.children}
     </Custom>
   );
@@ -1078,10 +1078,10 @@ const TestIds = props => {
       data-test-id={props['data-test-id'] || 'App'}
       className={styles.h18or678}
     >
-      <div data-test-id=\\"TestIds.Text\\">1</div>
-      <div data-test-id=\\"TestIds.Text:1\\">2</div>
+      <span data-test-id=\\"TestIds.Text\\">1</span>
+      <span data-test-id=\\"TestIds.Text:1\\">2</span>
       <External data-test-id=\\"TestIds.External\\" />
-      <div data-test-id=\\"TestIds.Name\\">name</div>
+      <span data-test-id=\\"TestIds.Name\\">name</span>
       {props.children}
     </div>
   );
@@ -1120,10 +1120,10 @@ const TextInterpolation = props => {
       data-test-id={props['data-test-id'] || 'Vertical'}
       className={styles.h18or678}
     >
-      <div data-test-id=\\"TextInterpolation.Text\\">{\`\${props.name} test\`}</div>
-      <div data-test-id=\\"TextInterpolation.Text:1\\">
+      <span data-test-id=\\"TextInterpolation.Text\\">{\`\${props.name} test\`}</span>
+      <span data-test-id=\\"TextInterpolation.Text:1\\">
         {props.name ? \`\${props.name} here\` : 'other'}
-      </div>
+      </span>
       {props.children}
     </div>
   );
@@ -1151,7 +1151,7 @@ Object {
 import React from 'react';
 
 const Toggle = props => {
-  return <div data-test-id={props['data-test-id'] || 'Text'}>NOPE</div>;
+  return <span data-test-id={props['data-test-id'] || 'Text'}>NOPE</span>;
 };
 
 export default Toggle;
@@ -1635,7 +1635,7 @@ const UseProxy = props => {
             { fill: 'red' }
           )
         : null}
-      <div data-test-id=\\"UseProxy.Text\\">{props.text}</div>
+      <span data-test-id=\\"UseProxy.Text\\">{props.text}</span>
     </div>
   );
 };
@@ -1781,12 +1781,12 @@ font-weight: 300; }\`,
 
 const UseText = props => {
   return (
-    <div
+    <span
       data-test-id={props['data-test-id'] || 'Text'}
       className={styles.h84riit}
     >
       Hi, I'm some text
-    </div>
+    </span>
   );
 };
 
@@ -1867,7 +1867,7 @@ const When = props => {
       className={styles.hnpb55i}
     >
       {props.showMe ? (
-        <div data-test-id=\\"When.Text\\">I may be hidden</div>
+        <span data-test-id=\\"When.Text\\">I may be hidden</span>
       ) : null}
       {props.children}
     </div>
@@ -1918,9 +1918,9 @@ const WhenList = props => {
         <div data-test-id=\\"WhenList.List\\" className={styles.h18or678}>
           {Array.isArray(props.list) &&
             props.list.map((item, index) => (
-              <div data-test-id=\\"WhenList.Text\\" key={index}>
+              <span data-test-id=\\"WhenList.Text\\" key={index}>
                 {item.thing}
-              </div>
+              </span>
             ))}
         </div>
       ) : null}
@@ -1958,7 +1958,7 @@ import React from 'react';
 
 const WhenTopLevel = props => {
   return props.showMe ? (
-    <div data-test-id={props['data-test-id'] || 'Text'}>I may be hidden</div>
+    <span data-test-id={props['data-test-id'] || 'Text'}>I may be hidden</span>
   ) : null;
 };
 
@@ -1998,7 +1998,7 @@ const WithTest = props => {
       onClick={props.change}
       className={styles.h18or678}
     >
-      <div data-test-id=\\"WithTest.Text\\">{props.text}</div>
+      <span data-test-id=\\"WithTest.Text\\">{props.text}</span>
       {props.children}
     </button>
   );

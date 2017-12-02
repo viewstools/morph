@@ -22,6 +22,8 @@ export default (node, parent, state) => {
       return 'img'
 
     case 'Text':
+      return 'span'
+
     case 'List':
       return 'div'
 
