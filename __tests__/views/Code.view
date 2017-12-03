@@ -1,0 +1,4 @@
+Vertical
+ref {$e => this.$e = $e}
+Text
+text props.text

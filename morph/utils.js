@@ -104,8 +104,12 @@ export const hasProp = (node, key, match) => {
 export const hasDefaultProp = (node, parent) =>
   parent.list.some(prop => prop.key.value === node.key.value && !prop.inScope)
 
+export const CODE_EXPLICIT = /^{.+}$/
+export const isCodeExplicit = str => CODE_EXPLICIT.test(str)
 export const isCode = node =>
-  typeof node === 'string' ? /props|item|index/.test(node) : isTag(node, 'code')
+  typeof node === 'string'
+    ? /props|item|index/.test(node) || isCodeExplicit(node)
+    : isTag(node, 'code')
 export const isData = node => isTag(node, 'data')
 export const isStyle = node => isTag(node, 'style')
 export const isToggle = node => isTag(node, 'toggle')

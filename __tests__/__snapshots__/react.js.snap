@@ -462,6 +462,90 @@ export default ClassName;
 }
 `;
 
+exports[`react-dom parses react-dom Code 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import css from 'glam';
+const styles = {
+  h18or678: css('css-1s0kfvh', [], function inlineCss() {
+    return [
+      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
+    ];
+  }),
+};
+
+const Code = props => {
+  return (
+    <div
+      data-test-id={props['data-test-id'] || 'Vertical'}
+      ref={$e => (this.$e = $e)}
+      className={styles.h18or678}
+    >
+      <span data-test-id=\\"Code.Text\\">{props.text}</span>
+      {props.children}
+    </div>
+  );
+};
+
+export default Code;
+",
+  "fonts": Object {},
+  "props": Object {
+    "text": "string",
+  },
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom Code debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import css from 'glam';
+const styles = {
+  h18or678: css('css-1s0kfvh', [], function inlineCss() {
+    return [
+      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
+    ];
+  }),
+};
+
+const Code = props => {
+  return (
+    <div
+      data-test-id={props['data-test-id'] || 'Vertical'}
+      ref={$e => (this.$e = $e)}
+      className={styles.h18or678}
+    >
+      <span data-test-id=\\"Code.Text\\">{props.text}</span>
+      {props.children}
+    </div>
+  );
+};
+
+export default Code;
+",
+  "fonts": Object {},
+  "props": Object {
+    "text": "string",
+  },
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
 exports[`react-dom parses react-dom Form 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -4362,6 +4446,42 @@ export default ClassName;
 ",
   "fonts": Object {},
   "props": Object {},
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-native parses react-native Code 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
+
+const Code = props => {
+  return (
+    <View
+      testID={props['testID'] || 'Vertical'}
+      ref={$e => (this.$e = $e)}
+      style={styles.h18pdll5}
+    >
+      <Text testID=\\"Code.Text\\">{props.text}</Text>
+      {props.children}
+    </View>
+  );
+};
+
+export default Code;
+",
+  "fonts": Object {},
+  "props": Object {
+    "text": "string",
+  },
   "tests": Array [
     Object {
       "data": Object {},
