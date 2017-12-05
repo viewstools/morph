@@ -6,13 +6,14 @@ const asDynamicCss = style => {
   let dynamicCss = ''
 
   props.forEach(prop => {
-    debugger
     // e.g. backgroundColor: `${props => props.isLoggedIn? "red" : "black"
-    dynamicCss += `${prop}: \${prop}\ => ${style[`${prop}`]} \n `
+    dynamicCss += `${prop}: \${props =>\ ${style[`${prop}`]}\}`
   })
-
+  debugger
   return dynamicCss
 }
+
+// width: ${props => (props.isTwo ? 60 : props.isOne ? 30 : 20)}px;
 
 const getStyledComponent = (name, base, style) =>
   `const ${name} = styled('${base}')\`${asDynamicCss(style)}\``

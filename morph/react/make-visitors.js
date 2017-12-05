@@ -237,9 +237,9 @@ export default ({
 
         node.isRoute = true
         state.render.push(
-          `<Route path=${safe(path)} ${
-            isExact ? 'exact' : ''
-          } render={routeProps => `
+          `<Route path=${safe(path)} ${isExact
+            ? 'exact'
+            : ''} render={routeProps => `
         )
       }
     },
@@ -379,6 +379,7 @@ export default ({
             code
           ))
         }
+        debugger
 
         if (_isProp) {
           Object.keys(styleForProperty).forEach(k =>
