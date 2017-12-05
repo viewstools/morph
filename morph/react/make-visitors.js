@@ -6,13 +6,11 @@ import {
   getStyleType,
   hasDefaultProp,
   isCode,
-  isData,
   isStyle,
   isToggle,
 } from '../utils.js'
 import makeToggle from './make-toggle.js'
 import safe from './safe.js'
-import toCamelCase from 'to-camel-case'
 import toPascalCase from 'to-pascal-case'
 import wrap from './wrap.js'
 
@@ -24,18 +22,6 @@ export default ({
   PropertiesClassName,
   PropertiesStyleLeave,
 }) => {
-  const BlockDefaultProps = {
-    enter(node, parent, state) {
-      if (parent || node.name.value === 'List') return
-
-      const from = getProp(node, 'from')
-      if (from && isData(from)) {
-        state.use(from.value.value)
-        state.defaultProps = toCamelCase(from.value.value)
-      }
-    },
-  }
-
   const BlockName = {
     enter(node, parent, state) {
       const name = getBlockName(node, parent, state)
@@ -218,12 +204,7 @@ export default ({
         let from = getProp(parent, 'from')
         if (!from) return
 
-        if (isData(from)) {
-          state.use(from.value.value)
-          from = toCamelCase(from.value.value)
-        } else {
-          from = from.value.value
-        }
+        from = from.value.value
 
         state.render.push(
           `{Array.isArray(${from}) && ${from}.map((item, index) => `
@@ -329,15 +310,6 @@ export default ({
     leave: PropertiesStyleLeave,
   }
 
-  // const PropertyData = {
-  //   enter(node, parent, state) {
-  //     if (isData(node)) {
-  //       state.render.push(``)
-  //       return true
-  //     }
-  //   }
-  // }
-
   const PropertyList = {
     enter(node, parent, state) {
       // block is inside List
@@ -441,7 +413,6 @@ export default ({
   }
 
   return {
-    BlockDefaultProps,
     BlockExplicitChildren,
     BlockMaybeNeedsProperties,
     BlockName,
@@ -457,7 +428,6 @@ export default ({
         BlockWhen.enter.call(this, node, parent, state)
         BlockRoute.enter.call(this, node, parent, state)
         BlockName.enter.call(this, node, parent, state)
-        BlockDefaultProps.enter.call(this, node, parent, state)
         BlockMaybeNeedsProperties.enter.call(this, node, parent, state)
         BlockProxy.enter.call(this, node, parent, state)
       },
@@ -503,7 +473,6 @@ export default ({
         if (
           key === 'at' ||
           key === 'when' ||
-          isData(node) ||
           (!isValidPropertyForBlock(node, parent, state) &&
             parent.parent.isBasic) ||
           (node.tags.scope && node.tags.scope !== 'props.isDisabled') ||

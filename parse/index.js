@@ -303,6 +303,7 @@ export default (rtext, skipComments = true) => {
           nested.push({
             type: 'Property',
             loc: getLoc(j, line.indexOf(prop), line.length - 1),
+            tags: {},
             key: {
               type: 'Literal',
               value: prop,
@@ -364,7 +365,6 @@ export default (rtext, skipComments = true) => {
         }
 
         if (isItem(prop)) {
-          // TODO FIXME cast last to array
           last.push({
             type: 'ArrayItem',
             value: {
@@ -377,6 +377,16 @@ export default (rtext, skipComments = true) => {
               ),
             },
           })
+
+          const lastNested = nested[nested.length - 1]
+          if (lastNested.value.type === 'ObjectExpression') {
+            lastNested.value = {
+              type: 'ArrayExpression',
+              elements: last,
+              item: prop,
+              loc: lastNested.value.loc,
+            }
+          }
         } else {
           const propValue = isEmptyList(value)
             ? {

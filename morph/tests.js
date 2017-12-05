@@ -101,8 +101,7 @@ export default ({ file, view }) => {
 export const getValue = (property, tests) => {
   switch (property.value.type) {
     case 'Literal':
-      const v = property.value.value
-      return tests.includes(v) ? `display:${v}` : v
+      return property.value.value
 
     case 'ArrayExpression':
       return property.value.elements.map(v => getValue(v, tests))

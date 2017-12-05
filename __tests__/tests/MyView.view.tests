@@ -1,15 +1,29 @@
-Main is Test
+Main Test
 width 360
 text it's Main!
 onClick Next
 
-Next is Test
+Next Test
 text it's Next!
 onClick EvenMore
 
-EvenMore is Test
+EvenMore Test
 text it's EvenMore!
 onClick Main
 
 Data Test
 from ./file.json
+
+FlatList Test
+list
+item hey
+item ho
+
+ObjectList test
+list
+item
+name hey
+surname ho
+item
+name another
+surname more

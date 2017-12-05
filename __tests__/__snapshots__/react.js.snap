@@ -384,6 +384,82 @@ export default BoxShadow;
 }
 `;
 
+exports[`react-dom parses react-dom Broken 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import css from 'glam';
+const styles = {
+  h18or678: css('css-1s0kfvh', [], function inlineCss() {
+    return [
+      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
+    ];
+  }),
+};
+
+const Broken = props => {
+  return (
+    <div
+      data-test-id={props['data-test-id'] || 'Vertical'}
+      className={styles.h18or678}
+    >
+      {props.children}
+    </div>
+  );
+};
+
+export default Broken;
+",
+  "fonts": Object {},
+  "props": Object {},
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom Broken debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import css from 'glam';
+const styles = {
+  h18or678: css('css-1s0kfvh', [], function inlineCss() {
+    return [
+      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
+    ];
+  }),
+};
+
+const Broken = props => {
+  return (
+    <div
+      data-test-id={props['data-test-id'] || 'Vertical'}
+      className={styles.h18or678}
+    >
+      {props.children}
+    </div>
+  );
+};
+
+export default Broken;
+",
+  "fonts": Object {},
+  "props": Object {},
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
 exports[`react-dom parses react-dom ClassName 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -4168,14 +4244,14 @@ export default WithTest;
   "tests": Array [
     Object {
       "data": Object {
-        "change": "display:Next",
+        "change": "Next",
         "text": "in Main",
       },
       "name": "Main",
     },
     Object {
       "data": Object {
-        "change": "display:Main",
+        "change": "Main",
         "text": "in Next",
       },
       "name": "Next",
@@ -4221,14 +4297,14 @@ export default WithTest;
   "tests": Array [
     Object {
       "data": Object {
-        "change": "display:Next",
+        "change": "Next",
         "text": "in Main",
       },
       "name": "Main",
     },
     Object {
       "data": Object {
-        "change": "display:Main",
+        "change": "Main",
         "text": "in Next",
       },
       "name": "Next",
@@ -4415,6 +4491,35 @@ export default BoxShadow;
   "props": Object {
     "color": "string",
   },
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-native parses react-native Broken 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
+
+const Broken = props => {
+  return (
+    <View testID={props['testID'] || 'Vertical'} style={styles.h18pdll5}>
+      {props.children}
+    </View>
+  );
+};
+
+export default Broken;
+",
+  "fonts": Object {},
+  "props": Object {},
   "tests": Array [
     Object {
       "data": Object {},
@@ -6196,14 +6301,14 @@ export default WithTest;
   "tests": Array [
     Object {
       "data": Object {
-        "change": "display:Next",
+        "change": "Next",
         "text": "in Main",
       },
       "name": "Main",
     },
     Object {
       "data": Object {
-        "change": "display:Main",
+        "change": "Main",
         "text": "in Next",
       },
       "name": "Next",

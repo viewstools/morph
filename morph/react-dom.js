@@ -88,7 +88,6 @@ export default ({
   }
 
   const {
-    BlockDefaultProps,
     BlockExplicitChildren,
     BlockMaybeNeedsProperties,
     BlockName,
@@ -116,7 +115,6 @@ export default ({
         BlockCapture.enter,
         BlockTeleport.enter,
         BlockGoTo.enter,
-        BlockDefaultProps.enter,
         BlockMaybeNeedsProperties.enter,
         BlockProxy.enter,
         BlockTestIdEnter,
