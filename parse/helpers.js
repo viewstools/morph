@@ -28,7 +28,9 @@ const SECTION = /^([a-z][a-zA-Z0-9]*)$/
 const STYLE = new RegExp(
   `^(${cssProperties
     .map(toCamelCase)
-    .join('|')}|pointerEvents|clipPath|appRegion|userSelect)$`
+    .join(
+      '|'
+    )}|pointerEvents|clipPath|appRegion|userSelect|hyphens|overflowWrap)$`
 )
 const TEMPLATE_LITERAL = /^`.+`$/
 const TERNARY = /\?\s*['"]?\s*(.+)?\s*['"]?\s*:\s*['"]?\s*(.+)\s*['"]?\s*/
