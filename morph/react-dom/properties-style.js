@@ -2,13 +2,20 @@ import { getObjectAsString, getProp, hasKeysInChildren } from '../utils.js'
 import hash from '../hash.js'
 
 const asDynamicCss = style => {
-  // ....
-  return `padding: \${props => props.whateever? 10: 0}px`
+  const props = Object.keys(style)
+  let dynamicCss = ''
+
+  props.forEach(prop => {
+    debugger
+    // e.g. backgroundColor: `${props => props.isLoggedIn? "red" : "black"
+    dynamicCss += `${prop}: \${prop}\ => ${style[`${prop}`]} \n `
+  })
+
+  return dynamicCss
 }
 
-const getStyledComponent = (name, base, style) => `
-const ${name} = styled(${base})\`${asDynamicCss(style)}\`
-`
+const getStyledComponent = (name, base, style) =>
+  `const ${name} = styled('${base}')\`${asDynamicCss(style)}\``
 
 export const leave = (node, parent, state) => {
   if (hasKeysInChildren(node.style.static)) {
@@ -24,15 +31,20 @@ export const leave = (node, parent, state) => {
     }
   }
 
+  debugger
   // TODO needs to be different, it should also be a classname here too
   if (hasKeysInChildren(node.style.dynamic)) {
+    const block = node.parent
+    debugger
     // TODO get block name or type
     // Animated.div
+    // const code = getStyledComponent(node.dynamicStyleComponent.name, node.dynamicStyleComponent.tag, node.style.dynamic);
     const code = getStyledComponent(
-      node.dynamicStyleComponent.name,
-      node.dynamicStyleComponent.tag,
-      node.style.dynamic
+      block.is,
+      block.name.finalValue,
+      node.style.dynamic.base
     )
+
     console.log(state.render)
     // TODO replace the tag for the one we need to
     state.stylesDynamic.push(code)
