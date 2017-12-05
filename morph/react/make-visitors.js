@@ -379,7 +379,6 @@ export default ({
             code
           ))
         }
-        debugger
 
         if (_isProp) {
           Object.keys(styleForProperty).forEach(k =>

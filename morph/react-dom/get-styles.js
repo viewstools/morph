@@ -9,7 +9,6 @@ import toSlugCase from 'to-slug-case'
 
 export default ({ debug, styles, stylesDynamic }, name) => {
   // TODO check both, styles and stylesDynamic
-  debugger
   if (!hasKeys(styles)) return ''
 
   const obj = Object.keys(styles)
@@ -27,7 +26,7 @@ export default ({ debug, styles, stylesDynamic }, name) => {
     .filter(Boolean)
     .join(';\n')
 
-  return `${maybeImport}\n${code}${stylesDynamic.join('\n')}`
+  return `${maybeImport}\n${code}\n${stylesDynamic.join('\n')}`
 }
 
 const getKey = raw => {

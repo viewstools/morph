@@ -66,14 +66,11 @@ export default (node, parent, state) => {
       break
   }
 
-  debugger
-
   if (node.maybeAnimated) {
     if (state.enableAnimated && name !== 'Link' && name !== 'form') {
       name = `Animated.${name}`
     }
 
-    debugger
     node.dynamicStyleComponent = {
       tag: /Animated/.test(name) ? name : `"${name}"`,
     }

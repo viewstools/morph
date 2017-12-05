@@ -7,9 +7,9 @@ const asDynamicCss = style => {
 
   props.forEach(prop => {
     // e.g. backgroundColor: `${props => props.isLoggedIn? "red" : "black"
+    // TODO: camel case properties should be hyphenated
     dynamicCss += `${prop}: \${props =>\ ${style[`${prop}`]}\}`
   })
-  debugger
   return dynamicCss
 }
 
@@ -32,11 +32,9 @@ export const leave = (node, parent, state) => {
     }
   }
 
-  debugger
   // TODO needs to be different, it should also be a classname here too
   if (hasKeysInChildren(node.style.dynamic)) {
     const block = node.parent
-    debugger
     // TODO get block name or type
     // Animated.div
     // const code = getStyledComponent(node.dynamicStyleComponent.name, node.dynamicStyleComponent.tag, node.style.dynamic);
@@ -48,8 +46,10 @@ export const leave = (node, parent, state) => {
 
     console.log(state.render)
     // TODO replace the tag for the one we need to
+    state.render[0] = `<${block.is}`
     state.stylesDynamic.push(code)
-    // const dynamic = getObjectAsString(node.style.dynamic.base)
-    // state.render.push(` style={${dynamic}}`)
+    block.name.finalValue = block.is
+    // const dynamic = getObjectAsString(node.style.dynamic.base);
+    // state.render.push(` style={${dynamic}}`);
   }
 }
