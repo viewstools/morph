@@ -10,6 +10,8 @@ import toSlugCase from 'to-slug-case'
 export default ({ debug, styles, stylesDynamic }, name) => {
   if (!hasKeys(styles) && stylesDynamic.length === 0) return ''
 
+  debugger
+
   const obj = Object.keys(styles)
     .filter(k => hasKeysInChildren(styles[k]))
     .map(k => `${JSON.stringify(k)}: css\`${toNestedCss(styles[k], debug)}\``)
@@ -40,9 +42,7 @@ const getValue = (key, value) =>
     : `${value}`
 
 const toCss = obj => {
-  Object.keys(obj)
-    .map(k => `${getKey(k)}: ${getValue(k, obj[k])};`)
-    .join('\n')
+  debugger
   return Object.keys(obj)
     .map(k => `${getKey(k)}: ${getValue(k, obj[k])};`)
     .join('\n')
@@ -52,6 +52,7 @@ const toNestedCss = (
   { base, hover, focus, active, activeHover, disabled, placeholder, print },
   debug
 ) => {
+  debugger
   const baseCss = toCss(base)
   const hoverCss = toCss(hover)
   const focusCss = toCss(focus)
