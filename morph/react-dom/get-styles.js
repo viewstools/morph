@@ -8,8 +8,7 @@ import toSlugCase from 'to-slug-case'
 // TODO don't produce CSS files, just inline
 
 export default ({ debug, styles, stylesDynamic }, name) => {
-  // TODO check both, styles and stylesDynamic
-  if (!hasKeys(styles)) return ''
+  if (!hasKeys(styles) && stylesDynamic.length === 0) return ''
 
   const obj = Object.keys(styles)
     .filter(k => hasKeysInChildren(styles[k]))
@@ -40,10 +39,14 @@ const getValue = (key, value) =>
     ? `${value}px`
     : `${value}`
 
-const toCss = obj =>
+const toCss = obj => {
   Object.keys(obj)
     .map(k => `${getKey(k)}: ${getValue(k, obj[k])};`)
     .join('\n')
+  return Object.keys(obj)
+    .map(k => `${getKey(k)}: ${getValue(k, obj[k])};`)
+    .join('\n')
+}
 
 const toNestedCss = (
   { base, hover, focus, active, activeHover, disabled, placeholder, print },

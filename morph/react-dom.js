@@ -11,7 +11,6 @@ import getValueForProperty from './react-dom/get-value-for-property.js'
 import isValidPropertyForBlock from './react-dom/is-valid-property-for-block.js'
 import makeVisitors from './react/make-visitors.js'
 import maybeUsesRouter from './react-dom/maybe-uses-router.js'
-import maybeUsesStyleSheet from './react-dom/maybe-uses-style-sheet.js'
 import morph from './morph.js'
 import morphTests, { EMPTY_TEST } from './tests.js'
 import restrictedNames from './react-dom/restricted-names.js'
@@ -131,7 +130,6 @@ export default ({
 
   morph(view, state, visitors)
 
-  maybeUsesStyleSheet(state)
   maybeUsesRouter(state)
 
   const finalGetImport = name => imports[name] || getImport(name)
