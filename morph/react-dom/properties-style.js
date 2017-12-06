@@ -1,19 +1,16 @@
 import { getObjectAsString, getProp, hasKeysInChildren } from '../utils.js'
 import hash from '../hash.js'
+import toSlugCase from 'to-slug-case'
 
 const asDynamicCss = style => {
   const props = Object.keys(style)
   let dynamicCss = ''
 
   props.forEach(prop => {
-    // e.g. backgroundColor: `${props => props.isLoggedIn? "red" : "black"
-    // TODO: camel case properties should be hyphenated
-    dynamicCss += `${prop}: \${props =>\ ${style[`${prop}`]}\}`
+    dynamicCss += `${toSlugCase(prop)}: \${props =>\ ${style[`${prop}`]}\}`
   })
   return dynamicCss
 }
-
-// width: ${props => (props.isTwo ? 60 : props.isOne ? 30 : 20)}px;
 
 const getStyledComponent = (name, base, style) =>
   `const ${name} = styled('${base}')\`${asDynamicCss(style)}\``
