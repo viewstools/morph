@@ -29,9 +29,7 @@ export default ({ images, isReactNative, uses }, getImport) => {
   }
 
   const dependencies = []
-  debugger
   uses.sort().forEach(d => {
-    debugger
     if (isReactNative && NATIVE.includes(d)) {
       useNative(d)
     } else if (isReactNative && SVG.includes(d)) {

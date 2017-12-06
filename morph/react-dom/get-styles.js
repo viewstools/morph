@@ -41,18 +41,16 @@ const getValue = (key, value) =>
     ? `${value}px`
     : `${value}`
 
-const toCss = obj => {
-  debugger
-  return Object.keys(obj)
+const toCss = obj =>
+  Object.keys(obj)
     .map(k => `${getKey(k)}: ${getValue(k, obj[k])};`)
     .join('\n')
-}
 
 const toNestedCss = (
   { base, hover, focus, active, activeHover, disabled, placeholder, print },
   debug
 ) => {
-  debugger
+  // debugger;
   const baseCss = toCss(base)
   const hoverCss = toCss(hover)
   const focusCss = toCss(focus)

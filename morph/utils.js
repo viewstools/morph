@@ -72,13 +72,8 @@ export const getScopedProps = (propNode, blockNode) => {
   let scopedConditional = maybeSafe(propNode)
 
   scopedProps.forEach(prop => {
-    // scopedConditional =
-    //   `${prop.inScope} ? ${maybeSafe(prop)} : ` + scopedConditional
-
     scopedConditional =
-      `\${\${prop.inScope}\}\ ? ${maybeSafe(prop)} : ` + scopedConditional
-    console.log('scopedConditional', scopedConditional)
-    debugger
+      `${prop.inScope} ? ${maybeSafe(prop)} : ` + scopedConditional
   })
 
   return scopedConditional
