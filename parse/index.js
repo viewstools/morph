@@ -235,9 +235,9 @@ export default (rtext, skipComments = true) => {
       if (newLinesBeforePreviousBlock > 2) {
         const linesToRemove = newLinesBeforePreviousBlock - 2
         help.push(
-          `remove ${linesToRemove} empty line${
-            linesToRemove > 1 ? 's' : ''
-          } before`
+          `remove ${linesToRemove} empty line${linesToRemove > 1
+            ? 's'
+            : ''} before`
         )
       }
       warn(help.join(', '), block)

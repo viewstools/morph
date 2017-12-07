@@ -2,7 +2,7 @@ import { getObjectAsString, getProp, hasKeysInChildren } from '../utils.js'
 import hash from '../hash.js'
 import toSlugCase from 'to-slug-case'
 
-let dynamicCss = ''
+let dynamicCss
 
 const asDynamicCss = (style, styleKey) => {
   const props = Object.keys(style)
@@ -38,9 +38,11 @@ export const leave = (node, parent, state) => {
   // TODO needs to be different, it should also be a classname here too
   if (hasKeysInChildren(node.style.dynamic)) {
     const block = node.parent
+    const blockName = block.is || block.name.value
+    let code = ''
+    dynamicCss = ''
     // TODO get block name or type
     // Animated.div
-    let code = ''
     const filteredDynamicStyles = Object.keys(
       node.style.dynamic
     ).filter((dynamicKey, index) => {
@@ -53,7 +55,7 @@ export const leave = (node, parent, state) => {
         asDynamicCss(node.style.dynamic[styleKey], styleKey)
       } else {
         code = getStyledComponent(
-          block.is,
+          blockName,
           block.name.finalValue,
           node.style.dynamic[styleKey],
           styleKey
@@ -63,8 +65,12 @@ export const leave = (node, parent, state) => {
 
     console.log(state.render)
 
-    state.render[0] = `<${block.is}`
+    const renderValue = state.render.filter(item =>
+      item.includes(block.name.finalValue)
+    )[0]
+    state.render[state.render.indexOf(renderValue)] = `<${blockName}`
+
     state.stylesDynamic.push(code)
-    block.name.finalValue = block.is
+    block.name.finalValue = blockName
   }
 }
