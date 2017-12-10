@@ -9,8 +9,10 @@ export const asScopedValue = (obj, node, properties) => {
   let value = []
 
   for (const scope in obj) {
-    const scopeValue = properties.list[obj[scope]].value.value
-    value.push(`${scope}? ${safeScope(scopeValue)}`)
+    const scopeProp = properties.list.find(
+      prop => prop.inScope === scope && prop.key.valueRaw === node.key.valueRaw
+    )
+    value.push(`${scope}? ${safeScope(scopeProp.value.value)}`)
   }
 
   return `${value.join(' : ')} : ${safeScope(defaultValue)}`
