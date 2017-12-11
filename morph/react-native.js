@@ -36,9 +36,7 @@ export default ({
   if (name !== finalName) {
     console.warn(
       `// "${name}" is a Views reserved name.
-      We've renamed it to "${
-        finalName
-      }", so your view should work but this isn't ideal.
+      We've renamed it to "${finalName}", so your view should work but this isn't ideal.
       To fix this, change its file name to something else.`
     )
   }
@@ -47,6 +45,7 @@ export default ({
     captures: [],
     defaultProps: false,
     fonts: [],
+    images: [],
     isReactNative: true,
     name: finalName,
     remap: {},

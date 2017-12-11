@@ -1,15 +1,36 @@
 import { getScope, getScopedProps } from '../utils.js'
 import safe from '../react/safe.js'
+import toCamelCase from 'to-camel-case'
 
-export default (node, parent) => {
+const isUrl = str => /^https?:\/\//.test(str)
+
+const getImageSource = (node, state) => {
+  const { value } = node.value
+
+  if (node.tags.code || isUrl(value)) {
+    return safe(value)
+  } else {
+    const name = toCamelCase(value)
+    if (!state.images.includes(value)) {
+      state.images.push({
+        name,
+        file: value,
+      })
+    }
+    return `{${name}}`
+  }
+}
+
+export default (node, parent, state) => {
   const key = node.key.value
   const value = node.value.value
 
   switch (node.value.type) {
     case 'Literal':
+      // TODO support sccoped source
       if (key === 'source' && parent.parent.name.value === 'Image') {
         return {
-          src: safe(value, node),
+          src: getImageSource(node, state),
         }
       } else if (
         key === 'isDisabled' &&

@@ -13,7 +13,7 @@ const NATIVE = [
   'View',
 ]
 
-export default ({ isReactNative, uses }, getImport) => {
+export default ({ images, isReactNative, uses }, getImport) => {
   const usesNative = []
   const usesSvg = []
 
@@ -46,6 +46,12 @@ export default ({ isReactNative, uses }, getImport) => {
       dependencies.push(`import css from 'glam'`)
     }
   })
+
+  // TODO we probably want to check that the file exists and do something if it
+  // doesn;t, like warn the user at least?
+  images.forEach(img =>
+    dependencies.push(`import ${img.name} from "${img.file}"`)
+  )
 
   if (usesSvg.length > 0) {
     const svg = usesSvg.filter(m => m !== 'Svg').join(', ')
