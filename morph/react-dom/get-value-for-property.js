@@ -7,8 +7,10 @@ const isUrl = str => /^https?:\/\//.test(str)
 const getImageSource = (node, state) => {
   const { value } = node.value
 
-  if (node.tags.code || isUrl(value)) {
+  if (isUrl(value)) {
     return safe(value)
+  } else if (node.tags.code) {
+    return `{${state.debug ? 'require' : 'requireImage'}(${value})}`
   } else {
     const name = toCamelCase(value)
     if (!state.images.includes(value)) {

@@ -1645,6 +1645,68 @@ export default LocalImageSvg;
 }
 `;
 
+exports[`react-dom parses react-dom LocalOrRemoteImageWhenCode 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+
+const LocalOrRemoteImageWhenCode = props => {
+  return (
+    <img
+      data-test-id={props['data-test-id'] || 'LocalOrRemoteImageWhenCode'}
+      src={requireImage(props.source)}
+    />
+  );
+};
+
+export default LocalOrRemoteImageWhenCode;
+",
+  "fonts": Object {},
+  "props": Object {
+    "source": "string",
+  },
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom LocalOrRemoteImageWhenCode debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+
+const LocalOrRemoteImageWhenCode = props => {
+  return (
+    <img
+      data-test-id={props['data-test-id'] || 'LocalOrRemoteImageWhenCode'}
+      src={require(props.source)}
+    />
+  );
+};
+
+export default LocalOrRemoteImageWhenCode;
+",
+  "fonts": Object {},
+  "props": Object {
+    "source": "string",
+  },
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
 exports[`react-dom parses react-dom NameIsType 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -5302,6 +5364,42 @@ export default LocalImageSvg;
       "view": "ChopperSvgInline",
     },
   ],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-native parses react-native LocalOrRemoteImageWhenCode 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import { Image } from 'react-native';
+
+const LocalOrRemoteImageWhenCode = props => {
+  return (
+    <Image
+      testID={props['testID'] || 'LocalOrRemoteImageWhenCode'}
+      source={
+        /^https?:\\\\/\\\\//.test(props.source)
+          ? { uri: props.source }
+          : requireImage(props.source)
+      }
+    />
+  );
+};
+
+export default LocalOrRemoteImageWhenCode;
+",
+  "fonts": Object {},
+  "props": Object {
+    "source": "string",
+  },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
