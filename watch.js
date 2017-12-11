@@ -8,6 +8,7 @@ const glob = require('fast-glob')
 const path = require('path')
 const toPascalCase = require('to-pascal-case')
 const uniq = require('array-uniq')
+const morphInlineSvg = require('./morph/inline-svg.js')
 
 const isMorphedView = f => /\.view\.js$/.test(f)
 
@@ -67,9 +68,7 @@ module.exports = options => {
 
     if (!viewNotFound)
       viewNotFound = name => {
-        const warning = `${src}/${
-          name
-        }.view doesn't exist but it is being used. Create the file!`
+        const warning = `${src}/${name}.view doesn't exist but it is being used. Create the file!`
         verbose && console.log(chalk.magenta(`! ${warning}`))
         return getViewNotFound(as, name, warning)
       }
@@ -179,9 +178,7 @@ module.exports = options => {
         console.log(
           chalk.magenta('X'),
           chalk.dim(`-> ${f}`),
-          `This view will not be morphed as a view with the name ${
-            view
-          } already exists. If you did intend to morph this view please give it a unique name.`
+          `This view will not be morphed as a view with the name ${view} already exists. If you did intend to morph this view please give it a unique name.`
         )
         return
       }
@@ -358,6 +355,43 @@ height 50`
         } else {
           await onMorph(toMorph)
         }
+
+        await Promise.all(
+          res.svgs.map(async svg => {
+            const svgFile = path.resolve(rawFile, '..', svg.source)
+
+            try {
+              const inlined = await morphInlineSvg(svgFile)
+
+              // TODO revisit as most of the options don't matter here
+              const res = morph(inlined, {
+                as,
+                compile,
+                debug,
+                enableAnimated,
+                inlineStyles,
+                file: { raw: rawFile, relative: file },
+                name: svg.view,
+                getImport,
+                pretty,
+                tests,
+                views,
+              })
+
+              await onMorph({
+                code: res.code,
+                isInlineSvg: true,
+                file: path.resolve(rawFile, '..', `${svg.view}.view`),
+                view,
+              })
+            } catch (error) {
+              console.error(
+                chalk.magenta('M'),
+                `${view}. Can't morph inline ${svgFile}`
+              )
+            }
+          })
+        )
 
         verbose && console.log(chalk.green('M'), view)
       } catch (err) {

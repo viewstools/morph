@@ -236,9 +236,9 @@ export default ({
 
         node.isRoute = true
         state.render.push(
-          `<Route path=${safe(path)} ${
-            isExact ? 'exact' : ''
-          } render={routeProps => `
+          `<Route path=${safe(path)} ${isExact
+            ? 'exact'
+            : ''} render={routeProps => `
         )
       }
     },
@@ -358,7 +358,7 @@ export default ({
   const PropertyStyle = {
     enter(node, parent, state) {
       let styleForProperty, isScopedVal, _isProp
-      if (isStyle(node) && parent.parent.isBasic) {
+      if (isStyle(node) && parent.parent.isBasic && !parent.parent.isSvg) {
         const code = isCode(node)
 
         if (parent.parent.scoped.hasOwnProperty(node.key.value)) {

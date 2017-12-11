@@ -40,7 +40,9 @@ export default ({ images, isReactNative, uses }, getImport) => {
             ? `G as SvgGroup`
             : `${d.replace('Svg', '')} as ${d}`
       )
-    } else if (/^[A-Z]/.test(d) || /\.data$/.test(d)) {
+    } else if (d.endsWith('SvgInline')) {
+      dependencies.push(`import ${d} from "./${d}.view.js"`)
+    } else if (/^[A-Z]/.test(d)) {
       dependencies.push(getImport(d))
     } else if (d === 'glam') {
       dependencies.push(`import css from 'glam'`)
