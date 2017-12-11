@@ -9,7 +9,7 @@ const getImageSource = (node, state) => {
 
   if (node.tags.code || isUrl(value)) {
     const uri = isCode(value) ? value : `"${value}"`
-    return `{{ uri: ${uri}}}`
+    return `{{ uri: ${uri} }}`
   } else {
     const name = toCamelCase(value)
     if (!state.images.includes(value)) {
@@ -29,6 +29,7 @@ export default (node, parent, state) => {
   switch (node.value.type) {
     case 'Literal':
       // TODO support sccoped source
+      // TODO support SVGs
       // TODO support local files passed as props
       // I guess we either do this dynamically or we determine the value being
       // passed based off the link between views
