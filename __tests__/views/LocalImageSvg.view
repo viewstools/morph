@@ -1,0 +1,4 @@
+LocalImageSvg Image
+width 50
+height props.height
+source ./chopper.svg

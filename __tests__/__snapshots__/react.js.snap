@@ -1479,12 +1479,13 @@ exports[`react-dom parses react-dom LocalImage 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
+import chopperJpg from './chopper.jpg';
 
 const LocalImage = props => {
   return (
     <img
       data-test-id={props['data-test-id'] || 'LocalImage'}
-      src=\\"./chopper.jpg\\"
+      src={chopperJpg}
     />
   );
 };
@@ -1507,17 +1508,76 @@ exports[`react-dom parses react-dom LocalImage debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
+import chopperJpg from './chopper.jpg';
 
 const LocalImage = props => {
   return (
     <img
       data-test-id={props['data-test-id'] || 'LocalImage'}
-      src=\\"./chopper.jpg\\"
+      src={chopperJpg}
     />
   );
 };
 
 export default LocalImage;
+",
+  "fonts": Object {},
+  "props": Object {},
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom LocalImageSvg 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import chopperSvg from './chopper.svg';
+
+const LocalImageSvg = props => {
+  return (
+    <img
+      data-test-id={props['data-test-id'] || 'LocalImageSvg'}
+      src={chopperSvg}
+    />
+  );
+};
+
+export default LocalImageSvg;
+",
+  "fonts": Object {},
+  "props": Object {},
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom LocalImageSvg debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import chopperSvg from './chopper.svg';
+
+const LocalImageSvg = props => {
+  return (
+    <img
+      data-test-id={props['data-test-id'] || 'LocalImageSvg'}
+      src={chopperSvg}
+    />
+  );
+};
+
+export default LocalImageSvg;
 ",
   "fonts": Object {},
   "props": Object {},
@@ -3387,7 +3447,7 @@ const UseImage = props => {
   return (
     <img
       data-test-id={props['data-test-id'] || 'Image'}
-      src=\\"https://viewsdx.com/rocks.jpg\\"
+      src=\\"https://views.tools/rocks.jpg\\"
     />
   );
 };
@@ -3395,7 +3455,9 @@ const UseImage = props => {
 export default UseImage;
 ",
   "fonts": Object {},
-  "props": Object {},
+  "props": Object {
+    "another": "string",
+  },
   "tests": Array [
     Object {
       "data": Object {},
@@ -3415,7 +3477,7 @@ const UseImage = props => {
   return (
     <img
       data-test-id={props['data-test-id'] || 'Image'}
-      src=\\"https://viewsdx.com/rocks.jpg\\"
+      src=\\"https://views.tools/rocks.jpg\\"
     />
   );
 };
@@ -3423,7 +3485,9 @@ const UseImage = props => {
 export default UseImage;
 ",
   "fonts": Object {},
-  "props": Object {},
+  "props": Object {
+    "another": "string",
+  },
   "tests": Array [
     Object {
       "data": Object {},
@@ -5053,18 +5117,44 @@ exports[`react-native parses react-native LocalImage 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
+import chopperJpg from './chopper.jpg';
 import { Image } from 'react-native';
 
 const LocalImage = props => {
+  return <Image testID={props['testID'] || 'LocalImage'} source={chopperJpg} />;
+};
+
+export default LocalImage;
+",
+  "fonts": Object {},
+  "props": Object {},
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-native parses react-native LocalImageSvg 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import RNImageSvg from 'react-native-svg-uri';
+import chopperSvg from './chopper.svg';
+
+const LocalImageSvg = props => {
   return (
-    <Image
-      testID={props['testID'] || 'LocalImage'}
-      source={{ uri: './chopper.jpg' }}
+    <RNImageSvg
+      testID={props['testID'] || 'LocalImageSvg'}
+      source={chopperSvg}
     />
   );
 };
 
-export default LocalImage;
+export default LocalImageSvg;
 ",
   "fonts": Object {},
   "props": Object {},
@@ -5976,7 +6066,7 @@ const UseImage = props => {
   return (
     <Image
       testID={props['testID'] || 'Image'}
-      source={{ uri: 'https://viewsdx.com/rocks.jpg' }}
+      source={{ uri: 'https://views.tools/rocks.jpg' }}
     />
   );
 };
@@ -5984,7 +6074,9 @@ const UseImage = props => {
 export default UseImage;
 ",
   "fonts": Object {},
-  "props": Object {},
+  "props": Object {
+    "another": "string",
+  },
   "tests": Array [
     Object {
       "data": Object {},

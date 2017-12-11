@@ -18,6 +18,9 @@ export default (node, parent, state) => {
     case 'Vertical':
       return getGroupBlockName(node, state)
 
+    case 'Image':
+      return getImageName(node, state)
+
     case 'List':
       return getListBlockName(node)
 
@@ -80,4 +83,16 @@ const getListBlockName = node => {
     ? 'ScrollView'
     : 'View'
   return node.maybeAnimated ? `Animated.${base}` : base
+}
+
+const isSvg = str => /\.svg$/.test(str)
+const getImageName = (node, state) => {
+  if (hasProp(node, 'source')) {
+    const source = getProp(node, 'source')
+    if (isSvg(source.value.value)) {
+      return 'RNImageSvg'
+    }
+  }
+
+  return 'Image'
 }
