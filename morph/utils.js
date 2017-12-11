@@ -104,7 +104,9 @@ export const hasProp = (node, key, match) => {
 }
 
 export const hasDefaultProp = (node, parent) =>
-  parent.list.some(prop => prop.key.value === node.key.value && !prop.inScope)
+  parent.list.some(
+    prop => prop.key.valueRaw === node.key.valueRaw && !prop.inScope
+  )
 
 export const CODE_EXPLICIT = /^{.+}$/
 export const isCodeExplicit = str => CODE_EXPLICIT.test(str)
