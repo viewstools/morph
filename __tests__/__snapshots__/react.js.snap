@@ -1475,6 +1475,62 @@ export default ListWithKey;
 }
 `;
 
+exports[`react-dom parses react-dom LocalImage 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+
+const LocalImage = props => {
+  return (
+    <img
+      data-test-id={props['data-test-id'] || 'LocalImage'}
+      src=\\"./chopper.jpg\\"
+    />
+  );
+};
+
+export default LocalImage;
+",
+  "fonts": Object {},
+  "props": Object {},
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom LocalImage debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+
+const LocalImage = props => {
+  return (
+    <img
+      data-test-id={props['data-test-id'] || 'LocalImage'}
+      src=\\"./chopper.jpg\\"
+    />
+  );
+};
+
+export default LocalImage;
+",
+  "fonts": Object {},
+  "props": Object {},
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
 exports[`react-dom parses react-dom NameIsType 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -4983,6 +5039,35 @@ export default ListWithKey;
   "props": Object {
     "list": "string",
   },
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-native parses react-native LocalImage 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import { Image } from 'react-native';
+
+const LocalImage = props => {
+  return (
+    <Image
+      testID={props['testID'] || 'LocalImage'}
+      source={{ uri: './chopper.jpg' }}
+    />
+  );
+};
+
+export default LocalImage;
+",
+  "fonts": Object {},
+  "props": Object {},
   "tests": Array [
     Object {
       "data": Object {},

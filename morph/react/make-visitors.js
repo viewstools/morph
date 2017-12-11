@@ -344,7 +344,7 @@ export default ({
         //   return
         // }
 
-        const value = getValueForProperty(node, parent)
+        const value = getValueForProperty(node, parent, state)
 
         if (value) {
           Object.keys(value).forEach(k =>
@@ -421,8 +421,6 @@ export default ({
     BlockWhen,
 
     Block: {
-      // TODO Image
-      // TODO Capture*
       // TODO List without wrapper?
       enter(node, parent, state) {
         BlockWhen.enter.call(this, node, parent, state)
