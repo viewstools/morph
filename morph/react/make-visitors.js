@@ -236,9 +236,9 @@ export default ({
 
         node.isRoute = true
         state.render.push(
-          `<Route path=${safe(path)} ${isExact
-            ? 'exact'
-            : ''} render={routeProps => `
+          `<Route path=${safe(path)} ${
+            isExact ? 'exact' : ''
+          } render={routeProps => `
         )
       }
     },
@@ -474,7 +474,8 @@ export default ({
           (!isValidPropertyForBlock(node, parent, state) &&
             parent.parent.isBasic) ||
           (node.tags.scope && node.tags.scope !== 'props.isDisabled') ||
-          (node.inScope && hasDefaultProp(node, parent))
+          (node.inScope && hasDefaultProp(node, parent)) ||
+          (state.debug && key === 'ref')
         )
           return
 

@@ -610,7 +610,6 @@ const Code = props => {
   return (
     <div
       data-test-id={props['data-test-id'] || 'Vertical'}
-      ref={$e => (this.$e = $e)}
       className={styles.h18or678}
     >
       <span data-test-id=\\"Code.Text\\">{props.text}</span>
