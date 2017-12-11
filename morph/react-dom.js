@@ -60,6 +60,7 @@ export default ({
     remap: {},
     render: [],
     styles: {},
+    svgs: [],
     todos: [],
     uses: [],
     testIds: {},
@@ -143,6 +144,7 @@ export default ({
     }),
     fonts: state.fonts,
     props: state.props,
+    svgs: state.svgs,
     tests: state.tests,
     todos: state.todos,
   }

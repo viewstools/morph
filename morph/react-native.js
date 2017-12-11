@@ -19,7 +19,6 @@ import toComponent from './react/to-component.js'
 
 const imports = {
   DismissKeyboard: `import dismissKeyboard from 'dismissKeyboard'`,
-  RNImageSvg: "import RNImageSvg from 'react-native-svg-uri'",
   Link: "import { Link } from 'react-router-native'",
   Route: "import { Route } from 'react-router-native'",
   Router: "import { NativeRouter as Router } from 'react-router-native'",
@@ -66,6 +65,7 @@ export default ({
 
       state.uses.push(block)
     },
+    svgs: [],
     views,
     withRouter: false,
   }
@@ -130,6 +130,7 @@ export default ({
     }),
     fonts: state.fonts,
     props: state.props,
+    svgs: state.svgs,
     tests: state.tests,
     todos: state.todos,
   }

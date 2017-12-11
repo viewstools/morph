@@ -34,9 +34,11 @@ export default (node, parent, state) => {
       // I guess we either do this dynamically or we determine the value being
       // passed based off the link between views
       if (key === 'source' && parent.parent.name.value === 'Image') {
-        return {
-          source: getImageSource(node, state),
-        }
+        return parent.parent.isSvg
+          ? {}
+          : {
+              source: getImageSource(node, state),
+            }
       } else if (parent.parent.scoped.hasOwnProperty(key)) {
         return {
           [key]: safe(getScopedProps(node, parent.parent)),

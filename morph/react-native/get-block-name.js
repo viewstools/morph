@@ -89,8 +89,19 @@ const isSvg = str => /\.svg$/.test(str)
 const getImageName = (node, state) => {
   if (hasProp(node, 'source')) {
     const source = getProp(node, 'source')
-    if (isSvg(source.value.value)) {
-      return 'RNImageSvg'
+    const { value } = source.value
+
+    if (isSvg(value)) {
+      const name = `${toPascalCase(value)}Inline`
+      node.isSvg = true
+
+      if (!state.svgs.some(svg => svg.source === value)) {
+        state.svgs.push({
+          source: value,
+          view: name,
+        })
+      }
+      return name
     }
   }
 

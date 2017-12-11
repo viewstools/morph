@@ -35,6 +35,7 @@ export default Action;
     "clickMe": "function",
     "isDisabled": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -80,6 +81,7 @@ export default Action;
     "clickMe": "function",
     "isDisabled": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -125,6 +127,7 @@ export default AnimatedButton;
     "onClick": "function",
     "opacity": "number",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -170,6 +173,7 @@ export default AnimatedButton;
     "onClick": "function",
     "opacity": "number",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -223,6 +227,7 @@ export default BackgroundImage;
   "props": Object {
     "backgroundImage": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -276,6 +281,7 @@ export default BackgroundImage;
   "props": Object {
     "backgroundImage": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -325,6 +331,7 @@ export default BoxShadow;
   "props": Object {
     "color": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -374,6 +381,7 @@ export default BoxShadow;
   "props": Object {
     "color": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -412,6 +420,7 @@ export default Broken;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -450,6 +459,7 @@ export default Broken;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -489,6 +499,7 @@ export default ClassName;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -528,6 +539,7 @@ export default ClassName;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -570,6 +582,7 @@ export default Code;
   "props": Object {
     "text": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -612,6 +625,7 @@ export default Code;
   "props": Object {
     "text": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -695,6 +709,7 @@ export default Form;
   "props": Object {
     "onSubmit": "function",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -783,6 +798,7 @@ export default Form;
   "props": Object {
     "onSubmit": "function",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -825,6 +841,7 @@ export default GoTo;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -867,6 +884,7 @@ export default GoTo;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -919,6 +937,7 @@ export default Hover;
   "props": Object {
     "onClick": "function",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -971,6 +990,7 @@ export default Hover;
   "props": Object {
     "onClick": "function",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -1031,6 +1051,7 @@ export default HoverProxy;
     "icon": "string",
     "onClick": "function",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -1091,6 +1112,7 @@ export default HoverProxy;
     "icon": "string",
     "onClick": "function",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -1114,6 +1136,7 @@ export default JustText;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -1137,6 +1160,7 @@ export default JustText;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -1199,6 +1223,7 @@ export default ListOfButtons;
     },
     "onClick": "function",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -1261,6 +1286,7 @@ export default ListOfButtons;
     },
     "onClick": "function",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -1317,6 +1343,7 @@ export default ListOfSomething;
       "type": "array",
     },
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -1373,6 +1400,7 @@ export default ListOfSomething;
       "type": "array",
     },
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -1419,6 +1447,7 @@ export default ListWithKey;
   "props": Object {
     "list": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -1465,6 +1494,7 @@ export default ListWithKey;
   "props": Object {
     "list": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -1494,6 +1524,7 @@ export default LocalImage;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -1523,6 +1554,7 @@ export default LocalImage;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -1537,13 +1569,21 @@ exports[`react-dom parses react-dom LocalImageSvg 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
+import css from 'glam';
 import chopperSvg from './chopper.svg';
+const styles = {
+  hux9fid: css('css-1d8t7s8', [], function inlineCss() {
+    return [\`.css-1d8t7s8 { width: 50px; }\`];
+  }),
+};
 
 const LocalImageSvg = props => {
   return (
     <img
       data-test-id={props['data-test-id'] || 'LocalImageSvg'}
       src={chopperSvg}
+      style={{ height: props.height }}
+      className={styles.hux9fid}
     />
   );
 };
@@ -1551,7 +1591,10 @@ const LocalImageSvg = props => {
 export default LocalImageSvg;
 ",
   "fonts": Object {},
-  "props": Object {},
+  "props": Object {
+    "height": "number",
+  },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -1566,13 +1609,21 @@ exports[`react-dom parses react-dom LocalImageSvg debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
+import css from 'glam';
 import chopperSvg from './chopper.svg';
+const styles = {
+  hux9fid: css('css-1d8t7s8', [], function inlineCss() {
+    return [\`.css-1d8t7s8 { width: 50px; }\`];
+  }),
+};
 
 const LocalImageSvg = props => {
   return (
     <img
       data-test-id={props['data-test-id'] || 'LocalImageSvg'}
       src={chopperSvg}
+      style={{ height: props.height }}
+      className={styles.hux9fid}
     />
   );
 };
@@ -1580,7 +1631,10 @@ const LocalImageSvg = props => {
 export default LocalImageSvg;
 ",
   "fonts": Object {},
-  "props": Object {},
+  "props": Object {
+    "height": "number",
+  },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -1604,6 +1658,7 @@ export default NameIsType;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -1627,6 +1682,7 @@ export default NameIsType;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -1683,6 +1739,7 @@ export default withRouter(NestedRoutes);
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -1739,6 +1796,7 @@ export default withRouter(NestedRoutes);
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -1790,6 +1848,7 @@ export default Print;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -1841,6 +1900,7 @@ export default Print;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -1896,6 +1956,7 @@ export default ProxyTest;
     "bla": "string",
     "onClickRemapped": "function",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -1951,6 +2012,7 @@ export default ProxyTest;
     "bla": "string",
     "onClickRemapped": "function",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -1991,6 +2053,7 @@ export default Scope;
     "somethingGreen": "string",
     "whatMakesBlue": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -2031,6 +2094,7 @@ export default Scope;
     "somethingGreen": "string",
     "whatMakesBlue": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -2067,6 +2131,7 @@ export default ScopeOnCustomView;
     "different": "string",
     "more": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -2103,6 +2168,7 @@ export default ScopeOnCustomView;
     "different": "string",
     "more": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -2160,6 +2226,7 @@ export default ScopePopup;
     "toggle": "function",
     "whatMakesBlue": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -2217,6 +2284,7 @@ export default ScopePopup;
     "toggle": "function",
     "whatMakesBlue": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -2266,6 +2334,7 @@ export default ScopePopup2;
     "isSuperVisible": "string",
     "toggle": "function",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -2315,6 +2384,7 @@ export default ScopePopup2;
     "isSuperVisible": "string",
     "toggle": "function",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -2356,6 +2426,7 @@ export default Teleport;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -2397,6 +2468,7 @@ export default Teleport;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -2431,6 +2503,7 @@ export default Test;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -2465,6 +2538,7 @@ export default Test;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -2508,6 +2582,7 @@ export default TestIds;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -2551,6 +2626,7 @@ export default TestIds;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -2595,6 +2671,7 @@ export default TextInterpolation;
   "props": Object {
     "name": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -2639,6 +2716,7 @@ export default TextInterpolation;
   "props": Object {
     "name": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -2662,6 +2740,7 @@ export default Toggle;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -2685,6 +2764,7 @@ export default Toggle;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -2741,6 +2821,7 @@ export default UseCaptureEmail;
   "props": Object {
     "onSubmit": "function",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -2797,6 +2878,7 @@ export default UseCaptureEmail;
   "props": Object {
     "onSubmit": "function",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -2835,6 +2917,7 @@ export default UseCaptureFile;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -2874,6 +2957,7 @@ export default UseCaptureFile;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -2913,6 +2997,7 @@ export default UseCaptureNumber;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -2953,6 +3038,7 @@ export default UseCaptureNumber;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -2992,6 +3078,7 @@ export default UseCapturePhone;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -3032,6 +3119,7 @@ export default UseCapturePhone;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -3071,6 +3159,7 @@ export default UseCaptureSecure;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -3111,6 +3200,7 @@ export default UseCaptureSecure;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -3150,6 +3240,7 @@ export default UseCaptureText;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -3190,6 +3281,7 @@ export default UseCaptureText;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -3229,6 +3321,7 @@ export default UseCaptureTextArea;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -3269,6 +3362,7 @@ export default UseCaptureTextArea;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -3309,6 +3403,7 @@ export default UseCaptureTextManagedFromOutside;
   "props": Object {
     "external": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -3350,6 +3445,7 @@ export default UseCaptureTextManagedFromOutside;
   "props": Object {
     "external": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -3389,6 +3485,7 @@ export default UseHorizontal;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -3428,6 +3525,7 @@ export default UseHorizontal;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -3458,6 +3556,7 @@ export default UseImage;
   "props": Object {
     "another": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -3488,6 +3587,7 @@ export default UseImage;
   "props": Object {
     "another": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -3533,6 +3633,7 @@ export default UseOfProxy;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -3578,6 +3679,7 @@ export default UseOfProxy;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -3627,6 +3729,7 @@ export default UseProxy;
     "icon": "string",
     "text": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -3676,6 +3779,7 @@ export default UseProxy;
     "icon": "string",
     "text": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -3747,6 +3851,7 @@ export default UseRouter;
   "props": Object {
     "height": "number",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -3818,6 +3923,7 @@ export default UseRouter;
   "props": Object {
     "height": "number",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -3852,6 +3958,7 @@ export default UseSvg;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -3886,6 +3993,7 @@ export default UseSvg;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -3932,6 +4040,7 @@ export default UseText;
     ],
   },
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -3978,6 +4087,7 @@ export default UseText;
     ],
   },
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -4017,6 +4127,7 @@ export default UseVertical;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -4056,6 +4167,7 @@ export default UseVertical;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -4099,6 +4211,7 @@ export default When;
   "props": Object {
     "showMe": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -4142,6 +4255,7 @@ export default When;
   "props": Object {
     "showMe": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -4203,6 +4317,7 @@ export default WhenList;
     },
     "showMe": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -4264,6 +4379,7 @@ export default WhenList;
     },
     "showMe": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -4291,6 +4407,7 @@ export default WhenTopLevel;
   "props": Object {
     "showMe": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -4318,6 +4435,7 @@ export default WhenTopLevel;
   "props": Object {
     "showMe": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -4361,6 +4479,7 @@ export default WithTest;
     "change": "function",
     "text": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {
@@ -4414,6 +4533,7 @@ export default WithTest;
     "change": "function",
     "text": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {
@@ -4465,6 +4585,7 @@ export default Action;
     "clickMe": "function",
     "isDisabled": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -4512,6 +4633,7 @@ export default AnimatedButton;
     "onClick": "function",
     "opacity": "number",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -4557,6 +4679,7 @@ export default BackgroundImage;
   "props": Object {
     "backgroundImage": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -4611,6 +4734,7 @@ export default BoxShadow;
   "props": Object {
     "color": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -4640,6 +4764,7 @@ export default Broken;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -4671,6 +4796,7 @@ export default ClassName;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -4707,6 +4833,7 @@ export default Code;
   "props": Object {
     "text": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -4811,6 +4938,7 @@ export default Form;
   "props": Object {
     "onSubmit": "function",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -4841,6 +4969,7 @@ export default GoTo;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -4884,6 +5013,7 @@ export default Hover;
   "props": Object {
     "onClick": "function",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -4935,6 +5065,7 @@ export default HoverProxy;
     "icon": "string",
     "onClick": "function",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -4959,6 +5090,7 @@ export default JustText;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -5019,6 +5151,7 @@ export default ListOfButtons;
     },
     "onClick": "function",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -5066,6 +5199,7 @@ export default ListOfSomething;
       "type": "array",
     },
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -5103,6 +5237,7 @@ export default ListWithKey;
   "props": Object {
     "list": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -5128,6 +5263,7 @@ export default LocalImage;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -5142,14 +5278,14 @@ exports[`react-native parses react-native LocalImageSvg 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import RNImageSvg from 'react-native-svg-uri';
-import chopperSvg from './chopper.svg';
+import ChopperSvgInline from './ChopperSvgInline.view.js';
 
 const LocalImageSvg = props => {
   return (
-    <RNImageSvg
+    <ChopperSvgInline
       testID={props['testID'] || 'LocalImageSvg'}
-      source={chopperSvg}
+      width={50}
+      height={props.height}
     />
   );
 };
@@ -5157,7 +5293,15 @@ const LocalImageSvg = props => {
 export default LocalImageSvg;
 ",
   "fonts": Object {},
-  "props": Object {},
+  "props": Object {
+    "height": "number",
+  },
+  "svgs": Array [
+    Object {
+      "source": "./chopper.svg",
+      "view": "ChopperSvgInline",
+    },
+  ],
   "tests": Array [
     Object {
       "data": Object {},
@@ -5182,6 +5326,7 @@ export default NameIsType;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -5231,6 +5376,7 @@ export default withRouter(NestedRoutes);
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -5262,6 +5408,7 @@ export default Print;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -5306,6 +5453,7 @@ export default ProxyTest;
     "bla": "string",
     "onClickRemapped": "function",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -5347,6 +5495,7 @@ export default Scope;
     "somethingGreen": "string",
     "whatMakesBlue": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -5383,6 +5532,7 @@ export default ScopeOnCustomView;
     "different": "string",
     "more": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -5436,6 +5586,7 @@ export default ScopePopup;
     "toggle": "function",
     "whatMakesBlue": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -5478,6 +5629,7 @@ export default ScopePopup2;
     "isSuperVisible": "string",
     "toggle": "function",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -5511,6 +5663,7 @@ export default Teleport;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -5546,6 +5699,7 @@ export default Test;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -5580,6 +5734,7 @@ export default TestIds;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -5615,6 +5770,7 @@ export default TextInterpolation;
   "props": Object {
     "name": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -5639,6 +5795,7 @@ export default Toggle;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -5699,6 +5856,7 @@ export default UseCaptureEmail;
   "props": Object {
     "onSubmit": "function",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -5743,6 +5901,7 @@ export default UseCaptureFile;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -5787,6 +5946,7 @@ export default UseCaptureNumber;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -5831,6 +5991,7 @@ export default UseCapturePhone;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -5875,6 +6036,7 @@ export default UseCaptureSecure;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -5919,6 +6081,7 @@ export default UseCaptureText;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -5963,6 +6126,7 @@ export default UseCaptureTextArea;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -6010,6 +6174,7 @@ export default UseCaptureTextManagedFromOutside;
   "props": Object {
     "external": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -6046,6 +6211,7 @@ export default UseHorizontal;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -6077,6 +6243,7 @@ export default UseImage;
   "props": Object {
     "another": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -6113,6 +6280,7 @@ export default UseOfProxy;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -6153,6 +6321,7 @@ export default UseProxy;
     "icon": "string",
     "text": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -6215,6 +6384,7 @@ export default UseRouter;
   "props": Object {
     "height": "number",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -6255,6 +6425,7 @@ export default UseSvg;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -6295,6 +6466,7 @@ export default UseText;
     ],
   },
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -6326,6 +6498,7 @@ export default UseVertical;
 ",
   "fonts": Object {},
   "props": Object {},
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -6358,6 +6531,7 @@ export default When;
   "props": Object {
     "showMe": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -6408,6 +6582,7 @@ export default WhenList;
     },
     "showMe": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -6436,6 +6611,7 @@ export default WhenTopLevel;
   "props": Object {
     "showMe": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -6475,6 +6651,7 @@ export default WithTest;
     "change": "function",
     "text": "string",
   },
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {
