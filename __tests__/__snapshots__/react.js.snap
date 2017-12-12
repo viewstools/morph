@@ -466,14 +466,12 @@ exports[`react-dom parses react-dom ClassName 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import css from 'glam';
+import { css } from 'react-emotion';
 const styles = {
-  hjpd2p3: css('css-wuqyzz', [], function inlineCss() {
-    return [
-      \`.css-wuqyzz { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column;
-background-color: blue; }\`,
-    ];
-  }),
+  hjpd2p3: css\`
+    flex-direction: column;
+    background-color: blue;
+  \`,
 };
 
 const ClassName = props => {
@@ -794,13 +792,11 @@ exports[`react-dom parses react-dom GoTo 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import css from 'glam';
+import { css } from 'react-emotion';
 const styles = {
-  h18or678: css('css-1s0kfvh', [], function inlineCss() {
-    return [
-      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
-    ];
-  }),
+  h18or678: css\`
+    flex-direction: column;
+  \`,
 };
 
 const GoTo = props => {
@@ -1158,14 +1154,15 @@ exports[`react-dom parses react-dom ListOfButtons 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import css from 'glam';
+import styled, { css } from 'react-emotion';
 const styles = {
-  h18or678: css('css-1s0kfvh', [], function inlineCss() {
-    return [
-      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
-    ];
-  }),
+  h18or678: css\`
+    flex-direction: column;
+  \`,
 };
+const Text = styled('span')\`
+  color: \${props => item.color};
+\`;
 
 const ListOfButtons = props => {
   return (
@@ -1181,12 +1178,7 @@ const ListOfButtons = props => {
             key={index}
             className={styles.h18or678}
           >
-            <span
-              data-test-id=\\"ListOfButtons.Text\\"
-              style={{ color: item.color }}
-            >
-              {index}
-            </span>
+            <Text data-test-id=\\"ListOfButtons.Text\\">{index}</Text>
           </button>
         ))}
       {props.children}
