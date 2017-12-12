@@ -13,7 +13,7 @@ export default ({ debug, styles, stylesDynamic }, name) => {
       .join(',')
   }
 
-  const code = obj ? `const styles = {${obj}}` : false
+  const code = obj ? `const styles = {${obj}}` : ''
   const maybeImport = [
     stylesDynamic.length > 0
       ? 'import styled, { css } from "react-emotion"'
