@@ -50,13 +50,11 @@ exports[`react-dom parses react-dom Action debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import css from 'glam';
+import { css } from 'react-emotion';
 const styles = {
-  h18or678: css('css-1s0kfvh', [], function inlineCss() {
-    return [
-      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
-    ];
-  }),
+  h18or678: css\`
+    flex-direction: column;
+  \`,
 };
 
 const Action = props => {
@@ -143,26 +141,26 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import Animated from 'react-dom-animated';
-import css from 'glam';
+import styled, { css } from 'react-emotion';
 const styles = {
-  h18or678: css('css-1s0kfvh', [], function inlineCss() {
-    return [
-      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
-    ];
-  }),
+  h18or678: css\`
+    flex-direction: column;
+  \`,
 };
+const Vertical = styled('AnimatedButtonVertical')\`
+  opacity: \${props => props.opacity};
+\`;
 
 const AnimatedButton = props => {
   return (
-    <Animated.button
+    <Vertical
       data-test-id={props['data-test-id'] || 'Vertical'}
       onClick={props.onClick}
-      style={{ opacity: props.opacity }}
       className={styles.h18or678}
     >
       <span data-test-id=\\"AnimatedButton.Text\\">hey</span>
       {props.children}
-    </Animated.button>
+    </Vertical>
   );
 };
 
@@ -242,22 +240,21 @@ exports[`react-dom parses react-dom BackgroundImage debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import Animated from 'react-dom-animated';
-import css from 'glam';
+import BackgroundImageHorizontal from './BackgroundImageHorizontal.view.js';
+import styled, { css } from 'react-emotion';
 const styles = {
-  h1omhxf4: css('css-1lgf2gr', [], function inlineCss() {
-    return [
-      \`.css-1lgf2gr { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column;
-background-image: url(\\"https://viewsdx.com/image.jpg\\"); }\`,
-    ];
-  }),
-  h1peh4ml: css('css-ii8p9n', [], function inlineCss() {
-    return [
-      \`.css-ii8p9n { -webkit-flex-direction: row; -ms-flex-direction: row; -webkit-box-orient: horizontal; -webkit-box-direction: normal; flex-direction: row;
-background-size: contain; }\`,
-    ];
-  }),
+  h1omhxf4: css\`
+    flex-direction: column;
+    background-image: url('https://viewsdx.com/image.jpg');
+  \`,
+  h1peh4ml: css\`
+    flex-direction: row;
+    background-size: contain;
+  \`,
 };
+const Horizontal = styled('BackgroundImageHorizontal')\`
+  background-image: \${props => \`url(\${props.backgroundImage})\`};
+\`;
 
 const BackgroundImage = props => {
   return (
@@ -265,9 +262,8 @@ const BackgroundImage = props => {
       data-test-id={props['data-test-id'] || 'Vertical'}
       className={styles.h1omhxf4}
     >
-      <Animated.div
+      <Horizontal
         data-test-id=\\"BackgroundImage.Horizontal\\"
-        style={{ backgroundImage: \`url(\${props.backgroundImage})\` }}
         className={styles.h1peh4ml}
       />
       {props.children}
@@ -346,32 +342,30 @@ exports[`react-dom parses react-dom BoxShadow debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import Animated from 'react-dom-animated';
-import css from 'glam';
+import BoxShadowVertical from './BoxShadowVertical.view.js';
+import styled, { css } from 'react-emotion';
 const styles = {
-  h18or678: css('css-1s0kfvh', [], function inlineCss() {
-    return [
-      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
-    ];
-  }),
-  h18mfro8: css('css-16jqtdw', [], function inlineCss() {
-    return [
-      \`.css-16jqtdw { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column;
-box-shadow: 0px 8px 15px 0px rgba(0,0,0,0.1); }\`,
-    ];
-  }),
+  h18or678: css\`
+    flex-direction: column;
+  \`,
+  h18mfro8: css\`
+    flex-direction: column;
+    box-shadow: 0px 8px 15px 0px rgba(0, 0, 0, 0.1);
+  \`,
 };
+const Vertical = styled('BoxShadowVertical')\`
+  box-shadow: \${props => \`10px 5px 2px \${props.color}\`};
+\`;
 
 const BoxShadow = props => {
   return (
-    <Animated.div
+    <Vertical
       data-test-id={props['data-test-id'] || 'Vertical'}
-      style={{ boxShadow: \`10px 5px 2px \${props.color}\` }}
       className={styles.h18or678}
     >
       <div data-test-id=\\"BoxShadow.Vertical:1\\" className={styles.h18mfro8} />
       {props.children}
-    </Animated.div>
+    </Vertical>
   );
 };
 
@@ -514,14 +508,12 @@ exports[`react-dom parses react-dom ClassName debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import css from 'glam';
+import { css } from 'react-emotion';
 const styles = {
-  hjpd2p3: css('css-wuqyzz', [], function inlineCss() {
-    return [
-      \`.css-wuqyzz { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column;
-background-color: blue; }\`,
-    ];
-  }),
+  hjpd2p3: css\`
+    flex-direction: column;
+    background-color: blue;
+  \`,
 };
 
 const ClassName = props => {
@@ -597,13 +589,11 @@ exports[`react-dom parses react-dom Code debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import css from 'glam';
+import { css } from 'react-emotion';
 const styles = {
-  h18or678: css('css-1s0kfvh', [], function inlineCss() {
-    return [
-      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
-    ];
-  }),
+  h18or678: css\`
+    flex-direction: column;
+  \`,
 };
 
 const Code = props => {
@@ -723,13 +713,11 @@ exports[`react-dom parses react-dom Form debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import css from 'glam';
+import { css } from 'react-emotion';
 const styles = {
-  h18or678: css('css-1s0kfvh', [], function inlineCss() {
-    return [
-      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
-    ];
-  }),
+  h18or678: css\`
+    flex-direction: column;
+  \`,
 };
 
 class Form extends React.Component {
@@ -855,13 +843,11 @@ exports[`react-dom parses react-dom GoTo debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import css from 'glam';
+import { css } from 'react-emotion';
 const styles = {
-  h18or678: css('css-1s0kfvh', [], function inlineCss() {
-    return [
-      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
-    ];
-  }),
+  h18or678: css\`
+    flex-direction: column;
+  \`,
 };
 
 const GoTo = props => {
@@ -951,21 +937,23 @@ exports[`react-dom parses react-dom Hover debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import css from 'glam';
+import { css } from 'react-emotion';
 const styles = {
-  h1mc7g7i: css('css-1wmifg8', [], function inlineCss() {
-    return [
-      \`.css-1wmifg8 { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column;
-background-color: black; }\`,
-      \`.css-1wmifg8:hover, .css-1wmifg8.hover { background-color: white; }\`,
-    ];
-  }),
-  h1mgvy2v: css('css-1p5vu9v', [], function inlineCss() {
-    return [
-      \`.css-1p5vu9v { color: white; }\`,
-      \`.css-1p5vu9v:hover, .css-1p5vu9v.hover { color: black; }\`,
-    ];
-  }),
+  h1mc7g7i: css\`
+    flex-direction: column;
+    background-color: black;
+    &:hover,
+    &.hover {
+      background-color: white;
+    }
+  \`,
+  h1mgvy2v: css\`
+    color: white;
+    &:hover,
+    &.hover {
+      color: black;
+    }
+  \`,
 };
 
 const Hover = props => {
@@ -1065,21 +1053,23 @@ exports[`react-dom parses react-dom HoverProxy debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import css from 'glam';
+import { css } from 'react-emotion';
 const styles = {
-  h1mc7g7i: css('css-1wmifg8', [], function inlineCss() {
-    return [
-      \`.css-1wmifg8 { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column;
-background-color: black; }\`,
-      \`.css-1wmifg8:hover, .css-1wmifg8.hover { background-color: white; }\`,
-    ];
-  }),
-  h1mgvy2v: css('css-1p5vu9v', [], function inlineCss() {
-    return [
-      \`.css-1p5vu9v { color: white; }\`,
-      \`.css-1p5vu9v:hover, .css-1p5vu9v.hover { color: black; }\`,
-    ];
-  }),
+  h1mc7g7i: css\`
+    flex-direction: column;
+    background-color: black;
+    &:hover,
+    &.hover {
+      background-color: white;
+    }
+  \`,
+  h1mgvy2v: css\`
+    color: white;
+    &:hover,
+    &.hover {
+      color: black;
+    }
+  \`,
 };
 
 const HoverProxy = props => {
@@ -1237,14 +1227,15 @@ exports[`react-dom parses react-dom ListOfButtons debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import css from 'glam';
+import styled, { css } from 'react-emotion';
 const styles = {
-  h18or678: css('css-1s0kfvh', [], function inlineCss() {
-    return [
-      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
-    ];
-  }),
+  h18or678: css\`
+    flex-direction: column;
+  \`,
 };
+const Text = styled('span')\`
+  color: \${props => item.color};
+\`;
 
 const ListOfButtons = props => {
   return (
@@ -1260,12 +1251,7 @@ const ListOfButtons = props => {
             key={index}
             className={styles.h18or678}
           >
-            <span
-              data-test-id=\\"ListOfButtons.Text\\"
-              style={{ color: item.color }}
-            >
-              {index}
-            </span>
+            <Text data-test-id=\\"ListOfButtons.Text\\">{index}</Text>
           </button>
         ))}
       {props.children}
@@ -1357,14 +1343,15 @@ exports[`react-dom parses react-dom ListOfSomething debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import css from 'glam';
+import styled, { css } from 'react-emotion';
 const styles = {
-  h18or678: css('css-1s0kfvh', [], function inlineCss() {
-    return [
-      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
-    ];
-  }),
+  h18or678: css\`
+    flex-direction: column;
+  \`,
 };
+const Text = styled('span')\`
+  color: \${props => item.color};
+\`;
 
 const ListOfSomething = props => {
   return (
@@ -1374,14 +1361,13 @@ const ListOfSomething = props => {
     >
       {Array.isArray(props.list) &&
         props.list.map((item, index) => (
-          <span
+          <Text
             data-test-id=\\"ListOfSomething.Text\\"
             dataIndex={index}
-            style={{ color: item.color }}
             key={index}
           >
             {index}
-          </span>
+          </Text>
         ))}
       {props.children}
     </div>
@@ -1461,13 +1447,11 @@ exports[`react-dom parses react-dom ListWithKey debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import css from 'glam';
+import { css } from 'react-emotion';
 const styles = {
-  h18or678: css('css-1s0kfvh', [], function inlineCss() {
-    return [
-      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
-    ];
-  }),
+  h18or678: css\`
+    flex-direction: column;
+  \`,
 };
 
 const ListWithKey = props => {
@@ -1819,13 +1803,11 @@ import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Route } from 'react-router-dom';
 import Topic from './Topic.view.js';
-import css from 'glam';
+import { css } from 'react-emotion';
 const styles = {
-  h18or678: css('css-1s0kfvh', [], function inlineCss() {
-    return [
-      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
-    ];
-  }),
+  h18or678: css\`
+    flex-direction: column;
+  \`,
 };
 
 const NestedRoutes = props => {
@@ -1924,22 +1906,16 @@ exports[`react-dom parses react-dom Print debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import css from 'glam';
+import { css } from 'react-emotion';
 const styles = {
-  h18or678: css('css-1s0kfvh', [], function inlineCss() {
-    return [
-      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
-    ];
-  }),
-  h12h5uqm: css('css-p8hd6', [], function inlineCss() {
-    return [
-      \`@media print, &.media-print {
-    .css-p8hd6 {
-        display: none
+  h18or678: css\`
+    flex-direction: column;
+  \`,
+  h12h5uqm: css\`
+    @media print, &.media-print {
+      display: none;
     }
-}\`,
-    ];
-  }),
+  \`,
 };
 
 const Print = props => {
@@ -2032,18 +2008,14 @@ exports[`react-dom parses react-dom ProxyTest debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import css from 'glam';
+import { css } from 'react-emotion';
 const styles = {
-  h18or678: css('css-1s0kfvh', [], function inlineCss() {
-    return [
-      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
-    ];
-  }),
-  hnpb55i: css('css-sw3yj', [], function inlineCss() {
-    return [
-      \`.css-sw3yj { -webkit-flex-direction: row; -ms-flex-direction: row; -webkit-box-orient: horizontal; -webkit-box-direction: normal; flex-direction: row; }\`,
-    ];
-  }),
+  h18or678: css\`
+    flex-direction: column;
+  \`,
+  hnpb55i: css\`
+    flex-direction: row;
+  \`,
 };
 
 const ProxyTest = props => {
@@ -2129,21 +2101,22 @@ exports[`react-dom parses react-dom Scope debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
+import styled, { css } from 'react-emotion';
+const styles = {};
+const Text = styled('span')\`
+  color: \${props =>
+    props.somethingGreen
+      ? 'rgb(0,255,0)'
+      : props.whatMakesBlue ? 'rgb(0,0,255)' : 'red'};
+\`;
 
 const Scope = props => {
   return (
-    <span
-      data-test-id={props['data-test-id'] || 'Text'}
-      style={{
-        color: props.somethingGreen
-          ? 'rgb(0,255,0)'
-          : props.whatMakesBlue ? 'rgb(0,0,255)' : 'red',
-      }}
-    >
+    <Text data-test-id={props['data-test-id'] || 'Text'}>
       {props.somethingGreen
         ? '2 green'
         : props.whatMakesBlue ? props.blue : '1 red'}
-    </span>
+    </Text>
   );
 };
 
@@ -2244,13 +2217,11 @@ exports[`react-dom parses react-dom ScopePopup 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import css from 'glam';
+import { css } from 'react-emotion';
 const styles = {
-  h18or678: css('css-1s0kfvh', [], function inlineCss() {
-    return [
-      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
-    ];
-  }),
+  h18or678: css\`
+    flex-direction: column;
+  \`,
 };
 
 const ScopePopup = props => {
@@ -2302,13 +2273,11 @@ exports[`react-dom parses react-dom ScopePopup debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import css from 'glam';
+import { css } from 'react-emotion';
 const styles = {
-  h18or678: css('css-1s0kfvh', [], function inlineCss() {
-    return [
-      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
-    ];
-  }),
+  h18or678: css\`
+    flex-direction: column;
+  \`,
 };
 
 const ScopePopup = props => {
@@ -2360,13 +2329,11 @@ exports[`react-dom parses react-dom ScopePopup2 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import css from 'glam';
+import { css } from 'react-emotion';
 const styles = {
-  h18or678: css('css-1s0kfvh', [], function inlineCss() {
-    return [
-      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
-    ];
-  }),
+  h18or678: css\`
+    flex-direction: column;
+  \`,
 };
 
 const ScopePopup2 = props => {
@@ -2410,13 +2377,11 @@ exports[`react-dom parses react-dom ScopePopup2 debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import css from 'glam';
+import { css } from 'react-emotion';
 const styles = {
-  h18or678: css('css-1s0kfvh', [], function inlineCss() {
-    return [
-      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
-    ];
-  }),
+  h18or678: css\`
+    flex-direction: column;
+  \`,
 };
 
 const ScopePopup2 = props => {
@@ -2461,13 +2426,11 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { Link } from 'react-router-dom';
-import css from 'glam';
+import { css } from 'react-emotion';
 const styles = {
-  hnpb55i: css('css-sw3yj', [], function inlineCss() {
-    return [
-      \`.css-sw3yj { -webkit-flex-direction: row; -ms-flex-direction: row; -webkit-box-orient: horizontal; -webkit-box-direction: normal; flex-direction: row; }\`,
-    ];
-  }),
+  hnpb55i: css\`
+    flex-direction: row;
+  \`,
 };
 
 const Teleport = props => {
@@ -2503,13 +2466,11 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { Link } from 'react-router-dom';
-import css from 'glam';
+import { css } from 'react-emotion';
 const styles = {
-  hnpb55i: css('css-sw3yj', [], function inlineCss() {
-    return [
-      \`.css-sw3yj { -webkit-flex-direction: row; -ms-flex-direction: row; -webkit-box-orient: horizontal; -webkit-box-direction: normal; flex-direction: row; }\`,
-    ];
-  }),
+  hnpb55i: css\`
+    flex-direction: row;
+  \`,
 };
 
 const Teleport = props => {
@@ -2615,13 +2576,11 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import External from './External.view.js';
-import css from 'glam';
+import { css } from 'react-emotion';
 const styles = {
-  h18or678: css('css-1s0kfvh', [], function inlineCss() {
-    return [
-      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
-    ];
-  }),
+  h18or678: css\`
+    flex-direction: column;
+  \`,
 };
 
 const TestIds = props => {
@@ -2659,13 +2618,11 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import External from './External.view.js';
-import css from 'glam';
+import { css } from 'react-emotion';
 const styles = {
-  h18or678: css('css-1s0kfvh', [], function inlineCss() {
-    return [
-      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
-    ];
-  }),
+  h18or678: css\`
+    flex-direction: column;
+  \`,
 };
 
 const TestIds = props => {
@@ -2702,13 +2659,11 @@ exports[`react-dom parses react-dom TextInterpolation 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import css from 'glam';
+import { css } from 'react-emotion';
 const styles = {
-  h18or678: css('css-1s0kfvh', [], function inlineCss() {
-    return [
-      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
-    ];
-  }),
+  h18or678: css\`
+    flex-direction: column;
+  \`,
 };
 
 const TextInterpolation = props => {
@@ -2747,13 +2702,11 @@ exports[`react-dom parses react-dom TextInterpolation debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import css from 'glam';
+import { css } from 'react-emotion';
 const styles = {
-  h18or678: css('css-1s0kfvh', [], function inlineCss() {
-    return [
-      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
-    ];
-  }),
+  h18or678: css\`
+    flex-direction: column;
+  \`,
 };
 
 const TextInterpolation = props => {
@@ -2840,16 +2793,18 @@ exports[`react-dom parses react-dom UseCaptureEmail 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import css from 'glam';
+import { css } from 'react-emotion';
 const styles = {
-  hzek9vx: css('css-f7ztup', [], function inlineCss() {
-    return [
-      \`.css-f7ztup { border: 1px solid black;
-color: red; }\`,
-      \`.css-f7ztup:focus { color: purple; }\`,
-      \`.css-f7ztup::placeholder { color: blue; }\`,
-    ];
-  }),
+  hzek9vx: css\`
+    border: 1px solid black;
+    color: red;
+    &:focus {
+      color: purple;
+    }
+    &::placeholder {
+      color: blue;
+    }
+  \`,
 };
 
 class UseCaptureEmail extends React.Component {
@@ -2897,16 +2852,20 @@ exports[`react-dom parses react-dom UseCaptureEmail debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import css from 'glam';
+import { css } from 'react-emotion';
 const styles = {
-  hzek9vx: css('css-1q0jvin', [], function inlineCss() {
-    return [
-      \`.css-1q0jvin { border: 1px solid black;
-color: red; }\`,
-      \`.css-1q0jvin:focus, .css-1q0jvin.focus { color: purple; }\`,
-      \`.css-1q0jvin::placeholder, .css-1q0jvin.placeholder { color: blue; }\`,
-    ];
-  }),
+  hzek9vx: css\`
+    border: 1px solid black;
+    color: red;
+    &:focus,
+    &.focus {
+      color: purple;
+    }
+    &::placeholder,
+    &.placeholder {
+      color: blue;
+    }
+  \`,
 };
 
 class UseCaptureEmail extends React.Component {
@@ -3521,14 +3480,12 @@ exports[`react-dom parses react-dom UseHorizontal 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import css from 'glam';
+import { css } from 'react-emotion';
 const styles = {
-  h1d1hac2: css('css-vkz5lf', [], function inlineCss() {
-    return [
-      \`.css-vkz5lf { -webkit-flex-direction: row; -ms-flex-direction: row; -webkit-box-orient: horizontal; -webkit-box-direction: normal; flex-direction: row;
-border: 1px solid red; }\`,
-    ];
-  }),
+  h1d1hac2: css\`
+    flex-direction: row;
+    border: 1px solid red;
+  \`,
 };
 
 const UseHorizontal = props => {
@@ -3561,14 +3518,12 @@ exports[`react-dom parses react-dom UseHorizontal debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import css from 'glam';
+import { css } from 'react-emotion';
 const styles = {
-  h1d1hac2: css('css-vkz5lf', [], function inlineCss() {
-    return [
-      \`.css-vkz5lf { -webkit-flex-direction: row; -ms-flex-direction: row; -webkit-box-orient: horizontal; -webkit-box-direction: normal; flex-direction: row;
-border: 1px solid red; }\`,
-    ];
-  }),
+  h1d1hac2: css\`
+    flex-direction: row;
+    border: 1px solid red;
+  \`,
 };
 
 const UseHorizontal = props => {
@@ -3664,13 +3619,11 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import Button from './Button.view.js';
-import css from 'glam';
+import { css } from 'react-emotion';
 const styles = {
-  hnpb55i: css('css-sw3yj', [], function inlineCss() {
-    return [
-      \`.css-sw3yj { -webkit-flex-direction: row; -ms-flex-direction: row; -webkit-box-orient: horizontal; -webkit-box-direction: normal; flex-direction: row; }\`,
-    ];
-  }),
+  hnpb55i: css\`
+    flex-direction: row;
+  \`,
 };
 
 const UseOfProxy = props => {
@@ -3710,13 +3663,11 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import Button from './Button.view.js';
-import css from 'glam';
+import { css } from 'react-emotion';
 const styles = {
-  hnpb55i: css('css-sw3yj', [], function inlineCss() {
-    return [
-      \`.css-sw3yj { -webkit-flex-direction: row; -ms-flex-direction: row; -webkit-box-orient: horizontal; -webkit-box-direction: normal; flex-direction: row; }\`,
-    ];
-  }),
+  hnpb55i: css\`
+    flex-direction: row;
+  \`,
 };
 
 const UseOfProxy = props => {
@@ -3755,13 +3706,11 @@ exports[`react-dom parses react-dom UseProxy 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import css from 'glam';
+import { css } from 'react-emotion';
 const styles = {
-  hnpb55i: css('css-sw3yj', [], function inlineCss() {
-    return [
-      \`.css-sw3yj { -webkit-flex-direction: row; -ms-flex-direction: row; -webkit-box-orient: horizontal; -webkit-box-direction: normal; flex-direction: row; }\`,
-    ];
-  }),
+  hnpb55i: css\`
+    flex-direction: row;
+  \`,
 };
 
 const UseProxy = props => {
@@ -3805,13 +3754,11 @@ exports[`react-dom parses react-dom UseProxy debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import css from 'glam';
+import { css } from 'react-emotion';
 const styles = {
-  hnpb55i: css('css-sw3yj', [], function inlineCss() {
-    return [
-      \`.css-sw3yj { -webkit-flex-direction: row; -ms-flex-direction: row; -webkit-box-orient: horizontal; -webkit-box-direction: normal; flex-direction: row; }\`,
-    ];
-  }),
+  hnpb55i: css\`
+    flex-direction: row;
+  \`,
 };
 
 const UseProxy = props => {
@@ -3928,17 +3875,15 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import About from './About.view.js';
-import Home from './Home.view.js';
 import { Route } from 'react-router-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Topics from './Topics.view.js';
-import css from 'glam';
+import UseRouterHome from './UseRouterHome.view.js';
+import { css } from 'react-emotion';
 const styles = {
-  hnpb55i: css('css-sw3yj', [], function inlineCss() {
-    return [
-      \`.css-sw3yj { -webkit-flex-direction: row; -ms-flex-direction: row; -webkit-box-orient: horizontal; -webkit-box-direction: normal; flex-direction: row; }\`,
-    ];
-  }),
+  hnpb55i: css\`
+    flex-direction: row;
+  \`,
 };
 
 const UseRouter = props => {
@@ -3952,7 +3897,7 @@ const UseRouter = props => {
           path=\\"/\\"
           exact
           render={routeProps => (
-            <Home
+            <UseRouterHome
               data-test-id=\\"UseRouter.Home\\"
               height={props.height}
               width={360}
@@ -4069,17 +4014,15 @@ exports[`react-dom parses react-dom UseText 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import css from 'glam';
+import { css } from 'react-emotion';
 const styles = {
-  h84riit: css('css-1m3prkm', [], function inlineCss() {
-    return [
-      \`.css-1m3prkm { color: blue;
-font-family: Montserrat, sans-serif;
-font-size: 16px;
-line-height: 1.5;
-font-weight: 300; }\`,
-    ];
-  }),
+  h84riit: css\`
+    color: blue;
+    font-family: Montserrat, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 300;
+  \`,
 };
 
 const UseText = props => {
@@ -4116,17 +4059,15 @@ exports[`react-dom parses react-dom UseText debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import css from 'glam';
+import { css } from 'react-emotion';
 const styles = {
-  h84riit: css('css-1m3prkm', [], function inlineCss() {
-    return [
-      \`.css-1m3prkm { color: blue;
-font-family: Montserrat, sans-serif;
-font-size: 16px;
-line-height: 1.5;
-font-weight: 300; }\`,
-    ];
-  }),
+  h84riit: css\`
+    color: blue;
+    font-family: Montserrat, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 300;
+  \`,
 };
 
 const UseText = props => {
@@ -4163,14 +4104,12 @@ exports[`react-dom parses react-dom UseVertical 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import css from 'glam';
+import { css } from 'react-emotion';
 const styles = {
-  h1k352l5: css('css-nxb3y5', [], function inlineCss() {
-    return [
-      \`.css-nxb3y5 { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column;
-background-color: red; }\`,
-    ];
-  }),
+  h1k352l5: css\`
+    flex-direction: column;
+    background-color: red;
+  \`,
 };
 
 const UseVertical = props => {
@@ -4203,14 +4142,12 @@ exports[`react-dom parses react-dom UseVertical debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import css from 'glam';
+import { css } from 'react-emotion';
 const styles = {
-  h1k352l5: css('css-nxb3y5', [], function inlineCss() {
-    return [
-      \`.css-nxb3y5 { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column;
-background-color: red; }\`,
-    ];
-  }),
+  h1k352l5: css\`
+    flex-direction: column;
+    background-color: red;
+  \`,
 };
 
 const UseVertical = props => {
@@ -4243,13 +4180,11 @@ exports[`react-dom parses react-dom When 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import css from 'glam';
+import { css } from 'react-emotion';
 const styles = {
-  hnpb55i: css('css-sw3yj', [], function inlineCss() {
-    return [
-      \`.css-sw3yj { -webkit-flex-direction: row; -ms-flex-direction: row; -webkit-box-orient: horizontal; -webkit-box-direction: normal; flex-direction: row; }\`,
-    ];
-  }),
+  hnpb55i: css\`
+    flex-direction: row;
+  \`,
 };
 
 const When = props => {
@@ -4287,13 +4222,11 @@ exports[`react-dom parses react-dom When debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import css from 'glam';
+import { css } from 'react-emotion';
 const styles = {
-  hnpb55i: css('css-sw3yj', [], function inlineCss() {
-    return [
-      \`.css-sw3yj { -webkit-flex-direction: row; -ms-flex-direction: row; -webkit-box-orient: horizontal; -webkit-box-direction: normal; flex-direction: row; }\`,
-    ];
-  }),
+  hnpb55i: css\`
+    flex-direction: row;
+  \`,
 };
 
 const When = props => {
@@ -4331,18 +4264,14 @@ exports[`react-dom parses react-dom WhenList 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import css from 'glam';
+import { css } from 'react-emotion';
 const styles = {
-  hnpb55i: css('css-sw3yj', [], function inlineCss() {
-    return [
-      \`.css-sw3yj { -webkit-flex-direction: row; -ms-flex-direction: row; -webkit-box-orient: horizontal; -webkit-box-direction: normal; flex-direction: row; }\`,
-    ];
-  }),
-  h18or678: css('css-1s0kfvh', [], function inlineCss() {
-    return [
-      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
-    ];
-  }),
+  hnpb55i: css\`
+    flex-direction: row;
+  \`,
+  h18or678: css\`
+    flex-direction: column;
+  \`,
 };
 
 const WhenList = props => {
@@ -4393,18 +4322,14 @@ exports[`react-dom parses react-dom WhenList debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import css from 'glam';
+import { css } from 'react-emotion';
 const styles = {
-  hnpb55i: css('css-sw3yj', [], function inlineCss() {
-    return [
-      \`.css-sw3yj { -webkit-flex-direction: row; -ms-flex-direction: row; -webkit-box-orient: horizontal; -webkit-box-direction: normal; flex-direction: row; }\`,
-    ];
-  }),
-  h18or678: css('css-1s0kfvh', [], function inlineCss() {
-    return [
-      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
-    ];
-  }),
+  hnpb55i: css\`
+    flex-direction: row;
+  \`,
+  h18or678: css\`
+    flex-direction: column;
+  \`,
 };
 
 const WhenList = props => {
@@ -4511,13 +4436,11 @@ exports[`react-dom parses react-dom WithTest 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import css from 'glam';
+import { css } from 'react-emotion';
 const styles = {
-  h18or678: css('css-1s0kfvh', [], function inlineCss() {
-    return [
-      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
-    ];
-  }),
+  h18or678: css\`
+    flex-direction: column;
+  \`,
 };
 
 const WithTest = props => {
@@ -4565,13 +4488,11 @@ exports[`react-dom parses react-dom WithTest debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import css from 'glam';
+import { css } from 'react-emotion';
 const styles = {
-  h18or678: css('css-1s0kfvh', [], function inlineCss() {
-    return [
-      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
-    ];
-  }),
+  h18or678: css\`
+    flex-direction: column;
+  \`,
 };
 
 const WithTest = props => {
