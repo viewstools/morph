@@ -4,17 +4,20 @@ import toSlugCase from 'to-slug-case'
 
 export default ({ debug, styles, stylesDynamic }, name) => {
   if (!hasKeys(styles) && stylesDynamic.length === 0) return ''
+  let obj
 
-  const obj = Object.keys(styles)
-    .filter(k => hasKeysInChildren(styles[k]))
-    .map(k => `${JSON.stringify(k)}: css\`${toNestedCss(styles[k], debug)}\``)
-    .join(',')
+  if (styles) {
+    obj = Object.keys(styles)
+      .filter(k => hasKeysInChildren(styles[k]))
+      .map(k => `${JSON.stringify(k)}: css\`${toNestedCss(styles[k], debug)}\``)
+      .join(',')
+  }
 
-  const code = `const styles = {${obj}}`
+  const code = obj ? `const styles = {${obj}}` : false
   const maybeImport = [
     stylesDynamic.length > 0
       ? 'import styled, { css } from "react-emotion"'
-      : 'import { css } from "react-emotion"',
+      : code ? 'import { css } from "react-emotion"' : false,
   ]
     .filter(Boolean)
     .join(';\n')
