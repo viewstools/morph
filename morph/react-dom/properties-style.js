@@ -7,13 +7,11 @@ let dynamicCss
 const asDynamicCss = (style, styleKey, parentEl) => {
   const props = Object.keys(style)
 
-  debugger
   if (styleKey !== 'base' && parentEl) {
     dynamicCss += `\${${parentEl}}\:${styleKey} & {`
   } else if (styleKey !== 'base') {
     dynamicCss += `&:${styleKey} {`
   }
-  // ${ButtonOne}:hover & {
 
   props.forEach(prop => {
     dynamicCss += `${toSlugCase(prop)}: \${props =>\ ${style[`${prop}`]}\};`
@@ -32,20 +30,15 @@ const getStyledComponent = (name, base, style, styleKey, parentEl) =>
   )}\``
 
 const checkParentStem = (node, styleKey) => {
-  debugger
   if (styleKey === 'base' || !node.parent.parent) return
 
-  //const nodeStyleStem = getStyleType(node);
-
-  //if (nodeStyleStem !== 'base' && node.parent.parent) {
-  const matchedParentEl = node.parent.parent.parent
-  const matchingParentStem = matchedParentEl.properties.list.find(
+  const parentEl = node.parent.parent.parent
+  const matchingParentStem = parentEl.properties.list.find(
     prop => prop.key.valueRaw.toLowerCase().indexOf(styleKey) > -1
   )
-  //}
 
   if (matchingParentStem) {
-    return matchedParentEl.is || matchedParentEl.name.value
+    return parentEl.is || parentEl.name.value
   }
 }
 
@@ -77,11 +70,8 @@ export const leave = (node, parent, state) => {
       return hasKeysInChildren(node.style.dynamic[dynamicKey])
     })
 
-    debugger
-
     const filteredLength = filteredDynamicStyles.length
     filteredDynamicStyles.forEach((styleKey, index) => {
-      debugger
       const parentEl = checkParentStem(node, styleKey)
       if (filteredLength - 1 !== index) {
         asDynamicCss(node.style.dynamic[styleKey], styleKey, parentEl)
