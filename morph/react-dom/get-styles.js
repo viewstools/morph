@@ -1,11 +1,6 @@
 import { hasKeys, hasKeysInChildren } from '../utils.js'
-// import { transform } from 'babel-core'
 import isUnitlessNumber from '../react/is-unitless-number.js'
 import toSlugCase from 'to-slug-case'
-// import glam from 'glam/babel'
-
-// TODO use emotion instead of glam
-// TODO don't produce CSS files, just inline
 
 export default ({ debug, styles, stylesDynamic }, name) => {
   if (!hasKeys(styles) && stylesDynamic.length === 0) return ''
@@ -15,12 +10,12 @@ export default ({ debug, styles, stylesDynamic }, name) => {
     .map(k => `${JSON.stringify(k)}: css\`${toNestedCss(styles[k], debug)}\``)
     .join(',')
 
+  debugger
   const code = `const styles = {${obj}}`
   const maybeImport = [
-    // inlineStyles ? '' : `import './${file.relative.split('/').pop()}.css'\n`,
     stylesDynamic.length > 0
       ? 'import styled, { css } from "react-emotion"'
-      : false,
+      : 'import { css } from "react-emotion"',
   ]
     .filter(Boolean)
     .join(';\n')
@@ -74,20 +69,3 @@ const toNestedCss = (
 
   return ret
 }
-
-// const transformGlam = (code, inline, filename) => {
-//   let out = transform(code, {
-//     babelrc: false,
-//     filename,
-//     plugins: [[glam, { inline }]],
-//   }).code
-
-//   if (!inline) {
-//     out = out
-//       .replace(/css\(/g, '')
-//       .replace(/,\s*\[\]/g, '')
-//       .replace(/\)/g, '')
-//   }
-
-//   return out
-// }
