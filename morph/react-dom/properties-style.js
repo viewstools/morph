@@ -16,7 +16,8 @@ const asDynamicCss = (style, styleKey, parentEl) => {
   props.forEach(prop => {
     const shouldApplyUnits =
       prop !== 'lineHeight' &&
-      Number.isInteger(parseInt(style[prop].split(': ')[2]))
+      prop !== 'fontWeight' &&
+      Number.isInteger(parseInt(style[prop].split(': ').slice(-1)[0]))
     dynamicCss += `${toSlugCase(prop)}: \${props =>\ ${style[
       `${prop}`
     ]}\}${shouldApplyUnits ? 'px' : ''};`
@@ -90,8 +91,6 @@ export const leave = (node, parent, state) => {
         )
       }
     })
-
-    console.log(state.render)
 
     const renderValue = state.render.filter(item =>
       item.includes(block.name.finalValue)
