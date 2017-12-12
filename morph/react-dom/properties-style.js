@@ -30,7 +30,7 @@ const getStyledComponent = (name, base, style, styleKey, parentEl) =>
   )}\``
 
 const checkParentStem = (node, styleKey) => {
-  if (styleKey === 'base' || !node.parent.parent) return
+  if (styleKey !== 'hover' || !node.parent.parent) return
 
   const parentEl = node.parent.parent.parent
   const matchingParentStem = parentEl.properties.list.find(
