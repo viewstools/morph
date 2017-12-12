@@ -14,7 +14,12 @@ const asDynamicCss = (style, styleKey, parentEl) => {
   }
 
   props.forEach(prop => {
-    dynamicCss += `${toSlugCase(prop)}: \${props =>\ ${style[`${prop}`]}\};`
+    const shouldApplyUnits =
+      prop !== 'lineHeight' &&
+      Number.isInteger(parseInt(style[prop].split(': ')[2]))
+    dynamicCss += `${toSlugCase(prop)}: \${props =>\ ${style[
+      `${prop}`
+    ]}\}${shouldApplyUnits ? 'px' : ''};`
   })
 
   if (styleKey !== 'base') dynamicCss += `}`

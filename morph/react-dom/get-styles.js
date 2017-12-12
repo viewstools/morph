@@ -10,7 +10,6 @@ export default ({ debug, styles, stylesDynamic }, name) => {
     .map(k => `${JSON.stringify(k)}: css\`${toNestedCss(styles[k], debug)}\``)
     .join(',')
 
-  debugger
   const code = `const styles = {${obj}}`
   const maybeImport = [
     stylesDynamic.length > 0
