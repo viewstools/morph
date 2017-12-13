@@ -65,7 +65,12 @@ export const leave = (node, parent, state) => {
   // TODO needs to be different, it should also be a classname here too
   if (hasKeysInChildren(node.style.dynamic)) {
     const block = node.parent
-    const blockName = block.is || block.name.value
+    const blockName = block.dynamicStyleComponent
+      ? block.dynamicStyleComponent.name
+      : block.is || block.name.value
+    const blockBase = block.dynamicStyleComponent
+      ? block.dynamicStyleComponent.tag
+      : block.name.finalValue
     let code = ''
     dynamicCss = ''
     // TODO get block name or type
@@ -82,9 +87,10 @@ export const leave = (node, parent, state) => {
       if (filteredLength - 1 !== index) {
         asDynamicCss(node.style.dynamic[styleKey], styleKey, parentEl)
       } else {
+        debugger
         code = getStyledComponent(
           blockName,
-          block.name.finalValue,
+          blockBase,
           node.style.dynamic[styleKey],
           styleKey,
           parentEl

@@ -93,26 +93,26 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import Animated from 'react-dom-animated';
-import css from 'glam';
+import styled, { css } from 'react-emotion';
 const styles = {
-  h18or678: css('css-1s0kfvh', [], function inlineCss() {
-    return [
-      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
-    ];
-  }),
+  h18or678: css\`
+    flex-direction: column;
+  \`,
 };
+const AnimatedButtonVertical = styled('Animated.button')\`
+  opacity: \${props => props.opacity};
+\`;
 
 const AnimatedButton = props => {
   return (
-    <Animated.button
+    <AnimatedButtonVertical
       data-test-id={props['data-test-id'] || 'Vertical'}
       onClick={props.onClick}
-      style={{ opacity: props.opacity }}
       className={styles.h18or678}
     >
       <span data-test-id=\\"AnimatedButton.Text\\">hey</span>
       {props.children}
-    </Animated.button>
+    </AnimatedButtonVertical>
   );
 };
 
@@ -145,20 +145,20 @@ const styles = {
     flex-direction: column;
   \`,
 };
-const Vertical = styled('AnimatedButtonVertical')\`
+const AnimatedButtonVertical = styled('Animated.button')\`
   opacity: \${props => props.opacity};
 \`;
 
 const AnimatedButton = props => {
   return (
-    <Vertical
+    <AnimatedButtonVertical
       data-test-id={props['data-test-id'] || 'Vertical'}
       onClick={props.onClick}
       className={styles.h18or678}
     >
       <span data-test-id=\\"AnimatedButton.Text\\">hey</span>
       {props.children}
-    </Vertical>
+    </AnimatedButtonVertical>
   );
 };
 
@@ -250,7 +250,7 @@ const styles = {
     background-size: contain;
   \`,
 };
-const Horizontal = styled('BackgroundImageHorizontal')\`
+const BackgroundImageHorizontal = styled('Animated.div')\`
   background-image: \${props => \`url(\${props.backgroundImage})\`};
 \`;
 
@@ -260,7 +260,7 @@ const BackgroundImage = props => {
       data-test-id={props['data-test-id'] || 'Vertical'}
       className={styles.h1omhxf4}
     >
-      <Horizontal
+      <BackgroundImageHorizontal
         data-test-id=\\"BackgroundImage.Horizontal\\"
         className={styles.h1peh4ml}
       />
@@ -351,19 +351,19 @@ const styles = {
     box-shadow: 0px 8px 15px 0px rgba(0, 0, 0, 0.1);
   \`,
 };
-const Vertical = styled('BoxShadowVertical')\`
+const BoxShadowVertical = styled('Animated.div')\`
   box-shadow: \${props => \`10px 5px 2px \${props.color}\`};
 \`;
 
 const BoxShadow = props => {
   return (
-    <Vertical
+    <BoxShadowVertical
       data-test-id={props['data-test-id'] || 'Vertical'}
       className={styles.h18or678}
     >
       <div data-test-id=\\"BoxShadow.Vertical:1\\" className={styles.h18mfro8} />
       {props.children}
-    </Vertical>
+    </BoxShadowVertical>
   );
 };
 
