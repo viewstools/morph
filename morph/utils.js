@@ -117,5 +117,6 @@ export const isCode = node =>
 export const isData = node => isTag(node, 'data')
 export const isStyle = node => isTag(node, 'style')
 export const isToggle = node => isTag(node, 'toggle')
-
 export const isTag = (node, tag) => node.tags[tag]
+export const isUnitlessProp = prop =>
+  prop === 'lineHeight' || prop === 'fontWeight' || prop === 'opacity'

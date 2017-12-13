@@ -1,4 +1,9 @@
-import { getObjectAsString, getProp, hasKeysInChildren } from '../utils.js'
+import {
+  getObjectAsString,
+  getProp,
+  hasKeysInChildren,
+  isUnitlessProp,
+} from '../utils.js'
 import hash from '../hash.js'
 import toSlugCase from 'to-slug-case'
 
@@ -15,8 +20,7 @@ const asDynamicCss = (style, styleKey, parentEl) => {
 
   props.forEach(prop => {
     const shouldApplyUnits =
-      prop !== 'lineHeight' &&
-      prop !== 'fontWeight' &&
+      !isUnitlessProp(prop) &&
       Number.isInteger(parseInt(style[prop].split(': ').slice(-1)[0]))
     dynamicCss += `${toSlugCase(prop)}: \${props =>\ ${style[
       `${prop}`
