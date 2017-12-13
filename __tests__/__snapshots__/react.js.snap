@@ -185,21 +185,20 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import Animated from 'react-dom-animated';
-import css from 'glam';
+import styled, { css } from 'react-emotion';
 const styles = {
-  h1omhxf4: css('css-1lgf2gr', [], function inlineCss() {
-    return [
-      \`.css-1lgf2gr { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column;
-background-image: url(\\"https://viewsdx.com/image.jpg\\"); }\`,
-    ];
-  }),
-  h1peh4ml: css('css-ii8p9n', [], function inlineCss() {
-    return [
-      \`.css-ii8p9n { -webkit-flex-direction: row; -ms-flex-direction: row; -webkit-box-orient: horizontal; -webkit-box-direction: normal; flex-direction: row;
-background-size: contain; }\`,
-    ];
-  }),
+  h1omhxf4: css\`
+    flex-direction: column;
+    background-image: url('https://viewsdx.com/image.jpg');
+  \`,
+  h1peh4ml: css\`
+    flex-direction: row;
+    background-size: contain;
+  \`,
 };
+const BackgroundImageHorizontal = styled('Animated.div')\`
+  background-image: \${props => \`url(\${props.backgroundImage})\`};
+\`;
 
 const BackgroundImage = props => {
   return (
@@ -207,9 +206,8 @@ const BackgroundImage = props => {
       data-test-id={props['data-test-id'] || 'Vertical'}
       className={styles.h1omhxf4}
     >
-      <Animated.div
+      <BackgroundImageHorizontal
         data-test-id=\\"BackgroundImage.Horizontal\\"
-        style={{ backgroundImage: \`url(\${props.backgroundImage})\` }}
         className={styles.h1peh4ml}
       />
       {props.children}
@@ -238,7 +236,7 @@ exports[`react-dom parses react-dom BackgroundImage debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import BackgroundImageHorizontal from './BackgroundImageHorizontal.view.js';
+import Animated from 'react-dom-animated';
 import styled, { css } from 'react-emotion';
 const styles = {
   h1omhxf4: css\`
@@ -291,31 +289,29 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import Animated from 'react-dom-animated';
-import css from 'glam';
+import styled, { css } from 'react-emotion';
 const styles = {
-  h18or678: css('css-1s0kfvh', [], function inlineCss() {
-    return [
-      \`.css-1s0kfvh { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column; }\`,
-    ];
-  }),
-  h18mfro8: css('css-16jqtdw', [], function inlineCss() {
-    return [
-      \`.css-16jqtdw { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column;
-box-shadow: 0px 8px 15px 0px rgba(0,0,0,0.1); }\`,
-    ];
-  }),
+  h18or678: css\`
+    flex-direction: column;
+  \`,
+  h18mfro8: css\`
+    flex-direction: column;
+    box-shadow: 0px 8px 15px 0px rgba(0, 0, 0, 0.1);
+  \`,
 };
+const BoxShadowVertical = styled('Animated.div')\`
+  box-shadow: \${props => \`10px 5px 2px \${props.color}\`};
+\`;
 
 const BoxShadow = props => {
   return (
-    <Animated.div
+    <BoxShadowVertical
       data-test-id={props['data-test-id'] || 'Vertical'}
-      style={{ boxShadow: \`10px 5px 2px \${props.color}\` }}
       className={styles.h18or678}
     >
       <div data-test-id=\\"BoxShadow.Vertical:1\\" className={styles.h18mfro8} />
       {props.children}
-    </Animated.div>
+    </BoxShadowVertical>
   );
 };
 
@@ -340,7 +336,7 @@ exports[`react-dom parses react-dom BoxShadow debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import BoxShadowVertical from './BoxShadowVertical.view.js';
+import Animated from 'react-dom-animated';
 import styled, { css } from 'react-emotion';
 const styles = {
   h18or678: css\`
@@ -3848,10 +3844,10 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import About from './About.view.js';
+import Animated from 'react-dom-animated';
 import { Route } from 'react-router-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Topics from './Topics.view.js';
-import UseRouterHome from './UseRouterHome.view.js';
 import { css } from 'react-emotion';
 const styles = {
   hnpb55i: css\`

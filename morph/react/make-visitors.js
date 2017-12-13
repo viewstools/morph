@@ -27,10 +27,12 @@ export default ({
       const name = getBlockName(node, parent, state)
       if (name === null) return this.skip()
 
-      node.name.finalValue = name
-      // TODO change this check towards whatever
-      state.use(/Animated/.test(name) ? 'Animated' : name)
+      const stringToTest = node.dynamicStyleComponent
+        ? node.dynamicStyleComponent.tag
+        : name
+      state.use(/Animated/.test(stringToTest) ? 'Animated' : name)
 
+      node.name.finalValue = name
       state.render.push(`<${name}`)
     },
     leave(node, parent, state) {
