@@ -870,22 +870,25 @@ exports[`react-dom parses react-dom Hover 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import css from 'glam';
+import styled, { css } from 'react-emotion';
 const styles = {
-  h1mc7g7i: css('css-i58qmr', [], function inlineCss() {
-    return [
-      \`.css-i58qmr { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column;
-background-color: black; }\`,
-      \`.css-i58qmr:hover { background-color: white; }\`,
-    ];
-  }),
-  h1mgvy2v: css('css-9glvsj', [], function inlineCss() {
-    return [
-      \`.css-9glvsj { color: white; }\`,
-      \`.css-9glvsj:hover { color: black; }\`,
-    ];
-  }),
+  h1mc7g7i: css\`
+    flex-direction: column;
+    background-color: black;
+    &:hover {
+      background-color: white;
+    }
+  \`,
+  h1qbyotb: css\`
+    color: white;
+  \`,
 };
+const Text = styled('span')\`
+  \${Button}:hover &,
+  \${Button}.hover & {
+    color: \${props => 'black'};
+  }
+\`;
 
 const Hover = props => {
   return (
@@ -894,9 +897,9 @@ const Hover = props => {
       onClick={props.onClick}
       className={styles.h1mc7g7i}
     >
-      <span data-test-id=\\"Hover.Text\\" className={styles.h1mgvy2v}>
+      <Text data-test-id=\\"Hover.Text\\" className={styles.h1qbyotb}>
         Hey!
-      </span>
+      </Text>
       {props.children}
     </button>
   );
@@ -923,7 +926,7 @@ exports[`react-dom parses react-dom Hover debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { css } from 'react-emotion';
+import styled, { css } from 'react-emotion';
 const styles = {
   h1mc7g7i: css\`
     flex-direction: column;
@@ -933,14 +936,16 @@ const styles = {
       background-color: white;
     }
   \`,
-  h1mgvy2v: css\`
+  h1qbyotb: css\`
     color: white;
-    &:hover,
-    &.hover {
-      color: black;
-    }
   \`,
 };
+const Text = styled('span')\`
+  \${Button}:hover &,
+  \${Button}.hover & {
+    color: \${props => 'black'};
+  }
+\`;
 
 const Hover = props => {
   return (
@@ -949,9 +954,9 @@ const Hover = props => {
       onClick={props.onClick}
       className={styles.h1mc7g7i}
     >
-      <span data-test-id=\\"Hover.Text\\" className={styles.h1mgvy2v}>
+      <Text data-test-id=\\"Hover.Text\\" className={styles.h1qbyotb}>
         Hey!
-      </span>
+      </Text>
       {props.children}
     </button>
   );
@@ -978,22 +983,25 @@ exports[`react-dom parses react-dom HoverProxy 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import css from 'glam';
+import styled, { css } from 'react-emotion';
 const styles = {
-  h1mc7g7i: css('css-i58qmr', [], function inlineCss() {
-    return [
-      \`.css-i58qmr { -webkit-flex-direction: column; -ms-flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; flex-direction: column;
-background-color: black; }\`,
-      \`.css-i58qmr:hover { background-color: white; }\`,
-    ];
-  }),
-  h1mgvy2v: css('css-9glvsj', [], function inlineCss() {
-    return [
-      \`.css-9glvsj { color: white; }\`,
-      \`.css-9glvsj:hover { color: black; }\`,
-    ];
-  }),
+  h1mc7g7i: css\`
+    flex-direction: column;
+    background-color: black;
+    &:hover {
+      background-color: white;
+    }
+  \`,
+  h1qbyotb: css\`
+    color: white;
+  \`,
 };
+const Text = styled('span')\`
+  \${Button}:hover &,
+  \${Button}.hover & {
+    color: \${props => 'black'};
+  }
+\`;
 
 const HoverProxy = props => {
   const childrenArray = React.Children.toArray(props.children);
@@ -1010,9 +1018,9 @@ const HoverProxy = props => {
             { fill: 'white', fillHover: 'black' }
           )
         : null}
-      <span data-test-id=\\"HoverProxy.Text\\" className={styles.h1mgvy2v}>
+      <Text data-test-id=\\"HoverProxy.Text\\" className={styles.h1qbyotb}>
         Hey!
-      </span>
+      </Text>
     </button>
   );
 };
@@ -1039,7 +1047,7 @@ exports[`react-dom parses react-dom HoverProxy debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { css } from 'react-emotion';
+import styled, { css } from 'react-emotion';
 const styles = {
   h1mc7g7i: css\`
     flex-direction: column;
@@ -1049,14 +1057,16 @@ const styles = {
       background-color: white;
     }
   \`,
-  h1mgvy2v: css\`
+  h1qbyotb: css\`
     color: white;
-    &:hover,
-    &.hover {
-      color: black;
-    }
   \`,
 };
+const Text = styled('span')\`
+  \${Button}:hover &,
+  \${Button}.hover & {
+    color: \${props => 'black'};
+  }
+\`;
 
 const HoverProxy = props => {
   const childrenArray = React.Children.toArray(props.children);
@@ -1073,9 +1083,9 @@ const HoverProxy = props => {
             { fill: 'white', fillHover: 'black' }
           )
         : null}
-      <span data-test-id=\\"HoverProxy.Text\\" className={styles.h1mgvy2v}>
+      <Text data-test-id=\\"HoverProxy.Text\\" className={styles.h1qbyotb}>
         Hey!
-      </span>
+      </Text>
     </button>
   );
 };

@@ -14,9 +14,9 @@ const asDynamicCss = (style, styleKey, parentEl) => {
   const props = Object.keys(style)
 
   if (parentEl) {
-    dynamicCss += `\${${parentEl}}\:${styleKey} & {`
-  } else if (styleKey !== 'base') {
-    dynamicCss += `&:${styleKey} {`
+    dynamicCss += `\${${parentEl}}\:${styleKey} &, \${${parentEl}}\.${styleKey} & {`
+  } else if (styleKey == 'hover') {
+    dynamicCss += `&:${styleKey}, &.${styleKey} {`
   }
 
   props.forEach(prop => {
