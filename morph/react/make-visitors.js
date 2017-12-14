@@ -1,5 +1,6 @@
 import {
   asScopedValue,
+  checkParentStem,
   getObjectAsString,
   getProp,
   getPropertiesAsObject,
@@ -387,8 +388,11 @@ export default ({
             state.render.push(` ${k}=${safe(styleForProperty[k], node)}`)
           )
         } else {
+          const hasMatchingParent = checkParentStem(parent, getStyleType(node))
           const target =
-            code || isScopedVal ? parent.style.dynamic : parent.style.static
+            code || isScopedVal || hasMatchingParent
+              ? parent.style.dynamic
+              : parent.style.static
           Object.assign(target[getStyleType(node)], styleForProperty)
         }
 

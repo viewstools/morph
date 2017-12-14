@@ -1,4 +1,5 @@
 import {
+  checkParentStem,
   getObjectAsString,
   getProp,
   hasKeysInChildren,
@@ -12,7 +13,7 @@ let dynamicCss
 const asDynamicCss = (style, styleKey, parentEl) => {
   const props = Object.keys(style)
 
-  if (styleKey !== 'base' && parentEl) {
+  if (parentEl) {
     dynamicCss += `\${${parentEl}}\:${styleKey} & {`
   } else if (styleKey !== 'base') {
     dynamicCss += `&:${styleKey} {`
@@ -22,9 +23,14 @@ const asDynamicCss = (style, styleKey, parentEl) => {
     const shouldApplyUnits =
       !isUnitlessProp(prop) &&
       Number.isInteger(parseInt(style[prop].split(': ').slice(-1)[0]))
-    dynamicCss += `${toSlugCase(prop)}: \${props =>\ ${style[
-      `${prop}`
-    ]}\}${shouldApplyUnits ? 'px' : ''};`
+    const needsQuotes = /props|item/.test(`${style[`${prop}`]}`) ? false : true
+    dynamicCss += needsQuotes
+      ? `${toSlugCase(prop)}: \${props =>\ '${style[
+          `${prop}`
+        ]}'\}${shouldApplyUnits ? 'px' : ''};`
+      : `${toSlugCase(prop)}: \${props =>\ ${style[
+          `${prop}`
+        ]}\}${shouldApplyUnits ? 'px' : ''};`
   })
 
   if (styleKey !== 'base') dynamicCss += `}`
@@ -38,19 +44,6 @@ const getStyledComponent = (name, base, style, styleKey, parentEl) =>
     styleKey,
     parentEl
   )}\``
-
-const checkParentStem = (node, styleKey) => {
-  if (styleKey !== 'hover' || !node.parent.parent) return
-
-  const parentEl = node.parent.parent.parent
-  const matchingParentStem = parentEl.properties.list.find(
-    prop => prop.key.valueRaw.toLowerCase().indexOf(styleKey) > -1
-  )
-
-  if (matchingParentStem) {
-    return parentEl.is || parentEl.name.value
-  }
-}
 
 export const leave = (node, parent, state) => {
   if (hasKeysInChildren(node.style.static)) {
@@ -77,8 +70,6 @@ export const leave = (node, parent, state) => {
       : block.name.finalValue
     let code = ''
     dynamicCss = ''
-    // TODO get block name or type
-    // Animated.div
     const filteredDynamicStyles = Object.keys(
       node.style.dynamic
     ).filter((dynamicKey, index) => {
@@ -91,7 +82,6 @@ export const leave = (node, parent, state) => {
       if (filteredLength - 1 !== index) {
         asDynamicCss(node.style.dynamic[styleKey], styleKey, parentEl)
       } else {
-        debugger
         code = getStyledComponent(
           blockName,
           blockBase,

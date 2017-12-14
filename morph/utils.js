@@ -18,6 +18,19 @@ export const asScopedValue = (obj, node, properties) => {
   return `${value.join(' : ')} : ${safeScope(defaultValue)}`
 }
 
+export const checkParentStem = (node, styleKey) => {
+  if (styleKey !== 'hover' || !node.parent.parent) return
+
+  const parentEl = node.parent.parent.parent
+  const matchingParentStem = parentEl.properties.list.find(
+    prop => prop.key.valueRaw.toLowerCase().indexOf(styleKey) > -1
+  )
+
+  if (matchingParentStem) {
+    return parentEl.is || parentEl.name.value
+  }
+}
+
 const INTERPOLATION = /\${(.+)}/
 export const isInterpolation = str => INTERPOLATION.test(str)
 export const deinterpolate = str => {
