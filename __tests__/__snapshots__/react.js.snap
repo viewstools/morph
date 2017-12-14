@@ -3786,13 +3786,11 @@ import Home from './Home.view.js';
 import { Route } from 'react-router-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Topics from './Topics.view.js';
-import css from 'glam';
+import { css } from 'react-emotion';
 const styles = {
-  hnpb55i: css('css-sw3yj', [], function inlineCss() {
-    return [
-      \`.css-sw3yj { -webkit-flex-direction: row; -ms-flex-direction: row; -webkit-box-orient: horizontal; -webkit-box-direction: normal; flex-direction: row; }\`,
-    ];
-  }),
+  hnpb55i: css\`
+    flex-direction: row;
+  \`,
 };
 
 const UseRouter = props => {
@@ -3854,7 +3852,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import About from './About.view.js';
-import Animated from 'react-dom-animated';
+import Home from './Home.view.js';
 import { Route } from 'react-router-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Topics from './Topics.view.js';
@@ -3876,7 +3874,7 @@ const UseRouter = props => {
           path=\\"/\\"
           exact
           render={routeProps => (
-            <UseRouterHome
+            <Home
               data-test-id=\\"UseRouter.Home\\"
               height={props.height}
               width={360}

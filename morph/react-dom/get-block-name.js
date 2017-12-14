@@ -66,7 +66,7 @@ export default (node, parent, state) => {
       break
   }
 
-  if (node.maybeAnimated) {
+  if (node.maybeAnimated && !node.isRoute) {
     if (state.enableAnimated && name !== 'Link' && name !== 'form') {
       name = `Animated.${name}`
     }
