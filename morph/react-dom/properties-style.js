@@ -62,6 +62,14 @@ export const leave = (node, parent, state) => {
   if (hasKeysInChildren(node.style.dynamic)) {
     const block = node.parent
     const blockName = block.is || block.name.value
+
+    const alreadyExists = state.render.filter(item =>
+      item.match(`<${blockName}`)
+    )
+    blockName = alreadyExists
+      ? `${blockName}${alreadyExists.length + 1}`
+      : blockName
+
     let code = ''
     dynamicCss = ''
     const filteredDynamicStyles = Object.keys(
