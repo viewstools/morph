@@ -65,25 +65,6 @@ export default (node, parent, state) => {
       name = node.name.value
       break
   }
-
-  if (node.maybeAnimated && !node.isRoute) {
-    if (state.enableAnimated && name !== 'Link' && name !== 'form') {
-      name = `Animated.${name}`
-    }
-
-    node.dynamicStyleComponent = {
-      tag: /Animated/.test(name) ? name : `"${name}"`,
-    }
-    name = `${state.name}${node.name.value}`
-
-    if (state.stylesDynamicNames.includes(name)) {
-      name = `${name}${state.stylesDynamicNames.length}`
-    }
-    state.stylesDynamicNames.push(name)
-    node.dynamicStyleComponent.name = name
-
-    node.properties.dynamicStyleComponent = node.dynamicStyleComponent
-  }
   return name
 }
 

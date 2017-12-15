@@ -1,4 +1,4 @@
 Vertical
 boxShadow 10px 5px 2px ${props.color}
 Vertical
-boxShadow 0px 8px 15px 0px rgba(0,0,0,0.1)
+boxShadow 10px 5px 10px ${props.color}

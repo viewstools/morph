@@ -44,9 +44,6 @@ export default ({ images, isReactNative, uses }, getImport) => {
       dependencies.push(`import ${d} from "./${d}.view.js"`)
     } else if (/^[A-Z]/.test(d)) {
       dependencies.push(getImport(d))
-    } else if (d === 'glam') {
-      // TODO replace for emotion
-      dependencies.push(`import css from 'glam'`)
     }
   })
 

@@ -1,6 +1,6 @@
 Button is Vertical
-backgroundColor black
-backgroundColorHover white
+backgroundColor props.backgroundColor
+backgroundColorHover props.backgroundColorHover
 onClick props.onClick
 Text
 color white
