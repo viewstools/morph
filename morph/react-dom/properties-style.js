@@ -68,7 +68,7 @@ export const leave = (node, parent, state) => {
     )
     blockName =
       alreadyExists.length > 0
-        ? `${blockName}${alreadyExists.length + 1}`
+        ? `${blockName}${alreadyExists.length}`
         : blockName
 
     let code = ''
@@ -96,7 +96,7 @@ export const leave = (node, parent, state) => {
     })
 
     const renderValue = state.render.filter(item =>
-      item.includes(block.name.finalValue)
+      item.includes(`${block.name.finalValue} isDynamic`)
     )[0]
     state.render[state.render.indexOf(renderValue)] = `<${blockName}`
 

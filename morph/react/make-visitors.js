@@ -28,11 +28,8 @@ export default ({
       const name = getBlockName(node, parent, state)
       if (name === null) return this.skip()
 
-      // const stringToTest = node.dynamicStyleComponent ? node.dynamicStyleComponent.tag : name;
-      // state.use(/Animated/.test(stringToTest) ? 'Animated' : name);
-
       node.name.finalValue = name
-      state.render.push(`<${name}`)
+      state.render.push(`<${name} ${node.maybeAnimated ? 'isDynamic' : ''}`)
     },
     leave(node, parent, state) {
       if (
