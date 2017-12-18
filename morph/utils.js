@@ -18,35 +18,16 @@ export const asScopedValue = (obj, node, properties) => {
   return `${value.join(' : ')} : ${safeScope(defaultValue)}`
 }
 
-export const anotherCheckParentStem = (node, styleKey) => {
-  debugger
-  //if (styleKey !== 'hover' || !node.parent.parent) return;
-  if (styleKey !== 'hover' || !node.parent) return
-
-  //const parentEl = node.parent.parent.parent;
-  const parentEl = node.parent
-  const matchingParentStem = parentEl.properties.list.find(
-    prop => prop.key.valueRaw.toLowerCase().indexOf(styleKey) > -1
-  )
-
-  if (matchingParentStem) {
-    return parentEl.is || parentEl.name.value
-  }
-}
-
 export const checkParentStem = (node, styleKey) => {
   debugger
-  if (styleKey !== 'hover' || !node.parent.parent) return
-  //if (styleKey !== 'hover' || !node.parent) return;
+  if (styleKey !== 'hover' || !node.parent) return
 
-  const parentEl = node.parent.parent.parent
-  //const parentEl = node.parent;
-  const matchingParentStem = parentEl.properties.list.find(
+  const matchingParentStem = node.parent.properties.list.find(
     prop => prop.key.valueRaw.toLowerCase().indexOf(styleKey) > -1
   )
 
   if (matchingParentStem) {
-    return parentEl.is || parentEl.name.value
+    return node.parent.is || node.parent.name.value
   }
 }
 

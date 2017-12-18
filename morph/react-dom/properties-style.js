@@ -12,7 +12,6 @@ let dynamicCss
 
 const asDynamicCss = (style, styleKey, parentEl) => {
   const props = Object.keys(style)
-  debugger
 
   if (parentEl) {
     dynamicCss += `\${${parentEl}}\:${styleKey} &, \${${parentEl}}\.${styleKey} & {`
@@ -61,7 +60,6 @@ export const leave = (node, parent, state) => {
   }
 
   if (hasKeysInChildren(node.style.dynamic)) {
-    debugger
     const block = node.parent
     let blockName = block.is || block.name.value
     let parentEl
@@ -84,7 +82,9 @@ export const leave = (node, parent, state) => {
 
     const filteredLength = filteredDynamicStyles.length
     filteredDynamicStyles.forEach((styleKey, index) => {
-      parentEl = checkParentStem(node, styleKey)
+      parentEl = node.parent.parent
+        ? checkParentStem(node.parent.parent, styleKey)
+        : null
       if (filteredLength - 1 !== index) {
         asDynamicCss(node.style.dynamic[styleKey], styleKey, parentEl)
       } else {

@@ -1,7 +1,7 @@
 import {
   asScopedValue,
-  anotherCheckParentStem,
   checkParentStem,
+  xCheckParentStem,
   getObjectAsString,
   getProp,
   getPropertiesAsObject,
@@ -28,27 +28,20 @@ export default ({
     enter(node, parent, state) {
       const name = getBlockName(node, parent, state)
       if (name === null) return this.skip()
-      debugger
 
-      // if has (styleStem && matching parent) || (styles contain `props.`) then node.isDynamic
       const dynamicStyles = node.properties.list.filter(
         item => item.tags.style && item.value.value.match(/props./)
       )
-
       const hasHoverStem = node.properties.list.filter(
         item => getStyleType(item) === 'hover'
       )
-      const hasMatchingParent = parent
-        ? anotherCheckParentStem(node, 'hover')
-        : false
+      const hasMatchingParent = parent ? checkParentStem(node, 'hover') : false
 
       node.isDynamic =
         dynamicStyles.length > 0 || (hasMatchingParent && hasHoverStem)
           ? true
           : false
-
       node.name.finalValue = name
-      debugger
       state.render.push(`<${name} ${node.isDynamic ? 'isDynamic' : ''}`)
     },
     leave(node, parent, state) {
@@ -403,8 +396,9 @@ export default ({
             state.render.push(` ${k}=${safe(styleForProperty[k], node)}`)
           )
         } else {
-          debugger
-          const hasMatchingParent = checkParentStem(parent, getStyleType(node))
+          const hasMatchingParent = parent.parent.parent
+            ? checkParentStem(parent.parent.parent, getStyleType(node))
+            : false
           const target =
             code || isScopedVal || hasMatchingParent
               ? parent.style.dynamic
