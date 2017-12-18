@@ -18,10 +18,29 @@ export const asScopedValue = (obj, node, properties) => {
   return `${value.join(' : ')} : ${safeScope(defaultValue)}`
 }
 
+export const anotherCheckParentStem = (node, styleKey) => {
+  debugger
+  //if (styleKey !== 'hover' || !node.parent.parent) return;
+  if (styleKey !== 'hover' || !node.parent) return
+
+  //const parentEl = node.parent.parent.parent;
+  const parentEl = node.parent
+  const matchingParentStem = parentEl.properties.list.find(
+    prop => prop.key.valueRaw.toLowerCase().indexOf(styleKey) > -1
+  )
+
+  if (matchingParentStem) {
+    return parentEl.is || parentEl.name.value
+  }
+}
+
 export const checkParentStem = (node, styleKey) => {
+  debugger
   if (styleKey !== 'hover' || !node.parent.parent) return
+  //if (styleKey !== 'hover' || !node.parent) return;
 
   const parentEl = node.parent.parent.parent
+  //const parentEl = node.parent;
   const matchingParentStem = parentEl.properties.list.find(
     prop => prop.key.valueRaw.toLowerCase().indexOf(styleKey) > -1
   )
@@ -103,12 +122,8 @@ const styleStems = [
   'disabled',
   'print',
 ]
-export const getStyleType = node => {
-  console.log(styleStems.find(tag => isTag(node, tag)) || 'base')
-  debugger
-  return styleStems.find(tag => isTag(node, tag)) || 'base'
-}
-
+export const getStyleType = node =>
+  styleStems.find(tag => isTag(node, tag)) || 'base'
 export const hasKeys = obj => Object.keys(obj).length > 0
 export const hasKeysInChildren = obj =>
   Object.keys(obj).some(k => hasKeys(obj[k]))

@@ -2118,6 +2118,47 @@ export default Scope;
 }
 `;
 
+exports[`react-dom parses react-dom Scope debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import styled, { css } from 'react-emotion';
+
+const Text = styled('span')\`
+  color: \${props =>
+    props.somethingGreen
+      ? 'rgb(0,255,0)'
+      : props.whatMakesBlue ? 'rgb(0,0,255)' : 'red'};
+\`;
+
+const Scope = props => {
+  return (
+    <Text data-test-id={props['data-test-id'] || 'Text'}>
+      {props.somethingGreen
+        ? '2 green'
+        : props.whatMakesBlue ? props.blue : '1 red'}
+    </Text>
+  );
+};
+
+export default Scope;
+",
+  "fonts": Object {},
+  "props": Object {
+    "blue": "string",
+    "somethingGreen": "string",
+    "whatMakesBlue": "string",
+  },
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
 exports[`react-dom parses react-dom ScopeOnCustomView 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
