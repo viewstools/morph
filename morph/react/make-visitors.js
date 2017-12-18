@@ -1,7 +1,6 @@
 import {
   asScopedValue,
   checkParentStem,
-  xCheckParentStem,
   getObjectAsString,
   getProp,
   getPropertiesAsObject,
@@ -27,13 +26,13 @@ export default ({
   const BlockName = {
     enter(node, parent, state) {
       const name = getBlockName(node, parent, state)
-      let dynamicStyles
+      let dynamicStyles = []
       let hasHoverStem
       let hasMatchingParent
       if (name === null) return this.skip()
       debugger
 
-      if (node.properties.list) {
+      if (node.properties) {
         dynamicStyles = node.properties.list.filter(
           item => item.tags.style && item.value.value.match(/props./)
         )
