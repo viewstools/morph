@@ -27,15 +27,21 @@ export default ({
   const BlockName = {
     enter(node, parent, state) {
       const name = getBlockName(node, parent, state)
+      let dynamicStyles
+      let hasHoverStem
+      let hasMatchingParent
       if (name === null) return this.skip()
+      debugger
 
-      const dynamicStyles = node.properties.list.filter(
-        item => item.tags.style && item.value.value.match(/props./)
-      )
-      const hasHoverStem = node.properties.list.filter(
-        item => getStyleType(item) === 'hover'
-      )
-      const hasMatchingParent = parent ? checkParentStem(node, 'hover') : false
+      if (node.properties.list) {
+        dynamicStyles = node.properties.list.filter(
+          item => item.tags.style && item.value.value.match(/props./)
+        )
+        hasHoverStem = node.properties.list.filter(
+          item => getStyleType(item) === 'hover'
+        )
+        hasMatchingParent = parent ? checkParentStem(parent, 'hover') : false
+      }
 
       node.isDynamic =
         dynamicStyles.length > 0 || (hasMatchingParent && hasHoverStem)
@@ -396,9 +402,11 @@ export default ({
             state.render.push(` ${k}=${safe(styleForProperty[k], node)}`)
           )
         } else {
-          const hasMatchingParent = parent.parent.parent
-            ? checkParentStem(parent.parent.parent, getStyleType(node))
-            : false
+          debugger
+          const hasMatchingParent =
+            parent.parent.parent && node.isDynamic
+              ? checkParentStem(parent.parent.parent, getStyleType(node))
+              : false
           const target =
             code || isScopedVal || hasMatchingParent
               ? parent.style.dynamic

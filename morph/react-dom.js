@@ -52,6 +52,7 @@ export default ({
     fonts: [],
     images: [],
     inlineStyles,
+    isDynamic: false,
     isReactNative: false,
     name: finalName,
     remap: {},

@@ -82,6 +82,7 @@ export const leave = (node, parent, state) => {
 
     const filteredLength = filteredDynamicStyles.length
     filteredDynamicStyles.forEach((styleKey, index) => {
+      debugger
       parentEl = node.parent.parent
         ? checkParentStem(node.parent.parent, styleKey)
         : null
