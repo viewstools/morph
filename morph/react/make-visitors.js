@@ -27,11 +27,17 @@ export default ({
     enter(node, parent, state) {
       const name = getBlockName(node, parent, state)
       if (name === null) return this.skip()
+      debugger
+
+      let styleStems = node.properties.list.forEach(item => getStyleType(item))
+      debugger
+      // if has styleStem and matching parent then node.isDynamic
 
       node.name.finalValue = name
       state.render.push(`<${name} ${node.maybeAnimated ? 'isDynamic' : ''}`)
     },
     leave(node, parent, state) {
+      debugger
       if (
         (!parent && node.blocks) ||
         node.explicitChildren ||

@@ -103,8 +103,11 @@ const styleStems = [
   'disabled',
   'print',
 ]
-export const getStyleType = node =>
-  styleStems.find(tag => isTag(node, tag)) || 'base'
+export const getStyleType = node => {
+  console.log(styleStems.find(tag => isTag(node, tag)) || 'base')
+  debugger
+  return styleStems.find(tag => isTag(node, tag)) || 'base'
+}
 
 export const hasKeys = obj => Object.keys(obj).length > 0
 export const hasKeysInChildren = obj =>
