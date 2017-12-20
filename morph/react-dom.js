@@ -45,6 +45,8 @@ export default ({
 
   const state = {
     captures: [],
+    cssDynamic: false,
+    cssStatic: false,
     enableAnimated,
     defaultProps: false,
     debug,
@@ -62,8 +64,7 @@ export default ({
     todos: [],
     usedBlockNames: {},
     uses: [],
-    styles: {},
-    stylesDynamic: [],
+    styles: [],
     testIds: {},
     tests: morphTests({ view: tests, file }),
     use(block) {

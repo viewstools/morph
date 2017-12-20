@@ -121,3 +121,18 @@ export const isToggle = node => isTag(node, 'toggle')
 export const isTag = (node, tag) => node.tags[tag]
 export const isUnitlessProp = prop =>
   prop === 'lineHeight' || prop === 'fontWeight' || prop === 'opacity'
+
+export const getActionableParent = node => {
+  if (!node.parent) return false
+  if (node.parent.action) return node.parent
+  return getActionableParent(node.parent)
+}
+
+export const getAllowedStyleKeys = node => {
+  if (node.isCapture) {
+    return ['base', 'focus', 'hover', 'disabled', 'placeholder']
+  } else if (node.action || getActionableParent(node)) {
+    return ['base', 'focus', 'hover', 'disabled']
+  }
+  return ['base']
+}

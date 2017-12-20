@@ -41,6 +41,7 @@ export const morph = (
       objectAssign: 'Object.assign',
       transforms: {
         modules: false,
+        templateString: false,
       },
     }).code
   }
