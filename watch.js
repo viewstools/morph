@@ -394,13 +394,8 @@ height 50`
         )
 
         verbose && console.log(chalk.green('M'), view)
-      } catch (err) {
-        verbose &&
-          console.error(
-            chalk.red('M'),
-            view,
-            typeof err.toString === 'function' ? err.toString() : err
-          )
+      } catch (error) {
+        verbose && console.error(chalk.red('M'), view, error)
       }
     })
 
