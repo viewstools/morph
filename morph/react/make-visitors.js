@@ -16,7 +16,7 @@ import toPascalCase from 'to-pascal-case'
 import wrap from './wrap.js'
 
 export default ({
-  getBlockName,
+  BlockNameEnter,
   getStyleForProperty,
   getValueForProperty,
   isValidPropertyForBlock,
@@ -24,31 +24,7 @@ export default ({
   PropertiesStyleLeave,
 }) => {
   const BlockName = {
-    enter(node, parent, state) {
-      const name = getBlockName(node, parent, state)
-      let dynamicStyles = []
-      let hasHoverStem
-      let hasMatchingParent
-      if (name === null) return this.skip()
-      debugger
-
-      if (node.properties) {
-        dynamicStyles = node.properties.list.filter(
-          item => item.tags.style && item.value.value.match(/props./)
-        )
-        hasHoverStem = node.properties.list.filter(
-          item => getStyleType(item) === 'hover'
-        )
-        hasMatchingParent = parent ? checkParentStem(parent, 'hover') : false
-      }
-
-      node.isDynamic =
-        dynamicStyles.length > 0 || (hasMatchingParent && hasHoverStem)
-          ? true
-          : false
-      node.name.finalValue = name
-      state.render.push(`<${name} ${node.isDynamic ? 'isDynamic' : ''}`)
-    },
+    enter: BlockNameEnter,
     leave(node, parent, state) {
       if (
         (!parent && node.blocks) ||
@@ -253,9 +229,9 @@ export default ({
 
         node.isRoute = true
         state.render.push(
-          `<Route path=${safe(path)} ${isExact
-            ? 'exact'
-            : ''} render={routeProps => `
+          `<Route path=${safe(path)} ${
+            isExact ? 'exact' : ''
+          } render={routeProps => `
         )
       }
     },

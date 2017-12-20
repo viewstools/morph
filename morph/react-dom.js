@@ -2,9 +2,9 @@ import * as BlockCapture from './react-dom/block-capture.js'
 import * as BlockGoTo from './react-dom/block-go-to.js'
 import * as BlockTeleport from './react-dom/block-teleport.js'
 import * as PropertiesClassName from './react-dom/properties-class-name.js'
+import { enter as BlockNameEnter } from './react-dom/block-name.js'
 import { enter as BlockTestIdEnter } from './react-dom/block-test-id.js'
 import { leave as PropertiesStyleLeave } from './react-dom/properties-style.js'
-import getBlockName from './react-dom/get-block-name.js'
 import getStyleForProperty from './react-dom/get-style-for-property.js'
 import getStyles from './react-dom/get-styles.js'
 import getValueForProperty from './react-dom/get-value-for-property.js'
@@ -60,6 +60,7 @@ export default ({
     styles: {},
     svgs: [],
     todos: [],
+    usedBlockNames: {},
     uses: [],
     styles: {},
     stylesDynamic: [],
@@ -94,7 +95,7 @@ export default ({
     BlockWhen,
     ...visitors
   } = makeVisitors({
-    getBlockName,
+    BlockNameEnter,
     getStyleForProperty,
     getValueForProperty,
     isValidPropertyForBlock,
