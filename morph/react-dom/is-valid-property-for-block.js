@@ -1,4 +1,4 @@
-const blacklist = ['classname', 'isactive', 'teleportto', 'goto']
+const blacklist = ['classname', 'teleportto', 'goto']
 const blacklistDebug = ['autofocus', 'tabindex']
 
 export default (node, parent, state) => {

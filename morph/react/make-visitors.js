@@ -273,20 +273,16 @@ export default ({
       node.style = {
         dynamic: {
           base: {},
-          active: {},
           hover: {},
           focus: {},
-          activeHover: {},
           disabled: {},
           placeholder: {},
           print: {},
         },
         static: {
           base: {},
-          active: {},
           hover: {},
           focus: {},
-          activeHover: {},
           disabled: {},
           placeholder: {},
           print: {},
@@ -377,7 +373,6 @@ export default ({
             state.render.push(` ${k}=${safe(styleForProperty[k], node)}`)
           )
         } else {
-          debugger
           const hasMatchingParent =
             parent.parent.parent && node.isDynamic
               ? checkParentStem(parent.parent.parent, getStyleType(node))

@@ -19,16 +19,13 @@ export const asScopedValue = (obj, node, properties) => {
 }
 
 export const checkParentStem = (node, styleKey) => {
-  debugger
-  if (styleKey !== 'hover' || !node.parent) return
+  if (styleKey !== 'hover' || !node.parent) return false
 
-  const matchingParentStem = node.parent.properties.list.find(
-    prop => prop.key.valueRaw.toLowerCase().indexOf(styleKey) > -1
-  )
+  const matchingParentStem =
+    node.parent.properties &&
+    node.parent.properties.list.some(prop => prop.tags.hover)
 
-  if (matchingParentStem) {
-    return node.parent.is || node.parent.name.value
-  }
+  return matchingParentStem && (node.parent.is || node.parent.name.value)
 }
 
 const INTERPOLATION = /\${(.+)}/
@@ -94,15 +91,7 @@ export const getScopedProps = (propNode, blockNode) => {
   return scopedConditional
 }
 
-const styleStems = [
-  'active',
-  'hover',
-  'focus',
-  'activeHover',
-  'placeholder',
-  'disabled',
-  'print',
-]
+const styleStems = ['hover', 'focus', 'placeholder', 'disabled', 'print']
 export const getStyleType = node =>
   styleStems.find(tag => isTag(node, tag)) || 'base'
 export const hasKeys = obj => Object.keys(obj).length > 0
