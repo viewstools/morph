@@ -1,8 +1,10 @@
-Button is Vertical
+Button Vertical
 backgroundColor props.backgroundColor
 backgroundColorHover props.backgroundColorHover
 onClick props.onClick
 Text
 color white
 colorHover black
+fontSize props.fontSize
+fontSizeHover props.fontSizeHover
 text Hey!
