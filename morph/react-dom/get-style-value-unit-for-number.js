@@ -19,7 +19,7 @@ export default (key, value) => {
   if (typeof value === 'number') return units[0] || ''
 
   const match = value.match(IS_INT.test(value) ? IS_INT : IS_FLOAT)
-  return (match && units.find(u => u === match.unit)) || units[0] || ''
+  return match ? '' : units[0] || ''
 }
 
 const LENGTH = [PIXEL, PERCENTAGE, EM, REM, VW, VH]
