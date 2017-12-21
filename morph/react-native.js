@@ -4,6 +4,7 @@ import * as BlockWrap from './react-native/block-wrap.js'
 import { enter as BlockNameEnter } from './react-native/block-name.js'
 import { enter as BlockTestIdEnter } from './react-native/block-test-id.js'
 import { leave as PropertiesStyleLeave } from './react-native/properties-style.js'
+import { enter as PropertyRefEnter } from './react-dom/property-ref.js'
 import getStyleForProperty from './react-native/get-style-for-property.js'
 import getStyles from './react-native/get-styles.js'
 import getValueForProperty from './react-native/get-value-for-property.js'
@@ -84,6 +85,7 @@ export default ({
     getValueForProperty,
     isValidPropertyForBlock,
     PropertiesStyleLeave,
+    PropertyRefEnter,
   })
 
   visitors.Block = {

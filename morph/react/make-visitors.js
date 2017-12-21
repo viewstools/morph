@@ -23,6 +23,7 @@ export default ({
   isValidPropertyForBlock,
   PropertiesClassName,
   PropertiesStyleLeave,
+  PropertyRefEnter,
 }) => {
   const BlockName = {
     enter: BlockNameEnter,
@@ -470,6 +471,8 @@ export default ({
           (state.debug && key === 'ref')
         )
           return
+
+        if (PropertyRefEnter.call(this, node, parent, state)) return
 
         // if (PropertyData.enter.call(this, node, parent, state)) return
         if (PropertyStyle.enter.call(this, node, parent, state)) return

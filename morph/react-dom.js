@@ -4,6 +4,7 @@ import * as BlockTeleport from './react-dom/block-teleport.js'
 import * as PropertiesClassName from './react-dom/properties-class-name.js'
 import { enter as BlockNameEnter } from './react-dom/block-name.js'
 import { enter as BlockTestIdEnter } from './react-dom/block-test-id.js'
+import { enter as PropertyRefEnter } from './react-dom/property-ref.js'
 import { leave as PropertiesStyleLeave } from './react-dom/properties-style.js'
 import getStyleForProperty from './react-dom/get-style-for-property.js'
 import getStyles from './react-dom/get-styles.js'
@@ -102,6 +103,7 @@ export default ({
     isValidPropertyForBlock,
     PropertiesClassName,
     PropertiesStyleLeave,
+    PropertyRefEnter,
   })
 
   visitors.Block = {
