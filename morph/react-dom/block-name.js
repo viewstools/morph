@@ -9,7 +9,7 @@ export function enter(node, parent, state) {
   node.name.tagValue = name
   state.use(name)
 
-  if (node.properties) {
+  if (node.properties && node.isBasic) {
     const hasDynamicStyles = node.properties.list.some(
       item => item.tags.style && item.tags.code
     )

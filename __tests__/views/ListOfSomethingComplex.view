@@ -1,0 +1,8 @@
+List
+from props.list
+Vertical
+backgroundColor item.backgroundColor
+border 1px solid red
+Text
+color item.color
+text index

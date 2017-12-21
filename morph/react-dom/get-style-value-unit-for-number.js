@@ -13,15 +13,13 @@ const GRADIANS = 'grad'
 const RADIANS = 'rad'
 const TURN = 'turn'
 
-export default node => {
-  const units = getUnits(node.key.value)
+export default (key, value) => {
+  const units = getUnits(key)
 
-  if (typeof node.value.value === 'number') return units[0]
+  if (typeof value === 'number') return units[0] || ''
 
-  const match = node.value.value.match(
-    IS_INT.test(node.value.value) ? IS_INT : IS_FLOAT
-  )
-  return units.find(u => u === match.unit) || units[0]
+  const match = value.match(IS_INT.test(value) ? IS_INT : IS_FLOAT)
+  return (match && units.find(u => u === match.unit)) || units[0] || ''
 }
 
 const LENGTH = [PIXEL, PERCENTAGE, EM, REM, VW, VH]

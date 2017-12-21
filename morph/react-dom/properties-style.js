@@ -2,19 +2,26 @@ import {
   getActionableParent,
   getAllowedStyleKeys,
   hasKeysInChildren,
+  isList,
+  isInList,
 } from '../utils.js'
+import getUnit from './get-style-value-unit-for-number.js'
 import hash from '../hash.js'
 import toSlugCase from 'to-slug-case'
 
-// TODO UNITS
-
-const asDynamicCss = styles =>
+const asDynamicCss = (styles, isInList = false) =>
   Object.keys(styles).map(
-    prop => `${toSlugCase(prop)}: \${props => ${styles[prop]}};`
+    prop =>
+      `${toSlugCase(prop)}: \${${
+        isInList ? '({ index, item, props })' : '({ props })'
+      } => ${styles[prop]}}${getUnit(prop, styles[prop])};`
   )
 
 const asStaticCss = styles =>
-  Object.keys(styles).map(prop => `${toSlugCase(prop)}: ${styles[prop]};`)
+  Object.keys(styles).map(
+    prop =>
+      `${toSlugCase(prop)}: ${styles[prop]}${getUnit(prop, styles[prop])};`
+  )
 
 const asCss = (styles, key, scopedUnderParent) => {
   let css = []
@@ -59,18 +66,25 @@ export const leave = (node, parent, state) => {
       )
       .map(key =>
         asCss(
-          [...asDynamicCss(dynamic[key]), ...asStaticCss(staticStyle[key])],
+          [
+            ...asDynamicCss(dynamic[key], isInList(node)),
+            ...asStaticCss(staticStyle[key]),
+          ],
           key,
           scopedUnderParent
         ).join('\n')
       )
       .join('\n')
 
-    state.styles.push(
-      `const ${node.parent.name.finalValue} = styled('${
-        node.parent.name.tagValue
-      }')\`${css}\``
-    )
+    state.styles[node.parent.name.finalValue] = `const ${
+      node.parent.name.finalValue
+    } = styled('${node.parent.name.tagValue}')\`${css}\``
+
+    // TODO we may want to be smarter here and only pass what's needed
+    state.render.push(` props={props}`)
+    if (isInList(node) && !isList(parent)) {
+      state.render.push(` index={index} item={item}`)
+    }
   } else if (hasKeysInChildren(staticStyle)) {
     state.cssStatic = true
 
@@ -88,6 +102,6 @@ export const leave = (node, parent, state) => {
       )
       .join('\n')
 
-    state.styles.push(`const ${id} = css\`${css}\``)
+    state.styles[id] = `const ${id} = css\`${css}\``
   }
 }

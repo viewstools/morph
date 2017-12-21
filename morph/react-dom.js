@@ -62,9 +62,9 @@ export default ({
     styles: {},
     svgs: [],
     todos: [],
-    usedBlockNames: {},
+    usedBlockNames: { [finalName]: 1 },
     uses: [],
-    styles: [],
+    styles: {},
     testIds: {},
     tests: morphTests({ view: tests, file }),
     use(block) {
