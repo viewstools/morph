@@ -22,6 +22,7 @@ export const enter = (node, parent, state) => {
       : null
 
     const hasScopedActions = node.scoped.hasOwnProperty('onClick')
+    const key = getProp(node, 'key')
 
     state.use(block)
 
@@ -37,7 +38,7 @@ export const enter = (node, parent, state) => {
           }
           ${isDisabled ? `disabled=${wrap(isDisabled)}` : ''}
           underlayColor='transparent'
-          ${node.isInList ? 'key={index}' : ''}>`
+          ${node.isInList ? `key={${key ? key.value.value : 'index'}}` : ''}>`
     )
     node.wrapEnd = `</${block}>`
   } else if (node.teleport) {

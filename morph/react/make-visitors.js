@@ -7,6 +7,7 @@ import {
   getStyleType,
   hasDefaultProp,
   isCode,
+  isList,
   isStyle,
   isToggle,
 } from '../utils.js'
@@ -122,8 +123,7 @@ export default ({
       if (when) {
         node.when = true
 
-        if (parent && parent.parent.name.value !== 'List')
-          state.render.push('{')
+        if (parent && !isList(parent.parent)) state.render.push('{')
 
         state.render.push(`${when.value.value} ? `)
       }
@@ -131,8 +131,7 @@ export default ({
     leave(node, parent, state) {
       if (node.when) {
         state.render.push(` : null`)
-        if (parent && parent.parent.name.value !== 'List')
-          state.render.push('}')
+        if (parent && !isList(parent.parent)) state.render.push('}')
       }
     },
   }
@@ -193,21 +192,21 @@ export default ({
 
   const BlocksList = {
     enter(node, parent, state) {
-      if (parent.name.value === 'List') {
-        let from = getProp(parent, 'from')
+      if (isList(parent)) {
+        const from = getProp(parent, 'from')
         if (!from) return
 
-        from = from.value.value
-
         state.render.push(
-          `{Array.isArray(${from}) && ${from}.map((item, index) => `
+          `{Array.isArray(${from.value.value}) && ${
+            from.value.value
+          }.map((item, index) => `
         )
 
         node.list.forEach(n => (n.isInList = true))
       }
     },
     leave(node, parent, state) {
-      if (parent.name.value === 'List') {
+      if (isList(parent)) {
         state.render.push(')}')
       }
     },
@@ -416,7 +415,6 @@ export default ({
     BlockWhen,
 
     Block: {
-      // TODO List without wrapper?
       enter(node, parent, state) {
         BlockWhen.enter.call(this, node, parent, state)
         BlockRoute.enter.call(this, node, parent, state)
@@ -435,11 +433,10 @@ export default ({
     Blocks: {
       enter(node, parent, state) {
         if (node.list.length > 0) state.render.push('>')
+
         BlocksList.enter.call(this, node, parent, state)
       },
-      leave(node, parent, state) {
-        BlocksList.leave.call(this, node, parent, state)
-      },
+      leave: BlocksList.leave,
     },
 
     Properties: {

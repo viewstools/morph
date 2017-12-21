@@ -9,7 +9,6 @@ const CAPTURE = /^(CaptureEmail|CaptureFile|CaptureNumber|CapturePhone|CaptureSe
 const CODE_EXPLICIT = /^{.+}$/
 const CODE_IMPLICIT = /(props|item|index)\./
 const COMMENT = /^#(.+)$/
-const DATA = /^.+\.data$/
 const EMPTY_LIST = /^is empty list$/i
 const EMPTY_TEXT = /^is empty text$/i
 const INTERPOLATED_EXPRESSION = /\${.+}/
@@ -45,7 +44,6 @@ export const isBasic = line => is(BASIC, line)
 export const isBlock = line => is(BLOCK, line)
 export const isBool = line => is(BOOL, line)
 export const isCapture = line => is(CAPTURE, line)
-export const isData = line => is(DATA, line)
 export const isCode = line =>
   isCodeOneWord(line) || is(CODE_EXPLICIT, line) || is(CODE_IMPLICIT, line)
 export const isCodeOneWord = line =>

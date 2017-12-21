@@ -105,8 +105,6 @@ export default ({
   })
 
   visitors.Block = {
-    // TODO Capture*
-    // TODO List without wrapper?
     enter(node, parent, state) {
       ;[
         BlockWhen.enter,

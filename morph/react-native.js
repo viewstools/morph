@@ -87,8 +87,6 @@ export default ({
   })
 
   visitors.Block = {
-    // TODO Capture*
-    // TODO FlatList
     enter(node, parent, state) {
       ;[
         BlockWhen.enter,

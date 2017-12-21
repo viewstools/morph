@@ -115,7 +115,6 @@ export const isCode = node =>
   typeof node === 'string'
     ? /props|item|index/.test(node) || isCodeExplicit(node)
     : isTag(node, 'code')
-export const isData = node => isTag(node, 'data')
 export const isStyle = node => isTag(node, 'style')
 export const isToggle = node => isTag(node, 'toggle')
 export const isTag = (node, tag) => node.tags[tag]
@@ -135,4 +134,15 @@ export const getAllowedStyleKeys = node => {
     return ['base', 'focus', 'hover', 'disabled']
   }
   return ['base']
+}
+
+export const isList = node =>
+  node.type === 'Block' && node.name.value === 'List'
+
+export const isInList = node => {
+  let parent = node.parent
+  while (parent && !isList(parent)) {
+    parent = parent.parent
+  }
+  return !!parent
 }
