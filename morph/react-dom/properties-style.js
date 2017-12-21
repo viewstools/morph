@@ -10,18 +10,22 @@ import getUnit from './get-style-value-unit-for-number.js'
 import hash from '../hash.js'
 import toSlugCase from 'to-slug-case'
 
+const toCssKey = raw => {
+  const key = toSlugCase(raw)
+  return /^(webkit|moz|ms)-/.test(key) ? `-${key}` : key
+}
+
 const asDynamicCss = (styles, isInList = false) =>
   Object.keys(styles).map(
     prop =>
-      `${toSlugCase(prop)}: \${${
+      `${toCssKey(prop)}: \${${
         isInList ? '({ index, item, props })' : '({ props })'
       } => ${styles[prop]}}${getUnit(prop, styles[prop])};`
   )
 
 const asStaticCss = styles =>
   Object.keys(styles).map(
-    prop =>
-      `${toSlugCase(prop)}: ${styles[prop]}${getUnit(prop, styles[prop])};`
+    prop => `${toCssKey(prop)}: ${styles[prop]}${getUnit(prop, styles[prop])};`
   )
 
 const asCss = (styles, key, scopedUnderParent) => {

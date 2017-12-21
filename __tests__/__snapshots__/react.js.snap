@@ -180,6 +180,80 @@ export default AnimatedButton;
 }
 `;
 
+exports[`react-dom parses react-dom AppRegionDrag 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import { css } from 'react-emotion';
+
+const Vertical_hsfb8tw = css\`
+  flex-direction: column;
+  -webkit-app-region: drag;
+  width: 92%;
+\`;
+
+const AppRegionDrag = props => {
+  return (
+    <div
+      data-test-id={props['data-test-id'] || 'Vertical'}
+      className={Vertical_hsfb8tw}
+    >
+      {props.children}
+    </div>
+  );
+};
+
+export default AppRegionDrag;
+",
+  "fonts": Object {},
+  "props": Object {},
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom AppRegionDrag debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import { css } from 'react-emotion';
+
+const Vertical_hsfb8tw = css\`
+  flex-direction: column;
+  -webkit-app-region: drag;
+  width: 92%;
+\`;
+
+const AppRegionDrag = props => {
+  return (
+    <div
+      data-test-id={props['data-test-id'] || 'Vertical'}
+      className={Vertical_hsfb8tw}
+    >
+      {props.children}
+    </div>
+  );
+};
+
+export default AppRegionDrag;
+",
+  "fonts": Object {},
+  "props": Object {},
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
 exports[`react-dom parses react-dom BackgroundImage 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -4634,6 +4708,37 @@ export default AnimatedButton;
     "opacity": "number",
   },
   "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-native parses react-native AppRegionDrag 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+const styles = StyleSheet.create({
+  h1yjtav2: { flexDirection: 'column', width: '92%' },
+});
+
+const AppRegionDrag = props => {
+  return (
+    <View testID={props['testID'] || 'Vertical'} style={styles.h1yjtav2}>
+      {props.children}
+    </View>
+  );
+};
+
+export default AppRegionDrag;
+",
+  "fonts": Object {},
+  "props": Object {},
   "tests": Array [
     Object {
       "data": Object {},
