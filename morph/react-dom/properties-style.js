@@ -1,6 +1,7 @@
 import {
   getActionableParent,
   getAllowedStyleKeys,
+  hasKeys,
   hasKeysInChildren,
   isList,
   isInList,
@@ -61,9 +62,7 @@ export const leave = (node, parent, state) => {
     parent.styleName = parent.name.finalValue
 
     const css = Object.keys(dynamic)
-      .filter(
-        key => allowedStyleKeys.includes(key) && hasKeysInChildren(dynamic[key])
-      )
+      .filter(key => allowedStyleKeys.includes(key) && hasKeys(dynamic[key]))
       .map(key =>
         asCss(
           [
@@ -76,14 +75,16 @@ export const leave = (node, parent, state) => {
       )
       .join('\n')
 
-    state.styles[node.parent.name.finalValue] = `const ${
-      node.parent.name.finalValue
-    } = styled('${node.parent.name.tagValue}')\`${css}\``
+    if (css) {
+      state.styles[node.parent.name.finalValue] = `const ${
+        node.parent.name.finalValue
+      } = styled('${node.parent.name.tagValue}')\`${css}\``
 
-    // TODO we may want to be smarter here and only pass what's needed
-    state.render.push(` props={props}`)
-    if (isInList(node) && !isList(parent)) {
-      state.render.push(` index={index} item={item}`)
+      // TODO we may want to be smarter here and only pass what's needed
+      state.render.push(` props={props}`)
+      if (isInList(node) && !isList(parent)) {
+        state.render.push(` index={index} item={item}`)
+      }
     }
   } else if (hasKeysInChildren(staticStyle)) {
     state.cssStatic = true
@@ -94,14 +95,15 @@ export const leave = (node, parent, state) => {
 
     const css = Object.keys(staticStyle)
       .filter(
-        key =>
-          allowedStyleKeys.includes(key) && hasKeysInChildren(staticStyle[key])
+        key => allowedStyleKeys.includes(key) && hasKeys(staticStyle[key])
       )
       .map(key =>
         asCss(asStaticCss(staticStyle[key]), key, scopedUnderParent).join('\n')
       )
       .join('\n')
 
-    state.styles[id] = `const ${id} = css\`${css}\``
+    if (css) {
+      state.styles[id] = `const ${id} = css\`${css}\``
+    }
   }
 }
