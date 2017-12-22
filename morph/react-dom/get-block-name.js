@@ -2,6 +2,7 @@ import { getProp, hasProp } from '../utils.js'
 import toCamelCase from 'to-camel-case'
 
 export default (node, parent, state) => {
+  let name
   switch (node.name.value) {
     case 'CaptureEmail':
     case 'CaptureFile':
@@ -9,32 +10,39 @@ export default (node, parent, state) => {
     case 'CapturePhone':
     case 'CaptureSecure':
     case 'CaptureText':
-      return 'input'
+      name = 'input'
+      break
 
     case 'CaptureTextArea':
-      return 'textarea'
+      name = 'textarea'
+      break
 
     case 'Horizontal':
     case 'Vertical':
-      return getGroupBlockName(node, parent, state)
+      name = getGroupBlockName(node, parent, state)
+      break
 
     case 'Image':
-      return 'img'
+      name = 'img'
+      break
 
     case 'Text':
       return 'span'
 
     case 'List':
-      return 'div'
+      name = 'div'
+      break
 
     case 'Proxy':
       return null
 
     case 'Svg':
-      return 'svg'
+      name = 'svg'
+      break
 
     case 'SvgGroup':
-      return 'g'
+      name = 'g'
+      break
 
     case 'SvgCircle':
     case 'SvgEllipse':
@@ -50,11 +58,14 @@ export default (node, parent, state) => {
     case 'SvgUse':
     case 'SvgDefs':
     case 'SvgStop':
-      return toCamelCase(node.name.value.replace('Svg', ''))
+      name = toCamelCase(node.name.value.replace('Svg', ''))
+      break
 
     default:
-      return node.name.value
+      name = node.name.value
+      break
   }
+  return name
 }
 
 const getGroupBlockName = (node, parent, state) => {
@@ -86,15 +97,6 @@ const getGroupBlockName = (node, parent, state) => {
     name = 'div'
   } else if (hasProp(node, 'onSubmit')) {
     name = 'form'
-  }
-
-  if (
-    node.maybeAnimated &&
-    state.enableAnimated &&
-    name !== 'Link' &&
-    name !== 'form'
-  ) {
-    name = `Animated.${name}`
   }
 
   return name

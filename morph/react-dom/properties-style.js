@@ -1,23 +1,125 @@
-import { getObjectAsString, getProp, hasKeysInChildren } from '../utils.js'
+import {
+  getActionableParent,
+  getAllowedStyleKeys,
+  hasKeys,
+  hasKeysInChildren,
+  isList,
+  isInList,
+} from '../utils.js'
 import hash from '../hash.js'
 
-export const leave = (node, parent, state) => {
-  if (hasKeysInChildren(node.style.static)) {
-    const id = hash(node.style.static)
-    state.styles[id] = node.style.static
-    parent.styleId = id
-    const isActive = getProp(parent, 'isActive')
+const asDynamicCss = styles =>
+  Object.keys(styles).map(prop => `${prop}: ${styles[prop]}`)
 
-    node.className.push(`\${styles.${id}}`)
+const safe = str =>
+  typeof str === 'string' ? `"${str.replace(/"/g, "'")}"` : str
 
-    if (isActive) {
-      node.className.push(`\${${isActive.value.value} && 'active'}`)
+const asStaticCss = (styles, dynamicStyles = []) =>
+  Object.keys(styles)
+    .filter(prop => !dynamicStyles.includes(prop))
+    .map(prop => `${prop}: ${safe(styles[prop])}`)
+
+const asCss = (styles, key, scopedUnderParent) => {
+  let css = []
+
+  if (key !== 'base') {
+    if (scopedUnderParent) {
+      let parent = `\${${scopedUnderParent}}`
+      if (/_/.test(scopedUnderParent)) {
+        parent = `.${parent}`
+      }
+      css.push(`[\`${parent}:${key} &, ${parent}.${key} &\`]: {`)
+    } else if (
+      key === 'hover' ||
+      key === 'disabled' ||
+      key === 'focus' ||
+      key === 'placeholder'
+    ) {
+      css.push(`"&:${key}, &.${key}": {`)
     }
   }
 
-  // TODO needs to be different, it should also be a classname here too
-  if (hasKeysInChildren(node.style.dynamic)) {
-    const dynamic = getObjectAsString(node.style.dynamic.base)
-    state.render.push(` style={${dynamic}}`)
+  css.push(styles.join(',\n'))
+
+  if (key !== 'base') css.push(`}`)
+
+  return css
+}
+
+export const leave = (node, parent, state) => {
+  const { dynamic, static: staticStyle } = node.style
+
+  const allowedStyleKeys = getAllowedStyleKeys(parent)
+  let scopedUnderParent =
+    !parent.isCapture && !parent.action && getActionableParent(parent)
+  if (scopedUnderParent) {
+    scopedUnderParent = scopedUnderParent.styleName
+  }
+
+  // dynamic merges static styles
+  if (hasKeysInChildren(dynamic)) {
+    state.cssDynamic = true
+    parent.styleName = parent.name.finalValue
+
+    let cssStatic = Object.keys(staticStyle)
+      .filter(
+        key => allowedStyleKeys.includes(key) && hasKeys(staticStyle[key])
+      )
+      .map(key =>
+        asCss(
+          asStaticCss(staticStyle[key], Object.keys(dynamic[key])),
+          key,
+          scopedUnderParent
+        ).join('\n')
+      )
+      .join(',\n')
+
+    let cssDynamic = [
+      `${isInList ? '({ index, item, props })' : '({ props })'} => ({`,
+    ]
+    cssDynamic = cssDynamic.concat(
+      Object.keys(dynamic)
+        .filter(key => allowedStyleKeys.includes(key) && hasKeys(dynamic[key]))
+        .map(key =>
+          asCss(asDynamicCss(dynamic[key]), key, scopedUnderParent).join('\n')
+        )
+        .join(',\n')
+    )
+
+    cssDynamic.push('})')
+    cssDynamic = cssDynamic.join('\n')
+
+    if (cssStatic || cssDynamic) {
+      state.styles[node.parent.name.finalValue] = `const ${
+        node.parent.name.finalValue
+      } = styled('${node.parent.name.tagValue}')(${
+        cssStatic ? `{${cssStatic}}, ` : ''
+      }${cssDynamic})`
+
+      // TODO we may want to be smarter here and only pass what's needed
+      state.render.push(` props={props}`)
+      if (isInList(node) && !isList(parent)) {
+        state.render.push(` index={index} item={item}`)
+      }
+    }
+  } else if (hasKeysInChildren(staticStyle)) {
+    state.cssStatic = true
+
+    const id = `${parent.is || parent.name.value}_${hash(staticStyle)}`
+    parent.styleName = id
+    node.className.push(`\${${id}}`)
+
+    const css = Object.keys(staticStyle)
+      .filter(
+        key => allowedStyleKeys.includes(key) && hasKeys(staticStyle[key])
+      )
+      .map(key =>
+        asCss(asStaticCss(staticStyle[key]), key, scopedUnderParent).join('\n')
+      )
+      .join(',\n')
+
+    if (css) {
+      state.styles[id] = `const ${id} = css({${css}})`
+    }
   }
 }

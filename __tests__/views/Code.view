@@ -1,4 +1,7 @@
 Vertical
+backgroundColor red
 ref {$e => this.$e = $e}
 Text
 text props.text
+color props.color
+ref props.refText

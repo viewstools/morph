@@ -2,16 +2,16 @@ import * as BlockCapture from './react-dom/block-capture.js'
 import * as BlockGoTo from './react-dom/block-go-to.js'
 import * as BlockTeleport from './react-dom/block-teleport.js'
 import * as PropertiesClassName from './react-dom/properties-class-name.js'
+import { enter as BlockNameEnter } from './react-dom/block-name.js'
 import { enter as BlockTestIdEnter } from './react-dom/block-test-id.js'
+import { enter as PropertyRefEnter } from './react-dom/property-ref.js'
 import { leave as PropertiesStyleLeave } from './react-dom/properties-style.js'
-import getBlockName from './react-dom/get-block-name.js'
 import getStyleForProperty from './react-dom/get-style-for-property.js'
 import getStyles from './react-dom/get-styles.js'
 import getValueForProperty from './react-dom/get-value-for-property.js'
 import isValidPropertyForBlock from './react-dom/is-valid-property-for-block.js'
 import makeVisitors from './react/make-visitors.js'
 import maybeUsesRouter from './react-dom/maybe-uses-router.js'
-import maybeUsesStyleSheet from './react-dom/maybe-uses-style-sheet.js'
 import morph from './morph.js'
 import morphTests, { EMPTY_TEST } from './tests.js'
 import restrictedNames from './react-dom/restricted-names.js'
@@ -45,9 +45,9 @@ export default ({
   }
 
   const state = {
-    animatedA: false,
-    animatedButton: false,
     captures: [],
+    cssDynamic: false,
+    cssStatic: false,
     enableAnimated,
     defaultProps: false,
     debug,
@@ -55,6 +55,7 @@ export default ({
     fonts: [],
     images: [],
     inlineStyles,
+    isDynamic: false,
     isReactNative: false,
     name: finalName,
     remap: {},
@@ -62,7 +63,9 @@ export default ({
     styles: {},
     svgs: [],
     todos: [],
+    usedBlockNames: { [finalName]: 1 },
     uses: [],
+    styles: {},
     testIds: {},
     tests: morphTests({ view: tests, file }),
     use(block) {
@@ -94,17 +97,16 @@ export default ({
     BlockWhen,
     ...visitors
   } = makeVisitors({
-    getBlockName,
+    BlockNameEnter,
     getStyleForProperty,
     getValueForProperty,
     isValidPropertyForBlock,
     PropertiesClassName,
     PropertiesStyleLeave,
+    PropertyRefEnter,
   })
 
   visitors.Block = {
-    // TODO Capture*
-    // TODO List without wrapper?
     enter(node, parent, state) {
       ;[
         BlockWhen.enter,
@@ -130,7 +132,6 @@ export default ({
 
   morph(view, state, visitors)
 
-  maybeUsesStyleSheet(state)
   maybeUsesRouter(state)
 
   const finalGetImport = name => imports[name] || getImport(name)

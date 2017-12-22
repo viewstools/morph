@@ -1,11 +1,13 @@
 import {
   asScopedValue,
+  checkParentStem,
   getObjectAsString,
   getProp,
   getPropertiesAsObject,
   getStyleType,
   hasDefaultProp,
   isCode,
+  isList,
   isStyle,
   isToggle,
 } from '../utils.js'
@@ -15,23 +17,16 @@ import toPascalCase from 'to-pascal-case'
 import wrap from './wrap.js'
 
 export default ({
-  getBlockName,
+  BlockNameEnter,
   getStyleForProperty,
   getValueForProperty,
   isValidPropertyForBlock,
   PropertiesClassName,
   PropertiesStyleLeave,
+  PropertyRefEnter,
 }) => {
   const BlockName = {
-    enter(node, parent, state) {
-      const name = getBlockName(node, parent, state)
-      if (name === null) return this.skip()
-
-      node.name.finalValue = name
-      state.use(/Animated/.test(name) ? 'Animated' : name)
-
-      state.render.push(`<${name}`)
-    },
+    enter: BlockNameEnter,
     leave(node, parent, state) {
       if (
         (!parent && node.blocks) ||
@@ -129,8 +124,7 @@ export default ({
       if (when) {
         node.when = true
 
-        if (parent && parent.parent.name.value !== 'List')
-          state.render.push('{')
+        if (parent && !isList(parent.parent)) state.render.push('{')
 
         state.render.push(`${when.value.value} ? `)
       }
@@ -138,8 +132,7 @@ export default ({
     leave(node, parent, state) {
       if (node.when) {
         state.render.push(` : null`)
-        if (parent && parent.parent.name.value !== 'List')
-          state.render.push('}')
+        if (parent && !isList(parent.parent)) state.render.push('}')
       }
     },
   }
@@ -200,21 +193,21 @@ export default ({
 
   const BlocksList = {
     enter(node, parent, state) {
-      if (parent.name.value === 'List') {
-        let from = getProp(parent, 'from')
+      if (isList(parent)) {
+        const from = getProp(parent, 'from')
         if (!from) return
 
-        from = from.value.value
-
         state.render.push(
-          `{Array.isArray(${from}) && ${from}.map((item, index) => `
+          `{Array.isArray(${from.value.value}) && ${
+            from.value.value
+          }.map((item, index) => `
         )
 
         node.list.forEach(n => (n.isInList = true))
       }
     },
     leave(node, parent, state) {
-      if (parent.name.value === 'List') {
+      if (isList(parent)) {
         state.render.push(')}')
       }
     },
@@ -280,20 +273,16 @@ export default ({
       node.style = {
         dynamic: {
           base: {},
-          active: {},
           hover: {},
           focus: {},
-          activeHover: {},
           disabled: {},
           placeholder: {},
           print: {},
         },
         static: {
           base: {},
-          active: {},
           hover: {},
           focus: {},
-          activeHover: {},
           disabled: {},
           placeholder: {},
           print: {},
@@ -384,8 +373,14 @@ export default ({
             state.render.push(` ${k}=${safe(styleForProperty[k], node)}`)
           )
         } else {
+          const hasMatchingParent =
+            parent.parent.parent && node.isDynamic
+              ? checkParentStem(parent.parent.parent, getStyleType(node))
+              : false
           const target =
-            code || isScopedVal ? parent.style.dynamic : parent.style.static
+            code || isScopedVal || hasMatchingParent
+              ? parent.style.dynamic
+              : parent.style.static
           Object.assign(target[getStyleType(node)], styleForProperty)
         }
 
@@ -421,7 +416,6 @@ export default ({
     BlockWhen,
 
     Block: {
-      // TODO List without wrapper?
       enter(node, parent, state) {
         BlockWhen.enter.call(this, node, parent, state)
         BlockRoute.enter.call(this, node, parent, state)
@@ -440,11 +434,10 @@ export default ({
     Blocks: {
       enter(node, parent, state) {
         if (node.list.length > 0) state.render.push('>')
+
         BlocksList.enter.call(this, node, parent, state)
       },
-      leave(node, parent, state) {
-        BlocksList.leave.call(this, node, parent, state)
-      },
+      leave: BlocksList.leave,
     },
 
     Properties: {
@@ -478,6 +471,8 @@ export default ({
           (state.debug && key === 'ref')
         )
           return
+
+        if (PropertyRefEnter.call(this, node, parent, state)) return
 
         // if (PropertyData.enter.call(this, node, parent, state)) return
         if (PropertyStyle.enter.call(this, node, parent, state)) return
