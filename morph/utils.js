@@ -133,7 +133,7 @@ export const getAllowedStyleKeys = node => {
   } else if (node.action || getActionableParent(node)) {
     return ['base', 'focus', 'hover', 'disabled']
   }
-  return ['base']
+  return ['base', 'focus']
 }
 
 export const isList = node =>
