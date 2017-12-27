@@ -41,7 +41,92 @@ export default Action;
 }
 `;
 
+exports[`react-dom parses react-dom Action: react-dom parses react-dom Action debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import { css } from 'react-emotion';
+
+const Vertical_ho4tnl3 = css({ flexDirection: 'column' });
+
+const Action = props => {
+  return props.check ? (
+    <button
+      data-test-id={props['data-test-id'] || 'Vertical'}
+      onClick={props.clickMe}
+      disabled={props.isDisabled}
+      className={Vertical_ho4tnl3}
+    >
+      <span data-test-id=\\"Action.Text\\">click me</span>
+      {props.children}
+    </button>
+  ) : null;
+};
+
+export default Action;
+",
+  "fonts": Object {},
+  "props": Object {
+    "check": "string",
+    "clickMe": "function",
+    "isDisabled": "string",
+  },
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
 exports[`react-dom parses react-dom AnimatedButton 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import styled from 'react-emotion';
+
+const Vertical = styled('button')(
+  { flexDirection: 'column' },
+  ({ index, item, props }) => ({
+    opacity: props.opacity,
+  })
+);
+
+const AnimatedButton = props => {
+  return (
+    <Vertical
+      data-test-id={props['data-test-id'] || 'Vertical'}
+      onClick={props.onClick}
+      props={props}
+    >
+      <span data-test-id=\\"AnimatedButton.Text\\">hey</span>
+      {props.children}
+    </Vertical>
+  );
+};
+
+export default AnimatedButton;
+",
+  "fonts": Object {},
+  "props": Object {
+    "onClick": "function",
+    "opacity": "number",
+  },
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom AnimatedButton: react-dom parses react-dom AnimatedButton debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
@@ -124,7 +209,95 @@ export default AppRegionDrag;
 }
 `;
 
+exports[`react-dom parses react-dom AppRegionDrag: react-dom parses react-dom AppRegionDrag debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import { css } from 'react-emotion';
+
+const Vertical_h7d9pb0 = css({
+  flexDirection: 'column',
+  WebkitAppRegion: 'drag',
+  width: '92%',
+  marginTop: 'auto',
+});
+
+const AppRegionDrag = props => {
+  return (
+    <div
+      data-test-id={props['data-test-id'] || 'Vertical'}
+      className={Vertical_h7d9pb0}
+    >
+      {props.children}
+    </div>
+  );
+};
+
+export default AppRegionDrag;
+",
+  "fonts": Object {},
+  "props": Object {},
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
 exports[`react-dom parses react-dom BackgroundImage 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import styled, { css } from 'react-emotion';
+
+const Vertical_h1fqs4qx = css({
+  flexDirection: 'column',
+  backgroundImage: \\"url('https://viewsdx.com/image.jpg')\\",
+});
+const Horizontal = styled('div')(
+  {
+    flexDirection: 'row',
+    backgroundSize: 'contain',
+  },
+  ({ index, item, props }) => ({
+    backgroundImage: \`url(\${props.backgroundImage})\`,
+  })
+);
+
+const BackgroundImage = props => {
+  return (
+    <div
+      data-test-id={props['data-test-id'] || 'Vertical'}
+      className={Vertical_h1fqs4qx}
+    >
+      <Horizontal data-test-id=\\"BackgroundImage.Horizontal\\" props={props} />
+      {props.children}
+    </div>
+  );
+};
+
+export default BackgroundImage;
+",
+  "fonts": Object {},
+  "props": Object {
+    "backgroundImage": "string",
+  },
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom BackgroundImage: react-dom parses react-dom BackgroundImage debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
@@ -224,6 +397,57 @@ export default BoxShadow;
 }
 `;
 
+exports[`react-dom parses react-dom BoxShadow: react-dom parses react-dom BoxShadow debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import styled, { css } from 'react-emotion';
+
+const Vertical = styled('div')(
+  { flexDirection: 'column' },
+  ({ index, item, props }) => ({
+    boxShadow: \`10px 5px 2px \${props.color}\`,
+  })
+);
+const Vertical1 = styled('div')(
+  { flexDirection: 'column' },
+  ({ index, item, props }) => ({
+    boxShadow: \`10px 5px 10px \${props.color}\`,
+  })
+);
+const Vertical_hvytwz3 = css({
+  flexDirection: 'column',
+  boxShadow: '0px 8px 15px 0px rgba(0,0,0,0.1)',
+});
+
+const BoxShadow = props => {
+  return (
+    <Vertical data-test-id={props['data-test-id'] || 'Vertical'} props={props}>
+      <Vertical1 data-test-id=\\"BoxShadow.Vertical:1\\" props={props}>
+        <div data-test-id=\\"BoxShadow.Vertical:2\\" className={Vertical_hvytwz3} />
+      </Vertical1>
+      {props.children}
+    </Vertical>
+  );
+};
+
+export default BoxShadow;
+",
+  "fonts": Object {},
+  "props": Object {
+    "color": "string",
+  },
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
 exports[`react-dom parses react-dom Broken 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -258,7 +482,78 @@ export default Broken;
 }
 `;
 
+exports[`react-dom parses react-dom Broken: react-dom parses react-dom Broken debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import { css } from 'react-emotion';
+
+const Vertical_ho4tnl3 = css({ flexDirection: 'column' });
+
+const Broken = props => {
+  return (
+    <div
+      data-test-id={props['data-test-id'] || 'Vertical'}
+      className={Vertical_ho4tnl3}
+    >
+      {props.children}
+    </div>
+  );
+};
+
+export default Broken;
+",
+  "fonts": Object {},
+  "props": Object {},
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
 exports[`react-dom parses react-dom ClassName 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import { css } from 'react-emotion';
+
+const Vertical_hsjxc34 = css({
+  flexDirection: 'column',
+  backgroundColor: 'blue',
+});
+
+const ClassName = props => {
+  return (
+    <div
+      data-test-id={props['data-test-id'] || 'Vertical'}
+      className={\`hey \${Vertical_hsjxc34}\`}
+    >
+      {props.children}
+    </div>
+  );
+};
+
+export default ClassName;
+",
+  "fonts": Object {},
+  "props": Object {},
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom ClassName: react-dom parses react-dom ClassName debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
@@ -343,7 +638,97 @@ export default Code;
 }
 `;
 
+exports[`react-dom parses react-dom Code: react-dom parses react-dom Code debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import styled, { css } from 'react-emotion';
+
+const Vertical_h241iip = css({
+  flexDirection: 'column',
+  backgroundColor: 'red',
+});
+const Text = styled('span')(({ index, item, props }) => ({
+  color: props.color,
+}));
+
+const Code = props => {
+  return (
+    <div
+      data-test-id={props['data-test-id'] || 'Vertical'}
+      className={Vertical_h241iip}
+    >
+      <Text data-test-id=\\"Code.Text\\" props={props}>
+        {props.text}
+      </Text>
+      {props.children}
+    </div>
+  );
+};
+
+export default Code;
+",
+  "fonts": Object {},
+  "props": Object {
+    "color": "string",
+    "refText": "string",
+    "text": "string",
+  },
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
 exports[`react-dom parses react-dom DynamicStylesApplyToBasicBlocksOnly 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import SomeThing from './SomeThing.view.js';
+import styled from 'react-emotion';
+
+const Vertical = styled('div')(
+  { flexDirection: 'column' },
+  ({ index, item, props }) => ({
+    height: props.height,
+  })
+);
+
+const DynamicStylesApplyToBasicBlocksOnly = props => {
+  return (
+    <Vertical data-test-id={props['data-test-id'] || 'Vertical'} props={props}>
+      <SomeThing
+        data-test-id=\\"DynamicStylesApplyToBasicBlocksOnly.OnTop\\"
+        height={props.height}
+      />
+      {props.children}
+    </Vertical>
+  );
+};
+
+export default DynamicStylesApplyToBasicBlocksOnly;
+",
+  "fonts": Object {},
+  "props": Object {
+    "height": "number",
+  },
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom DynamicStylesApplyToBasicBlocksOnly: react-dom parses react-dom DynamicStylesApplyToBasicBlocksOnly debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
@@ -466,7 +851,130 @@ export default Form;
 }
 `;
 
+exports[`react-dom parses react-dom Form: react-dom parses react-dom Form debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import { css } from 'react-emotion';
+
+const Form_ho4tnl3 = css({ flexDirection: 'column' });
+const Button_ho4tnl3 = css({ flexDirection: 'column' });
+
+class Form extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const { props, state } = this;
+
+    return (
+      <form
+        data-test-id={props['data-test-id'] || 'Form'}
+        onSubmit={() => props.onSubmit(state)}
+        className={Form_ho4tnl3}
+      >
+        <input
+          type=\\"text\\"
+          onChange={event => this.setState({ name: event.target.value })}
+          value={state.name}
+          tabIndex={-1}
+          data-test-id=\\"Form.Name\\"
+          className=\\"mousetrap\\"
+        />
+        <input
+          type=\\"text\\"
+          onChange={event => this.setState({ surname: event.target.value })}
+          value={state.surname}
+          tabIndex={-1}
+          data-test-id=\\"Form.Surname\\"
+        />
+        <input
+          type=\\"password\\"
+          onChange={event => this.setState({ password: event.target.value })}
+          value={state.password}
+          tabIndex={-1}
+          data-test-id=\\"Form.Password\\"
+        />
+        <input
+          type=\\"email\\"
+          onChange={event => this.setState({ email: event.target.value })}
+          value={state.email}
+          tabIndex={-1}
+          data-test-id=\\"Form.Email\\"
+          defaultValue=\\"morph@viewsdx.com\\"
+          className=\\"mousetrap\\"
+        />
+        <button
+          data-test-id=\\"Form.Button\\"
+          onClick={() => props.onSubmit(state)}
+          className={Button_ho4tnl3}
+        >
+          <span data-test-id=\\"Form.Text\\">Send!</span>
+        </button>
+        {props.children}
+      </form>
+    );
+  }
+}
+
+export default Form;
+",
+  "fonts": Object {},
+  "props": Object {
+    "onSubmit": "function",
+  },
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
 exports[`react-dom parses react-dom GoTo 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import { css } from 'react-emotion';
+
+const Vertical_ho4tnl3 = css({ flexDirection: 'column' });
+
+const GoTo = props => {
+  return (
+    <a
+      href=\\"https://viewsdx.com\\"
+      rel=\\"noopener noreferrer\\"
+      target=\\"_blank\\"
+      data-test-id={props['data-test-id'] || 'Vertical'}
+      className={Vertical_ho4tnl3}
+    >
+      <span data-test-id=\\"GoTo.Text\\">Go to ViewsDX website!</span>
+      {props.children}
+    </a>
+  );
+};
+
+export default GoTo;
+",
+  "fonts": Object {},
+  "props": Object {},
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom GoTo: react-dom parses react-dom GoTo debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
@@ -511,10 +1019,73 @@ import React from 'react';
 import styled from 'react-emotion';
 
 const Button = styled('button')(
+  { flexDirection: 'column' },
+  ({ index, item, props }) => ({
+    backgroundColor: props.backgroundColor,
+    '&:hover, &.hover': {
+      backgroundColor: props.backgroundColorHover,
+    },
+  })
+);
+const Text = styled('span')(
   {
-    flexDirection: 'column',
-    '&:hover, &.hover': {},
+    color: 'white',
+    [\`\${Button}:hover &, \${Button}.hover &\`]: {
+      color: 'black',
+    },
   },
+  ({ index, item, props }) => ({
+    fontSize: props.fontSize,
+    [\`\${Button}:hover &, \${Button}.hover &\`]: {
+      fontSize: props.fontSizeHover,
+    },
+  })
+);
+
+const Hover = props => {
+  return (
+    <Button
+      data-test-id={props['data-test-id'] || 'Button'}
+      onClick={props.onClick}
+      props={props}
+    >
+      <Text data-test-id=\\"Hover.Text\\" props={props}>
+        Hey!
+      </Text>
+      {props.children}
+    </Button>
+  );
+};
+
+export default Hover;
+",
+  "fonts": Object {},
+  "props": Object {
+    "backgroundColor": "string",
+    "backgroundColorHover": "string",
+    "fontSize": "number",
+    "fontSizeHover": "number",
+    "onClick": "function",
+  },
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom Hover: react-dom parses react-dom Hover debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import styled from 'react-emotion';
+
+const Button = styled('button')(
+  { flexDirection: 'column' },
   ({ index, item, props }) => ({
     backgroundColor: props.backgroundColor,
     '&:hover, &.hover': {
@@ -633,7 +1204,91 @@ export default HoverProxy;
 }
 `;
 
+exports[`react-dom parses react-dom HoverProxy: react-dom parses react-dom HoverProxy debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import { css } from 'react-emotion';
+
+const Button_hhxd3nw = css({
+  flexDirection: 'column',
+  backgroundColor: 'black',
+  '&:hover, &.hover': {
+    backgroundColor: 'white',
+  },
+});
+const Text_h1uuiss4 = css({
+  color: 'white',
+  [\`.\${Button_hhxd3nw}:hover &, .\${Button_hhxd3nw}.hover &\`]: {
+    color: 'black',
+  },
+});
+
+const HoverProxy = props => {
+  const childrenArray = React.Children.toArray(props.children);
+  return (
+    <button
+      data-test-id={props['data-test-id'] || 'Button'}
+      onClick={props.onClick}
+      className={Button_hhxd3nw}
+    >
+      {props.childrenProxyMap &&
+      childrenArray[props.childrenProxyMap['props.icon']]
+        ? React.cloneElement(
+            childrenArray[props.childrenProxyMap['props.icon']],
+            { fill: 'white', fillHover: 'black' }
+          )
+        : null}
+      <Text data-test-id=\\"HoverProxy.Text\\" className={Text_h1uuiss4}>
+        Hey!
+      </Text>
+    </button>
+  );
+};
+
+export default HoverProxy;
+",
+  "fonts": Object {},
+  "props": Object {
+    "icon": "string",
+    "onClick": "function",
+  },
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
 exports[`react-dom parses react-dom JustText 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+
+const JustText = props => {
+  return <span data-test-id={props['data-test-id'] || 'Text'}>hey!</span>;
+};
+
+export default JustText;
+",
+  "fonts": Object {},
+  "props": Object {},
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom JustText: react-dom parses react-dom JustText debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
@@ -721,7 +1376,127 @@ export default ListOfButtons;
 }
 `;
 
+exports[`react-dom parses react-dom ListOfButtons: react-dom parses react-dom ListOfButtons debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import styled, { css } from 'react-emotion';
+
+const List_ho4tnl3 = css({ flexDirection: 'column' });
+const Vertical_ho4tnl3 = css({ flexDirection: 'column' });
+const Text = styled('span')(({ index, item, props }) => ({
+  color: item.color,
+}));
+
+const ListOfButtons = props => {
+  return (
+    <div
+      data-test-id={props['data-test-id'] || 'List'}
+      className={List_ho4tnl3}
+    >
+      {Array.isArray(props.list) &&
+        props.list.map((item, index) => (
+          <button
+            data-test-id=\\"ListOfButtons.Vertical\\"
+            onClick={props.onClick}
+            key={index}
+            className={Vertical_ho4tnl3}
+          >
+            <Text
+              data-test-id=\\"ListOfButtons.Text\\"
+              props={props}
+              index={index}
+              item={item}
+            >
+              {index}
+            </Text>
+          </button>
+        ))}
+      {props.children}
+    </div>
+  );
+};
+
+export default ListOfButtons;
+",
+  "fonts": Object {},
+  "props": Object {
+    "list": Object {
+      "shape": Object {
+        "color": "string",
+      },
+      "type": "array",
+    },
+    "onClick": "function",
+  },
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
 exports[`react-dom parses react-dom ListOfSomething 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import styled, { css } from 'react-emotion';
+
+const List_ho4tnl3 = css({ flexDirection: 'column' });
+const Text = styled('span')(({ index, item, props }) => ({
+  color: item.color,
+}));
+
+const ListOfSomething = props => {
+  return (
+    <div
+      data-test-id={props['data-test-id'] || 'List'}
+      className={List_ho4tnl3}
+    >
+      {Array.isArray(props.list) &&
+        props.list.map((item, index) => (
+          <Text
+            data-test-id=\\"ListOfSomething.Text\\"
+            props={props}
+            index={index}
+            item={item}
+            key={index}
+          >
+            {index}
+          </Text>
+        ))}
+      {props.children}
+    </div>
+  );
+};
+
+export default ListOfSomething;
+",
+  "fonts": Object {},
+  "props": Object {
+    "list": Object {
+      "shape": Object {
+        "color": "string",
+      },
+      "type": "array",
+    },
+  },
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom ListOfSomething: react-dom parses react-dom ListOfSomething debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
@@ -850,7 +1625,122 @@ export default ListOfSomethingComplex;
 }
 `;
 
+exports[`react-dom parses react-dom ListOfSomethingComplex: react-dom parses react-dom ListOfSomethingComplex debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import styled, { css } from 'react-emotion';
+
+const List_ho4tnl3 = css({ flexDirection: 'column' });
+const Vertical = styled('div')(
+  {
+    flexDirection: 'column',
+    border: '1px solid red',
+  },
+  ({ index, item, props }) => ({
+    backgroundColor: item.backgroundColor,
+  })
+);
+const Text = styled('span')(({ index, item, props }) => ({
+  color: item.color,
+}));
+
+const ListOfSomethingComplex = props => {
+  return (
+    <div
+      data-test-id={props['data-test-id'] || 'List'}
+      className={List_ho4tnl3}
+    >
+      {Array.isArray(props.list) &&
+        props.list.map((item, index) => (
+          <Vertical
+            data-test-id=\\"ListOfSomethingComplex.Vertical\\"
+            props={props}
+            index={index}
+            item={item}
+            key={index}
+          >
+            <Text
+              data-test-id=\\"ListOfSomethingComplex.Text\\"
+              props={props}
+              index={index}
+              item={item}
+            >
+              {index}
+            </Text>
+          </Vertical>
+        ))}
+      {props.children}
+    </div>
+  );
+};
+
+export default ListOfSomethingComplex;
+",
+  "fonts": Object {},
+  "props": Object {
+    "list": Object {
+      "shape": Object {
+        "backgroundColor": "string",
+        "color": "string",
+      },
+      "type": "array",
+    },
+  },
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
 exports[`react-dom parses react-dom ListWithKey 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import { css } from 'react-emotion';
+
+const List_ho4tnl3 = css({ flexDirection: 'column' });
+
+const ListWithKey = props => {
+  return (
+    <div
+      data-test-id={props['data-test-id'] || 'List'}
+      className={List_ho4tnl3}
+    >
+      {Array.isArray(props.list) &&
+        props.list.map((item, index) => (
+          <span data-test-id=\\"ListWithKey.Text\\" key={item}>
+            {item}
+          </span>
+        ))}
+      {props.children}
+    </div>
+  );
+};
+
+export default ListWithKey;
+",
+  "fonts": Object {},
+  "props": Object {
+    "list": "string",
+  },
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom ListWithKey: react-dom parses react-dom ListWithKey debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
@@ -922,7 +1812,78 @@ export default LocalImage;
 }
 `;
 
+exports[`react-dom parses react-dom LocalImage: react-dom parses react-dom LocalImage debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import chopperJpg from './chopper.jpg';
+
+const LocalImage = props => {
+  return (
+    <img
+      data-test-id={props['data-test-id'] || 'LocalImage'}
+      src={chopperJpg}
+    />
+  );
+};
+
+export default LocalImage;
+",
+  "fonts": Object {},
+  "props": Object {},
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
 exports[`react-dom parses react-dom LocalImageSvg 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import chopperSvg from './chopper.svg';
+import styled from 'react-emotion';
+
+const LocalImageSvg1 = styled('img')(
+  { width: 50 },
+  ({ index, item, props }) => ({
+    height: props.height,
+  })
+);
+
+const LocalImageSvg = props => {
+  return (
+    <LocalImageSvg1
+      data-test-id={props['data-test-id'] || 'LocalImageSvg'}
+      src={chopperSvg}
+      props={props}
+    />
+  );
+};
+
+export default LocalImageSvg;
+",
+  "fonts": Object {},
+  "props": Object {
+    "height": "number",
+  },
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom LocalImageSvg: react-dom parses react-dom LocalImageSvg debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
@@ -994,6 +1955,37 @@ export default LocalOrRemoteImageWhenCode;
 }
 `;
 
+exports[`react-dom parses react-dom LocalOrRemoteImageWhenCode: react-dom parses react-dom LocalOrRemoteImageWhenCode debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+
+const LocalOrRemoteImageWhenCode = props => {
+  return (
+    <img
+      data-test-id={props['data-test-id'] || 'LocalOrRemoteImageWhenCode'}
+      src={require(props.source)}
+    />
+  );
+};
+
+export default LocalOrRemoteImageWhenCode;
+",
+  "fonts": Object {},
+  "props": Object {
+    "source": "string",
+  },
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
 exports[`react-dom parses react-dom NameIsType 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -1018,7 +2010,84 @@ export default NameIsType;
 }
 `;
 
+exports[`react-dom parses react-dom NameIsType: react-dom parses react-dom NameIsType debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+
+const NameIsType = props => {
+  return <span data-test-id={props['data-test-id'] || 'Texto'}>iam</span>;
+};
+
+export default NameIsType;
+",
+  "fonts": Object {},
+  "props": Object {},
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
 exports[`react-dom parses react-dom NestedRoutes 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import { withRouter } from 'react-router';
+import { Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+import Topic from './Topic.view.js';
+import { css } from 'react-emotion';
+
+const Topics_ho4tnl3 = css({ flexDirection: 'column' });
+const Link_ho4tnl3 = css({ flexDirection: 'column' });
+
+const NestedRoutes = props => {
+  return (
+    <div
+      data-test-id={props['data-test-id'] || 'Topics'}
+      className={Topics_ho4tnl3}
+    >
+      <span data-test-id=\\"NestedRoutes.Text\\">topics</span>
+      <Link
+        to={\`\${props.match.url === '/' ? '' : props.match.url}/rendering\`}
+        data-test-id=\\"NestedRoutes.Link\\"
+        className={Link_ho4tnl3}
+      >
+        <span data-test-id=\\"NestedRoutes.Text:1\\">Rendering with React</span>
+      </Link>
+      <Route
+        path=\\":topic\\"
+        render={routeProps => (
+          <Topic data-test-id=\\"NestedRoutes.Topic\\" {...routeProps} />
+        )}
+      />
+      {props.children}
+    </div>
+  );
+};
+
+export default withRouter(NestedRoutes);
+",
+  "fonts": Object {},
+  "props": Object {},
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom NestedRoutes: react-dom parses react-dom NestedRoutes debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
@@ -1109,7 +2178,92 @@ export default Print;
 }
 `;
 
+exports[`react-dom parses react-dom Print: react-dom parses react-dom Print debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import { css } from 'react-emotion';
+
+const Vertical_ho4tnl3 = css({ flexDirection: 'column' });
+
+const Print = props => {
+  return (
+    <div
+      data-test-id={props['data-test-id'] || 'Vertical'}
+      className={Vertical_ho4tnl3}
+    >
+      <span data-test-id=\\"Print.Text\\" className={Text_h1d06m5g}>
+        not in print
+      </span>
+      <span data-test-id=\\"Print.Text:1\\">hey</span>
+      {props.children}
+    </div>
+  );
+};
+
+export default Print;
+",
+  "fonts": Object {},
+  "props": Object {},
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
 exports[`react-dom parses react-dom ProxyTest 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import { css } from 'react-emotion';
+
+const Vertical_ho4tnl3 = css({ flexDirection: 'column' });
+const Horizontal_h1qq1i2q = css({ flexDirection: 'row' });
+
+const ProxyTest = props => {
+  const childrenArray = React.Children.toArray(props.children);
+  return (
+    <div
+      data-test-id={props['data-test-id'] || 'Vertical'}
+      className={Vertical_ho4tnl3}
+    >
+      <div data-test-id=\\"ProxyTest.Horizontal\\" className={Horizontal_h1qq1i2q}>
+        {props.bla && childrenArray[props.childrenProxyMap['Something']]
+          ? React.cloneElement(
+              childrenArray[props.childrenProxyMap['Something']],
+              { onClick: props.onClickRemapped }
+            )
+          : null}
+      </div>
+      {props.childrenProxyMap && childrenArray[props.childrenProxyMap['View1']]}
+    </div>
+  );
+};
+
+export default ProxyTest;
+",
+  "fonts": Object {},
+  "props": Object {
+    "bla": "string",
+    "onClickRemapped": "function",
+  },
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom ProxyTest: react-dom parses react-dom ProxyTest debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
@@ -1197,7 +2351,85 @@ export default Scope;
 }
 `;
 
+exports[`react-dom parses react-dom Scope: react-dom parses react-dom Scope debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import styled from 'react-emotion';
+
+const Text = styled('span')(({ index, item, props }) => ({
+  color: props.somethingGreen
+    ? 'rgb(0,255,0)'
+    : props.whatMakesBlue ? 'rgb(0,0,255)' : 'red',
+}));
+
+const Scope = props => {
+  return (
+    <Text data-test-id={props['data-test-id'] || 'Text'} props={props}>
+      {props.somethingGreen
+        ? '2 green'
+        : props.whatMakesBlue ? props.blue : '1 red'}
+    </Text>
+  );
+};
+
+export default Scope;
+",
+  "fonts": Object {},
+  "props": Object {
+    "blue": "string",
+    "somethingGreen": "string",
+    "whatMakesBlue": "string",
+  },
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
 exports[`react-dom parses react-dom ScopeOnCustomView 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import Button from './Button.view.js';
+
+const ScopeOnCustomView = props => {
+  return (
+    <Button
+      data-test-id={props['data-test-id'] || 'Button'}
+      label={props.a ? 'ho' : props.b ? 'this is b' : 'hey'}
+      another={props.a ? 1 : 0}
+      more={props.a ? props.different : props.more}
+    >
+      {props.children}
+    </Button>
+  );
+};
+
+export default ScopeOnCustomView;
+",
+  "fonts": Object {},
+  "props": Object {
+    "different": "string",
+    "more": "string",
+  },
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom ScopeOnCustomView: react-dom parses react-dom ScopeOnCustomView debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
@@ -1247,7 +2479,6 @@ const ScopePopup = props => {
   return (
     <div
       data-test-id={props['data-test-id'] || 'Popup'}
-      animate=\\"pop\\"
       className={Popup_ho4tnl3}
     >
       <button
@@ -1270,7 +2501,58 @@ export default ScopePopup;
 ",
   "fonts": Object {},
   "props": Object {
-    "isShown": "string",
+    "onClickBlue": "function",
+    "onClickGreen": "function",
+    "somethingGreen": "string",
+    "toggle": "function",
+    "whatMakesBlue": "string",
+  },
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom ScopePopup: react-dom parses react-dom ScopePopup debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import { css } from 'react-emotion';
+
+const Popup_ho4tnl3 = css({ flexDirection: 'column' });
+const Toggle_ho4tnl3 = css({ flexDirection: 'column' });
+
+const ScopePopup = props => {
+  return (
+    <div
+      data-test-id={props['data-test-id'] || 'Popup'}
+      className={Popup_ho4tnl3}
+    >
+      <button
+        data-test-id=\\"ScopePopup.Toggle\\"
+        onClick={
+          props.somethingGreen
+            ? props.onClickGreen
+            : props.whatMakesBlue ? props.onClickBlue : props.toggle
+        }
+        className={Toggle_ho4tnl3}
+      >
+        <span data-test-id=\\"ScopePopup.Text\\">toggle popup</span>
+      </button>
+      {props.children}
+    </div>
+  );
+};
+
+export default ScopePopup;
+",
+  "fonts": Object {},
+  "props": Object {
     "onClickBlue": "function",
     "onClickGreen": "function",
     "somethingGreen": "string",
@@ -1292,10 +2574,16 @@ exports[`react-dom parses react-dom ScopePopup2 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { css } from 'react-emotion';
+import styled, { css } from 'react-emotion';
 
 const Popup_ho4tnl3 = css({ flexDirection: 'column' });
 const Toggle_ho4tnl3 = css({ flexDirection: 'column' });
+const Content = styled('div')(
+  { flexDirection: 'column' },
+  ({ index, item, props }) => ({
+    opacity: props.isShown ? 1 : props.isSuperVisible ? 3 : 0,
+  })
+);
 
 const ScopePopup2 = props => {
   return (
@@ -1310,6 +2598,68 @@ const ScopePopup2 = props => {
       >
         <span data-test-id=\\"ScopePopup2.Text\\">toggle popup</span>
       </button>
+      <Content
+        data-test-id=\\"ScopePopup2.Content\\"
+        scale={props.isShown ? 1 : props.isSuperVisible ? 2 : 0}
+        props={props}
+      />
+      {props.children}
+    </div>
+  );
+};
+
+export default ScopePopup2;
+",
+  "fonts": Object {},
+  "props": Object {
+    "isShown": "string",
+    "isSuperVisible": "string",
+    "toggle": "function",
+  },
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom ScopePopup2: react-dom parses react-dom ScopePopup2 debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import styled, { css } from 'react-emotion';
+
+const Popup_ho4tnl3 = css({ flexDirection: 'column' });
+const Toggle_ho4tnl3 = css({ flexDirection: 'column' });
+const Content = styled('div')(
+  { flexDirection: 'column' },
+  ({ index, item, props }) => ({
+    opacity: props.isShown ? 1 : props.isSuperVisible ? 3 : 0,
+  })
+);
+
+const ScopePopup2 = props => {
+  return (
+    <div
+      data-test-id={props['data-test-id'] || 'Popup'}
+      className={Popup_ho4tnl3}
+    >
+      <button
+        data-test-id=\\"ScopePopup2.Toggle\\"
+        onClick={props.toggle}
+        className={Toggle_ho4tnl3}
+      >
+        <span data-test-id=\\"ScopePopup2.Text\\">toggle popup</span>
+      </button>
+      <Content
+        data-test-id=\\"ScopePopup2.Content\\"
+        scale={props.isShown ? 1 : props.isSuperVisible ? 2 : 0}
+        props={props}
+      />
       {props.children}
     </div>
   );
@@ -1488,6 +2838,43 @@ export default Teleport;
 }
 `;
 
+exports[`react-dom parses react-dom Teleport: react-dom parses react-dom Teleport debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { css } from 'react-emotion';
+
+const Horizontal_h1qq1i2q = css({ flexDirection: 'row' });
+
+const Teleport = props => {
+  return (
+    <Link
+      to=\\"..\\"
+      data-test-id={props['data-test-id'] || 'Horizontal'}
+      className={Horizontal_h1qq1i2q}
+    >
+      <span data-test-id=\\"Teleport.Text\\">go back</span>
+      {props.children}
+    </Link>
+  );
+};
+
+export default Teleport;
+",
+  "fonts": Object {},
+  "props": Object {},
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
 exports[`react-dom parses react-dom Test 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -1523,7 +2910,78 @@ export default Test;
 }
 `;
 
+exports[`react-dom parses react-dom Test: react-dom parses react-dom Test debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import Custom from './Custom.view.js';
+
+const Test = props => {
+  return (
+    <Custom
+      data-test-id={props['data-test-id'] || 'Custom'}
+      stuff=\\"eqweqw\\"
+      childrenProxyMap={{ Something: 0, Another: 1 }}
+    >
+      <span data-test-id=\\"Test.Something\\">v1vh1t1</span>
+      <span data-test-id=\\"Test.Another\\">inside custom</span>
+      {props.children}
+    </Custom>
+  );
+};
+
+export default Test;
+",
+  "fonts": Object {},
+  "props": Object {},
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
 exports[`react-dom parses react-dom TestIds 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import External from './External.view.js';
+import { css } from 'react-emotion';
+
+const App_ho4tnl3 = css({ flexDirection: 'column' });
+
+const TestIds = props => {
+  return (
+    <div data-test-id={props['data-test-id'] || 'App'} className={App_ho4tnl3}>
+      <span data-test-id=\\"TestIds.Text\\">1</span>
+      <span data-test-id=\\"TestIds.Text:1\\">2</span>
+      <External data-test-id=\\"TestIds.External\\" />
+      <span data-test-id=\\"TestIds.Name\\">name</span>
+      {props.children}
+    </div>
+  );
+};
+
+export default TestIds;
+",
+  "fonts": Object {},
+  "props": Object {},
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom TestIds: react-dom parses react-dom TestIds debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
@@ -1599,7 +3057,71 @@ export default TextInterpolation;
 }
 `;
 
+exports[`react-dom parses react-dom TextInterpolation: react-dom parses react-dom TextInterpolation debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import { css } from 'react-emotion';
+
+const Vertical_ho4tnl3 = css({ flexDirection: 'column' });
+
+const TextInterpolation = props => {
+  return (
+    <div
+      data-test-id={props['data-test-id'] || 'Vertical'}
+      className={Vertical_ho4tnl3}
+    >
+      <span data-test-id=\\"TextInterpolation.Text\\">{\`\${props.name} test\`}</span>
+      <span data-test-id=\\"TextInterpolation.Text:1\\">
+        {props.name ? \`\${props.name} here\` : 'other'}
+      </span>
+      {props.children}
+    </div>
+  );
+};
+
+export default TextInterpolation;
+",
+  "fonts": Object {},
+  "props": Object {
+    "name": "string",
+  },
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
 exports[`react-dom parses react-dom Toggle 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+
+const Toggle = props => {
+  return <span data-test-id={props['data-test-id'] || 'Text'}>NOPE</span>;
+};
+
+export default Toggle;
+",
+  "fonts": Object {},
+  "props": Object {},
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom Toggle: react-dom parses react-dom Toggle debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
@@ -1681,6 +3203,64 @@ export default UseCaptureEmail;
 }
 `;
 
+exports[`react-dom parses react-dom UseCaptureEmail: react-dom parses react-dom UseCaptureEmail debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import { css } from 'react-emotion';
+
+const Email_h1by7qdg = css({
+  border: '1px solid black',
+  color: 'red',
+  '&:focus, &.focus': {
+    color: 'purple',
+  },
+  '&:placeholder, &.placeholder': {
+    color: 'blue',
+  },
+});
+
+class UseCaptureEmail extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const { props, state } = this;
+
+    return (
+      <input
+        type=\\"email\\"
+        onChange={event => this.setState({ email: event.target.value })}
+        value={state.email}
+        tabIndex={-1}
+        data-test-id={props['data-test-id'] || 'Email'}
+        defaultValue=\\"hey this is a default value\\"
+        onSubmit={props.onSubmit}
+        className={\`mousetrap \${Email_h1by7qdg}\`}
+      />
+    );
+  }
+}
+
+export default UseCaptureEmail;
+",
+  "fonts": Object {},
+  "props": Object {
+    "onSubmit": "function",
+  },
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
 exports[`react-dom parses react-dom UseCaptureFile 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -1699,6 +3279,46 @@ class UseCaptureFile extends React.Component {
       <input
         onChange={event => this.setState({ file: event.target.value })}
         value={state.file}
+        data-test-id={props['data-test-id'] || 'File'}
+      />
+    );
+  }
+}
+
+export default UseCaptureFile;
+",
+  "fonts": Object {},
+  "props": Object {},
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom UseCaptureFile: react-dom parses react-dom UseCaptureFile debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+
+class UseCaptureFile extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const { props, state } = this;
+
+    return (
+      <input
+        onChange={event => this.setState({ file: event.target.value })}
+        value={state.file}
+        tabIndex={-1}
         data-test-id={props['data-test-id'] || 'File'}
       />
     );
@@ -1760,6 +3380,47 @@ export default UseCaptureNumber;
 }
 `;
 
+exports[`react-dom parses react-dom UseCaptureNumber: react-dom parses react-dom UseCaptureNumber debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+
+class UseCaptureNumber extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const { props, state } = this;
+
+    return (
+      <input
+        type=\\"number\\"
+        onChange={event => this.setState({ number: event.target.value })}
+        value={state.number}
+        tabIndex={-1}
+        data-test-id={props['data-test-id'] || 'Number'}
+      />
+    );
+  }
+}
+
+export default UseCaptureNumber;
+",
+  "fonts": Object {},
+  "props": Object {},
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
 exports[`react-dom parses react-dom UseCapturePhone 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -1779,6 +3440,47 @@ class UseCapturePhone extends React.Component {
         type=\\"tel\\"
         onChange={event => this.setState({ phone: event.target.value })}
         value={state.phone}
+        data-test-id={props['data-test-id'] || 'Phone'}
+      />
+    );
+  }
+}
+
+export default UseCapturePhone;
+",
+  "fonts": Object {},
+  "props": Object {},
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom UseCapturePhone: react-dom parses react-dom UseCapturePhone debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+
+class UseCapturePhone extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const { props, state } = this;
+
+    return (
+      <input
+        type=\\"tel\\"
+        onChange={event => this.setState({ phone: event.target.value })}
+        value={state.phone}
+        tabIndex={-1}
         data-test-id={props['data-test-id'] || 'Phone'}
       />
     );
@@ -1840,6 +3542,47 @@ export default UseCaptureSecure;
 }
 `;
 
+exports[`react-dom parses react-dom UseCaptureSecure: react-dom parses react-dom UseCaptureSecure debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+
+class UseCaptureSecure extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const { props, state } = this;
+
+    return (
+      <input
+        type=\\"password\\"
+        onChange={event => this.setState({ secure: event.target.value })}
+        value={state.secure}
+        tabIndex={-1}
+        data-test-id={props['data-test-id'] || 'Secure'}
+      />
+    );
+  }
+}
+
+export default UseCaptureSecure;
+",
+  "fonts": Object {},
+  "props": Object {},
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
 exports[`react-dom parses react-dom UseCaptureText 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -1859,6 +3602,47 @@ class UseCaptureText extends React.Component {
         type=\\"text\\"
         onChange={event => this.setState({ text: event.target.value })}
         value={state.text}
+        data-test-id={props['data-test-id'] || 'Text'}
+      />
+    );
+  }
+}
+
+export default UseCaptureText;
+",
+  "fonts": Object {},
+  "props": Object {},
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom UseCaptureText: react-dom parses react-dom UseCaptureText debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+
+class UseCaptureText extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const { props, state } = this;
+
+    return (
+      <input
+        type=\\"text\\"
+        onChange={event => this.setState({ text: event.target.value })}
+        value={state.text}
+        tabIndex={-1}
         data-test-id={props['data-test-id'] || 'Text'}
       />
     );
@@ -1921,6 +3705,48 @@ export default UseCaptureTextArea;
 }
 `;
 
+exports[`react-dom parses react-dom UseCaptureTextArea: react-dom parses react-dom UseCaptureTextArea debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+
+class UseCaptureTextArea extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const { props, state } = this;
+
+    return (
+      <textarea
+        onChange={event =>
+          this.setState({ captureTextArea: event.target.value })
+        }
+        value={state.captureTextArea}
+        tabIndex={-1}
+        data-test-id={props['data-test-id'] || 'CaptureTextArea'}
+      />
+    );
+  }
+}
+
+export default UseCaptureTextArea;
+",
+  "fonts": Object {},
+  "props": Object {},
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
 exports[`react-dom parses react-dom UseCaptureTextManagedFromOutside 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -1940,6 +3766,48 @@ class UseCaptureTextManagedFromOutside extends React.Component {
         type=\\"text\\"
         data-test-id={props['data-test-id'] || 'CaptureText'}
         value={props.external}
+      />
+    );
+  }
+}
+
+export default UseCaptureTextManagedFromOutside;
+",
+  "fonts": Object {},
+  "props": Object {
+    "external": "string",
+  },
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom UseCaptureTextManagedFromOutside: react-dom parses react-dom UseCaptureTextManagedFromOutside debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+
+class UseCaptureTextManagedFromOutside extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const { props, state } = this;
+
+    return (
+      <input
+        type=\\"text\\"
+        data-test-id={props['data-test-id'] || 'CaptureText'}
+        value={props.external}
+        className=\\"mousetrap\\"
       />
     );
   }
@@ -1999,7 +3867,75 @@ export default UseHorizontal;
 }
 `;
 
+exports[`react-dom parses react-dom UseHorizontal: react-dom parses react-dom UseHorizontal debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import { css } from 'react-emotion';
+
+const Horizontal_hud64j7 = css({
+  flexDirection: 'row',
+  border: '1px solid red',
+});
+
+const UseHorizontal = props => {
+  return (
+    <div
+      data-test-id={props['data-test-id'] || 'Horizontal'}
+      className={Horizontal_hud64j7}
+    >
+      {props.children}
+    </div>
+  );
+};
+
+export default UseHorizontal;
+",
+  "fonts": Object {},
+  "props": Object {},
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
 exports[`react-dom parses react-dom UseImage 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+
+const UseImage = props => {
+  return (
+    <img
+      data-test-id={props['data-test-id'] || 'Image'}
+      src=\\"https://views.tools/rocks.jpg\\"
+    />
+  );
+};
+
+export default UseImage;
+",
+  "fonts": Object {},
+  "props": Object {
+    "another": "string",
+  },
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom UseImage: react-dom parses react-dom UseImage debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
@@ -2068,7 +4004,90 @@ export default UseOfProxy;
 }
 `;
 
+exports[`react-dom parses react-dom UseOfProxy: react-dom parses react-dom UseOfProxy debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import Button from './Button.view.js';
+import { css } from 'react-emotion';
+
+const App_h1qq1i2q = css({ flexDirection: 'row' });
+
+const UseOfProxy = props => {
+  return (
+    <div data-test-id={props['data-test-id'] || 'App'} className={App_h1qq1i2q}>
+      <Button
+        data-test-id=\\"UseOfProxy.Button\\"
+        color=\\"red\\"
+        icon=\\"MyIcon\\"
+        text=\\"I'm a button!\\"
+      />
+      {props.children}
+    </div>
+  );
+};
+
+export default UseOfProxy;
+",
+  "fonts": Object {},
+  "props": Object {},
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
 exports[`react-dom parses react-dom UseProxy 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import { css } from 'react-emotion';
+
+const Button_h1qq1i2q = css({ flexDirection: 'row' });
+
+const UseProxy = props => {
+  const childrenArray = React.Children.toArray(props.children);
+  return (
+    <div
+      data-test-id={props['data-test-id'] || 'Button'}
+      className={Button_h1qq1i2q}
+    >
+      {props.childrenProxyMap &&
+      childrenArray[props.childrenProxyMap['props.icon']]
+        ? React.cloneElement(
+            childrenArray[props.childrenProxyMap['props.icon']],
+            { fill: 'red' }
+          )
+        : null}
+      <span data-test-id=\\"UseProxy.Text\\">{props.text}</span>
+    </div>
+  );
+};
+
+export default UseProxy;
+",
+  "fonts": Object {},
+  "props": Object {
+    "icon": "string",
+    "text": "string",
+  },
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom UseProxy: react-dom parses react-dom UseProxy debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
@@ -2180,7 +4199,119 @@ export default UseRouter;
 }
 `;
 
+exports[`react-dom parses react-dom UseRouter: react-dom parses react-dom UseRouter debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import About from './About.view.js';
+import Home from './Home.view.js';
+import { Route } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Topics from './Topics.view.js';
+import { css } from 'react-emotion';
+
+const Horizontal_h1qq1i2q = css({ flexDirection: 'row' });
+
+const UseRouter = props => {
+  return (
+    <Router>
+      <div
+        data-test-id={props['data-test-id'] || 'Horizontal'}
+        className={Horizontal_h1qq1i2q}
+      >
+        <Route
+          path=\\"/\\"
+          exact
+          render={routeProps => (
+            <Home
+              data-test-id=\\"UseRouter.Home\\"
+              height={props.height}
+              width={360}
+              {...routeProps}
+            />
+          )}
+        />
+        <Route
+          path=\\"/about\\"
+          render={routeProps => (
+            <About data-test-id=\\"UseRouter.About\\" {...routeProps} />
+          )}
+        />
+        <Route
+          path=\\"/topics\\"
+          render={routeProps => (
+            <Topics data-test-id=\\"UseRouter.Topics\\" {...routeProps} />
+          )}
+        />
+        {props.children}
+      </div>
+    </Router>
+  );
+};
+
+export default UseRouter;
+",
+  "fonts": Object {},
+  "props": Object {
+    "height": "number",
+  },
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
 exports[`react-dom parses react-dom UseSvg 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import { css } from 'react-emotion';
+
+const Svg_hq411mi = css({
+  height: 20,
+  width: 20,
+});
+
+const UseSvg = props => {
+  return (
+    <svg
+      data-test-id={props['data-test-id'] || 'Svg'}
+      viewBox=\\"0 0 20 20\\"
+      className={Svg_hq411mi}
+    >
+      <path data-test-id=\\"UseSvg.SvgPath\\" d=\\"0 20\\" />
+      <circle data-test-id=\\"UseSvg.SvgCircle\\" cx={10} cy={5} r={5} />
+      <g data-test-id=\\"UseSvg.SvgGroup\\">
+        <path data-test-id=\\"UseSvg.SvgPath:1\\" d={1} />
+        <path data-test-id=\\"UseSvg.SvgPath:2\\" d={2} />
+      </g>
+      <text data-test-id=\\"UseSvg.SvgText\\" text=\\"hey\\" />
+      {props.children}
+    </svg>
+  );
+};
+
+export default UseSvg;
+",
+  "fonts": Object {},
+  "props": Object {},
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom UseSvg: react-dom parses react-dom UseSvg debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
@@ -2269,7 +4400,88 @@ export default UseText;
 }
 `;
 
+exports[`react-dom parses react-dom UseText: react-dom parses react-dom UseText debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import { css } from 'react-emotion';
+
+const Text_hjam8jb = css({
+  color: 'blue',
+  fontFamily: 'Montserrat, sans-serif',
+  fontSize: 16,
+  lineHeight: 1.5,
+  fontWeight: 300,
+});
+
+const UseText = props => {
+  return (
+    <span
+      data-test-id={props['data-test-id'] || 'Text'}
+      className={Text_hjam8jb}
+    >
+      Hi, I'm some text
+    </span>
+  );
+};
+
+export default UseText;
+",
+  "fonts": Object {
+    "Montserrat": Array [
+      "300",
+    ],
+  },
+  "props": Object {},
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
 exports[`react-dom parses react-dom UseVertical 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import { css } from 'react-emotion';
+
+const Vertical_h241iip = css({
+  flexDirection: 'column',
+  backgroundColor: 'red',
+});
+
+const UseVertical = props => {
+  return (
+    <div
+      data-test-id={props['data-test-id'] || 'Vertical'}
+      className={Vertical_h241iip}
+    >
+      {props.children}
+    </div>
+  );
+};
+
+export default UseVertical;
+",
+  "fonts": Object {},
+  "props": Object {},
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom UseVertical: react-dom parses react-dom UseVertical debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
@@ -2350,7 +4562,87 @@ export default ViewNameIsntUsedInStyle;
 }
 `;
 
+exports[`react-dom parses react-dom ViewNameIsntUsedInStyle: react-dom parses react-dom ViewNameIsntUsedInStyle debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import styled from 'react-emotion';
+
+const ViewNameIsntUsedInStyle1 = styled('div')(
+  {
+    flexDirection: 'column',
+    zIndex: 5,
+  },
+  ({ index, item, props }) => ({
+    opacity: props.opacity,
+  })
+);
+
+const ViewNameIsntUsedInStyle = props => {
+  return (
+    <ViewNameIsntUsedInStyle1
+      data-test-id={props['data-test-id'] || 'ViewNameIsntUsedInStyle'}
+      props={props}
+    >
+      {props.children}
+    </ViewNameIsntUsedInStyle1>
+  );
+};
+
+export default ViewNameIsntUsedInStyle;
+",
+  "fonts": Object {},
+  "props": Object {
+    "opacity": "number",
+  },
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
 exports[`react-dom parses react-dom When 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import { css } from 'react-emotion';
+
+const App_h1qq1i2q = css({ flexDirection: 'row' });
+
+const When = props => {
+  return (
+    <div data-test-id={props['data-test-id'] || 'App'} className={App_h1qq1i2q}>
+      {props.showMe ? (
+        <span data-test-id=\\"When.Text\\">I may be hidden</span>
+      ) : null}
+      {props.children}
+    </div>
+  );
+};
+
+export default When;
+",
+  "fonts": Object {},
+  "props": Object {
+    "showMe": "string",
+  },
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom When: react-dom parses react-dom When debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
@@ -2436,6 +4728,56 @@ export default WhenList;
 }
 `;
 
+exports[`react-dom parses react-dom WhenList: react-dom parses react-dom WhenList debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import { css } from 'react-emotion';
+
+const App_h1qq1i2q = css({ flexDirection: 'row' });
+const List_ho4tnl3 = css({ flexDirection: 'column' });
+
+const WhenList = props => {
+  return (
+    <div data-test-id={props['data-test-id'] || 'App'} className={App_h1qq1i2q}>
+      {props.showMe ? (
+        <div data-test-id=\\"WhenList.List\\" className={List_ho4tnl3}>
+          {Array.isArray(props.list) &&
+            props.list.map((item, index) => (
+              <span data-test-id=\\"WhenList.Text\\" key={index}>
+                {item.thing}
+              </span>
+            ))}
+        </div>
+      ) : null}
+      {props.children}
+    </div>
+  );
+};
+
+export default WhenList;
+",
+  "fonts": Object {},
+  "props": Object {
+    "list": Object {
+      "shape": Object {
+        "thing": "string",
+      },
+      "type": "array",
+    },
+    "showMe": "string",
+  },
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
 exports[`react-dom parses react-dom WhenTopLevel 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -2464,7 +4806,84 @@ export default WhenTopLevel;
 }
 `;
 
+exports[`react-dom parses react-dom WhenTopLevel: react-dom parses react-dom WhenTopLevel debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+
+const WhenTopLevel = props => {
+  return props.showMe ? (
+    <span data-test-id={props['data-test-id'] || 'Text'}>I may be hidden</span>
+  ) : null;
+};
+
+export default WhenTopLevel;
+",
+  "fonts": Object {},
+  "props": Object {
+    "showMe": "string",
+  },
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
 exports[`react-dom parses react-dom WithTest 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import { css } from 'react-emotion';
+
+const Vertical_ho4tnl3 = css({ flexDirection: 'column' });
+
+const WithTest = props => {
+  return (
+    <button
+      data-test-id={props['data-test-id'] || 'Vertical'}
+      onClick={props.change}
+      className={Vertical_ho4tnl3}
+    >
+      <span data-test-id=\\"WithTest.Text\\">{props.text}</span>
+      {props.children}
+    </button>
+  );
+};
+
+export default WithTest;
+",
+  "fonts": Object {},
+  "props": Object {
+    "change": "function",
+    "text": "string",
+  },
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {
+        "change": "Next",
+        "text": "in Main",
+      },
+      "name": "Main",
+    },
+    Object {
+      "data": Object {
+        "change": "Main",
+        "text": "in Next",
+      },
+      "name": "Next",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom WithTest: react-dom parses react-dom WithTest debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
@@ -3713,11 +6132,7 @@ const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
 const ScopePopup = props => {
   return (
-    <View
-      testID={props['testID'] || 'Popup'}
-      animate=\\"pop\\"
-      style={styles.h18pdll5}
-    >
+    <View testID={props['testID'] || 'Popup'} style={styles.h18pdll5}>
       <TouchableWithoutFeedback
         activeOpacity={0.7}
         onPress={
@@ -3740,7 +6155,6 @@ export default ScopePopup;
 ",
   "fonts": Object {},
   "props": Object {
-    "isShown": "string",
     "onClickBlue": "function",
     "onClickGreen": "function",
     "somethingGreen": "string",
@@ -3777,6 +6191,14 @@ const ScopePopup2 = props => {
           <Text testID=\\"ScopePopup2.Text\\">toggle popup</Text>
         </View>
       </TouchableWithoutFeedback>
+      <View
+        testID=\\"ScopePopup2.Content\\"
+        scale={props.isShown ? 1 : props.isSuperVisible ? 2 : 0}
+        style={[
+          styles.h18pdll5,
+          { opacity: props.isShown ? 1 : props.isSuperVisible ? 3 : 0 },
+        ]}
+      />
       {props.children}
     </View>
   );

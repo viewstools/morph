@@ -1,25 +1,9 @@
 Popup Vertical
-animate pop
 Toggle Vertical
 onClick props.toggle
 green when props.somethingGreen
 onClick props.onClickGreen
 blue when props.whatMakesBlue
 onClick props.onClickBlue
-# animateClick pop spring
-# animateHover explode spring
 Text
 text toggle popup
-
-
-Content Vertical
-(opacity 0)
-(scale 0)
-
-show when props.isShown
-animate [predefined] spring
-(opacity 1)
-(scale 1)
-
-Text
-text I'm inside the popup
