@@ -448,74 +448,6 @@ export default BoxShadow;
 }
 `;
 
-exports[`react-dom parses react-dom Broken 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import { css } from 'react-emotion';
-
-const Vertical_ho4tnl3 = css({ flexDirection: 'column' });
-
-const Broken = props => {
-  return (
-    <div
-      data-test-id={props['data-test-id'] || 'Vertical'}
-      className={Vertical_ho4tnl3}
-    >
-      {props.children}
-    </div>
-  );
-};
-
-export default Broken;
-",
-  "fonts": Object {},
-  "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom Broken: react-dom parses react-dom Broken debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import { css } from 'react-emotion';
-
-const Vertical_ho4tnl3 = css({ flexDirection: 'column' });
-
-const Broken = props => {
-  return (
-    <div
-      data-test-id={props['data-test-id'] || 'Vertical'}
-      className={Vertical_ho4tnl3}
-    >
-      {props.children}
-    </div>
-  );
-};
-
-export default Broken;
-",
-  "fonts": Object {},
-  "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
-}
-`;
-
 exports[`react-dom parses react-dom ClassName 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -760,6 +692,54 @@ export default DynamicStylesApplyToBasicBlocksOnly;
   "props": Object {
     "height": "number",
   },
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom EmptyText 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+
+const EmptyText = props => {
+  return <span data-test-id={props['data-test-id'] || 'EmptyText'} />;
+};
+
+export default EmptyText;
+",
+  "fonts": Object {},
+  "props": Object {},
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom EmptyText: react-dom parses react-dom EmptyText debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+
+const EmptyText = props => {
+  return <span data-test-id={props['data-test-id'] || 'EmptyText'} />;
+};
+
+export default EmptyText;
+",
+  "fonts": Object {},
+  "props": Object {},
   "svgs": Array [],
   "tests": Array [
     Object {
@@ -4755,36 +4735,6 @@ export default BoxShadow;
 }
 `;
 
-exports[`react-native parses react-native Broken 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
-const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
-
-const Broken = props => {
-  return (
-    <View testID={props['testID'] || 'Vertical'} style={styles.h18pdll5}>
-      {props.children}
-    </View>
-  );
-};
-
-export default Broken;
-",
-  "fonts": Object {},
-  "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
-}
-`;
-
 exports[`react-native parses react-native ClassName 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -4893,6 +4843,31 @@ export default DynamicStylesApplyToBasicBlocksOnly;
   "props": Object {
     "height": "number",
   },
+  "svgs": Array [],
+  "tests": Array [
+    Object {
+      "data": Object {},
+      "name": "Main",
+    },
+  ],
+  "todos": Array [],
+}
+`;
+
+exports[`react-native parses react-native EmptyText 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import { Text } from 'react-native';
+
+const EmptyText = props => {
+  return <Text testID={props['testID'] || 'EmptyText'} />;
+};
+
+export default EmptyText;
+",
+  "fonts": Object {},
+  "props": Object {},
   "svgs": Array [],
   "tests": Array [
     Object {

@@ -8,14 +8,12 @@ const CAPTURE = /^(CaptureEmail|CaptureFile|CaptureNumber|CapturePhone|CaptureSe
 const CODE_EXPLICIT = /^{.+}$/
 const CODE_IMPLICIT = /props\./
 const COMMENT = /^#(.+)$/
-const EMPTY_LIST = /^is empty list$/i
 const INTERPOLATED_EXPRESSION = /\${.+}/
 const FLOAT = /^[0-9]+\.[0-9]+$/
 const FONTABLE = /^(CaptureEmail|CaptureNumber|CapturePhone|CaptureSecure|CaptureText|CaptureTextArea|Text)$/
-const LIST = /^List$/
 const INT = /^[0-9]+$/
 const NOT_GROUP = /^(Image|Test|Text|Proxy|SvgCircle|SvgEllipse|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgText|SvgStop)$/i
-const PROP = /^([a-z][a-zA-Z0-9]*)\s+(.*)$/
+const PROP = /^([a-z][a-zA-Z0-9]*)(\s+(.+))?$/
 const PROP_STYLE_STEMS = /^([a-z][A-Z0-9]*?)(Hover|Focus|Placeholder|Disabled|Print)?$/i
 const SCOPE = /^when\s+(.+)$/
 const STYLE = new RegExp(
@@ -46,7 +44,7 @@ export const isCodeInvalid = line => {
   )
 }
 export const isComment = line => is(COMMENT, line)
-export const isEmptyList = line => is(EMPTY_LIST, line)
+export const isEmptyList = line => line === 'is empty list'
 export const isEmptyText = line => line === ''
 export const isEnd = line => line === ''
 export const isInterpolatedExpression = line =>
@@ -54,7 +52,7 @@ export const isInterpolatedExpression = line =>
 export const isFloat = line => is(FLOAT, line)
 export const isFontable = line => is(FONTABLE, line)
 export const isGroup = line => !is(NOT_GROUP, line) && !isCapture(line)
-export const isList = line => is(LIST, line)
+export const isList = line => line === 'List'
 export const isInt = line => is(INT, line)
 export const isProp = line => is(PROP, line)
 export const isTemplateLiteral = line => is(TEMPLATE_LITERAL, line)
@@ -66,17 +64,11 @@ export const isUserComment = line => is(USER_COMMENT, line)
 const get = (regex, line) => line.match(regex)
 
 export const getBlock = line => {
-  const match = get(BLOCK, line)
-  if (match[3]) {
-    return {
-      block: match[3],
-      is: match[1],
-    }
-  } else {
-    return {
-      block: match[1],
-      is: null,
-    }
+  // eslint-disable-next-line
+  const [_, is, _1, block] = get(BLOCK, line)
+  return {
+    block: block || is,
+    is: block ? is : null,
   }
 }
 export const getCodeData = line =>
@@ -94,7 +86,11 @@ export const getComment = line => {
 }
 export const getMainFont = line =>
   line ? line.split(',')[0].replace(/['"]/g, '') : ''
-export const getProp = line => get(PROP, line).slice(1)
+export const getProp = line => {
+  // eslint-disable-next-line
+  const [_, prop, _1, value = ''] = get(PROP, line)
+  return [prop, value]
+}
 export const getScope = line => get(SCOPE, line)[1]
 export const getValue = value => {
   if (isFloat(value)) {
