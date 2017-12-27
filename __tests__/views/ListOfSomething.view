@@ -1,5 +1,3 @@
-List
-from props.list
-Text
-color item.color
-text index
+ListOfSomething List
+from props.from
+Something

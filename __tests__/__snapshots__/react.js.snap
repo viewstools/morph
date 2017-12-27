@@ -1312,162 +1312,24 @@ export default JustText;
 }
 `;
 
-exports[`react-dom parses react-dom ListOfButtons 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import styled, { css } from 'react-emotion';
-
-const List_ho4tnl3 = css({ flexDirection: 'column' });
-const Vertical_ho4tnl3 = css({ flexDirection: 'column' });
-const Text = styled('span')(({ index, item, props }) => ({
-  color: item.color,
-}));
-
-const ListOfButtons = props => {
-  return (
-    <div
-      data-test-id={props['data-test-id'] || 'List'}
-      className={List_ho4tnl3}
-    >
-      {Array.isArray(props.list) &&
-        props.list.map((item, index) => (
-          <button
-            data-test-id=\\"ListOfButtons.Vertical\\"
-            onClick={props.onClick}
-            key={index}
-            className={Vertical_ho4tnl3}
-          >
-            <Text
-              data-test-id=\\"ListOfButtons.Text\\"
-              props={props}
-              index={index}
-              item={item}
-            >
-              {index}
-            </Text>
-          </button>
-        ))}
-      {props.children}
-    </div>
-  );
-};
-
-export default ListOfButtons;
-",
-  "fonts": Object {},
-  "props": Object {
-    "list": Object {
-      "shape": Object {
-        "color": "string",
-      },
-      "type": "array",
-    },
-    "onClick": "function",
-  },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom ListOfButtons: react-dom parses react-dom ListOfButtons debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import styled, { css } from 'react-emotion';
-
-const List_ho4tnl3 = css({ flexDirection: 'column' });
-const Vertical_ho4tnl3 = css({ flexDirection: 'column' });
-const Text = styled('span')(({ index, item, props }) => ({
-  color: item.color,
-}));
-
-const ListOfButtons = props => {
-  return (
-    <div
-      data-test-id={props['data-test-id'] || 'List'}
-      className={List_ho4tnl3}
-    >
-      {Array.isArray(props.list) &&
-        props.list.map((item, index) => (
-          <button
-            data-test-id=\\"ListOfButtons.Vertical\\"
-            onClick={props.onClick}
-            key={index}
-            className={Vertical_ho4tnl3}
-          >
-            <Text
-              data-test-id=\\"ListOfButtons.Text\\"
-              props={props}
-              index={index}
-              item={item}
-            >
-              {index}
-            </Text>
-          </button>
-        ))}
-      {props.children}
-    </div>
-  );
-};
-
-export default ListOfButtons;
-",
-  "fonts": Object {},
-  "props": Object {
-    "list": Object {
-      "shape": Object {
-        "color": "string",
-      },
-      "type": "array",
-    },
-    "onClick": "function",
-  },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
-}
-`;
-
 exports[`react-dom parses react-dom ListOfSomething 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import styled, { css } from 'react-emotion';
+import Something from './Something.view.js';
+import { css } from 'react-emotion';
 
-const List_ho4tnl3 = css({ flexDirection: 'column' });
-const Text = styled('span')(({ index, item, props }) => ({
-  color: item.color,
-}));
+const ListOfSomething_ho4tnl3 = css({ flexDirection: 'column' });
 
 const ListOfSomething = props => {
   return (
     <div
-      data-test-id={props['data-test-id'] || 'List'}
-      className={List_ho4tnl3}
+      data-test-id={props['data-test-id'] || 'ListOfSomething'}
+      className={ListOfSomething_ho4tnl3}
     >
-      {Array.isArray(props.list) &&
-        props.list.map((item, index) => (
-          <Text
-            data-test-id=\\"ListOfSomething.Text\\"
-            props={props}
-            index={index}
-            item={item}
-            key={index}
-          >
-            {index}
-          </Text>
+      {Array.isArray(props.from) &&
+        props.from.map((item, index) => (
+          <Something data-test-id=\\"ListOfSomething.Something\\" />
         ))}
       {props.children}
     </div>
@@ -1478,12 +1340,7 @@ export default ListOfSomething;
 ",
   "fonts": Object {},
   "props": Object {
-    "list": Object {
-      "shape": Object {
-        "color": "string",
-      },
-      "type": "array",
-    },
+    "from": "string",
   },
   "svgs": Array [],
   "tests": Array [
@@ -1500,30 +1357,20 @@ exports[`react-dom parses react-dom ListOfSomething: react-dom parses react-dom 
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import styled, { css } from 'react-emotion';
+import Something from './Something.view.js';
+import { css } from 'react-emotion';
 
-const List_ho4tnl3 = css({ flexDirection: 'column' });
-const Text = styled('span')(({ index, item, props }) => ({
-  color: item.color,
-}));
+const ListOfSomething_ho4tnl3 = css({ flexDirection: 'column' });
 
 const ListOfSomething = props => {
   return (
     <div
-      data-test-id={props['data-test-id'] || 'List'}
-      className={List_ho4tnl3}
+      data-test-id={props['data-test-id'] || 'ListOfSomething'}
+      className={ListOfSomething_ho4tnl3}
     >
-      {Array.isArray(props.list) &&
-        props.list.map((item, index) => (
-          <Text
-            data-test-id=\\"ListOfSomething.Text\\"
-            props={props}
-            index={index}
-            item={item}
-            key={index}
-          >
-            {index}
-          </Text>
+      {Array.isArray(props.from) &&
+        props.from.map((item, index) => (
+          <Something data-test-id=\\"ListOfSomething.Something\\" />
         ))}
       {props.children}
     </div>
@@ -1534,12 +1381,7 @@ export default ListOfSomething;
 ",
   "fonts": Object {},
   "props": Object {
-    "list": Object {
-      "shape": Object {
-        "color": "string",
-      },
-      "type": "array",
-    },
+    "from": "string",
   },
   "svgs": Array [],
   "tests": Array [
@@ -1552,182 +1394,34 @@ export default ListOfSomething;
 }
 `;
 
-exports[`react-dom parses react-dom ListOfSomethingComplex 1`] = `
+exports[`react-dom parses react-dom ListWhen 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import styled, { css } from 'react-emotion';
-
-const List_ho4tnl3 = css({ flexDirection: 'column' });
-const Vertical = styled('div')(
-  {
-    flexDirection: 'column',
-    border: '1px solid red',
-  },
-  ({ index, item, props }) => ({
-    backgroundColor: item.backgroundColor,
-  })
-);
-const Text = styled('span')(({ index, item, props }) => ({
-  color: item.color,
-}));
-
-const ListOfSomethingComplex = props => {
-  return (
-    <div
-      data-test-id={props['data-test-id'] || 'List'}
-      className={List_ho4tnl3}
-    >
-      {Array.isArray(props.list) &&
-        props.list.map((item, index) => (
-          <Vertical
-            data-test-id=\\"ListOfSomethingComplex.Vertical\\"
-            props={props}
-            index={index}
-            item={item}
-            key={index}
-          >
-            <Text
-              data-test-id=\\"ListOfSomethingComplex.Text\\"
-              props={props}
-              index={index}
-              item={item}
-            >
-              {index}
-            </Text>
-          </Vertical>
-        ))}
-      {props.children}
-    </div>
-  );
-};
-
-export default ListOfSomethingComplex;
-",
-  "fonts": Object {},
-  "props": Object {
-    "list": Object {
-      "shape": Object {
-        "backgroundColor": "string",
-        "color": "string",
-      },
-      "type": "array",
-    },
-  },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom ListOfSomethingComplex: react-dom parses react-dom ListOfSomethingComplex debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import styled, { css } from 'react-emotion';
-
-const List_ho4tnl3 = css({ flexDirection: 'column' });
-const Vertical = styled('div')(
-  {
-    flexDirection: 'column',
-    border: '1px solid red',
-  },
-  ({ index, item, props }) => ({
-    backgroundColor: item.backgroundColor,
-  })
-);
-const Text = styled('span')(({ index, item, props }) => ({
-  color: item.color,
-}));
-
-const ListOfSomethingComplex = props => {
-  return (
-    <div
-      data-test-id={props['data-test-id'] || 'List'}
-      className={List_ho4tnl3}
-    >
-      {Array.isArray(props.list) &&
-        props.list.map((item, index) => (
-          <Vertical
-            data-test-id=\\"ListOfSomethingComplex.Vertical\\"
-            props={props}
-            index={index}
-            item={item}
-            key={index}
-          >
-            <Text
-              data-test-id=\\"ListOfSomethingComplex.Text\\"
-              props={props}
-              index={index}
-              item={item}
-            >
-              {index}
-            </Text>
-          </Vertical>
-        ))}
-      {props.children}
-    </div>
-  );
-};
-
-export default ListOfSomethingComplex;
-",
-  "fonts": Object {},
-  "props": Object {
-    "list": Object {
-      "shape": Object {
-        "backgroundColor": "string",
-        "color": "string",
-      },
-      "type": "array",
-    },
-  },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom ListWithKey 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
+import Card from './Card.view.js';
 import { css } from 'react-emotion';
 
 const List_ho4tnl3 = css({ flexDirection: 'column' });
 
-const ListWithKey = props => {
-  return (
+const ListWhen = props => {
+  return props.showMe ? (
     <div
       data-test-id={props['data-test-id'] || 'List'}
       className={List_ho4tnl3}
     >
-      {Array.isArray(props.list) &&
-        props.list.map((item, index) => (
-          <span data-test-id=\\"ListWithKey.Text\\" key={item}>
-            {item}
-          </span>
-        ))}
+      {Array.isArray(props.from) &&
+        props.from.map((item, index) => <Card data-test-id=\\"ListWhen.Card\\" />)}
       {props.children}
     </div>
-  );
+  ) : null;
 };
 
-export default ListWithKey;
+export default ListWhen;
 ",
   "fonts": Object {},
   "props": Object {
-    "list": "string",
+    "from": "string",
+    "showMe": "string",
   },
   "svgs": Array [],
   "tests": Array [
@@ -1740,36 +1434,34 @@ export default ListWithKey;
 }
 `;
 
-exports[`react-dom parses react-dom ListWithKey: react-dom parses react-dom ListWithKey debug 1`] = `
+exports[`react-dom parses react-dom ListWhen: react-dom parses react-dom ListWhen debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
+import Card from './Card.view.js';
 import { css } from 'react-emotion';
 
 const List_ho4tnl3 = css({ flexDirection: 'column' });
 
-const ListWithKey = props => {
-  return (
+const ListWhen = props => {
+  return props.showMe ? (
     <div
       data-test-id={props['data-test-id'] || 'List'}
       className={List_ho4tnl3}
     >
-      {Array.isArray(props.list) &&
-        props.list.map((item, index) => (
-          <span data-test-id=\\"ListWithKey.Text\\" key={item}>
-            {item}
-          </span>
-        ))}
+      {Array.isArray(props.from) &&
+        props.from.map((item, index) => <Card data-test-id=\\"ListWhen.Card\\" />)}
       {props.children}
     </div>
-  );
+  ) : null;
 };
 
-export default ListWithKey;
+export default ListWhen;
 ",
   "fonts": Object {},
   "props": Object {
-    "list": "string",
+    "from": "string",
+    "showMe": "string",
   },
   "svgs": Array [],
   "tests": Array [
@@ -3032,9 +2724,6 @@ const TextInterpolation = props => {
       className={Vertical_ho4tnl3}
     >
       <span data-test-id=\\"TextInterpolation.Text\\">{\`\${props.name} test\`}</span>
-      <span data-test-id=\\"TextInterpolation.Text:1\\">
-        {props.name ? \`\${props.name} here\` : 'other'}
-      </span>
       {props.children}
     </div>
   );
@@ -3072,9 +2761,6 @@ const TextInterpolation = props => {
       className={Vertical_ho4tnl3}
     >
       <span data-test-id=\\"TextInterpolation.Text\\">{\`\${props.name} test\`}</span>
-      <span data-test-id=\\"TextInterpolation.Text:1\\">
-        {props.name ? \`\${props.name} here\` : 'other'}
-      </span>
       {props.children}
     </div>
   );
@@ -4678,106 +4364,6 @@ export default When;
 }
 `;
 
-exports[`react-dom parses react-dom WhenList 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import { css } from 'react-emotion';
-
-const App_h1qq1i2q = css({ flexDirection: 'row' });
-const List_ho4tnl3 = css({ flexDirection: 'column' });
-
-const WhenList = props => {
-  return (
-    <div data-test-id={props['data-test-id'] || 'App'} className={App_h1qq1i2q}>
-      {props.showMe ? (
-        <div data-test-id=\\"WhenList.List\\" className={List_ho4tnl3}>
-          {Array.isArray(props.list) &&
-            props.list.map((item, index) => (
-              <span data-test-id=\\"WhenList.Text\\" key={index}>
-                {item.thing}
-              </span>
-            ))}
-        </div>
-      ) : null}
-      {props.children}
-    </div>
-  );
-};
-
-export default WhenList;
-",
-  "fonts": Object {},
-  "props": Object {
-    "list": Object {
-      "shape": Object {
-        "thing": "string",
-      },
-      "type": "array",
-    },
-    "showMe": "string",
-  },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom WhenList: react-dom parses react-dom WhenList debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import { css } from 'react-emotion';
-
-const App_h1qq1i2q = css({ flexDirection: 'row' });
-const List_ho4tnl3 = css({ flexDirection: 'column' });
-
-const WhenList = props => {
-  return (
-    <div data-test-id={props['data-test-id'] || 'App'} className={App_h1qq1i2q}>
-      {props.showMe ? (
-        <div data-test-id=\\"WhenList.List\\" className={List_ho4tnl3}>
-          {Array.isArray(props.list) &&
-            props.list.map((item, index) => (
-              <span data-test-id=\\"WhenList.Text\\" key={index}>
-                {item.thing}
-              </span>
-            ))}
-        </div>
-      ) : null}
-      {props.children}
-    </div>
-  );
-};
-
-export default WhenList;
-",
-  "fonts": Object {},
-  "props": Object {
-    "list": Object {
-      "shape": Object {
-        "thing": "string",
-      },
-      "type": "array",
-    },
-    "showMe": "string",
-  },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
-}
-`;
-
 exports[`react-dom parses react-dom WhenTopLevel 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -5585,86 +5171,20 @@ export default JustText;
 }
 `;
 
-exports[`react-native parses react-native ListOfButtons 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import {
-  Animated,
-  StyleSheet,
-  TouchableWithoutFeedback,
-  View,
-} from 'react-native';
-const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
-
-const ListOfButtons = props => {
-  return (
-    <View testID={props['testID'] || 'List'} style={styles.h18pdll5}>
-      {Array.isArray(props.list) &&
-        props.list.map((item, index) => (
-          <TouchableWithoutFeedback
-            activeOpacity={0.7}
-            onPress={props.onClick}
-            underlayColor=\\"transparent\\"
-            key={index}
-          >
-            <View testID=\\"ListOfButtons.Vertical\\" style={styles.h18pdll5}>
-              <Animated.Text
-                testID=\\"ListOfButtons.Text\\"
-                style={{ color: item.color }}
-              >
-                {index}
-              </Animated.Text>
-            </View>
-          </TouchableWithoutFeedback>
-        ))}
-      {props.children}
-    </View>
-  );
-};
-
-export default ListOfButtons;
-",
-  "fonts": Object {},
-  "props": Object {
-    "list": Object {
-      "shape": Object {
-        "color": "string",
-      },
-      "type": "array",
-    },
-    "onClick": "function",
-  },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
-}
-`;
-
 exports[`react-native parses react-native ListOfSomething 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { Animated, StyleSheet, View } from 'react-native';
+import Something from './Something.view.js';
+import { StyleSheet, View } from 'react-native';
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
 const ListOfSomething = props => {
   return (
-    <View testID={props['testID'] || 'List'} style={styles.h18pdll5}>
-      {Array.isArray(props.list) &&
-        props.list.map((item, index) => (
-          <Animated.Text
-            testID=\\"ListOfSomething.Text\\"
-            style={{ color: item.color }}
-            key={index}
-          >
-            {index}
-          </Animated.Text>
+    <View testID={props['testID'] || 'ListOfSomething'} style={styles.h18pdll5}>
+      {Array.isArray(props.from) &&
+        props.from.map((item, index) => (
+          <Something testID=\\"ListOfSomething.Something\\" />
         ))}
       {props.children}
     </View>
@@ -5675,12 +5195,7 @@ export default ListOfSomething;
 ",
   "fonts": Object {},
   "props": Object {
-    "list": Object {
-      "shape": Object {
-        "color": "string",
-      },
-      "type": "array",
-    },
+    "from": "string",
   },
   "svgs": Array [],
   "tests": Array [
@@ -5693,93 +5208,30 @@ export default ListOfSomething;
 }
 `;
 
-exports[`react-native parses react-native ListOfSomethingComplex 1`] = `
+exports[`react-native parses react-native ListWhen 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { Animated, StyleSheet, View } from 'react-native';
-const styles = StyleSheet.create({
-  h18pdll5: { flexDirection: 'column' },
-  h1562g93: {
-    flexDirection: 'column',
-    borderColor: 'red',
-    borderStyle: 'solid',
-    borderWidth: 1,
-  },
-});
-
-const ListOfSomethingComplex = props => {
-  return (
-    <View testID={props['testID'] || 'List'} style={styles.h18pdll5}>
-      {Array.isArray(props.list) &&
-        props.list.map((item, index) => (
-          <Animated.View
-            testID=\\"ListOfSomethingComplex.Vertical\\"
-            style={[styles.h1562g93, { backgroundColor: item.backgroundColor }]}
-            key={index}
-          >
-            <Animated.Text
-              testID=\\"ListOfSomethingComplex.Text\\"
-              style={{ color: item.color }}
-            >
-              {index}
-            </Animated.Text>
-          </Animated.View>
-        ))}
-      {props.children}
-    </View>
-  );
-};
-
-export default ListOfSomethingComplex;
-",
-  "fonts": Object {},
-  "props": Object {
-    "list": Object {
-      "shape": Object {
-        "backgroundColor": "string",
-        "color": "string",
-      },
-      "type": "array",
-    },
-  },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
-}
-`;
-
-exports[`react-native parses react-native ListWithKey 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import Card from './Card.view.js';
+import { StyleSheet, View } from 'react-native';
 const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
 
-const ListWithKey = props => {
-  return (
+const ListWhen = props => {
+  return props.showMe ? (
     <View testID={props['testID'] || 'List'} style={styles.h18pdll5}>
-      {Array.isArray(props.list) &&
-        props.list.map((item, index) => (
-          <Text testID=\\"ListWithKey.Text\\" key={item}>
-            {item}
-          </Text>
-        ))}
+      {Array.isArray(props.from) &&
+        props.from.map((item, index) => <Card testID=\\"ListWhen.Card\\" />)}
       {props.children}
     </View>
-  );
+  ) : null;
 };
 
-export default ListWithKey;
+export default ListWhen;
 ",
   "fonts": Object {},
   "props": Object {
-    "list": "string",
+    "from": "string",
+    "showMe": "string",
   },
   "svgs": Array [],
   "tests": Array [
@@ -6394,9 +5846,6 @@ const TextInterpolation = props => {
   return (
     <View testID={props['testID'] || 'Vertical'} style={styles.h18pdll5}>
       <Text testID=\\"TextInterpolation.Text\\">{\`\${props.name} test\`}</Text>
-      <Text testID=\\"TextInterpolation.Text:1\\">
-        {props.name ? \`\${props.name} here\` : 'other'}
-      </Text>
       {props.children}
     </View>
   );
@@ -7210,57 +6659,6 @@ export default When;
 ",
   "fonts": Object {},
   "props": Object {
-    "showMe": "string",
-  },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
-}
-`;
-
-exports[`react-native parses react-native WhenList 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-const styles = StyleSheet.create({
-  hp2cr4d: { flexDirection: 'row' },
-  h18pdll5: { flexDirection: 'column' },
-});
-
-const WhenList = props => {
-  return (
-    <View testID={props['testID'] || 'App'} style={styles.hp2cr4d}>
-      {props.showMe ? (
-        <View testID=\\"WhenList.List\\" style={styles.h18pdll5}>
-          {Array.isArray(props.list) &&
-            props.list.map((item, index) => (
-              <Text testID=\\"WhenList.Text\\" key={index}>
-                {item.thing}
-              </Text>
-            ))}
-        </View>
-      ) : null}
-      {props.children}
-    </View>
-  );
-};
-
-export default WhenList;
-",
-  "fonts": Object {},
-  "props": Object {
-    "list": Object {
-      "shape": Object {
-        "thing": "string",
-      },
-      "type": "array",
-    },
     "showMe": "string",
   },
   "svgs": Array [],

@@ -35,17 +35,5 @@ Array [
     },
     "name": "Data",
   },
-  Object {
-    "data": Object {
-      "list": Array [
-        "hey",
-        "ho",
-      ],
-      "onClick": "Next",
-      "text": "it's Main!",
-      "width": 360,
-    },
-    "name": "FlatList",
-  },
 ]
 `;

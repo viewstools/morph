@@ -1,26 +1,19 @@
 import {
   getBlock,
   getComment,
-  getFontInfo,
+  getMainFont,
   getProp,
-  getSection,
-  getTodo,
   getValue,
   isBasic,
   isBlock,
   isCapture,
   isComment,
-  isEmptyList,
   isEnd,
   isFontable,
   isGroup,
-  isItem,
   isList,
   isProp,
-  isSection,
-  isTodo,
   isUserComment,
-  onlyMainFont,
   stemStylesFromProp,
   warn,
 } from './helpers.js'
@@ -36,7 +29,6 @@ export default (rtext, skipComments = true) => {
   const lines = text.split('\n').map(line => line.trim())
   const props = []
   const stack = []
-  const todos = []
   const views = []
   let lastCapture
 
@@ -59,71 +51,39 @@ export default (rtext, skipComments = true) => {
 
   const lookForFonts = block => {
     if (block.properties && (isFontable(block.name.value) || !block.isBasic)) {
-      let fontFamily
-      let fontWeight
+      const fontFamilyProp = block.properties.list.find(
+        p => p.key && p.key.value === 'fontFamily'
+      )
 
-      block.properties.list.forEach(p => {
-        if (p.tags && p.tags.comment) return
+      if (fontFamilyProp) {
+        const fontFamily = getMainFont(fontFamilyProp.value.value)
+        const fontWeightProp = block.properties.list.find(
+          p => p.key && p.key.value === 'fontWeight'
+        )
+        const fontWeight = fontWeightProp
+          ? fontWeightProp.value.value.toString()
+          : '400'
 
-        if (p.key.value === 'fontFamily') {
-          fontFamily = p.value.value = onlyMainFont(p.value.value)
-        } else if (p.key.value === 'fontWeight') {
-          fontWeight = p.value.value
+        if (!fonts[fontFamily]) fonts[fontFamily] = []
+        if (!fonts[fontFamily].includes(fontWeight)) {
+          fonts[fontFamily].push(fontWeight)
         }
-      })
-
-      if (fontFamily) {
-        const info = getFontInfo(fontFamily, fontWeight)
-
-        info.forEach(font => {
-          if (!fonts[font.family]) fonts[font.family] = []
-          if (!fonts[font.family].includes(font.weight)) {
-            fonts[font.family].push(font.weight)
-          }
-        })
       }
     }
   }
 
   const end = (block, endLine) => {
-    // let endLine = maybeEndLine
-    // while (lines[endLine] === '' && endLine > 0) {
-    //   endLine--
-    // }
-
-    // const prevLine = lines[endLine - 1]
-
     block.loc.end = {
       line: endLine,
       column: Math.max(0, lines[endLine].length - 1),
-      // (typeof prevLine === 'string' ? prevLine : lines[endLine]).length - 1,
     }
 
-    // TODO review this
-    // if we're past our line, use the previous line's end
-    // if (block.loc.end.column < 0) {
-    //   block.loc.end = {
-    //     line: endLine - 1,
-    //     column: lines[endLine - 2].length - 1,
-    //   }
-    // }
-
-    // TODO define end location of blocks inside this
-    // block.blocks.forEach(innerBlock => {
-    //   innerBlock.loc.end = // ...
-    // })
-    // end this block's properties if any
     if (block.properties) {
       const last = block.properties.list[block.properties.list.length - 1]
       block.properties.loc.end = last.loc.end
-
-      // look for fonts
-      lookForFonts(block)
     }
 
     if (block.blocks) {
-      block.blocks.list.forEach(lookForFonts)
-
       const last = block.blocks.list[block.blocks.list.length - 1]
       block.blocks.loc.end = last ? last.loc.end : block.loc.end
 
@@ -133,11 +93,6 @@ export default (rtext, skipComments = true) => {
     }
 
     if (stack.length > 0) {
-      // // if there are more blocks, put this block as part of the last block on the stack's block
-      // const nextLast = stack[stack.length - 1]
-      // if (nextLast !== block && nextLast.blocks) {
-      //   nextLast.blocks.list.push(block)
-      // }
       return false
     } else {
       // if we're the last block on the stack, then this is the view!
@@ -235,9 +190,9 @@ export default (rtext, skipComments = true) => {
       if (newLinesBeforePreviousBlock > 2) {
         const linesToRemove = newLinesBeforePreviousBlock - 2
         help.push(
-          `remove ${linesToRemove} empty line${linesToRemove > 1
-            ? 's'
-            : ''} before`
+          `remove ${linesToRemove} empty line${
+            linesToRemove > 1 ? 's' : ''
+          } before`
         )
       }
       warn(help.join(', '), block)
@@ -275,52 +230,7 @@ export default (rtext, skipComments = true) => {
     for (let j = i; j <= endOfBlockIndex; j++) {
       const line = lines[j]
 
-      if (isSection(line)) {
-        const prop = getSection(line)
-
-        if (isItem(prop) && nested.length > 0) {
-          const item = {
-            type: 'ArrayItem',
-            value: {
-              type: 'ObjectExpression',
-              properties: [],
-              loc: getLoc(j, 0),
-            },
-          }
-
-          const last = nested[nested.length - 1]
-          if (last.value.type === 'ObjectExpression') {
-            last.value = {
-              type: 'ArrayExpression',
-              elements: [],
-              item: prop,
-              loc: last.value.loc,
-            }
-          }
-
-          last.value.elements.push(item)
-        } else {
-          nested.push({
-            type: 'Property',
-            loc: getLoc(j, line.indexOf(prop), line.length - 1),
-            tags: {},
-            key: {
-              type: 'Literal',
-              value: prop,
-              loc: getLoc(
-                j,
-                line.indexOf(prop),
-                line.indexOf(prop) + prop.length - 1
-              ),
-            },
-            value: {
-              type: 'ObjectExpression',
-              properties: [],
-              loc: getLoc(j, 0),
-            },
-          })
-        }
-      } else if (isProp(line)) {
+      if (isProp(line)) {
         const [propRaw, value] = getProp(line)
         const [prop, stemmedTag] = stemStylesFromProp(block, propRaw)
         const tags = getTags(prop, value)
@@ -343,91 +253,36 @@ export default (rtext, skipComments = true) => {
           block.scoped[prop][inScope] = properties.length
         }
 
-        let last = properties
-        if (nested[nested.length - 1]) {
-          const lastValue = nested[nested.length - 1].value
-
-          if (lastValue.type === 'ObjectExpression') {
-            last = lastValue.properties
-          } else if (lastValue.type === 'ArrayExpression') {
-            const lastElement =
-              lastValue.elements[lastValue.elements.length - 1]
-            if (
-              lastElement &&
-              lastElement.type === 'ArrayItem' &&
-              !isItem(prop)
-            ) {
-              last = lastElement.value.properties
-            } else {
-              last = lastValue.elements
-            }
-          }
-        }
-
-        if (isItem(prop)) {
-          last.push({
-            type: 'ArrayItem',
-            value: {
-              type: 'Literal',
-              value: getValue(value),
-              loc: getLoc(
-                j,
-                line.indexOf(value),
-                line.indexOf(value) + value.length - 1
-              ),
-            },
-          })
-
-          const lastNested = nested[nested.length - 1]
-          if (lastNested.value.type === 'ObjectExpression') {
-            lastNested.value = {
-              type: 'ArrayExpression',
-              elements: last,
-              item: prop,
-              loc: lastNested.value.loc,
-            }
-          }
-        } else {
-          const propValue = isEmptyList(value)
-            ? {
-                type: 'ArrayExpression',
-                elements: [],
-              }
-            : {
-                type: 'Literal',
-                value: getValue(value),
-              }
-
-          propValue.loc = getLoc(
-            j,
-            line.indexOf(value),
-            line.indexOf(value) + value.length - 1
-          )
-
-          last.push({
-            type: 'Property',
-            loc: getLoc(j, line.indexOf(propRaw), line.length - 1),
-            key: {
-              type: 'Literal',
-              // TODO should we use propRaw as value here?
-              value: prop,
-              valueRaw: propRaw,
-              loc: getLoc(
-                j,
-                line.indexOf(propRaw),
-                line.indexOf(propRaw) + propRaw.length - 1
-              ),
-            },
-            inScope,
-            tags,
-            meta: getMeta(value, line, j),
-            value: propValue,
-          })
-        }
+        properties.push({
+          type: 'Property',
+          loc: getLoc(j, line.indexOf(propRaw), line.length - 1),
+          key: {
+            type: 'Literal',
+            // TODO should we use propRaw as value here?
+            value: prop,
+            valueRaw: propRaw,
+            loc: getLoc(
+              j,
+              line.indexOf(propRaw),
+              line.indexOf(propRaw) + propRaw.length - 1
+            ),
+          },
+          inScope,
+          tags,
+          meta: getMeta(value, line, j),
+          value: {
+            loc: getLoc(
+              j,
+              line.indexOf(value),
+              line.indexOf(value) + value.length - 1
+            ),
+            type: 'Literal',
+            value: getValue(value),
+          },
+        })
       } else if (isEnd(line)) {
         const prevLine = lines[j - 1]
 
-        // TODO close item
         if (isEnd(prevLine)) {
           if (nested.length > 0) {
             const props = nested.pop()
@@ -493,10 +348,9 @@ export default (rtext, skipComments = true) => {
   lines.forEach((line, i) => {
     if (isBlock(line)) {
       parseBlock(line, i)
-    } else if (isProp(line) || isSection(line) || isComment(line)) {
+    } else if (isProp(line) || isComment(line)) {
       let block = stack[stack.length - 1] || views[views.length - 1]
       // TODO add warning
-      // TODO edge case of comments before any block
       if (!block) return
       if (block.blocks && block.blocks.list.length > 0) {
         block = block.blocks.list[block.blocks.list.length - 1]
@@ -507,19 +361,8 @@ export default (rtext, skipComments = true) => {
         if (block.properties) {
           block.loc.end = block.properties.loc.end
         }
+        lookForFonts(block)
       }
-    } else if (isTodo(line)) {
-      // eslint-disable-next-line
-      const [_, to, message] = getTodo(line)
-
-      const todo = {
-        type: 'Todo',
-        loc: getLoc(i, line.indexOf('#') + 1, line.length - 1),
-        to,
-        message: message.trim(),
-      }
-
-      todos.push(todo)
     } else if (isEnd(line) && stack.length > 0) {
       end(stack.pop(), i)
     }
@@ -532,7 +375,6 @@ export default (rtext, skipComments = true) => {
   return {
     fonts,
     props: getPropTypes(props),
-    todos,
     views,
   }
 }

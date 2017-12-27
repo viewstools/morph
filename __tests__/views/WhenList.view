@@ -1,6 +1,0 @@
-App is Horizontal
-List
-from props.list
-when props.showMe
-Text
-text item.thing

@@ -4,7 +4,6 @@ exports[`#parse 1`] = `
 Object {
   "fonts": Object {},
   "props": Object {},
-  "todos": Array [],
   "views": Array [
     Object {
       "blocks": Object {
@@ -59,7 +58,6 @@ exports[`#parse 2`] = `
 Object {
   "fonts": Object {},
   "props": Object {},
-  "todos": Array [],
   "views": Array [
     Object {
       "blocks": Object {
@@ -147,7 +145,6 @@ exports[`#parse 3`] = `
 Object {
   "fonts": Object {},
   "props": Object {},
-  "todos": Array [],
   "views": Array [
     Object {
       "blocks": Object {
@@ -733,7 +730,6 @@ exports[`#parse 4`] = `
 Object {
   "fonts": Object {},
   "props": Object {},
-  "todos": Array [],
   "views": Array [
     Object {
       "blocks": Object {
@@ -1037,7 +1033,6 @@ exports[`#parse 5`] = `
 Object {
   "fonts": Object {},
   "props": Object {
-    "anotherCall": "function",
     "backgroundColor": "string",
     "marginLeft": "number",
     "name": "function",
@@ -1050,15 +1045,8 @@ Object {
       },
       "type": "object",
     },
-    "stuff": Object {
-      "shape": Object {
-        "color": "string",
-        "name": "string",
-      },
-      "type": "array",
-    },
+    "stuff": "string",
   },
-  "todos": Array [],
   "views": Array [
     Object {
       "blocks": Object {
@@ -1247,7 +1235,6 @@ Object {
                   },
                   "tags": Object {
                     "code": true,
-                    "margin": true,
                     "style": true,
                   },
                   "type": "Property",
@@ -1486,215 +1473,11 @@ Object {
               "list": Array [
                 Object {
                   "blocks": Object {
-                    "list": Array [
-                      Object {
-                        "isBasic": true,
-                        "loc": Object {
-                          "end": Object {
-                            "column": 13,
-                            "line": 16,
-                          },
-                          "start": Object {
-                            "column": 0,
-                            "line": 14,
-                          },
-                        },
-                        "maybeAnimated": true,
-                        "name": Object {
-                          "loc": Object {
-                            "end": Object {
-                              "column": 3,
-                              "line": 14,
-                            },
-                            "start": Object {
-                              "column": 0,
-                              "line": 14,
-                            },
-                          },
-                          "type": "Literal",
-                          "value": "Text",
-                        },
-                        "parents": Array [
-                          "Vertical",
-                          "List",
-                          "Vertical",
-                        ],
-                        "properties": Object {
-                          "list": Array [
-                            Object {
-                              "inScope": false,
-                              "key": Object {
-                                "loc": Object {
-                                  "end": Object {
-                                    "column": 4,
-                                    "line": 15,
-                                  },
-                                  "start": Object {
-                                    "column": 0,
-                                    "line": 15,
-                                  },
-                                },
-                                "type": "Literal",
-                                "value": "color",
-                                "valueRaw": "color",
-                              },
-                              "loc": Object {
-                                "end": Object {
-                                  "column": 15,
-                                  "line": 15,
-                                },
-                                "start": Object {
-                                  "column": 0,
-                                  "line": 15,
-                                },
-                              },
-                              "meta": Object {
-                                "elements": Array [
-                                  Object {
-                                    "loc": Object {
-                                      "end": Object {
-                                        "column": 15,
-                                        "line": 15,
-                                      },
-                                      "start": Object {
-                                        "column": 6,
-                                        "line": 15,
-                                      },
-                                    },
-                                    "tag": "code",
-                                    "type": "Literal",
-                                    "value": "item.color",
-                                  },
-                                ],
-                                "loc": Object {
-                                  "end": Object {
-                                    "column": 15,
-                                    "line": 15,
-                                  },
-                                  "start": Object {
-                                    "column": 0,
-                                    "line": 15,
-                                  },
-                                },
-                                "type": "ArrayExpression",
-                              },
-                              "tags": Object {
-                                "code": true,
-                                "style": true,
-                              },
-                              "type": "Property",
-                              "value": Object {
-                                "loc": Object {
-                                  "end": Object {
-                                    "column": 15,
-                                    "line": 15,
-                                  },
-                                  "start": Object {
-                                    "column": 6,
-                                    "line": 15,
-                                  },
-                                },
-                                "type": "Literal",
-                                "value": "item.color",
-                              },
-                            },
-                            Object {
-                              "inScope": false,
-                              "key": Object {
-                                "loc": Object {
-                                  "end": Object {
-                                    "column": 3,
-                                    "line": 16,
-                                  },
-                                  "start": Object {
-                                    "column": 0,
-                                    "line": 16,
-                                  },
-                                },
-                                "type": "Literal",
-                                "value": "text",
-                                "valueRaw": "text",
-                              },
-                              "loc": Object {
-                                "end": Object {
-                                  "column": 13,
-                                  "line": 16,
-                                },
-                                "start": Object {
-                                  "column": 0,
-                                  "line": 16,
-                                },
-                              },
-                              "meta": Object {
-                                "elements": Array [
-                                  Object {
-                                    "loc": Object {
-                                      "end": Object {
-                                        "column": 13,
-                                        "line": 16,
-                                      },
-                                      "start": Object {
-                                        "column": 5,
-                                        "line": 16,
-                                      },
-                                    },
-                                    "tag": "code",
-                                    "type": "Literal",
-                                    "value": "item.name",
-                                  },
-                                ],
-                                "loc": Object {
-                                  "end": Object {
-                                    "column": 13,
-                                    "line": 16,
-                                  },
-                                  "start": Object {
-                                    "column": 0,
-                                    "line": 16,
-                                  },
-                                },
-                                "type": "ArrayExpression",
-                              },
-                              "tags": Object {
-                                "code": true,
-                              },
-                              "type": "Property",
-                              "value": Object {
-                                "loc": Object {
-                                  "end": Object {
-                                    "column": 13,
-                                    "line": 16,
-                                  },
-                                  "start": Object {
-                                    "column": 5,
-                                    "line": 16,
-                                  },
-                                },
-                                "type": "Literal",
-                                "value": "item.name",
-                              },
-                            },
-                          ],
-                          "loc": Object {
-                            "end": Object {
-                              "column": 13,
-                              "line": 16,
-                            },
-                            "start": Object {
-                              "column": 0,
-                              "line": 15,
-                            },
-                          },
-                          "type": "Properties",
-                        },
-                        "scoped": Object {},
-                        "type": "Block",
-                      },
-                    ],
+                    "list": Array [],
                     "loc": Object {
                       "end": Object {
-                        "column": 13,
-                        "line": 16,
+                        "column": 4,
+                        "line": 12,
                       },
                       "start": Object {
                         "column": 0,
@@ -1703,11 +1486,12 @@ Object {
                     },
                     "type": "Blocks",
                   },
-                  "isBasic": true,
+                  "childrenProxyMap": null,
+                  "isBasic": false,
                   "loc": Object {
                     "end": Object {
-                      "column": 13,
-                      "line": 16,
+                      "column": 4,
+                      "line": 12,
                     },
                     "start": Object {
                       "column": 0,
@@ -1717,7 +1501,7 @@ Object {
                   "name": Object {
                     "loc": Object {
                       "end": Object {
-                        "column": 7,
+                        "column": 4,
                         "line": 12,
                       },
                       "start": Object {
@@ -1726,111 +1510,20 @@ Object {
                       },
                     },
                     "type": "Literal",
-                    "value": "Vertical",
+                    "value": "Stuff",
                   },
                   "parents": Array [
                     "Vertical",
                     "List",
                   ],
-                  "properties": Object {
-                    "list": Array [
-                      Object {
-                        "inScope": false,
-                        "key": Object {
-                          "loc": Object {
-                            "end": Object {
-                              "column": 6,
-                              "line": 13,
-                            },
-                            "start": Object {
-                              "column": 0,
-                              "line": 13,
-                            },
-                          },
-                          "type": "Literal",
-                          "value": "onClick",
-                          "valueRaw": "onClick",
-                        },
-                        "loc": Object {
-                          "end": Object {
-                            "column": 24,
-                            "line": 13,
-                          },
-                          "start": Object {
-                            "column": 0,
-                            "line": 13,
-                          },
-                        },
-                        "meta": Object {
-                          "elements": Array [
-                            Object {
-                              "loc": Object {
-                                "end": Object {
-                                  "column": 24,
-                                  "line": 13,
-                                },
-                                "start": Object {
-                                  "column": 8,
-                                  "line": 13,
-                                },
-                              },
-                              "tag": "code",
-                              "type": "Literal",
-                              "value": "props.anotherCall",
-                            },
-                          ],
-                          "loc": Object {
-                            "end": Object {
-                              "column": 24,
-                              "line": 13,
-                            },
-                            "start": Object {
-                              "column": 0,
-                              "line": 13,
-                            },
-                          },
-                          "type": "ArrayExpression",
-                        },
-                        "tags": Object {
-                          "code": true,
-                        },
-                        "type": "Property",
-                        "value": Object {
-                          "loc": Object {
-                            "end": Object {
-                              "column": 24,
-                              "line": 13,
-                            },
-                            "start": Object {
-                              "column": 8,
-                              "line": 13,
-                            },
-                          },
-                          "type": "Literal",
-                          "value": "props.anotherCall",
-                        },
-                      },
-                    ],
-                    "loc": Object {
-                      "end": Object {
-                        "column": 24,
-                        "line": 13,
-                      },
-                      "start": Object {
-                        "column": 0,
-                        "line": 13,
-                      },
-                    },
-                    "type": "Properties",
-                  },
                   "scoped": Object {},
                   "type": "Block",
                 },
               ],
               "loc": Object {
                 "end": Object {
-                  "column": 13,
-                  "line": 16,
+                  "column": 4,
+                  "line": 12,
                 },
                 "start": Object {
                   "column": 0,
@@ -1842,8 +1535,8 @@ Object {
             "isBasic": true,
             "loc": Object {
               "end": Object {
-                "column": 13,
-                "line": 16,
+                "column": 4,
+                "line": 12,
               },
               "start": Object {
                 "column": 0,
@@ -2040,8 +1733,8 @@ Object {
         ],
         "loc": Object {
           "end": Object {
-            "column": 13,
-            "line": 16,
+            "column": 4,
+            "line": 12,
           },
           "start": Object {
             "column": 0,
@@ -2053,8 +1746,8 @@ Object {
       "isBasic": true,
       "loc": Object {
         "end": Object {
-          "column": 13,
-          "line": 16,
+          "column": 4,
+          "line": 12,
         },
         "start": Object {
           "column": 0,

@@ -44,9 +44,5 @@ onFocus props.onFocus
 List
 from props.stuff
 when props.stuff.length > 0
-Vertical
-onClick props.anotherCall
-Text
-color item.color
-text item.name`,
+Stuff`,
 ]

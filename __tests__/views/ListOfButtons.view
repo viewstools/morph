@@ -1,7 +1,0 @@
-List
-from props.list
-Vertical
-onClick props.onClick
-Text
-color item.color
-text index

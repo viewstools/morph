@@ -1,6 +1,8 @@
 import { getCodeData, getColor, isCode, isColor } from './helpers.js'
 import getLoc from './get-loc.js'
 
+// TODO rework this, if anything, we need a simpler data structure
+// not an AST
 export default (value, line, startLine) => {
   const hasCode = isCode(value)
   const hasColor = isColor(value)

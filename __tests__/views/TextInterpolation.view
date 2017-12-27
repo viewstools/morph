@@ -1,5 +1,3 @@
 Vertical
 Text
 text ${props.name} test
-Text
-text props.name? `${props.name} here` : 'other'
