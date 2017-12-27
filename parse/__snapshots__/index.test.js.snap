@@ -245,7 +245,7 @@ Object {
                             "line": 4,
                           },
                         },
-                        "meta": null,
+                        "meta": Array [],
                         "tags": Object {},
                         "type": "Property",
                         "value": Object {
@@ -431,7 +431,7 @@ Object {
                       "line": 9,
                     },
                   },
-                  "meta": null,
+                  "meta": Array [],
                   "tags": Object {},
                   "type": "Property",
                   "value": Object {
@@ -476,36 +476,7 @@ Object {
                       "line": 10,
                     },
                   },
-                  "meta": Object {
-                    "elements": Array [
-                      Object {
-                        "loc": Object {
-                          "end": Object {
-                            "column": 11,
-                            "line": 10,
-                          },
-                          "start": Object {
-                            "column": 6,
-                            "line": 10,
-                          },
-                        },
-                        "tag": "color",
-                        "type": "Literal",
-                        "value": "purple",
-                      },
-                    ],
-                    "loc": Object {
-                      "end": Object {
-                        "column": 11,
-                        "line": 10,
-                      },
-                      "start": Object {
-                        "column": 0,
-                        "line": 10,
-                      },
-                    },
-                    "type": "ArrayExpression",
-                  },
+                  "meta": Array [],
                   "tags": Object {
                     "style": true,
                   },
@@ -614,36 +585,7 @@ Object {
                       "line": 12,
                     },
                   },
-                  "meta": Object {
-                    "elements": Array [
-                      Object {
-                        "loc": Object {
-                          "end": Object {
-                            "column": 19,
-                            "line": 12,
-                          },
-                          "start": Object {
-                            "column": 16,
-                            "line": 12,
-                          },
-                        },
-                        "tag": "color",
-                        "type": "Literal",
-                        "value": "blue",
-                      },
-                    ],
-                    "loc": Object {
-                      "end": Object {
-                        "column": 19,
-                        "line": 12,
-                      },
-                      "start": Object {
-                        "column": 0,
-                        "line": 12,
-                      },
-                    },
-                    "type": "ArrayExpression",
-                  },
+                  "meta": Array [],
                   "tags": Object {
                     "style": true,
                   },
@@ -793,36 +735,7 @@ Object {
                       "line": 2,
                     },
                   },
-                  "meta": Object {
-                    "elements": Array [
-                      Object {
-                        "loc": Object {
-                          "end": Object {
-                            "column": 8,
-                            "line": 2,
-                          },
-                          "start": Object {
-                            "column": 6,
-                            "line": 2,
-                          },
-                        },
-                        "tag": "color",
-                        "type": "Literal",
-                        "value": "red",
-                      },
-                    ],
-                    "loc": Object {
-                      "end": Object {
-                        "column": 8,
-                        "line": 2,
-                      },
-                      "start": Object {
-                        "column": 0,
-                        "line": 2,
-                      },
-                    },
-                    "type": "ArrayExpression",
-                  },
+                  "meta": Array [],
                   "tags": Object {
                     "style": true,
                   },
@@ -917,36 +830,7 @@ Object {
                       "line": 4,
                     },
                   },
-                  "meta": Object {
-                    "elements": Array [
-                      Object {
-                        "loc": Object {
-                          "end": Object {
-                            "column": 10,
-                            "line": 4,
-                          },
-                          "start": Object {
-                            "column": 6,
-                            "line": 4,
-                          },
-                        },
-                        "tag": "color",
-                        "type": "Literal",
-                        "value": "white",
-                      },
-                    ],
-                    "loc": Object {
-                      "end": Object {
-                        "column": 10,
-                        "line": 4,
-                      },
-                      "start": Object {
-                        "column": 0,
-                        "line": 4,
-                      },
-                    },
-                    "type": "ArrayExpression",
-                  },
+                  "meta": Array [],
                   "tags": Object {
                     "style": true,
                   },
@@ -1111,51 +995,12 @@ Object {
                       "line": 4,
                     },
                   },
-                  "meta": Object {
-                    "elements": Array [
-                      Object {
-                        "loc": Object {
-                          "end": Object {
-                            "column": 21,
-                            "line": 4,
-                          },
-                          "start": Object {
-                            "column": 6,
-                            "line": 4,
-                          },
-                        },
-                        "tag": "code",
-                        "type": "Literal",
-                        "value": "props.some.thing",
-                      },
-                      Object {
-                        "loc": Object {
-                          "end": Object {
-                            "column": 29,
-                            "line": 4,
-                          },
-                          "start": Object {
-                            "column": 27,
-                            "line": 4,
-                          },
-                        },
-                        "tag": "color",
-                        "type": "Literal",
-                        "value": "red",
-                      },
-                    ],
-                    "loc": Object {
-                      "end": Object {
-                        "column": 30,
-                        "line": 4,
-                      },
-                      "start": Object {
-                        "column": 0,
-                        "line": 4,
-                      },
+                  "meta": Array [
+                    Object {
+                      "tag": "code",
+                      "value": "props.some.thing",
                     },
-                    "type": "ArrayExpression",
-                  },
+                  ],
                   "tags": Object {
                     "code": true,
                     "style": true,
@@ -1203,36 +1048,12 @@ Object {
                       "line": 5,
                     },
                   },
-                  "meta": Object {
-                    "elements": Array [
-                      Object {
-                        "loc": Object {
-                          "end": Object {
-                            "column": 26,
-                            "line": 5,
-                          },
-                          "start": Object {
-                            "column": 11,
-                            "line": 5,
-                          },
-                        },
-                        "tag": "code",
-                        "type": "Literal",
-                        "value": "props.marginLeft",
-                      },
-                    ],
-                    "loc": Object {
-                      "end": Object {
-                        "column": 26,
-                        "line": 5,
-                      },
-                      "start": Object {
-                        "column": 0,
-                        "line": 5,
-                      },
+                  "meta": Array [
+                    Object {
+                      "tag": "code",
+                      "value": "props.marginLeft",
                     },
-                    "type": "ArrayExpression",
-                  },
+                  ],
                   "tags": Object {
                     "code": true,
                     "style": true,
@@ -1280,36 +1101,12 @@ Object {
                       "line": 6,
                     },
                   },
-                  "meta": Object {
-                    "elements": Array [
-                      Object {
-                        "loc": Object {
-                          "end": Object {
-                            "column": 19,
-                            "line": 6,
-                          },
-                          "start": Object {
-                            "column": 5,
-                            "line": 6,
-                          },
-                        },
-                        "tag": "code",
-                        "type": "Literal",
-                        "value": "props.some.prop",
-                      },
-                    ],
-                    "loc": Object {
-                      "end": Object {
-                        "column": 19,
-                        "line": 6,
-                      },
-                      "start": Object {
-                        "column": 0,
-                        "line": 6,
-                      },
+                  "meta": Array [
+                    Object {
+                      "tag": "code",
+                      "value": "props.some.prop",
                     },
-                    "type": "ArrayExpression",
-                  },
+                  ],
                   "tags": Object {
                     "code": true,
                   },
@@ -1403,36 +1200,12 @@ Object {
                       "line": 8,
                     },
                   },
-                  "meta": Object {
-                    "elements": Array [
-                      Object {
-                        "loc": Object {
-                          "end": Object {
-                            "column": 20,
-                            "line": 8,
-                          },
-                          "start": Object {
-                            "column": 8,
-                            "line": 8,
-                          },
-                        },
-                        "tag": "code",
-                        "type": "Literal",
-                        "value": "props.onFocus",
-                      },
-                    ],
-                    "loc": Object {
-                      "end": Object {
-                        "column": 20,
-                        "line": 8,
-                      },
-                      "start": Object {
-                        "column": 0,
-                        "line": 8,
-                      },
+                  "meta": Array [
+                    Object {
+                      "tag": "code",
+                      "value": "props.onFocus",
                     },
-                    "type": "ArrayExpression",
-                  },
+                  ],
                   "tags": Object {
                     "code": true,
                   },
@@ -1589,36 +1362,12 @@ Object {
                       "line": 10,
                     },
                   },
-                  "meta": Object {
-                    "elements": Array [
-                      Object {
-                        "loc": Object {
-                          "end": Object {
-                            "column": 15,
-                            "line": 10,
-                          },
-                          "start": Object {
-                            "column": 5,
-                            "line": 10,
-                          },
-                        },
-                        "tag": "code",
-                        "type": "Literal",
-                        "value": "props.stuff",
-                      },
-                    ],
-                    "loc": Object {
-                      "end": Object {
-                        "column": 15,
-                        "line": 10,
-                      },
-                      "start": Object {
-                        "column": 0,
-                        "line": 10,
-                      },
+                  "meta": Array [
+                    Object {
+                      "tag": "code",
+                      "value": "props.stuff",
                     },
-                    "type": "ArrayExpression",
-                  },
+                  ],
                   "tags": Object {
                     "code": true,
                   },
@@ -1665,36 +1414,12 @@ Object {
                       "line": 11,
                     },
                   },
-                  "meta": Object {
-                    "elements": Array [
-                      Object {
-                        "loc": Object {
-                          "end": Object {
-                            "column": 22,
-                            "line": 11,
-                          },
-                          "start": Object {
-                            "column": 5,
-                            "line": 11,
-                          },
-                        },
-                        "tag": "code",
-                        "type": "Literal",
-                        "value": "props.stuff.length",
-                      },
-                    ],
-                    "loc": Object {
-                      "end": Object {
-                        "column": 26,
-                        "line": 11,
-                      },
-                      "start": Object {
-                        "column": 0,
-                        "line": 11,
-                      },
+                  "meta": Array [
+                    Object {
+                      "tag": "code",
+                      "value": "props.stuff.length",
                     },
-                    "type": "ArrayExpression",
-                  },
+                  ],
                   "tags": Object {
                     "code": true,
                   },
@@ -1799,36 +1524,12 @@ Object {
                 "line": 1,
               },
             },
-            "meta": Object {
-              "elements": Array [
-                Object {
-                  "loc": Object {
-                    "end": Object {
-                      "column": 36,
-                      "line": 1,
-                    },
-                    "start": Object {
-                      "column": 16,
-                      "line": 1,
-                    },
-                  },
-                  "tag": "code",
-                  "type": "Literal",
-                  "value": "props.backgroundColor",
-                },
-              ],
-              "loc": Object {
-                "end": Object {
-                  "column": 36,
-                  "line": 1,
-                },
-                "start": Object {
-                  "column": 0,
-                  "line": 1,
-                },
+            "meta": Array [
+              Object {
+                "tag": "code",
+                "value": "props.backgroundColor",
               },
-              "type": "ArrayExpression",
-            },
+            ],
             "tags": Object {
               "code": true,
               "style": true,
@@ -1876,36 +1577,12 @@ Object {
                 "line": 2,
               },
             },
-            "meta": Object {
-              "elements": Array [
-                Object {
-                  "loc": Object {
-                    "end": Object {
-                      "column": 41,
-                      "line": 2,
-                    },
-                    "start": Object {
-                      "column": 17,
-                      "line": 2,
-                    },
-                  },
-                  "tag": "code",
-                  "type": "Literal",
-                  "value": "props.onClick(props.name,",
-                },
-              ],
-              "loc": Object {
-                "end": Object {
-                  "column": 48,
-                  "line": 2,
-                },
-                "start": Object {
-                  "column": 0,
-                  "line": 2,
-                },
+            "meta": Array [
+              Object {
+                "tag": "code",
+                "value": "props.onClick(props.name,",
               },
-              "type": "ArrayExpression",
-            },
+            ],
             "tags": Object {
               "code": true,
             },

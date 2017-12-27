@@ -1,8 +1,8 @@
-Button is Vertical
+Button Vertical
 backgroundColor black
 backgroundColorHover white
 onClick props.onClick
-Icon is Proxy
+Icon Proxy
 from props.icon
 fill white
 fillHover black

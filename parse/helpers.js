@@ -1,9 +1,8 @@
-import { all as COLOR } from 'synesthesia'
 import cssProperties from 'css-properties'
 import toCamelCase from 'to-camel-case'
 
 const BASIC = /^(CaptureEmail|CaptureFile|CaptureNumber|CapturePhone|CaptureSecure|CaptureText|CaptureTextArea|G|Horizontal|Image|List|Svg|SvgCircle|SvgEllipse|SvgDefs|SvgGroup|SvgLinearGradient|SvgRadialGradient|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgSymbol|SvgText|SvgUse|SvgStop|Text|Vertical)$/i
-const BLOCK = /^([A-Z][a-zA-Z0-9]*)(\s+[a-z\s]*([A-Z][a-zA-Z0-9]*))?$/
+const BLOCK = /^([A-Z][a-zA-Z0-9]*)(\s+([A-Z][a-zA-Z0-9]*))?$/
 const BOOL = /^(false|true)$/i
 const CAPTURE = /^(CaptureEmail|CaptureFile|CaptureNumber|CapturePhone|CaptureSecure|CaptureText|CaptureTextArea)$/i
 const CODE_EXPLICIT = /^{.+}$/
@@ -16,7 +15,7 @@ const FONTABLE = /^(CaptureEmail|CaptureNumber|CapturePhone|CaptureSecure|Captur
 const LIST = /^List$/
 const INT = /^[0-9]+$/
 const NOT_GROUP = /^(Image|Test|Text|Proxy|SvgCircle|SvgEllipse|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgText|SvgStop)$/i
-const PROP = /^([a-z][a-zA-Z0-9]*)\s+(.+)$/
+const PROP = /^([a-z][a-zA-Z0-9]*)\s+(.*)$/
 const PROP_STYLE_STEMS = /^([a-z][A-Z0-9]*?)(Hover|Focus|Placeholder|Disabled|Print)?$/i
 const SCOPE = /^when\s+(.+)$/
 const STYLE = new RegExp(
@@ -27,7 +26,6 @@ const STYLE = new RegExp(
     )}|pointerEvents|clipPath|appRegion|userSelect|hyphens|overflowWrap)$`
 )
 const TEMPLATE_LITERAL = /^`.+`$/
-const TEXT = /^Text$/
 const TRUE = /^true$/i
 const USER_COMMENT = /^##(.*)$/
 
@@ -48,7 +46,6 @@ export const isCodeInvalid = line => {
   )
 }
 export const isComment = line => is(COMMENT, line)
-export const isColor = line => is(COLOR, line)
 export const isEmptyList = line => is(EMPTY_LIST, line)
 export const isEmptyText = line => line === ''
 export const isEnd = line => line === ''
@@ -60,7 +57,6 @@ export const isGroup = line => !is(NOT_GROUP, line) && !isCapture(line)
 export const isList = line => is(LIST, line)
 export const isInt = line => is(INT, line)
 export const isProp = line => is(PROP, line)
-export const isText = line => is(TEXT, line)
 export const isTemplateLiteral = line => is(TEMPLATE_LITERAL, line)
 export const isScope = line => is(SCOPE, line) && isCode(getScope(line))
 export const isStyle = line => is(STYLE, line)
@@ -96,7 +92,6 @@ export const getComment = line => {
     return ''
   }
 }
-export const getColor = line => get(COLOR, line)
 export const getMainFont = line =>
   line ? line.split(',')[0].replace(/['"]/g, '') : ''
 export const getProp = line => get(PROP, line).slice(1)

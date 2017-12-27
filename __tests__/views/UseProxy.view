@@ -1,5 +1,5 @@
-Button is Horizontal
-Icon is Proxy
+Button Horizontal
+Icon Proxy
 from props.icon
 fill red
 Text
