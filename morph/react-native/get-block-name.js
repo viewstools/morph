@@ -1,4 +1,4 @@
-import { getProp, hasProp, isCode, isToggle } from '../utils.js'
+import { getProp, hasProp, isCode } from '../utils.js'
 import makeToggle from '../react/make-toggle.js'
 import toPascalCase from 'to-pascal-case'
 
@@ -44,20 +44,7 @@ const getGroupBlockName = (node, state) => {
     node.goTo = true
   } else if (hasProp(node, 'onClick')) {
     const propNode = getProp(node, 'onClick')
-
-    if (isToggle(propNode)) {
-      const propToToggle = propNode.tags.toggle
-      const functionName = `toggle${toPascalCase(propToToggle)}`
-      state.remap[propToToggle] = {
-        body: makeToggle(functionName, propToToggle),
-        fn: functionName,
-      }
-
-      node.action = `props.${functionName}`
-      return name
-    } else {
-      node.action = propNode.value.value
-    }
+    node.action = propNode.value.value
   }
 
   if (hasProp(node, 'backgroundImage')) {

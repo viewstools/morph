@@ -9,11 +9,8 @@ import {
   isCode,
   isList,
   isStyle,
-  isToggle,
 } from '../utils.js'
-import makeToggle from './make-toggle.js'
 import safe from './safe.js'
-import toPascalCase from 'to-pascal-case'
 import wrap from './wrap.js'
 
 export default ({
@@ -202,8 +199,6 @@ export default ({
             from.value.value
           }.map((item, index) => `
         )
-
-        node.list.forEach(n => (n.isInList = true))
       }
     },
     leave(node, parent, state) {
@@ -242,20 +237,20 @@ export default ({
     },
   }
 
+  const BlockInList = {
+    enter(node, parent, state) {
+      if (parent && isList(parent.parent)) {
+        state.render.push(' {...item} key={item.id || index}')
+      }
+    },
+  }
+
   const PropertiesChildrenProxyMap = {
     leave(node, parent, state) {
       if (parent.childrenProxyMap) {
         state.render.push(
           ` childrenProxyMap={${getObjectAsString(parent.childrenProxyMap)}}`
         )
-      }
-    },
-  }
-
-  const PropertiesListKey = {
-    leave(node, parent, state) {
-      if (parent.isInList && !node.hasKey && !parent.wrapEnd) {
-        state.render.push(' key={index}')
       }
     },
   }
@@ -299,40 +294,12 @@ export default ({
     leave: PropertiesStyleLeave,
   }
 
-  const PropertyList = {
-    enter(node, parent, state) {
-      // block is inside List
-      if (parent.parent.isInList && node.key.value === 'key') {
-        parent.hasKey = true
-      }
-    },
-  }
-
   const PropertyRest = {
     enter(node, parent, state) {
       if (
         !parent.skip &&
         !(node.key.value === 'from' && parent.parent.name.value === 'List')
       ) {
-        // TODO remove toggle
-        if (isToggle(node)) {
-          const propToToggle = node.tags.toggle
-          const functionName = `toggle${toPascalCase(propToToggle)}`
-          state.remap[propToToggle] = {
-            body: makeToggle(functionName, propToToggle),
-            fn: functionName,
-          }
-          state.render.push(` ${node.key.value}={props.${functionName}}`)
-          return
-        }
-
-        // if (node.key.value === 'onSubmit') {
-        //   state.render.push(
-        //     ` ${node.key.value}={() => ${node.value.value}(state)}`
-        //   )
-        //   return
-        // }
-
         const value = getValueForProperty(node, parent, state)
 
         if (value) {
@@ -409,6 +376,7 @@ export default ({
 
   return {
     BlockExplicitChildren,
+    BlockInList,
     BlockMaybeNeedsProperties,
     BlockName,
     BlockProxy,
@@ -422,6 +390,7 @@ export default ({
         BlockName.enter.call(this, node, parent, state)
         BlockMaybeNeedsProperties.enter.call(this, node, parent, state)
         BlockProxy.enter.call(this, node, parent, state)
+        BlockInList.enter.call(this, node, parent, state)
       },
       leave(node, parent, state) {
         BlockExplicitChildren.leave.call(this, node, parent, state)
@@ -449,7 +418,6 @@ export default ({
       },
       leave(node, parent, state) {
         PropertiesStyle.leave.call(this, node, parent, state)
-        PropertiesListKey.leave.call(this, node, parent, state)
         PropertiesRoute.leave.call(this, node, parent, state)
         PropertiesChildrenProxyMap.leave.call(this, node, parent, state)
         if (PropertiesClassName) {
@@ -477,7 +445,6 @@ export default ({
         // if (PropertyData.enter.call(this, node, parent, state)) return
         if (PropertyStyle.enter.call(this, node, parent, state)) return
         if (PropertyText.enter.call(this, node, parent, state)) return
-        PropertyList.enter.call(this, node, parent, state)
         PropertyRest.enter.call(this, node, parent, state)
       },
     },

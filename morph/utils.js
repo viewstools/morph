@@ -116,10 +116,7 @@ export const isCode = node =>
     ? /props|item|index/.test(node) || isCodeExplicit(node)
     : isTag(node, 'code')
 export const isStyle = node => isTag(node, 'style')
-export const isToggle = node => isTag(node, 'toggle')
 export const isTag = (node, tag) => node.tags[tag]
-export const isUnitlessProp = prop =>
-  prop === 'lineHeight' || prop === 'fontWeight' || prop === 'opacity'
 
 export const getActionableParent = node => {
   if (!node.parent) return false
@@ -138,11 +135,3 @@ export const getAllowedStyleKeys = node => {
 
 export const isList = node =>
   node.type === 'Block' && node.name.value === 'List'
-
-export const isInList = node => {
-  let parent = node.parent
-  while (parent && !isList(parent)) {
-    parent = parent.parent
-  }
-  return !!parent
-}

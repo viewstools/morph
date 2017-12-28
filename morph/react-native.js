@@ -73,6 +73,7 @@ export default ({
 
   const {
     BlockExplicitChildren,
+    BlockInList,
     BlockMaybeNeedsProperties,
     BlockName,
     BlockProxy,
@@ -99,6 +100,7 @@ export default ({
         BlockCapture.enter,
         BlockBackgroundImage.enter,
         BlockProxy.enter,
+        BlockInList.enter,
         BlockTestIdEnter,
       ].forEach(fn => fn.call(this, node, parent, state))
     },

@@ -88,12 +88,9 @@ Object {
 import React from 'react';
 import styled from 'react-emotion';
 
-const Vertical = styled('button')(
-  { flexDirection: 'column' },
-  ({ index, item, props }) => ({
-    opacity: props.opacity,
-  })
-);
+const Vertical = styled('button')({ flexDirection: 'column' }, ({ props }) => ({
+  opacity: props.opacity,
+}));
 
 const AnimatedButton = props => {
   return (
@@ -132,12 +129,9 @@ Object {
 import React from 'react';
 import styled from 'react-emotion';
 
-const Vertical = styled('button')(
-  { flexDirection: 'column' },
-  ({ index, item, props }) => ({
-    opacity: props.opacity,
-  })
-);
+const Vertical = styled('button')({ flexDirection: 'column' }, ({ props }) => ({
+  opacity: props.opacity,
+}));
 
 const AnimatedButton = props => {
   return (
@@ -263,7 +257,7 @@ const Horizontal = styled('div')(
     flexDirection: 'row',
     backgroundSize: 'contain',
   },
-  ({ index, item, props }) => ({
+  ({ props }) => ({
     backgroundImage: \`url(\${props.backgroundImage})\`,
   })
 );
@@ -312,7 +306,7 @@ const Horizontal = styled('div')(
     flexDirection: 'row',
     backgroundSize: 'contain',
   },
-  ({ index, item, props }) => ({
+  ({ props }) => ({
     backgroundImage: \`url(\${props.backgroundImage})\`,
   })
 );
@@ -352,18 +346,12 @@ Object {
 import React from 'react';
 import styled, { css } from 'react-emotion';
 
-const Vertical = styled('div')(
-  { flexDirection: 'column' },
-  ({ index, item, props }) => ({
-    boxShadow: \`10px 5px 2px \${props.color}\`,
-  })
-);
-const Vertical1 = styled('div')(
-  { flexDirection: 'column' },
-  ({ index, item, props }) => ({
-    boxShadow: \`10px 5px 10px \${props.color}\`,
-  })
-);
+const Vertical = styled('div')({ flexDirection: 'column' }, ({ props }) => ({
+  boxShadow: \`10px 5px 2px \${props.color}\`,
+}));
+const Vertical1 = styled('div')({ flexDirection: 'column' }, ({ props }) => ({
+  boxShadow: \`10px 5px 10px \${props.color}\`,
+}));
 const Vertical_hvytwz3 = css({
   flexDirection: 'column',
   boxShadow: '0px 8px 15px 0px rgba(0,0,0,0.1)',
@@ -403,18 +391,12 @@ Object {
 import React from 'react';
 import styled, { css } from 'react-emotion';
 
-const Vertical = styled('div')(
-  { flexDirection: 'column' },
-  ({ index, item, props }) => ({
-    boxShadow: \`10px 5px 2px \${props.color}\`,
-  })
-);
-const Vertical1 = styled('div')(
-  { flexDirection: 'column' },
-  ({ index, item, props }) => ({
-    boxShadow: \`10px 5px 10px \${props.color}\`,
-  })
-);
+const Vertical = styled('div')({ flexDirection: 'column' }, ({ props }) => ({
+  boxShadow: \`10px 5px 2px \${props.color}\`,
+}));
+const Vertical1 = styled('div')({ flexDirection: 'column' }, ({ props }) => ({
+  boxShadow: \`10px 5px 10px \${props.color}\`,
+}));
 const Vertical_hvytwz3 = css({
   flexDirection: 'column',
   boxShadow: '0px 8px 15px 0px rgba(0,0,0,0.1)',
@@ -532,7 +514,7 @@ const Vertical_h241iip = css({
   flexDirection: 'column',
   backgroundColor: 'red',
 });
-const Text = styled('span')(({ index, item, props }) => ({
+const Text = styled('span')(({ props }) => ({
   color: props.color,
 }));
 
@@ -580,7 +562,7 @@ const Vertical_h241iip = css({
   flexDirection: 'column',
   backgroundColor: 'red',
 });
-const Text = styled('span')(({ index, item, props }) => ({
+const Text = styled('span')(({ props }) => ({
   color: props.color,
 }));
 
@@ -624,12 +606,9 @@ import React from 'react';
 import SomeThing from './SomeThing.view.js';
 import styled from 'react-emotion';
 
-const Vertical = styled('div')(
-  { flexDirection: 'column' },
-  ({ index, item, props }) => ({
-    height: props.height,
-  })
-);
+const Vertical = styled('div')({ flexDirection: 'column' }, ({ props }) => ({
+  height: props.height,
+}));
 
 const DynamicStylesApplyToBasicBlocksOnly = props => {
   return (
@@ -667,12 +646,9 @@ import React from 'react';
 import SomeThing from './SomeThing.view.js';
 import styled from 'react-emotion';
 
-const Vertical = styled('div')(
-  { flexDirection: 'column' },
-  ({ index, item, props }) => ({
-    height: props.height,
-  })
-);
+const Vertical = styled('div')({ flexDirection: 'column' }, ({ props }) => ({
+  height: props.height,
+}));
 
 const DynamicStylesApplyToBasicBlocksOnly = props => {
   return (
@@ -998,15 +974,12 @@ Object {
 import React from 'react';
 import styled from 'react-emotion';
 
-const Button = styled('button')(
-  { flexDirection: 'column' },
-  ({ index, item, props }) => ({
-    backgroundColor: props.backgroundColor,
-    '&:hover, &.hover': {
-      backgroundColor: props.backgroundColorHover,
-    },
-  })
-);
+const Button = styled('button')({ flexDirection: 'column' }, ({ props }) => ({
+  backgroundColor: props.backgroundColor,
+  '&:hover, &.hover': {
+    backgroundColor: props.backgroundColorHover,
+  },
+}));
 const Text = styled('span')(
   {
     color: 'white',
@@ -1014,7 +987,7 @@ const Text = styled('span')(
       color: 'black',
     },
   },
-  ({ index, item, props }) => ({
+  ({ props }) => ({
     fontSize: props.fontSize,
     [\`\${Button}:hover &, \${Button}.hover &\`]: {
       fontSize: props.fontSizeHover,
@@ -1064,15 +1037,12 @@ Object {
 import React from 'react';
 import styled from 'react-emotion';
 
-const Button = styled('button')(
-  { flexDirection: 'column' },
-  ({ index, item, props }) => ({
-    backgroundColor: props.backgroundColor,
-    '&:hover, &.hover': {
-      backgroundColor: props.backgroundColorHover,
-    },
-  })
-);
+const Button = styled('button')({ flexDirection: 'column' }, ({ props }) => ({
+  backgroundColor: props.backgroundColor,
+  '&:hover, &.hover': {
+    backgroundColor: props.backgroundColorHover,
+  },
+}));
 const Text = styled('span')(
   {
     color: 'white',
@@ -1080,7 +1050,7 @@ const Text = styled('span')(
       color: 'black',
     },
   },
-  ({ index, item, props }) => ({
+  ({ props }) => ({
     fontSize: props.fontSize,
     [\`\${Button}:hover &, \${Button}.hover &\`]: {
       fontSize: props.fontSizeHover,
@@ -1309,7 +1279,11 @@ const ListOfSomething = props => {
     >
       {Array.isArray(props.from) &&
         props.from.map((item, index) => (
-          <Something data-test-id=\\"ListOfSomething.Something\\" />
+          <Something
+            {...item}
+            key={item.id || index}
+            data-test-id=\\"ListOfSomething.Something\\"
+          />
         ))}
       {props.children}
     </div>
@@ -1350,7 +1324,11 @@ const ListOfSomething = props => {
     >
       {Array.isArray(props.from) &&
         props.from.map((item, index) => (
-          <Something data-test-id=\\"ListOfSomething.Something\\" />
+          <Something
+            {...item}
+            key={item.id || index}
+            data-test-id=\\"ListOfSomething.Something\\"
+          />
         ))}
       {props.children}
     </div>
@@ -1390,7 +1368,9 @@ const ListWhen = props => {
       className={List_ho4tnl3}
     >
       {Array.isArray(props.from) &&
-        props.from.map((item, index) => <Card data-test-id=\\"ListWhen.Card\\" />)}
+        props.from.map((item, index) => (
+          <Card {...item} key={item.id || index} data-test-id=\\"ListWhen.Card\\" />
+        ))}
       {props.children}
     </div>
   ) : null;
@@ -1430,7 +1410,9 @@ const ListWhen = props => {
       className={List_ho4tnl3}
     >
       {Array.isArray(props.from) &&
-        props.from.map((item, index) => <Card data-test-id=\\"ListWhen.Card\\" />)}
+        props.from.map((item, index) => (
+          <Card {...item} key={item.id || index} data-test-id=\\"ListWhen.Card\\" />
+        ))}
       {props.children}
     </div>
   ) : null;
@@ -1521,12 +1503,9 @@ import React from 'react';
 import chopperSvg from './chopper.svg';
 import styled from 'react-emotion';
 
-const LocalImageSvg1 = styled('img')(
-  { width: 50 },
-  ({ index, item, props }) => ({
-    height: props.height,
-  })
-);
+const LocalImageSvg1 = styled('img')({ width: 50 }, ({ props }) => ({
+  height: props.height,
+}));
 
 const LocalImageSvg = props => {
   return (
@@ -1562,12 +1541,9 @@ import React from 'react';
 import chopperSvg from './chopper.svg';
 import styled from 'react-emotion';
 
-const LocalImageSvg1 = styled('img')(
-  { width: 50 },
-  ({ index, item, props }) => ({
-    height: props.height,
-  })
-);
+const LocalImageSvg1 = styled('img')({ width: 50 }, ({ props }) => ({
+  height: props.height,
+}));
 
 const LocalImageSvg = props => {
   return (
@@ -1988,7 +1964,7 @@ Object {
 import React from 'react';
 import styled from 'react-emotion';
 
-const Text = styled('span')(({ index, item, props }) => ({
+const Text = styled('span')(({ props }) => ({
   color: props.somethingGreen
     ? 'rgb(0,255,0)'
     : props.whatMakesBlue ? 'rgb(0,0,255)' : 'red',
@@ -2029,7 +2005,7 @@ Object {
 import React from 'react';
 import styled from 'react-emotion';
 
-const Text = styled('span')(({ index, item, props }) => ({
+const Text = styled('span')(({ props }) => ({
   color: props.somethingGreen
     ? 'rgb(0,255,0)'
     : props.whatMakesBlue ? 'rgb(0,0,255)' : 'red',
@@ -2250,12 +2226,9 @@ import styled, { css } from 'react-emotion';
 
 const Popup_ho4tnl3 = css({ flexDirection: 'column' });
 const Toggle_ho4tnl3 = css({ flexDirection: 'column' });
-const Content = styled('div')(
-  { flexDirection: 'column' },
-  ({ index, item, props }) => ({
-    opacity: props.isShown ? 1 : props.isSuperVisible ? 3 : 0,
-  })
-);
+const Content = styled('div')({ flexDirection: 'column' }, ({ props }) => ({
+  opacity: props.isShown ? 1 : props.isSuperVisible ? 3 : 0,
+}));
 
 const ScopePopup2 = props => {
   return (
@@ -2307,12 +2280,9 @@ import styled, { css } from 'react-emotion';
 
 const Popup_ho4tnl3 = css({ flexDirection: 'column' });
 const Toggle_ho4tnl3 = css({ flexDirection: 'column' });
-const Content = styled('div')(
-  { flexDirection: 'column' },
-  ({ index, item, props }) => ({
-    opacity: props.isShown ? 1 : props.isSuperVisible ? 3 : 0,
-  })
-);
+const Content = styled('div')({ flexDirection: 'column' }, ({ props }) => ({
+  opacity: props.isShown ? 1 : props.isSuperVisible ? 3 : 0,
+}));
 
 const ScopePopup2 = props => {
   return (
@@ -2377,7 +2347,7 @@ const WindowControl = styled('button')(
       transform: 'scale(1.5)',
     },
   },
-  ({ index, item, props }) => ({
+  ({ props }) => ({
     '&:hover, &.hover': {
       backgroundColor: props.backgroundColorHover,
     },
@@ -2436,7 +2406,7 @@ const WindowControl = styled('button')(
       transform: 'scale(1.5)',
     },
   },
-  ({ index, item, props }) => ({
+  ({ props }) => ({
     '&:hover, &.hover': {
       backgroundColor: props.backgroundColorHover,
     },
@@ -4195,7 +4165,7 @@ const ViewNameIsntUsedInStyle1 = styled('div')(
     flexDirection: 'column',
     zIndex: 5,
   },
-  ({ index, item, props }) => ({
+  ({ props }) => ({
     opacity: props.opacity,
   })
 );
@@ -4239,7 +4209,7 @@ const ViewNameIsntUsedInStyle1 = styled('div')(
     flexDirection: 'column',
     zIndex: 5,
   },
-  ({ index, item, props }) => ({
+  ({ props }) => ({
     opacity: props.opacity,
   })
 );
@@ -5159,7 +5129,11 @@ const ListOfSomething = props => {
     <View testID={props['testID'] || 'ListOfSomething'} style={styles.h18pdll5}>
       {Array.isArray(props.from) &&
         props.from.map((item, index) => (
-          <Something testID=\\"ListOfSomething.Something\\" />
+          <Something
+            {...item}
+            key={item.id || index}
+            testID=\\"ListOfSomething.Something\\"
+          />
         ))}
       {props.children}
     </View>
@@ -5195,7 +5169,9 @@ const ListWhen = props => {
   return props.showMe ? (
     <View testID={props['testID'] || 'List'} style={styles.h18pdll5}>
       {Array.isArray(props.from) &&
-        props.from.map((item, index) => <Card testID=\\"ListWhen.Card\\" />)}
+        props.from.map((item, index) => (
+          <Card {...item} key={item.id || index} testID=\\"ListWhen.Card\\" />
+        ))}
       {props.children}
     </View>
   ) : null;

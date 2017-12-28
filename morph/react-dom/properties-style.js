@@ -3,8 +3,6 @@ import {
   getAllowedStyleKeys,
   hasKeys,
   hasKeysInChildren,
-  isList,
-  isInList,
 } from '../utils.js'
 import hash from '../hash.js'
 
@@ -74,9 +72,7 @@ export const leave = (node, parent, state) => {
       )
       .join(',\n')
 
-    let cssDynamic = [
-      `${isInList ? '({ index, item, props })' : '({ props })'} => ({`,
-    ]
+    let cssDynamic = ['({ props }) => ({']
     cssDynamic = cssDynamic.concat(
       Object.keys(dynamic)
         .filter(key => allowedStyleKeys.includes(key) && hasKeys(dynamic[key]))
@@ -98,9 +94,6 @@ export const leave = (node, parent, state) => {
 
       // TODO we may want to be smarter here and only pass what's needed
       state.render.push(` props={props}`)
-      if (isInList(node) && !isList(parent)) {
-        state.render.push(` index={index} item={item}`)
-      }
     }
   } else if (hasKeysInChildren(staticStyle)) {
     state.cssStatic = true
