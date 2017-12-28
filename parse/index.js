@@ -83,7 +83,7 @@ export default (rtext, skipComments = true) => {
       block.properties.loc.end = last.loc.end
     }
 
-    if (block.blocks) {
+    if (block.isGroup) {
       const last = block.blocks.list[block.blocks.list.length - 1]
       block.blocks.loc.end = last ? last.loc.end : block.loc.end
 
@@ -92,13 +92,12 @@ export default (rtext, skipComments = true) => {
       }
     }
 
-    if (stack.length > 0) {
-      return false
-    } else {
+    if (stack.length === 0) {
       // if we're the last block on the stack, then this is the view!
       views.push(block)
       return true
     }
+    return false
   }
 
   const parseBlock = (line, i) => {
@@ -113,12 +112,11 @@ export default (rtext, skipComments = true) => {
         loc: getLoc(i, 0, line.length - 1),
       },
       isBasic: isBasic(name),
+      isGroup: false,
       loc: getLoc(i, 0),
-      parents: stack
-        .filter(b => b.type === 'Block')
-        .map(b => b.is || b.name.value),
       scoped: {},
     }
+
     if (is) {
       block.is = is
 
@@ -132,38 +130,31 @@ export default (rtext, skipComments = true) => {
 
     const last = stack[stack.length - 1]
     if (last) {
-      if (last.blocks) {
-        if (isList(last.name.value) && last.blocks.list.length > 0) {
-          // the list already has a block
-          let topLevelIsGroup = false
-          if (stack.length - 2 >= 0) {
-            topLevelIsGroup = isGroup(stack[stack.length - 2].name.value)
-          } else if (views.length > 0) {
-            topLevelIsGroup = !!views[0].blocks
-          }
-
-          if (topLevelIsGroup) {
-            // tell how we can fix that
+      if (last.isGroup) {
+        if (last.isList) {
+          if (block.isBasic) {
             warn(
-              lines[i - 1] === ''
-                ? `put 1 empty line before`
-                : `put 2 empty lines before`,
+              `A basic block can't be inside a List.\nPut 1 empty line before`,
               block
             )
+            shouldPushToStack = true
+          } else if (last.blocks.list.length > 0) {
+            warn(
+              `A List can only have one view inside. This block is outside of it.\nPut 1 empty line before.`,
+              block
+            )
+            shouldPushToStack = true
           } else {
-            warn(`add Vertical at the top`, block)
+            last.blocks.list.push(block)
           }
-          // shouldPushToStack = true
+        } else {
+          last.blocks.list.push(block)
         }
-
-        last.blocks.list.push(block)
       } else {
         // the block is inside a block that isn't a group
         end(stack.pop(), i)
-        const topLevelIsGroup = !!views[0].blocks
 
-        if (topLevelIsGroup) {
-          // tell how we can fix that
+        if (views[0].isGroup) {
           warn(
             lines[i - 1] === ''
               ? `put 1 empty line before`
@@ -177,14 +168,13 @@ export default (rtext, skipComments = true) => {
       }
     } else if (views.length > 0) {
       // the block is outside the top level block
-      const topLevelIsGroup = !!views[0].blocks
       let newLinesBeforePreviousBlock = 1
       while (isEnd(lines[i - newLinesBeforePreviousBlock])) {
         newLinesBeforePreviousBlock++
       }
 
       const help = []
-      if (!topLevelIsGroup) {
+      if (!views[0].isGroup) {
         help.push(`add Vertical at the top`)
       }
       if (newLinesBeforePreviousBlock > 2) {
@@ -199,6 +189,8 @@ export default (rtext, skipComments = true) => {
     }
 
     if (isGroup(name)) {
+      block.isGroup = true
+      block.isList = isList(name)
       block.blocks = {
         type: 'Blocks',
         list: [],
@@ -223,7 +215,6 @@ export default (rtext, skipComments = true) => {
     }
 
     const properties = []
-    const nested = []
 
     let inScope = false
 
@@ -280,23 +271,6 @@ export default (rtext, skipComments = true) => {
             value: getValue(value),
           },
         })
-      } else if (isEnd(line)) {
-        const prevLine = lines[j - 1]
-
-        if (isEnd(prevLine)) {
-          if (nested.length > 0) {
-            const props = nested.pop()
-
-            let last = properties
-            if (nested.length > 0) {
-              last = nested[nested.length - 1].value.properties
-            }
-            // TODO add warning
-            if (last) {
-              last.push(props)
-            }
-          }
-        }
       } else if (isComment(line) && !skipComments) {
         let [value] = getComment(line)
 
@@ -315,18 +289,6 @@ export default (rtext, skipComments = true) => {
           },
           tags: { comment: true, userComment },
         })
-      }
-    }
-
-    while (nested.length > 0) {
-      const props = nested.pop()
-
-      let last = properties
-      if (nested.length > 0) {
-        last = nested[nested.length - 1].value.properties
-      }
-      if (last) {
-        last.push(props)
       }
     }
 
@@ -352,7 +314,7 @@ export default (rtext, skipComments = true) => {
       let block = stack[stack.length - 1] || views[views.length - 1]
       // TODO add warning
       if (!block) return
-      if (block.blocks && block.blocks.list.length > 0) {
+      if (block.isGroup && block.blocks.list.length > 0) {
         block = block.blocks.list[block.blocks.list.length - 1]
       }
 

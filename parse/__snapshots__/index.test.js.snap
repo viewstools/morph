@@ -22,6 +22,8 @@ Object {
       },
       "is": "Main",
       "isBasic": true,
+      "isGroup": true,
+      "isList": false,
       "loc": Object {
         "end": Object {
           "column": 12,
@@ -46,7 +48,6 @@ Object {
         "type": "Literal",
         "value": "Vertical",
       },
-      "parents": Array [],
       "scoped": Object {},
       "type": "Block",
     },
@@ -64,6 +65,7 @@ Object {
         "list": Array [
           Object {
             "isBasic": true,
+            "isGroup": false,
             "loc": Object {
               "end": Object {
                 "column": undefined,
@@ -88,9 +90,6 @@ Object {
               "type": "Literal",
               "value": "Text",
             },
-            "parents": Array [
-              "Main",
-            ],
             "scoped": Object {},
             "type": "Block",
           },
@@ -109,6 +108,8 @@ Object {
       },
       "is": "Main",
       "isBasic": true,
+      "isGroup": true,
+      "isList": false,
       "loc": Object {
         "end": Object {
           "column": 3,
@@ -133,7 +134,6 @@ Object {
         "type": "Literal",
         "value": "Vertical",
       },
-      "parents": Array [],
       "scoped": Object {},
       "type": "Block",
     },
@@ -152,6 +152,7 @@ Object {
           Object {
             "is": "Before",
             "isBasic": true,
+            "isGroup": false,
             "loc": Object {
               "end": Object {
                 "column": undefined,
@@ -176,9 +177,6 @@ Object {
               "type": "Literal",
               "value": "Text",
             },
-            "parents": Array [
-              "BlueButton",
-            ],
             "scoped": Object {},
             "type": "Block",
           },
@@ -188,6 +186,7 @@ Object {
                 Object {
                   "is": "ImageInside",
                   "isBasic": true,
+                  "isGroup": false,
                   "loc": Object {
                     "end": Object {
                       "column": 32,
@@ -212,10 +211,6 @@ Object {
                     "type": "Literal",
                     "value": "Image",
                   },
-                  "parents": Array [
-                    "BlueButton",
-                    "Nested",
-                  ],
                   "properties": Object {
                     "list": Array [
                       Object {
@@ -296,6 +291,8 @@ Object {
                   },
                   "is": "VerticalInside",
                   "isBasic": true,
+                  "isGroup": true,
+                  "isList": false,
                   "loc": Object {
                     "end": Object {
                       "column": 0,
@@ -320,10 +317,6 @@ Object {
                     "type": "Literal",
                     "value": "Vertical",
                   },
-                  "parents": Array [
-                    "BlueButton",
-                    "Nested",
-                  ],
                   "scoped": Object {},
                   "type": "Block",
                 },
@@ -342,6 +335,8 @@ Object {
             },
             "is": "Nested",
             "isBasic": true,
+            "isGroup": true,
+            "isList": false,
             "loc": Object {
               "end": Object {
                 "column": 0,
@@ -366,15 +361,13 @@ Object {
               "type": "Literal",
               "value": "Vertical",
             },
-            "parents": Array [
-              "BlueButton",
-            ],
             "scoped": Object {},
             "type": "Block",
           },
           Object {
             "is": "After",
             "isBasic": true,
+            "isGroup": false,
             "loc": Object {
               "end": Object {
                 "column": 11,
@@ -399,9 +392,6 @@ Object {
               "type": "Literal",
               "value": "Text",
             },
-            "parents": Array [
-              "BlueButton",
-            ],
             "properties": Object {
               "list": Array [
                 Object {
@@ -529,6 +519,8 @@ Object {
             },
             "is": "Last",
             "isBasic": true,
+            "isGroup": true,
+            "isList": false,
             "loc": Object {
               "end": Object {
                 "column": 19,
@@ -553,9 +545,6 @@ Object {
               "type": "Literal",
               "value": "Vertical",
             },
-            "parents": Array [
-              "BlueButton",
-            ],
             "properties": Object {
               "list": Array [
                 Object {
@@ -636,6 +625,8 @@ Object {
       },
       "is": "BlueButton",
       "isBasic": true,
+      "isGroup": true,
+      "isList": false,
       "loc": Object {
         "end": Object {
           "column": 19,
@@ -660,7 +651,6 @@ Object {
         "type": "Literal",
         "value": "Vertical",
       },
-      "parents": Array [],
       "scoped": Object {},
       "type": "Block",
     },
@@ -679,6 +669,7 @@ Object {
           Object {
             "is": "A1",
             "isBasic": true,
+            "isGroup": false,
             "loc": Object {
               "end": Object {
                 "column": 8,
@@ -703,9 +694,6 @@ Object {
               "type": "Literal",
               "value": "Text",
             },
-            "parents": Array [
-              "A",
-            ],
             "properties": Object {
               "list": Array [
                 Object {
@@ -774,6 +762,7 @@ Object {
           Object {
             "is": "A2",
             "isBasic": true,
+            "isGroup": false,
             "loc": Object {
               "end": Object {
                 "column": 10,
@@ -798,9 +787,6 @@ Object {
               "type": "Literal",
               "value": "Text",
             },
-            "parents": Array [
-              "A",
-            ],
             "properties": Object {
               "list": Array [
                 Object {
@@ -881,6 +867,8 @@ Object {
       },
       "is": "A",
       "isBasic": true,
+      "isGroup": true,
+      "isList": false,
       "loc": Object {
         "end": Object {
           "column": 10,
@@ -905,7 +893,6 @@ Object {
         "type": "Literal",
         "value": "Vertical",
       },
-      "parents": Array [],
       "scoped": Object {},
       "type": "Block",
     },
@@ -938,6 +925,7 @@ Object {
           Object {
             "is": "Title",
             "isBasic": true,
+            "isGroup": false,
             "loc": Object {
               "end": Object {
                 "column": 19,
@@ -963,9 +951,6 @@ Object {
               "type": "Literal",
               "value": "Text",
             },
-            "parents": Array [
-              "Vertical",
-            ],
             "properties": Object {
               "list": Array [
                 Object {
@@ -1144,6 +1129,7 @@ Object {
           },
           Object {
             "isBasic": true,
+            "isGroup": false,
             "loc": Object {
               "end": Object {
                 "column": 20,
@@ -1168,9 +1154,6 @@ Object {
               "type": "Literal",
               "value": "CaptureText",
             },
-            "parents": Array [
-              "Vertical",
-            ],
             "properties": Object {
               "list": Array [
                 Object {
@@ -1261,6 +1244,8 @@ Object {
                   },
                   "childrenProxyMap": null,
                   "isBasic": false,
+                  "isGroup": true,
+                  "isList": false,
                   "loc": Object {
                     "end": Object {
                       "column": 4,
@@ -1285,10 +1270,6 @@ Object {
                     "type": "Literal",
                     "value": "Stuff",
                   },
-                  "parents": Array [
-                    "Vertical",
-                    "List",
-                  ],
                   "scoped": Object {},
                   "type": "Block",
                 },
@@ -1306,6 +1287,8 @@ Object {
               "type": "Blocks",
             },
             "isBasic": true,
+            "isGroup": true,
+            "isList": true,
             "loc": Object {
               "end": Object {
                 "column": 4,
@@ -1330,9 +1313,6 @@ Object {
               "type": "Literal",
               "value": "List",
             },
-            "parents": Array [
-              "Vertical",
-            ],
             "properties": Object {
               "list": Array [
                 Object {
@@ -1469,6 +1449,8 @@ Object {
         "type": "Blocks",
       },
       "isBasic": true,
+      "isGroup": true,
+      "isList": false,
       "loc": Object {
         "end": Object {
           "column": 4,
@@ -1494,7 +1476,6 @@ Object {
         "type": "Literal",
         "value": "Vertical",
       },
-      "parents": Array [],
       "properties": Object {
         "list": Array [
           Object {
