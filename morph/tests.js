@@ -34,26 +34,29 @@ export default ({ file, view }) => {
           name = node.is || `Test${index}`
         } else if (node.type === 'Property') {
           if (node.key.value === 'from') {
-            const resourceFile = path.resolve(
-              path.dirname(file.raw),
-              getValue(node, names)
-            )
+            if (typeof node.value.value === 'number') {
+              const list = []
+              for (let id = 0; id < node.value.value; id++) {
+                list.push({ id })
+              }
+              test[node.key.value] = list
+            } else {
+              const resourceFile = path.resolve(
+                path.dirname(file.raw),
+                getValue(node, names)
+              )
 
-            if (fs.existsSync(resourceFile)) {
-              try {
-                resource = JSON.parse(fs.readFileSync(resourceFile, 'utf8'))
-              } catch (error) {
-                console.error(
-                  `${file}: Can't parse resource ${resourceFile}`,
-                  error
-                )
+              if (fs.existsSync(resourceFile)) {
+                try {
+                  resource = JSON.parse(fs.readFileSync(resourceFile, 'utf8'))
+                } catch (error) {
+                  console.error(
+                    `${file}: Can't parse resource ${resourceFile}`,
+                    error
+                  )
+                }
               }
             }
-            // const importStatement = `import ${resource} from '${file}'`
-
-            // if (!imports.includes(importStatement)) {
-            //   imports.push(importStatement)
-            // }
           } else {
             test[node.key.value] = getValue(node, names)
           }
