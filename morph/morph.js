@@ -15,9 +15,6 @@ export default (code, state, visitors) => {
       if (visitor && visitor.leave)
         visitor.leave.call(this, node, parent, state)
     },
-    nodeKeys: {
-      Block: ['properties', 'blocks'],
-    },
   })
 
   state.fonts = parsed.fonts

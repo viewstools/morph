@@ -1,39 +1,37 @@
 import { maybeAddFallbackFont } from '../fonts.js'
-import safe from './safe.js'
 
 export default (node, parent, code) => {
-  const key = node.key.value
-  const value = node.value.value
-
-  switch (key) {
+  switch (node.name) {
     case 'appRegion':
       return {
-        WebkitAppRegion: value,
+        WebkitAppRegion: node.value,
       }
 
     case 'backgroundImage':
       return {
-        backgroundImage: code ? `\`url(\${${value}})\`` : `url("${value}")`,
+        backgroundImage: code
+          ? `\`url(\${${node.value}})\``
+          : `url("${node.value}")`,
       }
 
     case 'fontFamily':
       return {
-        fontFamily: code ? value : maybeAddFallbackFont(value),
+        fontFamily: code ? node.value : maybeAddFallbackFont(node.value),
       }
 
     case 'userSelect':
       return {
-        WebkitUserSelect: value,
+        WebkitUserSelect: node.value,
       }
 
     case 'zIndex':
       return {
-        zIndex: code ? value : parseInt(value, 10),
+        zIndex: code ? node.value : parseInt(node.value, 10),
       }
 
     default:
       return {
-        [key]: value,
+        [node.name]: node.value,
       }
   }
 }

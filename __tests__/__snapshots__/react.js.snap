@@ -4,9 +4,6 @@ exports[`react-dom parses react-dom Action 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { css } from 'react-emotion';
-
-const Vertical_ho4tnl3 = css({ flexDirection: 'column' });
 
 const Action = props => {
   return props.check ? (
@@ -14,7 +11,6 @@ const Action = props => {
       data-test-id={props['data-test-id'] || 'Vertical'}
       onClick={props.clickMe}
       disabled={props.isDisabled}
-      className={Vertical_ho4tnl3}
     >
       <span data-test-id=\\"Action.Text\\">click me</span>
       {props.children}
@@ -45,9 +41,6 @@ exports[`react-dom parses react-dom Action: react-dom parses react-dom Action de
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { css } from 'react-emotion';
-
-const Vertical_ho4tnl3 = css({ flexDirection: 'column' });
 
 const Action = props => {
   return props.check ? (
@@ -55,7 +48,6 @@ const Action = props => {
       data-test-id={props['data-test-id'] || 'Vertical'}
       onClick={props.clickMe}
       disabled={props.isDisabled}
-      className={Vertical_ho4tnl3}
     >
       <span data-test-id=\\"Action.Text\\">click me</span>
       {props.children}
@@ -88,7 +80,7 @@ Object {
 import React from 'react';
 import styled from 'react-emotion';
 
-const Vertical = styled('button')({ flexDirection: 'column' }, ({ props }) => ({
+const Vertical = styled('button')(({ props }) => ({
   opacity: props.opacity,
 }));
 
@@ -129,7 +121,7 @@ Object {
 import React from 'react';
 import styled from 'react-emotion';
 
-const Vertical = styled('button')({ flexDirection: 'column' }, ({ props }) => ({
+const Vertical = styled('button')(({ props }) => ({
   opacity: props.opacity,
 }));
 
@@ -170,8 +162,7 @@ Object {
 import React from 'react';
 import { css } from 'react-emotion';
 
-const Vertical_h7d9pb0 = css({
-  flexDirection: 'column',
+const Vertical_h1n973fw = css({
   WebkitAppRegion: 'drag',
   width: '92%',
   marginTop: 'auto',
@@ -181,7 +172,7 @@ const AppRegionDrag = props => {
   return (
     <div
       data-test-id={props['data-test-id'] || 'Vertical'}
-      className={Vertical_h7d9pb0}
+      className={Vertical_h1n973fw}
     >
       {props.children}
     </div>
@@ -209,8 +200,7 @@ Object {
 import React from 'react';
 import { css } from 'react-emotion';
 
-const Vertical_h7d9pb0 = css({
-  flexDirection: 'column',
+const Vertical_h1n973fw = css({
   WebkitAppRegion: 'drag',
   width: '92%',
   marginTop: 'auto',
@@ -220,7 +210,7 @@ const AppRegionDrag = props => {
   return (
     <div
       data-test-id={props['data-test-id'] || 'Vertical'}
-      className={Vertical_h7d9pb0}
+      className={Vertical_h1n973fw}
     >
       {props.children}
     </div>
@@ -248,8 +238,7 @@ Object {
 import React from 'react';
 import styled, { css } from 'react-emotion';
 
-const Vertical_h1fqs4qx = css({
-  flexDirection: 'column',
+const Vertical_h1q68ydz = css({
   backgroundImage: \\"url('https://viewsdx.com/image.jpg')\\",
 });
 const Horizontal = styled('div')(
@@ -266,7 +255,7 @@ const BackgroundImage = props => {
   return (
     <div
       data-test-id={props['data-test-id'] || 'Vertical'}
-      className={Vertical_h1fqs4qx}
+      className={Vertical_h1q68ydz}
     >
       <Horizontal data-test-id=\\"BackgroundImage.Horizontal\\" props={props} />
       {props.children}
@@ -297,8 +286,7 @@ Object {
 import React from 'react';
 import styled, { css } from 'react-emotion';
 
-const Vertical_h1fqs4qx = css({
-  flexDirection: 'column',
+const Vertical_h1q68ydz = css({
   backgroundImage: \\"url('https://viewsdx.com/image.jpg')\\",
 });
 const Horizontal = styled('div')(
@@ -315,7 +303,7 @@ const BackgroundImage = props => {
   return (
     <div
       data-test-id={props['data-test-id'] || 'Vertical'}
-      className={Vertical_h1fqs4qx}
+      className={Vertical_h1q68ydz}
     >
       <Horizontal data-test-id=\\"BackgroundImage.Horizontal\\" props={props} />
       {props.children}
@@ -346,22 +334,19 @@ Object {
 import React from 'react';
 import styled, { css } from 'react-emotion';
 
-const Vertical = styled('div')({ flexDirection: 'column' }, ({ props }) => ({
+const Vertical = styled('div')(({ props }) => ({
   boxShadow: \`10px 5px 2px \${props.color}\`,
 }));
-const Vertical1 = styled('div')({ flexDirection: 'column' }, ({ props }) => ({
+const Vertical1 = styled('div')(({ props }) => ({
   boxShadow: \`10px 5px 10px \${props.color}\`,
 }));
-const Vertical_hvytwz3 = css({
-  flexDirection: 'column',
-  boxShadow: '0px 8px 15px 0px rgba(0,0,0,0.1)',
-});
+const Vertical_he0xt4e = css({ boxShadow: '0px 8px 15px 0px rgba(0,0,0,0.1)' });
 
 const BoxShadow = props => {
   return (
     <Vertical data-test-id={props['data-test-id'] || 'Vertical'} props={props}>
       <Vertical1 data-test-id=\\"BoxShadow.Vertical:1\\" props={props}>
-        <div data-test-id=\\"BoxShadow.Vertical:2\\" className={Vertical_hvytwz3} />
+        <div data-test-id=\\"BoxShadow.Vertical:2\\" className={Vertical_he0xt4e} />
       </Vertical1>
       {props.children}
     </Vertical>
@@ -391,22 +376,19 @@ Object {
 import React from 'react';
 import styled, { css } from 'react-emotion';
 
-const Vertical = styled('div')({ flexDirection: 'column' }, ({ props }) => ({
+const Vertical = styled('div')(({ props }) => ({
   boxShadow: \`10px 5px 2px \${props.color}\`,
 }));
-const Vertical1 = styled('div')({ flexDirection: 'column' }, ({ props }) => ({
+const Vertical1 = styled('div')(({ props }) => ({
   boxShadow: \`10px 5px 10px \${props.color}\`,
 }));
-const Vertical_hvytwz3 = css({
-  flexDirection: 'column',
-  boxShadow: '0px 8px 15px 0px rgba(0,0,0,0.1)',
-});
+const Vertical_he0xt4e = css({ boxShadow: '0px 8px 15px 0px rgba(0,0,0,0.1)' });
 
 const BoxShadow = props => {
   return (
     <Vertical data-test-id={props['data-test-id'] || 'Vertical'} props={props}>
       <Vertical1 data-test-id=\\"BoxShadow.Vertical:1\\" props={props}>
-        <div data-test-id=\\"BoxShadow.Vertical:2\\" className={Vertical_hvytwz3} />
+        <div data-test-id=\\"BoxShadow.Vertical:2\\" className={Vertical_he0xt4e} />
       </Vertical1>
       {props.children}
     </Vertical>
@@ -436,16 +418,13 @@ Object {
 import React from 'react';
 import { css } from 'react-emotion';
 
-const Vertical_hsjxc34 = css({
-  flexDirection: 'column',
-  backgroundColor: 'blue',
-});
+const Vertical_h118stgu = css({ backgroundColor: 'blue' });
 
 const ClassName = props => {
   return (
     <div
       data-test-id={props['data-test-id'] || 'Vertical'}
-      className={\`hey \${Vertical_hsjxc34}\`}
+      className={\`hey \${Vertical_h118stgu}\`}
     >
       {props.children}
     </div>
@@ -473,16 +452,13 @@ Object {
 import React from 'react';
 import { css } from 'react-emotion';
 
-const Vertical_hsjxc34 = css({
-  flexDirection: 'column',
-  backgroundColor: 'blue',
-});
+const Vertical_h118stgu = css({ backgroundColor: 'blue' });
 
 const ClassName = props => {
   return (
     <div
       data-test-id={props['data-test-id'] || 'Vertical'}
-      className={\`hey \${Vertical_hsjxc34}\`}
+      className={\`hey \${Vertical_h118stgu}\`}
     >
       {props.children}
     </div>
@@ -510,10 +486,7 @@ Object {
 import React from 'react';
 import styled, { css } from 'react-emotion';
 
-const Vertical_h241iip = css({
-  flexDirection: 'column',
-  backgroundColor: 'red',
-});
+const Vertical_h1cyenk5 = css({ backgroundColor: 'red' });
 const Text = styled('span')(({ props }) => ({
   color: props.color,
 }));
@@ -523,7 +496,7 @@ const Code = props => {
     <div
       data-test-id={props['data-test-id'] || 'Vertical'}
       ref={$e => (this.$e = $e)}
-      className={Vertical_h241iip}
+      className={Vertical_h1cyenk5}
     >
       <Text data-test-id=\\"Code.Text\\" innerRef={props.refText} props={props}>
         {props.text}
@@ -558,10 +531,7 @@ Object {
 import React from 'react';
 import styled, { css } from 'react-emotion';
 
-const Vertical_h241iip = css({
-  flexDirection: 'column',
-  backgroundColor: 'red',
-});
+const Vertical_h1cyenk5 = css({ backgroundColor: 'red' });
 const Text = styled('span')(({ props }) => ({
   color: props.color,
 }));
@@ -570,7 +540,7 @@ const Code = props => {
   return (
     <div
       data-test-id={props['data-test-id'] || 'Vertical'}
-      className={Vertical_h241iip}
+      className={Vertical_h1cyenk5}
     >
       <Text data-test-id=\\"Code.Text\\" props={props}>
         {props.text}
@@ -606,7 +576,7 @@ import React from 'react';
 import SomeThing from './SomeThing.view.js';
 import styled from 'react-emotion';
 
-const Vertical = styled('div')({ flexDirection: 'column' }, ({ props }) => ({
+const Vertical = styled('div')(({ props }) => ({
   height: props.height,
 }));
 
@@ -646,7 +616,7 @@ import React from 'react';
 import SomeThing from './SomeThing.view.js';
 import styled from 'react-emotion';
 
-const Vertical = styled('div')({ flexDirection: 'column' }, ({ props }) => ({
+const Vertical = styled('div')(({ props }) => ({
   height: props.height,
 }));
 
@@ -731,10 +701,6 @@ exports[`react-dom parses react-dom Form 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { css } from 'react-emotion';
-
-const Form_ho4tnl3 = css({ flexDirection: 'column' });
-const Button_ho4tnl3 = css({ flexDirection: 'column' });
 
 class Form extends React.Component {
   constructor(props) {
@@ -749,7 +715,6 @@ class Form extends React.Component {
       <form
         data-test-id={props['data-test-id'] || 'Form'}
         onSubmit={() => props.onSubmit(state)}
-        className={Form_ho4tnl3}
       >
         <input
           type=\\"text\\"
@@ -780,7 +745,6 @@ class Form extends React.Component {
         <button
           data-test-id=\\"Form.Button\\"
           onClick={() => props.onSubmit(state)}
-          className={Button_ho4tnl3}
         >
           <span data-test-id=\\"Form.Text\\">Send!</span>
         </button>
@@ -811,10 +775,6 @@ exports[`react-dom parses react-dom Form: react-dom parses react-dom Form debug 
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { css } from 'react-emotion';
-
-const Form_ho4tnl3 = css({ flexDirection: 'column' });
-const Button_ho4tnl3 = css({ flexDirection: 'column' });
 
 class Form extends React.Component {
   constructor(props) {
@@ -829,7 +789,6 @@ class Form extends React.Component {
       <form
         data-test-id={props['data-test-id'] || 'Form'}
         onSubmit={() => props.onSubmit(state)}
-        className={Form_ho4tnl3}
       >
         <input
           type=\\"text\\"
@@ -865,7 +824,6 @@ class Form extends React.Component {
         <button
           data-test-id=\\"Form.Button\\"
           onClick={() => props.onSubmit(state)}
-          className={Button_ho4tnl3}
         >
           <span data-test-id=\\"Form.Text\\">Send!</span>
         </button>
@@ -896,9 +854,6 @@ exports[`react-dom parses react-dom GoTo 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { css } from 'react-emotion';
-
-const Vertical_ho4tnl3 = css({ flexDirection: 'column' });
 
 const GoTo = props => {
   return (
@@ -907,7 +862,6 @@ const GoTo = props => {
       rel=\\"noopener noreferrer\\"
       target=\\"_blank\\"
       data-test-id={props['data-test-id'] || 'Vertical'}
-      className={Vertical_ho4tnl3}
     >
       <span data-test-id=\\"GoTo.Text\\">Go to ViewsDX website!</span>
       {props.children}
@@ -934,9 +888,6 @@ exports[`react-dom parses react-dom GoTo: react-dom parses react-dom GoTo debug 
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { css } from 'react-emotion';
-
-const Vertical_ho4tnl3 = css({ flexDirection: 'column' });
 
 const GoTo = props => {
   return (
@@ -945,7 +896,6 @@ const GoTo = props => {
       rel=\\"noopener noreferrer\\"
       target=\\"_blank\\"
       data-test-id={props['data-test-id'] || 'Vertical'}
-      className={Vertical_ho4tnl3}
     >
       <span data-test-id=\\"GoTo.Text\\">Go to ViewsDX website!</span>
       {props.children}
@@ -974,7 +924,7 @@ Object {
 import React from 'react';
 import styled from 'react-emotion';
 
-const Button = styled('button')({ flexDirection: 'column' }, ({ props }) => ({
+const Button = styled('button')(({ props }) => ({
   backgroundColor: props.backgroundColor,
   '&:hover, &.hover': {
     backgroundColor: props.backgroundColorHover,
@@ -1037,7 +987,7 @@ Object {
 import React from 'react';
 import styled from 'react-emotion';
 
-const Button = styled('button')({ flexDirection: 'column' }, ({ props }) => ({
+const Button = styled('button')(({ props }) => ({
   backgroundColor: props.backgroundColor,
   '&:hover, &.hover': {
     backgroundColor: props.backgroundColorHover,
@@ -1081,126 +1031,6 @@ export default Hover;
     "backgroundColorHover": "string",
     "fontSize": "number",
     "fontSizeHover": "number",
-    "onClick": "function",
-  },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom HoverProxy 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import { css } from 'react-emotion';
-
-const Button_hhxd3nw = css({
-  flexDirection: 'column',
-  backgroundColor: 'black',
-  '&:hover, &.hover': {
-    backgroundColor: 'white',
-  },
-});
-const Text_h1uuiss4 = css({
-  color: 'white',
-  [\`.\${Button_hhxd3nw}:hover &, .\${Button_hhxd3nw}.hover &\`]: {
-    color: 'black',
-  },
-});
-
-const HoverProxy = props => {
-  const childrenArray = React.Children.toArray(props.children);
-  return (
-    <button
-      data-test-id={props['data-test-id'] || 'Button'}
-      onClick={props.onClick}
-      className={Button_hhxd3nw}
-    >
-      {props.childrenProxyMap &&
-      childrenArray[props.childrenProxyMap['props.icon']]
-        ? React.cloneElement(
-            childrenArray[props.childrenProxyMap['props.icon']],
-            { fill: 'white', fillHover: 'black' }
-          )
-        : null}
-      <Text data-test-id=\\"HoverProxy.Text\\" className={Text_h1uuiss4}>
-        Hey!
-      </Text>
-    </button>
-  );
-};
-
-export default HoverProxy;
-",
-  "fonts": Object {},
-  "props": Object {
-    "icon": "string",
-    "onClick": "function",
-  },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom HoverProxy: react-dom parses react-dom HoverProxy debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import { css } from 'react-emotion';
-
-const Button_hhxd3nw = css({
-  flexDirection: 'column',
-  backgroundColor: 'black',
-  '&:hover, &.hover': {
-    backgroundColor: 'white',
-  },
-});
-const Text_h1uuiss4 = css({
-  color: 'white',
-  [\`.\${Button_hhxd3nw}:hover &, .\${Button_hhxd3nw}.hover &\`]: {
-    color: 'black',
-  },
-});
-
-const HoverProxy = props => {
-  const childrenArray = React.Children.toArray(props.children);
-  return (
-    <button
-      data-test-id={props['data-test-id'] || 'Button'}
-      onClick={props.onClick}
-      className={Button_hhxd3nw}
-    >
-      {props.childrenProxyMap &&
-      childrenArray[props.childrenProxyMap['props.icon']]
-        ? React.cloneElement(
-            childrenArray[props.childrenProxyMap['props.icon']],
-            { fill: 'white', fillHover: 'black' }
-          )
-        : null}
-      <Text data-test-id=\\"HoverProxy.Text\\" className={Text_h1uuiss4}>
-        Hey!
-      </Text>
-    </button>
-  );
-};
-
-export default HoverProxy;
-",
-  "fonts": Object {},
-  "props": Object {
-    "icon": "string",
     "onClick": "function",
   },
   "svgs": Array [],
@@ -1267,16 +1097,10 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import Something from './Something.view.js';
-import { css } from 'react-emotion';
-
-const ListOfSomething_ho4tnl3 = css({ flexDirection: 'column' });
 
 const ListOfSomething = props => {
   return (
-    <div
-      data-test-id={props['data-test-id'] || 'ListOfSomething'}
-      className={ListOfSomething_ho4tnl3}
-    >
+    <div data-test-id={props['data-test-id'] || 'ListOfSomething'}>
       {Array.isArray(props.from) &&
         props.from.map((item, index) => (
           <Something
@@ -1312,16 +1136,10 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import Something from './Something.view.js';
-import { css } from 'react-emotion';
-
-const ListOfSomething_ho4tnl3 = css({ flexDirection: 'column' });
 
 const ListOfSomething = props => {
   return (
-    <div
-      data-test-id={props['data-test-id'] || 'ListOfSomething'}
-      className={ListOfSomething_ho4tnl3}
-    >
+    <div data-test-id={props['data-test-id'] || 'ListOfSomething'}>
       {Array.isArray(props.from) &&
         props.from.map((item, index) => (
           <Something
@@ -1357,16 +1175,10 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import Card from './Card.view.js';
-import { css } from 'react-emotion';
-
-const List_ho4tnl3 = css({ flexDirection: 'column' });
 
 const ListWhen = props => {
   return props.showMe ? (
-    <div
-      data-test-id={props['data-test-id'] || 'List'}
-      className={List_ho4tnl3}
-    >
+    <div data-test-id={props['data-test-id'] || 'List'}>
       {Array.isArray(props.from) &&
         props.from.map((item, index) => (
           <Card {...item} key={item.id || index} data-test-id=\\"ListWhen.Card\\" />
@@ -1399,16 +1211,10 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import Card from './Card.view.js';
-import { css } from 'react-emotion';
-
-const List_ho4tnl3 = css({ flexDirection: 'column' });
 
 const ListWhen = props => {
   return props.showMe ? (
-    <div
-      data-test-id={props['data-test-id'] || 'List'}
-      className={List_ho4tnl3}
-    >
+    <div data-test-id={props['data-test-id'] || 'List'}>
       {Array.isArray(props.from) &&
         props.from.map((item, index) => (
           <Card {...item} key={item.id || index} data-test-id=\\"ListWhen.Card\\" />
@@ -1690,22 +1496,14 @@ import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Route } from 'react-router-dom';
 import Topic from './Topic.view.js';
-import { css } from 'react-emotion';
-
-const Topics_ho4tnl3 = css({ flexDirection: 'column' });
-const Link_ho4tnl3 = css({ flexDirection: 'column' });
 
 const NestedRoutes = props => {
   return (
-    <div
-      data-test-id={props['data-test-id'] || 'Topics'}
-      className={Topics_ho4tnl3}
-    >
+    <div data-test-id={props['data-test-id'] || 'Topics'}>
       <span data-test-id=\\"NestedRoutes.Text\\">topics</span>
       <Link
         to={\`\${props.match.url === '/' ? '' : props.match.url}/rendering\`}
         data-test-id=\\"NestedRoutes.Link\\"
-        className={Link_ho4tnl3}
       >
         <span data-test-id=\\"NestedRoutes.Text:1\\">Rendering with React</span>
       </Link>
@@ -1743,22 +1541,14 @@ import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Route } from 'react-router-dom';
 import Topic from './Topic.view.js';
-import { css } from 'react-emotion';
-
-const Topics_ho4tnl3 = css({ flexDirection: 'column' });
-const Link_ho4tnl3 = css({ flexDirection: 'column' });
 
 const NestedRoutes = props => {
   return (
-    <div
-      data-test-id={props['data-test-id'] || 'Topics'}
-      className={Topics_ho4tnl3}
-    >
+    <div data-test-id={props['data-test-id'] || 'Topics'}>
       <span data-test-id=\\"NestedRoutes.Text\\">topics</span>
       <Link
         to={\`\${props.match.url === '/' ? '' : props.match.url}/rendering\`}
         data-test-id=\\"NestedRoutes.Link\\"
-        className={Link_ho4tnl3}
       >
         <span data-test-id=\\"NestedRoutes.Text:1\\">Rendering with React</span>
       </Link>
@@ -1794,14 +1584,9 @@ Object {
 import React from 'react';
 import { css } from 'react-emotion';
 
-const Vertical_ho4tnl3 = css({ flexDirection: 'column' });
-
 const Print = props => {
   return (
-    <div
-      data-test-id={props['data-test-id'] || 'Vertical'}
-      className={Vertical_ho4tnl3}
-    >
+    <div data-test-id={props['data-test-id'] || 'Vertical'}>
       <span data-test-id=\\"Print.Text\\" className={Text_h1d06m5g}>
         not in print
       </span>
@@ -1832,14 +1617,9 @@ Object {
 import React from 'react';
 import { css } from 'react-emotion';
 
-const Vertical_ho4tnl3 = css({ flexDirection: 'column' });
-
 const Print = props => {
   return (
-    <div
-      data-test-id={props['data-test-id'] || 'Vertical'}
-      className={Vertical_ho4tnl3}
-    >
+    <div data-test-id={props['data-test-id'] || 'Vertical'}>
       <span data-test-id=\\"Print.Text\\" className={Text_h1d06m5g}>
         not in print
       </span>
@@ -1870,16 +1650,12 @@ Object {
 import React from 'react';
 import { css } from 'react-emotion';
 
-const Vertical_ho4tnl3 = css({ flexDirection: 'column' });
 const Horizontal_h1qq1i2q = css({ flexDirection: 'row' });
 
 const ProxyTest = props => {
   const childrenArray = React.Children.toArray(props.children);
   return (
-    <div
-      data-test-id={props['data-test-id'] || 'Vertical'}
-      className={Vertical_ho4tnl3}
-    >
+    <div data-test-id={props['data-test-id'] || 'Vertical'}>
       <div data-test-id=\\"ProxyTest.Horizontal\\" className={Horizontal_h1qq1i2q}>
         {props.bla && childrenArray[props.childrenProxyMap['Something']]
           ? React.cloneElement(
@@ -1917,16 +1693,12 @@ Object {
 import React from 'react';
 import { css } from 'react-emotion';
 
-const Vertical_ho4tnl3 = css({ flexDirection: 'column' });
 const Horizontal_h1qq1i2q = css({ flexDirection: 'row' });
 
 const ProxyTest = props => {
   const childrenArray = React.Children.toArray(props.children);
   return (
-    <div
-      data-test-id={props['data-test-id'] || 'Vertical'}
-      className={Vertical_ho4tnl3}
-    >
+    <div data-test-id={props['data-test-id'] || 'Vertical'}>
       <div data-test-id=\\"ProxyTest.Horizontal\\" className={Horizontal_h1qq1i2q}>
         {props.bla && childrenArray[props.childrenProxyMap['Something']]
           ? React.cloneElement(
@@ -2118,17 +1890,10 @@ exports[`react-dom parses react-dom ScopePopup 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { css } from 'react-emotion';
-
-const Popup_ho4tnl3 = css({ flexDirection: 'column' });
-const Toggle_ho4tnl3 = css({ flexDirection: 'column' });
 
 const ScopePopup = props => {
   return (
-    <div
-      data-test-id={props['data-test-id'] || 'Popup'}
-      className={Popup_ho4tnl3}
-    >
+    <div data-test-id={props['data-test-id'] || 'Popup'}>
       <button
         data-test-id=\\"ScopePopup.Toggle\\"
         onClick={
@@ -2136,7 +1901,6 @@ const ScopePopup = props => {
             ? props.onClickGreen
             : props.whatMakesBlue ? props.onClickBlue : props.toggle
         }
-        className={Toggle_ho4tnl3}
       >
         <span data-test-id=\\"ScopePopup.Text\\">toggle popup</span>
       </button>
@@ -2170,17 +1934,10 @@ exports[`react-dom parses react-dom ScopePopup: react-dom parses react-dom Scope
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { css } from 'react-emotion';
-
-const Popup_ho4tnl3 = css({ flexDirection: 'column' });
-const Toggle_ho4tnl3 = css({ flexDirection: 'column' });
 
 const ScopePopup = props => {
   return (
-    <div
-      data-test-id={props['data-test-id'] || 'Popup'}
-      className={Popup_ho4tnl3}
-    >
+    <div data-test-id={props['data-test-id'] || 'Popup'}>
       <button
         data-test-id=\\"ScopePopup.Toggle\\"
         onClick={
@@ -2188,7 +1945,6 @@ const ScopePopup = props => {
             ? props.onClickGreen
             : props.whatMakesBlue ? props.onClickBlue : props.toggle
         }
-        className={Toggle_ho4tnl3}
       >
         <span data-test-id=\\"ScopePopup.Text\\">toggle popup</span>
       </button>
@@ -2222,25 +1978,16 @@ exports[`react-dom parses react-dom ScopePopup2 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import styled, { css } from 'react-emotion';
+import styled from 'react-emotion';
 
-const Popup_ho4tnl3 = css({ flexDirection: 'column' });
-const Toggle_ho4tnl3 = css({ flexDirection: 'column' });
-const Content = styled('div')({ flexDirection: 'column' }, ({ props }) => ({
+const Content = styled('div')(({ props }) => ({
   opacity: props.isShown ? 1 : props.isSuperVisible ? 3 : 0,
 }));
 
 const ScopePopup2 = props => {
   return (
-    <div
-      data-test-id={props['data-test-id'] || 'Popup'}
-      className={Popup_ho4tnl3}
-    >
-      <button
-        data-test-id=\\"ScopePopup2.Toggle\\"
-        onClick={props.toggle}
-        className={Toggle_ho4tnl3}
-      >
+    <div data-test-id={props['data-test-id'] || 'Popup'}>
+      <button data-test-id=\\"ScopePopup2.Toggle\\" onClick={props.toggle}>
         <span data-test-id=\\"ScopePopup2.Text\\">toggle popup</span>
       </button>
       <Content
@@ -2276,25 +2023,16 @@ exports[`react-dom parses react-dom ScopePopup2: react-dom parses react-dom Scop
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import styled, { css } from 'react-emotion';
+import styled from 'react-emotion';
 
-const Popup_ho4tnl3 = css({ flexDirection: 'column' });
-const Toggle_ho4tnl3 = css({ flexDirection: 'column' });
-const Content = styled('div')({ flexDirection: 'column' }, ({ props }) => ({
+const Content = styled('div')(({ props }) => ({
   opacity: props.isShown ? 1 : props.isSuperVisible ? 3 : 0,
 }));
 
 const ScopePopup2 = props => {
   return (
-    <div
-      data-test-id={props['data-test-id'] || 'Popup'}
-      className={Popup_ho4tnl3}
-    >
-      <button
-        data-test-id=\\"ScopePopup2.Toggle\\"
-        onClick={props.toggle}
-        className={Toggle_ho4tnl3}
-      >
+    <div data-test-id={props['data-test-id'] || 'Popup'}>
+      <button data-test-id=\\"ScopePopup2.Toggle\\" onClick={props.toggle}>
         <span data-test-id=\\"ScopePopup2.Text\\">toggle popup</span>
       </button>
       <Content
@@ -2334,7 +2072,6 @@ import styled from 'react-emotion';
 
 const WindowControl = styled('button')(
   {
-    flexDirection: 'column',
     marginRight: 8,
     backgroundColor: '#CBCDCE',
     opacity: 0.7,
@@ -2393,7 +2130,6 @@ import styled from 'react-emotion';
 
 const WindowControl = styled('button')(
   {
-    flexDirection: 'column',
     marginRight: 8,
     backgroundColor: '#CBCDCE',
     opacity: 0.7,
@@ -2592,13 +2328,10 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import External from './External.view.js';
-import { css } from 'react-emotion';
-
-const App_ho4tnl3 = css({ flexDirection: 'column' });
 
 const TestIds = props => {
   return (
-    <div data-test-id={props['data-test-id'] || 'App'} className={App_ho4tnl3}>
+    <div data-test-id={props['data-test-id'] || 'App'}>
       <span data-test-id=\\"TestIds.Text\\">1</span>
       <span data-test-id=\\"TestIds.Text:1\\">2</span>
       <External data-test-id=\\"TestIds.External\\" />
@@ -2628,13 +2361,10 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import External from './External.view.js';
-import { css } from 'react-emotion';
-
-const App_ho4tnl3 = css({ flexDirection: 'column' });
 
 const TestIds = props => {
   return (
-    <div data-test-id={props['data-test-id'] || 'App'} className={App_ho4tnl3}>
+    <div data-test-id={props['data-test-id'] || 'App'}>
       <span data-test-id=\\"TestIds.Text\\">1</span>
       <span data-test-id=\\"TestIds.Text:1\\">2</span>
       <External data-test-id=\\"TestIds.External\\" />
@@ -2663,16 +2393,10 @@ exports[`react-dom parses react-dom TextInterpolation 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { css } from 'react-emotion';
-
-const Vertical_ho4tnl3 = css({ flexDirection: 'column' });
 
 const TextInterpolation = props => {
   return (
-    <div
-      data-test-id={props['data-test-id'] || 'Vertical'}
-      className={Vertical_ho4tnl3}
-    >
+    <div data-test-id={props['data-test-id'] || 'Vertical'}>
       <span data-test-id=\\"TextInterpolation.Text\\">{\`\${props.name} test\`}</span>
       {props.children}
     </div>
@@ -2700,16 +2424,10 @@ exports[`react-dom parses react-dom TextInterpolation: react-dom parses react-do
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { css } from 'react-emotion';
-
-const Vertical_ho4tnl3 = css({ flexDirection: 'column' });
 
 const TextInterpolation = props => {
   return (
-    <div
-      data-test-id={props['data-test-id'] || 'Vertical'}
-      className={Vertical_ho4tnl3}
-    >
+    <div data-test-id={props['data-test-id'] || 'Vertical'}>
       <span data-test-id=\\"TextInterpolation.Text\\">{\`\${props.name} test\`}</span>
       {props.children}
     </div>
@@ -2956,6 +2674,7 @@ class UseCaptureFile extends React.Component {
         value={state.file}
         tabIndex={-1}
         data-test-id={props['data-test-id'] || 'File'}
+        className=\\"mousetrap\\"
       />
     );
   }
@@ -3037,6 +2756,7 @@ class UseCaptureNumber extends React.Component {
         value={state.number}
         tabIndex={-1}
         data-test-id={props['data-test-id'] || 'Number'}
+        className=\\"mousetrap\\"
       />
     );
   }
@@ -3118,6 +2838,7 @@ class UseCapturePhone extends React.Component {
         value={state.phone}
         tabIndex={-1}
         data-test-id={props['data-test-id'] || 'Phone'}
+        className=\\"mousetrap\\"
       />
     );
   }
@@ -3199,6 +2920,7 @@ class UseCaptureSecure extends React.Component {
         value={state.secure}
         tabIndex={-1}
         data-test-id={props['data-test-id'] || 'Secure'}
+        className=\\"mousetrap\\"
       />
     );
   }
@@ -3280,6 +3002,7 @@ class UseCaptureText extends React.Component {
         value={state.text}
         tabIndex={-1}
         data-test-id={props['data-test-id'] || 'Text'}
+        className=\\"mousetrap\\"
       />
     );
   }
@@ -3363,6 +3086,7 @@ class UseCaptureTextArea extends React.Component {
         value={state.captureTextArea}
         tabIndex={-1}
         data-test-id={props['data-test-id'] || 'CaptureTextArea'}
+        className=\\"mousetrap\\"
       />
     );
   }
@@ -4086,16 +3810,13 @@ Object {
 import React from 'react';
 import { css } from 'react-emotion';
 
-const Vertical_h241iip = css({
-  flexDirection: 'column',
-  backgroundColor: 'red',
-});
+const Vertical_h1cyenk5 = css({ backgroundColor: 'red' });
 
 const UseVertical = props => {
   return (
     <div
       data-test-id={props['data-test-id'] || 'Vertical'}
-      className={Vertical_h241iip}
+      className={Vertical_h1cyenk5}
     >
       {props.children}
     </div>
@@ -4123,16 +3844,13 @@ Object {
 import React from 'react';
 import { css } from 'react-emotion';
 
-const Vertical_h241iip = css({
-  flexDirection: 'column',
-  backgroundColor: 'red',
-});
+const Vertical_h1cyenk5 = css({ backgroundColor: 'red' });
 
 const UseVertical = props => {
   return (
     <div
       data-test-id={props['data-test-id'] || 'Vertical'}
-      className={Vertical_h241iip}
+      className={Vertical_h1cyenk5}
     >
       {props.children}
     </div>
@@ -4160,15 +3878,9 @@ Object {
 import React from 'react';
 import styled from 'react-emotion';
 
-const ViewNameIsntUsedInStyle1 = styled('div')(
-  {
-    flexDirection: 'column',
-    zIndex: 5,
-  },
-  ({ props }) => ({
-    opacity: props.opacity,
-  })
-);
+const ViewNameIsntUsedInStyle1 = styled('div')({ zIndex: 5 }, ({ props }) => ({
+  opacity: props.opacity,
+}));
 
 const ViewNameIsntUsedInStyle = props => {
   return (
@@ -4204,15 +3916,9 @@ Object {
 import React from 'react';
 import styled from 'react-emotion';
 
-const ViewNameIsntUsedInStyle1 = styled('div')(
-  {
-    flexDirection: 'column',
-    zIndex: 5,
-  },
-  ({ props }) => ({
-    opacity: props.opacity,
-  })
-);
+const ViewNameIsntUsedInStyle1 = styled('div')({ zIndex: 5 }, ({ props }) => ({
+  opacity: props.opacity,
+}));
 
 const ViewNameIsntUsedInStyle = props => {
   return (
@@ -4374,16 +4080,12 @@ exports[`react-dom parses react-dom WithTest 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { css } from 'react-emotion';
-
-const Vertical_ho4tnl3 = css({ flexDirection: 'column' });
 
 const WithTest = props => {
   return (
     <button
       data-test-id={props['data-test-id'] || 'Vertical'}
       onClick={props.change}
-      className={Vertical_ho4tnl3}
     >
       <span data-test-id=\\"WithTest.Text\\">{props.text}</span>
       {props.children}
@@ -4423,16 +4125,12 @@ exports[`react-dom parses react-dom WithTest: react-dom parses react-dom WithTes
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { css } from 'react-emotion';
-
-const Vertical_ho4tnl3 = css({ flexDirection: 'column' });
 
 const WithTest = props => {
   return (
     <button
       data-test-id={props['data-test-id'] || 'Vertical'}
       onClick={props.change}
-      className={Vertical_ho4tnl3}
     >
       <span data-test-id=\\"WithTest.Text\\">{props.text}</span>
       {props.children}
@@ -4472,8 +4170,7 @@ exports[`react-native parses react-native Action 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
-const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
+import { Text, TouchableWithoutFeedback, View } from 'react-native';
 
 const Action = props => {
   return props.check ? (
@@ -4483,7 +4180,7 @@ const Action = props => {
       disabled={props.isDisabled}
       underlayColor=\\"transparent\\"
     >
-      <View testID={props['testID'] || 'Vertical'} style={styles.h18pdll5}>
+      <View testID={props['testID'] || 'Vertical'}>
         <Text testID=\\"Action.Text\\">click me</Text>
         {props.children}
       </View>
@@ -4514,13 +4211,7 @@ exports[`react-native parses react-native AnimatedButton 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import {
-  Animated,
-  StyleSheet,
-  Text,
-  TouchableWithoutFeedback,
-} from 'react-native';
-const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
+import { Animated, Text, TouchableWithoutFeedback } from 'react-native';
 
 const AnimatedButton = props => {
   return (
@@ -4531,7 +4222,7 @@ const AnimatedButton = props => {
     >
       <Animated.View
         testID={props['testID'] || 'Vertical'}
-        style={[styles.h18pdll5, { opacity: props.opacity }]}
+        style={{ opacity: props.opacity }}
       >
         <Text testID=\\"AnimatedButton.Text\\">hey</Text>
         {props.children}
@@ -4564,12 +4255,12 @@ Object {
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 const styles = StyleSheet.create({
-  h148do75: { flexDirection: 'column', width: '92%', marginTop: 'auto' },
+  hfuuuuw: { width: '92%', marginTop: 'auto' },
 });
 
 const AppRegionDrag = props => {
   return (
-    <View testID={props['testID'] || 'Vertical'} style={styles.h148do75}>
+    <View testID={props['testID'] || 'Vertical'} style={styles.hfuuuuw}>
       {props.children}
     </View>
   );
@@ -4595,10 +4286,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { Animated, Image, StyleSheet } from 'react-native';
-const styles = StyleSheet.create({
-  h18pdll5: { flexDirection: 'column' },
-  hp2cr4d: { flexDirection: 'row' },
-});
+const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
 
 const BackgroundImage = props => {
   return (
@@ -4606,10 +4294,9 @@ const BackgroundImage = props => {
       resizeMode=\\"cover\\"
       source={{ uri: 'https://viewsdx.com/image.jpg' }}
       testID={props['testID'] || 'Vertical'}
-      style={styles.h18pdll5}
     >
       <Animated.Image
-        resizeMode=\\"contain\\"
+        resizeMode={undefined}
         source={{ uri: props.backgroundImage }}
         testID=\\"BackgroundImage.Horizontal\\"
         style={styles.hp2cr4d}
@@ -4642,9 +4329,7 @@ Object {
 import React from 'react';
 import { Animated, StyleSheet, View } from 'react-native';
 const styles = StyleSheet.create({
-  h18pdll5: { flexDirection: 'column' },
-  h141a9qm: {
-    flexDirection: 'column',
+  hvzqnyi: {
     elevation: 1,
     shadowOffset: { width: 0, height: 8 },
     shadowRadius: 15,
@@ -4657,31 +4342,25 @@ const BoxShadow = props => {
   return (
     <Animated.View
       testID={props['testID'] || 'Vertical'}
-      style={[
-        styles.h18pdll5,
-        {
-          elevation: 1,
-          shadowOffset: { width: 10, height: 5 },
-          shadowRadius: 2,
-          shadowOpacity: 1,
-          shadowColor: props.color,
-        },
-      ]}
+      style={{
+        elevation: 1,
+        shadowOffset: { width: 10, height: 5 },
+        shadowRadius: 2,
+        shadowOpacity: 1,
+        shadowColor: props.color,
+      }}
     >
       <Animated.View
         testID=\\"BoxShadow.Vertical:1\\"
-        style={[
-          styles.h18pdll5,
-          {
-            elevation: 1,
-            shadowOffset: { width: 10, height: 5 },
-            shadowRadius: 10,
-            shadowOpacity: 1,
-            shadowColor: props.color,
-          },
-        ]}
+        style={{
+          elevation: 1,
+          shadowOffset: { width: 10, height: 5 },
+          shadowRadius: 10,
+          shadowOpacity: 1,
+          shadowColor: props.color,
+        }}
       >
-        <View testID=\\"BoxShadow.Vertical:2\\" style={styles.h141a9qm} />
+        <View testID=\\"BoxShadow.Vertical:2\\" style={styles.hvzqnyi} />
       </Animated.View>
       {props.children}
     </Animated.View>
@@ -4710,13 +4389,11 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-const styles = StyleSheet.create({
-  h1cpfewk: { flexDirection: 'column', backgroundColor: 'blue' },
-});
+const styles = StyleSheet.create({ hkg1xou: { backgroundColor: 'blue' } });
 
 const ClassName = props => {
   return (
-    <View testID={props['testID'] || 'Vertical'} style={styles.h1cpfewk}>
+    <View testID={props['testID'] || 'Vertical'} style={styles.hkg1xou}>
       {props.children}
     </View>
   );
@@ -4742,16 +4419,14 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { Animated, StyleSheet, View } from 'react-native';
-const styles = StyleSheet.create({
-  h1c5r919: { flexDirection: 'column', backgroundColor: 'red' },
-});
+const styles = StyleSheet.create({ h1jcb2fl: { backgroundColor: 'red' } });
 
 const Code = props => {
   return (
     <View
       testID={props['testID'] || 'Vertical'}
       ref={$e => (this.$e = $e)}
-      style={styles.h1c5r919}
+      style={styles.h1jcb2fl}
     >
       <Animated.Text
         testID=\\"Code.Text\\"
@@ -4789,14 +4464,13 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import SomeThing from './SomeThing.view.js';
-import { Animated, StyleSheet } from 'react-native';
-const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
+import { Animated } from 'react-native';
 
 const DynamicStylesApplyToBasicBlocksOnly = props => {
   return (
     <Animated.View
       testID={props['testID'] || 'Vertical'}
-      style={[styles.h18pdll5, { height: props.height }]}
+      style={{ height: props.height }}
     >
       <SomeThing
         testID=\\"DynamicStylesApplyToBasicBlocksOnly.OnTop\\"
@@ -4853,89 +4527,28 @@ exports[`react-native parses react-native Form 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableWithoutFeedback,
-  View,
-} from 'react-native';
-const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
+import { Text, TextInput, TouchableWithoutFeedback, View } from 'react-native';
 
-class Form extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  render() {
-    const { props, state } = this;
-
-    return (
-      <View testID={props['testID'] || 'Form'} style={styles.h18pdll5}>
-        <TextInput
-          blurOnSubmit={false}
-          onSubmitEditing={this.$Surname ? () => this.$Surname.focus() : null}
-          returnKeyType={this.$Surname ? 'next' : 'go'}
-          onChangeText={name => this.setState({ name })}
-          ref={$e => (this.$name = $e)}
-          value={state.name}
-          keyboardType=\\"default\\"
-          autoCorrect={false}
-          underlineColorAndroid=\\"transparent\\"
-          testID=\\"Form.Name\\"
-          autoFocus={true}
-        />
-        <TextInput
-          blurOnSubmit={false}
-          onSubmitEditing={this.$Password ? () => this.$Password.focus() : null}
-          returnKeyType={this.$Password ? 'next' : 'go'}
-          onChangeText={surname => this.setState({ surname })}
-          ref={$e => (this.$surname = $e)}
-          value={state.surname}
-          keyboardType=\\"default\\"
-          autoCorrect={false}
-          underlineColorAndroid=\\"transparent\\"
-          testID=\\"Form.Surname\\"
-        />
-        <TextInput
-          blurOnSubmit={false}
-          onSubmitEditing={this.$Email ? () => this.$Email.focus() : null}
-          returnKeyType={this.$Email ? 'next' : 'go'}
-          onChangeText={password => this.setState({ password })}
-          ref={$e => (this.$password = $e)}
-          value={state.password}
-          secureTextEntry
-          autoCorrect={false}
-          underlineColorAndroid=\\"transparent\\"
-          testID=\\"Form.Password\\"
-        />
-        <TextInput
-          returnKeyType=\\"done\\"
-          onChangeText={email => this.setState({ email })}
-          ref={$e => (this.$email = $e)}
-          value={state.email}
-          keyboardType=\\"email-address\\"
-          autoCorrect={false}
-          defaultValue=\\"morph@viewsdx.com\\"
-          underlineColorAndroid=\\"transparent\\"
-          testID=\\"Form.Email\\"
-          defaultValue=\\"morph@viewsdx.com\\"
-        />
-        <TouchableWithoutFeedback
-          activeOpacity={0.7}
-          onPress={() => props.onSubmit(state)}
-          underlayColor=\\"transparent\\"
-        >
-          <View testID=\\"Form.Button\\" style={styles.h18pdll5}>
-            <Text testID=\\"Form.Text\\">Send!</Text>
-          </View>
-        </TouchableWithoutFeedback>
-        {props.children}
-      </View>
-    );
-  }
-}
+const Form = props => {
+  return (
+    <View testID={props['testID'] || 'Form'}>
+      <TextInput testID=\\"Form.Name\\" autoFocus={true} />
+      <TextInput testID=\\"Form.Surname\\" />
+      <TextInput testID=\\"Form.Password\\" />
+      <TextInput testID=\\"Form.Email\\" defaultValue=\\"morph@viewsdx.com\\" />
+      <TouchableWithoutFeedback
+        activeOpacity={0.7}
+        onPress={() => props.onSubmit(state)}
+        underlayColor=\\"transparent\\"
+      >
+        <View testID=\\"Form.Button\\">
+          <Text testID=\\"Form.Text\\">Send!</Text>
+        </View>
+      </TouchableWithoutFeedback>
+      {props.children}
+    </View>
+  );
+};
 
 export default Form;
 ",
@@ -4958,12 +4571,11 @@ exports[`react-native parses react-native GoTo 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
+import { Text, View } from 'react-native';
 
 const GoTo = props => {
   return (
-    <View testID={props['testID'] || 'Vertical'} style={styles.h18pdll5}>
+    <View testID={props['testID'] || 'Vertical'}>
       <Text testID=\\"GoTo.Text\\">Go to ViewsDX website!</Text>
       {props.children}
     </View>
@@ -4990,10 +4602,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { Animated, StyleSheet, TouchableWithoutFeedback } from 'react-native';
-const styles = StyleSheet.create({
-  h18pdll5: { flexDirection: 'column' },
-  hyfo4ef: { color: 'white' },
-});
+const styles = StyleSheet.create({ hyfo4ef: { color: 'white' } });
 
 const Hover = props => {
   return (
@@ -5004,7 +4613,7 @@ const Hover = props => {
     >
       <Animated.View
         testID={props['testID'] || 'Button'}
-        style={[styles.h18pdll5, { backgroundColor: props.backgroundColor }]}
+        style={{ backgroundColor: props.backgroundColor }}
       >
         <Animated.Text
           testID=\\"Hover.Text\\"
@@ -5026,58 +4635,6 @@ export default Hover;
     "backgroundColorHover": "string",
     "fontSize": "number",
     "fontSizeHover": "number",
-    "onClick": "function",
-  },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
-}
-`;
-
-exports[`react-native parses react-native HoverProxy 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
-const styles = StyleSheet.create({
-  h1jrzrhl: { flexDirection: 'column', backgroundColor: 'black' },
-  hyfo4ef: { color: 'white' },
-});
-
-const HoverProxy = props => {
-  const childrenArray = React.Children.toArray(props.children);
-  return (
-    <TouchableWithoutFeedback
-      activeOpacity={0.7}
-      onPress={props.onClick}
-      underlayColor=\\"transparent\\"
-    >
-      <View testID={props['testID'] || 'Button'} style={styles.h1jrzrhl}>
-        {props.childrenProxyMap &&
-        childrenArray[props.childrenProxyMap['props.icon']]
-          ? React.cloneElement(
-              childrenArray[props.childrenProxyMap['props.icon']],
-              { fill: 'white', fillHover: 'black' }
-            )
-          : null}
-        <Text testID=\\"HoverProxy.Text\\" style={styles.hyfo4ef}>
-          Hey!
-        </Text>
-      </View>
-    </TouchableWithoutFeedback>
-  );
-};
-
-export default HoverProxy;
-",
-  "fonts": Object {},
-  "props": Object {
-    "icon": "string",
     "onClick": "function",
   },
   "svgs": Array [],
@@ -5121,12 +4678,11 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import Something from './Something.view.js';
-import { StyleSheet, View } from 'react-native';
-const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
+import { View } from 'react-native';
 
 const ListOfSomething = props => {
   return (
-    <View testID={props['testID'] || 'ListOfSomething'} style={styles.h18pdll5}>
+    <View testID={props['testID'] || 'ListOfSomething'}>
       {Array.isArray(props.from) &&
         props.from.map((item, index) => (
           <Something
@@ -5162,12 +4718,11 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import Card from './Card.view.js';
-import { StyleSheet, View } from 'react-native';
-const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
+import { View } from 'react-native';
 
 const ListWhen = props => {
   return props.showMe ? (
-    <View testID={props['testID'] || 'List'} style={styles.h18pdll5}>
+    <View testID={props['testID'] || 'List'}>
       {Array.isArray(props.from) &&
         props.from.map((item, index) => (
           <Card {...item} key={item.id || index} testID=\\"ListWhen.Card\\" />
@@ -5225,14 +4780,16 @@ exports[`react-native parses react-native LocalImageSvg 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import ChopperSvgInline from './ChopperSvgInline.view.js';
+import chopperSvg from './chopper.svg';
+import { Image, StyleSheet } from 'react-native';
+const styles = StyleSheet.create({ h1fkj9gt: { width: 50 } });
 
 const LocalImageSvg = props => {
   return (
-    <ChopperSvgInline
+    <Image
       testID={props['testID'] || 'LocalImageSvg'}
-      width={50}
-      height={props.height}
+      source={chopperSvg}
+      style={[styles.h1fkj9gt, { height: props.height }]}
     />
   );
 };
@@ -5243,12 +4800,7 @@ export default LocalImageSvg;
   "props": Object {
     "height": "number",
   },
-  "svgs": Array [
-    Object {
-      "source": "./chopper.svg",
-      "view": "ChopperSvgInline",
-    },
-  ],
+  "svgs": Array [],
   "tests": Array [
     Object {
       "data": Object {},
@@ -5328,19 +4880,21 @@ import { withRouter } from 'react-router';
 import { Link } from 'react-router-native';
 import { Route } from 'react-router-native';
 import Topic from './Topic.view.js';
-import { StyleSheet, Text, View } from 'react-native';
-const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
+import { Text, View } from 'react-native';
 
 const NestedRoutes = props => {
   return (
-    <View testID={props['testID'] || 'Topics'} style={styles.h18pdll5}>
+    <View testID={props['testID'] || 'Topics'}>
       <Text testID=\\"NestedRoutes.Text\\">topics</Text>
       <Link
         activeOpacity={0.7}
         to={\`\${props.match.url === '/' ? '' : props.match.url}/rendering\`}
         underlayColor=\\"transparent\\"
       >
-        <View testID=\\"NestedRoutes.Link\\" style={styles.h18pdll5}>
+        <View
+          to={\`\${props.match.url === '/' ? '' : props.match.url}/rendering\`}
+          testID=\\"NestedRoutes.Link\\"
+        >
           <Text testID=\\"NestedRoutes.Text:1\\">Rendering with React</Text>
         </View>
       </Link>
@@ -5374,12 +4928,11 @@ exports[`react-native parses react-native Print 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
+import { Text, View } from 'react-native';
 
 const Print = props => {
   return (
-    <View testID={props['testID'] || 'Vertical'} style={styles.h18pdll5}>
+    <View testID={props['testID'] || 'Vertical'}>
       <Text testID=\\"Print.Text\\">not in print</Text>
       <Text testID=\\"Print.Text:1\\">hey</Text>
       {props.children}
@@ -5407,15 +4960,12 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-const styles = StyleSheet.create({
-  h18pdll5: { flexDirection: 'column' },
-  hp2cr4d: { flexDirection: 'row' },
-});
+const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
 
 const ProxyTest = props => {
   const childrenArray = React.Children.toArray(props.children);
   return (
-    <View testID={props['testID'] || 'Vertical'} style={styles.h18pdll5}>
+    <View testID={props['testID'] || 'Vertical'}>
       <View testID=\\"ProxyTest.Horizontal\\" style={styles.hp2cr4d}>
         {props.bla && childrenArray[props.childrenProxyMap['Something']]
           ? React.cloneElement(
@@ -5530,12 +5080,11 @@ exports[`react-native parses react-native ScopePopup 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
-const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
+import { Text, TouchableWithoutFeedback, View } from 'react-native';
 
 const ScopePopup = props => {
   return (
-    <View testID={props['testID'] || 'Popup'} style={styles.h18pdll5}>
+    <View testID={props['testID'] || 'Popup'}>
       <TouchableWithoutFeedback
         activeOpacity={0.7}
         onPress={
@@ -5545,7 +5094,7 @@ const ScopePopup = props => {
         }
         underlayColor=\\"transparent\\"
       >
-        <View testID=\\"ScopePopup.Toggle\\" style={styles.h18pdll5}>
+        <View testID=\\"ScopePopup.Toggle\\">
           <Text testID=\\"ScopePopup.Text\\">toggle popup</Text>
         </View>
       </TouchableWithoutFeedback>
@@ -5579,28 +5128,24 @@ exports[`react-native parses react-native ScopePopup2 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
-const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
+import { Text, TouchableWithoutFeedback, View } from 'react-native';
 
 const ScopePopup2 = props => {
   return (
-    <View testID={props['testID'] || 'Popup'} style={styles.h18pdll5}>
+    <View testID={props['testID'] || 'Popup'}>
       <TouchableWithoutFeedback
         activeOpacity={0.7}
         onPress={props.toggle}
         underlayColor=\\"transparent\\"
       >
-        <View testID=\\"ScopePopup2.Toggle\\" style={styles.h18pdll5}>
+        <View testID=\\"ScopePopup2.Toggle\\">
           <Text testID=\\"ScopePopup2.Text\\">toggle popup</Text>
         </View>
       </TouchableWithoutFeedback>
       <View
         testID=\\"ScopePopup2.Content\\"
         scale={props.isShown ? 1 : props.isSuperVisible ? 2 : 0}
-        style={[
-          styles.h18pdll5,
-          { opacity: props.isShown ? 1 : props.isSuperVisible ? 3 : 0 },
-        ]}
+        style={{ opacity: props.isShown ? 1 : props.isSuperVisible ? 3 : 0 }}
       />
       {props.children}
     </View>
@@ -5632,8 +5177,7 @@ Object {
 import React from 'react';
 import { Animated, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 const styles = StyleSheet.create({
-  h14nybr: {
-    flexDirection: 'column',
+  h7g4z7s: {
     marginRight: 8,
     backgroundColor: '#CBCDCE',
     opacity: 0.7,
@@ -5655,7 +5199,7 @@ const SomeMissingStyle = props => {
       <Animated.View
         testID={props['testID'] || 'WindowControl'}
         tabIndex=\\"-1\\"
-        style={styles.h14nybr}
+        style={styles.h7g4z7s}
       >
         {props.children}
       </Animated.View>
@@ -5692,7 +5236,11 @@ const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
 const Teleport = props => {
   return (
     <Link activeOpacity={0.7} to=\\"..\\" underlayColor=\\"transparent\\">
-      <View testID={props['testID'] || 'Horizontal'} style={styles.hp2cr4d}>
+      <View
+        to=\\"..\\"
+        testID={props['testID'] || 'Horizontal'}
+        style={styles.hp2cr4d}
+      >
         <Text testID=\\"Teleport.Text\\">go back</Text>
         {props.children}
       </View>
@@ -5756,12 +5304,11 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import External from './External.view.js';
-import { StyleSheet, Text, View } from 'react-native';
-const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
+import { Text, View } from 'react-native';
 
 const TestIds = props => {
   return (
-    <View testID={props['testID'] || 'App'} style={styles.h18pdll5}>
+    <View testID={props['testID'] || 'App'}>
       <Text testID=\\"TestIds.Text\\">1</Text>
       <Text testID=\\"TestIds.Text:1\\">2</Text>
       <External testID=\\"TestIds.External\\" />
@@ -5790,12 +5337,11 @@ exports[`react-native parses react-native TextInterpolation 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
+import { Text, View } from 'react-native';
 
 const TextInterpolation = props => {
   return (
-    <View testID={props['testID'] || 'Vertical'} style={styles.h18pdll5}>
+    <View testID={props['testID'] || 'Vertical'}>
       <Text testID=\\"TextInterpolation.Text\\">{\`\${props.name} test\`}</Text>
       {props.children}
     </View>
@@ -5858,35 +5404,17 @@ const styles = StyleSheet.create({
   },
 });
 
-class UseCaptureEmail extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  render() {
-    const { props, state } = this;
-
-    return (
-      <TextInput
-        onSubmitEditing={props.onSubmit}
-        returnKeyType=\\"go\\"
-        onChangeText={email => this.setState({ email })}
-        ref={$e => (this.$email = $e)}
-        value={state.email}
-        keyboardType=\\"email-address\\"
-        autoCorrect={false}
-        defaultValue=\\"hey this is a default value\\"
-        underlineColorAndroid=\\"transparent\\"
-        testID={props['testID'] || 'Email'}
-        autoFocus={true}
-        placeholderTextColor=\\"blue\\"
-        defaultValue=\\"hey this is a default value\\"
-        style={styles.hm4pcs}
-      />
-    );
-  }
-}
+const UseCaptureEmail = props => {
+  return (
+    <TextInput
+      testID={props['testID'] || 'Email'}
+      autoFocus={true}
+      placeholderTextColor=\\"blue\\"
+      defaultValue=\\"hey this is a default value\\"
+      style={styles.hm4pcs}
+    />
+  );
+};
 
 export default UseCaptureEmail;
 ",
@@ -5911,29 +5439,9 @@ Object {
 import React from 'react';
 import CaptureFile from './CaptureFile.view.js';
 
-class UseCaptureFile extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  render() {
-    const { props, state } = this;
-
-    return (
-      <CaptureFile
-        returnKeyType=\\"done\\"
-        onChangeText={file => this.setState({ file })}
-        ref={$e => (this.$file = $e)}
-        value={state.file}
-        keyboardType=\\"undefined\\"
-        autoCorrect={false}
-        underlineColorAndroid=\\"transparent\\"
-        testID={props['testID'] || 'File'}
-      />
-    );
-  }
-}
+const UseCaptureFile = props => {
+  return <CaptureFile testID={props['testID'] || 'File'} />;
+};
 
 export default UseCaptureFile;
 ",
@@ -5956,29 +5464,9 @@ Object {
 import React from 'react';
 import { TextInput } from 'react-native';
 
-class UseCaptureNumber extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  render() {
-    const { props, state } = this;
-
-    return (
-      <TextInput
-        returnKeyType=\\"done\\"
-        onChangeText={number => this.setState({ number })}
-        ref={$e => (this.$number = $e)}
-        value={state.number}
-        keyboardType=\\"numeric\\"
-        autoCorrect={false}
-        underlineColorAndroid=\\"transparent\\"
-        testID={props['testID'] || 'Number'}
-      />
-    );
-  }
-}
+const UseCaptureNumber = props => {
+  return <TextInput testID={props['testID'] || 'Number'} />;
+};
 
 export default UseCaptureNumber;
 ",
@@ -6001,29 +5489,9 @@ Object {
 import React from 'react';
 import { TextInput } from 'react-native';
 
-class UseCapturePhone extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  render() {
-    const { props, state } = this;
-
-    return (
-      <TextInput
-        returnKeyType=\\"done\\"
-        onChangeText={phone => this.setState({ phone })}
-        ref={$e => (this.$phone = $e)}
-        value={state.phone}
-        keyboardType=\\"phone-pad\\"
-        autoCorrect={false}
-        underlineColorAndroid=\\"transparent\\"
-        testID={props['testID'] || 'Phone'}
-      />
-    );
-  }
-}
+const UseCapturePhone = props => {
+  return <TextInput testID={props['testID'] || 'Phone'} />;
+};
 
 export default UseCapturePhone;
 ",
@@ -6046,29 +5514,9 @@ Object {
 import React from 'react';
 import { TextInput } from 'react-native';
 
-class UseCaptureSecure extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  render() {
-    const { props, state } = this;
-
-    return (
-      <TextInput
-        returnKeyType=\\"done\\"
-        onChangeText={secure => this.setState({ secure })}
-        ref={$e => (this.$secure = $e)}
-        value={state.secure}
-        secureTextEntry
-        autoCorrect={false}
-        underlineColorAndroid=\\"transparent\\"
-        testID={props['testID'] || 'Secure'}
-      />
-    );
-  }
-}
+const UseCaptureSecure = props => {
+  return <TextInput testID={props['testID'] || 'Secure'} />;
+};
 
 export default UseCaptureSecure;
 ",
@@ -6091,29 +5539,9 @@ Object {
 import React from 'react';
 import { TextInput } from 'react-native';
 
-class UseCaptureText extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  render() {
-    const { props, state } = this;
-
-    return (
-      <TextInput
-        returnKeyType=\\"done\\"
-        onChangeText={text => this.setState({ text })}
-        ref={$e => (this.$text = $e)}
-        value={state.text}
-        keyboardType=\\"default\\"
-        autoCorrect={false}
-        underlineColorAndroid=\\"transparent\\"
-        testID={props['testID'] || 'Text'}
-      />
-    );
-  }
-}
+const UseCaptureText = props => {
+  return <TextInput testID={props['testID'] || 'Text'} />;
+};
 
 export default UseCaptureText;
 ",
@@ -6136,29 +5564,9 @@ Object {
 import React from 'react';
 import { TextInput } from 'react-native';
 
-class UseCaptureTextArea extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  render() {
-    const { props, state } = this;
-
-    return (
-      <TextInput
-        returnKeyType=\\"done\\"
-        onChangeText={captureTextArea => this.setState({ captureTextArea })}
-        ref={$e => (this.$captureTextArea = $e)}
-        value={state.captureTextArea}
-        keyboardType=\\"undefined\\"
-        autoCorrect={false}
-        underlineColorAndroid=\\"transparent\\"
-        testID={props['testID'] || 'CaptureTextArea'}
-      />
-    );
-  }
-}
+const UseCaptureTextArea = props => {
+  return <TextInput testID={props['testID'] || 'CaptureTextArea'} />;
+};
 
 export default UseCaptureTextArea;
 ",
@@ -6181,30 +5589,14 @@ Object {
 import React from 'react';
 import { TextInput } from 'react-native';
 
-class UseCaptureTextManagedFromOutside extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  render() {
-    const { props, state } = this;
-
-    return (
-      <TextInput
-        returnKeyType=\\"done\\"
-        onChangeText={captureText => this.setState({ captureText })}
-        ref={$e => (this.$captureText = $e)}
-        value={state.captureText}
-        keyboardType=\\"default\\"
-        autoCorrect={false}
-        underlineColorAndroid=\\"transparent\\"
-        testID={props['testID'] || 'CaptureText'}
-        value={props.external}
-      />
-    );
-  }
-}
+const UseCaptureTextManagedFromOutside = props => {
+  return (
+    <TextInput
+      testID={props['testID'] || 'CaptureText'}
+      value={props.external}
+    />
+  );
+};
 
 export default UseCaptureTextManagedFromOutside;
 ",
@@ -6526,13 +5918,11 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-const styles = StyleSheet.create({
-  h1c5r919: { flexDirection: 'column', backgroundColor: 'red' },
-});
+const styles = StyleSheet.create({ h1jcb2fl: { backgroundColor: 'red' } });
 
 const UseVertical = props => {
   return (
-    <View testID={props['testID'] || 'Vertical'} style={styles.h1c5r919}>
+    <View testID={props['testID'] || 'Vertical'} style={styles.h1jcb2fl}>
       {props.children}
     </View>
   );
@@ -6558,15 +5948,13 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { Animated, StyleSheet } from 'react-native';
-const styles = StyleSheet.create({
-  h1jyh4qf: { flexDirection: 'column', zIndex: 5 },
-});
+const styles = StyleSheet.create({ h15ehzpl: { zIndex: 5 } });
 
 const ViewNameIsntUsedInStyle = props => {
   return (
     <Animated.View
       testID={props['testID'] || 'ViewNameIsntUsedInStyle'}
-      style={[styles.h1jyh4qf, { opacity: props.opacity }]}
+      style={[styles.h15ehzpl, { opacity: props.opacity }]}
     >
       {props.children}
     </Animated.View>
@@ -6656,8 +6044,7 @@ exports[`react-native parses react-native WithTest 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
-const styles = StyleSheet.create({ h18pdll5: { flexDirection: 'column' } });
+import { Text, TouchableWithoutFeedback, View } from 'react-native';
 
 const WithTest = props => {
   return (
@@ -6666,7 +6053,7 @@ const WithTest = props => {
       onPress={props.change}
       underlayColor=\\"transparent\\"
     >
-      <View testID={props['testID'] || 'Vertical'} style={styles.h18pdll5}>
+      <View testID={props['testID'] || 'Vertical'}>
         <Text testID=\\"WithTest.Text\\">{props.text}</Text>
         {props.children}
       </View>

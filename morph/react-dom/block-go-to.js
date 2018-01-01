@@ -6,7 +6,7 @@ export const enter = (node, parent, state) => {
     const goTo = getProp(node, 'goTo')
     state.render.push(
       ` href=${safe(
-        goTo.value.value,
+        goTo.value,
         goTo
       )} rel='noopener noreferrer' target='_blank'`
     )

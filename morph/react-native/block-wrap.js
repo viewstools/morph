@@ -9,8 +9,7 @@ export const enter = (node, parent, state) => {
   if (
     name === 'Text' &&
     parent &&
-    parent.parent &&
-    (parent.parent.backgroundImage || parent.parent.ensureBackgroundColor)
+    (parent.backgroundImage || parent.ensureBackgroundColor)
   ) {
     node.ensureBackgroundColor = true
   }
@@ -38,12 +37,12 @@ export const enter = (node, parent, state) => {
           }
           ${isDisabled ? `disabled=${wrap(isDisabled)}` : ''}
           underlayColor='transparent'
-          ${node.isInList ? `key={${key ? key.value.value : 'index'}}` : ''}>`
+          ${node.isInList ? `key={${key ? key.value : 'index'}}` : ''}>`
     )
     node.wrapEnd = `</${block}>`
   } else if (node.teleport) {
     state.use('Link')
-    let to = getProp(node, 'teleportTo').value.value
+    let to = getProp(node, 'teleportTo').value
 
     if (to.startsWith('/') || to === '..') {
       to = safe(to)

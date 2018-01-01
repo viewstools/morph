@@ -21,4 +21,4 @@ const blacklist = [
 ]
 
 export default (node, parent, state) =>
-  !blacklist.includes(node.key.value.toLowerCase())
+  !blacklist.includes(node.name.toLowerCase())

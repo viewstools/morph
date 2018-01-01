@@ -4,15 +4,15 @@ import wrap from './react/wrap.js'
 const safeScope = value =>
   typeof value === 'string' && !isCode(value) ? JSON.stringify(value) : value
 
-export const asScopedValue = (obj, node, properties) => {
-  const defaultValue = node.inScope ? null : node.value.value
+export const asScopedValue = (obj, node, parent) => {
+  const defaultValue = node.inScope ? null : node.value
   let value = []
 
   for (const scope in obj) {
-    const scopeProp = properties.list.find(
-      prop => prop.inScope === scope && prop.key.valueRaw === node.key.valueRaw
+    const scopeProp = parent.properties.find(
+      prop => prop.inScope === scope && prop.nameRaw === node.nameRaw
     )
-    value.push(`${scope}? ${safeScope(scopeProp.value.value)}`)
+    value.push(`${scope}? ${safeScope(scopeProp.value)}`)
   }
 
   return `${value.join(' : ')} : ${safeScope(defaultValue)}`
@@ -21,11 +21,11 @@ export const asScopedValue = (obj, node, properties) => {
 export const checkParentStem = (node, styleKey) => {
   if (styleKey !== 'hover' || !node.parent) return false
 
-  const matchingParentStem =
-    node.parent.properties &&
-    node.parent.properties.list.some(prop => prop.tags.hover)
+  const matchingParentStem = node.parent.properties.some(
+    prop => prop.tags.hover
+  )
 
-  return matchingParentStem && (node.parent.is || node.parent.name.value)
+  return matchingParentStem && (node.parent.is || node.parent.name)
 }
 
 const INTERPOLATION = /\${(.+)}/
@@ -52,7 +52,7 @@ export const getPropertiesAsObject = list => {
   const obj = {}
 
   list.forEach(prop => {
-    obj[prop.key.value] = safeScope(prop.value.value)
+    obj[prop.name] = safeScope(prop.value)
   })
 
   return getObjectAsString(obj)
@@ -60,25 +60,21 @@ export const getPropertiesAsObject = list => {
 
 export const getProp = (node, key) => {
   const finder =
-    typeof key === 'string'
-      ? p => p.key.value === key
-      : p => key.test(p.key.value)
+    typeof key === 'string' ? p => p.name === key : p => key.test(p.name)
 
-  return node.properties && node.properties.list.find(finder)
+  return node.properties && node.properties.find(finder)
 }
 
-export const getScope = node => node.value.value.split('when ')[1]
+export const getScope = node => node.value.split('when ')[1]
 
 const maybeSafe = node =>
   node.tags.code
-    ? node.value.value
-    : typeof node.value.value === 'string'
-      ? safe(node.value.value)
-      : node.value.value
+    ? node.value
+    : typeof node.value === 'string' ? safe(node.value) : node.value
 
 export const getScopedProps = (propNode, blockNode) => {
-  const scopedProps = blockNode.properties.list
-    .filter(prop => prop.key.value === propNode.key.value && prop.inScope)
+  const scopedProps = blockNode.properties
+    .filter(prop => prop.name === propNode.name && prop.inScope)
     .reverse()
 
   let scopedConditional = maybeSafe(propNode)
@@ -101,13 +97,11 @@ export const hasKeysInChildren = obj =>
 export const hasProp = (node, key, match) => {
   const prop = getProp(node, key)
   if (!prop) return false
-  return typeof match === 'function' ? match(prop.value.value) : true
+  return typeof match === 'function' ? match(prop.value) : true
 }
 
 export const hasDefaultProp = (node, parent) =>
-  parent.list.some(
-    prop => prop.key.valueRaw === node.key.valueRaw && !prop.inScope
-  )
+  parent.properties.some(prop => prop.nameRaw === node.nameRaw && !prop.inScope)
 
 export const CODE_EXPLICIT = /^{.+}$/
 export const isCodeExplicit = str => CODE_EXPLICIT.test(str)
@@ -134,4 +128,4 @@ export const getAllowedStyleKeys = node => {
 }
 
 export const isList = node =>
-  node.type === 'Block' && node.name.value === 'List'
+  node && node.type === 'Block' && node.name === 'List'

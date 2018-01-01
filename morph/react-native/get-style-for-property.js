@@ -1,20 +1,17 @@
-import { deinterpolate, isTag } from '../utils.js'
+import { deinterpolate, getProp, isTag } from '../utils.js'
 import getColor from 'color'
 
 export default (node, parent, code) => {
-  const key = node.key.value
-  const value = node.value.value
-
-  switch (key) {
+  switch (node.name) {
     case 'border':
     case 'borderBottom':
     case 'borderLeft':
     case 'borderRight':
     case 'borderTop':
-      return getBorder(value, key.replace('border', ''))
+      return getBorder(node.value, node.name.replace('border', ''))
 
     case 'boxShadow':
-      return getShadow(value)
+      return getShadow(node.value)
 
     case 'fontFamily':
       return {
@@ -23,23 +20,20 @@ export default (node, parent, code) => {
 
     case 'zIndex':
       return {
-        zIndex: code ? value : parseInt(value, 10),
+        zIndex: code ? node.value : parseInt(node.value, 10),
       }
 
     case 'color':
-      if (
-        /Capture/.test(parent.parent.name.value) &&
-        isTag(node, 'placeholder')
-      ) {
+      if (/Capture/.test(parent.name) && isTag(node, 'placeholder')) {
         return {
           _isProp: true,
-          placeholderTextColor: value,
+          placeholderTextColor: node.value,
         }
       }
-      // Just returning the value in cases where if statement is not true
+      // Just returning the node.value in cases where if statement is not true
       // Otherwise it was falling through to the next case.
       return {
-        color: value,
+        color: node.value,
       }
 
     case 'lineHeight':
@@ -49,24 +43,24 @@ export default (node, parent, code) => {
 
     default:
       return {
-        [key]: value,
+        [node.name]: node.value,
       }
   }
 }
 
 const getFontFamily = (node, parent) => {
-  const fontWeight = parent.list.find(n => n.key.value === 'fontWeight')
+  const fontWeight = getProp(parent, 'fontWeight')
   // const key = node.key.value
-  const fontFamily = node.value.value.split(',')[0].replace(/\s/g, '')
+  const fontFamily = node.value.split(',')[0].replace(/\s/g, '')
 
-  return fontWeight ? `${fontFamily}-${fontWeight.value.value}` : fontFamily
+  return fontWeight ? `${fontFamily}-${fontWeight.value}` : fontFamily
 }
 
 const getLineHeight = (node, parent) => {
-  const fontSize = parent.list.find(n => n.key.value === 'fontSize')
+  const fontSize = getProp(parent, 'fontSize')
   // using a default font size of 16 if none specified
-  const fontSizeValue = fontSize ? fontSize.value.value : 16
-  return node.value.value * fontSizeValue
+  const fontSizeValue = fontSize ? fontSize.value : 16
+  return node.value * fontSizeValue
 }
 
 // support
@@ -104,6 +98,8 @@ const getShadow = value => {
     case 3:
       color = parts[2]
       ret.shadowRadius = parseInt(parts[0], 10)
+      break
+    default:
       break
   }
 

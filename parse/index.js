@@ -35,8 +35,8 @@ export default (rtext, skipComments = true) => {
   const getChildrenProxyMap = block => {
     const childrenProxyMap = {}
 
-    block.blocks.list.forEach((child, i) => {
-      let maybeName = child.is || child.name.value
+    block.children.forEach((child, i) => {
+      let maybeName = child.is || child.name
       let name = maybeName
       let next = 1
       while (name in childrenProxyMap) {
@@ -50,18 +50,16 @@ export default (rtext, skipComments = true) => {
   }
 
   const lookForFonts = block => {
-    if (block.properties && (isFontable(block.name.value) || !block.isBasic)) {
-      const fontFamilyProp = block.properties.list.find(
-        p => p.key && p.key.value === 'fontFamily'
-      )
+    if (block.properties && (isFontable(block.name) || !block.isBasic)) {
+      const fontFamilyProp = block.properties.find(p => p.name === 'fontFamily')
 
       if (fontFamilyProp) {
-        const fontFamily = getMainFont(fontFamilyProp.value.value)
-        const fontWeightProp = block.properties.list.find(
-          p => p.key && p.key.value === 'fontWeight'
+        const fontFamily = getMainFont(fontFamilyProp.value)
+        const fontWeightProp = block.properties.find(
+          p => p.name === 'fontWeight'
         )
         const fontWeight = fontWeightProp
-          ? fontWeightProp.value.value.toString()
+          ? fontWeightProp.value.toString()
           : '400'
 
         if (!fonts[fontFamily]) fonts[fontFamily] = []
@@ -78,18 +76,12 @@ export default (rtext, skipComments = true) => {
       column: Math.max(0, lines[endLine].length - 1),
     }
 
-    if (block.properties) {
-      const last = block.properties.list[block.properties.list.length - 1]
-      block.properties.loc.end = last.loc.end
+    if (block.isGroup && !block.isBasic) {
+      block.childrenProxyMap = getChildrenProxyMap(block)
     }
 
-    if (block.isGroup) {
-      const last = block.blocks.list[block.blocks.list.length - 1]
-      block.blocks.loc.end = last ? last.loc.end : block.loc.end
-
-      if (!block.isBasic) {
-        block.childrenProxyMap = getChildrenProxyMap(block)
-      }
+    if (!block.properties) {
+      block.properties = []
     }
 
     if (stack.length === 0) {
@@ -106,11 +98,7 @@ export default (rtext, skipComments = true) => {
 
     const block = {
       type: 'Block',
-      name: {
-        type: 'Literal',
-        value: name,
-        loc: getLoc(i, 0, line.length - 1),
-      },
+      name,
       isBasic: isBasic(name),
       isGroup: false,
       loc: getLoc(i, 0),
@@ -138,17 +126,17 @@ export default (rtext, skipComments = true) => {
               block
             )
             shouldPushToStack = true
-          } else if (last.blocks.list.length > 0) {
+          } else if (last.children.length > 0) {
             warn(
               `A List can only have one view inside. This block is outside of it.\nPut 1 empty line before.`,
               block
             )
             shouldPushToStack = true
           } else {
-            last.blocks.list.push(block)
+            last.children.push(block)
           }
         } else {
-          last.blocks.list.push(block)
+          last.children.push(block)
         }
       } else {
         // the block is inside a block that isn't a group
@@ -191,11 +179,7 @@ export default (rtext, skipComments = true) => {
     if (isGroup(name)) {
       block.isGroup = true
       block.isList = isList(name)
-      block.blocks = {
-        type: 'Blocks',
-        list: [],
-        loc: getLoc(i + 1, 0),
-      }
+      block.children = []
 
       shouldPushToStack = true
     }
@@ -230,7 +214,7 @@ export default (rtext, skipComments = true) => {
         }
 
         if (tags.code) {
-          props.push({ type: block.name.value, prop, value })
+          props.push({ type: block.name, prop, value })
         }
 
         if (tags.style && tags.code) {
@@ -247,29 +231,12 @@ export default (rtext, skipComments = true) => {
         properties.push({
           type: 'Property',
           loc: getLoc(j, line.indexOf(propRaw), line.length - 1),
-          key: {
-            type: 'Literal',
-            // TODO should we use propRaw as value here?
-            value: prop,
-            valueRaw: propRaw,
-            loc: getLoc(
-              j,
-              line.indexOf(propRaw),
-              line.indexOf(propRaw) + propRaw.length - 1
-            ),
-          },
+          name: prop,
+          nameRaw: propRaw,
           inScope,
           tags,
           meta: getMeta(value, line, j),
-          value: {
-            loc: getLoc(
-              j,
-              line.indexOf(value),
-              line.indexOf(value) + value.length - 1
-            ),
-            type: 'Literal',
-            value: getValue(value),
-          },
+          value: getValue(value),
         })
       } else if (isComment(line) && !skipComments) {
         let [value] = getComment(line)
@@ -282,29 +249,13 @@ export default (rtext, skipComments = true) => {
         properties.push({
           type: 'Property',
           loc: getLoc(j, 0, line.length - 1),
-          value: {
-            type: 'Literal',
-            value,
-            loc: getLoc(j, line.indexOf(value), line.length - 1),
-          },
+          value,
           tags: { comment: true, userComment },
         })
       }
     }
 
-    if (properties.length > 0) {
-      const start = properties[0].loc.start
-      const end = properties[properties.length - 1].loc.end
-
-      block.properties = {
-        type: 'Properties',
-        list: properties,
-        loc: {
-          start,
-          end,
-        },
-      }
-    }
+    block.properties = properties
   }
 
   lines.forEach((line, i) => {
@@ -314,14 +265,14 @@ export default (rtext, skipComments = true) => {
       let block = stack[stack.length - 1] || views[views.length - 1]
       // TODO add warning
       if (!block) return
-      if (block.isGroup && block.blocks.list.length > 0) {
-        block = block.blocks.list[block.blocks.list.length - 1]
+      if (block.isGroup && block.children.length > 0) {
+        block = block.children[block.children.length - 1]
       }
 
       if (!block.properties) {
         parseProps(i, block)
         if (block.properties) {
-          block.loc.end = block.properties.loc.end
+          block.loc.end = block.properties[block.properties.length - 1].loc.end
         }
         lookForFonts(block)
       }

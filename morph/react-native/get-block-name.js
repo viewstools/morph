@@ -1,9 +1,8 @@
 import { getProp, hasProp, isCode } from '../utils.js'
-import makeToggle from '../react/make-toggle.js'
 import toPascalCase from 'to-pascal-case'
 
 export default (node, parent, state) => {
-  switch (node.name.value) {
+  switch (node.name) {
     case 'CaptureEmail':
     // case 'CaptureFile':
     case 'CaptureNumber':
@@ -31,7 +30,7 @@ export default (node, parent, state) => {
       return node.maybeAnimated ? `Animated.Text` : 'Text'
 
     default:
-      return node.name.value
+      return node.name
   }
 }
 
@@ -44,14 +43,14 @@ const getGroupBlockName = (node, state) => {
     node.goTo = true
   } else if (hasProp(node, 'onClick')) {
     const propNode = getProp(node, 'onClick')
-    node.action = propNode.value.value
+    node.action = propNode.value
   }
 
   if (hasProp(node, 'backgroundImage')) {
     const propNode = getProp(node, 'backgroundImage')
     node.backgroundImage = isCode(propNode)
-      ? propNode.value.value
-      : JSON.stringify(propNode.value.value)
+      ? propNode.value
+      : JSON.stringify(propNode.value)
 
     name = 'Image'
   } else if (hasProp(node, 'overflowY', v => v === 'auto' || v === 'scroll')) {

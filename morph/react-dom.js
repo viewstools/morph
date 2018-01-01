@@ -1,21 +1,13 @@
-import * as BlockCapture from './react-dom/block-capture.js'
-import * as BlockGoTo from './react-dom/block-go-to.js'
-import * as BlockTeleport from './react-dom/block-teleport.js'
-import * as PropertiesClassName from './react-dom/properties-class-name.js'
-import { enter as BlockNameEnter } from './react-dom/block-name.js'
-import { enter as BlockTestIdEnter } from './react-dom/block-test-id.js'
-import { enter as PropertyRefEnter } from './react-dom/property-ref.js'
-import { leave as PropertiesStyleLeave } from './react-dom/properties-style.js'
+import * as visitor from './react-dom/block.js'
 import getStyleForProperty from './react-dom/get-style-for-property.js'
 import getStyles from './react-dom/get-styles.js'
 import getValueForProperty from './react-dom/get-value-for-property.js'
-import isValidPropertyForBlock from './react-dom/is-valid-property-for-block.js'
-import makeVisitors from './react/make-visitors.js'
 import maybeUsesRouter from './react-dom/maybe-uses-router.js'
-import morph from './morph.js'
 import morphTests, { EMPTY_TEST } from './tests.js'
+import parse from '../parse/index.js'
 import restrictedNames from './react-dom/restricted-names.js'
 import toComponent from './react/to-component.js'
+import walk from './walk.js'
 
 const imports = {
   Animated: "import Animated from 'react-dom-animated'",
@@ -33,7 +25,6 @@ export default ({
   name,
   tests = EMPTY_TEST,
   view,
-  views = {},
 }) => {
   const finalName = restrictedNames.includes(name) ? `${name}1` : name
   if (name !== finalName) {
@@ -53,19 +44,19 @@ export default ({
     debug,
     file,
     fonts: [],
+    getStyleForProperty,
+    getValueForProperty,
     images: [],
     inlineStyles,
     isDynamic: false,
     isReactNative: false,
     name: finalName,
-    remap: {},
     render: [],
     styles: {},
     svgs: [],
     todos: [],
     usedBlockNames: { [finalName]: 1 },
     uses: [],
-    styles: {},
     testIds: {},
     tests: morphTests({ view: tests, file }),
     use(block) {
@@ -78,7 +69,6 @@ export default ({
 
       state.uses.push(block)
     },
-    views,
     withRouter: false,
   }
 
@@ -88,52 +78,8 @@ export default ({
     )
   }
 
-  const {
-    BlockExplicitChildren,
-    BlockInList,
-    BlockMaybeNeedsProperties,
-    BlockName,
-    BlockProxy,
-    BlockRoute,
-    BlockWhen,
-    ...visitors
-  } = makeVisitors({
-    BlockNameEnter,
-    getStyleForProperty,
-    getValueForProperty,
-    isValidPropertyForBlock,
-    PropertiesClassName,
-    PropertiesStyleLeave,
-    PropertyRefEnter,
-  })
-
-  visitors.Block = {
-    enter(node, parent, state) {
-      ;[
-        BlockWhen.enter,
-        BlockRoute.enter,
-        BlockName.enter,
-        BlockCapture.enter,
-        BlockTeleport.enter,
-        BlockGoTo.enter,
-        BlockMaybeNeedsProperties.enter,
-        BlockProxy.enter,
-        BlockInList.enter,
-        BlockTestIdEnter,
-      ].forEach(fn => fn.call(this, node, parent, state))
-    },
-    leave(node, parent, state) {
-      ;[
-        BlockExplicitChildren.leave,
-        BlockName.leave,
-        BlockRoute.leave,
-        BlockWhen.leave,
-      ].forEach(fn => fn.call(this, node, parent, state))
-    },
-  }
-
-  morph(view, state, visitors)
-
+  const parsed = parse(view)
+  walk(parsed.views[0], visitor, state)
   maybeUsesRouter(state)
 
   const finalGetImport = name => imports[name] || getImport(name)
@@ -145,8 +91,8 @@ export default ({
       name: finalName,
       state,
     }),
-    fonts: state.fonts,
-    props: state.props,
+    fonts: parsed.fonts,
+    props: parsed.props,
     svgs: state.svgs,
     tests: state.tests,
     todos: state.todos,

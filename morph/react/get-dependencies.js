@@ -13,7 +13,10 @@ const NATIVE = [
   'View',
 ]
 
-export default ({ cssDynamic, cssStatic, images, isReactNative, uses }, getImport) => {
+export default (
+  { cssDynamic, cssStatic, images, isReactNative, uses },
+  getImport
+) => {
   const usesNative = []
   const usesSvg = []
 

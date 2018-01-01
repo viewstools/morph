@@ -4,16 +4,14 @@ import wrap from '../react/wrap.js'
 export const enter = (node, parent, state) => {
   node.className = []
 
-  const className = getProp(parent, 'className')
+  const className = getProp(node, 'className')
   if (className) {
     node.className.push(
-      className.tags.code
-        ? `\${${className.value.value}}`
-        : className.value.value
+      className.tags.code ? `\${${className.value}}` : className.value
     )
   }
 
-  if (state.debug && parent.isCapture) {
+  if (state.debug && node.isCapture) {
     node.className.push('mousetrap')
   }
 }

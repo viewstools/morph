@@ -5,18 +5,16 @@ import toCamelCase from 'to-camel-case'
 const isUrl = str => /^https?:\/\//.test(str)
 
 const getImageSource = (node, state) => {
-  const { value } = node.value
-
-  if (isUrl(value)) {
-    return safe(value)
+  if (isUrl(node.value)) {
+    return safe(node.value)
   } else if (node.tags.code) {
-    return `{${state.debug ? 'require' : 'requireImage'}(${value})}`
+    return `{${state.debug ? 'require' : 'requireImage'}(${node.value})}`
   } else {
-    const name = toCamelCase(value)
-    if (!state.images.includes(value)) {
+    const name = toCamelCase(node.value)
+    if (!state.images.includes(node.value)) {
       state.images.push({
         name,
-        file: value,
+        file: node.value,
       })
     }
     return `{${name}}`
@@ -24,37 +22,25 @@ const getImageSource = (node, state) => {
 }
 
 export default (node, parent, state) => {
-  const key = node.key.value
-  const value = node.value.value
-
-  switch (node.value.type) {
-    case 'Literal':
-      // TODO support sccoped source
-      if (key === 'source' && parent.parent.name.value === 'Image') {
-        return {
-          src: getImageSource(node, state),
-        }
-      } else if (
-        key === 'isDisabled' &&
-        value.toString().indexOf('when') > -1
-      ) {
-        return {
-          disabled: safe(getScope(node)),
-        }
-      } else if (parent.parent.scoped.hasOwnProperty(key)) {
-        return {
-          [key]: safe(getScopedProps(node, parent.parent)),
-        }
-      } else {
-        return {
-          [key]: safe(value, node),
-        }
-      }
-    // TODO lists
-    case 'ArrayExpression':
-    // TODO support object nesting
-    case 'ObjectExpression':
-    default:
-      return false
+  // TODO support scoped source
+  if (node.name === 'source' && parent.name === 'Image') {
+    return {
+      src: getImageSource(node, state),
+    }
+  } else if (
+    node.name === 'isDisabled' &&
+    node.value.toString().indexOf('when') > -1
+  ) {
+    return {
+      disabled: safe(getScope(node)),
+    }
+  } else if (parent.scoped.hasOwnProperty(node.name)) {
+    return {
+      [node.name]: safe(getScopedProps(node, parent)),
+    }
+  } else {
+    return {
+      [node.name]: safe(node.value, node),
+    }
   }
 }

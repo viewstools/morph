@@ -1,35 +1,34 @@
 import { checkParentStem } from '../utils.js'
+import { leave } from '../react/block-name.js'
 import getBlockName from './get-block-name.js'
 
 export function enter(node, parent, state) {
   let name = getBlockName(node, parent, state)
-  if (name === null) return this.skip()
+  if (name === null) return true
 
-  node.name.finalValue = name
-  node.name.tagValue = name
+  node.nameFinal = name
+  node.nameTag = name
   state.use(name)
 
   if (node.properties && node.isBasic) {
-    const hasDynamicStyles = node.properties.list.some(
+    const hasDynamicStyles = node.properties.some(
       item => item.tags.style && item.tags.code
     )
 
     const hasScopedStyles = Object.keys(node.scoped).some(key =>
-      node.properties.list.some(
-        item => item.key.value === key && item.tags.style
-      )
+      node.properties.some(prop => prop.name === key && prop.tags.style)
     )
 
-    const hasHoverStem = node.properties.list.some(item => item.tags.hover)
+    const hasHoverStem = node.properties.some(prop => prop.tags.hover)
     const hasMatchingParentWithHover =
-      hasHoverStem && parent && checkParentStem(parent, 'hover')
+      hasHoverStem && checkParentStem(node, 'hover')
 
     node.isDynamic =
       hasDynamicStyles || hasScopedStyles || hasMatchingParentWithHover
 
     if (node.isDynamic) {
       // we need to reset it to the block's name or value
-      let finalValue = node.is || node.name.value
+      let finalValue = node.is || node.name
 
       // count repeatead ones
       if (state.usedBlockNames[finalValue]) {
@@ -38,9 +37,11 @@ export function enter(node, parent, state) {
         state.usedBlockNames[finalValue] = 1
       }
 
-      node.name.finalValue = finalValue
+      node.nameFinal = finalValue
     }
   }
 
-  state.render.push(`<${node.name.finalValue}`)
+  state.render.push(`<${node.nameFinal}`)
 }
+
+export { leave }

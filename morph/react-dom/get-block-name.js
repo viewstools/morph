@@ -2,8 +2,9 @@ import { getProp, hasProp } from '../utils.js'
 import toCamelCase from 'to-camel-case'
 
 export default (node, parent, state) => {
-  let name
-  switch (node.name.value) {
+  let name = node.name
+
+  switch (node.name) {
     case 'CaptureEmail':
     case 'CaptureFile':
     case 'CaptureNumber':
@@ -58,13 +59,13 @@ export default (node, parent, state) => {
     case 'SvgUse':
     case 'SvgDefs':
     case 'SvgStop':
-      name = toCamelCase(node.name.value.replace('Svg', ''))
+      name = toCamelCase(node.name.replace('Svg', ''))
       break
 
     default:
-      name = node.name.value
       break
   }
+
   return name
 }
 
@@ -91,7 +92,7 @@ const getGroupBlockName = (node, parent, state) => {
 
     if (canBeButton) {
       name = 'button'
-      node.action = propNode.value.value
+      node.action = propNode.value
     }
   } else if (hasProp(node, 'overflowY', v => v === 'auto' || v === 'scroll')) {
     name = 'div'

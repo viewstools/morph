@@ -10,7 +10,7 @@ const typesMap = {
 }
 
 export const enter = (node, parent, state) => {
-  const blockType = node.name.value
+  const blockType = node.name
 
   if (!/Capture/.test(blockType)) return
 

@@ -3,7 +3,7 @@ import safe from '../react/safe.js'
 
 export const enter = (node, parent, state) => {
   if (node.teleport) {
-    let to = getProp(node, 'teleportTo').value.value
+    let to = getProp(node, 'teleportTo').value
 
     if (to.startsWith('/') || to === '..') {
       to = safe(to)

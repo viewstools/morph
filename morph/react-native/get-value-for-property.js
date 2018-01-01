@@ -5,20 +5,18 @@ import toCamelCase from 'to-camel-case'
 const isUrl = str => /^https?:\/\//.test(str)
 
 const getImageSource = (node, state) => {
-  const { value } = node.value
-
-  if (isUrl(value)) {
-    return `{{ uri: "${value}" }}`
+  if (isUrl(node.value)) {
+    return `{{ uri: "${node.value}" }}`
   } else if (node.tags.code) {
-    return `{/^https?:\\/\\//.test(${value})? { uri: ${value} } : ${state.debug
-      ? 'require'
-      : 'requireImage'}(${value})}`
+    return `{/^https?:\\/\\//.test(${node.value})? { uri: ${node.value} } : ${
+      state.debug ? 'require' : 'requireImage'
+    }(${node.value})}`
   } else {
-    const name = toCamelCase(value)
-    if (!state.images.includes(value)) {
+    const name = toCamelCase(node.value)
+    if (!state.images.includes(node.value)) {
       state.images.push({
         name,
-        file: value,
+        file: node.value,
       })
     }
     return `{${name}}`
@@ -26,33 +24,21 @@ const getImageSource = (node, state) => {
 }
 
 export default (node, parent, state) => {
-  const key = node.key.value
-  const value = node.value.value
-
-  switch (node.value.type) {
-    case 'Literal':
-      // TODO support scoped source
-      // TODO SVGs will need a different treatment when the source is a prop
-      if (key === 'source' && parent.parent.name.value === 'Image') {
-        return (
-          !parent.parent.isSvg && {
-            source: getImageSource(node, state),
-          }
-        )
-      } else if (parent.parent.scoped.hasOwnProperty(key)) {
-        return {
-          [key]: safe(getScopedProps(node, parent.parent)),
-        }
-      } else {
-        return {
-          [key]: safe(value, node),
-        }
+  // TODO support scoped source
+  // TODO SVGs will need a different treatment when the source is a prop
+  if (node.name === 'source' && parent.name === 'Image') {
+    return (
+      !parent.isSvg && {
+        source: getImageSource(node, state),
       }
-    // TODO lists
-    case 'ArrayExpression':
-    // TODO support object nesting
-    case 'ObjectExpression':
-    default:
-      return false
+    )
+  } else if (parent.scoped.hasOwnProperty(node.name)) {
+    return {
+      [node.name]: safe(getScopedProps(node, parent)),
+    }
+  } else {
+    return {
+      [node.name]: safe(node.value, node),
+    }
   }
 }

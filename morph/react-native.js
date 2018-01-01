@@ -1,22 +1,15 @@
-import * as BlockBackgroundImage from './react-native/block-background-image.js'
-import * as BlockCapture from './react-native/block-capture.js'
-import * as BlockWrap from './react-native/block-wrap.js'
-import { enter as BlockNameEnter } from './react-native/block-name.js'
-import { enter as BlockTestIdEnter } from './react-native/block-test-id.js'
-import { leave as PropertiesStyleLeave } from './react-native/properties-style.js'
-import { enter as PropertyRefEnter } from './react-dom/property-ref.js'
+import * as visitor from './react-native/block.js'
 import getStyleForProperty from './react-native/get-style-for-property.js'
 import getStyles from './react-native/get-styles.js'
 import getValueForProperty from './react-native/get-value-for-property.js'
-import isValidPropertyForBlock from './react-native/is-valid-property-for-block.js'
-import makeVisitors from './react/make-visitors.js'
 import maybeUsesTextInput from './react-native/maybe-uses-text-input.js'
 import maybeUsesRouter from './react-native/maybe-uses-router.js'
 import maybeUsesStyleSheet from './react-native/maybe-uses-style-sheet.js'
-import morph from './morph.js'
 import morphTests, { EMPTY_TEST } from './tests.js'
+import parse from '../parse/index.js'
 import restrictedNames from './react-native/restricted-names.js'
 import toComponent from './react/to-component.js'
+import walk from './walk.js'
 
 const imports = {
   DismissKeyboard: `import dismissKeyboard from 'dismissKeyboard'`,
@@ -25,14 +18,7 @@ const imports = {
   Router: "import { NativeRouter as Router } from 'react-router-native'",
 }
 
-export default ({
-  file,
-  getImport,
-  name,
-  tests = EMPTY_TEST,
-  view,
-  views = {},
-}) => {
+export default ({ file, getImport, name, tests = EMPTY_TEST, view }) => {
   const finalName = restrictedNames.includes(name) ? `${name}1` : name
   if (name !== finalName) {
     console.warn(
@@ -47,6 +33,8 @@ export default ({
     defaultProps: false,
     fonts: [],
     images: [],
+    getStyleForProperty,
+    getValueForProperty,
     isReactNative: true,
     name: finalName,
     remap: {},
@@ -67,55 +55,11 @@ export default ({
       state.uses.push(block)
     },
     svgs: [],
-    views,
     withRouter: false,
   }
 
-  const {
-    BlockExplicitChildren,
-    BlockInList,
-    BlockMaybeNeedsProperties,
-    BlockName,
-    BlockProxy,
-    BlockRoute,
-    BlockWhen,
-    ...visitors
-  } = makeVisitors({
-    BlockNameEnter,
-    getStyleForProperty,
-    getValueForProperty,
-    isValidPropertyForBlock,
-    PropertiesStyleLeave,
-    PropertyRefEnter,
-  })
-
-  visitors.Block = {
-    enter(node, parent, state) {
-      ;[
-        BlockWhen.enter,
-        BlockRoute.enter,
-        BlockWrap.enter,
-        BlockMaybeNeedsProperties.enter,
-        BlockName.enter,
-        BlockCapture.enter,
-        BlockBackgroundImage.enter,
-        BlockProxy.enter,
-        BlockInList.enter,
-        BlockTestIdEnter,
-      ].forEach(fn => fn.call(this, node, parent, state))
-    },
-    leave(node, parent, state) {
-      ;[
-        BlockExplicitChildren.leave,
-        BlockName.leave,
-        BlockWrap.leave,
-        BlockRoute.leave,
-        BlockWhen.leave,
-      ].forEach(fn => fn.call(this, node, parent, state))
-    },
-  }
-
-  morph(view, state, visitors)
+  const parsed = parse(view)
+  walk(parsed.views[0], visitor, state)
 
   maybeUsesTextInput(state)
   maybeUsesRouter(state)
@@ -130,8 +74,8 @@ export default ({
       name: finalName,
       state,
     }),
-    fonts: state.fonts,
-    props: state.props,
+    fonts: parsed.fonts,
+    props: parsed.props,
     svgs: state.svgs,
     tests: state.tests,
     todos: state.todos,

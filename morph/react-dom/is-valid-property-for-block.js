@@ -2,10 +2,10 @@ const blacklist = ['classname', 'teleportto', 'goto']
 const blacklistDebug = ['autofocus', 'tabindex']
 
 export default (node, parent, state) => {
-  const key = node.key.value.toLowerCase()
+  const name = node.name.toLowerCase()
 
   return !(
-    blacklist.includes(key) ||
-    (state.debug && blacklistDebug.includes(key))
+    blacklist.includes(name) ||
+    (state.debug && blacklistDebug.includes(name))
   )
 }
