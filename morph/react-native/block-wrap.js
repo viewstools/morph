@@ -20,7 +20,7 @@ export const enter = (node, parent, state) => {
       ? getScope(getProp(node, 'isDisabled'))
       : null
 
-    const hasScopedActions = node.scoped.hasOwnProperty('onClick')
+    const hasScopedActions = getScopedProps(getProp(node, 'onClick'), node)
     const key = getProp(node, 'key')
 
     state.use(block)

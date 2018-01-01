@@ -1,6 +1,7 @@
 import {
-  asScopedValue,
+  // asScopedValue,
   checkParentStem,
+  getScopedProps,
   getStyleType,
   isCode,
   isStyle,
@@ -12,11 +13,12 @@ export function enter(node, parent, state) {
   if (isStyle(node) && parent.isBasic && !parent.isSvg) {
     const code = isCode(node)
 
-    if (parent.scoped.hasOwnProperty(node.name)) {
+    // TODO refactor
+    if (getScopedProps(node, parent)) {
       isScopedVal = true
 
       styleForProperty = {
-        [node.name]: asScopedValue(parent.scoped[node.name], node, parent),
+        [node.name]: getScopedProps(node, parent),
       }
     } else {
       ;({ _isProp, ...styleForProperty } = state.getStyleForProperty(

@@ -15,8 +15,8 @@ export function enter(node, parent, state) {
       item => item.tags.style && item.tags.code
     )
 
-    const hasScopedStyles = Object.keys(node.scoped).some(key =>
-      node.properties.some(prop => prop.name === key && prop.tags.style)
+    const hasScopedStyles = node.scopes.some(scope =>
+      scope.properties.some(prop => prop.tags.style)
     )
 
     const hasHoverStem = node.properties.some(prop => prop.tags.hover)

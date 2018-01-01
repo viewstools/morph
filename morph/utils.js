@@ -4,19 +4,18 @@ import wrap from './react/wrap.js'
 const safeScope = value =>
   typeof value === 'string' && !isCode(value) ? JSON.stringify(value) : value
 
-export const asScopedValue = (obj, node, parent) => {
-  const defaultValue = node.inScope ? null : node.value
-  let value = []
+// export const asScopedValue = (obj, node, parent) => {
+//   let value = []
 
-  for (const scope in obj) {
-    const scopeProp = parent.properties.find(
-      prop => prop.inScope === scope && prop.nameRaw === node.nameRaw
-    )
-    value.push(`${scope}? ${safeScope(scopeProp.value)}`)
-  }
+//   for (const scope in obj) {
+//     const scopeProp = parent.properties.find(
+//       prop => prop.inScope === scope && prop.nameRaw === node.nameRaw
+//     )
+//     value.push(`${scope}? ${safeScope(scopeProp.value)}`)
+//   }
 
-  return `${value.join(' : ')} : ${safeScope(defaultValue)}`
-}
+//   return `${value.join(' : ')} : ${safeScope(node.value)}`
+// }
 
 export const checkParentStem = (node, styleKey) => {
   if (styleKey !== 'hover' || !node.parent) return false
@@ -73,18 +72,23 @@ const maybeSafe = node =>
     : typeof node.value === 'string' ? safe(node.value) : node.value
 
 export const getScopedProps = (propNode, blockNode) => {
-  const scopedProps = blockNode.properties
-    .filter(prop => prop.name === propNode.name && prop.inScope)
+  const scopes = blockNode.scopes
+    .map(scope => {
+      const prop = scope.properties.find(prop => prop.name === propNode.name)
+      return prop && { prop, when: scope.value }
+    })
+    .filter(Boolean)
     .reverse()
 
-  let scopedConditional = maybeSafe(propNode)
+  if (isEmpty(scopes)) return false
 
-  scopedProps.forEach(prop => {
-    scopedConditional =
-      `${prop.inScope} ? ${maybeSafe(prop)} : ` + scopedConditional
+  let conditional = maybeSafe(propNode)
+
+  scopes.forEach(scope => {
+    conditional = `${scope.when} ? ${maybeSafe(scope.prop)} : ` + conditional
   })
 
-  return scopedConditional
+  return conditional
 }
 
 const styleStems = ['hover', 'focus', 'placeholder', 'disabled', 'print']
@@ -101,7 +105,7 @@ export const hasProp = (node, key, match) => {
 }
 
 export const hasDefaultProp = (node, parent) =>
-  parent.properties.some(prop => prop.nameRaw === node.nameRaw && !prop.inScope)
+  parent.properties.some(prop => prop.nameRaw === node.nameRaw)
 
 export const CODE_EXPLICIT = /^{.+}$/
 export const isCodeExplicit = str => CODE_EXPLICIT.test(str)
@@ -129,3 +133,6 @@ export const getAllowedStyleKeys = node => {
 
 export const isList = node =>
   node && node.type === 'Block' && node.name === 'List'
+
+export const isEmpty = list => list.length === 0
+export const last = list => list[list.length - 1]

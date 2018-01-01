@@ -5,12 +5,10 @@ import * as PropertyRef from '../react/property-ref.js'
 import * as PropertyRest from '../react/property-rest.js'
 import * as PropertyStyle from '../react/property-style.js'
 import * as PropertyText from '../react/property-text.js'
-import { hasDefaultProp } from '../utils.js'
+// import { hasDefaultProp } from '../utils.js'
 import isValidPropertyForBlock from './is-valid-property-for-block.js'
 
 export function enter(node, parent, state) {
-  if (!Array.isArray(node.properties)) return
-
   PropertiesStyle.enter(node, parent, state)
 
   node.properties.forEach(propNode => {
@@ -20,7 +18,7 @@ export function enter(node, parent, state) {
       (propNode.name === 'ref' && state.debug) ||
       (!isValidPropertyForBlock(propNode, node, state) && node.isBasic) ||
       (propNode.tags.scope && propNode.tags.scope !== 'props.isDisabled') ||
-      (propNode.inScope && hasDefaultProp(propNode, node)) ||
+      // (propNode.inScope && hasDefaultProp(propNode, node)) ||
       (propNode.name === 'from' && node.name === 'List')
     )
       return

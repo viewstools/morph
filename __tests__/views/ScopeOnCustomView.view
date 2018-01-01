@@ -2,9 +2,9 @@ Button
 label hey
 another 0
 more props.more
-a when props.a
+when props.a
 label ho
 another 1
 more props.different
-b when props.b
+when props.b
 label this is b

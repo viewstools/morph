@@ -23,7 +23,7 @@ Object {
       },
       "name": "Vertical",
       "properties": Array [],
-      "scoped": Object {},
+      "scopes": Array [],
       "type": "Block",
     },
   ],
@@ -51,7 +51,8 @@ Object {
             },
           },
           "name": "Text",
-          "scoped": Object {},
+          "properties": Array [],
+          "scopes": Array [],
           "type": "Block",
         },
       ],
@@ -71,7 +72,7 @@ Object {
       },
       "name": "Vertical",
       "properties": Array [],
-      "scoped": Object {},
+      "scopes": Array [],
       "type": "Block",
     },
   ],
@@ -100,7 +101,8 @@ Object {
             },
           },
           "name": "Text",
-          "scoped": Object {},
+          "properties": Array [],
+          "scopes": Array [],
           "type": "Block",
         },
         Object {
@@ -122,7 +124,6 @@ Object {
               "name": "Image",
               "properties": Array [
                 Object {
-                  "inScope": false,
                   "loc": Object {
                     "end": Object {
                       "column": 32,
@@ -141,7 +142,7 @@ Object {
                   "value": "https://image.com/file.jpg",
                 },
               ],
-              "scoped": Object {},
+              "scopes": Array [],
               "type": "Block",
             },
             Object {
@@ -162,7 +163,7 @@ Object {
               },
               "name": "Vertical",
               "properties": Array [],
-              "scoped": Object {},
+              "scopes": Array [],
               "type": "Block",
             },
           ],
@@ -182,7 +183,7 @@ Object {
           },
           "name": "Vertical",
           "properties": Array [],
-          "scoped": Object {},
+          "scopes": Array [],
           "type": "Block",
         },
         Object {
@@ -202,7 +203,6 @@ Object {
           "name": "Text",
           "properties": Array [
             Object {
-              "inScope": false,
               "loc": Object {
                 "end": Object {
                   "column": 9,
@@ -221,7 +221,6 @@ Object {
               "value": "after",
             },
             Object {
-              "inScope": false,
               "loc": Object {
                 "end": Object {
                   "column": 11,
@@ -242,7 +241,7 @@ Object {
               "value": "purple",
             },
           ],
-          "scoped": Object {},
+          "scopes": Array [],
           "type": "Block",
         },
         Object {
@@ -264,7 +263,6 @@ Object {
           "name": "Vertical",
           "properties": Array [
             Object {
-              "inScope": false,
               "loc": Object {
                 "end": Object {
                   "column": 19,
@@ -285,7 +283,7 @@ Object {
               "value": "blue",
             },
           ],
-          "scoped": Object {},
+          "scopes": Array [],
           "type": "Block",
         },
       ],
@@ -305,7 +303,7 @@ Object {
       },
       "name": "Vertical",
       "properties": Array [],
-      "scoped": Object {},
+      "scopes": Array [],
       "type": "Block",
     },
   ],
@@ -336,7 +334,6 @@ Object {
           "name": "Text",
           "properties": Array [
             Object {
-              "inScope": false,
               "loc": Object {
                 "end": Object {
                   "column": 8,
@@ -357,7 +354,7 @@ Object {
               "value": "red",
             },
           ],
-          "scoped": Object {},
+          "scopes": Array [],
           "type": "Block",
         },
         Object {
@@ -377,7 +374,6 @@ Object {
           "name": "Text",
           "properties": Array [
             Object {
-              "inScope": false,
               "loc": Object {
                 "end": Object {
                   "column": 10,
@@ -398,7 +394,7 @@ Object {
               "value": "white",
             },
           ],
-          "scoped": Object {},
+          "scopes": Array [],
           "type": "Block",
         },
       ],
@@ -418,7 +414,7 @@ Object {
       },
       "name": "Vertical",
       "properties": Array [],
-      "scoped": Object {},
+      "scopes": Array [],
       "type": "Block",
     },
   ],
@@ -464,7 +460,6 @@ Object {
           "name": "Text",
           "properties": Array [
             Object {
-              "inScope": false,
               "loc": Object {
                 "end": Object {
                   "column": 30,
@@ -491,7 +486,6 @@ Object {
               "value": "props.some.thing || 'red'",
             },
             Object {
-              "inScope": false,
               "loc": Object {
                 "end": Object {
                   "column": 26,
@@ -518,7 +512,6 @@ Object {
               "value": "props.marginLeft",
             },
             Object {
-              "inScope": false,
               "loc": Object {
                 "end": Object {
                   "column": 19,
@@ -544,7 +537,7 @@ Object {
               "value": "props.some.prop",
             },
           ],
-          "scoped": Object {},
+          "scopes": Array [],
           "type": "Block",
         },
         Object {
@@ -563,7 +556,6 @@ Object {
           "name": "CaptureText",
           "properties": Array [
             Object {
-              "inScope": false,
               "loc": Object {
                 "end": Object {
                   "column": 20,
@@ -589,7 +581,7 @@ Object {
               "value": "props.onFocus",
             },
           ],
-          "scoped": Object {},
+          "scopes": Array [],
           "type": "Block",
         },
         Object {
@@ -612,7 +604,7 @@ Object {
               },
               "name": "Stuff",
               "properties": Array [],
-              "scoped": Object {},
+              "scopes": Array [],
               "type": "Block",
             },
           ],
@@ -632,7 +624,6 @@ Object {
           "name": "List",
           "properties": Array [
             Object {
-              "inScope": false,
               "loc": Object {
                 "end": Object {
                   "column": 15,
@@ -657,34 +648,13 @@ Object {
               "type": "Property",
               "value": "props.stuff",
             },
+          ],
+          "scopes": Array [
             Object {
-              "inScope": false,
-              "loc": Object {
-                "end": Object {
-                  "column": 26,
-                  "line": 11,
-                },
-                "start": Object {
-                  "column": 0,
-                  "line": 11,
-                },
-              },
-              "meta": Array [
-                Object {
-                  "tag": "code",
-                  "value": "props.stuff.length",
-                },
-              ],
-              "name": "when",
-              "nameRaw": "when",
-              "tags": Object {
-                "code": true,
-              },
-              "type": "Property",
+              "properties": Array [],
               "value": "props.stuff.length > 0",
             },
           ],
-          "scoped": Object {},
           "type": "Block",
         },
       ],
@@ -705,7 +675,6 @@ Object {
       "name": "Vertical",
       "properties": Array [
         Object {
-          "inScope": false,
           "loc": Object {
             "end": Object {
               "column": 36,
@@ -732,7 +701,6 @@ Object {
           "value": "props.backgroundColor",
         },
         Object {
-          "inScope": false,
           "loc": Object {
             "end": Object {
               "column": 48,
@@ -758,7 +726,7 @@ Object {
           "value": "event => props.onClick(props.name, event)",
         },
       ],
-      "scoped": Object {},
+      "scopes": Array [],
       "type": "Block",
     },
   ],

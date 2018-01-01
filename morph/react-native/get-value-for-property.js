@@ -32,7 +32,7 @@ export default (node, parent, state) => {
         source: getImageSource(node, state),
       }
     )
-  } else if (parent.scoped.hasOwnProperty(node.name)) {
+  } else if (getScopedProps(node, parent)) {
     return {
       [node.name]: safe(getScopedProps(node, parent)),
     }

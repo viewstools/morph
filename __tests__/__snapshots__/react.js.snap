@@ -804,6 +804,7 @@ class Form extends React.Component {
           value={state.surname}
           tabIndex={-1}
           data-test-id=\\"Form.Surname\\"
+          className=\\"mousetrap\\"
         />
         <input
           type=\\"password\\"
@@ -811,6 +812,7 @@ class Form extends React.Component {
           value={state.password}
           tabIndex={-1}
           data-test-id=\\"Form.Password\\"
+          className=\\"mousetrap\\"
         />
         <input
           type=\\"email\\"

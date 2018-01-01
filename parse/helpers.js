@@ -15,7 +15,6 @@ const INT = /^[0-9]+$/
 const NOT_GROUP = /^(Image|Test|Text|Proxy|SvgCircle|SvgEllipse|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgText|SvgStop)$/i
 const PROP = /^([a-z][a-zA-Z0-9]*)(\s+(.+))?$/
 const PROP_STYLE_STEMS = /^([a-z][A-Z0-9]*?)(Hover|Focus|Placeholder|Disabled|Print)?$/i
-const SCOPE = /^when\s+(.+)$/
 const STYLE = new RegExp(
   `^(${cssProperties
     .map(toCamelCase)
@@ -56,7 +55,6 @@ export const isList = line => line === 'List'
 export const isInt = line => is(INT, line)
 export const isProp = line => is(PROP, line)
 export const isTemplateLiteral = line => is(TEMPLATE_LITERAL, line)
-export const isScope = line => is(SCOPE, line) && isCode(getScope(line))
 export const isStyle = line => is(STYLE, line)
 export const isTrue = line => is(TRUE, line)
 export const isUserComment = line => is(USER_COMMENT, line)
@@ -91,7 +89,6 @@ export const getProp = line => {
   const [_, prop, _1, value = ''] = get(PROP, line)
   return [prop, value]
 }
-export const getScope = line => get(SCOPE, line)[1]
 export const getValue = value => {
   if (isFloat(value)) {
     return parseFloat(value, 10)

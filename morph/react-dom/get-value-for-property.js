@@ -34,7 +34,7 @@ export default (node, parent, state) => {
     return {
       disabled: safe(getScope(node)),
     }
-  } else if (parent.scoped.hasOwnProperty(node.name)) {
+  } else if (getScopedProps(node, parent)) {
     return {
       [node.name]: safe(getScopedProps(node, parent)),
     }

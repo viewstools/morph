@@ -8,11 +8,11 @@ Content Vertical
 opacity 0
 scale 0
 
-show when props.isShown
+when props.isShown
 opacity 1
 scale 1
 
-magnifier when props.isSuperVisible
+when props.isSuperVisible
 opacity 3
 scale 2
 

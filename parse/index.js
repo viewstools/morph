@@ -102,7 +102,8 @@ export default (rtext, skipComments = true) => {
       isBasic: isBasic(name),
       isGroup: false,
       loc: getLoc(i, 0),
-      scoped: {},
+      properties: [],
+      scopes: [],
     }
 
     if (is) {
@@ -187,6 +188,9 @@ export default (rtext, skipComments = true) => {
     if (shouldPushToStack || stack.length === 0) {
       stack.push(block)
     }
+
+    parseProps(i, block)
+    lookForFonts(block)
   }
 
   const parseProps = (i, block) => {
@@ -199,11 +203,14 @@ export default (rtext, skipComments = true) => {
     }
 
     const properties = []
-
+    const scopes = []
+    let scope
     let inScope = false
 
     for (let j = i; j <= endOfBlockIndex; j++) {
       const line = lines[j]
+
+      let propNode = null
 
       if (isProp(line)) {
         const [propRaw, value] = getProp(line)
@@ -221,23 +228,22 @@ export default (rtext, skipComments = true) => {
           block.maybeAnimated = true
         }
 
-        if (tags.scope) {
-          inScope = tags.scope
-        } else if (inScope) {
-          if (!block.scoped[prop]) block.scoped[prop] = {}
-          block.scoped[prop][inScope] = properties.length
+        if (prop === 'when') {
+          tags.scope = value
+          inScope = value
+          scope = { value, properties: [] }
+          scopes.push(scope)
         }
 
-        properties.push({
+        propNode = {
           type: 'Property',
           loc: getLoc(j, line.indexOf(propRaw), line.length - 1),
           name: prop,
           nameRaw: propRaw,
-          inScope,
           tags,
           meta: getMeta(value, line, j),
           value: getValue(value),
-        })
+        }
       } else if (isComment(line) && !skipComments) {
         let [value] = getComment(line)
 
@@ -246,36 +252,34 @@ export default (rtext, skipComments = true) => {
           value = getComment(value)
         }
 
-        properties.push({
+        propNode = {
           type: 'Property',
           loc: getLoc(j, 0, line.length - 1),
           value,
           tags: { comment: true, userComment },
-        })
+        }
+      }
+
+      if (propNode) {
+        block.loc.end = propNode.loc.end
+
+        if (inScope) {
+          if (propNode.name !== 'when') {
+            scope.properties.push(propNode)
+          }
+        } else {
+          properties.push(propNode)
+        }
       }
     }
 
     block.properties = properties
+    block.scopes = scopes
   }
 
   lines.forEach((line, i) => {
     if (isBlock(line)) {
       parseBlock(line, i)
-    } else if (isProp(line) || isComment(line)) {
-      let block = stack[stack.length - 1] || views[views.length - 1]
-      // TODO add warning
-      if (!block) return
-      if (block.isGroup && block.children.length > 0) {
-        block = block.children[block.children.length - 1]
-      }
-
-      if (!block.properties) {
-        parseProps(i, block)
-        if (block.properties) {
-          block.loc.end = block.properties[block.properties.length - 1].loc.end
-        }
-        lookForFonts(block)
-      }
     } else if (isEnd(line) && stack.length > 0) {
       end(stack.pop(), i)
     }
