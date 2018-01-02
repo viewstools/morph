@@ -24,6 +24,7 @@ export default (node, parent, code) => {
       }
 
     case 'color':
+      // TODO handle this but differently as we don't have the placeholder tag anymore
       if (/Capture/.test(parent.name) && isTag(node, 'placeholder')) {
         return {
           _isProp: true,

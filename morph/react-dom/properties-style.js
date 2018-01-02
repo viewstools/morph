@@ -108,6 +108,9 @@ const asCss = (styles, key, scopedUnderParent) => {
       key === 'placeholder'
     ) {
       css.push(`"&:${key}, &.${key}": {`)
+    } else if (key === 'print') {
+      // TODO can we use this to support all media queries?
+      css.push('"@media print": {')
     }
   }
 

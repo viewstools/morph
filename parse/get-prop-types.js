@@ -4,7 +4,7 @@ const isActionable = item =>
   // (item.type === 'Horizontal' ||
   //   item.type === 'Vertical' ||
   //   /^Capture/.test(item.type)) &&
-  /^on[A-Z]/.test(item.prop)
+  /^on[A-Z]/.test(item.name)
 
 const extractPropsAndItems = item => {
   const props = []
@@ -24,7 +24,7 @@ const extractPropsAndItems = item => {
       type:
         isActionable(item) || isExplicitFunctionCall
           ? 'function'
-          : isNumber[item.prop] ? 'number' : 'string',
+          : isNumber[item.name] ? 'number' : 'string',
     })
     matches = regex.exec(item.value)
   }
@@ -32,7 +32,7 @@ const extractPropsAndItems = item => {
 }
 
 const isList = item => item.type === 'List'
-const isListFrom = item => item.prop === 'from' && isList(item)
+const isListFrom = item => item.name === 'from' && isList(item)
 
 export default list => {
   const flatProps = {}

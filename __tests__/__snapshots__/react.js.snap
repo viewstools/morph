@@ -1586,6 +1586,12 @@ Object {
 import React from 'react';
 import { css } from 'react-emotion';
 
+const Text_h1d06m5g = css({
+  '@media print': {
+    display: 'none',
+  },
+});
+
 const Print = props => {
   return (
     <div data-test-id={props['data-test-id'] || 'Vertical'}>
@@ -1618,6 +1624,12 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { css } from 'react-emotion';
+
+const Text_h1d06m5g = css({
+  '@media print': {
+    display: 'none',
+  },
+});
 
 const Print = props => {
   return (
@@ -5411,7 +5423,6 @@ const UseCaptureEmail = props => {
     <TextInput
       testID={props['testID'] || 'Email'}
       autoFocus={true}
-      placeholderTextColor=\\"blue\\"
       defaultValue=\\"hey this is a default value\\"
       style={styles.hm4pcs}
     />

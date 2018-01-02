@@ -10,21 +10,25 @@ export function enter(node, parent, state) {
   node.nameTag = name
   state.use(name)
 
-  if (node.properties && node.isBasic) {
+  if (node.isBasic) {
     const hasDynamicStyles = node.properties.some(
-      item => item.tags.style && item.tags.code
+      prop => prop.tags.style && prop.tags.code
     )
 
-    const hasScopedStyles = node.scopes.some(scope =>
-      scope.properties.some(prop => prop.tags.style)
+    const hasDynamicScopedStyles = node.scopes.some(
+      scope =>
+        scope.isSystem
+          ? scope.properties.some(prop => prop.tags.style && prop.tags.code)
+          : scope.properties.some(prop => prop.tags.style)
     )
 
-    const hasHoverStem = node.properties.some(prop => prop.tags.hover)
+    // TODO expand to active, focus, etc
+    const hasHoverStem = node.scopes.some(scope => scope.value === 'hover')
     const hasMatchingParentWithHover =
       hasHoverStem && checkParentStem(node, 'hover')
 
     node.isDynamic =
-      hasDynamicStyles || hasScopedStyles || hasMatchingParentWithHover
+      hasDynamicStyles || hasDynamicScopedStyles || hasMatchingParentWithHover
 
     if (node.isDynamic) {
       // we need to reset it to the block's name or value

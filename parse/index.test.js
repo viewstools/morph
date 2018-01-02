@@ -21,6 +21,8 @@ VerticalInside Vertical
 After Text
 text after
 color purple
+when hover
+color red
 Last Vertical
 backgroundColor blue`,
 

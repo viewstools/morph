@@ -13,8 +13,8 @@ import {
   isGroup,
   isList,
   isProp,
+  isSystemScope,
   isUserComment,
-  stemStylesFromProp,
   warn,
 } from './helpers.js'
 import getLoc from './get-loc.js'
@@ -213,33 +213,28 @@ export default (rtext, skipComments = true) => {
       let propNode = null
 
       if (isProp(line)) {
-        const [propRaw, value] = getProp(line)
-        const [prop, stemmedTag] = stemStylesFromProp(block, propRaw)
-        const tags = getTags(prop, value)
-        if (stemmedTag) {
-          tags[stemmedTag] = true
-        }
+        const [name, value] = getProp(line)
+        const tags = getTags(name, value)
 
         if (tags.code) {
-          props.push({ type: block.name, prop, value })
+          props.push({ type: block.name, name, value })
         }
 
         if (tags.style && tags.code) {
           block.maybeAnimated = true
         }
 
-        if (prop === 'when') {
+        if (name === 'when') {
           tags.scope = value
           inScope = value
-          scope = { value, properties: [] }
+          scope = { isSystem: isSystemScope(value), value, properties: [] }
           scopes.push(scope)
         }
 
         propNode = {
           type: 'Property',
-          loc: getLoc(j, line.indexOf(propRaw), line.length - 1),
-          name: prop,
-          nameRaw: propRaw,
+          loc: getLoc(j, line.indexOf(name), line.length - 1),
+          name,
           tags,
           meta: getMeta(value, line, j),
           value: getValue(value),

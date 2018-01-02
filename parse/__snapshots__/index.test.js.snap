@@ -136,7 +136,6 @@ Object {
                   },
                   "meta": Array [],
                   "name": "source",
-                  "nameRaw": "source",
                   "tags": Object {},
                   "type": "Property",
                   "value": "https://image.com/file.jpg",
@@ -192,8 +191,8 @@ Object {
           "isGroup": false,
           "loc": Object {
             "end": Object {
-              "column": 11,
-              "line": 10,
+              "column": 8,
+              "line": 12,
             },
             "start": Object {
               "column": 0,
@@ -215,7 +214,6 @@ Object {
               },
               "meta": Array [],
               "name": "text",
-              "nameRaw": "text",
               "tags": Object {},
               "type": "Property",
               "value": "after",
@@ -233,7 +231,6 @@ Object {
               },
               "meta": Array [],
               "name": "color",
-              "nameRaw": "color",
               "tags": Object {
                 "style": true,
               },
@@ -241,7 +238,33 @@ Object {
               "value": "purple",
             },
           ],
-          "scopes": Array [],
+          "scopes": Array [
+            Object {
+              "isSystem": true,
+              "properties": Array [
+                Object {
+                  "loc": Object {
+                    "end": Object {
+                      "column": 8,
+                      "line": 12,
+                    },
+                    "start": Object {
+                      "column": 0,
+                      "line": 12,
+                    },
+                  },
+                  "meta": Array [],
+                  "name": "color",
+                  "tags": Object {
+                    "style": true,
+                  },
+                  "type": "Property",
+                  "value": "red",
+                },
+              ],
+              "value": "hover",
+            },
+          ],
           "type": "Block",
         },
         Object {
@@ -253,11 +276,11 @@ Object {
           "loc": Object {
             "end": Object {
               "column": 19,
-              "line": 12,
+              "line": 14,
             },
             "start": Object {
               "column": 0,
-              "line": 11,
+              "line": 13,
             },
           },
           "name": "Vertical",
@@ -266,16 +289,15 @@ Object {
               "loc": Object {
                 "end": Object {
                   "column": 19,
-                  "line": 12,
+                  "line": 14,
                 },
                 "start": Object {
                   "column": 0,
-                  "line": 12,
+                  "line": 14,
                 },
               },
               "meta": Array [],
               "name": "backgroundColor",
-              "nameRaw": "backgroundColor",
               "tags": Object {
                 "style": true,
               },
@@ -294,7 +316,7 @@ Object {
       "loc": Object {
         "end": Object {
           "column": 19,
-          "line": 12,
+          "line": 14,
         },
         "start": Object {
           "column": 0,
@@ -346,7 +368,6 @@ Object {
               },
               "meta": Array [],
               "name": "color",
-              "nameRaw": "color",
               "tags": Object {
                 "style": true,
               },
@@ -386,7 +407,6 @@ Object {
               },
               "meta": Array [],
               "name": "color",
-              "nameRaw": "color",
               "tags": Object {
                 "style": true,
               },
@@ -477,7 +497,6 @@ Object {
                 },
               ],
               "name": "color",
-              "nameRaw": "color",
               "tags": Object {
                 "code": true,
                 "style": true,
@@ -503,7 +522,6 @@ Object {
                 },
               ],
               "name": "marginLeft",
-              "nameRaw": "marginLeft",
               "tags": Object {
                 "code": true,
                 "style": true,
@@ -529,7 +547,6 @@ Object {
                 },
               ],
               "name": "text",
-              "nameRaw": "text",
               "tags": Object {
                 "code": true,
               },
@@ -573,7 +590,6 @@ Object {
                 },
               ],
               "name": "onFocus",
-              "nameRaw": "onFocus",
               "tags": Object {
                 "code": true,
               },
@@ -641,7 +657,6 @@ Object {
                 },
               ],
               "name": "from",
-              "nameRaw": "from",
               "tags": Object {
                 "code": true,
               },
@@ -651,6 +666,7 @@ Object {
           ],
           "scopes": Array [
             Object {
+              "isSystem": false,
               "properties": Array [],
               "value": "props.stuff.length > 0",
             },
@@ -692,7 +708,6 @@ Object {
             },
           ],
           "name": "backgroundColor",
-          "nameRaw": "backgroundColor",
           "tags": Object {
             "code": true,
             "style": true,
@@ -718,7 +733,6 @@ Object {
             },
           ],
           "name": "onClick",
-          "nameRaw": "onClick",
           "tags": Object {
             "code": true,
           },

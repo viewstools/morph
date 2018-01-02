@@ -4,24 +4,12 @@ import wrap from './react/wrap.js'
 const safeScope = value =>
   typeof value === 'string' && !isCode(value) ? JSON.stringify(value) : value
 
-// export const asScopedValue = (obj, node, parent) => {
-//   let value = []
-
-//   for (const scope in obj) {
-//     const scopeProp = parent.properties.find(
-//       prop => prop.inScope === scope && prop.nameRaw === node.nameRaw
-//     )
-//     value.push(`${scope}? ${safeScope(scopeProp.value)}`)
-//   }
-
-//   return `${value.join(' : ')} : ${safeScope(node.value)}`
-// }
-
 export const checkParentStem = (node, styleKey) => {
-  if (styleKey !== 'hover' || !node.parent) return false
+  if (styleKey !== 'hover' || styleKey !== 'disabled' || !node.parent)
+    return false
 
-  const matchingParentStem = node.parent.properties.some(
-    prop => prop.tags.hover
+  const matchingParentStem = node.parent.scopes.some(
+    scope => scope.value === styleKey
   )
 
   return matchingParentStem && (node.parent.is || node.parent.name)
@@ -73,6 +61,7 @@ const maybeSafe = node =>
 
 export const getScopedProps = (propNode, blockNode) => {
   const scopes = blockNode.scopes
+    .filter(scope => !scope.isSystem)
     .map(scope => {
       const prop = scope.properties.find(prop => prop.name === propNode.name)
       return prop && { prop, when: scope.value }
@@ -124,11 +113,11 @@ export const getActionableParent = node => {
 
 export const getAllowedStyleKeys = node => {
   if (node.isCapture) {
-    return ['base', 'focus', 'hover', 'disabled', 'placeholder']
+    return ['base', 'focus', 'hover', 'disabled', 'placeholder', 'print']
   } else if (node.action || getActionableParent(node)) {
-    return ['base', 'focus', 'hover', 'disabled']
+    return ['base', 'focus', 'hover', 'disabled', 'print']
   }
-  return ['base', 'focus']
+  return ['base', 'focus', 'print']
 }
 
 export const isList = node =>

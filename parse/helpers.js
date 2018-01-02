@@ -14,7 +14,6 @@ const FONTABLE = /^(CaptureEmail|CaptureNumber|CapturePhone|CaptureSecure|Captur
 const INT = /^[0-9]+$/
 const NOT_GROUP = /^(Image|Test|Text|Proxy|SvgCircle|SvgEllipse|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgText|SvgStop)$/i
 const PROP = /^([a-z][a-zA-Z0-9]*)(\s+(.+))?$/
-const PROP_STYLE_STEMS = /^([a-z][A-Z0-9]*?)(Hover|Focus|Placeholder|Disabled|Print)?$/i
 const STYLE = new RegExp(
   `^(${cssProperties
     .map(toCamelCase)
@@ -108,19 +107,21 @@ export const getValue = value => {
 export const fixBackticks = value =>
   isTemplateLiteral(value) ? value : `\`${value}\``
 
-export const stemStylesFromProp = (block, raw) => {
-  if (!block.isBasic) return [raw, false]
-
-  const [prop, tag] = get(PROP_STYLE_STEMS, raw).slice(1)
-
-  return tag && !isStyle(prop)
-    ? [raw]
-    : [prop, typeof tag === 'string' ? toCamelCase(tag) : undefined]
-}
-
 export const warn = (message, block) => {
   if (!Array.isArray(block.warnings)) {
     block.warnings = []
   }
   block.warnings.push(message)
 }
+
+const SYSTEM_SCOPES = [
+  'active',
+  // TODO disabled should be a prop instead I think
+  'disabled',
+  'focus',
+  'hover',
+  'placeholder',
+  'print',
+  // TODO do we want to do media queries here?
+]
+export const isSystemScope = name => SYSTEM_SCOPES.includes(name)
