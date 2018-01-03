@@ -245,6 +245,25 @@ Object {
                 Object {
                   "loc": Object {
                     "end": Object {
+                      "column": 9,
+                      "line": 11,
+                    },
+                    "start": Object {
+                      "column": 0,
+                      "line": 11,
+                    },
+                  },
+                  "meta": Array [],
+                  "name": "when",
+                  "tags": Object {
+                    "scope": "hover",
+                  },
+                  "type": "Property",
+                  "value": "hover",
+                },
+                Object {
+                  "loc": Object {
+                    "end": Object {
                       "column": 8,
                       "line": 12,
                     },
@@ -667,7 +686,33 @@ Object {
           "scopes": Array [
             Object {
               "isSystem": false,
-              "properties": Array [],
+              "properties": Array [
+                Object {
+                  "loc": Object {
+                    "end": Object {
+                      "column": 26,
+                      "line": 11,
+                    },
+                    "start": Object {
+                      "column": 0,
+                      "line": 11,
+                    },
+                  },
+                  "meta": Array [
+                    Object {
+                      "tag": "code",
+                      "value": "props.stuff.length",
+                    },
+                  ],
+                  "name": "when",
+                  "tags": Object {
+                    "code": true,
+                    "scope": "props.stuff.length > 0",
+                  },
+                  "type": "Property",
+                  "value": "props.stuff.length > 0",
+                },
+              ],
               "value": "props.stuff.length > 0",
             },
           ],

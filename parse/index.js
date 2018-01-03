@@ -259,9 +259,7 @@ export default (rtext, skipComments = true) => {
         block.loc.end = propNode.loc.end
 
         if (inScope) {
-          if (propNode.name !== 'when') {
-            scope.properties.push(propNode)
-          }
+          scope.properties.push(propNode)
         } else {
           properties.push(propNode)
         }

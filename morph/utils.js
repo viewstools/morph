@@ -125,3 +125,5 @@ export const isList = node =>
 
 export const isEmpty = list => list.length === 0
 export const last = list => list[list.length - 1]
+
+export const isEmptyScope = scope => scope.properties.length === 1

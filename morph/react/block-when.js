@@ -1,10 +1,10 @@
-import { isEmpty, isList, last } from '../utils.js'
+import { isEmptyScope, isList, last } from '../utils.js'
 
 export function enter(node, parent, state) {
   // when lets you show/hide blocks depending on props
   const when = last(node.scopes)
 
-  if (when && isEmpty(when.properties)) {
+  if (when && isEmptyScope(when)) {
     node.when = true
 
     if (parent && !isList(parent)) state.render.push('{')

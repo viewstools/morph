@@ -24,6 +24,8 @@ export function enter(node, parent, state) {
   // TODO use this directly in styles without having to go through this
   node.scopes.filter(scope => scope.isSystem).forEach(scope => {
     scope.properties.forEach(propNode => {
+      if (propNode.name === 'when') return
+
       const { _isProp, ...styleForProperty } = state.getStyleForProperty(
         propNode,
         node,
