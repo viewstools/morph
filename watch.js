@@ -304,6 +304,7 @@ height 50`
       if (isJs(f)) return
 
       const getImport = makeGetImport(view, file)
+      let calledMaybeIsReady = false
 
       try {
         const rawFile = path.join(src, f)
@@ -338,6 +339,7 @@ height 50`
         }
 
         if (maybeIsReady()) {
+          calledMaybeIsReady = true
           // TODO revisit effect of rawView vs view here
           updateResponsibleFor(view)
           toMorph.responsibleFor = responsibleFor[view]
@@ -396,6 +398,10 @@ height 50`
         verbose && console.log(chalk.green('M'), view)
       } catch (error) {
         verbose && console.error(chalk.red('M'), view, error)
+
+        if (!calledMaybeIsReady) {
+          maybeIsReady()
+        }
       }
     })
 
