@@ -5,12 +5,8 @@ import toCamelCase from 'to-camel-case'
 const isUrl = str => /^https?:\/\//.test(str)
 
 const getImageSource = (node, state) => {
-  if (isUrl(node.value)) {
-    return `{{ uri: "${node.value}" }}`
-  } else if (node.tags.code) {
-    return `{/^https?:\\/\\//.test(${node.value})? { uri: ${node.value} } : ${
-      state.debug ? 'requireImage' : 'require'
-    }(${node.value})}`
+  if (isUrl(node.value) || node.tags.code) {
+    return `{{ uri: ${node.tags.code ? node.value : safe(node.value)} }}`
   } else {
     const name = toCamelCase(node.value)
     if (!state.images.includes(node.value)) {

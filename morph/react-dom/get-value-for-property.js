@@ -5,21 +5,21 @@ import toCamelCase from 'to-camel-case'
 const isUrl = str => /^https?:\/\//.test(str)
 
 const getImageSource = (node, state) => {
-  if (isUrl(node.value)) {
+  if (isUrl(node.value) || node.tags.code) {
     return safe(node.value)
-  } else if (node.tags.code) {
-    return `{/^https?:\\/\\//.test(${node.value})? ${node.value} : ${
-      state.debug ? 'requireImage' : 'require'
-    }(${node.value})}`
   } else {
-    const name = toCamelCase(node.value)
-    if (!state.images.includes(node.value)) {
-      state.images.push({
-        name,
-        file: node.value,
-      })
+    if (state.debug) {
+      return `{requireImage("${node.value}")}`
+    } else {
+      const name = toCamelCase(node.value)
+      if (!state.images.includes(node.value)) {
+        state.images.push({
+          name,
+          file: node.value,
+        })
+      }
+      return `{${name}}`
     }
-    return `{${name}}`
   }
 }
 

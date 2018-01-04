@@ -1278,13 +1278,12 @@ exports[`react-dom parses react-dom LocalImage: react-dom parses react-dom Local
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import chopperJpg from './chopper.jpg';
 
 const LocalImage = props => {
   return (
     <img
       data-test-id={props['data-test-id'] || 'LocalImage'}
-      src={chopperJpg}
+      src={requireImage('./chopper.jpg')}
     />
   );
 };
@@ -1346,7 +1345,6 @@ exports[`react-dom parses react-dom LocalImageSvg: react-dom parses react-dom Lo
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import chopperSvg from './chopper.svg';
 import styled from 'react-emotion';
 
 const LocalImageSvg1 = styled('img')({ width: 50 }, ({ props }) => ({
@@ -1357,7 +1355,7 @@ const LocalImageSvg = props => {
   return (
     <LocalImageSvg1
       data-test-id={props['data-test-id'] || 'LocalImageSvg'}
-      src={chopperSvg}
+      src={requireImage('./chopper.svg')}
       props={props}
     />
   );
@@ -1389,9 +1387,7 @@ const LocalOrRemoteImageWhenCode = props => {
   return (
     <img
       data-test-id={props['data-test-id'] || 'LocalOrRemoteImageWhenCode'}
-      src={
-        /^https?:\\\\/\\\\//.test(props.source) ? props.source : require(props.source)
-      }
+      src={props.source}
     />
   );
 };
@@ -1422,11 +1418,7 @@ const LocalOrRemoteImageWhenCode = props => {
   return (
     <img
       data-test-id={props['data-test-id'] || 'LocalOrRemoteImageWhenCode'}
-      src={
-        /^https?:\\\\/\\\\//.test(props.source)
-          ? props.source
-          : requireImage(props.source)
-      }
+      src={props.source}
     />
   );
 };
@@ -4841,11 +4833,7 @@ const LocalOrRemoteImageWhenCode = props => {
   return (
     <Image
       testID={props['testID'] || 'LocalOrRemoteImageWhenCode'}
-      source={
-        /^https?:\\\\/\\\\//.test(props.source)
-          ? { uri: props.source }
-          : require(props.source)
-      }
+      source={{ uri: props.source }}
     />
   );
 };
