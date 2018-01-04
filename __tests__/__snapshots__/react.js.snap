@@ -1390,9 +1390,7 @@ const LocalOrRemoteImageWhenCode = props => {
     <img
       data-test-id={props['data-test-id'] || 'LocalOrRemoteImageWhenCode'}
       src={
-        /^https?:\\\\/\\\\//.test(props.source)
-          ? props.source
-          : requireImage(props.source)
+        /^https?:\\\\/\\\\//.test(props.source) ? props.source : require(props.source)
       }
     />
   );
@@ -1425,7 +1423,9 @@ const LocalOrRemoteImageWhenCode = props => {
     <img
       data-test-id={props['data-test-id'] || 'LocalOrRemoteImageWhenCode'}
       src={
-        /^https?:\\\\/\\\\//.test(props.source) ? props.source : require(props.source)
+        /^https?:\\\\/\\\\//.test(props.source)
+          ? props.source
+          : requireImage(props.source)
       }
     />
   );
@@ -4844,7 +4844,7 @@ const LocalOrRemoteImageWhenCode = props => {
       source={
         /^https?:\\\\/\\\\//.test(props.source)
           ? { uri: props.source }
-          : requireImage(props.source)
+          : require(props.source)
       }
     />
   );

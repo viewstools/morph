@@ -9,7 +9,7 @@ const getImageSource = (node, state) => {
     return safe(node.value)
   } else if (node.tags.code) {
     return `{/^https?:\\/\\//.test(${node.value})? ${node.value} : ${
-      state.debug ? 'require' : 'requireImage'
+      state.debug ? 'requireImage' : 'require'
     }(${node.value})}`
   } else {
     const name = toCamelCase(node.value)
