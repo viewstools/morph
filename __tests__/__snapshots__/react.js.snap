@@ -4541,26 +4541,80 @@ Object {
 import React from 'react';
 import { Text, TextInput, TouchableWithoutFeedback, View } from 'react-native';
 
-const Form = props => {
-  return (
-    <View testID={props['testID'] || 'Form'}>
-      <TextInput testID=\\"Form.Name\\" autoFocus={true} />
-      <TextInput testID=\\"Form.Surname\\" />
-      <TextInput testID=\\"Form.Password\\" />
-      <TextInput testID=\\"Form.Email\\" defaultValue=\\"morph@viewsdx.com\\" />
-      <TouchableWithoutFeedback
-        activeOpacity={0.7}
-        onPress={() => props.onSubmit(state)}
-        underlayColor=\\"transparent\\"
-      >
-        <View testID=\\"Form.Button\\">
-          <Text testID=\\"Form.Text\\">Send!</Text>
-        </View>
-      </TouchableWithoutFeedback>
-      {props.children}
-    </View>
-  );
-};
+class Form extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const { props, state } = this;
+
+    return (
+      <View testID={props['testID'] || 'Form'}>
+        <TextInput
+          blurOnSubmit={false}
+          onSubmitEditing={this.$Surname ? () => this.$Surname.focus() : null}
+          returnKeyType={this.$Surname ? 'next' : 'go'}
+          onChangeText={name => this.setState({ name })}
+          ref={$e => (this.$name = $e)}
+          value={state.name}
+          keyboardType=\\"default\\"
+          autoCorrect={false}
+          underlineColorAndroid=\\"transparent\\"
+          testID=\\"Form.Name\\"
+          autoFocus={true}
+        />
+        <TextInput
+          blurOnSubmit={false}
+          onSubmitEditing={this.$Password ? () => this.$Password.focus() : null}
+          returnKeyType={this.$Password ? 'next' : 'go'}
+          onChangeText={surname => this.setState({ surname })}
+          ref={$e => (this.$surname = $e)}
+          value={state.surname}
+          keyboardType=\\"default\\"
+          autoCorrect={false}
+          underlineColorAndroid=\\"transparent\\"
+          testID=\\"Form.Surname\\"
+        />
+        <TextInput
+          blurOnSubmit={false}
+          onSubmitEditing={this.$Email ? () => this.$Email.focus() : null}
+          returnKeyType={this.$Email ? 'next' : 'go'}
+          onChangeText={password => this.setState({ password })}
+          ref={$e => (this.$password = $e)}
+          value={state.password}
+          secureTextEntry
+          autoCorrect={false}
+          underlineColorAndroid=\\"transparent\\"
+          testID=\\"Form.Password\\"
+        />
+        <TextInput
+          returnKeyType=\\"done\\"
+          onChangeText={email => this.setState({ email })}
+          ref={$e => (this.$email = $e)}
+          value={state.email}
+          keyboardType=\\"email-address\\"
+          autoCorrect={false}
+          defaultValue={undefined}
+          underlineColorAndroid=\\"transparent\\"
+          testID=\\"Form.Email\\"
+          defaultValue=\\"morph@viewsdx.com\\"
+        />
+        <TouchableWithoutFeedback
+          activeOpacity={0.7}
+          onPress={() => props.onSubmit(state)}
+          underlayColor=\\"transparent\\"
+        >
+          <View testID=\\"Form.Button\\">
+            <Text testID=\\"Form.Text\\">Send!</Text>
+          </View>
+        </TouchableWithoutFeedback>
+        {props.children}
+      </View>
+    );
+  }
+}
 
 export default Form;
 ",
@@ -5412,16 +5466,33 @@ const styles = StyleSheet.create({
   },
 });
 
-const UseCaptureEmail = props => {
-  return (
-    <TextInput
-      testID={props['testID'] || 'Email'}
-      autoFocus={true}
-      defaultValue=\\"hey this is a default value\\"
-      style={styles.hm4pcs}
-    />
-  );
-};
+class UseCaptureEmail extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const { props, state } = this;
+
+    return (
+      <TextInput
+        returnKeyType=\\"done\\"
+        onChangeText={email => this.setState({ email })}
+        ref={$e => (this.$email = $e)}
+        value={state.email}
+        keyboardType=\\"email-address\\"
+        autoCorrect={false}
+        defaultValue={undefined}
+        underlineColorAndroid=\\"transparent\\"
+        testID={props['testID'] || 'Email'}
+        autoFocus={true}
+        defaultValue=\\"hey this is a default value\\"
+        style={styles.hm4pcs}
+      />
+    );
+  }
+}
 
 export default UseCaptureEmail;
 ",
@@ -5446,9 +5517,29 @@ Object {
 import React from 'react';
 import CaptureFile from './CaptureFile.view.js';
 
-const UseCaptureFile = props => {
-  return <CaptureFile testID={props['testID'] || 'File'} />;
-};
+class UseCaptureFile extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const { props, state } = this;
+
+    return (
+      <CaptureFile
+        returnKeyType=\\"done\\"
+        onChangeText={file => this.setState({ file })}
+        ref={$e => (this.$file = $e)}
+        value={state.file}
+        keyboardType=\\"undefined\\"
+        autoCorrect={false}
+        underlineColorAndroid=\\"transparent\\"
+        testID={props['testID'] || 'File'}
+      />
+    );
+  }
+}
 
 export default UseCaptureFile;
 ",
@@ -5471,9 +5562,29 @@ Object {
 import React from 'react';
 import { TextInput } from 'react-native';
 
-const UseCaptureNumber = props => {
-  return <TextInput testID={props['testID'] || 'Number'} />;
-};
+class UseCaptureNumber extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const { props, state } = this;
+
+    return (
+      <TextInput
+        returnKeyType=\\"done\\"
+        onChangeText={number => this.setState({ number })}
+        ref={$e => (this.$number = $e)}
+        value={state.number}
+        keyboardType=\\"numeric\\"
+        autoCorrect={false}
+        underlineColorAndroid=\\"transparent\\"
+        testID={props['testID'] || 'Number'}
+      />
+    );
+  }
+}
 
 export default UseCaptureNumber;
 ",
@@ -5496,9 +5607,29 @@ Object {
 import React from 'react';
 import { TextInput } from 'react-native';
 
-const UseCapturePhone = props => {
-  return <TextInput testID={props['testID'] || 'Phone'} />;
-};
+class UseCapturePhone extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const { props, state } = this;
+
+    return (
+      <TextInput
+        returnKeyType=\\"done\\"
+        onChangeText={phone => this.setState({ phone })}
+        ref={$e => (this.$phone = $e)}
+        value={state.phone}
+        keyboardType=\\"phone-pad\\"
+        autoCorrect={false}
+        underlineColorAndroid=\\"transparent\\"
+        testID={props['testID'] || 'Phone'}
+      />
+    );
+  }
+}
 
 export default UseCapturePhone;
 ",
@@ -5521,9 +5652,29 @@ Object {
 import React from 'react';
 import { TextInput } from 'react-native';
 
-const UseCaptureSecure = props => {
-  return <TextInput testID={props['testID'] || 'Secure'} />;
-};
+class UseCaptureSecure extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const { props, state } = this;
+
+    return (
+      <TextInput
+        returnKeyType=\\"done\\"
+        onChangeText={secure => this.setState({ secure })}
+        ref={$e => (this.$secure = $e)}
+        value={state.secure}
+        secureTextEntry
+        autoCorrect={false}
+        underlineColorAndroid=\\"transparent\\"
+        testID={props['testID'] || 'Secure'}
+      />
+    );
+  }
+}
 
 export default UseCaptureSecure;
 ",
@@ -5546,9 +5697,29 @@ Object {
 import React from 'react';
 import { TextInput } from 'react-native';
 
-const UseCaptureText = props => {
-  return <TextInput testID={props['testID'] || 'Text'} />;
-};
+class UseCaptureText extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const { props, state } = this;
+
+    return (
+      <TextInput
+        returnKeyType=\\"done\\"
+        onChangeText={text => this.setState({ text })}
+        ref={$e => (this.$text = $e)}
+        value={state.text}
+        keyboardType=\\"default\\"
+        autoCorrect={false}
+        underlineColorAndroid=\\"transparent\\"
+        testID={props['testID'] || 'Text'}
+      />
+    );
+  }
+}
 
 export default UseCaptureText;
 ",
@@ -5571,9 +5742,29 @@ Object {
 import React from 'react';
 import { TextInput } from 'react-native';
 
-const UseCaptureTextArea = props => {
-  return <TextInput testID={props['testID'] || 'CaptureTextArea'} />;
-};
+class UseCaptureTextArea extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const { props, state } = this;
+
+    return (
+      <TextInput
+        returnKeyType=\\"done\\"
+        onChangeText={captureTextArea => this.setState({ captureTextArea })}
+        ref={$e => (this.$captureTextArea = $e)}
+        value={state.captureTextArea}
+        keyboardType=\\"undefined\\"
+        autoCorrect={false}
+        underlineColorAndroid=\\"transparent\\"
+        testID={props['testID'] || 'CaptureTextArea'}
+      />
+    );
+  }
+}
 
 export default UseCaptureTextArea;
 ",
@@ -5596,14 +5787,30 @@ Object {
 import React from 'react';
 import { TextInput } from 'react-native';
 
-const UseCaptureTextManagedFromOutside = props => {
-  return (
-    <TextInput
-      testID={props['testID'] || 'CaptureText'}
-      value={props.external}
-    />
-  );
-};
+class UseCaptureTextManagedFromOutside extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const { props, state } = this;
+
+    return (
+      <TextInput
+        returnKeyType=\\"done\\"
+        onChangeText={captureText => this.setState({ captureText })}
+        ref={$e => (this.$captureText = $e)}
+        value={state.captureText}
+        keyboardType=\\"default\\"
+        autoCorrect={false}
+        underlineColorAndroid=\\"transparent\\"
+        testID={props['testID'] || 'CaptureText'}
+        value={props.external}
+      />
+    );
+  }
+}
 
 export default UseCaptureTextManagedFromOutside;
 ",

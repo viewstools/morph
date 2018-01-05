@@ -10,9 +10,9 @@ const keyboardType = {
 }
 
 export const enter = (node, parent, state) => {
-  const blockType = node.name.value
+  const blockType = node.name
 
-  if (!/Capture/.test(node.name.value)) return
+  if (!/Capture/.test(node.name)) return
   node.isCapture = true
 
   const name = toCamelCase(node.is || blockType)
@@ -25,9 +25,7 @@ export const enter = (node, parent, state) => {
   if (captureNext) {
     state.render.push(` blurOnSubmit={false}`)
     state.render.push(
-      ` onSubmitEditing={this.$${captureNext}? () => this.$${
-        captureNext
-      }.focus() : ${onSubmit}}`
+      ` onSubmitEditing={this.$${captureNext}? () => this.$${captureNext}.focus() : ${onSubmit}}`
     )
     state.render.push(` returnKeyType = {this.$${captureNext}? 'next' : 'go'}`)
   } else {
@@ -42,7 +40,7 @@ export const enter = (node, parent, state) => {
   state.render.push(` ref={$e => this.$${name} = $e}`)
   state.render.push(` value={state.${name}}`)
 
-  if (node.name.value === 'CaptureSecure') {
+  if (node.name === 'CaptureSecure') {
     state.render.push(` secureTextEntry`)
   } else {
     state.render.push(` keyboardType='${keyboardType[blockType]}'`)
