@@ -7,6 +7,7 @@ const BOOL = /^(false|true)$/i
 const CAPTURE = /^(CaptureEmail|CaptureFile|CaptureNumber|CapturePhone|CaptureSecure|CaptureText|CaptureTextArea)$/i
 const CODE_EXPLICIT = /^{.+}$/
 const CODE_IMPLICIT = /props\./
+const CODE_DEFAULT = /^props$/
 const COMMENT = /^#(.+)$/
 const INTERPOLATED_EXPRESSION = /\${.+}/
 const FLOAT = /^[0-9]+\.[0-9]+$/
@@ -30,7 +31,9 @@ export const isBasic = line => is(BASIC, line)
 export const isBlock = line => is(BLOCK, line)
 export const isBool = line => is(BOOL, line)
 export const isCapture = line => is(CAPTURE, line)
-export const isCode = line => is(CODE_EXPLICIT, line) || is(CODE_IMPLICIT, line)
+export const isCode = line =>
+  is(CODE_EXPLICIT, line) || is(CODE_IMPLICIT, line) || isCodeDefault(line)
+export const isCodeDefault = line => is(CODE_DEFAULT, line)
 // TODO
 export const isCodeInvalid = line => {
   return getCodeData(line).find(
@@ -85,7 +88,10 @@ export const getMainFont = line =>
   line ? line.split(',')[0].replace(/['"]/g, '') : ''
 export const getProp = line => {
   // eslint-disable-next-line
-  const [_, prop, _1, value = ''] = get(PROP, line)
+  let [_, prop, _1, value = ''] = get(PROP, line)
+  if (isCodeDefault(value)) {
+    value = `props.${prop}`
+  }
   return [prop, value]
 }
 export const getValue = value => {
