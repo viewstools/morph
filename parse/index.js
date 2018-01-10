@@ -25,7 +25,7 @@ import getTags from './get-tags.js'
 export default (rtext, skipComments = true) => {
   // convert crlf to lf
   const text = rtext.replace(/\r\n/g, '\n')
-  const fonts = {}
+  const fonts = []
   const lines = text.split('\n').map(line => line.trim())
   const props = []
   const stack = []
@@ -58,13 +58,31 @@ export default (rtext, skipComments = true) => {
         const fontWeightProp = block.properties.find(
           p => p.name === 'fontWeight'
         )
+        const fontStyleProp = block.properties.find(p => p.name === 'fontStyle')
         const fontWeight = fontWeightProp
           ? fontWeightProp.value.toString()
           : '400'
 
-        if (!fonts[fontFamily]) fonts[fontFamily] = []
-        if (!fonts[fontFamily].includes(fontWeight)) {
-          fonts[fontFamily].push(fontWeight)
+        const fontStyle = fontStyleProp
+          ? fontStyleProp.value.toString()
+          : 'normal'
+
+        if (
+          !fonts.find(
+            font =>
+              font.family === fontFamily &&
+              font.weight === fontWeight &&
+              font.style === fontStyle
+          )
+        ) {
+          fonts.push({
+            id: `${fontFamily}-${fontWeight}${
+              fontStyle === 'italic' ? '-italic' : ''
+            }`,
+            family: fontFamily,
+            weight: fontWeight,
+            style: fontStyle,
+          })
         }
       }
     }

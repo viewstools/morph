@@ -16,6 +16,8 @@ all.forEach(f => (byName[f.value] = f))
 
 export const fontFamily = all.map(f => f.value)
 
+export const isGoogleFont = family => !!byName[family]
+
 export const maybeAddFallbackFont = f => {
   const font = byName[f]
 

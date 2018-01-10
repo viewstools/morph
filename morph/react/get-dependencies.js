@@ -13,10 +13,7 @@ const NATIVE = [
   'View',
 ]
 
-export default (
-  { cssDynamic, cssStatic, images, isReactNative, uses },
-  getImport
-) => {
+export default (state, getImport) => {
   const usesNative = []
   const usesSvg = []
 
@@ -32,10 +29,10 @@ export default (
   }
 
   const dependencies = []
-  uses.sort().forEach(d => {
-    if (isReactNative && NATIVE.includes(d)) {
+  state.uses.sort().forEach(d => {
+    if (state.isReactNative && NATIVE.includes(d)) {
       useNative(d)
-    } else if (isReactNative && SVG.includes(d)) {
+    } else if (state.isReactNative && SVG.includes(d)) {
       useSvg(
         d === 'Svg'
           ? d
@@ -50,17 +47,27 @@ export default (
     }
   })
 
+  // TODO native
+  if (!state.isReactNative) {
+    state.fonts.forEach(usedFont => {
+      const font = state.getFont(usedFont)
+      if (font) {
+        dependencies.push(`import "${font}"`)
+      }
+    })
+  }
+
   // TODO we probably want to check that the file exists and do something if it
   // doesn;t, like warn the user at least?
-  images.forEach(img =>
+  state.images.forEach(img =>
     dependencies.push(`import ${img.name} from "${img.file}"`)
   )
 
-  if (cssDynamic && cssStatic) {
+  if (state.cssDynamic && state.cssStatic) {
     dependencies.push('import styled, { css } from "react-emotion"')
-  } else if (cssStatic) {
+  } else if (state.cssStatic) {
     dependencies.push('import { css } from "react-emotion"')
-  } else if (cssDynamic) {
+  } else if (state.cssDynamic) {
     dependencies.push('import styled from "react-emotion"')
   }
 

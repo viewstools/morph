@@ -31,7 +31,6 @@ export default ({ file, getImport, name, tests = EMPTY_TEST, view }) => {
   const state = {
     captures: [],
     defaultProps: false,
-    fonts: [],
     images: [],
     getStyleForProperty,
     getValueForProperty,
@@ -59,6 +58,8 @@ export default ({ file, getImport, name, tests = EMPTY_TEST, view }) => {
   }
 
   const parsed = parse(view)
+  state.fonts = parsed.fonts
+
   walk(parsed.views[0], visitor, state)
 
   maybeUsesTextInput(state)

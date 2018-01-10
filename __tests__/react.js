@@ -4,6 +4,11 @@ import { existsSync, readdirSync, readFileSync } from 'fs'
 
 const isView = f => /\.view$/.test(f)
 const getPath = (f = '.') => join(__dirname, 'views', f)
+
+const getFont = font =>
+  `./Fonts/${font.family}-${font.weight}${
+    font.style === 'italic' ? '-italic' : ''
+  }`
 ;['react-dom', 'react-native'].forEach(as =>
   describe(as, () => {
     readdirSync(getPath())
@@ -20,6 +25,7 @@ const getPath = (f = '.') => join(__dirname, 'views', f)
           expect(
             morph(code, {
               as,
+              getFont,
               inlineStyles: true,
               name,
               pretty: true,
@@ -32,6 +38,7 @@ const getPath = (f = '.') => join(__dirname, 'views', f)
               morph(code, {
                 as,
                 debug: true,
+                getFont,
                 inlineStyles: true,
                 name,
                 pretty: true,

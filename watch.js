@@ -1,4 +1,9 @@
-const { getViewNotFound, isViewNameRestricted, morph } = require('./lib.js')
+const {
+  getViewNotFound,
+  isViewNameRestricted,
+  morph,
+  morphFont,
+} = require('./lib.js')
 const chalk = require('chalk')
 const chokidar = require('chokidar')
 const clean = require('./clean.js')
@@ -10,12 +15,22 @@ const toPascalCase = require('to-pascal-case')
 const uniq = require('array-uniq')
 const morphInlineSvg = require('./morph/inline-svg.js')
 
+const FONT_TYPES = {
+  '.otf': 'opentype',
+  '.ttf': 'truetype',
+  '.woff': 'woff',
+  '.woff2': 'woff2',
+}
+
 const isMorphedView = f => /\.view\.js$/.test(f)
 
 const isJs = f => path.extname(f) === '.js'
 const isLogic = f => /\.view\.logic\.js$/.test(f)
 const isTests = f => /\.view\.tests$/.test(f)
 const isView = f => path.extname(f) === '.view' || /\.view\.fake$/.test(f)
+const isFont = f => Object.keys(FONT_TYPES).includes(path.extname(f))
+
+const getFontFileId = file => path.basename(file).split('.')[0]
 
 const relativise = (from, to) => {
   const r = path.relative(from, to)
@@ -102,7 +117,8 @@ module.exports = options => {
         isMorphedView(f) ||
         (isJs(f) && !isJsComponent(f) && !isLogic(f)) ||
         (!shouldIncludeLogic && isLogic(f)) ||
-        isDirectory(f)
+        isDirectory(f) ||
+        isFont(f)
       )
         return
 
@@ -120,6 +136,40 @@ module.exports = options => {
       const ret = relativise(file, f)
 
       return isJs(ret) ? ret.replace(/\.js$/, '') : `${ret}.js`
+    }
+
+    const addFont = file => {
+      const id = getFontFileId(file)
+
+      if (instance.customFonts.some(font => font.id === id)) return
+
+      instance.customFonts.push({
+        file,
+        relativeFile: file.replace('Fonts/', './'),
+        id: getFontFileId(file),
+        type: FONT_TYPES[path.extname(file)],
+      })
+    }
+    const removeFont = file => {
+      const id = getFontFileId(file)
+      instance.customFonts = instance.customFonts.filter(font => font.id !== id)
+    }
+
+    const fonts = {}
+
+    const makeGetFont = (view, file) => {
+      return font => {
+        if (!fonts[font.id]) {
+          fonts[font.id] = `Fonts/${font.id}.js`
+
+          fs.writeFileSync(
+            path.join(src, fonts[font.id]),
+            morphFont({ as, font, files: instance.customFonts })
+          )
+        }
+
+        return relativise(file, fonts[font.id])
+      }
     }
 
     const makeGetImport = (view, file) => {
@@ -144,6 +194,7 @@ module.exports = options => {
     const views = Object.assign({}, map)
 
     const instance = {
+      customFonts: [],
       dependsOn,
       responsibleFor,
       logic,
@@ -303,6 +354,7 @@ height 50`
 
       if (isJs(f)) return
 
+      const getFont = makeGetFont(view, file)
       const getImport = makeGetImport(view, file)
       let calledMaybeIsReady = false
 
@@ -319,6 +371,7 @@ height 50`
           inlineStyles,
           file: { raw: rawFile, relative: file },
           name: view,
+          getFont,
           getImport,
           pretty,
           tests,
@@ -431,6 +484,34 @@ height 50`
       }
     }
 
+    const removeView = filter(f => {
+      const { view } = toViewPath(f)
+      if (isViewNameRestricted(view, as)) return
+
+      verbose && console.log(chalk.blue('D'), view)
+
+      if (isTests(f)) {
+        const viewForTest = view.replace(/Tests$/, '')
+        if (views[viewForTest]) {
+          morphView(views[viewForTest])
+        }
+      } else if (isLogic(f)) {
+        delete logic[view]
+      } else {
+        delete views[view]
+      }
+
+      if (typeof onRemove === 'function') {
+        onRemove(view)
+      }
+
+      updateResponsibleFor(view)
+
+      remorphDependenciesFor(view)
+
+      delete dependsOn[view]
+    })
+
     const watcherOptions = {
       // filter: f => !/node_modules/.test(f) && !isMorphedView(f),
       bashNative: ['linux'],
@@ -443,6 +524,11 @@ height 50`
       shouldIncludeLogic && `**/*.view.logic.js`,
       `**/*.view.tests`,
       shouldIncludeFake && `**/*.view.fake`,
+      // fonts,
+      'Fonts/*.otf',
+      'Fonts/*.ttf',
+      'Fonts/*.woff',
+      'Fonts/*.woff2',
     ].filter(Boolean)
 
     let viewsLeftToBeReady = null
@@ -452,6 +538,23 @@ height 50`
 
     viewsLeftToBeReady = viewsToMorph.length
     viewsToMorph.forEach(morphView)
+
+    const fontsDirectory = path.join(src, 'Fonts')
+    if (!await fs.exists(fontsDirectory)) {
+      await fs.mkdir(fontsDirectory)
+    }
+    const customFonts = await glob(
+      [
+        // fonts,
+        'Fonts/*.otf',
+        'Fonts/*.ttf',
+        'Fonts/*.woff',
+        'Fonts/*.woff2',
+      ],
+      watcherOptions
+    )
+
+    customFonts.forEach(addFont)
 
     if (!once) {
       const watcher = chokidar.watch(watcherPattern, {
@@ -466,38 +569,23 @@ height 50`
 
       instance.stop = () => watcher.close()
 
-      watcher.on('add', f => addView(f))
-      watcher.on('change', f => morphView(f))
-      watcher.on(
-        'unlink',
-        filter(f => {
-          const { view } = toViewPath(f)
-          if (isViewNameRestricted(view, as)) return
-
-          verbose && console.log(chalk.blue('D'), view)
-
-          if (isTests(f)) {
-            const viewForTest = view.replace(/Tests$/, '')
-            if (views[viewForTest]) {
-              morphView(views[viewForTest])
-            }
-          } else if (isLogic(f)) {
-            delete logic[view]
-          } else {
-            delete views[view]
-          }
-
-          if (typeof onRemove === 'function') {
-            onRemove(view)
-          }
-
-          updateResponsibleFor(view)
-
-          remorphDependenciesFor(view)
-
-          delete dependsOn[view]
-        })
-      )
+      watcher.on('add', f => {
+        if (isFont(f)) {
+          addFont(f)
+        } else {
+          addView(f)
+        }
+      })
+      watcher.on('change', f => {
+        morphView(f)
+      })
+      watcher.on('unlink', f => {
+        if (isFont(f)) {
+          removeFont(f)
+        } else {
+          removeView(f)
+        }
+      })
     }
   })
 }

@@ -2,6 +2,7 @@ import { basename, extname } from 'path'
 import buble from 'buble'
 import doMorph from './morphers.js'
 import doGetViewNotFound from './get-view-not-found.js'
+import morphFont from './morph/font.js'
 import restrictedNames from './restricted-names.js'
 import toPascalCase from 'to-pascal-case'
 import prettier from 'prettier'
@@ -16,6 +17,7 @@ export const morph = (
     debug,
     enableAnimated,
     file = {},
+    getFont,
     getImport = DEFAULT_IMPORT,
     inlineStyles,
     name,
@@ -28,6 +30,7 @@ export const morph = (
     debug,
     enableAnimated,
     file,
+    getFont,
     getImport,
     inlineStyles,
     name,
@@ -72,3 +75,5 @@ export const pathToName = path =>
 
 export const isViewNameRestricted = (view, as) =>
   restrictedNames[as].includes(view)
+
+export { morphFont }

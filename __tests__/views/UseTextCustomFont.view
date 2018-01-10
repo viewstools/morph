@@ -1,0 +1,16 @@
+UseTextCustomFont Vertical
+Normal Text
+color blue
+fontFamily CustomFontNotOnGoogle, sans-serif
+fontSize 16
+lineHeight 1.5
+fontWeight 300
+text Hi, I'm some text
+Italic Text
+color blue
+fontFamily CustomFontNotOnGoogle, sans-serif
+fontStyle italic
+fontSize 16
+lineHeight 1.5
+fontWeight 400
+text Hi, I'm some text

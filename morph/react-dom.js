@@ -20,6 +20,7 @@ export default ({
   debug,
   enableAnimated = true,
   file,
+  getFont = () => false,
   getImport,
   inlineStyles = true,
   name,
@@ -43,7 +44,7 @@ export default ({
     defaultProps: false,
     debug,
     file,
-    fonts: [],
+    getFont,
     getStyleForProperty,
     getValueForProperty,
     images: [],
@@ -79,6 +80,8 @@ export default ({
   }
 
   const parsed = parse(view)
+  state.fonts = parsed.fonts
+
   walk(parsed.views[0], visitor, state)
   maybeUsesRouter(state)
 

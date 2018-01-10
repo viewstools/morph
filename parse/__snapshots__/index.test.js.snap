@@ -2,7 +2,7 @@
 
 exports[`#parse 1`] = `
 Object {
-  "fonts": Object {},
+  "fonts": Array [],
   "props": Object {},
   "views": Array [
     Object {
@@ -32,7 +32,7 @@ Object {
 
 exports[`#parse 2`] = `
 Object {
-  "fonts": Object {},
+  "fonts": Array [],
   "props": Object {},
   "views": Array [
     Object {
@@ -81,7 +81,7 @@ Object {
 
 exports[`#parse 3`] = `
 Object {
-  "fonts": Object {},
+  "fonts": Array [],
   "props": Object {},
   "views": Array [
     Object {
@@ -353,7 +353,7 @@ Object {
 
 exports[`#parse 4`] = `
 Object {
-  "fonts": Object {},
+  "fonts": Array [],
   "props": Object {},
   "views": Array [
     Object {
@@ -462,7 +462,7 @@ Object {
 
 exports[`#parse 5`] = `
 Object {
-  "fonts": Object {},
+  "fonts": Array [],
   "props": Object {
     "backgroundColor": "string",
     "marginLeft": "number",
