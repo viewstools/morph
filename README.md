@@ -20,20 +20,18 @@ views-morph src --watch --as react-dom
 views-morph . --watch --as react-dom
 ```
 
-Views will create `.js` files for every file type it morphs (`.view`, `.data` and `.view.tests`).
-Feel free to add those files to `.gitignore` like:
+Views morphs `.view` files into `.view.js`. You may want to add those to `.gitignore`:
 
 ```
-**/*.data.js
 **/*.view.js
-**/*.view.css
-**/*.view.tests.js
 ```
 
-[Use with rollup](https://github.com/viewsdx/rollup-plugin-views)
-[Use with webpack](https://github.com/viewsdx/webpack-views-loader)
+Run the tests with `yarn test`. If you want to debug the tests, run:
+```
+node --inspect-brk node_modules/.bin/jest --runInBand
+```
 
-See viewsdx.com for more info.
+See https://views.tools for more info.
 
 License BSD-Clause-3
 
