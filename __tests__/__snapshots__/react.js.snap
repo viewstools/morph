@@ -4,6 +4,13 @@ exports[`react-dom parses react-dom Action 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
+import { css } from 'react-emotion';
+
+const Vertical_haflknc = css({
+  '&:disabled, &.disabled': {
+    color: 'blue',
+  },
+});
 
 const Action = props => {
   return props.check ? (
@@ -11,6 +18,7 @@ const Action = props => {
       data-test-id={props['data-test-id'] || 'Vertical'}
       onClick={props.clickMe}
       disabled={props.isDisabled}
+      className={Vertical_haflknc}
     >
       <span data-test-id=\\"Action.Text\\">click me</span>
       {props.children}
@@ -41,6 +49,13 @@ exports[`react-dom parses react-dom Action: react-dom parses react-dom Action de
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
+import { css } from 'react-emotion';
+
+const Vertical_haflknc = css({
+  '&:disabled, &.disabled': {
+    color: 'blue',
+  },
+});
 
 const Action = props => {
   return props.check ? (
@@ -48,6 +63,7 @@ const Action = props => {
       data-test-id={props['data-test-id'] || 'Vertical'}
       onClick={props.clickMe}
       disabled={props.isDisabled}
+      className={Vertical_haflknc}
     >
       <span data-test-id=\\"Action.Text\\">click me</span>
       {props.children}

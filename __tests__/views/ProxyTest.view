@@ -3,7 +3,7 @@ Horizontal
 Proxy
 from Something
 onClick props.onClickRemapped
-when props.bla
+onWhen props.bla
 
 Proxy
 from View1

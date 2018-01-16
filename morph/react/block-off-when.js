@@ -1,0 +1,21 @@
+import { getProp, isList } from '../utils.js'
+
+export function enter(node, parent, state) {
+  // onWhen lets you show/hide blocks depending on props
+  const onWhen = getProp(node, 'onWhen')
+
+  if (onWhen) {
+    node.onWhen = true
+
+    if (parent && !isList(parent)) state.render.push('{')
+
+    state.render.push(`${onWhen.value} ? `)
+  }
+}
+
+export function leave(node, parent, state) {
+  if (node.onWhen) {
+    state.render.push(` : null`)
+    if (parent && !isList(parent)) state.render.push('}')
+  }
+}

@@ -1,4 +1,4 @@
-import { getScope, getScopedProps, getProp, isCode } from '../utils.js'
+import { getScopedProps, getProp, isCode } from '../utils.js'
 import getBlockName from './get-block-name.js'
 import safe from '../react/safe.js'
 import wrap from '../react/wrap.js'
@@ -17,8 +17,6 @@ export const enter = (node, parent, state) => {
   if (node.action) {
     const block = 'TouchableWithoutFeedback'
     const isDisabled = getProp(node, 'isDisabled')
-      ? getScope(getProp(node, 'isDisabled'))
-      : null
 
     const hasScopedActions = getScopedProps(getProp(node, 'onClick'), node)
     const key = getProp(node, 'key')
@@ -35,7 +33,7 @@ export const enter = (node, parent, state) => {
                 )}`
               : `onPress=${wrap(node.action)}`
           }
-          ${isDisabled ? `disabled=${wrap(isDisabled)}` : ''}
+          ${isDisabled ? `disabled=${wrap(isDisabled.value)}` : ''}
           underlayColor='transparent'
           ${node.isInList ? `key={${key ? key.value : 'index'}}` : ''}>`
     )

@@ -1,4 +1,4 @@
 List
+onWhen props.showMe
 from props.from
-when props.showMe
 Card

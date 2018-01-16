@@ -4,7 +4,7 @@ const isActionable = item =>
   // (item.type === 'Horizontal' ||
   //   item.type === 'Vertical' ||
   //   /^Capture/.test(item.type)) &&
-  /^on[A-Z]/.test(item.name)
+  item.name !== 'onWhen' && /^on[A-Z]/.test(item.name)
 
 const extractPropsAndItems = item => {
   const props = []

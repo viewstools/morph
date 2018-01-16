@@ -1,6 +1,8 @@
 Vertical
 onClick props.clickMe
-isDisabled when props.isDisabled
-when props.check
+onWhen props.check
+isDisabled props
+when disabled
+color blue
 Text
 text click me

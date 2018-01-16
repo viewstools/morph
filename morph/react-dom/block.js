@@ -10,10 +10,10 @@ import * as BlockProxy from '../react/block-proxy.js'
 import * as BlockRoute from '../react/block-route.js'
 import * as BlockTeleport from '../react/block-teleport.js'
 import * as BlockTestId from './block-test-id.js'
-import * as BlockWhen from '../react/block-when.js'
+import * as BlockOffWhen from '../react/block-off-when.js'
 
 export const enter = [
-  BlockWhen.enter,
+  BlockOffWhen.enter,
   BlockProxy.enter,
   BlockRoute.enter,
   BlockName.enter,
@@ -32,5 +32,5 @@ export const leave = [
   BlockExplicitChildren.leave,
   BlockName.leave,
   BlockRoute.leave,
-  BlockWhen.leave,
+  BlockOffWhen.leave,
 ]

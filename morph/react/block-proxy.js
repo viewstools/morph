@@ -16,10 +16,10 @@ export function enter(node, parent, state) {
   proxied = proxied.value
 
   const otherProperties = node.properties.filter(
-    p => p.name !== 'from' && p.name !== 'when'
+    p => p.name !== 'from' && p.name !== 'onWhen' && p.name !== 'when'
   )
 
-  if (!node.when) {
+  if (!node.onWhen) {
     state.render.push('{')
   }
 
@@ -33,13 +33,13 @@ export function enter(node, parent, state) {
 
     state.render.push(childContent)
   } else {
-    if (!node.when) {
+    if (!node.onWhen) {
       state.render.push('props.childrenProxyMap && ')
     }
     const child = `childrenArray[props.childrenProxyMap['${proxied}']]`
 
     if (otherProperties.length > 0) {
-      if (node.when) {
+      if (node.onWhen) {
         if (state.render[state.render.length - 1].endsWith(' ? ')) {
           state.render[state.render.length - 1] = state.render[
             state.render.length - 1

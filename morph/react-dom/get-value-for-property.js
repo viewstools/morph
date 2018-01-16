@@ -1,4 +1,4 @@
-import { getScope, getScopedProps } from '../utils.js'
+import { getScopedProps } from '../utils.js'
 import safe from '../react/safe.js'
 import toCamelCase from 'to-camel-case'
 
@@ -29,12 +29,9 @@ export default (node, parent, state) => {
     return {
       src: getImageSource(node, state),
     }
-  } else if (
-    node.name === 'isDisabled' &&
-    node.value.toString().indexOf('when') > -1
-  ) {
+  } else if (node.name === 'isDisabled') {
     return {
-      disabled: safe(getScope(node)),
+      disabled: safe(node.value, node),
     }
   } else if (getScopedProps(node, parent)) {
     return {
