@@ -74,6 +74,6 @@ export default ({ file, getImport, name, view }) => {
     }),
     fonts: parsed.fonts,
     props: parsed.props,
-    svgs: parsed.svgs,
+    svgs: state.svgs,
   }
 }
