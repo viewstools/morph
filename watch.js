@@ -26,7 +26,6 @@ const isMorphedView = f => /\.view\.js$/.test(f)
 
 const isJs = f => path.extname(f) === '.js'
 const isLogic = f => /\.view\.logic\.js$/.test(f)
-const isTests = f => /\.view\.tests$/.test(f)
 const isView = f => path.extname(f) === '.view' || /\.view\.fake$/.test(f)
 const isFont = f => Object.keys(FONT_TYPES).includes(path.extname(f))
 
@@ -216,15 +215,6 @@ module.exports = options => {
         return
       }
 
-      if (isTests(file)) {
-        console.log(chalk.yellow('T'), view, chalk.dim(`-> ${f}`))
-        const testHasView = views[view.replace(/Tests$/, '')]
-        if (testHasView && !skipMorph) {
-          morphView(f.replace(/\.tests$/, ''))
-        }
-        return
-      }
-
       if (views[view]) {
         console.log(
           chalk.magenta('X'),
@@ -328,18 +318,9 @@ height 50`
 
     const addViewSkipMorph = f => addView(f, true)
 
-    const maybeGetTests = async viewFile => {
-      const testsFile = `${viewFile}.tests`
-      if (await fs.exists(testsFile)) {
-        return await fs.readFile(testsFile, 'utf-8')
-      }
-    }
-
     let toMorphQueue = null
 
-    const morphView = filter(async (maybeF, skipRemorph) => {
-      const f = maybeF.replace(/\.tests$/, '')
-
+    const morphView = filter(async (f, skipRemorph) => {
       const { file, view } = toViewPath(f)
       if (isViewNameRestricted(view, as)) {
         verbose &&
@@ -361,7 +342,6 @@ height 50`
       try {
         const rawFile = path.join(src, f)
         const source = await fs.readFile(rawFile, 'utf-8')
-        const tests = await maybeGetTests(rawFile)
 
         const res = morph(source, {
           as,
@@ -374,7 +354,6 @@ height 50`
           getFont,
           getImport,
           pretty,
-          tests,
           views,
         })
 
@@ -386,8 +365,6 @@ height 50`
           fonts: res.fonts,
           props: res.props,
           source,
-          tests: res.tests,
-          todos: res.todos,
           view,
         }
 
@@ -429,7 +406,6 @@ height 50`
                 name: svg.view,
                 getImport,
                 pretty,
-                tests,
                 views,
               })
 
@@ -490,12 +466,7 @@ height 50`
 
       verbose && console.log(chalk.blue('D'), view)
 
-      if (isTests(f)) {
-        const viewForTest = view.replace(/Tests$/, '')
-        if (views[viewForTest]) {
-          morphView(views[viewForTest])
-        }
-      } else if (isLogic(f)) {
+      if (isLogic(f)) {
         delete logic[view]
       } else {
         delete views[view]
@@ -513,7 +484,6 @@ height 50`
     })
 
     const watcherOptions = {
-      // filter: f => !/node_modules/.test(f) && !isMorphedView(f),
       bashNative: ['linux'],
       cwd: src,
       ignore: ['**/node_modules/**', '**/*.view.js'],
@@ -522,7 +492,6 @@ height 50`
       `**/*.js`,
       `**/*.view`,
       shouldIncludeLogic && `**/*.view.logic.js`,
-      `**/*.view.tests`,
       shouldIncludeFake && `**/*.view.fake`,
       // fonts,
       'Fonts/*.otf',

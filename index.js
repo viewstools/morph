@@ -22,7 +22,6 @@ export const morph = (
     inlineStyles,
     name,
     pretty = false,
-    tests,
     views = {},
   }
 ) => {
@@ -35,7 +34,6 @@ export const morph = (
     inlineStyles,
     name,
     view: code,
-    tests,
     views,
   })
 

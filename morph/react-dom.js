@@ -3,7 +3,6 @@ import getStyleForProperty from './react-dom/get-style-for-property.js'
 import getStyles from './react-dom/get-styles.js'
 import getValueForProperty from './react-dom/get-value-for-property.js'
 import maybeUsesRouter from './react-dom/maybe-uses-router.js'
-import morphTests, { EMPTY_TEST } from './tests.js'
 import parse from '../parse/index.js'
 import restrictedNames from './react-dom/restricted-names.js'
 import toComponent from './react/to-component.js'
@@ -24,7 +23,6 @@ export default ({
   getImport,
   inlineStyles = true,
   name,
-  tests = EMPTY_TEST,
   view,
 }) => {
   const finalName = restrictedNames.includes(name) ? `${name}1` : name
@@ -55,11 +53,9 @@ export default ({
     render: [],
     styles: {},
     svgs: [],
-    todos: [],
     usedBlockNames: { [finalName]: 1 },
     uses: [],
     testIds: {},
-    tests: morphTests({ view: tests, file }),
     use(block) {
       if (
         state.uses.includes(block) ||
@@ -97,7 +93,5 @@ export default ({
     fonts: parsed.fonts,
     props: parsed.props,
     svgs: state.svgs,
-    tests: state.tests,
-    todos: state.todos,
   }
 }

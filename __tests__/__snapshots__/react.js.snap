@@ -34,14 +34,6 @@ export default Action;
     "clickMe": "function",
     "isDisabled": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -79,14 +71,6 @@ export default Action;
     "clickMe": "function",
     "isDisabled": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -120,14 +104,6 @@ export default AnimatedButton;
     "onClick": "function",
     "opacity": "number",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -161,14 +137,6 @@ export default AnimatedButton;
     "onClick": "function",
     "opacity": "number",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -199,14 +167,6 @@ export default AppRegionDrag;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -237,14 +197,6 @@ export default AppRegionDrag;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -285,14 +237,6 @@ export default BackgroundImage;
   "props": Object {
     "backgroundImage": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -333,14 +277,6 @@ export default BackgroundImage;
   "props": Object {
     "backgroundImage": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -375,14 +311,6 @@ export default BoxShadow;
   "props": Object {
     "color": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -417,14 +345,6 @@ export default BoxShadow;
   "props": Object {
     "color": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -451,14 +371,6 @@ export default ClassName;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -485,14 +397,6 @@ export default ClassName;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -530,14 +434,6 @@ export default Code;
     "refText": "string",
     "text": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -574,14 +470,6 @@ export default Code;
     "refText": "string",
     "text": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -614,14 +502,6 @@ export default DynamicStylesApplyToBasicBlocksOnly;
   "props": Object {
     "height": "number",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -654,14 +534,6 @@ export default DynamicStylesApplyToBasicBlocksOnly;
   "props": Object {
     "height": "number",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -678,14 +550,6 @@ export default EmptyText;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -702,14 +566,6 @@ export default EmptyText;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -776,14 +632,6 @@ export default Form;
   "props": Object {
     "onSubmit": "function",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -857,14 +705,6 @@ export default Form;
   "props": Object {
     "onSubmit": "function",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -891,14 +731,6 @@ export default GoTo;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -925,14 +757,6 @@ export default GoTo;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -988,14 +812,6 @@ export default Hover;
     "fontSizeHover": "number",
     "onClick": "function",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -1051,14 +867,6 @@ export default Hover;
     "fontSizeHover": "number",
     "onClick": "function",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -1075,14 +883,6 @@ export default JustText;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -1099,14 +899,6 @@ export default JustText;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -1138,14 +930,6 @@ export default ListOfSomething;
   "props": Object {
     "from": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -1177,14 +961,6 @@ export default ListOfSomething;
   "props": Object {
     "from": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -1213,14 +989,6 @@ export default ListWhen;
     "from": "string",
     "showMe": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -1249,14 +1017,6 @@ export default ListWhen;
     "from": "string",
     "showMe": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -1279,14 +1039,6 @@ export default LocalImage;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -1308,14 +1060,6 @@ export default LocalImage;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -1346,14 +1090,6 @@ export default LocalImageSvg;
   "props": Object {
     "height": "number",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -1383,14 +1119,6 @@ export default LocalImageSvg;
   "props": Object {
     "height": "number",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -1414,14 +1142,6 @@ export default LocalOrRemoteImageWhenCode;
   "props": Object {
     "source": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -1445,14 +1165,6 @@ export default LocalOrRemoteImageWhenCode;
   "props": Object {
     "source": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -1469,14 +1181,6 @@ export default NameIsType;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -1493,14 +1197,6 @@ export default NameIsType;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -1538,14 +1234,6 @@ export default withRouter(NestedRoutes);
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -1583,14 +1271,6 @@ export default withRouter(NestedRoutes);
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -1622,14 +1302,6 @@ export default Print;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -1661,14 +1333,6 @@ export default Print;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -1704,14 +1368,6 @@ export default ProxyTest;
     "bla": "string",
     "onClickRemapped": "function",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -1747,14 +1403,6 @@ export default ProxyTest;
     "bla": "string",
     "onClickRemapped": "function",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -1788,14 +1436,6 @@ export default Scope;
     "somethingGreen": "string",
     "whatMakesBlue": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -1829,14 +1469,6 @@ export default Scope;
     "somethingGreen": "string",
     "whatMakesBlue": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -1866,14 +1498,6 @@ export default ScopeOnCustomView;
     "different": "string",
     "more": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -1903,14 +1527,6 @@ export default ScopeOnCustomView;
     "different": "string",
     "more": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -1947,14 +1563,6 @@ export default ScopePopup;
     "toggle": "function",
     "whatMakesBlue": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -1991,14 +1599,6 @@ export default ScopePopup;
     "toggle": "function",
     "whatMakesBlue": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -2036,14 +1636,6 @@ export default ScopePopup2;
     "isSuperVisible": "string",
     "toggle": "function",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -2081,14 +1673,6 @@ export default ScopePopup2;
     "isSuperVisible": "string",
     "toggle": "function",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -2139,14 +1723,6 @@ export default SomeMissingStyle;
     "backgroundColorHover": "string",
     "onClick": "function",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -2196,14 +1772,6 @@ export default SomeMissingStyle;
     "backgroundColorHover": "string",
     "onClick": "function",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -2233,14 +1801,6 @@ export default Teleport;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -2270,14 +1830,6 @@ export default Teleport;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -2305,14 +1857,6 @@ export default Test;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -2340,14 +1884,6 @@ export default Test;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -2373,14 +1909,6 @@ export default TestIds;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -2406,14 +1934,6 @@ export default TestIds;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -2437,14 +1957,6 @@ export default TextInterpolation;
   "props": Object {
     "name": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -2468,14 +1980,6 @@ export default TextInterpolation;
   "props": Object {
     "name": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -2492,14 +1996,6 @@ export default Toggle;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -2516,14 +2012,6 @@ export default Toggle;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -2574,14 +2062,6 @@ export default UseCaptureEmail;
   "props": Object {
     "onSubmit": "function",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -2632,14 +2112,6 @@ export default UseCaptureEmail;
   "props": Object {
     "onSubmit": "function",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -2671,14 +2143,6 @@ export default UseCaptureFile;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -2712,14 +2176,6 @@ export default UseCaptureFile;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -2752,14 +2208,6 @@ export default UseCaptureNumber;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -2794,14 +2242,6 @@ export default UseCaptureNumber;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -2834,14 +2274,6 @@ export default UseCapturePhone;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -2876,14 +2308,6 @@ export default UseCapturePhone;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -2916,14 +2340,6 @@ export default UseCaptureSecure;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -2958,14 +2374,6 @@ export default UseCaptureSecure;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -2998,14 +2406,6 @@ export default UseCaptureText;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -3040,14 +2440,6 @@ export default UseCaptureText;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -3081,14 +2473,6 @@ export default UseCaptureTextArea;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -3124,14 +2508,6 @@ export default UseCaptureTextArea;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -3165,14 +2541,6 @@ export default UseCaptureTextManagedFromOutside;
   "props": Object {
     "external": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -3207,14 +2575,6 @@ export default UseCaptureTextManagedFromOutside;
   "props": Object {
     "external": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -3244,14 +2604,6 @@ export default UseHorizontal;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -3281,14 +2633,6 @@ export default UseHorizontal;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -3312,14 +2656,6 @@ export default UseImage;
   "props": Object {
     "another": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -3343,14 +2679,6 @@ export default UseImage;
   "props": Object {
     "another": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -3381,14 +2709,6 @@ export default UseOfProxy;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -3419,14 +2739,6 @@ export default UseOfProxy;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -3464,14 +2776,6 @@ export default UseProxy;
     "icon": "string",
     "text": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -3509,14 +2813,6 @@ export default UseProxy;
     "icon": "string",
     "text": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -3576,14 +2872,6 @@ export default UseRouter;
   "props": Object {
     "height": "number",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -3643,14 +2931,6 @@ export default UseRouter;
   "props": Object {
     "height": "number",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -3688,14 +2968,6 @@ export default UseSvg;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -3733,14 +3005,6 @@ export default UseSvg;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -3781,14 +3045,6 @@ export default UseText;
     },
   ],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -3829,14 +3085,6 @@ export default UseText;
     },
   ],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -3895,14 +3143,6 @@ export default UseTextCustomFont;
     },
   ],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -3961,14 +3201,6 @@ export default UseTextCustomFont;
     },
   ],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -3995,14 +3227,6 @@ export default UseVertical;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -4029,14 +3253,6 @@ export default UseVertical;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -4067,14 +3283,6 @@ export default ViewNameIsntUsedInStyle;
   "props": Object {
     "opacity": "number",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -4105,14 +3313,6 @@ export default ViewNameIsntUsedInStyle;
   "props": Object {
     "opacity": "number",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -4141,14 +3341,6 @@ export default When;
   "props": Object {
     "showMe": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -4177,14 +3369,6 @@ export default When;
   "props": Object {
     "showMe": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -4205,14 +3389,6 @@ export default WhenTopLevel;
   "props": Object {
     "showMe": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -4233,14 +3409,6 @@ export default WhenTopLevel;
   "props": Object {
     "showMe": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -4268,24 +3436,6 @@ export default WithTest;
     "change": "function",
     "text": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {
-        "change": "Next",
-        "text": "in Main",
-      },
-      "name": "Main",
-    },
-    Object {
-      "data": Object {
-        "change": "Main",
-        "text": "in Next",
-      },
-      "name": "Next",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -4313,24 +3463,6 @@ export default WithTest;
     "change": "function",
     "text": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {
-        "change": "Next",
-        "text": "in Main",
-      },
-      "name": "Main",
-    },
-    Object {
-      "data": Object {
-        "change": "Main",
-        "text": "in Next",
-      },
-      "name": "Next",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -4364,14 +3496,6 @@ export default Action;
     "clickMe": "function",
     "isDisabled": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -4406,14 +3530,6 @@ export default AnimatedButton;
     "onClick": "function",
     "opacity": "number",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -4438,14 +3554,6 @@ export default AppRegionDrag;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -4480,14 +3588,6 @@ export default BackgroundImage;
   "props": Object {
     "backgroundImage": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -4541,14 +3641,6 @@ export default BoxShadow;
   "props": Object {
     "color": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -4571,14 +3663,6 @@ export default ClassName;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -4616,14 +3700,6 @@ export default Code;
     "refText": "string",
     "text": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -4655,14 +3731,6 @@ export default DynamicStylesApplyToBasicBlocksOnly;
   "props": Object {
     "height": "number",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -4680,14 +3748,6 @@ export default EmptyText;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -4778,14 +3838,6 @@ export default Form;
   "props": Object {
     "onSubmit": "function",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -4808,14 +3860,6 @@ export default GoTo;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -4859,14 +3903,6 @@ export default Hover;
     "fontSizeHover": "number",
     "onClick": "function",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -4884,14 +3920,6 @@ export default JustText;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -4924,14 +3952,6 @@ export default ListOfSomething;
   "props": Object {
     "from": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -4961,14 +3981,6 @@ export default ListWhen;
     "from": "string",
     "showMe": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -4987,14 +3999,6 @@ export default LocalImage;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -5003,12 +4007,12 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import chopperSvg from './chopper.svg';
-import { Image, StyleSheet } from 'react-native';
+import { Animated, StyleSheet } from 'react-native';
 const styles = StyleSheet.create({ h1fkj9gt: { width: 50 } });
 
 const LocalImageSvg = props => {
   return (
-    <Image
+    <Animated.Image
       testID={props['testID'] || 'LocalImageSvg'}
       source={chopperSvg}
       style={[styles.h1fkj9gt, { height: props.height }]}
@@ -5022,14 +4026,6 @@ export default LocalImageSvg;
   "props": Object {
     "height": "number",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -5054,14 +4050,6 @@ export default LocalOrRemoteImageWhenCode;
   "props": Object {
     "source": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -5079,14 +4067,6 @@ export default NameIsType;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -5131,14 +4111,6 @@ export default withRouter(NestedRoutes);
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -5162,14 +4134,6 @@ export default Print;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -5204,14 +4168,6 @@ export default ProxyTest;
     "bla": "string",
     "onClickRemapped": "function",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -5246,14 +4202,6 @@ export default Scope;
     "somethingGreen": "string",
     "whatMakesBlue": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -5283,14 +4231,6 @@ export default ScopeOnCustomView;
     "different": "string",
     "more": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -5331,14 +4271,6 @@ export default ScopePopup;
     "toggle": "function",
     "whatMakesBlue": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -5378,14 +4310,6 @@ export default ScopePopup2;
     "isSuperVisible": "string",
     "toggle": "function",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -5432,14 +4356,6 @@ export default SomeMissingStyle;
     "backgroundColorHover": "string",
     "onClick": "function",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -5470,14 +4386,6 @@ export default Teleport;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -5506,14 +4414,6 @@ export default Test;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -5540,14 +4440,6 @@ export default TestIds;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -5572,14 +4464,6 @@ export default TextInterpolation;
   "props": Object {
     "name": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -5597,14 +4481,6 @@ export default Toggle;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -5656,14 +4532,6 @@ export default UseCaptureEmail;
   "props": Object {
     "onSubmit": "function",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -5701,14 +4569,6 @@ export default UseCaptureFile;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -5746,14 +4606,6 @@ export default UseCaptureNumber;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -5791,14 +4643,6 @@ export default UseCapturePhone;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -5836,14 +4680,6 @@ export default UseCaptureSecure;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -5881,14 +4717,6 @@ export default UseCaptureText;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -5926,14 +4754,6 @@ export default UseCaptureTextArea;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -5974,14 +4794,6 @@ export default UseCaptureTextManagedFromOutside;
   "props": Object {
     "external": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -6011,14 +4823,6 @@ export default UseHorizontal;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -6043,14 +4847,6 @@ export default UseImage;
   "props": Object {
     "another": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -6080,14 +4876,6 @@ export default UseOfProxy;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -6121,14 +4909,6 @@ export default UseProxy;
     "icon": "string",
     "text": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -6184,14 +4964,6 @@ export default UseRouter;
   "props": Object {
     "height": "number",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -6231,14 +5003,6 @@ export default UseSvg;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -6275,14 +5039,6 @@ export default UseText;
     },
   ],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -6338,14 +5094,6 @@ export default UseTextCustomFont;
     },
   ],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -6368,14 +5116,6 @@ export default UseVertical;
 ",
   "fonts": Array [],
   "props": Object {},
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -6403,14 +5143,6 @@ export default ViewNameIsntUsedInStyle;
   "props": Object {
     "opacity": "number",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -6436,14 +5168,6 @@ export default When;
   "props": Object {
     "showMe": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -6465,14 +5189,6 @@ export default WhenTopLevel;
   "props": Object {
     "showMe": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {},
-      "name": "Main",
-    },
-  ],
-  "todos": Array [],
 }
 `;
 
@@ -6504,23 +5220,5 @@ export default WithTest;
     "change": "function",
     "text": "string",
   },
-  "svgs": Array [],
-  "tests": Array [
-    Object {
-      "data": Object {
-        "change": "Next",
-        "text": "in Main",
-      },
-      "name": "Main",
-    },
-    Object {
-      "data": Object {
-        "change": "Main",
-        "text": "in Next",
-      },
-      "name": "Next",
-    },
-  ],
-  "todos": Array [],
 }
 `;

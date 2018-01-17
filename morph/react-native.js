@@ -5,7 +5,6 @@ import getValueForProperty from './react-native/get-value-for-property.js'
 import maybeUsesTextInput from './react-native/maybe-uses-text-input.js'
 import maybeUsesRouter from './react-native/maybe-uses-router.js'
 import maybeUsesStyleSheet from './react-native/maybe-uses-style-sheet.js'
-import morphTests, { EMPTY_TEST } from './tests.js'
 import parse from '../parse/index.js'
 import restrictedNames from './react-native/restricted-names.js'
 import toComponent from './react/to-component.js'
@@ -18,7 +17,7 @@ const imports = {
   Router: "import { NativeRouter as Router } from 'react-router-native'",
 }
 
-export default ({ file, getImport, name, tests = EMPTY_TEST, view }) => {
+export default ({ file, getImport, name, view }) => {
   const finalName = restrictedNames.includes(name) ? `${name}1` : name
   if (name !== finalName) {
     console.warn(
@@ -39,9 +38,8 @@ export default ({ file, getImport, name, tests = EMPTY_TEST, view }) => {
     remap: {},
     render: [],
     styles: {},
+    svgs: [],
     testIds: {},
-    tests: morphTests({ view: tests, file }),
-    todos: [],
     uses: [],
     use(block) {
       if (
@@ -53,7 +51,6 @@ export default ({ file, getImport, name, tests = EMPTY_TEST, view }) => {
 
       state.uses.push(block)
     },
-    svgs: [],
     withRouter: false,
   }
 
@@ -77,8 +74,6 @@ export default ({ file, getImport, name, tests = EMPTY_TEST, view }) => {
     }),
     fonts: parsed.fonts,
     props: parsed.props,
-    svgs: state.svgs,
-    tests: state.tests,
-    todos: state.todos,
+    svgs: parsed.svgs,
   }
 }
