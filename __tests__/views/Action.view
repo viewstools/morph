@@ -2,7 +2,10 @@ Vertical
 onClick props.clickMe
 onWhen props.check
 isDisabled props
+color red
 when disabled
 color blue
 Text
 text click me
+SubButton
+isDisabled true

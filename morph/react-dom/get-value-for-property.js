@@ -25,11 +25,11 @@ const getImageSource = (node, state) => {
 
 export default (node, parent, state) => {
   // TODO support scoped source
-  if (node.name === 'source' && parent.name === 'Image') {
+  if (node.name === 'source' && parent.name === 'Image' && parent.isBasic) {
     return {
       src: getImageSource(node, state),
     }
-  } else if (node.name === 'isDisabled') {
+  } else if (parent.isBasic && node.name === 'isDisabled') {
     return {
       disabled: safe(node.value, node),
     }
