@@ -4894,7 +4894,8 @@ class UseCaptureTextArea extends React.Component {
         onChangeText={captureTextArea => this.setState({ captureTextArea })}
         ref={$e => (this.$captureTextArea = $e)}
         value={state.captureTextArea}
-        keyboardType=\\"undefined\\"
+        keyboardType=\\"default\\"
+        multiline={true}
         autoCorrect={false}
         underlineColorAndroid=\\"transparent\\"
         testID={props['testID'] || 'CaptureTextArea'}

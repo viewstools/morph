@@ -5,6 +5,7 @@ import toCamelCase from 'to-camel-case'
 const keyboardType = {
   CaptureEmail: 'email-address',
   CaptureText: 'default',
+  CaptureTextArea: 'default',
   CaptureNumber: 'numeric',
   CapturePhone: 'phone-pad',
 }
@@ -44,6 +45,10 @@ export const enter = (node, parent, state) => {
     state.render.push(` secureTextEntry`)
   } else {
     state.render.push(` keyboardType='${keyboardType[blockType]}'`)
+  }
+
+  if (node.name === 'CaptureTextArea') {
+    state.render.push(` multiline={true}`)
   }
 
   // TODO rest of props
