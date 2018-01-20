@@ -80,5 +80,9 @@ export default (state, getImport) => {
     dependencies.push(`import { ${usesNative.join(', ')} } from 'react-native'`)
   }
 
+  if (Object.keys(state.props).length > 0) {
+    dependencies.push("import PropTypes from 'prop-types'")
+  }
+
   return dependencies.join('\n')
 }

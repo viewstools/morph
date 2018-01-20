@@ -1,6 +1,7 @@
 import getBody from './get-body.js'
 import getDefaultProps from './get-default-props.js'
 import getDependencies from './get-dependencies.js'
+import getPropTypes from './get-prop-types.js'
 
 export default ({ getImport, getStyles, name, state }) => {
   let xport = name
@@ -26,5 +27,6 @@ ${getStyles(state, name)}
 
 ${getBody({ state, name })}
 ${getDefaultProps({ state, name })}
+${getPropTypes({ state, name })}
 export default ${xport}`
 }

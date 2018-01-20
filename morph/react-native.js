@@ -56,6 +56,7 @@ export default ({ file, getImport, name, view }) => {
 
   const parsed = parse(view)
   state.fonts = parsed.fonts
+  state.props = parsed.props
 
   walk(parsed.views[0], visitor, state)
 

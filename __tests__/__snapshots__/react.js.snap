@@ -6,6 +6,7 @@ Object {
 import React from 'react';
 import SubButton from './SubButton.view.js';
 import { css } from 'react-emotion';
+import PropTypes from 'prop-types';
 
 const Vertical_h1azf9vn = css({
   color: 'red',
@@ -29,6 +30,11 @@ const Action = props => {
   ) : null;
 };
 
+Action.propTypes = {
+  check: PropTypes.string.isRequired,
+  clickMe: PropTypes.func.isRequired,
+  isDisabled: PropTypes.string.isRequired,
+};
 export default Action;
 ",
   "fonts": Array [],
@@ -47,6 +53,7 @@ Object {
 import React from 'react';
 import SubButton from './SubButton.view.js';
 import { css } from 'react-emotion';
+import PropTypes from 'prop-types';
 
 const Vertical_h1azf9vn = css({
   color: 'red',
@@ -70,6 +77,11 @@ const Action = props => {
   ) : null;
 };
 
+Action.propTypes = {
+  check: PropTypes.string.isRequired,
+  clickMe: PropTypes.func.isRequired,
+  isDisabled: PropTypes.string.isRequired,
+};
 export default Action;
 ",
   "fonts": Array [],
@@ -87,6 +99,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import styled from 'react-emotion';
+import PropTypes from 'prop-types';
 
 const Vertical = styled('button')(({ props }) => ({
   opacity: props.opacity,
@@ -105,6 +118,10 @@ const AnimatedButton = props => {
   );
 };
 
+AnimatedButton.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  opacity: PropTypes.number.isRequired,
+};
 export default AnimatedButton;
 ",
   "fonts": Array [],
@@ -121,6 +138,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import styled from 'react-emotion';
+import PropTypes from 'prop-types';
 
 const Vertical = styled('button')(({ props }) => ({
   opacity: props.opacity,
@@ -139,6 +157,10 @@ const AnimatedButton = props => {
   );
 };
 
+AnimatedButton.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  opacity: PropTypes.number.isRequired,
+};
 export default AnimatedButton;
 ",
   "fonts": Array [],
@@ -217,6 +239,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import styled, { css } from 'react-emotion';
+import PropTypes from 'prop-types';
 
 const Vertical_h1q68ydz = css({
   backgroundImage: \\"url('https://viewsdx.com/image.jpg')\\",
@@ -243,6 +266,7 @@ const BackgroundImage = props => {
   );
 };
 
+BackgroundImage.propTypes = { backgroundImage: PropTypes.string.isRequired };
 export default BackgroundImage;
 ",
   "fonts": Array [],
@@ -258,6 +282,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import styled, { css } from 'react-emotion';
+import PropTypes from 'prop-types';
 
 const Vertical_h1q68ydz = css({
   backgroundImage: \\"url('https://viewsdx.com/image.jpg')\\",
@@ -284,6 +309,7 @@ const BackgroundImage = props => {
   );
 };
 
+BackgroundImage.propTypes = { backgroundImage: PropTypes.string.isRequired };
 export default BackgroundImage;
 ",
   "fonts": Array [],
@@ -299,6 +325,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import styled, { css } from 'react-emotion';
+import PropTypes from 'prop-types';
 
 const Vertical = styled('div')(({ props }) => ({
   boxShadow: \`10px 5px 2px \${props.color}\`,
@@ -319,6 +346,7 @@ const BoxShadow = props => {
   );
 };
 
+BoxShadow.propTypes = { color: PropTypes.string.isRequired };
 export default BoxShadow;
 ",
   "fonts": Array [],
@@ -334,6 +362,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import styled, { css } from 'react-emotion';
+import PropTypes from 'prop-types';
 
 const Vertical = styled('div')(({ props }) => ({
   boxShadow: \`10px 5px 2px \${props.color}\`,
@@ -354,6 +383,7 @@ const BoxShadow = props => {
   );
 };
 
+BoxShadow.propTypes = { color: PropTypes.string.isRequired };
 export default BoxShadow;
 ",
   "fonts": Array [],
@@ -423,6 +453,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import styled, { css } from 'react-emotion';
+import PropTypes from 'prop-types';
 
 const Vertical_h1cyenk5 = css({ backgroundColor: 'red' });
 const Text = styled('span')(({ props }) => ({
@@ -444,6 +475,11 @@ const Code = props => {
   );
 };
 
+Code.propTypes = {
+  color: PropTypes.string.isRequired,
+  refText: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+};
 export default Code;
 ",
   "fonts": Array [],
@@ -461,6 +497,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import styled, { css } from 'react-emotion';
+import PropTypes from 'prop-types';
 
 const Vertical_h1cyenk5 = css({ backgroundColor: 'red' });
 const Text = styled('span')(({ props }) => ({
@@ -481,6 +518,11 @@ const Code = props => {
   );
 };
 
+Code.propTypes = {
+  color: PropTypes.string.isRequired,
+  refText: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+};
 export default Code;
 ",
   "fonts": Array [],
@@ -499,6 +541,7 @@ Object {
 import React from 'react';
 import SomeThing from './SomeThing.view.js';
 import styled from 'react-emotion';
+import PropTypes from 'prop-types';
 
 const Vertical = styled('div')(({ props }) => ({
   height: props.height,
@@ -516,6 +559,9 @@ const DynamicStylesApplyToBasicBlocksOnly = props => {
   );
 };
 
+DynamicStylesApplyToBasicBlocksOnly.propTypes = {
+  height: PropTypes.number.isRequired,
+};
 export default DynamicStylesApplyToBasicBlocksOnly;
 ",
   "fonts": Array [],
@@ -532,6 +578,7 @@ Object {
 import React from 'react';
 import SomeThing from './SomeThing.view.js';
 import styled from 'react-emotion';
+import PropTypes from 'prop-types';
 
 const Vertical = styled('div')(({ props }) => ({
   height: props.height,
@@ -549,6 +596,9 @@ const DynamicStylesApplyToBasicBlocksOnly = props => {
   );
 };
 
+DynamicStylesApplyToBasicBlocksOnly.propTypes = {
+  height: PropTypes.number.isRequired,
+};
 export default DynamicStylesApplyToBasicBlocksOnly;
 ",
   "fonts": Array [],
@@ -597,6 +647,7 @@ exports[`react-dom parses react-dom Form 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class Form extends React.Component {
   constructor(props) {
@@ -650,6 +701,7 @@ class Form extends React.Component {
   }
 }
 
+Form.propTypes = { onSubmit: PropTypes.func.isRequired };
 export default Form;
 ",
   "fonts": Array [],
@@ -664,6 +716,7 @@ exports[`react-dom parses react-dom Form: react-dom parses react-dom Form debug 
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class Form extends React.Component {
   constructor(props) {
@@ -724,6 +777,7 @@ class Form extends React.Component {
   }
 }
 
+Form.propTypes = { onSubmit: PropTypes.func.isRequired };
 export default Form;
 ",
   "fonts": Array [],
@@ -793,6 +847,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import styled from 'react-emotion';
+import PropTypes from 'prop-types';
 
 const Button = styled('button')(({ props }) => ({
   backgroundColor: props.backgroundColor,
@@ -830,6 +885,13 @@ const Hover = props => {
   );
 };
 
+Hover.propTypes = {
+  backgroundColor: PropTypes.string.isRequired,
+  backgroundColorHover: PropTypes.string.isRequired,
+  fontSize: PropTypes.number.isRequired,
+  fontSizeHover: PropTypes.number.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
 export default Hover;
 ",
   "fonts": Array [],
@@ -849,6 +911,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import styled from 'react-emotion';
+import PropTypes from 'prop-types';
 
 const Button = styled('button')(({ props }) => ({
   backgroundColor: props.backgroundColor,
@@ -886,6 +949,13 @@ const Hover = props => {
   );
 };
 
+Hover.propTypes = {
+  backgroundColor: PropTypes.string.isRequired,
+  backgroundColorHover: PropTypes.string.isRequired,
+  fontSize: PropTypes.number.isRequired,
+  fontSizeHover: PropTypes.number.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
 export default Hover;
 ",
   "fonts": Array [],
@@ -939,6 +1009,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import Something from './Something.view.js';
+import PropTypes from 'prop-types';
 
 const ListOfSomething = props => {
   return (
@@ -956,6 +1027,7 @@ const ListOfSomething = props => {
   );
 };
 
+ListOfSomething.propTypes = { from: PropTypes.string.isRequired };
 export default ListOfSomething;
 ",
   "fonts": Array [],
@@ -971,6 +1043,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import Something from './Something.view.js';
+import PropTypes from 'prop-types';
 
 const ListOfSomething = props => {
   return (
@@ -988,6 +1061,7 @@ const ListOfSomething = props => {
   );
 };
 
+ListOfSomething.propTypes = { from: PropTypes.string.isRequired };
 export default ListOfSomething;
 ",
   "fonts": Array [],
@@ -1003,6 +1077,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import Card from './Card.view.js';
+import PropTypes from 'prop-types';
 
 const ListWhen = props => {
   return props.showMe ? (
@@ -1016,6 +1091,10 @@ const ListWhen = props => {
   ) : null;
 };
 
+ListWhen.propTypes = {
+  from: PropTypes.string.isRequired,
+  showMe: PropTypes.string.isRequired,
+};
 export default ListWhen;
 ",
   "fonts": Array [],
@@ -1032,6 +1111,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import Card from './Card.view.js';
+import PropTypes from 'prop-types';
 
 const ListWhen = props => {
   return props.showMe ? (
@@ -1045,6 +1125,10 @@ const ListWhen = props => {
   ) : null;
 };
 
+ListWhen.propTypes = {
+  from: PropTypes.string.isRequired,
+  showMe: PropTypes.string.isRequired,
+};
 export default ListWhen;
 ",
   "fonts": Array [],
@@ -1107,6 +1191,7 @@ Object {
 import React from 'react';
 import chopperSvg from './chopper.svg';
 import styled from 'react-emotion';
+import PropTypes from 'prop-types';
 
 const LocalImageSvg1 = styled('img')({ width: 50 }, ({ props }) => ({
   height: props.height,
@@ -1122,6 +1207,7 @@ const LocalImageSvg = props => {
   );
 };
 
+LocalImageSvg.propTypes = { height: PropTypes.number.isRequired };
 export default LocalImageSvg;
 ",
   "fonts": Array [],
@@ -1137,6 +1223,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import styled from 'react-emotion';
+import PropTypes from 'prop-types';
 
 const LocalImageSvg1 = styled('img')({ width: 50 }, ({ props }) => ({
   height: props.height,
@@ -1152,6 +1239,7 @@ const LocalImageSvg = props => {
   );
 };
 
+LocalImageSvg.propTypes = { height: PropTypes.number.isRequired };
 export default LocalImageSvg;
 ",
   "fonts": Array [],
@@ -1166,6 +1254,7 @@ exports[`react-dom parses react-dom LocalOrRemoteImageWhenCode 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const LocalOrRemoteImageWhenCode = props => {
   return (
@@ -1176,6 +1265,7 @@ const LocalOrRemoteImageWhenCode = props => {
   );
 };
 
+LocalOrRemoteImageWhenCode.propTypes = { source: PropTypes.string.isRequired };
 export default LocalOrRemoteImageWhenCode;
 ",
   "fonts": Array [],
@@ -1190,6 +1280,7 @@ exports[`react-dom parses react-dom LocalOrRemoteImageWhenCode: react-dom parses
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const LocalOrRemoteImageWhenCode = props => {
   return (
@@ -1200,6 +1291,7 @@ const LocalOrRemoteImageWhenCode = props => {
   );
 };
 
+LocalOrRemoteImageWhenCode.propTypes = { source: PropTypes.string.isRequired };
 export default LocalOrRemoteImageWhenCode;
 ",
   "fonts": Array [],
@@ -1389,6 +1481,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { css } from 'react-emotion';
+import PropTypes from 'prop-types';
 
 const Horizontal_h1qq1i2q = css({ flexDirection: 'row' });
 
@@ -1409,6 +1502,10 @@ const ProxyTest = props => {
   );
 };
 
+ProxyTest.propTypes = {
+  bla: PropTypes.string.isRequired,
+  onClickRemapped: PropTypes.func.isRequired,
+};
 export default ProxyTest;
 ",
   "fonts": Array [],
@@ -1425,6 +1522,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { css } from 'react-emotion';
+import PropTypes from 'prop-types';
 
 const Horizontal_h1qq1i2q = css({ flexDirection: 'row' });
 
@@ -1445,6 +1543,10 @@ const ProxyTest = props => {
   );
 };
 
+ProxyTest.propTypes = {
+  bla: PropTypes.string.isRequired,
+  onClickRemapped: PropTypes.func.isRequired,
+};
 export default ProxyTest;
 ",
   "fonts": Array [],
@@ -1461,6 +1563,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import styled from 'react-emotion';
+import PropTypes from 'prop-types';
 
 const Text = styled('span')(({ props }) => ({
   color: props.somethingGreen
@@ -1478,6 +1581,11 @@ const Scope = props => {
   );
 };
 
+Scope.propTypes = {
+  blue: PropTypes.string.isRequired,
+  somethingGreen: PropTypes.string.isRequired,
+  whatMakesBlue: PropTypes.string.isRequired,
+};
 export default Scope;
 ",
   "fonts": Array [],
@@ -1495,6 +1603,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import styled from 'react-emotion';
+import PropTypes from 'prop-types';
 
 const Text = styled('span')(({ props }) => ({
   color: props.somethingGreen
@@ -1512,6 +1621,11 @@ const Scope = props => {
   );
 };
 
+Scope.propTypes = {
+  blue: PropTypes.string.isRequired,
+  somethingGreen: PropTypes.string.isRequired,
+  whatMakesBlue: PropTypes.string.isRequired,
+};
 export default Scope;
 ",
   "fonts": Array [],
@@ -1529,6 +1643,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import Button from './Button.view.js';
+import PropTypes from 'prop-types';
 
 const ScopeOnCustomView = props => {
   return (
@@ -1543,6 +1658,10 @@ const ScopeOnCustomView = props => {
   );
 };
 
+ScopeOnCustomView.propTypes = {
+  different: PropTypes.string.isRequired,
+  more: PropTypes.string.isRequired,
+};
 export default ScopeOnCustomView;
 ",
   "fonts": Array [],
@@ -1559,6 +1678,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import Button from './Button.view.js';
+import PropTypes from 'prop-types';
 
 const ScopeOnCustomView = props => {
   return (
@@ -1573,6 +1693,10 @@ const ScopeOnCustomView = props => {
   );
 };
 
+ScopeOnCustomView.propTypes = {
+  different: PropTypes.string.isRequired,
+  more: PropTypes.string.isRequired,
+};
 export default ScopeOnCustomView;
 ",
   "fonts": Array [],
@@ -1588,6 +1712,7 @@ exports[`react-dom parses react-dom ScopePopup 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const ScopePopup = props => {
   return (
@@ -1607,6 +1732,13 @@ const ScopePopup = props => {
   );
 };
 
+ScopePopup.propTypes = {
+  onClickBlue: PropTypes.func.isRequired,
+  onClickGreen: PropTypes.func.isRequired,
+  somethingGreen: PropTypes.string.isRequired,
+  toggle: PropTypes.func.isRequired,
+  whatMakesBlue: PropTypes.string.isRequired,
+};
 export default ScopePopup;
 ",
   "fonts": Array [],
@@ -1625,6 +1757,7 @@ exports[`react-dom parses react-dom ScopePopup: react-dom parses react-dom Scope
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const ScopePopup = props => {
   return (
@@ -1644,6 +1777,13 @@ const ScopePopup = props => {
   );
 };
 
+ScopePopup.propTypes = {
+  onClickBlue: PropTypes.func.isRequired,
+  onClickGreen: PropTypes.func.isRequired,
+  somethingGreen: PropTypes.string.isRequired,
+  toggle: PropTypes.func.isRequired,
+  whatMakesBlue: PropTypes.string.isRequired,
+};
 export default ScopePopup;
 ",
   "fonts": Array [],
@@ -1663,6 +1803,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import styled from 'react-emotion';
+import PropTypes from 'prop-types';
 
 const Content = styled('div')(({ props }) => ({
   opacity: props.isShown ? 1 : props.isSuperVisible ? 3 : 0,
@@ -1684,6 +1825,11 @@ const ScopePopup2 = props => {
   );
 };
 
+ScopePopup2.propTypes = {
+  isShown: PropTypes.string.isRequired,
+  isSuperVisible: PropTypes.string.isRequired,
+  toggle: PropTypes.func.isRequired,
+};
 export default ScopePopup2;
 ",
   "fonts": Array [],
@@ -1701,6 +1847,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import styled from 'react-emotion';
+import PropTypes from 'prop-types';
 
 const Content = styled('div')(({ props }) => ({
   opacity: props.isShown ? 1 : props.isSuperVisible ? 3 : 0,
@@ -1722,6 +1869,11 @@ const ScopePopup2 = props => {
   );
 };
 
+ScopePopup2.propTypes = {
+  isShown: PropTypes.string.isRequired,
+  isSuperVisible: PropTypes.string.isRequired,
+  toggle: PropTypes.func.isRequired,
+};
 export default ScopePopup2;
 ",
   "fonts": Array [],
@@ -1739,6 +1891,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import styled from 'react-emotion';
+import PropTypes from 'prop-types';
 
 const WindowControl = styled('button')(
   {
@@ -1774,6 +1927,10 @@ const SomeMissingStyle = props => {
   );
 };
 
+SomeMissingStyle.propTypes = {
+  backgroundColorHover: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
 export default SomeMissingStyle;
 ",
   "fonts": Array [],
@@ -1790,6 +1947,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import styled from 'react-emotion';
+import PropTypes from 'prop-types';
 
 const WindowControl = styled('button')(
   {
@@ -1824,6 +1982,10 @@ const SomeMissingStyle = props => {
   );
 };
 
+SomeMissingStyle.propTypes = {
+  backgroundColorHover: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
 export default SomeMissingStyle;
 ",
   "fonts": Array [],
@@ -2007,6 +2169,7 @@ exports[`react-dom parses react-dom TextInterpolation 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const TextInterpolation = props => {
   return (
@@ -2017,6 +2180,7 @@ const TextInterpolation = props => {
   );
 };
 
+TextInterpolation.propTypes = { name: PropTypes.string.isRequired };
 export default TextInterpolation;
 ",
   "fonts": Array [],
@@ -2031,6 +2195,7 @@ exports[`react-dom parses react-dom TextInterpolation: react-dom parses react-do
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const TextInterpolation = props => {
   return (
@@ -2041,6 +2206,7 @@ const TextInterpolation = props => {
   );
 };
 
+TextInterpolation.propTypes = { name: PropTypes.string.isRequired };
 export default TextInterpolation;
 ",
   "fonts": Array [],
@@ -2090,6 +2256,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { css } from 'react-emotion';
+import PropTypes from 'prop-types';
 
 const Email_h1by7qdg = css({
   border: '1px solid black',
@@ -2126,6 +2293,7 @@ class UseCaptureEmail extends React.Component {
   }
 }
 
+UseCaptureEmail.propTypes = { onSubmit: PropTypes.func.isRequired };
 export default UseCaptureEmail;
 ",
   "fonts": Array [],
@@ -2141,6 +2309,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { css } from 'react-emotion';
+import PropTypes from 'prop-types';
 
 const Email_h1by7qdg = css({
   border: '1px solid black',
@@ -2177,6 +2346,7 @@ class UseCaptureEmail extends React.Component {
   }
 }
 
+UseCaptureEmail.propTypes = { onSubmit: PropTypes.func.isRequired };
 export default UseCaptureEmail;
 ",
   "fonts": Array [],
@@ -2599,6 +2769,7 @@ exports[`react-dom parses react-dom UseCaptureTextManagedFromOutside 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class UseCaptureTextManagedFromOutside extends React.Component {
   constructor(props) {
@@ -2619,6 +2790,9 @@ class UseCaptureTextManagedFromOutside extends React.Component {
   }
 }
 
+UseCaptureTextManagedFromOutside.propTypes = {
+  external: PropTypes.string.isRequired,
+};
 export default UseCaptureTextManagedFromOutside;
 ",
   "fonts": Array [],
@@ -2633,6 +2807,7 @@ exports[`react-dom parses react-dom UseCaptureTextManagedFromOutside: react-dom 
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class UseCaptureTextManagedFromOutside extends React.Component {
   constructor(props) {
@@ -2654,6 +2829,9 @@ class UseCaptureTextManagedFromOutside extends React.Component {
   }
 }
 
+UseCaptureTextManagedFromOutside.propTypes = {
+  external: PropTypes.string.isRequired,
+};
 export default UseCaptureTextManagedFromOutside;
 ",
   "fonts": Array [],
@@ -2728,6 +2906,7 @@ exports[`react-dom parses react-dom UseImage 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const UseImage = props => {
   return (
@@ -2738,6 +2917,7 @@ const UseImage = props => {
   );
 };
 
+UseImage.propTypes = { another: PropTypes.string.isRequired };
 export default UseImage;
 ",
   "fonts": Array [],
@@ -2752,6 +2932,7 @@ exports[`react-dom parses react-dom UseImage: react-dom parses react-dom UseImag
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const UseImage = props => {
   return (
@@ -2762,6 +2943,7 @@ const UseImage = props => {
   );
 };
 
+UseImage.propTypes = { another: PropTypes.string.isRequired };
 export default UseImage;
 ",
   "fonts": Array [],
@@ -2839,6 +3021,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { css } from 'react-emotion';
+import PropTypes from 'prop-types';
 
 const Button_h1qq1i2q = css({ flexDirection: 'row' });
 
@@ -2861,6 +3044,10 @@ const UseProxy = props => {
   );
 };
 
+UseProxy.propTypes = {
+  icon: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+};
 export default UseProxy;
 ",
   "fonts": Array [],
@@ -2877,6 +3064,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { css } from 'react-emotion';
+import PropTypes from 'prop-types';
 
 const Button_h1qq1i2q = css({ flexDirection: 'row' });
 
@@ -2899,6 +3087,10 @@ const UseProxy = props => {
   );
 };
 
+UseProxy.propTypes = {
+  icon: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+};
 export default UseProxy;
 ",
   "fonts": Array [],
@@ -2920,6 +3112,7 @@ import { Route } from 'react-router-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Topics from './Topics.view.js';
 import { css } from 'react-emotion';
+import PropTypes from 'prop-types';
 
 const Horizontal_h1qq1i2q = css({ flexDirection: 'row' });
 
@@ -2960,6 +3153,7 @@ const UseRouter = props => {
   );
 };
 
+UseRouter.propTypes = { height: PropTypes.number.isRequired };
 export default UseRouter;
 ",
   "fonts": Array [],
@@ -2980,6 +3174,7 @@ import { Route } from 'react-router-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Topics from './Topics.view.js';
 import { css } from 'react-emotion';
+import PropTypes from 'prop-types';
 
 const Horizontal_h1qq1i2q = css({ flexDirection: 'row' });
 
@@ -3020,6 +3215,7 @@ const UseRouter = props => {
   );
 };
 
+UseRouter.propTypes = { height: PropTypes.number.isRequired };
 export default UseRouter;
 ",
   "fonts": Array [],
@@ -3365,6 +3561,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import styled from 'react-emotion';
+import PropTypes from 'prop-types';
 
 const ViewNameIsntUsedInStyle1 = styled('div')({ zIndex: 5 }, ({ props }) => ({
   opacity: props.opacity,
@@ -3381,6 +3578,7 @@ const ViewNameIsntUsedInStyle = props => {
   );
 };
 
+ViewNameIsntUsedInStyle.propTypes = { opacity: PropTypes.number.isRequired };
 export default ViewNameIsntUsedInStyle;
 ",
   "fonts": Array [],
@@ -3396,6 +3594,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import styled from 'react-emotion';
+import PropTypes from 'prop-types';
 
 const ViewNameIsntUsedInStyle1 = styled('div')({ zIndex: 5 }, ({ props }) => ({
   opacity: props.opacity,
@@ -3412,6 +3611,7 @@ const ViewNameIsntUsedInStyle = props => {
   );
 };
 
+ViewNameIsntUsedInStyle.propTypes = { opacity: PropTypes.number.isRequired };
 export default ViewNameIsntUsedInStyle;
 ",
   "fonts": Array [],
@@ -3427,6 +3627,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { css } from 'react-emotion';
+import PropTypes from 'prop-types';
 
 const App_h1qq1i2q = css({ flexDirection: 'row' });
 
@@ -3441,6 +3642,7 @@ const When = props => {
   );
 };
 
+When.propTypes = { showMe: PropTypes.string.isRequired };
 export default When;
 ",
   "fonts": Array [],
@@ -3456,6 +3658,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { css } from 'react-emotion';
+import PropTypes from 'prop-types';
 
 const App_h1qq1i2q = css({ flexDirection: 'row' });
 
@@ -3470,6 +3673,7 @@ const When = props => {
   );
 };
 
+When.propTypes = { showMe: PropTypes.string.isRequired };
 export default When;
 ",
   "fonts": Array [],
@@ -3484,6 +3688,7 @@ exports[`react-dom parses react-dom WhenTopLevel 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const WhenTopLevel = props => {
   return props.showMe ? (
@@ -3491,6 +3696,7 @@ const WhenTopLevel = props => {
   ) : null;
 };
 
+WhenTopLevel.propTypes = { showMe: PropTypes.string.isRequired };
 export default WhenTopLevel;
 ",
   "fonts": Array [],
@@ -3505,6 +3711,7 @@ exports[`react-dom parses react-dom WhenTopLevel: react-dom parses react-dom Whe
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const WhenTopLevel = props => {
   return props.showMe ? (
@@ -3512,6 +3719,7 @@ const WhenTopLevel = props => {
   ) : null;
 };
 
+WhenTopLevel.propTypes = { showMe: PropTypes.string.isRequired };
 export default WhenTopLevel;
 ",
   "fonts": Array [],
@@ -3526,6 +3734,7 @@ exports[`react-dom parses react-dom WithTest 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const WithTest = props => {
   return (
@@ -3539,6 +3748,10 @@ const WithTest = props => {
   );
 };
 
+WithTest.propTypes = {
+  change: PropTypes.func.isRequired,
+  text: PropTypes.string.isRequired,
+};
 export default WithTest;
 ",
   "fonts": Array [],
@@ -3554,6 +3767,7 @@ exports[`react-dom parses react-dom WithTest: react-dom parses react-dom WithTes
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const WithTest = props => {
   return (
@@ -3567,6 +3781,10 @@ const WithTest = props => {
   );
 };
 
+WithTest.propTypes = {
+  change: PropTypes.func.isRequired,
+  text: PropTypes.string.isRequired,
+};
 export default WithTest;
 ",
   "fonts": Array [],
@@ -3584,6 +3802,7 @@ Object {
 import React from 'react';
 import SubButton from './SubButton.view.js';
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
+import PropTypes from 'prop-types';
 const styles = StyleSheet.create({ h1g2xbng: { color: 'red' } });
 
 const Action = props => {
@@ -3603,6 +3822,11 @@ const Action = props => {
   ) : null;
 };
 
+Action.propTypes = {
+  check: PropTypes.string.isRequired,
+  clickMe: PropTypes.func.isRequired,
+  isDisabled: PropTypes.string.isRequired,
+};
 export default Action;
 ",
   "fonts": Array [],
@@ -3620,6 +3844,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { Animated, Text, TouchableWithoutFeedback } from 'react-native';
+import PropTypes from 'prop-types';
 
 const AnimatedButton = props => {
   return (
@@ -3639,6 +3864,10 @@ const AnimatedButton = props => {
   );
 };
 
+AnimatedButton.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  opacity: PropTypes.number.isRequired,
+};
 export default AnimatedButton;
 ",
   "fonts": Array [],
@@ -3680,6 +3909,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { Animated, Image, StyleSheet } from 'react-native';
+import PropTypes from 'prop-types';
 const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
 
 const BackgroundImage = props => {
@@ -3700,6 +3930,7 @@ const BackgroundImage = props => {
   );
 };
 
+BackgroundImage.propTypes = { backgroundImage: PropTypes.string.isRequired };
 export default BackgroundImage;
 ",
   "fonts": Array [],
@@ -3715,6 +3946,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { Animated, StyleSheet, View } from 'react-native';
+import PropTypes from 'prop-types';
 const styles = StyleSheet.create({
   hvzqnyi: {
     elevation: 1,
@@ -3754,6 +3986,7 @@ const BoxShadow = props => {
   );
 };
 
+BoxShadow.propTypes = { color: PropTypes.string.isRequired };
 export default BoxShadow;
 ",
   "fonts": Array [],
@@ -3792,6 +4025,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { Animated, StyleSheet, View } from 'react-native';
+import PropTypes from 'prop-types';
 const styles = StyleSheet.create({ h1jcb2fl: { backgroundColor: 'red' } });
 
 const Code = props => {
@@ -3813,6 +4047,11 @@ const Code = props => {
   );
 };
 
+Code.propTypes = {
+  color: PropTypes.string.isRequired,
+  refText: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+};
 export default Code;
 ",
   "fonts": Array [],
@@ -3831,6 +4070,7 @@ Object {
 import React from 'react';
 import SomeThing from './SomeThing.view.js';
 import { Animated } from 'react-native';
+import PropTypes from 'prop-types';
 
 const DynamicStylesApplyToBasicBlocksOnly = props => {
   return (
@@ -3847,6 +4087,9 @@ const DynamicStylesApplyToBasicBlocksOnly = props => {
   );
 };
 
+DynamicStylesApplyToBasicBlocksOnly.propTypes = {
+  height: PropTypes.number.isRequired,
+};
 export default DynamicStylesApplyToBasicBlocksOnly;
 ",
   "fonts": Array [],
@@ -3880,6 +4123,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { Text, TextInput, TouchableWithoutFeedback, View } from 'react-native';
+import PropTypes from 'prop-types';
 
 class Form extends React.Component {
   constructor(props) {
@@ -3956,6 +4200,7 @@ class Form extends React.Component {
   }
 }
 
+Form.propTypes = { onSubmit: PropTypes.func.isRequired };
 export default Form;
 ",
   "fonts": Array [],
@@ -3994,6 +4239,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { Animated, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import PropTypes from 'prop-types';
 const styles = StyleSheet.create({ hyfo4ef: { color: 'white' } });
 
 const Hover = props => {
@@ -4019,6 +4265,13 @@ const Hover = props => {
   );
 };
 
+Hover.propTypes = {
+  backgroundColor: PropTypes.string.isRequired,
+  backgroundColorHover: PropTypes.string.isRequired,
+  fontSize: PropTypes.number.isRequired,
+  fontSizeHover: PropTypes.number.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
 export default Hover;
 ",
   "fonts": Array [],
@@ -4057,6 +4310,7 @@ Object {
 import React from 'react';
 import Something from './Something.view.js';
 import { View } from 'react-native';
+import PropTypes from 'prop-types';
 
 const ListOfSomething = props => {
   return (
@@ -4074,6 +4328,7 @@ const ListOfSomething = props => {
   );
 };
 
+ListOfSomething.propTypes = { from: PropTypes.string.isRequired };
 export default ListOfSomething;
 ",
   "fonts": Array [],
@@ -4090,6 +4345,7 @@ Object {
 import React from 'react';
 import Card from './Card.view.js';
 import { View } from 'react-native';
+import PropTypes from 'prop-types';
 
 const ListWhen = props => {
   return props.showMe ? (
@@ -4103,6 +4359,10 @@ const ListWhen = props => {
   ) : null;
 };
 
+ListWhen.propTypes = {
+  from: PropTypes.string.isRequired,
+  showMe: PropTypes.string.isRequired,
+};
 export default ListWhen;
 ",
   "fonts": Array [],
@@ -4139,6 +4399,7 @@ Object {
 import React from 'react';
 import chopperSvg from './chopper.svg';
 import { Image, StyleSheet } from 'react-native';
+import PropTypes from 'prop-types';
 const styles = StyleSheet.create({ h1fkj9gt: { width: 50 } });
 
 const LocalImageSvg = props => {
@@ -4151,6 +4412,7 @@ const LocalImageSvg = props => {
   );
 };
 
+LocalImageSvg.propTypes = { height: PropTypes.number.isRequired };
 export default LocalImageSvg;
 ",
   "fonts": Array [],
@@ -4166,6 +4428,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { Image } from 'react-native';
+import PropTypes from 'prop-types';
 
 const LocalOrRemoteImageWhenCode = props => {
   return (
@@ -4176,6 +4439,7 @@ const LocalOrRemoteImageWhenCode = props => {
   );
 };
 
+LocalOrRemoteImageWhenCode.propTypes = { source: PropTypes.string.isRequired };
 export default LocalOrRemoteImageWhenCode;
 ",
   "fonts": Array [],
@@ -4278,6 +4542,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
+import PropTypes from 'prop-types';
 const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
 
 const ProxyTest = props => {
@@ -4297,6 +4562,10 @@ const ProxyTest = props => {
   );
 };
 
+ProxyTest.propTypes = {
+  bla: PropTypes.string.isRequired,
+  onClickRemapped: PropTypes.func.isRequired,
+};
 export default ProxyTest;
 ",
   "fonts": Array [],
@@ -4313,6 +4582,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { Text } from 'react-native';
+import PropTypes from 'prop-types';
 
 const Scope = props => {
   return (
@@ -4331,6 +4601,11 @@ const Scope = props => {
   );
 };
 
+Scope.propTypes = {
+  blue: PropTypes.string.isRequired,
+  somethingGreen: PropTypes.string.isRequired,
+  whatMakesBlue: PropTypes.string.isRequired,
+};
 export default Scope;
 ",
   "fonts": Array [],
@@ -4348,6 +4623,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import Button from './Button.view.js';
+import PropTypes from 'prop-types';
 
 const ScopeOnCustomView = props => {
   return (
@@ -4362,6 +4638,10 @@ const ScopeOnCustomView = props => {
   );
 };
 
+ScopeOnCustomView.propTypes = {
+  different: PropTypes.string.isRequired,
+  more: PropTypes.string.isRequired,
+};
 export default ScopeOnCustomView;
 ",
   "fonts": Array [],
@@ -4378,6 +4658,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { Text, TouchableWithoutFeedback, View } from 'react-native';
+import PropTypes from 'prop-types';
 
 const ScopePopup = props => {
   return (
@@ -4400,6 +4681,13 @@ const ScopePopup = props => {
   );
 };
 
+ScopePopup.propTypes = {
+  onClickBlue: PropTypes.func.isRequired,
+  onClickGreen: PropTypes.func.isRequired,
+  somethingGreen: PropTypes.string.isRequired,
+  toggle: PropTypes.func.isRequired,
+  whatMakesBlue: PropTypes.string.isRequired,
+};
 export default ScopePopup;
 ",
   "fonts": Array [],
@@ -4419,6 +4707,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { Text, TouchableWithoutFeedback, View } from 'react-native';
+import PropTypes from 'prop-types';
 
 const ScopePopup2 = props => {
   return (
@@ -4442,6 +4731,11 @@ const ScopePopup2 = props => {
   );
 };
 
+ScopePopup2.propTypes = {
+  isShown: PropTypes.string.isRequired,
+  isSuperVisible: PropTypes.string.isRequired,
+  toggle: PropTypes.func.isRequired,
+};
 export default ScopePopup2;
 ",
   "fonts": Array [],
@@ -4459,6 +4753,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { Animated, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import PropTypes from 'prop-types';
 const styles = StyleSheet.create({
   h7g4z7s: {
     marginRight: 8,
@@ -4490,6 +4785,10 @@ const SomeMissingStyle = props => {
   );
 };
 
+SomeMissingStyle.propTypes = {
+  backgroundColorHover: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
 export default SomeMissingStyle;
 ",
   "fonts": Array [],
@@ -4593,6 +4892,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { Text, View } from 'react-native';
+import PropTypes from 'prop-types';
 
 const TextInterpolation = props => {
   return (
@@ -4603,6 +4903,7 @@ const TextInterpolation = props => {
   );
 };
 
+TextInterpolation.propTypes = { name: PropTypes.string.isRequired };
 export default TextInterpolation;
 ",
   "fonts": Array [],
@@ -4636,6 +4937,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { StyleSheet, TextInput } from 'react-native';
+import PropTypes from 'prop-types';
 const styles = StyleSheet.create({
   hm4pcs: {
     borderColor: 'black',
@@ -4673,6 +4975,7 @@ class UseCaptureEmail extends React.Component {
   }
 }
 
+UseCaptureEmail.propTypes = { onSubmit: PropTypes.func.isRequired };
 export default UseCaptureEmail;
 ",
   "fonts": Array [],
@@ -4917,6 +5220,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { TextInput } from 'react-native';
+import PropTypes from 'prop-types';
 
 class UseCaptureTextManagedFromOutside extends React.Component {
   constructor(props) {
@@ -4943,6 +5247,9 @@ class UseCaptureTextManagedFromOutside extends React.Component {
   }
 }
 
+UseCaptureTextManagedFromOutside.propTypes = {
+  external: PropTypes.string.isRequired,
+};
 export default UseCaptureTextManagedFromOutside;
 ",
   "fonts": Array [],
@@ -4988,6 +5295,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { Image } from 'react-native';
+import PropTypes from 'prop-types';
 
 const UseImage = props => {
   return (
@@ -4998,6 +5306,7 @@ const UseImage = props => {
   );
 };
 
+UseImage.propTypes = { another: PropTypes.string.isRequired };
 export default UseImage;
 ",
   "fonts": Array [],
@@ -5043,6 +5352,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import PropTypes from 'prop-types';
 const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
 
 const UseProxy = props => {
@@ -5061,6 +5371,10 @@ const UseProxy = props => {
   );
 };
 
+UseProxy.propTypes = {
+  icon: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+};
 export default UseProxy;
 ",
   "fonts": Array [],
@@ -5082,6 +5396,7 @@ import { Route } from 'react-router-native';
 import { NativeRouter as Router } from 'react-router-native';
 import Topics from './Topics.view.js';
 import { StyleSheet, View } from 'react-native';
+import PropTypes from 'prop-types';
 const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
 
 const UseRouter = props => {
@@ -5118,6 +5433,7 @@ const UseRouter = props => {
   );
 };
 
+UseRouter.propTypes = { height: PropTypes.number.isRequired };
 export default UseRouter;
 ",
   "fonts": Array [],
@@ -5289,6 +5605,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { Animated, StyleSheet } from 'react-native';
+import PropTypes from 'prop-types';
 const styles = StyleSheet.create({ h15ehzpl: { zIndex: 5 } });
 
 const ViewNameIsntUsedInStyle = props => {
@@ -5302,6 +5619,7 @@ const ViewNameIsntUsedInStyle = props => {
   );
 };
 
+ViewNameIsntUsedInStyle.propTypes = { opacity: PropTypes.number.isRequired };
 export default ViewNameIsntUsedInStyle;
 ",
   "fonts": Array [],
@@ -5317,6 +5635,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import PropTypes from 'prop-types';
 const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
 
 const When = props => {
@@ -5328,6 +5647,7 @@ const When = props => {
   );
 };
 
+When.propTypes = { showMe: PropTypes.string.isRequired };
 export default When;
 ",
   "fonts": Array [],
@@ -5343,6 +5663,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { Text } from 'react-native';
+import PropTypes from 'prop-types';
 
 const WhenTopLevel = props => {
   return props.showMe ? (
@@ -5350,6 +5671,7 @@ const WhenTopLevel = props => {
   ) : null;
 };
 
+WhenTopLevel.propTypes = { showMe: PropTypes.string.isRequired };
 export default WhenTopLevel;
 ",
   "fonts": Array [],
@@ -5365,6 +5687,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import { Text, TouchableWithoutFeedback, View } from 'react-native';
+import PropTypes from 'prop-types';
 
 const WithTest = props => {
   return (
@@ -5381,6 +5704,10 @@ const WithTest = props => {
   );
 };
 
+WithTest.propTypes = {
+  change: PropTypes.func.isRequired,
+  text: PropTypes.string.isRequired,
+};
 export default WithTest;
 ",
   "fonts": Array [],
