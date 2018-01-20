@@ -124,3 +124,6 @@ export const isList = node =>
   node && node.type === 'Block' && node.name === 'List'
 
 export const isEmpty = list => list.length === 0
+
+export const isValidImgSrc = (node, parent) =>
+  node.name === 'source' && parent.name === 'Image' && parent.isBasic

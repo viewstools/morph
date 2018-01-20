@@ -1,5 +1,6 @@
-import { getScopedProps } from '../utils.js'
+import { getScopedProps, isValidImgSrc } from '../utils.js'
 import safe from '../react/safe.js'
+import wrap from '../react/wrap.js'
 import toCamelCase from 'to-camel-case'
 
 const isUrl = str => /^https?:\/\//.test(str)
@@ -24,8 +25,11 @@ const getImageSource = (node, state) => {
 }
 
 export default (node, parent, state) => {
-  // TODO support scoped source
-  if (node.name === 'source' && parent.name === 'Image' && parent.isBasic) {
+  if (isValidImgSrc(node, parent) && getScopedProps(node, parent)) {
+    return {
+      src: wrap(getScopedProps(node, parent)),
+    }
+  } else if (isValidImgSrc(node, parent)) {
     return {
       src: getImageSource(node, state),
     }
