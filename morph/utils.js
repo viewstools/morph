@@ -85,6 +85,20 @@ export const getScopedCondition = (propNode, blockNode) => {
   return conditional
 }
 
+export const getScopedImageCondition = (scopes, scopedNames, defaultName) => {
+  let conditional = defaultName
+
+  debugger
+
+  scopes.forEach((scope, index) => {
+    debugger
+    conditional = `${scope.when} ? ${scopedNames[index]} : ` + conditional
+  })
+  debugger
+
+  return conditional
+}
+
 const styleStems = ['hover', 'focus', 'placeholder', 'disabled', 'print']
 export const getStyleType = node =>
   styleStems.find(tag => isTag(node, tag)) || 'base'

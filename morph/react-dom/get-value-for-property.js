@@ -1,4 +1,9 @@
-import { getScopedCondition, getScopedProps, isValidImgSrc } from '../utils.js'
+import {
+  getScopedCondition,
+  getScopedImageCondition,
+  getScopedProps,
+  isValidImgSrc,
+} from '../utils.js'
 import safe from '../react/safe.js'
 import wrap from '../react/wrap.js'
 import toCamelCase from 'to-camel-case'
@@ -16,9 +21,11 @@ const getImageSource = (node, state, parent) => {
       return `{requireImage("${node.value}")}`
     } else {
       let scopedNames
+      let scopes
       if (getScopedProps(node, parent)) {
-        const scopedValues = getScopedProps(node, parent)
-        const paths = scopedValues.map(scope => scope.prop.value)
+        debugger
+        scopes = getScopedProps(node, parent)
+        const paths = scopes.map(scope => scope.prop.value)
         scopedNames = paths.map(path => toCamelCase(path))
         //scopedValues.map(scope => toCamelCase(scope.prop.value))
         debugger
@@ -43,8 +50,9 @@ const getImageSource = (node, state, parent) => {
           file: node.value,
         })
       }
+      return wrap(getScopedImageCondition(scopes, scopedNames, defaultName))
       //return `{${defaultName}, ${scopedNames[0]}}`
-      return wrap(getScopedCondition(node, parent))
+      //return `{${defaultName}}` //wrap(getScopedCondition(node, parent))
     }
   }
 }
