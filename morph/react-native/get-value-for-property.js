@@ -1,5 +1,6 @@
-import { getScopedProps } from '../utils.js'
+import { getScopedCondition, isScopedImgSrc, isValidImgSrc } from '../utils.js'
 import safe from '../react/safe.js'
+import wrap from '../react/wrap.js'
 import toCamelCase from 'to-camel-case'
 
 const isUrl = str => /^https?:\/\//.test(str)
@@ -20,17 +21,24 @@ const getImageSource = (node, state) => {
 }
 
 export default (node, parent, state) => {
-  // TODO support scoped source
   // TODO SVGs will need a different treatment when the source is a prop
-  if (node.name === 'source' && parent.name === 'Image') {
+  debugger
+  // if (isScopedImgSrc(node, parent)) {
+  //   return (
+  //     !parent.isSvg && {
+  //       source: wrap(getScopedCondition(node, parent))
+  //     }
+  //   )
+  // } else
+  if (isValidImgSrc(node, parent)) {
     return (
       !parent.isSvg && {
         source: getImageSource(node, state),
       }
     )
-  } else if (getScopedProps(node, parent)) {
+  } else if (getScopedCondition(node, parent)) {
     return {
-      [node.name]: safe(getScopedProps(node, parent)),
+      [node.name]: safe(getScopedCondition(node, parent)),
     }
   } else {
     return {

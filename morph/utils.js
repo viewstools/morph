@@ -60,6 +60,7 @@ const maybeSafe = node =>
     : typeof node.value === 'string' ? safe(node.value) : node.value
 
 export const getScopedProps = (propNode, blockNode) => {
+  debugger
   const scopes = blockNode.scopes
     .filter(scope => !scope.isSystem)
     .map(scope => {
@@ -71,9 +72,13 @@ export const getScopedProps = (propNode, blockNode) => {
 
   if (isEmpty(scopes)) return false
 
+  return scopes
+}
+
+export const getScopedCondition = (propNode, blockNode) => {
   let conditional = maybeSafe(propNode)
 
-  scopes.forEach(scope => {
+  getScopedProps(propNode, blockNode).forEach(scope => {
     conditional = `${scope.when} ? ${maybeSafe(scope.prop)} : ` + conditional
   })
 
@@ -127,3 +132,6 @@ export const isEmpty = list => list.length === 0
 
 export const isValidImgSrc = (node, parent) =>
   node.name === 'source' && parent.name === 'Image' && parent.isBasic
+
+// export const isScopedImgSrc = (node, parent) =>
+//   isValidImgSrc(node, parent) && !!getScopedProps(node, parent)
