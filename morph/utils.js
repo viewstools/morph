@@ -124,3 +124,5 @@ export const isList = node =>
   node && node.type === 'Block' && node.name === 'List'
 
 export const isEmpty = list => list.length === 0
+
+export const isSvg = node => /^Svg/.test(node.name) && node.isBasic

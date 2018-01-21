@@ -3469,7 +3469,12 @@ const UseSvg = props => {
       viewBox=\\"0 0 20 20\\"
       className={\`views-block \${Svg_hq411mi}\`}
     >
-      <path data-test-id=\\"UseSvg.SvgPath\\" d=\\"0 20\\" className=\\"views-block\\" />
+      <path
+        data-test-id=\\"UseSvg.SvgPath\\"
+        d=\\"0 20\\"
+        fill=\\"red\\"
+        className=\\"views-block\\"
+      />
       <circle
         data-test-id=\\"UseSvg.SvgCircle\\"
         cx={10}
@@ -3477,7 +3482,11 @@ const UseSvg = props => {
         r={5}
         className=\\"views-block\\"
       />
-      <g data-test-id=\\"UseSvg.SvgGroup\\" className=\\"views-block\\">
+      <g
+        data-test-id=\\"UseSvg.SvgGroup\\"
+        transform=\\"translate(6.000000, 5.000000)\\"
+        className=\\"views-block\\"
+      >
         <path data-test-id=\\"UseSvg.SvgPath:1\\" d={1} className=\\"views-block\\" />
         <path data-test-id=\\"UseSvg.SvgPath:2\\" d={2} className=\\"views-block\\" />
       </g>
@@ -3514,7 +3523,12 @@ const UseSvg = props => {
       viewBox=\\"0 0 20 20\\"
       className={\`views-block \${Svg_hq411mi}\`}
     >
-      <path data-test-id=\\"UseSvg.SvgPath\\" d=\\"0 20\\" className=\\"views-block\\" />
+      <path
+        data-test-id=\\"UseSvg.SvgPath\\"
+        d=\\"0 20\\"
+        fill=\\"red\\"
+        className=\\"views-block\\"
+      />
       <circle
         data-test-id=\\"UseSvg.SvgCircle\\"
         cx={10}
@@ -3522,7 +3536,11 @@ const UseSvg = props => {
         r={5}
         className=\\"views-block\\"
       />
-      <g data-test-id=\\"UseSvg.SvgGroup\\" className=\\"views-block\\">
+      <g
+        data-test-id=\\"UseSvg.SvgGroup\\"
+        transform=\\"translate(6.000000, 5.000000)\\"
+        className=\\"views-block\\"
+      >
         <path data-test-id=\\"UseSvg.SvgPath:1\\" d={1} className=\\"views-block\\" />
         <path data-test-id=\\"UseSvg.SvgPath:2\\" d={2} className=\\"views-block\\" />
       </g>
@@ -5632,19 +5650,21 @@ import Svg, {
   Path as SvgPath,
   Text as SvgText,
 } from 'react-native-svg';
-import { StyleSheet } from 'react-native';
-const styles = StyleSheet.create({ h8aawx1: { height: 20, width: 20 } });
 
 const UseSvg = props => {
   return (
     <Svg
       testID={props['testID'] || 'Svg'}
       viewBox=\\"0 0 20 20\\"
-      style={styles.h8aawx1}
+      height={20}
+      width={20}
     >
-      <SvgPath testID=\\"UseSvg.SvgPath\\" d=\\"0 20\\" />
+      <SvgPath testID=\\"UseSvg.SvgPath\\" d=\\"0 20\\" fill=\\"red\\" />
       <SvgCircle testID=\\"UseSvg.SvgCircle\\" cx={10} cy={5} r={5} />
-      <SvgGroup testID=\\"UseSvg.SvgGroup\\">
+      <SvgGroup
+        testID=\\"UseSvg.SvgGroup\\"
+        transform=\\"translate(6.000000, 5.000000)\\"
+      >
         <SvgPath testID=\\"UseSvg.SvgPath:1\\" d={1} />
         <SvgPath testID=\\"UseSvg.SvgPath:2\\" d={2} />
       </SvgGroup>
