@@ -2,7 +2,7 @@ import { deinterpolate, getProp, isCode, isInterpolation } from '../utils.js'
 import wrap from '../react/wrap.js'
 
 export const enter = (node, parent, state) => {
-  node.className = []
+  node.className = ['views-block']
 
   const className = getProp(node, 'className')
   if (className) {
