@@ -46,7 +46,7 @@ const getImageSource = (node, state, parent) => {
       const defaultName = toCamelCase(node.value)
       if (!state.images.includes(node.value)) {
         state.images.push({
-          defaultName,
+          name: defaultName,
           file: node.value,
         })
       }

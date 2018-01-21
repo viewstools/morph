@@ -88,13 +88,9 @@ export const getScopedCondition = (propNode, blockNode) => {
 export const getScopedImageCondition = (scopes, scopedNames, defaultName) => {
   let conditional = defaultName
 
-  debugger
-
   scopes.forEach((scope, index) => {
-    debugger
     conditional = `${scope.when} ? ${scopedNames[index]} : ` + conditional
   })
-  debugger
 
   return conditional
 }
