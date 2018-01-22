@@ -12,7 +12,7 @@ const isUrl = str => /^https?:\/\//.test(str)
 
 const getImageSource = (node, state, parent) => {
   debugger
-  if (getScopedProps(node, parent) && (isUrl(node.value) || node.tags.code)) {
+  if (!!getScopedProps(node, parent) && (isUrl(node.value) || node.tags.code)) {
     return wrap(getScopedCondition(node, parent))
   } else if (isUrl(node.value) || node.tags.code) {
     return safe(node.value)
@@ -22,7 +22,7 @@ const getImageSource = (node, state, parent) => {
     } else {
       let scopedNames
       let scopes
-      if (getScopedProps(node, parent)) {
+      if (!!getScopedProps(node, parent)) {
         debugger
         scopes = getScopedProps(node, parent)
         const paths = scopes.map(scope => scope.prop.value)
@@ -50,9 +50,9 @@ const getImageSource = (node, state, parent) => {
           file: node.value,
         })
       }
-      return wrap(getScopedImageCondition(scopes, scopedNames, defaultName))
-      //return `{${defaultName}, ${scopedNames[0]}}`
-      //return `{${defaultName}}` //wrap(getScopedCondition(node, parent))
+      return !!getScopedProps(node, parent)
+        ? wrap(getScopedImageCondition(scopes, scopedNames, defaultName))
+        : `{${defaultName}}`
     }
   }
 }
