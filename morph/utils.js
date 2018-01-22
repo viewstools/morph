@@ -95,6 +95,18 @@ export const getScopedImageCondition = (scopes, scopedNames, defaultName) => {
   return conditional
 }
 
+export const getScopedRequireCondition = (scopes, paths, defaultName) => {
+  //`{requireImage("${node.value}")}`
+  let conditional = `requireImage('${defaultName}')`
+
+  scopes.forEach((scope, index) => {
+    conditional =
+      `${scope.when} ? requireImage('${paths[index]}') : ` + conditional
+  })
+
+  return conditional
+}
+
 const styleStems = ['hover', 'focus', 'placeholder', 'disabled', 'print']
 export const getStyleType = node =>
   styleStems.find(tag => isTag(node, tag)) || 'base'
