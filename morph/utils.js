@@ -70,6 +70,7 @@ export const getScopedProps = (propNode, blockNode) => {
     .filter(Boolean)
     .reverse()
 
+  // remove this?
   if (isEmpty(scopes)) return false
 
   return scopes
@@ -77,6 +78,8 @@ export const getScopedProps = (propNode, blockNode) => {
 
 export const getScopedCondition = (propNode, blockNode) => {
   let conditional = maybeSafe(propNode)
+
+  if (!getScopedProps(propNode, blockNode)) return false
 
   getScopedProps(propNode, blockNode).forEach(scope => {
     conditional = `${scope.when} ? ${maybeSafe(scope.prop)} : ` + conditional

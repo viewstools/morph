@@ -39,7 +39,6 @@ const getImageSource = (node, state, parent) => {
               file: path,
             })
           }
-          // return `{${name}}`
         })
       } // else {
       debugger
