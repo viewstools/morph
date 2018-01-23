@@ -1,6 +1,7 @@
 import {
   getScopedCondition,
   getScopedImageCondition,
+  getScopedRequireCondition,
   getScopedProps,
   isValidImgSrc,
 } from '../utils.js'
@@ -17,15 +18,21 @@ const getImageSource = (node, state, parent) => {
   } else if (isUrl(node.value) || node.tags.code) {
     return safe(node.value)
   } else {
-    if (state.debug) {
+    let scopes, paths
+    let scopedNames
+
+    if (!!getScopedProps(node, parent) && state.debug) {
+      scopes = getScopedProps(node, parent)
+      paths = scopes.map(scope => scope.prop.value)
+
+      return wrap(getScopedRequireCondition(scopes, paths, node.value)) //`{requireImage("${node.value}")}`
+    } else if (state.debug) {
       return `{requireImage("${node.value}")}`
     } else {
-      let scopedNames
-      let scopes
       if (!!getScopedProps(node, parent)) {
         debugger
         scopes = getScopedProps(node, parent)
-        const paths = scopes.map(scope => scope.prop.value)
+        paths = scopes.map(scope => scope.prop.value)
         scopedNames = paths.map(path => toCamelCase(path))
         //scopedValues.map(scope => toCamelCase(scope.prop.value))
         debugger
