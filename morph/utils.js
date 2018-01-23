@@ -158,5 +158,17 @@ export const isEmpty = list => list.length === 0
 export const isValidImgSrc = (node, parent) =>
   node.name === 'source' && parent.name === 'Image' && parent.isBasic
 
+export const pushImageToState = (state, scopedNames, paths) =>
+  scopedNames.forEach(name => {
+    debugger
+    const path = paths[scopedNames.findIndex(item => item === name)]
+    if (!state.images.includes(path)) {
+      state.images.push({
+        name,
+        file: path,
+      })
+    }
+  })
+
 // export const isScopedImgSrc = (node, parent) =>
 //   isValidImgSrc(node, parent) && !!getScopedProps(node, parent)
