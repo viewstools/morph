@@ -1,5 +1,6 @@
 import safe from './react/safe.js'
 import wrap from './react/wrap.js'
+import toCamelCase from 'to-camel-case'
 
 const safeScope = value =>
   typeof value === 'string' && !isCode(value) ? JSON.stringify(value) : value
@@ -59,8 +60,7 @@ const maybeSafe = node =>
     ? node.value
     : typeof node.value === 'string' ? safe(node.value) : node.value
 
-export const getScopedProps = (propNode, blockNode) => {
-  debugger
+const getScopedProps = (propNode, blockNode) => {
   const scopes = blockNode.scopes
     .filter(scope => !scope.isSystem)
     .map(scope => {
@@ -70,7 +70,6 @@ export const getScopedProps = (propNode, blockNode) => {
     .filter(Boolean)
     .reverse()
 
-  // remove this?
   if (isEmpty(scopes)) return false
 
   return scopes
@@ -99,7 +98,6 @@ export const getScopedImageCondition = (scopes, scopedNames, defaultName) => {
 }
 
 export const getScopedRequireCondition = (scopes, paths, defaultName) => {
-  //`{requireImage("${node.value}")}`
   let conditional = `requireImage('${defaultName}')`
 
   scopes.forEach((scope, index) => {
@@ -160,7 +158,6 @@ export const isValidImgSrc = (node, parent) =>
 
 export const pushImageToState = (state, scopedNames, paths) =>
   scopedNames.forEach(name => {
-    debugger
     const path = paths[scopedNames.findIndex(item => item === name)]
     if (!state.images.includes(path)) {
       state.images.push({
@@ -170,5 +167,11 @@ export const pushImageToState = (state, scopedNames, paths) =>
     }
   })
 
-// export const isScopedImgSrc = (node, parent) =>
-//   isValidImgSrc(node, parent) && !!getScopedProps(node, parent)
+export const getScopes = (node, parent) => {
+  const scopedProps = getScopedProps(node, parent)
+  if (!scopedProps) return false
+  const paths = scopedProps.map(scope => scope.prop.value)
+  const scopedNames = paths.map(path => toCamelCase(path))
+
+  return { scopedProps, paths, scopedNames }
+}
