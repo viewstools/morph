@@ -19,10 +19,6 @@ const getImageSource = (node, state, parent) => {
   } else if (isUrl(node.value) || node.tags.code) {
     return safe(node.value)
   } else {
-    if (scopes) {
-      pushImageToState(state, scopes.scopedNames, scopes.paths)
-    }
-
     if (scopes && state.debug) {
       return wrap(
         getScopedRequireCondition(scopes.scopedProps, scopes.paths, node.value)
@@ -30,6 +26,9 @@ const getImageSource = (node, state, parent) => {
     } else if (state.debug) {
       return `{requireImage("${node.value}")}`
     } else {
+      if (scopes) {
+        pushImageToState(state, scopes.scopedNames, scopes.paths)
+      }
       const name = toCamelCase(node.value)
       if (!state.images.includes(node.value)) {
         state.images.push({
