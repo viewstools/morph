@@ -1216,13 +1216,14 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
+import garfieldPng from './garfield.png';
 import chopperJpg from './chopper.jpg';
 
 const LocalImage = props => {
   return (
     <img
       data-test-id={props['data-test-id'] || 'LocalImage'}
-      src={chopperJpg}
+      src={props.isCat ? garfieldPng : chopperJpg}
       className=\\"views-block\\"
     />
   );
@@ -1231,7 +1232,9 @@ const LocalImage = props => {
 export default LocalImage;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "props": Object {
+    "isCat": "string",
+  },
   "svgs": Array [],
 }
 `;
@@ -1246,7 +1249,11 @@ const LocalImage = props => {
   return (
     <img
       data-test-id={props['data-test-id'] || 'LocalImage'}
-      src={requireImage('./chopper.jpg')}
+      src={
+        props.isCat
+          ? requireImage('./garfield.png')
+          : requireImage('./chopper.jpg')
+      }
       className=\\"views-block\\"
     />
   );
@@ -1255,7 +1262,9 @@ const LocalImage = props => {
 export default LocalImage;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "props": Object {
+    "isCat": "string",
+  },
   "svgs": Array [],
 }
 `;
@@ -3114,7 +3123,11 @@ const UseImage = props => {
   return (
     <img
       data-test-id={props['data-test-id'] || 'Image'}
-      src=\\"https://views.tools/rocks.jpg\\"
+      src={
+        props.another
+          ? 'https://views.tools/hi.jpg'
+          : 'https://views.tools/rocks.jpg'
+      }
       className=\\"views-block\\"
     />
   );
@@ -3140,7 +3153,11 @@ const UseImage = props => {
   return (
     <img
       data-test-id={props['data-test-id'] || 'Image'}
-      src=\\"https://views.tools/rocks.jpg\\"
+      src={
+        props.another
+          ? 'https://views.tools/hi.jpg'
+          : 'https://views.tools/rocks.jpg'
+      }
       className=\\"views-block\\"
     />
   );
@@ -4630,17 +4647,25 @@ exports[`react-native parses react-native LocalImage 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
+import garfieldPng from './garfield.png';
 import chopperJpg from './chopper.jpg';
 import { Image } from 'react-native';
 
 const LocalImage = props => {
-  return <Image testID={props['testID'] || 'LocalImage'} source={chopperJpg} />;
+  return (
+    <Image
+      testID={props['testID'] || 'LocalImage'}
+      source={props.isCat ? garfieldPng : chopperJpg}
+    />
+  );
 };
 
 export default LocalImage;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "props": Object {
+    "isCat": "string",
+  },
   "svgs": Array [],
 }
 `;
@@ -5505,7 +5530,11 @@ const UseImage = props => {
   return (
     <Image
       testID={props['testID'] || 'Image'}
-      source={{ uri: 'https://views.tools/rocks.jpg' }}
+      source={{
+        uri: props.another
+          ? 'https://views.tools/hi.jpg'
+          : 'https://views.tools/rocks.jpg',
+      }}
     />
   );
 };

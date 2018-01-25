@@ -1,5 +1,6 @@
 import safe from './react/safe.js'
 import wrap from './react/wrap.js'
+import toCamelCase from 'to-camel-case'
 
 const safeScope = value =>
   typeof value === 'string' && !isCode(value) ? JSON.stringify(value) : value
@@ -59,7 +60,7 @@ const maybeSafe = node =>
     ? node.value
     : typeof node.value === 'string' ? safe(node.value) : node.value
 
-export const getScopedProps = (propNode, blockNode) => {
+const getScopedProps = (propNode, blockNode) => {
   const scopes = blockNode.scopes
     .filter(scope => !scope.isSystem)
     .map(scope => {
@@ -71,10 +72,37 @@ export const getScopedProps = (propNode, blockNode) => {
 
   if (isEmpty(scopes)) return false
 
+  return scopes
+}
+
+export const getScopedCondition = (propNode, blockNode) => {
   let conditional = maybeSafe(propNode)
 
-  scopes.forEach(scope => {
+  if (!getScopedProps(propNode, blockNode)) return false
+
+  getScopedProps(propNode, blockNode).forEach(scope => {
     conditional = `${scope.when} ? ${maybeSafe(scope.prop)} : ` + conditional
+  })
+
+  return conditional
+}
+
+export const getScopedImageCondition = (scopes, scopedNames, defaultName) => {
+  let conditional = defaultName
+
+  scopes.forEach((scope, index) => {
+    conditional = `${scope.when} ? ${scopedNames[index]} : ` + conditional
+  })
+
+  return conditional
+}
+
+export const getScopedRequireCondition = (scopes, paths, defaultName) => {
+  let conditional = `requireImage('${defaultName}')`
+
+  scopes.forEach((scope, index) => {
+    conditional =
+      `${scope.when} ? requireImage('${paths[index]}') : ` + conditional
   })
 
   return conditional
@@ -124,5 +152,28 @@ export const isList = node =>
   node && node.type === 'Block' && node.name === 'List'
 
 export const isEmpty = list => list.length === 0
+
+export const isValidImgSrc = (node, parent) =>
+  node.name === 'source' && parent.name === 'Image' && parent.isBasic
+
+export const pushImageToState = (state, scopedNames, paths) =>
+  scopedNames.forEach(name => {
+    const path = paths[scopedNames.findIndex(item => item === name)]
+    if (!state.images.includes(path)) {
+      state.images.push({
+        name,
+        file: path,
+      })
+    }
+  })
+
+export const getScopes = (node, parent) => {
+  const scopedProps = getScopedProps(node, parent)
+  if (!scopedProps) return false
+  const paths = scopedProps.map(scope => scope.prop.value)
+  const scopedNames = paths.map(path => toCamelCase(path))
+
+  return { scopedProps, paths, scopedNames }
+}
 
 export const isSvg = node => /^Svg/.test(node.name) && node.isBasic
