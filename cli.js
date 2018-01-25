@@ -10,7 +10,7 @@ const {
   as,
   compile,
   help,
-  inlineStyles,
+  isBundlingBaseCss,
   logic,
   pretty,
   watch: shouldWatch,
@@ -23,7 +23,7 @@ const {
   default: {
     as: 'react-dom',
     compile: false,
-    inlineStyles: false,
+    isBundlingBaseCss: false,
     logic: true,
     pretty: true,
     watch: false,
@@ -38,10 +38,9 @@ if (help) {
                       react-native
 
     --compile       if true, produces ES5 JS, defaults to false
-    --inline-styles if true, it will inline styles in react-dom,
-                      otherwise it will produce external .css
-                      files. Use this if you compile the CSS
-                      into its own file. Defaults to false
+    --bundle-base-css if true, it will bundle the base CSS in react-dom,
+                      otherwise you will need to include it in your
+                      build system as a .css file. Defaults to false
     --logic         if true, it includes .view.logic.js files in
                       the output, defaults to true
     --pretty        format output code, defaults to true
@@ -68,6 +67,13 @@ if (shouldWatch) {
     process.exit()
   }
 
+  const updateNotifier = require('update-notifier')
+  const pkg = require('./package.json')
+
+  updateNotifier({ pkg }).notify()
+
+  console.log(`Views Tools morpher v${pkg.version}\n\n`)
+
   console.log(
     `Will morph files at '${chalk.green(input)}' as ${chalk.green(as)}\n`
   )
@@ -82,7 +88,7 @@ if (shouldWatch) {
   watch({
     as,
     compile,
-    inlineStyles,
+    isBundlingBaseCss,
     logic,
     pretty,
     src: input,
@@ -92,7 +98,7 @@ if (shouldWatch) {
     watch({
       as,
       compile,
-      inlineStyles,
+      isBundlingBaseCss,
       logic,
       once: true,
       pretty,
@@ -102,7 +108,6 @@ if (shouldWatch) {
     const { code } = morph(readFileSync(input, 'utf-8'), {
       as,
       compile,
-      inlineStyles,
       file: { raw: input, relative: input },
       name: pathToName(input),
       pretty,

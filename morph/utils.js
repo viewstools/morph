@@ -175,3 +175,5 @@ export const getScopes = (node, parent) => {
 
   return { scopedProps, paths, scopedNames }
 }
+
+export const isSvg = node => /^Svg/.test(node.name) && node.isBasic

@@ -4,11 +4,18 @@ import {
   getStyleType,
   isCode,
   isStyle,
+  isSvg,
 } from '../utils.js'
 import safe from './safe.js'
 
 export function enter(node, parent, state) {
-  if (!(isStyle(node) && parent.isBasic && !parent.isSvg)) return
+  if (
+    !isStyle(node) ||
+    !parent.isBasic ||
+    (isSvg(parent) && state.isReactNative) ||
+    parent.name === 'SvgGroup'
+  )
+    return
 
   let styleForProperty, isScopedVal, _isProp
 

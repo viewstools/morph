@@ -7,13 +7,14 @@ const {
 const chalk = require('chalk')
 const chokidar = require('chokidar')
 const clean = require('./clean.js')
+const ensureBaseCss = require('./ensure-base-css.js')
 const flatten = require('flatten')
 const fs = require('mz/fs')
 const glob = require('fast-glob')
+const morphInlineSvg = require('./morph/inline-svg.js')
 const path = require('path')
 const toPascalCase = require('to-pascal-case')
 const uniq = require('array-uniq')
-const morphInlineSvg = require('./morph/inline-svg.js')
 
 const FONT_TYPES = {
   '.otf': 'opentype',
@@ -47,12 +48,12 @@ module.exports = options => {
       debug,
       enableAnimated,
       fake: shouldIncludeFake,
-      inlineStyles,
-      map,
+      isBundlingBaseCss,
       logic: shouldIncludeLogic,
-      once,
+      map,
       onMorph,
       onRemove,
+      once,
       pretty,
       src,
       verbose,
@@ -65,12 +66,13 @@ module.exports = options => {
         debug: false,
         enableAnimated: true,
         fake: false,
-        map: {},
+        isBundlingBaseCss: false,
         logic: true,
+        map: {},
+        onMorph: onMorphWriteFile,
+        once: false,
         pretty: true,
         src: process.cwd(),
-        once: false,
-        onMorph: onMorphWriteFile,
         verbose: true,
       },
       options
@@ -175,6 +177,12 @@ module.exports = options => {
       dependsOn[view] = []
 
       return name => {
+        if (name === 'ViewsBaseCss') {
+          return isBundlingBaseCss
+            ? `import '${relativise(file, instance.baseCss)}'`
+            : ''
+        }
+
         if (!dependsOn[view].includes(name)) {
           dependsOn[view].push(name)
         }
@@ -199,6 +207,11 @@ module.exports = options => {
       logic,
       views,
       stop() {},
+    }
+
+    if (as === 'react-dom' && isBundlingBaseCss) {
+      instance.baseCss = 'ViewsBaseCss.js'
+      ensureBaseCss(path.join(src, instance.baseCss))
     }
 
     const addView = filter((f, skipMorph = false) => {
@@ -348,7 +361,6 @@ height 50`
           compile,
           debug,
           enableAnimated,
-          inlineStyles,
           file: { raw: rawFile, relative: file },
           name: view,
           getFont,
@@ -401,7 +413,6 @@ height 50`
                 compile,
                 debug,
                 enableAnimated,
-                inlineStyles,
                 file: { raw: rawFile, relative: file },
                 name: svg.view,
                 getImport,
