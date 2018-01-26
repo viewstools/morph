@@ -130,9 +130,9 @@ export const isEmpty = list => list.length === 0
 export const isSvg = node => /^Svg/.test(node.name) && node.isBasic
 
 export const getScopeDescription = scope => {
-  let dictionary = []
-  var re = /(?:^|\W)props.(\w+)(?!\w)/g,
-    match
+  let dictionary = {}
+  let re = /(?:^|\W)props.(\w+)(?!\w)/g
+  let match
 
   while ((match = re.exec(scope))) {
     dictionary[match[1]] = toSlugCase(match[1])
@@ -140,14 +140,13 @@ export const getScopeDescription = scope => {
 
   dictionary['!'] = 'not-'
   dictionary['&&'] = '-and-'
+  dictionary['||'] = '-or-'
   dictionary['props.'] = ''
   dictionary[' '] = ''
 
-  for (var key in dictionary) {
+  for (let key in dictionary) {
     scope = scope.replace(new RegExp(key, 'g'), dictionary[key])
   }
 
-  scope = toCamelCase(scope)
-
-  return scope
+  return toCamelCase(scope)
 }

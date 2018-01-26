@@ -29,18 +29,14 @@ export const enter = key => (node, parent, state) => {
 
   let value
 
-  if (node.isBasic) {
-    if (parent) {
-      value = `{\`${state.name}.${blockName}|${conditional}\`}` //  + (${conditional})}`
-    } else {
-      value = `{\`\${props['${key}'] || '${blockName}'}|${conditional}\`}` // ` + '|' + (${conditional})}`
-    }
+  if (node.isBasic && parent) {
+    value = `{\`${state.name}.${blockName}|${conditional}\`}`
+  } else if (node.isBasic && parent) {
+    value = `{\`\${props['${key}'] || '${blockName}'}|${conditional}\`}`
+  } else if (parent) {
+    value = `"${state.name}.${blockName}"`
   } else {
-    if (parent) {
-      value = `"${state.name}.${blockName}"`
-    } else {
-      value = `{props["${key}"] || "${blockName}"}`
-    }
+    value = `{props["${key}"] || "${blockName}"}`
   }
 
   state.render.push(` ${key}=${value}`)
