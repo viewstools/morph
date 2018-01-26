@@ -18,7 +18,7 @@ const Vertical_h1azf9vn = css({
 const Action = props => {
   return props.check ? (
     <button
-      data-test-id={props['data-test-id'] || 'Vertical'}
+      data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
       onClick={props.clickMe}
       disabled={props.isDisabled}
       className={\`views-block \${Vertical_h1azf9vn}\`}
@@ -66,7 +66,7 @@ const Vertical_h1azf9vn = css({
 const Action = props => {
   return props.check ? (
     <button
-      data-test-id={props['data-test-id'] || 'Vertical'}
+      data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
       onClick={props.clickMe}
       disabled={props.isDisabled}
       className={\`views-block \${Vertical_h1azf9vn}\`}
@@ -110,7 +110,7 @@ const Vertical = styled('button')(({ props }) => ({
 const AnimatedButton = props => {
   return (
     <Vertical
-      data-test-id={props['data-test-id'] || 'Vertical'}
+      data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
       onClick={props.onClick}
       props={props}
       className=\\"views-block\\"
@@ -148,7 +148,7 @@ const Vertical = styled('button')(({ props }) => ({
 const AnimatedButton = props => {
   return (
     <Vertical
-      data-test-id={props['data-test-id'] || 'Vertical'}
+      data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
       onClick={props.onClick}
       props={props}
       className=\\"views-block\\"
@@ -188,7 +188,7 @@ const Vertical_h1n973fw = css({
 const AppRegionDrag = props => {
   return (
     <div
-      data-test-id={props['data-test-id'] || 'Vertical'}
+      data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
       className={\`views-block \${Vertical_h1n973fw}\`}
     >
       {props.children}
@@ -220,7 +220,7 @@ const Vertical_h1n973fw = css({
 const AppRegionDrag = props => {
   return (
     <div
-      data-test-id={props['data-test-id'] || 'Vertical'}
+      data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
       className={\`views-block \${Vertical_h1n973fw}\`}
     >
       {props.children}
@@ -259,7 +259,7 @@ const Horizontal = styled('div')(
 const BackgroundImage = props => {
   return (
     <div
-      data-test-id={props['data-test-id'] || 'Vertical'}
+      data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
       className={\`views-block \${Vertical_h1q68ydz}\`}
     >
       <Horizontal
@@ -305,7 +305,7 @@ const Horizontal = styled('div')(
 const BackgroundImage = props => {
   return (
     <div
-      data-test-id={props['data-test-id'] || 'Vertical'}
+      data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
       className={\`views-block \${Vertical_h1q68ydz}\`}
     >
       <Horizontal
@@ -346,7 +346,7 @@ const Vertical_he0xt4e = css({ boxShadow: '0px 8px 15px 0px rgba(0,0,0,0.1)' });
 const BoxShadow = props => {
   return (
     <Vertical
-      data-test-id={props['data-test-id'] || 'Vertical'}
+      data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
       props={props}
       className=\\"views-block\\"
     >
@@ -393,7 +393,7 @@ const Vertical_he0xt4e = css({ boxShadow: '0px 8px 15px 0px rgba(0,0,0,0.1)' });
 const BoxShadow = props => {
   return (
     <Vertical
-      data-test-id={props['data-test-id'] || 'Vertical'}
+      data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
       props={props}
       className=\\"views-block\\"
     >
@@ -434,7 +434,7 @@ const Vertical_h118stgu = css({ backgroundColor: 'blue' });
 const ClassName = props => {
   return (
     <div
-      data-test-id={props['data-test-id'] || 'Vertical'}
+      data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
       className={\`views-block hey \${Vertical_h118stgu}\`}
     >
       {props.children}
@@ -462,7 +462,7 @@ const Vertical_h118stgu = css({ backgroundColor: 'blue' });
 const ClassName = props => {
   return (
     <div
-      data-test-id={props['data-test-id'] || 'Vertical'}
+      data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
       className={\`views-block hey \${Vertical_h118stgu}\`}
     >
       {props.children}
@@ -493,7 +493,7 @@ const Text = styled('span')(({ props }) => ({
 const Code = props => {
   return (
     <div
-      data-test-id={props['data-test-id'] || 'Vertical'}
+      data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
       ref={$e => (this.$e = $e)}
       className={\`views-block \${Vertical_h1cyenk5}\`}
     >
@@ -537,7 +537,7 @@ const Text = styled('span')(({ props }) => ({
 const Code = props => {
   return (
     <div
-      data-test-id={props['data-test-id'] || 'Vertical'}
+      data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
       className={\`views-block \${Vertical_h1cyenk5}\`}
     >
       <Text data-test-id={\`Code.Text|\`} props={props} className=\\"views-block\\">
@@ -575,7 +575,7 @@ const Vertical = styled('div')(({ props }) => ({
 const DynamicStylesApplyToBasicBlocksOnly = props => {
   return (
     <Vertical
-      data-test-id={props['data-test-id'] || 'Vertical'}
+      data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
       props={props}
       className=\\"views-block\\"
     >
@@ -614,7 +614,7 @@ const Vertical = styled('div')(({ props }) => ({
 const DynamicStylesApplyToBasicBlocksOnly = props => {
   return (
     <Vertical
-      data-test-id={props['data-test-id'] || 'Vertical'}
+      data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
       props={props}
       className=\\"views-block\\"
     >
@@ -647,7 +647,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 const EmptyText = props => {
   return (
     <span
-      data-test-id={props['data-test-id'] || 'EmptyText'}
+      data-test-id={\`\${props['data-test-id'] || 'EmptyText'}|\`}
       className=\\"views-block\\"
     />
   );
@@ -670,7 +670,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 const EmptyText = props => {
   return (
     <span
-      data-test-id={props['data-test-id'] || 'EmptyText'}
+      data-test-id={\`\${props['data-test-id'] || 'EmptyText'}|\`}
       className=\\"views-block\\"
     />
   );
@@ -701,7 +701,7 @@ class Form extends React.Component {
 
     return (
       <form
-        data-test-id={props['data-test-id'] || 'Form'}
+        data-test-id={\`\${props['data-test-id'] || 'Form'}|\`}
         onSubmit={() => props.onSubmit(state)}
         className=\\"views-block\\"
       >
@@ -777,7 +777,7 @@ class Form extends React.Component {
 
     return (
       <form
-        data-test-id={props['data-test-id'] || 'Form'}
+        data-test-id={\`\${props['data-test-id'] || 'Form'}|\`}
         onSubmit={() => props.onSubmit(state)}
         className=\\"views-block\\"
       >
@@ -851,7 +851,7 @@ const GoTo = props => {
       href=\\"https://viewsdx.com\\"
       rel=\\"noopener noreferrer\\"
       target=\\"_blank\\"
-      data-test-id={props['data-test-id'] || 'Vertical'}
+      data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
       className=\\"views-block\\"
     >
       <span data-test-id={\`GoTo.Text|\`} className=\\"views-block\\">
@@ -882,7 +882,7 @@ const GoTo = props => {
       href=\\"https://viewsdx.com\\"
       rel=\\"noopener noreferrer\\"
       target=\\"_blank\\"
-      data-test-id={props['data-test-id'] || 'Vertical'}
+      data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
       className=\\"views-block\\"
     >
       <span data-test-id={\`GoTo.Text|\`} className=\\"views-block\\">
@@ -932,7 +932,7 @@ const Text = styled('span')(
 const Hover = props => {
   return (
     <Button
-      data-test-id={props['data-test-id'] || 'Button'}
+      data-test-id={\`\${props['data-test-id'] || 'Button'}|\`}
       onClick={props.onClick}
       props={props}
       className=\\"views-block\\"
@@ -990,7 +990,7 @@ const Text = styled('span')(
 const Hover = props => {
   return (
     <Button
-      data-test-id={props['data-test-id'] || 'Button'}
+      data-test-id={\`\${props['data-test-id'] || 'Button'}|\`}
       onClick={props.onClick}
       props={props}
       className=\\"views-block\\"
@@ -1026,7 +1026,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 const JustText = props => {
   return (
     <span
-      data-test-id={props['data-test-id'] || 'Text'}
+      data-test-id={\`\${props['data-test-id'] || 'Text'}|\`}
       className=\\"views-block\\"
     >
       hey!
@@ -1051,7 +1051,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 const JustText = props => {
   return (
     <span
-      data-test-id={props['data-test-id'] || 'Text'}
+      data-test-id={\`\${props['data-test-id'] || 'Text'}|\`}
       className=\\"views-block\\"
     >
       hey!
@@ -1077,7 +1077,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 const ListOfSomething = props => {
   return (
     <div
-      data-test-id={props['data-test-id'] || 'ListOfSomething'}
+      data-test-id={\`\${props['data-test-id'] || 'ListOfSomething'}|\`}
       className=\\"views-block\\"
     >
       {Array.isArray(props.from) &&
@@ -1114,7 +1114,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 const ListOfSomething = props => {
   return (
     <div
-      data-test-id={props['data-test-id'] || 'ListOfSomething'}
+      data-test-id={\`\${props['data-test-id'] || 'ListOfSomething'}|\`}
       className=\\"views-block\\"
     >
       {Array.isArray(props.from) &&
@@ -1150,7 +1150,10 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 
 const ListWhen = props => {
   return props.showMe ? (
-    <div data-test-id={props['data-test-id'] || 'List'} className=\\"views-block\\">
+    <div
+      data-test-id={\`\${props['data-test-id'] || 'List'}|\`}
+      className=\\"views-block\\"
+    >
       {Array.isArray(props.from) &&
         props.from.map((item, index) => (
           <Card
@@ -1185,7 +1188,10 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 
 const ListWhen = props => {
   return props.showMe ? (
-    <div data-test-id={props['data-test-id'] || 'List'} className=\\"views-block\\">
+    <div
+      data-test-id={\`\${props['data-test-id'] || 'List'}|\`}
+      className=\\"views-block\\"
+    >
       {Array.isArray(props.from) &&
         props.from.map((item, index) => (
           <Card
@@ -1221,7 +1227,7 @@ import chopperJpg from './chopper.jpg';
 const LocalImage = props => {
   return (
     <img
-      data-test-id={props['data-test-id'] || 'LocalImage'}
+      data-test-id={\`\${props['data-test-id'] || 'LocalImage'}|\`}
       src={chopperJpg}
       className=\\"views-block\\"
     />
@@ -1245,7 +1251,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 const LocalImage = props => {
   return (
     <img
-      data-test-id={props['data-test-id'] || 'LocalImage'}
+      data-test-id={\`\${props['data-test-id'] || 'LocalImage'}|\`}
       src={requireImage('./chopper.jpg')}
       className=\\"views-block\\"
     />
@@ -1275,7 +1281,7 @@ const LocalImageSvg1 = styled('img')({ width: 50 }, ({ props }) => ({
 const LocalImageSvg = props => {
   return (
     <LocalImageSvg1
-      data-test-id={props['data-test-id'] || 'LocalImageSvg'}
+      data-test-id={\`\${props['data-test-id'] || 'LocalImageSvg'}|\`}
       src={chopperSvg}
       props={props}
       className=\\"views-block\\"
@@ -1307,7 +1313,7 @@ const LocalImageSvg1 = styled('img')({ width: 50 }, ({ props }) => ({
 const LocalImageSvg = props => {
   return (
     <LocalImageSvg1
-      data-test-id={props['data-test-id'] || 'LocalImageSvg'}
+      data-test-id={\`\${props['data-test-id'] || 'LocalImageSvg'}|\`}
       src={requireImage('./chopper.svg')}
       props={props}
       className=\\"views-block\\"
@@ -1334,7 +1340,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 const LocalOrRemoteImageWhenCode = props => {
   return (
     <img
-      data-test-id={props['data-test-id'] || 'LocalOrRemoteImageWhenCode'}
+      data-test-id={\`\${props['data-test-id'] || 'LocalOrRemoteImageWhenCode'}|\`}
       src={props.source}
       className=\\"views-block\\"
     />
@@ -1360,7 +1366,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 const LocalOrRemoteImageWhenCode = props => {
   return (
     <img
-      data-test-id={props['data-test-id'] || 'LocalOrRemoteImageWhenCode'}
+      data-test-id={\`\${props['data-test-id'] || 'LocalOrRemoteImageWhenCode'}|\`}
       src={props.source}
       className=\\"views-block\\"
     />
@@ -1386,7 +1392,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 const NameIsType = props => {
   return (
     <span
-      data-test-id={props['data-test-id'] || 'Texto'}
+      data-test-id={\`\${props['data-test-id'] || 'Texto'}|\`}
       className=\\"views-block\\"
     >
       iam
@@ -1411,7 +1417,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 const NameIsType = props => {
   return (
     <span
-      data-test-id={props['data-test-id'] || 'Texto'}
+      data-test-id={\`\${props['data-test-id'] || 'Texto'}|\`}
       className=\\"views-block\\"
     >
       iam
@@ -1440,7 +1446,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 const NestedRoutes = props => {
   return (
     <div
-      data-test-id={props['data-test-id'] || 'Topics'}
+      data-test-id={\`\${props['data-test-id'] || 'Topics'}|\`}
       className=\\"views-block\\"
     >
       <span data-test-id={\`NestedRoutes.Text|\`} className=\\"views-block\\">
@@ -1491,7 +1497,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 const NestedRoutes = props => {
   return (
     <div
-      data-test-id={props['data-test-id'] || 'Topics'}
+      data-test-id={\`\${props['data-test-id'] || 'Topics'}|\`}
       className=\\"views-block\\"
     >
       <span data-test-id={\`NestedRoutes.Text|\`} className=\\"views-block\\">
@@ -1545,7 +1551,7 @@ const Text_h1d06m5g = css({
 const Print = props => {
   return (
     <div
-      data-test-id={props['data-test-id'] || 'Vertical'}
+      data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
       className=\\"views-block\\"
     >
       <span
@@ -1586,7 +1592,7 @@ const Text_h1d06m5g = css({
 const Print = props => {
   return (
     <div
-      data-test-id={props['data-test-id'] || 'Vertical'}
+      data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
       className=\\"views-block\\"
     >
       <span
@@ -1624,7 +1630,7 @@ const ProxyTest = props => {
   const childrenArray = React.Children.toArray(props.children);
   return (
     <div
-      data-test-id={props['data-test-id'] || 'Vertical'}
+      data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
       className=\\"views-block\\"
     >
       <div
@@ -1667,7 +1673,7 @@ const ProxyTest = props => {
   const childrenArray = React.Children.toArray(props.children);
   return (
     <div
-      data-test-id={props['data-test-id'] || 'Vertical'}
+      data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
       className=\\"views-block\\"
     >
       <div
@@ -1715,7 +1721,15 @@ const Text = styled('span')(({ props }) => ({
 const Scope = props => {
   return (
     <Text
-      data-test-id={props['data-test-id'] || 'Text'}
+      data-test-id={\`\${props['data-test-id'] || 'Text'}|\${
+        props.somethingGreen
+          ? 'somethingGreen'
+          : props.whatMakesBlue
+            ? 'whatMakesBlue'
+            : !props.whatMakesBlue && props.somethingGreen
+              ? 'notWhatMakesBlueAndSomethingGreen'
+              : ''
+      }\`}
       props={props}
       className=\\"views-block\\"
     >
@@ -1758,7 +1772,15 @@ const Text = styled('span')(({ props }) => ({
 const Scope = props => {
   return (
     <Text
-      data-test-id={props['data-test-id'] || 'Text'}
+      data-test-id={\`\${props['data-test-id'] || 'Text'}|\${
+        props.somethingGreen
+          ? 'somethingGreen'
+          : props.whatMakesBlue
+            ? 'whatMakesBlue'
+            : !props.whatMakesBlue && props.somethingGreen
+              ? 'notWhatMakesBlueAndSomethingGreen'
+              : ''
+      }\`}
       props={props}
       className=\\"views-block\\"
     >
@@ -1856,16 +1878,14 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 const ScopePopup = props => {
   return (
     <div
-      data-test-id={props['data-test-id'] || 'Popup'}
+      data-test-id={\`\${props['data-test-id'] || 'Popup'}|\`}
       className=\\"views-block\\"
     >
       <button
         data-test-id={\`ScopePopup.Toggle|\${
           props.somethingGreen
-            ? 'orPOrROrOOrPOrSOrOrSOrOOrMOrEOrTOrHOrIOrNOrGOrOrGOrROrEOrEOrNOr'
-            : props.whatMakesBlue
-              ? 'orPOrROrOOrPOrSOrOrWOrHOrAOrTOrOrMOrAOrKOrEOrSOrOrBOrLOrUOrEOr'
-              : ''
+            ? 'somethingGreen'
+            : props.whatMakesBlue ? 'whatMakesBlue' : ''
         }\`}
         onClick={
           props.somethingGreen
@@ -1906,16 +1926,14 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 const ScopePopup = props => {
   return (
     <div
-      data-test-id={props['data-test-id'] || 'Popup'}
+      data-test-id={\`\${props['data-test-id'] || 'Popup'}|\`}
       className=\\"views-block\\"
     >
       <button
         data-test-id={\`ScopePopup.Toggle|\${
           props.somethingGreen
-            ? 'orPOrROrOOrPOrSOrOrSOrOOrMOrEOrTOrHOrIOrNOrGOrOrGOrROrEOrEOrNOr'
-            : props.whatMakesBlue
-              ? 'orPOrROrOOrPOrSOrOrWOrHOrAOrTOrOrMOrAOrKOrEOrSOrOrBOrLOrUOrEOr'
-              : ''
+            ? 'somethingGreen'
+            : props.whatMakesBlue ? 'whatMakesBlue' : ''
         }\`}
         onClick={
           props.somethingGreen
@@ -1961,7 +1979,7 @@ const Content = styled('div')(({ props }) => ({
 const ScopePopup2 = props => {
   return (
     <div
-      data-test-id={props['data-test-id'] || 'Popup'}
+      data-test-id={\`\${props['data-test-id'] || 'Popup'}|\`}
       className=\\"views-block\\"
     >
       <button
@@ -1976,10 +1994,8 @@ const ScopePopup2 = props => {
       <Content
         data-test-id={\`ScopePopup2.Content|\${
           props.isShown
-            ? 'orPOrROrOOrPOrSOrOrIOrSOrOrSOrHOrOOrWOrNOr'
-            : props.isSuperVisible
-              ? 'orPOrROrOOrPOrSOrOrIOrSOrOrSOrUOrPOrEOrROrOrVOrIOrSOrIOrBOrLOrEOr'
-              : ''
+            ? 'isShown'
+            : props.isSuperVisible ? 'isSuperVisible' : ''
         }\`}
         scale={props.isShown ? 1 : props.isSuperVisible ? 2 : 0}
         props={props}
@@ -2016,7 +2032,7 @@ const Content = styled('div')(({ props }) => ({
 const ScopePopup2 = props => {
   return (
     <div
-      data-test-id={props['data-test-id'] || 'Popup'}
+      data-test-id={\`\${props['data-test-id'] || 'Popup'}|\`}
       className=\\"views-block\\"
     >
       <button
@@ -2031,10 +2047,8 @@ const ScopePopup2 = props => {
       <Content
         data-test-id={\`ScopePopup2.Content|\${
           props.isShown
-            ? 'orPOrROrOOrPOrSOrOrIOrSOrOrSOrHOrOOrWOrNOr'
-            : props.isSuperVisible
-              ? 'orPOrROrOOrPOrSOrOrIOrSOrOrSOrUOrPOrEOrROrOrVOrIOrSOrIOrBOrLOrEOr'
-              : ''
+            ? 'isShown'
+            : props.isSuperVisible ? 'isSuperVisible' : ''
         }\`}
         scale={props.isShown ? 1 : props.isSuperVisible ? 2 : 0}
         props={props}
@@ -2088,7 +2102,7 @@ const WindowControl = styled('button')(
 const SomeMissingStyle = props => {
   return (
     <WindowControl
-      data-test-id={props['data-test-id'] || 'WindowControl'}
+      data-test-id={\`\${props['data-test-id'] || 'WindowControl'}|\`}
       onClick={props.onClick}
       tabIndex=\\"-1\\"
       props={props}
@@ -2141,7 +2155,7 @@ const WindowControl = styled('button')(
 const SomeMissingStyle = props => {
   return (
     <WindowControl
-      data-test-id={props['data-test-id'] || 'WindowControl'}
+      data-test-id={\`\${props['data-test-id'] || 'WindowControl'}|\`}
       onClick={props.onClick}
       props={props}
       className=\\"views-block\\"
@@ -2176,7 +2190,7 @@ const Teleport = props => {
   return (
     <Link
       to=\\"..\\"
-      data-test-id={props['data-test-id'] || 'Horizontal'}
+      data-test-id={\`\${props['data-test-id'] || 'Horizontal'}|\`}
       className={\`views-block \${Horizontal_h1qq1i2q}\`}
     >
       <span data-test-id={\`Teleport.Text|\`} className=\\"views-block\\">
@@ -2209,7 +2223,7 @@ const Teleport = props => {
   return (
     <Link
       to=\\"..\\"
-      data-test-id={props['data-test-id'] || 'Horizontal'}
+      data-test-id={\`\${props['data-test-id'] || 'Horizontal'}|\`}
       className={\`views-block \${Horizontal_h1qq1i2q}\`}
     >
       <span data-test-id={\`Teleport.Text|\`} className=\\"views-block\\">
@@ -2305,7 +2319,10 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 
 const TestIds = props => {
   return (
-    <div data-test-id={props['data-test-id'] || 'App'} className=\\"views-block\\">
+    <div
+      data-test-id={\`\${props['data-test-id'] || 'App'}|\`}
+      className=\\"views-block\\"
+    >
       <span data-test-id={\`TestIds.Text|\`} className=\\"views-block\\">
         1
       </span>
@@ -2338,7 +2355,10 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 
 const TestIds = props => {
   return (
-    <div data-test-id={props['data-test-id'] || 'App'} className=\\"views-block\\">
+    <div
+      data-test-id={\`\${props['data-test-id'] || 'App'}|\`}
+      className=\\"views-block\\"
+    >
       <span data-test-id={\`TestIds.Text|\`} className=\\"views-block\\">
         1
       </span>
@@ -2371,7 +2391,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 const TextInterpolation = props => {
   return (
     <div
-      data-test-id={props['data-test-id'] || 'Vertical'}
+      data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
       className=\\"views-block\\"
     >
       <span
@@ -2402,7 +2422,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 const TextInterpolation = props => {
   return (
     <div
-      data-test-id={props['data-test-id'] || 'Vertical'}
+      data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
       className=\\"views-block\\"
     >
       <span
@@ -2433,7 +2453,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 const Toggle = props => {
   return (
     <span
-      data-test-id={props['data-test-id'] || 'Text'}
+      data-test-id={\`\${props['data-test-id'] || 'Text'}|\`}
       className=\\"views-block\\"
     >
       NOPE
@@ -2458,7 +2478,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 const Toggle = props => {
   return (
     <span
-      data-test-id={props['data-test-id'] || 'Text'}
+      data-test-id={\`\${props['data-test-id'] || 'Text'}|\`}
       className=\\"views-block\\"
     >
       NOPE
@@ -2506,7 +2526,7 @@ class UseCaptureEmail extends React.Component {
         type=\\"email\\"
         onChange={event => this.setState({ email: event.target.value })}
         value={state.email}
-        data-test-id={props['data-test-id'] || 'Email'}
+        data-test-id={\`\${props['data-test-id'] || 'Email'}|\`}
         autoFocus={true}
         defaultValue=\\"hey this is a default value\\"
         onSubmit={props.onSubmit}
@@ -2559,7 +2579,7 @@ class UseCaptureEmail extends React.Component {
         onChange={event => this.setState({ email: event.target.value })}
         value={state.email}
         tabIndex={-1}
-        data-test-id={props['data-test-id'] || 'Email'}
+        data-test-id={\`\${props['data-test-id'] || 'Email'}|\`}
         defaultValue=\\"hey this is a default value\\"
         onSubmit={props.onSubmit}
         className={\`views-block mousetrap \${Email_h1by7qdg}\`}
@@ -2597,7 +2617,7 @@ class UseCaptureFile extends React.Component {
       <input
         onChange={event => this.setState({ file: event.target.value })}
         value={state.file}
-        data-test-id={props['data-test-id'] || 'File'}
+        data-test-id={\`\${props['data-test-id'] || 'File'}|\`}
         className=\\"views-block\\"
       />
     );
@@ -2632,7 +2652,7 @@ class UseCaptureFile extends React.Component {
         onChange={event => this.setState({ file: event.target.value })}
         value={state.file}
         tabIndex={-1}
-        data-test-id={props['data-test-id'] || 'File'}
+        data-test-id={\`\${props['data-test-id'] || 'File'}|\`}
         className={\`views-block mousetrap\`}
       />
     );
@@ -2667,7 +2687,7 @@ class UseCaptureNumber extends React.Component {
         type=\\"number\\"
         onChange={event => this.setState({ number: event.target.value })}
         value={state.number}
-        data-test-id={props['data-test-id'] || 'Number'}
+        data-test-id={\`\${props['data-test-id'] || 'Number'}|\`}
         className=\\"views-block\\"
       />
     );
@@ -2703,7 +2723,7 @@ class UseCaptureNumber extends React.Component {
         onChange={event => this.setState({ number: event.target.value })}
         value={state.number}
         tabIndex={-1}
-        data-test-id={props['data-test-id'] || 'Number'}
+        data-test-id={\`\${props['data-test-id'] || 'Number'}|\`}
         className={\`views-block mousetrap\`}
       />
     );
@@ -2738,7 +2758,7 @@ class UseCapturePhone extends React.Component {
         type=\\"tel\\"
         onChange={event => this.setState({ phone: event.target.value })}
         value={state.phone}
-        data-test-id={props['data-test-id'] || 'Phone'}
+        data-test-id={\`\${props['data-test-id'] || 'Phone'}|\`}
         className=\\"views-block\\"
       />
     );
@@ -2774,7 +2794,7 @@ class UseCapturePhone extends React.Component {
         onChange={event => this.setState({ phone: event.target.value })}
         value={state.phone}
         tabIndex={-1}
-        data-test-id={props['data-test-id'] || 'Phone'}
+        data-test-id={\`\${props['data-test-id'] || 'Phone'}|\`}
         className={\`views-block mousetrap\`}
       />
     );
@@ -2809,7 +2829,7 @@ class UseCaptureSecure extends React.Component {
         type=\\"password\\"
         onChange={event => this.setState({ secure: event.target.value })}
         value={state.secure}
-        data-test-id={props['data-test-id'] || 'Secure'}
+        data-test-id={\`\${props['data-test-id'] || 'Secure'}|\`}
         className=\\"views-block\\"
       />
     );
@@ -2845,7 +2865,7 @@ class UseCaptureSecure extends React.Component {
         onChange={event => this.setState({ secure: event.target.value })}
         value={state.secure}
         tabIndex={-1}
-        data-test-id={props['data-test-id'] || 'Secure'}
+        data-test-id={\`\${props['data-test-id'] || 'Secure'}|\`}
         className={\`views-block mousetrap\`}
       />
     );
@@ -2880,7 +2900,7 @@ class UseCaptureText extends React.Component {
         type=\\"text\\"
         onChange={event => this.setState({ text: event.target.value })}
         value={state.text}
-        data-test-id={props['data-test-id'] || 'Text'}
+        data-test-id={\`\${props['data-test-id'] || 'Text'}|\`}
         className=\\"views-block\\"
       />
     );
@@ -2916,7 +2936,7 @@ class UseCaptureText extends React.Component {
         onChange={event => this.setState({ text: event.target.value })}
         value={state.text}
         tabIndex={-1}
-        data-test-id={props['data-test-id'] || 'Text'}
+        data-test-id={\`\${props['data-test-id'] || 'Text'}|\`}
         className={\`views-block mousetrap\`}
       />
     );
@@ -2952,7 +2972,7 @@ class UseCaptureTextArea extends React.Component {
           this.setState({ captureTextArea: event.target.value })
         }
         value={state.captureTextArea}
-        data-test-id={props['data-test-id'] || 'CaptureTextArea'}
+        data-test-id={\`\${props['data-test-id'] || 'CaptureTextArea'}|\`}
         className=\\"views-block\\"
       />
     );
@@ -2989,7 +3009,7 @@ class UseCaptureTextArea extends React.Component {
         }
         value={state.captureTextArea}
         tabIndex={-1}
-        data-test-id={props['data-test-id'] || 'CaptureTextArea'}
+        data-test-id={\`\${props['data-test-id'] || 'CaptureTextArea'}|\`}
         className={\`views-block mousetrap\`}
       />
     );
@@ -3022,7 +3042,7 @@ class UseCaptureTextManagedFromOutside extends React.Component {
     return (
       <input
         type=\\"text\\"
-        data-test-id={props['data-test-id'] || 'CaptureText'}
+        data-test-id={\`\${props['data-test-id'] || 'CaptureText'}|\`}
         value={props.external}
         className=\\"views-block\\"
       />
@@ -3058,7 +3078,7 @@ class UseCaptureTextManagedFromOutside extends React.Component {
     return (
       <input
         type=\\"text\\"
-        data-test-id={props['data-test-id'] || 'CaptureText'}
+        data-test-id={\`\${props['data-test-id'] || 'CaptureText'}|\`}
         value={props.external}
         className={\`views-block mousetrap\`}
       />
@@ -3091,7 +3111,7 @@ const Horizontal_hud64j7 = css({
 const UseHorizontal = props => {
   return (
     <div
-      data-test-id={props['data-test-id'] || 'Horizontal'}
+      data-test-id={\`\${props['data-test-id'] || 'Horizontal'}|\`}
       className={\`views-block \${Horizontal_hud64j7}\`}
     >
       {props.children}
@@ -3122,7 +3142,7 @@ const Horizontal_hud64j7 = css({
 const UseHorizontal = props => {
   return (
     <div
-      data-test-id={props['data-test-id'] || 'Horizontal'}
+      data-test-id={\`\${props['data-test-id'] || 'Horizontal'}|\`}
       className={\`views-block \${Horizontal_hud64j7}\`}
     >
       {props.children}
@@ -3147,7 +3167,9 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 const UseImage = props => {
   return (
     <img
-      data-test-id={props['data-test-id'] || 'Image'}
+      data-test-id={\`\${props['data-test-id'] || 'Image'}|\${
+        props.another ? 'another' : ''
+      }\`}
       src=\\"https://views.tools/rocks.jpg\\"
       className=\\"views-block\\"
     />
@@ -3173,7 +3195,9 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 const UseImage = props => {
   return (
     <img
-      data-test-id={props['data-test-id'] || 'Image'}
+      data-test-id={\`\${props['data-test-id'] || 'Image'}|\${
+        props.another ? 'another' : ''
+      }\`}
       src=\\"https://views.tools/rocks.jpg\\"
       className=\\"views-block\\"
     />
@@ -3203,7 +3227,7 @@ const App_h1qq1i2q = css({ flexDirection: 'row' });
 const UseOfProxy = props => {
   return (
     <div
-      data-test-id={props['data-test-id'] || 'App'}
+      data-test-id={\`\${props['data-test-id'] || 'App'}|\`}
       className={\`views-block \${App_h1qq1i2q}\`}
     >
       <Button
@@ -3239,7 +3263,7 @@ const App_h1qq1i2q = css({ flexDirection: 'row' });
 const UseOfProxy = props => {
   return (
     <div
-      data-test-id={props['data-test-id'] || 'App'}
+      data-test-id={\`\${props['data-test-id'] || 'App'}|\`}
       className={\`views-block \${App_h1qq1i2q}\`}
     >
       <Button
@@ -3275,7 +3299,7 @@ const UseProxy = props => {
   const childrenArray = React.Children.toArray(props.children);
   return (
     <div
-      data-test-id={props['data-test-id'] || 'Button'}
+      data-test-id={\`\${props['data-test-id'] || 'Button'}|\`}
       className={\`views-block \${Button_h1qq1i2q}\`}
     >
       {props.childrenProxyMap &&
@@ -3316,7 +3340,7 @@ const UseProxy = props => {
   const childrenArray = React.Children.toArray(props.children);
   return (
     <div
-      data-test-id={props['data-test-id'] || 'Button'}
+      data-test-id={\`\${props['data-test-id'] || 'Button'}|\`}
       className={\`views-block \${Button_h1qq1i2q}\`}
     >
       {props.childrenProxyMap &&
@@ -3362,7 +3386,7 @@ const UseRouter = props => {
   return (
     <Router>
       <div
-        data-test-id={props['data-test-id'] || 'Horizontal'}
+        data-test-id={\`\${props['data-test-id'] || 'Horizontal'}|\`}
         className={\`views-block \${Horizontal_h1qq1i2q}\`}
       >
         <Route
@@ -3432,7 +3456,7 @@ const UseRouter = props => {
   return (
     <Router>
       <div
-        data-test-id={props['data-test-id'] || 'Horizontal'}
+        data-test-id={\`\${props['data-test-id'] || 'Horizontal'}|\`}
         className={\`views-block \${Horizontal_h1qq1i2q}\`}
       >
         <Route
@@ -3499,7 +3523,7 @@ const Svg_hq411mi = css({
 const UseSvg = props => {
   return (
     <svg
-      data-test-id={props['data-test-id'] || 'Svg'}
+      data-test-id={\`\${props['data-test-id'] || 'Svg'}|\`}
       viewBox=\\"0 0 20 20\\"
       className={\`views-block \${Svg_hq411mi}\`}
     >
@@ -3565,7 +3589,7 @@ const Svg_hq411mi = css({
 const UseSvg = props => {
   return (
     <svg
-      data-test-id={props['data-test-id'] || 'Svg'}
+      data-test-id={\`\${props['data-test-id'] || 'Svg'}|\`}
       viewBox=\\"0 0 20 20\\"
       className={\`views-block \${Svg_hq411mi}\`}
     >
@@ -3635,7 +3659,7 @@ const UseText_hjam8jb = css({
 const UseText = props => {
   return (
     <span
-      data-test-id={props['data-test-id'] || 'UseText'}
+      data-test-id={\`\${props['data-test-id'] || 'UseText'}|\`}
       className={\`views-block \${UseText_hjam8jb}\`}
     >
       Hi, I'm some text
@@ -3677,7 +3701,7 @@ const UseText_hjam8jb = css({
 const UseText = props => {
   return (
     <span
-      data-test-id={props['data-test-id'] || 'UseText'}
+      data-test-id={\`\${props['data-test-id'] || 'UseText'}|\`}
       className={\`views-block \${UseText_hjam8jb}\`}
     >
       Hi, I'm some text
@@ -3728,7 +3752,7 @@ const Italic_hw8flfq = css({
 const UseTextCustomFont = props => {
   return (
     <div
-      data-test-id={props['data-test-id'] || 'UseTextCustomFont'}
+      data-test-id={\`\${props['data-test-id'] || 'UseTextCustomFont'}|\`}
       className=\\"views-block\\"
     >
       <span
@@ -3797,7 +3821,7 @@ const Italic_hw8flfq = css({
 const UseTextCustomFont = props => {
   return (
     <div
-      data-test-id={props['data-test-id'] || 'UseTextCustomFont'}
+      data-test-id={\`\${props['data-test-id'] || 'UseTextCustomFont'}|\`}
       className=\\"views-block\\"
     >
       <span
@@ -3850,7 +3874,7 @@ const Vertical_h1cyenk5 = css({ backgroundColor: 'red' });
 const UseVertical = props => {
   return (
     <div
-      data-test-id={props['data-test-id'] || 'Vertical'}
+      data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
       className={\`views-block \${Vertical_h1cyenk5}\`}
     >
       {props.children}
@@ -3878,7 +3902,7 @@ const Vertical_h1cyenk5 = css({ backgroundColor: 'red' });
 const UseVertical = props => {
   return (
     <div
-      data-test-id={props['data-test-id'] || 'Vertical'}
+      data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
       className={\`views-block \${Vertical_h1cyenk5}\`}
     >
       {props.children}
@@ -3908,7 +3932,7 @@ const ViewNameIsntUsedInStyle1 = styled('div')({ zIndex: 5 }, ({ props }) => ({
 const ViewNameIsntUsedInStyle = props => {
   return (
     <ViewNameIsntUsedInStyle1
-      data-test-id={props['data-test-id'] || 'ViewNameIsntUsedInStyle'}
+      data-test-id={\`\${props['data-test-id'] || 'ViewNameIsntUsedInStyle'}|\`}
       props={props}
       className=\\"views-block\\"
     >
@@ -3941,7 +3965,7 @@ const ViewNameIsntUsedInStyle1 = styled('div')({ zIndex: 5 }, ({ props }) => ({
 const ViewNameIsntUsedInStyle = props => {
   return (
     <ViewNameIsntUsedInStyle1
-      data-test-id={props['data-test-id'] || 'ViewNameIsntUsedInStyle'}
+      data-test-id={\`\${props['data-test-id'] || 'ViewNameIsntUsedInStyle'}|\`}
       props={props}
       className=\\"views-block\\"
     >
@@ -3972,7 +3996,7 @@ const App_h1qq1i2q = css({ flexDirection: 'row' });
 const When = props => {
   return (
     <div
-      data-test-id={props['data-test-id'] || 'App'}
+      data-test-id={\`\${props['data-test-id'] || 'App'}|\`}
       className={\`views-block \${App_h1qq1i2q}\`}
     >
       {props.showMe ? (
@@ -4007,7 +4031,7 @@ const App_h1qq1i2q = css({ flexDirection: 'row' });
 const When = props => {
   return (
     <div
-      data-test-id={props['data-test-id'] || 'App'}
+      data-test-id={\`\${props['data-test-id'] || 'App'}|\`}
       className={\`views-block \${App_h1qq1i2q}\`}
     >
       {props.showMe ? (
@@ -4039,7 +4063,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 const WhenTopLevel = props => {
   return props.showMe ? (
     <span
-      data-test-id={props['data-test-id'] || 'Text'}
+      data-test-id={\`\${props['data-test-id'] || 'Text'}|\`}
       className=\\"views-block\\"
     >
       I may be hidden
@@ -4066,7 +4090,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 const WhenTopLevel = props => {
   return props.showMe ? (
     <span
-      data-test-id={props['data-test-id'] || 'Text'}
+      data-test-id={\`\${props['data-test-id'] || 'Text'}|\`}
       className=\\"views-block\\"
     >
       I may be hidden
@@ -4093,7 +4117,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 const WithTest = props => {
   return (
     <button
-      data-test-id={props['data-test-id'] || 'Vertical'}
+      data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
       onClick={props.change}
       className=\\"views-block\\"
     >
@@ -4125,7 +4149,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 const WithTest = props => {
   return (
     <button
-      data-test-id={props['data-test-id'] || 'Vertical'}
+      data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
       onClick={props.change}
       className=\\"views-block\\"
     >
@@ -4164,7 +4188,10 @@ const Action = props => {
       disabled={props.isDisabled}
       underlayColor=\\"transparent\\"
     >
-      <View testID={props['testID'] || 'Vertical'} style={styles.h1g2xbng}>
+      <View
+        testID={\`\${props['testID'] || 'Vertical'}|\`}
+        style={styles.h1g2xbng}
+      >
         <Text testID={\`Action.Text|\`}>click me</Text>
         <SubButton testID=\\"Action.SubButton\\" isDisabled={true} />
         {props.children}
@@ -4199,7 +4226,7 @@ const AnimatedButton = props => {
       underlayColor=\\"transparent\\"
     >
       <Animated.View
-        testID={props['testID'] || 'Vertical'}
+        testID={\`\${props['testID'] || 'Vertical'}|\`}
         style={{ opacity: props.opacity }}
       >
         <Text testID={\`AnimatedButton.Text|\`}>hey</Text>
@@ -4231,7 +4258,7 @@ const styles = StyleSheet.create({
 
 const AppRegionDrag = props => {
   return (
-    <View testID={props['testID'] || 'Vertical'} style={styles.hfuuuuw}>
+    <View testID={\`\${props['testID'] || 'Vertical'}|\`} style={styles.hfuuuuw}>
       {props.children}
     </View>
   );
@@ -4257,7 +4284,7 @@ const BackgroundImage = props => {
     <Image
       resizeMode=\\"cover\\"
       source={{ uri: 'https://viewsdx.com/image.jpg' }}
-      testID={props['testID'] || 'Vertical'}
+      testID={\`\${props['testID'] || 'Vertical'}|\`}
     >
       <Animated.Image
         resizeMode={undefined}
@@ -4298,7 +4325,7 @@ const styles = StyleSheet.create({
 const BoxShadow = props => {
   return (
     <Animated.View
-      testID={props['testID'] || 'Vertical'}
+      testID={\`\${props['testID'] || 'Vertical'}|\`}
       style={{
         elevation: 1,
         shadowOffset: { width: 10, height: 5 },
@@ -4343,7 +4370,7 @@ const styles = StyleSheet.create({ hkg1xou: { backgroundColor: 'blue' } });
 
 const ClassName = props => {
   return (
-    <View testID={props['testID'] || 'Vertical'} style={styles.hkg1xou}>
+    <View testID={\`\${props['testID'] || 'Vertical'}|\`} style={styles.hkg1xou}>
       {props.children}
     </View>
   );
@@ -4367,7 +4394,7 @@ const styles = StyleSheet.create({ h1jcb2fl: { backgroundColor: 'red' } });
 const Code = props => {
   return (
     <View
-      testID={props['testID'] || 'Vertical'}
+      testID={\`\${props['testID'] || 'Vertical'}|\`}
       ref={$e => (this.$e = $e)}
       style={styles.h1jcb2fl}
     >
@@ -4405,7 +4432,7 @@ import { Animated } from 'react-native';
 const DynamicStylesApplyToBasicBlocksOnly = props => {
   return (
     <Animated.View
-      testID={props['testID'] || 'Vertical'}
+      testID={\`\${props['testID'] || 'Vertical'}|\`}
       style={{ height: props.height }}
     >
       <SomeThing
@@ -4434,7 +4461,7 @@ import React from 'react';
 import { Text } from 'react-native';
 
 const EmptyText = props => {
-  return <Text testID={props['testID'] || 'EmptyText'} />;
+  return <Text testID={\`\${props['testID'] || 'EmptyText'}|\`} />;
 };
 
 export default EmptyText;
@@ -4461,7 +4488,7 @@ class Form extends React.Component {
     const { props, state } = this;
 
     return (
-      <View testID={props['testID'] || 'Form'}>
+      <View testID={\`\${props['testID'] || 'Form'}|\`}>
         <TextInput
           blurOnSubmit={false}
           onSubmitEditing={this.$Surname ? () => this.$Surname.focus() : null}
@@ -4544,7 +4571,7 @@ import { Text, View } from 'react-native';
 
 const GoTo = props => {
   return (
-    <View testID={props['testID'] || 'Vertical'}>
+    <View testID={\`\${props['testID'] || 'Vertical'}|\`}>
       <Text testID={\`GoTo.Text|\`}>Go to ViewsDX website!</Text>
       {props.children}
     </View>
@@ -4574,7 +4601,7 @@ const Hover = props => {
       underlayColor=\\"transparent\\"
     >
       <Animated.View
-        testID={props['testID'] || 'Button'}
+        testID={\`\${props['testID'] || 'Button'}|\`}
         style={{ backgroundColor: props.backgroundColor }}
       >
         <Animated.Text
@@ -4610,7 +4637,7 @@ import React from 'react';
 import { Text } from 'react-native';
 
 const JustText = props => {
-  return <Text testID={props['testID'] || 'Text'}>hey!</Text>;
+  return <Text testID={\`\${props['testID'] || 'Text'}|\`}>hey!</Text>;
 };
 
 export default JustText;
@@ -4630,7 +4657,7 @@ import { View } from 'react-native';
 
 const ListOfSomething = props => {
   return (
-    <View testID={props['testID'] || 'ListOfSomething'}>
+    <View testID={\`\${props['testID'] || 'ListOfSomething'}|\`}>
       {Array.isArray(props.from) &&
         props.from.map((item, index) => (
           <Something
@@ -4663,7 +4690,7 @@ import { View } from 'react-native';
 
 const ListWhen = props => {
   return props.showMe ? (
-    <View testID={props['testID'] || 'List'}>
+    <View testID={\`\${props['testID'] || 'List'}|\`}>
       {Array.isArray(props.from) &&
         props.from.map((item, index) => (
           <Card {...item} key={item.id || index} testID=\\"ListWhen.Card\\" />
@@ -4692,7 +4719,9 @@ import chopperJpg from './chopper.jpg';
 import { Image } from 'react-native';
 
 const LocalImage = props => {
-  return <Image testID={props['testID'] || 'LocalImage'} source={chopperJpg} />;
+  return (
+    <Image testID={\`\${props['testID'] || 'LocalImage'}|\`} source={chopperJpg} />
+  );
 };
 
 export default LocalImage;
@@ -4714,7 +4743,7 @@ const styles = StyleSheet.create({ h1fkj9gt: { width: 50 } });
 const LocalImageSvg = props => {
   return (
     <Image
-      testID={props['testID'] || 'LocalImageSvg'}
+      testID={\`\${props['testID'] || 'LocalImageSvg'}|\`}
       source={chopperSvg}
       style={[styles.h1fkj9gt, { height: props.height }]}
     />
@@ -4740,7 +4769,7 @@ import { Image } from 'react-native';
 const LocalOrRemoteImageWhenCode = props => {
   return (
     <Image
-      testID={props['testID'] || 'LocalOrRemoteImageWhenCode'}
+      testID={\`\${props['testID'] || 'LocalOrRemoteImageWhenCode'}|\`}
       source={{ uri: props.source }}
     />
   );
@@ -4763,7 +4792,7 @@ import React from 'react';
 import { Text } from 'react-native';
 
 const NameIsType = props => {
-  return <Text testID={props['testID'] || 'Texto'}>iam</Text>;
+  return <Text testID={\`\${props['testID'] || 'Texto'}|\`}>iam</Text>;
 };
 
 export default NameIsType;
@@ -4786,7 +4815,7 @@ import { Text, View } from 'react-native';
 
 const NestedRoutes = props => {
   return (
-    <View testID={props['testID'] || 'Topics'}>
+    <View testID={\`\${props['testID'] || 'Topics'}|\`}>
       <Text testID={\`NestedRoutes.Text|\`}>topics</Text>
       <Link
         activeOpacity={0.7}
@@ -4827,7 +4856,7 @@ import { Text, View } from 'react-native';
 
 const Print = props => {
   return (
-    <View testID={props['testID'] || 'Vertical'}>
+    <View testID={\`\${props['testID'] || 'Vertical'}|\`}>
       <Text testID={\`Print.Text|\`}>not in print</Text>
       <Text testID={\`Print.Text:1|\`}>hey</Text>
       {props.children}
@@ -4853,7 +4882,7 @@ const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
 const ProxyTest = props => {
   const childrenArray = React.Children.toArray(props.children);
   return (
-    <View testID={props['testID'] || 'Vertical'}>
+    <View testID={\`\${props['testID'] || 'Vertical'}|\`}>
       <View testID={\`ProxyTest.Horizontal|\`} style={styles.hp2cr4d}>
         {props.bla && childrenArray[props.childrenProxyMap['Something']]
           ? React.cloneElement(
@@ -4887,7 +4916,15 @@ import { Text } from 'react-native';
 const Scope = props => {
   return (
     <Text
-      testID={props['testID'] || 'Text'}
+      testID={\`\${props['testID'] || 'Text'}|\${
+        props.somethingGreen
+          ? 'somethingGreen'
+          : props.whatMakesBlue
+            ? 'whatMakesBlue'
+            : !props.whatMakesBlue && props.somethingGreen
+              ? 'notWhatMakesBlueAndSomethingGreen'
+              : ''
+      }\`}
       style={{
         color: props.somethingGreen
           ? 'rgb(0,255,0)'
@@ -4957,7 +4994,7 @@ import { Text, TouchableWithoutFeedback, View } from 'react-native';
 
 const ScopePopup = props => {
   return (
-    <View testID={props['testID'] || 'Popup'}>
+    <View testID={\`\${props['testID'] || 'Popup'}|\`}>
       <TouchableWithoutFeedback
         activeOpacity={0.7}
         onPress={
@@ -4970,10 +5007,8 @@ const ScopePopup = props => {
         <View
           testID={\`ScopePopup.Toggle|\${
             props.somethingGreen
-              ? 'orPOrROrOOrPOrSOrOrSOrOOrMOrEOrTOrHOrIOrNOrGOrOrGOrROrEOrEOrNOr'
-              : props.whatMakesBlue
-                ? 'orPOrROrOOrPOrSOrOrWOrHOrAOrTOrOrMOrAOrKOrEOrSOrOrBOrLOrUOrEOr'
-                : ''
+              ? 'somethingGreen'
+              : props.whatMakesBlue ? 'whatMakesBlue' : ''
           }\`}
         >
           <Text testID={\`ScopePopup.Text|\`}>toggle popup</Text>
@@ -5006,7 +5041,7 @@ import { Text, TouchableWithoutFeedback, View } from 'react-native';
 
 const ScopePopup2 = props => {
   return (
-    <View testID={props['testID'] || 'Popup'}>
+    <View testID={\`\${props['testID'] || 'Popup'}|\`}>
       <TouchableWithoutFeedback
         activeOpacity={0.7}
         onPress={props.toggle}
@@ -5019,10 +5054,8 @@ const ScopePopup2 = props => {
       <View
         testID={\`ScopePopup2.Content|\${
           props.isShown
-            ? 'orPOrROrOOrPOrSOrOrIOrSOrOrSOrHOrOOrWOrNOr'
-            : props.isSuperVisible
-              ? 'orPOrROrOOrPOrSOrOrIOrSOrOrSOrUOrPOrEOrROrOrVOrIOrSOrIOrBOrLOrEOr'
-              : ''
+            ? 'isShown'
+            : props.isSuperVisible ? 'isSuperVisible' : ''
         }\`}
         scale={props.isShown ? 1 : props.isSuperVisible ? 2 : 0}
         style={{ opacity: props.isShown ? 1 : props.isSuperVisible ? 3 : 0 }}
@@ -5070,7 +5103,7 @@ const SomeMissingStyle = props => {
       underlayColor=\\"transparent\\"
     >
       <Animated.View
-        testID={props['testID'] || 'WindowControl'}
+        testID={\`\${props['testID'] || 'WindowControl'}|\`}
         tabIndex=\\"-1\\"
         style={styles.h7g4z7s}
       >
@@ -5104,7 +5137,7 @@ const Teleport = props => {
     <Link activeOpacity={0.7} to=\\"..\\" underlayColor=\\"transparent\\">
       <View
         to=\\"..\\"
-        testID={props['testID'] || 'Horizontal'}
+        testID={\`\${props['testID'] || 'Horizontal'}|\`}
         style={styles.hp2cr4d}
       >
         <Text testID={\`Teleport.Text|\`}>go back</Text>
@@ -5160,7 +5193,7 @@ import { Text, View } from 'react-native';
 
 const TestIds = props => {
   return (
-    <View testID={props['testID'] || 'App'}>
+    <View testID={\`\${props['testID'] || 'App'}|\`}>
       <Text testID={\`TestIds.Text|\`}>1</Text>
       <Text testID={\`TestIds.Text:1|\`}>2</Text>
       <External testID=\\"TestIds.External\\" />
@@ -5186,7 +5219,7 @@ import { Text, View } from 'react-native';
 
 const TextInterpolation = props => {
   return (
-    <View testID={props['testID'] || 'Vertical'}>
+    <View testID={\`\${props['testID'] || 'Vertical'}|\`}>
       <Text testID={\`TextInterpolation.Text|\`}>{\`\${props.name} test\`}</Text>
       {props.children}
     </View>
@@ -5210,7 +5243,7 @@ import React from 'react';
 import { Text } from 'react-native';
 
 const Toggle = props => {
-  return <Text testID={props['testID'] || 'Text'}>NOPE</Text>;
+  return <Text testID={\`\${props['testID'] || 'Text'}|\`}>NOPE</Text>;
 };
 
 export default Toggle;
@@ -5254,7 +5287,7 @@ class UseCaptureEmail extends React.Component {
         autoCorrect={false}
         defaultValue={undefined}
         underlineColorAndroid=\\"transparent\\"
-        testID={props['testID'] || 'Email'}
+        testID={\`\${props['testID'] || 'Email'}|\`}
         autoFocus={true}
         defaultValue=\\"hey this is a default value\\"
         style={styles.hm4pcs}
@@ -5297,7 +5330,7 @@ class UseCaptureFile extends React.Component {
         keyboardType=\\"undefined\\"
         autoCorrect={false}
         underlineColorAndroid=\\"transparent\\"
-        testID={props['testID'] || 'File'}
+        testID={\`\${props['testID'] || 'File'}|\`}
       />
     );
   }
@@ -5335,7 +5368,7 @@ class UseCaptureNumber extends React.Component {
         keyboardType=\\"numeric\\"
         autoCorrect={false}
         underlineColorAndroid=\\"transparent\\"
-        testID={props['testID'] || 'Number'}
+        testID={\`\${props['testID'] || 'Number'}|\`}
       />
     );
   }
@@ -5373,7 +5406,7 @@ class UseCapturePhone extends React.Component {
         keyboardType=\\"phone-pad\\"
         autoCorrect={false}
         underlineColorAndroid=\\"transparent\\"
-        testID={props['testID'] || 'Phone'}
+        testID={\`\${props['testID'] || 'Phone'}|\`}
       />
     );
   }
@@ -5411,7 +5444,7 @@ class UseCaptureSecure extends React.Component {
         secureTextEntry
         autoCorrect={false}
         underlineColorAndroid=\\"transparent\\"
-        testID={props['testID'] || 'Secure'}
+        testID={\`\${props['testID'] || 'Secure'}|\`}
       />
     );
   }
@@ -5449,7 +5482,7 @@ class UseCaptureText extends React.Component {
         keyboardType=\\"default\\"
         autoCorrect={false}
         underlineColorAndroid=\\"transparent\\"
-        testID={props['testID'] || 'Text'}
+        testID={\`\${props['testID'] || 'Text'}|\`}
       />
     );
   }
@@ -5488,7 +5521,7 @@ class UseCaptureTextArea extends React.Component {
         multiline={true}
         autoCorrect={false}
         underlineColorAndroid=\\"transparent\\"
-        testID={props['testID'] || 'CaptureTextArea'}
+        testID={\`\${props['testID'] || 'CaptureTextArea'}|\`}
       />
     );
   }
@@ -5526,7 +5559,7 @@ class UseCaptureTextManagedFromOutside extends React.Component {
         keyboardType=\\"default\\"
         autoCorrect={false}
         underlineColorAndroid=\\"transparent\\"
-        testID={props['testID'] || 'CaptureText'}
+        testID={\`\${props['testID'] || 'CaptureText'}|\`}
         value={props.external}
       />
     );
@@ -5559,7 +5592,10 @@ const styles = StyleSheet.create({
 
 const UseHorizontal = props => {
   return (
-    <View testID={props['testID'] || 'Horizontal'} style={styles.h13qdyyc}>
+    <View
+      testID={\`\${props['testID'] || 'Horizontal'}|\`}
+      style={styles.h13qdyyc}
+    >
       {props.children}
     </View>
   );
@@ -5582,7 +5618,7 @@ import { Image } from 'react-native';
 const UseImage = props => {
   return (
     <Image
-      testID={props['testID'] || 'Image'}
+      testID={\`\${props['testID'] || 'Image'}|\${props.another ? 'another' : ''}\`}
       source={{ uri: 'https://views.tools/rocks.jpg' }}
     />
   );
@@ -5608,7 +5644,7 @@ const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
 
 const UseOfProxy = props => {
   return (
-    <View testID={props['testID'] || 'App'} style={styles.hp2cr4d}>
+    <View testID={\`\${props['testID'] || 'App'}|\`} style={styles.hp2cr4d}>
       <Button
         testID=\\"UseOfProxy.Button\\"
         color=\\"red\\"
@@ -5638,7 +5674,7 @@ const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
 const UseProxy = props => {
   const childrenArray = React.Children.toArray(props.children);
   return (
-    <View testID={props['testID'] || 'Button'} style={styles.hp2cr4d}>
+    <View testID={\`\${props['testID'] || 'Button'}|\`} style={styles.hp2cr4d}>
       {props.childrenProxyMap &&
       childrenArray[props.childrenProxyMap['props.icon']]
         ? React.cloneElement(
@@ -5677,7 +5713,10 @@ const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
 const UseRouter = props => {
   return (
     <Router>
-      <View testID={props['testID'] || 'Horizontal'} style={styles.hp2cr4d}>
+      <View
+        testID={\`\${props['testID'] || 'Horizontal'}|\`}
+        style={styles.hp2cr4d}
+      >
         <Route
           path=\\"/\\"
           exact
@@ -5732,7 +5771,7 @@ import Svg, {
 const UseSvg = props => {
   return (
     <Svg
-      testID={props['testID'] || 'Svg'}
+      testID={\`\${props['testID'] || 'Svg'}|\`}
       viewBox=\\"0 0 20 20\\"
       height={20}
       width={20}
@@ -5776,7 +5815,7 @@ const styles = StyleSheet.create({
 
 const UseText = props => {
   return (
-    <Text testID={props['testID'] || 'UseText'} style={styles.h1gml2rz}>
+    <Text testID={\`\${props['testID'] || 'UseText'}|\`} style={styles.h1gml2rz}>
       Hi, I'm some text
     </Text>
   );
@@ -5820,7 +5859,7 @@ const styles = StyleSheet.create({
 
 const UseTextCustomFont = props => {
   return (
-    <View testID={props['testID'] || 'UseTextCustomFont'}>
+    <View testID={\`\${props['testID'] || 'UseTextCustomFont'}|\`}>
       <Text testID={\`UseTextCustomFont.Normal|\`} style={styles.hlldui9}>
         Hi, I'm some text
       </Text>
@@ -5862,7 +5901,7 @@ const styles = StyleSheet.create({ h1jcb2fl: { backgroundColor: 'red' } });
 
 const UseVertical = props => {
   return (
-    <View testID={props['testID'] || 'Vertical'} style={styles.h1jcb2fl}>
+    <View testID={\`\${props['testID'] || 'Vertical'}|\`} style={styles.h1jcb2fl}>
       {props.children}
     </View>
   );
@@ -5886,7 +5925,7 @@ const styles = StyleSheet.create({ h15ehzpl: { zIndex: 5 } });
 const ViewNameIsntUsedInStyle = props => {
   return (
     <Animated.View
-      testID={props['testID'] || 'ViewNameIsntUsedInStyle'}
+      testID={\`\${props['testID'] || 'ViewNameIsntUsedInStyle'}|\`}
       style={[styles.h15ehzpl, { opacity: props.opacity }]}
     >
       {props.children}
@@ -5913,7 +5952,7 @@ const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
 
 const When = props => {
   return (
-    <View testID={props['testID'] || 'App'} style={styles.hp2cr4d}>
+    <View testID={\`\${props['testID'] || 'App'}|\`} style={styles.hp2cr4d}>
       {props.showMe ? <Text testID={\`When.Text|\`}>I may be hidden</Text> : null}
       {props.children}
     </View>
@@ -5938,7 +5977,7 @@ import { Text } from 'react-native';
 
 const WhenTopLevel = props => {
   return props.showMe ? (
-    <Text testID={props['testID'] || 'Text'}>I may be hidden</Text>
+    <Text testID={\`\${props['testID'] || 'Text'}|\`}>I may be hidden</Text>
   ) : null;
 };
 
@@ -5965,7 +6004,7 @@ const WithTest = props => {
       onPress={props.change}
       underlayColor=\\"transparent\\"
     >
-      <View testID={props['testID'] || 'Vertical'}>
+      <View testID={\`\${props['testID'] || 'Vertical'}|\`}>
         <Text testID={\`WithTest.Text|\`}>{props.text}</Text>
         {props.children}
       </View>

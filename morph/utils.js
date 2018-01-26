@@ -131,7 +131,7 @@ export const isSvg = node => /^Svg/.test(node.name) && node.isBasic
 
 export const getScopeDescription = scope => {
   let dictionary = {}
-  let re = /(?:^|\W)props.(\w+)(?!\w)/g
+  const re = /(?:^|\W)props.(\w+)(?!\w)/g
   let match
 
   while ((match = re.exec(scope))) {
@@ -140,7 +140,6 @@ export const getScopeDescription = scope => {
 
   dictionary['!'] = 'not-'
   dictionary['&&'] = '-and-'
-  dictionary['||'] = '-or-'
   dictionary['props.'] = ''
   dictionary[' '] = ''
 

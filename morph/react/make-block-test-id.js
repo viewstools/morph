@@ -31,7 +31,7 @@ export const enter = key => (node, parent, state) => {
 
   if (node.isBasic && parent) {
     value = `{\`${state.name}.${blockName}|${conditional}\`}`
-  } else if (node.isBasic && parent) {
+  } else if (node.isBasic) {
     value = `{\`\${props['${key}'] || '${blockName}'}|${conditional}\`}`
   } else if (parent) {
     value = `"${state.name}.${blockName}"`
