@@ -1,5 +1,4 @@
-import toCamelCase from 'to-camel-case'
-import toSlugCase from 'to-slug-case'
+import { getScopeDescription } from '../utils.js'
 
 export const enter = key => (node, parent, state) => {
   if (node.name === 'Proxy') return
@@ -23,27 +22,26 @@ export const enter = key => (node, parent, state) => {
 
   let conditional = `''`
   scopes.forEach(scope => {
-    let s = toSlugCase(scope.replace('!', 'not-'))
-    s = s.replace(/props./g, '')
-    s = toCamelCase(s)
-    conditional = `${scope} ? '${s}' : ` + conditional
+    conditional = `${scope} ? '${getScopeDescription(scope)}' : ` + conditional
   })
+
+  conditional = scopes.length > 0 ? `\${${conditional}}` : ''
+
+  let value
 
   if (node.isBasic) {
     if (parent) {
-      state.render.push(
-        ` ${key}={"${state.name}.${blockName}|" + (${conditional})}`
-      )
+      value = `{\`${state.name}.${blockName}|${conditional}\`}` //  + (${conditional})}`
     } else {
-      state.render.push(
-        ` ${key}={(props["${key}"] || "${blockName}") + '|' + (${conditional})}`
-      )
+      value = `{\`\${props['${key}'] || '${blockName}'}|${conditional}\`}` // ` + '|' + (${conditional})}`
     }
   } else {
     if (parent) {
-      state.render.push(` ${key}="${state.name}.${blockName}"`)
+      value = `"${state.name}.${blockName}"`
     } else {
-      state.render.push(` ${key}={props["${key}"] || "${blockName}"}`)
+      value = `{props["${key}"] || "${blockName}"}`
     }
   }
+
+  state.render.push(` ${key}=${value}`)
 }

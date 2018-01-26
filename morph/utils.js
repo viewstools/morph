@@ -1,5 +1,7 @@
 import safe from './react/safe.js'
 import wrap from './react/wrap.js'
+import toCamelCase from 'to-camel-case'
+import toSlugCase from 'to-slug-case'
 
 const safeScope = value =>
   typeof value === 'string' && !isCode(value) ? JSON.stringify(value) : value
@@ -126,3 +128,26 @@ export const isList = node =>
 export const isEmpty = list => list.length === 0
 
 export const isSvg = node => /^Svg/.test(node.name) && node.isBasic
+
+export const getScopeDescription = scope => {
+  let dictionary = []
+  var re = /(?:^|\W)props.(\w+)(?!\w)/g,
+    match
+
+  while ((match = re.exec(scope))) {
+    dictionary[match[1]] = toSlugCase(match[1])
+  }
+
+  dictionary['!'] = 'not-'
+  dictionary['&&'] = '-and-'
+  dictionary['props.'] = ''
+  dictionary[' '] = ''
+
+  for (var key in dictionary) {
+    scope = scope.replace(new RegExp(key, 'g'), dictionary[key])
+  }
+
+  scope = toCamelCase(scope)
+
+  return scope
+}
