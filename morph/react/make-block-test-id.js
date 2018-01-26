@@ -1,5 +1,16 @@
+import toCamelCase from 'to-camel-case'
+import toSlugCase from 'to-slug-case'
+
 export const enter = key => (node, parent, state) => {
   if (node.name === 'Proxy') return
+
+  const scopes = node.scopes
+    .filter(scope => !scope.isSystem)
+    .map(scope => {
+      return scope.value
+    })
+    .filter(Boolean)
+    .reverse()
 
   let blockName = node.is || node.name
 
@@ -10,9 +21,29 @@ export const enter = key => (node, parent, state) => {
     state.testIds[blockName] = 0
   }
 
-  if (parent) {
-    state.render.push(` ${key}="${state.name}.${blockName}"`)
+  let conditional = `''`
+  scopes.forEach(scope => {
+    let s = toSlugCase(scope.replace('!', 'not-'))
+    s = s.replace(/props./g, '')
+    s = toCamelCase(s)
+    conditional = `${scope} ? '${s}' : ` + conditional
+  })
+
+  if (node.isBasic) {
+    if (parent) {
+      state.render.push(
+        ` ${key}={"${state.name}.${blockName}|" + (${conditional})}`
+      )
+    } else {
+      state.render.push(
+        ` ${key}={(props["${key}"] || "${blockName}") + '|' + (${conditional})}`
+      )
+    }
   } else {
-    state.render.push(` ${key}={props["${key}"] || "${blockName}"}`)
+    if (parent) {
+      state.render.push(` ${key}="${state.name}.${blockName}"`)
+    } else {
+      state.render.push(` ${key}={props["${key}"] || "${blockName}"}`)
+    }
   }
 }
