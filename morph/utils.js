@@ -138,14 +138,16 @@ export const getScopeDescription = scope => {
     dictionary[match[1]] = toSlugCase(match[1])
   }
 
-  dictionary['!'] = 'not-'
-  dictionary['&&'] = '-and-'
-  dictionary['props.'] = ''
-  dictionary[' '] = ''
-
   for (let key in dictionary) {
     scope = scope.replace(new RegExp(key, 'g'), dictionary[key])
   }
 
-  return toCamelCase(scope)
+  return toCamelCase(
+    scope
+      .replace(/\|\|/g, '-or-')
+      .replace(/!/g, 'not-')
+      .replace(/&&/g, '-and-')
+      .replace(/props\./g, '')
+      .replace(/\s/g, '')
+  )
 }
