@@ -5,5 +5,6 @@ when props.somethingGreen
 onClick props.onClickGreen
 when props.whatMakesBlue
 onClick props.onClickBlue
+
 Text
 text toggle popup

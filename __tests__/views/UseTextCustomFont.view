@@ -6,6 +6,7 @@ fontSize 16
 lineHeight 1.5
 fontWeight 300
 text Hi, I'm some text
+
 Italic Text
 color blue
 fontFamily CustomFontNotOnGoogle, sans-serif

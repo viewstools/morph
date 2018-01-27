@@ -2,10 +2,14 @@ Form Vertical
 onSubmit () => props.onSubmit(state)
 Name CaptureText
 autoFocus true
+
 Surname CaptureText
+
 Password CaptureSecure
+
 Email CaptureEmail
 defaultValue morph@viewsdx.com
+
 Button Vertical
 onClick () => props.onSubmit(state)
 Text

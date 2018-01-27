@@ -7,5 +7,6 @@ when disabled
 color blue
 Text
 text click me
+
 SubButton
 isDisabled true
