@@ -1,6 +1,6 @@
 import {
   checkParentStem,
-  getScopedProps,
+  getScopedCondition,
   getStyleType,
   isCode,
   isStyle,
@@ -22,11 +22,11 @@ export function enter(node, parent, state) {
   const code = isCode(node)
 
   // TODO refactor
-  if (getScopedProps(node, parent)) {
+  if (getScopedCondition(node, parent)) {
     isScopedVal = true
 
     styleForProperty = {
-      [node.name]: getScopedProps(node, parent),
+      [node.name]: getScopedCondition(node, parent),
     }
   } else {
     ;({ _isProp, ...styleForProperty } = state.getStyleForProperty(
