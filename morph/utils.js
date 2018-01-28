@@ -180,12 +180,13 @@ export const getScopes = (node, parent) => {
 export const isSvg = node => /^Svg/.test(node.name) && node.isBasic
 
 export const getScopeDescription = scope => {
-  let dictionary = {}
+  const dictionary = {}
   const re = /(?:^|\W)props.(\w+)(?!\w)/g
-  let match
 
-  while ((match = re.exec(scope))) {
+  let match = re.exec(scope)
+  while (match) {
     dictionary[match[1]] = toSlugCase(match[1])
+    match = re.exec(scope)
   }
 
   for (let key in dictionary) {
