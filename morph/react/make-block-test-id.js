@@ -3,14 +3,6 @@ import { getScopeDescription } from '../utils.js'
 export const enter = key => (node, parent, state) => {
   if (node.name === 'Proxy') return
 
-  const scopes = node.scopes
-    .filter(scope => !scope.isSystem)
-    .map(scope => {
-      return scope.value
-    })
-    .filter(Boolean)
-    .reverse()
-
   let blockName = node.is || node.name
 
   if (typeof state.testIds[blockName] === 'number') {
@@ -20,15 +12,19 @@ export const enter = key => (node, parent, state) => {
     state.testIds[blockName] = 0
   }
 
-  let conditional = `''`
-  scopes.forEach(scope => {
-    conditional = `${scope} ? '${getScopeDescription(scope)}' : ` + conditional
-  })
+  const scopes = node.scopes
+    .filter(scope => !scope.isSystem)
+    .map(scope => scope.value)
+    .filter(Boolean)
+    .reverse()
 
+  let conditional = scopes.reduce(
+    (prev, scope) => `${scope} ? '${getScopeDescription(scope)}' : ${prev}`,
+    "''"
+  )
   conditional = scopes.length > 0 ? `\${${conditional}}` : ''
 
   let value
-
   if (node.isBasic && parent) {
     value = `{\`${state.name}.${blockName}|${conditional}\`}`
   } else if (node.isBasic) {
