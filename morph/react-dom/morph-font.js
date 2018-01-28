@@ -1,4 +1,10 @@
 import { isGoogleFont } from '../fonts.js'
+import sort from 'bubblesort'
+
+const fontsOrder = ['eot', 'woff2', 'woff', 'ttf', 'svg', 'otf']
+
+const sortFonts = (a, b) =>
+  fontsOrder.indexOf(b.type) - fontsOrder.indexOf(a.type)
 
 export default ({ font, files }) => {
   let body
@@ -9,7 +15,7 @@ export default ({ font, files }) => {
       '+'
     )}:${font.weight}${font.style === 'italic' ? 'i' : ''}');")`
   } else {
-    const sources = files.filter(src => font.id === src.id)
+    const sources = sort(files.filter(src => font.id === src.id), sortFonts)
 
     body = `${sources
       .map(src => `import ${src.type} from '${src.relativeFile}'`)
