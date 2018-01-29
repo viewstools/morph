@@ -27,7 +27,7 @@ let {
     isBundlingBaseCss: false,
     logic: true,
     pretty: true,
-    track: true,
+    track: false,
     watch: false,
   },
 })
@@ -49,7 +49,7 @@ if (help) {
     --logic         if true, it includes .view.logic.js files in
                       the output, defaults to true
     --pretty        format output code, defaults to true
-    --track         enable UI tracking, defaults to true
+    --track         enable UI tracking, defaults to false
     --watch         watch a directory and produce .view.js files
   `)
 
