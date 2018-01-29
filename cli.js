@@ -36,6 +36,7 @@ if (help) {
     --as            target platform
                       react-dom (default)
                       react-native
+                      e2e
 
     --compile       if true, produces ES5 JS, defaults to false
     --bundle-base-css if true, it will bundle the base CSS in react-dom,
