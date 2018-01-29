@@ -1,21 +1,9 @@
 export default ({ name, state }) => {
   const render = state.render.sort().join('')
 
-  return ` const get = (id, ...scopes) => () => {
-    const el = browser.element(\`[data-test-id*="\$\{id}|"]\`);
+  return ` const { get } = require("@viewstools/e2e");
 
-    scopes.forEach(scope => {
-      el[scope] = () => browser.element(\`[data-test-id="\$\{id}|\$\{scope}"]\`);
-    });
-
-    return el;
-  };
-
-  const ${state.name} = {
+  module.exports = {
     ${render}
-  };
-
-  export default ${state.name};
-
-  `
+  };`
 }
