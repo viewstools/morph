@@ -9,7 +9,7 @@ const getFont = font =>
   `./Fonts/${font.family}-${font.weight}${
     font.style === 'italic' ? '-italic' : ''
   }`
-;['react-dom', 'react-native'].forEach(as =>
+;['react-dom', 'react-native', 'e2e'].forEach(as =>
   describe(as, () => {
     readdirSync(getPath())
       .filter(isView)

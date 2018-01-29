@@ -1,5 +1,1180 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`e2e parses e2e Action 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const Action = {
+  Vertical: get('Action.Vertical'),
+  Text: get('Action.Text'),
+  SubButton: get('Action.SubButton'),
+};
+
+export default Action;
+",
+}
+`;
+
+exports[`e2e parses e2e AnimatedButton 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const AnimatedButton = {
+  Vertical: get('AnimatedButton.Vertical'),
+  Text: get('AnimatedButton.Text'),
+};
+
+export default AnimatedButton;
+",
+}
+`;
+
+exports[`e2e parses e2e AppRegionDrag 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const AppRegionDrag = {
+  Vertical: get('AppRegionDrag.Vertical'),
+};
+
+export default AppRegionDrag;
+",
+}
+`;
+
+exports[`e2e parses e2e BackgroundImage 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const BackgroundImage = {
+  Vertical: get('BackgroundImage.Vertical'),
+  Horizontal: get('BackgroundImage.Horizontal'),
+};
+
+export default BackgroundImage;
+",
+}
+`;
+
+exports[`e2e parses e2e BoxShadow 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const BoxShadow = {
+  Vertical: get('BoxShadow.Vertical'),
+  Vertical: get('BoxShadow.Vertical'),
+  Vertical: get('BoxShadow.Vertical'),
+};
+
+export default BoxShadow;
+",
+}
+`;
+
+exports[`e2e parses e2e ClassName 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const ClassName = {
+  Vertical: get('ClassName.Vertical'),
+};
+
+export default ClassName;
+",
+}
+`;
+
+exports[`e2e parses e2e Code 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const Code = {
+  Vertical: get('Code.Vertical'),
+  Text: get('Code.Text'),
+};
+
+export default Code;
+",
+}
+`;
+
+exports[`e2e parses e2e DynamicStylesApplyToBasicBlocksOnly 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const DynamicStylesApplyToBasicBlocksOnly = {
+  Vertical: get('DynamicStylesApplyToBasicBlocksOnly.Vertical'),
+  OnTop: get('DynamicStylesApplyToBasicBlocksOnly.OnTop'),
+};
+
+export default DynamicStylesApplyToBasicBlocksOnly;
+",
+}
+`;
+
+exports[`e2e parses e2e EmptyText 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const EmptyText = {
+  EmptyText: get('EmptyText.EmptyText'),
+};
+
+export default EmptyText;
+",
+}
+`;
+
+exports[`e2e parses e2e Form 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const Form = {
+  Form: get('Form.Form'),
+  Name: get('Form.Name'),
+  Surname: get('Form.Surname'),
+  Password: get('Form.Password'),
+  Email: get('Form.Email'),
+  Button: get('Form.Button'),
+  Text: get('Form.Text'),
+};
+
+export default Form;
+",
+}
+`;
+
+exports[`e2e parses e2e GoTo 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const GoTo = {
+  Vertical: get('GoTo.Vertical'),
+  Text: get('GoTo.Text'),
+};
+
+export default GoTo;
+",
+}
+`;
+
+exports[`e2e parses e2e Hover 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const Hover = {
+  Button: get('Hover.Button'),
+  Text: get('Hover.Text'),
+};
+
+export default Hover;
+",
+}
+`;
+
+exports[`e2e parses e2e JustText 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const JustText = {
+  Text: get('JustText.Text'),
+};
+
+export default JustText;
+",
+}
+`;
+
+exports[`e2e parses e2e ListOfSomething 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const ListOfSomething = {
+  ListOfSomething: get('ListOfSomething.ListOfSomething'),
+  Something: get('ListOfSomething.Something'),
+};
+
+export default ListOfSomething;
+",
+}
+`;
+
+exports[`e2e parses e2e ListWhen 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const ListWhen = {
+  List: get('ListWhen.List'),
+  Card: get('ListWhen.Card'),
+};
+
+export default ListWhen;
+",
+}
+`;
+
+exports[`e2e parses e2e LocalImage 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const LocalImage = {
+  LocalImage: get('LocalImage.LocalImage', 'isCat'),
+};
+
+export default LocalImage;
+",
+}
+`;
+
+exports[`e2e parses e2e LocalImageSvg 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const LocalImageSvg = {
+  LocalImageSvg: get('LocalImageSvg.LocalImageSvg'),
+};
+
+export default LocalImageSvg;
+",
+}
+`;
+
+exports[`e2e parses e2e LocalOrRemoteImageWhenCode 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const LocalOrRemoteImageWhenCode = {
+  LocalOrRemoteImageWhenCode: get(
+    'LocalOrRemoteImageWhenCode.LocalOrRemoteImageWhenCode'
+  ),
+};
+
+export default LocalOrRemoteImageWhenCode;
+",
+}
+`;
+
+exports[`e2e parses e2e NameIsType 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const NameIsType = {
+  Texto: get('NameIsType.Texto'),
+};
+
+export default NameIsType;
+",
+}
+`;
+
+exports[`e2e parses e2e NestedRoutes 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const NestedRoutes = {
+  Topics: get('NestedRoutes.Topics'),
+  Text: get('NestedRoutes.Text'),
+  Link: get('NestedRoutes.Link'),
+  Text: get('NestedRoutes.Text'),
+  Topic: get('NestedRoutes.Topic'),
+};
+
+export default NestedRoutes;
+",
+}
+`;
+
+exports[`e2e parses e2e Print 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const Print = {
+  Vertical: get('Print.Vertical'),
+  Text: get('Print.Text'),
+  Text: get('Print.Text'),
+};
+
+export default Print;
+",
+}
+`;
+
+exports[`e2e parses e2e ProxyTest 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const ProxyTest = {
+  Vertical: get('ProxyTest.Vertical'),
+  Horizontal: get('ProxyTest.Horizontal'),
+};
+
+export default ProxyTest;
+",
+}
+`;
+
+exports[`e2e parses e2e Scope 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const Scope = {
+  Text: get(
+    'Scope.Text',
+    'notWhatMakesBlueAndSomethingGreen',
+    'whatMakesBlue',
+    'somethingGreen'
+  ),
+};
+
+export default Scope;
+",
+}
+`;
+
+exports[`e2e parses e2e ScopeOnCustomView 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const ScopeOnCustomView = {
+  Button: get('ScopeOnCustomView.Button', 'b', 'a'),
+};
+
+export default ScopeOnCustomView;
+",
+}
+`;
+
+exports[`e2e parses e2e ScopePopup 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const ScopePopup = {
+  Popup: get('ScopePopup.Popup'),
+  Toggle: get('ScopePopup.Toggle', 'whatMakesBlue', 'somethingGreen'),
+  Text: get('ScopePopup.Text'),
+};
+
+export default ScopePopup;
+",
+}
+`;
+
+exports[`e2e parses e2e ScopePopup2 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const ScopePopup2 = {
+  Popup: get('ScopePopup2.Popup'),
+  Toggle: get('ScopePopup2.Toggle'),
+  Text: get('ScopePopup2.Text'),
+  Content: get('ScopePopup2.Content', 'isSuperVisible', 'isShown'),
+};
+
+export default ScopePopup2;
+",
+}
+`;
+
+exports[`e2e parses e2e SomeMissingStyle 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const SomeMissingStyle = {
+  WindowControl: get('SomeMissingStyle.WindowControl'),
+};
+
+export default SomeMissingStyle;
+",
+}
+`;
+
+exports[`e2e parses e2e Teleport 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const Teleport = {
+  Horizontal: get('Teleport.Horizontal'),
+  Text: get('Teleport.Text'),
+};
+
+export default Teleport;
+",
+}
+`;
+
+exports[`e2e parses e2e Test 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const Test = {
+  Custom: get('Test.Custom'),
+  Something: get('Test.Something'),
+  Another: get('Test.Another'),
+};
+
+export default Test;
+",
+}
+`;
+
+exports[`e2e parses e2e TestIds 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const TestIds = {
+  App: get('TestIds.App'),
+  Text: get('TestIds.Text'),
+  Text: get('TestIds.Text'),
+  External: get('TestIds.External'),
+  Name: get('TestIds.Name'),
+};
+
+export default TestIds;
+",
+}
+`;
+
+exports[`e2e parses e2e TextInterpolation 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const TextInterpolation = {
+  Vertical: get('TextInterpolation.Vertical'),
+  Text: get('TextInterpolation.Text'),
+};
+
+export default TextInterpolation;
+",
+}
+`;
+
+exports[`e2e parses e2e Toggle 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const Toggle = {
+  Text: get('Toggle.Text'),
+};
+
+export default Toggle;
+",
+}
+`;
+
+exports[`e2e parses e2e UseCaptureEmail 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const UseCaptureEmail = {
+  Email: get('UseCaptureEmail.Email'),
+};
+
+export default UseCaptureEmail;
+",
+}
+`;
+
+exports[`e2e parses e2e UseCaptureFile 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const UseCaptureFile = {
+  File: get('UseCaptureFile.File'),
+};
+
+export default UseCaptureFile;
+",
+}
+`;
+
+exports[`e2e parses e2e UseCaptureNumber 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const UseCaptureNumber = {
+  Number: get('UseCaptureNumber.Number'),
+};
+
+export default UseCaptureNumber;
+",
+}
+`;
+
+exports[`e2e parses e2e UseCapturePhone 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const UseCapturePhone = {
+  Phone: get('UseCapturePhone.Phone'),
+};
+
+export default UseCapturePhone;
+",
+}
+`;
+
+exports[`e2e parses e2e UseCaptureSecure 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const UseCaptureSecure = {
+  Secure: get('UseCaptureSecure.Secure'),
+};
+
+export default UseCaptureSecure;
+",
+}
+`;
+
+exports[`e2e parses e2e UseCaptureText 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const UseCaptureText = {
+  Text: get('UseCaptureText.Text'),
+};
+
+export default UseCaptureText;
+",
+}
+`;
+
+exports[`e2e parses e2e UseCaptureTextArea 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const UseCaptureTextArea = {
+  CaptureTextArea: get('UseCaptureTextArea.CaptureTextArea'),
+};
+
+export default UseCaptureTextArea;
+",
+}
+`;
+
+exports[`e2e parses e2e UseCaptureTextManagedFromOutside 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const UseCaptureTextManagedFromOutside = {
+  CaptureText: get('UseCaptureTextManagedFromOutside.CaptureText'),
+};
+
+export default UseCaptureTextManagedFromOutside;
+",
+}
+`;
+
+exports[`e2e parses e2e UseHorizontal 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const UseHorizontal = {
+  Horizontal: get('UseHorizontal.Horizontal'),
+};
+
+export default UseHorizontal;
+",
+}
+`;
+
+exports[`e2e parses e2e UseImage 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const UseImage = {
+  Image: get('UseImage.Image', 'another'),
+};
+
+export default UseImage;
+",
+}
+`;
+
+exports[`e2e parses e2e UseOfProxy 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const UseOfProxy = {
+  App: get('UseOfProxy.App'),
+  Button: get('UseOfProxy.Button'),
+};
+
+export default UseOfProxy;
+",
+}
+`;
+
+exports[`e2e parses e2e UseProxy 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const UseProxy = {
+  Button: get('UseProxy.Button'),
+  Text: get('UseProxy.Text'),
+};
+
+export default UseProxy;
+",
+}
+`;
+
+exports[`e2e parses e2e UseRouter 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const UseRouter = {
+  Horizontal: get('UseRouter.Horizontal'),
+  Home: get('UseRouter.Home'),
+  About: get('UseRouter.About'),
+  Topics: get('UseRouter.Topics'),
+};
+
+export default UseRouter;
+",
+}
+`;
+
+exports[`e2e parses e2e UseSvg 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const UseSvg = {
+  Svg: get('UseSvg.Svg'),
+  SvgPath: get('UseSvg.SvgPath'),
+  SvgCircle: get('UseSvg.SvgCircle'),
+  SvgGroup: get('UseSvg.SvgGroup'),
+  SvgPath: get('UseSvg.SvgPath'),
+  SvgPath: get('UseSvg.SvgPath'),
+  SvgText: get('UseSvg.SvgText'),
+};
+
+export default UseSvg;
+",
+}
+`;
+
+exports[`e2e parses e2e UseText 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const UseText = {
+  UseText: get('UseText.UseText'),
+};
+
+export default UseText;
+",
+}
+`;
+
+exports[`e2e parses e2e UseTextCustomFont 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const UseTextCustomFont = {
+  UseTextCustomFont: get('UseTextCustomFont.UseTextCustomFont'),
+  Normal: get('UseTextCustomFont.Normal'),
+  Italic: get('UseTextCustomFont.Italic'),
+};
+
+export default UseTextCustomFont;
+",
+}
+`;
+
+exports[`e2e parses e2e UseVertical 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const UseVertical = {
+  Vertical: get('UseVertical.Vertical'),
+};
+
+export default UseVertical;
+",
+}
+`;
+
+exports[`e2e parses e2e ViewNameIsntUsedInStyle 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const ViewNameIsntUsedInStyle = {
+  ViewNameIsntUsedInStyle: get(
+    'ViewNameIsntUsedInStyle.ViewNameIsntUsedInStyle'
+  ),
+};
+
+export default ViewNameIsntUsedInStyle;
+",
+}
+`;
+
+exports[`e2e parses e2e When 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const When = {
+  App: get('When.App'),
+  Text: get('When.Text'),
+};
+
+export default When;
+",
+}
+`;
+
+exports[`e2e parses e2e WhenTopLevel 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const WhenTopLevel = {
+  Text: get('WhenTopLevel.Text'),
+};
+
+export default WhenTopLevel;
+",
+}
+`;
+
+exports[`e2e parses e2e WithTest 1`] = `
+Object {
+  "code": "const get = (id, ...scopes) => () => {
+  const el = browser.element(\`[data-test-id*=\\"\${id}|\\"]\`);
+
+  scopes.forEach(scope => {
+    el[scope] = () => browser.element(\`[data-test-id=\\"\${id}|\${scope}\\"]\`);
+  });
+
+  return el;
+};
+
+const WithTest = {
+  Vertical: get('WithTest.Vertical'),
+  Text: get('WithTest.Text'),
+};
+
+export default WithTest;
+",
+}
+`;
+
 exports[`react-dom parses react-dom Action 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */

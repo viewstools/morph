@@ -37,7 +37,8 @@ const relativise = (from, to) => {
   return r.substr(r.startsWith('../..') ? 3 : 1)
 }
 
-const onMorphWriteFile = ({ file, code }) => fs.writeFile(`${file}.js`, code)
+const onMorphWriteFile = ({ as, file, code }) =>
+  fs.writeFile(`${file}${as === 'e2e' ? '.page.js' : '.js'}`, code)
 
 module.exports = options => {
   return new Promise(async (resolve, reject) => {
@@ -311,6 +312,8 @@ height 50`
       Object.keys(dependsOn).filter(dep => dependsOn[dep].includes(view))
 
     const updateResponsibleFor = viewRaw => {
+      if (as === 'e2e') return
+
       const view = viewRaw.split('.')[0]
       const list = []
       const left = getPointsOfUseFor(view)
@@ -370,6 +373,7 @@ height 50`
         })
 
         const toMorph = {
+          as,
           code: res.code,
           dependsOn: dependsOn[view],
           // responsibleFor: responsibleFor[view],
@@ -400,40 +404,43 @@ height 50`
           await onMorph(toMorph)
         }
 
-        await Promise.all(
-          res.svgs.map(async svg => {
-            const svgFile = path.resolve(rawFile, '..', svg.source)
+        if (Array.isArray(res.svgs)) {
+          await Promise.all(
+            res.svgs.map(async svg => {
+              const svgFile = path.resolve(rawFile, '..', svg.source)
 
-            try {
-              const inlined = await morphInlineSvg(svgFile)
+              try {
+                const inlined = await morphInlineSvg(svgFile)
 
-              // TODO revisit as most of the options don't matter here
-              const res = morph(inlined, {
-                as,
-                compile,
-                debug,
-                enableAnimated,
-                file: { raw: rawFile, relative: file },
-                name: svg.view,
-                getImport,
-                pretty,
-                views,
-              })
+                // TODO revisit as most of the options don't matter here
+                const res = morph(inlined, {
+                  as,
+                  compile,
+                  debug,
+                  enableAnimated,
+                  file: { raw: rawFile, relative: file },
+                  name: svg.view,
+                  getImport,
+                  pretty,
+                  views,
+                })
 
-              await onMorph({
-                code: res.code,
-                isInlineSvg: true,
-                file: path.resolve(rawFile, '..', `${svg.view}.view`),
-                view,
-              })
-            } catch (error) {
-              console.error(
-                chalk.magenta('M'),
-                `${view}. Can't morph inline ${svgFile}`
-              )
-            }
-          })
-        )
+                await onMorph({
+                  as,
+                  code: res.code,
+                  isInlineSvg: true,
+                  file: path.resolve(rawFile, '..', `${svg.view}.view`),
+                  view,
+                })
+              } catch (error) {
+                console.error(
+                  chalk.magenta('M'),
+                  `${view}. Can't morph inline ${svgFile}`
+                )
+              }
+            })
+          )
+        }
 
         verbose && console.log(chalk.green('M'), view)
       } catch (error) {
