@@ -57,6 +57,7 @@ module.exports = options => {
       once,
       pretty,
       src,
+      track,
       verbose,
       viewNotFound,
     } = Object.assign(
@@ -74,6 +75,7 @@ module.exports = options => {
         once: false,
         pretty: true,
         src: process.cwd(),
+        track: true,
         verbose: true,
       },
       options
@@ -369,6 +371,7 @@ height 50`
           getFont,
           getImport,
           pretty,
+          track,
           views,
         })
 
@@ -422,6 +425,7 @@ height 50`
                   name: svg.view,
                   getImport,
                   pretty,
+                  track,
                   views,
                 })
 

@@ -202,3 +202,15 @@ export const getScopeDescription = scope => {
       .replace(/\s/g, '')
   )
 }
+
+export const makeOnClickTracker = (node, state) => {
+  const block = node.testId
+    ? `"${state.name}.${node.testId}"`
+    : `props["${state.testIdKey}"] || "${state.name}"`
+
+  const track = `context.track({ block: ${block}, action: "click" })`
+
+  state.isTracking = true
+
+  return `event => { ${track}; (${node.value})(event); }`
+}

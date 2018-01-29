@@ -1,0 +1,32 @@
+import { getScopeDescription } from '../utils.js'
+
+export const enter = (node, parent, state) => {
+  if (node.name === 'Proxy') return
+
+  const scopes = node.scopes
+    .filter(scope => !scope.isSystem)
+    .map(scope => scope.value)
+    .filter(Boolean)
+    .reverse()
+
+  let conditional = scopes.reduce(
+    (prev, scope) => `${scope} ? '${getScopeDescription(scope)}' : ${prev}`,
+    "''"
+  )
+  conditional = scopes.length > 0 ? `\${${conditional}}` : ''
+
+  let value
+  if (node.isBasic && parent) {
+    value = `{\`${state.name}.${node.testId}|${conditional}\`}`
+  } else if (node.isBasic) {
+    value = `{\`\${props['${state.testIdKey}'] || '${
+      node.testId
+    }'}|${conditional}\`}`
+  } else if (parent) {
+    value = `"${state.name}.${node.testId}"`
+  } else {
+    value = `{props["${state.testIdKey}"] || "${node.testId}"}`
+  }
+
+  state.render.push(` ${state.testIdKey}=${value}`)
+}

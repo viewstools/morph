@@ -22,6 +22,7 @@ export const morph = (
     inlineStyles,
     name,
     pretty = false,
+    track = true,
     views = {},
   }
 ) => {
@@ -33,6 +34,7 @@ export const morph = (
     getImport,
     inlineStyles,
     name,
+    track,
     view: code,
     views,
   })

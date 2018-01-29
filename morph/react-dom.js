@@ -21,8 +21,8 @@ export default ({
   file,
   getFont = () => false,
   getImport,
-  inlineStyles = true,
   name,
+  track = true,
   view,
 }) => {
   const finalName = restrictedNames.includes(name) ? `${name}1` : name
@@ -46,7 +46,6 @@ export default ({
     getStyleForProperty,
     getValueForProperty,
     images: [],
-    inlineStyles,
     isDynamic: false,
     isReactNative: false,
     name: finalName,
@@ -55,7 +54,9 @@ export default ({
     svgs: [],
     usedBlockNames: { [finalName]: 1 },
     uses: [],
+    testIdKey: 'data-test-id',
     testIds: {},
+    track,
     use(block) {
       if (
         state.uses.includes(block) ||

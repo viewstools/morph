@@ -5,7 +5,7 @@ const { morph, pathToName } = require('./lib.js')
 const chalk = require('chalk')
 const watch = require('./watch.js')
 
-const {
+let {
   _,
   as,
   compile,
@@ -13,12 +13,13 @@ const {
   isBundlingBaseCss,
   logic,
   pretty,
+  track,
   watch: shouldWatch,
 } = require('minimist')(process.argv.slice(2), {
   alias: {
     help: 'h',
   },
-  booleans: ['help', 'watch'],
+  booleans: ['help', 'track', 'watch'],
 
   default: {
     as: 'react-dom',
@@ -26,9 +27,12 @@ const {
     isBundlingBaseCss: false,
     logic: true,
     pretty: true,
+    track: true,
     watch: false,
   },
 })
+
+track = track !== 'false'
 
 if (help) {
   console.log(`
@@ -45,6 +49,7 @@ if (help) {
     --logic         if true, it includes .view.logic.js files in
                       the output, defaults to true
     --pretty        format output code, defaults to true
+    --track         enable UI tracking, defaults to true
     --watch         watch a directory and produce .view.js files
   `)
 
@@ -76,7 +81,9 @@ if (shouldWatch) {
   console.log(`Views Tools morpher v${pkg.version}\n\n`)
 
   console.log(
-    `Will morph files at '${chalk.green(input)}' as ${chalk.green(as)}\n`
+    `Will morph files at '${chalk.green(input)}' as ${chalk.green(as)} ${
+      track ? 'with tracking' : 'without tracking'
+    }\n`
   )
   console.log(chalk.yellow('A'), ' = Added')
   console.log(chalk.blue('D'), ` = View deleted`)
@@ -93,6 +100,7 @@ if (shouldWatch) {
     logic,
     pretty,
     src: input,
+    track,
   })
 } else {
   if (statSync(input).isDirectory()) {
@@ -104,6 +112,7 @@ if (shouldWatch) {
       once: true,
       pretty,
       src: input,
+      track,
     })
   } else {
     const { code } = morph(readFileSync(input, 'utf-8'), {
@@ -112,6 +121,7 @@ if (shouldWatch) {
       file: { raw: input, relative: input },
       name: pathToName(input),
       pretty,
+      track,
     })
 
     console.log(code)

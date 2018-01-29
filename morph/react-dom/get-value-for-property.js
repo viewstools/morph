@@ -4,6 +4,7 @@ import {
   getScopedRequireCondition,
   getScopes,
   isValidImgSrc,
+  makeOnClickTracker,
   pushImageToState,
 } from '../utils.js'
 import safe from '../react/safe.js'
@@ -61,6 +62,15 @@ export default (node, parent, state) => {
   } else if (getScopedCondition(node, parent)) {
     return {
       [node.name]: safe(getScopedCondition(node, parent)),
+    }
+  } else if (
+    parent.isBasic &&
+    node.name === 'onClick' &&
+    state.track &&
+    !state.debug
+  ) {
+    return {
+      onClick: wrap(makeOnClickTracker(node, state)),
     }
   } else {
     return {
