@@ -1,7 +1,9 @@
 export default ({ state, name }) => {
-  if (!state.track) return ''
+  if (state.track && !state.debug) {
+    return `${name}.contextTypes = {
+  track: PropTypes.func.isRequired
+}`
+  }
 
-  return `${name}.contextTypes = {
-    track: PropTypes.func.isRequired
-  }`
+  return ''
 }

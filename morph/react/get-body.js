@@ -13,23 +13,24 @@ export default ({ state, name }) => {
       : ''
 
   const block = `this.props["${state.testIdKey}"] || "${state.name}"`
-  const maybeTracking = state.track
-    ? `componentDidMount() {
+  const maybeTracking =
+    state.track && !state.debug
+      ? `componentDidMount() {
   this.context.track({ block: ${block}, action: "enter" })
 }
 
 componentWillUnmount() {
   this.context.track({ block: ${block}, action: "leave" })
 }`
-    : ''
+      : ''
 
-  if (maybeState || state.track) {
+  if (maybeState || maybeTracking) {
     return `class ${name} extends React.Component {
   ${maybeState}
   ${maybeTracking}
 
   render() {
-    const { ${state.track ? 'context,' : ''} props, ${
+    const { ${maybeTracking ? 'context,' : ''} props, ${
       maybeState ? 'state' : ''
     } } = this
     ${maybeChildrenArray}
@@ -37,7 +38,7 @@ componentWillUnmount() {
   }
 }`
   } else {
-    return `const ${name} = (props ${state.track ? ', context' : ''}) => {
+    return `const ${name} = (props ${maybeTracking ? ', context' : ''}) => {
   ${maybeChildrenArray}
   return (${render})
 }`
