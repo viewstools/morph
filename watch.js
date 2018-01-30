@@ -18,6 +18,8 @@ const uniq = require('array-uniq')
 
 const FONT_TYPES = {
   '.otf': 'opentype',
+  '.eot': 'eot',
+  '.svg': 'svg',
   '.ttf': 'truetype',
   '.woff': 'woff',
   '.woff2': 'woff2',
@@ -144,14 +146,18 @@ module.exports = options => {
 
     const addFont = file => {
       const id = getFontFileId(file)
+      const type = FONT_TYPES[path.extname(file)]
 
-      if (instance.customFonts.some(font => font.id === id)) return
+      if (
+        instance.customFonts.some(font => font.id === id && font.type === type)
+      )
+        return
 
       instance.customFonts.push({
         file,
         relativeFile: file.replace('Fonts/', './'),
         id: getFontFileId(file),
-        type: FONT_TYPES[path.extname(file)],
+        type,
       })
     }
     const removeFont = file => {
@@ -516,8 +522,10 @@ height 50`
       shouldIncludeLogic && `**/*.view.logic.js`,
       shouldIncludeFake && `**/*.view.fake`,
       // fonts,
+      'Fonts/*.eot',
       'Fonts/*.otf',
       'Fonts/*.ttf',
+      'Fonts/*.svg',
       'Fonts/*.woff',
       'Fonts/*.woff2',
     ].filter(Boolean)
@@ -529,8 +537,10 @@ height 50`
     const customFonts = await glob(
       [
         // fonts,
+        'Fonts/*.eot',
         'Fonts/*.otf',
         'Fonts/*.ttf',
+        'Fonts/*.svg',
         'Fonts/*.woff',
         'Fonts/*.woff2',
       ],
