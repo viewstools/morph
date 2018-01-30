@@ -53,7 +53,6 @@ export default ({ file, getImport, name, track = true, view }) => {
 
       state.uses.push(block)
     },
-    withRouter: false,
   }
 
   const parsed = parse(view)

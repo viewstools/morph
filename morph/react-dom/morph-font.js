@@ -7,7 +7,7 @@ export default ({ font, files }) => {
     body = `injectGlobal("@import url('https://fonts.googleapis.com/css?family=${font.family.replace(
       /\s/g,
       '+'
-    )}:${font.weight}${font.style === 'italic' ? 'i' : ''}');")`
+    )}:${font.weight}${font.style === 'italic' ? 'i' : ''}');body{}")`
   } else {
     const sources = files.filter(src => font.id === src.id)
 
