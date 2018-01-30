@@ -32,7 +32,7 @@ let {
   },
 })
 
-track = track !== 'false'
+track = track === 'true'
 
 if (help) {
   console.log(`
