@@ -2539,7 +2539,6 @@ exports[`react-dom parses react-dom NestedRoutes 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Route } from 'react-router-dom';
 import Topic from './Topic.view.js';
@@ -2573,7 +2572,7 @@ class NestedRoutes extends React.Component {
           topics
         </span>
         <Link
-          to={\`\${props.match.url === '/' ? '' : props.match.url}/rendering\`}
+          to=\\"rendering\\"
           data-test-id={\`NestedRoutes.Link|\`}
           className=\\"views-block\\"
         >
@@ -2600,7 +2599,7 @@ NestedRoutes.contextTypes = {
   track: PropTypes.func.isRequired,
 };
 
-export default withRouter(NestedRoutes);
+export default NestedRoutes;
 ",
   "fonts": Array [],
   "props": Object {},
@@ -2612,7 +2611,6 @@ exports[`react-dom parses react-dom NestedRoutes: react-dom parses react-dom Nes
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Route } from 'react-router-dom';
 import Topic from './Topic.view.js';
@@ -2628,7 +2626,7 @@ const NestedRoutes = props => {
         topics
       </span>
       <Link
-        to={\`\${props.match.url === '/' ? '' : props.match.url}/rendering\`}
+        to=\\"rendering\\"
         data-test-id={\`NestedRoutes.Link|\`}
         className=\\"views-block\\"
       >
@@ -2651,7 +2649,7 @@ const NestedRoutes = props => {
   );
 };
 
-export default withRouter(NestedRoutes);
+export default NestedRoutes;
 ",
   "fonts": Array [],
   "props": Object {},
@@ -7086,7 +7084,6 @@ exports[`react-native parses react-native NestedRoutes 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { withRouter } from 'react-router';
 import { Link } from 'react-router-native';
 import { Route } from 'react-router-native';
 import Topic from './Topic.view.js';
@@ -7114,15 +7111,8 @@ class NestedRoutes extends React.Component {
     return (
       <View testID={\`\${props['testID'] || 'Topics'}|\`}>
         <Text testID={\`NestedRoutes.Text|\`}>topics</Text>
-        <Link
-          activeOpacity={0.7}
-          to={\`\${props.match.url === '/' ? '' : props.match.url}/rendering\`}
-          underlayColor=\\"transparent\\"
-        >
-          <View
-            to={\`\${props.match.url === '/' ? '' : props.match.url}/rendering\`}
-            testID={\`NestedRoutes.Link|\`}
-          >
+        <Link activeOpacity={0.7} to=\\"rendering\\" underlayColor=\\"transparent\\">
+          <View to=\\"rendering\\" testID={\`NestedRoutes.Link|\`}>
             <Text testID={\`NestedRoutes.Text:1|\`}>Rendering with React</Text>
           </View>
         </Link>
@@ -7141,7 +7131,7 @@ NestedRoutes.contextTypes = {
   track: PropTypes.func.isRequired,
 };
 
-export default withRouter(NestedRoutes);
+export default NestedRoutes;
 ",
   "fonts": Array [],
   "props": Object {},

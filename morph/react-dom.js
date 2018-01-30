@@ -67,7 +67,6 @@ export default ({
 
       state.uses.push(block)
     },
-    withRouter: false,
   }
 
   if (name !== finalName) {

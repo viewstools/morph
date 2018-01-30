@@ -170,6 +170,12 @@ module.exports = options => {
             path.join(src, fonts[font.id]),
             morphFont({ as, font, files: instance.customFonts })
           )
+
+          console.log(
+            'font file',
+            font.id,
+            fs.readFileSync(path.join(src, fonts[font.id]), 'utf-8')
+          )
         }
 
         return relativise(file, fonts[font.id])
@@ -522,14 +528,6 @@ height 50`
       'Fonts/*.woff2',
     ].filter(Boolean)
 
-    let viewsLeftToBeReady = null
-
-    const listToMorph = await glob(watcherPattern, watcherOptions)
-    const viewsToMorph = listToMorph.map(addViewSkipMorph).filter(Boolean)
-
-    viewsLeftToBeReady = viewsToMorph.length
-    viewsToMorph.forEach(morphView)
-
     const fontsDirectory = path.join(src, 'Fonts')
     if (!await fs.exists(fontsDirectory)) {
       await fs.mkdir(fontsDirectory)
@@ -544,8 +542,19 @@ height 50`
       ],
       watcherOptions
     )
-
     customFonts.forEach(addFont)
+
+    console.log(
+      'Custom fonts:\n',
+      instance.customFonts.map(f => f.file).join(',\n'),
+      '\n'
+    )
+
+    let viewsLeftToBeReady = null
+    const listToMorph = await glob(watcherPattern, watcherOptions)
+    const viewsToMorph = listToMorph.map(addViewSkipMorph).filter(Boolean)
+    viewsLeftToBeReady = viewsToMorph.length
+    viewsToMorph.forEach(morphView)
 
     if (!once) {
       const watcher = chokidar.watch(watcherPattern, {
