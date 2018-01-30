@@ -170,12 +170,6 @@ module.exports = options => {
             path.join(src, fonts[font.id]),
             morphFont({ as, font, files: instance.customFonts })
           )
-
-          console.log(
-            'font file',
-            font.id,
-            fs.readFileSync(path.join(src, fonts[font.id]), 'utf-8')
-          )
         }
 
         return relativise(file, fonts[font.id])
