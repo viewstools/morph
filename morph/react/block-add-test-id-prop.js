@@ -10,7 +10,7 @@ export const enter = (node, parent, state) => {
     .reverse()
 
   let conditional = scopes.reduce(
-    (prev, scope) => `${scope} ? '${getScopeDescription(scope)}' : ${prev}`,
+    (prev, scope) => `${scope} ? '${getScopeDescription(scope)}|' : ${prev}`,
     "''"
   )
   conditional = scopes.length > 0 ? `\${${conditional}}` : ''
