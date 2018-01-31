@@ -103,7 +103,6 @@ export default (rtext, skipComments = true) => {
     }
 
     if (stack.length === 0) {
-      debugger
       // if we're the last block on the stack, then this is the view!
       views.push(block)
       return true
@@ -146,38 +145,36 @@ export default (rtext, skipComments = true) => {
               `A basic block can't be inside a List.\nPut 1 empty line before`,
               block
             )
-            //shouldPushToStack = true
           } else if (last.children.length > 0) {
             warn(
               `A List can only have one view inside. This block is outside of it.\nPut 1 empty line before.`,
               block
             )
-            //shouldPushToStack = true
           } else {
             last.children.push(block)
           }
         } else {
-          debugger
           last.children.push(block)
         }
       } else {
         // the block is inside a block that isn't a group
-        debugger
         end(stack.pop(), i)
 
-        if (views[0].isGroup) {
+        if (views[0] && views[0].isGroup) {
           warn(
             lines[i - 1] === ''
               ? `put 1 empty line before`
               : `put 2 empty lines before`,
             block
           )
+        } else if (views.length === 0) {
+          warn(
+            `An empty line is required after every block. Put 1 empty line before`,
+            block
+          )
         } else {
           warn(`add Vertical at the top`, block)
         }
-        debugger
-        // is this where header is set to true but intro is not because its not a group, its basic?
-        // shouldPushToStack = true
       }
     } else if (views.length > 0) {
       // the block is outside the top level block
@@ -205,12 +202,8 @@ export default (rtext, skipComments = true) => {
       block.isGroup = true
       block.isList = isList(name)
       block.children = []
-
-      // shouldPushToStack = true
     }
 
-    debugger
-    // is header getting pushed to stack but intro is not??
     if (shouldPushToStack || stack.length === 0) {
       stack.push(block)
     }
@@ -297,18 +290,14 @@ export default (rtext, skipComments = true) => {
   }
 
   lines.forEach((line, i) => {
-    debugger
-
     if (isBlock(line)) {
       parseBlock(line, i)
     } else if (isEnd(line) && stack.length > 0) {
-      debugger
       end(stack.pop(), i)
     }
   })
 
   if (stack.length > 0) {
-    debugger
     while (!end(stack.pop(), lines.length - 1)) {}
   }
 
