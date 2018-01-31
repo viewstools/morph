@@ -6,6 +6,7 @@ import morphFont from './morph/font.js'
 import restrictedNames from './restricted-names.js'
 import toPascalCase from 'to-pascal-case'
 import prettier from 'prettier'
+import parse from './parse/index.js'
 
 const DEFAULT_IMPORT = name => `import ${name} from './${name}.view.js'`
 
@@ -24,6 +25,7 @@ export const morph = (
     pretty = false,
     track = true,
     views = {},
+    viewsParsed = {},
   }
 ) => {
   let morphed = doMorph[as]({
@@ -37,6 +39,7 @@ export const morph = (
     track,
     view: code,
     views,
+    viewsParsed,
   })
 
   if (compile) {
@@ -77,3 +80,5 @@ export const isViewNameRestricted = (view, as) =>
   restrictedNames[as].includes(view)
 
 export { morphFont }
+
+export { parse }

@@ -1,16 +1,15 @@
 import * as visitor from './e2e/block.js'
-import parse from '../parse/index.js'
 import toFile from './e2e/to-file.js'
 import walk from './walk.js'
 
-export default ({ file, name, view }) => {
+export default ({ name, viewsParsed }) => {
   const state = {
     name,
     render: [],
     testIds: {},
+    viewsParsed,
   }
-
-  const parsed = parse(view)
+  const parsed = viewsParsed[name]
   walk(parsed.views[0], visitor, state)
 
   return {
