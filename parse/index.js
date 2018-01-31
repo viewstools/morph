@@ -8,6 +8,7 @@ import {
   isBlock,
   isCapture,
   isComment,
+  isValidCode,
   isEnd,
   isFontable,
   isGroup,
@@ -15,7 +16,6 @@ import {
   isProp,
   isSystemScope,
   isUserComment,
-  warn,
 } from './helpers.js'
 import getLoc from './get-loc.js'
 import getMeta from './get-meta.js'
@@ -30,6 +30,7 @@ export default (rtext, skipComments = true) => {
   const props = []
   const stack = []
   const views = []
+  const warnings = []
   let lastCapture
 
   const getChildrenProxyMap = block => {
@@ -141,15 +142,17 @@ export default (rtext, skipComments = true) => {
       if (last.isGroup) {
         if (last.isList) {
           if (block.isBasic) {
-            warn(
-              `A basic block can't be inside a List.\nPut 1 empty line before`,
-              block
-            )
+            warnings.push({
+              loc: block.loc,
+              type: `A basic block can't be inside a List.\nPut 1 empty line before.`,
+              line,
+            })
           } else if (last.children.length > 0) {
-            warn(
-              `A List can only have one view inside. This block is outside of it.\nPut 1 empty line before.`,
-              block
-            )
+            warnings.push({
+              loc: block.loc,
+              type: `A List can only have one view inside. This block is outside of it.\nPut 1 empty line before.`,
+              line,
+            })
           } else {
             last.children.push(block)
           }
@@ -161,19 +164,26 @@ export default (rtext, skipComments = true) => {
         end(stack.pop(), i)
 
         if (views[0] && views[0].isGroup) {
-          warn(
-            lines[i - 1] === ''
-              ? `put 1 empty line before`
-              : `put 2 empty lines before`,
-            block
-          )
+          warnings.push({
+            loc: block.loc,
+            type:
+              lines[i - 1] === ''
+                ? `Put 1 empty line before`
+                : `Put 2 empty lines before`,
+            line,
+          })
         } else if (views.length === 0) {
-          warn(
-            `An empty line is required after every block. Put 1 empty line before`,
-            block
-          )
+          warnings.push({
+            loc: block.loc,
+            type: `An empty line is required after every block. Put 1 empty line before`,
+            line,
+          })
         } else {
-          warn(`add Vertical at the top`, block)
+          warnings.push({
+            loc: block.loc,
+            type: `Add Vertical at the top`,
+            line,
+          })
         }
       }
     } else if (views.length > 0) {
@@ -185,7 +195,7 @@ export default (rtext, skipComments = true) => {
 
       const help = []
       if (!views[0].isGroup) {
-        help.push(`add Vertical at the top`)
+        help.push(`Add Vertical at the top`)
       }
       if (newLinesBeforePreviousBlock > 2) {
         const linesToRemove = newLinesBeforePreviousBlock - 2
@@ -195,13 +205,26 @@ export default (rtext, skipComments = true) => {
           } before`
         )
       }
-      warn(help.join(', '), block)
+      warnings.push({
+        loc: block.loc,
+        type: help.join(', '),
+        line,
+      })
     }
 
     if (isGroup(name)) {
       block.isGroup = true
       block.isList = isList(name)
       block.children = []
+    }
+
+    if (shouldPushToStack && name === 'FakeProps') {
+      warnings.push({
+        type:
+          'FakeProps needs to be outside of any top block. Add new lines before it.',
+        loc: block.loc,
+        line,
+      })
     }
 
     if (shouldPushToStack || stack.length === 0) {
@@ -233,10 +256,23 @@ export default (rtext, skipComments = true) => {
 
       if (isProp(line)) {
         const [name, value] = getProp(line)
+        const loc = getLoc(j, line.indexOf(name), line.length - 1)
         const tags = getTags(name, value)
 
         if (tags.code) {
           props.push({ type: block.name, name, value })
+        }
+
+        if (
+          (tags.code || tags.shouldBeCode) &&
+          name !== 'when' &&
+          !isValidCode(value)
+        ) {
+          warnings.push({
+            loc,
+            type: 'The code you used in the props value is invalid',
+            line,
+          })
         }
 
         if (tags.style && tags.code) {
@@ -244,15 +280,41 @@ export default (rtext, skipComments = true) => {
         }
 
         if (name === 'when') {
+          const isSystem = isSystemScope(value)
+
+          if (value === '') {
+            warnings.push({
+              loc,
+              type: 'This when has no props, add some condition to it',
+              line,
+            })
+          } else if (value === 'props') {
+            warnings.push({
+              loc,
+              type: `You can't use the props shorthand in a when`,
+              line,
+            })
+          } else if (
+            !isSystem &&
+            !isValidCode(value) &&
+            block.name !== 'FakeProps'
+          ) {
+            warnings.push({
+              loc,
+              type: 'The code you used in the props value is invalid',
+              line,
+            })
+          }
+
           tags.scope = value
           inScope = value
-          scope = { isSystem: isSystemScope(value), value, properties: [] }
+          scope = { isSystem, value, properties: [] }
           scopes.push(scope)
         }
 
         propNode = {
           type: 'Property',
-          loc: getLoc(j, line.indexOf(name), line.length - 1),
+          loc,
           name,
           tags,
           meta: getMeta(value, line, j),
@@ -278,6 +340,20 @@ export default (rtext, skipComments = true) => {
         block.loc.end = propNode.loc.end
 
         if (inScope) {
+          if (
+            propNode.name !== 'when' &&
+            !propNode.tags.comment &&
+            !properties.some(baseProp => baseProp.name === propNode.name)
+          ) {
+            warnings.push({
+              loc: propNode.loc,
+              type: `You're missing a base prop for ${
+                propNode.name
+              }. Add it before all whens on the block.`,
+              line,
+            })
+          }
+
           scope.properties.push(propNode)
         } else {
           properties.push(propNode)
@@ -305,5 +381,6 @@ export default (rtext, skipComments = true) => {
     fonts,
     props: getPropTypes(props),
     views,
+    warnings,
   }
 }

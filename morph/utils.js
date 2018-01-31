@@ -1,6 +1,7 @@
 import safe from './react/safe.js'
 import wrap from './react/wrap.js'
 import toCamelCase from 'to-camel-case'
+import toSlugCase from 'to-slug-case'
 
 const safeScope = value =>
   typeof value === 'string' && !isCode(value) ? JSON.stringify(value) : value
@@ -177,3 +178,39 @@ export const getScopes = (node, parent) => {
 }
 
 export const isSvg = node => /^Svg/.test(node.name) && node.isBasic
+
+export const getScopeDescription = scope => {
+  const dictionary = {}
+  const re = /(?:^|\W)props.(\w+)(?!\w)/g
+
+  let match = re.exec(scope)
+  while (match) {
+    dictionary[match[1]] = toSlugCase(match[1])
+    match = re.exec(scope)
+  }
+
+  for (let key in dictionary) {
+    scope = scope.replace(new RegExp(key, 'g'), dictionary[key])
+  }
+
+  return toCamelCase(
+    scope
+      .replace(/\|\|/g, '-or-')
+      .replace(/!/g, 'not-')
+      .replace(/&&/g, '-and-')
+      .replace(/props\./g, '')
+      .replace(/\s/g, '')
+  )
+}
+
+export const makeOnClickTracker = (node, state) => {
+  const block = node.testId
+    ? `"${state.name}.${node.testId}"`
+    : `props["${state.testIdKey}"] || "${state.name}"`
+
+  const track = `context.track({ block: ${block}, action: "click" })`
+
+  state.isTracking = true
+
+  return `event => { ${track}; (${node.value})(event); }`
+}

@@ -3,6 +3,7 @@ const {
   isViewNameRestricted,
   morph,
   morphFont,
+  parse,
 } = require('./lib.js')
 const chalk = require('chalk')
 const chokidar = require('chokidar')
@@ -37,7 +38,8 @@ const relativise = (from, to) => {
   return r.substr(r.startsWith('../..') ? 3 : 1)
 }
 
-const onMorphWriteFile = ({ file, code }) => fs.writeFile(`${file}.js`, code)
+const onMorphWriteFile = ({ as, file, code }) =>
+  fs.writeFile(`${file}${as === 'e2e' ? '.page.js' : '.js'}`, code)
 
 module.exports = options => {
   return new Promise(async (resolve, reject) => {
@@ -56,6 +58,7 @@ module.exports = options => {
       once,
       pretty,
       src,
+      track,
       verbose,
       viewNotFound,
     } = Object.assign(
@@ -73,6 +76,7 @@ module.exports = options => {
         once: false,
         pretty: true,
         src: process.cwd(),
+        track: true,
         verbose: true,
       },
       options
@@ -113,9 +117,9 @@ module.exports = options => {
       }
     }
 
-    const filter = fn => (f, a) => {
+    const filter = fn => (f, a, b) => {
       if (
-        isMorphedView(f) ||
+        isMorphedView(f, a, b) ||
         (isJs(f) && !isJsComponent(f) && !isLogic(f)) ||
         (!shouldIncludeLogic && isLogic(f)) ||
         isDirectory(f) ||
@@ -123,7 +127,7 @@ module.exports = options => {
       )
         return
 
-      return fn(f, a)
+      return fn(f, a, b)
     }
 
     const getImportFileName = (name, file) => {
@@ -199,6 +203,7 @@ module.exports = options => {
     const responsibleFor = {}
     const logic = {}
     const views = Object.assign({}, map)
+    const viewsParsed = {}
 
     const instance = {
       customFonts: [],
@@ -311,6 +316,8 @@ height 50`
       Object.keys(dependsOn).filter(dep => dependsOn[dep].includes(view))
 
     const updateResponsibleFor = viewRaw => {
+      if (as === 'e2e') return
+
       const view = viewRaw.split('.')[0]
       const list = []
       const left = getPointsOfUseFor(view)
@@ -331,9 +338,35 @@ height 50`
 
     const addViewSkipMorph = f => addView(f, true)
 
-    let toMorphQueue = null
+    const getViewSource = async f => {
+      const { view } = toViewPath(f)
 
-    const morphView = filter(async (f, skipRemorph) => {
+      try {
+        const rawFile = path.join(src, f)
+        const source = await fs.readFile(rawFile, 'utf-8')
+        const parsed = parse(source)
+        viewsParsed[view] = parsed
+
+        if (parsed.warnings.length > 0) {
+          console.error(
+            chalk.red(view),
+            chalk.dim(path.resolve(src, views[view]))
+          )
+          parsed.warnings.forEach(warning => {
+            console.error(
+              `  ${chalk.blue(warning.type)} ${chalk.yellow(
+                `line ${warning.loc.start.line}`
+              )} ${warning.line}`
+            )
+          })
+        }
+      } catch (error) {
+        verbose && console.error(chalk.red('M'), view, error)
+      }
+    }
+
+    let toMorphQueue = null
+    const morphView = filter(async (f, skipRemorph, skipSource) => {
       const { file, view } = toViewPath(f)
       if (isViewNameRestricted(view, as)) {
         verbose &&
@@ -354,9 +387,11 @@ height 50`
 
       try {
         const rawFile = path.join(src, f)
-        const source = await fs.readFile(rawFile, 'utf-8')
+        if (!skipSource) {
+          await getViewSource(f)
+        }
 
-        const res = morph(source, {
+        const res = morph({
           as,
           compile,
           debug,
@@ -366,17 +401,18 @@ height 50`
           getFont,
           getImport,
           pretty,
-          views,
+          track,
+          views: viewsParsed,
         })
 
         const toMorph = {
+          as,
           code: res.code,
           dependsOn: dependsOn[view],
           // responsibleFor: responsibleFor[view],
           file: rawFile,
           fonts: res.fonts,
           props: res.props,
-          source,
           view,
         }
 
@@ -400,40 +436,46 @@ height 50`
           await onMorph(toMorph)
         }
 
-        await Promise.all(
-          res.svgs.map(async svg => {
-            const svgFile = path.resolve(rawFile, '..', svg.source)
+        if (Array.isArray(res.svgs)) {
+          await Promise.all(
+            res.svgs.map(async svg => {
+              const svgFile = path.resolve(rawFile, '..', svg.source)
 
-            try {
-              const inlined = await morphInlineSvg(svgFile)
+              try {
+                const inlined = await morphInlineSvg(svgFile)
 
-              // TODO revisit as most of the options don't matter here
-              const res = morph(inlined, {
-                as,
-                compile,
-                debug,
-                enableAnimated,
-                file: { raw: rawFile, relative: file },
-                name: svg.view,
-                getImport,
-                pretty,
-                views,
-              })
+                // TODO revisit as most of the options don't matter here
+                const res = morph({
+                  as,
+                  compile,
+                  debug,
+                  enableAnimated,
+                  file: { raw: rawFile, relative: file },
+                  name: svg.view,
+                  getImport,
+                  pretty,
+                  track,
+                  views: {
+                    [svg.view]: inlined,
+                  },
+                })
 
-              await onMorph({
-                code: res.code,
-                isInlineSvg: true,
-                file: path.resolve(rawFile, '..', `${svg.view}.view`),
-                view,
-              })
-            } catch (error) {
-              console.error(
-                chalk.magenta('M'),
-                `${view}. Can't morph inline ${svgFile}`
-              )
-            }
-          })
-        )
+                await onMorph({
+                  as,
+                  code: res.code,
+                  isInlineSvg: true,
+                  file: path.resolve(rawFile, '..', `${svg.view}.view`),
+                  view,
+                })
+              } catch (error) {
+                console.error(
+                  chalk.magenta('M'),
+                  `${view}. Can't morph inline ${svgFile}`
+                )
+              }
+            })
+          )
+        }
 
         verbose && console.log(chalk.green('M'), view)
       } catch (error) {
@@ -481,6 +523,7 @@ height 50`
         delete logic[view]
       } else {
         delete views[view]
+        delete viewsParsed[view]
       }
 
       if (typeof onRemove === 'function') {
@@ -516,8 +559,10 @@ height 50`
     const listToMorph = await glob(watcherPattern, watcherOptions)
     const viewsToMorph = listToMorph.map(addViewSkipMorph).filter(Boolean)
 
+    await Promise.all(viewsToMorph.map(getViewSource))
+
     viewsLeftToBeReady = viewsToMorph.length
-    viewsToMorph.forEach(morphView)
+    viewsToMorph.forEach(v => morphView(v, false, true))
 
     const fontsDirectory = path.join(src, 'Fonts')
     if (!await fs.exists(fontsDirectory)) {

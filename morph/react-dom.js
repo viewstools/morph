@@ -3,7 +3,6 @@ import getStyleForProperty from './react-dom/get-style-for-property.js'
 import getStyles from './react-dom/get-styles.js'
 import getValueForProperty from './react-dom/get-value-for-property.js'
 import maybeUsesRouter from './react-dom/maybe-uses-router.js'
-import parse from '../parse/index.js'
 import restrictedNames from './react-dom/restricted-names.js'
 import toComponent from './react/to-component.js'
 import walk from './walk.js'
@@ -21,9 +20,9 @@ export default ({
   file,
   getFont = () => false,
   getImport,
-  inlineStyles = true,
   name,
-  view,
+  track = true,
+  views,
 }) => {
   const finalName = restrictedNames.includes(name) ? `${name}1` : name
   if (name !== finalName) {
@@ -46,7 +45,6 @@ export default ({
     getStyleForProperty,
     getValueForProperty,
     images: [],
-    inlineStyles,
     isDynamic: false,
     isReactNative: false,
     name: finalName,
@@ -55,7 +53,9 @@ export default ({
     svgs: [],
     usedBlockNames: { [finalName]: 1 },
     uses: [],
+    testIdKey: 'data-test-id',
     testIds: {},
+    track,
     use(block) {
       if (
         state.uses.includes(block) ||
@@ -75,7 +75,7 @@ export default ({
     )
   }
 
-  const parsed = parse(view)
+  const parsed = views[name]
   state.fonts = parsed.fonts
 
   walk(parsed.views[0], visitor, state)

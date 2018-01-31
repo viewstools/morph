@@ -1,4 +1,5 @@
 import getBody from './get-body.js'
+import getContext from './get-context.js'
 import getDefaultProps from './get-default-props.js'
 import getDependencies from './get-dependencies.js'
 
@@ -25,6 +26,7 @@ ${dependencies}
 ${getStyles(state, name)}
 
 ${getBody({ state, name })}
+${getContext({ state, name })}
 ${getDefaultProps({ state, name })}
 export default ${xport}`
 }

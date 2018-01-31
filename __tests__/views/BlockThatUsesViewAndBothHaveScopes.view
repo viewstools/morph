@@ -1,0 +1,3 @@
+BlockThatUsesViewAndBothHaveScopes Scope
+when props.isBlack
+color rgb(0,0,0)

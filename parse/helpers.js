@@ -1,4 +1,5 @@
 import cssProperties from 'css-properties'
+import isExpression from 'is-expression'
 import toCamelCase from 'to-camel-case'
 
 const BASIC = /^(CaptureEmail|CaptureFile|CaptureNumber|CapturePhone|CaptureSecure|CaptureText|CaptureTextArea|G|Horizontal|Image|List|Svg|SvgCircle|SvgEllipse|SvgDefs|SvgGroup|SvgLinearGradient|SvgRadialGradient|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgSymbol|SvgText|SvgUse|SvgStop|Text|Vertical|FakeProps)$/i
@@ -34,15 +35,18 @@ export const isCapture = line => is(CAPTURE, line)
 export const isCode = line =>
   is(CODE_EXPLICIT, line) || is(CODE_IMPLICIT, line) || isCodeDefault(line)
 export const isCodeDefault = line => is(CODE_DEFAULT, line)
-// TODO
-export const isCodeInvalid = line => {
-  return getCodeData(line).find(
-    l =>
-      /\. /.test(l) || // props. x
-      / \./.test(l) || // props .
-      / \[/.test(l) || // props[
-      /\]/.test(l) // props]
-  )
+export const isValidCode = rcode => {
+  try {
+    let code = rcode
+    if (isInterpolatedExpression(code) && !isTemplateLiteral(code)) {
+      code = `\`${code}\``
+    }
+    // eslint-disable-next-line
+    new Function('props', 'state', 'event', code)({}, {}, {})
+    return isExpression(code, { strict: true })
+  } catch (error) {
+    return false
+  }
 }
 export const isComment = line => is(COMMENT, line)
 export const isEmptyList = line => line === 'is empty list'

@@ -1,53 +1,58 @@
-import { morph } from '../index.js'
+import { morph, parse } from '../index.js'
 import { join } from 'path'
 import { existsSync, readdirSync, readFileSync } from 'fs'
 
 const isView = f => /\.view$/.test(f)
 const getPath = (f = '.') => join(__dirname, 'views', f)
+const getName = f => f.replace(/\.view$/, '')
+
+const views = {}
+const files = []
+
+const getFiles = () =>
+  readdirSync(getPath())
+    .filter(isView)
+    .map(f => {
+      const view = getName(f)
+      const source = readFileSync(getPath(f), 'utf-8')
+      views[view] = parse(source)
+      return f
+    })
 
 const getFont = font =>
   `./Fonts/${font.family}-${font.weight}${
     font.style === 'italic' ? '-italic' : ''
   }`
-;['react-dom', 'react-native'].forEach(as =>
+;['react-dom', 'react-native', 'e2e'].forEach(as =>
   describe(as, () => {
-    readdirSync(getPath())
-      .filter(isView)
-      .forEach(f => {
-        const name = f.replace(/\.view$/, '')
-        const code = readFileSync(getPath(f), 'utf-8')
-        const testFile = getPath(`${f}.tests`)
-        const tests = existsSync(testFile)
-          ? readFileSync(testFile, 'utf-8')
-          : undefined
+    getFiles().forEach(f => {
+      const name = getName(f)
 
-        it(`parses ${as} ${name}`, () => {
+      it(`parses ${as} ${name}`, () => {
+        expect(
+          morph({
+            as,
+            getFont,
+            name,
+            pretty: true,
+            views,
+          })
+        ).toMatchSnapshot()
+
+        if (as === 'react-dom') {
           expect(
-            morph(code, {
+            morph({
               as,
+              debug: true,
               getFont,
-              inlineStyles: true,
               name,
               pretty: true,
-              tests,
+              views,
             })
-          ).toMatchSnapshot()
-
-          if (as === 'react-dom') {
-            expect(
-              morph(code, {
-                as,
-                debug: true,
-                getFont,
-                inlineStyles: true,
-                name,
-                pretty: true,
-                tests,
-              })
-            ).toMatchSnapshot(`${as} parses ${as} ${name} debug`)
-          }
-        })
-        // TODO test rendered morphed view
+          ).toMatchSnapshot(`${as} parses ${as} ${name} debug`)
+        }
       })
+      // TODO test rendered morphed view
+    })
   })
 )

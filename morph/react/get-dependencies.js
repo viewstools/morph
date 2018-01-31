@@ -82,5 +82,9 @@ export default (state, getImport) => {
     dependencies.push(`import { ${usesNative.join(', ')} } from 'react-native'`)
   }
 
+  if (state.track && !state.debug) {
+    dependencies.push('import PropTypes from "prop-types"')
+  }
+
   return dependencies.join('\n')
 }

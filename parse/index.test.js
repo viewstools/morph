@@ -2,6 +2,8 @@ import parse from './index.js'
 
 test('#parse', () => {
   VIEWS.forEach(view => expect(parse(view)).toMatchSnapshot())
+
+  expect(parse(WARNING)).toMatchSnapshot()
 })
 
 const VIEWS = [
@@ -54,3 +56,12 @@ from props.stuff
 when props.stuff.length > 0
 Stuff`,
 ]
+
+const WARNING = `Warning Vertical
+EmptyWhen Vertical
+color blue
+when
+color red
+when props. stuff
+backgroundColor purple
+color green`
