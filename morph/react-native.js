@@ -5,7 +5,6 @@ import getValueForProperty from './react-native/get-value-for-property.js'
 import maybeUsesTextInput from './react-native/maybe-uses-text-input.js'
 import maybeUsesRouter from './react-native/maybe-uses-router.js'
 import maybeUsesStyleSheet from './react-native/maybe-uses-style-sheet.js'
-import parse from '../parse/index.js'
 import restrictedNames from './react-native/restricted-names.js'
 import toComponent from './react/to-component.js'
 import walk from './walk.js'
@@ -17,7 +16,7 @@ const imports = {
   Router: "import { NativeRouter as Router } from 'react-router-native'",
 }
 
-export default ({ file, getImport, name, track = true, view }) => {
+export default ({ file, getImport, name, track = true, views }) => {
   const finalName = restrictedNames.includes(name) ? `${name}1` : name
   if (name !== finalName) {
     console.warn(
@@ -56,7 +55,7 @@ export default ({ file, getImport, name, track = true, view }) => {
     withRouter: false,
   }
 
-  const parsed = parse(view)
+  const parsed = views[name]
   state.fonts = parsed.fonts
 
   walk(parsed.views[0], visitor, state)

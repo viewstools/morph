@@ -10,22 +10,18 @@ export const enter = (node, parent, state) => {
     .reverse()
 
   let conditional = scopes.reduce(
-    (prev, scope) => `${scope} ? '${getScopeDescription(scope)}' : ${prev}`,
+    (prev, scope) => `${scope} ? '${getScopeDescription(scope)}|' : ${prev}`,
     "''"
   )
   conditional = scopes.length > 0 ? `\${${conditional}}` : ''
 
   let value
-  if (node.isBasic && parent) {
+  if (parent) {
     value = `{\`${state.name}.${node.testId}|${conditional}\`}`
-  } else if (node.isBasic) {
+  } else {
     value = `{\`\${props['${state.testIdKey}'] || '${
       node.testId
     }'}|${conditional}\`}`
-  } else if (parent) {
-    value = `"${state.name}.${node.testId}"`
-  } else {
-    value = `{props["${state.testIdKey}"] || "${node.testId}"}`
   }
 
   state.render.push(` ${state.testIdKey}=${value}`)

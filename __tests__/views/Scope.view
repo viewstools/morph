@@ -1,4 +1,4 @@
-Text
+Scope Text
 color red
 text 1 red
 when props.somethingGreen
@@ -8,5 +8,5 @@ when props.whatMakesBlue
 color rgb(0,0,255)
 text props.blue 
 when !props.whatMakesBlue && props.somethingGreen
-color rgb(0,0,255)
-text props.blue
+color rgb(255,255,0)
+text  is Yellow

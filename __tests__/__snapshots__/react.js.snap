@@ -48,6 +48,20 @@ module.exports = {
 }
 `;
 
+exports[`e2e parses e2e BlockThatUsesViewAndBothHaveScopes 1`] = `
+Object {
+  "code": "const { get } = require('@viewstools/e2e');
+
+module.exports = {
+  BlockThatUsesViewAndBothHaveScopes: get(
+    'BlockThatUsesViewAndBothHaveScopes.BlockThatUsesViewAndBothHaveScopes',
+    'isBlack'
+  ),
+};
+",
+}
+`;
+
 exports[`e2e parses e2e BoxShadow 1`] = `
 Object {
   "code": "const { get } = require('@viewstools/e2e');
@@ -274,8 +288,8 @@ Object {
   "code": "const { get } = require('@viewstools/e2e');
 
 module.exports = {
-  Text: get(
-    'Scope.Text',
+  Scope: get(
+    'Scope.Scope',
     'notWhatMakesBlueAndSomethingGreen',
     'whatMakesBlue',
     'somethingGreen'
@@ -696,7 +710,7 @@ class Action extends React.Component {
           click me
         </span>
         <SubButton
-          data-test-id=\\"Action.SubButton\\"
+          data-test-id={\`Action.SubButton|\`}
           isDisabled={true}
           className=\\"views-block\\"
         />
@@ -748,7 +762,7 @@ const Action = props => {
         click me
       </span>
       <SubButton
-        data-test-id=\\"Action.SubButton\\"
+        data-test-id={\`Action.SubButton|\`}
         isDisabled={true}
         className=\\"views-block\\"
       />
@@ -1068,6 +1082,90 @@ export default BackgroundImage;
   "fonts": Array [],
   "props": Object {
     "backgroundImage": "string",
+  },
+  "svgs": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom BlockThatUsesViewAndBothHaveScopes 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import Scope from './Scope.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+import PropTypes from 'prop-types';
+
+class BlockThatUsesViewAndBothHaveScopes extends React.Component {
+  componentDidMount() {
+    this.context.track({
+      block: this.props['data-test-id'] || 'BlockThatUsesViewAndBothHaveScopes',
+      action: 'enter',
+    });
+  }
+
+  componentWillUnmount() {
+    this.context.track({
+      block: this.props['data-test-id'] || 'BlockThatUsesViewAndBothHaveScopes',
+      action: 'leave',
+    });
+  }
+
+  render() {
+    const { context, props } = this;
+
+    return (
+      <Scope
+        data-test-id={\`\${props['data-test-id'] ||
+          'BlockThatUsesViewAndBothHaveScopes'}|\${
+          props.isBlack ? 'isBlack' : ''
+        }\`}
+        className=\\"views-block\\"
+      >
+        {props.children}
+      </Scope>
+    );
+  }
+}
+BlockThatUsesViewAndBothHaveScopes.contextTypes = {
+  track: PropTypes.func.isRequired,
+};
+
+export default BlockThatUsesViewAndBothHaveScopes;
+",
+  "fonts": Array [],
+  "props": Object {
+    "isBlack": "string",
+  },
+  "svgs": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom BlockThatUsesViewAndBothHaveScopes: react-dom parses react-dom BlockThatUsesViewAndBothHaveScopes debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import Scope from './Scope.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+
+const BlockThatUsesViewAndBothHaveScopes = props => {
+  return (
+    <Scope
+      data-test-id={\`\${props['data-test-id'] ||
+        'BlockThatUsesViewAndBothHaveScopes'}|\${
+        props.isBlack ? 'isBlack' : ''
+      }\`}
+      className=\\"views-block\\"
+    >
+      {props.children}
+    </Scope>
+  );
+};
+
+export default BlockThatUsesViewAndBothHaveScopes;
+",
+  "fonts": Array [],
+  "props": Object {
+    "isBlack": "string",
   },
   "svgs": Array [],
 }
@@ -1411,7 +1509,7 @@ class DynamicStylesApplyToBasicBlocksOnly extends React.Component {
         className=\\"views-block\\"
       >
         <SomeThing
-          data-test-id=\\"DynamicStylesApplyToBasicBlocksOnly.OnTop\\"
+          data-test-id={\`DynamicStylesApplyToBasicBlocksOnly.OnTop|\`}
           height={props.height}
           className=\\"views-block\\"
         />
@@ -1454,7 +1552,7 @@ const DynamicStylesApplyToBasicBlocksOnly = props => {
       className=\\"views-block\\"
     >
       <SomeThing
-        data-test-id=\\"DynamicStylesApplyToBasicBlocksOnly.OnTop\\"
+        data-test-id={\`DynamicStylesApplyToBasicBlocksOnly.OnTop|\`}
         height={props.height}
         className=\\"views-block\\"
       />
@@ -2059,7 +2157,7 @@ class ListOfSomething extends React.Component {
             <Something
               {...item}
               key={item.id || index}
-              data-test-id=\\"ListOfSomething.Something\\"
+              data-test-id={\`ListOfSomething.Something|\`}
               className=\\"views-block\\"
             />
           ))}
@@ -2100,7 +2198,7 @@ const ListOfSomething = props => {
           <Something
             {...item}
             key={item.id || index}
-            data-test-id=\\"ListOfSomething.Something\\"
+            data-test-id={\`ListOfSomething.Something|\`}
             className=\\"views-block\\"
           />
         ))}
@@ -2155,7 +2253,7 @@ class ListWhen extends React.Component {
             <Card
               {...item}
               key={item.id || index}
-              data-test-id=\\"ListWhen.Card\\"
+              data-test-id={\`ListWhen.Card|\`}
               className=\\"views-block\\"
             />
           ))}
@@ -2197,7 +2295,7 @@ const ListWhen = props => {
           <Card
             {...item}
             key={item.id || index}
-            data-test-id=\\"ListWhen.Card\\"
+            data-test-id={\`ListWhen.Card|\`}
             className=\\"views-block\\"
           />
         ))}
@@ -2585,7 +2683,7 @@ class NestedRoutes extends React.Component {
           path=\\":topic\\"
           render={routeProps => (
             <Topic
-              data-test-id=\\"NestedRoutes.Topic\\"
+              data-test-id={\`NestedRoutes.Topic|\`}
               {...routeProps}
               className=\\"views-block\\"
             />
@@ -2640,7 +2738,7 @@ const NestedRoutes = props => {
         path=\\":topic\\"
         render={routeProps => (
           <Topic
-            data-test-id=\\"NestedRoutes.Topic\\"
+            data-test-id={\`NestedRoutes.Topic|\`}
             {...routeProps}
             className=\\"views-block\\"
           />
@@ -2879,12 +2977,12 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import styled from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const Text = styled('span')(({ props }) => ({
+const Scope1 = styled('span')(({ props }) => ({
   color: props.somethingGreen
     ? 'rgb(0,255,0)'
     : props.whatMakesBlue
       ? 'rgb(0,0,255)'
-      : !props.whatMakesBlue && props.somethingGreen ? 'rgb(0,0,255)' : 'red',
+      : !props.whatMakesBlue && props.somethingGreen ? 'rgb(255,255,0)' : 'red',
 }));
 
 class Scope extends React.Component {
@@ -2906,8 +3004,8 @@ class Scope extends React.Component {
     const { context, props } = this;
 
     return (
-      <Text
-        data-test-id={\`\${props['data-test-id'] || 'Text'}|\${
+      <Scope1
+        data-test-id={\`\${props['data-test-id'] || 'Scope'}|\${
           props.somethingGreen
             ? 'somethingGreen'
             : props.whatMakesBlue
@@ -2924,9 +3022,9 @@ class Scope extends React.Component {
           : props.whatMakesBlue
             ? props.blue
             : !props.whatMakesBlue && props.somethingGreen
-              ? props.blue
+              ? 'is Yellow'
               : '1 red'}
-      </Text>
+      </Scope1>
     );
   }
 }
@@ -2953,18 +3051,18 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import styled from 'react-emotion';
 
-const Text = styled('span')(({ props }) => ({
+const Scope1 = styled('span')(({ props }) => ({
   color: props.somethingGreen
     ? 'rgb(0,255,0)'
     : props.whatMakesBlue
       ? 'rgb(0,0,255)'
-      : !props.whatMakesBlue && props.somethingGreen ? 'rgb(0,0,255)' : 'red',
+      : !props.whatMakesBlue && props.somethingGreen ? 'rgb(255,255,0)' : 'red',
 }));
 
 const Scope = props => {
   return (
-    <Text
-      data-test-id={\`\${props['data-test-id'] || 'Text'}|\${
+    <Scope1
+      data-test-id={\`\${props['data-test-id'] || 'Scope'}|\${
         props.somethingGreen
           ? 'somethingGreen'
           : props.whatMakesBlue
@@ -2980,8 +3078,10 @@ const Scope = props => {
         ? '2 green'
         : props.whatMakesBlue
           ? props.blue
-          : !props.whatMakesBlue && props.somethingGreen ? props.blue : '1 red'}
-    </Text>
+          : !props.whatMakesBlue && props.somethingGreen
+            ? 'is Yellow'
+            : '1 red'}
+    </Scope1>
   );
 };
 
@@ -3025,7 +3125,9 @@ class ScopeOnCustomView extends React.Component {
 
     return (
       <Button
-        data-test-id={props['data-test-id'] || 'Button'}
+        data-test-id={\`\${props['data-test-id'] || 'Button'}|\${
+          props.a ? 'a' : props.b ? 'b' : ''
+        }\`}
         label={props.a ? 'ho' : props.b ? 'this is b' : 'hey'}
         another={props.a ? 1 : 0}
         more={props.a ? props.different : props.more}
@@ -3061,7 +3163,9 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 const ScopeOnCustomView = props => {
   return (
     <Button
-      data-test-id={props['data-test-id'] || 'Button'}
+      data-test-id={\`\${props['data-test-id'] || 'Button'}|\${
+        props.a ? 'a' : props.b ? 'b' : ''
+      }\`}
       label={props.a ? 'ho' : props.b ? 'this is b' : 'hey'}
       another={props.a ? 1 : 0}
       more={props.a ? props.different : props.more}
@@ -3584,7 +3688,7 @@ class Test extends React.Component {
 
     return (
       <Custom
-        data-test-id={props['data-test-id'] || 'Custom'}
+        data-test-id={\`\${props['data-test-id'] || 'Custom'}|\`}
         stuff=\\"eqweqw\\"
         childrenProxyMap={{ Something: 0, Another: 1 }}
         className=\\"views-block\\"
@@ -3622,7 +3726,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 const Test = props => {
   return (
     <Custom
-      data-test-id={props['data-test-id'] || 'Custom'}
+      data-test-id={\`\${props['data-test-id'] || 'Custom'}|\`}
       stuff=\\"eqweqw\\"
       childrenProxyMap={{ Something: 0, Another: 1 }}
       className=\\"views-block\\"
@@ -3683,7 +3787,7 @@ class TestIds extends React.Component {
         <span data-test-id={\`TestIds.Text:1|\`} className=\\"views-block\\">
           2
         </span>
-        <External data-test-id=\\"TestIds.External\\" className=\\"views-block\\" />
+        <External data-test-id={\`TestIds.External|\`} className=\\"views-block\\" />
         <span data-test-id={\`TestIds.Name|\`} className=\\"views-block\\">
           name
         </span>
@@ -3723,7 +3827,7 @@ const TestIds = props => {
       <span data-test-id={\`TestIds.Text:1|\`} className=\\"views-block\\">
         2
       </span>
-      <External data-test-id=\\"TestIds.External\\" className=\\"views-block\\" />
+      <External data-test-id={\`TestIds.External|\`} className=\\"views-block\\" />
       <span data-test-id={\`TestIds.Name|\`} className=\\"views-block\\">
         name
       </span>
@@ -4839,7 +4943,7 @@ class UseOfProxy extends React.Component {
         className={\`views-block \${App_h1qq1i2q}\`}
       >
         <Button
-          data-test-id=\\"UseOfProxy.Button\\"
+          data-test-id={\`UseOfProxy.Button|\`}
           color=\\"red\\"
           icon=\\"MyIcon\\"
           text=\\"I'm a button!\\"
@@ -4879,7 +4983,7 @@ const UseOfProxy = props => {
       className={\`views-block \${App_h1qq1i2q}\`}
     >
       <Button
-        data-test-id=\\"UseOfProxy.Button\\"
+        data-test-id={\`UseOfProxy.Button|\`}
         color=\\"red\\"
         icon=\\"MyIcon\\"
         text=\\"I'm a button!\\"
@@ -5045,7 +5149,7 @@ class UseRouter extends React.Component {
             exact
             render={routeProps => (
               <Home
-                data-test-id=\\"UseRouter.Home\\"
+                data-test-id={\`UseRouter.Home|\`}
                 height={props.height}
                 width={360}
                 {...routeProps}
@@ -5057,7 +5161,7 @@ class UseRouter extends React.Component {
             path=\\"/about\\"
             render={routeProps => (
               <About
-                data-test-id=\\"UseRouter.About\\"
+                data-test-id={\`UseRouter.About|\`}
                 {...routeProps}
                 className=\\"views-block\\"
               />
@@ -5067,7 +5171,7 @@ class UseRouter extends React.Component {
             path=\\"/topics\\"
             render={routeProps => (
               <Topics
-                data-test-id=\\"UseRouter.Topics\\"
+                data-test-id={\`UseRouter.Topics|\`}
                 {...routeProps}
                 className=\\"views-block\\"
               />
@@ -5119,7 +5223,7 @@ const UseRouter = props => {
           exact
           render={routeProps => (
             <Home
-              data-test-id=\\"UseRouter.Home\\"
+              data-test-id={\`UseRouter.Home|\`}
               height={props.height}
               width={360}
               {...routeProps}
@@ -5131,7 +5235,7 @@ const UseRouter = props => {
           path=\\"/about\\"
           render={routeProps => (
             <About
-              data-test-id=\\"UseRouter.About\\"
+              data-test-id={\`UseRouter.About|\`}
               {...routeProps}
               className=\\"views-block\\"
             />
@@ -5141,7 +5245,7 @@ const UseRouter = props => {
           path=\\"/topics\\"
           render={routeProps => (
             <Topics
-              data-test-id=\\"UseRouter.Topics\\"
+              data-test-id={\`UseRouter.Topics|\`}
               {...routeProps}
               className=\\"views-block\\"
             />
@@ -6054,7 +6158,7 @@ class Action extends React.Component {
           style={styles.h1g2xbng}
         >
           <Text testID={\`Action.Text|\`}>click me</Text>
-          <SubButton testID=\\"Action.SubButton\\" isDisabled={true} />
+          <SubButton testID={\`Action.SubButton|\`} isDisabled={true} />
           {props.children}
         </View>
       </TouchableWithoutFeedback>
@@ -6244,6 +6348,56 @@ export default BackgroundImage;
 }
 `;
 
+exports[`react-native parses react-native BlockThatUsesViewAndBothHaveScopes 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import Scope from './Scope.view.js';
+import PropTypes from 'prop-types';
+
+class BlockThatUsesViewAndBothHaveScopes extends React.Component {
+  componentDidMount() {
+    this.context.track({
+      block: this.props['testID'] || 'BlockThatUsesViewAndBothHaveScopes',
+      action: 'enter',
+    });
+  }
+
+  componentWillUnmount() {
+    this.context.track({
+      block: this.props['testID'] || 'BlockThatUsesViewAndBothHaveScopes',
+      action: 'leave',
+    });
+  }
+
+  render() {
+    const { context, props } = this;
+
+    return (
+      <Scope
+        testID={\`\${props['testID'] || 'BlockThatUsesViewAndBothHaveScopes'}|\${
+          props.isBlack ? 'isBlack' : ''
+        }\`}
+      >
+        {props.children}
+      </Scope>
+    );
+  }
+}
+BlockThatUsesViewAndBothHaveScopes.contextTypes = {
+  track: PropTypes.func.isRequired,
+};
+
+export default BlockThatUsesViewAndBothHaveScopes;
+",
+  "fonts": Array [],
+  "props": Object {
+    "isBlack": "string",
+  },
+  "svgs": Array [],
+}
+`;
+
 exports[`react-native parses react-native BoxShadow 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -6399,7 +6553,7 @@ class Code extends React.Component {
       >
         <Animated.Text
           testID={\`Code.Text|\`}
-          ref={props.refText}
+          innerRef={props.refText}
           style={{ color: props.color }}
         >
           {props.text}
@@ -6457,7 +6611,7 @@ class DynamicStylesApplyToBasicBlocksOnly extends React.Component {
         style={{ height: props.height }}
       >
         <SomeThing
-          testID=\\"DynamicStylesApplyToBasicBlocksOnly.OnTop\\"
+          testID={\`DynamicStylesApplyToBasicBlocksOnly.OnTop|\`}
           height={props.height}
         />
         {props.children}
@@ -6820,7 +6974,7 @@ class ListOfSomething extends React.Component {
             <Something
               {...item}
               key={item.id || index}
-              testID=\\"ListOfSomething.Something\\"
+              testID={\`ListOfSomething.Something|\`}
             />
           ))}
         {props.children}
@@ -6872,7 +7026,7 @@ class ListWhen extends React.Component {
       <View testID={\`\${props['testID'] || 'List'}|\`}>
         {Array.isArray(props.from) &&
           props.from.map((item, index) => (
-            <Card {...item} key={item.id || index} testID=\\"ListWhen.Card\\" />
+            <Card {...item} key={item.id || index} testID={\`ListWhen.Card|\`} />
           ))}
         {props.children}
       </View>
@@ -7129,7 +7283,7 @@ class NestedRoutes extends React.Component {
         <Route
           path=\\":topic\\"
           render={routeProps => (
-            <Topic testID=\\"NestedRoutes.Topic\\" {...routeProps} />
+            <Topic testID={\`NestedRoutes.Topic|\`} {...routeProps} />
           )}
         />
         {props.children}
@@ -7279,7 +7433,7 @@ class Scope extends React.Component {
 
     return (
       <Text
-        testID={\`\${props['testID'] || 'Text'}|\${
+        testID={\`\${props['testID'] || 'Scope'}|\${
           props.somethingGreen
             ? 'somethingGreen'
             : props.whatMakesBlue
@@ -7294,7 +7448,7 @@ class Scope extends React.Component {
             : props.whatMakesBlue
               ? 'rgb(0,0,255)'
               : !props.whatMakesBlue && props.somethingGreen
-                ? 'rgb(0,0,255)'
+                ? 'rgb(255,255,0)'
                 : 'red',
         }}
       >
@@ -7303,7 +7457,7 @@ class Scope extends React.Component {
           : props.whatMakesBlue
             ? props.blue
             : !props.whatMakesBlue && props.somethingGreen
-              ? props.blue
+              ? 'is Yellow'
               : '1 red'}
       </Text>
     );
@@ -7352,7 +7506,9 @@ class ScopeOnCustomView extends React.Component {
 
     return (
       <Button
-        testID={props['testID'] || 'Button'}
+        testID={\`\${props['testID'] || 'Button'}|\${
+          props.a ? 'a' : props.b ? 'b' : ''
+        }\`}
         label={props.a ? 'ho' : props.b ? 'this is b' : 'hey'}
         another={props.a ? 1 : 0}
         more={props.a ? props.different : props.more}
@@ -7674,7 +7830,7 @@ class Test extends React.Component {
 
     return (
       <Custom
-        testID={props['testID'] || 'Custom'}
+        testID={\`\${props['testID'] || 'Custom'}|\`}
         stuff=\\"eqweqw\\"
         childrenProxyMap={{ Something: 0, Another: 1 }}
       >
@@ -7727,7 +7883,7 @@ class TestIds extends React.Component {
       <View testID={\`\${props['testID'] || 'App'}|\`}>
         <Text testID={\`TestIds.Text|\`}>1</Text>
         <Text testID={\`TestIds.Text:1|\`}>2</Text>
-        <External testID=\\"TestIds.External\\" />
+        <External testID={\`TestIds.External|\`} />
         <Text testID={\`TestIds.Name|\`}>name</Text>
         {props.children}
       </View>
@@ -8429,7 +8585,7 @@ class UseOfProxy extends React.Component {
     return (
       <View testID={\`\${props['testID'] || 'App'}|\`} style={styles.hp2cr4d}>
         <Button
-          testID=\\"UseOfProxy.Button\\"
+          testID={\`UseOfProxy.Button|\`}
           color=\\"red\\"
           icon=\\"MyIcon\\"
           text=\\"I'm a button!\\"
@@ -8548,7 +8704,7 @@ class UseRouter extends React.Component {
             exact
             render={routeProps => (
               <Home
-                testID=\\"UseRouter.Home\\"
+                testID={\`UseRouter.Home|\`}
                 height={props.height}
                 width={360}
                 {...routeProps}
@@ -8558,13 +8714,13 @@ class UseRouter extends React.Component {
           <Route
             path=\\"/about\\"
             render={routeProps => (
-              <About testID=\\"UseRouter.About\\" {...routeProps} />
+              <About testID={\`UseRouter.About|\`} {...routeProps} />
             )}
           />
           <Route
             path=\\"/topics\\"
             render={routeProps => (
-              <Topics testID=\\"UseRouter.Topics\\" {...routeProps} />
+              <Topics testID={\`UseRouter.Topics|\`} {...routeProps} />
             )}
           />
           {props.children}
