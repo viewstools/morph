@@ -55,7 +55,10 @@ Object {
 module.exports = {
   BlockThatUsesViewAndBothHaveScopes: get(
     'BlockThatUsesViewAndBothHaveScopes.BlockThatUsesViewAndBothHaveScopes',
-    'isBlack'
+    'isBlack',
+    'notWhatMakesBlueAndSomethingGreen',
+    'whatMakesBlue',
+    'somethingGreen'
   ),
 };
 ",
@@ -1117,7 +1120,7 @@ class BlockThatUsesViewAndBothHaveScopes extends React.Component {
       <Scope
         data-test-id={\`\${props['data-test-id'] ||
           'BlockThatUsesViewAndBothHaveScopes'}|\${
-          props.isBlack ? 'isBlack' : ''
+          props.isBlack ? 'isBlack|' : ''
         }\`}
         className=\\"views-block\\"
       >
@@ -1152,7 +1155,7 @@ const BlockThatUsesViewAndBothHaveScopes = props => {
     <Scope
       data-test-id={\`\${props['data-test-id'] ||
         'BlockThatUsesViewAndBothHaveScopes'}|\${
-        props.isBlack ? 'isBlack' : ''
+        props.isBlack ? 'isBlack|' : ''
       }\`}
       className=\\"views-block\\"
     >
@@ -2345,7 +2348,7 @@ class LocalImage extends React.Component {
     return (
       <img
         data-test-id={\`\${props['data-test-id'] || 'LocalImage'}|\${
-          props.isCat ? 'isCat' : ''
+          props.isCat ? 'isCat|' : ''
         }\`}
         src={props.isCat ? garfieldPng : chopperJpg}
         className=\\"views-block\\"
@@ -2377,7 +2380,7 @@ const LocalImage = props => {
   return (
     <img
       data-test-id={\`\${props['data-test-id'] || 'LocalImage'}|\${
-        props.isCat ? 'isCat' : ''
+        props.isCat ? 'isCat|' : ''
       }\`}
       src={
         props.isCat
@@ -3007,11 +3010,11 @@ class Scope extends React.Component {
       <Scope1
         data-test-id={\`\${props['data-test-id'] || 'Scope'}|\${
           props.somethingGreen
-            ? 'somethingGreen'
+            ? 'somethingGreen|'
             : props.whatMakesBlue
-              ? 'whatMakesBlue'
+              ? 'whatMakesBlue|'
               : !props.whatMakesBlue && props.somethingGreen
-                ? 'notWhatMakesBlueAndSomethingGreen'
+                ? 'notWhatMakesBlueAndSomethingGreen|'
                 : ''
         }\`}
         props={props}
@@ -3064,11 +3067,11 @@ const Scope = props => {
     <Scope1
       data-test-id={\`\${props['data-test-id'] || 'Scope'}|\${
         props.somethingGreen
-          ? 'somethingGreen'
+          ? 'somethingGreen|'
           : props.whatMakesBlue
-            ? 'whatMakesBlue'
+            ? 'whatMakesBlue|'
             : !props.whatMakesBlue && props.somethingGreen
-              ? 'notWhatMakesBlueAndSomethingGreen'
+              ? 'notWhatMakesBlueAndSomethingGreen|'
               : ''
       }\`}
       props={props}
@@ -3126,7 +3129,7 @@ class ScopeOnCustomView extends React.Component {
     return (
       <Button
         data-test-id={\`\${props['data-test-id'] || 'Button'}|\${
-          props.a ? 'a' : props.b ? 'b' : ''
+          props.a ? 'a|' : props.b ? 'b|' : ''
         }\`}
         label={props.a ? 'ho' : props.b ? 'this is b' : 'hey'}
         another={props.a ? 1 : 0}
@@ -3164,7 +3167,7 @@ const ScopeOnCustomView = props => {
   return (
     <Button
       data-test-id={\`\${props['data-test-id'] || 'Button'}|\${
-        props.a ? 'a' : props.b ? 'b' : ''
+        props.a ? 'a|' : props.b ? 'b|' : ''
       }\`}
       label={props.a ? 'ho' : props.b ? 'this is b' : 'hey'}
       another={props.a ? 1 : 0}
@@ -3220,8 +3223,8 @@ class ScopePopup extends React.Component {
         <button
           data-test-id={\`ScopePopup.Toggle|\${
             props.somethingGreen
-              ? 'somethingGreen'
-              : props.whatMakesBlue ? 'whatMakesBlue' : ''
+              ? 'somethingGreen|'
+              : props.whatMakesBlue ? 'whatMakesBlue|' : ''
           }\`}
           onClick={
             props.somethingGreen
@@ -3272,8 +3275,8 @@ const ScopePopup = props => {
       <button
         data-test-id={\`ScopePopup.Toggle|\${
           props.somethingGreen
-            ? 'somethingGreen'
-            : props.whatMakesBlue ? 'whatMakesBlue' : ''
+            ? 'somethingGreen|'
+            : props.whatMakesBlue ? 'whatMakesBlue|' : ''
         }\`}
         onClick={
           props.somethingGreen
@@ -3358,8 +3361,8 @@ class ScopePopup2 extends React.Component {
         <Content
           data-test-id={\`ScopePopup2.Content|\${
             props.isShown
-              ? 'isShown'
-              : props.isSuperVisible ? 'isSuperVisible' : ''
+              ? 'isShown|'
+              : props.isSuperVisible ? 'isSuperVisible|' : ''
           }\`}
           scale={props.isShown ? 1 : props.isSuperVisible ? 2 : 0}
           props={props}
@@ -3415,8 +3418,8 @@ const ScopePopup2 = props => {
       <Content
         data-test-id={\`ScopePopup2.Content|\${
           props.isShown
-            ? 'isShown'
-            : props.isSuperVisible ? 'isSuperVisible' : ''
+            ? 'isShown|'
+            : props.isSuperVisible ? 'isSuperVisible|' : ''
         }\`}
         scale={props.isShown ? 1 : props.isSuperVisible ? 2 : 0}
         props={props}
@@ -4850,7 +4853,7 @@ class UseImage extends React.Component {
     return (
       <img
         data-test-id={\`\${props['data-test-id'] || 'Image'}|\${
-          props.another ? 'another' : ''
+          props.another ? 'another|' : ''
         }\`}
         src={
           props.another
@@ -4886,7 +4889,7 @@ const UseImage = props => {
   return (
     <img
       data-test-id={\`\${props['data-test-id'] || 'Image'}|\${
-        props.another ? 'another' : ''
+        props.another ? 'another|' : ''
       }\`}
       src={
         props.another
@@ -6376,7 +6379,7 @@ class BlockThatUsesViewAndBothHaveScopes extends React.Component {
     return (
       <Scope
         testID={\`\${props['testID'] || 'BlockThatUsesViewAndBothHaveScopes'}|\${
-          props.isBlack ? 'isBlack' : ''
+          props.isBlack ? 'isBlack|' : ''
         }\`}
       >
         {props.children}
@@ -7078,7 +7081,7 @@ class LocalImage extends React.Component {
     return (
       <Image
         testID={\`\${props['testID'] || 'LocalImage'}|\${
-          props.isCat ? 'isCat' : ''
+          props.isCat ? 'isCat|' : ''
         }\`}
         source={props.isCat ? garfieldPng : chopperJpg}
       />
@@ -7435,11 +7438,11 @@ class Scope extends React.Component {
       <Text
         testID={\`\${props['testID'] || 'Scope'}|\${
           props.somethingGreen
-            ? 'somethingGreen'
+            ? 'somethingGreen|'
             : props.whatMakesBlue
-              ? 'whatMakesBlue'
+              ? 'whatMakesBlue|'
               : !props.whatMakesBlue && props.somethingGreen
-                ? 'notWhatMakesBlueAndSomethingGreen'
+                ? 'notWhatMakesBlueAndSomethingGreen|'
                 : ''
         }\`}
         style={{
@@ -7507,7 +7510,7 @@ class ScopeOnCustomView extends React.Component {
     return (
       <Button
         testID={\`\${props['testID'] || 'Button'}|\${
-          props.a ? 'a' : props.b ? 'b' : ''
+          props.a ? 'a|' : props.b ? 'b|' : ''
         }\`}
         label={props.a ? 'ho' : props.b ? 'this is b' : 'hey'}
         another={props.a ? 1 : 0}
@@ -7572,8 +7575,8 @@ class ScopePopup extends React.Component {
           <View
             testID={\`ScopePopup.Toggle|\${
               props.somethingGreen
-                ? 'somethingGreen'
-                : props.whatMakesBlue ? 'whatMakesBlue' : ''
+                ? 'somethingGreen|'
+                : props.whatMakesBlue ? 'whatMakesBlue|' : ''
             }\`}
           >
             <Text testID={\`ScopePopup.Text|\`}>toggle popup</Text>
@@ -7647,8 +7650,8 @@ class ScopePopup2 extends React.Component {
         <View
           testID={\`ScopePopup2.Content|\${
             props.isShown
-              ? 'isShown'
-              : props.isSuperVisible ? 'isSuperVisible' : ''
+              ? 'isShown|'
+              : props.isSuperVisible ? 'isSuperVisible|' : ''
           }\`}
           scale={props.isShown ? 1 : props.isSuperVisible ? 2 : 0}
           style={{ opacity: props.isShown ? 1 : props.isSuperVisible ? 3 : 0 }}
@@ -8530,7 +8533,7 @@ class UseImage extends React.Component {
     return (
       <Image
         testID={\`\${props['testID'] || 'Image'}|\${
-          props.another ? 'another' : ''
+          props.another ? 'another|' : ''
         }\`}
         source={{
           uri: props.another
