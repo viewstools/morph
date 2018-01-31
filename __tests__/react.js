@@ -3,10 +3,10 @@ import { join } from 'path'
 import { existsSync, readdirSync, readFileSync } from 'fs'
 
 const isView = f => /\.view$/.test(f)
-const getPath = (f = '.') => join(__dirname, 'views', f)
+const getPath = (f = '.') => join(__dirname, 'á', f)
 const getName = f => f.replace(/\.view$/, '')
 
-const viewsParsed = {}
+const views = {}
 const files = []
 
 const getFiles = () =>
@@ -15,7 +15,7 @@ const getFiles = () =>
     .map(f => {
       const view = getName(f)
       const source = readFileSync(getPath(f), 'utf-8')
-      viewsParsed[view] = parse(source)
+      views[view] = parse(source)
       return f
     })
 
@@ -33,10 +33,9 @@ const getFont = font =>
           morph({
             as,
             getFont,
-            inlineStyles: true,
             name,
             pretty: true,
-            viewsParsed,
+            views,
           })
         ).toMatchSnapshot()
 
@@ -46,10 +45,9 @@ const getFont = font =>
               as,
               debug: true,
               getFont,
-              inlineStyles: true,
               name,
               pretty: true,
-              viewsParsed,
+              views,
             })
           ).toMatchSnapshot(`${as} parses ${as} ${name} debug`)
         }

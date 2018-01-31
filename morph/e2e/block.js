@@ -20,10 +20,10 @@ export const enter = [
       .reverse()
 
     if (!node.isBasic) {
-      let groupView = state.viewsParsed[node.name]
-        ? state.viewsParsed[node.name].views[0]
-        : null
-      if (groupView && groupView.scopes > 0) {
+      const groupView =
+        state.views[node.name] && state.views[node.name].views[0]
+
+      if (groupView && groupView.scopes.length > 0) {
         let groupScopes = groupView.scopes
           .filter(scope => !scope.isSystem)
           .map(scope => getScopeDescription(scope.value))

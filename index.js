@@ -18,12 +18,10 @@ export const morph = ({
   file = {},
   getFont,
   getImport = DEFAULT_IMPORT,
-  inlineStyles,
   name,
   pretty = false,
   track = true,
   views = {},
-  viewsParsed = {},
 }) => {
   let morphed = doMorph[as]({
     debug,
@@ -31,11 +29,9 @@ export const morph = ({
     file,
     getFont,
     getImport,
-    inlineStyles,
     name,
     track,
     views,
-    viewsParsed,
   })
 
   if (compile) {

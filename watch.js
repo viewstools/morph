@@ -386,8 +386,7 @@ height 50`
           getImport,
           pretty,
           track,
-          views,
-          viewsParsed,
+          views: viewsParsed,
         })
 
         const toMorph = {
@@ -440,8 +439,7 @@ height 50`
                   getImport,
                   pretty,
                   track,
-                  views,
-                  viewsParsed: {
+                  views: {
                     [svg.view]: inlined,
                   },
                 })

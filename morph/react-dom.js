@@ -22,7 +22,7 @@ export default ({
   getImport,
   name,
   track = true,
-  viewsParsed,
+  views,
 }) => {
   const finalName = restrictedNames.includes(name) ? `${name}1` : name
   if (name !== finalName) {
@@ -75,7 +75,7 @@ export default ({
     )
   }
 
-  const parsed = viewsParsed[name]
+  const parsed = views[name]
   state.fonts = parsed.fonts
 
   walk(parsed.views[0], visitor, state)
