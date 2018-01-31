@@ -203,7 +203,6 @@ module.exports = options => {
     const responsibleFor = {}
     const logic = {}
     const views = Object.assign({}, map)
-    const viewsSource = {}
     const viewsParsed = {}
 
     const instance = {
@@ -346,7 +345,6 @@ height 50`
         const rawFile = path.join(src, f)
         source = await fs.readFile(rawFile, 'utf-8')
         viewsParsed[view] = parse(source)
-        viewsSource[view] = source
       } catch (error) {
         verbose && console.error(chalk.red('M'), view, error)
       }
@@ -378,8 +376,7 @@ height 50`
           await getViewSource(f)
         }
 
-        const source = viewsSource[view]
-        const res = morph(source, {
+        const res = morph({
           as,
           compile,
           debug,
@@ -402,7 +399,6 @@ height 50`
           file: rawFile,
           fonts: res.fonts,
           props: res.props,
-          source,
           view,
         }
 

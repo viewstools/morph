@@ -39,7 +39,7 @@ const getFont = font =>
 
       it(`parses ${as} ${name}`, () => {
         expect(
-          morph(code, {
+          morph({
             as,
             getFont,
             inlineStyles: true,
@@ -52,7 +52,7 @@ const getFont = font =>
 
         if (as === 'react-dom') {
           expect(
-            morph(code, {
+            morph({
               as,
               debug: true,
               getFont,

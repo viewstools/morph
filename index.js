@@ -10,24 +10,21 @@ import parse from './parse/index.js'
 
 const DEFAULT_IMPORT = name => `import ${name} from './${name}.view.js'`
 
-export const morph = (
-  code,
-  {
-    as,
-    compile,
-    debug,
-    enableAnimated,
-    file = {},
-    getFont,
-    getImport = DEFAULT_IMPORT,
-    inlineStyles,
-    name,
-    pretty = false,
-    track = true,
-    views = {},
-    viewsParsed = {},
-  }
-) => {
+export const morph = ({
+  as,
+  compile,
+  debug,
+  enableAnimated,
+  file = {},
+  getFont,
+  getImport = DEFAULT_IMPORT,
+  inlineStyles,
+  name,
+  pretty = false,
+  track = true,
+  views = {},
+  viewsParsed = {},
+}) => {
   let morphed = doMorph[as]({
     debug,
     enableAnimated,
@@ -37,7 +34,6 @@ export const morph = (
     inlineStyles,
     name,
     track,
-    view: code,
     views,
     viewsParsed,
   })
