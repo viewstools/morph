@@ -339,11 +339,27 @@ height 50`
     const addViewSkipMorph = f => addView(f, true)
 
     const getViewSource = async f => {
-      const { file, view } = toViewPath(f)
+      const { view } = toViewPath(f)
+
       try {
         const rawFile = path.join(src, f)
         const source = await fs.readFile(rawFile, 'utf-8')
-        viewsParsed[view] = parse(source)
+        const parsed = parse(source)
+        viewsParsed[view] = parsed
+
+        if (parsed.warnings.length > 0) {
+          console.error(
+            chalk.red(view),
+            chalk.dim(path.resolve(src, views[view]))
+          )
+          parsed.warnings.forEach(warning => {
+            console.error(
+              `  ${chalk.blue(warning.type)} ${chalk.yellow(
+                `line ${warning.loc.start.line}`
+              )} ${warning.line}`
+            )
+          })
+        }
       } catch (error) {
         verbose && console.error(chalk.red('M'), view, error)
       }
