@@ -340,10 +340,9 @@ height 50`
 
     const getViewSource = async f => {
       const { file, view } = toViewPath(f)
-      let source
       try {
         const rawFile = path.join(src, f)
-        source = await fs.readFile(rawFile, 'utf-8')
+        const source = await fs.readFile(rawFile, 'utf-8')
         viewsParsed[view] = parse(source)
       } catch (error) {
         verbose && console.error(chalk.red('M'), view, error)
@@ -431,7 +430,7 @@ height 50`
                 const inlined = await morphInlineSvg(svgFile)
 
                 // TODO revisit as most of the options don't matter here
-                const res = morph(inlined, {
+                const res = morph({
                   as,
                   compile,
                   debug,
@@ -442,7 +441,9 @@ height 50`
                   pretty,
                   track,
                   views,
-                  viewsParsed,
+                  viewsParsed: {
+                    [svg.view]: inlined,
+                  },
                 })
 
                 await onMorph({
@@ -508,6 +509,7 @@ height 50`
         delete logic[view]
       } else {
         delete views[view]
+        delete viewsParsed[view]
       }
 
       if (typeof onRemove === 'function') {
@@ -543,9 +545,7 @@ height 50`
     const listToMorph = await glob(watcherPattern, watcherOptions)
     const viewsToMorph = listToMorph.map(addViewSkipMorph).filter(Boolean)
 
-    for (let file of viewsToMorph) {
-      await getViewSource(file)
-    }
+    await Promise.all(viewsToMorph.map(getViewSource))
 
     viewsLeftToBeReady = viewsToMorph.length
     viewsToMorph.forEach(v => morphView(v, false, true))

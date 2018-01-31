@@ -6,21 +6,18 @@ const isView = f => /\.view$/.test(f)
 const getPath = (f = '.') => join(__dirname, 'views', f)
 const getName = f => f.replace(/\.view$/, '')
 
-const viewsSource = {}
 const viewsParsed = {}
 const files = []
 
-const getFiles = () => {
+const getFiles = () =>
   readdirSync(getPath())
     .filter(isView)
-    .forEach(f => {
+    .map(f => {
       const view = getName(f)
       const source = readFileSync(getPath(f), 'utf-8')
       viewsParsed[view] = parse(source)
-      viewsSource[view] = source
-      files.push(f)
+      return f
     })
-}
 
 const getFont = font =>
   `./Fonts/${font.family}-${font.weight}${
@@ -28,14 +25,8 @@ const getFont = font =>
   }`
 ;['react-dom', 'react-native', 'e2e'].forEach(as =>
   describe(as, () => {
-    getFiles()
-    files.forEach(f => {
+    getFiles().forEach(f => {
       const name = getName(f)
-      const code = viewsSource[name]
-      const testFile = getPath(`${f}.tests`)
-      const tests = existsSync(testFile)
-        ? readFileSync(testFile, 'utf-8')
-        : undefined
 
       it(`parses ${as} ${name}`, () => {
         expect(
@@ -45,7 +36,6 @@ const getFont = font =>
             inlineStyles: true,
             name,
             pretty: true,
-            tests,
             viewsParsed,
           })
         ).toMatchSnapshot()
@@ -59,7 +49,6 @@ const getFont = font =>
               inlineStyles: true,
               name,
               pretty: true,
-              tests,
               viewsParsed,
             })
           ).toMatchSnapshot(`${as} parses ${as} ${name} debug`)
