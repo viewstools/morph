@@ -15,6 +15,7 @@ SvgGroup
 transform translate(6.000000, 5.000000)
 SvgPath
 d 1
+
 SvgPath
 d 2
 

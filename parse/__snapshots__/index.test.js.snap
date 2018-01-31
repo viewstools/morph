@@ -42,7 +42,7 @@ Object {
           "isGroup": false,
           "loc": Object {
             "end": Object {
-              "column": undefined,
+              "column": 3,
               "line": 1,
             },
             "start": Object {
@@ -92,8 +92,8 @@ Object {
           "isGroup": false,
           "loc": Object {
             "end": Object {
-              "column": undefined,
-              "line": 1,
+              "column": 0,
+              "line": 2,
             },
             "start": Object {
               "column": 0,
@@ -113,12 +113,12 @@ Object {
               "isGroup": false,
               "loc": Object {
                 "end": Object {
-                  "column": 32,
-                  "line": 4,
+                  "column": 0,
+                  "line": 6,
                 },
                 "start": Object {
                   "column": 0,
-                  "line": 3,
+                  "line": 4,
                 },
               },
               "name": "Image",
@@ -127,11 +127,11 @@ Object {
                   "loc": Object {
                     "end": Object {
                       "column": 32,
-                      "line": 4,
+                      "line": 5,
                     },
                     "start": Object {
                       "column": 0,
-                      "line": 4,
+                      "line": 5,
                     },
                   },
                   "meta": Array [],
@@ -153,11 +153,11 @@ Object {
               "loc": Object {
                 "end": Object {
                   "column": 0,
-                  "line": 6,
+                  "line": 8,
                 },
                 "start": Object {
                   "column": 0,
-                  "line": 5,
+                  "line": 7,
                 },
               },
               "name": "Vertical",
@@ -173,11 +173,11 @@ Object {
           "loc": Object {
             "end": Object {
               "column": 0,
-              "line": 7,
+              "line": 9,
             },
             "start": Object {
               "column": 0,
-              "line": 2,
+              "line": 3,
             },
           },
           "name": "Vertical",
@@ -191,12 +191,12 @@ Object {
           "isGroup": false,
           "loc": Object {
             "end": Object {
-              "column": 8,
-              "line": 12,
+              "column": 0,
+              "line": 15,
             },
             "start": Object {
               "column": 0,
-              "line": 8,
+              "line": 10,
             },
           },
           "name": "Text",
@@ -205,11 +205,11 @@ Object {
               "loc": Object {
                 "end": Object {
                   "column": 9,
-                  "line": 9,
+                  "line": 11,
                 },
                 "start": Object {
                   "column": 0,
-                  "line": 9,
+                  "line": 11,
                 },
               },
               "meta": Array [],
@@ -222,11 +222,11 @@ Object {
               "loc": Object {
                 "end": Object {
                   "column": 11,
-                  "line": 10,
+                  "line": 12,
                 },
                 "start": Object {
                   "column": 0,
-                  "line": 10,
+                  "line": 12,
                 },
               },
               "meta": Array [],
@@ -246,11 +246,11 @@ Object {
                   "loc": Object {
                     "end": Object {
                       "column": 9,
-                      "line": 11,
+                      "line": 13,
                     },
                     "start": Object {
                       "column": 0,
-                      "line": 11,
+                      "line": 13,
                     },
                   },
                   "meta": Array [],
@@ -265,11 +265,11 @@ Object {
                   "loc": Object {
                     "end": Object {
                       "column": 8,
-                      "line": 12,
+                      "line": 14,
                     },
                     "start": Object {
                       "column": 0,
-                      "line": 12,
+                      "line": 14,
                     },
                   },
                   "meta": Array [],
@@ -295,11 +295,11 @@ Object {
           "loc": Object {
             "end": Object {
               "column": 19,
-              "line": 14,
+              "line": 17,
             },
             "start": Object {
               "column": 0,
-              "line": 13,
+              "line": 16,
             },
           },
           "name": "Vertical",
@@ -308,11 +308,11 @@ Object {
               "loc": Object {
                 "end": Object {
                   "column": 19,
-                  "line": 14,
+                  "line": 17,
                 },
                 "start": Object {
                   "column": 0,
-                  "line": 14,
+                  "line": 17,
                 },
               },
               "meta": Array [],
@@ -335,7 +335,7 @@ Object {
       "loc": Object {
         "end": Object {
           "column": 19,
-          "line": 14,
+          "line": 17,
         },
         "start": Object {
           "column": 0,
@@ -364,8 +364,8 @@ Object {
           "isGroup": false,
           "loc": Object {
             "end": Object {
-              "column": 8,
-              "line": 2,
+              "column": 0,
+              "line": 3,
             },
             "start": Object {
               "column": 0,
@@ -404,11 +404,11 @@ Object {
           "loc": Object {
             "end": Object {
               "column": 10,
-              "line": 4,
+              "line": 5,
             },
             "start": Object {
               "column": 0,
-              "line": 3,
+              "line": 4,
             },
           },
           "name": "Text",
@@ -417,11 +417,11 @@ Object {
               "loc": Object {
                 "end": Object {
                   "column": 10,
-                  "line": 4,
+                  "line": 5,
                 },
                 "start": Object {
                   "column": 0,
-                  "line": 4,
+                  "line": 5,
                 },
               },
               "meta": Array [],
@@ -444,7 +444,7 @@ Object {
       "loc": Object {
         "end": Object {
           "column": 10,
-          "line": 4,
+          "line": 5,
         },
         "start": Object {
           "column": 0,
@@ -487,8 +487,8 @@ Object {
           "isGroup": false,
           "loc": Object {
             "end": Object {
-              "column": 19,
-              "line": 6,
+              "column": 0,
+              "line": 7,
             },
             "start": Object {
               "column": 0,
@@ -581,12 +581,12 @@ Object {
           "isGroup": false,
           "loc": Object {
             "end": Object {
-              "column": 20,
-              "line": 8,
+              "column": 0,
+              "line": 10,
             },
             "start": Object {
               "column": 0,
-              "line": 7,
+              "line": 8,
             },
           },
           "name": "CaptureText",
@@ -595,11 +595,11 @@ Object {
               "loc": Object {
                 "end": Object {
                   "column": 20,
-                  "line": 8,
+                  "line": 9,
                 },
                 "start": Object {
                   "column": 0,
-                  "line": 8,
+                  "line": 9,
                 },
               },
               "meta": Array [
@@ -630,11 +630,11 @@ Object {
               "loc": Object {
                 "end": Object {
                   "column": 4,
-                  "line": 12,
+                  "line": 14,
                 },
                 "start": Object {
                   "column": 0,
-                  "line": 12,
+                  "line": 14,
                 },
               },
               "name": "Stuff",
@@ -649,11 +649,11 @@ Object {
           "loc": Object {
             "end": Object {
               "column": 4,
-              "line": 12,
+              "line": 14,
             },
             "start": Object {
               "column": 0,
-              "line": 9,
+              "line": 11,
             },
           },
           "name": "List",
@@ -662,11 +662,11 @@ Object {
               "loc": Object {
                 "end": Object {
                   "column": 15,
-                  "line": 10,
+                  "line": 12,
                 },
                 "start": Object {
                   "column": 0,
-                  "line": 10,
+                  "line": 12,
                 },
               },
               "meta": Array [
@@ -691,11 +691,11 @@ Object {
                   "loc": Object {
                     "end": Object {
                       "column": 26,
-                      "line": 11,
+                      "line": 13,
                     },
                     "start": Object {
                       "column": 0,
-                      "line": 11,
+                      "line": 13,
                     },
                   },
                   "meta": Array [
@@ -725,7 +725,7 @@ Object {
       "loc": Object {
         "end": Object {
           "column": 4,
-          "line": 12,
+          "line": 14,
         },
         "start": Object {
           "column": 0,

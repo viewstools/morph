@@ -12,9 +12,11 @@ Text`,
 
   `BlueButton Vertical
 Before Text
+
 Nested Vertical
 ImageInside Image
 source https://image.com/file.jpg
+
 VerticalInside Vertical
 
 
@@ -23,6 +25,7 @@ text after
 color purple
 when hover
 color red
+
 Last Vertical
 backgroundColor blue`,
 
@@ -31,6 +34,7 @@ backgroundColor blue`,
   `A Vertical 
 A1 Text
 color red
+
 A2 Text    
 color white`,
 
@@ -41,8 +45,10 @@ Title Text
 color props.some.thing || 'red'
 marginLeft props.marginLeft
 text props.some.prop
+
 CaptureText
 onFocus props.onFocus
+
 List
 from props.stuff
 when props.stuff.length > 0
