@@ -1,5 +1,6 @@
 import {
-  didYouMean,
+  didYouMeanBlock,
+  didYouMeanProp,
   getBlock,
   getComment,
   getMainFont,
@@ -27,7 +28,8 @@ export default (rtext, skipComments = true) => {
   // convert crlf to lf
   const text = rtext.replace(/\r\n/g, '\n')
   const fonts = []
-  const lines = text.split('\n').map(line => line.trim())
+  const rlines = text.split('\n')
+  const lines = rlines.map(line => line.trim())
   const props = []
   const stack = []
   const views = []
@@ -138,8 +140,8 @@ export default (rtext, skipComments = true) => {
     }
 
     if (is && !block.isBasic) {
-      const meant = didYouMean(name)
-      if (meant !== name) {
+      const meant = didYouMeanBlock(name)
+      if (meant && meant !== name) {
         warnings.push({
           loc: block.loc,
           type: `Did you mean "${meant}" instead of "${name}"?`,
@@ -294,8 +296,8 @@ export default (rtext, skipComments = true) => {
         const loc = getLoc(j, line.indexOf(name), line.length - 1)
         const tags = getTags(name, value)
 
-        const meant = didYouMean(name)
-        if (meant !== name) {
+        const meant = didYouMeanProp(name)
+        if (meant && meant !== name && block.isBasic) {
           warnings.push({
             loc,
             type: `Did you mean "${meant}" instead of "${name}"?`,
@@ -356,6 +358,14 @@ export default (rtext, skipComments = true) => {
           scopes.push(scope)
         }
 
+        if (name === 'onWhen' && properties.length > 0) {
+          warnings.push({
+            type: `Put onWhen at the top of the block. It's easier to see it that way!`,
+            line,
+            loc,
+          })
+        }
+
         propNode = {
           type: 'Property',
           loc,
@@ -410,6 +420,18 @@ export default (rtext, skipComments = true) => {
   }
 
   lines.forEach((line, i) => {
+    if (line !== rlines[i]) {
+      warnings.push({
+        type: `You have some spaces before or after this line. Clean them up.`,
+        loc: {
+          start: {
+            line: i,
+          },
+        },
+        line: rlines[i],
+      })
+    }
+
     if (isBlock(line)) {
       parseBlock(line, i)
     } else if (isEnd(line) && stack.length > 0) {
