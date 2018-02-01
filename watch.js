@@ -566,16 +566,6 @@ height 50`
       'Fonts/*.woff2',
     ].filter(Boolean)
 
-    let viewsLeftToBeReady = null
-
-    const listToMorph = await glob(watcherPattern, watcherOptions)
-    const viewsToMorph = listToMorph.map(addViewSkipMorph).filter(Boolean)
-
-    await Promise.all(viewsToMorph.map(getViewSource))
-
-    viewsLeftToBeReady = viewsToMorph.length
-    viewsToMorph.forEach(v => morphView(v, false, true))
-
     const fontsDirectory = path.join(src, 'Fonts')
     if (!await fs.exists(fontsDirectory)) {
       await fs.mkdir(fontsDirectory)
@@ -601,10 +591,14 @@ height 50`
     )
 
     let viewsLeftToBeReady = null
+
     const listToMorph = await glob(watcherPattern, watcherOptions)
     const viewsToMorph = listToMorph.map(addViewSkipMorph).filter(Boolean)
+
+    await Promise.all(viewsToMorph.map(getViewSource))
+
     viewsLeftToBeReady = viewsToMorph.length
-    viewsToMorph.forEach(morphView)
+    viewsToMorph.forEach(v => morphView(v, false, true))
 
     if (!once) {
       const watcher = chokidar.watch(watcherPattern, {
