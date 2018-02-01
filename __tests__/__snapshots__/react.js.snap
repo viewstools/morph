@@ -699,13 +699,14 @@ class Action extends React.Component {
     return props.check ? (
       <button
         data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-        onClick={event => {
+        onClick={event =>
           context.track({
             block: props['data-test-id'] || 'Action',
             action: 'click',
-          });
-          props.clickMe(event);
-        }}
+            callback: props.clickMe,
+            event,
+          })
+        }
         disabled={props.isDisabled}
         className={\`views-block \${Vertical_h1azf9vn}\`}
       >
@@ -819,13 +820,14 @@ class AnimatedButton extends React.Component {
     return (
       <Vertical
         data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-        onClick={event => {
+        onClick={event =>
           context.track({
             block: props['data-test-id'] || 'AnimatedButton',
             action: 'click',
-          });
-          props.onClick(event);
-        }}
+            callback: props.onClick,
+            event,
+          })
+        }
         props={props}
         className=\\"views-block\\"
       >
@@ -1709,13 +1711,14 @@ class Form extends React.Component {
         />
         <button
           data-test-id={\`Form.Button|\`}
-          onClick={event => {
+          onClick={event =>
             context.track({
               block: props['data-test-id'] || 'Form',
               action: 'click',
-            });
-            (() => props.onSubmit(state))(event);
-          }}
+              callback: () => props.onSubmit(state),
+              event,
+            })
+          }
           className=\\"views-block\\"
         >
           <span data-test-id={\`Form.Text|\`} className=\\"views-block\\">
@@ -1954,13 +1957,14 @@ class Hover extends React.Component {
     return (
       <Button
         data-test-id={\`\${props['data-test-id'] || 'Button'}|\`}
-        onClick={event => {
+        onClick={event =>
           context.track({
             block: props['data-test-id'] || 'Hover',
             action: 'click',
-          });
-          props.onClick(event);
-        }}
+            callback: props.onClick,
+            event,
+          })
+        }
         props={props}
         className=\\"views-block\\"
       >
@@ -3343,13 +3347,14 @@ class ScopePopup2 extends React.Component {
       >
         <button
           data-test-id={\`ScopePopup2.Toggle|\`}
-          onClick={event => {
+          onClick={event =>
             context.track({
               block: props['data-test-id'] || 'ScopePopup2',
               action: 'click',
-            });
-            props.toggle(event);
-          }}
+              callback: props.toggle,
+              event,
+            })
+          }
           className=\\"views-block\\"
         >
           <span data-test-id={\`ScopePopup2.Text|\`} className=\\"views-block\\">
@@ -3490,13 +3495,14 @@ class SomeMissingStyle extends React.Component {
     return (
       <WindowControl
         data-test-id={\`\${props['data-test-id'] || 'WindowControl'}|\`}
-        onClick={event => {
+        onClick={event =>
           context.track({
             block: props['data-test-id'] || 'SomeMissingStyle',
             action: 'click',
-          });
-          props.onClick(event);
-        }}
+            callback: props.onClick,
+            event,
+          })
+        }
         tabIndex=\\"-1\\"
         props={props}
         className=\\"views-block\\"
@@ -6050,13 +6056,14 @@ class WithTest extends React.Component {
     return (
       <button
         data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-        onClick={event => {
+        onClick={event =>
           context.track({
             block: props['data-test-id'] || 'WithTest',
             action: 'click',
-          });
-          props.change(event);
-        }}
+            callback: props.change,
+            event,
+          })
+        }
         className=\\"views-block\\"
       >
         <span data-test-id={\`WithTest.Text|\`} className=\\"views-block\\">
@@ -6144,13 +6151,14 @@ class Action extends React.Component {
     return props.check ? (
       <TouchableWithoutFeedback
         activeOpacity={0.7}
-        onPress={event => {
+        onPress={event =>
           context.track({
             block: props['testID'] || 'Action',
             action: 'click',
-          });
-          props.clickMe(event);
-        }}
+            callback: props.clickMe,
+            event,
+          })
+        }
         disabled={props.isDisabled}
         underlayColor=\\"transparent\\"
       >
@@ -6210,13 +6218,14 @@ class AnimatedButton extends React.Component {
     return (
       <TouchableWithoutFeedback
         activeOpacity={0.7}
-        onPress={event => {
+        onPress={event =>
           context.track({
             block: props['testID'] || 'AnimatedButton',
             action: 'click',
-          });
-          props.onClick(event);
-        }}
+            callback: props.onClick,
+            event,
+          })
+        }
         underlayColor=\\"transparent\\"
       >
         <Animated.View
@@ -6756,13 +6765,14 @@ class Form extends React.Component {
         />
         <TouchableWithoutFeedback
           activeOpacity={0.7}
-          onPress={event => {
+          onPress={event =>
             context.track({
               block: props['testID'] || 'Form',
               action: 'click',
-            });
-            (() => props.onSubmit(state))(event);
-          }}
+              callback: () => props.onSubmit(state),
+              event,
+            })
+          }
           underlayColor=\\"transparent\\"
         >
           <View testID={\`Form.Button|\`}>
@@ -6862,10 +6872,14 @@ class Hover extends React.Component {
     return (
       <TouchableWithoutFeedback
         activeOpacity={0.7}
-        onPress={event => {
-          context.track({ block: props['testID'] || 'Hover', action: 'click' });
-          props.onClick(event);
-        }}
+        onPress={event =>
+          context.track({
+            block: props['testID'] || 'Hover',
+            action: 'click',
+            callback: props.onClick,
+            event,
+          })
+        }
         underlayColor=\\"transparent\\"
       >
         <Animated.View
@@ -7624,13 +7638,14 @@ class ScopePopup2 extends React.Component {
       <View testID={\`\${props['testID'] || 'Popup'}|\`}>
         <TouchableWithoutFeedback
           activeOpacity={0.7}
-          onPress={event => {
+          onPress={event =>
             context.track({
               block: props['testID'] || 'ScopePopup2',
               action: 'click',
-            });
-            props.toggle(event);
-          }}
+              callback: props.toggle,
+              event,
+            })
+          }
           underlayColor=\\"transparent\\"
         >
           <View testID={\`ScopePopup2.Toggle|\`}>
@@ -7707,13 +7722,14 @@ class SomeMissingStyle extends React.Component {
     return (
       <TouchableWithoutFeedback
         activeOpacity={0.7}
-        onPress={event => {
+        onPress={event =>
           context.track({
             block: props['testID'] || 'SomeMissingStyle',
             action: 'click',
-          });
-          props.onClick(event);
-        }}
+            callback: props.onClick,
+            event,
+          })
+        }
         underlayColor=\\"transparent\\"
       >
         <Animated.View
@@ -9157,13 +9173,14 @@ class WithTest extends React.Component {
     return (
       <TouchableWithoutFeedback
         activeOpacity={0.7}
-        onPress={event => {
+        onPress={event =>
           context.track({
             block: props['testID'] || 'WithTest',
             action: 'click',
-          });
-          props.change(event);
-        }}
+            callback: props.change,
+            event,
+          })
+        }
         underlayColor=\\"transparent\\"
       >
         <View testID={\`\${props['testID'] || 'Vertical'}|\`}>
