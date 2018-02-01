@@ -582,8 +582,19 @@ height 50`
       ],
       watcherOptions
     )
-
     customFonts.forEach(addFont)
+
+    console.log(
+      'Custom fonts:\n',
+      instance.customFonts.map(f => f.file).join(',\n'),
+      '\n'
+    )
+
+    let viewsLeftToBeReady = null
+    const listToMorph = await glob(watcherPattern, watcherOptions)
+    const viewsToMorph = listToMorph.map(addViewSkipMorph).filter(Boolean)
+    viewsLeftToBeReady = viewsToMorph.length
+    viewsToMorph.forEach(morphView)
 
     if (!once) {
       const watcher = chokidar.watch(watcherPattern, {
