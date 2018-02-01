@@ -41,6 +41,7 @@
   },
   "dependencies": {
     "array-uniq": "^1.0.3",
+    "bubblesort": "^1.0.1",
     "buble": "^0.18.0",
     "chalk": "^2.3.0",
     "chokidar": "^1.7.0",

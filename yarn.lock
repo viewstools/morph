@@ -966,6 +966,10 @@ bser@^2.0.0:
   dependencies:
     node-int64 "^0.4.0"
 
+bubblesort@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/bubblesort/-/bubblesort-1.0.1.tgz#c351cc9239ffdde9eaf4a112d6ea878e77a2cb47"
+
 buble@^0.18.0:
   version "0.18.0"
   resolved "https://registry.yarnpkg.com/buble/-/buble-0.18.0.tgz#63b338b8248c474b46fd3e3546560ae08d8abe91"
