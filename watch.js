@@ -203,6 +203,7 @@ module.exports = options => {
     const responsibleFor = {}
     const logic = {}
     const views = Object.assign({}, map)
+    const viewsSources = {}
     const viewsParsed = {}
 
     const instance = {
@@ -345,6 +346,7 @@ height 50`
         const rawFile = path.join(src, f)
         const source = await fs.readFile(rawFile, 'utf-8')
         const parsed = parse(source)
+        viewsSources[view] = source
         viewsParsed[view] = parsed
 
         if (parsed.warnings.length > 0) {
@@ -413,6 +415,7 @@ height 50`
           file: rawFile,
           fonts: res.fonts,
           props: res.props,
+          source: viewsSources[view],
           view,
         }
 
@@ -523,6 +526,7 @@ height 50`
         delete logic[view]
       } else {
         delete views[view]
+        delete viewsSources[view]
         delete viewsParsed[view]
       }
 
