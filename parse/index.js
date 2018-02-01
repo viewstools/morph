@@ -1,4 +1,5 @@
 import {
+  didYouMean,
   getBlock,
   getComment,
   getMainFont,
@@ -134,6 +135,17 @@ export default (rtext, skipComments = true) => {
       loc: getLoc(i, 0),
       properties: [],
       scopes: [],
+    }
+
+    if (is && !block.isBasic) {
+      const meant = didYouMean(name)
+      if (meant !== name) {
+        warnings.push({
+          loc: block.loc,
+          type: `Did you mean "${meant}" instead of "${name}"?`,
+          line,
+        })
+      }
     }
 
     if (is) {
@@ -281,6 +293,15 @@ export default (rtext, skipComments = true) => {
         const [name, value] = getProp(line)
         const loc = getLoc(j, line.indexOf(name), line.length - 1)
         const tags = getTags(name, value)
+
+        const meant = didYouMean(name)
+        if (meant !== name) {
+          warnings.push({
+            loc,
+            type: `Did you mean "${meant}" instead of "${name}"?`,
+            line,
+          })
+        }
 
         if (tags.code) {
           props.push({ type: block.name, name, value })
