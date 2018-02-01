@@ -208,9 +208,9 @@ export const makeOnClickTracker = (node, state) => {
     ? `"${state.name}.${node.testId}"`
     : `props["${state.testIdKey}"] || "${state.name}"`
 
-  const track = `context.track({ block: ${block}, action: "click" })`
-
   state.isTracking = true
 
-  return `event => { ${track}; (${node.value})(event); }`
+  return `event => context.track({ block: ${block}, action: "click", callback: ${
+    node.value
+  }, event })`
 }
