@@ -103,6 +103,17 @@ export default (rtext, skipComments = true) => {
       block.properties = []
     }
 
+    if (
+      block.name === 'List' &&
+      !block.properties.some(prop => prop.name === 'from')
+    ) {
+      warnings.push({
+        loc: block.loc,
+        type: `A List needs "from props" to work`,
+        line: lines[block.loc.start.line],
+      })
+    }
+
     if (stack.length === 0) {
       // if we're the last block on the stack, then this is the view!
       views.push(block)
@@ -139,19 +150,30 @@ export default (rtext, skipComments = true) => {
     const last = stack[stack.length - 1]
     if (last) {
       if (last.isGroup) {
-        if (last.isList) {
+        if (block.name === 'FakeProps') {
+          warnings.push({
+            loc: block.loc,
+            type: `FakeProps needs to be outside of the top block. Put new lines before it.`,
+            line,
+          })
+        } else if (last.isList) {
           if (block.isBasic) {
             warnings.push({
               loc: block.loc,
-              type: `A basic block can't be inside a List.\nPut 1 empty line before.`,
+              type: `A basic block "${
+                block.name
+              }" can't be inside a List. Use a view you made instead.`,
               line,
+              blocker: true,
             })
 
             shouldPushToStack = true
           } else if (last.children.length > 0) {
             warnings.push({
               loc: block.loc,
-              type: `A List can only have one view inside. This block is outside of it.\nPut 1 empty line before.`,
+              type: `A List can only have one view inside. "${
+                block.name
+              }" is outside of it. Put 1 empty line before.`,
               line,
             })
             shouldPushToStack = true
@@ -165,7 +187,7 @@ export default (rtext, skipComments = true) => {
         // the block is inside a block that isn't a group
         end(stack.pop(), i)
 
-        if (views[0].isGroup) {
+        if (views[0] && views[0].isGroup) {
           warnings.push({
             loc: block.loc,
             type:
@@ -190,23 +212,25 @@ export default (rtext, skipComments = true) => {
         newLinesBeforePreviousBlock++
       }
 
-      const help = []
-      if (!views[0].isGroup) {
-        help.push(`Add Vertical at the top`)
+      if (block.name !== 'FakeProps') {
+        const help = []
+        if (!views[0].isGroup) {
+          help.push(`Add Vertical at the top`)
+        }
+        if (newLinesBeforePreviousBlock > 2) {
+          const linesToRemove = newLinesBeforePreviousBlock - 2
+          help.push(
+            `remove ${linesToRemove} empty line${
+              linesToRemove > 1 ? 's' : ''
+            } before`
+          )
+        }
+        warnings.push({
+          loc: block.loc,
+          type: help.join(', '),
+          line,
+        })
       }
-      if (newLinesBeforePreviousBlock > 2) {
-        const linesToRemove = newLinesBeforePreviousBlock - 2
-        help.push(
-          `remove ${linesToRemove} empty line${
-            linesToRemove > 1 ? 's' : ''
-          } before`
-        )
-      }
-      warnings.push({
-        loc: block.loc,
-        type: help.join(', '),
-        line,
-      })
     }
 
     if (isGroup(name)) {

@@ -479,7 +479,7 @@ height 50`
 
         verbose && console.log(chalk.green('M'), view)
       } catch (error) {
-        verbose && console.error(chalk.red('M'), view, error)
+        verbose && console.error(chalk.red('M'), view, error.codeFrame || error)
 
         if (!calledMaybeIsReady) {
           maybeIsReady()
