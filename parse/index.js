@@ -163,19 +163,19 @@ export default (rtext, skipComments = true) => {
         // the block is inside a block that isn't a group
         end(stack.pop(), i)
 
-        if (views[0] && views[0].isGroup) {
+        if (last.isBasic) {
+          warnings.push({
+            loc: block.loc,
+            type: `An empty line is required after every block. Put 1 empty line before`,
+            line,
+          })
+        } else if (views[0] && views[0].isGroup) {
           warnings.push({
             loc: block.loc,
             type:
               lines[i - 1] === ''
                 ? `Put 1 empty line before`
                 : `Put 2 empty lines before`,
-            line,
-          })
-        } else if (views.length === 0) {
-          warnings.push({
-            loc: block.loc,
-            type: `An empty line is required after every block. Put 1 empty line before`,
             line,
           })
         } else {
