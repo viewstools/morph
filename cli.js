@@ -4,6 +4,12 @@ const { readFileSync, statSync } = require('fs')
 const { morph, pathToName } = require('./lib.js')
 const chalk = require('chalk')
 const watch = require('./watch.js')
+const path = require('path')
+const { writeFile } = require('mz/fs')
+const morphInlineSvg = require('./morph/inline-svg.js')
+const onMorphWriteSvg = ({ file, code }) => {
+  return writeFile(`${file}`, code)
+}
 
 let {
   _,
@@ -57,7 +63,6 @@ if (help) {
 }
 
 const input = Array.isArray(_) && _[0]
-
 if (!input) {
   console.error(
     'You need to specify an input file. Eg run views-morph some.view'
@@ -115,15 +120,30 @@ if (shouldWatch) {
       track,
     })
   } else {
-    const { code } = morph(readFileSync(input, 'utf-8'), {
-      as,
-      compile,
-      file: { raw: input, relative: input },
-      name: pathToName(input),
-      pretty,
-      track,
-    })
+    if (input.includes('.svg')) {
+      return new Promise(async (resolve, reject) => {
+        const inlined = await morphInlineSvg(input)
 
-    console.log(code)
+        resolve(
+          onMorphWriteSvg({
+            as,
+            code: inlined,
+            isInlineSvg: true,
+            file: path.resolve(input, '..', `${pathToName(input)}.view`),
+          })
+        )
+      })
+    } else {
+      const { code } = morph(readFileSync(input, 'utf-8'), {
+        as,
+        compile,
+        file: { raw: input, relative: input },
+        name: pathToName(input),
+        pretty,
+        track,
+      })
+
+      console.log(code)
+    }
   }
 }
