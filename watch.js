@@ -19,6 +19,8 @@ const uniq = require('array-uniq')
 
 const FONT_TYPES = {
   '.otf': 'opentype',
+  '.eot': 'eot',
+  '.svg': 'svg',
   '.ttf': 'truetype',
   '.woff': 'woff',
   '.woff2': 'woff2',
@@ -145,14 +147,18 @@ module.exports = options => {
 
     const addFont = file => {
       const id = getFontFileId(file)
+      const type = FONT_TYPES[path.extname(file)]
 
-      if (instance.customFonts.some(font => font.id === id)) return
+      if (
+        instance.customFonts.some(font => font.id === id && font.type === type)
+      )
+        return
 
       instance.customFonts.push({
         file,
         relativeFile: file.replace('Fonts/', './'),
         id: getFontFileId(file),
-        type: FONT_TYPES[path.extname(file)],
+        type,
       })
     }
     const removeFont = file => {
@@ -203,6 +209,7 @@ module.exports = options => {
     const responsibleFor = {}
     const logic = {}
     const views = Object.assign({}, map)
+    const viewsSources = {}
     const viewsParsed = {}
 
     const instance = {
@@ -345,6 +352,7 @@ height 50`
         const rawFile = path.join(src, f)
         const source = await fs.readFile(rawFile, 'utf-8')
         const parsed = parse(source)
+        viewsSources[view] = source
         viewsParsed[view] = parsed
 
         if (parsed.warnings.length > 0) {
@@ -413,6 +421,7 @@ height 50`
           file: rawFile,
           fonts: res.fonts,
           props: res.props,
+          source: viewsSources[view],
           view,
         }
 
@@ -479,7 +488,7 @@ height 50`
 
         verbose && console.log(chalk.green('M'), view)
       } catch (error) {
-        verbose && console.error(chalk.red('M'), view, error)
+        verbose && console.error(chalk.red('M'), view, error.codeFrame || error)
 
         if (!calledMaybeIsReady) {
           maybeIsReady()
@@ -523,6 +532,7 @@ height 50`
         delete logic[view]
       } else {
         delete views[view]
+        delete viewsSources[view]
         delete viewsParsed[view]
       }
 
@@ -548,11 +558,37 @@ height 50`
       shouldIncludeLogic && `**/*.view.logic.js`,
       shouldIncludeFake && `**/*.view.fake`,
       // fonts,
+      'Fonts/*.eot',
       'Fonts/*.otf',
       'Fonts/*.ttf',
+      'Fonts/*.svg',
       'Fonts/*.woff',
       'Fonts/*.woff2',
     ].filter(Boolean)
+
+    const fontsDirectory = path.join(src, 'Fonts')
+    if (!await fs.exists(fontsDirectory)) {
+      await fs.mkdir(fontsDirectory)
+    }
+    const customFonts = await glob(
+      [
+        // fonts,
+        'Fonts/*.eot',
+        'Fonts/*.otf',
+        'Fonts/*.ttf',
+        'Fonts/*.svg',
+        'Fonts/*.woff',
+        'Fonts/*.woff2',
+      ],
+      watcherOptions
+    )
+    customFonts.forEach(addFont)
+
+    console.log(
+      'Custom fonts:\n',
+      instance.customFonts.map(f => f.file).join(',\n'),
+      '\n'
+    )
 
     let viewsLeftToBeReady = null
 
@@ -563,23 +599,6 @@ height 50`
 
     viewsLeftToBeReady = viewsToMorph.length
     viewsToMorph.forEach(v => morphView(v, false, true))
-
-    const fontsDirectory = path.join(src, 'Fonts')
-    if (!await fs.exists(fontsDirectory)) {
-      await fs.mkdir(fontsDirectory)
-    }
-    const customFonts = await glob(
-      [
-        // fonts,
-        'Fonts/*.otf',
-        'Fonts/*.ttf',
-        'Fonts/*.woff',
-        'Fonts/*.woff2',
-      ],
-      watcherOptions
-    )
-
-    customFonts.forEach(addFont)
 
     if (!once) {
       const watcher = chokidar.watch(watcherPattern, {

@@ -461,7 +461,26 @@ Object {
       "type": "Block",
     },
   ],
-  "warnings": Array [],
+  "warnings": Array [
+    Object {
+      "line": "A Vertical ",
+      "loc": Object {
+        "start": Object {
+          "line": 0,
+        },
+      },
+      "type": "You have some spaces before or after this line. Clean them up.",
+    },
+    Object {
+      "line": "A2 Text    ",
+      "loc": Object {
+        "start": Object {
+          "line": 3,
+        },
+      },
+      "type": "You have some spaces before or after this line. Clean them up.",
+    },
+  ],
 }
 `;
 
@@ -811,7 +830,7 @@ Object {
           "line": 4,
         },
       },
-      "type": "props/invalid-code",
+      "type": "The code you used in the props value is invalid",
     },
     Object {
       "line": "text props.some.prop",
@@ -825,7 +844,7 @@ Object {
           "line": 6,
         },
       },
-      "type": "props/invalid-code",
+      "type": "The code you used in the props value is invalid",
     },
     Object {
       "line": "when props.stuff.length > 0",
@@ -839,7 +858,7 @@ Object {
           "line": 11,
         },
       },
-      "type": "props/invalid-code",
+      "type": "The code you used in the props value is invalid",
     },
   ],
 }
@@ -1042,7 +1061,7 @@ Object {
           "line": 3,
         },
       },
-      "type": "when/no-props",
+      "type": "This when has no props, add some condition to it",
     },
     Object {
       "line": "backgroundColor purple",
@@ -1056,7 +1075,7 @@ Object {
           "line": 6,
         },
       },
-      "type": "scopes/missing-base-prop",
+      "type": "You're missing a base prop for backgroundColor. Add it before all whens on the block.",
     },
   ],
 }

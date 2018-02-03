@@ -1,9 +1,4 @@
-import {
-  getScopedCondition,
-  getProp,
-  isCode,
-  makeOnClickTracker,
-} from '../utils.js'
+import { getScopedCondition, getProp, makeOnClickTracker } from '../utils.js'
 import getBlockName from './get-block-name.js'
 import safe from '../react/safe.js'
 import wrap from '../react/wrap.js'
@@ -44,20 +39,12 @@ export const enter = (node, parent, state) => {
     node.wrapEnd = `</${block}>`
   } else if (node.teleport) {
     state.use('Link')
-    let to = getProp(node, 'teleportTo').value
-
-    if (to.startsWith('/') || to === '..') {
-      to = safe(to)
-    } else {
-      to = isCode(to) ? `\${${to}}` : to
-      to = `{\`\${props.match.url === '/' ? '' : props.match.url}/${to}\`}`
-      state.withRouter = true
-    }
+    const to = getProp(node, 'teleportTo').value
 
     state.render.push(
       `<Link
           activeOpacity={0.7}
-          to=${to}
+          to=${safe(to)}
           underlayColor='transparent'>`
     )
     node.wrapEnd = '</Link>'

@@ -1,4 +1,6 @@
 import {
+  didYouMeanBlock,
+  didYouMeanProp,
   getBlock,
   getComment,
   getMainFont,
@@ -26,7 +28,8 @@ export default (rtext, skipComments = true) => {
   // convert crlf to lf
   const text = rtext.replace(/\r\n/g, '\n')
   const fonts = []
-  const lines = text.split('\n').map(line => line.trim())
+  const rlines = text.split('\n')
+  const lines = rlines.map(line => line.trim())
   const props = []
   const stack = []
   const views = []
@@ -103,6 +106,17 @@ export default (rtext, skipComments = true) => {
       block.properties = []
     }
 
+    if (
+      block.name === 'List' &&
+      !block.properties.some(prop => prop.name === 'from')
+    ) {
+      warnings.push({
+        loc: block.loc,
+        type: `A List needs "from props" to work`,
+        line: lines[block.loc.start.line],
+      })
+    }
+
     if (stack.length === 0) {
       // if we're the last block on the stack, then this is the view!
       views.push(block)
@@ -125,6 +139,17 @@ export default (rtext, skipComments = true) => {
       scopes: [],
     }
 
+    if (is && !block.isBasic) {
+      const meant = didYouMeanBlock(name)
+      if (meant && meant !== name) {
+        warnings.push({
+          loc: block.loc,
+          type: `Did you mean "${meant}" instead of "${name}"?`,
+          line,
+        })
+      }
+    }
+
     if (is) {
       block.is = is
 
@@ -140,17 +165,28 @@ export default (rtext, skipComments = true) => {
     if (last) {
       shouldPushToStack = true
       if (last.isGroup) {
-        if (last.isList) {
+        if (block.name === 'FakeProps') {
+          warnings.push({
+            loc: block.loc,
+            type: `FakeProps needs to be outside of the top block. Put new lines before it.`,
+            line,
+          })
+        } else if (last.isList) {
           if (block.isBasic) {
             warnings.push({
               loc: block.loc,
-              type: `A basic block can't be inside a List.\nPut 1 empty line before.`,
+              type: `A basic block "${
+                block.name
+              }" can't be inside a List. Use a view you made instead.`,
               line,
+              blocker: true,
             })
           } else if (last.children.length > 0) {
             warnings.push({
               loc: block.loc,
-              type: `A List can only have one view inside. This block is outside of it.\nPut 1 empty line before.`,
+              type: `A List can only have one view inside. "${
+                block.name
+              }" is outside of it. Put 1 empty line before.`,
               line,
             })
           } else {
@@ -193,23 +229,25 @@ export default (rtext, skipComments = true) => {
         newLinesBeforePreviousBlock++
       }
 
-      const help = []
-      if (!views[0].isGroup) {
-        help.push(`Add Vertical at the top`)
+      if (block.name !== 'FakeProps') {
+        const help = []
+        if (!views[0].isGroup) {
+          help.push(`Add Vertical at the top`)
+        }
+        if (newLinesBeforePreviousBlock > 2) {
+          const linesToRemove = newLinesBeforePreviousBlock - 2
+          help.push(
+            `remove ${linesToRemove} empty line${
+              linesToRemove > 1 ? 's' : ''
+            } before`
+          )
+        }
+        warnings.push({
+          loc: block.loc,
+          type: help.join(', '),
+          line,
+        })
       }
-      if (newLinesBeforePreviousBlock > 2) {
-        const linesToRemove = newLinesBeforePreviousBlock - 2
-        help.push(
-          `remove ${linesToRemove} empty line${
-            linesToRemove > 1 ? 's' : ''
-          } before`
-        )
-      }
-      warnings.push({
-        loc: block.loc,
-        type: help.join(', '),
-        line,
-      })
     }
 
     if (isGroup(name)) {
@@ -258,6 +296,15 @@ export default (rtext, skipComments = true) => {
         const [name, value] = getProp(line)
         const loc = getLoc(j, line.indexOf(name), line.length - 1)
         const tags = getTags(name, value)
+
+        const meant = didYouMeanProp(name)
+        if (meant && meant !== name && block.isBasic) {
+          warnings.push({
+            loc,
+            type: `Did you mean "${meant}" instead of "${name}"?`,
+            line,
+          })
+        }
 
         if (tags.code) {
           props.push({ type: block.name, name, value })
@@ -310,6 +357,14 @@ export default (rtext, skipComments = true) => {
           inScope = value
           scope = { isSystem, value, properties: [] }
           scopes.push(scope)
+        }
+
+        if (name === 'onWhen' && properties.length > 0) {
+          warnings.push({
+            type: `Put onWhen at the top of the block. It's easier to see it that way!`,
+            line,
+            loc,
+          })
         }
 
         propNode = {
@@ -366,6 +421,18 @@ export default (rtext, skipComments = true) => {
   }
 
   lines.forEach((line, i) => {
+    if (line !== rlines[i]) {
+      warnings.push({
+        type: `You have some spaces before or after this line. Clean them up.`,
+        loc: {
+          start: {
+            line: i,
+          },
+        },
+        line: rlines[i],
+      })
+    }
+
     if (isBlock(line)) {
       parseBlock(line, i)
     } else if (isEnd(line) && stack.length > 0) {

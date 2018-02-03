@@ -966,6 +966,10 @@ bser@^2.0.0:
   dependencies:
     node-int64 "^0.4.0"
 
+bubblesort@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/bubblesort/-/bubblesort-1.0.1.tgz#c351cc9239ffdde9eaf4a112d6ea878e77a2cb47"
+
 buble@^0.18.0:
   version "0.18.0"
   resolved "https://registry.yarnpkg.com/buble/-/buble-0.18.0.tgz#63b338b8248c474b46fd3e3546560ae08d8abe91"
@@ -3117,6 +3121,10 @@ left-pad@^1.2.0:
 leven@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/leven/-/leven-2.1.0.tgz#c2e7a9f772094dee9d34202ae8acce4687875580"
+
+levenshtein@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/levenshtein/-/levenshtein-1.0.5.tgz#3911737a9cb56da345d008f55782c6f138979ba3"
 
 levn@^0.3.0, levn@~0.3.0:
   version "0.3.0"

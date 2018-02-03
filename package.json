@@ -1,6 +1,6 @@
 {
   "name": "views-morph",
-  "version": "0.11.17",
+  "version": "0.11.20",
   "description": "Views language morpher",
   "main": "lib.js",
   "bin": {
@@ -41,6 +41,7 @@
   },
   "dependencies": {
     "array-uniq": "^1.0.3",
+    "bubblesort": "^1.0.1",
     "buble": "^0.18.0",
     "chalk": "^2.3.0",
     "chokidar": "^1.7.0",
@@ -51,6 +52,8 @@
     "google-fonts-complete": "^1.1.1",
     "html2json": "^1.0.2",
     "is-expression": "^3.0.0",
+    "levenshtein": "^1.0.5",
+    "lodash.sortby": "^4.7.0",
     "minimist": "^1.2.0",
     "mz": "^2.6.0",
     "prettier": "^1.4.2",

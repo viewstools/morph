@@ -1,6 +1,56 @@
 import cssProperties from 'css-properties'
+import DidYouMeanMatcher from './did-you-mean.js'
 import isExpression from 'is-expression'
 import toCamelCase from 'to-camel-case'
+
+const dymBlockMatcher = new DidYouMeanMatcher(
+  'CaptureEmail|CaptureFile|CaptureNumber|CapturePhone|CaptureSecure|CaptureText|CaptureTextArea|G|Horizontal|Image|List|Svg|SvgCircle|SvgEllipse|SvgDefs|SvgGroup|SvgLinearGradient|SvgRadialGradient|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgSymbol|SvgText|SvgUse|SvgStop|Text|Vertical|FakeProps'.split(
+    '|'
+  )
+)
+const dymPropMatcher = new DidYouMeanMatcher([
+  ...cssProperties.map(toCamelCase),
+  'defaultValue',
+  'fill',
+  'stroke',
+  'from',
+  'viewBox',
+  'stroke',
+  'strokeWidth',
+  'strokeLinecap',
+  'strokeMiterlimit',
+  'at',
+  'd',
+  'x',
+  'x1',
+  'y1',
+  'y',
+  'x2',
+  'y2',
+  'strokeLinejoin',
+  'onBlur',
+  'onChange',
+  'onClick',
+  'onDrag',
+  'onDragEnd',
+  'onDragOver',
+  'onDragStart',
+  'onFocus',
+  'onMouseDown',
+  'onMouseMove',
+  'onMouseOver',
+  'onMouseUp',
+  'onWheel',
+  'onWhen',
+  'ref',
+  'tabIndex',
+  'text',
+  'value',
+  'when',
+])
+
+export const didYouMeanBlock = block => dymBlockMatcher.get(block)
+export const didYouMeanProp = prop => dymPropMatcher.get(prop)
 
 const BASIC = /^(CaptureEmail|CaptureFile|CaptureNumber|CapturePhone|CaptureSecure|CaptureText|CaptureTextArea|G|Horizontal|Image|List|Svg|SvgCircle|SvgEllipse|SvgDefs|SvgGroup|SvgLinearGradient|SvgRadialGradient|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgSymbol|SvgText|SvgUse|SvgStop|Text|Vertical|FakeProps)$/i
 const BLOCK = /^([A-Z][a-zA-Z0-9]*)(\s+([A-Z][a-zA-Z0-9]*))?$/
