@@ -1,4 +1,4 @@
-import { getScopedCondition, isCode } from '../utils.js'
+import { getScopedCondition, isProps } from '../utils.js'
 import wrap from './wrap.js'
 
 export function enter(node, parent, state) {
@@ -6,7 +6,7 @@ export function enter(node, parent, state) {
     if (getScopedCondition(node, parent)) {
       parent.explicitChildren = wrap(getScopedCondition(node, parent))
     } else {
-      parent.explicitChildren = isCode(node) ? wrap(node.value) : node.value
+      parent.explicitChildren = isProps(node) ? wrap(node.value) : node.value
     }
 
     return true

@@ -1,5 +1,5 @@
 Vertical
-opacity props.opacity
-onClick props.onClick
+opacity props 1
+onClick props
 Text
 text hey

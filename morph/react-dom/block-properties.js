@@ -1,17 +1,18 @@
 import * as PropertiesChildrenProxyMap from '../react/properties-children-proxy-map.js'
 import * as PropertiesClassName from './properties-class-name.js'
+import * as PropertiesImage from './properties-image.js'
 import * as PropertiesRoute from '../react/properties-route.js'
 import * as PropertiesStyle from './properties-style.js'
 import * as PropertyRef from '../react/property-ref.js'
 import * as PropertyRest from '../react/property-rest.js'
 import * as PropertyStyle from '../react/property-style.js'
 import * as PropertyText from '../react/property-text.js'
-// import { hasDefaultProp } from '../utils.js'
 import isValidPropertyForBlock from './is-valid-property-for-block.js'
 
 export function enter(node, parent, state) {
   PropertiesStyle.enter(node, parent, state)
   PropertiesClassName.enter(node, parent, state)
+  PropertiesImage.enter(node, parent, state)
 
   node.properties.forEach(propNode => {
     if (
@@ -19,6 +20,7 @@ export function enter(node, parent, state) {
       propNode.name === 'when' ||
       propNode.name === 'onWhen' ||
       (propNode.name === 'ref' && state.debug) ||
+      propNode.tags.shorthand ||
       (!isValidPropertyForBlock(propNode, node, state) && node.isBasic) ||
       (propNode.name === 'from' && node.name === 'List')
     )

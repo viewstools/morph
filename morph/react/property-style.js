@@ -2,7 +2,7 @@ import {
   checkParentStem,
   getScopedCondition,
   getStyleType,
-  isCode,
+  isProps,
   isStyle,
   isSvg,
 } from '../utils.js'
@@ -19,7 +19,7 @@ export function enter(node, parent, state) {
 
   let styleForProperty, isScopedVal, _isProp
 
-  const code = isCode(node)
+  const code = isProps(node)
 
   // TODO refactor
   if (getScopedCondition(node, parent)) {

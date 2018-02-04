@@ -1,2 +1,4 @@
 Horizontal
-border 1px solid red
+borderColor red
+borderStyle solid
+borderWidth 1

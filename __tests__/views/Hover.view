@@ -1,12 +1,11 @@
-Button Vertical
-backgroundColor props.backgroundColor
-onClick props.onClick
+Hover Vertical
+backgroundColor #323232
+onClick props
 when hover
-backgroundColor props.backgroundColorHover
+backgroundColor #232323
 Text
 color white
-fontSize props.fontSize
+fontSize props
 text Hey!
 when hover
 color black
-fontSize props.fontSizeHover

@@ -1,7 +1,7 @@
 Horizontal
 Home
 at / exact
-height props.height
+height props 10
 width 360
 
 About

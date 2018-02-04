@@ -1,10 +1,10 @@
 Button
 label hey
 another 0
-more props.more
+more props
 when props.a
 label ho
 another 1
-more props.different
+more props
 when props.b
 label this is b

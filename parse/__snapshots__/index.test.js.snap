@@ -3,7 +3,7 @@
 exports[`#parse 1`] = `
 Object {
   "fonts": Array [],
-  "props": Object {},
+  "props": Array [],
   "views": Array [
     Object {
       "children": Array [],
@@ -34,7 +34,7 @@ Object {
 exports[`#parse 2`] = `
 Object {
   "fonts": Array [],
-  "props": Object {},
+  "props": Array [],
   "views": Array [
     Object {
       "children": Array [
@@ -84,7 +84,7 @@ Object {
 exports[`#parse 3`] = `
 Object {
   "fonts": Array [],
-  "props": Object {},
+  "props": Array [],
   "views": Array [
     Object {
       "children": Array [
@@ -136,7 +136,6 @@ Object {
                       "line": 5,
                     },
                   },
-                  "meta": Array [],
                   "name": "source",
                   "tags": Object {},
                   "type": "Property",
@@ -214,7 +213,6 @@ Object {
                   "line": 11,
                 },
               },
-              "meta": Array [],
               "name": "text",
               "tags": Object {},
               "type": "Property",
@@ -231,7 +229,6 @@ Object {
                   "line": 12,
                 },
               },
-              "meta": Array [],
               "name": "color",
               "tags": Object {
                 "style": true,
@@ -255,11 +252,11 @@ Object {
                       "line": 13,
                     },
                   },
-                  "meta": Array [],
                   "name": "when",
                   "tags": Object {
                     "scope": "hover",
-                    "shouldBeCode": true,
+                    "shouldBeProps": true,
+                    "validProps": false,
                   },
                   "type": "Property",
                   "value": "hover",
@@ -275,7 +272,6 @@ Object {
                       "line": 14,
                     },
                   },
-                  "meta": Array [],
                   "name": "color",
                   "tags": Object {
                     "style": true,
@@ -318,7 +314,6 @@ Object {
                   "line": 17,
                 },
               },
-              "meta": Array [],
               "name": "backgroundColor",
               "tags": Object {
                 "style": true,
@@ -358,7 +353,7 @@ Object {
 exports[`#parse 4`] = `
 Object {
   "fonts": Array [],
-  "props": Object {},
+  "props": Array [],
   "views": Array [
     Object {
       "children": Array [
@@ -389,7 +384,6 @@ Object {
                   "line": 2,
                 },
               },
-              "meta": Array [],
               "name": "color",
               "tags": Object {
                 "style": true,
@@ -428,7 +422,6 @@ Object {
                   "line": 5,
                 },
               },
-              "meta": Array [],
               "name": "color",
               "tags": Object {
                 "style": true,
@@ -487,21 +480,38 @@ Object {
 exports[`#parse 5`] = `
 Object {
   "fonts": Array [],
-  "props": Object {
-    "backgroundColor": "string",
-    "marginLeft": "number",
-    "name": "function",
-    "onClick": "function",
-    "onFocus": "function",
-    "some": Object {
-      "shape": Object {
-        "prop": "string",
-        "thing": "string",
-      },
-      "type": "object",
+  "props": Array [
+    Object {
+      "defaultValue": false,
+      "name": "backgroundColor",
+      "type": "string",
     },
-    "stuff": "string",
-  },
+    Object {
+      "defaultValue": "red",
+      "name": "color",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": 10,
+      "name": "marginLeft",
+      "type": "number",
+    },
+    Object {
+      "defaultValue": "This is the title",
+      "name": "text",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "onFocus",
+      "type": "function",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "from",
+      "type": "array",
+    },
+  ],
   "views": Array [
     Object {
       "children": Array [
@@ -519,13 +529,13 @@ Object {
               "line": 3,
             },
           },
-          "maybeAnimated": true,
           "name": "Text",
           "properties": Array [
             Object {
+              "defaultValue": "red",
               "loc": Object {
                 "end": Object {
-                  "column": 30,
+                  "column": 14,
                   "line": 4,
                 },
                 "start": Object {
@@ -533,24 +543,20 @@ Object {
                   "line": 4,
                 },
               },
-              "meta": Array [
-                Object {
-                  "tag": "code",
-                  "value": "props.some.thing",
-                },
-              ],
               "name": "color",
               "tags": Object {
-                "code": true,
+                "props": true,
                 "style": true,
+                "validProps": true,
               },
               "type": "Property",
-              "value": "props.some.thing || 'red'",
+              "value": "props.color",
             },
             Object {
+              "defaultValue": 10,
               "loc": Object {
                 "end": Object {
-                  "column": 26,
+                  "column": 18,
                   "line": 5,
                 },
                 "start": Object {
@@ -558,24 +564,20 @@ Object {
                   "line": 5,
                 },
               },
-              "meta": Array [
-                Object {
-                  "tag": "code",
-                  "value": "props.marginLeft",
-                },
-              ],
               "name": "marginLeft",
               "tags": Object {
-                "code": true,
+                "props": true,
                 "style": true,
+                "validProps": true,
               },
               "type": "Property",
               "value": "props.marginLeft",
             },
             Object {
+              "defaultValue": "This is the title",
               "loc": Object {
                 "end": Object {
-                  "column": 19,
+                  "column": 33,
                   "line": 6,
                 },
                 "start": Object {
@@ -583,18 +585,13 @@ Object {
                   "line": 6,
                 },
               },
-              "meta": Array [
-                Object {
-                  "tag": "code",
-                  "value": "props.some.prop",
-                },
-              ],
               "name": "text",
               "tags": Object {
-                "code": true,
+                "props": true,
+                "validProps": true,
               },
               "type": "Property",
-              "value": "props.some.prop",
+              "value": "props.title",
             },
           ],
           "scopes": Array [],
@@ -616,9 +613,10 @@ Object {
           "name": "CaptureText",
           "properties": Array [
             Object {
+              "defaultValue": false,
               "loc": Object {
                 "end": Object {
-                  "column": 20,
+                  "column": 12,
                   "line": 9,
                 },
                 "start": Object {
@@ -626,16 +624,11 @@ Object {
                   "line": 9,
                 },
               },
-              "meta": Array [
-                Object {
-                  "tag": "code",
-                  "value": "props.onFocus",
-                },
-              ],
               "name": "onFocus",
               "tags": Object {
-                "code": true,
-                "shouldBeCode": true,
+                "props": true,
+                "shouldBeProps": true,
+                "validProps": true,
               },
               "type": "Property",
               "value": "props.onFocus",
@@ -655,11 +648,11 @@ Object {
               "loc": Object {
                 "end": Object {
                   "column": 4,
-                  "line": 14,
+                  "line": 13,
                 },
                 "start": Object {
                   "column": 0,
-                  "line": 14,
+                  "line": 13,
                 },
               },
               "name": "Stuff",
@@ -674,7 +667,7 @@ Object {
           "loc": Object {
             "end": Object {
               "column": 4,
-              "line": 14,
+              "line": 13,
             },
             "start": Object {
               "column": 0,
@@ -684,9 +677,10 @@ Object {
           "name": "List",
           "properties": Array [
             Object {
+              "defaultValue": false,
               "loc": Object {
                 "end": Object {
-                  "column": 15,
+                  "column": 9,
                   "line": 12,
                 },
                 "start": Object {
@@ -694,55 +688,17 @@ Object {
                   "line": 12,
                 },
               },
-              "meta": Array [
-                Object {
-                  "tag": "code",
-                  "value": "props.stuff",
-                },
-              ],
               "name": "from",
               "tags": Object {
-                "code": true,
-                "shouldBeCode": true,
+                "props": true,
+                "shouldBeProps": true,
+                "validProps": true,
               },
               "type": "Property",
-              "value": "props.stuff",
+              "value": "props.from",
             },
           ],
-          "scopes": Array [
-            Object {
-              "isSystem": false,
-              "properties": Array [
-                Object {
-                  "loc": Object {
-                    "end": Object {
-                      "column": 26,
-                      "line": 13,
-                    },
-                    "start": Object {
-                      "column": 0,
-                      "line": 13,
-                    },
-                  },
-                  "meta": Array [
-                    Object {
-                      "tag": "code",
-                      "value": "props.stuff.length",
-                    },
-                  ],
-                  "name": "when",
-                  "tags": Object {
-                    "code": true,
-                    "scope": "props.stuff.length > 0",
-                    "shouldBeCode": true,
-                  },
-                  "type": "Property",
-                  "value": "props.stuff.length > 0",
-                },
-              ],
-              "value": "props.stuff.length > 0",
-            },
-          ],
+          "scopes": Array [],
           "type": "Block",
         },
       ],
@@ -752,17 +708,17 @@ Object {
       "loc": Object {
         "end": Object {
           "column": 4,
-          "line": 14,
+          "line": 13,
         },
         "start": Object {
           "column": 0,
           "line": 0,
         },
       },
-      "maybeAnimated": true,
       "name": "Vertical",
       "properties": Array [
         Object {
+          "defaultValue": false,
           "loc": Object {
             "end": Object {
               "column": 36,
@@ -773,16 +729,11 @@ Object {
               "line": 1,
             },
           },
-          "meta": Array [
-            Object {
-              "tag": "code",
-              "value": "props.backgroundColor",
-            },
-          ],
           "name": "backgroundColor",
           "tags": Object {
-            "code": true,
+            "props": true,
             "style": true,
+            "validProps": true,
           },
           "type": "Property",
           "value": "props.backgroundColor",
@@ -798,16 +749,10 @@ Object {
               "line": 2,
             },
           },
-          "meta": Array [
-            Object {
-              "tag": "code",
-              "value": "props.onClick(props.name,",
-            },
-          ],
           "name": "onClick",
           "tags": Object {
-            "code": true,
-            "shouldBeCode": true,
+            "shouldBeProps": true,
+            "validProps": false,
           },
           "type": "Property",
           "value": "event => props.onClick(props.name, event)",
@@ -819,46 +764,60 @@ Object {
   ],
   "warnings": Array [
     Object {
-      "line": "color props.some.thing || 'red'",
+      "line": "backgroundColor props.backgroundColor",
       "loc": Object {
         "end": Object {
-          "column": 30,
-          "line": 4,
+          "column": 36,
+          "line": 1,
         },
         "start": Object {
           "column": 0,
-          "line": 4,
+          "line": 1,
+        },
+      },
+      "type": "Add a default value to backgroundColor like: backgroundColor props.backgroundColor default value",
+    },
+    Object {
+      "line": "onClick event => props.onClick(props.name, event)",
+      "loc": Object {
+        "end": Object {
+          "column": 48,
+          "line": 2,
+        },
+        "start": Object {
+          "column": 0,
+          "line": 2,
         },
       },
       "type": "The code you used in the props value is invalid",
     },
     Object {
-      "line": "text props.some.prop",
+      "line": "onFocus props",
       "loc": Object {
         "end": Object {
-          "column": 19,
-          "line": 6,
+          "column": 12,
+          "line": 9,
         },
         "start": Object {
           "column": 0,
-          "line": 6,
+          "line": 9,
         },
       },
-      "type": "The code you used in the props value is invalid",
+      "type": "Add a default value to onFocus like: onFocus props default value",
     },
     Object {
-      "line": "when props.stuff.length > 0",
+      "line": "from props",
       "loc": Object {
         "end": Object {
-          "column": 26,
-          "line": 13,
+          "column": 9,
+          "line": 12,
         },
         "start": Object {
           "column": 0,
-          "line": 13,
+          "line": 12,
         },
       },
-      "type": "The code you used in the props value is invalid",
+      "type": "Add a default value to from like: from props default value",
     },
   ],
 }
@@ -867,7 +826,13 @@ Object {
 exports[`#parse 6`] = `
 Object {
   "fonts": Array [],
-  "props": Object {},
+  "props": Array [
+    Object {
+      "defaultValue": false,
+      "name": "marginTop",
+      "type": "number",
+    },
+  ],
   "views": Array [
     Object {
       "children": Array [
@@ -880,7 +845,7 @@ Object {
           "loc": Object {
             "end": Object {
               "column": 10,
-              "line": 7,
+              "line": 9,
             },
             "start": Object {
               "column": 0,
@@ -900,7 +865,6 @@ Object {
                   "line": 2,
                 },
               },
-              "meta": Array [],
               "name": "color",
               "tags": Object {
                 "style": true,
@@ -909,9 +873,10 @@ Object {
               "value": "blue",
             },
             Object {
+              "defaultValue": false,
               "loc": Object {
                 "end": Object {
-                  "column": 3,
+                  "column": 14,
                   "line": 3,
                 },
                 "start": Object {
@@ -919,11 +884,49 @@ Object {
                   "line": 3,
                 },
               },
-              "meta": Array [],
+              "name": "marginTop",
+              "tags": Object {
+                "props": true,
+                "style": true,
+                "validProps": true,
+              },
+              "type": "Property",
+              "value": "props.marginTop",
+            },
+            Object {
+              "loc": Object {
+                "end": Object {
+                  "column": 19,
+                  "line": 4,
+                },
+                "start": Object {
+                  "column": 0,
+                  "line": 4,
+                },
+              },
+              "name": "border",
+              "tags": Object {
+                "shorthand": true,
+              },
+              "type": "Property",
+              "value": "1px solid red",
+            },
+            Object {
+              "loc": Object {
+                "end": Object {
+                  "column": 3,
+                  "line": 5,
+                },
+                "start": Object {
+                  "column": 0,
+                  "line": 5,
+                },
+              },
               "name": "when",
               "tags": Object {
                 "scope": "",
-                "shouldBeCode": true,
+                "shouldBeProps": true,
+                "validProps": false,
               },
               "type": "Property",
               "value": "",
@@ -932,14 +935,13 @@ Object {
               "loc": Object {
                 "end": Object {
                   "column": 8,
-                  "line": 4,
+                  "line": 6,
                 },
                 "start": Object {
                   "column": 0,
-                  "line": 4,
+                  "line": 6,
                 },
               },
-              "meta": Array [],
               "name": "color",
               "tags": Object {
                 "style": true,
@@ -961,24 +963,18 @@ Object {
                   "loc": Object {
                     "end": Object {
                       "column": 16,
-                      "line": 5,
+                      "line": 7,
                     },
                     "start": Object {
                       "column": 0,
-                      "line": 5,
+                      "line": 7,
                     },
                   },
-                  "meta": Array [
-                    Object {
-                      "tag": "code",
-                      "value": "props.",
-                    },
-                  ],
                   "name": "when",
                   "tags": Object {
-                    "code": true,
                     "scope": "props. stuff",
-                    "shouldBeCode": true,
+                    "shouldBeProps": true,
+                    "validProps": false,
                   },
                   "type": "Property",
                   "value": "props. stuff",
@@ -987,14 +983,13 @@ Object {
                   "loc": Object {
                     "end": Object {
                       "column": 21,
-                      "line": 6,
+                      "line": 8,
                     },
                     "start": Object {
                       "column": 0,
-                      "line": 6,
+                      "line": 8,
                     },
                   },
-                  "meta": Array [],
                   "name": "backgroundColor",
                   "tags": Object {
                     "style": true,
@@ -1006,14 +1001,13 @@ Object {
                   "loc": Object {
                     "end": Object {
                       "column": 10,
-                      "line": 7,
+                      "line": 9,
                     },
                     "start": Object {
                       "column": 0,
-                      "line": 7,
+                      "line": 9,
                     },
                   },
-                  "meta": Array [],
                   "name": "color",
                   "tags": Object {
                     "style": true,
@@ -1035,7 +1029,7 @@ Object {
       "loc": Object {
         "end": Object {
           "column": 10,
-          "line": 7,
+          "line": 9,
         },
         "start": Object {
           "column": 0,
@@ -1050,10 +1044,10 @@ Object {
   ],
   "warnings": Array [
     Object {
-      "line": "when",
+      "line": "marginTop props",
       "loc": Object {
         "end": Object {
-          "column": 3,
+          "column": 14,
           "line": 3,
         },
         "start": Object {
@@ -1061,18 +1055,63 @@ Object {
           "line": 3,
         },
       },
-      "type": "This when has no props, add some condition to it",
+      "type": "Add a default value to marginTop like: marginTop props default value",
+    },
+    Object {
+      "line": "border 1px solid red",
+      "loc": Object {
+        "end": Object {
+          "column": 19,
+          "line": 4,
+        },
+        "start": Object {
+          "column": 0,
+          "line": 4,
+        },
+      },
+      "type": "The shorthand border isn't allowed. You need to expand it like:
+borderColor
+borderStyle
+borderWidth",
+    },
+    Object {
+      "line": "when",
+      "loc": Object {
+        "end": Object {
+          "column": 3,
+          "line": 5,
+        },
+        "start": Object {
+          "column": 0,
+          "line": 5,
+        },
+      },
+      "type": "This when has no condition assigned to it. Add one like: when props.isCondition",
+    },
+    Object {
+      "line": "when props. stuff",
+      "loc": Object {
+        "end": Object {
+          "column": 16,
+          "line": 7,
+        },
+        "start": Object {
+          "column": 0,
+          "line": 7,
+        },
+      },
+      "type": "The code you used in the props value is invalid",
     },
     Object {
       "line": "backgroundColor purple",
       "loc": Object {
         "end": Object {
           "column": 21,
-          "line": 6,
+          "line": 8,
         },
         "start": Object {
           "column": 0,
-          "line": 6,
+          "line": 8,
         },
       },
       "type": "You're missing a base prop for backgroundColor. Add it before all whens on the block.",

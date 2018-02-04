@@ -1,15 +1,14 @@
-import cssProperties from 'css-properties'
+import { isStyle, STYLE } from './prop-is-style.js'
 import DidYouMeanMatcher from './did-you-mean.js'
-import isExpression from 'is-expression'
-import toCamelCase from 'to-camel-case'
+import isNumber from './prop-is-number.js'
 
 const dymBlockMatcher = new DidYouMeanMatcher(
-  'CaptureEmail|CaptureFile|CaptureNumber|CapturePhone|CaptureSecure|CaptureText|CaptureTextArea|G|Horizontal|Image|List|Svg|SvgCircle|SvgEllipse|SvgDefs|SvgGroup|SvgLinearGradient|SvgRadialGradient|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgSymbol|SvgText|SvgUse|SvgStop|Text|Vertical|FakeProps'.split(
+  'CaptureEmail|CaptureFile|CaptureNumber|CapturePhone|CaptureSecure|CaptureText|CaptureTextArea|G|Horizontal|Image|List|Svg|SvgCircle|SvgEllipse|SvgDefs|SvgGroup|SvgLinearGradient|SvgRadialGradient|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgSymbol|SvgText|SvgUse|SvgStop|Text|Vertical'.split(
     '|'
   )
 )
 const dymPropMatcher = new DidYouMeanMatcher([
-  ...cssProperties.map(toCamelCase),
+  ...STYLE,
   'defaultValue',
   'fill',
   'stroke',
@@ -52,66 +51,63 @@ const dymPropMatcher = new DidYouMeanMatcher([
 export const didYouMeanBlock = block => dymBlockMatcher.get(block)
 export const didYouMeanProp = prop => dymPropMatcher.get(prop)
 
-const BASIC = /^(CaptureEmail|CaptureFile|CaptureNumber|CapturePhone|CaptureSecure|CaptureText|CaptureTextArea|G|Horizontal|Image|List|Svg|SvgCircle|SvgEllipse|SvgDefs|SvgGroup|SvgLinearGradient|SvgRadialGradient|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgSymbol|SvgText|SvgUse|SvgStop|Text|Vertical|FakeProps)$/i
+const BASIC = /^(CaptureEmail|CaptureFile|CaptureNumber|CapturePhone|CaptureSecure|CaptureText|CaptureTextArea|Horizontal|Image|List|Svg|SvgCircle|SvgEllipse|SvgDefs|SvgGroup|SvgLinearGradient|SvgRadialGradient|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgSymbol|SvgText|SvgUse|SvgStop|Text|Vertical)$/i
 const BLOCK = /^([A-Z][a-zA-Z0-9]*)(\s+([A-Z][a-zA-Z0-9]*))?$/
 const BOOL = /^(false|true)$/i
 const CAPTURE = /^(CaptureEmail|CaptureFile|CaptureNumber|CapturePhone|CaptureSecure|CaptureText|CaptureTextArea)$/i
-const CODE_EXPLICIT = /^{.+}$/
-const CODE_IMPLICIT = /props\./
-const CODE_DEFAULT = /^props$/
 const COMMENT = /^#(.+)$/
-const INTERPOLATED_EXPRESSION = /\${.+}/
 const FLOAT = /^[0-9]+\.[0-9]+$/
 const FONTABLE = /^(CaptureEmail|CaptureNumber|CapturePhone|CaptureSecure|CaptureText|CaptureTextArea|Text)$/
 const INT = /^[0-9]+$/
-const NOT_GROUP = /^(Image|FakeProps|Text|Proxy|SvgCircle|SvgEllipse|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgText|SvgStop)$/i
+const NOT_GROUP = /^(Image|Text|Proxy|SvgCircle|SvgEllipse|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgText|SvgStop)$/i
 const PROP = /^([a-z][a-zA-Z0-9]*)(\s+(.+))?$/
-const STYLE = new RegExp(
-  `^(${cssProperties
-    .map(toCamelCase)
-    .join(
-      '|'
-    )}|pointerEvents|clipPath|appRegion|userSelect|hyphens|overflowWrap)$`
-)
-const TEMPLATE_LITERAL = /^`.+`$/
+const SHORTHAND = {
+  background: ['backgroundColor', 'backgroundImage', 'backgroundSize'],
+  border: ['borderWidth', 'borderStyle', 'borderColor'],
+  borderBottom: ['borderBottomWidth', 'borderBottomStyle', 'borderBottomColor'],
+  borderTop: ['borderTopWidth', 'borderTopStyle', 'borderTopColor'],
+  borderRight: ['borderRightWidth', 'borderRightStyle', 'borderRightColor'],
+  borderLeft: ['borderLeftWidth', 'borderLeftStyle', 'borderLeftColor'],
+  borderRadius: [
+    'borderTopLeftRadius',
+    'borderTopRightRadius',
+    'borderBottomLeftRadius',
+    'borderBottomRightRadius',
+  ],
+  boxShadow: [
+    'shadowOffsetX',
+    'shadowOffsetY',
+    'shadowRadius',
+    'shadowSpread',
+    'shadowColor',
+  ],
+  margin: ['marginTop', 'marginRight', 'marginBottom', 'marginLeft'],
+  padding: ['paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft'],
+  textShadow: ['shadowOffsetX', 'shadowOffsetY', 'shadowRadius', 'shadowColor'],
+  outline: ['outlineWidth', 'outlineStyle', 'outlineColor'],
+  overflow: ['overflowX', 'overflowY'],
+}
 const TRUE = /^true$/i
 const USER_COMMENT = /^##(.*)$/
+const PROPS = /^(!?props(\.[a-zA-Z0-9]+)?)(\s+(.+))?$/
 
 export const is = (thing, line) => thing.test(line)
 export const isBasic = line => is(BASIC, line)
 export const isBlock = line => is(BLOCK, line)
 export const isBool = line => is(BOOL, line)
 export const isCapture = line => is(CAPTURE, line)
-export const isCode = line =>
-  is(CODE_EXPLICIT, line) || is(CODE_IMPLICIT, line) || isCodeDefault(line)
-export const isCodeDefault = line => is(CODE_DEFAULT, line)
-export const isValidCode = rcode => {
-  try {
-    let code = rcode
-    if (isInterpolatedExpression(code) && !isTemplateLiteral(code)) {
-      code = `\`${code}\``
-    }
-    // eslint-disable-next-line
-    new Function('props', 'state', 'event', code)({}, {}, {})
-    return isExpression(code, { strict: true })
-  } catch (error) {
-    return false
-  }
-}
 export const isComment = line => is(COMMENT, line)
-export const isEmptyList = line => line === 'is empty list'
 export const isEmptyText = line => line === ''
 export const isEnd = line => line === ''
-export const isInterpolatedExpression = line =>
-  is(INTERPOLATED_EXPRESSION, line)
 export const isFloat = line => is(FLOAT, line)
 export const isFontable = line => is(FONTABLE, line)
 export const isGroup = line => !is(NOT_GROUP, line) && !isCapture(line)
 export const isList = line => line === 'List'
 export const isInt = line => is(INT, line)
 export const isProp = line => is(PROP, line)
-export const isTemplateLiteral = line => is(TEMPLATE_LITERAL, line)
-export const isStyle = line => is(STYLE, line)
+export const isProps = line => is(PROPS, line)
+export const isShorthand = name => name in SHORTHAND
+export { isStyle }
 export const isTrue = line => is(TRUE, line)
 export const isUserComment = line => is(USER_COMMENT, line)
 
@@ -125,12 +121,6 @@ export const getBlock = line => {
     is: block ? is : null,
   }
 }
-export const getCodeData = line =>
-  line
-    .replace(/^{/, '')
-    .replace(/}$/, '')
-    .split(' ')
-    .filter(l => /[.[]/.test(l))
 export const getComment = line => {
   try {
     return get(COMMENT, line).slice(1)
@@ -138,15 +128,74 @@ export const getComment = line => {
     return ''
   }
 }
-export const getMainFont = line =>
-  line ? line.split(',')[0].replace(/['"]/g, '') : ''
 export const getProp = line => {
   // eslint-disable-next-line
-  let [_, prop, _1, value = ''] = get(PROP, line)
-  if (isCodeDefault(value)) {
-    value = `props.${prop}`
+  let [_, name, _1, value = ''] = get(PROP, line)
+  // eslint-disable-next-line
+  let [props, _2, _3, defaultValue = ''] = is(PROPS, value)
+    ? getProps(value)
+    : []
+
+  return { name, props, value: defaultValue || value }
+}
+export const getProps = line => get(PROPS, line).slice(1)
+export const getShorthandExpanded = (name, value) => {
+  const props = SHORTHAND[name]
+
+  if (name === 'borderRadius') {
+    const theValue = value.replace('px', '')
+
+    return [
+      `${props[0]} ${theValue}`,
+      `${props[1]} ${theValue}`,
+      `${props[2]} ${theValue}`,
+      `${props[3]} ${theValue}`,
+    ]
+  } else if (name.startsWith('border') || name === 'outline') {
+    const [width, style, ...color] = value.split(' ')
+
+    return [
+      `${props[0]} ${width.replace('px', '')}`,
+      `${props[1]} ${style}`,
+      `${props[2]} ${color.join(' ')}`,
+    ]
+  } else if (name === 'boxShadow') {
+    const [offsetX, offsetY, blurRadius, spreadRadius, ...color] = value.split(
+      ' '
+    )
+
+    return [
+      `${props[0]} ${offsetX.replace('px', '')}`,
+      `${props[1]} ${offsetY.replace('px', '')}`,
+      `${props[2]} ${blurRadius.replace('px', '')}`,
+      `${props[3]} ${spreadRadius.replace('px', '')}`,
+      `${props[4]} ${color.join(' ')}`,
+    ]
+  } else if (name === 'textShadow') {
+    const [offsetX, offsetY, blurRadius, ...color] = value.split(' ')
+
+    return [
+      `${props[0]} ${offsetX.replace('px', '')}`,
+      `${props[1]} ${offsetY.replace('px', '')}`,
+      `${props[2]} ${blurRadius.replace('px', '')}`,
+      `${props[3]} ${color.join(' ')}`,
+    ]
+  } else if (name === 'overflow') {
+    return [`${props[0]} ${value}`, `${props[1]} ${value}`]
+  } else if (name === 'padding' || name === 'margin') {
+    let [top, right, bottom, left] = value.split(' ')
+    top = top.replace('px', '')
+    right = right ? right.replace('px', '') : top
+    bottom = bottom ? bottom.replace('px', '') : top
+    left = left ? left.replace('px', '') : right || top
+
+    return [
+      `${props[0]} ${top}`,
+      `${props[1]} ${right}`,
+      `${props[2]} ${bottom}`,
+      `${props[3]} ${left}`,
+    ]
   }
-  return [prop, value]
 }
 export const getValue = value => {
   if (isFloat(value)) {
@@ -157,21 +206,9 @@ export const getValue = value => {
     return ''
   } else if (isBool(value)) {
     return isTrue(value)
-  } else if (isInterpolatedExpression(value)) {
-    return fixBackticks(value)
   } else {
     return value
   }
-}
-
-export const fixBackticks = value =>
-  isTemplateLiteral(value) ? value : `\`${value}\``
-
-export const warn = (message, block) => {
-  if (!Array.isArray(block.warnings)) {
-    block.warnings = []
-  }
-  block.warnings.push(message)
 }
 
 const SYSTEM_SCOPES = [
@@ -185,3 +222,10 @@ const SYSTEM_SCOPES = [
   // TODO do we want to do media queries here?
 ]
 export const isSystemScope = name => SYSTEM_SCOPES.includes(name)
+
+const isActionable = name => name !== 'onWhen' && /^on[A-Z]/.test(name)
+
+export const getPropType = (block, name, defaultValue) =>
+  block.isList && name === 'from'
+    ? 'array'
+    : isActionable(name) ? 'function' : isNumber[name] ? 'number' : 'string'

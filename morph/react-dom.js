@@ -38,7 +38,6 @@ export default ({
     cssDynamic: false,
     cssStatic: false,
     enableAnimated,
-    defaultProps: false,
     debug,
     file,
     getFont,
@@ -76,6 +75,7 @@ export default ({
 
   const parsed = views[name]
   state.fonts = parsed.fonts
+  state.props = parsed.props
 
   walk(parsed.views[0], visitor, state)
   maybeUsesRouter(state)

@@ -8,11 +8,9 @@ text toggle popup
 Content Vertical
 opacity 0
 scale 0
-
 when props.isShown
 opacity 1
 scale 1
-
 when props.isSuperVisible
 opacity 3
 scale 2

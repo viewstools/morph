@@ -44,22 +44,23 @@ color white`,
 backgroundColor props.backgroundColor
 onClick event => props.onClick(props.name, event)
 Title Text
-color props.some.thing || 'red'
-marginLeft props.marginLeft
-text props.some.prop
+color props red
+marginLeft props 10
+text props.title This is the title
 
 CaptureText
-onFocus props.onFocus
+onFocus props
 
 List
-from props.stuff
-when props.stuff.length > 0
+from props
 Stuff`,
 ]
 
 const WARNING = `Warning Vertical
 EmptyWhen Vertical
 color blue
+marginTop props
+border 1px solid red
 when
 color red
 when props. stuff

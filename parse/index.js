@@ -3,14 +3,14 @@ import {
   didYouMeanProp,
   getBlock,
   getComment,
-  getMainFont,
   getProp,
+  getPropType,
+  getShorthandExpanded,
   getValue,
   isBasic,
   isBlock,
   isCapture,
   isComment,
-  isValidCode,
   isEnd,
   isFontable,
   isGroup,
@@ -20,8 +20,6 @@ import {
   isUserComment,
 } from './helpers.js'
 import getLoc from './get-loc.js'
-import getMeta from './get-meta.js'
-import getPropTypes from './get-prop-types.js'
 import getTags from './get-tags.js'
 
 export default (rtext, skipComments = true) => {
@@ -30,8 +28,8 @@ export default (rtext, skipComments = true) => {
   const fonts = []
   const rlines = text.split('\n')
   const lines = rlines.map(line => line.trim())
-  const props = []
   const stack = []
+  const viewProps = []
   const views = []
   const warnings = []
   let lastCapture
@@ -58,7 +56,7 @@ export default (rtext, skipComments = true) => {
       const fontFamilyProp = block.properties.find(p => p.name === 'fontFamily')
 
       if (fontFamilyProp) {
-        const fontFamily = getMainFont(fontFamilyProp.value)
+        const fontFamily = fontFamilyProp.value
         const fontWeightProp = block.properties.find(
           p => p.name === 'fontWeight'
         )
@@ -165,13 +163,7 @@ export default (rtext, skipComments = true) => {
     if (last) {
       shouldPushToStack = true
       if (last.isGroup) {
-        if (block.name === 'FakeProps') {
-          warnings.push({
-            loc: block.loc,
-            type: `FakeProps needs to be outside of the top block. Put new lines before it.`,
-            line,
-          })
-        } else if (last.isList) {
+        if (last.isList) {
           if (block.isBasic) {
             warnings.push({
               loc: block.loc,
@@ -229,40 +221,29 @@ export default (rtext, skipComments = true) => {
         newLinesBeforePreviousBlock++
       }
 
-      if (block.name !== 'FakeProps') {
-        const help = []
-        if (!views[0].isGroup) {
-          help.push(`Add Vertical at the top`)
-        }
-        if (newLinesBeforePreviousBlock > 2) {
-          const linesToRemove = newLinesBeforePreviousBlock - 2
-          help.push(
-            `remove ${linesToRemove} empty line${
-              linesToRemove > 1 ? 's' : ''
-            } before`
-          )
-        }
-        warnings.push({
-          loc: block.loc,
-          type: help.join(', '),
-          line,
-        })
+      const help = []
+      if (!views[0].isGroup) {
+        help.push(`Add Vertical at the top`)
       }
+      if (newLinesBeforePreviousBlock > 2) {
+        const linesToRemove = newLinesBeforePreviousBlock - 2
+        help.push(
+          `remove ${linesToRemove} empty line${
+            linesToRemove > 1 ? 's' : ''
+          } before`
+        )
+      }
+      warnings.push({
+        loc: block.loc,
+        type: help.join(', '),
+        line,
+      })
     }
 
     if (isGroup(name)) {
       block.isGroup = true
       block.isList = isList(name)
       block.children = []
-    }
-
-    if (shouldPushToStack && name === 'FakeProps') {
-      warnings.push({
-        type:
-          'FakeProps needs to be outside of any top block. Add new lines before it.',
-        loc: block.loc,
-        line,
-      })
     }
 
     if (shouldPushToStack || stack.length === 0) {
@@ -293,37 +274,30 @@ export default (rtext, skipComments = true) => {
       let propNode = null
 
       if (isProp(line)) {
-        const [name, value] = getProp(line)
+        const { name, props, value } = getProp(line)
         const loc = getLoc(j, line.indexOf(name), line.length - 1)
-        const tags = getTags(name, value)
+        const tags = getTags(name, props, value, block)
 
-        const meant = didYouMeanProp(name)
-        if (meant && meant !== name && block.isBasic) {
-          warnings.push({
-            loc,
-            type: `Did you mean "${meant}" instead of "${name}"?`,
-            line,
-          })
-        }
-
-        if (tags.code) {
-          props.push({ type: block.name, name, value })
-        }
-
-        if (
-          (tags.code || tags.shouldBeCode) &&
-          name !== 'when' &&
-          !isValidCode(value)
-        ) {
-          warnings.push({
-            loc,
-            type: 'The code you used in the props value is invalid',
-            line,
-          })
-        }
-
-        if (tags.style && tags.code) {
-          block.maybeAnimated = true
+        if (block.isBasic) {
+          if (tags.shorthand) {
+            warnings.push({
+              loc,
+              type: `The shorthand ${name} isn't allowed. You need to expand it like:\n${getShorthandExpanded(
+                name,
+                value
+              ).join('\n')}`,
+              line,
+            })
+          } else {
+            const meant = didYouMeanProp(name)
+            if (meant && meant !== name) {
+              warnings.push({
+                loc,
+                type: `Did you mean "${meant}" instead of "${name}"?`,
+                line,
+              })
+            }
+          }
         }
 
         if (name === 'when') {
@@ -332,7 +306,8 @@ export default (rtext, skipComments = true) => {
           if (value === '') {
             warnings.push({
               loc,
-              type: 'This when has no props, add some condition to it',
+              type:
+                'This when has no condition assigned to it. Add one like: when props.isCondition',
               line,
             })
           } else if (value === 'props') {
@@ -341,11 +316,7 @@ export default (rtext, skipComments = true) => {
               type: `You can't use the props shorthand in a when`,
               line,
             })
-          } else if (
-            !isSystem &&
-            !isValidCode(value) &&
-            block.name !== 'FakeProps'
-          ) {
+          } else if (!isSystem && !tags.validProps) {
             warnings.push({
               loc,
               type: 'The code you used in the props value is invalid',
@@ -357,6 +328,12 @@ export default (rtext, skipComments = true) => {
           inScope = value
           scope = { isSystem, value, properties: [] }
           scopes.push(scope)
+        } else if ((tags.props || tags.shouldBeProps) && !tags.validProps) {
+          warnings.push({
+            loc,
+            type: 'The code you used in the props value is invalid',
+            line,
+          })
         }
 
         if (name === 'onWhen' && properties.length > 0) {
@@ -372,8 +349,40 @@ export default (rtext, skipComments = true) => {
           loc,
           name,
           tags,
-          meta: getMeta(value, line, j),
           value: getValue(value),
+        }
+
+        if (tags.props) {
+          const needsDefaultValue =
+            block.isBasic && !tags.shouldBeProps && props === propNode.value
+
+          propNode.defaultValue = propNode.value
+          propNode.value = props === 'props' ? `props.${name}` : props
+
+          if (needsDefaultValue) {
+            if (name === 'text' && block.name === 'Text') {
+              propNode.defaultValue = ''
+            } else {
+              propNode.defaultValue = false
+              warnings.push({
+                loc,
+                type: `Add a default value to "${name}" like: "${name} ${props} default value"`,
+                line,
+              })
+            }
+          }
+
+          if (!inScope && !viewProps.some(vp => vp.name === name)) {
+            const propType = getPropType(block, name, value)
+            viewProps.push({
+              name,
+              type: propType,
+              defaultValue:
+                tags.shouldBeProps || !block.isBasic
+                  ? false
+                  : propNode.defaultValue,
+            })
+          }
         }
       } else if (isComment(line) && !skipComments) {
         let [value] = getComment(line)
@@ -446,7 +455,7 @@ export default (rtext, skipComments = true) => {
 
   return {
     fonts,
-    props: getPropTypes(props),
+    props: viewProps,
     views,
     warnings,
   }
