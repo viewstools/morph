@@ -210,6 +210,17 @@ module.exports = {
 }
 `;
 
+exports[`e2e parses e2e NegativeNumber 1`] = `
+Object {
+  "code": "const { get } = require('@viewstools/e2e');
+
+module.exports = {
+  Text: get('NegativeNumber.Text'),
+};
+",
+}
+`;
+
 exports[`e2e parses e2e NestedRoutes 1`] = `
 Object {
   "code": "const { get } = require('@viewstools/e2e');
@@ -1422,11 +1433,6 @@ export default DynamicStylesApplyToBasicBlocksOnly;
       "name": "height",
       "type": "number",
     },
-    Object {
-      "defaultValue": false,
-      "name": "height",
-      "type": "number",
-    },
   ],
   "svgs": Array [],
 }
@@ -1465,11 +1471,6 @@ export default DynamicStylesApplyToBasicBlocksOnly;
 ",
   "fonts": Array [],
   "props": Array [
-    Object {
-      "defaultValue": false,
-      "name": "height",
-      "type": "number",
-    },
     Object {
       "defaultValue": false,
       "name": "height",
@@ -2105,6 +2106,7 @@ class LocalImage extends React.Component {
         data-test-id={\`\${props['data-test-id'] || 'LocalImage'}|\${
           props.isCat ? 'isCat|' : ''
         }\`}
+        alt={''}
         src={props.isCat ? garfieldPng : chopperJpg}
         className=\\"views-block\\"
       />
@@ -2135,6 +2137,7 @@ const LocalImage = props => {
       data-test-id={\`\${props['data-test-id'] || 'LocalImage'}|\${
         props.isCat ? 'isCat|' : ''
       }\`}
+      alt={''}
       src={
         props.isCat
           ? requireImage('./garfield.png')
@@ -2187,6 +2190,7 @@ class LocalImageSvg extends React.Component {
     return (
       <LocalImageSvg1
         data-test-id={\`\${props['data-test-id'] || 'LocalImageSvg'}|\`}
+        alt={''}
         src={chopperSvg}
         props={props}
         className=\\"views-block\\"
@@ -2227,6 +2231,7 @@ const LocalImageSvg = props => {
   return (
     <LocalImageSvg1
       data-test-id={\`\${props['data-test-id'] || 'LocalImageSvg'}|\`}
+      alt={''}
       src={requireImage('./chopper.svg')}
       props={props}
       className=\\"views-block\\"
@@ -2278,6 +2283,7 @@ class LocalOrRemoteImageWhenCode extends React.Component {
       <img
         data-test-id={\`\${props['data-test-id'] ||
           'LocalOrRemoteImageWhenCode'}|\`}
+        alt={''}
         src={props.source}
         className=\\"views-block\\"
       />
@@ -2314,6 +2320,7 @@ const LocalOrRemoteImageWhenCode = props => {
   return (
     <img
       data-test-id={\`\${props['data-test-id'] || 'LocalOrRemoteImageWhenCode'}|\`}
+      alt={''}
       src={props.source}
       className=\\"views-block\\"
     />
@@ -2402,6 +2409,84 @@ const NameIsType = props => {
 };
 
 export default NameIsType;
+",
+  "fonts": Array [],
+  "props": Array [],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom NegativeNumber 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+import { css } from 'react-emotion';
+import PropTypes from 'prop-types';
+
+const Text_h7ml8je = css({ marginTop: -10 });
+
+class NegativeNumber extends React.Component {
+  componentDidMount() {
+    this.context.track({
+      block: this.props['data-test-id'] || 'NegativeNumber',
+      action: 'enter',
+    });
+  }
+
+  componentWillUnmount() {
+    this.context.track({
+      block: this.props['data-test-id'] || 'NegativeNumber',
+      action: 'leave',
+    });
+  }
+
+  render() {
+    const { context, props } = this;
+
+    return (
+      <span
+        data-test-id={\`\${props['data-test-id'] || 'Text'}|\`}
+        className={\`views-block \${Text_h7ml8je}\`}
+      >
+        hey
+      </span>
+    );
+  }
+}
+NegativeNumber.contextTypes = {
+  track: PropTypes.func.isRequired,
+};
+
+export default NegativeNumber;
+",
+  "fonts": Array [],
+  "props": Array [],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom NegativeNumber: react-dom parses react-dom NegativeNumber debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+import { css } from 'react-emotion';
+
+const Text_h7ml8je = css({ marginTop: -10 });
+
+const NegativeNumber = props => {
+  return (
+    <span
+      data-test-id={\`\${props['data-test-id'] || 'Text'}|\`}
+      className={\`views-block \${Text_h7ml8je}\`}
+    >
+      hey
+    </span>
+  );
+};
+
+export default NegativeNumber;
 ",
   "fonts": Array [],
   "props": Array [],
@@ -3063,21 +3148,13 @@ class Shadow extends React.Component {
 Shadow.contextTypes = {
   track: PropTypes.func.isRequired,
 };
-Shadow.defaultProps = {
-  shadowColor: 'red',
-  shadowColor: 'blue',
-};
+Shadow.defaultProps = { shadowColor: 'red' };
 export default Shadow;
 ",
   "fonts": Array [],
   "props": Array [
     Object {
       "defaultValue": "red",
-      "name": "shadowColor",
-      "type": "string",
-    },
-    Object {
-      "defaultValue": "blue",
       "name": "shadowColor",
       "type": "string",
     },
@@ -3124,21 +3201,13 @@ const Shadow = props => {
   );
 };
 
-Shadow.defaultProps = {
-  shadowColor: 'red',
-  shadowColor: 'blue',
-};
+Shadow.defaultProps = { shadowColor: 'red' };
 export default Shadow;
 ",
   "fonts": Array [],
   "props": Array [
     Object {
       "defaultValue": "red",
-      "name": "shadowColor",
-      "type": "string",
-    },
-    Object {
-      "defaultValue": "blue",
       "name": "shadowColor",
       "type": "string",
     },
@@ -3204,7 +3273,7 @@ class SomeMissingStyle extends React.Component {
           })
         }
         scale={1.1}
-        tabIndex=\\"-1\\"
+        tabIndex={-1}
         props={props}
         className=\\"views-block\\"
       >
@@ -4434,6 +4503,7 @@ class UseImage extends React.Component {
         data-test-id={\`\${props['data-test-id'] || 'Image'}|\${
           props.another ? 'another|' : ''
         }\`}
+        alt={''}
         src={
           props.another
             ? 'https://views.tools/hi.jpg'
@@ -4468,6 +4538,7 @@ const UseImage = props => {
       data-test-id={\`\${props['data-test-id'] || 'Image'}|\${
         props.another ? 'another|' : ''
       }\`}
+      alt={''}
       src={
         props.another
           ? 'https://views.tools/hi.jpg'
@@ -4819,10 +4890,11 @@ import './Fonts/Montserrat-300';
 import { css } from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const UseText_hkoyoom = css({
+const UseText_hjam8jb = css({
   color: 'blue',
   fontFamily: 'Montserrat, sans-serif',
   fontSize: 16,
+  lineHeight: 1.5,
   fontWeight: 300,
 });
 
@@ -4847,8 +4919,7 @@ class UseText extends React.Component {
     return (
       <span
         data-test-id={\`\${props['data-test-id'] || 'UseText'}|\`}
-        lineHeight={1.5}
-        className={\`views-block \${UseText_hkoyoom}\`}
+        className={\`views-block \${UseText_hjam8jb}\`}
       >
         Hi, I'm some text
       </span>
@@ -4882,10 +4953,11 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import './Fonts/Montserrat-300';
 import { css } from 'react-emotion';
 
-const UseText_hkoyoom = css({
+const UseText_hjam8jb = css({
   color: 'blue',
   fontFamily: 'Montserrat, sans-serif',
   fontSize: 16,
+  lineHeight: 1.5,
   fontWeight: 300,
 });
 
@@ -4893,8 +4965,7 @@ const UseText = props => {
   return (
     <span
       data-test-id={\`\${props['data-test-id'] || 'UseText'}|\`}
-      lineHeight={1.5}
-      className={\`views-block \${UseText_hkoyoom}\`}
+      className={\`views-block \${UseText_hjam8jb}\`}
     >
       Hi, I'm some text
     </span>
@@ -4926,17 +4997,19 @@ import './Fonts/CustomFontNotOnGoogle-400-italic';
 import { css } from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const Normal_h6lxjyg = css({
+const Normal_h10uwqya = css({
   color: 'blue',
   fontFamily: 'CustomFontNotOnGoogle',
   fontSize: 16,
+  lineHeight: 1.5,
   fontWeight: 300,
 });
-const Italic_h1cad5u8 = css({
+const Italic_h1p02bde = css({
   color: 'blue',
   fontFamily: 'CustomFontNotOnGoogle',
   fontStyle: 'italic',
   fontSize: 16,
+  lineHeight: 1.5,
   fontWeight: 400,
 });
 
@@ -4966,16 +5039,14 @@ class UseTextCustomFont extends React.Component {
         <span
           data-test-id={\`UseTextCustomFont.Normal|\`}
           fontType=\\"sans-serif\\"
-          lineHeight={1.5}
-          className={\`views-block \${Normal_h6lxjyg}\`}
+          className={\`views-block \${Normal_h10uwqya}\`}
         >
           Hi, I'm some text
         </span>
         <span
           data-test-id={\`UseTextCustomFont.Italic|\`}
           fontType=\\"sans-serif\\"
-          lineHeight={1.5}
-          className={\`views-block \${Italic_h1cad5u8}\`}
+          className={\`views-block \${Italic_h1p02bde}\`}
         >
           Hi, I'm some text
         </span>
@@ -5018,17 +5089,19 @@ import './Fonts/CustomFontNotOnGoogle-300';
 import './Fonts/CustomFontNotOnGoogle-400-italic';
 import { css } from 'react-emotion';
 
-const Normal_h6lxjyg = css({
+const Normal_h10uwqya = css({
   color: 'blue',
   fontFamily: 'CustomFontNotOnGoogle',
   fontSize: 16,
+  lineHeight: 1.5,
   fontWeight: 300,
 });
-const Italic_h1cad5u8 = css({
+const Italic_h1p02bde = css({
   color: 'blue',
   fontFamily: 'CustomFontNotOnGoogle',
   fontStyle: 'italic',
   fontSize: 16,
+  lineHeight: 1.5,
   fontWeight: 400,
 });
 
@@ -5041,16 +5114,14 @@ const UseTextCustomFont = props => {
       <span
         data-test-id={\`UseTextCustomFont.Normal|\`}
         fontType=\\"sans-serif\\"
-        lineHeight={1.5}
-        className={\`views-block \${Normal_h6lxjyg}\`}
+        className={\`views-block \${Normal_h10uwqya}\`}
       >
         Hi, I'm some text
       </span>
       <span
         data-test-id={\`UseTextCustomFont.Italic|\`}
         fontType=\\"sans-serif\\"
-        lineHeight={1.5}
-        className={\`views-block \${Italic_h1cad5u8}\`}
+        className={\`views-block \${Italic_h1p02bde}\`}
       >
         Hi, I'm some text
       </span>
@@ -5930,11 +6001,6 @@ export default DynamicStylesApplyToBasicBlocksOnly;
       "name": "height",
       "type": "number",
     },
-    Object {
-      "defaultValue": false,
-      "name": "height",
-      "type": "number",
-    },
   ],
   "svgs": Array [],
 }
@@ -6458,6 +6524,51 @@ export default NameIsType;
 }
 `;
 
+exports[`react-native parses react-native NegativeNumber 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import { StyleSheet, Text } from 'react-native';
+import PropTypes from 'prop-types';
+const styles = StyleSheet.create({ h1gnz4mf: { marginTop: -10 } });
+
+class NegativeNumber extends React.Component {
+  componentDidMount() {
+    this.context.track({
+      block: this.props['testID'] || 'NegativeNumber',
+      action: 'enter',
+    });
+  }
+
+  componentWillUnmount() {
+    this.context.track({
+      block: this.props['testID'] || 'NegativeNumber',
+      action: 'leave',
+    });
+  }
+
+  render() {
+    const { context, props } = this;
+
+    return (
+      <Text testID={\`\${props['testID'] || 'Text'}|\`} style={styles.h1gnz4mf}>
+        hey
+      </Text>
+    );
+  }
+}
+NegativeNumber.contextTypes = {
+  track: PropTypes.func.isRequired,
+};
+
+export default NegativeNumber;
+",
+  "fonts": Array [],
+  "props": Array [],
+  "svgs": Array [],
+}
+`;
+
 exports[`react-native parses react-native NestedRoutes 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -6927,21 +7038,13 @@ class Shadow extends React.Component {
 Shadow.contextTypes = {
   track: PropTypes.func.isRequired,
 };
-Shadow.defaultProps = {
-  shadowColor: 'red',
-  shadowColor: 'blue',
-};
+Shadow.defaultProps = { shadowColor: 'red' };
 export default Shadow;
 ",
   "fonts": Array [],
   "props": Array [
     Object {
       "defaultValue": "red",
-      "name": "shadowColor",
-      "type": "string",
-    },
-    Object {
-      "defaultValue": "blue",
       "name": "shadowColor",
       "type": "string",
     },
@@ -7001,7 +7104,7 @@ class SomeMissingStyle extends React.Component {
         <View
           testID={\`\${props['testID'] || 'WindowControl'}|\`}
           scale={1.1}
-          tabIndex=\\"-1\\"
+          tabIndex={-1}
           style={styles.h3pga9k}
         >
           {props.children}
@@ -7909,7 +8012,12 @@ import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 import PropTypes from 'prop-types';
 const styles = StyleSheet.create({
-  h11t0jc: { color: 'blue', fontFamily: 'Montserrat-300', fontSize: 16 },
+  h1gml2rz: {
+    color: 'blue',
+    fontFamily: 'Montserrat-300',
+    fontSize: 16,
+    lineHeight: 24,
+  },
 });
 
 class UseText extends React.Component {
@@ -7931,11 +8039,7 @@ class UseText extends React.Component {
     const { context, props } = this;
 
     return (
-      <Text
-        testID={\`\${props['testID'] || 'UseText'}|\`}
-        lineHeight={1.5}
-        style={styles.h11t0jc}
-      >
+      <Text testID={\`\${props['testID'] || 'UseText'}|\`} style={styles.h1gml2rz}>
         Hi, I'm some text
       </Text>
     );
@@ -7967,16 +8071,18 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 const styles = StyleSheet.create({
-  h17wlanj: {
+  hlldui9: {
     color: 'blue',
     fontFamily: 'CustomFontNotOnGoogle-300',
     fontSize: 16,
+    lineHeight: 24,
   },
-  h1v8srjn: {
+  h164u665: {
     color: 'blue',
     fontFamily: 'CustomFontNotOnGoogle-400',
     fontStyle: 'italic',
     fontSize: 16,
+    lineHeight: 24,
   },
 });
 
@@ -8003,16 +8109,14 @@ class UseTextCustomFont extends React.Component {
         <Text
           testID={\`UseTextCustomFont.Normal|\`}
           fontType=\\"sans-serif\\"
-          lineHeight={1.5}
-          style={styles.h17wlanj}
+          style={styles.hlldui9}
         >
           Hi, I'm some text
         </Text>
         <Text
           testID={\`UseTextCustomFont.Italic|\`}
           fontType=\\"sans-serif\\"
-          lineHeight={1.5}
-          style={styles.h1v8srjn}
+          style={styles.h164u665}
         >
           Hi, I'm some text
         </Text>
