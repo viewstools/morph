@@ -5,7 +5,7 @@ import {
   getComment,
   getProp,
   getPropType,
-  getShorthandExpanded,
+  getUnsupportedShorthandExpanded,
   getValue,
   isBasic,
   isBlock,
@@ -29,7 +29,7 @@ export default (rtext, skipComments = true) => {
   const rlines = text.split('\n')
   const lines = rlines.map(line => line.trim())
   const stack = []
-  const viewProps = []
+  const slots = []
   const views = []
   const warnings = []
   let lastCapture
@@ -110,7 +110,7 @@ export default (rtext, skipComments = true) => {
     ) {
       warnings.push({
         loc: block.loc,
-        type: `A List needs "from props" to work`,
+        type: `A List needs "from <" to work`,
         line: lines[block.loc.start.line],
       })
     }
@@ -274,15 +274,22 @@ export default (rtext, skipComments = true) => {
       let propNode = null
 
       if (isProp(line)) {
-        const { name, props, value } = getProp(line)
+        const { name, isSlot, slotName, slotIsNot, value } = getProp(line)
         const loc = getLoc(j, line.indexOf(name), line.length - 1)
-        const tags = getTags(name, props, value, block)
+        const tags = getTags({
+          name,
+          isSlot,
+          slotIsNot,
+          slotName,
+          value,
+          block,
+        })
 
         if (block.isBasic) {
-          if (tags.shorthand) {
+          if (tags.unsupportedShorthand) {
             warnings.push({
               loc,
-              type: `The shorthand ${name} isn't allowed. You need to expand it like:\n${getShorthandExpanded(
+              type: `The shorthand ${name} isn't supported. You need to expand it like:\n${getUnsupportedShorthandExpanded(
                 name,
                 value
               ).join('\n')}`,
@@ -303,35 +310,35 @@ export default (rtext, skipComments = true) => {
         if (name === 'when') {
           const isSystem = isSystemScope(value)
 
-          if (value === '') {
+          if (value === '' || value === '<' || value === '<!') {
             warnings.push({
               loc,
               type:
-                'This when has no condition assigned to it. Add one like: when props.isCondition',
+                'This when has no condition assigned to it. Add one like: when <isCondition',
               line,
             })
-          } else if (value === 'props') {
+          } else if (!isSystem && !tags.validSlot) {
             warnings.push({
               loc,
-              type: `You can't use the props shorthand in a when`,
-              line,
-            })
-          } else if (!isSystem && !tags.validProps) {
-            warnings.push({
-              loc,
-              type: 'The code you used in the props value is invalid',
+              type: `The value you used in the slot "${name}" is invalid`,
               line,
             })
           }
 
           tags.scope = value
-          inScope = value
-          scope = { isSystem, value, properties: [] }
+          inScope = true
+          scope = {
+            isSystem,
+            value: isSystem
+              ? value
+              : `${slotIsNot ? '!' : ''}props.${slotName || name}`,
+            properties: [],
+          }
           scopes.push(scope)
-        } else if ((tags.props || tags.shouldBeProps) && !tags.validProps) {
+        } else if ((tags.slot || tags.shouldBeSlot) && !tags.validSlot) {
           warnings.push({
             loc,
-            type: 'The code you used in the props value is invalid',
+            type: `The value you used in the slot "${name}" is invalid`,
             line,
           })
         }
@@ -352,12 +359,12 @@ export default (rtext, skipComments = true) => {
           value: getValue(value),
         }
 
-        if (tags.props) {
+        if (tags.slot) {
           const needsDefaultValue =
-            block.isBasic && !tags.shouldBeProps && props === propNode.value
+            block.isBasic && !tags.shouldBeSlot && /</.test(propNode.value)
 
           propNode.defaultValue = propNode.value
-          propNode.value = props === 'props' ? `props.${name}` : props
+          propNode.value = `${slotIsNot ? '!' : ''}props.${slotName || name}`
 
           if (needsDefaultValue) {
             if (name === 'text' && block.name === 'Text') {
@@ -366,19 +373,18 @@ export default (rtext, skipComments = true) => {
               propNode.defaultValue = false
               warnings.push({
                 loc,
-                type: `Add a default value to "${name}" like: "${name} ${props} default value"`,
+                type: `Add a default value to "${name}" like: "${name} <${slotName} default value"`,
                 line,
               })
             }
           }
 
-          if (!inScope && !viewProps.some(vp => vp.name === name)) {
-            const propType = getPropType(block, name, value)
-            viewProps.push({
+          if (!inScope && !slots.some(vp => vp.name === name)) {
+            slots.push({
               name,
-              type: propType,
+              type: getPropType(block, name, value),
               defaultValue:
-                tags.shouldBeProps || !block.isBasic
+                tags.shouldBeSlot || !block.isBasic
                   ? false
                   : propNode.defaultValue,
             })
@@ -455,7 +461,7 @@ export default (rtext, skipComments = true) => {
 
   return {
     fonts,
-    props: viewProps,
+    slots,
     views,
     warnings,
   }

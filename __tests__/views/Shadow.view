@@ -1,13 +1,13 @@
 Shadow Vertical
 BoxShadow Vertical
 shadowRadius 2
-shadowColor props red
+shadowColor < red
 shadowOffsetX 10
 shadowOffsetY 5
 shadowSpread 2
 TextShadow Text
 shadowRadius 1
-shadowColor props blue
+shadowColor < blue
 shadowOffsetX 2
 shadowOffsetY 3
 text hey

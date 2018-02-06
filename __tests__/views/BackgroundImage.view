@@ -1,5 +1,5 @@
 Vertical
 backgroundImage https://views.tools/image.jpg
 Horizontal
-backgroundImage props https://views.tools/image.jpg
+backgroundImage < https://views.tools/image.jpg
 backgroundSize contain

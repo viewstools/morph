@@ -55,7 +55,7 @@ export default ({ file, getImport, name, track = true, views }) => {
 
   const parsed = views[name]
   state.fonts = parsed.fonts
-  state.props = parsed.props
+  state.slots = parsed.slots
 
   walk(parsed.views[0], visitor, state)
 
@@ -73,7 +73,7 @@ export default ({ file, getImport, name, track = true, views }) => {
       state,
     }),
     fonts: parsed.fonts,
-    props: parsed.props,
+    slots: parsed.slots,
     svgs: state.svgs,
   }
 }

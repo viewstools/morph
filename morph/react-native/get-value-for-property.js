@@ -14,10 +14,10 @@ const isUrl = str => /^https?:\/\//.test(str)
 const getImageSource = (node, state, parent) => {
   const scopes = getScopes(node, parent)
 
-  if (scopes && (isUrl(node.value) || node.tags.props)) {
+  if (scopes && (isUrl(node.value) || node.tags.slot)) {
     return `{{ uri: ${getScopedCondition(node, parent)} }}`
-  } else if (isUrl(node.value) || node.tags.props) {
-    return `{{ uri: ${node.tags.props ? node.value : safe(node.value)} }}`
+  } else if (isUrl(node.value) || node.tags.slot) {
+    return `{{ uri: ${node.tags.slot ? node.value : safe(node.value)} }}`
   } else {
     if (scopes) {
       pushImageToState(state, scopes.scopedNames, scopes.paths)

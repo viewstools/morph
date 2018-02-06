@@ -1,9 +1,9 @@
 Popup Vertical
 Toggle Vertical
-onClick props.toggle
-when props.somethingGreen
-onClick props.onClickGreen
-when props.whatMakesBlue
-onClick props.onClickBlue
+onClick <toggle
+when <somethingGreen
+onClick <onClickGreen
+when <whatMakesBlue
+onClick <onClickBlue
 Text
 text toggle popup

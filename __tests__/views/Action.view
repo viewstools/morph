@@ -1,7 +1,7 @@
 Vertical
-onWhen props.check
-onClick props
-isDisabled props
+onWhen <check
+onClick <
+isDisabled <
 color red
 when disabled
 color blue

@@ -1,14 +1,14 @@
-const stringify = prop =>
-  /^[0-9]+$/.test(prop.defaultValue)
-    ? prop.defaultValue
-    : JSON.stringify(prop.defaultValue)
+const stringify = slot =>
+  /^[0-9]+$/.test(slot.defaultValue)
+    ? slot.defaultValue
+    : JSON.stringify(slot.defaultValue)
 
 export default ({ state, name }) => {
-  const props = state.props
-    .filter(prop => prop.defaultValue !== false)
-    .map(prop => `${prop.name}: ${stringify(prop)}`)
+  const slots = state.slots
+    .filter(slot => slot.defaultValue !== false)
+    .map(slot => `${slot.name}: ${stringify(slot)}`)
 
-  return props.length === 0
+  return slots.length === 0
     ? ''
-    : `${name}.defaultProps = {${props.join(',\n')}}`
+    : `${name}.defaultProps = {${slots.join(',\n')}}`
 }

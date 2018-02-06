@@ -1,4 +1,4 @@
-import { getProp, isProps } from '../utils.js'
+import { getProp, isSlot } from '../utils.js'
 import { maybeAddFallbackFont } from '../fonts.js'
 
 export default (node, parent, code) => {
@@ -47,7 +47,7 @@ export default (node, parent, code) => {
 const getPropValue = (prop, unit = '') => {
   if (!prop) return false
 
-  if (prop.tags.props) {
+  if (prop.tags.slot) {
     return `\${${prop.value}}${unit}`
   }
 
@@ -74,11 +74,11 @@ const getShadow = (node, parent) => {
     .join(' ')
 
   if (
-    isProps(shadowColor) ||
-    isProps(shadowRadius) ||
-    isProps(shadowOffsetY) ||
-    isProps(shadowOffsetX) ||
-    isProps(shadowSpread)
+    isSlot(shadowColor) ||
+    isSlot(shadowRadius) ||
+    isSlot(shadowOffsetY) ||
+    isSlot(shadowOffsetX) ||
+    isSlot(shadowSpread)
   ) {
     value = `\`${value}\``
   }

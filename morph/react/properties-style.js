@@ -1,4 +1,4 @@
-import { checkParentStem, isProps } from '../utils.js'
+import { checkParentStem, isSlot } from '../utils.js'
 import safe from './safe.js'
 
 export function enter(node, parent, state) {
@@ -29,7 +29,7 @@ export function enter(node, parent, state) {
       const { _isProp, ...styleForProperty } = state.getStyleForProperty(
         propNode,
         node,
-        isProps(propNode)
+        isSlot(propNode)
       )
 
       if (_isProp) {
@@ -40,7 +40,7 @@ export function enter(node, parent, state) {
         const hasMatchingParent =
           parent && node.isDynamic ? checkParentStem(node, scope.value) : false
         const target =
-          isProps(propNode) || hasMatchingParent
+          isSlot(propNode) || hasMatchingParent
             ? node.style.dynamic
             : node.style.static
         Object.assign(target[scope.value], styleForProperty)

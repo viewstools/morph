@@ -70,11 +70,11 @@ const getShadow = (node, parent) => {
     elevation: 1,
     // iOS,
     shadowOffset: {
-      width: shadowOffsetX.value,
-      height: shadowOffsetY.value,
+      width: shadowOffsetX ? shadowOffsetX.value : undefined,
+      height: shadowOffsetY ? shadowOffsetY.value : undefined,
     },
-    shadowRadius,
+    shadowRadius: shadowRadius ? shadowRadius.value : undefined,
     shadowOpacity: 1,
-    shadowColor,
+    shadowColor: shadowColor ? shadowColor.value : undefined,
   }
 }

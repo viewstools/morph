@@ -1,11 +1,11 @@
 Hover Vertical
 backgroundColor #323232
-onClick props
+onClick <
 when hover
 backgroundColor #232323
 Text
 color white
-fontSize props
+fontSize <
 text Hey!
 when hover
 color black

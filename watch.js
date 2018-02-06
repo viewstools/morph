@@ -420,7 +420,7 @@ height 50`
           // responsibleFor: responsibleFor[view],
           file: rawFile,
           fonts: res.fonts,
-          props: res.props,
+          slots: res.slots,
           source: viewsSources[view],
           view,
         }

@@ -1,4 +1,4 @@
-import { getProp, hasProp, isProps } from '../utils.js'
+import { getProp, hasProp, isSlot } from '../utils.js'
 import toPascalCase from 'to-pascal-case'
 
 export default (node, parent, state) => {
@@ -47,7 +47,7 @@ const getGroupBlockName = (node, state) => {
 
   if (hasProp(node, 'backgroundImage')) {
     const propNode = getProp(node, 'backgroundImage')
-    node.backgroundImage = isProps(propNode)
+    node.backgroundImage = isSlot(propNode)
       ? propNode.value
       : JSON.stringify(propNode.value)
 

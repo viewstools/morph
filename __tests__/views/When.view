@@ -1,4 +1,4 @@
 App Horizontal
 Text
-onWhen props.showMe
+onWhen <showMe
 text I may be hidden

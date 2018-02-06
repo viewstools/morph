@@ -1,7 +1,7 @@
-import { isProps } from '../utils.js'
+import { isSlot } from '../utils.js'
 import wrap from './wrap.js'
 
 export default value =>
-  typeof value === 'string' && !isProps(value)
+  typeof value === 'string' && !isSlot(value)
     ? JSON.stringify(value)
     : wrap(value)

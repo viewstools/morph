@@ -1,6 +1,6 @@
 Popup Vertical
 Toggle Vertical
-onClick props.toggle
+onClick <toggle
 Text
 text toggle popup
 
@@ -8,10 +8,10 @@ text toggle popup
 Content Vertical
 opacity 0
 scale 0
-when props.isShown
+when <isShown
 opacity 1
 scale 1
-when props.isSuperVisible
+when <isSuperVisible
 opacity 3
 scale 2
 Text

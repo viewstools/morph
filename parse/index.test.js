@@ -41,28 +41,28 @@ A2 Text
 color white`,
 
   `Vertical
-backgroundColor props.backgroundColor
-onClick event => props.onClick(props.name, event)
+backgroundColor <backgroundColor
+onClick <onClick
 Title Text
-color props red
-marginLeft props 10
-text props.title This is the title
+color < red
+marginLeft < 10
+text <title This is the title
 
 CaptureText
-onFocus props
+onFocus <
 
 List
-from props
+from <
 Stuff`,
 ]
 
 const WARNING = `Warning Vertical
 EmptyWhen Vertical
 color blue
-marginTop props
+marginTop <
 border 1px solid red
 when
 color red
-when props. stuff
+when < stuff
 backgroundColor purple
 color green`

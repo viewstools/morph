@@ -1,4 +1,4 @@
 Border Vertical
 borderColor red
 borderStyle solid
-borderWidth props 10
+borderWidth < 10

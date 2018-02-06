@@ -4,7 +4,7 @@ import toCamelCase from 'to-camel-case'
 import toSlugCase from 'to-slug-case'
 
 const safeScope = value =>
-  typeof value === 'string' && !isProps(value) ? JSON.stringify(value) : value
+  typeof value === 'string' && !isSlot(value) ? JSON.stringify(value) : value
 
 export const checkParentStem = (node, styleKey) => {
   if (styleKey !== 'hover' || styleKey !== 'disabled' || !node.parent)
@@ -57,7 +57,7 @@ export const getProp = (node, key) => {
 export const getScope = node => node.value.split('when ')[1]
 
 const maybeSafe = node =>
-  node.tags.props
+  node.tags.slot
     ? node.value
     : typeof node.value === 'string' ? safe(node.value) : node.value
 
@@ -125,8 +125,8 @@ export const hasProp = (node, key, match) => {
 export const hasDefaultProp = (node, parent) =>
   parent.properties.some(prop => prop.nameRaw === node.nameRaw)
 
-export const isProps = node =>
-  typeof node === 'string' ? /props/.test(node) : isTag(node, 'props')
+export const isSlot = node =>
+  typeof node === 'string' ? /props/.test(node) : isTag(node, 'slot')
 export const isStyle = node => isTag(node, 'style')
 export const isTag = (node, tag) => node && node.tags[tag]
 

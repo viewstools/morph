@@ -61,7 +61,7 @@ const FONTABLE = /^(CaptureEmail|CaptureNumber|CapturePhone|CaptureSecure|Captur
 const INT = /^-?[0-9]+$/
 const NOT_GROUP = /^(Image|Text|Proxy|SvgCircle|SvgEllipse|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgText|SvgStop)$/i
 const PROP = /^([a-z][a-zA-Z0-9]*)(\s+(.+))?$/
-const SHORTHAND = {
+const UNSUPPORTED_SHORTHAND = {
   background: ['backgroundColor', 'backgroundImage', 'backgroundSize'],
   border: ['borderWidth', 'borderStyle', 'borderColor'],
   borderBottom: ['borderBottomWidth', 'borderBottomStyle', 'borderBottomColor'],
@@ -89,7 +89,8 @@ const SHORTHAND = {
 }
 const TRUE = /^true$/i
 const USER_COMMENT = /^##(.*)$/
-const PROPS = /^(!?props(\.[a-zA-Z0-9]+)?)(\s+(.+))?$/
+// TODO slot can't start with a number
+const SLOT = /^<((!)?([a-zA-Z0-9]+))?(\s+(.+))?$/
 
 export const is = (thing, line) => thing.test(line)
 export const isBasic = line => is(BASIC, line)
@@ -105,8 +106,8 @@ export const isGroup = line => !is(NOT_GROUP, line) && !isCapture(line)
 export const isList = line => line === 'List'
 export const isInt = line => is(INT, line)
 export const isProp = line => is(PROP, line)
-export const isProps = line => is(PROPS, line)
-export const isShorthand = name => name in SHORTHAND
+export const isSlot = line => is(SLOT, line)
+export const isUnsupportedShorthand = name => name in UNSUPPORTED_SHORTHAND
 export { isStyle }
 export const isTrue = line => is(TRUE, line)
 export const isUserComment = line => is(USER_COMMENT, line)
@@ -131,16 +132,32 @@ export const getComment = line => {
 export const getProp = line => {
   // eslint-disable-next-line
   let [_, name, _1, value = ''] = get(PROP, line)
-  // eslint-disable-next-line
-  let [props, _2, _3, defaultValue = ''] = is(PROPS, value)
-    ? getProps(value)
-    : []
 
-  return { name, props, value: defaultValue || value }
+  const prop = { name, isSlot: false, value }
+
+  if (is(SLOT, value)) {
+    const [
+      // eslint-disable-next-line
+      _2,
+      slotIsNot = false,
+      slotName = '',
+      // eslint-disable-next-line
+      _3,
+      // eslint-disable-next-line
+      defaultValue = '',
+    ] = getSlot(value)
+
+    prop.isSlot = true
+    prop.slotIsNot = slotIsNot === '!'
+    prop.slotName = slotName
+    prop.value = defaultValue || value
+  }
+
+  return prop
 }
-export const getProps = line => get(PROPS, line).slice(1)
-export const getShorthandExpanded = (name, value) => {
-  const props = SHORTHAND[name]
+export const getSlot = line => get(SLOT, line).slice(1)
+export const getUnsupportedShorthandExpanded = (name, value) => {
+  const props = UNSUPPORTED_SHORTHAND[name]
 
   if (name === 'borderRadius') {
     const theValue = value.replace('px', '')

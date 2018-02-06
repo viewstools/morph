@@ -1,6 +1,6 @@
 Vertical
 backgroundColor red
 Text
-text props hey
-color props white
-ref props.refText
+text < hey
+color < white
+ref <refText

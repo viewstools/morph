@@ -634,7 +634,7 @@ Action.contextTypes = {
 export default Action;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": false,
       "name": "onWhen",
@@ -694,7 +694,7 @@ const Action = props => {
 export default Action;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": false,
       "name": "onWhen",
@@ -774,7 +774,7 @@ AnimatedButton.defaultProps = { opacity: 1 };
 export default AnimatedButton;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": 1,
       "name": "opacity",
@@ -821,7 +821,7 @@ AnimatedButton.defaultProps = { opacity: 1 };
 export default AnimatedButton;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": 1,
       "name": "opacity",
@@ -886,7 +886,7 @@ AppRegionDrag.contextTypes = {
 export default AppRegionDrag;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -918,7 +918,7 @@ const AppRegionDrag = props => {
 export default AppRegionDrag;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -986,7 +986,7 @@ BackgroundImage.defaultProps = {
 export default BackgroundImage;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": "https://views.tools/image.jpg",
       "name": "backgroundImage",
@@ -1039,7 +1039,7 @@ BackgroundImage.defaultProps = {
 export default BackgroundImage;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": "https://views.tools/image.jpg",
       "name": "backgroundImage",
@@ -1104,7 +1104,7 @@ Border.defaultProps = { borderWidth: 10 };
 export default Border;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": 10,
       "name": "borderWidth",
@@ -1148,7 +1148,7 @@ Border.defaultProps = { borderWidth: 10 };
 export default Border;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": 10,
       "name": "borderWidth",
@@ -1204,7 +1204,7 @@ ClassName.contextTypes = {
 export default ClassName;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -1232,7 +1232,7 @@ const ClassName = props => {
 export default ClassName;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -1296,7 +1296,7 @@ Code.defaultProps = {
 export default Code;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": "hey",
       "name": "text",
@@ -1350,7 +1350,7 @@ Code.defaultProps = {
 export default Code;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": "hey",
       "name": "text",
@@ -1427,7 +1427,7 @@ DynamicStylesApplyToBasicBlocksOnly.contextTypes = {
 export default DynamicStylesApplyToBasicBlocksOnly;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": false,
       "name": "height",
@@ -1470,7 +1470,7 @@ const DynamicStylesApplyToBasicBlocksOnly = props => {
 export default DynamicStylesApplyToBasicBlocksOnly;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": false,
       "name": "height",
@@ -1521,7 +1521,7 @@ EmptyText.contextTypes = {
 export default EmptyText;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -1544,7 +1544,7 @@ const EmptyText = props => {
 export default EmptyText;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -1597,7 +1597,7 @@ GoTo.contextTypes = {
 export default GoTo;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -1628,7 +1628,7 @@ const GoTo = props => {
 export default GoTo;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -1709,7 +1709,7 @@ Hover.contextTypes = {
 export default Hover;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": false,
       "name": "onClick",
@@ -1768,7 +1768,7 @@ const Hover = props => {
 export default Hover;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": false,
       "name": "onClick",
@@ -1826,7 +1826,7 @@ JustText.contextTypes = {
 export default JustText;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -1851,7 +1851,7 @@ const JustText = props => {
 export default JustText;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -1908,7 +1908,7 @@ ListOfSomething.contextTypes = {
 export default ListOfSomething;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": false,
       "name": "from",
@@ -1949,7 +1949,7 @@ const ListOfSomething = props => {
 export default ListOfSomething;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": false,
       "name": "from",
@@ -2012,7 +2012,7 @@ ListWhen.contextTypes = {
 export default ListWhen;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": false,
       "name": "onWhen",
@@ -2058,7 +2058,7 @@ const ListWhen = props => {
 export default ListWhen;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": false,
       "name": "onWhen",
@@ -2120,7 +2120,7 @@ LocalImage.contextTypes = {
 export default LocalImage;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -2151,7 +2151,7 @@ const LocalImage = props => {
 export default LocalImage;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -2205,7 +2205,7 @@ LocalImageSvg.defaultProps = { height: 50 };
 export default LocalImageSvg;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": 50,
       "name": "height",
@@ -2243,7 +2243,7 @@ LocalImageSvg.defaultProps = { height: 50 };
 export default LocalImageSvg;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": 50,
       "name": "height",
@@ -2299,7 +2299,7 @@ LocalOrRemoteImageWhenCode.defaultProps = {
 export default LocalOrRemoteImageWhenCode;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": "https://views.tools/image.jpg",
       "name": "source",
@@ -2333,7 +2333,7 @@ LocalOrRemoteImageWhenCode.defaultProps = {
 export default LocalOrRemoteImageWhenCode;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": "https://views.tools/image.jpg",
       "name": "source",
@@ -2386,7 +2386,7 @@ NameIsType.contextTypes = {
 export default NameIsType;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -2411,7 +2411,7 @@ const NameIsType = props => {
 export default NameIsType;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -2461,7 +2461,7 @@ NegativeNumber.contextTypes = {
 export default NegativeNumber;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -2489,7 +2489,7 @@ const NegativeNumber = props => {
 export default NegativeNumber;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -2561,7 +2561,7 @@ NestedRoutes.contextTypes = {
 export default NestedRoutes;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -2611,7 +2611,7 @@ const NestedRoutes = props => {
 export default NestedRoutes;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -2678,7 +2678,7 @@ Scope.contextTypes = {
 export default Scope;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -2723,7 +2723,7 @@ const Scope = props => {
 export default Scope;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -2776,7 +2776,7 @@ ScopeOnCustomView.contextTypes = {
 export default ScopeOnCustomView;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": false,
       "name": "more",
@@ -2813,7 +2813,7 @@ const ScopeOnCustomView = props => {
 export default ScopeOnCustomView;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": false,
       "name": "more",
@@ -2883,7 +2883,7 @@ ScopePopup.contextTypes = {
 export default ScopePopup;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": false,
       "name": "onClick",
@@ -2931,7 +2931,7 @@ const ScopePopup = props => {
 export default ScopePopup;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": false,
       "name": "onClick",
@@ -3019,7 +3019,7 @@ ScopePopup2.contextTypes = {
 export default ScopePopup2;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": false,
       "name": "onClick",
@@ -3078,7 +3078,7 @@ const ScopePopup2 = props => {
 export default ScopePopup2;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": false,
       "name": "onClick",
@@ -3152,7 +3152,7 @@ Shadow.defaultProps = { shadowColor: 'red' };
 export default Shadow;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": "red",
       "name": "shadowColor",
@@ -3205,7 +3205,7 @@ Shadow.defaultProps = { shadowColor: 'red' };
 export default Shadow;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": "red",
       "name": "shadowColor",
@@ -3289,7 +3289,7 @@ SomeMissingStyle.contextTypes = {
 export default SomeMissingStyle;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": false,
       "name": "onClick",
@@ -3343,7 +3343,7 @@ const SomeMissingStyle = props => {
 export default SomeMissingStyle;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": false,
       "name": "onClick",
@@ -3404,7 +3404,7 @@ Teleport.contextTypes = {
 export default Teleport;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -3437,7 +3437,7 @@ const Teleport = props => {
 export default Teleport;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -3495,7 +3495,7 @@ TestIds.contextTypes = {
 export default TestIds;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -3531,7 +3531,7 @@ const TestIds = props => {
 export default TestIds;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -3581,7 +3581,7 @@ TextInterpolation.defaultProps = { text: '' };
 export default TextInterpolation;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": "",
       "name": "text",
@@ -3616,7 +3616,7 @@ TextInterpolation.defaultProps = { text: '' };
 export default TextInterpolation;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": "",
       "name": "text",
@@ -3691,7 +3691,7 @@ UseCaptureEmail.contextTypes = {
 export default UseCaptureEmail;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": false,
       "name": "onSubmit",
@@ -3749,7 +3749,7 @@ class UseCaptureEmail extends React.Component {
 export default UseCaptureEmail;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": false,
       "name": "onSubmit",
@@ -3806,7 +3806,7 @@ UseCaptureFile.contextTypes = {
 export default UseCaptureFile;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -3841,7 +3841,7 @@ class UseCaptureFile extends React.Component {
 export default UseCaptureFile;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -3893,7 +3893,7 @@ UseCaptureNumber.contextTypes = {
 export default UseCaptureNumber;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -3929,7 +3929,7 @@ class UseCaptureNumber extends React.Component {
 export default UseCaptureNumber;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -3981,7 +3981,7 @@ UseCapturePhone.contextTypes = {
 export default UseCapturePhone;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -4017,7 +4017,7 @@ class UseCapturePhone extends React.Component {
 export default UseCapturePhone;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -4069,7 +4069,7 @@ UseCaptureSecure.contextTypes = {
 export default UseCaptureSecure;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -4105,7 +4105,7 @@ class UseCaptureSecure extends React.Component {
 export default UseCaptureSecure;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -4157,7 +4157,7 @@ UseCaptureText.contextTypes = {
 export default UseCaptureText;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -4193,7 +4193,7 @@ class UseCaptureText extends React.Component {
 export default UseCaptureText;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -4246,7 +4246,7 @@ UseCaptureTextArea.contextTypes = {
 export default UseCaptureTextArea;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -4283,7 +4283,7 @@ class UseCaptureTextArea extends React.Component {
 export default UseCaptureTextArea;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -4334,7 +4334,7 @@ UseCaptureTextManagedFromOutside.contextTypes = {
 export default UseCaptureTextManagedFromOutside;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": false,
       "name": "value",
@@ -4374,7 +4374,7 @@ class UseCaptureTextManagedFromOutside extends React.Component {
 export default UseCaptureTextManagedFromOutside;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": false,
       "name": "value",
@@ -4435,7 +4435,7 @@ UseHorizontal.contextTypes = {
 export default UseHorizontal;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -4468,7 +4468,7 @@ const UseHorizontal = props => {
 export default UseHorizontal;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -4521,7 +4521,7 @@ UseImage.contextTypes = {
 export default UseImage;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -4552,7 +4552,7 @@ const UseImage = props => {
 export default UseImage;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -4642,7 +4642,7 @@ UseRouter.contextTypes = {
 export default UseRouter;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": false,
       "name": "height",
@@ -4716,7 +4716,7 @@ const UseRouter = props => {
 export default UseRouter;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": false,
       "name": "height",
@@ -4810,7 +4810,7 @@ UseSvg.contextTypes = {
 export default UseSvg;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -4876,7 +4876,7 @@ const UseSvg = props => {
 export default UseSvg;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -4940,7 +4940,7 @@ export default UseText;
       "weight": "300",
     },
   ],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -4982,7 +4982,7 @@ export default UseText;
       "weight": "300",
     },
   ],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -5075,7 +5075,7 @@ export default UseTextCustomFont;
       "weight": "400",
     },
   ],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -5146,7 +5146,7 @@ export default UseTextCustomFont;
       "weight": "400",
     },
   ],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -5196,7 +5196,7 @@ UseVertical.contextTypes = {
 export default UseVertical;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -5224,7 +5224,7 @@ const UseVertical = props => {
 export default UseVertical;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -5277,7 +5277,7 @@ ViewNameIsntUsedInStyle.defaultProps = { opacity: 1 };
 export default ViewNameIsntUsedInStyle;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": 1,
       "name": "opacity",
@@ -5315,7 +5315,7 @@ ViewNameIsntUsedInStyle.defaultProps = { opacity: 1 };
 export default ViewNameIsntUsedInStyle;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": 1,
       "name": "opacity",
@@ -5376,7 +5376,7 @@ When.contextTypes = {
 export default When;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": false,
       "name": "onWhen",
@@ -5415,7 +5415,7 @@ const When = props => {
 export default When;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": false,
       "name": "onWhen",
@@ -5468,7 +5468,7 @@ WhenTopLevel.contextTypes = {
 export default WhenTopLevel;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": false,
       "name": "onWhen",
@@ -5499,7 +5499,7 @@ const WhenTopLevel = props => {
 export default WhenTopLevel;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": false,
       "name": "onWhen",
@@ -5570,7 +5570,7 @@ Action.contextTypes = {
 export default Action;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": false,
       "name": "onWhen",
@@ -5647,7 +5647,7 @@ AnimatedButton.defaultProps = { opacity: 1 };
 export default AnimatedButton;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": 1,
       "name": "opacity",
@@ -5705,7 +5705,7 @@ AppRegionDrag.contextTypes = {
 export default AppRegionDrag;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -5762,7 +5762,7 @@ BackgroundImage.defaultProps = {
 export default BackgroundImage;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": "https://views.tools/image.jpg",
       "name": "backgroundImage",
@@ -5818,7 +5818,7 @@ Border.defaultProps = { borderWidth: 10 };
 export default Border;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": 10,
       "name": "borderWidth",
@@ -5869,7 +5869,7 @@ ClassName.contextTypes = {
 export default ClassName;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -5927,7 +5927,7 @@ Code.defaultProps = {
 export default Code;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": "hey",
       "name": "text",
@@ -5995,7 +5995,7 @@ DynamicStylesApplyToBasicBlocksOnly.contextTypes = {
 export default DynamicStylesApplyToBasicBlocksOnly;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": false,
       "name": "height",
@@ -6041,7 +6041,7 @@ EmptyText.contextTypes = {
 export default EmptyText;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -6086,7 +6086,7 @@ GoTo.contextTypes = {
 export default GoTo;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -6153,7 +6153,7 @@ Hover.contextTypes = {
 export default Hover;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": false,
       "name": "onClick",
@@ -6204,7 +6204,7 @@ JustText.contextTypes = {
 export default JustText;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -6257,7 +6257,7 @@ ListOfSomething.contextTypes = {
 export default ListOfSomething;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": false,
       "name": "from",
@@ -6312,7 +6312,7 @@ ListWhen.contextTypes = {
 export default ListWhen;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": false,
       "name": "onWhen",
@@ -6372,7 +6372,7 @@ LocalImage.contextTypes = {
 export default LocalImage;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -6420,7 +6420,7 @@ LocalImageSvg.defaultProps = { height: 50 };
 export default LocalImageSvg;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": 50,
       "name": "height",
@@ -6473,7 +6473,7 @@ LocalOrRemoteImageWhenCode.defaultProps = {
 export default LocalOrRemoteImageWhenCode;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": "https://views.tools/image.jpg",
       "name": "source",
@@ -6519,7 +6519,7 @@ NameIsType.contextTypes = {
 export default NameIsType;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -6564,7 +6564,7 @@ NegativeNumber.contextTypes = {
 export default NegativeNumber;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -6623,7 +6623,7 @@ NestedRoutes.contextTypes = {
 export default NestedRoutes;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -6686,7 +6686,7 @@ Scope.contextTypes = {
 export default Scope;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -6737,7 +6737,7 @@ ScopeOnCustomView.contextTypes = {
 export default ScopeOnCustomView;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": false,
       "name": "more",
@@ -6806,7 +6806,7 @@ ScopePopup.contextTypes = {
 export default ScopePopup;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": false,
       "name": "onClick",
@@ -6883,7 +6883,7 @@ ScopePopup2.contextTypes = {
 export default ScopePopup2;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": false,
       "name": "onClick",
@@ -6901,45 +6901,19 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 const styles = StyleSheet.create({
-  h1en52zj: {
+  h1qdzhym: {
     elevation: 1,
     shadowOffset: { width: 10, height: 5 },
-    shadowRadius: {
-      type: 'Property',
-      loc: { start: { line: 2, column: 0 }, end: { line: 2, column: 13 } },
-      name: 'shadowRadius',
-      tags: { style: true },
-      value: 2,
-    },
+    shadowRadius: 2,
     shadowOpacity: 1,
-    shadowColor: {
-      type: 'Property',
-      loc: { start: { line: 3, column: 0 }, end: { line: 3, column: 20 } },
-      name: 'shadowColor',
-      tags: { style: true, props: true, validProps: true },
-      value: 'props.shadowColor',
-      defaultValue: 'red',
-    },
+    shadowColor: 'props.shadowColor',
   },
-  hfr1tty: {
+  h9jluza: {
     elevation: 1,
     shadowOffset: { width: 2, height: 3 },
-    shadowRadius: {
-      type: 'Property',
-      loc: { start: { line: 8, column: 0 }, end: { line: 8, column: 13 } },
-      name: 'shadowRadius',
-      tags: { style: true },
-      value: 1,
-    },
+    shadowRadius: 1,
     shadowOpacity: 1,
-    shadowColor: {
-      type: 'Property',
-      loc: { start: { line: 9, column: 0 }, end: { line: 9, column: 21 } },
-      name: 'shadowColor',
-      tags: { style: true, props: true, validProps: true },
-      value: 'props.shadowColor',
-      defaultValue: 'blue',
-    },
+    shadowColor: 'props.shadowColor',
   },
 });
 
@@ -6966,64 +6940,26 @@ class Shadow extends React.Component {
         <View
           testID={\`Shadow.BoxShadow|\`}
           style={[
-            styles.h1en52zj,
+            styles.h1qdzhym,
             {
               elevation: 1,
               shadowOffset: { width: 10, height: 5 },
-              shadowRadius: {
-                type: Property,
-                loc: {
-                  start: { line: 2, column: 0 },
-                  end: { line: 2, column: 13 },
-                },
-                name: shadowRadius,
-                tags: { style: true },
-                value: 2,
-              },
+              shadowRadius: 2,
               shadowOpacity: 1,
-              shadowColor: {
-                type: Property,
-                loc: {
-                  start: { line: 3, column: 0 },
-                  end: { line: 3, column: 20 },
-                },
-                name: shadowColor,
-                tags: { style: true, props: true, validProps: true },
-                value: props.shadowColor,
-                defaultValue: red,
-              },
+              shadowColor: props.shadowColor,
             },
           ]}
         >
           <Text
             testID={\`Shadow.TextShadow|\`}
             style={[
-              styles.hfr1tty,
+              styles.h9jluza,
               {
                 elevation: 1,
                 shadowOffset: { width: 2, height: 3 },
-                shadowRadius: {
-                  type: Property,
-                  loc: {
-                    start: { line: 8, column: 0 },
-                    end: { line: 8, column: 13 },
-                  },
-                  name: shadowRadius,
-                  tags: { style: true },
-                  value: 1,
-                },
+                shadowRadius: 1,
                 shadowOpacity: 1,
-                shadowColor: {
-                  type: Property,
-                  loc: {
-                    start: { line: 9, column: 0 },
-                    end: { line: 9, column: 21 },
-                  },
-                  name: shadowColor,
-                  tags: { style: true, props: true, validProps: true },
-                  value: props.shadowColor,
-                  defaultValue: blue,
-                },
+                shadowColor: props.shadowColor,
               },
             ]}
           >
@@ -7042,7 +6978,7 @@ Shadow.defaultProps = { shadowColor: 'red' };
 export default Shadow;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": "red",
       "name": "shadowColor",
@@ -7120,7 +7056,7 @@ SomeMissingStyle.contextTypes = {
 export default SomeMissingStyle;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": false,
       "name": "onClick",
@@ -7179,7 +7115,7 @@ Teleport.contextTypes = {
 export default Teleport;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -7228,7 +7164,7 @@ TestIds.contextTypes = {
 export default TestIds;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -7273,7 +7209,7 @@ TextInterpolation.defaultProps = { text: '' };
 export default TextInterpolation;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": "",
       "name": "text",
@@ -7346,7 +7282,7 @@ UseCaptureEmail.contextTypes = {
 export default UseCaptureEmail;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": false,
       "name": "onSubmit",
@@ -7407,7 +7343,7 @@ UseCaptureFile.contextTypes = {
 export default UseCaptureFile;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -7462,7 +7398,7 @@ UseCaptureNumber.contextTypes = {
 export default UseCaptureNumber;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -7517,7 +7453,7 @@ UseCapturePhone.contextTypes = {
 export default UseCapturePhone;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -7572,7 +7508,7 @@ UseCaptureSecure.contextTypes = {
 export default UseCaptureSecure;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -7627,7 +7563,7 @@ UseCaptureText.contextTypes = {
 export default UseCaptureText;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -7683,7 +7619,7 @@ UseCaptureTextArea.contextTypes = {
 export default UseCaptureTextArea;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -7739,7 +7675,7 @@ UseCaptureTextManagedFromOutside.contextTypes = {
 export default UseCaptureTextManagedFromOutside;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": false,
       "name": "value",
@@ -7800,7 +7736,7 @@ UseHorizontal.contextTypes = {
 export default UseHorizontal;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -7851,7 +7787,7 @@ UseImage.contextTypes = {
 export default UseImage;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -7930,7 +7866,7 @@ UseRouter.contextTypes = {
 export default UseRouter;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": false,
       "name": "height",
@@ -8000,7 +7936,7 @@ UseSvg.contextTypes = {
 export default UseSvg;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -8059,7 +7995,7 @@ export default UseText;
       "weight": "300",
     },
   ],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -8145,7 +8081,7 @@ export default UseTextCustomFont;
       "weight": "400",
     },
   ],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -8193,7 +8129,7 @@ UseVertical.contextTypes = {
 export default UseVertical;
 ",
   "fonts": Array [],
-  "props": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -8241,7 +8177,7 @@ ViewNameIsntUsedInStyle.defaultProps = { opacity: 1 };
 export default ViewNameIsntUsedInStyle;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": 1,
       "name": "opacity",
@@ -8295,7 +8231,7 @@ When.contextTypes = {
 export default When;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": false,
       "name": "onWhen",
@@ -8343,7 +8279,7 @@ WhenTopLevel.contextTypes = {
 export default WhenTopLevel;
 ",
   "fonts": Array [],
-  "props": Array [
+  "slots": Array [
     Object {
       "defaultValue": false,
       "name": "onWhen",

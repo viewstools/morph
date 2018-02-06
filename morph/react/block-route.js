@@ -1,4 +1,4 @@
-import { getProp, isProps } from '../utils.js'
+import { getProp, isSlot } from '../utils.js'
 import safe from './safe.js'
 
 export function enter(node, parent, state) {
@@ -10,7 +10,7 @@ export function enter(node, parent, state) {
     if (path === '/') state.use('Router')
 
     if (!path.startsWith('/')) {
-      path = isProps(path) ? `\`\${${path}}\`` : path
+      path = isSlot(path) ? `\`\${${path}}\`` : path
       // path = `\`\${props.match.url}/${to}\``
     }
 

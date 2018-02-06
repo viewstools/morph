@@ -16,7 +16,7 @@ export function enter(node, parent, state) {
       propNode.name === 'when' ||
       propNode.name === 'onWhen' ||
       (propNode.name === 'ref' && state.debug) ||
-      propNode.tags.shorthand ||
+      propNode.tags.unsupportedShorthand ||
       (!isValidPropertyForBlock(propNode, node, state) && node.isBasic) ||
       (propNode.name === 'from' && node.name === 'List')
     )

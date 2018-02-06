@@ -5,7 +5,7 @@ borderStyle solid
 borderWidth 1
 color red
 defaultValue hey this is a default value
-onSubmit props
+onSubmit <
 when focus
 color purple
 when placeholder
