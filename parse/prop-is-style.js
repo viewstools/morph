@@ -3,6 +3,7 @@ export const STYLE = [
   'alignItems',
   'alignSelf',
   'appRegion',
+  'background',
   'backgroundColor',
   'backgroundImage',
   'backgroundSize',

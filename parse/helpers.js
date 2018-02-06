@@ -62,7 +62,6 @@ const INT = /^-?[0-9]+$/
 const NOT_GROUP = /^(Image|Text|Proxy|SvgCircle|SvgEllipse|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgText|SvgStop)$/i
 const PROP = /^([a-z][a-zA-Z0-9]*)(\s+(.+))?$/
 const UNSUPPORTED_SHORTHAND = {
-  background: ['backgroundColor', 'backgroundImage', 'backgroundSize'],
   border: ['borderWidth', 'borderStyle', 'borderColor'],
   borderBottom: ['borderBottomWidth', 'borderBottomStyle', 'borderBottomColor'],
   borderTop: ['borderTopWidth', 'borderTopStyle', 'borderTopColor'],
