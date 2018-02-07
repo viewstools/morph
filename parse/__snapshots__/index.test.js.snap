@@ -245,6 +245,7 @@ Object {
           "scopes": Array [
             Object {
               "isSystem": true,
+              "name": "when",
               "properties": Array [
                 Object {
                   "loc": Object {
@@ -512,7 +513,7 @@ Object {
     },
     Object {
       "defaultValue": "This is the title",
-      "name": "text",
+      "name": "title",
       "type": "string",
     },
     Object {
@@ -558,6 +559,7 @@ Object {
                 },
               },
               "name": "color",
+              "slotName": "",
               "tags": Object {
                 "slot": true,
                 "style": true,
@@ -579,6 +581,7 @@ Object {
                 },
               },
               "name": "marginLeft",
+              "slotName": "",
               "tags": Object {
                 "slot": true,
                 "style": true,
@@ -600,6 +603,7 @@ Object {
                 },
               },
               "name": "text",
+              "slotName": "title",
               "tags": Object {
                 "slot": true,
                 "validSlot": true,
@@ -639,6 +643,7 @@ Object {
                 },
               },
               "name": "onFocus",
+              "slotName": "",
               "tags": Object {
                 "shouldBeSlot": true,
                 "slot": true,
@@ -703,6 +708,7 @@ Object {
                 },
               },
               "name": "from",
+              "slotName": "",
               "tags": Object {
                 "shouldBeSlot": true,
                 "slot": true,
@@ -744,6 +750,7 @@ Object {
             },
           },
           "name": "backgroundColor",
+          "slotName": "backgroundColor",
           "tags": Object {
             "slot": true,
             "style": true,
@@ -765,6 +772,7 @@ Object {
             },
           },
           "name": "onClick",
+          "slotName": "onClick",
           "tags": Object {
             "shouldBeSlot": true,
             "slot": true,
@@ -860,6 +868,7 @@ Object {
                 },
               },
               "name": "marginTop",
+              "slotName": "",
               "tags": Object {
                 "slot": true,
                 "style": true,
@@ -891,6 +900,7 @@ Object {
           "scopes": Array [
             Object {
               "isSystem": false,
+              "name": "when",
               "properties": Array [
                 Object {
                   "loc": Object {
@@ -932,10 +942,13 @@ Object {
                   "value": "red",
                 },
               ],
+              "slotIsNot": undefined,
+              "slotName": undefined,
               "value": "props.when",
             },
             Object {
               "isSystem": false,
+              "name": "when",
               "properties": Array [
                 Object {
                   "defaultValue": "stuff",
@@ -950,6 +963,7 @@ Object {
                     },
                   },
                   "name": "when",
+                  "slotName": "",
                   "tags": Object {
                     "scope": "stuff",
                     "shouldBeSlot": true,
@@ -998,6 +1012,8 @@ Object {
                   "value": "green",
                 },
               ],
+              "slotIsNot": false,
+              "slotName": "",
               "value": "props.when",
             },
           ],

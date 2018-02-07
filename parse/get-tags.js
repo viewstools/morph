@@ -13,6 +13,7 @@ export default ({ name, isSlot, slotName, slotIsNot, value, block }) => {
 
   if (shouldBeSlot(name)) tags.shouldBeSlot = true
   if (isSlot) tags.slot = true
+  if (slotIsNot) tags.slotIsNot = true
 
   tags.validSlot = tags.slot || (tags.shouldBeSlot && tags.slot) || null
 

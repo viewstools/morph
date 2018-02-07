@@ -1,9 +1,9 @@
 import parse from './index.js'
 
 test('#parse', () => {
-  VIEWS.forEach(view => expect(parse(view)).toMatchSnapshot())
+  VIEWS.forEach(view => expect(parse({ source: view })).toMatchSnapshot())
 
-  expect(parse(WARNING)).toMatchSnapshot()
+  expect(parse({ source: WARNING })).toMatchSnapshot()
 })
 
 const VIEWS = [

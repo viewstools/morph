@@ -22,12 +22,16 @@ import {
 import getLoc from './get-loc.js'
 import getTags from './get-tags.js'
 
-export default (rtext, skipComments = true) => {
+export default ({
+  convertSlotToProps = true,
+  skipComments = true,
+  source,
+} = {}) => {
   // convert crlf to lf
-  const text = rtext.replace(/\r\n/g, '\n')
-  const fonts = []
+  const text = source.replace(/\r\n/g, '\n')
   const rlines = text.split('\n')
   const lines = rlines.map(line => line.trim())
+  const fonts = []
   const stack = []
   const slots = []
   const views = []
@@ -329,10 +333,17 @@ export default (rtext, skipComments = true) => {
           inScope = true
           scope = {
             isSystem,
-            value: isSystem
-              ? value
-              : `${slotIsNot ? '!' : ''}props.${slotName || name}`,
+            value,
+            name,
             properties: [],
+          }
+
+          if (!isSystem) {
+            if (convertSlotToProps) {
+              scope.value = `${slotIsNot ? '!' : ''}props.${slotName || name}`
+            }
+            scope.slotIsNot = slotIsNot
+            scope.slotName = slotName
           }
           scopes.push(scope)
         } else if ((tags.slot || tags.shouldBeSlot) && !tags.validSlot) {
@@ -364,7 +375,10 @@ export default (rtext, skipComments = true) => {
             block.isBasic && !tags.shouldBeSlot && /</.test(propNode.value)
 
           propNode.defaultValue = propNode.value
-          propNode.value = `${slotIsNot ? '!' : ''}props.${slotName || name}`
+          propNode.slotName = slotName
+          if (convertSlotToProps) {
+            propNode.value = `${slotIsNot ? '!' : ''}props.${slotName || name}`
+          }
 
           if (needsDefaultValue) {
             if (name === 'text' && block.name === 'Text') {
@@ -381,7 +395,7 @@ export default (rtext, skipComments = true) => {
 
           if (!inScope && !slots.some(vp => vp.name === name)) {
             slots.push({
-              name,
+              name: slotName || name,
               type: getPropType(block, name, value),
               defaultValue:
                 tags.shouldBeSlot || !block.isBasic
