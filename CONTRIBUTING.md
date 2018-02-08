@@ -4,8 +4,8 @@
 
 1. You need to symlink your local morpher to your Views project.
 
-* In your local instance of the morpher run `yarn link` in the root directory.
-* In your project where you are using Views run `yarn link views-morph` in the root directory.
+    * In your local instance of the morpher run `yarn link` in the root directory.
+    * In your project where you are using Views run `yarn link views-morph` in the root directory.
 
 2. Put in your `debugger` statements where necessary.
 
@@ -21,12 +21,14 @@
 
 The tests are in `__tests__/views`. We are using [Jest snapshot testing](https://facebook.github.io/jest/docs/en/snapshot-testing.html).
 
-You can run all the tests with `yarn test`, or you can run a specific test with `jest -t '<nameOfTest>'`
+You can run all the tests with `yarn test`, or you can run a specific test with `jest -t '<nameOfTest>'`.
 
-You can debug a specific test with `node --inspect node_modules/.bin/jest --runInBand -t='<nameOfTest>'`
+You can debug a specific test with `node --inspect node_modules/.bin/jest --runInBand -t='<nameOfTest>'`.
 
-All tests should be passing before you open a PR.
+When you're happy with snapshot diffs you can run `yarn test -u` to update them all at once or you can run `jest --updateSnapshot -t='<nameOfTest>'` to update them individually.
 
-Having problems? Let us know in the [Views slack channel](https://slack.views.tools/)
+All tests should be passing before you open a PR.<br/><br/>
+
+Having problems? Let us know in the [Views slack channel](https://slack.views.tools/).
 
 Thanks! :clap:
