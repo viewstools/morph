@@ -30,11 +30,6 @@ Views morphs `.view` files into `.view.js`. You may want to add those to `.gitig
 
 Brilliant! Check out [CONTRIBUTING.md](https://github.com/viewstools/morph/blob/master/CONTRIBUTING.md) for a step-by-step guide.
 
-Run the tests with `yarn test`. If you want to debug the tests, run:
-
-```
-node --inspect-brk node_modules/.bin/jest --runInBand
-```
 
 See https://views.tools for more info.
 
