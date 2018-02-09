@@ -1,4 +1,4 @@
 LocalImage Image
 source ./chopper.jpg
-when props.isCat
+when <isCat
 source ./garfield.png

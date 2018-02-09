@@ -3,14 +3,14 @@ import {
   didYouMeanProp,
   getBlock,
   getComment,
-  getMainFont,
   getProp,
+  getPropType,
+  getUnsupportedShorthandExpanded,
   getValue,
   isBasic,
   isBlock,
   isCapture,
   isComment,
-  isValidCode,
   isEnd,
   isFontable,
   isGroup,
@@ -20,18 +20,20 @@ import {
   isUserComment,
 } from './helpers.js'
 import getLoc from './get-loc.js'
-import getMeta from './get-meta.js'
-import getPropTypes from './get-prop-types.js'
 import getTags from './get-tags.js'
 
-export default (rtext, skipComments = true) => {
+export default ({
+  convertSlotToProps = true,
+  skipComments = true,
+  source,
+} = {}) => {
   // convert crlf to lf
-  const text = rtext.replace(/\r\n/g, '\n')
-  const fonts = []
+  const text = source.replace(/\r\n/g, '\n')
   const rlines = text.split('\n')
   const lines = rlines.map(line => line.trim())
-  const props = []
+  const fonts = []
   const stack = []
+  const slots = []
   const views = []
   const warnings = []
   let lastCapture
@@ -58,7 +60,7 @@ export default (rtext, skipComments = true) => {
       const fontFamilyProp = block.properties.find(p => p.name === 'fontFamily')
 
       if (fontFamilyProp) {
-        const fontFamily = getMainFont(fontFamilyProp.value)
+        const fontFamily = fontFamilyProp.value
         const fontWeightProp = block.properties.find(
           p => p.name === 'fontWeight'
         )
@@ -112,7 +114,7 @@ export default (rtext, skipComments = true) => {
     ) {
       warnings.push({
         loc: block.loc,
-        type: `A List needs "from props" to work`,
+        type: `A List needs "from <" to work`,
         line: lines[block.loc.start.line],
       })
     }
@@ -163,14 +165,9 @@ export default (rtext, skipComments = true) => {
 
     const last = stack[stack.length - 1]
     if (last) {
+      shouldPushToStack = true
       if (last.isGroup) {
-        if (block.name === 'FakeProps') {
-          warnings.push({
-            loc: block.loc,
-            type: `FakeProps needs to be outside of the top block. Put new lines before it.`,
-            line,
-          })
-        } else if (last.isList) {
+        if (last.isList) {
           if (block.isBasic) {
             warnings.push({
               loc: block.loc,
@@ -180,8 +177,6 @@ export default (rtext, skipComments = true) => {
               line,
               blocker: true,
             })
-
-            shouldPushToStack = true
           } else if (last.children.length > 0) {
             warnings.push({
               loc: block.loc,
@@ -190,7 +185,6 @@ export default (rtext, skipComments = true) => {
               }" is outside of it. Put 1 empty line before.`,
               line,
             })
-            shouldPushToStack = true
           } else {
             last.children.push(block)
           }
@@ -201,7 +195,13 @@ export default (rtext, skipComments = true) => {
         // the block is inside a block that isn't a group
         end(stack.pop(), i)
 
-        if (views[0] && views[0].isGroup) {
+        if (last.isBasic) {
+          warnings.push({
+            loc: block.loc,
+            type: `An empty line is required after every block. Put 1 empty line before`,
+            line,
+          })
+        } else if (views[0] && views[0].isGroup) {
           warnings.push({
             loc: block.loc,
             type:
@@ -217,7 +217,6 @@ export default (rtext, skipComments = true) => {
             line,
           })
         }
-        shouldPushToStack = true
       }
     } else if (views.length > 0) {
       // the block is outside the top level block
@@ -226,42 +225,29 @@ export default (rtext, skipComments = true) => {
         newLinesBeforePreviousBlock++
       }
 
-      if (block.name !== 'FakeProps') {
-        const help = []
-        if (!views[0].isGroup) {
-          help.push(`Add Vertical at the top`)
-        }
-        if (newLinesBeforePreviousBlock > 2) {
-          const linesToRemove = newLinesBeforePreviousBlock - 2
-          help.push(
-            `remove ${linesToRemove} empty line${
-              linesToRemove > 1 ? 's' : ''
-            } before`
-          )
-        }
-        warnings.push({
-          loc: block.loc,
-          type: help.join(', '),
-          line,
-        })
+      const help = []
+      if (!views[0].isGroup) {
+        help.push(`Add Vertical at the top`)
       }
+      if (newLinesBeforePreviousBlock > 2) {
+        const linesToRemove = newLinesBeforePreviousBlock - 2
+        help.push(
+          `remove ${linesToRemove} empty line${
+            linesToRemove > 1 ? 's' : ''
+          } before`
+        )
+      }
+      warnings.push({
+        loc: block.loc,
+        type: help.join(', '),
+        line,
+      })
     }
 
     if (isGroup(name)) {
       block.isGroup = true
       block.isList = isList(name)
       block.children = []
-
-      shouldPushToStack = true
-    }
-
-    if (shouldPushToStack && name === 'FakeProps') {
-      warnings.push({
-        type:
-          'FakeProps needs to be outside of any top block. Add new lines before it.',
-        loc: block.loc,
-        line,
-      })
     }
 
     if (shouldPushToStack || stack.length === 0) {
@@ -292,70 +278,80 @@ export default (rtext, skipComments = true) => {
       let propNode = null
 
       if (isProp(line)) {
-        const [name, value] = getProp(line)
+        const { name, isSlot, slotName, slotIsNot, value } = getProp(line)
         const loc = getLoc(j, line.indexOf(name), line.length - 1)
-        const tags = getTags(name, value)
+        const tags = getTags({
+          name,
+          isSlot,
+          slotIsNot,
+          slotName,
+          value,
+          block,
+        })
 
-        const meant = didYouMeanProp(name)
-        if (meant && meant !== name && block.isBasic) {
-          warnings.push({
-            loc,
-            type: `Did you mean "${meant}" instead of "${name}"?`,
-            line,
-          })
-        }
-
-        if (tags.code) {
-          props.push({ type: block.name, name, value })
-        }
-
-        if (
-          (tags.code || tags.shouldBeCode) &&
-          name !== 'when' &&
-          !isValidCode(value)
-        ) {
-          warnings.push({
-            loc,
-            type: 'The code you used in the props value is invalid',
-            line,
-          })
-        }
-
-        if (tags.style && tags.code) {
-          block.maybeAnimated = true
+        if (block.isBasic) {
+          if (tags.unsupportedShorthand) {
+            warnings.push({
+              loc,
+              type: `The shorthand ${name} isn't supported. You need to expand it like:\n${getUnsupportedShorthandExpanded(
+                name,
+                value
+              ).join('\n')}`,
+              line,
+            })
+          } else {
+            const meant = didYouMeanProp(name)
+            if (meant && meant !== name) {
+              warnings.push({
+                loc,
+                type: `Did you mean "${meant}" instead of "${name}"?`,
+                line,
+              })
+            }
+          }
         }
 
         if (name === 'when') {
           const isSystem = isSystemScope(value)
 
-          if (value === '') {
+          if (value === '' || value === '<' || value === '<!') {
             warnings.push({
               loc,
-              type: 'This when has no props, add some condition to it',
+              type:
+                'This when has no condition assigned to it. Add one like: when <isCondition',
               line,
             })
-          } else if (value === 'props') {
+          } else if (!isSystem && !tags.validSlot) {
             warnings.push({
               loc,
-              type: `You can't use the props shorthand in a when`,
-              line,
-            })
-          } else if (
-            !isSystem &&
-            !isValidCode(value) &&
-            block.name !== 'FakeProps'
-          ) {
-            warnings.push({
-              loc,
-              type: 'The code you used in the props value is invalid',
+              type: `The value you used in the slot "${name}" is invalid`,
               line,
             })
           }
 
           tags.scope = value
-          inScope = value
-          scope = { isSystem, value, properties: [] }
+          inScope = true
+          scope = {
+            isSystem,
+            value,
+            name,
+            properties: [],
+          }
+
+          if (!isSystem) {
+            if (convertSlotToProps) {
+              scope.value = `${slotIsNot ? '!' : ''}props.${slotName || name}`
+            }
+            scope.slotIsNot = slotIsNot
+            scope.slotName = slotName
+          }
           scopes.push(scope)
+        } else if ((tags.slot || tags.shouldBeSlot) && !tags.validSlot) {
+          warnings.push({
+            loc,
+            type: `The value you used in the slot "${name}" is invalid`,
+            line,
+          })
         }
 
         if (name === 'onWhen' && properties.length > 0) {
@@ -371,8 +367,42 @@ export default (rtext, skipComments = true) => {
           loc,
           name,
           tags,
-          meta: getMeta(value, line, j),
           value: getValue(value),
+        }
+
+        if (tags.slot) {
+          const needsDefaultValue =
+            block.isBasic && !tags.shouldBeSlot && /</.test(propNode.value)
+
+          propNode.defaultValue = propNode.value
+          propNode.slotName = slotName
+          if (convertSlotToProps) {
+            propNode.value = `${slotIsNot ? '!' : ''}props.${slotName || name}`
+          }
+
+          if (needsDefaultValue) {
+            if (name === 'text' && block.name === 'Text') {
+              propNode.defaultValue = ''
+            } else {
+              propNode.defaultValue = false
+              warnings.push({
+                loc,
+                type: `Add a default value to "${name}" like: "${name} <${slotName} default value"`,
+                line,
+              })
+            }
+          }
+
+          if (!inScope && !slots.some(vp => vp.name === name)) {
+            slots.push({
+              name: slotName || name,
+              type: getPropType(block, name, value),
+              defaultValue:
+                tags.shouldBeSlot || !block.isBasic
+                  ? false
+                  : propNode.defaultValue,
+            })
+          }
         }
       } else if (isComment(line) && !skipComments) {
         let [value] = getComment(line)
@@ -445,7 +475,7 @@ export default (rtext, skipComments = true) => {
 
   return {
     fonts,
-    props: getPropTypes(props),
+    slots,
     views,
     warnings,
   }

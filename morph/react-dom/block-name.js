@@ -12,13 +12,13 @@ export function enter(node, parent, state) {
 
   if (node.isBasic) {
     const hasDynamicStyles = node.properties.some(
-      prop => prop.tags.style && prop.tags.code
+      prop => prop.tags.style && prop.tags.slot
     )
 
     const hasDynamicScopedStyles = node.scopes.some(
       scope =>
         scope.isSystem
-          ? scope.properties.some(prop => prop.tags.style && prop.tags.code)
+          ? scope.properties.some(prop => prop.tags.style && prop.tags.slot)
           : scope.properties.some(prop => prop.tags.style)
     )
 

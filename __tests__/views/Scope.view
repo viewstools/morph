@@ -1,12 +1,12 @@
 Scope Text
 color red
 text 1 red
-when props.somethingGreen
+when <somethingGreen
 color rgb(0,255,0)
 text 2 green
-when props.whatMakesBlue
+when <whatMakesBlue
 color rgb(0,0,255)
-text props.blue 
-when !props.whatMakesBlue && props.somethingGreen
+text <blue
+when <!whatMakesBlue
 color rgb(255,255,0)
 text  is Yellow

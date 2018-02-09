@@ -15,7 +15,7 @@ const getFiles = () =>
     .map(f => {
       const view = getName(f)
       const source = readFileSync(getPath(f), 'utf-8')
-      views[view] = parse(source)
+      views[view] = parse({ source })
       return f
     })
 

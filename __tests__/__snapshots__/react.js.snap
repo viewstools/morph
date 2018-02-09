@@ -48,31 +48,12 @@ module.exports = {
 }
 `;
 
-exports[`e2e parses e2e BlockThatUsesViewAndBothHaveScopes 1`] = `
+exports[`e2e parses e2e Border 1`] = `
 Object {
   "code": "const { get } = require('@viewstools/e2e');
 
 module.exports = {
-  BlockThatUsesViewAndBothHaveScopes: get(
-    'BlockThatUsesViewAndBothHaveScopes.BlockThatUsesViewAndBothHaveScopes',
-    'isBlack',
-    'notWhatMakesBlueAndSomethingGreen',
-    'whatMakesBlue',
-    'somethingGreen'
-  ),
-};
-",
-}
-`;
-
-exports[`e2e parses e2e BoxShadow 1`] = `
-Object {
-  "code": "const { get } = require('@viewstools/e2e');
-
-module.exports = {
-  Vertical1: get('BoxShadow.Vertical:1'),
-  Vertical2: get('BoxShadow.Vertical:2'),
-  Vertical: get('BoxShadow.Vertical'),
+  Border: get('Border.Border'),
 };
 ",
 }
@@ -124,23 +105,6 @@ module.exports = {
 }
 `;
 
-exports[`e2e parses e2e Form 1`] = `
-Object {
-  "code": "const { get } = require('@viewstools/e2e');
-
-module.exports = {
-  Button: get('Form.Button'),
-  Email: get('Form.Email'),
-  Form: get('Form.Form'),
-  Name: get('Form.Name'),
-  Password: get('Form.Password'),
-  Surname: get('Form.Surname'),
-  Text: get('Form.Text'),
-};
-",
-}
-`;
-
 exports[`e2e parses e2e GoTo 1`] = `
 Object {
   "code": "const { get } = require('@viewstools/e2e');
@@ -158,7 +122,7 @@ Object {
   "code": "const { get } = require('@viewstools/e2e');
 
 module.exports = {
-  Button: get('Hover.Button'),
+  Hover: get('Hover.Hover'),
   Text: get('Hover.Text'),
 };
 ",
@@ -170,7 +134,7 @@ Object {
   "code": "const { get } = require('@viewstools/e2e');
 
 module.exports = {
-  Text: get('JustText.Text'),
+  JustText: get('JustText.JustText'),
 };
 ",
 }
@@ -246,6 +210,17 @@ module.exports = {
 }
 `;
 
+exports[`e2e parses e2e NegativeNumber 1`] = `
+Object {
+  "code": "const { get } = require('@viewstools/e2e');
+
+module.exports = {
+  Text: get('NegativeNumber.Text'),
+};
+",
+}
+`;
+
 exports[`e2e parses e2e NestedRoutes 1`] = `
 Object {
   "code": "const { get } = require('@viewstools/e2e');
@@ -261,31 +236,6 @@ module.exports = {
 }
 `;
 
-exports[`e2e parses e2e Print 1`] = `
-Object {
-  "code": "const { get } = require('@viewstools/e2e');
-
-module.exports = {
-  Text1: get('Print.Text:1'),
-  Text: get('Print.Text'),
-  Vertical: get('Print.Vertical'),
-};
-",
-}
-`;
-
-exports[`e2e parses e2e ProxyTest 1`] = `
-Object {
-  "code": "const { get } = require('@viewstools/e2e');
-
-module.exports = {
-  Horizontal: get('ProxyTest.Horizontal'),
-  Vertical: get('ProxyTest.Vertical'),
-};
-",
-}
-`;
-
 exports[`e2e parses e2e Scope 1`] = `
 Object {
   "code": "const { get } = require('@viewstools/e2e');
@@ -293,7 +243,7 @@ Object {
 module.exports = {
   Scope: get(
     'Scope.Scope',
-    'notWhatMakesBlueAndSomethingGreen',
+    'notWhatMakesBlue',
     'whatMakesBlue',
     'somethingGreen'
   ),
@@ -333,8 +283,22 @@ Object {
 module.exports = {
   Content: get('ScopePopup2.Content', 'isSuperVisible', 'isShown'),
   Popup: get('ScopePopup2.Popup'),
+  Text1: get('ScopePopup2.Text:1'),
   Text: get('ScopePopup2.Text'),
   Toggle: get('ScopePopup2.Toggle'),
+};
+",
+}
+`;
+
+exports[`e2e parses e2e Shadow 1`] = `
+Object {
+  "code": "const { get } = require('@viewstools/e2e');
+
+module.exports = {
+  BoxShadow: get('Shadow.BoxShadow'),
+  Shadow: get('Shadow.Shadow'),
+  TextShadow: get('Shadow.TextShadow'),
 };
 ",
 }
@@ -363,19 +327,6 @@ module.exports = {
 }
 `;
 
-exports[`e2e parses e2e Test 1`] = `
-Object {
-  "code": "const { get } = require('@viewstools/e2e');
-
-module.exports = {
-  Another: get('Test.Another'),
-  Custom: get('Test.Custom'),
-  Something: get('Test.Something'),
-};
-",
-}
-`;
-
 exports[`e2e parses e2e TestIds 1`] = `
 Object {
   "code": "const { get } = require('@viewstools/e2e');
@@ -398,17 +349,6 @@ Object {
 module.exports = {
   Text: get('TextInterpolation.Text'),
   Vertical: get('TextInterpolation.Vertical'),
-};
-",
-}
-`;
-
-exports[`e2e parses e2e Toggle 1`] = `
-Object {
-  "code": "const { get } = require('@viewstools/e2e');
-
-module.exports = {
-  Text: get('Toggle.Text'),
 };
 ",
 }
@@ -524,30 +464,6 @@ module.exports = {
 }
 `;
 
-exports[`e2e parses e2e UseOfProxy 1`] = `
-Object {
-  "code": "const { get } = require('@viewstools/e2e');
-
-module.exports = {
-  App: get('UseOfProxy.App'),
-  Button: get('UseOfProxy.Button'),
-};
-",
-}
-`;
-
-exports[`e2e parses e2e UseProxy 1`] = `
-Object {
-  "code": "const { get } = require('@viewstools/e2e');
-
-module.exports = {
-  Button: get('UseProxy.Button'),
-  Text: get('UseProxy.Text'),
-};
-",
-}
-`;
-
 exports[`e2e parses e2e UseRouter 1`] = `
 Object {
   "code": "const { get } = require('@viewstools/e2e');
@@ -650,18 +566,6 @@ module.exports = {
 }
 `;
 
-exports[`e2e parses e2e WithTest 1`] = `
-Object {
-  "code": "const { get } = require('@viewstools/e2e');
-
-module.exports = {
-  Text: get('WithTest.Text'),
-  Vertical: get('WithTest.Vertical'),
-};
-",
-}
-`;
-
 exports[`react-dom parses react-dom Action 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -703,7 +607,7 @@ class Action extends React.Component {
           context.track({
             block: props['data-test-id'] || 'Action',
             action: 'click',
-            callback: props.clickMe,
+            callback: props.onClick,
             event,
           })
         }
@@ -730,11 +634,23 @@ Action.contextTypes = {
 export default Action;
 ",
   "fonts": Array [],
-  "props": Object {
-    "check": "string",
-    "clickMe": "function",
-    "isDisabled": "string",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "check",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "onClick",
+      "type": "function",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "isDisabled",
+      "type": "string",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -758,7 +674,7 @@ const Action = props => {
   return props.check ? (
     <button
       data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-      onClick={props.clickMe}
+      onClick={props.onClick}
       disabled={props.isDisabled}
       className={\`views-block \${Vertical_h1azf9vn}\`}
     >
@@ -778,11 +694,23 @@ const Action = props => {
 export default Action;
 ",
   "fonts": Array [],
-  "props": Object {
-    "check": "string",
-    "clickMe": "function",
-    "isDisabled": "string",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "check",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "onClick",
+      "type": "function",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "isDisabled",
+      "type": "string",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -842,14 +770,22 @@ class AnimatedButton extends React.Component {
 AnimatedButton.contextTypes = {
   track: PropTypes.func.isRequired,
 };
-
+AnimatedButton.defaultProps = { opacity: 1 };
 export default AnimatedButton;
 ",
   "fonts": Array [],
-  "props": Object {
-    "onClick": "function",
-    "opacity": "number",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": 1,
+      "name": "opacity",
+      "type": "number",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "onClick",
+      "type": "function",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -881,13 +817,22 @@ const AnimatedButton = props => {
   );
 };
 
+AnimatedButton.defaultProps = { opacity: 1 };
 export default AnimatedButton;
 ",
   "fonts": Array [],
-  "props": Object {
-    "onClick": "function",
-    "opacity": "number",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": 1,
+      "name": "opacity",
+      "type": "number",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "onClick",
+      "type": "function",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -941,7 +886,7 @@ AppRegionDrag.contextTypes = {
 export default AppRegionDrag;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -973,7 +918,7 @@ const AppRegionDrag = props => {
 export default AppRegionDrag;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -986,8 +931,8 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import styled, { css } from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const Vertical_h1q68ydz = css({
-  backgroundImage: \\"url('https://viewsdx.com/image.jpg')\\",
+const Vertical_hi6h2fk = css({
+  backgroundImage: \\"url('https://views.tools/image.jpg')\\",
 });
 const Horizontal = styled('div')(
   {
@@ -1020,7 +965,7 @@ class BackgroundImage extends React.Component {
     return (
       <div
         data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-        className={\`views-block \${Vertical_h1q68ydz}\`}
+        className={\`views-block \${Vertical_hi6h2fk}\`}
       >
         <Horizontal
           data-test-id={\`BackgroundImage.Horizontal|\`}
@@ -1035,13 +980,19 @@ class BackgroundImage extends React.Component {
 BackgroundImage.contextTypes = {
   track: PropTypes.func.isRequired,
 };
-
+BackgroundImage.defaultProps = {
+  backgroundImage: 'https://views.tools/image.jpg',
+};
 export default BackgroundImage;
 ",
   "fonts": Array [],
-  "props": Object {
-    "backgroundImage": "string",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": "https://views.tools/image.jpg",
+      "name": "backgroundImage",
+      "type": "string",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -1053,8 +1004,8 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import styled, { css } from 'react-emotion';
 
-const Vertical_h1q68ydz = css({
-  backgroundImage: \\"url('https://viewsdx.com/image.jpg')\\",
+const Vertical_hi6h2fk = css({
+  backgroundImage: \\"url('https://views.tools/image.jpg')\\",
 });
 const Horizontal = styled('div')(
   {
@@ -1070,7 +1021,7 @@ const BackgroundImage = props => {
   return (
     <div
       data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-      className={\`views-block \${Vertical_h1q68ydz}\`}
+      className={\`views-block \${Vertical_hi6h2fk}\`}
     >
       <Horizontal
         data-test-id={\`BackgroundImage.Horizontal|\`}
@@ -1082,35 +1033,52 @@ const BackgroundImage = props => {
   );
 };
 
+BackgroundImage.defaultProps = {
+  backgroundImage: 'https://views.tools/image.jpg',
+};
 export default BackgroundImage;
 ",
   "fonts": Array [],
-  "props": Object {
-    "backgroundImage": "string",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": "https://views.tools/image.jpg",
+      "name": "backgroundImage",
+      "type": "string",
+    },
+  ],
   "svgs": Array [],
 }
 `;
 
-exports[`react-dom parses react-dom BlockThatUsesViewAndBothHaveScopes 1`] = `
+exports[`react-dom parses react-dom Border 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import Scope from './Scope.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
+import styled from 'react-emotion';
 import PropTypes from 'prop-types';
 
-class BlockThatUsesViewAndBothHaveScopes extends React.Component {
+const Border1 = styled('div')(
+  {
+    borderColor: 'red',
+    borderStyle: 'solid',
+  },
+  ({ props }) => ({
+    borderWidth: props.borderWidth,
+  })
+);
+
+class Border extends React.Component {
   componentDidMount() {
     this.context.track({
-      block: this.props['data-test-id'] || 'BlockThatUsesViewAndBothHaveScopes',
+      block: this.props['data-test-id'] || 'Border',
       action: 'enter',
     });
   }
 
   componentWillUnmount() {
     this.context.track({
-      block: this.props['data-test-id'] || 'BlockThatUsesViewAndBothHaveScopes',
+      block: this.props['data-test-id'] || 'Border',
       action: 'leave',
     });
   }
@@ -1119,175 +1087,74 @@ class BlockThatUsesViewAndBothHaveScopes extends React.Component {
     const { context, props } = this;
 
     return (
-      <Scope
-        data-test-id={\`\${props['data-test-id'] ||
-          'BlockThatUsesViewAndBothHaveScopes'}|\${
-          props.isBlack ? 'isBlack|' : ''
-        }\`}
-        className=\\"views-block\\"
-      >
-        {props.children}
-      </Scope>
-    );
-  }
-}
-BlockThatUsesViewAndBothHaveScopes.contextTypes = {
-  track: PropTypes.func.isRequired,
-};
-
-export default BlockThatUsesViewAndBothHaveScopes;
-",
-  "fonts": Array [],
-  "props": Object {
-    "isBlack": "string",
-  },
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom BlockThatUsesViewAndBothHaveScopes: react-dom parses react-dom BlockThatUsesViewAndBothHaveScopes debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import Scope from './Scope.view.js';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-
-const BlockThatUsesViewAndBothHaveScopes = props => {
-  return (
-    <Scope
-      data-test-id={\`\${props['data-test-id'] ||
-        'BlockThatUsesViewAndBothHaveScopes'}|\${
-        props.isBlack ? 'isBlack|' : ''
-      }\`}
-      className=\\"views-block\\"
-    >
-      {props.children}
-    </Scope>
-  );
-};
-
-export default BlockThatUsesViewAndBothHaveScopes;
-",
-  "fonts": Array [],
-  "props": Object {
-    "isBlack": "string",
-  },
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom BoxShadow 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import styled, { css } from 'react-emotion';
-import PropTypes from 'prop-types';
-
-const Vertical = styled('div')(({ props }) => ({
-  boxShadow: \`10px 5px 2px \${props.color}\`,
-}));
-const Vertical1 = styled('div')(({ props }) => ({
-  boxShadow: \`10px 5px 10px \${props.color}\`,
-}));
-const Vertical_he0xt4e = css({ boxShadow: '0px 8px 15px 0px rgba(0,0,0,0.1)' });
-
-class BoxShadow extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'BoxShadow',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'BoxShadow',
-      action: 'leave',
-    });
-  }
-
-  render() {
-    const { context, props } = this;
-
-    return (
-      <Vertical
-        data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
+      <Border1
+        data-test-id={\`\${props['data-test-id'] || 'Border'}|\`}
         props={props}
         className=\\"views-block\\"
       >
-        <Vertical1
-          data-test-id={\`BoxShadow.Vertical:1|\`}
-          props={props}
-          className=\\"views-block\\"
-        >
-          <div
-            data-test-id={\`BoxShadow.Vertical:2|\`}
-            className={\`views-block \${Vertical_he0xt4e}\`}
-          />
-        </Vertical1>
         {props.children}
-      </Vertical>
+      </Border1>
     );
   }
 }
-BoxShadow.contextTypes = {
+Border.contextTypes = {
   track: PropTypes.func.isRequired,
 };
-
-export default BoxShadow;
+Border.defaultProps = { borderWidth: 10 };
+export default Border;
 ",
   "fonts": Array [],
-  "props": Object {
-    "color": "string",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": 10,
+      "name": "borderWidth",
+      "type": "number",
+    },
+  ],
   "svgs": Array [],
 }
 `;
 
-exports[`react-dom parses react-dom BoxShadow: react-dom parses react-dom BoxShadow debug 1`] = `
+exports[`react-dom parses react-dom Border: react-dom parses react-dom Border debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import styled, { css } from 'react-emotion';
+import styled from 'react-emotion';
 
-const Vertical = styled('div')(({ props }) => ({
-  boxShadow: \`10px 5px 2px \${props.color}\`,
-}));
-const Vertical1 = styled('div')(({ props }) => ({
-  boxShadow: \`10px 5px 10px \${props.color}\`,
-}));
-const Vertical_he0xt4e = css({ boxShadow: '0px 8px 15px 0px rgba(0,0,0,0.1)' });
+const Border1 = styled('div')(
+  {
+    borderColor: 'red',
+    borderStyle: 'solid',
+  },
+  ({ props }) => ({
+    borderWidth: props.borderWidth,
+  })
+);
 
-const BoxShadow = props => {
+const Border = props => {
   return (
-    <Vertical
-      data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
+    <Border1
+      data-test-id={\`\${props['data-test-id'] || 'Border'}|\`}
       props={props}
       className=\\"views-block\\"
     >
-      <Vertical1
-        data-test-id={\`BoxShadow.Vertical:1|\`}
-        props={props}
-        className=\\"views-block\\"
-      >
-        <div
-          data-test-id={\`BoxShadow.Vertical:2|\`}
-          className={\`views-block \${Vertical_he0xt4e}\`}
-        />
-      </Vertical1>
       {props.children}
-    </Vertical>
+    </Border1>
   );
 };
 
-export default BoxShadow;
+Border.defaultProps = { borderWidth: 10 };
+export default Border;
 ",
   "fonts": Array [],
-  "props": Object {
-    "color": "string",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": 10,
+      "name": "borderWidth",
+      "type": "number",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -1337,7 +1204,7 @@ ClassName.contextTypes = {
 export default ClassName;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -1365,7 +1232,7 @@ const ClassName = props => {
 export default ClassName;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -1404,7 +1271,6 @@ class Code extends React.Component {
     return (
       <div
         data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-        ref={$e => (this.$e = $e)}
         className={\`views-block \${Vertical_h1cyenk5}\`}
       >
         <Text
@@ -1423,15 +1289,30 @@ class Code extends React.Component {
 Code.contextTypes = {
   track: PropTypes.func.isRequired,
 };
-
+Code.defaultProps = {
+  text: 'hey',
+  color: 'white',
+};
 export default Code;
 ",
   "fonts": Array [],
-  "props": Object {
-    "color": "string",
-    "refText": "string",
-    "text": "string",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": "hey",
+      "name": "text",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": "white",
+      "name": "color",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "refText",
+      "type": "string",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -1462,14 +1343,30 @@ const Code = props => {
   );
 };
 
+Code.defaultProps = {
+  text: 'hey',
+  color: 'white',
+};
 export default Code;
 ",
   "fonts": Array [],
-  "props": Object {
-    "color": "string",
-    "refText": "string",
-    "text": "string",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": "hey",
+      "name": "text",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": "white",
+      "name": "color",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "refText",
+      "type": "string",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -1530,9 +1427,13 @@ DynamicStylesApplyToBasicBlocksOnly.contextTypes = {
 export default DynamicStylesApplyToBasicBlocksOnly;
 ",
   "fonts": Array [],
-  "props": Object {
-    "height": "number",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "height",
+      "type": "number",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -1569,9 +1470,13 @@ const DynamicStylesApplyToBasicBlocksOnly = props => {
 export default DynamicStylesApplyToBasicBlocksOnly;
 ",
   "fonts": Array [],
-  "props": Object {
-    "height": "number",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "height",
+      "type": "number",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -1616,7 +1521,7 @@ EmptyText.contextTypes = {
 export default EmptyText;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -1639,186 +1544,7 @@ const EmptyText = props => {
 export default EmptyText;
 ",
   "fonts": Array [],
-  "props": Object {},
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom Form 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import PropTypes from 'prop-types';
-
-class Form extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'Form',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'Form',
-      action: 'leave',
-    });
-  }
-
-  render() {
-    const { context, props, state } = this;
-
-    return (
-      <form
-        data-test-id={\`\${props['data-test-id'] || 'Form'}|\`}
-        onSubmit={() => props.onSubmit(state)}
-        className=\\"views-block\\"
-      >
-        <input
-          type=\\"text\\"
-          onChange={event => this.setState({ name: event.target.value })}
-          value={state.name}
-          data-test-id={\`Form.Name|\`}
-          autoFocus={true}
-          className=\\"views-block\\"
-        />
-        <input
-          type=\\"text\\"
-          onChange={event => this.setState({ surname: event.target.value })}
-          value={state.surname}
-          data-test-id={\`Form.Surname|\`}
-          className=\\"views-block\\"
-        />
-        <input
-          type=\\"password\\"
-          onChange={event => this.setState({ password: event.target.value })}
-          value={state.password}
-          data-test-id={\`Form.Password|\`}
-          className=\\"views-block\\"
-        />
-        <input
-          type=\\"email\\"
-          onChange={event => this.setState({ email: event.target.value })}
-          value={state.email}
-          data-test-id={\`Form.Email|\`}
-          defaultValue=\\"morph@viewsdx.com\\"
-          className=\\"views-block\\"
-        />
-        <button
-          data-test-id={\`Form.Button|\`}
-          onClick={event =>
-            context.track({
-              block: props['data-test-id'] || 'Form',
-              action: 'click',
-              callback: () => props.onSubmit(state),
-              event,
-            })
-          }
-          className=\\"views-block\\"
-        >
-          <span data-test-id={\`Form.Text|\`} className=\\"views-block\\">
-            Send!
-          </span>
-        </button>
-        {props.children}
-      </form>
-    );
-  }
-}
-Form.contextTypes = {
-  track: PropTypes.func.isRequired,
-};
-
-export default Form;
-",
-  "fonts": Array [],
-  "props": Object {
-    "onSubmit": "function",
-  },
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom Form: react-dom parses react-dom Form debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-
-class Form extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  render() {
-    const { props, state } = this;
-
-    return (
-      <form
-        data-test-id={\`\${props['data-test-id'] || 'Form'}|\`}
-        onSubmit={() => props.onSubmit(state)}
-        className=\\"views-block\\"
-      >
-        <input
-          type=\\"text\\"
-          onChange={event => this.setState({ name: event.target.value })}
-          value={state.name}
-          tabIndex={-1}
-          data-test-id={\`Form.Name|\`}
-          className={\`views-block mousetrap\`}
-        />
-        <input
-          type=\\"text\\"
-          onChange={event => this.setState({ surname: event.target.value })}
-          value={state.surname}
-          tabIndex={-1}
-          data-test-id={\`Form.Surname|\`}
-          className={\`views-block mousetrap\`}
-        />
-        <input
-          type=\\"password\\"
-          onChange={event => this.setState({ password: event.target.value })}
-          value={state.password}
-          tabIndex={-1}
-          data-test-id={\`Form.Password|\`}
-          className={\`views-block mousetrap\`}
-        />
-        <input
-          type=\\"email\\"
-          onChange={event => this.setState({ email: event.target.value })}
-          value={state.email}
-          tabIndex={-1}
-          data-test-id={\`Form.Email|\`}
-          defaultValue=\\"morph@viewsdx.com\\"
-          className={\`views-block mousetrap\`}
-        />
-        <button
-          data-test-id={\`Form.Button|\`}
-          onClick={() => props.onSubmit(state)}
-          className=\\"views-block\\"
-        >
-          <span data-test-id={\`Form.Text|\`} className=\\"views-block\\">
-            Send!
-          </span>
-        </button>
-        {props.children}
-      </form>
-    );
-  }
-}
-
-export default Form;
-",
-  "fonts": Array [],
-  "props": Object {
-    "onSubmit": "function",
-  },
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -1850,14 +1576,14 @@ class GoTo extends React.Component {
 
     return (
       <a
-        href=\\"https://viewsdx.com\\"
+        href=\\"https://views.tools\\"
         rel=\\"noopener noreferrer\\"
         target=\\"_blank\\"
         data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
         className=\\"views-block\\"
       >
         <span data-test-id={\`GoTo.Text|\`} className=\\"views-block\\">
-          Go to ViewsDX website!
+          Go to Views Tools website!
         </span>
         {props.children}
       </a>
@@ -1871,7 +1597,7 @@ GoTo.contextTypes = {
 export default GoTo;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -1885,14 +1611,14 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 const GoTo = props => {
   return (
     <a
-      href=\\"https://viewsdx.com\\"
+      href=\\"https://views.tools\\"
       rel=\\"noopener noreferrer\\"
       target=\\"_blank\\"
       data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
       className=\\"views-block\\"
     >
       <span data-test-id={\`GoTo.Text|\`} className=\\"views-block\\">
-        Go to ViewsDX website!
+        Go to Views Tools website!
       </span>
       {props.children}
     </a>
@@ -1902,7 +1628,7 @@ const GoTo = props => {
 export default GoTo;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -1912,27 +1638,24 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import styled from 'react-emotion';
+import styled, { css } from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const Button = styled('button')(({ props }) => ({
-  backgroundColor: props.backgroundColor,
+const Hover_h1eiserf = css({
+  backgroundColor: '#323232',
   '&:hover, &.hover': {
-    backgroundColor: props.backgroundColorHover,
+    backgroundColor: '#232323',
   },
-}));
+});
 const Text = styled('span')(
   {
     color: 'white',
-    [\`\${Button}:hover &, \${Button}.hover &\`]: {
+    [\`.\${Hover_h1eiserf}:hover &, .\${Hover_h1eiserf}.hover &\`]: {
       color: 'black',
     },
   },
   ({ props }) => ({
     fontSize: props.fontSize,
-    [\`\${Button}:hover &, \${Button}.hover &\`]: {
-      fontSize: props.fontSizeHover,
-    },
   })
 );
 
@@ -1955,8 +1678,8 @@ class Hover extends React.Component {
     const { context, props } = this;
 
     return (
-      <Button
-        data-test-id={\`\${props['data-test-id'] || 'Button'}|\`}
+      <button
+        data-test-id={\`\${props['data-test-id'] || 'Hover'}|\`}
         onClick={event =>
           context.track({
             block: props['data-test-id'] || 'Hover',
@@ -1965,8 +1688,7 @@ class Hover extends React.Component {
             event,
           })
         }
-        props={props}
-        className=\\"views-block\\"
+        className={\`views-block \${Hover_h1eiserf}\`}
       >
         <Text
           data-test-id={\`Hover.Text|\`}
@@ -1976,7 +1698,7 @@ class Hover extends React.Component {
           Hey!
         </Text>
         {props.children}
-      </Button>
+      </button>
     );
   }
 }
@@ -1987,13 +1709,18 @@ Hover.contextTypes = {
 export default Hover;
 ",
   "fonts": Array [],
-  "props": Object {
-    "backgroundColor": "string",
-    "backgroundColorHover": "string",
-    "fontSize": "number",
-    "fontSizeHover": "number",
-    "onClick": "function",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "onClick",
+      "type": "function",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "fontSize",
+      "type": "number",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -2003,55 +1730,56 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import styled from 'react-emotion';
+import styled, { css } from 'react-emotion';
 
-const Button = styled('button')(({ props }) => ({
-  backgroundColor: props.backgroundColor,
+const Hover_h1eiserf = css({
+  backgroundColor: '#323232',
   '&:hover, &.hover': {
-    backgroundColor: props.backgroundColorHover,
+    backgroundColor: '#232323',
   },
-}));
+});
 const Text = styled('span')(
   {
     color: 'white',
-    [\`\${Button}:hover &, \${Button}.hover &\`]: {
+    [\`.\${Hover_h1eiserf}:hover &, .\${Hover_h1eiserf}.hover &\`]: {
       color: 'black',
     },
   },
   ({ props }) => ({
     fontSize: props.fontSize,
-    [\`\${Button}:hover &, \${Button}.hover &\`]: {
-      fontSize: props.fontSizeHover,
-    },
   })
 );
 
 const Hover = props => {
   return (
-    <Button
-      data-test-id={\`\${props['data-test-id'] || 'Button'}|\`}
+    <button
+      data-test-id={\`\${props['data-test-id'] || 'Hover'}|\`}
       onClick={props.onClick}
-      props={props}
-      className=\\"views-block\\"
+      className={\`views-block \${Hover_h1eiserf}\`}
     >
       <Text data-test-id={\`Hover.Text|\`} props={props} className=\\"views-block\\">
         Hey!
       </Text>
       {props.children}
-    </Button>
+    </button>
   );
 };
 
 export default Hover;
 ",
   "fonts": Array [],
-  "props": Object {
-    "backgroundColor": "string",
-    "backgroundColorHover": "string",
-    "fontSize": "number",
-    "fontSizeHover": "number",
-    "onClick": "function",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "onClick",
+      "type": "function",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "fontSize",
+      "type": "number",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -2083,7 +1811,7 @@ class JustText extends React.Component {
 
     return (
       <span
-        data-test-id={\`\${props['data-test-id'] || 'Text'}|\`}
+        data-test-id={\`\${props['data-test-id'] || 'JustText'}|\`}
         className=\\"views-block\\"
       >
         hey!
@@ -2098,7 +1826,7 @@ JustText.contextTypes = {
 export default JustText;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -2112,7 +1840,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 const JustText = props => {
   return (
     <span
-      data-test-id={\`\${props['data-test-id'] || 'Text'}|\`}
+      data-test-id={\`\${props['data-test-id'] || 'JustText'}|\`}
       className=\\"views-block\\"
     >
       hey!
@@ -2123,7 +1851,7 @@ const JustText = props => {
 export default JustText;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -2180,9 +1908,13 @@ ListOfSomething.contextTypes = {
 export default ListOfSomething;
 ",
   "fonts": Array [],
-  "props": Object {
-    "from": "string",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "from",
+      "type": "array",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -2217,9 +1949,13 @@ const ListOfSomething = props => {
 export default ListOfSomething;
 ",
   "fonts": Array [],
-  "props": Object {
-    "from": "string",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "from",
+      "type": "array",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -2276,10 +2012,18 @@ ListWhen.contextTypes = {
 export default ListWhen;
 ",
   "fonts": Array [],
-  "props": Object {
-    "from": "string",
-    "showMe": "string",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "showMe",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "from",
+      "type": "array",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -2314,10 +2058,18 @@ const ListWhen = props => {
 export default ListWhen;
 ",
   "fonts": Array [],
-  "props": Object {
-    "from": "string",
-    "showMe": "string",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "showMe",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "from",
+      "type": "array",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -2354,6 +2106,7 @@ class LocalImage extends React.Component {
         data-test-id={\`\${props['data-test-id'] || 'LocalImage'}|\${
           props.isCat ? 'isCat|' : ''
         }\`}
+        alt={''}
         src={props.isCat ? garfieldPng : chopperJpg}
         className=\\"views-block\\"
       />
@@ -2367,9 +2120,7 @@ LocalImage.contextTypes = {
 export default LocalImage;
 ",
   "fonts": Array [],
-  "props": Object {
-    "isCat": "string",
-  },
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -2386,6 +2137,7 @@ const LocalImage = props => {
       data-test-id={\`\${props['data-test-id'] || 'LocalImage'}|\${
         props.isCat ? 'isCat|' : ''
       }\`}
+      alt={''}
       src={
         props.isCat
           ? requireImage('./garfield.png')
@@ -2399,9 +2151,7 @@ const LocalImage = props => {
 export default LocalImage;
 ",
   "fonts": Array [],
-  "props": Object {
-    "isCat": "string",
-  },
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -2440,6 +2190,7 @@ class LocalImageSvg extends React.Component {
     return (
       <LocalImageSvg1
         data-test-id={\`\${props['data-test-id'] || 'LocalImageSvg'}|\`}
+        alt={''}
         src={chopperSvg}
         props={props}
         className=\\"views-block\\"
@@ -2450,13 +2201,17 @@ class LocalImageSvg extends React.Component {
 LocalImageSvg.contextTypes = {
   track: PropTypes.func.isRequired,
 };
-
+LocalImageSvg.defaultProps = { height: 50 };
 export default LocalImageSvg;
 ",
   "fonts": Array [],
-  "props": Object {
-    "height": "number",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": 50,
+      "name": "height",
+      "type": "number",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -2476,6 +2231,7 @@ const LocalImageSvg = props => {
   return (
     <LocalImageSvg1
       data-test-id={\`\${props['data-test-id'] || 'LocalImageSvg'}|\`}
+      alt={''}
       src={requireImage('./chopper.svg')}
       props={props}
       className=\\"views-block\\"
@@ -2483,12 +2239,17 @@ const LocalImageSvg = props => {
   );
 };
 
+LocalImageSvg.defaultProps = { height: 50 };
 export default LocalImageSvg;
 ",
   "fonts": Array [],
-  "props": Object {
-    "height": "number",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": 50,
+      "name": "height",
+      "type": "number",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -2522,6 +2283,7 @@ class LocalOrRemoteImageWhenCode extends React.Component {
       <img
         data-test-id={\`\${props['data-test-id'] ||
           'LocalOrRemoteImageWhenCode'}|\`}
+        alt={''}
         src={props.source}
         className=\\"views-block\\"
       />
@@ -2531,13 +2293,19 @@ class LocalOrRemoteImageWhenCode extends React.Component {
 LocalOrRemoteImageWhenCode.contextTypes = {
   track: PropTypes.func.isRequired,
 };
-
+LocalOrRemoteImageWhenCode.defaultProps = {
+  source: 'https://views.tools/image.jpg',
+};
 export default LocalOrRemoteImageWhenCode;
 ",
   "fonts": Array [],
-  "props": Object {
-    "source": "string",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": "https://views.tools/image.jpg",
+      "name": "source",
+      "type": "string",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -2552,18 +2320,26 @@ const LocalOrRemoteImageWhenCode = props => {
   return (
     <img
       data-test-id={\`\${props['data-test-id'] || 'LocalOrRemoteImageWhenCode'}|\`}
+      alt={''}
       src={props.source}
       className=\\"views-block\\"
     />
   );
 };
 
+LocalOrRemoteImageWhenCode.defaultProps = {
+  source: 'https://views.tools/image.jpg',
+};
 export default LocalOrRemoteImageWhenCode;
 ",
   "fonts": Array [],
-  "props": Object {
-    "source": "string",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": "https://views.tools/image.jpg",
+      "name": "source",
+      "type": "string",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -2610,7 +2386,7 @@ NameIsType.contextTypes = {
 export default NameIsType;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -2635,7 +2411,85 @@ const NameIsType = props => {
 export default NameIsType;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom NegativeNumber 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+import { css } from 'react-emotion';
+import PropTypes from 'prop-types';
+
+const Text_h7ml8je = css({ marginTop: -10 });
+
+class NegativeNumber extends React.Component {
+  componentDidMount() {
+    this.context.track({
+      block: this.props['data-test-id'] || 'NegativeNumber',
+      action: 'enter',
+    });
+  }
+
+  componentWillUnmount() {
+    this.context.track({
+      block: this.props['data-test-id'] || 'NegativeNumber',
+      action: 'leave',
+    });
+  }
+
+  render() {
+    const { context, props } = this;
+
+    return (
+      <span
+        data-test-id={\`\${props['data-test-id'] || 'Text'}|\`}
+        className={\`views-block \${Text_h7ml8je}\`}
+      >
+        hey
+      </span>
+    );
+  }
+}
+NegativeNumber.contextTypes = {
+  track: PropTypes.func.isRequired,
+};
+
+export default NegativeNumber;
+",
+  "fonts": Array [],
+  "slots": Array [],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom NegativeNumber: react-dom parses react-dom NegativeNumber debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+import { css } from 'react-emotion';
+
+const Text_h7ml8je = css({ marginTop: -10 });
+
+const NegativeNumber = props => {
+  return (
+    <span
+      data-test-id={\`\${props['data-test-id'] || 'Text'}|\`}
+      className={\`views-block \${Text_h7ml8je}\`}
+    >
+      hey
+    </span>
+  );
+};
+
+export default NegativeNumber;
+",
+  "fonts": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -2707,7 +2561,7 @@ NestedRoutes.contextTypes = {
 export default NestedRoutes;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -2757,219 +2611,7 @@ const NestedRoutes = props => {
 export default NestedRoutes;
 ",
   "fonts": Array [],
-  "props": Object {},
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom Print 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'react-emotion';
-import PropTypes from 'prop-types';
-
-const Text_h1d06m5g = css({
-  '@media print': {
-    display: 'none',
-  },
-});
-
-class Print extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'Print',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'Print',
-      action: 'leave',
-    });
-  }
-
-  render() {
-    const { context, props } = this;
-
-    return (
-      <div
-        data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-        className=\\"views-block\\"
-      >
-        <span
-          data-test-id={\`Print.Text|\`}
-          className={\`views-block \${Text_h1d06m5g}\`}
-        >
-          not in print
-        </span>
-        <span data-test-id={\`Print.Text:1|\`} className=\\"views-block\\">
-          hey
-        </span>
-        {props.children}
-      </div>
-    );
-  }
-}
-Print.contextTypes = {
-  track: PropTypes.func.isRequired,
-};
-
-export default Print;
-",
-  "fonts": Array [],
-  "props": Object {},
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom Print: react-dom parses react-dom Print debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'react-emotion';
-
-const Text_h1d06m5g = css({
-  '@media print': {
-    display: 'none',
-  },
-});
-
-const Print = props => {
-  return (
-    <div
-      data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-      className=\\"views-block\\"
-    >
-      <span
-        data-test-id={\`Print.Text|\`}
-        className={\`views-block \${Text_h1d06m5g}\`}
-      >
-        not in print
-      </span>
-      <span data-test-id={\`Print.Text:1|\`} className=\\"views-block\\">
-        hey
-      </span>
-      {props.children}
-    </div>
-  );
-};
-
-export default Print;
-",
-  "fonts": Array [],
-  "props": Object {},
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom ProxyTest 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'react-emotion';
-import PropTypes from 'prop-types';
-
-const Horizontal_h1qq1i2q = css({ flexDirection: 'row' });
-
-class ProxyTest extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'ProxyTest',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'ProxyTest',
-      action: 'leave',
-    });
-  }
-
-  render() {
-    const { context, props } = this;
-    const childrenArray = React.Children.toArray(props.children);
-    return (
-      <div
-        data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-        className=\\"views-block\\"
-      >
-        <div
-          data-test-id={\`ProxyTest.Horizontal|\`}
-          className={\`views-block \${Horizontal_h1qq1i2q}\`}
-        >
-          {props.bla && childrenArray[props.childrenProxyMap['Something']]
-            ? React.cloneElement(
-                childrenArray[props.childrenProxyMap['Something']],
-                { onClick: props.onClickRemapped }
-              )
-            : null}
-        </div>
-        {props.childrenProxyMap &&
-          childrenArray[props.childrenProxyMap['View1']]}
-      </div>
-    );
-  }
-}
-ProxyTest.contextTypes = {
-  track: PropTypes.func.isRequired,
-};
-
-export default ProxyTest;
-",
-  "fonts": Array [],
-  "props": Object {
-    "bla": "string",
-    "onClickRemapped": "function",
-  },
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom ProxyTest: react-dom parses react-dom ProxyTest debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'react-emotion';
-
-const Horizontal_h1qq1i2q = css({ flexDirection: 'row' });
-
-const ProxyTest = props => {
-  const childrenArray = React.Children.toArray(props.children);
-  return (
-    <div
-      data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-      className=\\"views-block\\"
-    >
-      <div
-        data-test-id={\`ProxyTest.Horizontal|\`}
-        className={\`views-block \${Horizontal_h1qq1i2q}\`}
-      >
-        {props.bla && childrenArray[props.childrenProxyMap['Something']]
-          ? React.cloneElement(
-              childrenArray[props.childrenProxyMap['Something']],
-              { onClick: props.onClickRemapped }
-            )
-          : null}
-      </div>
-      {props.childrenProxyMap && childrenArray[props.childrenProxyMap['View1']]}
-    </div>
-  );
-};
-
-export default ProxyTest;
-",
-  "fonts": Array [],
-  "props": Object {
-    "bla": "string",
-    "onClickRemapped": "function",
-  },
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -2987,7 +2629,7 @@ const Scope1 = styled('span')(({ props }) => ({
     ? 'rgb(0,255,0)'
     : props.whatMakesBlue
       ? 'rgb(0,0,255)'
-      : !props.whatMakesBlue && props.somethingGreen ? 'rgb(255,255,0)' : 'red',
+      : !props.whatMakesBlue ? 'rgb(255,255,0)' : 'red',
 }));
 
 class Scope extends React.Component {
@@ -3015,9 +2657,7 @@ class Scope extends React.Component {
             ? 'somethingGreen|'
             : props.whatMakesBlue
               ? 'whatMakesBlue|'
-              : !props.whatMakesBlue && props.somethingGreen
-                ? 'notWhatMakesBlueAndSomethingGreen|'
-                : ''
+              : !props.whatMakesBlue ? 'notWhatMakesBlue|' : ''
         }\`}
         props={props}
         className=\\"views-block\\"
@@ -3026,9 +2666,7 @@ class Scope extends React.Component {
           ? '2 green'
           : props.whatMakesBlue
             ? props.blue
-            : !props.whatMakesBlue && props.somethingGreen
-              ? 'is Yellow'
-              : '1 red'}
+            : !props.whatMakesBlue ? 'is Yellow' : '1 red'}
       </Scope1>
     );
   }
@@ -3040,11 +2678,7 @@ Scope.contextTypes = {
 export default Scope;
 ",
   "fonts": Array [],
-  "props": Object {
-    "blue": "string",
-    "somethingGreen": "string",
-    "whatMakesBlue": "string",
-  },
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -3061,7 +2695,7 @@ const Scope1 = styled('span')(({ props }) => ({
     ? 'rgb(0,255,0)'
     : props.whatMakesBlue
       ? 'rgb(0,0,255)'
-      : !props.whatMakesBlue && props.somethingGreen ? 'rgb(255,255,0)' : 'red',
+      : !props.whatMakesBlue ? 'rgb(255,255,0)' : 'red',
 }));
 
 const Scope = props => {
@@ -3072,9 +2706,7 @@ const Scope = props => {
           ? 'somethingGreen|'
           : props.whatMakesBlue
             ? 'whatMakesBlue|'
-            : !props.whatMakesBlue && props.somethingGreen
-              ? 'notWhatMakesBlueAndSomethingGreen|'
-              : ''
+            : !props.whatMakesBlue ? 'notWhatMakesBlue|' : ''
       }\`}
       props={props}
       className=\\"views-block\\"
@@ -3083,9 +2715,7 @@ const Scope = props => {
         ? '2 green'
         : props.whatMakesBlue
           ? props.blue
-          : !props.whatMakesBlue && props.somethingGreen
-            ? 'is Yellow'
-            : '1 red'}
+          : !props.whatMakesBlue ? 'is Yellow' : '1 red'}
     </Scope1>
   );
 };
@@ -3093,11 +2723,7 @@ const Scope = props => {
 export default Scope;
 ",
   "fonts": Array [],
-  "props": Object {
-    "blue": "string",
-    "somethingGreen": "string",
-    "whatMakesBlue": "string",
-  },
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -3135,7 +2761,7 @@ class ScopeOnCustomView extends React.Component {
         }\`}
         label={props.a ? 'ho' : props.b ? 'this is b' : 'hey'}
         another={props.a ? 1 : 0}
-        more={props.a ? props.different : props.more}
+        more={props.a ? props.more : props.more}
         className=\\"views-block\\"
       >
         {props.children}
@@ -3150,10 +2776,13 @@ ScopeOnCustomView.contextTypes = {
 export default ScopeOnCustomView;
 ",
   "fonts": Array [],
-  "props": Object {
-    "different": "string",
-    "more": "string",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "more",
+      "type": "string",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -3173,7 +2802,7 @@ const ScopeOnCustomView = props => {
       }\`}
       label={props.a ? 'ho' : props.b ? 'this is b' : 'hey'}
       another={props.a ? 1 : 0}
-      more={props.a ? props.different : props.more}
+      more={props.a ? props.more : props.more}
       className=\\"views-block\\"
     >
       {props.children}
@@ -3184,10 +2813,13 @@ const ScopeOnCustomView = props => {
 export default ScopeOnCustomView;
 ",
   "fonts": Array [],
-  "props": Object {
-    "different": "string",
-    "more": "string",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "more",
+      "type": "string",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -3251,13 +2883,13 @@ ScopePopup.contextTypes = {
 export default ScopePopup;
 ",
   "fonts": Array [],
-  "props": Object {
-    "onClickBlue": "function",
-    "onClickGreen": "function",
-    "somethingGreen": "string",
-    "toggle": "function",
-    "whatMakesBlue": "string",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "toggle",
+      "type": "function",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -3299,13 +2931,13 @@ const ScopePopup = props => {
 export default ScopePopup;
 ",
   "fonts": Array [],
-  "props": Object {
-    "onClickBlue": "function",
-    "onClickGreen": "function",
-    "somethingGreen": "string",
-    "toggle": "function",
-    "whatMakesBlue": "string",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "toggle",
+      "type": "function",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -3370,7 +3002,11 @@ class ScopePopup2 extends React.Component {
           scale={props.isShown ? 1 : props.isSuperVisible ? 2 : 0}
           props={props}
           className=\\"views-block\\"
-        />
+        >
+          <span data-test-id={\`ScopePopup2.Text:1|\`} className=\\"views-block\\">
+            I'm inside the popup
+          </span>
+        </Content>
         {props.children}
       </div>
     );
@@ -3383,11 +3019,13 @@ ScopePopup2.contextTypes = {
 export default ScopePopup2;
 ",
   "fonts": Array [],
-  "props": Object {
-    "isShown": "string",
-    "isSuperVisible": "string",
-    "toggle": "function",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "toggle",
+      "type": "function",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -3427,7 +3065,11 @@ const ScopePopup2 = props => {
         scale={props.isShown ? 1 : props.isSuperVisible ? 2 : 0}
         props={props}
         className=\\"views-block\\"
-      />
+      >
+        <span data-test-id={\`ScopePopup2.Text:1|\`} className=\\"views-block\\">
+          I'm inside the popup
+        </span>
+      </Content>
       {props.children}
     </div>
   );
@@ -3436,11 +3078,140 @@ const ScopePopup2 = props => {
 export default ScopePopup2;
 ",
   "fonts": Array [],
-  "props": Object {
-    "isShown": "string",
-    "isSuperVisible": "string",
-    "toggle": "function",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "toggle",
+      "type": "function",
+    },
+  ],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom Shadow 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+import styled from 'react-emotion';
+import PropTypes from 'prop-types';
+
+const BoxShadow = styled('div')(({ props }) => ({
+  boxShadow: \`10px 5px 2px 2px \${props.shadowColor}\`,
+}));
+const TextShadow = styled('span')(({ props }) => ({
+  textShadow: \`2px 3px 1px \${props.shadowColor}\`,
+}));
+
+class Shadow extends React.Component {
+  componentDidMount() {
+    this.context.track({
+      block: this.props['data-test-id'] || 'Shadow',
+      action: 'enter',
+    });
+  }
+
+  componentWillUnmount() {
+    this.context.track({
+      block: this.props['data-test-id'] || 'Shadow',
+      action: 'leave',
+    });
+  }
+
+  render() {
+    const { context, props } = this;
+
+    return (
+      <div
+        data-test-id={\`\${props['data-test-id'] || 'Shadow'}|\`}
+        className=\\"views-block\\"
+      >
+        <BoxShadow
+          data-test-id={\`Shadow.BoxShadow|\`}
+          props={props}
+          className=\\"views-block\\"
+        >
+          <TextShadow
+            data-test-id={\`Shadow.TextShadow|\`}
+            props={props}
+            className=\\"views-block\\"
+          >
+            hey
+          </TextShadow>
+        </BoxShadow>
+        {props.children}
+      </div>
+    );
+  }
+}
+Shadow.contextTypes = {
+  track: PropTypes.func.isRequired,
+};
+Shadow.defaultProps = { shadowColor: 'red' };
+export default Shadow;
+",
+  "fonts": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": "red",
+      "name": "shadowColor",
+      "type": "string",
+    },
+  ],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom Shadow: react-dom parses react-dom Shadow debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+import styled from 'react-emotion';
+
+const BoxShadow = styled('div')(({ props }) => ({
+  boxShadow: \`10px 5px 2px 2px \${props.shadowColor}\`,
+}));
+const TextShadow = styled('span')(({ props }) => ({
+  textShadow: \`2px 3px 1px \${props.shadowColor}\`,
+}));
+
+const Shadow = props => {
+  return (
+    <div
+      data-test-id={\`\${props['data-test-id'] || 'Shadow'}|\`}
+      className=\\"views-block\\"
+    >
+      <BoxShadow
+        data-test-id={\`Shadow.BoxShadow|\`}
+        props={props}
+        className=\\"views-block\\"
+      >
+        <TextShadow
+          data-test-id={\`Shadow.TextShadow|\`}
+          props={props}
+          className=\\"views-block\\"
+        >
+          hey
+        </TextShadow>
+      </BoxShadow>
+      {props.children}
+    </div>
+  );
+};
+
+Shadow.defaultProps = { shadowColor: 'red' };
+export default Shadow;
+",
+  "fonts": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": "red",
+      "name": "shadowColor",
+      "type": "string",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -3458,13 +3229,11 @@ const WindowControl = styled('button')(
     marginRight: 8,
     backgroundColor: '#CBCDCE',
     opacity: 0.7,
-    transform: 'scale(1.1)',
     transition: 'all 0.15s ease-out',
-    borderRadius: 10,
     width: 10,
     height: 10,
     '&:hover, &.hover': {
-      transform: 'scale(1.5)',
+      scale: 1.5,
     },
   },
   ({ props }) => ({
@@ -3503,7 +3272,8 @@ class SomeMissingStyle extends React.Component {
             event,
           })
         }
-        tabIndex=\\"-1\\"
+        scale={1.1}
+        tabIndex={-1}
         props={props}
         className=\\"views-block\\"
       >
@@ -3519,10 +3289,13 @@ SomeMissingStyle.contextTypes = {
 export default SomeMissingStyle;
 ",
   "fonts": Array [],
-  "props": Object {
-    "backgroundColorHover": "string",
-    "onClick": "function",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "onClick",
+      "type": "function",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -3539,13 +3312,11 @@ const WindowControl = styled('button')(
     marginRight: 8,
     backgroundColor: '#CBCDCE',
     opacity: 0.7,
-    transform: 'scale(1.1)',
     transition: 'all 0.15s ease-out',
-    borderRadius: 10,
     width: 10,
     height: 10,
     '&:hover, &.hover': {
-      transform: 'scale(1.5)',
+      scale: 1.5,
     },
   },
   ({ props }) => ({
@@ -3560,6 +3331,7 @@ const SomeMissingStyle = props => {
     <WindowControl
       data-test-id={\`\${props['data-test-id'] || 'WindowControl'}|\`}
       onClick={props.onClick}
+      scale={1.1}
       props={props}
       className=\\"views-block\\"
     >
@@ -3571,10 +3343,13 @@ const SomeMissingStyle = props => {
 export default SomeMissingStyle;
 ",
   "fonts": Array [],
-  "props": Object {
-    "backgroundColorHover": "string",
-    "onClick": "function",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "onClick",
+      "type": "function",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -3629,7 +3404,7 @@ Teleport.contextTypes = {
 export default Teleport;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -3662,97 +3437,7 @@ const Teleport = props => {
 export default Teleport;
 ",
   "fonts": Array [],
-  "props": Object {},
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom Test 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import Custom from './Custom.view.js';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import PropTypes from 'prop-types';
-
-class Test extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'Test',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'Test',
-      action: 'leave',
-    });
-  }
-
-  render() {
-    const { context, props } = this;
-
-    return (
-      <Custom
-        data-test-id={\`\${props['data-test-id'] || 'Custom'}|\`}
-        stuff=\\"eqweqw\\"
-        childrenProxyMap={{ Something: 0, Another: 1 }}
-        className=\\"views-block\\"
-      >
-        <span data-test-id={\`Test.Something|\`} className=\\"views-block\\">
-          v1vh1t1
-        </span>
-        <span data-test-id={\`Test.Another|\`} className=\\"views-block\\">
-          inside custom
-        </span>
-        {props.children}
-      </Custom>
-    );
-  }
-}
-Test.contextTypes = {
-  track: PropTypes.func.isRequired,
-};
-
-export default Test;
-",
-  "fonts": Array [],
-  "props": Object {},
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom Test: react-dom parses react-dom Test debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import Custom from './Custom.view.js';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-
-const Test = props => {
-  return (
-    <Custom
-      data-test-id={\`\${props['data-test-id'] || 'Custom'}|\`}
-      stuff=\\"eqweqw\\"
-      childrenProxyMap={{ Something: 0, Another: 1 }}
-      className=\\"views-block\\"
-    >
-      <span data-test-id={\`Test.Something|\`} className=\\"views-block\\">
-        v1vh1t1
-      </span>
-      <span data-test-id={\`Test.Another|\`} className=\\"views-block\\">
-        inside custom
-      </span>
-      {props.children}
-    </Custom>
-  );
-};
-
-export default Test;
-",
-  "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -3810,7 +3495,7 @@ TestIds.contextTypes = {
 export default TestIds;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -3846,7 +3531,7 @@ const TestIds = props => {
 export default TestIds;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -3881,10 +3566,9 @@ class TextInterpolation extends React.Component {
         data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
         className=\\"views-block\\"
       >
-        <span
-          data-test-id={\`TextInterpolation.Text|\`}
-          className=\\"views-block\\"
-        >{\`\${props.name} test\`}</span>
+        <span data-test-id={\`TextInterpolation.Text|\`} className=\\"views-block\\">
+          {props.name}
+        </span>
         {props.children}
       </div>
     );
@@ -3893,13 +3577,17 @@ class TextInterpolation extends React.Component {
 TextInterpolation.contextTypes = {
   track: PropTypes.func.isRequired,
 };
-
+TextInterpolation.defaultProps = { name: '' };
 export default TextInterpolation;
 ",
   "fonts": Array [],
-  "props": Object {
-    "name": "string",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": "",
+      "name": "name",
+      "type": "string",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -3916,93 +3604,25 @@ const TextInterpolation = props => {
       data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
       className=\\"views-block\\"
     >
-      <span
-        data-test-id={\`TextInterpolation.Text|\`}
-        className=\\"views-block\\"
-      >{\`\${props.name} test\`}</span>
+      <span data-test-id={\`TextInterpolation.Text|\`} className=\\"views-block\\">
+        {props.name}
+      </span>
       {props.children}
     </div>
   );
 };
 
+TextInterpolation.defaultProps = { name: '' };
 export default TextInterpolation;
 ",
   "fonts": Array [],
-  "props": Object {
-    "name": "string",
-  },
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom Toggle 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import PropTypes from 'prop-types';
-
-class Toggle extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'Toggle',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'Toggle',
-      action: 'leave',
-    });
-  }
-
-  render() {
-    const { context, props } = this;
-
-    return (
-      <span
-        data-test-id={\`\${props['data-test-id'] || 'Text'}|\`}
-        className=\\"views-block\\"
-      >
-        NOPE
-      </span>
-    );
-  }
-}
-Toggle.contextTypes = {
-  track: PropTypes.func.isRequired,
-};
-
-export default Toggle;
-",
-  "fonts": Array [],
-  "props": Object {},
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom Toggle: react-dom parses react-dom Toggle debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-
-const Toggle = props => {
-  return (
-    <span
-      data-test-id={\`\${props['data-test-id'] || 'Text'}|\`}
-      className=\\"views-block\\"
-    >
-      NOPE
-    </span>
-  );
-};
-
-export default Toggle;
-",
-  "fonts": Array [],
-  "props": Object {},
+  "slots": Array [
+    Object {
+      "defaultValue": "",
+      "name": "name",
+      "type": "string",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -4015,8 +3635,10 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const Email_h1by7qdg = css({
-  border: '1px solid black',
+const Email_h17p6imm = css({
+  borderColor: 'black',
+  borderStyle: 'solid',
+  borderWidth: 1,
   color: 'red',
   '&:focus, &.focus': {
     color: 'purple',
@@ -4057,7 +3679,7 @@ class UseCaptureEmail extends React.Component {
         autoFocus={true}
         defaultValue=\\"hey this is a default value\\"
         onSubmit={props.onSubmit}
-        className={\`views-block \${Email_h1by7qdg}\`}
+        className={\`views-block \${Email_h17p6imm}\`}
       />
     );
   }
@@ -4069,9 +3691,13 @@ UseCaptureEmail.contextTypes = {
 export default UseCaptureEmail;
 ",
   "fonts": Array [],
-  "props": Object {
-    "onSubmit": "function",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "onSubmit",
+      "type": "function",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -4083,8 +3709,10 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'react-emotion';
 
-const Email_h1by7qdg = css({
-  border: '1px solid black',
+const Email_h17p6imm = css({
+  borderColor: 'black',
+  borderStyle: 'solid',
+  borderWidth: 1,
   color: 'red',
   '&:focus, &.focus': {
     color: 'purple',
@@ -4112,7 +3740,7 @@ class UseCaptureEmail extends React.Component {
         data-test-id={\`\${props['data-test-id'] || 'Email'}|\`}
         defaultValue=\\"hey this is a default value\\"
         onSubmit={props.onSubmit}
-        className={\`views-block mousetrap \${Email_h1by7qdg}\`}
+        className={\`views-block mousetrap \${Email_h17p6imm}\`}
       />
     );
   }
@@ -4121,9 +3749,13 @@ class UseCaptureEmail extends React.Component {
 export default UseCaptureEmail;
 ",
   "fonts": Array [],
-  "props": Object {
-    "onSubmit": "function",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "onSubmit",
+      "type": "function",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -4174,7 +3806,7 @@ UseCaptureFile.contextTypes = {
 export default UseCaptureFile;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -4209,7 +3841,7 @@ class UseCaptureFile extends React.Component {
 export default UseCaptureFile;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -4261,7 +3893,7 @@ UseCaptureNumber.contextTypes = {
 export default UseCaptureNumber;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -4297,7 +3929,7 @@ class UseCaptureNumber extends React.Component {
 export default UseCaptureNumber;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -4349,7 +3981,7 @@ UseCapturePhone.contextTypes = {
 export default UseCapturePhone;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -4385,7 +4017,7 @@ class UseCapturePhone extends React.Component {
 export default UseCapturePhone;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -4437,7 +4069,7 @@ UseCaptureSecure.contextTypes = {
 export default UseCaptureSecure;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -4473,7 +4105,7 @@ class UseCaptureSecure extends React.Component {
 export default UseCaptureSecure;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -4525,7 +4157,7 @@ UseCaptureText.contextTypes = {
 export default UseCaptureText;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -4561,7 +4193,7 @@ class UseCaptureText extends React.Component {
 export default UseCaptureText;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -4614,7 +4246,7 @@ UseCaptureTextArea.contextTypes = {
 export default UseCaptureTextArea;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -4651,7 +4283,7 @@ class UseCaptureTextArea extends React.Component {
 export default UseCaptureTextArea;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -4702,9 +4334,13 @@ UseCaptureTextManagedFromOutside.contextTypes = {
 export default UseCaptureTextManagedFromOutside;
 ",
   "fonts": Array [],
-  "props": Object {
-    "external": "string",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "external",
+      "type": "string",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -4738,9 +4374,13 @@ class UseCaptureTextManagedFromOutside extends React.Component {
 export default UseCaptureTextManagedFromOutside;
 ",
   "fonts": Array [],
-  "props": Object {
-    "external": "string",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "external",
+      "type": "string",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -4753,9 +4393,11 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const Horizontal_hud64j7 = css({
+const Horizontal_h1t8p93z = css({
   flexDirection: 'row',
-  border: '1px solid red',
+  borderColor: 'red',
+  borderStyle: 'solid',
+  borderWidth: 1,
 });
 
 class UseHorizontal extends React.Component {
@@ -4779,7 +4421,7 @@ class UseHorizontal extends React.Component {
     return (
       <div
         data-test-id={\`\${props['data-test-id'] || 'Horizontal'}|\`}
-        className={\`views-block \${Horizontal_hud64j7}\`}
+        className={\`views-block \${Horizontal_h1t8p93z}\`}
       >
         {props.children}
       </div>
@@ -4793,7 +4435,7 @@ UseHorizontal.contextTypes = {
 export default UseHorizontal;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -4805,16 +4447,18 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'react-emotion';
 
-const Horizontal_hud64j7 = css({
+const Horizontal_h1t8p93z = css({
   flexDirection: 'row',
-  border: '1px solid red',
+  borderColor: 'red',
+  borderStyle: 'solid',
+  borderWidth: 1,
 });
 
 const UseHorizontal = props => {
   return (
     <div
       data-test-id={\`\${props['data-test-id'] || 'Horizontal'}|\`}
-      className={\`views-block \${Horizontal_hud64j7}\`}
+      className={\`views-block \${Horizontal_h1t8p93z}\`}
     >
       {props.children}
     </div>
@@ -4824,7 +4468,7 @@ const UseHorizontal = props => {
 export default UseHorizontal;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -4859,6 +4503,7 @@ class UseImage extends React.Component {
         data-test-id={\`\${props['data-test-id'] || 'Image'}|\${
           props.another ? 'another|' : ''
         }\`}
+        alt={''}
         src={
           props.another
             ? 'https://views.tools/hi.jpg'
@@ -4876,9 +4521,7 @@ UseImage.contextTypes = {
 export default UseImage;
 ",
   "fonts": Array [],
-  "props": Object {
-    "another": "string",
-  },
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -4895,6 +4538,7 @@ const UseImage = props => {
       data-test-id={\`\${props['data-test-id'] || 'Image'}|\${
         props.another ? 'another|' : ''
       }\`}
+      alt={''}
       src={
         props.another
           ? 'https://views.tools/hi.jpg'
@@ -4908,206 +4552,7 @@ const UseImage = props => {
 export default UseImage;
 ",
   "fonts": Array [],
-  "props": Object {
-    "another": "string",
-  },
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom UseOfProxy 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import Button from './Button.view.js';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'react-emotion';
-import PropTypes from 'prop-types';
-
-const App_h1qq1i2q = css({ flexDirection: 'row' });
-
-class UseOfProxy extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'UseOfProxy',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'UseOfProxy',
-      action: 'leave',
-    });
-  }
-
-  render() {
-    const { context, props } = this;
-
-    return (
-      <div
-        data-test-id={\`\${props['data-test-id'] || 'App'}|\`}
-        className={\`views-block \${App_h1qq1i2q}\`}
-      >
-        <Button
-          data-test-id={\`UseOfProxy.Button|\`}
-          color=\\"red\\"
-          icon=\\"MyIcon\\"
-          text=\\"I'm a button!\\"
-          className=\\"views-block\\"
-        />
-        {props.children}
-      </div>
-    );
-  }
-}
-UseOfProxy.contextTypes = {
-  track: PropTypes.func.isRequired,
-};
-
-export default UseOfProxy;
-",
-  "fonts": Array [],
-  "props": Object {},
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom UseOfProxy: react-dom parses react-dom UseOfProxy debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import Button from './Button.view.js';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'react-emotion';
-
-const App_h1qq1i2q = css({ flexDirection: 'row' });
-
-const UseOfProxy = props => {
-  return (
-    <div
-      data-test-id={\`\${props['data-test-id'] || 'App'}|\`}
-      className={\`views-block \${App_h1qq1i2q}\`}
-    >
-      <Button
-        data-test-id={\`UseOfProxy.Button|\`}
-        color=\\"red\\"
-        icon=\\"MyIcon\\"
-        text=\\"I'm a button!\\"
-        className=\\"views-block\\"
-      />
-      {props.children}
-    </div>
-  );
-};
-
-export default UseOfProxy;
-",
-  "fonts": Array [],
-  "props": Object {},
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom UseProxy 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'react-emotion';
-import PropTypes from 'prop-types';
-
-const Button_h1qq1i2q = css({ flexDirection: 'row' });
-
-class UseProxy extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'UseProxy',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'UseProxy',
-      action: 'leave',
-    });
-  }
-
-  render() {
-    const { context, props } = this;
-    const childrenArray = React.Children.toArray(props.children);
-    return (
-      <div
-        data-test-id={\`\${props['data-test-id'] || 'Button'}|\`}
-        className={\`views-block \${Button_h1qq1i2q}\`}
-      >
-        {props.childrenProxyMap &&
-        childrenArray[props.childrenProxyMap['props.icon']]
-          ? React.cloneElement(
-              childrenArray[props.childrenProxyMap['props.icon']],
-              { fill: 'red' }
-            )
-          : null}
-        <span data-test-id={\`UseProxy.Text|\`} className=\\"views-block\\">
-          {props.text}
-        </span>
-      </div>
-    );
-  }
-}
-UseProxy.contextTypes = {
-  track: PropTypes.func.isRequired,
-};
-
-export default UseProxy;
-",
-  "fonts": Array [],
-  "props": Object {
-    "icon": "string",
-    "text": "string",
-  },
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom UseProxy: react-dom parses react-dom UseProxy debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'react-emotion';
-
-const Button_h1qq1i2q = css({ flexDirection: 'row' });
-
-const UseProxy = props => {
-  const childrenArray = React.Children.toArray(props.children);
-  return (
-    <div
-      data-test-id={\`\${props['data-test-id'] || 'Button'}|\`}
-      className={\`views-block \${Button_h1qq1i2q}\`}
-    >
-      {props.childrenProxyMap &&
-      childrenArray[props.childrenProxyMap['props.icon']]
-        ? React.cloneElement(
-            childrenArray[props.childrenProxyMap['props.icon']],
-            { fill: 'red' }
-          )
-        : null}
-      <span data-test-id={\`UseProxy.Text|\`} className=\\"views-block\\">
-        {props.text}
-      </span>
-    </div>
-  );
-};
-
-export default UseProxy;
-",
-  "fonts": Array [],
-  "props": Object {
-    "icon": "string",
-    "text": "string",
-  },
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -5197,9 +4642,13 @@ UseRouter.contextTypes = {
 export default UseRouter;
 ",
   "fonts": Array [],
-  "props": Object {
-    "height": "number",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "height",
+      "type": "number",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -5267,9 +4716,13 @@ const UseRouter = props => {
 export default UseRouter;
 ",
   "fonts": Array [],
-  "props": Object {
-    "height": "number",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "height",
+      "type": "number",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -5286,6 +4739,7 @@ const Svg_hq411mi = css({
   height: 20,
   width: 20,
 });
+const SvgPath_h15mb53k = css({ fill: 'red' });
 
 class UseSvg extends React.Component {
   componentDidMount() {
@@ -5314,8 +4768,7 @@ class UseSvg extends React.Component {
         <path
           data-test-id={\`UseSvg.SvgPath|\`}
           d=\\"0 20\\"
-          fill=\\"red\\"
-          className=\\"views-block\\"
+          className={\`views-block \${SvgPath_h15mb53k}\`}
         />
         <circle
           data-test-id={\`UseSvg.SvgCircle|\`}
@@ -5357,7 +4810,7 @@ UseSvg.contextTypes = {
 export default UseSvg;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -5373,6 +4826,7 @@ const Svg_hq411mi = css({
   height: 20,
   width: 20,
 });
+const SvgPath_h15mb53k = css({ fill: 'red' });
 
 const UseSvg = props => {
   return (
@@ -5384,8 +4838,7 @@ const UseSvg = props => {
       <path
         data-test-id={\`UseSvg.SvgPath|\`}
         d=\\"0 20\\"
-        fill=\\"red\\"
-        className=\\"views-block\\"
+        className={\`views-block \${SvgPath_h15mb53k}\`}
       />
       <circle
         data-test-id={\`UseSvg.SvgCircle|\`}
@@ -5423,7 +4876,7 @@ const UseSvg = props => {
 export default UseSvg;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -5487,7 +4940,7 @@ export default UseText;
       "weight": "300",
     },
   ],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -5529,7 +4982,7 @@ export default UseText;
       "weight": "300",
     },
   ],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -5544,16 +4997,16 @@ import './Fonts/CustomFontNotOnGoogle-400-italic';
 import { css } from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const Normal_h4qeg9p = css({
+const Normal_h10uwqya = css({
   color: 'blue',
-  fontFamily: 'CustomFontNotOnGoogle, sans-serif',
+  fontFamily: 'CustomFontNotOnGoogle',
   fontSize: 16,
   lineHeight: 1.5,
   fontWeight: 300,
 });
-const Italic_hw8flfq = css({
+const Italic_h1p02bde = css({
   color: 'blue',
-  fontFamily: 'CustomFontNotOnGoogle, sans-serif',
+  fontFamily: 'CustomFontNotOnGoogle',
   fontStyle: 'italic',
   fontSize: 16,
   lineHeight: 1.5,
@@ -5585,13 +5038,15 @@ class UseTextCustomFont extends React.Component {
       >
         <span
           data-test-id={\`UseTextCustomFont.Normal|\`}
-          className={\`views-block \${Normal_h4qeg9p}\`}
+          fontType=\\"sans-serif\\"
+          className={\`views-block \${Normal_h10uwqya}\`}
         >
           Hi, I'm some text
         </span>
         <span
           data-test-id={\`UseTextCustomFont.Italic|\`}
-          className={\`views-block \${Italic_hw8flfq}\`}
+          fontType=\\"sans-serif\\"
+          className={\`views-block \${Italic_h1p02bde}\`}
         >
           Hi, I'm some text
         </span>
@@ -5620,7 +5075,7 @@ export default UseTextCustomFont;
       "weight": "400",
     },
   ],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -5634,16 +5089,16 @@ import './Fonts/CustomFontNotOnGoogle-300';
 import './Fonts/CustomFontNotOnGoogle-400-italic';
 import { css } from 'react-emotion';
 
-const Normal_h4qeg9p = css({
+const Normal_h10uwqya = css({
   color: 'blue',
-  fontFamily: 'CustomFontNotOnGoogle, sans-serif',
+  fontFamily: 'CustomFontNotOnGoogle',
   fontSize: 16,
   lineHeight: 1.5,
   fontWeight: 300,
 });
-const Italic_hw8flfq = css({
+const Italic_h1p02bde = css({
   color: 'blue',
-  fontFamily: 'CustomFontNotOnGoogle, sans-serif',
+  fontFamily: 'CustomFontNotOnGoogle',
   fontStyle: 'italic',
   fontSize: 16,
   lineHeight: 1.5,
@@ -5658,13 +5113,15 @@ const UseTextCustomFont = props => {
     >
       <span
         data-test-id={\`UseTextCustomFont.Normal|\`}
-        className={\`views-block \${Normal_h4qeg9p}\`}
+        fontType=\\"sans-serif\\"
+        className={\`views-block \${Normal_h10uwqya}\`}
       >
         Hi, I'm some text
       </span>
       <span
         data-test-id={\`UseTextCustomFont.Italic|\`}
-        className={\`views-block \${Italic_hw8flfq}\`}
+        fontType=\\"sans-serif\\"
+        className={\`views-block \${Italic_h1p02bde}\`}
       >
         Hi, I'm some text
       </span>
@@ -5689,7 +5146,7 @@ export default UseTextCustomFont;
       "weight": "400",
     },
   ],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -5739,7 +5196,7 @@ UseVertical.contextTypes = {
 export default UseVertical;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -5767,7 +5224,7 @@ const UseVertical = props => {
 export default UseVertical;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -5816,13 +5273,17 @@ class ViewNameIsntUsedInStyle extends React.Component {
 ViewNameIsntUsedInStyle.contextTypes = {
   track: PropTypes.func.isRequired,
 };
-
+ViewNameIsntUsedInStyle.defaultProps = { opacity: 1 };
 export default ViewNameIsntUsedInStyle;
 ",
   "fonts": Array [],
-  "props": Object {
-    "opacity": "number",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": 1,
+      "name": "opacity",
+      "type": "number",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -5850,12 +5311,17 @@ const ViewNameIsntUsedInStyle = props => {
   );
 };
 
+ViewNameIsntUsedInStyle.defaultProps = { opacity: 1 };
 export default ViewNameIsntUsedInStyle;
 ",
   "fonts": Array [],
-  "props": Object {
-    "opacity": "number",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": 1,
+      "name": "opacity",
+      "type": "number",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -5910,9 +5376,13 @@ When.contextTypes = {
 export default When;
 ",
   "fonts": Array [],
-  "props": Object {
-    "showMe": "string",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "showMe",
+      "type": "string",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -5945,9 +5415,13 @@ const When = props => {
 export default When;
 ",
   "fonts": Array [],
-  "props": Object {
-    "showMe": "string",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "showMe",
+      "type": "string",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -5994,9 +5468,13 @@ WhenTopLevel.contextTypes = {
 export default WhenTopLevel;
 ",
   "fonts": Array [],
-  "props": Object {
-    "showMe": "string",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "showMe",
+      "type": "string",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -6021,102 +5499,13 @@ const WhenTopLevel = props => {
 export default WhenTopLevel;
 ",
   "fonts": Array [],
-  "props": Object {
-    "showMe": "string",
-  },
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom WithTest 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import PropTypes from 'prop-types';
-
-class WithTest extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'WithTest',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'WithTest',
-      action: 'leave',
-    });
-  }
-
-  render() {
-    const { context, props } = this;
-
-    return (
-      <button
-        data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-        onClick={event =>
-          context.track({
-            block: props['data-test-id'] || 'WithTest',
-            action: 'click',
-            callback: props.change,
-            event,
-          })
-        }
-        className=\\"views-block\\"
-      >
-        <span data-test-id={\`WithTest.Text|\`} className=\\"views-block\\">
-          {props.text}
-        </span>
-        {props.children}
-      </button>
-    );
-  }
-}
-WithTest.contextTypes = {
-  track: PropTypes.func.isRequired,
-};
-
-export default WithTest;
-",
-  "fonts": Array [],
-  "props": Object {
-    "change": "function",
-    "text": "string",
-  },
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom WithTest: react-dom parses react-dom WithTest debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-
-const WithTest = props => {
-  return (
-    <button
-      data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-      onClick={props.change}
-      className=\\"views-block\\"
-    >
-      <span data-test-id={\`WithTest.Text|\`} className=\\"views-block\\">
-        {props.text}
-      </span>
-      {props.children}
-    </button>
-  );
-};
-
-export default WithTest;
-",
-  "fonts": Array [],
-  "props": Object {
-    "change": "function",
-    "text": "string",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "showMe",
+      "type": "string",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -6155,7 +5544,7 @@ class Action extends React.Component {
           context.track({
             block: props['testID'] || 'Action',
             action: 'click',
-            callback: props.clickMe,
+            callback: props.onClick,
             event,
           })
         }
@@ -6181,11 +5570,23 @@ Action.contextTypes = {
 export default Action;
 ",
   "fonts": Array [],
-  "props": Object {
-    "check": "string",
-    "clickMe": "function",
-    "isDisabled": "string",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "check",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "onClick",
+      "type": "function",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "isDisabled",
+      "type": "string",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -6194,7 +5595,7 @@ exports[`react-native parses react-native AnimatedButton 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { Animated, Text, TouchableWithoutFeedback } from 'react-native';
+import { Text, TouchableWithoutFeedback, View } from 'react-native';
 import PropTypes from 'prop-types';
 
 class AnimatedButton extends React.Component {
@@ -6228,13 +5629,13 @@ class AnimatedButton extends React.Component {
         }
         underlayColor=\\"transparent\\"
       >
-        <Animated.View
+        <View
           testID={\`\${props['testID'] || 'Vertical'}|\`}
           style={{ opacity: props.opacity }}
         >
           <Text testID={\`AnimatedButton.Text|\`}>hey</Text>
           {props.children}
-        </Animated.View>
+        </View>
       </TouchableWithoutFeedback>
     );
   }
@@ -6242,14 +5643,22 @@ class AnimatedButton extends React.Component {
 AnimatedButton.contextTypes = {
   track: PropTypes.func.isRequired,
 };
-
+AnimatedButton.defaultProps = { opacity: 1 };
 export default AnimatedButton;
 ",
   "fonts": Array [],
-  "props": Object {
-    "onClick": "function",
-    "opacity": "number",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": 1,
+      "name": "opacity",
+      "type": "number",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "onClick",
+      "type": "function",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -6296,7 +5705,7 @@ AppRegionDrag.contextTypes = {
 export default AppRegionDrag;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -6305,7 +5714,7 @@ exports[`react-native parses react-native BackgroundImage 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { Animated, Image, StyleSheet } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
 
@@ -6330,10 +5739,10 @@ class BackgroundImage extends React.Component {
     return (
       <Image
         resizeMode=\\"cover\\"
-        source={{ uri: 'https://viewsdx.com/image.jpg' }}
+        source={{ uri: 'https://views.tools/image.jpg' }}
         testID={\`\${props['testID'] || 'Vertical'}|\`}
       >
-        <Animated.Image
+        <Image
           resizeMode={undefined}
           source={{ uri: props.backgroundImage }}
           testID={\`BackgroundImage.Horizontal|\`}
@@ -6347,94 +5756,44 @@ class BackgroundImage extends React.Component {
 BackgroundImage.contextTypes = {
   track: PropTypes.func.isRequired,
 };
-
+BackgroundImage.defaultProps = {
+  backgroundImage: 'https://views.tools/image.jpg',
+};
 export default BackgroundImage;
 ",
   "fonts": Array [],
-  "props": Object {
-    "backgroundImage": "string",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": "https://views.tools/image.jpg",
+      "name": "backgroundImage",
+      "type": "string",
+    },
+  ],
   "svgs": Array [],
 }
 `;
 
-exports[`react-native parses react-native BlockThatUsesViewAndBothHaveScopes 1`] = `
+exports[`react-native parses react-native Border 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import Scope from './Scope.view.js';
-import PropTypes from 'prop-types';
-
-class BlockThatUsesViewAndBothHaveScopes extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'BlockThatUsesViewAndBothHaveScopes',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'BlockThatUsesViewAndBothHaveScopes',
-      action: 'leave',
-    });
-  }
-
-  render() {
-    const { context, props } = this;
-
-    return (
-      <Scope
-        testID={\`\${props['testID'] || 'BlockThatUsesViewAndBothHaveScopes'}|\${
-          props.isBlack ? 'isBlack|' : ''
-        }\`}
-      >
-        {props.children}
-      </Scope>
-    );
-  }
-}
-BlockThatUsesViewAndBothHaveScopes.contextTypes = {
-  track: PropTypes.func.isRequired,
-};
-
-export default BlockThatUsesViewAndBothHaveScopes;
-",
-  "fonts": Array [],
-  "props": Object {
-    "isBlack": "string",
-  },
-  "svgs": Array [],
-}
-`;
-
-exports[`react-native parses react-native BoxShadow 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import { Animated, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import PropTypes from 'prop-types';
 const styles = StyleSheet.create({
-  hvzqnyi: {
-    elevation: 1,
-    shadowOffset: { width: 0, height: 8 },
-    shadowRadius: 15,
-    shadowOpacity: 1,
-    shadowColor: 'rgba(0, 0, 0, 0.1)',
-  },
+  h1n9275f: { borderColor: 'red', borderStyle: 'solid' },
 });
 
-class BoxShadow extends React.Component {
+class Border extends React.Component {
   componentDidMount() {
     this.context.track({
-      block: this.props['testID'] || 'BoxShadow',
+      block: this.props['testID'] || 'Border',
       action: 'enter',
     });
   }
 
   componentWillUnmount() {
     this.context.track({
-      block: this.props['testID'] || 'BoxShadow',
+      block: this.props['testID'] || 'Border',
       action: 'leave',
     });
   }
@@ -6443,43 +5802,29 @@ class BoxShadow extends React.Component {
     const { context, props } = this;
 
     return (
-      <Animated.View
-        testID={\`\${props['testID'] || 'Vertical'}|\`}
-        style={{
-          elevation: 1,
-          shadowOffset: { width: 10, height: 5 },
-          shadowRadius: 2,
-          shadowOpacity: 1,
-          shadowColor: props.color,
-        }}
+      <View
+        testID={\`\${props['testID'] || 'Border'}|\`}
+        style={[styles.h1n9275f, { borderWidth: props.borderWidth }]}
       >
-        <Animated.View
-          testID={\`BoxShadow.Vertical:1|\`}
-          style={{
-            elevation: 1,
-            shadowOffset: { width: 10, height: 5 },
-            shadowRadius: 10,
-            shadowOpacity: 1,
-            shadowColor: props.color,
-          }}
-        >
-          <View testID={\`BoxShadow.Vertical:2|\`} style={styles.hvzqnyi} />
-        </Animated.View>
         {props.children}
-      </Animated.View>
+      </View>
     );
   }
 }
-BoxShadow.contextTypes = {
+Border.contextTypes = {
   track: PropTypes.func.isRequired,
 };
-
-export default BoxShadow;
+Border.defaultProps = { borderWidth: 10 };
+export default Border;
 ",
   "fonts": Array [],
-  "props": Object {
-    "color": "string",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": 10,
+      "name": "borderWidth",
+      "type": "number",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -6524,7 +5869,7 @@ ClassName.contextTypes = {
 export default ClassName;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -6533,7 +5878,7 @@ exports[`react-native parses react-native Code 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { Animated, StyleSheet, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 const styles = StyleSheet.create({ h1jcb2fl: { backgroundColor: 'red' } });
 
@@ -6558,16 +5903,15 @@ class Code extends React.Component {
     return (
       <View
         testID={\`\${props['testID'] || 'Vertical'}|\`}
-        ref={$e => (this.$e = $e)}
         style={styles.h1jcb2fl}
       >
-        <Animated.Text
+        <Text
           testID={\`Code.Text|\`}
           innerRef={props.refText}
           style={{ color: props.color }}
         >
           {props.text}
-        </Animated.Text>
+        </Text>
         {props.children}
       </View>
     );
@@ -6576,15 +5920,30 @@ class Code extends React.Component {
 Code.contextTypes = {
   track: PropTypes.func.isRequired,
 };
-
+Code.defaultProps = {
+  text: 'hey',
+  color: 'white',
+};
 export default Code;
 ",
   "fonts": Array [],
-  "props": Object {
-    "color": "string",
-    "refText": "string",
-    "text": "string",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": "hey",
+      "name": "text",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": "white",
+      "name": "color",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "refText",
+      "type": "string",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -6594,7 +5953,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import SomeThing from './SomeThing.view.js';
-import { Animated } from 'react-native';
+import { View } from 'react-native';
 import PropTypes from 'prop-types';
 
 class DynamicStylesApplyToBasicBlocksOnly extends React.Component {
@@ -6616,7 +5975,7 @@ class DynamicStylesApplyToBasicBlocksOnly extends React.Component {
     const { context, props } = this;
 
     return (
-      <Animated.View
+      <View
         testID={\`\${props['testID'] || 'Vertical'}|\`}
         style={{ height: props.height }}
       >
@@ -6625,7 +5984,7 @@ class DynamicStylesApplyToBasicBlocksOnly extends React.Component {
           height={props.height}
         />
         {props.children}
-      </Animated.View>
+      </View>
     );
   }
 }
@@ -6636,9 +5995,13 @@ DynamicStylesApplyToBasicBlocksOnly.contextTypes = {
 export default DynamicStylesApplyToBasicBlocksOnly;
 ",
   "fonts": Array [],
-  "props": Object {
-    "height": "number",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "height",
+      "type": "number",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -6678,122 +6041,7 @@ EmptyText.contextTypes = {
 export default EmptyText;
 ",
   "fonts": Array [],
-  "props": Object {},
-  "svgs": Array [],
-}
-`;
-
-exports[`react-native parses react-native Form 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import { Text, TextInput, TouchableWithoutFeedback, View } from 'react-native';
-import PropTypes from 'prop-types';
-
-class Form extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'Form',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'Form',
-      action: 'leave',
-    });
-  }
-
-  render() {
-    const { context, props, state } = this;
-
-    return (
-      <View testID={\`\${props['testID'] || 'Form'}|\`}>
-        <TextInput
-          blurOnSubmit={false}
-          onSubmitEditing={this.$Surname ? () => this.$Surname.focus() : null}
-          returnKeyType={this.$Surname ? 'next' : 'go'}
-          onChangeText={name => this.setState({ name })}
-          ref={$e => (this.$name = $e)}
-          value={state.name}
-          keyboardType=\\"default\\"
-          autoCorrect={false}
-          underlineColorAndroid=\\"transparent\\"
-          testID={\`Form.Name|\`}
-          autoFocus={true}
-        />
-        <TextInput
-          blurOnSubmit={false}
-          onSubmitEditing={this.$Password ? () => this.$Password.focus() : null}
-          returnKeyType={this.$Password ? 'next' : 'go'}
-          onChangeText={surname => this.setState({ surname })}
-          ref={$e => (this.$surname = $e)}
-          value={state.surname}
-          keyboardType=\\"default\\"
-          autoCorrect={false}
-          underlineColorAndroid=\\"transparent\\"
-          testID={\`Form.Surname|\`}
-        />
-        <TextInput
-          blurOnSubmit={false}
-          onSubmitEditing={this.$Email ? () => this.$Email.focus() : null}
-          returnKeyType={this.$Email ? 'next' : 'go'}
-          onChangeText={password => this.setState({ password })}
-          ref={$e => (this.$password = $e)}
-          value={state.password}
-          secureTextEntry
-          autoCorrect={false}
-          underlineColorAndroid=\\"transparent\\"
-          testID={\`Form.Password|\`}
-        />
-        <TextInput
-          returnKeyType=\\"done\\"
-          onChangeText={email => this.setState({ email })}
-          ref={$e => (this.$email = $e)}
-          value={state.email}
-          keyboardType=\\"email-address\\"
-          autoCorrect={false}
-          defaultValue={undefined}
-          underlineColorAndroid=\\"transparent\\"
-          testID={\`Form.Email|\`}
-          defaultValue=\\"morph@viewsdx.com\\"
-        />
-        <TouchableWithoutFeedback
-          activeOpacity={0.7}
-          onPress={event =>
-            context.track({
-              block: props['testID'] || 'Form',
-              action: 'click',
-              callback: () => props.onSubmit(state),
-              event,
-            })
-          }
-          underlayColor=\\"transparent\\"
-        >
-          <View testID={\`Form.Button|\`}>
-            <Text testID={\`Form.Text|\`}>Send!</Text>
-          </View>
-        </TouchableWithoutFeedback>
-        {props.children}
-      </View>
-    );
-  }
-}
-Form.contextTypes = {
-  track: PropTypes.func.isRequired,
-};
-
-export default Form;
-",
-  "fonts": Array [],
-  "props": Object {
-    "onSubmit": "function",
-  },
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -6825,7 +6073,7 @@ class GoTo extends React.Component {
 
     return (
       <View testID={\`\${props['testID'] || 'Vertical'}|\`}>
-        <Text testID={\`GoTo.Text|\`}>Go to ViewsDX website!</Text>
+        <Text testID={\`GoTo.Text|\`}>Go to Views Tools website!</Text>
         {props.children}
       </View>
     );
@@ -6838,7 +6086,7 @@ GoTo.contextTypes = {
 export default GoTo;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -6847,9 +6095,12 @@ exports[`react-native parses react-native Hover 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { Animated, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import PropTypes from 'prop-types';
-const styles = StyleSheet.create({ hyfo4ef: { color: 'white' } });
+const styles = StyleSheet.create({
+  h14i1mtc: { backgroundColor: '#323232' },
+  hyfo4ef: { color: 'white' },
+});
 
 class Hover extends React.Component {
   componentDidMount() {
@@ -6882,18 +6133,15 @@ class Hover extends React.Component {
         }
         underlayColor=\\"transparent\\"
       >
-        <Animated.View
-          testID={\`\${props['testID'] || 'Button'}|\`}
-          style={{ backgroundColor: props.backgroundColor }}
-        >
-          <Animated.Text
+        <View testID={\`\${props['testID'] || 'Hover'}|\`} style={styles.h14i1mtc}>
+          <Text
             testID={\`Hover.Text|\`}
             style={[styles.hyfo4ef, { fontSize: props.fontSize }]}
           >
             Hey!
-          </Animated.Text>
+          </Text>
           {props.children}
-        </Animated.View>
+        </View>
       </TouchableWithoutFeedback>
     );
   }
@@ -6905,13 +6153,18 @@ Hover.contextTypes = {
 export default Hover;
 ",
   "fonts": Array [],
-  "props": Object {
-    "backgroundColor": "string",
-    "backgroundColorHover": "string",
-    "fontSize": "number",
-    "fontSizeHover": "number",
-    "onClick": "function",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "onClick",
+      "type": "function",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "fontSize",
+      "type": "number",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -6941,7 +6194,7 @@ class JustText extends React.Component {
   render() {
     const { context, props } = this;
 
-    return <Text testID={\`\${props['testID'] || 'Text'}|\`}>hey!</Text>;
+    return <Text testID={\`\${props['testID'] || 'JustText'}|\`}>hey!</Text>;
   }
 }
 JustText.contextTypes = {
@@ -6951,7 +6204,7 @@ JustText.contextTypes = {
 export default JustText;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -7004,9 +6257,13 @@ ListOfSomething.contextTypes = {
 export default ListOfSomething;
 ",
   "fonts": Array [],
-  "props": Object {
-    "from": "string",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "from",
+      "type": "array",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -7055,10 +6312,18 @@ ListWhen.contextTypes = {
 export default ListWhen;
 ",
   "fonts": Array [],
-  "props": Object {
-    "from": "string",
-    "showMe": "string",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "showMe",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "from",
+      "type": "array",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -7107,9 +6372,7 @@ LocalImage.contextTypes = {
 export default LocalImage;
 ",
   "fonts": Array [],
-  "props": Object {
-    "isCat": "string",
-  },
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -7153,13 +6416,17 @@ class LocalImageSvg extends React.Component {
 LocalImageSvg.contextTypes = {
   track: PropTypes.func.isRequired,
 };
-
+LocalImageSvg.defaultProps = { height: 50 };
 export default LocalImageSvg;
 ",
   "fonts": Array [],
-  "props": Object {
-    "height": "number",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": 50,
+      "name": "height",
+      "type": "number",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -7200,13 +6467,19 @@ class LocalOrRemoteImageWhenCode extends React.Component {
 LocalOrRemoteImageWhenCode.contextTypes = {
   track: PropTypes.func.isRequired,
 };
-
+LocalOrRemoteImageWhenCode.defaultProps = {
+  source: 'https://views.tools/image.jpg',
+};
 export default LocalOrRemoteImageWhenCode;
 ",
   "fonts": Array [],
-  "props": Object {
-    "source": "string",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": "https://views.tools/image.jpg",
+      "name": "source",
+      "type": "string",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -7246,7 +6519,52 @@ NameIsType.contextTypes = {
 export default NameIsType;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-native parses react-native NegativeNumber 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import { StyleSheet, Text } from 'react-native';
+import PropTypes from 'prop-types';
+const styles = StyleSheet.create({ h1gnz4mf: { marginTop: -10 } });
+
+class NegativeNumber extends React.Component {
+  componentDidMount() {
+    this.context.track({
+      block: this.props['testID'] || 'NegativeNumber',
+      action: 'enter',
+    });
+  }
+
+  componentWillUnmount() {
+    this.context.track({
+      block: this.props['testID'] || 'NegativeNumber',
+      action: 'leave',
+    });
+  }
+
+  render() {
+    const { context, props } = this;
+
+    return (
+      <Text testID={\`\${props['testID'] || 'Text'}|\`} style={styles.h1gnz4mf}>
+        hey
+      </Text>
+    );
+  }
+}
+NegativeNumber.contextTypes = {
+  track: PropTypes.func.isRequired,
+};
+
+export default NegativeNumber;
+",
+  "fonts": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -7305,110 +6623,7 @@ NestedRoutes.contextTypes = {
 export default NestedRoutes;
 ",
   "fonts": Array [],
-  "props": Object {},
-  "svgs": Array [],
-}
-`;
-
-exports[`react-native parses react-native Print 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import { Text, View } from 'react-native';
-import PropTypes from 'prop-types';
-
-class Print extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'Print',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'Print',
-      action: 'leave',
-    });
-  }
-
-  render() {
-    const { context, props } = this;
-
-    return (
-      <View testID={\`\${props['testID'] || 'Vertical'}|\`}>
-        <Text testID={\`Print.Text|\`}>not in print</Text>
-        <Text testID={\`Print.Text:1|\`}>hey</Text>
-        {props.children}
-      </View>
-    );
-  }
-}
-Print.contextTypes = {
-  track: PropTypes.func.isRequired,
-};
-
-export default Print;
-",
-  "fonts": Array [],
-  "props": Object {},
-  "svgs": Array [],
-}
-`;
-
-exports[`react-native parses react-native ProxyTest 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import PropTypes from 'prop-types';
-const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
-
-class ProxyTest extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'ProxyTest',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'ProxyTest',
-      action: 'leave',
-    });
-  }
-
-  render() {
-    const { context, props } = this;
-    const childrenArray = React.Children.toArray(props.children);
-    return (
-      <View testID={\`\${props['testID'] || 'Vertical'}|\`}>
-        <View testID={\`ProxyTest.Horizontal|\`} style={styles.hp2cr4d}>
-          {props.bla && childrenArray[props.childrenProxyMap['Something']]
-            ? React.cloneElement(
-                childrenArray[props.childrenProxyMap['Something']],
-                { onClick: props.onClickRemapped }
-              )
-            : null}
-        </View>
-        {props.childrenProxyMap &&
-          childrenArray[props.childrenProxyMap['View1']]}
-      </View>
-    );
-  }
-}
-ProxyTest.contextTypes = {
-  track: PropTypes.func.isRequired,
-};
-
-export default ProxyTest;
-",
-  "fonts": Array [],
-  "props": Object {
-    "bla": "string",
-    "onClickRemapped": "function",
-  },
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -7445,27 +6660,21 @@ class Scope extends React.Component {
             ? 'somethingGreen|'
             : props.whatMakesBlue
               ? 'whatMakesBlue|'
-              : !props.whatMakesBlue && props.somethingGreen
-                ? 'notWhatMakesBlueAndSomethingGreen|'
-                : ''
+              : !props.whatMakesBlue ? 'notWhatMakesBlue|' : ''
         }\`}
         style={{
           color: props.somethingGreen
             ? 'rgb(0,255,0)'
             : props.whatMakesBlue
               ? 'rgb(0,0,255)'
-              : !props.whatMakesBlue && props.somethingGreen
-                ? 'rgb(255,255,0)'
-                : 'red',
+              : !props.whatMakesBlue ? 'rgb(255,255,0)' : 'red',
         }}
       >
         {props.somethingGreen
           ? '2 green'
           : props.whatMakesBlue
             ? props.blue
-            : !props.whatMakesBlue && props.somethingGreen
-              ? 'is Yellow'
-              : '1 red'}
+            : !props.whatMakesBlue ? 'is Yellow' : '1 red'}
       </Text>
     );
   }
@@ -7477,11 +6686,7 @@ Scope.contextTypes = {
 export default Scope;
 ",
   "fonts": Array [],
-  "props": Object {
-    "blue": "string",
-    "somethingGreen": "string",
-    "whatMakesBlue": "string",
-  },
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -7518,7 +6723,7 @@ class ScopeOnCustomView extends React.Component {
         }\`}
         label={props.a ? 'ho' : props.b ? 'this is b' : 'hey'}
         another={props.a ? 1 : 0}
-        more={props.a ? props.different : props.more}
+        more={props.a ? props.more : props.more}
       >
         {props.children}
       </Button>
@@ -7532,10 +6737,13 @@ ScopeOnCustomView.contextTypes = {
 export default ScopeOnCustomView;
 ",
   "fonts": Array [],
-  "props": Object {
-    "different": "string",
-    "more": "string",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "more",
+      "type": "string",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -7598,13 +6806,13 @@ ScopePopup.contextTypes = {
 export default ScopePopup;
 ",
   "fonts": Array [],
-  "props": Object {
-    "onClickBlue": "function",
-    "onClickGreen": "function",
-    "somethingGreen": "string",
-    "toggle": "function",
-    "whatMakesBlue": "string",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "toggle",
+      "type": "function",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -7660,7 +6868,9 @@ class ScopePopup2 extends React.Component {
           }\`}
           scale={props.isShown ? 1 : props.isSuperVisible ? 2 : 0}
           style={{ opacity: props.isShown ? 1 : props.isSuperVisible ? 3 : 0 }}
-        />
+        >
+          <Text testID={\`ScopePopup2.Text:1|\`}>I'm inside the popup</Text>
+        </View>
         {props.children}
       </View>
     );
@@ -7673,11 +6883,108 @@ ScopePopup2.contextTypes = {
 export default ScopePopup2;
 ",
   "fonts": Array [],
-  "props": Object {
-    "isShown": "string",
-    "isSuperVisible": "string",
-    "toggle": "function",
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "toggle",
+      "type": "function",
+    },
+  ],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-native parses react-native Shadow 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import PropTypes from 'prop-types';
+const styles = StyleSheet.create({
+  h1qdzhym: {
+    elevation: 1,
+    shadowOffset: { width: 10, height: 5 },
+    shadowRadius: 2,
+    shadowOpacity: 1,
+    shadowColor: 'props.shadowColor',
   },
+  h9jluza: {
+    elevation: 1,
+    shadowOffset: { width: 2, height: 3 },
+    shadowRadius: 1,
+    shadowOpacity: 1,
+    shadowColor: 'props.shadowColor',
+  },
+});
+
+class Shadow extends React.Component {
+  componentDidMount() {
+    this.context.track({
+      block: this.props['testID'] || 'Shadow',
+      action: 'enter',
+    });
+  }
+
+  componentWillUnmount() {
+    this.context.track({
+      block: this.props['testID'] || 'Shadow',
+      action: 'leave',
+    });
+  }
+
+  render() {
+    const { context, props } = this;
+
+    return (
+      <View testID={\`\${props['testID'] || 'Shadow'}|\`}>
+        <View
+          testID={\`Shadow.BoxShadow|\`}
+          style={[
+            styles.h1qdzhym,
+            {
+              elevation: 1,
+              shadowOffset: { width: 10, height: 5 },
+              shadowRadius: 2,
+              shadowOpacity: 1,
+              shadowColor: props.shadowColor,
+            },
+          ]}
+        >
+          <Text
+            testID={\`Shadow.TextShadow|\`}
+            style={[
+              styles.h9jluza,
+              {
+                elevation: 1,
+                shadowOffset: { width: 2, height: 3 },
+                shadowRadius: 1,
+                shadowOpacity: 1,
+                shadowColor: props.shadowColor,
+              },
+            ]}
+          >
+            hey
+          </Text>
+        </View>
+        {props.children}
+      </View>
+    );
+  }
+}
+Shadow.contextTypes = {
+  track: PropTypes.func.isRequired,
+};
+Shadow.defaultProps = { shadowColor: 'red' };
+export default Shadow;
+",
+  "fonts": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": "red",
+      "name": "shadowColor",
+      "type": "string",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -7686,16 +6993,14 @@ exports[`react-native parses react-native SomeMissingStyle 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { Animated, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import PropTypes from 'prop-types';
 const styles = StyleSheet.create({
-  h7g4z7s: {
+  h3pga9k: {
     marginRight: 8,
     backgroundColor: '#CBCDCE',
     opacity: 0.7,
-    transform: 'scale(1.1)',
     transition: 'all 0.15s ease-out',
-    borderRadius: 10,
     width: 10,
     height: 10,
   },
@@ -7732,13 +7037,14 @@ class SomeMissingStyle extends React.Component {
         }
         underlayColor=\\"transparent\\"
       >
-        <Animated.View
+        <View
           testID={\`\${props['testID'] || 'WindowControl'}|\`}
-          tabIndex=\\"-1\\"
-          style={styles.h7g4z7s}
+          scale={1.1}
+          tabIndex={-1}
+          style={styles.h3pga9k}
         >
           {props.children}
-        </Animated.View>
+        </View>
       </TouchableWithoutFeedback>
     );
   }
@@ -7750,10 +7056,13 @@ SomeMissingStyle.contextTypes = {
 export default SomeMissingStyle;
 ",
   "fonts": Array [],
-  "props": Object {
-    "backgroundColorHover": "string",
-    "onClick": "function",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "onClick",
+      "type": "function",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -7806,58 +7115,7 @@ Teleport.contextTypes = {
 export default Teleport;
 ",
   "fonts": Array [],
-  "props": Object {},
-  "svgs": Array [],
-}
-`;
-
-exports[`react-native parses react-native Test 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import Custom from './Custom.view.js';
-import { Text } from 'react-native';
-import PropTypes from 'prop-types';
-
-class Test extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'Test',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'Test',
-      action: 'leave',
-    });
-  }
-
-  render() {
-    const { context, props } = this;
-
-    return (
-      <Custom
-        testID={\`\${props['testID'] || 'Custom'}|\`}
-        stuff=\\"eqweqw\\"
-        childrenProxyMap={{ Something: 0, Another: 1 }}
-      >
-        <Text testID={\`Test.Something|\`}>v1vh1t1</Text>
-        <Text testID={\`Test.Another|\`}>inside custom</Text>
-        {props.children}
-      </Custom>
-    );
-  }
-}
-Test.contextTypes = {
-  track: PropTypes.func.isRequired,
-};
-
-export default Test;
-",
-  "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -7906,7 +7164,7 @@ TestIds.contextTypes = {
 export default TestIds;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -7938,7 +7196,7 @@ class TextInterpolation extends React.Component {
 
     return (
       <View testID={\`\${props['testID'] || 'Vertical'}|\`}>
-        <Text testID={\`TextInterpolation.Text|\`}>{\`\${props.name} test\`}</Text>
+        <Text testID={\`TextInterpolation.Text|\`}>{props.name}</Text>
         {props.children}
       </View>
     );
@@ -7947,53 +7205,17 @@ class TextInterpolation extends React.Component {
 TextInterpolation.contextTypes = {
   track: PropTypes.func.isRequired,
 };
-
+TextInterpolation.defaultProps = { name: '' };
 export default TextInterpolation;
 ",
   "fonts": Array [],
-  "props": Object {
-    "name": "string",
-  },
-  "svgs": Array [],
-}
-`;
-
-exports[`react-native parses react-native Toggle 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import { Text } from 'react-native';
-import PropTypes from 'prop-types';
-
-class Toggle extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'Toggle',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'Toggle',
-      action: 'leave',
-    });
-  }
-
-  render() {
-    const { context, props } = this;
-
-    return <Text testID={\`\${props['testID'] || 'Text'}|\`}>NOPE</Text>;
-  }
-}
-Toggle.contextTypes = {
-  track: PropTypes.func.isRequired,
-};
-
-export default Toggle;
-",
-  "fonts": Array [],
-  "props": Object {},
+  "slots": Array [
+    Object {
+      "defaultValue": "",
+      "name": "name",
+      "type": "string",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -8060,9 +7282,13 @@ UseCaptureEmail.contextTypes = {
 export default UseCaptureEmail;
 ",
   "fonts": Array [],
-  "props": Object {
-    "onSubmit": "function",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "onSubmit",
+      "type": "function",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -8117,7 +7343,7 @@ UseCaptureFile.contextTypes = {
 export default UseCaptureFile;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -8172,7 +7398,7 @@ UseCaptureNumber.contextTypes = {
 export default UseCaptureNumber;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -8227,7 +7453,7 @@ UseCapturePhone.contextTypes = {
 export default UseCapturePhone;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -8282,7 +7508,7 @@ UseCaptureSecure.contextTypes = {
 export default UseCaptureSecure;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -8337,7 +7563,7 @@ UseCaptureText.contextTypes = {
 export default UseCaptureText;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -8393,7 +7619,7 @@ UseCaptureTextArea.contextTypes = {
 export default UseCaptureTextArea;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -8449,9 +7675,13 @@ UseCaptureTextManagedFromOutside.contextTypes = {
 export default UseCaptureTextManagedFromOutside;
 ",
   "fonts": Array [],
-  "props": Object {
-    "external": "string",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "external",
+      "type": "string",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -8506,7 +7736,7 @@ UseHorizontal.contextTypes = {
 export default UseHorizontal;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -8557,116 +7787,7 @@ UseImage.contextTypes = {
 export default UseImage;
 ",
   "fonts": Array [],
-  "props": Object {
-    "another": "string",
-  },
-  "svgs": Array [],
-}
-`;
-
-exports[`react-native parses react-native UseOfProxy 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import Button from './Button.view.js';
-import { StyleSheet, View } from 'react-native';
-import PropTypes from 'prop-types';
-const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
-
-class UseOfProxy extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'UseOfProxy',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'UseOfProxy',
-      action: 'leave',
-    });
-  }
-
-  render() {
-    const { context, props } = this;
-
-    return (
-      <View testID={\`\${props['testID'] || 'App'}|\`} style={styles.hp2cr4d}>
-        <Button
-          testID={\`UseOfProxy.Button|\`}
-          color=\\"red\\"
-          icon=\\"MyIcon\\"
-          text=\\"I'm a button!\\"
-        />
-        {props.children}
-      </View>
-    );
-  }
-}
-UseOfProxy.contextTypes = {
-  track: PropTypes.func.isRequired,
-};
-
-export default UseOfProxy;
-",
-  "fonts": Array [],
-  "props": Object {},
-  "svgs": Array [],
-}
-`;
-
-exports[`react-native parses react-native UseProxy 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import PropTypes from 'prop-types';
-const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
-
-class UseProxy extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'UseProxy',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'UseProxy',
-      action: 'leave',
-    });
-  }
-
-  render() {
-    const { context, props } = this;
-    const childrenArray = React.Children.toArray(props.children);
-    return (
-      <View testID={\`\${props['testID'] || 'Button'}|\`} style={styles.hp2cr4d}>
-        {props.childrenProxyMap &&
-        childrenArray[props.childrenProxyMap['props.icon']]
-          ? React.cloneElement(
-              childrenArray[props.childrenProxyMap['props.icon']],
-              { fill: 'red' }
-            )
-          : null}
-        <Text testID={\`UseProxy.Text|\`}>{props.text}</Text>
-      </View>
-    );
-  }
-}
-UseProxy.contextTypes = {
-  track: PropTypes.func.isRequired,
-};
-
-export default UseProxy;
-",
-  "fonts": Array [],
-  "props": Object {
-    "icon": "string",
-    "text": "string",
-  },
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -8745,9 +7866,13 @@ UseRouter.contextTypes = {
 export default UseRouter;
 ",
   "fonts": Array [],
-  "props": Object {
-    "height": "number",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "height",
+      "type": "number",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -8811,7 +7936,7 @@ UseSvg.contextTypes = {
 export default UseSvg;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -8870,7 +7995,7 @@ export default UseText;
       "weight": "300",
     },
   ],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -8917,10 +8042,18 @@ class UseTextCustomFont extends React.Component {
 
     return (
       <View testID={\`\${props['testID'] || 'UseTextCustomFont'}|\`}>
-        <Text testID={\`UseTextCustomFont.Normal|\`} style={styles.hlldui9}>
+        <Text
+          testID={\`UseTextCustomFont.Normal|\`}
+          fontType=\\"sans-serif\\"
+          style={styles.hlldui9}
+        >
           Hi, I'm some text
         </Text>
-        <Text testID={\`UseTextCustomFont.Italic|\`} style={styles.h164u665}>
+        <Text
+          testID={\`UseTextCustomFont.Italic|\`}
+          fontType=\\"sans-serif\\"
+          style={styles.h164u665}
+        >
           Hi, I'm some text
         </Text>
         {props.children}
@@ -8948,7 +8081,7 @@ export default UseTextCustomFont;
       "weight": "400",
     },
   ],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -8996,7 +8129,7 @@ UseVertical.contextTypes = {
 export default UseVertical;
 ",
   "fonts": Array [],
-  "props": Object {},
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -9005,7 +8138,7 @@ exports[`react-native parses react-native ViewNameIsntUsedInStyle 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { Animated, StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import PropTypes from 'prop-types';
 const styles = StyleSheet.create({ h15ehzpl: { zIndex: 5 } });
 
@@ -9028,25 +8161,29 @@ class ViewNameIsntUsedInStyle extends React.Component {
     const { context, props } = this;
 
     return (
-      <Animated.View
+      <View
         testID={\`\${props['testID'] || 'ViewNameIsntUsedInStyle'}|\`}
         style={[styles.h15ehzpl, { opacity: props.opacity }]}
       >
         {props.children}
-      </Animated.View>
+      </View>
     );
   }
 }
 ViewNameIsntUsedInStyle.contextTypes = {
   track: PropTypes.func.isRequired,
 };
-
+ViewNameIsntUsedInStyle.defaultProps = { opacity: 1 };
 export default ViewNameIsntUsedInStyle;
 ",
   "fonts": Array [],
-  "props": Object {
-    "opacity": "number",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": 1,
+      "name": "opacity",
+      "type": "number",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -9094,9 +8231,13 @@ When.contextTypes = {
 export default When;
 ",
   "fonts": Array [],
-  "props": Object {
-    "showMe": "string",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "showMe",
+      "type": "string",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -9138,70 +8279,13 @@ WhenTopLevel.contextTypes = {
 export default WhenTopLevel;
 ",
   "fonts": Array [],
-  "props": Object {
-    "showMe": "string",
-  },
-  "svgs": Array [],
-}
-`;
-
-exports[`react-native parses react-native WithTest 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import { Text, TouchableWithoutFeedback, View } from 'react-native';
-import PropTypes from 'prop-types';
-
-class WithTest extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'WithTest',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'WithTest',
-      action: 'leave',
-    });
-  }
-
-  render() {
-    const { context, props } = this;
-
-    return (
-      <TouchableWithoutFeedback
-        activeOpacity={0.7}
-        onPress={event =>
-          context.track({
-            block: props['testID'] || 'WithTest',
-            action: 'click',
-            callback: props.change,
-            event,
-          })
-        }
-        underlayColor=\\"transparent\\"
-      >
-        <View testID={\`\${props['testID'] || 'Vertical'}|\`}>
-          <Text testID={\`WithTest.Text|\`}>{props.text}</Text>
-          {props.children}
-        </View>
-      </TouchableWithoutFeedback>
-    );
-  }
-}
-WithTest.contextTypes = {
-  track: PropTypes.func.isRequired,
-};
-
-export default WithTest;
-",
-  "fonts": Array [],
-  "props": Object {
-    "change": "function",
-    "text": "string",
-  },
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "showMe",
+      "type": "string",
+    },
+  ],
   "svgs": Array [],
 }
 `;

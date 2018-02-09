@@ -1,6 +1,0 @@
-Button Horizontal
-Icon Proxy
-from props.icon
-fill red
-Text
-text props.text

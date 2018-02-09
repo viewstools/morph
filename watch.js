@@ -351,7 +351,7 @@ height 50`
       try {
         const rawFile = path.join(src, f)
         const source = await fs.readFile(rawFile, 'utf-8')
-        const parsed = parse(source)
+        const parsed = parse({ source })
         viewsSources[view] = source
         viewsParsed[view] = parsed
 
@@ -420,7 +420,7 @@ height 50`
           // responsibleFor: responsibleFor[view],
           file: rawFile,
           fonts: res.fonts,
-          props: res.props,
+          slots: res.slots,
           source: viewsSources[view],
           view,
         }

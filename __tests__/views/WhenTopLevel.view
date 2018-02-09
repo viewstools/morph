@@ -1,3 +1,3 @@
 Text
+onWhen <showMe
 text I may be hidden
-onWhen props.showMe

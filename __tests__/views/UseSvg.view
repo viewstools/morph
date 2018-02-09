@@ -5,16 +5,20 @@ width 20
 SvgPath
 d 0 20
 fill red
+
 SvgCircle
 cx 10
 cy 5
 r 5
+
 SvgGroup
 transform translate(6.000000, 5.000000)
 SvgPath
 d 1
+
 SvgPath
 d 2
+
 
 SvgText
 text hey

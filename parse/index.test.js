@@ -1,9 +1,9 @@
 import parse from './index.js'
 
 test('#parse', () => {
-  VIEWS.forEach(view => expect(parse(view)).toMatchSnapshot())
+  VIEWS.forEach(view => expect(parse({ source: view })).toMatchSnapshot())
 
-  expect(parse(WARNING)).toMatchSnapshot()
+  expect(parse({ source: WARNING })).toMatchSnapshot()
 })
 
 const VIEWS = [
@@ -14,9 +14,11 @@ Text`,
 
   `BlueButton Vertical
 Before Text
+
 Nested Vertical
 ImageInside Image
 source https://image.com/file.jpg
+
 VerticalInside Vertical
 
 
@@ -25,6 +27,7 @@ text after
 color purple
 when hover
 color red
+
 Last Vertical
 backgroundColor blue`,
 
@@ -33,29 +36,33 @@ backgroundColor blue`,
   `A Vertical 
 A1 Text
 color red
+
 A2 Text    
 color white`,
 
   `Vertical
-backgroundColor props.backgroundColor
-onClick event => props.onClick(props.name, event)
+backgroundColor <backgroundColor
+onClick <onClick
 Title Text
-color props.some.thing || 'red'
-marginLeft props.marginLeft
-text props.some.prop
+color < red
+marginLeft < 10
+text <title This is the title
+
 CaptureText
-onFocus props.onFocus
+onFocus <
+
 List
-from props.stuff
-when props.stuff.length > 0
+from <
 Stuff`,
 ]
 
 const WARNING = `Warning Vertical
 EmptyWhen Vertical
 color blue
+marginTop <
+border 1px solid red
 when
 color red
-when props. stuff
+when < stuff
 backgroundColor purple
 color green`

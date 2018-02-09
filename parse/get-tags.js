@@ -1,14 +1,21 @@
-import { isCode, isStyle } from './helpers.js'
+import { isUnsupportedShorthand, isStyle, isSlot } from './helpers.js'
 
-const CODE_PROPS = ['from', 'when', 'onClick', 'onFocus', 'onWhen']
-const shouldBeCode = prop => CODE_PROPS.includes(prop) || /^on[A-Z]/.test(prop)
+const SLOT_PROPS = ['from', 'when', 'onClick', 'onFocus', 'onWhen']
+const shouldBeSlot = prop => SLOT_PROPS.includes(prop) || /^on[A-Z]/.test(prop)
 
-export default (prop, value) => {
+export default ({ name, isSlot, slotName, slotIsNot, value, block }) => {
   const tags = {}
 
-  if (shouldBeCode(prop)) tags.shouldBeCode = true
-  if (isCode(value)) tags.code = true
-  if (isStyle(prop)) tags.style = true
+  if (isStyle(name)) tags.style = true
+  if (isUnsupportedShorthand(name) && block.isBasic) {
+    tags.unsupportedShorthand = true
+  }
+
+  if (shouldBeSlot(name)) tags.shouldBeSlot = true
+  if (isSlot) tags.slot = true
+  if (slotIsNot) tags.slotIsNot = true
+
+  tags.validSlot = tags.slot || (tags.shouldBeSlot && tags.slot) || null
 
   return tags
 }

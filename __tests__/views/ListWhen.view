@@ -1,4 +1,4 @@
 List
-onWhen props.showMe
-from props.from
+onWhen <showMe
+from <
 Card

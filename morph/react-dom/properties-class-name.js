@@ -1,4 +1,4 @@
-import { deinterpolate, getProp, isCode, isInterpolation } from '../utils.js'
+import { deinterpolate, getProp, isSlot, isInterpolation } from '../utils.js'
 import wrap from '../react/wrap.js'
 
 export const enter = (node, parent, state) => {
@@ -7,7 +7,7 @@ export const enter = (node, parent, state) => {
   const className = getProp(node, 'className')
   if (className) {
     node.className.push(
-      className.tags.code ? `\${${className.value}}` : className.value
+      className.tags.slot ? `\${${className.value}}` : className.value
     )
   }
 
@@ -23,7 +23,7 @@ export const leave = (node, parent, state) => {
 
     if (isInterpolation(className)) {
       className = deinterpolate(className)
-    } else if (!isCode(className)) {
+    } else if (!isSlot(className)) {
       className = `"${className}"`
       shouldWrap = false
     }

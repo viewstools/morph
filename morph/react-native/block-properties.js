@@ -5,7 +5,6 @@ import * as PropertyRef from '../react/property-ref.js'
 import * as PropertyRest from '../react/property-rest.js'
 import * as PropertyStyle from '../react/property-style.js'
 import * as PropertyText from '../react/property-text.js'
-// import { hasDefaultProp } from '../utils.js'
 import isValidPropertyForBlock from './is-valid-property-for-block.js'
 
 export function enter(node, parent, state) {
@@ -17,6 +16,7 @@ export function enter(node, parent, state) {
       propNode.name === 'when' ||
       propNode.name === 'onWhen' ||
       (propNode.name === 'ref' && state.debug) ||
+      propNode.tags.unsupportedShorthand ||
       (!isValidPropertyForBlock(propNode, node, state) && node.isBasic) ||
       (propNode.name === 'from' && node.name === 'List')
     )

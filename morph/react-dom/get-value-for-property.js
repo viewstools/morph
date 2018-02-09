@@ -15,9 +15,9 @@ const isUrl = str => /^https?:\/\//.test(str)
 
 const getImageSource = (node, state, parent) => {
   const scopes = getScopes(node, parent)
-  if (scopes && (isUrl(node.value) || node.tags.code)) {
+  if (scopes && (isUrl(node.value) || node.tags.slot)) {
     return wrap(getScopedCondition(node, parent))
-  } else if (isUrl(node.value) || node.tags.code) {
+  } else if (isUrl(node.value) || node.tags.slot) {
     return safe(node.value)
   } else {
     if (scopes && state.debug) {

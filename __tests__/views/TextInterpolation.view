@@ -1,3 +1,5 @@
 Vertical
 Text
-text ${props.name} test
+text <name
+Text
+text test

@@ -1,4 +1,4 @@
-Horizontal
+Border Vertical
 borderColor red
 borderStyle solid
-borderWidth 1
+borderWidth < 10
