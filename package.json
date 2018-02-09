@@ -1,5 +1,5 @@
 {
-  "name": "views-morph",
+  "name": "@viewstools/morph",
   "version": "12.0.3",
   "description": "Views language morpher",
   "main": "lib.js",
