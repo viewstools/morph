@@ -1,6 +1,6 @@
-# Views language morpher
+# Views Tools language morpher
 
-[There are some docs!!!](https://github.com/viewsdx/docs)
+[Looking for Views Tools docs?](https://github.com/viewstools/docs)
 
 The easiest way to integrate Views with your project is to run it as a
 standalone command. You can install it with:
@@ -29,7 +29,6 @@ Views morphs `.view` files into `.view.js`. You may want to add those to `.gitig
 ## Want to contribute?
 
 Brilliant! Check out [CONTRIBUTING.md](https://github.com/viewstools/morph/blob/master/CONTRIBUTING.md) for a step-by-step guide.
-
 
 See https://views.tools for more info.
 
