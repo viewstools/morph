@@ -40,6 +40,7 @@ const parseSvg = ({ attr, child, tag }) => {
     const attrs = getAttrs(attr)
     s.push(attrs)
   }
+
   if (child) {
     s.push(
       child.map(c => {
@@ -63,7 +64,5 @@ module.exports = async raw => {
     )
   )
   const res = await svgo.optimize(raw)
-  return flatten(parseSvg(html2json(res.data).child[0]))
-    .filter(Boolean)
-    .join('\n')
+  return flatten(parseSvg(html2json(res.data).child[0])).join('\n')
 }
