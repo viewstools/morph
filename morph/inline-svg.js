@@ -2,13 +2,12 @@ const fs = require('mz/fs')
 const morphSvgToView = require('./svg-to-view.js')
 
 const svgCustomStyles = [
-  'alignSelf props.alignSelf',
-  'flex props.flex',
-  'margin props.margin',
-  'marginTop props.marginTop',
-  'marginBottom props.marginBottom',
-  'marginLeft props.marginLeft',
-  'marginRight props.marginRight',
+  'alignSelf <',
+  'flex <',
+  'marginTop <',
+  'marginBottom <',
+  'marginLeft <',
+  'marginRight <',
 ]
 
 module.exports = async svgFile => {

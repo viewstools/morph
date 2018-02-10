@@ -7,9 +7,6 @@ const watch = require('./watch.js')
 const path = require('path')
 const { writeFile } = require('mz/fs')
 const morphInlineSvg = require('./morph/inline-svg.js')
-const onMorphWriteSvg = ({ file, code }) => {
-  return writeFile(`${file}`, code)
-}
 
 let {
   _,
@@ -121,18 +118,9 @@ if (shouldWatch) {
     })
   } else {
     if (input.includes('.svg')) {
-      return new Promise(async (resolve, reject) => {
-        const inlined = await morphInlineSvg(input)
-
-        resolve(
-          onMorphWriteSvg({
-            as,
-            code: inlined,
-            isInlineSvg: true,
-            file: path.resolve(input, '..', `${pathToName(input)}.view`),
-          })
-        )
-      })
+      return morphInlineSvg(input).then(code =>
+        writeFile(path.resolve(input, '..', `${pathToName(input)}.view`), code)
+      )
     } else {
       const { code } = morph(readFileSync(input, 'utf-8'), {
         as,
