@@ -15,15 +15,18 @@ module.exports = async svgFile => {
 
   return (await morphSvgToView(content))
     .split('\n')
-    .map(
-      line =>
-        line === 'Svg'
-          ? `Svg\n${svgCustomStyles.join('\n')}`
-          : line.startsWith('width')
-            ? line.replace('width', 'width props.width || ')
-            : line.startsWith('height')
-              ? line.replace('height', 'height props.height || ')
-              : line
-    )
+    .map(line => {
+      return line === 'Svg'
+        ? `Svg\n${svgCustomStyles.join('\n')}`
+        : line.startsWith('width')
+          ? line.replace('width', 'width < ||')
+          : line.startsWith('height')
+            ? line.replace('height', 'height < ||')
+            : line.startsWith('fill ')
+              ? line.replace('fill', 'fill < ||')
+              : line.startsWith('stroke ')
+                ? line.replace('stroke', 'stroke < ||')
+                : line
+    })
     .join('\n')
 }
