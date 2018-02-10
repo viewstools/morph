@@ -4,8 +4,6 @@ const { readFileSync, statSync } = require('fs')
 const { morph, pathToName } = require('./lib.js')
 const chalk = require('chalk')
 const watch = require('./watch.js')
-const path = require('path')
-const { writeFile } = require('mz/fs')
 const morphInlineSvg = require('./morph/inline-svg.js')
 
 let {
@@ -118,9 +116,7 @@ if (shouldWatch) {
     })
   } else {
     if (input.includes('.svg')) {
-      return morphInlineSvg(input).then(code =>
-        writeFile(path.resolve(input, '..', `${pathToName(input)}.view`), code)
-      )
+      return morphInlineSvg(input).then(code => console.log(code))
     } else {
       const { code } = morph(readFileSync(input, 'utf-8'), {
         as,
