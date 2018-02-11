@@ -200,6 +200,8 @@ export const getScopeDescription = scope => {
 }
 
 export const makeOnClickTracker = (node, state) => {
+  if (!state.track) return node.value
+
   const block = node.testId
     ? `"${state.name}.${node.testId}"`
     : `props["${state.testIdKey}"] || "${state.name}"`
