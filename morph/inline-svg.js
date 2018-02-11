@@ -11,8 +11,6 @@ const svgCustomStyles = [
 ]
 
 // refactor line replacements
-// if there duplicate fills or strokes they should be exposed as fill2, fill3 etc
-// if no width/height is supplied get them from viewbox
 
 const insertDimension = (result, viewbox, dimensionName, dimensionVal) =>
   `${result.substring(
@@ -22,30 +20,40 @@ const insertDimension = (result, viewbox, dimensionName, dimensionVal) =>
     result.lastIndexOf(viewbox.split('\n')[1])
   )}`
 
+// if width or height props aren't declared, get them from the viewbox
 const checkDimensions = result => {
   const svgString = result.split(/Svg/)[1]
   const viewbox = result.split(/viewBox /)[1]
+  const dimensions = ['width', 'height']
 
-  if (!svgString.includes('width')) {
-    const widthVal = viewbox.split(' ')[2]
-    result = insertDimension(result, viewbox, 'width', widthVal)
-  }
-
-  if (!svgString.includes('height')) {
-    const heightVal = viewbox.split(' ')[3]
-    result = insertDimension(result, viewbox, 'height', heightVal)
-  }
+  dimensions.forEach((dimension, index) => {
+    if (!svgString.includes(dimension)) {
+      // skipping the first 2 indicies in viewbox, they're not relevant
+      const dimensionVal = viewbox.split(' ')[index + 2]
+      result = insertDimension(result, viewbox, dimension, dimensionVal)
+    }
+  })
 
   return result
 }
 
+// if there are duplicate fills or strokes, expose them as fill2, fill3 etc
+const checkDuplicates = result => {
+  // debugger
+  // const fills = result.split(/fill/)
+  // if (fills.length > 2) {
+  // }
+  // find all instances of fill/stroke
+  // if more than 1, loop over them and replace the slots with incremental names
+  // push these new lines back onto the result
+  // return result
+}
+
 module.exports = async svgFile => {
   const content = await fs.readFile(svgFile, 'utf-8')
-  debugger
 
-  const morphedSvg = (await morphSvgToView(content)).split('\n')
-
-  let result = morphedSvg
+  let result = (await morphSvgToView(content))
+    .split('\n')
     .map(line => {
       return line === 'Svg'
         ? `Svg\n${svgCustomStyles.join('\n')}`
@@ -62,6 +70,7 @@ module.exports = async svgFile => {
     .join('\n')
 
   result = checkDimensions(result)
+  //  result = checkDuplicates(result)
 
   return result
 }
