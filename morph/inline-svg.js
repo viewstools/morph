@@ -39,14 +39,21 @@ const checkDimensions = result => {
 
 // if there are duplicate fills or strokes, expose them as fill2, fill3 etc
 const checkDuplicates = result => {
-  // debugger
-  // const fills = result.split(/fill/)
-  // if (fills.length > 2) {
-  // }
-  // find all instances of fill/stroke
-  // if more than 1, loop over them and replace the slots with incremental names
-  // push these new lines back onto the result
-  // return result
+  const slotNames = ['fill', 'stroke']
+
+  slotNames.forEach(name => {
+    const slots = result.split(new RegExp(`${name} <`))
+    debugger
+
+    if (slots.length > 2) {
+      slots.slice(2, slots.length).forEach((slot, index) => {
+        result = `${result.substring(0, result.indexOf(slot))}${name}${index +
+          2}${result.substring(result.indexOf(slot))}`
+      })
+    }
+  })
+
+  return result
 }
 
 module.exports = async svgFile => {
@@ -69,8 +76,7 @@ module.exports = async svgFile => {
     })
     .join('\n')
 
-  result = checkDimensions(result)
-  //  result = checkDuplicates(result)
+  result = checkDuplicates(checkDimensions(result))
 
   return result
 }
