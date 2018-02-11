@@ -10,6 +10,8 @@ const svgCustomStyles = [
   'marginRight <',
 ]
 
+const slotNames = ['width', 'height', 'fill', 'stroke']
+
 const addSubstring = (result, indexOf, newSubstring) =>
   `${result.substring(
     0,
@@ -39,10 +41,8 @@ const checkDimensions = result => {
   return result
 }
 
-// if there are duplicate fills or strokes, expose them as fill2, fill3 etc
+// if there are duplicate properties, expose them as fill2, fill3, width2, width3 etc
 const checkDuplicates = result => {
-  const slotNames = ['fill', 'stroke']
-
   slotNames.forEach(name => {
     const slots = result.split(new RegExp(`${name} <`))
 
@@ -59,24 +59,22 @@ const checkDuplicates = result => {
   return result
 }
 
+const addSlots = line => {
+  const match = slotNames.find(name => line.startsWith(name))
+  line = match ? line.replace(match, `${match} <`) : line
+
+  return line
+}
+
 module.exports = async svgFile => {
   const content = await fs.readFile(svgFile, 'utf-8')
 
-  // refactor line replacements ?
   const result = (await morphSvgToView(content))
     .split('\n')
     .map(line => {
       return line === 'Svg'
         ? `Svg\n${svgCustomStyles.join('\n')}`
-        : line.startsWith('width')
-          ? line.replace('width', 'width <')
-          : line.startsWith('height')
-            ? line.replace('height', 'height <')
-            : line.startsWith('fill ')
-              ? line.replace('fill', 'fill <')
-              : line.startsWith('stroke ')
-                ? line.replace('stroke', 'stroke <')
-                : line
+        : addSlots(line)
     })
     .join('\n')
 
