@@ -11,7 +11,7 @@
 
 3. Run `yarn prepare` in the morpher directory to bundle your code.
 
-4. In your views project run `node --inspect ./node_modules/views-morph/cli.js . --watch`. This will watch your current directory. If you just want to watch a subdirectory within that you can replace the `.` in that command with the path to the subdirectory.
+4. In your views project run `node --inspect ./node_modules/@viewstools/morph/cli.js . --watch`. This will watch your current directory. If you just want to watch a subdirectory within that you can replace the `.` in that command with the path to the subdirectory.
 
 5. In chrome open your dev tools on any tab. Click on the green icon at the top to open the node dev tools. Bingo! :tada:
 
