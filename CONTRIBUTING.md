@@ -5,7 +5,7 @@
 1. You need to symlink your local morpher to your Views project.
 
     * In your local instance of the morpher run `yarn link` in the root directory.
-    * In your project where you are using Views run `yarn link views-morph` in the root directory.
+    * In your project where you are using Views run `yarn link @viewstools/morph` in the root directory.
 
 2. Put in your `debugger` statements where necessary.
 
