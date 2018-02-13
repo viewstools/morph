@@ -250,7 +250,7 @@ Object {
                 Object {
                   "loc": Object {
                     "end": Object {
-                      "column": 9,
+                      "column": 10,
                       "line": 13,
                     },
                     "start": Object {
@@ -260,12 +260,13 @@ Object {
                   },
                   "name": "when",
                   "tags": Object {
-                    "scope": "hover",
+                    "scope": "<hover",
                     "shouldBeSlot": true,
-                    "validSlot": null,
+                    "slot": true,
+                    "validSlot": true,
                   },
                   "type": "Property",
-                  "value": "hover",
+                  "value": "<hover",
                 },
                 Object {
                   "loc": Object {
@@ -287,6 +288,8 @@ Object {
                   "value": "red",
                 },
               ],
+              "slotIsNot": false,
+              "slotName": "hover",
               "value": "hover",
             },
           ],
@@ -1084,7 +1087,7 @@ borderColor red",
           "line": 5,
         },
       },
-      "type": "This when has no condition assigned to it. Add one like: when <isCondition",
+      "type": "This when has no condition assigned to it. Add one like: \\"when <isCondition\\"",
     },
     Object {
       "line": "backgroundColor purple",

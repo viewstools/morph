@@ -312,20 +312,27 @@ export default ({
         }
 
         if (name === 'when') {
-          const isSystem = isSystemScope(value)
+          const isSystem = isSystemScope(slotName)
 
           if (value === '' || value === '<' || value === '<!') {
             warnings.push({
               loc,
               type:
-                'This when has no condition assigned to it. Add one like: when <isCondition',
+                'This when has no condition assigned to it. Add one like: "when <isCondition"',
               line,
             })
-          } else if (!isSystem && !tags.validSlot) {
+          } else if (!tags.validSlot) {
             warnings.push({
               loc,
-              type: `The value you used in the slot "${name}" is invalid`,
+              type: `The slot name "${name}" isn't valid. Fix it like: "when <isCondition" `,
               line,
+            })
+          }
+
+          if (isSystem && slotIsNot) {
+            warnings.push({
+              loc,
+              type: `"${slotName}" is a system slot and it can't take a "!" in its value. Replace the line for: "when <${slotName}".`,
             })
           }
 
@@ -335,16 +342,17 @@ export default ({
             isSystem,
             value,
             name,
+            slotName,
+            slotIsNot: isSystem ? false : slotIsNot,
             properties: [],
           }
 
-          if (!isSystem) {
-            if (convertSlotToProps) {
-              scope.value = `${slotIsNot ? '!' : ''}props.${slotName || name}`
-            }
-            scope.slotIsNot = slotIsNot
-            scope.slotName = slotName
+          if (convertSlotToProps) {
+            scope.value = isSystem
+              ? slotName
+              : `${slotIsNot ? '!' : ''}props.${slotName || name}`
           }
+
           scopes.push(scope)
         } else if ((tags.slot || tags.shouldBeSlot) && !tags.validSlot) {
           warnings.push({
@@ -370,7 +378,10 @@ export default ({
           value: getValue(value),
         }
 
-        if (tags.slot) {
+        if (
+          tags.slot &&
+          (name !== 'when' || (name === 'when' && !scope.isSystem))
+        ) {
           const needsDefaultValue =
             block.isBasic && !tags.shouldBeSlot && /</.test(propNode.value)
 
@@ -393,7 +404,7 @@ export default ({
             }
           }
 
-          if (!inScope && !slots.some(vp => vp.name === name)) {
+          if (!inScope && !slots.some(vp => vp.name === (slotName || name))) {
             slots.push({
               name: slotName || name,
               type: getPropType(block, name, value),

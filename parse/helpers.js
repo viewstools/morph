@@ -234,7 +234,6 @@ const SYSTEM_SCOPES = [
   'focus',
   'hover',
   'placeholder',
-  'print',
   // TODO do we want to do media queries here?
 ]
 export const isSystemScope = name => SYSTEM_SCOPES.includes(name)

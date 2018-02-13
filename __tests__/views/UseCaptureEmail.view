@@ -6,7 +6,7 @@ borderWidth 1
 color red
 defaultValue hey this is a default value
 onSubmit <
-when focus
+when <focus
 color purple
-when placeholder
+when <placeholder
 color blue

@@ -82,6 +82,19 @@ module.exports = {
 }
 `;
 
+exports[`e2e parses e2e DefaultProps 1`] = `
+Object {
+  "code": "const { get } = require('@viewstools/e2e');
+
+module.exports = {
+  DefaultProps: get('DefaultProps.DefaultProps'),
+  Text1: get('DefaultProps.Text:1'),
+  Text: get('DefaultProps.Text'),
+};
+",
+}
+`;
+
 exports[`e2e parses e2e DynamicStylesApplyToBasicBlocksOnly 1`] = `
 Object {
   "code": "const { get } = require('@viewstools/e2e');
@@ -1364,6 +1377,119 @@ export default Code;
     Object {
       "defaultValue": false,
       "name": "refText",
+      "type": "string",
+    },
+  ],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom DefaultProps 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+import PropTypes from 'prop-types';
+
+class DefaultProps extends React.Component {
+  componentDidMount() {
+    this.context.track({
+      block: this.props['data-test-id'] || 'DefaultProps',
+      action: 'enter',
+    });
+  }
+
+  componentWillUnmount() {
+    this.context.track({
+      block: this.props['data-test-id'] || 'DefaultProps',
+      action: 'leave',
+    });
+  }
+
+  render() {
+    const { context, props } = this;
+
+    return (
+      <div
+        data-test-id={\`\${props['data-test-id'] || 'DefaultProps'}|\`}
+        className=\\"views-block\\"
+      >
+        <span data-test-id={\`DefaultProps.Text|\`} className=\\"views-block\\">
+          {props.text}
+        </span>
+        <span data-test-id={\`DefaultProps.Text:1|\`} className=\\"views-block\\">
+          {props.texto}
+        </span>
+        {props.children}
+      </div>
+    );
+  }
+}
+DefaultProps.contextTypes = {
+  track: PropTypes.func.isRequired,
+};
+DefaultProps.defaultProps = {
+  text: 'hey',
+  texto: 'ho',
+};
+export default DefaultProps;
+",
+  "fonts": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": "hey",
+      "name": "text",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": "ho",
+      "name": "texto",
+      "type": "string",
+    },
+  ],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom DefaultProps: react-dom parses react-dom DefaultProps debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+
+const DefaultProps = props => {
+  return (
+    <div
+      data-test-id={\`\${props['data-test-id'] || 'DefaultProps'}|\`}
+      className=\\"views-block\\"
+    >
+      <span data-test-id={\`DefaultProps.Text|\`} className=\\"views-block\\">
+        {props.text}
+      </span>
+      <span data-test-id={\`DefaultProps.Text:1|\`} className=\\"views-block\\">
+        {props.texto}
+      </span>
+      {props.children}
+    </div>
+  );
+};
+
+DefaultProps.defaultProps = {
+  text: 'hey',
+  texto: 'ho',
+};
+export default DefaultProps;
+",
+  "fonts": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": "hey",
+      "name": "text",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": "ho",
+      "name": "texto",
       "type": "string",
     },
   ],
@@ -5941,6 +6067,66 @@ export default Code;
     Object {
       "defaultValue": false,
       "name": "refText",
+      "type": "string",
+    },
+  ],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-native parses react-native DefaultProps 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import { Text, View } from 'react-native';
+import PropTypes from 'prop-types';
+
+class DefaultProps extends React.Component {
+  componentDidMount() {
+    this.context.track({
+      block: this.props['testID'] || 'DefaultProps',
+      action: 'enter',
+    });
+  }
+
+  componentWillUnmount() {
+    this.context.track({
+      block: this.props['testID'] || 'DefaultProps',
+      action: 'leave',
+    });
+  }
+
+  render() {
+    const { context, props } = this;
+
+    return (
+      <View testID={\`\${props['testID'] || 'DefaultProps'}|\`}>
+        <Text testID={\`DefaultProps.Text|\`}>{props.text}</Text>
+        <Text testID={\`DefaultProps.Text:1|\`}>{props.texto}</Text>
+        {props.children}
+      </View>
+    );
+  }
+}
+DefaultProps.contextTypes = {
+  track: PropTypes.func.isRequired,
+};
+DefaultProps.defaultProps = {
+  text: 'hey',
+  texto: 'ho',
+};
+export default DefaultProps;
+",
+  "fonts": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": "hey",
+      "name": "text",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": "ho",
+      "name": "texto",
       "type": "string",
     },
   ],
