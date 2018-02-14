@@ -2072,6 +2072,15 @@ const ListOfSomething = props => {
   );
 };
 
+ListOfSomething.defaultProps = {
+  from: [
+    { id: 'item1' },
+    { id: 'item2' },
+    { id: 'item3' },
+    { id: 'item4' },
+    { id: 'item5' },
+  ],
+};
 export default ListOfSomething;
 ",
   "fonts": Array [],
@@ -2181,6 +2190,15 @@ const ListWhen = props => {
   ) : null;
 };
 
+ListWhen.defaultProps = {
+  from: [
+    { id: 'item1' },
+    { id: 'item2' },
+    { id: 'item3' },
+    { id: 'item4' },
+    { id: 'item5' },
+  ],
+};
 export default ListWhen;
 ",
   "fonts": Array [],
