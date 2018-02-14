@@ -289,6 +289,14 @@ export default ({
           block,
         })
 
+        if (!isFontable(block.name) && name.indexOf('font') >= 0) {
+          warnings.push({
+            loc,
+            type: `The prop ${name} isn't supported on block ${block.name}`,
+            line,
+          })
+        }
+
         if (block.isBasic) {
           if (tags.unsupportedShorthand) {
             warnings.push({
