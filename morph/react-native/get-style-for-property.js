@@ -3,7 +3,7 @@ import { getProp, isTag } from '../utils.js'
 export default (node, parent, code) => {
   switch (node.name) {
     case 'shadowColor':
-    case 'shadowRadius':
+    case 'shadowBlur':
     case 'shadowOffsetX':
     case 'shadowOffsetY':
       return getShadow(node, parent)
@@ -61,7 +61,7 @@ const getLineHeight = (node, parent) => {
 
 const getShadow = (node, parent) => {
   const shadowColor = getProp(parent, 'shadowColor')
-  const shadowRadius = getProp(parent, 'shadowRadius')
+  const shadowBlur = getProp(parent, 'shadowBlur')
   const shadowOffsetX = getProp(parent, 'shadowOffsetX')
   const shadowOffsetY = getProp(parent, 'shadowOffsetY')
 
@@ -73,7 +73,7 @@ const getShadow = (node, parent) => {
       width: shadowOffsetX ? shadowOffsetX.value : undefined,
       height: shadowOffsetY ? shadowOffsetY.value : undefined,
     },
-    shadowRadius: shadowRadius ? shadowRadius.value : undefined,
+    shadowBlur: shadowBlur ? shadowBlur.value : undefined,
     shadowOpacity: 1,
     shadowColor: shadowColor ? shadowColor.value : undefined,
   }

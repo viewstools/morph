@@ -3242,7 +3242,7 @@ import styled from 'react-emotion';
 import PropTypes from 'prop-types';
 
 const BoxShadow = styled('div')(({ props }) => ({
-  boxShadow: \`10px 5px 2px 2px \${props.shadowColor}\`,
+  boxShadow: \`0px 5px 2px 2px \${props.shadowColor}\`,
 }));
 const TextShadow = styled('span')(({ props }) => ({
   textShadow: \`2px 3px 1px \${props.shadowColor}\`,
@@ -3315,7 +3315,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import styled from 'react-emotion';
 
 const BoxShadow = styled('div')(({ props }) => ({
-  boxShadow: \`10px 5px 2px 2px \${props.shadowColor}\`,
+  boxShadow: \`0px 5px 2px 2px \${props.shadowColor}\`,
 }));
 const TextShadow = styled('span')(({ props }) => ({
   textShadow: \`2px 3px 1px \${props.shadowColor}\`,
@@ -7105,17 +7105,17 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 const styles = StyleSheet.create({
-  h1qdzhym: {
+  h4bs9jb: {
     elevation: 1,
-    shadowOffset: { width: 10, height: 5 },
-    shadowRadius: 2,
+    shadowOffset: { width: 0, height: 5 },
+    shadowBlur: 2,
     shadowOpacity: 1,
     shadowColor: 'props.shadowColor',
   },
-  h9jluza: {
+  h1qe21i6: {
     elevation: 1,
     shadowOffset: { width: 2, height: 3 },
-    shadowRadius: 1,
+    shadowBlur: 1,
     shadowOpacity: 1,
     shadowColor: 'props.shadowColor',
   },
@@ -7144,11 +7144,11 @@ class Shadow extends React.Component {
         <View
           testID={\`Shadow.BoxShadow|\`}
           style={[
-            styles.h1qdzhym,
+            styles.h4bs9jb,
             {
               elevation: 1,
-              shadowOffset: { width: 10, height: 5 },
-              shadowRadius: 2,
+              shadowOffset: { width: 0, height: 5 },
+              shadowBlur: 2,
               shadowOpacity: 1,
               shadowColor: props.shadowColor,
             },
@@ -7157,11 +7157,11 @@ class Shadow extends React.Component {
           <Text
             testID={\`Shadow.TextShadow|\`}
             style={[
-              styles.h9jluza,
+              styles.h1qe21i6,
               {
                 elevation: 1,
                 shadowOffset: { width: 2, height: 3 },
-                shadowRadius: 1,
+                shadowBlur: 1,
                 shadowOpacity: 1,
                 shadowColor: props.shadowColor,
               },

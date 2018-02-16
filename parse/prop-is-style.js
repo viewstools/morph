@@ -76,7 +76,7 @@ export const STYLE = [
   'shadowColor',
   'shadowOffsetX',
   'shadowOffsetY',
-  'shadowRadius',
+  'shadowBlur',
   'shadowSpread',
   'stroke',
   'textAlign',

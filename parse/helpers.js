@@ -76,13 +76,13 @@ const UNSUPPORTED_SHORTHAND = {
   boxShadow: [
     'shadowOffsetX',
     'shadowOffsetY',
-    'shadowRadius',
+    'shadowBlur',
     'shadowSpread',
     'shadowColor',
   ],
   margin: ['marginTop', 'marginRight', 'marginBottom', 'marginLeft'],
   padding: ['paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft'],
-  textShadow: ['shadowOffsetX', 'shadowOffsetY', 'shadowRadius', 'shadowColor'],
+  textShadow: ['shadowOffsetX', 'shadowOffsetY', 'shadowBlur', 'shadowColor'],
   outline: ['outlineWidth', 'outlineStyle', 'outlineColor'],
   overflow: ['overflowX', 'overflowY'],
 }
