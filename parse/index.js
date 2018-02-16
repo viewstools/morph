@@ -383,7 +383,7 @@ export default ({
           (name !== 'when' || (name === 'when' && !scope.isSystem))
         ) {
           const needsDefaultValue =
-            block.isBasic && !tags.shouldBeSlot && /</.test(propNode.value)
+            !tags.shouldBeSlot && /</.test(propNode.value)
 
           propNode.defaultValue = propNode.value
           propNode.slotName = slotName
@@ -396,11 +396,14 @@ export default ({
               propNode.defaultValue = ''
             } else {
               propNode.defaultValue = false
-              warnings.push({
-                loc,
-                type: `Add a default value to "${name}" like: "${name} <${slotName} default value"`,
-                line,
-              })
+
+              if (block.isBasic) {
+                warnings.push({
+                  loc,
+                  type: `Add a default value to "${name}" like: "${name} <${slotName} default value"`,
+                  line,
+                })
+              }
             }
           }
 
@@ -408,10 +411,7 @@ export default ({
             slots.push({
               name: slotName || name,
               type: getPropType(block, name, value),
-              defaultValue:
-                tags.shouldBeSlot || !block.isBasic
-                  ? false
-                  : propNode.defaultValue,
+              defaultValue: tags.shouldBeSlot ? false : propNode.defaultValue,
             })
           }
         }

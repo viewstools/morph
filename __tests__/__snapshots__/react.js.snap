@@ -4782,13 +4782,13 @@ class UseRouter extends React.Component {
 UseRouter.contextTypes = {
   track: PropTypes.func.isRequired,
 };
-
+UseRouter.defaultProps = { height: 10 };
 export default UseRouter;
 ",
   "fonts": Array [],
   "slots": Array [
     Object {
-      "defaultValue": false,
+      "defaultValue": 10,
       "name": "height",
       "type": "number",
     },
@@ -4857,12 +4857,13 @@ const UseRouter = props => {
   );
 };
 
+UseRouter.defaultProps = { height: 10 };
 export default UseRouter;
 ",
   "fonts": Array [],
   "slots": Array [
     Object {
-      "defaultValue": false,
+      "defaultValue": 10,
       "name": "height",
       "type": "number",
     },
@@ -8066,13 +8067,13 @@ class UseRouter extends React.Component {
 UseRouter.contextTypes = {
   track: PropTypes.func.isRequired,
 };
-
+UseRouter.defaultProps = { height: 10 };
 export default UseRouter;
 ",
   "fonts": Array [],
   "slots": Array [
     Object {
-      "defaultValue": false,
+      "defaultValue": 10,
       "name": "height",
       "type": "number",
     },
