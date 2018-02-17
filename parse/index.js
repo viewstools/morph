@@ -385,6 +385,9 @@ export default ({
           const needsDefaultValue =
             !tags.shouldBeSlot && /</.test(propNode.value)
 
+          if (typeof propNode.value === 'string') {
+            propNode.value = propNode.value.replace(/^</, '')
+          }
           propNode.defaultValue = propNode.value
           propNode.slotName = slotName
           if (convertSlotToProps) {

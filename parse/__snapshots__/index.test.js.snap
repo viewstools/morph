@@ -634,7 +634,7 @@ Object {
           "name": "CaptureText",
           "properties": Array [
             Object {
-              "defaultValue": "<",
+              "defaultValue": "",
               "loc": Object {
                 "end": Object {
                   "column": 8,
@@ -699,7 +699,7 @@ Object {
           "name": "List",
           "properties": Array [
             Object {
-              "defaultValue": "<",
+              "defaultValue": "",
               "loc": Object {
                 "end": Object {
                   "column": 5,
@@ -763,7 +763,7 @@ Object {
           "value": "props.backgroundColor",
         },
         Object {
-          "defaultValue": "<onClick",
+          "defaultValue": "onClick",
           "loc": Object {
             "end": Object {
               "column": 15,
