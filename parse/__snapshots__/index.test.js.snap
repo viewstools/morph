@@ -259,6 +259,7 @@ Object {
                     },
                   },
                   "name": "when",
+                  "slotName": "hover",
                   "tags": Object {
                     "scope": "<hover",
                     "shouldBeSlot": true,
@@ -266,7 +267,7 @@ Object {
                     "validSlot": true,
                   },
                   "type": "Property",
-                  "value": "<hover",
+                  "value": "hover",
                 },
                 Object {
                   "loc": Object {
