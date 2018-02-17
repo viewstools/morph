@@ -1,5 +1,8 @@
 # Contributing
 
+[Here's a video walkthrough of the morpher that should help you understand its
+internals - February 2018](https://youtu.be/iUAxvYi3MJo).
+
 ## How do I debug the morpher locally?
 
 1. You need to symlink your local morpher to your Views project.
