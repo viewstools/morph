@@ -73,7 +73,7 @@ const getShadow = (node, parent) => {
       width: shadowOffsetX ? shadowOffsetX.value : undefined,
       height: shadowOffsetY ? shadowOffsetY.value : undefined,
     },
-    shadowBlur: shadowBlur ? shadowBlur.value : undefined,
+    shadowRadius: shadowBlur ? shadowBlur.value : undefined,
     shadowOpacity: 1,
     shadowColor: shadowColor ? shadowColor.value : undefined,
   }

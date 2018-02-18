@@ -7106,17 +7106,17 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 const styles = StyleSheet.create({
-  h4bs9jb: {
+  h8lazqx: {
     elevation: 1,
     shadowOffset: { width: 0, height: 5 },
-    shadowBlur: 2,
+    shadowRadius: 2,
     shadowOpacity: 1,
     shadowColor: 'props.shadowColor',
   },
-  h1qe21i6: {
+  h9jluza: {
     elevation: 1,
     shadowOffset: { width: 2, height: 3 },
-    shadowBlur: 1,
+    shadowRadius: 1,
     shadowOpacity: 1,
     shadowColor: 'props.shadowColor',
   },
@@ -7145,11 +7145,11 @@ class Shadow extends React.Component {
         <View
           testID={\`Shadow.BoxShadow|\`}
           style={[
-            styles.h4bs9jb,
+            styles.h8lazqx,
             {
               elevation: 1,
               shadowOffset: { width: 0, height: 5 },
-              shadowBlur: 2,
+              shadowRadius: 2,
               shadowOpacity: 1,
               shadowColor: props.shadowColor,
             },
@@ -7158,11 +7158,11 @@ class Shadow extends React.Component {
           <Text
             testID={\`Shadow.TextShadow|\`}
             style={[
-              styles.h1qe21i6,
+              styles.h9jluza,
               {
                 elevation: 1,
                 shadowOffset: { width: 2, height: 3 },
-                shadowBlur: 1,
+                shadowRadius: 1,
                 shadowOpacity: 1,
                 shadowColor: props.shadowColor,
               },
