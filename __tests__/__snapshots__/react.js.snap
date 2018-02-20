@@ -2274,6 +2274,8 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
+import garfieldPng from './garfield.png';
+import chopperJpg from './chopper.jpg';
 
 const LocalImage = props => {
   return (
@@ -2282,11 +2284,7 @@ const LocalImage = props => {
         props.isCat ? 'isCat|' : ''
       }\`}
       alt={''}
-      src={
-        props.isCat
-          ? requireImage('./garfield.png')
-          : requireImage('./chopper.jpg')
-      }
+      src={props.isCat ? garfieldPng : chopperJpg}
       className=\\"views-block\\"
     />
   );
@@ -2365,6 +2363,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
+import chopperSvg from './chopper.svg';
 import styled from 'react-emotion';
 
 const LocalImageSvg1 = styled('img')({ width: 50 }, ({ props }) => ({
@@ -2376,7 +2375,7 @@ const LocalImageSvg = props => {
     <LocalImageSvg1
       data-test-id={\`\${props['data-test-id'] || 'LocalImageSvg'}|\`}
       alt={''}
-      src={requireImage('./chopper.svg')}
+      src={chopperSvg}
       props={props}
       className=\\"views-block\\"
     />
