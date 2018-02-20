@@ -590,7 +590,7 @@ import PropTypes from 'prop-types';
 
 const Vertical_h1azf9vn = css({
   color: 'red',
-  '&:disabled, &.disabled': {
+  '&:disabled': {
     color: 'blue',
   },
 });
@@ -678,7 +678,7 @@ import { css } from 'react-emotion';
 
 const Vertical_h1azf9vn = css({
   color: 'red',
-  '&:disabled, &.disabled': {
+  '&:disabled': {
     color: 'blue',
   },
 });
@@ -1769,7 +1769,7 @@ import PropTypes from 'prop-types';
 
 const Hover_h1eiserf = css({
   backgroundColor: '#323232',
-  '&:hover, &.hover': {
+  '&:hover': {
     backgroundColor: '#232323',
   },
 });
@@ -1860,7 +1860,7 @@ import styled, { css } from 'react-emotion';
 
 const Hover_h1eiserf = css({
   backgroundColor: '#323232',
-  '&:hover, &.hover': {
+  '&:hover': {
     backgroundColor: '#232323',
   },
 });
@@ -3376,12 +3376,12 @@ const WindowControl = styled('button')(
     transition: 'all 0.15s ease-out',
     width: 10,
     height: 10,
-    '&:hover, &.hover': {
+    '&:hover': {
       scale: 1.5,
     },
   },
   ({ props }) => ({
-    '&:hover, &.hover': {
+    '&:hover': {
       backgroundColor: props.backgroundColorHover,
     },
   })
@@ -3459,12 +3459,12 @@ const WindowControl = styled('button')(
     transition: 'all 0.15s ease-out',
     width: 10,
     height: 10,
-    '&:hover, &.hover': {
+    '&:hover': {
       scale: 1.5,
     },
   },
   ({ props }) => ({
-    '&:hover, &.hover': {
+    '&:hover': {
       backgroundColor: props.backgroundColorHover,
     },
   })
@@ -3784,10 +3784,10 @@ const Email_h17p6imm = css({
   borderStyle: 'solid',
   borderWidth: 1,
   color: 'red',
-  '&:focus, &.focus': {
+  '&:focus': {
     color: 'purple',
   },
-  '&:placeholder, &.placeholder': {
+  '&::placeholder': {
     color: 'blue',
   },
 });
@@ -3858,10 +3858,10 @@ const Email_h17p6imm = css({
   borderStyle: 'solid',
   borderWidth: 1,
   color: 'red',
-  '&:focus, &.focus': {
+  '&:focus': {
     color: 'purple',
   },
-  '&:placeholder, &.placeholder': {
+  '&::placeholder': {
     color: 'blue',
   },
 });
