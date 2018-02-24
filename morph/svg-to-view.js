@@ -26,7 +26,6 @@ const getAttrs = attr =>
   Object.keys(attr)
     .filter(a => a !== 'xmlns')
     .map(prop => {
-      debugger
       let value = attr[prop]
       if (Array.isArray(value)) {
         value = value.join(' ')
@@ -51,7 +50,7 @@ const IGNORE = ['title', 'desc']
 
 const parseSvg = ({ attr, child, tag }) => {
   const s = []
-  debugger
+  // debugger
 
   if (!tag || IGNORE.includes(tag.toLowerCase())) return false
 
@@ -76,6 +75,41 @@ const parseSvg = ({ attr, child, tag }) => {
   return s
 }
 
+const addNamedSlot = (line, name, num) =>
+  `${line.split(' < ')[0]} <${name}${num} ${line.split(' < ')[1]}`
+
+// if there are duplicate properties, expose them as fill2, fill3, width2, width3 etc
+const checkDuplicates = result => {
+  debugger
+
+  slotNames.forEach(name => {
+    let count = 0
+    let values = []
+    result.forEach((line, index) => {
+      const re = new RegExp(`${name} <`)
+      if (line && re.exec(line)) {
+        const value = line.split('< ')[1]
+        count++
+
+        // duplicate properties but the value doesn't already exist
+        if (count > 1 && !values.includes(value)) {
+          values[count] = value
+          result[index] = addNamedSlot(line, name, count)
+        } else if (count > 1) {
+          // duplicate properties and value does already exist
+          const i = values.indexOf(value)
+          result[index] = addNamedSlot(line, name, i)
+        } else {
+          // first property
+          values[count] = value
+        }
+      }
+    })
+  })
+
+  return result
+}
+
 module.exports = async raw => {
   const svgo = new SvgOptimiser()
   // TODO revisit this hack to SVGO's plugin config :/, it's too complex
@@ -87,6 +121,9 @@ module.exports = async raw => {
     )
   )
   const res = await svgo.optimize(raw)
+  debugger
 
-  return flatten(parseSvg(html2json(res.data).child[0])).join('\n')
+  return checkDuplicates(flatten(parseSvg(html2json(res.data).child[0]))).join(
+    '\n'
+  )
 }
