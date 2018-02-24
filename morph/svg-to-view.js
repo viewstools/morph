@@ -4,15 +4,34 @@ const SvgOptimiser = require('svgo')
 const toCamelCase = require('to-camel-case')
 const toPascalCase = require('to-pascal-case')
 
+const svgCustomStyles = [
+  'alignSelf <',
+  'flex <',
+  'marginTop <',
+  'marginBottom <',
+  'marginLeft <',
+  'marginRight <',
+]
+
+const slotNames = ['width', 'height', 'fill', 'stroke']
+
+const addSlots = (prop, value) => {
+  const match = slotNames.some(name => prop === name)
+  value = match ? `< ${value}` : value
+
+  return value
+}
+
 const getAttrs = attr =>
   Object.keys(attr)
     .filter(a => a !== 'xmlns')
     .map(prop => {
+      debugger
       let value = attr[prop]
       if (Array.isArray(value)) {
         value = value.join(' ')
       }
-      return `${toCamelCase(prop)} ${value}`
+      return `${toCamelCase(prop)} ${addSlots(prop, value)}`
     })
 
 const getBlock = raw => {
@@ -32,10 +51,14 @@ const IGNORE = ['title', 'desc']
 
 const parseSvg = ({ attr, child, tag }) => {
   const s = []
+  debugger
 
   if (!tag || IGNORE.includes(tag.toLowerCase())) return false
 
   s.push(getBlock(tag))
+  if (tag === 'svg') {
+    s.push(svgCustomStyles)
+  }
   if (attr) {
     const attrs = getAttrs(attr)
     s.push(attrs)
@@ -64,5 +87,6 @@ module.exports = async raw => {
     )
   )
   const res = await svgo.optimize(raw)
+
   return flatten(parseSvg(html2json(res.data).child[0])).join('\n')
 }

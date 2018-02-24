@@ -1,15 +1,6 @@
 const fs = require('mz/fs')
 const morphSvgToView = require('./svg-to-view.js')
 
-const svgCustomStyles = [
-  'alignSelf <',
-  'flex <',
-  'marginTop <',
-  'marginBottom <',
-  'marginLeft <',
-  'marginRight <',
-]
-
 const slotNames = ['width', 'height', 'fill', 'stroke']
 
 const addSubstring = (result, indexOf, newSubstring) =>
@@ -59,24 +50,9 @@ const checkDuplicates = result => {
   return result
 }
 
-const addSlots = line => {
-  const match = slotNames.find(name => line.startsWith(name))
-  line = match ? line.replace(match, `${match} <`) : line
-
-  return line
-}
-
 module.exports = async svgFile => {
   const content = await fs.readFile(svgFile, 'utf-8')
-
-  const result = (await morphSvgToView(content))
-    .split('\n')
-    .map(line => {
-      return line === 'Svg'
-        ? `Svg\n${svgCustomStyles.join('\n')}`
-        : addSlots(line)
-    })
-    .join('\n')
+  const result = await morphSvgToView(content)
 
   return checkDuplicates(checkDimensions(result))
 }
