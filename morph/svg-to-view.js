@@ -53,7 +53,6 @@ const parseSvg = ({ attr, child, tag }) => {
 
   if (!tag || IGNORE.includes(tag.toLowerCase())) return false
 
-  debugger
   s.push(getBlock(tag))
   if (tag === 'svg') {
     s.push(svgCustomStyles)
@@ -103,12 +102,14 @@ const checkDuplicates = result => {
         const value = line.split('< ')[1]
         count++
 
-        // duplicate properties but the value doesn't already exist
         if (count > 1 && !values.includes(value)) {
+          // duplicate properties but the value doesn't already exist
           values[count] = value
           result[index] = addNamedSlot(line, name, count)
-        } else if (count > 1) {
+        } else if (count > 1 && values.indexOf(value) > 1) {
           // duplicate properties and value does already exist
+          // but if indexOf(value) === 1 then it matches the first slot
+          // and does not need to be named
           const i = values.indexOf(value)
           result[index] = addNamedSlot(line, name, i)
         } else {
