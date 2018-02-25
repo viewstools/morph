@@ -50,16 +50,19 @@ const IGNORE = ['title', 'desc']
 
 const parseSvg = ({ attr, child, tag }) => {
   const s = []
-  // debugger
 
   if (!tag || IGNORE.includes(tag.toLowerCase())) return false
 
+  debugger
   s.push(getBlock(tag))
   if (tag === 'svg') {
     s.push(svgCustomStyles)
   }
   if (attr) {
-    const attrs = getAttrs(attr)
+    let attrs = getAttrs(attr)
+    if (attr.viewBox) {
+      attrs = addDimensions(attrs, attr)
+    }
     s.push(attrs)
   }
 
@@ -75,13 +78,22 @@ const parseSvg = ({ attr, child, tag }) => {
   return s
 }
 
+// if width or height props aren't declared, get them from the viewbox
+const addDimensions = (attrs, { viewBox, width, height }) => {
+  if (!width) {
+    attrs.push(`width < ${viewBox[2]}`)
+  }
+  if (!height) {
+    attrs.push(`height < ${viewBox[3]}`)
+  }
+  return attrs
+}
+
 const addNamedSlot = (line, name, num) =>
   `${line.split(' < ')[0]} <${name}${num} ${line.split(' < ')[1]}`
 
 // if there are duplicate properties, expose them as fill2, fill3, width2, width3 etc
 const checkDuplicates = result => {
-  debugger
-
   slotNames.forEach(name => {
     let count = 0
     let values = []
@@ -121,7 +133,6 @@ module.exports = async raw => {
     )
   )
   const res = await svgo.optimize(raw)
-  debugger
 
   return checkDuplicates(flatten(parseSvg(html2json(res.data).child[0]))).join(
     '\n'
