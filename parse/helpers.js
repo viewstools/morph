@@ -51,8 +51,7 @@ const dymPropMatcher = new DidYouMeanMatcher([
 export const didYouMeanBlock = block => dymBlockMatcher.get(block)
 export const didYouMeanProp = prop => dymPropMatcher.get(prop)
 
-// should they be camel cased?
-const ANIMATION = /(spring|linear|ease|ease-out|ease-in|ease-in-out)(?:\s(.+)\s([a-z].+))*/
+const ANIMATION = /(.+)(?:\s)(spring|linear|ease|easeOut|easeIn|easeInOut)(?:\s?(.*)?)/
 const BASIC = /^(CaptureEmail|CaptureFile|CaptureNumber|CapturePhone|CaptureSecure|CaptureText|CaptureTextArea|Horizontal|Image|List|Svg|SvgCircle|SvgEllipse|SvgDefs|SvgGroup|SvgLinearGradient|SvgRadialGradient|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgSymbol|SvgText|SvgUse|SvgStop|Text|Vertical)$/i
 const BLOCK = /^([A-Z][a-zA-Z0-9]*)(\s+([A-Z][a-zA-Z0-9]*))?$/
 const BOOL = /^(false|true)$/i
@@ -117,9 +116,23 @@ export const isUserComment = line => is(USER_COMMENT, line)
 const get = (regex, line) => line.match(regex)
 
 export const getAnimation = line => {
-  debugger
-  const test = get(ANIMATION, line)
-  console.log('test', test)
+  // eslint-disable-next-line
+  const [_, defaultValue, animationType, animationValues] = get(ANIMATION, line)
+  let properties = {
+    curve: animationType,
+  }
+
+  if (animationValues) {
+    const values = animationValues.split(' ')
+    for (let i = 0; i < values.length; i = i + 2) {
+      properties[values[i]] = values[i + 1]
+    }
+  }
+
+  return {
+    defaultValue,
+    properties,
+  }
 }
 
 export const getBlock = line => {
@@ -140,7 +153,6 @@ export const getComment = line => {
 export const getProp = line => {
   // eslint-disable-next-line
   let [_, name, _1, value = ''] = get(PROP, line)
-  debugger
 
   const prop = { name, isSlot: false, value }
 
