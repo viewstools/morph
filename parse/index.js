@@ -1,6 +1,7 @@
 import {
   didYouMeanBlock,
   didYouMeanProp,
+  getAnimation,
   getBlock,
   getComment,
   getProp,
@@ -259,6 +260,7 @@ export default ({
   }
 
   const parseProps = (i, block) => {
+    debugger
     let endOfBlockIndex = i
     while (
       endOfBlockIndex < lines.length - 1 &&
@@ -276,6 +278,8 @@ export default ({
       const line = lines[j]
 
       let propNode = null
+
+      debugger
 
       if (isProp(line)) {
         const { name, isSlot, slotName, slotIsNot, value } = getProp(line)
@@ -362,12 +366,30 @@ export default ({
           })
         }
 
+        // if (isAnimation(value)) {
+        //   console.log('hey animation!')
+        //   // let animation = value.match(
+        //   //   /(spring|linear|ease|ease-out|ease-in|ease-in-out).*$/
+        //   // )[0]
+        //   // //split the value
+        //   // // put the animation props on the node
+        //   debugger
+        // }
+
         propNode = {
           type: 'Property',
           loc,
           name,
           tags,
           value: getValue(value),
+        }
+
+        if (tags.animation) {
+          getAnimation(value)
+          // propNode.value = value.split(
+          //   /\s(spring|linear|ease|ease-out|ease-in|ease-in-out)/
+          // )[0]
+          // propNode.animation = {}
         }
 
         if (tags.slot) {
@@ -418,6 +440,7 @@ export default ({
           value,
           tags: { comment: true, userComment },
         }
+        debugger
       }
 
       if (propNode) {

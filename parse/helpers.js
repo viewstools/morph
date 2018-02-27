@@ -51,6 +51,8 @@ const dymPropMatcher = new DidYouMeanMatcher([
 export const didYouMeanBlock = block => dymBlockMatcher.get(block)
 export const didYouMeanProp = prop => dymPropMatcher.get(prop)
 
+// should they be camel cased?
+const ANIMATION = /(spring|linear|ease|ease-out|ease-in|ease-in-out)(?:\s(.+)\s([a-z].+))*/
 const BASIC = /^(CaptureEmail|CaptureFile|CaptureNumber|CapturePhone|CaptureSecure|CaptureText|CaptureTextArea|Horizontal|Image|List|Svg|SvgCircle|SvgEllipse|SvgDefs|SvgGroup|SvgLinearGradient|SvgRadialGradient|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgSymbol|SvgText|SvgUse|SvgStop|Text|Vertical)$/i
 const BLOCK = /^([A-Z][a-zA-Z0-9]*)(\s+([A-Z][a-zA-Z0-9]*))?$/
 const BOOL = /^(false|true)$/i
@@ -92,6 +94,7 @@ const USER_COMMENT = /^##(.*)$/
 const SLOT = /^<((!)?([a-zA-Z0-9]+))?(\s+(.+))?$/
 
 export const is = (thing, line) => thing.test(line)
+export const isAnimation = line => is(ANIMATION, line)
 export const isBasic = line => is(BASIC, line)
 export const isBlock = line => is(BLOCK, line)
 export const isBool = line => is(BOOL, line)
@@ -113,6 +116,12 @@ export const isUserComment = line => is(USER_COMMENT, line)
 
 const get = (regex, line) => line.match(regex)
 
+export const getAnimation = line => {
+  debugger
+  const test = get(ANIMATION, line)
+  console.log('test', test)
+}
+
 export const getBlock = line => {
   // eslint-disable-next-line
   const [_, is, _1, block] = get(BLOCK, line)
@@ -131,6 +140,7 @@ export const getComment = line => {
 export const getProp = line => {
   // eslint-disable-next-line
   let [_, name, _1, value = ''] = get(PROP, line)
+  debugger
 
   const prop = { name, isSlot: false, value }
 
