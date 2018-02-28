@@ -12,22 +12,11 @@ export default ({ state, name }) => {
   }`
       : ''
 
-  const block = `this.props["${state.testIdKey}"] || "${state.name}"`
-  const maybeTracking =
-    state.track && !state.debug
-      ? `componentDidMount() {
-  this.context.track({ block: ${block}, action: "enter" })
-}
-
-componentWillUnmount() {
-  this.context.track({ block: ${block}, action: "leave" })
-}`
-      : ''
+  const maybeTracking = state.track && !state.debug
 
   if (maybeState || maybeTracking) {
     return `class ${name} extends React.Component {
   ${maybeState}
-  ${maybeTracking}
 
   render() {
     const { ${maybeTracking ? 'context,' : ''} props, ${
