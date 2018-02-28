@@ -351,7 +351,7 @@ height 50`
       try {
         const rawFile = path.join(src, f)
         const source = await fs.readFile(rawFile, 'utf-8')
-        const parsed = parse({ source })
+        const parsed = parse({ enableSystemScopes: !debug, source })
         viewsSources[view] = source
         viewsParsed[view] = parsed
 

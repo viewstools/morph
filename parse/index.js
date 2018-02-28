@@ -24,6 +24,7 @@ import getTags from './get-tags.js'
 
 export default ({
   convertSlotToProps = true,
+  enableSystemScopes = true,
   skipComments = true,
   source,
 } = {}) => {
@@ -312,7 +313,7 @@ export default ({
         }
 
         if (name === 'when') {
-          const isSystem = isSystemScope(slotName)
+          const isSystem = enableSystemScopes && isSystemScope(slotName)
 
           if (value === '' || value === '<' || value === '<!') {
             warnings.push({
