@@ -23,11 +23,9 @@ import {
 import getLoc from './get-loc.js'
 import getTags from './get-tags.js'
 
-export default ({
-  convertSlotToProps = true,
-  skipComments = true,
-  source,
-} = {}) => {
+export default (
+  { convertSlotToProps = true, skipComments = true, source } = {}
+) => {
   // convert crlf to lf
   const text = source.replace(/\r\n/g, '\n')
   const rlines = text.split('\n')
@@ -83,9 +81,9 @@ export default ({
           )
         ) {
           fonts.push({
-            id: `${fontFamily}-${fontWeight}${
-              fontStyle === 'italic' ? '-italic' : ''
-            }`,
+            id: `${fontFamily}-${fontWeight}${fontStyle === 'italic'
+              ? '-italic'
+              : ''}`,
             family: fontFamily,
             weight: fontWeight,
             style: fontStyle,
@@ -135,6 +133,7 @@ export default ({
     const block = {
       type: 'Block',
       name,
+      isAnimated: false,
       isBasic: isBasic(name),
       isGroup: false,
       loc: getLoc(i, 0),
@@ -172,18 +171,14 @@ export default ({
           if (block.isBasic) {
             warnings.push({
               loc: block.loc,
-              type: `A basic block "${
-                block.name
-              }" can't be inside a List. Use a view you made instead.`,
+              type: `A basic block "${block.name}" can't be inside a List. Use a view you made instead.`,
               line,
               blocker: true,
             })
           } else if (last.children.length > 0) {
             warnings.push({
               loc: block.loc,
-              type: `A List can only have one view inside. "${
-                block.name
-              }" is outside of it. Put 1 empty line before.`,
+              type: `A List can only have one view inside. "${block.name}" is outside of it. Put 1 empty line before.`,
               line,
             })
           } else {
@@ -233,9 +228,9 @@ export default ({
       if (newLinesBeforePreviousBlock > 2) {
         const linesToRemove = newLinesBeforePreviousBlock - 2
         help.push(
-          `remove ${linesToRemove} empty line${
-            linesToRemove > 1 ? 's' : ''
-          } before`
+          `remove ${linesToRemove} empty line${linesToRemove > 1
+            ? 's'
+            : ''} before`
         )
       }
       warnings.push({
@@ -374,6 +369,7 @@ export default ({
         if (tags.animation) {
           const animation = getAnimation(value)
           propNode.value = animation.defaultValue
+          block.isAnimated = true
           propNode.animation = animation.properties
         }
 
@@ -438,9 +434,7 @@ export default ({
           ) {
             warnings.push({
               loc: propNode.loc,
-              type: `You're missing a base prop for ${
-                propNode.name
-              }. Add it before all whens on the block.`,
+              type: `You're missing a base prop for ${propNode.name}. Add it before all whens on the block.`,
               line,
             })
           }

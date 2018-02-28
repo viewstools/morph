@@ -51,7 +51,7 @@ const dymPropMatcher = new DidYouMeanMatcher([
 export const didYouMeanBlock = block => dymBlockMatcher.get(block)
 export const didYouMeanProp = prop => dymPropMatcher.get(prop)
 
-const ANIMATION = /(.+)(?:\s)(spring|linear|ease|easeOut|easeIn|easeInOut)(?:\s?(.*)?)/
+const ANIMATION = /(.+)(?:\s)(spring|linear|easeOut|easeIn|easeInOut|ease)(?:\s?(.*)?)/
 const BASIC = /^(CaptureEmail|CaptureFile|CaptureNumber|CapturePhone|CaptureSecure|CaptureText|CaptureTextArea|Horizontal|Image|List|Svg|SvgCircle|SvgEllipse|SvgDefs|SvgGroup|SvgLinearGradient|SvgRadialGradient|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgSymbol|SvgText|SvgUse|SvgStop|Text|Vertical)$/i
 const BLOCK = /^([A-Z][a-zA-Z0-9]*)(\s+([A-Z][a-zA-Z0-9]*))?$/
 const BOOL = /^(false|true)$/i

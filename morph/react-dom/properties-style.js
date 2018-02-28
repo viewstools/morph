@@ -6,6 +6,7 @@ import {
   hasKeysInChildren,
 } from '../utils.js'
 import hash from '../hash.js'
+import flatten from 'flatten'
 
 export { enter }
 
@@ -37,6 +38,10 @@ export function leave(node, parent, state) {
       )
       .join(',\n')
 
+    if (node.isAnimated) {
+      cssStatic = cssStatic + asAnimatedCss(node)
+    }
+
     let cssDynamic = ['({ props }) => ({']
     cssDynamic = cssDynamic.concat(
       Object.keys(dynamic)
@@ -51,9 +56,11 @@ export function leave(node, parent, state) {
     cssDynamic = cssDynamic.join('\n')
 
     if (cssStatic || cssDynamic) {
-      state.styles[node.nameFinal] = `const ${node.nameFinal} = styled('${
-        node.nameTag
-      }')(${cssStatic ? `{${cssStatic}}, ` : ''}${cssDynamic})`
+      state.styles[
+        node.nameFinal
+      ] = `const ${node.nameFinal} = styled('${node.nameTag}')(${cssStatic
+        ? `{${cssStatic}}, `
+        : ''}${cssDynamic})`
 
       // TODO we may want to be smarter here and only pass what's needed
       state.render.push(` props={props}`)
@@ -65,7 +72,7 @@ export function leave(node, parent, state) {
     node.styleName = id
     node.className.push(`\${${id}}`)
 
-    const css = Object.keys(staticStyle)
+    let css = Object.keys(staticStyle)
       .filter(
         key => allowedStyleKeys.includes(key) && hasKeys(staticStyle[key])
       )
@@ -78,6 +85,17 @@ export function leave(node, parent, state) {
       state.styles[id] = `const ${id} = css({${css}})`
     }
   }
+}
+
+const asAnimatedCss = node => {
+  const animatedProps = node.scopes.map(scope =>
+    scope.properties.filter(prop => prop.animation)
+  )
+
+  const animatedCss = flatten(animatedProps)
+    .map(prop => `${prop.name}`)
+    .join(', ')
+  return `,\nwillChange: '${animatedCss}'`
 }
 
 const asDynamicCss = styles =>
