@@ -4,6 +4,7 @@ const { readFileSync, statSync } = require('fs')
 const { morph, pathToName } = require('./lib.js')
 const chalk = require('chalk')
 const watch = require('./watch.js')
+const morphInlineSvg = require('./morph/inline-svg.js')
 
 let {
   _,
@@ -57,7 +58,6 @@ if (help) {
 }
 
 const input = Array.isArray(_) && _[0]
-
 if (!input) {
   console.error(
     'You need to specify an input file. Eg run views-morph some.view'
@@ -115,15 +115,19 @@ if (shouldWatch) {
       track,
     })
   } else {
-    const { code } = morph(readFileSync(input, 'utf-8'), {
-      as,
-      compile,
-      file: { raw: input, relative: input },
-      name: pathToName(input),
-      pretty,
-      track,
-    })
+    if (input.includes('.svg')) {
+      return morphInlineSvg(input).then(code => console.log(code))
+    } else {
+      const { code } = morph(readFileSync(input, 'utf-8'), {
+        as,
+        compile,
+        file: { raw: input, relative: input },
+        name: pathToName(input),
+        pretty,
+        track,
+      })
 
-    console.log(code)
+      console.log(code)
+    }
   }
 }
