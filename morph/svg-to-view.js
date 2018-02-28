@@ -6,7 +6,6 @@ const toPascalCase = require('to-pascal-case')
 
 const svgCustomStyles = [
   'alignSelf <',
-  'flex <',
   'marginTop <',
   'marginBottom <',
   'marginLeft <',
@@ -22,9 +21,11 @@ const addSlots = (prop, value) => {
   return value
 }
 
+const IGNORE_ATTRS = ['xmlns', 'id', 'class']
+
 const getAttrs = attr =>
   Object.keys(attr)
-    .filter(a => a !== 'xmlns')
+    .filter(a => !IGNORE_ATTRS.includes(a))
     .map(prop => {
       let value = attr[prop]
       if (Array.isArray(value)) {
@@ -46,12 +47,12 @@ const getBlock = raw => {
   }
 }
 
-const IGNORE = ['title', 'desc']
+const IGNORE_TAGS = ['title', 'desc']
 
 const parseSvg = ({ attr, child, tag }) => {
   const s = []
 
-  if (!tag || IGNORE.includes(tag.toLowerCase())) return false
+  if (!tag || IGNORE_TAGS.includes(tag.toLowerCase())) return false
 
   s.push(getBlock(tag))
   if (tag === 'svg') {
