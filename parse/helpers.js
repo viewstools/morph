@@ -128,7 +128,6 @@ export const getAnimation = line => {
       properties[values[i]] = getValue(values[i + 1], 10)
     }
   }
-  debugger
 
   if (animationType !== 'spring' && !properties.duration) {
     properties.duration = 150

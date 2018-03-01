@@ -7,6 +7,7 @@ import {
 } from '../utils.js'
 import hash from '../hash.js'
 import flatten from 'flatten'
+import toSlugCase from 'to-slug-case'
 
 export { enter }
 
@@ -92,12 +93,23 @@ const asAnimatedCss = node => {
     node.scopes.map(scope => scope.properties.filter(prop => prop.animation))
   )
 
-  debugger
-  // transition: 'color 150ms ease-out, font-size 150ms ease-out'
+  //TODO handle delay
+  const names = animatedProps.map(prop => `${toSlugCase(prop.name)}`)
 
-  const animatedCss = animatedProps.map(prop => `${prop.name}`).join(', ')
-  return `,\nwillChange: '${animatedCss}'`
+  let transition = ''
+  animatedProps.forEach((prop, i) => {
+    if (i === 0) {
+      transition += makeTransition(names[i], prop.animation)
+    } else {
+      transition += `, ${makeTransition(names[i], prop.animation)}`
+    }
+  })
+
+  return `,\ntransition: '${transition}',\nwillChange: '${names.join(', ')}'`
 }
+
+const makeTransition = (name, animation) =>
+  `${name} ${animation.duration}ms ${toSlugCase(animation.curve)}`
 
 const asDynamicCss = styles =>
   Object.keys(styles).map(prop => `${prop}: ${styles[prop]}`)
