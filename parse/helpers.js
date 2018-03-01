@@ -125,16 +125,17 @@ export const getAnimation = line => {
   if (animationValues) {
     const values = animationValues.split(' ')
     for (let i = 0; i < values.length; i = i + 2) {
-      properties[values[i]] = values[i + 1]
+      properties[values[i]] = getValue(values[i + 1], 10)
     }
   }
+  debugger
 
   if (animationType !== 'spring' && !properties.duration) {
     properties.duration = 150
   }
 
   return {
-    defaultValue,
+    defaultValue: getValue(defaultValue),
     properties,
   }
 }
