@@ -88,13 +88,14 @@ export function leave(node, parent, state) {
 }
 
 const asAnimatedCss = node => {
-  const animatedProps = node.scopes.map(scope =>
-    scope.properties.filter(prop => prop.animation)
+  const animatedProps = flatten(
+    node.scopes.map(scope => scope.properties.filter(prop => prop.animation))
   )
 
-  const animatedCss = flatten(animatedProps)
-    .map(prop => `${prop.name}`)
-    .join(', ')
+  debugger
+  // transition: 'color 150ms ease-out, font-size 150ms ease-out'
+
+  const animatedCss = animatedProps.map(prop => `${prop.name}`).join(', ')
   return `,\nwillChange: '${animatedCss}'`
 }
 

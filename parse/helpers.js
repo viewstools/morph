@@ -129,6 +129,10 @@ export const getAnimation = line => {
     }
   }
 
+  if (animationType !== 'spring' && !properties.duration) {
+    properties.duration = 150
+  }
+
   return {
     defaultValue,
     properties,
