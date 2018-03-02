@@ -93,7 +93,6 @@ const asAnimatedCss = node => {
     node.scopes.map(scope => scope.properties.filter(prop => prop.animation))
   )
 
-  //TODO handle delay
   const names = animatedProps.map(prop => `${toSlugCase(prop.name)}`)
 
   let transition = ''
@@ -109,7 +108,9 @@ const asAnimatedCss = node => {
 }
 
 const makeTransition = (name, animation) =>
-  `${name} ${animation.duration}ms ${toSlugCase(animation.curve)}`
+  `${name} ${animation.duration}ms ${toSlugCase(
+    animation.curve
+  )} ${animation.delay}ms`
 
 const asDynamicCss = styles =>
   Object.keys(styles).map(prop => `${prop}: ${styles[prop]}`)

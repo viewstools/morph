@@ -115,6 +115,24 @@ export const isUserComment = line => is(USER_COMMENT, line)
 
 const get = (regex, line) => line.match(regex)
 
+const addDefaults = (animationType, properties) => {
+  if (!properties.delay) {
+    properties.delay = 0
+  }
+
+  if (animationType !== 'spring' && !properties.duration) {
+    properties.duration = 150
+  } else if (animationType === 'spring') {
+    if (!properties.stiffness) {
+      properties.stiffness = 100
+    }
+    if (!properties.damping) {
+      properties.damping = 10
+    }
+  }
+  return properties
+}
+
 export const getAnimation = line => {
   // eslint-disable-next-line
   const [_, defaultValue, animationType, animationValues] = get(ANIMATION, line)
@@ -129,13 +147,9 @@ export const getAnimation = line => {
     }
   }
 
-  if (animationType !== 'spring' && !properties.duration) {
-    properties.duration = 150
-  }
-
   return {
     defaultValue: getValue(defaultValue),
-    properties,
+    properties: addDefaults(animationType, properties),
   }
 }
 
