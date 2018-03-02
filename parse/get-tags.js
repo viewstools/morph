@@ -11,7 +11,7 @@ const shouldBeSlot = prop => SLOT_PROPS.includes(prop) || /^on[A-Z]/.test(prop)
 export default ({ name, isSlot, slotName, slotIsNot, value, block }) => {
   const tags = {}
 
-  if (isAnimation(value)) tags.animation = true
+  if (isAnimation(value) && name !== 'text') tags.animation = true
   if (isStyle(name)) tags.style = true
   if (isUnsupportedShorthand(name) && block.isBasic) {
     tags.unsupportedShorthand = true
