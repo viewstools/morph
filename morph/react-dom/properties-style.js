@@ -73,7 +73,7 @@ export function leave(node, parent, state) {
     node.styleName = id
     node.className.push(`\${${id}}`)
 
-    let css = Object.keys(staticStyle)
+    const css = Object.keys(staticStyle)
       .filter(
         key => allowedStyleKeys.includes(key) && hasKeys(staticStyle[key])
       )

@@ -369,8 +369,8 @@ export default (
         if (tags.animation) {
           const animation = getAnimation(value)
           propNode.value = animation.defaultValue
-          block.isAnimated = true
           propNode.animation = animation.properties
+          block.isAnimated = true
         }
 
         if (tags.slot) {

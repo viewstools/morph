@@ -2,6 +2,7 @@ import safe from './react/safe.js'
 import wrap from './react/wrap.js'
 import toCamelCase from 'to-camel-case'
 import toSlugCase from 'to-slug-case'
+import flatten from 'flatten'
 
 const safeScope = value =>
   typeof value === 'string' && !isSlot(value) ? JSON.stringify(value) : value
@@ -213,3 +214,30 @@ export const makeOnClickTracker = (node, state) => {
 
 export const hasAnimatedChild = node =>
   node.children && node.children.some(child => child.isAnimated)
+
+const getDefaultValue = (node, name) =>
+  node.properties.find(prop => prop.name === name).value
+
+const getAnimatedCssString = (node, prop) =>
+  `${prop.name}: getAnimatedValue(this.animatedValue, ${getDefaultValue(
+    node,
+    prop.name
+  )}, ${prop.value})`
+
+export const getAnimatedStyles = node => {
+  let animated = ''
+  const animatedProps = flatten(
+    node.scopes.map(scope =>
+      scope.properties.filter(prop => prop.tags.animation === true)
+    )
+  )
+  animatedProps.forEach((prop, i) => {
+    if (i === 0) {
+      animated += getAnimatedCssString(node, prop)
+    } else {
+      animated += `, ${getAnimatedCssString(node, prop)}`
+    }
+  })
+
+  return animated
+}

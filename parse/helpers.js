@@ -143,7 +143,7 @@ export const getAnimation = line => {
   if (animationValues) {
     const values = animationValues.split(' ')
     for (let i = 0; i < values.length; i = i + 2) {
-      properties[values[i]] = getValue(values[i + 1], 10)
+      properties[values[i]] = getValue(values[i + 1])
     }
   }
 
