@@ -1,5 +1,6 @@
 import * as visitor from './react-native/block.js'
 import getStyleForProperty from './react-native/get-style-for-property.js'
+import getAnimatedValue from './react-native/get-animated-value.js'
 import getStyles from './react-native/get-styles.js'
 import getValueForProperty from './react-native/get-value-for-property.js'
 import maybeUsesTextInput from './react-native/maybe-uses-text-input.js'
@@ -71,6 +72,7 @@ export default ({ file, getImport, name, track = true, views }) => {
       getStyles,
       name: finalName,
       state,
+      getAnimatedValue,
     }),
     fonts: parsed.fonts,
     slots: parsed.slots,

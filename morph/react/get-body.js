@@ -30,9 +30,9 @@ componentWillUnmount() {
   ${maybeTracking}
 
   render() {
-    const { ${maybeTracking ? 'context,' : ''} props, ${
-      maybeState ? 'state' : ''
-    } } = this
+    const { ${maybeTracking ? 'context,' : ''} props, ${maybeState
+      ? 'state'
+      : ''} } = this
     ${maybeChildrenArray}
     return (${render})
   }

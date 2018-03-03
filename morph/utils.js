@@ -208,7 +208,8 @@ export const makeOnClickTracker = (node, state) => {
 
   state.isTracking = true
 
-  return `event => context.track({ block: ${block}, action: "click", callback: ${
-    node.value
-  }, event })`
+  return `event => context.track({ block: ${block}, action: "click", callback: ${node.value}, event })`
 }
+
+export const hasAnimatedChild = node =>
+  node.children && node.children.some(child => child.isAnimated)
