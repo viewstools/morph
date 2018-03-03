@@ -83,6 +83,7 @@ const UNSUPPORTED_SHORTHAND = {
     'shadowSpread',
     'shadowColor',
   ],
+  flex: ['flexGrow'],
   margin: ['marginTop', 'marginRight', 'marginBottom', 'marginLeft'],
   padding: ['paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft'],
   textShadow: ['shadowOffsetX', 'shadowOffsetY', 'shadowBlur', 'shadowColor'],
