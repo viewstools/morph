@@ -7,9 +7,6 @@ marginTop <
 marginBottom <
 marginLeft <
 marginRight <
-SvgStyle
-false
-
 SvgGroup
 fillOpacity .7
 stroke < #000

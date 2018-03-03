@@ -21,7 +21,7 @@ const addSlots = (prop, value) => {
   return value
 }
 
-const IGNORE_ATTRS = ['xmlns', 'id', 'class']
+const IGNORE_ATTRS = ['xmlns', 'id', 'class', 'onclick']
 
 const getAttrs = attr =>
   Object.keys(attr)
@@ -47,7 +47,7 @@ const getBlock = raw => {
   }
 }
 
-const IGNORE_TAGS = ['title', 'desc']
+const IGNORE_TAGS = ['title', 'desc', 'script', 'style']
 
 const parseSvg = ({ attr, child, tag }) => {
   const s = []
@@ -136,7 +136,9 @@ module.exports = async raw => {
   )
   const res = await svgo.optimize(raw)
 
-  return checkDuplicates(flatten(parseSvg(html2json(res.data).child[0]))).join(
-    '\n'
-  )
+  return checkDuplicates(
+    flatten(parseSvg(html2json(res.data).child[0])).filter(
+      l => typeof l === 'string'
+    )
+  ).join('\n')
 }
