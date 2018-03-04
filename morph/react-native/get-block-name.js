@@ -26,7 +26,7 @@ export default (node, parent, state) => {
       return null
 
     case 'Text':
-      return node.maybeAnimated ? `Animated.Text` : 'Text'
+      return node.isAnimated ? `Animated.Text` : 'Text'
 
     default:
       return node.name
@@ -56,7 +56,7 @@ const getGroupBlockName = (node, state) => {
     name = 'ScrollView'
   }
 
-  if (node.maybeAnimated && name !== 'Link') {
+  if (node.isAnimated && name !== 'Link') {
     name = `Animated.${name}`
   }
 
@@ -67,7 +67,7 @@ const getListBlockName = node => {
   const base = hasProp(node, /^overflow/, v => v === 'auto' || v === 'scroll')
     ? 'ScrollView'
     : 'View'
-  return node.maybeAnimated ? `Animated.${base}` : base
+  return node.isAnimated ? `Animated.${base}` : base
 }
 
 const isSvg = str => /\.svg$/.test(str)

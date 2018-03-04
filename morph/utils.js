@@ -220,11 +220,19 @@ export const hasAnimatedChild = node =>
 const getDefaultValue = (node, name) =>
   node.properties.find(prop => prop.name === name).value
 
-const getAnimatedCssString = (node, prop) =>
-  `${prop.name}: getAnimatedValue(this.animatedValue, ${getDefaultValue(
+const getAnimatedCssString = (node, prop) => {
+  // TODO: fix this 😬
+  if (typeof prop.value === 'number') {
+    return `${prop.name}: getAnimatedValue(this.animatedValue, ${getDefaultValue(
+      node,
+      prop.name
+    )}, ${prop.value})`
+  }
+  return `${prop.name}: getAnimatedValue(this.animatedValue, '${getDefaultValue(
     node,
     prop.name
-  )}, ${prop.value})`
+  )}', '${prop.value}')`
+}
 
 export const getAnimatedStyles = node => {
   let animated = ''
@@ -234,7 +242,6 @@ export const getAnimatedStyles = node => {
     )
   )
 
-  debugger
   animatedProps.forEach((prop, i) => {
     if (i === 0) {
       animated += getAnimatedCssString(node, prop)

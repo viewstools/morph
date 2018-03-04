@@ -1,5 +1,4 @@
 export default ({ state, name }) => {
-  debugger
   const render = state.render.join('')
   const maybeChildrenArray = state.usesChildrenArray
     ? `const childrenArray = React.Children.toArray(props.children)`
@@ -25,7 +24,7 @@ componentWillUnmount() {
 }`
       : ''
 
-  // TODO: what if we have multiple animations on differen scopes?
+  // TODO: what if we have multiple animations on different scopes?
   const maybeAnimated =
     state.isAnimated || state.hasAnimatedChild
       ? `animatedValue = new Animated.Value(this.props.${state.animation

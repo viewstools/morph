@@ -374,7 +374,6 @@ export default (
           // TODO: will i just get rid of this?
           block.isAnimated = true
           block.animation = { ...animation.properties, scope: scope.slotName }
-          debugger
         }
 
         if (tags.slot) {
