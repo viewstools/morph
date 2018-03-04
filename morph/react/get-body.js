@@ -28,7 +28,10 @@ componentWillUnmount() {
   // TODO: what if we have multiple animations on differen scopes?
   const maybeAnimated =
     state.isAnimated || state.hasAnimatedChild
-      ? `componentWillReceiveProps(next) {
+      ? `animatedValue = new Animated.Value(this.props.${state.animation
+          .scope} ? 1 : 0)
+      
+      componentWillReceiveProps(next) {
     const { props } = this
     if (props.${state.animation.scope} !== next.${state.animation.scope}) {
       Animated.spring(this.animatedValue, {
