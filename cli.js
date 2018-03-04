@@ -16,11 +16,12 @@ let {
   pretty,
   track,
   watch: shouldWatch,
+  version,
 } = require('minimist')(process.argv.slice(2), {
   alias: {
     help: 'h',
   },
-  booleans: ['help', 'track', 'watch'],
+  booleans: ['help', 'track', 'watch', 'version'],
 
   default: {
     as: 'react-dom',
@@ -30,6 +31,7 @@ let {
     pretty: true,
     track: false,
     watch: false,
+    version: false,
   },
 })
 
@@ -52,8 +54,15 @@ if (help) {
     --pretty        format output code, defaults to true
     --track         enable UI tracking, defaults to false
     --watch         watch a directory and produce .view.js files
+    --version       print the version
   `)
 
+  process.exit()
+}
+
+if (version) {
+  const pkg = require('./package.json')
+  console.log(`v${pkg.version}`)
   process.exit()
 }
 
