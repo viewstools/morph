@@ -3,6 +3,7 @@ import getStyleForProperty from './react-native/get-style-for-property.js'
 import getAnimatedValue from './react-native/get-animated-value.js'
 import getStyles from './react-native/get-styles.js'
 import getValueForProperty from './react-native/get-value-for-property.js'
+import maybeUsesAnimated from './react-native/maybe-uses-animated.js'
 import maybeUsesTextInput from './react-native/maybe-uses-text-input.js'
 import maybeUsesRouter from './react-native/maybe-uses-router.js'
 import maybeUsesStyleSheet from './react-native/maybe-uses-style-sheet.js'
@@ -60,10 +61,10 @@ export default ({ file, getImport, name, track = true, views }) => {
 
   walk(parsed.views[0], visitor, state)
 
+  maybeUsesAnimated(state)
   maybeUsesTextInput(state)
   maybeUsesRouter(state)
   maybeUsesStyleSheet(state)
-
   const finalGetImport = name => imports[name] || getImport(name)
 
   return {
