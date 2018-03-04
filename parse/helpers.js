@@ -215,7 +215,11 @@ export const getUnsupportedShorthandExpanded = (name, value) => {
       `${props[2]} ${bottom}`,
       `${props[3]} ${left}`,
     ]
+  } else if (name === 'flex') {
+    return [`flexGrow ${value}`, 'flexShrink 1']
   }
+
+  return []
 }
 export const getValue = value => {
   if (isFloat(value)) {
