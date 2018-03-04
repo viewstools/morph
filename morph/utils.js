@@ -116,6 +116,8 @@ export const getStyleType = node =>
 export const hasKeys = obj => Object.keys(obj).length > 0
 export const hasKeysInChildren = obj =>
   Object.keys(obj).some(k => hasKeys(obj[k]))
+// const hasKeyInChildren = (obj, key) =>
+//   Object.keys(obj).some(k => hasKeys(obj[key]))
 
 export const hasProp = (node, key, match) => {
   const prop = getProp(node, key)
@@ -231,6 +233,8 @@ export const getAnimatedStyles = node => {
       scope.properties.filter(prop => prop.tags.animation === true)
     )
   )
+
+  debugger
   animatedProps.forEach((prop, i) => {
     if (i === 0) {
       animated += getAnimatedCssString(node, prop)

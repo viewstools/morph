@@ -370,7 +370,11 @@ export default (
           const animation = getAnimation(value)
           propNode.value = animation.defaultValue
           propNode.animation = animation.properties
+          propNode.scope = scope.slotName
+          // TODO: will i just get rid of this?
           block.isAnimated = true
+          block.animation = { ...animation.properties, scope: scope.slotName }
+          debugger
         }
 
         if (tags.slot) {

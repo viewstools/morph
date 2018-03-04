@@ -1,4 +1,5 @@
 export default ({ state, name }) => {
+  debugger
   const render = state.render.join('')
   const maybeChildrenArray = state.usesChildrenArray
     ? `const childrenArray = React.Children.toArray(props.children)`
@@ -24,10 +25,27 @@ componentWillUnmount() {
 }`
       : ''
 
-  if (maybeState || maybeTracking) {
+  // TODO: what if we have multiple animations on differen scopes?
+  const maybeAnimated =
+    state.isAnimated || state.hasAnimatedChild
+      ? `componentWillReceiveProps(next) {
+    const { props } = this
+    if (props.${state.animation.scope} !== next.${state.animation.scope}) {
+      Animated.spring(this.animatedValue, {
+        toValue: next.${state.animation.scope} ? 1 : 0,
+        stiffness: ${state.animation.stiffness},
+        damping: ${state.animation.damping},
+        delay: ${state.animation.delay}
+      }).start()
+    }
+  }`
+      : ''
+
+  if (maybeState || maybeTracking || maybeAnimated) {
     return `class ${name} extends React.Component {
   ${maybeState}
   ${maybeTracking}
+  ${maybeAnimated}
 
   render() {
     const { ${maybeTracking ? 'context,' : ''} props, ${maybeState
