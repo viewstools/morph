@@ -1,8 +1,11 @@
 import { enter } from '../react/properties-style.js'
 import {
+  // getAnimatedProps,
   getAnimatedStyles,
   getObjectAsString,
   hasAnimatedChild,
+  // TODO: Think of a better name 🙈
+  getNonAnimatedDynamicStyles,
   hasKeys,
 } from '../utils.js'
 import hash from '../hash.js'
@@ -32,9 +35,10 @@ export const leave = (node, parent, state) => {
     style = style ? `[${style},{${animated}}]` : `{${animated}}`
     state.isAnimated = true
     state.animation = node.animation
-  } else if (hasKeys(node.style.dynamic.base)) {
-    //TODO: handle a mix of dynamic/animated styles
-    const dynamic = getObjectAsString(node.style.dynamic.base)
+  }
+
+  if (hasKeys(node.style.dynamic.base)) {
+    const dynamic = getObjectAsString(getNonAnimatedDynamicStyles(node))
     style = style ? `[${style},${dynamic}]` : dynamic
   }
 

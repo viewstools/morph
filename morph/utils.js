@@ -234,15 +234,16 @@ const getAnimatedCssString = (node, prop) => {
   )}', '${prop.value}')`
 }
 
-export const getAnimatedStyles = node => {
-  let animated = ''
-  const animatedProps = flatten(
+const getAnimatedProps = node =>
+  flatten(
     node.scopes.map(scope =>
       scope.properties.filter(prop => prop.tags.animation === true)
     )
   )
+export const getAnimatedStyles = node => {
+  let animated = ''
 
-  animatedProps.forEach((prop, i) => {
+  getAnimatedProps(node).forEach((prop, i) => {
     if (i === 0) {
       animated += getAnimatedCssString(node, prop)
     } else {
@@ -251,4 +252,15 @@ export const getAnimatedStyles = node => {
   })
 
   return animated
+}
+
+export const getNonAnimatedDynamicStyles = node => {
+  const animatedProps = getAnimatedProps(node).map(prop => prop.name)
+
+  return Object.keys(node.style.dynamic.base)
+    .filter(key => !animatedProps.includes(key))
+    .reduce((obj, key) => {
+      obj[key] = node.style.dynamic.base[key]
+      return obj
+    }, {})
 }
