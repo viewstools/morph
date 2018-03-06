@@ -13,6 +13,7 @@ import hash from '../hash.js'
 export { enter }
 
 export const leave = (node, parent, state) => {
+  const dynamicStyles = getNonAnimatedDynamicStyles(node)
   let style = null
 
   if (
@@ -37,8 +38,8 @@ export const leave = (node, parent, state) => {
     state.animation = node.animation
   }
 
-  if (hasKeys(node.style.dynamic.base)) {
-    const dynamic = getObjectAsString(getNonAnimatedDynamicStyles(node))
+  if (hasKeys(dynamicStyles)) {
+    const dynamic = getObjectAsString(dynamicStyles)
     style = style ? `[${style},${dynamic}]` : dynamic
   }
 
