@@ -24,21 +24,42 @@ componentWillUnmount() {
 }`
       : ''
 
-  const composeSpring = (animation, index) => {
-    // TODO non spring animations ??
-    return `
-    if (props.${animation.scope} !== next.${animation.scope}) {
+  const composeAnimation = (animation, index) => {
+    const type = animation.curve === 'spring' ? 'spring' : 'timing'
+
+    if (type === 'spring') {
+      return composeSpring(animation, index)
+    }
+    if (type === 'timing') {
+      return composeTiming(animation, index)
+    }
+  }
+
+  const composeSpring = (animation, index) =>
+    `if (props.${animation.scope} !== next.${animation.scope}) {
       Animated.spring(this.animatedValue${index}, {
         toValue: next.${animation.scope} ? 1 : 0,
         stiffness: ${animation.stiffness},
         damping: ${animation.damping},
-        delay: ${animation.delay}
+        delay: ${animation.delay},
+        useNativeDriver: true
       }).start()
     }`
-  }
+
+  const composeTiming = (animation, index) =>
+    `if (props.${animation.scope} !== next.${animation.scope}) {
+      Animated.timing(this.animatedValue${index}, {
+        toValue: next.${animation.scope} ? 1 : 0,
+        duration: ${animation.duration},
+        delay: ${animation.delay},
+        useNativeDriver: true
+      }).start()
+    }`
 
   const composeValues = (animation, index) =>
-    `animatedValue${index} = new Animated.Value(this.props.${animation.scope} ? 1 : 0)
+    `animatedValue${index} = new Animated.Value(this.props.${
+      animation.scope
+    } ? 1 : 0)
     `
 
   const maybeAnimated =
@@ -49,7 +70,7 @@ componentWillUnmount() {
       componentWillReceiveProps(next) {
           const { props } = this
           ${state.animations
-            .map((animation, index) => composeSpring(animation, index))
+            .map((animation, index) => composeAnimation(animation, index))
             .join('')}
         }`
       : ''
@@ -61,9 +82,9 @@ componentWillUnmount() {
   ${maybeAnimated}
 
   render() {
-    const { ${maybeTracking ? 'context,' : ''} props, ${maybeState
-      ? 'state'
-      : ''} } = this
+    const { ${maybeTracking ? 'context,' : ''} props, ${
+      maybeState ? 'state' : ''
+    } } = this
     ${maybeChildrenArray}
     return (${render})
   }
