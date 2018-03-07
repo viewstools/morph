@@ -267,6 +267,7 @@ export default (
     const scopes = []
     let scope
     let inScope = false
+    block.animations = []
 
     for (let j = i; j <= endOfBlockIndex; j++) {
       const line = lines[j]
@@ -368,12 +369,19 @@ export default (
 
         if (tags.animation) {
           const animation = getAnimation(value)
+          const existingScope = block.animations.find(
+            animation => animation.scope === scope.slotName
+          )
           propNode.value = animation.defaultValue
           propNode.animation = animation.properties
           propNode.scope = scope.slotName
-          // TODO: will i just get rid of this?
           block.isAnimated = true
-          block.animation = { ...animation.properties, scope: scope.slotName }
+          if (!existingScope) {
+            block.animations.push({
+              ...animation.properties,
+              scope: scope.slotName,
+            })
+          }
         }
 
         if (tags.slot) {

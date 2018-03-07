@@ -116,8 +116,6 @@ export const getStyleType = node =>
 export const hasKeys = obj => Object.keys(obj).length > 0
 export const hasKeysInChildren = obj =>
   Object.keys(obj).some(k => hasKeys(obj[k]))
-// const hasKeyInChildren = (obj, key) =>
-//   Object.keys(obj).some(k => hasKeys(obj[key]))
 
 export const hasProp = (node, key, match) => {
   const prop = getProp(node, key)
@@ -223,16 +221,21 @@ const getDefaultValue = (node, name) =>
 const getAnimatedCssString = (node, prop) => {
   // TODO: fix this 😬
   if (typeof prop.value === 'number') {
-    return `${prop.name}: getAnimatedValue(this.animatedValue, ${getDefaultValue(
+    return `${prop.name}: getAnimatedValue(this.animatedValue${getScopeIndex(
       node,
-      prop.name
-    )}, ${prop.value})`
+      prop.scope
+    )}, ${getDefaultValue(node, prop.name)}, ${prop.value})`
   }
-  return `${prop.name}: getAnimatedValue(this.animatedValue, '${getDefaultValue(
+  return `${prop.name}: getAnimatedValue(this.animatedValue${getScopeIndex(
     node,
-    prop.name
-  )}', '${prop.value}')`
+    prop.scope
+  )}, '${getDefaultValue(node, prop.name)}', '${prop.value}')`
 }
+
+const getScopeIndex = (node, currentScope) =>
+  node.scopes.findIndex(scope => {
+    return scope.slotName === currentScope
+  })
 
 const getAnimatedProps = node =>
   flatten(

@@ -24,23 +24,34 @@ componentWillUnmount() {
 }`
       : ''
 
-  // TODO: what if we have multiple animations on different scopes?
+  const composeSpring = (animation, index) => {
+    // TODO non spring animations ??
+    return `
+    if (props.${animation.scope} !== next.${animation.scope}) {
+      Animated.spring(this.animatedValue${index}, {
+        toValue: next.${animation.scope} ? 1 : 0,
+        stiffness: ${animation.stiffness},
+        damping: ${animation.damping},
+        delay: ${animation.delay}
+      }).start()
+    }`
+  }
+
+  const composeValues = (animation, index) =>
+    `animatedValue${index} = new Animated.Value(this.props.${animation.scope} ? 1 : 0)
+    `
+
   const maybeAnimated =
     state.isAnimated || state.hasAnimatedChild
-      ? `animatedValue = new Animated.Value(this.props.${state.animation
-          .scope} ? 1 : 0)
-      
+      ? `${state.animations
+          .map((animation, index) => composeValues(animation, index))
+          .join('')}
       componentWillReceiveProps(next) {
-    const { props } = this
-    if (props.${state.animation.scope} !== next.${state.animation.scope}) {
-      Animated.spring(this.animatedValue, {
-        toValue: next.${state.animation.scope} ? 1 : 0,
-        stiffness: ${state.animation.stiffness},
-        damping: ${state.animation.damping},
-        delay: ${state.animation.delay}
-      }).start()
-    }
-  }`
+          const { props } = this
+          ${state.animations
+            .map((animation, index) => composeSpring(animation, index))
+            .join('')}
+        }`
       : ''
 
   if (maybeState || maybeTracking || maybeAnimated) {

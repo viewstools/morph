@@ -35,7 +35,7 @@ export const leave = (node, parent, state) => {
     const animated = getAnimatedStyles(node)
     style = style ? `[${style},{${animated}}]` : `{${animated}}`
     state.isAnimated = true
-    state.animation = node.animation
+    state.animations = node.animations
   }
 
   if (hasKeys(dynamicStyles)) {
