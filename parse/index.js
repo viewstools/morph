@@ -372,8 +372,10 @@ export default (
           const existingScope =
             block.animations.length > 0 &&
             block.animations.some(animation => {
-              animation.scope === currentAnimation.scope &&
-                animation.curve === currentAnimation.curve
+              return (
+                animation.scope === scope.slotName &&
+                animation.curve === currentAnimation.properties.curve
+              )
             }, currentAnimation)
           propNode.value = currentAnimation.defaultValue
           propNode.animation = currentAnimation.properties
