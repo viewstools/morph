@@ -2,8 +2,10 @@ import { enter } from '../react/properties-style.js'
 import {
   getActionableParent,
   getAllowedStyleKeys,
+  getAnimatedStyles,
   hasKeys,
   hasKeysInChildren,
+  hasSpringAnimation,
 } from '../utils.js'
 import hash from '../hash.js'
 import flatten from 'flatten'
@@ -57,11 +59,9 @@ export function leave(node, parent, state) {
     cssDynamic = cssDynamic.join('\n')
 
     if (cssStatic || cssDynamic) {
-      state.styles[
-        node.nameFinal
-      ] = `const ${node.nameFinal} = styled('${node.nameTag}')(${cssStatic
-        ? `{${cssStatic}}, `
-        : ''}${cssDynamic})`
+      state.styles[node.nameFinal] = `const ${node.nameFinal} = styled('${
+        node.nameTag
+      }')(${cssStatic ? `{${cssStatic}}, ` : ''}${cssDynamic})`
 
       // TODO we may want to be smarter here and only pass what's needed
       state.render.push(` props={props}`)
@@ -86,6 +86,14 @@ export function leave(node, parent, state) {
       state.styles[id] = `const ${id} = css({${css}})`
     }
   }
+
+  if (node.isAnimated && hasSpringAnimation(node)) {
+    //debugger
+    const animated = getAnimatedStyles(node)
+    state.isAnimated = true
+    state.animations = node.animations
+    state.scopes = node.scopes
+  }
 }
 
 const asAnimatedCss = node => {
@@ -108,9 +116,9 @@ const asAnimatedCss = node => {
 }
 
 const makeTransition = (name, animation) =>
-  `${name} ${animation.duration}ms ${toSlugCase(
-    animation.curve
-  )} ${animation.delay}ms`
+  `${name} ${animation.duration}ms ${toSlugCase(animation.curve)} ${
+    animation.delay
+  }ms`
 
 const asDynamicCss = styles =>
   Object.keys(styles).map(prop => `${prop}: ${styles[prop]}`)

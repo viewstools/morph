@@ -209,7 +209,9 @@ export const makeOnClickTracker = (node, state) => {
 
   state.isTracking = true
 
-  return `event => context.track({ block: ${block}, action: "click", callback: ${node.value}, event })`
+  return `event => context.track({ block: ${block}, action: "click", callback: ${
+    node.value
+  }, event })`
 }
 
 export const hasAnimatedChild = node =>
@@ -273,3 +275,6 @@ export const getNonAnimatedDynamicStyles = node => {
       return obj
     }, {})
 }
+
+export const hasSpringAnimation = node =>
+  node.animations.some(anim => anim.curve === 'spring')
