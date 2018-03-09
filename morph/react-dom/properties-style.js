@@ -3,6 +3,7 @@ import {
   getActionableParent,
   getAllowedStyleKeys,
   getAnimatedStyles,
+  hasAnimatedChild,
   hasKeys,
   hasKeysInChildren,
   hasSpringAnimation,
@@ -88,11 +89,14 @@ export function leave(node, parent, state) {
   }
 
   if (node.isAnimated && hasSpringAnimation(node)) {
-    //debugger
     const animated = getAnimatedStyles(node)
     state.isAnimated = true
     state.animations = node.animations
     state.scopes = node.scopes
+  }
+
+  if (hasAnimatedChild(node) && hasSpringAnimation(node)) {
+    state.hasAnimatedChild = true
   }
 }
 

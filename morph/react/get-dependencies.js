@@ -73,6 +73,10 @@ export default (state, getImport) => {
     dependencies.push('import styled from "react-emotion"')
   }
 
+  if (state.isAnimated && !state.isReactNative) {
+    dependencies.push('import Animated from "animated/lib/targets/react-dom"')
+  }
+
   if (usesSvg.length > 0) {
     const svg = usesSvg.filter(m => m !== 'Svg').join(', ')
     dependencies.push(`import Svg, { ${svg} } from 'react-native-svg'`)

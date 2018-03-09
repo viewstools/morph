@@ -59,7 +59,9 @@ componentWillUnmount() {
     }`
 
   const composeValues = (animation, index) =>
-    `animatedValue${index} = new Animated.Value(this.props.${animation.scope} ? 1 : 0)
+    `animatedValue${index} = new Animated.Value(this.props.${
+      animation.scope
+    } ? 1 : 0)
     `
 
   const maybeAnimated =
@@ -88,9 +90,9 @@ componentWillUnmount() {
   ${maybeAnimated}
 
   render() {
-    const { ${maybeTracking ? 'context,' : ''} props, ${maybeState
-      ? 'state'
-      : ''} } = this
+    const { ${maybeTracking ? 'context,' : ''} props, ${
+      maybeState ? 'state' : ''
+    } } = this
     ${maybeChildrenArray}
     return (${render})
   }
