@@ -1,6 +1,5 @@
 import { enter } from '../react/properties-style.js'
 import {
-  // getAnimatedProps,
   getAnimatedStyles,
   getObjectAsString,
   hasAnimatedChild,
@@ -36,6 +35,7 @@ export const leave = (node, parent, state) => {
     style = style ? `[${style},{${animated}}]` : `{${animated}}`
     state.isAnimated = true
     state.animations = node.animations
+    state.scopes = node.scopes
   }
 
   if (hasKeys(dynamicStyles)) {

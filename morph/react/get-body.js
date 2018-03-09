@@ -1,3 +1,5 @@
+import { getScopeIndex, isNewScope } from '../utils.js'
+
 export default ({ state, name }) => {
   const render = state.render.join('')
   const maybeChildrenArray = state.usesChildrenArray
@@ -57,20 +59,24 @@ componentWillUnmount() {
     }`
 
   const composeValues = (animation, index) =>
-    `animatedValue${index} = new Animated.Value(this.props.${
-      animation.scope
-    } ? 1 : 0)
+    `animatedValue${index} = new Animated.Value(this.props.${animation.scope} ? 1 : 0)
     `
 
   const maybeAnimated =
     state.isAnimated || state.hasAnimatedChild
       ? `${state.animations
-          .map((animation, index) => composeValues(animation, index))
+          .map((animation, index) => {
+            return isNewScope(state, animation, index)
+              ? composeValues(animation, getScopeIndex(state, animation.scope))
+              : ''
+          }, state.animations)
           .join('')}
       componentWillReceiveProps(next) {
           const { props } = this
           ${state.animations
-            .map((animation, index) => composeAnimation(animation, index))
+            .map(animation =>
+              composeAnimation(animation, getScopeIndex(state, animation.scope))
+            )
             .join('')}
         }`
       : ''
@@ -82,9 +88,9 @@ componentWillUnmount() {
   ${maybeAnimated}
 
   render() {
-    const { ${maybeTracking ? 'context,' : ''} props, ${
-      maybeState ? 'state' : ''
-    } } = this
+    const { ${maybeTracking ? 'context,' : ''} props, ${maybeState
+      ? 'state'
+      : ''} } = this
     ${maybeChildrenArray}
     return (${render})
   }

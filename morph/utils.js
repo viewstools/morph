@@ -232,10 +232,16 @@ const getAnimatedCssString = (node, prop) => {
   )}, '${getDefaultValue(node, prop.name)}', '${prop.value}')`
 }
 
-const getScopeIndex = (node, currentScope) =>
+export const getScopeIndex = (node, currentScope) =>
   node.scopes.findIndex(scope => {
     return scope.slotName === currentScope
   })
+
+export const isNewScope = (state, currentAnimation, index) =>
+  index ===
+  state.animations.findIndex(
+    animation => animation.scope === currentAnimation.scope
+  )
 
 const getAnimatedProps = node =>
   flatten(
