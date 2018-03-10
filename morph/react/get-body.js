@@ -26,13 +26,10 @@ componentWillUnmount() {
 }`
       : ''
 
-  const composeAnimation = (animation, index) => {
-    const type = animation.curve === 'spring' ? 'spring' : 'timing'
-
-    if (type === 'spring') {
+  const composeAnimation = (state, animation, index) => {
+    if (animation.curve === 'spring') {
       return composeSpring(animation, index)
-    }
-    if (type === 'timing') {
+    } else if (state.isReactNative) {
       return composeTiming(animation, index)
     }
   }
@@ -58,26 +55,36 @@ componentWillUnmount() {
       }).start()
     }`
 
-  const composeValues = (animation, index) =>
-    `animatedValue${index} = new Animated.Value(this.props.${
+  const composeValues = (state, animation, index) => {
+    if (animation.curve === 'timing' && !state.isReactNative) return
+    return `animatedValue${index} = new Animated.Value(this.props.${
       animation.scope
     } ? 1 : 0)
     `
+  }
 
   const maybeAnimated =
     state.isAnimated || state.hasAnimatedChild
       ? `${state.animations
           .map((animation, index) => {
             return isNewScope(state, animation, index)
-              ? composeValues(animation, getScopeIndex(state, animation.scope))
+              ? composeValues(
+                  state,
+                  animation,
+                  getScopeIndex(state, animation.scope)
+                )
               : ''
-          }, state.animations)
+          })
           .join('')}
       componentWillReceiveProps(next) {
           const { props } = this
           ${state.animations
             .map(animation =>
-              composeAnimation(animation, getScopeIndex(state, animation.scope))
+              composeAnimation(
+                state,
+                animation,
+                getScopeIndex(state, animation.scope)
+              )
             )
             .join('')}
         }`
