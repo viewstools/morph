@@ -281,3 +281,17 @@ export const hasSpringAnimation = node =>
 
 export const hasTimingAnimation = node =>
   node.animations.some(anim => anim.curve !== 'spring')
+
+export const getAllAnimatedProps = node =>
+  flatten(
+    node.scopes.map(scope => scope.properties.filter(prop => prop.animation))
+  )
+
+export const getTimingProps = node =>
+  flatten(
+    node.scopes.map(scope =>
+      scope.properties.filter(
+        prop => prop.animation && prop.animation.curve !== 'spring'
+      )
+    )
+  )

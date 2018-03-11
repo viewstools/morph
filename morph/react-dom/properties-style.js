@@ -1,8 +1,10 @@
 import { enter } from '../react/properties-style.js'
 import {
   getActionableParent,
+  getAllAnimatedProps,
   getAllowedStyleKeys,
   getAnimatedStyles,
+  getTimingProps,
   hasAnimatedChild,
   hasKeys,
   hasKeysInChildren,
@@ -43,7 +45,7 @@ export function leave(node, parent, state) {
       )
       .join(',\n')
 
-    if (node.isAnimated && hasTimingAnimation(node)) {
+    if (node.isAnimated) {
       cssStatic = cssStatic + asAnimatedCss(node)
     }
 
@@ -102,26 +104,31 @@ export function leave(node, parent, state) {
 }
 
 const asAnimatedCss = node => {
-  const animatedProps = flatten(
-    node.scopes.map(scope =>
-      scope.properties.filter(
-        prop => prop.animation && prop.animation.curve !== 'spring'
-      )
-    )
+  // const animatedProps = flatten(
+  //   node.scopes.map(scope =>
+  //     scope.properties.filter(
+  //       prop => prop.animation //&& prop.animation.curve !== 'spring'
+  //     )
+  //   )
+  // )
+
+  const names = getAllAnimatedProps(node).map(
+    prop => `${toSlugCase(prop.name)}`
   )
 
-  const names = animatedProps.map(prop => `${toSlugCase(prop.name)}`)
+  if (hasTimingAnimation(node)) {
+    let transition = ''
+    getTimingProps(node).forEach((prop, i) => {
+      if (i === 0) {
+        transition += makeTransition(prop.name, prop.animation)
+      } else {
+        transition += `, ${makeTransition(prop.name, prop.animation)}`
+      }
+    })
+    return `,\ntransition: '${transition}',\nwillChange: '${names.join(', ')}'`
+  }
 
-  let transition = ''
-  animatedProps.forEach((prop, i) => {
-    if (i === 0) {
-      transition += makeTransition(names[i], prop.animation)
-    } else {
-      transition += `, ${makeTransition(names[i], prop.animation)}`
-    }
-  })
-
-  return `,\ntransition: '${transition}',\nwillChange: '${names.join(', ')}'`
+  return `,\nwillChange: '${names.join(', ')}'`
 }
 
 const makeTransition = (name, animation) =>
