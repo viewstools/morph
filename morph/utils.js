@@ -218,7 +218,9 @@ export const hasAnimatedChild = node =>
   node.children && node.children.some(child => child.isAnimated)
 
 const getDefaultValue = (node, name) =>
-  node.properties.find(prop => prop.name === name).value
+  node.properties.find(prop => {
+    return prop.name === name || `"--${prop.name}"` === name
+  }).value
 
 const getAnimatedCssString = (node, prop) => {
   // TODO: fix this 😬
@@ -246,7 +248,9 @@ export const isNewScope = (state, currentAnimation, index) =>
   )
 
 export const getAnimatedStyles = (node, isNative) => {
-  const props = isNative ? getAllAnimatedProps(node) : getSpringProps(node)
+  const props = isNative
+    ? getAllAnimatedProps(node)
+    : convertToVars(getSpringProps(node))
   let animated = ''
 
   props.forEach((prop, i) => {
@@ -299,3 +303,8 @@ const getSpringProps = node =>
       )
     )
   )
+
+const convertToVars = props => {
+  props.forEach(prop => (prop.name = `"--${prop.name}"`))
+  return props
+}

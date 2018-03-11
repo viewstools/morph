@@ -93,6 +93,7 @@ export function leave(node, parent, state) {
   }
 
   if (node.isAnimated && hasSpringAnimation(node)) {
+    debugger
     const animated = getAnimatedStyles(node, state.isReactNative)
     style = style ? `[${style},{${animated}}]` : `{${animated}}`
     state.render.push(` style={${style}}`)
