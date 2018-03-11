@@ -19,6 +19,7 @@ export { enter }
 
 export function leave(node, parent, state) {
   const { dynamic, static: staticStyle } = node.style
+  let style = null
 
   const allowedStyleKeys = getAllowedStyleKeys(node)
   let scopedUnderParent =
@@ -92,7 +93,10 @@ export function leave(node, parent, state) {
   }
 
   if (node.isAnimated && hasSpringAnimation(node)) {
-    const animated = getAnimatedStyles(node)
+    debugger
+    const animated = getAnimatedStyles(node, state.isReactNative)
+    style = style ? `[${style},{${animated}}]` : `{${animated}}`
+    state.render.push(` style={${style}}`)
     state.isAnimated = true
     state.animations = node.animations
     state.scopes = node.scopes

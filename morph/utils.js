@@ -245,16 +245,12 @@ export const isNewScope = (state, currentAnimation, index) =>
     animation => animation.scope === currentAnimation.scope
   )
 
-const getAnimatedProps = node =>
-  flatten(
-    node.scopes.map(scope =>
-      scope.properties.filter(prop => prop.tags.animation === true)
-    )
-  )
-export const getAnimatedStyles = node => {
+export const getAnimatedStyles = (node, isNative) => {
+  const props = isNative ? getAllAnimatedProps(node) : getSpringProps(node)
   let animated = ''
+  debugger
 
-  getAnimatedProps(node).forEach((prop, i) => {
+  props.forEach((prop, i) => {
     if (i === 0) {
       animated += getAnimatedCssString(node, prop)
     } else {
@@ -266,7 +262,7 @@ export const getAnimatedStyles = node => {
 }
 
 export const getNonAnimatedDynamicStyles = node => {
-  const animatedProps = getAnimatedProps(node).map(prop => prop.name)
+  const animatedProps = getAllAnimatedProps(node).map(prop => prop.name)
 
   return Object.keys(node.style.dynamic.base)
     .filter(key => !animatedProps.includes(key))
@@ -292,6 +288,15 @@ export const getTimingProps = node =>
     node.scopes.map(scope =>
       scope.properties.filter(
         prop => prop.animation && prop.animation.curve !== 'spring'
+      )
+    )
+  )
+
+const getSpringProps = node =>
+  flatten(
+    node.scopes.map(scope =>
+      scope.properties.filter(
+        prop => prop.animation && prop.animation.curve === 'spring'
       )
     )
   )

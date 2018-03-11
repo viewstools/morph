@@ -31,7 +31,7 @@ export const leave = (node, parent, state) => {
   }
 
   if (node.isAnimated) {
-    const animated = getAnimatedStyles(node)
+    const animated = getAnimatedStyles(node, state.isReactNative)
     style = style ? `[${style},{${animated}}]` : `{${animated}}`
     state.isAnimated = true
     state.animations = node.animations
