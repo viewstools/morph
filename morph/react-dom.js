@@ -8,7 +8,6 @@ import toComponent from './react/to-component.js'
 import walk from './walk.js'
 
 const imports = {
-  Animated: "import Animated from 'react-dom-animated'",
   Link: "import { Link } from 'react-router-dom'",
   Route: "import { Route } from 'react-router-dom'",
   Router: "import { BrowserRouter as Router } from 'react-router-dom'",

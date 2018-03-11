@@ -104,14 +104,6 @@ export function leave(node, parent, state) {
 }
 
 const asAnimatedCss = node => {
-  // const animatedProps = flatten(
-  //   node.scopes.map(scope =>
-  //     scope.properties.filter(
-  //       prop => prop.animation //&& prop.animation.curve !== 'spring'
-  //     )
-  //   )
-  // )
-
   const names = getAllAnimatedProps(node).map(
     prop => `${toSlugCase(prop.name)}`
   )

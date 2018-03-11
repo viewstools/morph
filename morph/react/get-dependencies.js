@@ -17,6 +17,8 @@ export default (state, getImport) => {
   const usesNative = []
   const usesSvg = []
 
+  debugger
+
   const useNative = d => {
     if (!usesNative.includes(d)) {
       usesNative.push(d)
@@ -60,7 +62,7 @@ export default (state, getImport) => {
   }
 
   // TODO we probably want to check that the file exists and do something if it
-  // doesn;t, like warn the user at least?
+  // doesn't, like warn the user at least?
   state.images.forEach(img =>
     dependencies.push(`import ${img.name} from "${img.file}"`)
   )
