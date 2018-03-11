@@ -248,7 +248,6 @@ export const isNewScope = (state, currentAnimation, index) =>
 export const getAnimatedStyles = (node, isNative) => {
   const props = isNative ? getAllAnimatedProps(node) : getSpringProps(node)
   let animated = ''
-  debugger
 
   props.forEach((prop, i) => {
     if (i === 0) {

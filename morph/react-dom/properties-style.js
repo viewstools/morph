@@ -93,7 +93,6 @@ export function leave(node, parent, state) {
   }
 
   if (node.isAnimated && hasSpringAnimation(node)) {
-    debugger
     const animated = getAnimatedStyles(node, state.isReactNative)
     style = style ? `[${style},{${animated}}]` : `{${animated}}`
     state.render.push(` style={${style}}`)
@@ -108,9 +107,11 @@ export function leave(node, parent, state) {
 }
 
 const asAnimatedCss = node => {
-  const names = getAllAnimatedProps(node).map(
-    prop => `${toSlugCase(prop.name)}`
-  )
+  const names = [
+    ...new Set(
+      getAllAnimatedProps(node).map(prop => `${toSlugCase(prop.name)}`)
+    ),
+  ]
 
   if (hasTimingAnimation(node)) {
     let transition = ''
