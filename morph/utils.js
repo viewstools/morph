@@ -278,3 +278,6 @@ export const getNonAnimatedDynamicStyles = node => {
 
 export const hasSpringAnimation = node =>
   node.animations.some(anim => anim.curve === 'spring')
+
+export const hasTimingAnimation = node =>
+  node.animations.some(anim => anim.curve !== 'spring')

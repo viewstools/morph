@@ -7,6 +7,7 @@ import {
   hasKeys,
   hasKeysInChildren,
   hasSpringAnimation,
+  hasTimingAnimation,
 } from '../utils.js'
 import hash from '../hash.js'
 import flatten from 'flatten'
@@ -42,7 +43,7 @@ export function leave(node, parent, state) {
       )
       .join(',\n')
 
-    if (node.isAnimated) {
+    if (node.isAnimated && hasTimingAnimation(node)) {
       cssStatic = cssStatic + asAnimatedCss(node)
     }
 
@@ -102,7 +103,11 @@ export function leave(node, parent, state) {
 
 const asAnimatedCss = node => {
   const animatedProps = flatten(
-    node.scopes.map(scope => scope.properties.filter(prop => prop.animation))
+    node.scopes.map(scope =>
+      scope.properties.filter(
+        prop => prop.animation && prop.animation.curve !== 'spring'
+      )
+    )
   )
 
   const names = animatedProps.map(prop => `${toSlugCase(prop.name)}`)
