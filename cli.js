@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const { readFileSync, statSync } = require('fs')
-const { morph, pathToName } = require('./lib.js')
+const { morph, parse, pathToName } = require('./lib.js')
 const chalk = require('chalk')
 const watch = require('./watch.js')
 const morphInlineSvg = require('./morph/inline-svg.js')
@@ -127,13 +127,18 @@ if (shouldWatch) {
     if (input.includes('.svg')) {
       return morphInlineSvg(input).then(code => console.log(code))
     } else {
-      const { code } = morph(readFileSync(input, 'utf-8'), {
+      const name = pathToName(input)
+
+      const { code } = morph({
         as,
         compile,
         file: { raw: input, relative: input },
-        name: pathToName(input),
+        name,
         pretty,
         track,
+        views: {
+          [name]: parse({ source: readFileSync(input, 'utf-8') }),
+        },
       })
 
       console.log(code)
