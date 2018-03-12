@@ -218,9 +218,9 @@ export const hasAnimatedChild = node =>
   node.children && node.children.some(child => child.isAnimated)
 
 const getDefaultValue = (node, name) =>
-  node.properties.find(prop => {
-    return prop.name === name || `"--${prop.name}"` === name
-  }).value
+  node.properties.find(
+    prop => prop.name === name || `"--${prop.name}` === name.split(/[0-9]/)[0]
+  ).value
 
 const getAnimatedCssString = (node, prop) => {
   // TODO: fix this 😬
@@ -305,6 +305,18 @@ const getSpringProps = node =>
   )
 
 const convertToVars = props => {
-  props.forEach(prop => (prop.name = `"--${prop.name}"`))
+  // if there are duplicate properties, e.g. color on different scopes
+  // they need to have unique variable names
+  const propTypes = [...new Set(props.map(prop => prop.name))]
+  let listsByType = []
+  propTypes.forEach((type, i) => {
+    listsByType[i] = props.filter(prop => prop.name === type)
+  }, props)
+
+  listsByType.forEach(propsList => {
+    propsList.forEach((prop, index) => {
+      return (prop.name = `"--${prop.name}${index++}"`)
+    })
+  })
   return props
 }
