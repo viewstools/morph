@@ -89,6 +89,8 @@ const UNSUPPORTED_SHORTHAND = {
   textShadow: ['shadowOffsetX', 'shadowOffsetY', 'shadowBlur', 'shadowColor'],
   outline: ['outlineWidth', 'outlineStyle', 'outlineColor'],
   overflow: ['overflowX', 'overflowY'],
+  transform: [],
+  transformOrigin: ['transformOriginX', 'transformOriginY'],
 }
 const TRUE = /^true$/i
 const USER_COMMENT = /^##(.*)$/
@@ -217,6 +219,11 @@ export const getUnsupportedShorthandExpanded = (name, value) => {
     ]
   } else if (name === 'flex') {
     return [`flexGrow ${value}`, 'flexShrink 1']
+  } else if (name === 'transform') {
+    return [`expand the values like: translateX 10`]
+  } else if (name === 'transformOrigin') {
+    const [x, y] = value.split(' ')
+    return [`${props[0]} ${x}`, `${props[1]} ${y || x}`]
   }
 
   return []

@@ -27,6 +27,28 @@ export default (node, parent, code) => {
     case 'shadowSpread':
       return getShadow(node, parent)
 
+    case 'translateX':
+    case 'translateY':
+    case 'translateZ':
+    case 'scaleX':
+    case 'scaleY':
+    case 'scaleZ':
+    case 'skewX':
+    case 'skewY':
+    case 'rotateX':
+    case 'rotateY':
+    case 'rotateZ':
+    case 'perspective':
+      return {
+        transform: getTransform(node, parent),
+      }
+
+    case 'transformOriginX':
+    case 'transformOriginY':
+      return {
+        transformOrigin: getTransformOrigin(node, parent),
+      }
+
     case 'userSelect':
       return {
         WebkitUserSelect: node.value,
@@ -86,4 +108,12 @@ const getShadow = (node, parent) => {
   return {
     [isText ? 'textShadow' : 'boxShadow']: value,
   }
+}
+
+const getTransform = (node, parent) => {
+  return 'stuff'
+}
+
+const getTransformOrigin = (node, parent) => {
+  return 'stuff'
 }
