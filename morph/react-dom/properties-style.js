@@ -47,7 +47,9 @@ export function leave(node, parent, state) {
       .join(',\n')
 
     if (node.isAnimated) {
-      cssStatic = cssStatic + asAnimatedCss(node)
+      cssStatic = cssStatic
+        ? `${cssStatic}, ${asAnimatedCss(node)}`
+        : asAnimatedCss(node)
     }
 
     let cssDynamic = ['({ props }) => ({']
@@ -93,7 +95,6 @@ export function leave(node, parent, state) {
   }
 
   if (node.isAnimated && hasSpringAnimation(node)) {
-    debugger
     const animated = getAnimatedStyles(node, state.isReactNative)
     style = style ? `[${style},{${animated}}]` : `{${animated}}`
     state.render.push(` style={${style}}`)
@@ -123,10 +124,10 @@ const asAnimatedCss = node => {
         transition += `, ${makeTransition(prop.name, prop.animation)}`
       }
     })
-    return `,\ntransition: '${transition}',\nwillChange: '${names.join(', ')}'`
+    return `\ntransition: '${transition}',\nwillChange: '${names.join(', ')},'`
   }
 
-  return `,\nwillChange: '${names.join(', ')}'`
+  return `\nwillChange: '${names.join(', ')},'`
 }
 
 const makeTransition = (name, animation) =>
