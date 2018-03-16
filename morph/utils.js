@@ -295,7 +295,7 @@ export const getTimingProps = node =>
     )
   )
 
-const getSpringProps = node =>
+export const getSpringProps = node =>
   flatten(
     node.scopes.map(scope =>
       scope.properties.filter(
@@ -315,7 +315,8 @@ const convertToVars = props => {
 
   listsByType.forEach(propsList => {
     propsList.forEach((prop, index) => {
-      return (prop.name = `"--${prop.name}${index++}"`)
+      prop.originalName = prop.name
+      prop.name = `"--${prop.name}${index++}"`
     })
   })
   return props

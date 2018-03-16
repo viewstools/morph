@@ -4,6 +4,7 @@ import {
   getAllAnimatedProps,
   getAllowedStyleKeys,
   getAnimatedStyles,
+  getSpringProps,
   getTimingProps,
   hasAnimatedChild,
   hasKeys,
@@ -28,6 +29,19 @@ export function leave(node, parent, state) {
     scopedUnderParent = scopedUnderParent.styleName
   }
 
+  if (hasAnimatedChild(node) && hasSpringAnimation(node)) {
+    state.hasAnimatedChild = true
+  }
+
+  if (node.isAnimated && hasSpringAnimation(node)) {
+    const animated = getAnimatedStyles(node, state.isReactNative)
+    style = style ? `[${style},{${animated}}]` : `{${animated}}`
+    state.render.push(` style={${style}}`)
+    state.isAnimated = true
+    state.animations = node.animations
+    state.scopes = node.scopes
+  }
+
   // dynamic merges static styles
   if (hasKeysInChildren(dynamic)) {
     state.cssDynamic = true
@@ -50,6 +64,8 @@ export function leave(node, parent, state) {
       cssStatic = cssStatic
         ? `${cssStatic}, ${asAnimatedCss(node)}`
         : asAnimatedCss(node)
+
+      filterBaseStyles(node, dynamic)
     }
 
     let cssDynamic = ['({ props }) => ({']
@@ -92,19 +108,6 @@ export function leave(node, parent, state) {
     if (css) {
       state.styles[id] = `const ${id} = css({${css}})`
     }
-  }
-
-  if (node.isAnimated && hasSpringAnimation(node)) {
-    const animated = getAnimatedStyles(node, state.isReactNative)
-    style = style ? `[${style},{${animated}}]` : `{${animated}}`
-    state.render.push(` style={${style}}`)
-    state.isAnimated = true
-    state.animations = node.animations
-    state.scopes = node.scopes
-  }
-
-  if (hasAnimatedChild(node) && hasSpringAnimation(node)) {
-    state.hasAnimatedChild = true
   }
 }
 
@@ -174,4 +177,17 @@ const asCss = (styles, key, scopedUnderParent) => {
   if (key !== 'base') css.push(`}`)
 
   return css
+}
+
+const filterBaseStyles = (node, dynamic) => {
+  const springs = getSpringProps(node).map(spring => spring.originalName)
+
+  dynamic.base = Object.keys(dynamic.base)
+    .filter(prop => !springs.includes(prop))
+    .reduce((obj, key) => {
+      obj[key] = dynamic.base[key]
+      return obj
+    }, {})
+
+  return dynamic
 }
