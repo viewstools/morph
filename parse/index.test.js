@@ -54,6 +54,12 @@ onFocus <
 List
 from <
 Stuff`,
+
+  `Locals Vertical
+Text
+text hi
+when <es
+text hola`,
 ]
 
 const WARNING = `Warning Vertical

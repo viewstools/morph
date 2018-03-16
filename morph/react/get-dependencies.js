@@ -86,5 +86,10 @@ export default (state, getImport) => {
     dependencies.push('import PropTypes from "prop-types"')
   }
 
+  if (Object.keys(state.locals).length > 0) {
+    dependencies.push('import { Subscribe } from "unstated"')
+    dependencies.push(getImport('LocalContainer'))
+  }
+
   return dependencies.join('\n')
 }

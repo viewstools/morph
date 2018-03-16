@@ -1,6 +1,9 @@
 import { isStyle, STYLE } from './prop-is-style.js'
 import DidYouMeanMatcher from './did-you-mean.js'
 import isNumber from './prop-is-number.js'
+import locales from 'i18n-locales'
+
+const LOCAL_SCOPES = locales.map(item => item.replace(/-/g, ''))
 
 const dymBlockMatcher = new DidYouMeanMatcher(
   'CaptureEmail|CaptureFile|CaptureNumber|CapturePhone|CaptureSecure|CaptureText|CaptureTextArea|G|Horizontal|Image|List|Svg|SvgCircle|SvgEllipse|SvgDefs|SvgGroup|SvgLinearGradient|SvgRadialGradient|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgSymbol|SvgText|SvgUse|SvgStop|Text|Vertical'.split(
@@ -83,7 +86,7 @@ const UNSUPPORTED_SHORTHAND = {
     'shadowSpread',
     'shadowColor',
   ],
-  flex: ['flexGrow'],
+  flex: ['flexGrow', 'flexShrink', 'flexBasis'],
   margin: ['marginTop', 'marginRight', 'marginBottom', 'marginLeft'],
   padding: ['paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft'],
   textShadow: ['shadowOffsetX', 'shadowOffsetY', 'shadowBlur', 'shadowColor'],
@@ -216,7 +219,7 @@ export const getUnsupportedShorthandExpanded = (name, value) => {
       `${props[3]} ${left}`,
     ]
   } else if (name === 'flex') {
-    return [`flexGrow ${value}`, 'flexShrink 1']
+    return [`flexGrow ${value}`, 'flexShrink 1', 'flexBasis 0%']
   }
 
   return []
@@ -234,6 +237,8 @@ export const getValue = value => {
     return value
   }
 }
+
+export const isLocalScope = name => LOCAL_SCOPES.includes(name)
 
 const SYSTEM_SCOPES = [
   'active',

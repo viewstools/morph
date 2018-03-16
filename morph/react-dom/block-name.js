@@ -15,12 +15,14 @@ export function enter(node, parent, state) {
       prop => prop.tags.style && prop.tags.slot
     )
 
-    const hasDynamicScopedStyles = node.scopes.some(
-      scope =>
-        scope.isSystem
-          ? scope.properties.some(prop => prop.tags.style && prop.tags.slot)
-          : scope.properties.some(prop => prop.tags.style)
-    )
+    const hasDynamicScopedStyles = node.scopes
+      .filter(scope => !scope.isLocal)
+      .some(
+        scope =>
+          scope.isSystem
+            ? scope.properties.some(prop => prop.tags.style && prop.tags.slot)
+            : scope.properties.some(prop => prop.tags.style)
+      )
 
     // TODO expand to active, focus, etc
     const hasHoverStem = node.scopes.some(scope => scope.value === 'hover')

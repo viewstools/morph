@@ -50,6 +50,7 @@
     "flatten": "^1.0.2",
     "google-fonts-complete": "^1.1.1",
     "html2json": "^1.0.2",
+    "i18n-locales": "^0.0.2",
     "levenshtein": "^1.0.5",
     "lodash.sortby": "^4.7.0",
     "minimist": "^1.2.0",
