@@ -53,7 +53,7 @@ Object {
   "code": "const { get } = require('@viewstools/e2e');
 
 module.exports = {
-  Border: get('Border.Border'),
+  _top: get('Border'),
 };
 ",
 }
@@ -87,9 +87,9 @@ Object {
   "code": "const { get } = require('@viewstools/e2e');
 
 module.exports = {
-  DefaultProps: get('DefaultProps.DefaultProps'),
   Text1: get('DefaultProps.Text:1'),
   Text: get('DefaultProps.Text'),
+  _top: get('DefaultProps'),
 };
 ",
 }
@@ -112,7 +112,7 @@ Object {
   "code": "const { get } = require('@viewstools/e2e');
 
 module.exports = {
-  EmptyText: get('EmptyText.EmptyText'),
+  _top: get('EmptyText'),
 };
 ",
 }
@@ -135,8 +135,8 @@ Object {
   "code": "const { get } = require('@viewstools/e2e');
 
 module.exports = {
-  Hover: get('Hover.Hover'),
   Text: get('Hover.Text'),
+  _top: get('Hover'),
 };
 ",
 }
@@ -147,7 +147,7 @@ Object {
   "code": "const { get } = require('@viewstools/e2e');
 
 module.exports = {
-  JustText: get('JustText.JustText'),
+  _top: get('JustText'),
 };
 ",
 }
@@ -158,8 +158,8 @@ Object {
   "code": "const { get } = require('@viewstools/e2e');
 
 module.exports = {
-  ListOfSomething: get('ListOfSomething.ListOfSomething'),
   Something: get('ListOfSomething.Something'),
+  _top: get('ListOfSomething'),
 };
 ",
 }
@@ -182,7 +182,7 @@ Object {
   "code": "const { get } = require('@viewstools/e2e');
 
 module.exports = {
-  LocalImage: get('LocalImage.LocalImage', 'isCat'),
+  _top: get('LocalImage', 'isCat'),
 };
 ",
 }
@@ -193,7 +193,7 @@ Object {
   "code": "const { get } = require('@viewstools/e2e');
 
 module.exports = {
-  LocalImageSvg: get('LocalImageSvg.LocalImageSvg'),
+  _top: get('LocalImageSvg'),
 };
 ",
 }
@@ -204,9 +204,7 @@ Object {
   "code": "const { get } = require('@viewstools/e2e');
 
 module.exports = {
-  LocalOrRemoteImageWhenCode: get(
-    'LocalOrRemoteImageWhenCode.LocalOrRemoteImageWhenCode'
-  ),
+  _top: get('LocalOrRemoteImageWhenCode'),
 };
 ",
 }
@@ -254,12 +252,7 @@ Object {
   "code": "const { get } = require('@viewstools/e2e');
 
 module.exports = {
-  Scope: get(
-    'Scope.Scope',
-    'notWhatMakesBlue',
-    'whatMakesBlue',
-    'somethingGreen'
-  ),
+  _top: get('Scope', 'notWhatMakesBlue', 'whatMakesBlue', 'somethingGreen'),
 };
 ",
 }
@@ -310,8 +303,8 @@ Object {
 
 module.exports = {
   BoxShadow: get('Shadow.BoxShadow'),
-  Shadow: get('Shadow.Shadow'),
   TextShadow: get('Shadow.TextShadow'),
+  _top: get('Shadow'),
 };
 ",
 }
@@ -513,7 +506,7 @@ Object {
   "code": "const { get } = require('@viewstools/e2e');
 
 module.exports = {
-  UseText: get('UseText.UseText'),
+  _top: get('UseText'),
 };
 ",
 }
@@ -526,7 +519,7 @@ Object {
 module.exports = {
   Italic: get('UseTextCustomFont.Italic'),
   Normal: get('UseTextCustomFont.Normal'),
-  UseTextCustomFont: get('UseTextCustomFont.UseTextCustomFont'),
+  _top: get('UseTextCustomFont'),
 };
 ",
 }
@@ -548,9 +541,7 @@ Object {
   "code": "const { get } = require('@viewstools/e2e');
 
 module.exports = {
-  ViewNameIsntUsedInStyle: get(
-    'ViewNameIsntUsedInStyle.ViewNameIsntUsedInStyle'
-  ),
+  _top: get('ViewNameIsntUsedInStyle'),
 };
 ",
 }
@@ -2061,6 +2052,7 @@ const ListOfSomething = props => {
       {Array.isArray(props.from) &&
         props.from.map((item, index) => (
           <Something
+            index={index}
             {...item}
             key={item.id || index}
             data-test-id={\`ListOfSomething.Something|\`}
@@ -2179,6 +2171,7 @@ const ListWhen = props => {
       {Array.isArray(props.from) &&
         props.from.map((item, index) => (
           <Card
+            index={index}
             {...item}
             key={item.id || index}
             data-test-id={\`ListWhen.Card|\`}
