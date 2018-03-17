@@ -135,7 +135,8 @@ module.exports = async raw => {
           !(
             plugin.name === 'removeDimensions' ||
             plugin.name === 'removeViewBox' ||
-            plugin.name === 'moveElemsAttrsToGroup'
+            plugin.name === 'moveElemsAttrsToGroup' ||
+            plugin.name === 'convertTransform'
           )
       )
     )
