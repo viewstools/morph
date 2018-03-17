@@ -36,7 +36,7 @@ export const enter = [
 
     let component = []
 
-    if (!parent) {
+    if (state.name === blockName) {
       component.push(`_top: get('${blockName}'`)
     } else {
       component.push(
