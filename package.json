@@ -1,11 +1,12 @@
 {
   "name": "@viewstools/morph",
-  "version": "13.0.2",
+  "version": "13.0.3",
   "description": "Views language morpher",
   "main": "lib.js",
   "bin": {
     "views-morph": "./cli.js"
   },
+  "private": false,
   "scripts": {
     "precommit": "lint-staged",
     "prepare": "NODE_ENV=production rollup --config rollup.config.js; NODE_ENV=production rollup --config rollup.config.parse.js;",
