@@ -128,12 +128,19 @@ module.exports = async raw => {
   const svgo = new SvgOptimiser()
   // TODO revisit this hack to SVGO's plugin config :/, it's too complex
   // and undocumented to spend time going through it
-  svgo.config.plugins = svgo.config.plugins.map(list =>
-    list.filter(
-      plugin =>
-        !(plugin.name === 'removeDimensions' || plugin.name === 'removeViewBox')
+  svgo.config.plugins = svgo.config.plugins
+    .map(list =>
+      list.filter(
+        plugin =>
+          !(
+            plugin.name === 'removeDimensions' ||
+            plugin.name === 'removeViewBox' ||
+            plugin.name === 'moveElemsAttrsToGroup'
+          )
+      )
     )
-  )
+    .filter(list => list.length)
+
   const res = await svgo.optimize(raw)
 
   return checkDuplicates(
