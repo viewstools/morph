@@ -36,9 +36,13 @@ export const enter = [
 
     let component = []
 
-    component.push(
-      `${blockName.replace(':', '')}: get('${state.name}.${blockName}'`
-    )
+    if (state.name === blockName) {
+      component.push(`_top: get('${blockName}'`)
+    } else {
+      component.push(
+        `${blockName.replace(':', '')}: get('${state.name}.${blockName}'`
+      )
+    }
 
     scopes.forEach(function(scope) {
       component.push(`, '${scope}'`)
