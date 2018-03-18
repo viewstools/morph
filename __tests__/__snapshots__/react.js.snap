@@ -210,6 +210,20 @@ module.exports = {
 }
 `;
 
+exports[`e2e parses e2e Locals 1`] = `
+Object {
+  "code": "const { get } = require('@viewstools/e2e');
+
+module.exports = {
+  Locals: get('Locals.Locals'),
+  Named: get('Locals.Named'),
+  Text1: get('Locals.Text:1'),
+  Text: get('Locals.Text'),
+};
+",
+}
+`;
+
 exports[`e2e parses e2e NameIsType 1`] = `
 Object {
   "code": "const { get } = require('@viewstools/e2e');
@@ -587,20 +601,6 @@ const Vertical_h1azf9vn = css({
 });
 
 class Action extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'Action',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'Action',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -732,20 +732,6 @@ const Vertical = styled('button')(({ props }) => ({
 }));
 
 class AnimatedButton extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'AnimatedButton',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'AnimatedButton',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -856,20 +842,6 @@ const Vertical_h1n973fw = css({
 });
 
 class AppRegionDrag extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'AppRegionDrag',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'AppRegionDrag',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -949,20 +921,6 @@ const Horizontal = styled('div')(
 );
 
 class BackgroundImage extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'BackgroundImage',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'BackgroundImage',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -1073,20 +1031,6 @@ const Border1 = styled('div')(
 );
 
 class Border extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'Border',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'Border',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -1174,20 +1118,6 @@ import PropTypes from 'prop-types';
 const Vertical_h118stgu = css({ backgroundColor: 'blue' });
 
 class ClassName extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'ClassName',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'ClassName',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -1255,20 +1185,6 @@ const Text = styled('span')(({ props }) => ({
 }));
 
 class Code extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'Code',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'Code',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -1383,20 +1299,6 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import PropTypes from 'prop-types';
 
 class DefaultProps extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'DefaultProps',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'DefaultProps',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -1502,22 +1404,6 @@ const Vertical = styled('div')(({ props }) => ({
 }));
 
 class DynamicStylesApplyToBasicBlocksOnly extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block:
-        this.props['data-test-id'] || 'DynamicStylesApplyToBasicBlocksOnly',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block:
-        this.props['data-test-id'] || 'DynamicStylesApplyToBasicBlocksOnly',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -1606,20 +1492,6 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import PropTypes from 'prop-types';
 
 class EmptyText extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'EmptyText',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'EmptyText',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -1674,20 +1546,6 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import PropTypes from 'prop-types';
 
 class GoTo extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'GoTo',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'GoTo',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -1777,20 +1635,6 @@ const Text = styled('span')(
 );
 
 class Hover extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'Hover',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'Hover',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -1909,20 +1753,6 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import PropTypes from 'prop-types';
 
 class JustText extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'JustText',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'JustText',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -1982,20 +1812,6 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import PropTypes from 'prop-types';
 
 class ListOfSomething extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'ListOfSomething',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'ListOfSomething',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -2096,20 +1912,6 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import PropTypes from 'prop-types';
 
 class ListWhen extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'ListWhen',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'ListWhen',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -2221,20 +2023,6 @@ import chopperJpg from './chopper.jpg';
 import PropTypes from 'prop-types';
 
 class LocalImage extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'LocalImage',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'LocalImage',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -2305,20 +2093,6 @@ const LocalImageSvg1 = styled('img')({ width: 50 }, ({ props }) => ({
 }));
 
 class LocalImageSvg extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'LocalImageSvg',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'LocalImageSvg',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -2398,20 +2172,6 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import PropTypes from 'prop-types';
 
 class LocalOrRemoteImageWhenCode extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'LocalOrRemoteImageWhenCode',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'LocalOrRemoteImageWhenCode',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -2480,6 +2240,118 @@ export default LocalOrRemoteImageWhenCode;
 }
 `;
 
+exports[`react-dom parses react-dom Locals 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+import PropTypes from 'prop-types';
+import { Subscribe } from 'unstated';
+import LocalContainer from './LocalContainer.view.js';
+
+const TextLocal = {
+  es: 'Hola',
+  pl: 'Cześć',
+  zhHansCN: '嗨',
+};
+const TextLocal1 = {
+  es: 'Mas',
+};
+const NamedLocal = {
+  es: 'Chau, \\"dijo el amigo de alguien\\"!',
+};
+
+class Locals extends React.Component {
+  render() {
+    const { context, props } = this;
+
+    return (
+      <Subscribe to={[LocalContainer]}>
+        {local => (
+          <div
+            data-test-id={\`\${props['data-test-id'] || 'Locals'}|\`}
+            className=\\"views-block\\"
+          >
+            <span data-test-id={\`Locals.Text|\`} className=\\"views-block\\">
+              {TextLocal[local.state.lang] || 'Hi'}
+            </span>
+            <span data-test-id={\`Locals.Text:1|\`} className=\\"views-block\\">
+              {TextLocal1[local.state.lang] || 'More'}
+            </span>
+            <span data-test-id={\`Locals.Named|\`} className=\\"views-block\\">
+              {NamedLocal[local.state.lang] || 'Bye, \\"Said someone\\\\'s friend\\"!'}
+            </span>
+            {props.children}
+          </div>
+        )}
+      </Subscribe>
+    );
+  }
+}
+Locals.contextTypes = {
+  track: PropTypes.func.isRequired,
+};
+
+export default Locals;
+",
+  "fonts": Array [],
+  "slots": Array [],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom Locals: react-dom parses react-dom Locals debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+import { Subscribe } from 'unstated';
+import LocalContainer from './LocalContainer.view.js';
+
+const TextLocal = {
+  es: 'Hola',
+  pl: 'Cześć',
+  zhHansCN: '嗨',
+};
+const TextLocal1 = {
+  es: 'Mas',
+};
+const NamedLocal = {
+  es: 'Chau, \\"dijo el amigo de alguien\\"!',
+};
+
+const Locals = props => {
+  return (
+    <Subscribe to={[LocalContainer]}>
+      {local => (
+        <div
+          data-test-id={\`\${props['data-test-id'] || 'Locals'}|\`}
+          className=\\"views-block\\"
+        >
+          <span data-test-id={\`Locals.Text|\`} className=\\"views-block\\">
+            {TextLocal[local.state.lang] || 'Hi'}
+          </span>
+          <span data-test-id={\`Locals.Text:1|\`} className=\\"views-block\\">
+            {TextLocal1[local.state.lang] || 'More'}
+          </span>
+          <span data-test-id={\`Locals.Named|\`} className=\\"views-block\\">
+            {NamedLocal[local.state.lang] || 'Bye, \\"Said someone\\\\'s friend\\"!'}
+          </span>
+          {props.children}
+        </div>
+      )}
+    </Subscribe>
+  );
+};
+
+export default Locals;
+",
+  "fonts": Array [],
+  "slots": Array [],
+  "svgs": Array [],
+}
+`;
+
 exports[`react-dom parses react-dom NameIsType 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -2488,20 +2360,6 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import PropTypes from 'prop-types';
 
 class NameIsType extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'NameIsType',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'NameIsType',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -2563,20 +2421,6 @@ import PropTypes from 'prop-types';
 const Text_h7ml8je = css({ marginTop: -10 });
 
 class NegativeNumber extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'NegativeNumber',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'NegativeNumber',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -2641,20 +2485,6 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import PropTypes from 'prop-types';
 
 class NestedRoutes extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'NestedRoutes',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'NestedRoutes',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -2769,20 +2599,6 @@ const Scope1 = styled('span')(({ props }) => ({
 }));
 
 class Scope extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'Scope',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'Scope',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -2873,20 +2689,6 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import PropTypes from 'prop-types';
 
 class ScopeOnCustomView extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'ScopeOnCustomView',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'ScopeOnCustomView',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -2968,20 +2770,6 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import PropTypes from 'prop-types';
 
 class ScopePopup extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'ScopePopup',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'ScopePopup',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -3091,20 +2879,6 @@ const Content = styled('div')(({ props }) => ({
 }));
 
 class ScopePopup2 extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'ScopePopup2',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'ScopePopup2',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -3241,20 +3015,6 @@ const TextShadow = styled('span')(({ props }) => ({
 }));
 
 class Shadow extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'Shadow',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'Shadow',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -3380,20 +3140,6 @@ const WindowControl = styled('button')(
 );
 
 class SomeMissingStyle extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'SomeMissingStyle',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'SomeMissingStyle',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -3502,20 +3248,6 @@ import PropTypes from 'prop-types';
 const Horizontal_h1qq1i2q = css({ flexDirection: 'row' });
 
 class Teleport extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'Teleport',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'Teleport',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -3587,20 +3319,6 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import PropTypes from 'prop-types';
 
 class TestIds extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'TestIds',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'TestIds',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -3680,20 +3398,6 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import PropTypes from 'prop-types';
 
 class TextInterpolation extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'TextInterpolation',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'TextInterpolation',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -3788,19 +3492,6 @@ class UseCaptureEmail extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
-  }
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'UseCaptureEmail',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'UseCaptureEmail',
-      action: 'leave',
-    });
   }
 
   render() {
@@ -3908,19 +3599,6 @@ class UseCaptureFile extends React.Component {
     super(props);
     this.state = {};
   }
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'UseCaptureFile',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'UseCaptureFile',
-      action: 'leave',
-    });
-  }
 
   render() {
     const { context, props, state } = this;
@@ -3993,19 +3671,6 @@ class UseCaptureNumber extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
-  }
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'UseCaptureNumber',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'UseCaptureNumber',
-      action: 'leave',
-    });
   }
 
   render() {
@@ -4082,19 +3747,6 @@ class UseCapturePhone extends React.Component {
     super(props);
     this.state = {};
   }
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'UseCapturePhone',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'UseCapturePhone',
-      action: 'leave',
-    });
-  }
 
   render() {
     const { context, props, state } = this;
@@ -4169,19 +3821,6 @@ class UseCaptureSecure extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
-  }
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'UseCaptureSecure',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'UseCaptureSecure',
-      action: 'leave',
-    });
   }
 
   render() {
@@ -4258,19 +3897,6 @@ class UseCaptureText extends React.Component {
     super(props);
     this.state = {};
   }
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'UseCaptureText',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'UseCaptureText',
-      action: 'leave',
-    });
-  }
 
   render() {
     const { context, props, state } = this;
@@ -4345,19 +3971,6 @@ class UseCaptureTextArea extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
-  }
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'UseCaptureTextArea',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'UseCaptureTextArea',
-      action: 'leave',
-    });
   }
 
   render() {
@@ -4435,19 +4048,6 @@ class UseCaptureTextManagedFromOutside extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
-  }
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'UseCaptureTextManagedFromOutside',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'UseCaptureTextManagedFromOutside',
-      action: 'leave',
-    });
   }
 
   render() {
@@ -4537,20 +4137,6 @@ const Horizontal_h1t8p93z = css({
 });
 
 class UseHorizontal extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'UseHorizontal',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'UseHorizontal',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -4617,20 +4203,6 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import PropTypes from 'prop-types';
 
 class UseImage extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'UseImage',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'UseImage',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -4709,20 +4281,6 @@ import PropTypes from 'prop-types';
 const Horizontal_h1qq1i2q = css({ flexDirection: 'row' });
 
 class UseRouter extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'UseRouter',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'UseRouter',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -4879,20 +4437,6 @@ const Svg_hq411mi = css({
 const SvgPath_h15mb53k = css({ fill: 'red' });
 
 class UseSvg extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'UseSvg',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'UseSvg',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -5036,20 +4580,6 @@ const UseText_hjam8jb = css({
 });
 
 class UseText extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'UseText',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'UseText',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -5151,20 +4681,6 @@ const Italic_h1p02bde = css({
 });
 
 class UseTextCustomFont extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'UseTextCustomFont',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'UseTextCustomFont',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -5299,20 +4815,6 @@ import PropTypes from 'prop-types';
 const Vertical_h1cyenk5 = css({ backgroundColor: 'red' });
 
 class UseVertical extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'UseVertical',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'UseVertical',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -5379,20 +4881,6 @@ const ViewNameIsntUsedInStyle1 = styled('div')({ zIndex: 5 }, ({ props }) => ({
 }));
 
 class ViewNameIsntUsedInStyle extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'ViewNameIsntUsedInStyle',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'ViewNameIsntUsedInStyle',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -5474,20 +4962,6 @@ import PropTypes from 'prop-types';
 const App_h1qq1i2q = css({ flexDirection: 'row' });
 
 class When extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'When',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'When',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -5571,20 +5045,6 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import PropTypes from 'prop-types';
 
 class WhenTopLevel extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'WhenTopLevel',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['data-test-id'] || 'WhenTopLevel',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -5657,20 +5117,6 @@ import PropTypes from 'prop-types';
 const styles = StyleSheet.create({ h1g2xbng: { color: 'red' } });
 
 class Action extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'Action',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'Action',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -5736,20 +5182,6 @@ import { Text, TouchableWithoutFeedback, View } from 'react-native';
 import PropTypes from 'prop-types';
 
 class AnimatedButton extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'AnimatedButton',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'AnimatedButton',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -5811,20 +5243,6 @@ const styles = StyleSheet.create({
 });
 
 class AppRegionDrag extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'AppRegionDrag',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'AppRegionDrag',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -5856,20 +5274,6 @@ import PropTypes from 'prop-types';
 const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
 
 class BackgroundImage extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'BackgroundImage',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'BackgroundImage',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -5921,20 +5325,6 @@ const styles = StyleSheet.create({
 });
 
 class Border extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'Border',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'Border',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -5975,20 +5365,6 @@ import PropTypes from 'prop-types';
 const styles = StyleSheet.create({ hkg1xou: { backgroundColor: 'blue' } });
 
 class ClassName extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'ClassName',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'ClassName',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -6020,20 +5396,6 @@ import PropTypes from 'prop-types';
 const styles = StyleSheet.create({ h1jcb2fl: { backgroundColor: 'red' } });
 
 class Code extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'Code',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'Code',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -6093,20 +5455,6 @@ import { Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 
 class DefaultProps extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'DefaultProps',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'DefaultProps',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -6154,20 +5502,6 @@ import { View } from 'react-native';
 import PropTypes from 'prop-types';
 
 class DynamicStylesApplyToBasicBlocksOnly extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'DynamicStylesApplyToBasicBlocksOnly',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'DynamicStylesApplyToBasicBlocksOnly',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -6211,20 +5545,6 @@ import { Text } from 'react-native';
 import PropTypes from 'prop-types';
 
 class EmptyText extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'EmptyText',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'EmptyText',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -6251,20 +5571,6 @@ import { Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 
 class GoTo extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'GoTo',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'GoTo',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -6300,20 +5606,6 @@ const styles = StyleSheet.create({
 });
 
 class Hover extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'Hover',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'Hover',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -6374,20 +5666,6 @@ import { Text } from 'react-native';
 import PropTypes from 'prop-types';
 
 class JustText extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'JustText',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'JustText',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -6415,20 +5693,6 @@ import { View } from 'react-native';
 import PropTypes from 'prop-types';
 
 class ListOfSomething extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'ListOfSomething',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'ListOfSomething',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -6474,20 +5738,6 @@ import { View } from 'react-native';
 import PropTypes from 'prop-types';
 
 class ListWhen extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'ListWhen',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'ListWhen',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -6535,20 +5785,6 @@ import { Image } from 'react-native';
 import PropTypes from 'prop-types';
 
 class LocalImage extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'LocalImage',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'LocalImage',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -6584,20 +5820,6 @@ import PropTypes from 'prop-types';
 const styles = StyleSheet.create({ h1fkj9gt: { width: 50 } });
 
 class LocalImageSvg extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'LocalImageSvg',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'LocalImageSvg',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -6636,20 +5858,6 @@ import { Image } from 'react-native';
 import PropTypes from 'prop-types';
 
 class LocalOrRemoteImageWhenCode extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'LocalOrRemoteImageWhenCode',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'LocalOrRemoteImageWhenCode',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -6681,6 +5889,63 @@ export default LocalOrRemoteImageWhenCode;
 }
 `;
 
+exports[`react-native parses react-native Locals 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import { Text, View } from 'react-native';
+import PropTypes from 'prop-types';
+import { Subscribe } from 'unstated';
+import LocalContainer from './LocalContainer.view.js';
+
+const TextLocal = {
+  es: 'Hola',
+  pl: 'Cześć',
+  zhHansCN: '嗨',
+};
+const TextLocal1 = {
+  es: 'Mas',
+};
+const NamedLocal = {
+  es: 'Chau, \\"dijo el amigo de alguien\\"!',
+};
+
+class Locals extends React.Component {
+  render() {
+    const { context, props } = this;
+
+    return (
+      <Subscribe to={[LocalContainer]}>
+        {local => (
+          <View testID={\`\${props['testID'] || 'Locals'}|\`}>
+            <Text testID={\`Locals.Text|\`}>
+              {TextLocal[local.state.lang] || 'Hi'}
+            </Text>
+            <Text testID={\`Locals.Text:1|\`}>
+              {TextLocal1[local.state.lang] || 'More'}
+            </Text>
+            <Text testID={\`Locals.Named|\`}>
+              {NamedLocal[local.state.lang] || 'Bye, \\"Said someone\\\\'s friend\\"!'}
+            </Text>
+            {props.children}
+          </View>
+        )}
+      </Subscribe>
+    );
+  }
+}
+Locals.contextTypes = {
+  track: PropTypes.func.isRequired,
+};
+
+export default Locals;
+",
+  "fonts": Array [],
+  "slots": Array [],
+  "svgs": Array [],
+}
+`;
+
 exports[`react-native parses react-native NameIsType 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -6689,20 +5954,6 @@ import { Text } from 'react-native';
 import PropTypes from 'prop-types';
 
 class NameIsType extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'NameIsType',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'NameIsType',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -6730,20 +5981,6 @@ import PropTypes from 'prop-types';
 const styles = StyleSheet.create({ h1gnz4mf: { marginTop: -10 } });
 
 class NegativeNumber extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'NegativeNumber',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'NegativeNumber',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -6777,20 +6014,6 @@ import { Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 
 class NestedRoutes extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'NestedRoutes',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'NestedRoutes',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -6833,20 +6056,6 @@ import { Text } from 'react-native';
 import PropTypes from 'prop-types';
 
 class Scope extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'Scope',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'Scope',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -6896,20 +6105,6 @@ import Button from './Button.view.js';
 import PropTypes from 'prop-types';
 
 class ScopeOnCustomView extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'ScopeOnCustomView',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'ScopeOnCustomView',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -6953,20 +6148,6 @@ import { Text, TouchableWithoutFeedback, View } from 'react-native';
 import PropTypes from 'prop-types';
 
 class ScopePopup extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'ScopePopup',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'ScopePopup',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -7022,20 +6203,6 @@ import { Text, TouchableWithoutFeedback, View } from 'react-native';
 import PropTypes from 'prop-types';
 
 class ScopePopup2 extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'ScopePopup2',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'ScopePopup2',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -7115,20 +6282,6 @@ const styles = StyleSheet.create({
 });
 
 class Shadow extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'Shadow',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'Shadow',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -7204,20 +6357,6 @@ const styles = StyleSheet.create({
 });
 
 class SomeMissingStyle extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'SomeMissingStyle',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'SomeMissingStyle',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -7274,20 +6413,6 @@ import PropTypes from 'prop-types';
 const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
 
 class Teleport extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'Teleport',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'Teleport',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -7326,20 +6451,6 @@ import { Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 
 class TestIds extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'TestIds',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'TestIds',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -7374,20 +6485,6 @@ import { Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 
 class TextInterpolation extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'TextInterpolation',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'TextInterpolation',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -7436,19 +6533,6 @@ class UseCaptureEmail extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
-  }
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'UseCaptureEmail',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'UseCaptureEmail',
-      action: 'leave',
-    });
   }
 
   render() {
@@ -7502,19 +6586,6 @@ class UseCaptureFile extends React.Component {
     super(props);
     this.state = {};
   }
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'UseCaptureFile',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'UseCaptureFile',
-      action: 'leave',
-    });
-  }
 
   render() {
     const { context, props, state } = this;
@@ -7556,19 +6627,6 @@ class UseCaptureNumber extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
-  }
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'UseCaptureNumber',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'UseCaptureNumber',
-      action: 'leave',
-    });
   }
 
   render() {
@@ -7612,19 +6670,6 @@ class UseCapturePhone extends React.Component {
     super(props);
     this.state = {};
   }
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'UseCapturePhone',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'UseCapturePhone',
-      action: 'leave',
-    });
-  }
 
   render() {
     const { context, props, state } = this;
@@ -7666,19 +6711,6 @@ class UseCaptureSecure extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
-  }
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'UseCaptureSecure',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'UseCaptureSecure',
-      action: 'leave',
-    });
   }
 
   render() {
@@ -7722,19 +6754,6 @@ class UseCaptureText extends React.Component {
     super(props);
     this.state = {};
   }
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'UseCaptureText',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'UseCaptureText',
-      action: 'leave',
-    });
-  }
 
   render() {
     const { context, props, state } = this;
@@ -7776,19 +6795,6 @@ class UseCaptureTextArea extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
-  }
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'UseCaptureTextArea',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'UseCaptureTextArea',
-      action: 'leave',
-    });
   }
 
   render() {
@@ -7832,19 +6838,6 @@ class UseCaptureTextManagedFromOutside extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
-  }
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'UseCaptureTextManagedFromOutside',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'UseCaptureTextManagedFromOutside',
-      action: 'leave',
-    });
   }
 
   render() {
@@ -7899,20 +6892,6 @@ const styles = StyleSheet.create({
 });
 
 class UseHorizontal extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'UseHorizontal',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'UseHorizontal',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -7946,20 +6925,6 @@ import { Image } from 'react-native';
 import PropTypes from 'prop-types';
 
 class UseImage extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'UseImage',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'UseImage',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -8003,20 +6968,6 @@ import PropTypes from 'prop-types';
 const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
 
 class UseRouter extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'UseRouter',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'UseRouter',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -8087,20 +7038,6 @@ import Svg, {
 import PropTypes from 'prop-types';
 
 class UseSvg extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'UseSvg',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'UseSvg',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -8154,20 +7091,6 @@ const styles = StyleSheet.create({
 });
 
 class UseText extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'UseText',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'UseText',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -8220,20 +7143,6 @@ const styles = StyleSheet.create({
 });
 
 class UseTextCustomFont extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'UseTextCustomFont',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'UseTextCustomFont',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -8292,20 +7201,6 @@ import PropTypes from 'prop-types';
 const styles = StyleSheet.create({ h1jcb2fl: { backgroundColor: 'red' } });
 
 class UseVertical extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'UseVertical',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'UseVertical',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -8340,20 +7235,6 @@ import PropTypes from 'prop-types';
 const styles = StyleSheet.create({ h15ehzpl: { zIndex: 5 } });
 
 class ViewNameIsntUsedInStyle extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'ViewNameIsntUsedInStyle',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'ViewNameIsntUsedInStyle',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -8394,20 +7275,6 @@ import PropTypes from 'prop-types';
 const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
 
 class When extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'When',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'When',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 
@@ -8447,20 +7314,6 @@ import { Text } from 'react-native';
 import PropTypes from 'prop-types';
 
 class WhenTopLevel extends React.Component {
-  componentDidMount() {
-    this.context.track({
-      block: this.props['testID'] || 'WhenTopLevel',
-      action: 'enter',
-    });
-  }
-
-  componentWillUnmount() {
-    this.context.track({
-      block: this.props['testID'] || 'WhenTopLevel',
-      action: 'leave',
-    });
-  }
-
   render() {
     const { context, props } = this;
 

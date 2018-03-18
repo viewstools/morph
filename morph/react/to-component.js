@@ -2,6 +2,7 @@ import getBody from './get-body.js'
 import getContext from './get-context.js'
 import getDefaultProps from './get-default-props.js'
 import getDependencies from './get-dependencies.js'
+import getLocals from './get-locals.js'
 
 export default ({ getImport, getStyles, name, state }) => {
   // TODO Emojis should be wrapped in <span>, have role="img", and have an accessible description
@@ -10,6 +11,7 @@ export default ({ getImport, getStyles, name, state }) => {
 import React from 'react'
 ${getDependencies(state, getImport)}
 ${getStyles(state, name)}
+${getLocals(state, name)}
 
 ${getBody({ state, name })}
 ${getContext({ state, name })}

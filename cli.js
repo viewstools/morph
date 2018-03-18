@@ -12,6 +12,7 @@ let {
   compile,
   help,
   isBundlingBaseCss,
+  local,
   logic,
   pretty,
   track,
@@ -27,6 +28,7 @@ let {
     as: 'react-dom',
     compile: false,
     isBundlingBaseCss: false,
+    local: 'en',
     logic: true,
     pretty: true,
     track: false,
@@ -49,6 +51,7 @@ if (help) {
     --bundle-base-css if true, it will bundle the base CSS in react-dom,
                       otherwise you will need to include it in your
                       build system as a .css file. Defaults to false
+    --local         default local language, defaults to English (en)
     --logic         if true, it includes .view.logic.js files in
                       the output, defaults to true
     --pretty        format output code, defaults to true
@@ -106,6 +109,7 @@ if (shouldWatch) {
     as,
     compile,
     isBundlingBaseCss,
+    local,
     logic,
     pretty,
     src: input,
@@ -117,6 +121,7 @@ if (shouldWatch) {
       as,
       compile,
       isBundlingBaseCss,
+      local,
       logic,
       once: true,
       pretty,
@@ -133,6 +138,7 @@ if (shouldWatch) {
         as,
         compile,
         file: { raw: input, relative: input },
+        local,
         name,
         pretty,
         track,

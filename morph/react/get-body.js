@@ -1,5 +1,9 @@
 export default ({ state, name }) => {
-  const render = state.render.join('')
+  let render = state.render.join('')
+  if (Object.keys(state.locals).length > 0) {
+    render = `<Subscribe to={[LocalContainer]}>\n{local =>\n${render}\n}</Subscribe>`
+  }
+
   const maybeChildrenArray = state.usesChildrenArray
     ? `const childrenArray = React.Children.toArray(props.children)`
     : ''
