@@ -47,8 +47,9 @@ export default (state, getImport) => {
     }
   })
 
-  // TODO native
-  if (!state.isReactNative) {
+  if (state.isReactNative) {
+    state.getFont(state.fonts)
+  } else {
     dependencies.push(getImport('ViewsBaseCss'))
 
     state.fonts.forEach(usedFont => {

@@ -171,8 +171,9 @@ module.exports = options => {
 
     const fonts = {}
 
-    const makeGetFont = (view, file) => {
+    const makeGetDomFont = (view, file) => {
       return font => {
+        debugger
         if (!fonts[font.id]) {
           fonts[font.id] = `Fonts/${font.id}.js`
 
@@ -183,6 +184,15 @@ module.exports = options => {
         }
 
         return relativise(file, fonts[font.id])
+      }
+    }
+
+    const makeGetNativeFonts = view => {
+      return fonts => {
+        fs.writeFileSync(
+          path.join(src, 'fonts.js'),
+          morphFont({ as, fonts, files: instance.customFonts })
+        )
       }
     }
 
@@ -433,7 +443,11 @@ height 50`
 
       if (isJs(f)) return
 
-      const getFont = makeGetFont(view, file)
+      debugger
+      const getFont =
+        as === 'react-native'
+          ? makeGetNativeFonts(view)
+          : makeGetDomFont(view, file)
       const getImport = makeGetImport(view, file)
       let calledMaybeIsReady = false
 

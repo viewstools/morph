@@ -16,7 +16,15 @@ const imports = {
   Router: "import { NativeRouter as Router } from 'react-router-native'",
 }
 
-export default ({ file, getImport, local, name, track = true, views }) => {
+export default ({
+  file,
+  getFont = () => false,
+  getImport,
+  local,
+  name,
+  track = true,
+  views,
+}) => {
   const finalName = restrictedNames.includes(name) ? `${name}1` : name
   if (name !== finalName) {
     console.warn(
@@ -29,6 +37,7 @@ export default ({ file, getImport, local, name, track = true, views }) => {
   const state = {
     captures: [],
     images: [],
+    getFont,
     getStyleForProperty,
     getValueForProperty,
     isReactNative: true,
