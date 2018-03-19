@@ -173,7 +173,6 @@ module.exports = options => {
 
     const makeGetDomFont = (view, file) => {
       return font => {
-        debugger
         if (!fonts[font.id]) {
           fonts[font.id] = `Fonts/${font.id}.js`
 
@@ -443,7 +442,6 @@ height 50`
 
       if (isJs(f)) return
 
-      debugger
       const getFont =
         as === 'react-native'
           ? makeGetNativeFonts(view)

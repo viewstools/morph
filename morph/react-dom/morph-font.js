@@ -4,7 +4,6 @@ import sort from 'bubblesort'
 
 export default (font, files) => {
   let body
-  debugger
 
   if (isGoogleFont(font.family)) {
     body = `injectGlobal("@import url('https://fonts.googleapis.com/css?family=${font.family.replace(
