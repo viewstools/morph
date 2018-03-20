@@ -21,6 +21,7 @@ export default ({
   getFont = () => false,
   getImport,
   local,
+  localSupported,
   name,
   track = true,
   views,
@@ -33,6 +34,7 @@ export default ({
       To fix this, change its file name to something else.`
     )
   }
+  debugger
 
   const state = {
     captures: [],
@@ -49,6 +51,7 @@ export default ({
     isReactNative: false,
     local,
     locals: {},
+    localSupported: [],
     name: finalName,
     render: [],
     styles: {},

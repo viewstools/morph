@@ -452,6 +452,7 @@ height 50`
           name: view,
           getFont,
           getImport,
+          localSupported: instance.localSupported,
           pretty,
           track,
           views: viewsParsed,
