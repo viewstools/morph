@@ -389,61 +389,65 @@ export default ({
           })
         }
 
-        propNode = {
-          type: 'Property',
-          loc,
-          name,
-          tags,
-          value: getValue(value),
-        }
-
-        if (tags.slot) {
-          const needsDefaultValue =
-            !tags.shouldBeSlot && /</.test(propNode.value)
-
-          if (typeof propNode.value === 'string') {
-            propNode.value = propNode.value.replace(/^</, '')
-          }
-
-          propNode.slotName = slotName
-
-          if (name !== 'when' || (name === 'when' && !scope.isSystem)) {
-            propNode.defaultValue = propNode.value
-
-            if (convertSlotToProps) {
-              propNode.value = `${slotIsNot ? '!' : ''}props.${slotName ||
-                name}`
-            }
-
-            if (needsDefaultValue) {
-              if (name === 'text' && block.name === 'Text') {
-                propNode.defaultValue = ''
-              } else {
-                propNode.defaultValue = false
-
-                if (block.isBasic) {
-                  warnings.push({
-                    loc,
-                    type: `Add a default value to "${name}" like: "${name} <${slotName} default value"`,
-                    line,
-                  })
-                }
-              }
-            }
-
-            if (!inScope && !slots.some(vp => vp.name === (slotName || name))) {
-              slots.push({
-                name: slotName || name,
-                type: getPropType(block, name, value),
-                defaultValue: tags.shouldBeSlot ? false : propNode.defaultValue,
-              })
-            }
-          }
-        }
-
         if (name === 'format') {
           block.format = getFormat(value)
-          debugger
+        } else {
+          propNode = {
+            type: 'Property',
+            loc,
+            name,
+            tags,
+            value: getValue(value),
+          }
+
+          if (tags.slot) {
+            const needsDefaultValue =
+              !tags.shouldBeSlot && /</.test(propNode.value)
+
+            if (typeof propNode.value === 'string') {
+              propNode.value = propNode.value.replace(/^</, '')
+            }
+
+            propNode.slotName = slotName
+
+            if (name !== 'when' || (name === 'when' && !scope.isSystem)) {
+              propNode.defaultValue = propNode.value
+
+              if (convertSlotToProps) {
+                propNode.value = `${slotIsNot ? '!' : ''}props.${slotName ||
+                  name}`
+              }
+
+              if (needsDefaultValue) {
+                if (name === 'text' && block.name === 'Text') {
+                  propNode.defaultValue = ''
+                } else {
+                  propNode.defaultValue = false
+
+                  if (block.isBasic) {
+                    warnings.push({
+                      loc,
+                      type: `Add a default value to "${name}" like: "${name} <${slotName} default value"`,
+                      line,
+                    })
+                  }
+                }
+              }
+
+              if (
+                !inScope &&
+                !slots.some(vp => vp.name === (slotName || name))
+              ) {
+                slots.push({
+                  name: slotName || name,
+                  type: getPropType(block, name, value),
+                  defaultValue: tags.shouldBeSlot
+                    ? false
+                    : propNode.defaultValue,
+                })
+              }
+            }
+          }
         }
       } else if (isComment(line) && !skipComments) {
         let [value] = getComment(line)
