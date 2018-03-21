@@ -64,6 +64,7 @@ const CAPTURE = /^(CaptureEmail|CaptureFile|CaptureNumber|CapturePhone|CaptureSe
 const COMMENT = /^#(.+)$/
 const FLOAT = /^-?[0-9]+\.[0-9]+$/
 const FONTABLE = /^(CaptureEmail|CaptureNumber|CapturePhone|CaptureSecure|CaptureText|CaptureTextArea|Text)$/
+// const FORMAT = /^format(?:\s?(.*)?)/
 const INT = /^-?[0-9]+$/
 const NOT_GROUP = /^(Image|Text|Proxy|SvgCircle|SvgEllipse|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgText|SvgStop)$/i
 const PROP = /^([a-z][a-zA-Z0-9]*)(\s+(.+))?$/
@@ -134,6 +135,21 @@ export const getComment = line => {
   } catch (err) {
     return ''
   }
+}
+export const getFormat = line => {
+  let properties = {}
+  const values = line.split(' ')
+
+  if (values.length === 2) {
+    properties[values[0]] = values[1]
+  } else {
+    properties[values[0]] = {}
+    for (let i = 1; i < values.length; i = i + 2) {
+      properties[values[0]][values[i]] = getValue(values[i + 1])
+    }
+  }
+
+  return properties
 }
 export const getProp = line => {
   // eslint-disable-next-line

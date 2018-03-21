@@ -34,7 +34,6 @@ export default ({
       To fix this, change its file name to something else.`
     )
   }
-  debugger
 
   const state = {
     captures: [],
@@ -79,9 +78,11 @@ export default ({
     )
   }
 
+  debugger
   const parsed = views[name]
   state.fonts = parsed.fonts
   state.slots = parsed.slots
+  state.localSupported = localSupported
 
   walk(parsed.views[0], visitor, state)
   maybeUsesRouter(state)

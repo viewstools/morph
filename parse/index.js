@@ -3,6 +3,7 @@ import {
   didYouMeanProp,
   getBlock,
   getComment,
+  getFormat,
   getProp,
   getPropType,
   getUnsupportedShorthandExpanded,
@@ -275,6 +276,7 @@ export default ({
     const scopes = []
     let scope
     let inScope = false
+    block.format = []
 
     for (let j = i; j <= endOfBlockIndex; j++) {
       const line = lines[j]
@@ -437,6 +439,11 @@ export default ({
               })
             }
           }
+        }
+
+        if (name === 'format') {
+          block.format = getFormat(value)
+          debugger
         }
       } else if (isComment(line) && !skipComments) {
         let [value] = getComment(line)
