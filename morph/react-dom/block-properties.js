@@ -7,12 +7,14 @@ import * as PropertyRef from '../react/property-ref.js'
 import * as PropertyRest from '../react/property-rest.js'
 import * as PropertyStyle from '../react/property-style.js'
 import * as PropertyText from '../react/property-text.js'
+import * as PropertyFormat from '../react/property-format.js'
 import isValidPropertyForBlock from './is-valid-property-for-block.js'
 
 export function enter(node, parent, state) {
   PropertiesStyle.enter(node, parent, state)
   PropertiesClassName.enter(node, parent, state)
   PropertiesImage.enter(node, parent, state)
+  PropertyFormat.enter(node, parent, state)
 
   node.properties.forEach(propNode => {
     if (
@@ -30,7 +32,7 @@ export function enter(node, parent, state) {
       !PropertyStyle.enter(propNode, node, state) &&
       !PropertyText.enter(propNode, node, state) &&
       PropertyRest.enter(propNode, node, state)
-  })
+  }, parent)
 
   PropertiesStyle.leave(node, parent, state)
   PropertiesRoute.leave(node, parent, state)

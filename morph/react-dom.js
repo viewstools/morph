@@ -78,7 +78,6 @@ export default ({
     )
   }
 
-  debugger
   const parsed = views[name]
   state.fonts = parsed.fonts
   state.slots = parsed.slots

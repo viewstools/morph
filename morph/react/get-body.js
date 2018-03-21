@@ -18,7 +18,6 @@ export default ({ state, name }) => {
 
   const maybeTracking = state.track && !state.debug
 
-  debugger
   if (maybeState || maybeTracking) {
     return `class ${name} extends React.Component {
   ${maybeState}

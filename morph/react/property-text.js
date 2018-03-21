@@ -9,7 +9,6 @@ import safe from './safe.js'
 import wrap from './wrap.js'
 
 export function enter(node, parent, state) {
-  debugger
   if (node.name === 'text' && parent.name === 'Text') {
     if (hasCustomScopes(node, parent)) {
       parent.explicitChildren = wrap(getScopedCondition(node, parent))
@@ -29,7 +28,6 @@ export function enter(node, parent, state) {
       )
     } else if (parent.hasOwnProperty('format')) {
       parent.explicitChildren = `{formatters[props.lang].format(${node.value})}`
-      debugger
     } else {
       parent.explicitChildren = node.value
     }
