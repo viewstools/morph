@@ -27,6 +27,9 @@ export function enter(node, parent, state) {
       parent.explicitChildren = wrap(
         `${localName}[local.state.lang] || ${safe(node.value)}`
       )
+    } else if (parent.hasOwnProperty('format')) {
+      parent.explicitChildren = `{formatters[props.lang].format(${node.value})}`
+      debugger
     } else {
       parent.explicitChildren = node.value
     }

@@ -276,7 +276,6 @@ export default ({
     const scopes = []
     let scope
     let inScope = false
-    block.format = []
 
     for (let j = i; j <= endOfBlockIndex; j++) {
       const line = lines[j]
