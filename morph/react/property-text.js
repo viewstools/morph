@@ -12,8 +12,10 @@ const parseFormatValue = (value, type) => {
   if (type === 'percent') {
     return value / 100
   }
+  if (type === 'date') {
+    return `Date.parse('${value}')`
+  }
   if (type === 'time') {
-    debugger
     const timeValues = value.split(':')
     let timeStr = `Date.UTC(2018, 14, 3`
     timeValues.forEach(val => (timeStr += `, ${val}`))
@@ -43,10 +45,10 @@ export function enter(node, parent, state) {
     } else if (parent.hasOwnProperty('format')) {
       const type = Object.keys(parent.format)[0]
       debugger
-      parent.explicitChildren = `{${type}Formatters[props.lang].format('${parseFormatValue(
+      parent.explicitChildren = `{${type}Formatters[local.state.lang].format(${parseFormatValue(
         node.value,
         type
-      )}')}`
+      )})}`
     } else {
       parent.explicitChildren = node.value
     }
