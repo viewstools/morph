@@ -32,7 +32,7 @@ export function enter(node, parent, state) {
       !PropertyStyle.enter(propNode, node, state) &&
       !PropertyText.enter(propNode, node, state) &&
       PropertyRest.enter(propNode, node, state)
-  }, parent)
+  })
 
   PropertiesStyle.leave(node, parent, state)
   PropertiesRoute.leave(node, parent, state)
