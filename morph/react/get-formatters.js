@@ -14,10 +14,9 @@ const createFormatters = ({ formats, localSupported }) => {
 }
 
 const getFormat = (format, style, localSupported, type) => {
-  const options = getOptions(format, style, type)
+  const options = getOptions(format[`${style}`], style, type)
   let string = `const ${style}Options = ${options}\nconst ${style}Formatters = {`
   localSupported.forEach(local => {
-    debugger
     string += `${local}: new Intl.${type}Format('${local}', ${style}Options),\n`
   })
 
@@ -26,15 +25,14 @@ const getFormat = (format, style, localSupported, type) => {
 
 const getOptions = (format, style, type) => {
   if (style === 'currency')
-    return `{ style: 'currency', currency: '${format.currency}' }`
+    return `{ style: 'currency', currency: '${format}' }`
 
   if (style === 'percent')
     return `{ style: 'percent', maximumFractionDigits: 2 }`
 
-  if (style === 'date') {
-    debugger
-    return JSON.stringify(format.date)
+  if (style === 'time' && format.clock) {
+    format.hour12 = format.clock === '24h' ? false : true
+    delete format.clock
   }
-
-  // time??
+  return JSON.stringify(format)
 }
