@@ -18,7 +18,8 @@ const parseFormatValue = (value, type) => {
   if (type === 'time') {
     const timeValues = value.split(':')
     let timeStr = `Date.UTC(2018, 14, 3`
-    timeValues.forEach(val => (timeStr += `, ${val}`))
+    // parseInt to remove leading zeroes, it isn't a valid number otherwise
+    timeValues.forEach(val => (timeStr += `, ${parseInt(val, 10)}`))
     return `${timeStr})`
   }
   return value
