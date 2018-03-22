@@ -8,6 +8,20 @@ import {
 import safe from './safe.js'
 import wrap from './wrap.js'
 
+const parseFormatValue = (value, type) => {
+  if (type === 'percent') {
+    return value / 100
+  }
+  if (type === 'time') {
+    debugger
+    const timeValues = value.split(':')
+    let timeStr = `Date.UTC(2018, 14, 3`
+    timeValues.forEach(val => (timeStr += `, ${val}`))
+    return `${timeStr})`
+  }
+  return value
+}
+
 export function enter(node, parent, state) {
   if (node.name === 'text' && parent.name === 'Text') {
     if (hasCustomScopes(node, parent)) {
@@ -27,11 +41,12 @@ export function enter(node, parent, state) {
         `${localName}[local.state.lang] || ${safe(node.value)}`
       )
     } else if (parent.hasOwnProperty('format')) {
+      const type = Object.keys(parent.format)[0]
       debugger
-      // TODO: rename formatters to be specific to type of formatting
-      parent.explicitChildren = `{${
-        Object.keys(parent.format)[0]
-      }Formatters[props.lang].format('${node.value}')}`
+      parent.explicitChildren = `{${type}Formatters[props.lang].format('${parseFormatValue(
+        node.value,
+        type
+      )}')}`
     } else {
       parent.explicitChildren = node.value
     }
