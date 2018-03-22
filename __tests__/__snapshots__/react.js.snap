@@ -215,10 +215,10 @@ Object {
   "code": "const { get } = require('@viewstools/e2e');
 
 module.exports = {
-  Locals: get('Locals.Locals'),
   Named: get('Locals.Named'),
   Text1: get('Locals.Text:1'),
   Text: get('Locals.Text'),
+  _top: get('Locals'),
 };
 ",
 }
