@@ -1,6 +1,6 @@
 export default ({ state, name }) => {
   let render = state.render.join('')
-  if (Object.keys(state.locals).length > 0) {
+  if (Object.keys(state.locals).length > 0 || state.hasFormattedChild) {
     render = `<Subscribe to={[LocalContainer]}>\n{local =>\n${render}\n}</Subscribe>`
   }
 

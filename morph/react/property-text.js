@@ -9,20 +9,20 @@ import safe from './safe.js'
 import wrap from './wrap.js'
 
 const parseFormatValue = (value, type) => {
-  if (type === 'percent') {
-    return value / 100
+  switch (type) {
+    case 'percent':
+      return value / 100
+    case 'date':
+      return `Date.parse('${value}')`
+    case 'time':
+      const timeValues = value.split(':')
+      let timeStr = `Date.UTC(2018, 14, 3`
+      // parseInt to remove leading zeroes, it isn't a valid number otherwise
+      timeValues.forEach(val => (timeStr += `, ${parseInt(val, 10)}`))
+      return `${timeStr})`
+    default:
+      return value
   }
-  if (type === 'date') {
-    return `Date.parse('${value}')`
-  }
-  if (type === 'time') {
-    const timeValues = value.split(':')
-    let timeStr = `Date.UTC(2018, 14, 3`
-    // parseInt to remove leading zeroes, it isn't a valid number otherwise
-    timeValues.forEach(val => (timeStr += `, ${parseInt(val, 10)}`))
-    return `${timeStr})`
-  }
-  return value
 }
 
 export function enter(node, parent, state) {

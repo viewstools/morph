@@ -5,6 +5,7 @@ const blacklist = [
   'classname',
   'clippath',
   'cursor',
+  'format',
   'fontweight',
   'goto',
   'isdisabled',
