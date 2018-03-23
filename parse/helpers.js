@@ -138,13 +138,14 @@ export const getComment = line => {
 export const getFormat = line => {
   let properties = {}
   const values = line.split(' ')
+  const formatKey = values[0]
 
   if (values.length === 2) {
-    properties[values[0]] = values[1]
+    properties[formatKey] = values[1]
   } else {
-    properties[values[0]] = {}
+    properties[formatKey] = {}
     for (let i = 1; i < values.length; i = i + 2) {
-      properties[values[0]][values[i]] = getValue(values[i + 1])
+      properties[formatKey][values[i]] = getValue(values[i + 1])
     }
   }
 
