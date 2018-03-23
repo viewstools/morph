@@ -77,6 +77,11 @@ const getPropValue = (prop, unit = '') => {
   return `${prop.value}${unit}`
 }
 
+const getTransformValue = (prop, unit) => {
+  if (!prop) return false
+  return `${prop.name}(${getPropValue(prop, unit)})`
+}
+
 const getShadow = (node, parent) => {
   const isText = parent.name === 'Text'
 
@@ -112,7 +117,53 @@ const getShadow = (node, parent) => {
 }
 
 const getTransform = (node, parent) => {
-  return 'stuff'
+  const translateX = getProp(parent, 'translateX')
+  const translateY = getProp(parent, 'translateY')
+  const translateZ = getProp(parent, 'translateZ')
+  const scaleX = getProp(parent, 'scaleX')
+  const scaleY = getProp(parent, 'scaleY')
+  const scaleZ = getProp(parent, 'scaleZ')
+  const skewX = getProp(parent, 'skewX')
+  const skewY = getProp(parent, 'skewY')
+  const rotateX = getProp(parent, 'rotateX')
+  const rotateY = getProp(parent, 'rotateY')
+  const rotateZ = getProp(parent, 'rotateZ')
+  const perspective = getProp(parent, 'perspective')
+
+  let value = [
+    getTransformValue(translateX, 'px'),
+    getTransformValue(translateY, 'px'),
+    getTransformValue(translateZ, 'px'),
+    getTransformValue(scaleX, 'px'),
+    getTransformValue(scaleY, 'px'),
+    getTransformValue(scaleZ, 'px'),
+    getTransformValue(skewX, 'deg'),
+    getTransformValue(skewY, 'deg'),
+    getTransformValue(rotateX, 'deg'),
+    getTransformValue(rotateY, 'deg'),
+    getTransformValue(rotateZ, 'deg'),
+    getTransformValue(perspective, 'px'),
+  ]
+    .filter(Boolean)
+    .join(' ')
+
+  if (
+    isSlot(translateX) ||
+    isSlot(translateY) ||
+    isSlot(translateZ) ||
+    isSlot(scaleX) ||
+    isSlot(scaleY) ||
+    isSlot(scaleZ) ||
+    isSlot(skewX) ||
+    isSlot(skewY) ||
+    isSlot(rotateX) ||
+    isSlot(rotateY) ||
+    isSlot(rotateZ) ||
+    isSlot(perspective)
+  ) {
+    value = `\`${value}\``
+  }
+  return value
 }
 
 const getTransformOrigin = (node, parent) => {
