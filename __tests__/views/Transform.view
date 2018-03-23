@@ -13,5 +13,6 @@ rotateZ 11
 perspective 12
 transformOriginX center
 transformOriginY top
+transformOriginZ 5
 Text
 text who knows what happens here :D

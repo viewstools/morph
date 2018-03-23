@@ -45,6 +45,7 @@ export default (node, parent, code) => {
 
     case 'transformOriginX':
     case 'transformOriginY':
+    case 'transformOriginZ':
       return {
         transformOrigin: getTransformOrigin(node, parent),
       }
@@ -115,5 +116,29 @@ const getTransform = (node, parent) => {
 }
 
 const getTransformOrigin = (node, parent) => {
-  return 'stuff'
+  const transformOriginX = getProp(parent, 'transformOriginX')
+  const transformOriginY = getProp(parent, 'transformOriginY')
+  const transformOriginZ = getProp(parent, 'transformOriginZ')
+  let value = [
+    getPropValue(
+      transformOriginX,
+      Number.isInteger(transformOriginX.value) ? 'px' : ''
+    ),
+    getPropValue(
+      transformOriginY,
+      Number.isInteger(transformOriginY.value) ? 'px' : ''
+    ),
+    getPropValue(transformOriginZ, 'px'),
+  ]
+    .filter(Boolean)
+    .join(' ')
+
+  if (
+    isSlot(transformOriginX) ||
+    isSlot(transformOriginY) ||
+    isSlot(transformOriginZ)
+  ) {
+    value = `\`${value}\``
+  }
+  return value
 }

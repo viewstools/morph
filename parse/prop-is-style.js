@@ -98,6 +98,7 @@ export const STYLE = [
   'perspective',
   'transformOriginX',
   'transformOriginY',
+  'transformOriginZ',
   'transition',
   'userSelect',
   'whiteSpace',

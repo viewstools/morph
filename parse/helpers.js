@@ -90,7 +90,7 @@ const UNSUPPORTED_SHORTHAND = {
   outline: ['outlineWidth', 'outlineStyle', 'outlineColor'],
   overflow: ['overflowX', 'overflowY'],
   transform: [],
-  transformOrigin: ['transformOriginX', 'transformOriginY'],
+  transformOrigin: ['transformOriginX', 'transformOriginY', 'transformOriginZ'],
 }
 const TRUE = /^true$/i
 const USER_COMMENT = /^##(.*)$/
