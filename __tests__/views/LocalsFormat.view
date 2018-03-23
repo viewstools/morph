@@ -1,0 +1,16 @@
+LocalsFormat Vertical
+Price Text
+text 100
+format currency USD
+
+Date Text
+text 2018-07-08
+format date weekday long year numeric month numeric day 2-digit
+
+Percentage Text
+text 80.5
+format percent
+
+Time Text
+text 3:00
+format time hour numeric minute numeric second 2-digit clock 12h

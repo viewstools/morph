@@ -45,7 +45,6 @@ export function enter(node, parent, state) {
       )
     } else if (parent.hasOwnProperty('format')) {
       const type = Object.keys(parent.format)[0]
-      debugger
       parent.explicitChildren = `{${type}Formatters[local.state.lang].format(${parseFormatValue(
         node.value,
         type

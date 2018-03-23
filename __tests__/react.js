@@ -23,6 +23,8 @@ const getFont = font =>
   `./Fonts/${font.family}-${font.weight}${
     font.style === 'italic' ? '-italic' : ''
   }`
+
+const localSupported = ['en', 'es', 'fr']
 ;['react-dom', 'react-native', 'e2e'].forEach(as =>
   describe(as, () => {
     getFiles().forEach(f => {
@@ -33,6 +35,7 @@ const getFont = font =>
           morph({
             as,
             getFont,
+            localSupported,
             name,
             pretty: true,
             views,
@@ -45,6 +48,7 @@ const getFont = font =>
               as,
               debug: true,
               getFont,
+              localSupported,
               name,
               pretty: true,
               views,

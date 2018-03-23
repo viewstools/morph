@@ -224,6 +224,21 @@ module.exports = {
 }
 `;
 
+exports[`e2e parses e2e LocalsFormat 1`] = `
+Object {
+  "code": "const { get } = require('@viewstools/e2e');
+
+module.exports = {
+  Date: get('LocalsFormat.Date'),
+  Percentage: get('LocalsFormat.Percentage'),
+  Price: get('LocalsFormat.Price'),
+  Time: get('LocalsFormat.Time'),
+  _top: get('LocalsFormat'),
+};
+",
+}
+`;
+
 exports[`e2e parses e2e NameIsType 1`] = `
 Object {
   "code": "const { get } = require('@viewstools/e2e');
@@ -2345,6 +2360,158 @@ const Locals = props => {
 };
 
 export default Locals;
+",
+  "fonts": Array [],
+  "slots": Array [],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom LocalsFormat 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+import PropTypes from 'prop-types';
+
+const currencyOptions = { style: 'currency', currency: 'USD' };
+const currencyFormatters = {
+  en: new Intl.NumberFormat('en', currencyOptions),
+  es: new Intl.NumberFormat('es', currencyOptions),
+  fr: new Intl.NumberFormat('fr', currencyOptions),
+};
+const dateOptions = {
+  weekday: 'long',
+  year: 'numeric',
+  month: 'numeric',
+  day: '2-digit',
+};
+const dateFormatters = {
+  en: new Intl.DateTimeFormat('en', dateOptions),
+  es: new Intl.DateTimeFormat('es', dateOptions),
+  fr: new Intl.DateTimeFormat('fr', dateOptions),
+};
+const percentOptions = { style: 'percent', maximumFractionDigits: 2 };
+const percentFormatters = {
+  en: new Intl.NumberFormat('en', percentOptions),
+  es: new Intl.NumberFormat('es', percentOptions),
+  fr: new Intl.NumberFormat('fr', percentOptions),
+};
+const timeOptions = {
+  hour: 'numeric',
+  minute: 'numeric',
+  second: '2-digit',
+  hour12: true,
+};
+const timeFormatters = {
+  en: new Intl.DateTimeFormat('en', timeOptions),
+  es: new Intl.DateTimeFormat('es', timeOptions),
+  fr: new Intl.DateTimeFormat('fr', timeOptions),
+};
+
+class LocalsFormat extends React.Component {
+  render() {
+    const { context, props } = this;
+
+    return (
+      <div
+        data-test-id={\`\${props['data-test-id'] || 'LocalsFormat'}|\`}
+        className=\\"views-block\\"
+      >
+        <span data-test-id={\`LocalsFormat.Price|\`} className=\\"views-block\\">
+          {currencyFormatters[local.state.lang].format(100)}
+        </span>
+        <span data-test-id={\`LocalsFormat.Date|\`} className=\\"views-block\\">
+          {dateFormatters[local.state.lang].format(Date.parse('2018-07-08'))}
+        </span>
+        <span data-test-id={\`LocalsFormat.Percentage|\`} className=\\"views-block\\">
+          {percentFormatters[local.state.lang].format(0.805)}
+        </span>
+        <span data-test-id={\`LocalsFormat.Time|\`} className=\\"views-block\\">
+          {timeFormatters[local.state.lang].format(Date.UTC(2018, 14, 3, 3, 0))}
+        </span>
+        {props.children}
+      </div>
+    );
+  }
+}
+LocalsFormat.contextTypes = {
+  track: PropTypes.func.isRequired,
+};
+
+export default LocalsFormat;
+",
+  "fonts": Array [],
+  "slots": Array [],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom LocalsFormat: react-dom parses react-dom LocalsFormat debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+
+const currencyOptions = { style: 'currency', currency: 'USD' };
+const currencyFormatters = {
+  en: new Intl.NumberFormat('en', currencyOptions),
+  es: new Intl.NumberFormat('es', currencyOptions),
+  fr: new Intl.NumberFormat('fr', currencyOptions),
+};
+const dateOptions = {
+  weekday: 'long',
+  year: 'numeric',
+  month: 'numeric',
+  day: '2-digit',
+};
+const dateFormatters = {
+  en: new Intl.DateTimeFormat('en', dateOptions),
+  es: new Intl.DateTimeFormat('es', dateOptions),
+  fr: new Intl.DateTimeFormat('fr', dateOptions),
+};
+const percentOptions = { style: 'percent', maximumFractionDigits: 2 };
+const percentFormatters = {
+  en: new Intl.NumberFormat('en', percentOptions),
+  es: new Intl.NumberFormat('es', percentOptions),
+  fr: new Intl.NumberFormat('fr', percentOptions),
+};
+const timeOptions = {
+  hour: 'numeric',
+  minute: 'numeric',
+  second: '2-digit',
+  hour12: true,
+};
+const timeFormatters = {
+  en: new Intl.DateTimeFormat('en', timeOptions),
+  es: new Intl.DateTimeFormat('es', timeOptions),
+  fr: new Intl.DateTimeFormat('fr', timeOptions),
+};
+
+const LocalsFormat = props => {
+  return (
+    <div
+      data-test-id={\`\${props['data-test-id'] || 'LocalsFormat'}|\`}
+      className=\\"views-block\\"
+    >
+      <span data-test-id={\`LocalsFormat.Price|\`} className=\\"views-block\\">
+        {currencyFormatters[local.state.lang].format(100)}
+      </span>
+      <span data-test-id={\`LocalsFormat.Date|\`} className=\\"views-block\\">
+        {dateFormatters[local.state.lang].format(Date.parse('2018-07-08'))}
+      </span>
+      <span data-test-id={\`LocalsFormat.Percentage|\`} className=\\"views-block\\">
+        {percentFormatters[local.state.lang].format(0.805)}
+      </span>
+      <span data-test-id={\`LocalsFormat.Time|\`} className=\\"views-block\\">
+        {timeFormatters[local.state.lang].format(Date.UTC(2018, 14, 3, 3, 0))}
+      </span>
+      {props.children}
+    </div>
+  );
+};
+
+export default LocalsFormat;
 ",
   "fonts": Array [],
   "slots": Array [],
@@ -5939,6 +6106,48 @@ Locals.contextTypes = {
 };
 
 export default Locals;
+",
+  "fonts": Array [],
+  "slots": Array [],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-native parses react-native LocalsFormat 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import { Text, View } from 'react-native';
+import PropTypes from 'prop-types';
+
+class LocalsFormat extends React.Component {
+  render() {
+    const { context, props } = this;
+
+    return (
+      <View testID={\`\${props['testID'] || 'LocalsFormat'}|\`}>
+        <Text testID={\`LocalsFormat.Price|\`}>
+          {currencyFormatters[local.state.lang].format(100)}
+        </Text>
+        <Text testID={\`LocalsFormat.Date|\`}>
+          {dateFormatters[local.state.lang].format(Date.parse('2018-07-08'))}
+        </Text>
+        <Text testID={\`LocalsFormat.Percentage|\`}>
+          {percentFormatters[local.state.lang].format(0.805)}
+        </Text>
+        <Text testID={\`LocalsFormat.Time|\`}>
+          {timeFormatters[local.state.lang].format(Date.UTC(2018, 14, 3, 3, 0))}
+        </Text>
+        {props.children}
+      </View>
+    );
+  }
+}
+LocalsFormat.contextTypes = {
+  track: PropTypes.func.isRequired,
+};
+
+export default LocalsFormat;
 ",
   "fonts": Array [],
   "slots": Array [],
