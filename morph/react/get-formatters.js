@@ -1,4 +1,4 @@
-export default state => (state.hasFormattedChild ? createFormatters(state) : '')
+export default state => (state.isFormatted ? createFormatters(state) : '')
 
 const createFormatters = ({ formats, localSupported }) => {
   return formats
