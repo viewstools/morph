@@ -18,6 +18,7 @@ const imports = {
 
 export default ({
   file,
+  getFont = () => false,
   getImport,
   local,
   localSupported,
@@ -37,6 +38,7 @@ export default ({
   const state = {
     captures: [],
     images: [],
+    getFont,
     getStyleForProperty,
     getValueForProperty,
     isReactNative: true,

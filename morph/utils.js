@@ -2,6 +2,7 @@ import safe from './react/safe.js'
 import wrap from './react/wrap.js'
 import toCamelCase from 'to-camel-case'
 import toSlugCase from 'to-slug-case'
+import sort from 'bubblesort'
 
 const safeScope = value =>
   typeof value === 'string' && !isSlot(value) ? JSON.stringify(value) : value
@@ -225,3 +226,8 @@ export const makeOnClickTracker = (node, state) => {
     node.value
   }, event })`
 }
+
+const fontsOrder = ['eot', 'woff2', 'woff', 'ttf', 'svg', 'otf']
+
+export const sortFonts = (a, b) =>
+  fontsOrder.indexOf(b.type) - fontsOrder.indexOf(a.type)

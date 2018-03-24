@@ -1,7 +1,8 @@
 import morphFontAsReactDom from './react-dom/morph-font.js'
-import morphFontAsReactNative from './react-native/morph-font.js'
+import morphFontsAsReactNative from './react-native/morph-fonts.js'
 
-export default ({ as, font, files }) =>
-  as === 'react-dom'
-    ? morphFontAsReactDom({ font, files })
-    : morphFontAsReactNative({ font, files })
+export default data => {
+  return data.as === 'react-dom'
+    ? morphFontAsReactDom(data.font, data.files)
+    : morphFontsAsReactNative(data.fonts, data.files)
+}
