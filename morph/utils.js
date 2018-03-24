@@ -189,7 +189,12 @@ export const getScopeDescription = scope => {
 }
 
 export const hasCustomScopes = (propNode, blockNode) =>
-  blockNode.scopes.some(scope => !scope.isLocal && !scope.isSystem)
+  blockNode.scopes.some(
+    scope =>
+      !scope.isLocal &&
+      !scope.isSystem &&
+      scope.properties.some(prop => prop.name === propNode.name)
+  )
 
 export const hasLocals = (propNode, blockNode) =>
   blockNode.scopes.some(scope => scope.isLocal)
