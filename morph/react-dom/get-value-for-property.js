@@ -1,7 +1,6 @@
 import {
   getScopedCondition,
   getScopedImageCondition,
-  getScopedRequireCondition,
   getScopes,
   isValidImgSrc,
   makeOnClickTracker,
@@ -20,33 +19,21 @@ const getImageSource = (node, state, parent) => {
   } else if (isUrl(node.value) || node.tags.slot) {
     return safe(node.value)
   } else {
-    if (scopes && state.debug) {
-      return wrap(
-        getScopedRequireCondition(scopes.scopedProps, scopes.paths, node.value)
-      )
-    } else if (state.debug) {
-      return `{requireImage("${node.value}")}`
-    } else {
-      if (scopes) {
-        pushImageToState(state, scopes.scopedNames, scopes.paths)
-      }
-      const name = toCamelCase(node.value)
-      if (!state.images.includes(node.value)) {
-        state.images.push({
-          name,
-          file: node.value,
-        })
-      }
-      return scopes
-        ? wrap(
-            getScopedImageCondition(
-              scopes.scopedProps,
-              scopes.scopedNames,
-              name
-            )
-          )
-        : `{${name}}`
+    if (scopes) {
+      pushImageToState(state, scopes.scopedNames, scopes.paths)
     }
+    const name = toCamelCase(node.value)
+    if (!state.images.includes(node.value)) {
+      state.images.push({
+        name,
+        file: node.value,
+      })
+    }
+    return scopes
+      ? wrap(
+          getScopedImageCondition(scopes.scopedProps, scopes.scopedNames, name)
+        )
+      : `{${name}}`
   }
 }
 

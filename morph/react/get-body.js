@@ -1,7 +1,11 @@
 import { getScopeIndex, isNewScope } from '../utils.js'
 
 export default ({ state, name }) => {
-  const render = state.render.join('')
+  let render = state.render.join('')
+  if (Object.keys(state.locals).length > 0 || state.isFormatted) {
+    render = `<Subscribe to={[LocalContainer]}>\n{local =>\n${render}\n}</Subscribe>`
+  }
+
   const maybeChildrenArray = state.usesChildrenArray
     ? `const childrenArray = React.Children.toArray(props.children)`
     : ''
@@ -14,17 +18,7 @@ export default ({ state, name }) => {
   }`
       : ''
 
-  const block = `this.props["${state.testIdKey}"] || "${state.name}"`
-  const maybeTracking =
-    state.track && !state.debug
-      ? `componentDidMount() {
-  this.context.track({ block: ${block}, action: "enter" })
-}
-
-componentWillUnmount() {
-  this.context.track({ block: ${block}, action: "leave" })
-}`
-      : ''
+  const maybeTracking = state.track && !state.debug
 
   const composeAnimation = (state, animation, index) => {
     if (animation.curve === 'spring') {

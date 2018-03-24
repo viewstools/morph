@@ -14,7 +14,7 @@ export const enter = [
     }
 
     let scopes = node.scopes
-      .filter(scope => !scope.isSystem)
+      .filter(scope => !scope.isSystem && !scope.isLocal)
       .map(scope => getScopeDescription(scope.value))
       .filter(Boolean)
       .reverse()
@@ -36,9 +36,13 @@ export const enter = [
 
     let component = []
 
-    component.push(
-      `${blockName.replace(':', '')}: get('${state.name}.${blockName}'`
-    )
+    if (state.name === blockName) {
+      component.push(`_top: get('${blockName}'`)
+    } else {
+      component.push(
+        `${blockName.replace(':', '')}: get('${state.name}.${blockName}'`
+      )
+    }
 
     scopes.forEach(function(scope) {
       component.push(`, '${scope}'`)

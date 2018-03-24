@@ -1,0 +1,19 @@
+Locals Vertical
+Text
+text Hi
+when <es
+text Hola
+when <pl
+text Cześć
+when <zhHansCN
+text 嗨
+
+Text
+text More
+when <es
+text Mas
+
+Named Text
+text Bye, "Said someone's friend"!
+when <es
+text Chau, "dijo el amigo de alguien"!

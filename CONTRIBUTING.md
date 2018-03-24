@@ -1,17 +1,20 @@
 # Contributing
 
+[Here's a video walkthrough of the morpher that should help you understand its
+internals - February 2018](https://youtu.be/iUAxvYi3MJo).
+
 ## How do I debug the morpher locally?
 
 1. You need to symlink your local morpher to your Views project.
 
     * In your local instance of the morpher run `yarn link` in the root directory.
-    * In your project where you are using Views run `yarn link views-morph` in the root directory.
+    * In your project where you are using Views run `yarn link @viewstools/morph` in the root directory.
 
 2. Put in your `debugger` statements where necessary.
 
 3. Run `yarn prepare` in the morpher directory to bundle your code.
 
-4. In your views project run `node --inspect ./node_modules/views-morph/cli.js . --watch`. This will watch your current directory. If you just want to watch a subdirectory within that you can replace the `.` in that command with the path to the subdirectory.
+4. In your views project run `node --inspect ./node_modules/@viewstools/morph/cli.js . --watch`. This will watch your current directory. If you just want to watch a subdirectory within that you can replace the `.` in that command with the path to the subdirectory. And if you are working on react-native run `node --inspect ./node_modules/@viewstools/morph/cli.js . --watch --as react-native`
 
 5. In chrome open your dev tools on any tab. Click on the green icon at the top to open the node dev tools. Bingo! :tada:
 

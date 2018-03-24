@@ -21,7 +21,7 @@ export default (node, parent, code) => {
       }
 
     case 'shadowColor':
-    case 'shadowRadius':
+    case 'shadowBlur':
     case 'shadowOffsetX':
     case 'shadowOffsetY':
     case 'shadowSpread':
@@ -58,7 +58,7 @@ const getShadow = (node, parent) => {
   const isText = parent.name === 'Text'
 
   const shadowColor = getProp(parent, 'shadowColor')
-  const shadowRadius = getProp(parent, 'shadowRadius')
+  const shadowBlur = getProp(parent, 'shadowBlur')
   const shadowOffsetX = getProp(parent, 'shadowOffsetX')
   const shadowOffsetY = getProp(parent, 'shadowOffsetY')
   const shadowSpread = getProp(parent, 'shadowSpread')
@@ -66,7 +66,7 @@ const getShadow = (node, parent) => {
   let value = [
     getPropValue(shadowOffsetX, 'px'),
     getPropValue(shadowOffsetY, 'px'),
-    getPropValue(shadowRadius, 'px'),
+    getPropValue(shadowBlur, 'px'),
     !isText && getPropValue(shadowSpread, 'px'),
     getPropValue(shadowColor),
   ]
@@ -75,7 +75,7 @@ const getShadow = (node, parent) => {
 
   if (
     isSlot(shadowColor) ||
-    isSlot(shadowRadius) ||
+    isSlot(shadowBlur) ||
     isSlot(shadowOffsetY) ||
     isSlot(shadowOffsetX) ||
     isSlot(shadowSpread)

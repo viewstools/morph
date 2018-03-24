@@ -9,6 +9,7 @@ const chalk = require('chalk')
 const chokidar = require('chokidar')
 const clean = require('./clean.js')
 const ensureBaseCss = require('./ensure-base-css.js')
+const ensureLocalContainer = require('./ensure-local-container.js')
 const flatten = require('flatten')
 const fs = require('mz/fs')
 const glob = require('fast-glob')
@@ -53,6 +54,7 @@ module.exports = options => {
       enableAnimated,
       fake: shouldIncludeFake,
       isBundlingBaseCss,
+      local,
       logic: shouldIncludeLogic,
       map,
       onMorph,
@@ -72,6 +74,7 @@ module.exports = options => {
         enableAnimated: true,
         fake: false,
         isBundlingBaseCss: false,
+        local: 'en',
         logic: true,
         map: {},
         onMorph: onMorphWriteFile,
@@ -168,7 +171,7 @@ module.exports = options => {
 
     const fonts = {}
 
-    const makeGetFont = (view, file) => {
+    const makeGetDomFont = (view, file) => {
       return font => {
         if (!fonts[font.id]) {
           fonts[font.id] = `Fonts/${font.id}.js`
@@ -183,6 +186,15 @@ module.exports = options => {
       }
     }
 
+    const makeGetNativeFonts = view => {
+      return fonts => {
+        fs.writeFileSync(
+          path.join(src, 'fonts.js'),
+          morphFont({ as, fonts, files: instance.customFonts })
+        )
+      }
+    }
+
     const makeGetImport = (view, file) => {
       dependsOn[view] = []
 
@@ -191,6 +203,13 @@ module.exports = options => {
           return isBundlingBaseCss
             ? `import '${relativise(file, instance.baseCss)}'`
             : ''
+        }
+
+        if (name === 'LocalContainer') {
+          return `import LocalContainer from '${relativise(
+            file,
+            instance.localContainer
+          )}'`
         }
 
         if (!dependsOn[view].includes(name)) {
@@ -224,6 +243,38 @@ module.exports = options => {
     if (as === 'react-dom' && isBundlingBaseCss) {
       instance.baseCss = 'ViewsBaseCss.js'
       ensureBaseCss(path.join(src, instance.baseCss))
+    }
+
+    const maybeUpdateLocal = supported => {
+      if (local) {
+        if (supported) {
+          supported.forEach(lang => {
+            if (!instance.localSupported.includes(lang)) {
+              instance.localSupported.push(lang)
+            }
+          })
+        }
+
+        if (instance.localSupported.length > 1) {
+          ensureLocalContainer({
+            as,
+            file: path.join(src, instance.localContainer),
+            fileGetInitialLanguage: path.join(
+              src,
+              instance.localContainerGetInitialLanguage
+            ),
+            supported: instance.localSupported,
+          })
+        }
+      }
+    }
+
+    if (local) {
+      instance.localContainer = 'LocalContainer.js'
+      instance.localContainerGetInitialLanguage = 'get-initial-language.js'
+      instance.localSupported = [local]
+
+      maybeUpdateLocal()
     }
 
     const addView = filter((f, skipMorph = false) => {
@@ -351,7 +402,7 @@ height 50`
       try {
         const rawFile = path.join(src, f)
         const source = await fs.readFile(rawFile, 'utf-8')
-        const parsed = parse({ source })
+        const parsed = parse({ enableSystemScopes: !debug, source })
         viewsSources[view] = source
         viewsParsed[view] = parsed
 
@@ -368,6 +419,8 @@ height 50`
             )
           })
         }
+
+        maybeUpdateLocal(parsed.locals)
       } catch (error) {
         verbose && console.error(chalk.red('M'), view, error)
       }
@@ -389,7 +442,10 @@ height 50`
 
       if (isJs(f)) return
 
-      const getFont = makeGetFont(view, file)
+      const getFont =
+        as === 'react-native'
+          ? makeGetNativeFonts(view)
+          : makeGetDomFont(view, file)
       const getImport = makeGetImport(view, file)
       let calledMaybeIsReady = false
 
@@ -408,6 +464,7 @@ height 50`
           name: view,
           getFont,
           getImport,
+          localSupported: instance.localSupported,
           pretty,
           track,
           views: viewsParsed,

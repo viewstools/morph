@@ -9,6 +9,6 @@ borderRadius 10
 width 10
 height 10
 tabIndex -1
-when hover
+when <hover
 backgroundColor <backgroundColorHover red
 scale 1.5

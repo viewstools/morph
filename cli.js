@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
 const { readFileSync, statSync } = require('fs')
-const { morph, pathToName } = require('./lib.js')
+const { morph, parse, pathToName } = require('./lib.js')
 const chalk = require('chalk')
 const watch = require('./watch.js')
+const morphInlineSvg = require('./morph/inline-svg.js')
 
 let {
   _,
@@ -11,24 +12,28 @@ let {
   compile,
   help,
   isBundlingBaseCss,
+  local,
   logic,
   pretty,
   track,
   watch: shouldWatch,
+  version,
 } = require('minimist')(process.argv.slice(2), {
   alias: {
     help: 'h',
   },
-  booleans: ['help', 'track', 'watch'],
+  booleans: ['help', 'track', 'watch', 'version'],
 
   default: {
     as: 'react-dom',
     compile: false,
     isBundlingBaseCss: false,
+    local: 'en',
     logic: true,
     pretty: true,
     track: false,
     watch: false,
+    version: false,
   },
 })
 
@@ -46,18 +51,25 @@ if (help) {
     --bundle-base-css if true, it will bundle the base CSS in react-dom,
                       otherwise you will need to include it in your
                       build system as a .css file. Defaults to false
+    --local         default local language, defaults to English (en)
     --logic         if true, it includes .view.logic.js files in
                       the output, defaults to true
     --pretty        format output code, defaults to true
     --track         enable UI tracking, defaults to false
     --watch         watch a directory and produce .view.js files
+    --version       print the version
   `)
 
   process.exit()
 }
 
-const input = Array.isArray(_) && _[0]
+if (version) {
+  const pkg = require('./package.json')
+  console.log(`v${pkg.version}`)
+  process.exit()
+}
 
+const input = Array.isArray(_) && _[0]
 if (!input) {
   console.error(
     'You need to specify an input file. Eg run views-morph some.view'
@@ -97,6 +109,7 @@ if (shouldWatch) {
     as,
     compile,
     isBundlingBaseCss,
+    local,
     logic,
     pretty,
     src: input,
@@ -108,6 +121,7 @@ if (shouldWatch) {
       as,
       compile,
       isBundlingBaseCss,
+      local,
       logic,
       once: true,
       pretty,
@@ -115,15 +129,25 @@ if (shouldWatch) {
       track,
     })
   } else {
-    const { code } = morph(readFileSync(input, 'utf-8'), {
-      as,
-      compile,
-      file: { raw: input, relative: input },
-      name: pathToName(input),
-      pretty,
-      track,
-    })
+    if (input.includes('.svg')) {
+      return morphInlineSvg(input).then(code => console.log(code))
+    } else {
+      const name = pathToName(input)
 
-    console.log(code)
+      const { code } = morph({
+        as,
+        compile,
+        file: { raw: input, relative: input },
+        local,
+        name,
+        pretty,
+        track,
+        views: {
+          [name]: parse({ source: readFileSync(input, 'utf-8') }),
+        },
+      })
+
+      console.log(code)
+    }
   }
 }

@@ -4,7 +4,7 @@ export const enter = (node, parent, state) => {
   if (node.name === 'Proxy') return
 
   const scopes = node.scopes
-    .filter(scope => !scope.isSystem)
+    .filter(scope => !scope.isSystem && !scope.isLocal)
     .map(scope => scope.value)
     .filter(Boolean)
     .reverse()

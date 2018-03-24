@@ -4,6 +4,7 @@ import {
   getAnimation,
   getBlock,
   getComment,
+  getFormat,
   getProp,
   getPropType,
   getUnsupportedShorthandExpanded,
@@ -17,20 +18,26 @@ import {
   isGroup,
   isList,
   isProp,
+  isLocalScope,
   isSystemScope,
   isUserComment,
 } from './helpers.js'
 import getLoc from './get-loc.js'
 import getTags from './get-tags.js'
 
-export default (
-  { convertSlotToProps = true, skipComments = true, source } = {}
-) => {
+export default ({
+  convertSlotToProps = true,
+  enableLocalScopes = true,
+  enableSystemScopes = true,
+  skipComments = true,
+  source,
+} = {}) => {
   // convert crlf to lf
   const text = source.replace(/\r\n/g, '\n')
   const rlines = text.split('\n')
   const lines = rlines.map(line => line.trim())
   const fonts = []
+  const locals = []
   const stack = []
   const slots = []
   const views = []
@@ -81,9 +88,9 @@ export default (
           )
         ) {
           fonts.push({
-            id: `${fontFamily}-${fontWeight}${fontStyle === 'italic'
-              ? '-italic'
-              : ''}`,
+            id: `${fontFamily}-${fontWeight}${
+              fontStyle === 'italic' ? '-italic' : ''
+            }`,
             family: fontFamily,
             weight: fontWeight,
             style: fontStyle,
@@ -171,14 +178,18 @@ export default (
           if (block.isBasic) {
             warnings.push({
               loc: block.loc,
-              type: `A basic block "${block.name}" can't be inside a List. Use a view you made instead.`,
+              type: `A basic block "${
+                block.name
+              }" can't be inside a List. Use a view you made instead.`,
               line,
               blocker: true,
             })
           } else if (last.children.length > 0) {
             warnings.push({
               loc: block.loc,
-              type: `A List can only have one view inside. "${block.name}" is outside of it. Put 1 empty line before.`,
+              type: `A List can only have one view inside. "${
+                block.name
+              }" is outside of it. Put 1 empty line before.`,
               line,
             })
           } else {
@@ -228,9 +239,9 @@ export default (
       if (newLinesBeforePreviousBlock > 2) {
         const linesToRemove = newLinesBeforePreviousBlock - 2
         help.push(
-          `remove ${linesToRemove} empty line${linesToRemove > 1
-            ? 's'
-            : ''} before`
+          `remove ${linesToRemove} empty line${
+            linesToRemove > 1 ? 's' : ''
+          } before`
         )
       }
       warnings.push({
@@ -309,39 +320,60 @@ export default (
         }
 
         if (name === 'when') {
-          const isSystem = isSystemScope(value)
+          const isSystem = enableSystemScopes && isSystemScope(slotName)
+          const isLocal = enableLocalScopes && isLocalScope(slotName)
+
+          if (isLocal) {
+            if (!locals.includes(value)) {
+              locals.push(slotName)
+            }
+          }
 
           if (value === '' || value === '<' || value === '<!') {
             warnings.push({
               loc,
               type:
-                'This when has no condition assigned to it. Add one like: when <isCondition',
+                'This when has no condition assigned to it. Add one like: "when <isCondition"',
               line,
             })
-          } else if (!isSystem && !tags.validSlot) {
+          } else if (!tags.validSlot) {
             warnings.push({
               loc,
-              type: `The value you used in the slot "${name}" is invalid`,
+              type: `The slot name "${name}" isn't valid. Fix it like: "when <isCondition" `,
               line,
             })
           }
+
+          if (isSystem && slotIsNot) {
+            warnings.push({
+              loc,
+              type: `"${slotName}" is a system slot and it can't take a "!" in its value. Replace the line for: "when <${slotName}".`,
+            })
+          }
+
+          // TODO warning
+          // if (isLocal && (name !== 'text' || name !== 'placeholder')) {
+          // }
 
           tags.scope = value
           inScope = true
           scope = {
+            isLocal,
             isSystem,
             value,
             name,
+            slotName,
+            slotIsNot: isSystem || isLocal ? false : slotIsNot,
             properties: [],
           }
 
-          if (!isSystem) {
-            if (convertSlotToProps) {
-              scope.value = `${slotIsNot ? '!' : ''}props.${slotName || name}`
-            }
-            scope.slotIsNot = slotIsNot
-            scope.slotName = slotName
+          if (convertSlotToProps) {
+            scope.value =
+              isSystem || isLocal
+                ? slotName
+                : `${slotIsNot ? '!' : ''}props.${slotName || name}`
           }
+
           scopes.push(scope)
         } else if ((tags.slot || tags.shouldBeSlot) && !tags.validSlot) {
           warnings.push({
@@ -357,6 +389,13 @@ export default (
             line,
             loc,
           })
+        }
+
+        if (name === 'format') {
+          block.format = getFormat(value)
+        }
+        if (tags.style && tags.slot) {
+          block.maybeAnimated = true
         }
 
         propNode = {
@@ -391,36 +430,45 @@ export default (
 
         if (tags.slot) {
           const needsDefaultValue =
-            block.isBasic && !tags.shouldBeSlot && /</.test(propNode.value)
+            !tags.shouldBeSlot && /</.test(propNode.value)
 
-          propNode.defaultValue = propNode.value
-          propNode.slotName = slotName
-          if (convertSlotToProps) {
-            propNode.value = `${slotIsNot ? '!' : ''}props.${slotName || name}`
+          if (typeof propNode.value === 'string') {
+            propNode.value = propNode.value.replace(/^</, '')
           }
 
-          if (needsDefaultValue) {
-            if (name === 'text' && block.name === 'Text') {
-              propNode.defaultValue = ''
-            } else {
-              propNode.defaultValue = false
-              warnings.push({
-                loc,
-                type: `Add a default value to "${name}" like: "${name} <${slotName} default value"`,
-                line,
+          propNode.slotName = slotName
+
+          if (name !== 'when' || (name === 'when' && !scope.isSystem)) {
+            propNode.defaultValue = propNode.value
+
+            if (convertSlotToProps) {
+              propNode.value = `${slotIsNot ? '!' : ''}props.${slotName ||
+                name}`
+            }
+
+            if (needsDefaultValue) {
+              if (name === 'text' && block.name === 'Text') {
+                propNode.defaultValue = ''
+              } else {
+                propNode.defaultValue = false
+
+                if (block.isBasic) {
+                  warnings.push({
+                    loc,
+                    type: `Add a default value to "${name}" like: "${name} <${slotName} default value"`,
+                    line,
+                  })
+                }
+              }
+            }
+
+            if (!inScope && !slots.some(vp => vp.name === (slotName || name))) {
+              slots.push({
+                name: slotName || name,
+                type: getPropType(block, name, value),
+                defaultValue: tags.shouldBeSlot ? false : propNode.defaultValue,
               })
             }
-          }
-
-          if (!inScope && !slots.some(vp => vp.name === name)) {
-            slots.push({
-              name: slotName || name,
-              type: getPropType(block, name, value),
-              defaultValue:
-                tags.shouldBeSlot || !block.isBasic
-                  ? false
-                  : propNode.defaultValue,
-            })
           }
         }
       } else if (isComment(line) && !skipComments) {
@@ -450,7 +498,9 @@ export default (
           ) {
             warnings.push({
               loc: propNode.loc,
-              type: `You're missing a base prop for ${propNode.name}. Add it before all whens on the block.`,
+              type: `You're missing a base prop for ${
+                propNode.name
+              }. Add it before all whens on the block.`,
               line,
             })
           }
@@ -492,6 +542,7 @@ export default (
 
   return {
     fonts,
+    locals,
     slots,
     views,
     warnings,

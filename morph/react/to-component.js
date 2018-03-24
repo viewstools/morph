@@ -1,8 +1,10 @@
+import getAnimatedValue from './get-animated-value.js'
 import getBody from './get-body.js'
 import getContext from './get-context.js'
 import getDefaultProps from './get-default-props.js'
 import getDependencies from './get-dependencies.js'
-import getAnimatedValue from './get-animated-value.js'
+import getFormatters from './get-formatters.js'
+import getLocals from './get-locals.js'
 
 export default ({ getImport, getStyles, name, state }) => {
   // TODO Emojis should be wrapped in <span>, have role="img", and have an accessible description
@@ -12,6 +14,8 @@ import React from 'react'
 ${getDependencies(state, getImport)}
 ${getAnimatedValue(state, name)}
 ${getStyles(state, name)}
+${getFormatters(state, name)}
+${getLocals(state, name)}
 
 ${getBody({ state, name })}
 ${getContext({ state, name })}

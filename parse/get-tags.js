@@ -1,9 +1,4 @@
-import {
-  isAnimation,
-  isUnsupportedShorthand,
-  isStyle,
-  isSlot,
-} from './helpers.js'
+import { isAnimation, isStyle, isUnsupportedShorthand } from './helpers.js'
 
 const SLOT_PROPS = ['from', 'when', 'onClick', 'onFocus', 'onWhen']
 const shouldBeSlot = prop => SLOT_PROPS.includes(prop) || /^on[A-Z]/.test(prop)

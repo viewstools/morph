@@ -1,11 +1,11 @@
 Hover Vertical
 backgroundColor #323232
 onClick <
-when hover
+when <hover
 backgroundColor #232323
 Text
 color white
 fontSize <
 text Hey!
-when hover
+when <hover
 color black

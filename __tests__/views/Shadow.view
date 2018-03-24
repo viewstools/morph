@@ -1,12 +1,12 @@
 Shadow Vertical
 BoxShadow Vertical
-shadowRadius 2
+shadowBlur 2
 shadowColor < red
-shadowOffsetX 10
+shadowOffsetX 0
 shadowOffsetY 5
 shadowSpread 2
 TextShadow Text
-shadowRadius 1
+shadowBlur 1
 shadowColor < blue
 shadowOffsetX 2
 shadowOffsetY 3

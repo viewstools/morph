@@ -1,8 +1,9 @@
+import flatten from 'flatten'
 import safe from './react/safe.js'
-import wrap from './react/wrap.js'
+// import sort from 'bubblesort'
 import toCamelCase from 'to-camel-case'
 import toSlugCase from 'to-slug-case'
-import flatten from 'flatten'
+import wrap from './react/wrap.js'
 
 const safeScope = value =>
   typeof value === 'string' && !isSlot(value) ? JSON.stringify(value) : value
@@ -64,7 +65,7 @@ const maybeSafe = node =>
 
 const getScopedProps = (propNode, blockNode) => {
   const scopes = blockNode.scopes
-    .filter(scope => !scope.isSystem)
+    .filter(scope => !scope.isSystem && !scope.isLocal)
     .map(scope => {
       const prop = scope.properties.find(prop => prop.name === propNode.name)
       return prop && { prop, when: scope.value }
@@ -94,17 +95,6 @@ export const getScopedImageCondition = (scopes, scopedNames, defaultName) => {
 
   scopes.forEach((scope, index) => {
     conditional = `${scope.when} ? ${scopedNames[index]} : ` + conditional
-  })
-
-  return conditional
-}
-
-export const getScopedRequireCondition = (scopes, paths, defaultName) => {
-  let conditional = `requireImage('${defaultName}')`
-
-  scopes.forEach((scope, index) => {
-    conditional =
-      `${scope.when} ? requireImage('${paths[index]}') : ` + conditional
   })
 
   return conditional
@@ -198,6 +188,30 @@ export const getScopeDescription = scope => {
       .replace(/props\./g, '')
       .replace(/\s/g, '')
   )
+}
+
+export const hasCustomScopes = (propNode, blockNode) =>
+  blockNode.scopes.some(
+    scope =>
+      !scope.isLocal &&
+      !scope.isSystem &&
+      scope.properties.some(prop => prop.name === propNode.name)
+  )
+
+export const hasLocals = (propNode, blockNode) =>
+  blockNode.scopes.some(scope => scope.isLocal)
+
+export const getLocals = (propNode, blockNode, state) => {
+  const locals = {}
+
+  blockNode.scopes.filter(scope => scope.isLocal).forEach(scope => {
+    const prop = scope.properties.find(prop => prop.name === propNode.name)
+    if (prop) {
+      locals[scope.value] = prop.value
+    }
+  })
+
+  return locals
 }
 
 export const makeOnClickTracker = (node, state) => {
@@ -321,3 +335,8 @@ const convertToVars = props => {
   })
   return props
 }
+
+const fontsOrder = ['eot', 'woff2', 'woff', 'ttf', 'svg', 'otf']
+
+export const sortFonts = (a, b) =>
+  fontsOrder.indexOf(b.type) - fontsOrder.indexOf(a.type)

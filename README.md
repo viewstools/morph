@@ -2,11 +2,12 @@
 
 [Looking for Views Tools docs?](https://github.com/viewstools/docs)
 
-The easiest way to integrate Views with your project is to run it as a
-standalone command. You can install it with:
+The easiest way to integrate Views with your project is to [follow this guide](https://github.com/viewstools/docs/tree/master/UseViews).
+
+If you know what you're doing run it as a standalone command. You can install it with:
 
 ```
-npm install --save-dev views-morph
+npm install --save-dev @viewstools/morph
 ```
 
 Then, you can use it with any React or React Native app like this from within
