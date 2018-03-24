@@ -5,6 +5,7 @@ const blacklist = [
   'classname',
   'clippath',
   'cursor',
+  'format',
   'fontweight',
   'goto',
   'isdisabled',
@@ -17,6 +18,8 @@ const blacklist = [
   'shadowspread',
   'teleportto',
   'texttransform',
+  'transition',
+  'transformorigin',
   'userselect',
 ]
 

@@ -21,6 +21,7 @@ export default ({
   getFont = () => false,
   getImport,
   local,
+  localSupported,
   name,
   track = true,
   views,
@@ -43,6 +44,7 @@ export default ({
     isReactNative: true,
     local,
     locals: {},
+    localSupported: [],
     name: finalName,
     remap: {},
     render: [],
@@ -67,6 +69,7 @@ export default ({
   const parsed = views[name]
   state.fonts = parsed.fonts
   state.slots = parsed.slots
+  state.localSupported = localSupported
 
   walk(parsed.views[0], visitor, state)
 

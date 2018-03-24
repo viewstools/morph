@@ -1,6 +1,7 @@
 import * as PropertiesChildrenProxyMap from '../react/properties-children-proxy-map.js'
 import * as PropertiesRoute from '../react/properties-route.js'
 import * as PropertiesStyle from './properties-style.js'
+import * as PropertyFormat from '../react/property-format.js'
 import * as PropertyRef from '../react/property-ref.js'
 import * as PropertyRest from '../react/property-rest.js'
 import * as PropertyStyle from '../react/property-style.js'
@@ -9,6 +10,7 @@ import isValidPropertyForBlock from './is-valid-property-for-block.js'
 
 export function enter(node, parent, state) {
   PropertiesStyle.enter(node, parent, state)
+  PropertyFormat.enter(node, parent, state)
 
   node.properties.forEach(propNode => {
     if (

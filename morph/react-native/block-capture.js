@@ -81,7 +81,10 @@ export const enter = (node, parent, state) => {
   const underlineColorAndroidValue = underlineColorAndroid
     ? underlineColorAndroid.value.value
     : 'transparent'
+
   state.render.push(
     ` underlineColorAndroid=${safe(underlineColorAndroidValue)}`
   )
+
+  state.render.push(` textAlignVertical="top"`)
 }
