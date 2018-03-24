@@ -21,6 +21,27 @@ const addSlots = (prop, value) => {
   return value
 }
 
+const parseTransform = (prop, value) => {
+  const transforms = value.split(/\s(?=[a-z])/)
+  return transforms
+    .map((transform, i) => {
+      const name = transform.split('(')[0]
+      const values = transform.match(/\(([^)]+)\)/)[1].split(/\s+|,/)
+      const axes = ['X', 'Y', 'Z']
+      debugger
+      return values
+        .map((val, j) => {
+          const lastItem =
+            j === values.length - 1 && i === transforms.length - 1
+          return lastItem
+            ? `${name}${axes[j]} ${val}`
+            : `${name}${axes[j]} ${val}\n`
+        })
+        .join('')
+    })
+    .join('')
+}
+
 const IGNORE_ATTRS = ['xmlns', 'id', 'class', 'onclick']
 
 const getAttrs = attr =>
@@ -30,6 +51,9 @@ const getAttrs = attr =>
       let value = attr[prop]
       if (Array.isArray(value)) {
         value = value.join(' ')
+      }
+      if (prop === 'transform') {
+        return `${parseTransform(prop, value)}`
       }
       return `${toCamelCase(prop)} ${addSlots(prop, value)}`
     })
