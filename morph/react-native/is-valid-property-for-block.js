@@ -17,6 +17,8 @@ const blacklist = [
   'shadowspread',
   'teleportto',
   'texttransform',
+  'transition',
+  'transformorigin',
   'userselect',
 ]
 
