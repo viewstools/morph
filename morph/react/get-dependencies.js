@@ -47,8 +47,9 @@ export default (state, getImport) => {
     }
   })
 
-  // TODO native
-  if (!state.isReactNative) {
+  if (state.isReactNative) {
+    state.getFont(state.fonts)
+  } else {
     dependencies.push(getImport('ViewsBaseCss'))
 
     state.fonts.forEach(usedFont => {
@@ -84,6 +85,11 @@ export default (state, getImport) => {
 
   if (state.track && !state.debug) {
     dependencies.push('import PropTypes from "prop-types"')
+  }
+
+  if (Object.keys(state.locals).length > 0) {
+    dependencies.push('import { Subscribe } from "unstated"')
+    dependencies.push(getImport('LocalContainer'))
   }
 
   return dependencies.join('\n')

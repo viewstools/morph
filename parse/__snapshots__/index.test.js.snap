@@ -3,6 +3,7 @@
 exports[`#parse 1`] = `
 Object {
   "fonts": Array [],
+  "locals": Array [],
   "slots": Array [],
   "views": Array [
     Object {
@@ -34,6 +35,7 @@ Object {
 exports[`#parse 2`] = `
 Object {
   "fonts": Array [],
+  "locals": Array [],
   "slots": Array [],
   "views": Array [
     Object {
@@ -84,6 +86,7 @@ Object {
 exports[`#parse 3`] = `
 Object {
   "fonts": Array [],
+  "locals": Array [],
   "slots": Array [],
   "views": Array [
     Object {
@@ -244,6 +247,7 @@ Object {
           ],
           "scopes": Array [
             Object {
+              "isLocal": false,
               "isSystem": true,
               "name": "when",
               "properties": Array [
@@ -365,6 +369,7 @@ Object {
 exports[`#parse 4`] = `
 Object {
   "fonts": Array [],
+  "locals": Array [],
   "slots": Array [],
   "views": Array [
     Object {
@@ -494,6 +499,7 @@ Object {
 exports[`#parse 5`] = `
 Object {
   "fonts": Array [],
+  "locals": Array [],
   "slots": Array [
     Object {
       "defaultValue": false,
@@ -548,6 +554,7 @@ Object {
               "line": 3,
             },
           },
+          "maybeAnimated": true,
           "name": "Text",
           "properties": Array [
             Object {
@@ -739,6 +746,7 @@ Object {
           "line": 0,
         },
       },
+      "maybeAnimated": true,
       "name": "Vertical",
       "properties": Array [
         Object {
@@ -812,6 +820,131 @@ Object {
 exports[`#parse 6`] = `
 Object {
   "fonts": Array [],
+  "locals": Array [
+    "es",
+  ],
+  "slots": Array [],
+  "views": Array [
+    Object {
+      "children": Array [
+        Object {
+          "isBasic": true,
+          "isGroup": false,
+          "loc": Object {
+            "end": Object {
+              "column": 8,
+              "line": 4,
+            },
+            "start": Object {
+              "column": 0,
+              "line": 1,
+            },
+          },
+          "name": "Text",
+          "properties": Array [
+            Object {
+              "loc": Object {
+                "end": Object {
+                  "column": 6,
+                  "line": 2,
+                },
+                "start": Object {
+                  "column": 0,
+                  "line": 2,
+                },
+              },
+              "name": "text",
+              "tags": Object {
+                "validSlot": null,
+              },
+              "type": "Property",
+              "value": "hi",
+            },
+          ],
+          "scopes": Array [
+            Object {
+              "isLocal": true,
+              "isSystem": false,
+              "name": "when",
+              "properties": Array [
+                Object {
+                  "defaultValue": "es",
+                  "loc": Object {
+                    "end": Object {
+                      "column": 7,
+                      "line": 3,
+                    },
+                    "start": Object {
+                      "column": 0,
+                      "line": 3,
+                    },
+                  },
+                  "name": "when",
+                  "slotName": "es",
+                  "tags": Object {
+                    "scope": "<es",
+                    "shouldBeSlot": true,
+                    "slot": true,
+                    "validSlot": true,
+                  },
+                  "type": "Property",
+                  "value": "props.es",
+                },
+                Object {
+                  "loc": Object {
+                    "end": Object {
+                      "column": 8,
+                      "line": 4,
+                    },
+                    "start": Object {
+                      "column": 0,
+                      "line": 4,
+                    },
+                  },
+                  "name": "text",
+                  "tags": Object {
+                    "validSlot": null,
+                  },
+                  "type": "Property",
+                  "value": "hola",
+                },
+              ],
+              "slotIsNot": false,
+              "slotName": "es",
+              "value": "es",
+            },
+          ],
+          "type": "Block",
+        },
+      ],
+      "is": "Locals",
+      "isBasic": true,
+      "isGroup": true,
+      "isList": false,
+      "loc": Object {
+        "end": Object {
+          "column": 8,
+          "line": 4,
+        },
+        "start": Object {
+          "column": 0,
+          "line": 0,
+        },
+      },
+      "name": "Vertical",
+      "properties": Array [],
+      "scopes": Array [],
+      "type": "Block",
+    },
+  ],
+  "warnings": Array [],
+}
+`;
+
+exports[`#parse 7`] = `
+Object {
+  "fonts": Array [],
+  "locals": Array [],
   "slots": Array [
     Object {
       "defaultValue": false,
@@ -838,6 +971,7 @@ Object {
               "line": 1,
             },
           },
+          "maybeAnimated": true,
           "name": "Vertical",
           "properties": Array [
             Object {
@@ -903,6 +1037,7 @@ Object {
           ],
           "scopes": Array [
             Object {
+              "isLocal": false,
               "isSystem": false,
               "name": "when",
               "properties": Array [
@@ -951,6 +1086,7 @@ Object {
               "value": "props.when",
             },
             Object {
+              "isLocal": false,
               "isSystem": false,
               "name": "when",
               "properties": Array [

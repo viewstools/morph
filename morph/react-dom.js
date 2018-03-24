@@ -20,6 +20,8 @@ export default ({
   file,
   getFont = () => false,
   getImport,
+  local,
+  localSupported,
   name,
   track = true,
   views,
@@ -46,6 +48,9 @@ export default ({
     images: [],
     isDynamic: false,
     isReactNative: false,
+    local,
+    locals: {},
+    localSupported: [],
     name: finalName,
     render: [],
     styles: {},
@@ -76,6 +81,7 @@ export default ({
   const parsed = views[name]
   state.fonts = parsed.fonts
   state.slots = parsed.slots
+  state.localSupported = localSupported
 
   walk(parsed.views[0], visitor, state)
   maybeUsesRouter(state)

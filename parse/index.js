@@ -3,6 +3,7 @@ import {
   didYouMeanProp,
   getBlock,
   getComment,
+  getFormat,
   getProp,
   getPropType,
   getUnsupportedShorthandExpanded,
@@ -16,6 +17,7 @@ import {
   isGroup,
   isList,
   isProp,
+  isLocalScope,
   isSystemScope,
   isUserComment,
 } from './helpers.js'
@@ -24,6 +26,7 @@ import getTags from './get-tags.js'
 
 export default ({
   convertSlotToProps = true,
+  enableLocalScopes = true,
   enableSystemScopes = true,
   skipComments = true,
   source,
@@ -33,6 +36,7 @@ export default ({
   const rlines = text.split('\n')
   const lines = rlines.map(line => line.trim())
   const fonts = []
+  const locals = []
   const stack = []
   const slots = []
   const views = []
@@ -314,6 +318,13 @@ export default ({
 
         if (name === 'when') {
           const isSystem = enableSystemScopes && isSystemScope(slotName)
+          const isLocal = enableLocalScopes && isLocalScope(slotName)
+
+          if (isLocal) {
+            if (!locals.includes(value)) {
+              locals.push(slotName)
+            }
+          }
 
           if (value === '' || value === '<' || value === '<!') {
             warnings.push({
@@ -337,21 +348,27 @@ export default ({
             })
           }
 
+          // TODO warning
+          // if (isLocal && (name !== 'text' || name !== 'placeholder')) {
+          // }
+
           tags.scope = value
           inScope = true
           scope = {
+            isLocal,
             isSystem,
             value,
             name,
             slotName,
-            slotIsNot: isSystem ? false : slotIsNot,
+            slotIsNot: isSystem || isLocal ? false : slotIsNot,
             properties: [],
           }
 
           if (convertSlotToProps) {
-            scope.value = isSystem
-              ? slotName
-              : `${slotIsNot ? '!' : ''}props.${slotName || name}`
+            scope.value =
+              isSystem || isLocal
+                ? slotName
+                : `${slotIsNot ? '!' : ''}props.${slotName || name}`
           }
 
           scopes.push(scope)
@@ -369,6 +386,13 @@ export default ({
             line,
             loc,
           })
+        }
+
+        if (name === 'format') {
+          block.format = getFormat(value)
+        }
+        if (tags.style && tags.slot) {
+          block.maybeAnimated = true
         }
 
         propNode = {
@@ -493,6 +517,7 @@ export default ({
 
   return {
     fonts,
+    locals,
     slots,
     views,
     warnings,

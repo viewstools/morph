@@ -2,6 +2,14 @@ import { getProp, isTag } from '../utils.js'
 
 export default (node, parent, code) => {
   switch (node.name) {
+    case 'borderTopStyle':
+    case 'borderBottomStyle':
+    case 'borderLeftStyle':
+    case 'borderRightStyle':
+      return {
+        borderStyle: node.value,
+      }
+
     case 'shadowColor':
     case 'shadowBlur':
     case 'shadowOffsetX':

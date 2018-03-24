@@ -2,6 +2,7 @@ import safe from './react/safe.js'
 import wrap from './react/wrap.js'
 import toCamelCase from 'to-camel-case'
 import toSlugCase from 'to-slug-case'
+import sort from 'bubblesort'
 
 const safeScope = value =>
   typeof value === 'string' && !isSlot(value) ? JSON.stringify(value) : value
@@ -63,7 +64,7 @@ const maybeSafe = node =>
 
 const getScopedProps = (propNode, blockNode) => {
   const scopes = blockNode.scopes
-    .filter(scope => !scope.isSystem)
+    .filter(scope => !scope.isSystem && !scope.isLocal)
     .map(scope => {
       const prop = scope.properties.find(prop => prop.name === propNode.name)
       return prop && { prop, when: scope.value }
@@ -188,6 +189,30 @@ export const getScopeDescription = scope => {
   )
 }
 
+export const hasCustomScopes = (propNode, blockNode) =>
+  blockNode.scopes.some(
+    scope =>
+      !scope.isLocal &&
+      !scope.isSystem &&
+      scope.properties.some(prop => prop.name === propNode.name)
+  )
+
+export const hasLocals = (propNode, blockNode) =>
+  blockNode.scopes.some(scope => scope.isLocal)
+
+export const getLocals = (propNode, blockNode, state) => {
+  const locals = {}
+
+  blockNode.scopes.filter(scope => scope.isLocal).forEach(scope => {
+    const prop = scope.properties.find(prop => prop.name === propNode.name)
+    if (prop) {
+      locals[scope.value] = prop.value
+    }
+  })
+
+  return locals
+}
+
 export const makeOnClickTracker = (node, state) => {
   if (!state.track) return node.value
 
@@ -201,3 +226,8 @@ export const makeOnClickTracker = (node, state) => {
     node.value
   }, event })`
 }
+
+const fontsOrder = ['eot', 'woff2', 'woff', 'ttf', 'svg', 'otf']
+
+export const sortFonts = (a, b) =>
+  fontsOrder.indexOf(b.type) - fontsOrder.indexOf(a.type)

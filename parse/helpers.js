@@ -1,6 +1,9 @@
 import { isStyle, STYLE } from './prop-is-style.js'
 import DidYouMeanMatcher from './did-you-mean.js'
 import isNumber from './prop-is-number.js'
+import locales from 'i18n-locales'
+
+const LOCAL_SCOPES = locales.map(item => item.replace(/-/g, ''))
 
 const dymBlockMatcher = new DidYouMeanMatcher(
   'CaptureEmail|CaptureFile|CaptureNumber|CapturePhone|CaptureSecure|CaptureText|CaptureTextArea|G|Horizontal|Image|List|Svg|SvgCircle|SvgEllipse|SvgDefs|SvgGroup|SvgLinearGradient|SvgRadialGradient|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgSymbol|SvgText|SvgUse|SvgStop|Text|Vertical'.split(
@@ -83,7 +86,7 @@ const UNSUPPORTED_SHORTHAND = {
     'shadowSpread',
     'shadowColor',
   ],
-  flex: ['flexGrow'],
+  flex: ['flexGrow', 'flexShrink', 'flexBasis'],
   margin: ['marginTop', 'marginRight', 'marginBottom', 'marginLeft'],
   padding: ['paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft'],
   textShadow: ['shadowOffsetX', 'shadowOffsetY', 'shadowBlur', 'shadowColor'],
@@ -133,6 +136,22 @@ export const getComment = line => {
   } catch (err) {
     return ''
   }
+}
+export const getFormat = line => {
+  let properties = {}
+  const values = line.split(' ')
+  const formatKey = values[0]
+
+  if (values.length === 2) {
+    properties[formatKey] = values[1]
+  } else {
+    properties[formatKey] = {}
+    for (let i = 1; i < values.length; i = i + 2) {
+      properties[formatKey][values[i]] = getValue(values[i + 1])
+    }
+  }
+
+  return properties
 }
 export const getProp = line => {
   // eslint-disable-next-line
@@ -218,7 +237,7 @@ export const getUnsupportedShorthandExpanded = (name, value) => {
       `${props[3]} ${left}`,
     ]
   } else if (name === 'flex') {
-    return [`flexGrow ${value}`, 'flexShrink 1']
+    return [`flexGrow ${value}`, 'flexShrink 1', 'flexBasis 0%']
   } else if (name === 'transform') {
     return [`expand the values like: translateX 10`]
   } else if (name === 'transformOrigin') {
@@ -241,6 +260,8 @@ export const getValue = value => {
     return value
   }
 }
+
+export const isLocalScope = name => LOCAL_SCOPES.includes(name)
 
 const SYSTEM_SCOPES = [
   'active',
