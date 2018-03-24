@@ -6787,6 +6787,7 @@ class UseCaptureEmail extends React.Component {
         autoCorrect={false}
         defaultValue={undefined}
         underlineColorAndroid=\\"transparent\\"
+        textAlignVertical=\\"top\\"
         testID={\`\${props['testID'] || 'Email'}|\`}
         autoFocus={true}
         defaultValue=\\"hey this is a default value\\"
@@ -6838,6 +6839,7 @@ class UseCaptureFile extends React.Component {
         keyboardType=\\"undefined\\"
         autoCorrect={false}
         underlineColorAndroid=\\"transparent\\"
+        textAlignVertical=\\"top\\"
         testID={\`\${props['testID'] || 'File'}|\`}
       />
     );
@@ -6880,6 +6882,7 @@ class UseCaptureNumber extends React.Component {
         keyboardType=\\"numeric\\"
         autoCorrect={false}
         underlineColorAndroid=\\"transparent\\"
+        textAlignVertical=\\"top\\"
         testID={\`\${props['testID'] || 'Number'}|\`}
       />
     );
@@ -6922,6 +6925,7 @@ class UseCapturePhone extends React.Component {
         keyboardType=\\"phone-pad\\"
         autoCorrect={false}
         underlineColorAndroid=\\"transparent\\"
+        textAlignVertical=\\"top\\"
         testID={\`\${props['testID'] || 'Phone'}|\`}
       />
     );
@@ -6964,6 +6968,7 @@ class UseCaptureSecure extends React.Component {
         secureTextEntry
         autoCorrect={false}
         underlineColorAndroid=\\"transparent\\"
+        textAlignVertical=\\"top\\"
         testID={\`\${props['testID'] || 'Secure'}|\`}
       />
     );
@@ -7006,6 +7011,7 @@ class UseCaptureText extends React.Component {
         keyboardType=\\"default\\"
         autoCorrect={false}
         underlineColorAndroid=\\"transparent\\"
+        textAlignVertical=\\"top\\"
         testID={\`\${props['testID'] || 'Text'}|\`}
       />
     );
@@ -7049,6 +7055,7 @@ class UseCaptureTextArea extends React.Component {
         multiline={true}
         autoCorrect={false}
         underlineColorAndroid=\\"transparent\\"
+        textAlignVertical=\\"top\\"
         testID={\`\${props['testID'] || 'CaptureTextArea'}|\`}
       />
     );
@@ -7091,6 +7098,7 @@ class UseCaptureTextManagedFromOutside extends React.Component {
         keyboardType=\\"default\\"
         autoCorrect={false}
         underlineColorAndroid=\\"transparent\\"
+        textAlignVertical=\\"top\\"
         testID={\`\${props['testID'] || 'CaptureText'}|\`}
         value={props.external}
       />
