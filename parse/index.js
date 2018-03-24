@@ -3,6 +3,7 @@ import {
   didYouMeanProp,
   getBlock,
   getComment,
+  getFormat,
   getProp,
   getPropType,
   getUnsupportedShorthandExpanded,
@@ -387,6 +388,9 @@ export default ({
           })
         }
 
+        if (name === 'format') {
+          block.format = getFormat(value)
+        }
         if (tags.style && tags.slot) {
           block.maybeAnimated = true
         }

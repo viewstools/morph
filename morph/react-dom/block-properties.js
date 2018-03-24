@@ -3,6 +3,7 @@ import * as PropertiesClassName from './properties-class-name.js'
 import * as PropertiesImage from './properties-image.js'
 import * as PropertiesRoute from '../react/properties-route.js'
 import * as PropertiesStyle from './properties-style.js'
+import * as PropertyFormat from '../react/property-format.js'
 import * as PropertyRef from '../react/property-ref.js'
 import * as PropertyRest from '../react/property-rest.js'
 import * as PropertyStyle from '../react/property-style.js'
@@ -13,6 +14,7 @@ export function enter(node, parent, state) {
   PropertiesStyle.enter(node, parent, state)
   PropertiesClassName.enter(node, parent, state)
   PropertiesImage.enter(node, parent, state)
+  PropertyFormat.enter(node, parent, state)
 
   node.properties.forEach(propNode => {
     if (
