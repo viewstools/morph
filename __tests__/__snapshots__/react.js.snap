@@ -215,10 +215,10 @@ Object {
   "code": "const { get } = require('@viewstools/e2e');
 
 module.exports = {
-  Locals: get('Locals.Locals'),
   Named: get('Locals.Named'),
   Text1: get('Locals.Text:1'),
   Text: get('Locals.Text'),
+  _top: get('Locals'),
 };
 ",
 }
@@ -520,7 +520,7 @@ Object {
   "code": "const { get } = require('@viewstools/e2e');
 
 module.exports = {
-  _top: get('UseText'),
+  _top: get('UseText', 'isSomething'),
 };
 ",
 }
@@ -1823,6 +1823,7 @@ class ListOfSomething extends React.Component {
         {Array.isArray(props.from) &&
           props.from.map((item, index) => (
             <Something
+              index={index}
               {...item}
               key={item.id || index}
               data-test-id={\`ListOfSomething.Something|\`}
@@ -1923,6 +1924,7 @@ class ListWhen extends React.Component {
         {Array.isArray(props.from) &&
           props.from.map((item, index) => (
             <Card
+              index={index}
               {...item}
               key={item.id || index}
               data-test-id={\`ListWhen.Card|\`}
@@ -4568,28 +4570,35 @@ Object {
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import './Fonts/Montserrat-300';
-import { css } from 'react-emotion';
+import styled from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const UseText_hjam8jb = css({
-  color: 'blue',
-  fontFamily: 'Montserrat, sans-serif',
-  fontSize: 16,
-  lineHeight: 1.5,
-  fontWeight: 300,
-});
+const UseText1 = styled('span')(
+  {
+    fontFamily: 'Montserrat, sans-serif',
+    fontSize: 16,
+    lineHeight: 1.5,
+    fontWeight: 300,
+  },
+  ({ props }) => ({
+    color: props.isSomething ? 'red' : 'blue',
+  })
+);
 
 class UseText extends React.Component {
   render() {
     const { context, props } = this;
 
     return (
-      <span
-        data-test-id={\`\${props['data-test-id'] || 'UseText'}|\`}
-        className={\`views-block \${UseText_hjam8jb}\`}
+      <UseText1
+        data-test-id={\`\${props['data-test-id'] || 'UseText'}|\${
+          props.isSomething ? 'isSomething|' : ''
+        }\`}
+        props={props}
+        className=\\"views-block\\"
       >
         Hi, I'm some text
-      </span>
+      </UseText1>
     );
   }
 }
@@ -4618,24 +4627,31 @@ Object {
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import './Fonts/Montserrat-300';
-import { css } from 'react-emotion';
+import styled from 'react-emotion';
 
-const UseText_hjam8jb = css({
-  color: 'blue',
-  fontFamily: 'Montserrat, sans-serif',
-  fontSize: 16,
-  lineHeight: 1.5,
-  fontWeight: 300,
-});
+const UseText1 = styled('span')(
+  {
+    fontFamily: 'Montserrat, sans-serif',
+    fontSize: 16,
+    lineHeight: 1.5,
+    fontWeight: 300,
+  },
+  ({ props }) => ({
+    color: props.isSomething ? 'red' : 'blue',
+  })
+);
 
 const UseText = props => {
   return (
-    <span
-      data-test-id={\`\${props['data-test-id'] || 'UseText'}|\`}
-      className={\`views-block \${UseText_hjam8jb}\`}
+    <UseText1
+      data-test-id={\`\${props['data-test-id'] || 'UseText'}|\${
+        props.isSomething ? 'isSomething|' : ''
+      }\`}
+      props={props}
+      className=\\"views-block\\"
     >
       Hi, I'm some text
-    </span>
+    </UseText1>
   );
 };
 
@@ -5178,7 +5194,7 @@ exports[`react-native parses react-native AnimatedButton 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { Text, TouchableWithoutFeedback, View } from 'react-native';
+import { Animated, Text, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 
 class AnimatedButton extends React.Component {
@@ -5198,13 +5214,13 @@ class AnimatedButton extends React.Component {
         }
         underlayColor=\\"transparent\\"
       >
-        <View
+        <Animated.View
           testID={\`\${props['testID'] || 'Vertical'}|\`}
           style={{ opacity: props.opacity }}
         >
           <Text testID={\`AnimatedButton.Text|\`}>hey</Text>
           {props.children}
-        </View>
+        </Animated.View>
       </TouchableWithoutFeedback>
     );
   }
@@ -5269,7 +5285,7 @@ exports[`react-native parses react-native BackgroundImage 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { Image, StyleSheet } from 'react-native';
+import { Animated, Image, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
 
@@ -5283,7 +5299,7 @@ class BackgroundImage extends React.Component {
         source={{ uri: 'https://views.tools/image.jpg' }}
         testID={\`\${props['testID'] || 'Vertical'}|\`}
       >
-        <Image
+        <Animated.Image
           resizeMode={undefined}
           source={{ uri: props.backgroundImage }}
           testID={\`BackgroundImage.Horizontal|\`}
@@ -5318,7 +5334,7 @@ exports[`react-native parses react-native Border 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Animated, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 const styles = StyleSheet.create({
   h1n9275f: { borderColor: 'red', borderStyle: 'solid' },
@@ -5329,12 +5345,12 @@ class Border extends React.Component {
     const { context, props } = this;
 
     return (
-      <View
+      <Animated.View
         testID={\`\${props['testID'] || 'Border'}|\`}
         style={[styles.h1n9275f, { borderWidth: props.borderWidth }]}
       >
         {props.children}
-      </View>
+      </Animated.View>
     );
   }
 }
@@ -5391,7 +5407,7 @@ exports[`react-native parses react-native Code 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Animated, StyleSheet, View } from 'react-native';
 import PropTypes from 'prop-types';
 const styles = StyleSheet.create({ h1jcb2fl: { backgroundColor: 'red' } });
 
@@ -5404,13 +5420,13 @@ class Code extends React.Component {
         testID={\`\${props['testID'] || 'Vertical'}|\`}
         style={styles.h1jcb2fl}
       >
-        <Text
+        <Animated.Text
           testID={\`Code.Text|\`}
           innerRef={props.refText}
           style={{ color: props.color }}
         >
           {props.text}
-        </Text>
+        </Animated.Text>
         {props.children}
       </View>
     );
@@ -5498,7 +5514,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import SomeThing from './SomeThing.view.js';
-import { View } from 'react-native';
+import { Animated } from 'react-native';
 import PropTypes from 'prop-types';
 
 class DynamicStylesApplyToBasicBlocksOnly extends React.Component {
@@ -5506,7 +5522,7 @@ class DynamicStylesApplyToBasicBlocksOnly extends React.Component {
     const { context, props } = this;
 
     return (
-      <View
+      <Animated.View
         testID={\`\${props['testID'] || 'Vertical'}|\`}
         style={{ height: props.height }}
       >
@@ -5515,7 +5531,7 @@ class DynamicStylesApplyToBasicBlocksOnly extends React.Component {
           height={props.height}
         />
         {props.children}
-      </View>
+      </Animated.View>
     );
   }
 }
@@ -5598,7 +5614,12 @@ exports[`react-native parses react-native Hover 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
+import {
+  Animated,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import PropTypes from 'prop-types';
 const styles = StyleSheet.create({
   h14i1mtc: { backgroundColor: '#323232' },
@@ -5623,12 +5644,12 @@ class Hover extends React.Component {
         underlayColor=\\"transparent\\"
       >
         <View testID={\`\${props['testID'] || 'Hover'}|\`} style={styles.h14i1mtc}>
-          <Text
+          <Animated.Text
             testID={\`Hover.Text|\`}
             style={[styles.hyfo4ef, { fontSize: props.fontSize }]}
           >
             Hey!
-          </Text>
+          </Animated.Text>
           {props.children}
         </View>
       </TouchableWithoutFeedback>
@@ -5701,6 +5722,7 @@ class ListOfSomething extends React.Component {
         {Array.isArray(props.from) &&
           props.from.map((item, index) => (
             <Something
+              index={index}
               {...item}
               key={item.id || index}
               testID={\`ListOfSomething.Something|\`}
@@ -5745,7 +5767,12 @@ class ListWhen extends React.Component {
       <View testID={\`\${props['testID'] || 'List'}|\`}>
         {Array.isArray(props.from) &&
           props.from.map((item, index) => (
-            <Card {...item} key={item.id || index} testID={\`ListWhen.Card|\`} />
+            <Card
+              index={index}
+              {...item}
+              key={item.id || index}
+              testID={\`ListWhen.Card|\`}
+            />
           ))}
         {props.children}
       </View>
@@ -6262,7 +6289,7 @@ exports[`react-native parses react-native Shadow 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Animated, StyleSheet, View } from 'react-native';
 import PropTypes from 'prop-types';
 const styles = StyleSheet.create({
   h8lazqx: {
@@ -6287,7 +6314,7 @@ class Shadow extends React.Component {
 
     return (
       <View testID={\`\${props['testID'] || 'Shadow'}|\`}>
-        <View
+        <Animated.View
           testID={\`Shadow.BoxShadow|\`}
           style={[
             styles.h8lazqx,
@@ -6300,7 +6327,7 @@ class Shadow extends React.Component {
             },
           ]}
         >
-          <Text
+          <Animated.Text
             testID={\`Shadow.TextShadow|\`}
             style={[
               styles.h9jluza,
@@ -6314,8 +6341,8 @@ class Shadow extends React.Component {
             ]}
           >
             hey
-          </Text>
-        </View>
+          </Animated.Text>
+        </Animated.View>
         {props.children}
       </View>
     );
@@ -6343,7 +6370,7 @@ exports[`react-native parses react-native SomeMissingStyle 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
+import { Animated, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 const styles = StyleSheet.create({
   h3pga9k: {
@@ -6373,14 +6400,14 @@ class SomeMissingStyle extends React.Component {
         }
         underlayColor=\\"transparent\\"
       >
-        <View
+        <Animated.View
           testID={\`\${props['testID'] || 'WindowControl'}|\`}
           scale={1.1}
           tabIndex={-1}
           style={styles.h3pga9k}
         >
           {props.children}
-        </View>
+        </Animated.View>
       </TouchableWithoutFeedback>
     );
   }
@@ -7082,12 +7109,7 @@ import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 import PropTypes from 'prop-types';
 const styles = StyleSheet.create({
-  h1gml2rz: {
-    color: 'blue',
-    fontFamily: 'Montserrat-300',
-    fontSize: 16,
-    lineHeight: 24,
-  },
+  h1tkz54v: { fontFamily: 'Montserrat-300', fontSize: 16, lineHeight: 24 },
 });
 
 class UseText extends React.Component {
@@ -7095,7 +7117,12 @@ class UseText extends React.Component {
     const { context, props } = this;
 
     return (
-      <Text testID={\`\${props['testID'] || 'UseText'}|\`} style={styles.h1gml2rz}>
+      <Text
+        testID={\`\${props['testID'] || 'UseText'}|\${
+          props.isSomething ? 'isSomething|' : ''
+        }\`}
+        style={[styles.h1tkz54v, { color: props.isSomething ? 'red' : 'blue' }]}
+      >
         Hi, I'm some text
       </Text>
     );
@@ -7230,7 +7257,7 @@ exports[`react-native parses react-native ViewNameIsntUsedInStyle 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Animated, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 const styles = StyleSheet.create({ h15ehzpl: { zIndex: 5 } });
 
@@ -7239,12 +7266,12 @@ class ViewNameIsntUsedInStyle extends React.Component {
     const { context, props } = this;
 
     return (
-      <View
+      <Animated.View
         testID={\`\${props['testID'] || 'ViewNameIsntUsedInStyle'}|\`}
         style={[styles.h15ehzpl, { opacity: props.opacity }]}
       >
         {props.children}
-      </View>
+      </Animated.View>
     );
   }
 }
