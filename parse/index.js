@@ -387,6 +387,10 @@ export default ({
           })
         }
 
+        if (tags.style && tags.slot) {
+          block.maybeAnimated = true
+        }
+
         propNode = {
           type: 'Property',
           loc,
