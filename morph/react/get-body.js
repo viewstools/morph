@@ -87,7 +87,6 @@ export default ({ state, name }) => {
   if (maybeState || maybeTracking || maybeAnimated) {
     return `class ${name} extends React.Component {
   ${maybeState}
-  ${maybeTracking}
   ${maybeAnimated}
 
   render() {

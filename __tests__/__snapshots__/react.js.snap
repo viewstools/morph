@@ -620,8 +620,6 @@ const Vertical_h1azf9vn = css({
 });
 
 class Action extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -768,7 +766,6 @@ const Text = styled('span')(
 );
 
 class AnimatedButton extends React.Component {
-  true;
   animatedValue0 = new Animated.Value(this.props.isOn ? 1 : 0);
 
   componentWillReceiveProps(next) {
@@ -854,7 +851,6 @@ const Vertical_hukdbcc = css({ opacity: 0.75 });
 const Text_hs37n86 = css({ color: 'red' });
 
 class AnimatedButton extends React.Component {
-  false;
   animatedValue0 = new Animated.Value(this.props.isOn ? 1 : 0);
 
   componentWillReceiveProps(next) {
@@ -926,8 +922,6 @@ const Vertical_h1n973fw = css({
 });
 
 class AppRegionDrag extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -1007,8 +1001,6 @@ const Horizontal = styled('div')(
 );
 
 class BackgroundImage extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -1155,8 +1147,6 @@ const Left = styled('div')(
 );
 
 class Border extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -1368,8 +1358,6 @@ import PropTypes from 'prop-types';
 const Vertical_h118stgu = css({ backgroundColor: 'blue' });
 
 class ClassName extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -1437,8 +1425,6 @@ const Text = styled('span')(({ props }) => ({
 }));
 
 class Code extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -1553,8 +1539,6 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import PropTypes from 'prop-types';
 
 class DefaultProps extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -1660,8 +1644,6 @@ const Vertical = styled('div')(({ props }) => ({
 }));
 
 class DynamicStylesApplyToBasicBlocksOnly extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -1750,8 +1732,6 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import PropTypes from 'prop-types';
 
 class EmptyText extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -1806,8 +1786,6 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import PropTypes from 'prop-types';
 
 class GoTo extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -1897,8 +1875,6 @@ const Text = styled('span')(
 );
 
 class Hover extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -2017,8 +1993,6 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import PropTypes from 'prop-types';
 
 class JustText extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -2078,8 +2052,6 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import PropTypes from 'prop-types';
 
 class ListOfSomething extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -2181,8 +2153,6 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import PropTypes from 'prop-types';
 
 class ListWhen extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -2295,8 +2265,6 @@ import chopperJpg from './chopper.jpg';
 import PropTypes from 'prop-types';
 
 class LocalImage extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -2367,8 +2335,6 @@ const LocalImageSvg1 = styled('img')({ width: 50 }, ({ props }) => ({
 }));
 
 class LocalImageSvg extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -2448,8 +2414,6 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import PropTypes from 'prop-types';
 
 class LocalOrRemoteImageWhenCode extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -2540,8 +2504,6 @@ const NamedLocal = {
 };
 
 class Locals extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -2675,8 +2637,6 @@ const timeFormatters = {
 };
 
 class LocalsFormat extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -2814,8 +2774,6 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import PropTypes from 'prop-types';
 
 class NameIsType extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -2877,8 +2835,6 @@ import PropTypes from 'prop-types';
 const Text_h7ml8je = css({ marginTop: -10 });
 
 class NegativeNumber extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -2943,8 +2899,6 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import PropTypes from 'prop-types';
 
 class NestedRoutes extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -3059,8 +3013,6 @@ const Scope1 = styled('span')(({ props }) => ({
 }));
 
 class Scope extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -3151,8 +3103,6 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import PropTypes from 'prop-types';
 
 class ScopeOnCustomView extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -3234,8 +3184,6 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import PropTypes from 'prop-types';
 
 class ScopePopup extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -3345,8 +3293,6 @@ const Content = styled('div')(({ props }) => ({
 }));
 
 class ScopePopup2 extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -3483,8 +3429,6 @@ const TextShadow = styled('span')(({ props }) => ({
 }));
 
 class Shadow extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -3610,8 +3554,6 @@ const WindowControl = styled('button')(
 );
 
 class SomeMissingStyle extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -3720,8 +3662,6 @@ import PropTypes from 'prop-types';
 const Horizontal_h1qq1i2q = css({ flexDirection: 'row' });
 
 class Teleport extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -3793,8 +3733,6 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import PropTypes from 'prop-types';
 
 class TestIds extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -3874,8 +3812,6 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import PropTypes from 'prop-types';
 
 class TextInterpolation extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -3971,7 +3907,6 @@ class UseCaptureEmail extends React.Component {
     super(props);
     this.state = {};
   }
-  true;
 
   render() {
     const { context, props, state } = this;
@@ -4033,7 +3968,6 @@ class UseCaptureEmail extends React.Component {
     super(props);
     this.state = {};
   }
-  false;
 
   render() {
     const { props, state } = this;
@@ -4079,7 +4013,6 @@ class UseCaptureFile extends React.Component {
     super(props);
     this.state = {};
   }
-  true;
 
   render() {
     const { context, props, state } = this;
@@ -4117,7 +4050,6 @@ class UseCaptureFile extends React.Component {
     super(props);
     this.state = {};
   }
-  false;
 
   render() {
     const { props, state } = this;
@@ -4154,7 +4086,6 @@ class UseCaptureNumber extends React.Component {
     super(props);
     this.state = {};
   }
-  true;
 
   render() {
     const { context, props, state } = this;
@@ -4193,7 +4124,6 @@ class UseCaptureNumber extends React.Component {
     super(props);
     this.state = {};
   }
-  false;
 
   render() {
     const { props, state } = this;
@@ -4231,7 +4161,6 @@ class UseCapturePhone extends React.Component {
     super(props);
     this.state = {};
   }
-  true;
 
   render() {
     const { context, props, state } = this;
@@ -4270,7 +4199,6 @@ class UseCapturePhone extends React.Component {
     super(props);
     this.state = {};
   }
-  false;
 
   render() {
     const { props, state } = this;
@@ -4308,7 +4236,6 @@ class UseCaptureSecure extends React.Component {
     super(props);
     this.state = {};
   }
-  true;
 
   render() {
     const { context, props, state } = this;
@@ -4347,7 +4274,6 @@ class UseCaptureSecure extends React.Component {
     super(props);
     this.state = {};
   }
-  false;
 
   render() {
     const { props, state } = this;
@@ -4385,7 +4311,6 @@ class UseCaptureText extends React.Component {
     super(props);
     this.state = {};
   }
-  true;
 
   render() {
     const { context, props, state } = this;
@@ -4424,7 +4349,6 @@ class UseCaptureText extends React.Component {
     super(props);
     this.state = {};
   }
-  false;
 
   render() {
     const { props, state } = this;
@@ -4462,7 +4386,6 @@ class UseCaptureTextArea extends React.Component {
     super(props);
     this.state = {};
   }
-  true;
 
   render() {
     const { context, props, state } = this;
@@ -4502,7 +4425,6 @@ class UseCaptureTextArea extends React.Component {
     super(props);
     this.state = {};
   }
-  false;
 
   render() {
     const { props, state } = this;
@@ -4541,7 +4463,6 @@ class UseCaptureTextManagedFromOutside extends React.Component {
     super(props);
     this.state = {};
   }
-  true;
 
   render() {
     const { context, props, state } = this;
@@ -4585,7 +4506,6 @@ class UseCaptureTextManagedFromOutside extends React.Component {
     super(props);
     this.state = {};
   }
-  false;
 
   render() {
     const { props, state } = this;
@@ -4631,8 +4551,6 @@ const Horizontal_h1t8p93z = css({
 });
 
 class UseHorizontal extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -4699,8 +4617,6 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import PropTypes from 'prop-types';
 
 class UseImage extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -4779,8 +4695,6 @@ import PropTypes from 'prop-types';
 const Horizontal_h1qq1i2q = css({ flexDirection: 'row' });
 
 class UseRouter extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -4937,8 +4851,6 @@ const Svg_hq411mi = css({
 const SvgPath_h15mb53k = css({ fill: 'red' });
 
 class UseSvg extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -5086,8 +4998,6 @@ const UseText1 = styled('span')(
 );
 
 class UseText extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -5199,8 +5109,6 @@ const Italic_h1p02bde = css({
 });
 
 class UseTextCustomFont extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -5335,8 +5243,6 @@ import PropTypes from 'prop-types';
 const Vertical_h1cyenk5 = css({ backgroundColor: 'red' });
 
 class UseVertical extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -5403,8 +5309,6 @@ const ViewNameIsntUsedInStyle1 = styled('div')({ zIndex: 5 }, ({ props }) => ({
 }));
 
 class ViewNameIsntUsedInStyle extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -5486,8 +5390,6 @@ import PropTypes from 'prop-types';
 const App_h1qq1i2q = css({ flexDirection: 'row' });
 
 class When extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -5571,8 +5473,6 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import PropTypes from 'prop-types';
 
 class WhenTopLevel extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -5646,8 +5546,6 @@ import PropTypes from 'prop-types';
 const styles = StyleSheet.create({ h1g2xbng: { color: 'red' } });
 
 class Action extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -5718,7 +5616,6 @@ const getAnimatedValue = (animatedValue, from, to) =>
   });
 
 class AnimatedButton extends React.Component {
-  true;
   animatedValue0 = new Animated.Value(this.props.isOn ? 1 : 0);
 
   componentWillReceiveProps(next) {
@@ -5800,8 +5697,6 @@ const styles = StyleSheet.create({
 });
 
 class AppRegionDrag extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -5828,14 +5723,12 @@ exports[`react-native parses react-native BackgroundImage 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { Image, StyleSheet } from 'react-native';
+import { Animated, Image, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
 
 class BackgroundImage extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -5845,7 +5738,7 @@ class BackgroundImage extends React.Component {
         source={{ uri: 'https://views.tools/image.jpg' }}
         testID={\`\${props['testID'] || 'Vertical'}|\`}
       >
-        <Image
+        <Animated.Image
           resizeMode={undefined}
           source={{ uri: props.backgroundImage }}
           testID={\`BackgroundImage.Horizontal|\`}
@@ -5880,7 +5773,7 @@ exports[`react-native parses react-native Border 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Animated, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
@@ -5892,37 +5785,35 @@ const styles = StyleSheet.create({
 });
 
 class Border extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
     return (
-      <View
+      <Animated.View
         testID={\`\${props['testID'] || 'Border'}|\`}
         style={[styles.h1n9275f, { borderWidth: props.borderWidth }]}
       >
-        <View
+        <Animated.View
           testID={\`Border.Top|\`}
           style={[styles.h14delot, { borderTopWidth: props.borderTopWidth }]}
         />
-        <View
+        <Animated.View
           testID={\`Border.Right|\`}
           style={[styles.hmmoxzd, { borderRightWidth: props.borderRightWidth }]}
         />
-        <View
+        <Animated.View
           testID={\`Border.Bottom|\`}
           style={[
             styles.h120skwi,
             { borderBottomWidth: props.borderBottomWidth },
           ]}
         />
-        <View
+        <Animated.View
           testID={\`Border.Left|\`}
           style={[styles.h1en1ebe, { borderLeftWidth: props.borderLeftWidth }]}
         />
         {props.children}
-      </View>
+      </Animated.View>
     );
   }
 }
@@ -5980,8 +5871,6 @@ import PropTypes from 'prop-types';
 const styles = StyleSheet.create({ hkg1xou: { backgroundColor: 'blue' } });
 
 class ClassName extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -6008,14 +5897,12 @@ exports[`react-native parses react-native Code 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Animated, StyleSheet, View } from 'react-native';
 import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({ h1jcb2fl: { backgroundColor: 'red' } });
 
 class Code extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -6024,13 +5911,13 @@ class Code extends React.Component {
         testID={\`\${props['testID'] || 'Vertical'}|\`}
         style={styles.h1jcb2fl}
       >
-        <Text
+        <Animated.Text
           testID={\`Code.Text|\`}
           ref={props.refText}
           style={{ color: props.color }}
         >
           {props.text}
-        </Text>
+        </Animated.Text>
         {props.children}
       </View>
     );
@@ -6075,8 +5962,6 @@ import { Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 
 class DefaultProps extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -6120,17 +6005,15 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import SomeThing from './SomeThing.view.js';
-import { View } from 'react-native';
+import { Animated } from 'react-native';
 import PropTypes from 'prop-types';
 
 class DynamicStylesApplyToBasicBlocksOnly extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
     return (
-      <View
+      <Animated.View
         testID={\`\${props['testID'] || 'Vertical'}|\`}
         style={{ height: props.height }}
       >
@@ -6139,7 +6022,7 @@ class DynamicStylesApplyToBasicBlocksOnly extends React.Component {
           height={props.height}
         />
         {props.children}
-      </View>
+      </Animated.View>
     );
   }
 }
@@ -6169,8 +6052,6 @@ import { Text } from 'react-native';
 import PropTypes from 'prop-types';
 
 class EmptyText extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -6197,8 +6078,6 @@ import { Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 
 class GoTo extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -6226,7 +6105,12 @@ exports[`react-native parses react-native Hover 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
+import {
+  Animated,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
@@ -6235,8 +6119,6 @@ const styles = StyleSheet.create({
 });
 
 class Hover extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -6254,12 +6136,12 @@ class Hover extends React.Component {
         underlayColor=\\"transparent\\"
       >
         <View testID={\`\${props['testID'] || 'Hover'}|\`} style={styles.h14i1mtc}>
-          <Text
+          <Animated.Text
             testID={\`Hover.Text|\`}
             style={[styles.hyfo4ef, { fontSize: props.fontSize }]}
           >
             Hey!
-          </Text>
+          </Animated.Text>
           {props.children}
         </View>
       </TouchableWithoutFeedback>
@@ -6297,8 +6179,6 @@ import { Text } from 'react-native';
 import PropTypes from 'prop-types';
 
 class JustText extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -6326,8 +6206,6 @@ import { View } from 'react-native';
 import PropTypes from 'prop-types';
 
 class ListOfSomething extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -6374,8 +6252,6 @@ import { View } from 'react-native';
 import PropTypes from 'prop-types';
 
 class ListWhen extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -6428,8 +6304,6 @@ import { Image } from 'react-native';
 import PropTypes from 'prop-types';
 
 class LocalImage extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -6466,8 +6340,6 @@ import PropTypes from 'prop-types';
 const styles = StyleSheet.create({ h1fkj9gt: { width: 50 } });
 
 class LocalImageSvg extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -6506,8 +6378,6 @@ import { Image } from 'react-native';
 import PropTypes from 'prop-types';
 
 class LocalOrRemoteImageWhenCode extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -6561,8 +6431,6 @@ const NamedLocal = {
 };
 
 class Locals extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -6641,8 +6509,6 @@ const timeFormatters = {
 };
 
 class LocalsFormat extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -6693,8 +6559,6 @@ import { Text } from 'react-native';
 import PropTypes from 'prop-types';
 
 class NameIsType extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -6723,8 +6587,6 @@ import PropTypes from 'prop-types';
 const styles = StyleSheet.create({ h1gnz4mf: { marginTop: -10 } });
 
 class NegativeNumber extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -6758,8 +6620,6 @@ import { Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 
 class NestedRoutes extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -6802,8 +6662,6 @@ import { Text } from 'react-native';
 import PropTypes from 'prop-types';
 
 class Scope extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -6853,8 +6711,6 @@ import Button from './Button.view.js';
 import PropTypes from 'prop-types';
 
 class ScopeOnCustomView extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -6898,8 +6754,6 @@ import { Text, TouchableWithoutFeedback, View } from 'react-native';
 import PropTypes from 'prop-types';
 
 class ScopePopup extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -6955,8 +6809,6 @@ import { Text, TouchableWithoutFeedback, View } from 'react-native';
 import PropTypes from 'prop-types';
 
 class ScopePopup2 extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -7016,7 +6868,7 @@ exports[`react-native parses react-native Shadow 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Animated, StyleSheet, View } from 'react-native';
 import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
@@ -7037,14 +6889,12 @@ const styles = StyleSheet.create({
 });
 
 class Shadow extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
     return (
       <View testID={\`\${props['testID'] || 'Shadow'}|\`}>
-        <View
+        <Animated.View
           testID={\`Shadow.BoxShadow|\`}
           style={[
             styles.h8lazqx,
@@ -7057,7 +6907,7 @@ class Shadow extends React.Component {
             },
           ]}
         >
-          <Text
+          <Animated.Text
             testID={\`Shadow.TextShadow|\`}
             style={[
               styles.h9jluza,
@@ -7071,8 +6921,8 @@ class Shadow extends React.Component {
             ]}
           >
             hey
-          </Text>
-        </View>
+          </Animated.Text>
+        </Animated.View>
         {props.children}
       </View>
     );
@@ -7100,7 +6950,7 @@ exports[`react-native parses react-native SomeMissingStyle 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
+import { Animated, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
@@ -7114,8 +6964,6 @@ const styles = StyleSheet.create({
 });
 
 class SomeMissingStyle extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -7132,14 +6980,14 @@ class SomeMissingStyle extends React.Component {
         }
         underlayColor=\\"transparent\\"
       >
-        <View
+        <Animated.View
           testID={\`\${props['testID'] || 'WindowControl'}|\`}
           scale={1.1}
           tabIndex={-1}
           style={styles.hduhodw}
         >
           {props.children}
-        </View>
+        </Animated.View>
       </TouchableWithoutFeedback>
     );
   }
@@ -7173,8 +7021,6 @@ import PropTypes from 'prop-types';
 const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
 
 class Teleport extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -7213,8 +7059,6 @@ import { Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 
 class TestIds extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -7249,8 +7093,6 @@ import { Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 
 class TextInterpolation extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -7301,7 +7143,6 @@ class UseCaptureEmail extends React.Component {
     super(props);
     this.state = {};
   }
-  true;
 
   render() {
     const { context, props, state } = this;
@@ -7355,7 +7196,6 @@ class UseCaptureFile extends React.Component {
     super(props);
     this.state = {};
   }
-  true;
 
   render() {
     const { context, props, state } = this;
@@ -7399,7 +7239,6 @@ class UseCaptureNumber extends React.Component {
     super(props);
     this.state = {};
   }
-  true;
 
   render() {
     const { context, props, state } = this;
@@ -7443,7 +7282,6 @@ class UseCapturePhone extends React.Component {
     super(props);
     this.state = {};
   }
-  true;
 
   render() {
     const { context, props, state } = this;
@@ -7487,7 +7325,6 @@ class UseCaptureSecure extends React.Component {
     super(props);
     this.state = {};
   }
-  true;
 
   render() {
     const { context, props, state } = this;
@@ -7531,7 +7368,6 @@ class UseCaptureText extends React.Component {
     super(props);
     this.state = {};
   }
-  true;
 
   render() {
     const { context, props, state } = this;
@@ -7575,7 +7411,6 @@ class UseCaptureTextArea extends React.Component {
     super(props);
     this.state = {};
   }
-  true;
 
   render() {
     const { context, props, state } = this;
@@ -7620,7 +7455,6 @@ class UseCaptureTextManagedFromOutside extends React.Component {
     super(props);
     this.state = {};
   }
-  true;
 
   render() {
     const { context, props, state } = this;
@@ -7676,8 +7510,6 @@ const styles = StyleSheet.create({
 });
 
 class UseHorizontal extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -7711,8 +7543,6 @@ import { Image } from 'react-native';
 import PropTypes from 'prop-types';
 
 class UseImage extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -7757,8 +7587,6 @@ import PropTypes from 'prop-types';
 const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
 
 class UseRouter extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -7829,8 +7657,6 @@ import Svg, {
 import PropTypes from 'prop-types';
 
 class UseSvg extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -7880,8 +7706,6 @@ const styles = StyleSheet.create({
 });
 
 class UseText extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -7940,8 +7764,6 @@ const styles = StyleSheet.create({
 });
 
 class UseTextCustomFont extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -8001,8 +7823,6 @@ import PropTypes from 'prop-types';
 const styles = StyleSheet.create({ h1jcb2fl: { backgroundColor: 'red' } });
 
 class UseVertical extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -8032,24 +7852,22 @@ exports[`react-native parses react-native ViewNameIsntUsedInStyle 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Animated, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({ h15ehzpl: { zIndex: 5 } });
 
 class ViewNameIsntUsedInStyle extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
     return (
-      <View
+      <Animated.View
         testID={\`\${props['testID'] || 'ViewNameIsntUsedInStyle'}|\`}
         style={[styles.h15ehzpl, { opacity: props.opacity }]}
       >
         {props.children}
-      </View>
+      </Animated.View>
     );
   }
 }
@@ -8081,8 +7899,6 @@ import PropTypes from 'prop-types';
 const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
 
 class When extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
@@ -8122,8 +7938,6 @@ import { Text } from 'react-native';
 import PropTypes from 'prop-types';
 
 class WhenTopLevel extends React.Component {
-  true;
-
   render() {
     const { context, props } = this;
 
