@@ -103,11 +103,8 @@ const getShadow = (node, parent) => {
   }
 }
 
-const getTransformValue = ({ name, value }, unit) => {
-  if (!value) return false
-  const parsedVal = unit ? `${value}${unit}` : value
-  return { [name]: parsedVal }
-}
+const getTransformValue = (prop, unit) =>
+  prop && { [prop.name]: unit ? `${prop.value}${unit}` : prop.value }
 
 const getTransform = (node, parent) => {
   const translateX = getProp(parent, 'translateX')
@@ -136,5 +133,5 @@ const getTransform = (node, parent) => {
     getTransformValue(rotateY, 'deg'),
     getTransformValue(rotateZ, 'deg'),
     getTransformValue(perspective),
-  ]
+  ].filter(Boolean)
 }
