@@ -28,7 +28,6 @@ const parseTransform = (prop, value) => {
       const name = transform.split('(')[0]
       const values = transform.match(/\(([^)]+)\)/)[1].split(/\s+|,/)
       const axes = ['X', 'Y', 'Z']
-      debugger
       return values
         .map((val, j) => {
           const lastItem =
@@ -44,7 +43,7 @@ const parseTransform = (prop, value) => {
 
 const IGNORE_ATTRS = ['xmlns', 'id', 'class', 'onclick']
 
-const getAttrs = attr =>
+const getAttrs = (attr, tag) =>
   Object.keys(attr)
     .filter(a => !IGNORE_ATTRS.includes(a))
     .map(prop => {
@@ -52,7 +51,7 @@ const getAttrs = attr =>
       if (Array.isArray(value)) {
         value = value.join(' ')
       }
-      if (prop === 'transform') {
+      if (prop === 'transform' && tag !== 'g') {
         return `${parseTransform(prop, value)}`
       }
       return `${toCamelCase(prop)} ${addSlots(prop, value)}`
@@ -83,7 +82,7 @@ const parseSvg = ({ attr, child, tag }) => {
     s.push(svgCustomStyles)
   }
   if (attr) {
-    let attrs = getAttrs(attr)
+    let attrs = getAttrs(attr, tag)
     if (attr.viewBox) {
       attrs = addDimensions(attrs, attr)
     }

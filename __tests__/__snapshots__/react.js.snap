@@ -4973,8 +4973,7 @@ const UseSvg = props => {
       />
       <g
         data-test-id={\`UseSvg.SvgGroup|\`}
-        translateX={6}
-        translateY={5}
+        transform=\\"translate(6.000000, 5.000000)\\"
         className=\\"views-block\\"
       >
         <path

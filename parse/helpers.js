@@ -92,7 +92,20 @@ const UNSUPPORTED_SHORTHAND = {
   textShadow: ['shadowOffsetX', 'shadowOffsetY', 'shadowBlur', 'shadowColor'],
   outline: ['outlineWidth', 'outlineStyle', 'outlineColor'],
   overflow: ['overflowX', 'overflowY'],
-  transform: [],
+  transform: [
+    'translateX',
+    'translateY',
+    'translateZ',
+    'scaleX',
+    'scaleY',
+    'scaleZ',
+    'skewX',
+    'skewY',
+    'rotateX',
+    'rotateY',
+    'rotateZ',
+    'perspective',
+  ],
   transformOrigin: ['transformOriginX', 'transformOriginY', 'transformOriginZ'],
 }
 const TRUE = /^true$/i
