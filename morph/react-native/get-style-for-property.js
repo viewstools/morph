@@ -23,15 +23,12 @@ export default (node, parent, code) => {
 
     case 'translateX':
     case 'translateY':
-    case 'translateZ':
     case 'scaleX':
     case 'scaleY':
-    case 'scaleZ':
     case 'skewX':
     case 'skewY':
     case 'rotateX':
     case 'rotateY':
-    case 'rotateZ':
     case 'perspective':
       return {
         transform: getTransform(node, parent),
@@ -109,29 +106,23 @@ const getTransformValue = (prop, unit) =>
 const getTransform = (node, parent) => {
   const translateX = getProp(parent, 'translateX')
   const translateY = getProp(parent, 'translateY')
-  const translateZ = getProp(parent, 'translateZ')
   const scaleX = getProp(parent, 'scaleX')
   const scaleY = getProp(parent, 'scaleY')
-  const scaleZ = getProp(parent, 'scaleZ')
   const skewX = getProp(parent, 'skewX')
   const skewY = getProp(parent, 'skewY')
   const rotateX = getProp(parent, 'rotateX')
   const rotateY = getProp(parent, 'rotateY')
-  const rotateZ = getProp(parent, 'rotateZ')
   const perspective = getProp(parent, 'perspective')
 
   return [
     getTransformValue(translateX),
     getTransformValue(translateY),
-    getTransformValue(translateZ),
     getTransformValue(scaleX),
     getTransformValue(scaleY),
-    getTransformValue(scaleZ),
     getTransformValue(skewX, 'deg'),
     getTransformValue(skewY, 'deg'),
     getTransformValue(rotateX, 'deg'),
     getTransformValue(rotateY, 'deg'),
-    getTransformValue(rotateZ, 'deg'),
     getTransformValue(perspective),
   ].filter(Boolean)
 }
