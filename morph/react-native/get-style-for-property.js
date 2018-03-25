@@ -21,6 +21,19 @@ export default (node, parent, code) => {
         fontFamily: getFontFamily(node, parent),
       }
 
+    case 'translateX':
+    case 'translateY':
+    case 'scaleX':
+    case 'scaleY':
+    case 'skewX':
+    case 'skewY':
+    case 'rotateX':
+    case 'rotateY':
+    case 'perspective':
+      return {
+        transform: getTransform(node, parent),
+      }
+
     case 'zIndex':
       return {
         zIndex: code ? node.value : parseInt(node.value, 10),
@@ -85,4 +98,31 @@ const getShadow = (node, parent) => {
     shadowOpacity: 1,
     shadowColor: shadowColor ? shadowColor.value : undefined,
   }
+}
+
+const getTransformValue = (prop, unit) =>
+  prop && { [prop.name]: unit ? `${prop.value}${unit}` : prop.value }
+
+const getTransform = (node, parent) => {
+  const translateX = getProp(parent, 'translateX')
+  const translateY = getProp(parent, 'translateY')
+  const scaleX = getProp(parent, 'scaleX')
+  const scaleY = getProp(parent, 'scaleY')
+  const skewX = getProp(parent, 'skewX')
+  const skewY = getProp(parent, 'skewY')
+  const rotateX = getProp(parent, 'rotateX')
+  const rotateY = getProp(parent, 'rotateY')
+  const perspective = getProp(parent, 'perspective')
+
+  return [
+    getTransformValue(translateX),
+    getTransformValue(translateY),
+    getTransformValue(scaleX),
+    getTransformValue(scaleY),
+    getTransformValue(skewX, 'deg'),
+    getTransformValue(skewY, 'deg'),
+    getTransformValue(rotateX, 'deg'),
+    getTransformValue(rotateY, 'deg'),
+    getTransformValue(perspective),
+  ].filter(Boolean)
 }

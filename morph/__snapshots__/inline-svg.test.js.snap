@@ -13,7 +13,8 @@ SvgCircle
 cx 6.5cm
 cy 2cm
 r 100
-transform translate(0,50)
+translateX 0
+translateY 50
 fill < red
 stroke < #000
 strokeWidth .1cm
@@ -22,7 +23,8 @@ SvgCircle
 cx 6.5cm
 cy 2cm
 r 100
-transform translate(70,150)
+translateX 70
+translateY 150
 fill <fill2 #00f
 stroke < #000
 strokeWidth .1cm
@@ -31,7 +33,8 @@ SvgCircle
 cx 6.5cm
 cy 2cm
 r 100
-transform translate(-70,150)
+translateX -70
+translateY 150
 fill <fill3 green
 stroke < #000
 strokeWidth .1cm
