@@ -1,8 +1,10 @@
 Vertical
 opacity 0.75
+translateX 10
 onClick <
 when <isOn
 opacity 1 spring
+translateX 10 spring
 Text
 color red
 text hey

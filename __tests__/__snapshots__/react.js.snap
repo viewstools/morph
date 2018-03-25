@@ -7218,20 +7218,18 @@ Object {
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
+
 const styles = StyleSheet.create({
-  halpp73: {
+  hzeo7hy: {
     transform: [
       { translateX: 1 },
       { translateY: 2 },
-      { translateZ: 3 },
       { scaleX: 4 },
       { scaleY: 5 },
-      { scaleZ: 6 },
       { skewX: '7deg' },
       { skewY: '8deg' },
       { rotateX: '9deg' },
       { rotateY: '10deg' },
-      { rotateZ: '11deg' },
       { perspective: 12 },
     ],
     transformOriginX: 'center',
@@ -7247,7 +7245,7 @@ class Transform extends React.Component {
     return (
       <View
         testID={\`\${props['testID'] || 'Transform'}|\`}
-        style={styles.halpp73}
+        style={styles.hzeo7hy}
       >
         <Text testID={\`Transform.Text|\`}>who knows what happens here :D</Text>
         {props.children}
