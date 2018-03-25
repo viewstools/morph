@@ -1,18 +1,18 @@
 Transform Vertical
 translateX 1
 translateY 2
-translateZ 3
-scaleX 4
-scaleY 5
-scaleZ 6
-skewX 7
-skewY 8
-rotateX 9
-rotateY 10
-rotateZ 11
-perspective 12
+translateZ not supported
+scale 3
+scaleX not supported
+scaleY not supported
+scaleZ not supported
+rotate 4deg
+rotateX 5deg
+rotateY 6deg
+rotateZ not supported
 transformOriginX center
 transformOriginY top
-transformOriginZ 5
+transformOriginZ not supported
+perspective not supported
 Text
 text who knows what happens here :D
