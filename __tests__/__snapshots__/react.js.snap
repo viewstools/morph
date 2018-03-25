@@ -3241,6 +3241,7 @@ import PropTypes from 'prop-types';
 
 const Content = styled('div')(({ props }) => ({
   opacity: props.isShown ? 1 : props.isSuperVisible ? 3 : 0,
+  scale: props.isShown ? 1 : props.isSuperVisible ? 2 : 0,
 }));
 
 class ScopePopup2 extends React.Component {
@@ -3274,7 +3275,6 @@ class ScopePopup2 extends React.Component {
               ? 'isShown|'
               : props.isSuperVisible ? 'isSuperVisible|' : ''
           }\`}
-          scale={props.isShown ? 1 : props.isSuperVisible ? 2 : 0}
           props={props}
           className=\\"views-block\\"
         >
@@ -3314,6 +3314,7 @@ import styled from 'react-emotion';
 
 const Content = styled('div')(({ props }) => ({
   opacity: props.isShown ? 1 : props.isSuperVisible ? 3 : 0,
+  scale: props.isShown ? 1 : props.isSuperVisible ? 2 : 0,
 }));
 
 const ScopePopup2 = props => {
@@ -3337,7 +3338,6 @@ const ScopePopup2 = props => {
             ? 'isShown|'
             : props.isSuperVisible ? 'isSuperVisible|' : ''
         }\`}
-        scale={props.isShown ? 1 : props.isSuperVisible ? 2 : 0}
         props={props}
         className=\\"views-block\\"
       >
@@ -3490,11 +3490,12 @@ const WindowControl = styled('button')(
     marginRight: 8,
     backgroundColor: '#CBCDCE',
     opacity: 0.7,
+    transform: 'scale(1.1px)',
     transition: 'all 0.15s ease-out',
     width: 10,
     height: 10,
     '&:hover': {
-      scale: 1.5,
+      transform: 'scale(1.1px)',
     },
   },
   ({ props }) => ({
@@ -3519,7 +3520,6 @@ class SomeMissingStyle extends React.Component {
             event,
           })
         }
-        scale={1.1}
         tabIndex={-1}
         props={props}
         className=\\"views-block\\"
@@ -3559,11 +3559,12 @@ const WindowControl = styled('button')(
     marginRight: 8,
     backgroundColor: '#CBCDCE',
     opacity: 0.7,
+    transform: 'scale(1.1px)',
     transition: 'all 0.15s ease-out',
     width: 10,
     height: 10,
     '&:hover': {
-      scale: 1.5,
+      transform: 'scale(1.1px)',
     },
   },
   ({ props }) => ({
@@ -3578,7 +3579,6 @@ const SomeMissingStyle = props => {
     <WindowControl
       data-test-id={\`\${props['data-test-id'] || 'WindowControl'}|\`}
       onClick={props.onClick}
-      scale={1.1}
       props={props}
       className=\\"views-block\\"
     >
@@ -3840,10 +3840,10 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const Transform_h1od8az7 = css({
+const Transform_ho7cu1x = css({
   transform:
-    'translateX(1px) translateY(2px) translateZ(3px) scaleX(4px) scaleY(5px) scaleZ(6px) skewX(7deg) skewY(8deg) rotateX(9deg) rotateY(10deg) rotateZ(11deg) perspective(12px)',
-  transformOrigin: 'center top 5px',
+    'rotate(4deg) rotateX(5deg) rotateY(6deg) scale(3px) translateX(1px) translateY(2px)',
+  transformOrigin: 'center top',
 });
 
 class Transform extends React.Component {
@@ -3853,7 +3853,7 @@ class Transform extends React.Component {
     return (
       <div
         data-test-id={\`\${props['data-test-id'] || 'Transform'}|\`}
-        className={\`views-block \${Transform_h1od8az7}\`}
+        className={\`views-block \${Transform_ho7cu1x}\`}
       >
         <span data-test-id={\`Transform.Text|\`} className=\\"views-block\\">
           who knows what happens here :D
@@ -3882,17 +3882,17 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'react-emotion';
 
-const Transform_h1od8az7 = css({
+const Transform_ho7cu1x = css({
   transform:
-    'translateX(1px) translateY(2px) translateZ(3px) scaleX(4px) scaleY(5px) scaleZ(6px) skewX(7deg) skewY(8deg) rotateX(9deg) rotateY(10deg) rotateZ(11deg) perspective(12px)',
-  transformOrigin: 'center top 5px',
+    'rotate(4deg) rotateX(5deg) rotateY(6deg) scale(3px) translateX(1px) translateY(2px)',
+  transformOrigin: 'center top',
 });
 
 const Transform = props => {
   return (
     <div
       data-test-id={\`\${props['data-test-id'] || 'Transform'}|\`}
-      className={\`views-block \${Transform_h1od8az7}\`}
+      className={\`views-block \${Transform_ho7cu1x}\`}
     >
       <span data-test-id={\`Transform.Text|\`} className=\\"views-block\\">
         who knows what happens here :D
@@ -6832,8 +6832,10 @@ class ScopePopup2 extends React.Component {
               ? 'isShown|'
               : props.isSuperVisible ? 'isSuperVisible|' : ''
           }\`}
-          scale={props.isShown ? 1 : props.isSuperVisible ? 2 : 0}
-          style={{ opacity: props.isShown ? 1 : props.isSuperVisible ? 3 : 0 }}
+          style={{
+            opacity: props.isShown ? 1 : props.isSuperVisible ? 3 : 0,
+            scale: props.isShown ? 1 : props.isSuperVisible ? 2 : 0,
+          }}
         >
           <Text testID={\`ScopePopup2.Text:1|\`}>I'm inside the popup</Text>
         </View>
@@ -6948,10 +6950,11 @@ import React from 'react';
 import { Animated, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 const styles = StyleSheet.create({
-  hduhodw: {
+  h1yk1sqs: {
     marginRight: 8,
     backgroundColor: '#CBCDCE',
     opacity: 0.7,
+    transform: [{ scale: 1.1 }],
     width: 10,
     height: 10,
   },
@@ -6976,9 +6979,8 @@ class SomeMissingStyle extends React.Component {
       >
         <Animated.View
           testID={\`\${props['testID'] || 'WindowControl'}|\`}
-          scale={1.1}
           tabIndex={-1}
-          style={styles.hduhodw}
+          style={styles.h1yk1sqs}
         >
           {props.children}
         </Animated.View>
@@ -7122,24 +7124,17 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 const styles = StyleSheet.create({
-  halpp73: {
+  h15tbsew: {
     transform: [
+      { rotate: '4degdeg' },
+      { rotateX: '5degdeg' },
+      { rotateY: '6degdeg' },
+      { scale: 3 },
       { translateX: 1 },
       { translateY: 2 },
-      { translateZ: 3 },
-      { scaleX: 4 },
-      { scaleY: 5 },
-      { scaleZ: 6 },
-      { skewX: '7deg' },
-      { skewY: '8deg' },
-      { rotateX: '9deg' },
-      { rotateY: '10deg' },
-      { rotateZ: '11deg' },
-      { perspective: 12 },
     ],
     transformOriginX: 'center',
     transformOriginY: 'top',
-    transformOriginZ: 5,
   },
 });
 
@@ -7150,7 +7145,7 @@ class Transform extends React.Component {
     return (
       <View
         testID={\`\${props['testID'] || 'Transform'}|\`}
-        style={styles.halpp73}
+        style={styles.h15tbsew}
       >
         <Text testID={\`Transform.Text|\`}>who knows what happens here :D</Text>
         {props.children}

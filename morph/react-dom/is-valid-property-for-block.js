@@ -1,4 +1,16 @@
-const blacklist = ['classname', 'format', 'teleportto', 'goto']
+const blacklist = [
+  'classname',
+  'format',
+  'teleportto',
+  'goto',
+  'translatez',
+  'scalex',
+  'scaley',
+  'scalez',
+  'rotatez',
+  'transformoriginz',
+  'perspective',
+]
 const blacklistDebug = ['autofocus', 'tabindex']
 
 export default (node, parent, state) => {

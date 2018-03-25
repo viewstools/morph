@@ -21,15 +21,12 @@ export default (node, parent, code) => {
         fontFamily: getFontFamily(node, parent),
       }
 
-    case 'translateX':
-    case 'translateY':
-    case 'scaleX':
-    case 'scaleY':
-    case 'skewX':
-    case 'skewY':
+    case 'rotate':
     case 'rotateX':
     case 'rotateY':
-    case 'perspective':
+    case 'scale':
+    case 'translateX':
+    case 'translateY':
       return {
         transform: getTransform(node, parent),
       }
@@ -104,25 +101,19 @@ const getTransformValue = (prop, unit) =>
   prop && { [prop.name]: unit ? `${prop.value}${unit}` : prop.value }
 
 const getTransform = (node, parent) => {
-  const translateX = getProp(parent, 'translateX')
-  const translateY = getProp(parent, 'translateY')
-  const scaleX = getProp(parent, 'scaleX')
-  const scaleY = getProp(parent, 'scaleY')
-  const skewX = getProp(parent, 'skewX')
-  const skewY = getProp(parent, 'skewY')
+  const rotate = getProp(parent, 'rotate')
   const rotateX = getProp(parent, 'rotateX')
   const rotateY = getProp(parent, 'rotateY')
-  const perspective = getProp(parent, 'perspective')
+  const scale = getProp(parent, 'scale')
+  const translateX = getProp(parent, 'translateX')
+  const translateY = getProp(parent, 'translateY')
 
   return [
-    getTransformValue(translateX),
-    getTransformValue(translateY),
-    getTransformValue(scaleX),
-    getTransformValue(scaleY),
-    getTransformValue(skewX, 'deg'),
-    getTransformValue(skewY, 'deg'),
+    getTransformValue(rotate, 'deg'),
     getTransformValue(rotateX, 'deg'),
     getTransformValue(rotateY, 'deg'),
-    getTransformValue(perspective),
+    getTransformValue(scale),
+    getTransformValue(translateX),
+    getTransformValue(translateY),
   ].filter(Boolean)
 }
