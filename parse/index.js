@@ -406,10 +406,11 @@ export default ({
           value: getValue(value),
         }
 
-        if (tags.animation) {
+        if (tags.animation && scope) {
           const currentAnimation = getAnimation(value)
           const existingScope =
             block.animations.length > 0 &&
+            // eslint-disable-next-line
             block.animations.some(animation => {
               return (
                 animation.scope === scope.slotName &&
@@ -423,6 +424,7 @@ export default ({
           if (!existingScope) {
             block.animations.push({
               ...currentAnimation.properties,
+              name,
               scope: scope.slotName,
             })
           }

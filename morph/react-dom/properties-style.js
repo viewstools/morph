@@ -114,7 +114,7 @@ export function leave(node, parent, state) {
 const asAnimatedCss = node => {
   const names = [
     ...new Set(
-      getAllAnimatedProps(node).map(prop => `${toSlugCase(prop.name)}`)
+      getAllAnimatedProps(node).map(prop => `${toSlugCase(prop.originalName)}`)
     ),
   ]
 
@@ -127,10 +127,10 @@ const asAnimatedCss = node => {
         transition += `, ${makeTransition(prop.name, prop.animation)}`
       }
     })
-    return `\ntransition: '${transition}',\nwillChange: '${names.join(', ')},'`
+    return `\ntransition: '${transition}',\nwillChange: '${names.join(', ')}'`
   }
 
-  return `\nwillChange: '${names.join(', ')},'`
+  return `\nwillChange: '${names.join(', ')}'`
 }
 
 const makeTransition = (name, animation) =>

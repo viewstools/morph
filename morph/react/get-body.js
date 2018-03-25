@@ -1,4 +1,4 @@
-import { getScopeIndex, isNewScope } from '../utils.js'
+import { canUseNativeDriver, getScopeIndex, isNewScope } from '../utils.js'
 
 export default ({ state, name }) => {
   let render = state.render.join('')
@@ -35,7 +35,7 @@ export default ({ state, name }) => {
         stiffness: ${animation.stiffness},
         damping: ${animation.damping},
         delay: ${animation.delay},
-        useNativeDriver: true
+        useNativeDriver: ${canUseNativeDriver(animation)}
       }).start()
     }`
 
@@ -45,7 +45,7 @@ export default ({ state, name }) => {
         toValue: next.${animation.scope} ? 1 : 0,
         duration: ${animation.duration},
         delay: ${animation.delay},
-        useNativeDriver: true
+        useNativeDriver: ${canUseNativeDriver(animation)}
       }).start()
     }`
 

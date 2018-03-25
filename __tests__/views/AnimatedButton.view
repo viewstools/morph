@@ -1,5 +1,10 @@
 Vertical
-opacity < 1
+opacity 0.75
 onClick <
+when <isOn
+opacity 1 spring
 Text
+color red
 text hey
+when <isOn
+color blue spring

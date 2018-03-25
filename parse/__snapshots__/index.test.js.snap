@@ -7,8 +7,10 @@ Object {
   "slots": Array [],
   "views": Array [
     Object {
+      "animations": Array [],
       "children": Array [],
       "is": "Main",
+      "isAnimated": false,
       "isBasic": true,
       "isGroup": true,
       "isList": false,
@@ -39,8 +41,11 @@ Object {
   "slots": Array [],
   "views": Array [
     Object {
+      "animations": Array [],
       "children": Array [
         Object {
+          "animations": Array [],
+          "isAnimated": false,
           "isBasic": true,
           "isGroup": false,
           "loc": Object {
@@ -60,6 +65,7 @@ Object {
         },
       ],
       "is": "Main",
+      "isAnimated": false,
       "isBasic": true,
       "isGroup": true,
       "isList": false,
@@ -90,9 +96,12 @@ Object {
   "slots": Array [],
   "views": Array [
     Object {
+      "animations": Array [],
       "children": Array [
         Object {
+          "animations": Array [],
           "is": "Before",
+          "isAnimated": false,
           "isBasic": true,
           "isGroup": false,
           "loc": Object {
@@ -111,9 +120,12 @@ Object {
           "type": "Block",
         },
         Object {
+          "animations": Array [],
           "children": Array [
             Object {
+              "animations": Array [],
               "is": "ImageInside",
+              "isAnimated": false,
               "isBasic": true,
               "isGroup": false,
               "loc": Object {
@@ -151,8 +163,10 @@ Object {
               "type": "Block",
             },
             Object {
+              "animations": Array [],
               "children": Array [],
               "is": "VerticalInside",
+              "isAnimated": false,
               "isBasic": true,
               "isGroup": true,
               "isList": false,
@@ -173,6 +187,7 @@ Object {
             },
           ],
           "is": "Nested",
+          "isAnimated": false,
           "isBasic": true,
           "isGroup": true,
           "isList": false,
@@ -192,7 +207,9 @@ Object {
           "type": "Block",
         },
         Object {
+          "animations": Array [],
           "is": "After",
+          "isAnimated": false,
           "isBasic": true,
           "isGroup": false,
           "loc": Object {
@@ -301,8 +318,10 @@ Object {
           "type": "Block",
         },
         Object {
+          "animations": Array [],
           "children": Array [],
           "is": "Last",
+          "isAnimated": false,
           "isBasic": true,
           "isGroup": true,
           "isList": false,
@@ -343,6 +362,7 @@ Object {
         },
       ],
       "is": "BlueButton",
+      "isAnimated": false,
       "isBasic": true,
       "isGroup": true,
       "isList": false,
@@ -373,9 +393,12 @@ Object {
   "slots": Array [],
   "views": Array [
     Object {
+      "animations": Array [],
       "children": Array [
         Object {
+          "animations": Array [],
           "is": "A1",
+          "isAnimated": false,
           "isBasic": true,
           "isGroup": false,
           "loc": Object {
@@ -414,7 +437,9 @@ Object {
           "type": "Block",
         },
         Object {
+          "animations": Array [],
           "is": "A2",
+          "isAnimated": false,
           "isBasic": true,
           "isGroup": false,
           "loc": Object {
@@ -454,6 +479,7 @@ Object {
         },
       ],
       "is": "A",
+      "isAnimated": false,
       "isBasic": true,
       "isGroup": true,
       "isList": false,
@@ -539,9 +565,12 @@ Object {
   ],
   "views": Array [
     Object {
+      "animations": Array [],
       "children": Array [
         Object {
+          "animations": Array [],
           "is": "Title",
+          "isAnimated": false,
           "isBasic": true,
           "isGroup": false,
           "loc": Object {
@@ -627,6 +656,8 @@ Object {
           "type": "Block",
         },
         Object {
+          "animations": Array [],
+          "isAnimated": false,
           "isBasic": true,
           "isGroup": false,
           "loc": Object {
@@ -668,10 +699,13 @@ Object {
           "type": "Block",
         },
         Object {
+          "animations": Array [],
           "children": Array [
             Object {
+              "animations": Array [],
               "children": Array [],
               "childrenProxyMap": null,
+              "isAnimated": false,
               "isBasic": false,
               "isGroup": true,
               "isList": false,
@@ -691,6 +725,7 @@ Object {
               "type": "Block",
             },
           ],
+          "isAnimated": false,
           "isBasic": true,
           "isGroup": true,
           "isList": true,
@@ -733,6 +768,7 @@ Object {
           "type": "Block",
         },
       ],
+      "isAnimated": false,
       "isBasic": true,
       "isGroup": true,
       "isList": false,
@@ -826,8 +862,11 @@ Object {
   "slots": Array [],
   "views": Array [
     Object {
+      "animations": Array [],
       "children": Array [
         Object {
+          "animations": Array [],
+          "isAnimated": false,
           "isBasic": true,
           "isGroup": false,
           "loc": Object {
@@ -918,6 +957,7 @@ Object {
         },
       ],
       "is": "Locals",
+      "isAnimated": false,
       "isBasic": true,
       "isGroup": true,
       "isList": false,
@@ -954,10 +994,13 @@ Object {
   ],
   "views": Array [
     Object {
+      "animations": Array [],
       "children": Array [
         Object {
+          "animations": Array [],
           "children": Array [],
           "is": "EmptyWhen",
+          "isAnimated": false,
           "isBasic": true,
           "isGroup": true,
           "isList": false,
@@ -1161,6 +1204,7 @@ Object {
         },
       ],
       "is": "Warning",
+      "isAnimated": false,
       "isBasic": true,
       "isGroup": true,
       "isList": false,

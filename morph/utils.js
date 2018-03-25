@@ -231,10 +231,12 @@ export const makeOnClickTracker = (node, state) => {
 export const hasAnimatedChild = node =>
   node.children && node.children.some(child => child.isAnimated)
 
-const getDefaultValue = (node, name) =>
-  node.properties.find(
+const getDefaultValue = (node, name) => {
+  const prop = node.properties.find(
     prop => prop.name === name || `"--${prop.name}` === name.split(/[0-9]/)[0]
-  ).value
+  )
+  return prop ? prop.value : ''
+}
 
 const getAnimatedCssString = (node, prop) => {
   // TODO: fix this 😬
@@ -329,12 +331,52 @@ const convertToVars = props => {
 
   listsByType.forEach(propsList => {
     propsList.forEach((prop, index) => {
+      // TODO ??? 😱
+      if (prop.name.startsWith('"--')) return
+
       prop.originalName = prop.name
       prop.name = `"--${prop.name}${index++}"`
     })
   })
   return props
 }
+
+// https://github.com/facebook/react-native/blob/26684cf3adf4094eb6c405d345a75bf8c7c0bf88/Libraries/Animated/src/NativeAnimatedHelper.js
+/**
+ * Styles allowed by the native animated implementation.
+ *
+ * In general native animated implementation should support any numeric property that doesn't need
+ * to be updated through the shadow view hierarchy (all non-layout properties).
+ */
+const STYLES_WHITELIST = {
+  opacity: true,
+  transform: true,
+  /* ios styles */
+  shadowOpacity: true,
+  shadowRadius: true,
+  /* legacy android transform properties */
+  scaleX: true,
+  scaleY: true,
+  translateX: true,
+  translateY: true,
+}
+
+const TRANSFORM_WHITELIST = {
+  translateX: true,
+  translateY: true,
+  scale: true,
+  scaleX: true,
+  scaleY: true,
+  rotate: true,
+  rotateX: true,
+  rotateY: true,
+  perspective: true,
+}
+
+export const canUseNativeDriver = animation =>
+  STYLES_WHITELIST[animation.name] ||
+  TRANSFORM_WHITELIST[animation.name] ||
+  false
 
 const fontsOrder = ['eot', 'woff2', 'woff', 'ttf', 'svg', 'otf']
 
