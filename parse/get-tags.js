@@ -7,7 +7,11 @@ export default ({ name, isSlot, slotName, slotIsNot, value, block }) => {
   const tags = {}
 
   if (isStyle(name)) tags.style = true
-  if (isUnsupportedShorthand(name) && block.isBasic) {
+  if (
+    isUnsupportedShorthand(name) &&
+    block.isBasic &&
+    block.name !== 'SvgGroup'
+  ) {
     tags.unsupportedShorthand = true
   }
 

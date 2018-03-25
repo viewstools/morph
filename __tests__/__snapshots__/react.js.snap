@@ -393,6 +393,18 @@ module.exports = {
 }
 `;
 
+exports[`e2e parses e2e Transform 1`] = `
+Object {
+  "code": "const { get } = require('@viewstools/e2e');
+
+module.exports = {
+  Text: get('Transform.Text'),
+  _top: get('Transform'),
+};
+",
+}
+`;
+
 exports[`e2e parses e2e UseCaptureEmail 1`] = `
 Object {
   "code": "const { get } = require('@viewstools/e2e');
@@ -3820,6 +3832,84 @@ export default TextInterpolation;
 }
 `;
 
+exports[`react-dom parses react-dom Transform 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+import { css } from 'react-emotion';
+import PropTypes from 'prop-types';
+
+const Transform_h1od8az7 = css({
+  transform:
+    'translateX(1px) translateY(2px) translateZ(3px) scaleX(4px) scaleY(5px) scaleZ(6px) skewX(7deg) skewY(8deg) rotateX(9deg) rotateY(10deg) rotateZ(11deg) perspective(12px)',
+  transformOrigin: 'center top 5px',
+});
+
+class Transform extends React.Component {
+  render() {
+    const { context, props } = this;
+
+    return (
+      <div
+        data-test-id={\`\${props['data-test-id'] || 'Transform'}|\`}
+        className={\`views-block \${Transform_h1od8az7}\`}
+      >
+        <span data-test-id={\`Transform.Text|\`} className=\\"views-block\\">
+          who knows what happens here :D
+        </span>
+        {props.children}
+      </div>
+    );
+  }
+}
+Transform.contextTypes = {
+  track: PropTypes.func.isRequired,
+};
+
+export default Transform;
+",
+  "fonts": Array [],
+  "slots": Array [],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom Transform: react-dom parses react-dom Transform debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+import { css } from 'react-emotion';
+
+const Transform_h1od8az7 = css({
+  transform:
+    'translateX(1px) translateY(2px) translateZ(3px) scaleX(4px) scaleY(5px) scaleZ(6px) skewX(7deg) skewY(8deg) rotateX(9deg) rotateY(10deg) rotateZ(11deg) perspective(12px)',
+  transformOrigin: 'center top 5px',
+});
+
+const Transform = props => {
+  return (
+    <div
+      data-test-id={\`\${props['data-test-id'] || 'Transform'}|\`}
+      className={\`views-block \${Transform_h1od8az7}\`}
+    >
+      <span data-test-id={\`Transform.Text|\`} className=\\"views-block\\">
+        who knows what happens here :D
+      </span>
+      {props.children}
+    </div>
+  );
+};
+
+export default Transform;
+",
+  "fonts": Array [],
+  "slots": Array [],
+  "svgs": Array [],
+}
+`;
+
 exports[`react-dom parses react-dom UseCaptureEmail 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -7021,6 +7111,61 @@ export default TextInterpolation;
       "type": "string",
     },
   ],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-native parses react-native Transform 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import PropTypes from 'prop-types';
+const styles = StyleSheet.create({
+  halpp73: {
+    transform: [
+      { translateX: 1 },
+      { translateY: 2 },
+      { translateZ: 3 },
+      { scaleX: 4 },
+      { scaleY: 5 },
+      { scaleZ: 6 },
+      { skewX: '7deg' },
+      { skewY: '8deg' },
+      { rotateX: '9deg' },
+      { rotateY: '10deg' },
+      { rotateZ: '11deg' },
+      { perspective: 12 },
+    ],
+    transformOriginX: 'center',
+    transformOriginY: 'top',
+    transformOriginZ: 5,
+  },
+});
+
+class Transform extends React.Component {
+  render() {
+    const { context, props } = this;
+
+    return (
+      <View
+        testID={\`\${props['testID'] || 'Transform'}|\`}
+        style={styles.halpp73}
+      >
+        <Text testID={\`Transform.Text|\`}>who knows what happens here :D</Text>
+        {props.children}
+      </View>
+    );
+  }
+}
+Transform.contextTypes = {
+  track: PropTypes.func.isRequired,
+};
+
+export default Transform;
+",
+  "fonts": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;

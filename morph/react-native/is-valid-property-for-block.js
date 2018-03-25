@@ -20,6 +20,9 @@ const blacklist = [
   'texttransform',
   'transition',
   'transformorigin',
+  'translatez',
+  'scalez',
+  'rotatez',
   'userselect',
 ]
 
