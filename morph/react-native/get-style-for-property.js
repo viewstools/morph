@@ -98,7 +98,12 @@ const getShadow = (node, parent) => {
 }
 
 const getTransformValue = (prop, unit) =>
-  prop && { [prop.name]: unit ? `${prop.value}${unit}` : prop.value }
+  prop && {
+    [prop.name]:
+      unit && typeof prop.value === 'number'
+        ? `${prop.value}${unit}`
+        : prop.value,
+  }
 
 const getTransform = (node, parent) => {
   const rotate = getProp(parent, 'rotate')
