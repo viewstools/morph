@@ -297,13 +297,12 @@ const getAnimatedString = (node, prop) =>
 
 export const getNonAnimatedDynamicStyles = node => {
   const animatedProps = getAllAnimatedProps(node).map(prop => prop.name)
-  debugger
 
   const animatedTransforms = animatedProps.includes('transform')
     ? getAllAnimatedProps(node)
         .find(prop => prop.name === 'transform')
         .props.map(prop => prop.name)
-    : null
+    : []
 
   return Object.keys(node.style.dynamic.base)
     .filter(

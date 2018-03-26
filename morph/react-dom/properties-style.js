@@ -114,7 +114,9 @@ export function leave(node, parent, state) {
 const asAnimatedCss = node => {
   const names = [
     ...new Set(
-      getAllAnimatedProps(node).map(prop => `${toSlugCase(prop.originalName)}`)
+      getAllAnimatedProps(node).map(prop =>
+        toSlugCase(prop.originalName || prop.name)
+      )
     ),
   ]
 
