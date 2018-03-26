@@ -238,7 +238,7 @@ const getDefaultValue = (node, name) => {
   return prop ? prop.value : ''
 }
 
-const getAnimatedCssString = (node, prop) => {
+const getStandardAnimatedString = (node, prop) => {
   // TODO: fix this 😬
   if (typeof prop.value === 'number') {
     return `${prop.name}: getAnimatedValue(this.animatedValue${getScopeIndex(
@@ -250,6 +250,16 @@ const getAnimatedCssString = (node, prop) => {
     node,
     prop.scope
   )}, '${getDefaultValue(node, prop.name)}', '${prop.value}')`
+}
+
+const getTransformString = (node, transform) => {
+  let transformStr = `transform: [`
+
+  transform.props.forEach((prop, i) => {
+    transformStr += `{${getAnimatedString(node, prop)}},`
+  })
+
+  return `${transformStr}]`
 }
 
 export const getScopeIndex = (node, currentScope) =>
@@ -271,20 +281,34 @@ export const getAnimatedStyles = (node, isNative) => {
 
   props.forEach((prop, i) => {
     if (i === 0) {
-      animated += getAnimatedCssString(node, prop)
+      animated += getAnimatedString(node, prop)
     } else {
-      animated += `, ${getAnimatedCssString(node, prop)}`
+      animated += `, ${getAnimatedString(node, prop)}`
     }
   })
 
   return animated
 }
 
+const getAnimatedString = (node, prop) =>
+  prop.name === 'transform'
+    ? getTransformString(node, prop)
+    : getStandardAnimatedString(node, prop)
+
 export const getNonAnimatedDynamicStyles = node => {
   const animatedProps = getAllAnimatedProps(node).map(prop => prop.name)
+  debugger
+
+  const animatedTransforms = animatedProps.includes('transform')
+    ? getAllAnimatedProps(node)
+        .find(prop => prop.name === 'transform')
+        .props.map(prop => prop.name)
+    : null
 
   return Object.keys(node.style.dynamic.base)
-    .filter(key => !animatedProps.includes(key))
+    .filter(
+      key => !animatedProps.includes(key) && !animatedTransforms.includes(key)
+    )
     .reduce((obj, key) => {
       obj[key] = node.style.dynamic.base[key]
       return obj
@@ -297,10 +321,28 @@ export const hasSpringAnimation = node =>
 export const hasTimingAnimation = node =>
   node.animations.some(anim => anim.curve !== 'spring')
 
-export const getAllAnimatedProps = node =>
-  flatten(
+export const getAllAnimatedProps = node => {
+  const props = flatten(
     node.scopes.map(scope => scope.properties.filter(prop => prop.animation))
   )
+  return checkForTransforms(props) ? combineTransforms(props) : props
+}
+
+const combineTransforms = props => {
+  // TODO: handle transforms on different scopes
+  let transform = { name: 'transform', props: [] }
+  props.forEach((prop, i) => {
+    if (TRANSFORM_WHITELIST[prop.name]) {
+      prop.isTransform = true
+      transform.props.push(prop)
+    }
+  })
+  props.push(transform)
+  return props.filter(prop => !prop.isTransform)
+}
+
+const checkForTransforms = props =>
+  props.some(prop => TRANSFORM_WHITELIST[prop.name])
 
 export const getTimingProps = node =>
   flatten(

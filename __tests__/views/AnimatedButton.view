@@ -1,10 +1,14 @@
 Vertical
 opacity 0.75
 translateX 10
+translateY 0
+rotateX 10
 onClick <
 when <isOn
 opacity 1 spring
-translateX 10 spring
+translateX 20 spring
+translateY 30
+rotateX 20 easeIn
 Text
 color red
 text hey
