@@ -275,7 +275,7 @@ export const isNewScope = (state, currentAnimation, index) =>
 
 export const getAnimatedStyles = (node, isNative) => {
   const props = isNative
-    ? getAllAnimatedProps(node)
+    ? getAllAnimatedProps(node, true)
     : convertToVars(getSpringProps(node))
   let animated = ''
 
@@ -296,10 +296,10 @@ const getAnimatedString = (node, prop) =>
     : getStandardAnimatedString(node, prop)
 
 export const getNonAnimatedDynamicStyles = node => {
-  const animatedProps = getAllAnimatedProps(node).map(prop => prop.name)
+  const animatedProps = getAllAnimatedProps(node, true).map(prop => prop.name)
 
   const animatedTransforms = animatedProps.includes('transform')
-    ? getAllAnimatedProps(node)
+    ? getAllAnimatedProps(node, true)
         .find(prop => prop.name === 'transform')
         .props.map(prop => prop.name)
     : []
@@ -320,11 +320,14 @@ export const hasSpringAnimation = node =>
 export const hasTimingAnimation = node =>
   node.animations.some(anim => anim.curve !== 'spring')
 
-export const getAllAnimatedProps = node => {
+export const getAllAnimatedProps = (node, isNative) => {
+  debugger
   const props = flatten(
     node.scopes.map(scope => scope.properties.filter(prop => prop.animation))
   )
-  return checkForTransforms(props) ? combineTransforms(props) : props
+  return checkForTransforms(props) && isNative
+    ? combineTransforms(props)
+    : props
 }
 
 const combineTransforms = props => {
