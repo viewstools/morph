@@ -139,11 +139,11 @@ const addDefaults = (animationType, properties) => {
   if (animationType !== 'spring' && !properties.duration) {
     properties.duration = 150
   } else if (animationType === 'spring') {
-    if (!properties.stiffness) {
-      properties.stiffness = 100
+    if (!properties.speed) {
+      properties.speed = 12
     }
-    if (!properties.damping) {
-      properties.damping = 10
+    if (!properties.bounciness) {
+      properties.bounciness = 8
     }
   }
   return properties

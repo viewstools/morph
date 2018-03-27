@@ -32,8 +32,8 @@ export default ({ state, name }) => {
     `if (props.${animation.scope} !== next.${animation.scope}) {
       Animated.spring(this.animatedValue${index}, {
         toValue: next.${animation.scope} ? 1 : 0,
-        stiffness: ${animation.stiffness},
-        damping: ${animation.damping},
+        speed: ${animation.speed},
+        bounciness: ${animation.bounciness},
         delay: ${animation.delay},
         useNativeDriver: ${canUseNativeDriver(animation)}
       }).start()
