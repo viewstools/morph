@@ -86,10 +86,17 @@ export function leave(node, parent, state) {
     cssDynamic.push('})')
     cssDynamic = cssDynamic.join('\n')
 
+    const nameTag =
+      node.isAnimated && hasSpringAnimation(node)
+        ? `Animated.div`
+        : `'${node.nameTag}'`
+
     if (cssStatic || cssDynamic) {
-      state.styles[node.nameFinal] = `const ${node.nameFinal} = styled('${
-        node.nameTag
-      }')(${cssStatic ? `{${cssStatic}}, ` : ''}${cssDynamic})`
+      state.styles[node.nameFinal] = `const ${
+        node.nameFinal
+      } = styled(${nameTag})(${
+        cssStatic ? `{${cssStatic}}, ` : ''
+      }${cssDynamic})`
 
       // TODO we may want to be smarter here and only pass what's needed
       state.render.push(` props={props}`)
