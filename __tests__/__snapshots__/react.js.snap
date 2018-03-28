@@ -764,7 +764,7 @@ const getAnimatedValue = (animatedValue, from, to) =>
     outputRange: [from, to],
   });
 
-const Vertical = styled('button')(
+const Vertical = styled(Animated.div)(
   {
     opacity: 'var(--opacity)',
     transform: 'var(--transform)',
@@ -776,7 +776,7 @@ const Vertical = styled('button')(
     rotateX: props.isOn ? 20 : 10,
   })
 );
-const Text = styled('span')(
+const Text = styled(Animated.div)(
   {
     color: 'var(--color)',
     willChange: 'color',
@@ -869,7 +869,7 @@ const getAnimatedValue = (animatedValue, from, to) =>
     outputRange: [from, to],
   });
 
-const Vertical = styled('button')(
+const Vertical = styled(Animated.div)(
   {
     opacity: 'var(--opacity)',
     transform: 'var(--transform)',
@@ -881,7 +881,7 @@ const Vertical = styled('button')(
     rotateX: props.isOn ? 20 : 10,
   })
 );
-const Text = styled('span')(
+const Text = styled(Animated.div)(
   {
     color: 'var(--color)',
     willChange: 'color',
