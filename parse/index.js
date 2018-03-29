@@ -171,57 +171,65 @@ export default ({
 
     const last = stack[stack.length - 1]
     if (last) {
-      shouldPushToStack = true
-      if (last.isGroup) {
-        if (last.isList) {
-          if (block.isBasic) {
-            warnings.push({
-              loc: block.loc,
-              type: `A basic block "${
-                block.name
-              }" can't be inside a List. Use a view you made instead.`,
-              line,
-              blocker: true,
-            })
-          } else if (last.children.length > 0) {
-            warnings.push({
-              loc: block.loc,
-              type: `A List can only have one view inside. "${
-                block.name
-              }" is outside of it. Put 1 empty line before.`,
-              line,
-            })
+      if (isTextInterpolation(block, last)) {
+        //TODO: dont use last, if you have multiples on one string this wont work
+        if (!last.interpolation) {
+          last.interpolation = []
+        }
+        last.interpolation.push(block)
+      } else {
+        shouldPushToStack = true
+        if (last.isGroup) {
+          if (last.isList) {
+            if (block.isBasic) {
+              warnings.push({
+                loc: block.loc,
+                type: `A basic block "${
+                  block.name
+                }" can't be inside a List. Use a view you made instead.`,
+                line,
+                blocker: true,
+              })
+            } else if (last.children.length > 0) {
+              warnings.push({
+                loc: block.loc,
+                type: `A List can only have one view inside. "${
+                  block.name
+                }" is outside of it. Put 1 empty line before.`,
+                line,
+              })
+            } else {
+              last.children.push(block)
+            }
           } else {
             last.children.push(block)
           }
-        } else {
-          last.children.push(block)
-        }
-      } else if (!isTextInterpolation(block, last)) {
-        // the block is inside a block that isn't a group
-        end(stack.pop(), i)
+        } else if (!isTextInterpolation(block, last)) {
+          // the block is inside a block that isn't a group
+          end(stack.pop(), i)
 
-        if (last.isBasic) {
-          warnings.push({
-            loc: block.loc,
-            type: `An empty line is required after every block. Put 1 empty line before`,
-            line,
-          })
-        } else if (views[0] && views[0].isGroup) {
-          warnings.push({
-            loc: block.loc,
-            type:
-              lines[i - 1] === ''
-                ? `Put 1 empty line before`
-                : `Put 2 empty lines before`,
-            line,
-          })
-        } else {
-          warnings.push({
-            loc: block.loc,
-            type: `Add Vertical at the top`,
-            line,
-          })
+          if (last.isBasic) {
+            warnings.push({
+              loc: block.loc,
+              type: `An empty line is required after every block. Put 1 empty line before`,
+              line,
+            })
+          } else if (views[0] && views[0].isGroup) {
+            warnings.push({
+              loc: block.loc,
+              type:
+                lines[i - 1] === ''
+                  ? `Put 1 empty line before`
+                  : `Put 2 empty lines before`,
+              line,
+            })
+          } else {
+            warnings.push({
+              loc: block.loc,
+              type: `Add Vertical at the top`,
+              line,
+            })
+          }
         }
       }
     } else if (views.length > 0) {
@@ -490,14 +498,6 @@ export default ({
 
     block.properties = properties
     block.scopes = scopes
-
-    if (last && isTextInterpolation(block, last)) {
-      //TODO: dont use last, if you have multiples on one string this wont work
-      if (!last.interpolation) {
-        last.interpolation = []
-      }
-      last.interpolation.push(block)
-    }
   }
 
   lines.forEach((line, i) => {

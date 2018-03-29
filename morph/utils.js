@@ -233,11 +233,10 @@ export const sortFonts = (a, b) =>
   fontsOrder.indexOf(b.type) - fontsOrder.indexOf(a.type)
 
 export const interpolateText = (node, parent) => {
-  node.value = parent.interpolation.map(item => {
+  parent.interpolation.forEach(item => {
     const re = new RegExp(`${item.name}`)
     const textNode = item.properties.find(prop => prop.name === 'text')
-    debugger
-    return node.value.replace(
+    node.value = node.value.replace(
       re,
       isSlot(textNode) ? wrap(textNode.value) : textNode.value
     )
