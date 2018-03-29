@@ -25,6 +25,17 @@ const parseFormatValue = (value, type) => {
   }
 }
 
+const interpolateText = (node, parent) => {
+  node.value = parent.interpolation.map(item => {
+    const re = new RegExp(`${item.name}`)
+    return node.value.replace(
+      re,
+      item.properties.find(prop => prop.name === 'text').value
+    )
+  })
+  return node.value
+}
+
 export function enter(node, parent, state) {
   if (node.name === 'text' && parent.name === 'Text') {
     if (hasCustomScopes(node, parent)) {
@@ -49,6 +60,8 @@ export function enter(node, parent, state) {
         node.value,
         type
       )})}`
+    } else if (parent.hasOwnProperty('interpolation')) {
+      parent.explicitChildren = interpolateText(node, parent)
     } else {
       parent.explicitChildren = node.value
     }

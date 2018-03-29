@@ -260,11 +260,11 @@ export default ({
       stack.push(block)
     }
 
-    parseProps(i, block)
+    parseProps(i, block, last)
     lookForFonts(block)
   }
 
-  const parseProps = (i, block) => {
+  const parseProps = (i, block, last) => {
     let endOfBlockIndex = i
     while (
       endOfBlockIndex < lines.length - 1 &&
@@ -490,6 +490,14 @@ export default ({
 
     block.properties = properties
     block.scopes = scopes
+
+    if (last && isTextInterpolation(block, last)) {
+      //TODO: dont use last, if you have multiples on one string this wont work
+      if (!last.interpolation) {
+        last.interpolation = []
+      }
+      last.interpolation.push(block)
+    }
   }
 
   lines.forEach((line, i) => {

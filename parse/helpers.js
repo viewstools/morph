@@ -290,5 +290,5 @@ export const getPropType = (block, name, defaultValue) =>
 
 export const isTextInterpolation = (block, previous) => {
   const previousText = previous.properties.find(prop => prop.name === 'text')
-  return previousText && previousText.value.includes(block.is)
+  return previousText && previousText.value.includes(block.is || block.name)
 }
