@@ -19,6 +19,7 @@ import {
   isProp,
   isLocalScope,
   isSystemScope,
+  isTextInterpolation,
   isUserComment,
 } from './helpers.js'
 import getLoc from './get-loc.js'
@@ -196,7 +197,7 @@ export default ({
         } else {
           last.children.push(block)
         }
-      } else {
+      } else if (!isTextInterpolation(block, last)) {
         // the block is inside a block that isn't a group
         end(stack.pop(), i)
 
