@@ -238,7 +238,9 @@ export const interpolateText = (node, parent) => {
     const textNode = item.properties.find(prop => prop.name === 'text')
     node.value = node.value.replace(
       re,
-      isSlot(textNode) ? wrap(textNode.value) : textNode.value
+      hasCustomScopes(textNode, item)
+        ? wrap(getScopedCondition(textNode, item))
+        : isSlot(textNode) ? wrap(textNode.value) : textNode.value
     )
   })
   return node.value
