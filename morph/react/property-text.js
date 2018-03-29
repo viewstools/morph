@@ -3,6 +3,7 @@ import {
   getScopedCondition,
   hasCustomScopes,
   hasLocals,
+  interpolateText,
   isSlot,
 } from '../utils.js'
 import safe from './safe.js'
@@ -23,17 +24,6 @@ const parseFormatValue = (value, type) => {
     default:
       return value
   }
-}
-
-const interpolateText = (node, parent) => {
-  node.value = parent.interpolation.map(item => {
-    const re = new RegExp(`${item.name}`)
-    return node.value.replace(
-      re,
-      item.properties.find(prop => prop.name === 'text').value
-    )
-  })
-  return node.value
 }
 
 export function enter(node, parent, state) {
