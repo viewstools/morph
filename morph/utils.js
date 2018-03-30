@@ -77,41 +77,42 @@ const getScopedProps = (propNode, blockNode) => {
   return scopes
 }
 
-export const interpolateText = (node, parent) => {
+export const interpolateText = (node, parent, isTemplateLiteral) => {
   parent.interpolation.forEach(item => {
     const re = new RegExp(`${item.is ? item.is : item.name}`)
     const textNode = item.properties.find(prop => prop.name === 'text')
-    node.value = node.value.replace(
-      re,
-      hasCustomScopes(textNode, item)
-        ? wrap(getScopedCondition(textNode, item, true))
-        : isSlot(textNode) ? wrap(textNode.value) : textNode.value
-    )
+    node.value = isTemplateLiteral
+      ? getLiteralInterpolation(node, re, textNode)
+      : getStandrdInterpolation(node, re, textNode, item)
   })
-  return node.value
+  return isTemplateLiteral ? '`' + node.value + '`' : node.value
 }
 
-const getLiteralInterpolation = (node, parent) => {
-  parent.interpolation.forEach(item => {
-    const re = new RegExp(`${item.is ? item.is : item.name}`)
-    const textNode = item.properties.find(prop => prop.name === 'text')
-    node.value = node.value.replace(
-      re,
-      `$${isSlot(textNode) ? wrap(textNode.value) : textNode.value}`
-    )
-  })
+const getLiteralInterpolation = (node, re, textNode) =>
+  node.value.replace(
+    re,
+    `$${isSlot(textNode) ? wrap(textNode.value) : textNode.value}`
+  )
 
-  return '`' + node.value + '`'
-}
+const getStandrdInterpolation = (node, re, textNode, item) =>
+  node.value.replace(
+    re,
+    hasCustomScopes(textNode, item)
+      ? wrap(getScopedCondition(textNode, item, true))
+      : isSlot(textNode) ? wrap(textNode.value) : textNode.value
+  )
 
 export const getScopedCondition = (
   propNode,
   blockNode,
   alreadyInterpolated
 ) => {
+  // alreadyInterpolated = interpolation that contains scoped condition
+  // !alreadyInterpolated = scoped condition that contains interpolation
+  // see tests in TextInterpolation.view for an example of both
   let conditional =
     blockNode.hasOwnProperty('interpolation') && !alreadyInterpolated
-      ? getLiteralInterpolation(propNode, blockNode)
+      ? interpolateText(propNode, blockNode, true)
       : maybeSafe(propNode)
 
   if (!getScopedProps(propNode, blockNode)) return false
@@ -120,7 +121,7 @@ export const getScopedCondition = (
     conditional =
       `${scope.when} ? ${
         blockNode.hasOwnProperty('interpolation') && !alreadyInterpolated
-          ? getLiteralInterpolation(scope.prop, blockNode)
+          ? interpolateText(scope.prop, blockNode, true)
           : maybeSafe(scope.prop)
       } : ` + conditional
   })
