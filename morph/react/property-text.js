@@ -29,7 +29,7 @@ const parseFormatValue = (value, type) => {
 export function enter(node, parent, state) {
   if (node.name === 'text' && parent.name === 'Text') {
     if (hasCustomScopes(node, parent)) {
-      parent.explicitChildren = wrap(getScopedCondition(node, parent))
+      parent.explicitChildren = wrap(getScopedCondition(node, parent, false))
     } else if (isSlot(node)) {
       parent.explicitChildren = wrap(node.value)
     } else if (hasLocals(node, parent)) {

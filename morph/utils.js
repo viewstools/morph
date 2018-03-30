@@ -77,13 +77,52 @@ const getScopedProps = (propNode, blockNode) => {
   return scopes
 }
 
-export const getScopedCondition = (propNode, blockNode) => {
-  let conditional = maybeSafe(propNode)
+export const interpolateText = (node, parent) => {
+  parent.interpolation.forEach(item => {
+    const re = new RegExp(`${item.is ? item.is : item.name}`)
+    const textNode = item.properties.find(prop => prop.name === 'text')
+    node.value = node.value.replace(
+      re,
+      hasCustomScopes(textNode, item)
+        ? wrap(getScopedCondition(textNode, item, true))
+        : isSlot(textNode) ? wrap(textNode.value) : textNode.value
+    )
+  })
+  return node.value
+}
+
+const getLiteralInterpolation = (node, parent) => {
+  parent.interpolation.forEach(item => {
+    const re = new RegExp(`${item.is ? item.is : item.name}`)
+    const textNode = item.properties.find(prop => prop.name === 'text')
+    node.value = node.value.replace(
+      re,
+      `$${isSlot(textNode) ? wrap(textNode.value) : textNode.value}`
+    )
+  })
+
+  return '`' + node.value + '`'
+}
+
+export const getScopedCondition = (
+  propNode,
+  blockNode,
+  alreadyInterpolated
+) => {
+  let conditional =
+    blockNode.hasOwnProperty('interpolation') && !alreadyInterpolated
+      ? getLiteralInterpolation(propNode, blockNode)
+      : maybeSafe(propNode)
 
   if (!getScopedProps(propNode, blockNode)) return false
 
   getScopedProps(propNode, blockNode).forEach(scope => {
-    conditional = `${scope.when} ? ${maybeSafe(scope.prop)} : ` + conditional
+    conditional =
+      `${scope.when} ? ${
+        blockNode.hasOwnProperty('interpolation') && !alreadyInterpolated
+          ? getLiteralInterpolation(scope.prop, blockNode)
+          : maybeSafe(scope.prop)
+      } : ` + conditional
   })
 
   return conditional
@@ -231,17 +270,3 @@ const fontsOrder = ['eot', 'woff2', 'woff', 'ttf', 'svg', 'otf']
 
 export const sortFonts = (a, b) =>
   fontsOrder.indexOf(b.type) - fontsOrder.indexOf(a.type)
-
-export const interpolateText = (node, parent) => {
-  parent.interpolation.forEach(item => {
-    const re = new RegExp(`${item.name}`)
-    const textNode = item.properties.find(prop => prop.name === 'text')
-    node.value = node.value.replace(
-      re,
-      hasCustomScopes(textNode, item)
-        ? wrap(getScopedCondition(textNode, item))
-        : isSlot(textNode) ? wrap(textNode.value) : textNode.value
-    )
-  })
-  return node.value
-}
