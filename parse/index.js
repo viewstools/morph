@@ -172,7 +172,6 @@ export default ({
     const last = stack[stack.length - 1]
     if (last) {
       if (isTextInterpolation(block, last)) {
-        //TODO: dont use last, if you have multiples on one string this wont work
         if (!last.interpolation) {
           last.interpolation = []
         }
