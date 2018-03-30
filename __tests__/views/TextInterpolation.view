@@ -1,5 +1,14 @@
 Vertical
-Greeting Text
-text Hi, Name!
-Name Text
-text <name
+Standard Text
+text Hi FirstName!
+when <!firstName
+text Hi stranger!
+FirstName Text
+text <firstName
+
+Scoped Text
+text Hello, Prof. Surname.
+Surname
+text <surname
+when <!surname
+text Anonymous
