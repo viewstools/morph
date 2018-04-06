@@ -386,7 +386,8 @@ Object {
   "code": "const { get } = require('@viewstools/e2e');
 
 module.exports = {
-  Text: get('TextInterpolation.Text'),
+  Scoped: get('TextInterpolation.Scoped'),
+  Standard: get('TextInterpolation.Standard', 'notFirstName'),
   Vertical: get('TextInterpolation.Vertical'),
 };
 ",
@@ -3771,8 +3772,19 @@ class TextInterpolation extends React.Component {
         data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
         className=\\"views-block\\"
       >
-        <span data-test-id={\`TextInterpolation.Text|\`} className=\\"views-block\\">
-          {props.name}
+        <span
+          data-test-id={\`TextInterpolation.Standard|\${
+            !props.firstName ? 'notFirstName|' : ''
+          }\`}
+          className=\\"views-block\\"
+        >
+          {!props.firstName ? \`Hi stranger!\` : \`Hi \${props.firstName}!\`}
+        </span>
+        <span
+          data-test-id={\`TextInterpolation.Scoped|\`}
+          className=\\"views-block\\"
+        >
+          Hello, Prof. {!props.surname ? 'Anonymous' : props.surname}.
         </span>
         {props.children}
       </div>
@@ -3782,14 +3794,22 @@ class TextInterpolation extends React.Component {
 TextInterpolation.contextTypes = {
   track: PropTypes.func.isRequired,
 };
-TextInterpolation.defaultProps = { name: '' };
+TextInterpolation.defaultProps = {
+  firstName: '',
+  surname: '',
+};
 export default TextInterpolation;
 ",
   "fonts": Array [],
   "slots": Array [
     Object {
       "defaultValue": "",
-      "name": "name",
+      "name": "firstName",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": "",
+      "name": "surname",
       "type": "string",
     },
   ],
@@ -3809,22 +3829,38 @@ const TextInterpolation = props => {
       data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
       className=\\"views-block\\"
     >
-      <span data-test-id={\`TextInterpolation.Text|\`} className=\\"views-block\\">
-        {props.name}
+      <span
+        data-test-id={\`TextInterpolation.Standard|\${
+          !props.firstName ? 'notFirstName|' : ''
+        }\`}
+        className=\\"views-block\\"
+      >
+        {!props.firstName ? \`Hi stranger!\` : \`Hi \${props.firstName}!\`}
+      </span>
+      <span data-test-id={\`TextInterpolation.Scoped|\`} className=\\"views-block\\">
+        Hello, Prof. {!props.surname ? 'Anonymous' : props.surname}.
       </span>
       {props.children}
     </div>
   );
 };
 
-TextInterpolation.defaultProps = { name: '' };
+TextInterpolation.defaultProps = {
+  firstName: '',
+  surname: '',
+};
 export default TextInterpolation;
 ",
   "fonts": Array [],
   "slots": Array [
     Object {
       "defaultValue": "",
-      "name": "name",
+      "name": "firstName",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": "",
+      "name": "surname",
       "type": "string",
     },
   ],
@@ -7093,7 +7129,16 @@ class TextInterpolation extends React.Component {
 
     return (
       <View testID={\`\${props['testID'] || 'Vertical'}|\`}>
-        <Text testID={\`TextInterpolation.Text|\`}>{props.name}</Text>
+        <Text
+          testID={\`TextInterpolation.Standard|\${
+            !props.firstName ? 'notFirstName|' : ''
+          }\`}
+        >
+          {!props.firstName ? \`Hi stranger!\` : \`Hi \${props.firstName}!\`}
+        </Text>
+        <Text testID={\`TextInterpolation.Scoped|\`}>
+          Hello, Prof. {!props.surname ? 'Anonymous' : props.surname}.
+        </Text>
         {props.children}
       </View>
     );
@@ -7102,14 +7147,22 @@ class TextInterpolation extends React.Component {
 TextInterpolation.contextTypes = {
   track: PropTypes.func.isRequired,
 };
-TextInterpolation.defaultProps = { name: '' };
+TextInterpolation.defaultProps = {
+  firstName: '',
+  surname: '',
+};
 export default TextInterpolation;
 ",
   "fonts": Array [],
   "slots": Array [
     Object {
       "defaultValue": "",
-      "name": "name",
+      "name": "firstName",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": "",
+      "name": "surname",
       "type": "string",
     },
   ],

@@ -1,5 +1,14 @@
 Vertical
-Text
-text <name
-Text
-text test
+Standard Text
+text Hi FirstName!
+when <!firstName
+text Hi stranger!
+FirstName Text
+text <firstName
+
+Scoped Text
+text Hello, Prof. Surname.
+Surname Text
+text <surname
+when <!surname
+text Anonymous
