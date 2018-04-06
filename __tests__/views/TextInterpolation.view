@@ -8,7 +8,7 @@ text <firstName
 
 Scoped Text
 text Hello, Prof. Surname.
-Surname
+Surname Text
 text <surname
 when <!surname
 text Anonymous
