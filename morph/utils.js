@@ -279,15 +279,23 @@ const getDefaultValue = (node, name) => {
   return prop ? prop.value : ''
 }
 
+const isRotate = name =>
+  name === 'rotate' || name === 'rotateX' || name === 'rotateY'
+
 const getStandardAnimatedString = (node, prop, isNative) => {
   // TODO: fix this 😬
   if (typeof prop.value === 'number') {
+    const fromValue = isRotate(prop.name)
+      ? `\`${getDefaultValue(node, prop.name)}deg\``
+      : getDefaultValue(node, prop.name)
+    const toValue = isRotate(prop.name) ? `\`${prop.value}deg\`` : prop.value
+
     return `${
       isNative ? prop.name : `"--${prop.name}"`
     }: getAnimatedValue(this.animatedValue${getScopeIndex(
       node,
       prop.scope
-    )}, ${getDefaultValue(node, prop.name)}, ${prop.value})`
+    )}, ${fromValue}, ${toValue})`
   }
   return `${
     isNative ? prop.name : `"--${prop.name}"`
