@@ -1,6 +1,5 @@
 import flatten from 'flatten'
 import safe from './react/safe.js'
-// import sort from 'bubblesort'
 import toCamelCase from 'to-camel-case'
 import toSlugCase from 'to-slug-case'
 import wrap from './react/wrap.js'
@@ -238,15 +237,19 @@ const getDefaultValue = (node, name) => {
   return prop ? prop.value : ''
 }
 
-const getStandardAnimatedString = (node, prop) => {
+const getStandardAnimatedString = (node, prop, isNative) => {
   // TODO: fix this 😬
   if (typeof prop.value === 'number') {
-    return `${prop.name}: getAnimatedValue(this.animatedValue${getScopeIndex(
+    return `${
+      isNative ? prop.name : `"--${prop.name}"`
+    }: getAnimatedValue(this.animatedValue${getScopeIndex(
       node,
       prop.scope
     )}, ${getDefaultValue(node, prop.name)}, ${prop.value})`
   }
-  return `${prop.name}: getAnimatedValue(this.animatedValue${getScopeIndex(
+  return `${
+    isNative ? prop.name : `"--${prop.name}"`
+  }: getAnimatedValue(this.animatedValue${getScopeIndex(
     node,
     prop.scope
   )}, '${getDefaultValue(node, prop.name)}', '${prop.value}')`
@@ -275,31 +278,31 @@ export const isNewScope = (state, currentAnimation, index) =>
 
 export const getAnimatedStyles = (node, isNative) => {
   const props = isNative
-    ? getAllAnimatedProps(node)
-    : convertToVars(getSpringProps(node))
+    ? getAllAnimatedProps(node, true)
+    : getSpringProps(node)
   let animated = ''
 
   props.forEach((prop, i) => {
     if (i === 0) {
-      animated += getAnimatedString(node, prop)
+      animated += getAnimatedString(node, prop, isNative)
     } else {
-      animated += `, ${getAnimatedString(node, prop)}`
+      animated += `, ${getAnimatedString(node, prop, isNative)}`
     }
   })
 
   return animated
 }
 
-const getAnimatedString = (node, prop) =>
+const getAnimatedString = (node, prop, isNative) =>
   prop.name === 'transform'
     ? getTransformString(node, prop)
-    : getStandardAnimatedString(node, prop)
+    : getStandardAnimatedString(node, prop, isNative)
 
 export const getNonAnimatedDynamicStyles = node => {
-  const animatedProps = getAllAnimatedProps(node).map(prop => prop.name)
+  const animatedProps = getAllAnimatedProps(node, true).map(prop => prop.name)
 
   const animatedTransforms = animatedProps.includes('transform')
-    ? getAllAnimatedProps(node)
+    ? getAllAnimatedProps(node, true)
         .find(prop => prop.name === 'transform')
         .props.map(prop => prop.name)
     : []
@@ -320,14 +323,16 @@ export const hasSpringAnimation = node =>
 export const hasTimingAnimation = node =>
   node.animations.some(anim => anim.curve !== 'spring')
 
-export const getAllAnimatedProps = node => {
+export const getAllAnimatedProps = (node, isNative) => {
   const props = flatten(
     node.scopes.map(scope => scope.properties.filter(prop => prop.animation))
   )
-  return checkForTransforms(props) ? combineTransforms(props) : props
+  return checkForTransforms(props) && isNative
+    ? combineTransforms(props)
+    : props
 }
 
-const combineTransforms = props => {
+export const combineTransforms = props => {
   // TODO: handle transforms on different scopes
   let transform = { name: 'transform', props: [] }
   props.forEach((prop, i) => {
@@ -340,7 +345,7 @@ const combineTransforms = props => {
   return props.filter(prop => !prop.isTransform)
 }
 
-const checkForTransforms = props =>
+export const checkForTransforms = props =>
   props.some(prop => TRANSFORM_WHITELIST[prop.name])
 
 export const getTimingProps = node =>
@@ -360,27 +365,6 @@ export const getSpringProps = node =>
       )
     )
   )
-
-const convertToVars = props => {
-  // if there are duplicate properties, e.g. color on different scopes
-  // they need to have unique variable names
-  const propTypes = [...new Set(props.map(prop => prop.name))]
-  let listsByType = []
-  propTypes.forEach((type, i) => {
-    listsByType[i] = props.filter(prop => prop.name === type)
-  }, props)
-
-  listsByType.forEach(propsList => {
-    propsList.forEach((prop, index) => {
-      // TODO ??? 😱
-      if (prop.name.startsWith('"--')) return
-
-      prop.originalName = prop.name
-      prop.name = `"--${prop.name}${index++}"`
-    })
-  })
-  return props
-}
 
 // https://github.com/facebook/react-native/blob/26684cf3adf4094eb6c405d345a75bf8c7c0bf88/Libraries/Animated/src/NativeAnimatedHelper.js
 /**

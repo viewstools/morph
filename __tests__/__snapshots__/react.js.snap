@@ -764,18 +764,21 @@ const getAnimatedValue = (animatedValue, from, to) =>
     outputRange: [from, to],
   });
 
-const Vertical = styled('button')(
+const Vertical = styled(Animated.div)(
   {
+    opacity: 'var(--opacity)',
+    transform: 'var(--transform)',
     transition: 'rotateX 150ms ease-in 0ms',
-    willChange: 'opacity, translate-x, transform',
+    willChange: 'opacity, translate-x, rotate-x',
   },
   ({ props }) => ({
     translateY: props.isOn ? 30 : 0,
     rotateX: props.isOn ? 20 : 10,
   })
 );
-const Text = styled('span')(
+const Text = styled(Animated.div)(
   {
+    color: 'var(--color)',
     willChange: 'color',
   },
   ({ props }) => ({})
@@ -814,8 +817,8 @@ class AnimatedButton extends React.Component {
           })
         }
         style={{
-          '--opacity0': getAnimatedValue(this.animatedValue0, 0.75, 1),
-          '--translateX0': getAnimatedValue(this.animatedValue0, 10, 20),
+          '--opacity': getAnimatedValue(this.animatedValue0, 0.75, 1),
+          '--translateX': getAnimatedValue(this.animatedValue0, 10, 20),
         }}
         props={props}
         className=\\"views-block\\"
@@ -823,7 +826,7 @@ class AnimatedButton extends React.Component {
         <Text
           data-test-id={\`AnimatedButton.Text|\${props.isOn ? 'isOn|' : ''}\`}
           style={{
-            '--color0': getAnimatedValue(this.animatedValue0, 'red', 'blue'),
+            '--color': getAnimatedValue(this.animatedValue0, 'red', 'blue'),
           }}
           props={props}
           className=\\"views-block\\"
@@ -858,7 +861,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import styled, { css } from 'react-emotion';
+import styled from 'react-emotion';
 import Animated from 'animated/lib/targets/react-dom';
 const getAnimatedValue = (animatedValue, from, to) =>
   animatedValue.interpolate({
@@ -866,19 +869,25 @@ const getAnimatedValue = (animatedValue, from, to) =>
     outputRange: [from, to],
   });
 
-const Vertical = styled('button')(
+const Vertical = styled(Animated.div)(
   {
-    opacity: 0.75,
-    transform: 'rotateX(10deg) translateX(10px) translateY(0px)',
+    opacity: 'var(--opacity)',
+    transform: 'var(--transform)',
     transition: 'rotateX 150ms ease-in 0ms',
-    willChange: 'opacity, translate-x, transform',
+    willChange: 'opacity, translate-x, rotate-x',
   },
   ({ props }) => ({
     translateY: props.isOn ? 30 : 0,
     rotateX: props.isOn ? 20 : 10,
   })
 );
-const Text_hs37n86 = css({ color: 'red' });
+const Text = styled(Animated.div)(
+  {
+    color: 'var(--color)',
+    willChange: 'color',
+  },
+  ({ props }) => ({})
+);
 
 class AnimatedButton extends React.Component {
   animatedValue0 = new Animated.Value(this.props.isOn ? 1 : 0);
@@ -906,8 +915,8 @@ class AnimatedButton extends React.Component {
         }\`}
         onClick={props.onClick}
         style={{
-          '--opacity0': getAnimatedValue(this.animatedValue0, 0.75, 1),
-          '--translateX0': getAnimatedValue(this.animatedValue0, 10, 20),
+          '--opacity': getAnimatedValue(this.animatedValue0, 0.75, 1),
+          '--translateX': getAnimatedValue(this.animatedValue0, 10, 20),
         }}
         props={props}
         className=\\"views-block\\"
@@ -915,9 +924,10 @@ class AnimatedButton extends React.Component {
         <Text
           data-test-id={\`AnimatedButton.Text|\${props.isOn ? 'isOn|' : ''}\`}
           style={{
-            '--color0': getAnimatedValue(this.animatedValue0, 'red', 'blue'),
+            '--color': getAnimatedValue(this.animatedValue0, 'red', 'blue'),
           }}
-          className={\`views-block \${Text_hs37n86}\`}
+          props={props}
+          className=\\"views-block\\"
         >
           hey
         </Text>
@@ -5767,8 +5777,10 @@ class AnimatedButton extends React.Component {
             {
               opacity: getAnimatedValue(this.animatedValue0, 0.75, 1),
               transform: [
-                { translateX: getAnimatedValue(this.animatedValue0, 10, 20) },
-                { rotateX: getAnimatedValue(this.animatedValue0, 10, 20) },
+                {
+                  '--translateX': getAnimatedValue(this.animatedValue0, 10, 20),
+                },
+                { '--rotateX': getAnimatedValue(this.animatedValue0, 10, 20) },
               ],
             },
             { translateY: props.isOn ? 30 : 0 },

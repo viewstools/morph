@@ -1,5 +1,7 @@
 import { enter } from '../react/properties-style.js'
 import {
+  checkForTransforms,
+  combineTransforms,
   getActionableParent,
   getAllAnimatedProps,
   getAllowedStyleKeys,
@@ -20,7 +22,6 @@ export { enter }
 
 export function leave(node, parent, state) {
   const { dynamic, static: staticStyle } = node.style
-  let style = null
 
   const allowedStyleKeys = getAllowedStyleKeys(node)
   let scopedUnderParent =
@@ -34,9 +35,9 @@ export function leave(node, parent, state) {
   }
 
   if (node.isAnimated && hasSpringAnimation(node)) {
-    const animated = getAnimatedStyles(node, state.isReactNative)
-    style = style ? `[${style},{${animated}}]` : `{${animated}}`
-    state.render.push(` style={${style}}`)
+    state.render.push(
+      ` style={{${getAnimatedStyles(node, state.isReactNative)}}}`
+    )
     state.isAnimated = true
     state.animations = node.animations
     state.scopes = node.scopes
@@ -60,6 +61,10 @@ export function leave(node, parent, state) {
       )
       .join(',\n')
 
+    if (hasSpringAnimation(node)) {
+      cssStatic += asVarsCss(getSpringProps(node)).join(',\n')
+    }
+
     if (node.isAnimated) {
       cssStatic = cssStatic
         ? `${cssStatic}, ${asAnimatedCss(node)}`
@@ -81,10 +86,17 @@ export function leave(node, parent, state) {
     cssDynamic.push('})')
     cssDynamic = cssDynamic.join('\n')
 
+    const nameTag =
+      node.isAnimated && hasSpringAnimation(node)
+        ? `Animated.div`
+        : `'${node.nameTag}'`
+
     if (cssStatic || cssDynamic) {
-      state.styles[node.nameFinal] = `const ${node.nameFinal} = styled('${
-        node.nameTag
-      }')(${cssStatic ? `{${cssStatic}}, ` : ''}${cssDynamic})`
+      state.styles[node.nameFinal] = `const ${
+        node.nameFinal
+      } = styled(${nameTag})(${
+        cssStatic ? `{${cssStatic}}, ` : ''
+      }${cssDynamic})`
 
       // TODO we may want to be smarter here and only pass what's needed
       state.render.push(` props={props}`)
@@ -114,7 +126,7 @@ export function leave(node, parent, state) {
 const asAnimatedCss = node => {
   const names = [
     ...new Set(
-      getAllAnimatedProps(node).map(prop =>
+      getAllAnimatedProps(node, false).map(prop =>
         toSlugCase(prop.originalName || prop.name)
       )
     ),
@@ -179,7 +191,7 @@ const asCss = (styles, key, scopedUnderParent) => {
 }
 
 const filterBaseStyles = (node, dynamic) => {
-  const springs = getSpringProps(node).map(spring => spring.originalName)
+  const springs = getSpringProps(node).map(spring => spring.name)
 
   dynamic.base = Object.keys(dynamic.base)
     .filter(prop => !springs.includes(prop))
@@ -189,4 +201,12 @@ const filterBaseStyles = (node, dynamic) => {
     }, {})
 
   return dynamic
+}
+
+const asVarsCss = springs => {
+  let varsCss = ''
+  if (checkForTransforms(springs)) {
+    springs = combineTransforms(springs)
+  }
+  return springs.map(spring => `${spring.name}: "var(--${spring.name})"`)
 }
