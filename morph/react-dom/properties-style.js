@@ -15,7 +15,6 @@ import {
   hasTimingAnimation,
 } from '../utils.js'
 import hash from '../hash.js'
-import flatten from 'flatten'
 import toSlugCase from 'to-slug-case'
 
 export { enter }
@@ -134,21 +133,16 @@ const asAnimatedCss = node => {
   ]
 
   if (hasTimingAnimation(node)) {
-    let transition = ''
-    getTimingProps(node).forEach((prop, i) => {
-      if (i === 0) {
-        transition += makeTransition(prop.name, prop.animation)
-      } else {
-        transition += `, ${makeTransition(prop.name, prop.animation)}`
-      }
-    })
+    const transition = getTimingProps(node)
+      .map(makeTransition)
+      .join(', ')
     return `\ntransition: '${transition}',\nwillChange: '${names.join(', ')}'`
   }
 
   return `\nwillChange: '${names.join(', ')}'`
 }
 
-const makeTransition = (name, animation) =>
+const makeTransition = ({ name, animation }) =>
   `${name} ${animation.duration}ms ${toSlugCase(animation.curve)} ${
     animation.delay
   }ms`
