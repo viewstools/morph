@@ -5,14 +5,14 @@ const toCamelCase = require('to-camel-case')
 const toPascalCase = require('to-pascal-case')
 
 const svgCustomStyles = [
-  'alignSelf <',
-  'marginTop <',
-  'marginBottom <',
-  'marginLeft <',
-  'marginRight <',
+  'alignSelf < auto',
+  'marginTop < 0',
+  'marginBottom < 0',
+  'marginLeft < 0',
+  'marginRight < 0',
 ]
 
-const slotNames = ['width', 'height', 'fill', 'stroke']
+const slotNames = ['fill', 'stroke']
 
 const addSlots = (prop, value) => {
   const match = slotNames.some(name => prop === name)
@@ -41,7 +41,7 @@ const parseTransform = (prop, value) => {
     .join('')
 }
 
-const IGNORE_ATTRS = ['xmlns', 'id', 'class', 'onclick']
+const IGNORE_ATTRS = ['xmlns', 'id', 'class', 'onclick', 'aria-label']
 
 const getAttrs = (attr, tag) =>
   Object.keys(attr)
@@ -65,12 +65,27 @@ const getBlock = raw => {
     case 'g':
       return 'SvgGroup'
 
+    case 'lineargradient':
+      return 'SvgLinearGradient'
+
+    case 'radialgradient':
+      return 'SvgRadialGradient'
+
     default:
       return `Svg${toPascalCase(raw)}`
   }
 }
 
-const IGNORE_TAGS = ['title', 'desc', 'script', 'style']
+const IGNORE_TAGS = [
+  'clippath',
+  'defs',
+  'desc',
+  'filter',
+  'script',
+  'style',
+  'title',
+  'use',
+]
 
 const parseSvg = ({ attr, child, tag }) => {
   const s = []
@@ -115,7 +130,7 @@ const addDimensions = (attrs, { viewBox, width, height }) => {
 const addNamedSlot = (line, name, num) =>
   `${line.split(' < ')[0]} <${name}${num} ${line.split(' < ')[1]}`
 
-// if there are duplicate properties, expose them as fill2, fill3, width2, width3 etc
+// if there are duplicate properties, expose them as fill2, fill3 etc
 const checkDuplicates = result => {
   slotNames.forEach(name => {
     let count = 0

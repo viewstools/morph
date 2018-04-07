@@ -3,6 +3,7 @@ import {
   getScopedCondition,
   hasCustomScopes,
   hasLocals,
+  interpolateText,
   isSlot,
 } from '../utils.js'
 import safe from './safe.js'
@@ -49,6 +50,8 @@ export function enter(node, parent, state) {
         node.value,
         type
       )})}`
+    } else if (parent.hasOwnProperty('interpolation')) {
+      parent.explicitChildren = interpolateText(node, parent)
     } else {
       parent.explicitChildren = node.value
     }

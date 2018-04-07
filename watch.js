@@ -188,10 +188,12 @@ module.exports = options => {
 
     const makeGetNativeFonts = view => {
       return fonts => {
-        fs.writeFileSync(
-          path.join(src, 'fonts.js'),
-          morphFont({ as, fonts, files: instance.customFonts })
-        )
+        // TODO revisit, it's overwriting the fonts with an empty object, so
+        // I'll disable it for now until we have more time to look into it.
+        // fs.writeFileSync(
+        //   path.join(src, 'fonts.js'),
+        //   morphFont({ as, fonts, files: instance.customFonts })
+        // )
       }
     }
 

@@ -2,11 +2,11 @@
 
 exports[`#toSvg 1`] = `
 "InlineSvgFixture Svg
-alignSelf <
-marginTop <
-marginBottom <
-marginLeft <
-marginRight <
+alignSelf < auto
+marginTop < 0
+marginBottom < 0
+marginLeft < 0
+marginRight < 0
 SvgGroup
 fillOpacity .7
 SvgCircle

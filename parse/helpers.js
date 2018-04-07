@@ -327,3 +327,12 @@ export const getPropType = (block, name, defaultValue) =>
   block.isList && name === 'from'
     ? 'array'
     : isActionable(name) ? 'function' : isNumber[name] ? 'number' : 'string'
+
+export const isTextInterpolation = (block, previous) => {
+  const previousText = previous.properties.find(prop => prop.name === 'text')
+  return (
+    block.name === 'Text' &&
+    previousText &&
+    previousText.value.includes(block.is || block.name)
+  )
+}
