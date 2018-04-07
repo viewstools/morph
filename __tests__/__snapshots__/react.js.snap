@@ -767,6 +767,7 @@ const getAnimatedValue = (animatedValue, from, to) =>
 
 const Vertical = styled(Animated.div)(
   {
+    backgroundColor: 'red',
     opacity: 'var(--opacity)',
     transform: 'var(--transform)',
     transition: 'rotateX 150ms ease-in 0ms',
@@ -872,6 +873,7 @@ const getAnimatedValue = (animatedValue, from, to) =>
 
 const Vertical = styled(Animated.div)(
   {
+    backgroundColor: 'red',
     opacity: 'var(--opacity)',
     transform: 'var(--transform)',
     transition: 'rotateX 150ms ease-in 0ms',
@@ -5765,13 +5767,14 @@ exports[`react-native parses react-native AnimatedButton 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { Animated, TouchableWithoutFeedback } from 'react-native';
+import { Animated, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 const getAnimatedValue = (animatedValue, from, to) =>
   animatedValue.interpolate({
     inputRange: [0, 1],
     outputRange: [from, to],
   });
+const styles = StyleSheet.create({ h1jcb2fl: { backgroundColor: 'red' } });
 
 class AnimatedButton extends React.Component {
   animatedValue0 = new Animated.Value(this.props.isOn ? 1 : 0);
@@ -5810,15 +5813,24 @@ class AnimatedButton extends React.Component {
             props.isOn ? 'isOn|' : ''
           }\`}
           style={[
-            {
-              opacity: getAnimatedValue(this.animatedValue0, 0.75, 1),
-              transform: [
-                {
-                  '--translateX': getAnimatedValue(this.animatedValue0, 10, 20),
-                },
-                { '--rotateX': getAnimatedValue(this.animatedValue0, 10, 20) },
-              ],
-            },
+            [
+              styles.h1jcb2fl,
+              {
+                opacity: getAnimatedValue(this.animatedValue0, 0.75, 1),
+                transform: [
+                  {
+                    '--translateX': getAnimatedValue(
+                      this.animatedValue0,
+                      10,
+                      20
+                    ),
+                  },
+                  {
+                    '--rotateX': getAnimatedValue(this.animatedValue0, 10, 20),
+                  },
+                ],
+              },
+            ],
             { translateY: props.isOn ? 30 : 0 },
           ]}
         >

@@ -59,11 +59,12 @@ export function leave(node, parent, state) {
           scopedUnderParent
         ).join('\n')
       )
-      .join(',\n')
 
     if (hasSpringAnimation(node)) {
-      cssStatic += asVarsCss(getSpringProps(node)).join(',\n')
+      cssStatic = [...cssStatic, ...asVarsCss(getSpringProps(node))]
     }
+
+    cssStatic = cssStatic.join(',\n')
 
     if (node.isAnimated) {
       cssStatic = cssStatic
