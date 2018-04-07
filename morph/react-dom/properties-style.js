@@ -16,6 +16,7 @@ import {
 } from '../utils.js'
 import hash from '../hash.js'
 import toSlugCase from 'to-slug-case'
+import uniq from 'array-uniq'
 
 export { enter }
 
@@ -126,26 +127,37 @@ export function leave(node, parent, state) {
 const asAnimatedCss = node => {
   const names = [
     ...new Set(
-      getAllAnimatedProps(node, false).map(prop =>
-        toSlugCase(prop.originalName || prop.name)
-      )
+      getAllAnimatedProps(node, false).map(prop => toSlugCase(prop.name))
     ),
   ]
 
   if (hasTimingAnimation(node)) {
-    const transition = getTimingProps(node)
-      .map(makeTransition)
-      .join(', ')
+    const transition = uniq(getTimingProps(node).map(makeTransition)).join(', ')
     return `\ntransition: '${transition}',\nwillChange: '${names.join(', ')}'`
   }
 
   return `\nwillChange: '${names.join(', ')}'`
 }
 
+const ensurePropNameForTransition = name => {
+  switch (name) {
+    case 'rotate':
+    case 'rotateX':
+    case 'rotateY':
+    case 'scale':
+    case 'translateX':
+    case 'translateY':
+      return 'transform'
+
+    default:
+      return toSlugCase(name)
+  }
+}
+
 const makeTransition = ({ name, animation }) =>
-  `${name} ${animation.duration}ms ${toSlugCase(animation.curve)} ${
-    animation.delay
-  }ms`
+  `${ensurePropNameForTransition(name)} ${animation.duration}ms ${toSlugCase(
+    animation.curve
+  )} ${animation.delay}ms`
 
 const asDynamicCss = styles =>
   Object.keys(styles).map(prop => `${prop}: ${styles[prop]}`)

@@ -770,7 +770,7 @@ const Vertical = styled(Animated.div)(
     backgroundColor: 'red',
     opacity: 'var(--opacity)',
     transform: 'var(--transform)',
-    transition: 'rotateX 150ms ease-in 0ms',
+    transition: 'transform 150ms ease-in 0ms',
     willChange: 'opacity, translate-x, rotate-x',
   },
   ({ props }) => ({
@@ -876,7 +876,7 @@ const Vertical = styled(Animated.div)(
     backgroundColor: 'red',
     opacity: 'var(--opacity)',
     transform: 'var(--transform)',
-    transition: 'rotateX 150ms ease-in 0ms',
+    transition: 'transform 150ms ease-in 0ms',
     willChange: 'opacity, translate-x, rotate-x',
   },
   ({ props }) => ({
