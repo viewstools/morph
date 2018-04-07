@@ -3,10 +3,25 @@ import { maybeAddFallbackFont } from '../fonts.js'
 
 export default (node, parent, code) => {
   const scopedCondition = getScopedCondition(node, parent)
+
   if (scopedCondition) {
-    return {
-      _isScoped: true,
-      [node.name]: getScopedCondition(node, parent),
+    switch (node.name) {
+      case 'rotate':
+      case 'rotateX':
+      case 'rotateY':
+      case 'scale':
+      case 'translateX':
+      case 'translateY':
+        return {
+          _isScoped: true,
+          transform: `\`${getTransform(node, parent)}\``,
+        }
+
+      default:
+        return {
+          _isScoped: true,
+          [node.name]: scopedCondition,
+        }
     }
   }
 
@@ -41,9 +56,10 @@ export default (node, parent, code) => {
     case 'scale':
     case 'translateX':
     case 'translateY':
-      return {
-        transform: getTransform(node, parent),
-      }
+      const transform = getTransform(node, parent)
+      if (transform.includes('props.')) return false
+
+      return { transform }
 
     case 'transformOriginX':
     case 'transformOriginY':
@@ -69,8 +85,13 @@ export default (node, parent, code) => {
   }
 }
 
-const getPropValue = (prop, unit = '') => {
+const getPropValue = (prop, block, unit = '') => {
   if (!prop) return false
+
+  const scopedCondition = getScopedCondition(prop, block)
+  if (scopedCondition) {
+    return `\${${scopedCondition}}${unit}`
+  }
 
   if (prop.tags.slot) {
     return `\${${prop.value}}${unit}`
@@ -89,11 +110,11 @@ const getShadow = (node, parent) => {
   const shadowSpread = getProp(parent, 'shadowSpread')
 
   let value = [
-    getPropValue(shadowOffsetX, 'px'),
-    getPropValue(shadowOffsetY, 'px'),
-    getPropValue(shadowBlur, 'px'),
-    !isText && getPropValue(shadowSpread, 'px'),
-    getPropValue(shadowColor),
+    getPropValue(shadowOffsetX, parent, 'px'),
+    getPropValue(shadowOffsetY, parent, 'px'),
+    getPropValue(shadowBlur, parent, 'px'),
+    !isText && getPropValue(shadowSpread, parent, 'px'),
+    getPropValue(shadowColor, parent),
   ]
     .filter(Boolean)
     .join(' ')
@@ -113,9 +134,9 @@ const getShadow = (node, parent) => {
   }
 }
 
-const getTransformValue = (prop, unit) => {
+const getTransformValue = (prop, parent, unit) => {
   if (!prop) return false
-  return `${prop.name}(${getPropValue(prop, unit)})`
+  return `${prop.name}(${getPropValue(prop, parent, unit)})`
 }
 
 const getTransform = (node, parent) => {
@@ -127,12 +148,12 @@ const getTransform = (node, parent) => {
   const translateY = getProp(parent, 'translateY')
 
   let value = [
-    getTransformValue(rotate, 'deg'),
-    getTransformValue(rotateX, 'deg'),
-    getTransformValue(rotateY, 'deg'),
-    getTransformValue(scale, 'px'),
-    getTransformValue(translateX, 'px'),
-    getTransformValue(translateY, 'px'),
+    getTransformValue(rotate, parent, 'deg'),
+    getTransformValue(rotateX, parent, 'deg'),
+    getTransformValue(rotateY, parent, 'deg'),
+    getTransformValue(scale, parent, ''),
+    getTransformValue(translateX, parent, 'px'),
+    getTransformValue(translateY, parent, 'px'),
   ]
     .filter(Boolean)
     .join(' ')
@@ -156,10 +177,12 @@ const getTransformOrigin = (node, parent) => {
   let value = [
     getPropValue(
       transformOriginX,
+      parent,
       Number.isInteger(transformOriginX.value) ? 'px' : ''
     ),
     getPropValue(
       transformOriginY,
+      parent,
       Number.isInteger(transformOriginY.value) ? 'px' : ''
     ),
   ]

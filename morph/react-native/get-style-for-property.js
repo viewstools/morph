@@ -3,9 +3,23 @@ import { getProp, getScopedCondition, isTag } from '../utils.js'
 export default (node, parent, code) => {
   const scopedCondition = getScopedCondition(node, parent)
   if (scopedCondition) {
-    return {
-      _isScoped: true,
-      [node.name]: getScopedCondition(node, parent),
+    switch (node.name) {
+      case 'rotate':
+      case 'rotateX':
+      case 'rotateY':
+      case 'scale':
+      case 'translateX':
+      case 'translateY':
+        return {
+          _isScoped: true,
+          transform: getTransform(node, parent),
+        }
+
+      default:
+        return {
+          _isScoped: true,
+          [node.name]: getScopedCondition(node, parent),
+        }
     }
   }
 
@@ -105,12 +119,26 @@ const getShadow = (node, parent) => {
   }
 }
 
-const getTransformValue = (prop, unit) =>
+const getPropValue = (prop, block, unit = '') => {
+  if (!prop) return false
+
+  const scopedCondition = getScopedCondition(prop, block)
+  if (scopedCondition) {
+    return unit ? `\`\${${scopedCondition}}${unit}\`` : scopedCondition
+  }
+
+  if (prop.tags.slot) {
+    return `\${${prop.value}}${unit}`
+  }
+
+  return typeof prop.value === 'number' && unit
+    ? `${prop.value}${unit}`
+    : prop.value
+}
+
+const getTransformValue = (prop, parent, unit) =>
   prop && {
-    [prop.name]:
-      unit && typeof prop.value === 'number'
-        ? `${prop.value}${unit}`
-        : prop.value,
+    [prop.name]: getPropValue(prop, parent, unit),
   }
 
 const getTransform = (node, parent) => {
@@ -122,11 +150,11 @@ const getTransform = (node, parent) => {
   const translateY = getProp(parent, 'translateY')
 
   return [
-    getTransformValue(rotate, 'deg'),
-    getTransformValue(rotateX, 'deg'),
-    getTransformValue(rotateY, 'deg'),
-    getTransformValue(scale),
-    getTransformValue(translateX),
-    getTransformValue(translateY),
+    getTransformValue(rotate, parent, 'deg'),
+    getTransformValue(rotateX, parent, 'deg'),
+    getTransformValue(rotateY, parent, 'deg'),
+    getTransformValue(scale, parent),
+    getTransformValue(translateX, parent),
+    getTransformValue(translateY, parent),
   ].filter(Boolean)
 }

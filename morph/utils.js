@@ -26,17 +26,19 @@ export const deinterpolate = str => {
 }
 
 export const getObjectAsString = obj =>
-  wrap(
-    Object.keys(obj)
-      .map(k => {
-        const v =
-          typeof obj[k] === 'object' && hasKeys(obj[k])
-            ? getObjectAsString(obj[k])
-            : obj[k]
-        return `${JSON.stringify(k)}: ${v}`
-      })
-      .join(',')
-  )
+  Array.isArray(obj)
+    ? `[${obj.map(getObjectAsString)}]`
+    : wrap(
+        Object.keys(obj)
+          .map(k => {
+            const v =
+              typeof obj[k] === 'object' && hasKeys(obj[k])
+                ? getObjectAsString(obj[k])
+                : obj[k]
+            return `${JSON.stringify(k)}: ${v}`
+          })
+          .join(',')
+      )
 
 export const getPropertiesAsObject = list => {
   const obj = {}

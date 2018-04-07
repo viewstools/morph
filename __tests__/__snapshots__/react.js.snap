@@ -774,8 +774,9 @@ const Vertical = styled(Animated.div)(
     willChange: 'opacity, translate-x, rotate-x',
   },
   ({ props }) => ({
-    translateY: props.isOn ? 30 : 0,
-    rotateX: props.isOn ? 20 : 10,
+    transform: \`rotateX(\${props.isOn ? 20 : 10}deg) translateX(\${
+      props.isOn ? 20 : 10
+    }px) translateY(\${props.isOn ? 30 : 0}px)\`,
   })
 );
 const Text = styled(Animated.div)(
@@ -880,8 +881,9 @@ const Vertical = styled(Animated.div)(
     willChange: 'opacity, translate-x, rotate-x',
   },
   ({ props }) => ({
-    translateY: props.isOn ? 30 : 0,
-    rotateX: props.isOn ? 20 : 10,
+    transform: \`rotateX(\${props.isOn ? 20 : 10}deg) translateX(\${
+      props.isOn ? 20 : 10
+    }px) translateY(\${props.isOn ? 30 : 0}px)\`,
   })
 );
 const Text = styled(Animated.div)(
@@ -3337,7 +3339,7 @@ import PropTypes from 'prop-types';
 
 const Content = styled('div')(({ props }) => ({
   opacity: props.isShown ? 1 : props.isSuperVisible ? 3 : 0,
-  scale: props.isShown ? 1 : props.isSuperVisible ? 2 : 0,
+  transform: \`scale(\${props.isShown ? 1 : props.isSuperVisible ? 2 : 0})\`,
 }));
 
 class ScopePopup2 extends React.Component {
@@ -3410,7 +3412,7 @@ import styled from 'react-emotion';
 
 const Content = styled('div')(({ props }) => ({
   opacity: props.isShown ? 1 : props.isSuperVisible ? 3 : 0,
-  scale: props.isShown ? 1 : props.isSuperVisible ? 2 : 0,
+  transform: \`scale(\${props.isShown ? 1 : props.isSuperVisible ? 2 : 0})\`,
 }));
 
 const ScopePopup2 = props => {
@@ -3586,12 +3588,12 @@ const WindowControl = styled('button')(
     marginRight: 8,
     backgroundColor: '#CBCDCE',
     opacity: 0.7,
-    transform: 'scale(1.1px)',
+    transform: 'scale(1.1)',
     transition: 'all 0.15s ease-out',
     width: 10,
     height: 10,
     '&:hover': {
-      transform: 'scale(1.1px)',
+      transform: 'scale(1.1)',
     },
   },
   ({ props }) => ({
@@ -3655,12 +3657,12 @@ const WindowControl = styled('button')(
     marginRight: 8,
     backgroundColor: '#CBCDCE',
     opacity: 0.7,
-    transform: 'scale(1.1px)',
+    transform: 'scale(1.1)',
     transition: 'all 0.15s ease-out',
     width: 10,
     height: 10,
     '&:hover': {
-      transform: 'scale(1.1px)',
+      transform: 'scale(1.1)',
     },
   },
   ({ props }) => ({
@@ -3971,9 +3973,9 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const Transform_ho7cu1x = css({
+const Transform_h1c079al = css({
   transform:
-    'rotate(4deg) rotateX(5deg) rotateY(6deg) scale(3px) translateX(1px) translateY(2px)',
+    'rotate(4deg) rotateX(5deg) rotateY(6deg) scale(3) translateX(1px) translateY(2px)',
   transformOrigin: 'center top',
 });
 
@@ -3984,7 +3986,7 @@ class Transform extends React.Component {
     return (
       <div
         data-test-id={\`\${props['data-test-id'] || 'Transform'}|\`}
-        className={\`views-block \${Transform_ho7cu1x}\`}
+        className={\`views-block \${Transform_h1c079al}\`}
       >
         <span data-test-id={\`Transform.Text|\`} className=\\"views-block\\">
           who knows what happens here :D
@@ -4013,9 +4015,9 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'react-emotion';
 
-const Transform_ho7cu1x = css({
+const Transform_h1c079al = css({
   transform:
-    'rotate(4deg) rotateX(5deg) rotateY(6deg) scale(3px) translateX(1px) translateY(2px)',
+    'rotate(4deg) rotateX(5deg) rotateY(6deg) scale(3) translateX(1px) translateY(2px)',
   transformOrigin: 'center top',
 });
 
@@ -4023,7 +4025,7 @@ const Transform = props => {
   return (
     <div
       data-test-id={\`\${props['data-test-id'] || 'Transform'}|\`}
-      className={\`views-block \${Transform_ho7cu1x}\`}
+      className={\`views-block \${Transform_h1c079al}\`}
     >
       <span data-test-id={\`Transform.Text|\`} className=\\"views-block\\">
         who knows what happens here :D
@@ -5813,25 +5815,16 @@ class AnimatedButton extends React.Component {
             props.isOn ? 'isOn|' : ''
           }\`}
           style={[
-            [
-              styles.h1jcb2fl,
-              {
-                opacity: getAnimatedValue(this.animatedValue0, 0.75, 1),
-                transform: [
-                  {
-                    '--translateX': getAnimatedValue(
-                      this.animatedValue0,
-                      10,
-                      20
-                    ),
-                  },
-                  {
-                    '--rotateX': getAnimatedValue(this.animatedValue0, 10, 20),
-                  },
-                ],
-              },
-            ],
-            { translateY: props.isOn ? 30 : 0 },
+            styles.h1jcb2fl,
+            {
+              opacity: getAnimatedValue(this.animatedValue0, 0.75, 1),
+              transform: [
+                {
+                  '--translateX': getAnimatedValue(this.animatedValue0, 10, 20),
+                },
+                { '--rotateX': getAnimatedValue(this.animatedValue0, 10, 20) },
+              ],
+            },
           ]}
         >
           <Animated.Text
@@ -7019,7 +7012,9 @@ class ScopePopup2 extends React.Component {
           }\`}
           style={{
             opacity: props.isShown ? 1 : props.isSuperVisible ? 3 : 0,
-            scale: props.isShown ? 1 : props.isSuperVisible ? 2 : 0,
+            transform: [
+              { scale: props.isShown ? 1 : props.isSuperVisible ? 2 : 0 },
+            ],
           }}
         >
           <Text testID={\`ScopePopup2.Text:1|\`}>I'm inside the popup</Text>
