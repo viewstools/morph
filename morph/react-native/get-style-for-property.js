@@ -1,6 +1,14 @@
-import { getProp, isTag } from '../utils.js'
+import { getProp, getScopedCondition, isTag } from '../utils.js'
 
 export default (node, parent, code) => {
+  const scopedCondition = getScopedCondition(node, parent)
+  if (scopedCondition) {
+    return {
+      _isScoped: true,
+      [node.name]: getScopedCondition(node, parent),
+    }
+  }
+
   switch (node.name) {
     case 'borderTopStyle':
     case 'borderBottomStyle':

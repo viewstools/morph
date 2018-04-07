@@ -1,7 +1,15 @@
-import { getProp, isSlot } from '../utils.js'
+import { getProp, getScopedCondition, isSlot } from '../utils.js'
 import { maybeAddFallbackFont } from '../fonts.js'
 
 export default (node, parent, code) => {
+  const scopedCondition = getScopedCondition(node, parent)
+  if (scopedCondition) {
+    return {
+      _isScoped: true,
+      [node.name]: getScopedCondition(node, parent),
+    }
+  }
+
   switch (node.name) {
     case 'appRegion':
       return {

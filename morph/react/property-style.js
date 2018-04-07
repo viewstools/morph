@@ -1,6 +1,5 @@
 import {
   checkParentStem,
-  getScopedCondition,
   getStyleType,
   isSlot,
   isStyle,
@@ -17,24 +16,13 @@ export function enter(node, parent, state) {
   )
     return
 
-  let styleForProperty, isScopedVal, _isProp
-
   const code = isSlot(node)
 
-  // TODO refactor
-  if (getScopedCondition(node, parent)) {
-    isScopedVal = true
-
-    styleForProperty = {
-      [node.name]: getScopedCondition(node, parent),
-    }
-  } else {
-    ;({ _isProp, ...styleForProperty } = state.getStyleForProperty(
-      node,
-      parent,
-      code
-    ))
-  }
+  const { _isProp, _isScoped, ...styleForProperty } = state.getStyleForProperty(
+    node,
+    parent,
+    code
+  )
 
   if (_isProp) {
     Object.keys(styleForProperty).forEach(k =>
@@ -46,7 +34,7 @@ export function enter(node, parent, state) {
         ? checkParentStem(node, getStyleType(node))
         : false
     const target =
-      code || isScopedVal || hasMatchingParent
+      code || _isScoped || hasMatchingParent
         ? parent.style.dynamic
         : parent.style.static
     Object.assign(target[getStyleType(node)], styleForProperty)
