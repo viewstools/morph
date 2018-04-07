@@ -5819,10 +5819,8 @@ class AnimatedButton extends React.Component {
             {
               opacity: getAnimatedValue(this.animatedValue0, 0.75, 1),
               transform: [
-                {
-                  '--translateX': getAnimatedValue(this.animatedValue0, 10, 20),
-                },
-                { '--rotateX': getAnimatedValue(this.animatedValue0, 10, 20) },
+                { translateX: getAnimatedValue(this.animatedValue0, 10, 20) },
+                { rotateX: getAnimatedValue(this.animatedValue0, 10, 20) },
               ],
             },
           ]}

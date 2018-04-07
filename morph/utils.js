@@ -297,11 +297,11 @@ const getStandardAnimatedString = (node, prop, isNative) => {
   )}, '${getDefaultValue(node, prop.name)}', '${prop.value}')`
 }
 
-const getTransformString = (node, transform) => {
+const getTransformString = (node, transform, isNative) => {
   let transformStr = `transform: [`
 
   transform.props.forEach((prop, i) => {
-    transformStr += `{${getAnimatedString(node, prop)}},`
+    transformStr += `{${getAnimatedString(node, prop, isNative)}},`
   })
 
   return `${transformStr}]`
@@ -322,22 +322,13 @@ export const getAnimatedStyles = (node, isNative) => {
   const props = isNative
     ? getAllAnimatedProps(node, true)
     : getSpringProps(node)
-  let animated = ''
 
-  props.forEach((prop, i) => {
-    if (i === 0) {
-      animated += getAnimatedString(node, prop, isNative)
-    } else {
-      animated += `, ${getAnimatedString(node, prop, isNative)}`
-    }
-  })
-
-  return animated
+  return props.map(prop => getAnimatedString(node, prop, isNative)).join(', ')
 }
 
 const getAnimatedString = (node, prop, isNative) =>
   prop.name === 'transform'
-    ? getTransformString(node, prop)
+    ? getTransformString(node, prop, isNative)
     : getStandardAnimatedString(node, prop, isNative)
 
 export const getNonAnimatedDynamicStyles = node => {
@@ -440,9 +431,10 @@ const TRANSFORM_WHITELIST = {
   perspective: true,
 }
 
+// TODO re-enable
 export const canUseNativeDriver = animation =>
-  STYLES_WHITELIST[animation.name] ||
-  TRANSFORM_WHITELIST[animation.name] ||
+  // STYLES_WHITELIST[animation.name] ||
+  // TRANSFORM_WHITELIST[animation.name] ||
   false
 
 const fontsOrder = ['eot', 'woff2', 'woff', 'ttf', 'svg', 'otf']
