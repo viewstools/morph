@@ -793,8 +793,8 @@ class AnimatedButton extends React.Component {
     if (props.isOn !== next.isOn) {
       Animated.spring(this.animatedValue0, {
         toValue: next.isOn ? 1 : 0,
-        stiffness: 100,
-        damping: 10,
+        speed: 12,
+        bounciness: 8,
         delay: 0,
         useNativeDriver: false,
       }).start();
@@ -898,8 +898,8 @@ class AnimatedButton extends React.Component {
     if (props.isOn !== next.isOn) {
       Animated.spring(this.animatedValue0, {
         toValue: next.isOn ? 1 : 0,
-        stiffness: 100,
-        damping: 10,
+        speed: 12,
+        bounciness: 8,
         delay: 0,
         useNativeDriver: false,
       }).start();
@@ -5781,8 +5781,8 @@ class AnimatedButton extends React.Component {
     if (props.isOn !== next.isOn) {
       Animated.spring(this.animatedValue0, {
         toValue: next.isOn ? 1 : 0,
-        stiffness: 100,
-        damping: 10,
+        speed: 12,
+        bounciness: 8,
         delay: 0,
         useNativeDriver: false,
       }).start();
