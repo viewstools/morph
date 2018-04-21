@@ -41,7 +41,7 @@ const parseTransform = (prop, value) => {
     .join('')
 }
 
-const IGNORE_ATTRS = ['xmlns', 'id', 'class', 'onclick', 'aria-label']
+const IGNORE_ATTRS = ['xmlns', 'id', 'class', 'onclick', 'aria-label', 'style']
 
 const getAttrs = (attr, tag) =>
   Object.keys(attr)
@@ -101,6 +101,9 @@ const parseSvg = ({ attr, child, tag }) => {
     if (attr.viewBox) {
       attrs = addDimensions(attrs, attr)
     }
+    if (tag === 'svg') {
+      ensureWidthAndHeightAsOpenSlots(attrs)
+    }
     s.push(attrs)
   }
 
@@ -125,6 +128,24 @@ const addDimensions = (attrs, { viewBox, width, height }) => {
     attrs.push(`height < ${viewBox[3]}`)
   }
   return attrs
+}
+
+const ensureSlot = (attrs, prop, defaultValue) => {
+  const slotRe = new RegExp(`${prop} <`)
+
+  if (!attrs.some(item => slotRe.test(item))) {
+    const staticPropIndex = attrs.findIndex(item => item.startsWith(prop))
+    if (staticPropIndex !== -1) {
+      attrs[staticPropIndex] = attrs[staticPropIndex].replace(prop, `${prop} <`)
+    } else {
+      attrs.push(`${prop} < ${defaultValue}`)
+    }
+  }
+}
+
+const ensureWidthAndHeightAsOpenSlots = attrs => {
+  ensureSlot(attrs, 'width', 50)
+  ensureSlot(attrs, 'height', 50)
 }
 
 const addNamedSlot = (line, name, num) =>
