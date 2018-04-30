@@ -1,7 +1,17 @@
+import { getLocalsString, hasLocals } from '../utils.js'
+import wrap from './wrap.js'
+
 export function enter(node, parent, state) {
   const value = state.getValueForProperty(node, parent, state)
 
   if (value) {
-    Object.keys(value).forEach(k => state.render.push(` ${k}=${value[k]}`))
+    Object.keys(value).forEach(k => {
+      if ((k === 'text' || k === 'placeholder') && hasLocals(node, parent)) {
+        return state.render.push(
+          ` ${k}=${getLocalsString(node, parent, state)}`
+        )
+      }
+      return state.render.push(` ${k}=${value[k]}`)
+    })
   }
 }

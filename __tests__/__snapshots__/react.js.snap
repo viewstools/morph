@@ -4370,6 +4370,12 @@ Object {
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import PropTypes from 'prop-types';
+import { Subscribe } from 'unstated';
+import LocalContainer from './LocalContainer.view.js';
+
+const TextLocal = {
+  es: 'Escriba sus comentarios aqui...',
+};
 
 class UseCaptureText extends React.Component {
   constructor(props) {
@@ -4381,13 +4387,18 @@ class UseCaptureText extends React.Component {
     const { context, props, state } = this;
 
     return (
-      <input
-        type=\\"text\\"
-        onChange={event => this.setState({ text: event.target.value })}
-        value={state.text}
-        data-test-id={\`\${props['data-test-id'] || 'Text'}|\`}
-        className=\\"views-block\\"
-      />
+      <Subscribe to={[LocalContainer]}>
+        {local => (
+          <input
+            type=\\"text\\"
+            onChange={event => this.setState({ text: event.target.value })}
+            value={state.text}
+            data-test-id={\`\${props['data-test-id'] || 'Text'}|\`}
+            placeholder={TextLocal[local.state.lang] || 'Type feedback here...'}
+            className=\\"views-block\\"
+          />
+        )}
+      </Subscribe>
     );
   }
 }
@@ -4408,6 +4419,12 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
+import { Subscribe } from 'unstated';
+import LocalContainer from './LocalContainer.view.js';
+
+const TextLocal = {
+  es: 'Escriba sus comentarios aqui...',
+};
 
 class UseCaptureText extends React.Component {
   constructor(props) {
@@ -4419,14 +4436,19 @@ class UseCaptureText extends React.Component {
     const { props, state } = this;
 
     return (
-      <input
-        type=\\"text\\"
-        onChange={event => this.setState({ text: event.target.value })}
-        value={state.text}
-        tabIndex={-1}
-        data-test-id={\`\${props['data-test-id'] || 'Text'}|\`}
-        className={\`views-block mousetrap\`}
-      />
+      <Subscribe to={[LocalContainer]}>
+        {local => (
+          <input
+            type=\\"text\\"
+            onChange={event => this.setState({ text: event.target.value })}
+            value={state.text}
+            tabIndex={-1}
+            data-test-id={\`\${props['data-test-id'] || 'Text'}|\`}
+            placeholder={TextLocal[local.state.lang] || 'Type feedback here...'}
+            className={\`views-block mousetrap\`}
+          />
+        )}
+      </Subscribe>
     );
   }
 }
@@ -7457,6 +7479,12 @@ Object {
 import React from 'react';
 import { TextInput } from 'react-native';
 import PropTypes from 'prop-types';
+import { Subscribe } from 'unstated';
+import LocalContainer from './LocalContainer.view.js';
+
+const TextLocal = {
+  es: 'Escriba sus comentarios aqui...',
+};
 
 class UseCaptureText extends React.Component {
   constructor(props) {
@@ -7468,17 +7496,23 @@ class UseCaptureText extends React.Component {
     const { context, props, state } = this;
 
     return (
-      <TextInput
-        returnKeyType=\\"done\\"
-        onChangeText={text => this.setState({ text })}
-        ref={$e => (this.$text = $e)}
-        value={state.text}
-        keyboardType=\\"default\\"
-        autoCorrect={false}
-        underlineColorAndroid=\\"transparent\\"
-        textAlignVertical=\\"top\\"
-        testID={\`\${props['testID'] || 'Text'}|\`}
-      />
+      <Subscribe to={[LocalContainer]}>
+        {local => (
+          <TextInput
+            returnKeyType=\\"done\\"
+            onChangeText={text => this.setState({ text })}
+            ref={$e => (this.$text = $e)}
+            value={state.text}
+            keyboardType=\\"default\\"
+            autoCorrect={false}
+            placeholder={undefined}
+            underlineColorAndroid=\\"transparent\\"
+            textAlignVertical=\\"top\\"
+            testID={\`\${props['testID'] || 'Text'}|\`}
+            placeholder={TextLocal[local.state.lang] || 'Type feedback here...'}
+          />
+        )}
+      </Subscribe>
     );
   }
 }
