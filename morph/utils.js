@@ -264,7 +264,7 @@ export const makeOnClickTracker = (node, state) => {
 
   return `event => context.track({ block: ${block}, action: "click", callback: ${
     node.value
-  }, event })`
+  }, event, props })`
 }
 
 const fontsOrder = ['eot', 'woff2', 'woff', 'ttf', 'svg', 'otf']
