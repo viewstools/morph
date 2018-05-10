@@ -99,6 +99,17 @@ module.exports = {
 }
 `;
 
+exports[`e2e parses e2e Display 1`] = `
+Object {
+  "code": "const { get } = require('@viewstools/e2e');
+
+module.exports = {
+  _top: get('Display'),
+};
+",
+}
+`;
+
 exports[`e2e parses e2e DynamicStylesApplyToBasicBlocksOnly 1`] = `
 Object {
   "code": "const { get } = require('@viewstools/e2e');
@@ -645,6 +656,7 @@ class Action extends React.Component {
             action: 'click',
             callback: props.onClick,
             event,
+            props,
           })
         }
         disabled={props.isDisabled}
@@ -776,6 +788,7 @@ class AnimatedButton extends React.Component {
             action: 'click',
             callback: props.onClick,
             event,
+            props,
           })
         }
         props={props}
@@ -1582,6 +1595,70 @@ export default DefaultProps;
 }
 `;
 
+exports[`react-dom parses react-dom Display 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+import { css } from 'react-emotion';
+import PropTypes from 'prop-types';
+
+const Display_h1ys1kch = css({ display: 'block' });
+
+class Display extends React.Component {
+  render() {
+    const { context, props } = this;
+
+    return (
+      <div
+        data-test-id={\`\${props['data-test-id'] || 'Display'}|\`}
+        className={\`views-block \${Display_h1ys1kch}\`}
+      >
+        {props.children}
+      </div>
+    );
+  }
+}
+Display.contextTypes = {
+  track: PropTypes.func.isRequired,
+};
+
+export default Display;
+",
+  "fonts": Array [],
+  "slots": Array [],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom Display: react-dom parses react-dom Display debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+import { css } from 'react-emotion';
+
+const Display_h1ys1kch = css({ display: 'block' });
+
+const Display = props => {
+  return (
+    <div
+      data-test-id={\`\${props['data-test-id'] || 'Display'}|\`}
+      className={\`views-block \${Display_h1ys1kch}\`}
+    >
+      {props.children}
+    </div>
+  );
+};
+
+export default Display;
+",
+  "fonts": Array [],
+  "slots": Array [],
+  "svgs": Array [],
+}
+`;
+
 exports[`react-dom parses react-dom DynamicStylesApplyToBasicBlocksOnly 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -1839,6 +1916,7 @@ class Hover extends React.Component {
             action: 'click',
             callback: props.onClick,
             event,
+            props,
           })
         }
         className={\`views-block \${Hover_h1eiserf}\`}
@@ -3262,6 +3340,7 @@ class ScopePopup2 extends React.Component {
               action: 'click',
               callback: props.toggle,
               event,
+              props,
             })
           }
           className=\\"views-block\\"
@@ -3519,6 +3598,7 @@ class SomeMissingStyle extends React.Component {
             action: 'click',
             callback: props.onClick,
             event,
+            props,
           })
         }
         tabIndex={-1}
@@ -5644,6 +5724,7 @@ class Action extends React.Component {
             action: 'click',
             callback: props.onClick,
             event,
+            props,
           })
         }
         disabled={props.isDisabled}
@@ -5709,6 +5790,7 @@ class AnimatedButton extends React.Component {
             action: 'click',
             callback: props.onClick,
             event,
+            props,
           })
         }
         underlayColor=\\"transparent\\"
@@ -6057,6 +6139,37 @@ export default DefaultProps;
 }
 `;
 
+exports[`react-native parses react-native Display 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import PropTypes from 'prop-types';
+const styles = StyleSheet.create({ h1dd5jy2: { display: 'block' } });
+
+class Display extends React.Component {
+  render() {
+    const { context, props } = this;
+
+    return (
+      <View testID={\`\${props['testID'] || 'Display'}|\`} style={styles.h1dd5jy2}>
+        {props.children}
+      </View>
+    );
+  }
+}
+Display.contextTypes = {
+  track: PropTypes.func.isRequired,
+};
+
+export default Display;
+",
+  "fonts": Array [],
+  "slots": Array [],
+  "svgs": Array [],
+}
+`;
+
 exports[`react-native parses react-native DynamicStylesApplyToBasicBlocksOnly 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -6187,6 +6300,7 @@ class Hover extends React.Component {
             action: 'click',
             callback: props.onClick,
             event,
+            props,
           })
         }
         underlayColor=\\"transparent\\"
@@ -6876,6 +6990,7 @@ class ScopePopup2 extends React.Component {
               action: 'click',
               callback: props.toggle,
               event,
+              props,
             })
           }
           underlayColor=\\"transparent\\"
@@ -7031,6 +7146,7 @@ class SomeMissingStyle extends React.Component {
             action: 'click',
             callback: props.onClick,
             event,
+            props,
           })
         }
         underlayColor=\\"transparent\\"
