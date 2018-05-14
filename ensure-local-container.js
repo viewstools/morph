@@ -36,7 +36,7 @@ export default class LocalContainer extends Container {
   constructor() {
     super()
 
-    const supported = ${JSON.stringify(supported)}
+    const supported = ${JSON.stringify(supported).replace(/["]/g, "'")}
 
     this.state = {
       lang: getInitialLanguage(supported),
@@ -57,7 +57,7 @@ export default class LocalContainer extends Container {
   constructor() {
     super()
 
-    const supported = ${JSON.stringify(supported)}
+    const supported = ${JSON.stringify(supported).replace(/["]/g, "'")}
 
     this.state = {
       lang: supported[0],
