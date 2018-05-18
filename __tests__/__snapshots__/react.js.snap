@@ -779,13 +779,10 @@ const Vertical = styled(Animated.div)(
     }px) translateY(\${props.isOn ? 30 : 0}px)\`,
   })
 );
-const Text = styled(Animated.div)(
-  {
-    color: 'var(--Text-color)',
-    willChange: 'color',
-  },
-  ({ props }) => ({})
-);
+const Text_hvqf4zf = css({
+  color: 'var(--Text-color)',
+  willChange: 'color',
+});
 
 class AnimatedButton extends React.Component {
   animatedValue0 = new Animated.Value(this.props.isOn ? 1 : 0);
@@ -839,8 +836,7 @@ class AnimatedButton extends React.Component {
               'blue'
             ),
           }}
-          props={props}
-          className=\\"views-block\\"
+          className={\`views-block \${Text_hvqf4zf}\`}
         >
           hey
         </Text>
@@ -894,13 +890,10 @@ const Vertical = styled(Animated.div)(
     }px) translateY(\${props.isOn ? 30 : 0}px)\`,
   })
 );
-const Text = styled(Animated.div)(
-  {
-    color: 'var(--Text-color)',
-    willChange: 'color',
-  },
-  ({ props }) => ({})
-);
+const Text_hvqf4zf = css({
+  color: 'var(--Text-color)',
+  willChange: 'color',
+});
 
 class AnimatedButton extends React.Component {
   animatedValue0 = new Animated.Value(this.props.isOn ? 1 : 0);
@@ -947,8 +940,7 @@ class AnimatedButton extends React.Component {
               'blue'
             ),
           }}
-          props={props}
-          className=\\"views-block\\"
+          className={\`views-block \${Text_hvqf4zf}\`}
         >
           hey
         </Text>

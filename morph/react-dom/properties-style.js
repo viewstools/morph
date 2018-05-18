@@ -75,6 +75,12 @@ export function leave(node, parent, state) {
         : asAnimatedCss(node)
 
       filterBaseStyles(node, dynamic)
+      // if there's no dynamic keys left after filtering out springs
+      // then we can use css instead of a styled component
+      if (!hasKeysInChildren(dynamic)) {
+        const id = createId(node, staticStyle)
+        return (state.styles[id] = `const ${id} = css({${cssStatic}})`)
+      }
     }
 
     let cssDynamic = ['({ props }) => ({']
@@ -108,10 +114,7 @@ export function leave(node, parent, state) {
   } else if (hasKeysInChildren(staticStyle)) {
     state.cssStatic = true
 
-    const id = `${node.is || node.name}_${hash(staticStyle)}`
-    node.styleName = id
-    node.className.push(`\${${id}}`)
-
+    const id = createId(node, staticStyle)
     const css = Object.keys(staticStyle)
       .filter(
         key => allowedStyleKeys.includes(key) && hasKeys(staticStyle[key])
@@ -225,4 +228,11 @@ const asVarsCss = (springs, component) => {
   return springs.map(
     spring => `${spring.name}: "var(--${component}-${spring.name})"`
   )
+}
+
+const createId = (node, staticStyle) => {
+  const id = `${node.is || node.name}_${hash(staticStyle)}`
+  node.styleName = id
+  node.className.push(`\${${id}}`)
+  return id
 }
