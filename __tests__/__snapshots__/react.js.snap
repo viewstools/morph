@@ -768,8 +768,8 @@ const getAnimatedValue = (animatedValue, from, to) =>
 const Vertical = styled(Animated.div)(
   {
     backgroundColor: 'red',
-    opacity: 'var(--opacity)',
-    transform: 'var(--transform)',
+    opacity: 'var(--Vertical-opacity)',
+    transform: 'var(--Vertical-transform)',
     transition: 'transform 150ms ease-in 0ms',
     willChange: 'opacity, transform',
   },
@@ -781,7 +781,7 @@ const Vertical = styled(Animated.div)(
 );
 const Text = styled(Animated.div)(
   {
-    color: 'var(--color)',
+    color: 'var(--Text-color)',
     willChange: 'color',
   },
   ({ props }) => ({})
@@ -820,8 +820,12 @@ class AnimatedButton extends React.Component {
           })
         }
         style={{
-          '--opacity': getAnimatedValue(this.animatedValue0, 0.75, 1),
-          '--translateX': getAnimatedValue(this.animatedValue0, 10, 20),
+          '--Vertical-opacity': getAnimatedValue(this.animatedValue0, 0.75, 1),
+          '--Vertical-translateX': getAnimatedValue(
+            this.animatedValue0,
+            10,
+            20
+          ),
         }}
         props={props}
         className=\\"views-block\\"
@@ -829,7 +833,11 @@ class AnimatedButton extends React.Component {
         <Text
           data-test-id={\`AnimatedButton.Text|\${props.isOn ? 'isOn|' : ''}\`}
           style={{
-            '--color': getAnimatedValue(this.animatedValue0, 'red', 'blue'),
+            '--Text-color': getAnimatedValue(
+              this.animatedValue0,
+              'red',
+              'blue'
+            ),
           }}
           props={props}
           className=\\"views-block\\"
@@ -875,8 +883,8 @@ const getAnimatedValue = (animatedValue, from, to) =>
 const Vertical = styled(Animated.div)(
   {
     backgroundColor: 'red',
-    opacity: 'var(--opacity)',
-    transform: 'var(--transform)',
+    opacity: 'var(--Vertical-opacity)',
+    transform: 'var(--Vertical-transform)',
     transition: 'transform 150ms ease-in 0ms',
     willChange: 'opacity, transform',
   },
@@ -888,7 +896,7 @@ const Vertical = styled(Animated.div)(
 );
 const Text = styled(Animated.div)(
   {
-    color: 'var(--color)',
+    color: 'var(--Text-color)',
     willChange: 'color',
   },
   ({ props }) => ({})
@@ -920,8 +928,12 @@ class AnimatedButton extends React.Component {
         }\`}
         onClick={props.onClick}
         style={{
-          '--opacity': getAnimatedValue(this.animatedValue0, 0.75, 1),
-          '--translateX': getAnimatedValue(this.animatedValue0, 10, 20),
+          '--Vertical-opacity': getAnimatedValue(this.animatedValue0, 0.75, 1),
+          '--Vertical-translateX': getAnimatedValue(
+            this.animatedValue0,
+            10,
+            20
+          ),
         }}
         props={props}
         className=\\"views-block\\"
@@ -929,7 +941,11 @@ class AnimatedButton extends React.Component {
         <Text
           data-test-id={\`AnimatedButton.Text|\${props.isOn ? 'isOn|' : ''}\`}
           style={{
-            '--color': getAnimatedValue(this.animatedValue0, 'red', 'blue'),
+            '--Text-color': getAnimatedValue(
+              this.animatedValue0,
+              'red',
+              'blue'
+            ),
           }}
           props={props}
           className=\\"views-block\\"

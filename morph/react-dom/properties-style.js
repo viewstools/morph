@@ -61,7 +61,10 @@ export function leave(node, parent, state) {
       )
 
     if (hasSpringAnimation(node)) {
-      cssStatic = [...cssStatic, ...asVarsCss(getSpringProps(node))]
+      cssStatic = [
+        ...cssStatic,
+        ...asVarsCss(getSpringProps(node), node.nameFinal),
+      ]
     }
 
     cssStatic = cssStatic.join(',\n')
@@ -214,10 +217,12 @@ const filterBaseStyles = (node, dynamic) => {
   return dynamic
 }
 
-const asVarsCss = springs => {
+const asVarsCss = (springs, component) => {
   let varsCss = ''
   if (checkForTransforms(springs)) {
     springs = combineTransforms(springs)
   }
-  return springs.map(spring => `${spring.name}: "var(--${spring.name})"`)
+  return springs.map(
+    spring => `${spring.name}: "var(--${component}-${spring.name})"`
+  )
 }

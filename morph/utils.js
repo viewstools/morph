@@ -291,14 +291,14 @@ const getStandardAnimatedString = (node, prop, isNative) => {
     const toValue = isRotate(prop.name) ? `\`${prop.value}deg\`` : prop.value
 
     return `${
-      isNative ? prop.name : `"--${prop.name}"`
+      isNative ? prop.name : `"--${node.nameFinal}-${prop.name}"`
     }: getAnimatedValue(this.animatedValue${getScopeIndex(
       node,
       prop.scope
     )}, ${fromValue}, ${toValue})`
   }
   return `${
-    isNative ? prop.name : `"--${prop.name}"`
+    isNative ? prop.name : `"--${node.nameFinal}-${prop.name}"`
   }: getAnimatedValue(this.animatedValue${getScopeIndex(
     node,
     prop.scope
