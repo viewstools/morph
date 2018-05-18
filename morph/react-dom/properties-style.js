@@ -125,21 +125,25 @@ export function leave(node, parent, state) {
 }
 
 const asAnimatedCss = node => {
-  const names = [
-    ...new Set(
-      getAllAnimatedProps(node, false).map(prop => toSlugCase(prop.name))
-    ),
-  ]
-
   if (hasTimingAnimation(node)) {
     const transition = uniq(getTimingProps(node).map(makeTransition)).join(', ')
-    return `\ntransition: '${transition}',\nwillChange: '${names.join(', ')}'`
+
+    return `\ntransition: '${transition}',\nwillChange: '${getUniqueNames(
+      node
+    )}'`
   }
 
-  return `\nwillChange: '${names.join(', ')}'`
+  return `\nwillChange: '${getUniqueNames(node)}'`
 }
 
-const ensurePropNameForTransition = name => {
+const getUniqueNames = node => {
+  const names = [
+    ...new Set(getAllAnimatedProps(node, false).map(prop => prop.name)),
+  ]
+  return uniq(names.map(name => ensurePropName(name))).join(', ')
+}
+
+const ensurePropName = name => {
   switch (name) {
     case 'rotate':
     case 'rotateX':
@@ -155,7 +159,7 @@ const ensurePropNameForTransition = name => {
 }
 
 const makeTransition = ({ name, animation }) =>
-  `${ensurePropNameForTransition(name)} ${animation.duration}ms ${toSlugCase(
+  `${ensurePropName(name)} ${animation.duration}ms ${toSlugCase(
     animation.curve
   )} ${animation.delay}ms`
 

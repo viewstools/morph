@@ -771,7 +771,7 @@ const Vertical = styled(Animated.div)(
     opacity: 'var(--opacity)',
     transform: 'var(--transform)',
     transition: 'transform 150ms ease-in 0ms',
-    willChange: 'opacity, translate-x, rotate-x',
+    willChange: 'opacity, transform',
   },
   ({ props }) => ({
     transform: \`rotateX(\${props.isOn ? 20 : 10}deg) translateX(\${
@@ -878,7 +878,7 @@ const Vertical = styled(Animated.div)(
     opacity: 'var(--opacity)',
     transform: 'var(--transform)',
     transition: 'transform 150ms ease-in 0ms',
-    willChange: 'opacity, translate-x, rotate-x',
+    willChange: 'opacity, transform',
   },
   ({ props }) => ({
     transform: \`rotateX(\${props.isOn ? 20 : 10}deg) translateX(\${
