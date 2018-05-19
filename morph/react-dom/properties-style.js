@@ -225,9 +225,15 @@ const asVarsCss = (springs, component) => {
   if (checkForTransforms(springs)) {
     springs = combineTransforms(springs)
   }
-  return springs.map(
-    spring => `${spring.name}: "var(--${component}-${spring.name})"`
-  )
+
+  return springs.map(spring => {
+    if (spring.name === 'transform') {
+      return `${spring.name}: ${spring.props
+        .map(prop => `"var(--${component}-${prop.name})"`)
+        .join(', ')}`
+    }
+    return `${spring.name}: "var(--${component}-${spring.name})"`
+  })
 }
 
 const createId = (node, staticStyle) => {
