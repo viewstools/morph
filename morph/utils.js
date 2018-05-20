@@ -2,7 +2,6 @@ import safe from './react/safe.js'
 import wrap from './react/wrap.js'
 import toCamelCase from 'to-camel-case'
 import toSlugCase from 'to-slug-case'
-import sort from 'bubblesort'
 
 const safeScope = value =>
   typeof value === 'string' && !isSlot(value) ? JSON.stringify(value) : value
@@ -60,9 +59,7 @@ export const getScope = node => node.value.split('when ')[1]
 const maybeSafe = node =>
   node.tags.slot
     ? node.value
-    : typeof node.value === 'string'
-      ? safe(node.value)
-      : node.value
+    : typeof node.value === 'string' ? safe(node.value) : node.value
 
 const getScopedProps = (propNode, blockNode) => {
   const scopes = blockNode.scopes
@@ -101,9 +98,7 @@ const getStandrdInterpolation = (node, re, textNode, item) =>
     re,
     hasCustomScopes(textNode, item)
       ? wrap(getScopedCondition(textNode, item, true))
-      : isSlot(textNode)
-        ? wrap(textNode.value)
-        : textNode.value
+      : isSlot(textNode) ? wrap(textNode.value) : textNode.value
   )
 
 export const getScopedCondition = (

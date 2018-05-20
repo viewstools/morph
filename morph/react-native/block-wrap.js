@@ -5,7 +5,6 @@ import wrap from '../react/wrap.js'
 
 export const enter = (node, parent, state) => {
   const name = getBlockName(node, parent, state)
-
   if (
     name === 'Text' &&
     parent &&
