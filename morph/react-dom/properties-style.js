@@ -45,6 +45,7 @@ export function leave(node, parent, state) {
 
   // dynamic merges static styles
   if (hasKeysInChildren(dynamic)) {
+    debugger
     state.cssDynamic = true
     node.styleName = node.nameFinal
 
@@ -221,15 +222,16 @@ const filterBaseStyles = (node, dynamic) => {
 }
 
 const asVarsCss = (springs, component) => {
-  let varsCss = ''
   if (checkForTransforms(springs)) {
     springs = combineTransforms(springs)
   }
 
+  debugger
+
   return springs.map(spring => {
     if (spring.name === 'transform') {
       return `${spring.name}: ${spring.props
-        .map(prop => `"var(--${component}-${prop.name})"`)
+        .map(prop => `"${prop.name}(var(--${component}-${prop.name}))"`)
         .join(', ')}`
     }
     return `${spring.name}: "var(--${component}-${spring.name})"`
