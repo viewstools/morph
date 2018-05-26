@@ -60,13 +60,14 @@ export function leave(node, parent, state) {
           scopedUnderParent
         ).join('\n')
       )
+    debugger
 
-    if (hasSpringAnimation(node)) {
-      cssStatic = [
-        ...cssStatic,
-        ...asVarsCss(getSpringProps(node), node.nameFinal),
-      ]
-    }
+    // if (hasSpringAnimation(node)) {
+    //   cssStatic = [
+    //     ...cssStatic,
+    //     ...asVarsCss(getSpringProps(node), node.nameFinal),
+    //   ]
+    // }
 
     cssStatic = cssStatic.join(',\n')
 
@@ -84,34 +85,46 @@ export function leave(node, parent, state) {
       }
     }
 
-    let cssDynamic = ['({ props }) => ({']
-    cssDynamic = cssDynamic.concat(
-      Object.keys(dynamic)
-        .filter(key => allowedStyleKeys.includes(key) && hasKeys(dynamic[key]))
-        .map(key =>
-          asCss(asDynamicCss(dynamic[key]), key, scopedUnderParent).join('\n')
-        )
-        .join(',\n')
-    )
+    // let cssDynamic = ['({ props }) => ({']
+    // cssDynamic = cssDynamic.concat(
+    //   Object.keys(dynamic)
+    //     .filter(key => allowedStyleKeys.includes(key) && hasKeys(dynamic[key]))
+    //     .map(key =>
+    //       asCss(asDynamicCss(dynamic[key]), key, scopedUnderParent).join('\n')
+    //     )
+    //     .join(',\n')
+    // )
 
-    cssDynamic.push('})')
-    cssDynamic = cssDynamic.join('\n')
+    // cssDynamic.push('})')
+    // cssDynamic = cssDynamic.join('\n')
 
-    const nameTag =
-      node.isAnimated && hasSpringAnimation(node)
-        ? `Animated.div`
-        : `'${node.nameTag}'`
+    let cssDynamic = Object.keys(dynamic)
+      .filter(key => allowedStyleKeys.includes(key) && hasKeys(dynamic[key]))
+      .map(key =>
+        asCss(asDynamicCss(dynamic[key]), key, scopedUnderParent).join('\n')
+      )
 
-    if (cssStatic || cssDynamic) {
-      state.styles[node.nameFinal] = `const ${
-        node.nameFinal
-      } = styled(${nameTag})(${
-        cssStatic ? `{${cssStatic}}, ` : ''
-      }${cssDynamic})`
+    // const nameTag =
+    //   node.isAnimated && hasSpringAnimation(node)
+    //     ? `Animated.div`
+    //     : `'${node.nameTag}'`
 
-      // TODO we may want to be smarter here and only pass what's needed
-      state.render.push(` props={props}`)
-    }
+    // if (cssStatic || cssDynamic) {
+    //   state.styles[node.nameFinal] = `const ${
+    //     node.nameFinal
+    //   } = styled(${nameTag})(${
+    //     cssStatic ? `{${cssStatic}}, ` : ''
+    //   }${cssDynamic})`
+
+    //   // TODO we may want to be smarter here and only pass what's needed
+    //   state.render.push(` props={props}`)
+    // }
+
+    const id = createId(node, staticStyle)
+
+    state.styles[node.nameFinal] = `const ${id} = css({${
+      cssStatic ? `${cssStatic}, ` : ''
+    }${cssDynamic}})`
   } else if (hasKeysInChildren(staticStyle)) {
     state.cssStatic = true
 
@@ -129,6 +142,7 @@ export function leave(node, parent, state) {
       state.styles[id] = `const ${id} = css({${css}})`
     }
   }
+  debugger
 }
 
 const asAnimatedCss = node => {
@@ -184,6 +198,7 @@ const asStaticCss = (styles, dynamicStyles = []) =>
 const asCss = (styles, key, scopedUnderParent) => {
   let css = []
 
+  debugger
   if (key !== 'base') {
     if (scopedUnderParent) {
       let parent = `\${${scopedUnderParent}}`

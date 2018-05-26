@@ -89,9 +89,14 @@ const getPropValue = (prop, block, unit = '') => {
   if (!prop) return false
 
   const scopedCondition = getScopedCondition(prop, block)
+  // if (scopedCondition) {
+  //   return `\${${scopedCondition}}${unit}`
+  // }
+
   if (scopedCondition) {
-    return `\${${scopedCondition}}${unit}`
+    return `var(--${block.nameFinal}-${prop.name})`
   }
+  //translateX(var(--Hey-translateX))
 
   if (prop.tags.slot) {
     return `\${${prop.value}}${unit}`

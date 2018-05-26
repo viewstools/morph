@@ -8,6 +8,7 @@ import {
 import safe from './safe.js'
 
 export function enter(node, parent, state) {
+  debugger
   if (
     !isStyle(node) ||
     !parent.isBasic ||
