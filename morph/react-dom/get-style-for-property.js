@@ -14,7 +14,7 @@ export default (node, parent, code) => {
       case 'translateY':
         return {
           _isScoped: true,
-          transform: `\`${getTransform(node, parent)}\``,
+          transform: `'${getTransform(node, parent)}'`,
         }
 
       default:
@@ -173,6 +173,7 @@ const getTransform = (node, parent) => {
   ) {
     value = `\`${value}\``
   }
+  debugger
   return value
 }
 
