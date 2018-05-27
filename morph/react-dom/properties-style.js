@@ -71,14 +71,6 @@ export function leave(node, parent, state) {
       cssStatic = cssStatic
         ? `${cssStatic}, ${asAnimatedCss(node)}`
         : asAnimatedCss(node)
-
-      filterBaseStyles(node, dynamic)
-      // if there's no dynamic keys left after filtering out springs
-      // then we can use css instead of a styled component
-      if (!hasKeysInChildren(dynamic)) {
-        const id = createId(node, staticStyle)
-        return (state.styles[id] = `const ${id} = css({${cssStatic}})`)
-      }
     }
 
     let cssDynamic = Object.keys(dynamic)
@@ -187,19 +179,6 @@ const asCss = (styles, key, scopedUnderParent) => {
   if (key !== 'base') css.push(`}`)
 
   return css
-}
-
-const filterBaseStyles = (node, dynamic) => {
-  const springs = getSpringProps(node).map(spring => spring.name)
-
-  dynamic.base = Object.keys(dynamic.base)
-    .filter(prop => !springs.includes(prop))
-    .reduce((obj, key) => {
-      obj[key] = dynamic.base[key]
-      return obj
-    }, {})
-
-  return dynamic
 }
 
 const createId = (node, staticStyle) => {

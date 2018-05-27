@@ -427,7 +427,6 @@ export default ({
             }, currentAnimation)
           propNode.value = currentAnimation.defaultValue
           propNode.animation = currentAnimation.properties
-          // propNode.scope = scope.slotName
           block.isAnimated = true
           if (!existingScope) {
             block.animations.push({
