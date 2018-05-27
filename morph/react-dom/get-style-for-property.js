@@ -2,9 +2,9 @@ import { getProp, getScopedCondition, isSlot } from '../utils.js'
 import { maybeAddFallbackFont } from '../fonts.js'
 
 export default (node, parent, code) => {
-  const scopedCondition = getScopedCondition(node, parent)
+  const scopedVar = setScopedVar(node, parent)
 
-  if (scopedCondition) {
+  if (scopedVar) {
     switch (node.name) {
       case 'rotate':
       case 'rotateX':
@@ -20,7 +20,7 @@ export default (node, parent, code) => {
       default:
         return {
           _isScoped: true,
-          [node.name]: scopedCondition,
+          [node.name]: `'${scopedVar}'`,
         }
     }
   }
@@ -85,18 +85,19 @@ export default (node, parent, code) => {
   }
 }
 
-const getPropValue = (prop, block, unit) => {
-  if (!prop) return false
-  debugger
-
+const setScopedVar = (prop, block, unit) => {
   const scopedCondition = getScopedCondition(prop, block, false, unit)
-  // if (scopedCondition) {
-  //   return `\${${scopedCondition}}${unit}`
-  // }
 
   if (scopedCondition) {
     return `var(--${block.nameFinal}-${prop.name})`
   }
+  return false
+}
+
+const getPropValue = (prop, block, unit) => {
+  if (!prop) return false
+
+  setScopedVar(prop, block, unit)
 
   if (prop.tags.slot) {
     return `\${${prop.value}}${unit}`
