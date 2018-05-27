@@ -88,7 +88,7 @@ export default (node, parent, code) => {
 const getPropValue = (prop, block, unit = '') => {
   if (!prop) return false
 
-  const scopedCondition = getScopedCondition(prop, block)
+  const scopedCondition = getScopedCondition(prop, block, false, unit)
   // if (scopedCondition) {
   //   return `\${${scopedCondition}}${unit}`
   // }
@@ -96,7 +96,6 @@ const getPropValue = (prop, block, unit = '') => {
   if (scopedCondition) {
     return `var(--${block.nameFinal}-${prop.name})`
   }
-  //translateX(var(--Hey-translateX))
 
   if (prop.tags.slot) {
     return `\${${prop.value}}${unit}`
@@ -173,7 +172,6 @@ const getTransform = (node, parent) => {
   ) {
     value = `\`${value}\``
   }
-  debugger
   return value
 }
 

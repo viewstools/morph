@@ -427,7 +427,7 @@ export default ({
             }, currentAnimation)
           propNode.value = currentAnimation.defaultValue
           propNode.animation = currentAnimation.properties
-          propNode.scope = scope.slotName
+          // propNode.scope = scope.slotName
           block.isAnimated = true
           if (!existingScope) {
             block.animations.push({
@@ -436,6 +436,10 @@ export default ({
               scope: scope.slotName,
             })
           }
+        }
+
+        if (scope) {
+          propNode.scope = scope.slotName
         }
 
         if (tags.slot) {

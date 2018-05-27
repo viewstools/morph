@@ -6,6 +6,9 @@ import {
   getAllAnimatedProps,
   getAllowedStyleKeys,
   getAnimatedStyles,
+  getDynamicStyles,
+  getScopedCondition,
+  getNonAnimatedDynamicStyles,
   getSpringProps,
   getTimingProps,
   hasAnimatedChild,
@@ -35,17 +38,30 @@ export function leave(node, parent, state) {
   }
 
   if (node.isAnimated && hasSpringAnimation(node)) {
-    state.render.push(
-      ` style={{${getAnimatedStyles(node, state.isReactNative)}}}`
-    )
+    // state.render.push(
+    //   ` style={{${getAnimatedStyles(node, state.isReactNative)}}}`
+    // )
     state.isAnimated = true
     state.animations = node.animations
     state.scopes = node.scopes
   }
+  console.log('what you doing?')
+  debugger
+
+  state.render.push(
+    ` style={{${getAnimatedStyles(
+      node,
+      state.isReactNative
+    )},${getDynamicStyles(node)}}}`
+  )
+
+  // style={{
+  //         '--Hey-translateX': getAnimatedValue(this.animatedValue0, 10, 20),
+  //         '--Hey-rotateX': `${props.isOn ? 20 : 10}`,
+  //       }}
 
   // dynamic merges static styles
   if (hasKeysInChildren(dynamic)) {
-    debugger
     state.cssDynamic = true
     node.styleName = node.nameFinal
 
@@ -60,7 +76,6 @@ export function leave(node, parent, state) {
           scopedUnderParent
         ).join('\n')
       )
-    debugger
 
     // if (hasSpringAnimation(node)) {
     //   cssStatic = [
@@ -142,7 +157,6 @@ export function leave(node, parent, state) {
       state.styles[id] = `const ${id} = css({${css}})`
     }
   }
-  debugger
 }
 
 const asAnimatedCss = node => {
@@ -198,7 +212,6 @@ const asStaticCss = (styles, dynamicStyles = []) =>
 const asCss = (styles, key, scopedUnderParent) => {
   let css = []
 
-  debugger
   if (key !== 'base') {
     if (scopedUnderParent) {
       let parent = `\${${scopedUnderParent}}`
@@ -240,8 +253,6 @@ const asVarsCss = (springs, component) => {
   if (checkForTransforms(springs)) {
     springs = combineTransforms(springs)
   }
-
-  debugger
 
   return springs.map(spring => {
     if (spring.name === 'transform') {

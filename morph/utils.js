@@ -107,11 +107,13 @@ const getStandrdInterpolation = (node, re, textNode, item) =>
 export const getScopedCondition = (
   propNode,
   blockNode,
-  alreadyInterpolated
+  alreadyInterpolated,
+  unit
 ) => {
   // alreadyInterpolated = interpolation that contains scoped condition
   // !alreadyInterpolated = scoped condition that contains interpolation
   // see tests in TextInterpolation.view for an example of both
+
   let conditional =
     blockNode.hasOwnProperty('interpolation') && !alreadyInterpolated
       ? interpolateText(propNode, blockNode, true)
@@ -126,6 +128,9 @@ export const getScopedCondition = (
           ? interpolateText(scope.prop, blockNode, true)
           : maybeSafe(scope.prop)
       } : ` + conditional
+    if (!scope.prop.animation || scope.prop.animation.curve !== 'spring') {
+      scope.prop.conditional = `\${${conditional}}${unit}`
+    }
   })
 
   return conditional
@@ -331,7 +336,43 @@ export const getAnimatedStyles = (node, isNative) => {
     ? getAllAnimatedProps(node, true)
     : getSpringProps(node)
 
+  debugger
+
+  //const props = getAllAnimatedProps(node, true)
+
   return props.map(prop => getAnimatedString(node, prop, isNative)).join(', ')
+}
+
+export const getDynamicStyles = node => {
+  console.log(
+    'wwww',
+    flatten(
+      node.scopes.map(scope =>
+        scope.properties.map(
+          prop =>
+            prop.conditional &&
+            `'--${node.nameFinal}-${prop.name}': \`${prop.conditional}\``
+        )
+      )
+    ).filter(Boolean)
+  )
+  debugger
+  return flatten(
+    node.scopes.map(scope =>
+      scope.properties.map(
+        prop =>
+          prop.conditional &&
+          `'--${node.nameFinal}-${prop.name}': \`${prop.conditional}\``
+      )
+    )
+  ).filter(Boolean)
+
+  // return props.map(
+  //   prop =>
+  //     `'--${node.nameFinal}-${prop.name}': ${prop.conditional}`
+  // )
+
+  //'--Hey-rotateX': `${props.isOn ? 20 : 10}`,
 }
 
 const getAnimatedString = (node, prop, isNative) =>
@@ -341,7 +382,6 @@ const getAnimatedString = (node, prop, isNative) =>
 
 export const getNonAnimatedDynamicStyles = node => {
   const animatedProps = getAllAnimatedProps(node, true).map(prop => prop.name)
-
   const animatedTransforms = animatedProps.includes('transform')
     ? getAllAnimatedProps(node, true)
         .find(prop => prop.name === 'transform')
