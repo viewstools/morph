@@ -30,6 +30,7 @@ export const STYLE = [
   'clipPath',
   'color',
   'cursor',
+  'display',
   'fill',
   'filter',
   'flexGrow',

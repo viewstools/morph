@@ -62,7 +62,9 @@ export const getScope = node => node.value.split('when ')[1]
 const maybeSafe = node =>
   node.tags.slot
     ? node.value
-    : typeof node.value === 'string' ? safe(node.value) : node.value
+    : typeof node.value === 'string'
+      ? safe(node.value)
+      : node.value
 
 const getScopedProps = (propNode, blockNode) => {
   const scopes = blockNode.scopes
@@ -101,7 +103,9 @@ const getStandardInterpolation = (node, re, textNode, item) =>
     re,
     hasCustomScopes(textNode, item)
       ? wrap(getScopedCondition(textNode, item, true))
-      : isSlot(textNode) ? wrap(textNode.value) : textNode.value
+      : isSlot(textNode)
+        ? wrap(textNode.value)
+        : textNode.value
   )
 
 export const getScopedCondition = (
@@ -260,6 +264,18 @@ export const getLocals = (propNode, blockNode, state) => {
   return locals
 }
 
+export const getLocalsString = (propNode, blockNode, state) => {
+  const baseLocalName = `${blockNode.is || blockNode.name}Local`
+  let localName = baseLocalName
+  let index = 1
+  while (localName in state.locals) {
+    localName = `${baseLocalName}${index++}`
+  }
+
+  state.locals[localName] = getLocals(propNode, blockNode, state)
+  return wrap(`${localName}[local.state.lang] || ${safe(propNode.value)}`)
+}
+
 export const makeOnClickTracker = (node, state) => {
   if (!state.track) return node.value
 
@@ -271,7 +287,7 @@ export const makeOnClickTracker = (node, state) => {
 
   return `event => context.track({ block: ${block}, action: "click", callback: ${
     node.value
-  }, event })`
+  }, event, props })`
 }
 
 export const hasAnimatedChild = node =>

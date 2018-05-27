@@ -99,6 +99,17 @@ module.exports = {
 }
 `;
 
+exports[`e2e parses e2e Display 1`] = `
+Object {
+  "code": "const { get } = require('@viewstools/e2e');
+
+module.exports = {
+  _top: get('Display'),
+};
+",
+}
+`;
+
 exports[`e2e parses e2e DynamicStylesApplyToBasicBlocksOnly 1`] = `
 Object {
   "code": "const { get } = require('@viewstools/e2e');
@@ -645,6 +656,7 @@ class Action extends React.Component {
             action: 'click',
             callback: props.onClick,
             event,
+            props,
           })
         }
         disabled={props.isDisabled}
@@ -814,6 +826,7 @@ class AnimatedButton extends React.Component {
             action: 'click',
             callback: props.onClick,
             event,
+            props,
           })
         }
         style={{
@@ -1664,6 +1677,70 @@ export default DefaultProps;
 }
 `;
 
+exports[`react-dom parses react-dom Display 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+import { css } from 'react-emotion';
+import PropTypes from 'prop-types';
+
+const Display_h1ys1kch = css({ display: 'block' });
+
+class Display extends React.Component {
+  render() {
+    const { context, props } = this;
+
+    return (
+      <div
+        data-test-id={\`\${props['data-test-id'] || 'Display'}|\`}
+        className={\`views-block \${Display_h1ys1kch}\`}
+      >
+        {props.children}
+      </div>
+    );
+  }
+}
+Display.contextTypes = {
+  track: PropTypes.func.isRequired,
+};
+
+export default Display;
+",
+  "fonts": Array [],
+  "slots": Array [],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom Display: react-dom parses react-dom Display debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+import { css } from 'react-emotion';
+
+const Display_h1ys1kch = css({ display: 'block' });
+
+const Display = props => {
+  return (
+    <div
+      data-test-id={\`\${props['data-test-id'] || 'Display'}|\`}
+      className={\`views-block \${Display_h1ys1kch}\`}
+    >
+      {props.children}
+    </div>
+  );
+};
+
+export default Display;
+",
+  "fonts": Array [],
+  "slots": Array [],
+  "svgs": Array [],
+}
+`;
+
 exports[`react-dom parses react-dom DynamicStylesApplyToBasicBlocksOnly 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -1919,6 +1996,7 @@ class Hover extends React.Component {
             action: 'click',
             callback: props.onClick,
             event,
+            props,
           })
         }
         className={\`views-block \${Hover_h1eiserf}\`}
@@ -3361,6 +3439,7 @@ class ScopePopup2 extends React.Component {
               action: 'click',
               callback: props.toggle,
               event,
+              props,
             })
           }
           className=\\"views-block\\"
@@ -3636,6 +3715,7 @@ class SomeMissingStyle extends React.Component {
             action: 'click',
             callback: props.onClick,
             event,
+            props,
           })
         }
         tabIndex={-1}
@@ -4483,6 +4563,12 @@ Object {
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import PropTypes from 'prop-types';
+import { Subscribe } from 'unstated';
+import LocalContainer from './LocalContainer.view.js';
+
+const TextLocal = {
+  es: 'Escriba sus comentarios aqui...',
+};
 
 class UseCaptureText extends React.Component {
   constructor(props) {
@@ -4494,13 +4580,18 @@ class UseCaptureText extends React.Component {
     const { context, props, state } = this;
 
     return (
-      <input
-        type=\\"text\\"
-        onChange={event => this.setState({ text: event.target.value })}
-        value={state.text}
-        data-test-id={\`\${props['data-test-id'] || 'Text'}|\`}
-        className=\\"views-block\\"
-      />
+      <Subscribe to={[LocalContainer]}>
+        {local => (
+          <input
+            type=\\"text\\"
+            onChange={event => this.setState({ text: event.target.value })}
+            value={state.text}
+            data-test-id={\`\${props['data-test-id'] || 'Text'}|\`}
+            placeholder={TextLocal[local.state.lang] || 'Type feedback here...'}
+            className=\\"views-block\\"
+          />
+        )}
+      </Subscribe>
     );
   }
 }
@@ -4521,6 +4612,12 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
+import { Subscribe } from 'unstated';
+import LocalContainer from './LocalContainer.view.js';
+
+const TextLocal = {
+  es: 'Escriba sus comentarios aqui...',
+};
 
 class UseCaptureText extends React.Component {
   constructor(props) {
@@ -4532,14 +4629,19 @@ class UseCaptureText extends React.Component {
     const { props, state } = this;
 
     return (
-      <input
-        type=\\"text\\"
-        onChange={event => this.setState({ text: event.target.value })}
-        value={state.text}
-        tabIndex={-1}
-        data-test-id={\`\${props['data-test-id'] || 'Text'}|\`}
-        className={\`views-block mousetrap\`}
-      />
+      <Subscribe to={[LocalContainer]}>
+        {local => (
+          <input
+            type=\\"text\\"
+            onChange={event => this.setState({ text: event.target.value })}
+            value={state.text}
+            tabIndex={-1}
+            data-test-id={\`\${props['data-test-id'] || 'Text'}|\`}
+            placeholder={TextLocal[local.state.lang] || 'Type feedback here...'}
+            className={\`views-block mousetrap\`}
+          />
+        )}
+      </Subscribe>
     );
   }
 }
@@ -5729,6 +5831,7 @@ class Action extends React.Component {
             action: 'click',
             callback: props.onClick,
             event,
+            props,
           })
         }
         disabled={props.isDisabled}
@@ -5815,6 +5918,7 @@ class AnimatedButton extends React.Component {
             action: 'click',
             callback: props.onClick,
             event,
+            props,
           })
         }
         underlayColor=\\"transparent\\"
@@ -6187,6 +6291,37 @@ export default DefaultProps;
 }
 `;
 
+exports[`react-native parses react-native Display 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import PropTypes from 'prop-types';
+const styles = StyleSheet.create({ h1dd5jy2: { display: 'block' } });
+
+class Display extends React.Component {
+  render() {
+    const { context, props } = this;
+
+    return (
+      <View testID={\`\${props['testID'] || 'Display'}|\`} style={styles.h1dd5jy2}>
+        {props.children}
+      </View>
+    );
+  }
+}
+Display.contextTypes = {
+  track: PropTypes.func.isRequired,
+};
+
+export default Display;
+",
+  "fonts": Array [],
+  "slots": Array [],
+  "svgs": Array [],
+}
+`;
+
 exports[`react-native parses react-native DynamicStylesApplyToBasicBlocksOnly 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -6318,6 +6453,7 @@ class Hover extends React.Component {
             action: 'click',
             callback: props.onClick,
             event,
+            props,
           })
         }
         underlayColor=\\"transparent\\"
@@ -7009,6 +7145,7 @@ class ScopePopup2 extends React.Component {
               action: 'click',
               callback: props.toggle,
               event,
+              props,
             })
           }
           underlayColor=\\"transparent\\"
@@ -7168,6 +7305,7 @@ class SomeMissingStyle extends React.Component {
             action: 'click',
             callback: props.onClick,
             event,
+            props,
           })
         }
         underlayColor=\\"transparent\\"
@@ -7619,6 +7757,12 @@ Object {
 import React from 'react';
 import { TextInput } from 'react-native';
 import PropTypes from 'prop-types';
+import { Subscribe } from 'unstated';
+import LocalContainer from './LocalContainer.view.js';
+
+const TextLocal = {
+  es: 'Escriba sus comentarios aqui...',
+};
 
 class UseCaptureText extends React.Component {
   constructor(props) {
@@ -7630,17 +7774,23 @@ class UseCaptureText extends React.Component {
     const { context, props, state } = this;
 
     return (
-      <TextInput
-        returnKeyType=\\"done\\"
-        onChangeText={text => this.setState({ text })}
-        ref={$e => (this.$text = $e)}
-        value={state.text}
-        keyboardType=\\"default\\"
-        autoCorrect={false}
-        underlineColorAndroid=\\"transparent\\"
-        textAlignVertical=\\"top\\"
-        testID={\`\${props['testID'] || 'Text'}|\`}
-      />
+      <Subscribe to={[LocalContainer]}>
+        {local => (
+          <TextInput
+            returnKeyType=\\"done\\"
+            onChangeText={text => this.setState({ text })}
+            ref={$e => (this.$text = $e)}
+            value={state.text}
+            keyboardType=\\"default\\"
+            autoCorrect={false}
+            placeholder={undefined}
+            underlineColorAndroid=\\"transparent\\"
+            textAlignVertical=\\"top\\"
+            testID={\`\${props['testID'] || 'Text'}|\`}
+            placeholder={TextLocal[local.state.lang] || 'Type feedback here...'}
+          />
+        )}
+      </Subscribe>
     );
   }
 }
