@@ -108,18 +108,21 @@ export const getScopedCondition = (
   propNode,
   blockNode,
   alreadyInterpolated,
-  unit
+  unit = ''
 ) => {
   // alreadyInterpolated = interpolation that contains scoped condition
   // !alreadyInterpolated = scoped condition that contains interpolation
   // see tests in TextInterpolation.view for an example of both
 
+  debugger
   let conditional =
     blockNode.hasOwnProperty('interpolation') && !alreadyInterpolated
       ? interpolateText(propNode, blockNode, true)
       : maybeSafe(propNode)
 
   if (!getScopedProps(propNode, blockNode)) return false
+
+  debugger
 
   getScopedProps(propNode, blockNode).forEach(scope => {
     conditional =
@@ -336,27 +339,10 @@ export const getAnimatedStyles = (node, isNative) => {
     ? getAllAnimatedProps(node, true)
     : getSpringProps(node)
 
-  debugger
-
-  //const props = getAllAnimatedProps(node, true)
-
   return props.map(prop => getAnimatedString(node, prop, isNative)).join(', ')
 }
 
 export const getDynamicStyles = node => {
-  console.log(
-    'wwww',
-    flatten(
-      node.scopes.map(scope =>
-        scope.properties.map(
-          prop =>
-            prop.conditional &&
-            `'--${node.nameFinal}-${prop.name}': \`${prop.conditional}\``
-        )
-      )
-    ).filter(Boolean)
-  )
-  debugger
   return flatten(
     node.scopes.map(scope =>
       scope.properties.map(
@@ -366,13 +352,6 @@ export const getDynamicStyles = node => {
       )
     )
   ).filter(Boolean)
-
-  // return props.map(
-  //   prop =>
-  //     `'--${node.nameFinal}-${prop.name}': ${prop.conditional}`
-  // )
-
-  //'--Hey-rotateX': `${props.isOn ? 20 : 10}`,
 }
 
 const getAnimatedString = (node, prop, isNative) =>

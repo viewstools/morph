@@ -85,8 +85,9 @@ export default (node, parent, code) => {
   }
 }
 
-const getPropValue = (prop, block, unit = '') => {
+const getPropValue = (prop, block, unit) => {
   if (!prop) return false
+  debugger
 
   const scopedCondition = getScopedCondition(prop, block, false, unit)
   // if (scopedCondition) {

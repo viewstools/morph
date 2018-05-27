@@ -38,14 +38,10 @@ export function leave(node, parent, state) {
   }
 
   if (node.isAnimated && hasSpringAnimation(node)) {
-    // state.render.push(
-    //   ` style={{${getAnimatedStyles(node, state.isReactNative)}}}`
-    // )
     state.isAnimated = true
     state.animations = node.animations
     state.scopes = node.scopes
   }
-  console.log('what you doing?')
   debugger
 
   state.render.push(
@@ -54,11 +50,6 @@ export function leave(node, parent, state) {
       state.isReactNative
     )},${getDynamicStyles(node)}}}`
   )
-
-  // style={{
-  //         '--Hey-translateX': getAnimatedValue(this.animatedValue0, 10, 20),
-  //         '--Hey-rotateX': `${props.isOn ? 20 : 10}`,
-  //       }}
 
   // dynamic merges static styles
   if (hasKeysInChildren(dynamic)) {
@@ -85,6 +76,8 @@ export function leave(node, parent, state) {
     // }
 
     cssStatic = cssStatic.join(',\n')
+
+    debugger
 
     if (node.isAnimated) {
       cssStatic = cssStatic
@@ -118,6 +111,7 @@ export function leave(node, parent, state) {
       .map(key =>
         asCss(asDynamicCss(dynamic[key]), key, scopedUnderParent).join('\n')
       )
+      .join('\n')
 
     // const nameTag =
     //   node.isAnimated && hasSpringAnimation(node)
