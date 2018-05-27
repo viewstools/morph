@@ -21,11 +21,8 @@ export function enter(node, parent, state) {
     },
   }
 
-  debugger
   // TODO use this directly in styles without having to go through this
   node.scopes.filter(scope => scope.isSystem).forEach(scope => {
-    debugger
-
     scope.properties.forEach(propNode => {
       if (propNode.name === 'when') return
 

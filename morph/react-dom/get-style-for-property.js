@@ -97,7 +97,9 @@ const setScopedVar = (prop, block, unit) => {
 const getPropValue = (prop, block, unit) => {
   if (!prop) return false
 
-  setScopedVar(prop, block, unit)
+  const scopedVar = setScopedVar(prop, block, unit)
+
+  if (scopedVar) return scopedVar
 
   if (prop.tags.slot) {
     return `\${${prop.value}}${unit}`

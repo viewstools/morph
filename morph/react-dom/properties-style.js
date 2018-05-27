@@ -7,8 +7,6 @@ import {
   getAllowedStyleKeys,
   getAnimatedStyles,
   getDynamicStyles,
-  getScopedCondition,
-  getNonAnimatedDynamicStyles,
   getSpringProps,
   getTimingProps,
   hasAnimatedChild,
@@ -42,7 +40,6 @@ export function leave(node, parent, state) {
     state.animations = node.animations
     state.scopes = node.scopes
   }
-  debugger
 
   state.render.push(
     ` style={{${getAnimatedStyles(
@@ -68,16 +65,7 @@ export function leave(node, parent, state) {
         ).join('\n')
       )
 
-    // if (hasSpringAnimation(node)) {
-    //   cssStatic = [
-    //     ...cssStatic,
-    //     ...asVarsCss(getSpringProps(node), node.nameFinal),
-    //   ]
-    // }
-
     cssStatic = cssStatic.join(',\n')
-
-    debugger
 
     if (node.isAnimated) {
       cssStatic = cssStatic
@@ -93,41 +81,12 @@ export function leave(node, parent, state) {
       }
     }
 
-    // let cssDynamic = ['({ props }) => ({']
-    // cssDynamic = cssDynamic.concat(
-    //   Object.keys(dynamic)
-    //     .filter(key => allowedStyleKeys.includes(key) && hasKeys(dynamic[key]))
-    //     .map(key =>
-    //       asCss(asDynamicCss(dynamic[key]), key, scopedUnderParent).join('\n')
-    //     )
-    //     .join(',\n')
-    // )
-
-    // cssDynamic.push('})')
-    // cssDynamic = cssDynamic.join('\n')
-
     let cssDynamic = Object.keys(dynamic)
       .filter(key => allowedStyleKeys.includes(key) && hasKeys(dynamic[key]))
       .map(key =>
         asCss(asDynamicCss(dynamic[key]), key, scopedUnderParent).join('\n')
       )
       .join('\n')
-
-    // const nameTag =
-    //   node.isAnimated && hasSpringAnimation(node)
-    //     ? `Animated.div`
-    //     : `'${node.nameTag}'`
-
-    // if (cssStatic || cssDynamic) {
-    //   state.styles[node.nameFinal] = `const ${
-    //     node.nameFinal
-    //   } = styled(${nameTag})(${
-    //     cssStatic ? `{${cssStatic}}, ` : ''
-    //   }${cssDynamic})`
-
-    //   // TODO we may want to be smarter here and only pass what's needed
-    //   state.render.push(` props={props}`)
-    // }
 
     const id = createId(node, staticStyle)
 
@@ -241,21 +200,6 @@ const filterBaseStyles = (node, dynamic) => {
     }, {})
 
   return dynamic
-}
-
-const asVarsCss = (springs, component) => {
-  if (checkForTransforms(springs)) {
-    springs = combineTransforms(springs)
-  }
-
-  return springs.map(spring => {
-    if (spring.name === 'transform') {
-      return `${spring.name}: ${spring.props
-        .map(prop => `"${prop.name}(var(--${component}-${prop.name}))"`)
-        .join(', ')}`
-    }
-    return `${spring.name}: "var(--${component}-${spring.name})"`
-  })
 }
 
 const createId = (node, staticStyle) => {
