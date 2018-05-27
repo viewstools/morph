@@ -876,23 +876,17 @@ const getAnimatedValue = (animatedValue, from, to) =>
     outputRange: [from, to],
   });
 
-const Vertical = styled(Animated.div)(
-  {
-    backgroundColor: 'red',
-    opacity: 'var(--Vertical-opacity)',
-    transform: 'var(--Vertical-translateX)',
-    transition: 'transform 150ms ease-in 0ms',
-    willChange: 'opacity, transform',
-  },
-  ({ props }) => ({
-    transform: \`rotateX(\${props.isOn ? 20 : 10}deg) translateX(\${
-      props.isOn ? 20 : 10
-    }px) translateY(\${props.isOn ? 30 : 0}px)\`,
-  })
-);
+const Vertical_h1cyenk5 = css({
+  backgroundColor: 'red',
+  transition: 'transform 150ms ease-in 0ms',
+  willChange: 'opacity, transform',
+  opacity: 'var(--Vertical-opacity)',
+  transform:
+    'rotateX(var(--Vertical-rotateX)) translateX(var(--Vertical-translateX)) translateY(var(--Vertical-translateY))',
+});
 const Text_hvqf4zf = css({
-  color: 'var(--Text-color)',
   willChange: 'color',
+  color: 'var(--Text-color)',
 });
 
 class AnimatedButton extends React.Component {
@@ -927,9 +921,10 @@ class AnimatedButton extends React.Component {
             10,
             20
           ),
+          '--Vertical-translateY': \`\${props.isOn ? 30 : 0}px\`,
+          '--Vertical-rotateX': \`\${props.isOn ? 20 : 10}deg\`,
         }}
-        props={props}
-        className=\\"views-block\\"
+        className={\`views-block \${Vertical_h1cyenk5}\`}
       >
         <Text
           data-test-id={\`AnimatedButton.Text|\${props.isOn ? 'isOn|' : ''}\`}
@@ -1106,15 +1101,11 @@ import styled, { css } from 'react-emotion';
 const Vertical_hi6h2fk = css({
   backgroundImage: \\"url('https://views.tools/image.jpg')\\",
 });
-const Horizontal = styled('div')(
-  {
-    flexDirection: 'row',
-    backgroundSize: 'contain',
-  },
-  ({ props }) => ({
-    backgroundImage: \`url(\${props.backgroundImage})\`,
-  })
-);
+const Horizontal_h1qzeuoz = css({
+  flexDirection: 'row',
+  backgroundSize: 'contain',
+  backgroundImage: \`url(\${props.backgroundImage})\`,
+});
 
 const BackgroundImage = props => {
   return (
@@ -1124,8 +1115,8 @@ const BackgroundImage = props => {
     >
       <Horizontal
         data-test-id={\`BackgroundImage.Horizontal|\`}
-        props={props}
-        className=\\"views-block\\"
+        style={{}}
+        className={\`views-block \${Horizontal_h1qzeuoz}\`}
       />
       {props.children}
     </div>
@@ -1289,74 +1280,58 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import styled from 'react-emotion';
 
-const Border1 = styled('div')(
-  {
-    borderColor: 'red',
-    borderStyle: 'solid',
-  },
-  ({ props }) => ({
-    borderWidth: props.borderWidth,
-  })
-);
-const Top = styled('div')(
-  {
-    borderTopStyle: 'solid',
-    borderTopColor: 'red',
-  },
-  ({ props }) => ({
-    borderTopWidth: props.borderTopWidth,
-  })
-);
-const Right = styled('div')(
-  {
-    borderRightStyle: 'solid',
-    borderRightColor: 'red',
-  },
-  ({ props }) => ({
-    borderRightWidth: props.borderRightWidth,
-  })
-);
-const Bottom = styled('div')(
-  {
-    borderBottomStyle: 'solid',
-    borderBottomColor: 'red',
-  },
-  ({ props }) => ({
-    borderBottomWidth: props.borderBottomWidth,
-  })
-);
-const Left = styled('div')(
-  {
-    borderLeftStyle: 'solid',
-    borderLeftColor: 'red',
-  },
-  ({ props }) => ({
-    borderLeftWidth: props.borderLeftWidth,
-  })
-);
+const Border_howvz65 = css({
+  borderColor: 'red',
+  borderStyle: 'solid',
+  borderWidth: props.borderWidth,
+});
+const Top_h1vfscbc = css({
+  borderTopStyle: 'solid',
+  borderTopColor: 'red',
+  borderTopWidth: props.borderTopWidth,
+});
+const Right_h1opmg39 = css({
+  borderRightStyle: 'solid',
+  borderRightColor: 'red',
+  borderRightWidth: props.borderRightWidth,
+});
+const Bottom_h9rup38 = css({
+  borderBottomStyle: 'solid',
+  borderBottomColor: 'red',
+  borderBottomWidth: props.borderBottomWidth,
+});
+const Left_h195r6cp = css({
+  borderLeftStyle: 'solid',
+  borderLeftColor: 'red',
+  borderLeftWidth: props.borderLeftWidth,
+});
 
 const Border = props => {
   return (
     <Border1
       data-test-id={\`\${props['data-test-id'] || 'Border'}|\`}
-      props={props}
-      className=\\"views-block\\"
+      style={{}}
+      className={\`views-block \${Border_howvz65}\`}
     >
-      <Top data-test-id={\`Border.Top|\`} props={props} className=\\"views-block\\" />
+      <Top
+        data-test-id={\`Border.Top|\`}
+        style={{}}
+        className={\`views-block \${Top_h1vfscbc}\`}
+      />
       <Right
         data-test-id={\`Border.Right|\`}
-        props={props}
-        className=\\"views-block\\"
+        style={{}}
+        className={\`views-block \${Right_h1opmg39}\`}
       />
       <Bottom
         data-test-id={\`Border.Bottom|\`}
-        props={props}
-        className=\\"views-block\\"
+        style={{}}
+        className={\`views-block \${Bottom_h9rup38}\`}
       />
       <Left
         data-test-id={\`Border.Left|\`}
-        props={props}
-        className=\\"views-block\\"
+        style={{}}
+        className={\`views-block \${Left_h195r6cp}\`}
       />
       {props.children}
     </Border1>
@@ -1542,9 +1517,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import styled, { css } from 'react-emotion';
 
 const Vertical_h1cyenk5 = css({ backgroundColor: 'red' });
-const Text = styled('span')(({ props }) => ({
-  color: props.color,
-}));
+const Text_hvqf4zf = css({ color: props.color });
 
 const Code = props => {
   return (
@@ -1552,7 +1525,11 @@ const Code = props => {
       data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
       className={\`views-block \${Vertical_h1cyenk5}\`}
     >
-      <Text data-test-id={\`Code.Text|\`} props={props} className=\\"views-block\\">
+      <Text
+        data-test-id={\`Code.Text|\`}
+        style={{}}
+        className={\`views-block \${Text_hvqf4zf}\`}
+      >
         {props.text}
       </Text>
       {props.children}
@@ -1746,16 +1723,14 @@ import SomeThing from './SomeThing.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import styled from 'react-emotion';
 
-const Vertical = styled('div')(({ props }) => ({
-  height: props.height,
-}));
+const Vertical_hvqf4zf = css({ height: props.height });
 
 const DynamicStylesApplyToBasicBlocksOnly = props => {
   return (
     <Vertical
       data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-      props={props}
-      className=\\"views-block\\"
+      style={{}}
+      className={\`views-block \${Vertical_hvqf4zf}\`}
     >
       <SomeThing
         data-test-id={\`DynamicStylesApplyToBasicBlocksOnly.OnTop|\`}
@@ -1996,17 +1971,13 @@ const Hover_h1eiserf = css({
     backgroundColor: '#232323',
   },
 });
-const Text = styled('span')(
-  {
-    color: 'white',
-    [\`.\${Hover_h1eiserf}:hover &, .\${Hover_h1eiserf}.hover &\`]: {
-      color: 'black',
-    },
+const Text_h1uuiss4 = css({
+  color: 'white',
+  [\`.\${Hover_h1eiserf}:hover &, .\${Hover_h1eiserf}.hover &\`]: {
+    color: 'black',
   },
-  ({ props }) => ({
-    fontSize: props.fontSize,
-  })
-);
+  fontSize: props.fontSize,
+});
 
 const Hover = props => {
   return (
@@ -2015,7 +1986,11 @@ const Hover = props => {
       onClick={props.onClick}
       className={\`views-block \${Hover_h1eiserf}\`}
     >
-      <Text data-test-id={\`Hover.Text|\`} props={props} className=\\"views-block\\">
+      <Text
+        data-test-id={\`Hover.Text|\`}
+        style={{}}
+        className={\`views-block \${Text_h1uuiss4}\`}
+      >
         Hey!
       </Text>
       {props.children}
@@ -2432,9 +2407,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import chopperSvg from './chopper.svg';
 import styled from 'react-emotion';
 
-const LocalImageSvg1 = styled('img')({ width: 50 }, ({ props }) => ({
-  height: props.height,
-}));
+const LocalImageSvg_hg0lcix = css({ width: 50, height: props.height });
 
 const LocalImageSvg = props => {
   return (
@@ -2442,8 +2415,8 @@ const LocalImageSvg = props => {
       data-test-id={\`\${props['data-test-id'] || 'LocalImageSvg'}|\`}
       alt={''}
       src={chopperSvg}
-      props={props}
-      className=\\"views-block\\"
+      style={{}}
+      className={\`views-block \${LocalImageSvg_hg0lcix}\`}
     />
   );
 };
@@ -3113,13 +3086,7 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import styled from 'react-emotion';
 
-const Scope1 = styled('span')(({ props }) => ({
-  color: props.somethingGreen
-    ? 'rgb(0,255,0)'
-    : props.whatMakesBlue
-      ? 'rgb(0,0,255)'
-      : !props.whatMakesBlue ? 'rgb(255,255,0)' : 'red',
-}));
+const Scope_hvqf4zf = css({ color: 'var(--Scope1-color)' });
 
 const Scope = props => {
   return (
@@ -3131,8 +3098,35 @@ const Scope = props => {
             ? 'whatMakesBlue|'
             : !props.whatMakesBlue ? 'notWhatMakesBlue|' : ''
       }\`}
-      props={props}
-      className=\\"views-block\\"
+      style={{
+        '--Scope1-color': \`\${
+          props.somethingGreen
+            ? 'rgb(0,255,0)'
+            : props.whatMakesBlue
+              ? 'rgb(0,0,255)'
+              : !props.whatMakesBlue ? 'rgb(255,255,0)' : 'red'
+        }\`,
+        '--Scope1-text': \`\${
+          props.somethingGreen
+            ? '2 green'
+            : props.whatMakesBlue
+              ? props.blue
+              : !props.whatMakesBlue ? 'is Yellow' : '1 red'
+        }\`,
+        '--Scope1-color': \`\${
+          props.whatMakesBlue
+            ? 'rgb(0,0,255)'
+            : !props.whatMakesBlue ? 'rgb(255,255,0)' : 'red'
+        }\`,
+        '--Scope1-text': \`\${
+          props.whatMakesBlue
+            ? props.blue
+            : !props.whatMakesBlue ? 'is Yellow' : '1 red'
+        }\`,
+        '--Scope1-color': \`\${!props.whatMakesBlue ? 'rgb(255,255,0)' : 'red'}\`,
+        '--Scope1-text': \`\${!props.whatMakesBlue ? 'is Yellow' : '1 red'}\`,
+      }}
+      className={\`views-block \${Scope_hvqf4zf}\`}
     >
       {props.somethingGreen
         ? '2 green'
@@ -3345,10 +3339,10 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import styled from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const Content = styled('div')(({ props }) => ({
-  opacity: props.isShown ? 1 : props.isSuperVisible ? 3 : 0,
-  transform: \`scale(\${props.isShown ? 1 : props.isSuperVisible ? 2 : 0})\`,
-}));
+const Content_hvqf4zf = css({
+  opacity: 'var(--Content-opacity)',
+  transform: 'scale(var(--Content-scale))',
+});
 
 class ScopePopup2 extends React.Component {
   render() {
@@ -3381,8 +3375,17 @@ class ScopePopup2 extends React.Component {
               ? 'isShown|'
               : props.isSuperVisible ? 'isSuperVisible|' : ''
           }\`}
-          props={props}
-          className=\\"views-block\\"
+          style={{
+            '--Content-opacity': \`\${
+              props.isShown ? 1 : props.isSuperVisible ? 3 : 0
+            }\`,
+            '--Content-scale': \`\${
+              props.isShown ? 1 : props.isSuperVisible ? 2 : 0
+            }\`,
+            '--Content-opacity': \`\${props.isSuperVisible ? 3 : 0}\`,
+            '--Content-scale': \`\${props.isSuperVisible ? 2 : 0}\`,
+          }}
+          className={\`views-block \${Content_hvqf4zf}\`}
         >
           <span data-test-id={\`ScopePopup2.Text:1|\`} className=\\"views-block\\">
             I'm inside the popup
@@ -3418,10 +3421,10 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import styled from 'react-emotion';
 
-const Content = styled('div')(({ props }) => ({
-  opacity: props.isShown ? 1 : props.isSuperVisible ? 3 : 0,
-  transform: \`scale(\${props.isShown ? 1 : props.isSuperVisible ? 2 : 0})\`,
-}));
+const Content_hvqf4zf = css({
+  opacity: 'var(--Content-opacity)',
+  transform: 'scale(var(--Content-scale))',
+});
 
 const ScopePopup2 = props => {
   return (
@@ -3444,8 +3447,17 @@ const ScopePopup2 = props => {
             ? 'isShown|'
             : props.isSuperVisible ? 'isSuperVisible|' : ''
         }\`}
-        props={props}
-        className=\\"views-block\\"
+        style={{
+          '--Content-opacity': \`\${
+            props.isShown ? 1 : props.isSuperVisible ? 3 : 0
+          }\`,
+          '--Content-scale': \`\${
+            props.isShown ? 1 : props.isSuperVisible ? 2 : 0
+          }\`,
+          '--Content-opacity': \`\${props.isSuperVisible ? 3 : 0}\`,
+          '--Content-scale': \`\${props.isSuperVisible ? 2 : 0}\`,
+        }}
+        className={\`views-block \${Content_hvqf4zf}\`}
       >
         <span data-test-id={\`ScopePopup2.Text:1|\`} className=\\"views-block\\">
           I'm inside the popup
@@ -3537,12 +3549,12 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import styled from 'react-emotion';
 
-const BoxShadow = styled('div')(({ props }) => ({
-  boxShadow: \`0px 5px 2px 2px \${props.shadowColor}\`,
-}));
-const TextShadow = styled('span')(({ props }) => ({
-  textShadow: \`2px 3px 1px \${props.shadowColor}\`,
-}));
+const BoxShadow_h187w4jn = css({
+  boxShadow: \`0px 5px 2px 2px \${props.shadowColor}undefined\`,
+});
+const TextShadow_h7rw1by = css({
+  textShadow: \`2px 3px 1px \${props.shadowColor}undefined\`,
+});
 
 const Shadow = props => {
   return (
@@ -3552,13 +3564,13 @@ const Shadow = props => {
     >
       <BoxShadow
         data-test-id={\`Shadow.BoxShadow|\`}
-        props={props}
-        className=\\"views-block\\"
+        style={{}}
+        className={\`views-block \${BoxShadow_h187w4jn}\`}
       >
         <TextShadow
           data-test-id={\`Shadow.TextShadow|\`}
-          props={props}
-          className=\\"views-block\\"
+          style={{}}
+          className={\`views-block \${TextShadow_h7rw1by}\`}
         >
           hey
         </TextShadow>
@@ -3660,33 +3672,29 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import styled from 'react-emotion';
 
-const WindowControl = styled('button')(
-  {
-    marginRight: 8,
-    backgroundColor: '#CBCDCE',
-    opacity: 0.7,
+const WindowControl_h122qb6y = css({
+  marginRight: 8,
+  backgroundColor: '#CBCDCE',
+  opacity: 0.7,
+  transform: 'scale(1.1)',
+  transition: 'all 0.15s ease-out',
+  width: 10,
+  height: 10,
+  '&:hover': {
     transform: 'scale(1.1)',
-    transition: 'all 0.15s ease-out',
-    width: 10,
-    height: 10,
-    '&:hover': {
-      transform: 'scale(1.1)',
-    },
   },
-  ({ props }) => ({
-    '&:hover': {
-      backgroundColor: props.backgroundColorHover,
-    },
-  })
-);
+  '&:hover': {
+    backgroundColor: props.backgroundColorHover,
+  },
+});
 
 const SomeMissingStyle = props => {
   return (
     <WindowControl
       data-test-id={\`\${props['data-test-id'] || 'WindowControl'}|\`}
       onClick={props.onClick}
-      props={props}
-      className=\\"views-block\\"
+      style={{}}
+      className={\`views-block \${WindowControl_h122qb6y}\`}
     >
       {props.children}
     </WindowControl>
@@ -5155,17 +5163,13 @@ import './Fonts/Montserrat-300';
 import styled from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const UseText1 = styled('span')(
-  {
-    fontFamily: 'Montserrat, sans-serif',
-    fontSize: 16,
-    lineHeight: 1.5,
-    fontWeight: 300,
-  },
-  ({ props }) => ({
-    color: props.isSomething ? 'red' : 'blue',
-  })
-);
+const UseText_htyzezn = css({
+  fontFamily: 'Montserrat, sans-serif',
+  fontSize: 16,
+  lineHeight: 1.5,
+  fontWeight: 300,
+  color: 'var(--UseText1-color)',
+});
 
 class UseText extends React.Component {
   render() {
@@ -5176,8 +5180,8 @@ class UseText extends React.Component {
         data-test-id={\`\${props['data-test-id'] || 'UseText'}|\${
           props.isSomething ? 'isSomething|' : ''
         }\`}
-        props={props}
-        className=\\"views-block\\"
+        style={{ '--UseText1-color': \`\${props.isSomething ? 'red' : 'blue'}\` }}
+        className={\`views-block \${UseText_htyzezn}\`}
       >
         Hi, I'm some text
       </UseText1>
@@ -5211,17 +5215,13 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import './Fonts/Montserrat-300';
 import styled from 'react-emotion';
 
-const UseText1 = styled('span')(
-  {
-    fontFamily: 'Montserrat, sans-serif',
-    fontSize: 16,
-    lineHeight: 1.5,
-    fontWeight: 300,
-  },
-  ({ props }) => ({
-    color: props.isSomething ? 'red' : 'blue',
-  })
-);
+const UseText_htyzezn = css({
+  fontFamily: 'Montserrat, sans-serif',
+  fontSize: 16,
+  lineHeight: 1.5,
+  fontWeight: 300,
+  color: 'var(--UseText1-color)',
+});
 
 const UseText = props => {
   return (
@@ -5229,8 +5229,8 @@ const UseText = props => {
       data-test-id={\`\${props['data-test-id'] || 'UseText'}|\${
         props.isSomething ? 'isSomething|' : ''
       }\`}
-      props={props}
-      className=\\"views-block\\"
+      style={{ '--UseText1-color': \`\${props.isSomething ? 'red' : 'blue'}\` }}
+      className={\`views-block \${UseText_htyzezn}\`}
     >
       Hi, I'm some text
     </UseText1>
@@ -5518,16 +5518,17 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import styled from 'react-emotion';
 
-const ViewNameIsntUsedInStyle1 = styled('div')({ zIndex: 5 }, ({ props }) => ({
+const ViewNameIsntUsedInStyle_h1syrwwv = css({
+  zIndex: 5,
   opacity: props.opacity,
-}));
+});
 
 const ViewNameIsntUsedInStyle = props => {
   return (
     <ViewNameIsntUsedInStyle1
       data-test-id={\`\${props['data-test-id'] || 'ViewNameIsntUsedInStyle'}|\`}
-      props={props}
-      className=\\"views-block\\"
+      style={{}}
+      className={\`views-block \${ViewNameIsntUsedInStyle_h1syrwwv}\`}
     >
       {props.children}
     </ViewNameIsntUsedInStyle1>

@@ -38,12 +38,16 @@ export function leave(node, parent, state) {
     state.scopes = node.scopes
   }
 
-  state.render.push(
-    ` style={{${getAnimatedStyles(
-      node,
-      state.isReactNative
-    )},${getDynamicStyles(node)}}}`
-  )
+  debugger
+
+  // if (hasSpringAnimation(node) || hasKeysInChildren(dynamic)) {
+  //   state.render.push(
+  //     ` style={{${getAnimatedStyles(
+  //       node,
+  //       state.isReactNative
+  //     )},${getDynamicStyles(node)}}}`
+  //   )
+  // }
 
   // dynamic merges static styles
   if (hasKeysInChildren(dynamic)) {
@@ -63,6 +67,7 @@ export function leave(node, parent, state) {
       )
 
     cssStatic = cssStatic.join(',\n')
+    debugger
 
     if (node.isAnimated) {
       cssStatic = cssStatic
@@ -82,6 +87,17 @@ export function leave(node, parent, state) {
     state.styles[node.nameFinal] = `const ${id} = css({${
       cssStatic ? `${cssStatic}, ` : ''
     }${cssDynamic}})`
+
+    if (hasSpringAnimation(node)) {
+      state.render.push(
+        ` style={{${getAnimatedStyles(
+          node,
+          state.isReactNative
+        )},${getDynamicStyles(node)}}}`
+      )
+    } else {
+      state.render.push(` style={{${getDynamicStyles(node)}}}`)
+    }
   } else if (hasKeysInChildren(staticStyle)) {
     state.cssStatic = true
 
