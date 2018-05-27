@@ -389,7 +389,7 @@ export const getAllAnimatedProps = (node, isNative) => {
     : props
 }
 
-export const combineTransforms = props => {
+const combineTransforms = props => {
   // TODO: handle transforms on different scopes
   let transform = { name: 'transform', props: [] }
   props.forEach((prop, i) => {
@@ -402,7 +402,7 @@ export const combineTransforms = props => {
   return props.filter(prop => !prop.isTransform)
 }
 
-export const checkForTransforms = props =>
+const checkForTransforms = props =>
   props.some(prop => TRANSFORM_WHITELIST[prop.name])
 
 export const getTimingProps = node =>
@@ -414,7 +414,7 @@ export const getTimingProps = node =>
     )
   )
 
-export const getSpringProps = node =>
+const getSpringProps = node =>
   flatten(
     node.scopes.map(scope =>
       scope.properties.filter(

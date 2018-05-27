@@ -1,13 +1,10 @@
 import { enter } from '../react/properties-style.js'
 import {
-  checkForTransforms,
-  combineTransforms,
   getActionableParent,
   getAllAnimatedProps,
   getAllowedStyleKeys,
   getAnimatedStyles,
   getDynamicStyles,
-  getSpringProps,
   getTimingProps,
   hasAnimatedChild,
   hasKeys,
