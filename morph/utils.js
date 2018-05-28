@@ -3,6 +3,7 @@ import safe from './react/safe.js'
 import toCamelCase from 'to-camel-case'
 import toSlugCase from 'to-slug-case'
 import wrap from './react/wrap.js'
+import getUnit from './get-unit.js'
 
 const safeScope = value =>
   typeof value === 'string' && !isSlot(value) ? JSON.stringify(value) : value
@@ -62,9 +63,7 @@ export const getScope = node => node.value.split('when ')[1]
 const maybeSafe = node =>
   node.tags.slot
     ? node.value
-    : typeof node.value === 'string'
-      ? safe(node.value)
-      : node.value
+    : typeof node.value === 'string' ? safe(node.value) : node.value
 
 const getScopedProps = (propNode, blockNode) => {
   const scopes = blockNode.scopes
@@ -103,9 +102,7 @@ const getStandardInterpolation = (node, re, textNode, item) =>
     re,
     hasCustomScopes(textNode, item)
       ? wrap(getScopedCondition(textNode, item, true))
-      : isSlot(textNode)
-        ? wrap(textNode.value)
-        : textNode.value
+      : isSlot(textNode) ? wrap(textNode.value) : textNode.value
   )
 
 export const getScopedCondition = (
@@ -312,14 +309,14 @@ const getStandardAnimatedString = (node, prop, isNative) => {
     const toValue = isRotate(prop.name) ? `\`${prop.value}deg\`` : prop.value
 
     return `${
-      isNative ? prop.name : `"--${node.nameFinal}-${prop.name}"`
+      isNative ? prop.name : `"--${prop.name}"`
     }: getAnimatedValue(this.animatedValue${getScopeIndex(
       node,
       prop.scope
     )}, ${fromValue}, ${toValue})`
   }
   return `${
-    isNative ? prop.name : `"--${node.nameFinal}-${prop.name}"`
+    isNative ? prop.name : `"--${prop.name}"`
   }: getAnimatedValue(this.animatedValue${getScopeIndex(
     node,
     prop.scope
@@ -356,15 +353,27 @@ export const getAnimatedStyles = (node, isNative) => {
 }
 
 export const getDynamicStyles = node => {
-  return flatten(
-    node.scopes.map(scope =>
-      scope.properties.map(
-        prop =>
-          prop.conditional &&
-          `'--${node.nameFinal}-${prop.name}': \`${prop.conditional}\``
+  const dynamic = [
+    ...node.properties
+      .filter(prop => prop.tags.style && prop.tags.slot)
+      .map(prop => {
+        // console.log('prop', prop)
+        const unit = getUnit(prop)
+        const value = unit ? `\`\${${prop.value}}${unit}\`` : prop.value
+        return `'--${prop.name}': ${value}`
+      }),
+    ...flatten(
+      node.scopes.map(scope =>
+        scope.properties.map(prop => {
+          // console.log('prop', prop)
+          // TODO remove interpolation when it isn't needed
+          return prop.conditional && `'--${prop.name}': \`${prop.conditional}\``
+        })
       )
-    )
-  ).filter(Boolean)
+    ),
+  ].filter(Boolean)
+  console.log(dynamic)
+  return dynamic
 }
 
 const getAnimatedString = (node, prop, isNative) =>
