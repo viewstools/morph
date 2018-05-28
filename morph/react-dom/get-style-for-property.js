@@ -20,7 +20,7 @@ export default (node, parent, code) => {
       default:
         return {
           _isScoped: true,
-          [node.name]: `'${scopedVar}'`,
+          [node.name]: scopedVar,
         }
     }
   }
@@ -28,19 +28,19 @@ export default (node, parent, code) => {
   switch (node.name) {
     case 'appRegion':
       return {
-        WebkitAppRegion: node.value,
+        WebkitAppRegion: maybeAsVar(node, code),
       }
 
     case 'backgroundImage':
       return {
         backgroundImage: code
-          ? `\`url(\${${node.value}})\``
+          ? `\`url(\${${asVar(node)}})\``
           : `url("${node.value}")`,
       }
 
     case 'fontFamily':
       return {
-        fontFamily: code ? node.value : maybeAddFallbackFont(node.value),
+        fontFamily: code ? asVar(node) : maybeAddFallbackFont(node.value),
       }
 
     case 'shadowColor':
@@ -70,28 +70,28 @@ export default (node, parent, code) => {
 
     case 'userSelect':
       return {
-        WebkitUserSelect: node.value,
+        WebkitUserSelect: maybeAsVar(node, code),
       }
 
     case 'zIndex':
       return {
-        zIndex: code ? node.value : parseInt(node.value, 10),
+        zIndex: code ? asVar(node) : parseInt(node.value, 10),
       }
 
     default:
       return {
-        [node.name]: node.value,
+        [node.name]: maybeAsVar(node, code),
       }
   }
 }
 
+const maybeAsVar = (prop, code) => (code ? asVar(prop) : prop.value)
+
+const asVar = prop => `'var(--${prop.name})'`
+
 const setScopedVar = (prop, block, unit) => {
   const scopedCondition = getScopedCondition(prop, block, false, unit)
-
-  if (scopedCondition) {
-    return `var(--${block.nameFinal}-${prop.name})`
-  }
-  return false
+  return scopedCondition && asVar(prop)
 }
 
 const getPropValue = (prop, block, unit) => {
