@@ -176,7 +176,9 @@ const getTransform = (node, parent) => {
   ) {
     value = `\`${value}\``
   }
-  return value
+  // TODO FIXME this is a hack to remove strings because my head is fried
+  // and yeah it does what we need for now :)
+  return value.replace(/'/g, '')
 }
 
 const getTransformOrigin = (node, parent) => {

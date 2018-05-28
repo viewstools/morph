@@ -876,6 +876,94 @@ export default AnimatedButton;
 }
 `;
 
+exports[`react-dom parses react-dom AnimatedButton: react-dom parses react-dom AnimatedButton debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+import styled from 'react-emotion';
+import Animated from 'animated/lib/targets/react-dom';
+const getAnimatedValue = (animatedValue, from, to) =>
+  animatedValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: [from, to],
+  });
+
+const Vertical_h1cyenk5 = css({
+  backgroundColor: 'red',
+  transition: 'transform 150ms ease-in 0ms',
+  willChange: 'opacity, transform',
+  opacity: 'var(--opacity)',
+  transform:
+    'rotateX(var(--rotateX)) translateX(var(--translateX)) translateY(var(--translateY))',
+});
+const Text_hvqf4zf = css({
+  willChange: 'color',
+  color: 'var(--color)',
+});
+
+class AnimatedButton extends React.Component {
+  animatedValue0 = new Animated.Value(this.props.isOn ? 1 : 0);
+
+  componentWillReceiveProps(next) {
+    const { props } = this;
+    if (props.isOn !== next.isOn) {
+      Animated.spring(this.animatedValue0, {
+        toValue: next.isOn ? 1 : 0,
+        speed: 12,
+        bounciness: 8,
+        delay: 0,
+        useNativeDriver: false,
+      }).start();
+    }
+  }
+
+  render() {
+    const { props } = this;
+
+    return (
+      <Vertical
+        data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\${
+          props.isOn ? 'isOn|' : ''
+        }\`}
+        onClick={props.onClick}
+        style={{
+          '--opacity': getAnimatedValue(this.animatedValue0, 0.75, 1),
+          '--translateX': getAnimatedValue(this.animatedValue0, 10, 20),
+          '--translateY': \`\${props.isOn ? 30 : 0}px\`,
+          '--rotateX': \`\${props.isOn ? 20 : 10}deg\`,
+        }}
+        className={\`views-block \${Vertical_h1cyenk5}\`}
+      >
+        <Text
+          data-test-id={\`AnimatedButton.Text|\${props.isOn ? 'isOn|' : ''}\`}
+          style={{
+            '--color': getAnimatedValue(this.animatedValue0, 'red', 'blue'),
+          }}
+          className={\`views-block \${Text_hvqf4zf}\`}
+        >
+          hey
+        </Text>
+        {props.children}
+      </Vertical>
+    );
+  }
+}
+
+export default AnimatedButton;
+",
+  "fonts": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "onClick",
+      "type": "function",
+    },
+  ],
+  "svgs": Array [],
+}
+`;
+
 exports[`react-dom parses react-dom AppRegionDrag 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -3368,6 +3456,70 @@ class ScopePopup2 extends React.Component {
 }
 ScopePopup2.contextTypes = {
   track: PropTypes.func.isRequired,
+};
+
+export default ScopePopup2;
+",
+  "fonts": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "toggle",
+      "type": "function",
+    },
+  ],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom ScopePopup2: react-dom parses react-dom ScopePopup2 debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+import styled from 'react-emotion';
+
+const Content_hvqf4zf = css({
+  opacity: 'var(--opacity)',
+  transform: 'scale(var(--scale))',
+});
+
+const ScopePopup2 = props => {
+  return (
+    <div
+      data-test-id={\`\${props['data-test-id'] || 'Popup'}|\`}
+      className=\\"views-block\\"
+    >
+      <button
+        data-test-id={\`ScopePopup2.Toggle|\`}
+        onClick={props.toggle}
+        className=\\"views-block\\"
+      >
+        <span data-test-id={\`ScopePopup2.Text|\`} className=\\"views-block\\">
+          toggle popup
+        </span>
+      </button>
+      <Content
+        data-test-id={\`ScopePopup2.Content|\${
+          props.isShown
+            ? 'isShown|'
+            : props.isSuperVisible ? 'isSuperVisible|' : ''
+        }\`}
+        style={{
+          '--opacity': \`\${props.isShown ? 1 : props.isSuperVisible ? 3 : 0}\`,
+          '--scale': \`\${props.isShown ? 1 : props.isSuperVisible ? 2 : 0}\`,
+          '--opacity': \`\${props.isSuperVisible ? 3 : 0}\`,
+          '--scale': \`\${props.isSuperVisible ? 2 : 0}\`,
+        }}
+        className={\`views-block \${Content_hvqf4zf}\`}
+      >
+        <span data-test-id={\`ScopePopup2.Text:1|\`} className=\\"views-block\\">
+          I'm inside the popup
+        </span>
+      </Content>
+      {props.children}
+    </div>
+  );
 };
 
 export default ScopePopup2;
