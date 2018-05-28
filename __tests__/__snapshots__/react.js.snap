@@ -876,102 +876,6 @@ export default AnimatedButton;
 }
 `;
 
-exports[`react-dom parses react-dom AnimatedButton: react-dom parses react-dom AnimatedButton debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import styled from 'react-emotion';
-import Animated from 'animated/lib/targets/react-dom';
-const getAnimatedValue = (animatedValue, from, to) =>
-  animatedValue.interpolate({
-    inputRange: [0, 1],
-    outputRange: [from, to],
-  });
-
-const Vertical_h1cyenk5 = css({
-  backgroundColor: 'red',
-  transition: 'transform 150ms ease-in 0ms',
-  willChange: 'opacity, transform',
-  opacity: 'var(--Vertical-opacity)',
-  transform:
-    'rotateX(var(--Vertical-rotateX)) translateX(var(--Vertical-translateX)) translateY(var(--Vertical-translateY))',
-});
-const Text_hvqf4zf = css({
-  willChange: 'color',
-  color: 'var(--Text-color)',
-});
-
-class AnimatedButton extends React.Component {
-  animatedValue0 = new Animated.Value(this.props.isOn ? 1 : 0);
-
-  componentWillReceiveProps(next) {
-    const { props } = this;
-    if (props.isOn !== next.isOn) {
-      Animated.spring(this.animatedValue0, {
-        toValue: next.isOn ? 1 : 0,
-        speed: 12,
-        bounciness: 8,
-        delay: 0,
-        useNativeDriver: false,
-      }).start();
-    }
-  }
-
-  render() {
-    const { props } = this;
-
-    return (
-      <Vertical
-        data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\${
-          props.isOn ? 'isOn|' : ''
-        }\`}
-        onClick={props.onClick}
-        style={{
-          '--Vertical-opacity': getAnimatedValue(this.animatedValue0, 0.75, 1),
-          '--Vertical-translateX': getAnimatedValue(
-            this.animatedValue0,
-            10,
-            20
-          ),
-          '--Vertical-translateY': \`\${props.isOn ? 30 : 0}px\`,
-          '--Vertical-rotateX': \`\${props.isOn ? 20 : 10}deg\`,
-        }}
-        className={\`views-block \${Vertical_h1cyenk5}\`}
-      >
-        <Text
-          data-test-id={\`AnimatedButton.Text|\${props.isOn ? 'isOn|' : ''}\`}
-          style={{
-            '--Text-color': getAnimatedValue(
-              this.animatedValue0,
-              'red',
-              'blue'
-            ),
-          }}
-          className={\`views-block \${Text_hvqf4zf}\`}
-        >
-          hey
-        </Text>
-        {props.children}
-      </Vertical>
-    );
-  }
-}
-
-export default AnimatedButton;
-",
-  "fonts": Array [],
-  "slots": Array [
-    Object {
-      "defaultValue": false,
-      "name": "onClick",
-      "type": "function",
-    },
-  ],
-  "svgs": Array [],
-}
-`;
-
 exports[`react-dom parses react-dom AppRegionDrag 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -1055,15 +959,11 @@ import PropTypes from 'prop-types';
 const Vertical_hi6h2fk = css({
   backgroundImage: \\"url('https://views.tools/image.jpg')\\",
 });
-const Horizontal = styled('div')(
-  {
-    flexDirection: 'row',
-    backgroundSize: 'contain',
-  },
-  ({ props }) => ({
-    backgroundImage: \`url(\${props.backgroundImage})\`,
-  })
-);
+const Horizontal_h1qzeuoz = css({
+  flexDirection: 'row',
+  backgroundSize: 'contain',
+  backgroundImage: \`url(\${'var(--backgroundImage)'})\`,
+});
 
 class BackgroundImage extends React.Component {
   render() {
@@ -1076,8 +976,8 @@ class BackgroundImage extends React.Component {
       >
         <Horizontal
           data-test-id={\`BackgroundImage.Horizontal|\`}
-          props={props}
-          className=\\"views-block\\"
+          style={{ '--backgroundImage': props.backgroundImage }}
+          className={\`views-block \${Horizontal_h1qzeuoz}\`}
         />
         {props.children}
       </div>
@@ -1117,7 +1017,7 @@ const Vertical_hi6h2fk = css({
 const Horizontal_h1qzeuoz = css({
   flexDirection: 'row',
   backgroundSize: 'contain',
-  backgroundImage: \`url(\${props.backgroundImage})\`,
+  backgroundImage: \`url(\${'var(--backgroundImage)'})\`,
 });
 
 const BackgroundImage = props => {
@@ -1128,7 +1028,7 @@ const BackgroundImage = props => {
     >
       <Horizontal
         data-test-id={\`BackgroundImage.Horizontal|\`}
-        style={{}}
+        style={{ '--backgroundImage': props.backgroundImage }}
         className={\`views-block \${Horizontal_h1qzeuoz}\`}
       />
       {props.children}
@@ -1161,51 +1061,31 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import styled from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const Border1 = styled('div')(
-  {
-    borderColor: 'red',
-    borderStyle: 'solid',
-  },
-  ({ props }) => ({
-    borderWidth: props.borderWidth,
-  })
-);
-const Top = styled('div')(
-  {
-    borderTopStyle: 'solid',
-    borderTopColor: 'red',
-  },
-  ({ props }) => ({
-    borderTopWidth: props.borderTopWidth,
-  })
-);
-const Right = styled('div')(
-  {
-    borderRightStyle: 'solid',
-    borderRightColor: 'red',
-  },
-  ({ props }) => ({
-    borderRightWidth: props.borderRightWidth,
-  })
-);
-const Bottom = styled('div')(
-  {
-    borderBottomStyle: 'solid',
-    borderBottomColor: 'red',
-  },
-  ({ props }) => ({
-    borderBottomWidth: props.borderBottomWidth,
-  })
-);
-const Left = styled('div')(
-  {
-    borderLeftStyle: 'solid',
-    borderLeftColor: 'red',
-  },
-  ({ props }) => ({
-    borderLeftWidth: props.borderLeftWidth,
-  })
-);
+const Border_howvz65 = css({
+  borderColor: 'red',
+  borderStyle: 'solid',
+  borderWidth: 'var(--borderWidth)',
+});
+const Top_h1vfscbc = css({
+  borderTopStyle: 'solid',
+  borderTopColor: 'red',
+  borderTopWidth: 'var(--borderTopWidth)',
+});
+const Right_h1opmg39 = css({
+  borderRightStyle: 'solid',
+  borderRightColor: 'red',
+  borderRightWidth: 'var(--borderRightWidth)',
+});
+const Bottom_h9rup38 = css({
+  borderBottomStyle: 'solid',
+  borderBottomColor: 'red',
+  borderBottomWidth: 'var(--borderBottomWidth)',
+});
+const Left_h195r6cp = css({
+  borderLeftStyle: 'solid',
+  borderLeftColor: 'red',
+  borderLeftWidth: 'var(--borderLeftWidth)',
+});
 
 class Border extends React.Component {
   render() {
@@ -1214,28 +1094,28 @@ class Border extends React.Component {
     return (
       <Border1
         data-test-id={\`\${props['data-test-id'] || 'Border'}|\`}
-        props={props}
-        className=\\"views-block\\"
+        style={{ '--borderWidth': \`\${props.borderWidth}px\` }}
+        className={\`views-block \${Border_howvz65}\`}
       >
         <Top
           data-test-id={\`Border.Top|\`}
-          props={props}
-          className=\\"views-block\\"
+          style={{ '--borderTopWidth': \`\${props.borderTopWidth}px\` }}
+          className={\`views-block \${Top_h1vfscbc}\`}
         />
         <Right
           data-test-id={\`Border.Right|\`}
-          props={props}
-          className=\\"views-block\\"
+          style={{ '--borderRightWidth': \`\${props.borderRightWidth}px\` }}
+          className={\`views-block \${Right_h1opmg39}\`}
         />
         <Bottom
           data-test-id={\`Border.Bottom|\`}
-          props={props}
-          className=\\"views-block\\"
+          style={{ '--borderBottomWidth': \`\${props.borderBottomWidth}px\` }}
+          className={\`views-block \${Bottom_h9rup38}\`}
         />
         <Left
           data-test-id={\`Border.Left|\`}
-          props={props}
-          className=\\"views-block\\"
+          style={{ '--borderLeftWidth': \`\${props.borderLeftWidth}px\` }}
+          className={\`views-block \${Left_h195r6cp}\`}
         />
         {props.children}
       </Border1>
@@ -1296,54 +1176,54 @@ import styled from 'react-emotion';
 const Border_howvz65 = css({
   borderColor: 'red',
   borderStyle: 'solid',
-  borderWidth: props.borderWidth,
+  borderWidth: 'var(--borderWidth)',
 });
 const Top_h1vfscbc = css({
   borderTopStyle: 'solid',
   borderTopColor: 'red',
-  borderTopWidth: props.borderTopWidth,
+  borderTopWidth: 'var(--borderTopWidth)',
 });
 const Right_h1opmg39 = css({
   borderRightStyle: 'solid',
   borderRightColor: 'red',
-  borderRightWidth: props.borderRightWidth,
+  borderRightWidth: 'var(--borderRightWidth)',
 });
 const Bottom_h9rup38 = css({
   borderBottomStyle: 'solid',
   borderBottomColor: 'red',
-  borderBottomWidth: props.borderBottomWidth,
+  borderBottomWidth: 'var(--borderBottomWidth)',
 });
 const Left_h195r6cp = css({
   borderLeftStyle: 'solid',
   borderLeftColor: 'red',
-  borderLeftWidth: props.borderLeftWidth,
+  borderLeftWidth: 'var(--borderLeftWidth)',
 });
 
 const Border = props => {
   return (
     <Border1
       data-test-id={\`\${props['data-test-id'] || 'Border'}|\`}
-      style={{}}
+      style={{ '--borderWidth': \`\${props.borderWidth}px\` }}
       className={\`views-block \${Border_howvz65}\`}
     >
       <Top
         data-test-id={\`Border.Top|\`}
-        style={{}}
+        style={{ '--borderTopWidth': \`\${props.borderTopWidth}px\` }}
         className={\`views-block \${Top_h1vfscbc}\`}
       />
       <Right
         data-test-id={\`Border.Right|\`}
-        style={{}}
+        style={{ '--borderRightWidth': \`\${props.borderRightWidth}px\` }}
         className={\`views-block \${Right_h1opmg39}\`}
       />
       <Bottom
         data-test-id={\`Border.Bottom|\`}
-        style={{}}
+        style={{ '--borderBottomWidth': \`\${props.borderBottomWidth}px\` }}
         className={\`views-block \${Bottom_h9rup38}\`}
       />
       <Left
         data-test-id={\`Border.Left|\`}
-        style={{}}
+        style={{ '--borderLeftWidth': \`\${props.borderLeftWidth}px\` }}
         className={\`views-block \${Left_h195r6cp}\`}
       />
       {props.children}
@@ -1465,9 +1345,7 @@ import styled, { css } from 'react-emotion';
 import PropTypes from 'prop-types';
 
 const Vertical_h1cyenk5 = css({ backgroundColor: 'red' });
-const Text = styled('span')(({ props }) => ({
-  color: props.color,
-}));
+const Text_hvqf4zf = css({ color: 'var(--color)' });
 
 class Code extends React.Component {
   render() {
@@ -1481,8 +1359,8 @@ class Code extends React.Component {
         <Text
           data-test-id={\`Code.Text|\`}
           innerRef={props.refText}
-          props={props}
-          className=\\"views-block\\"
+          style={{ '--color': props.color }}
+          className={\`views-block \${Text_hvqf4zf}\`}
         >
           {props.text}
         </Text>
@@ -1530,7 +1408,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import styled, { css } from 'react-emotion';
 
 const Vertical_h1cyenk5 = css({ backgroundColor: 'red' });
-const Text_hvqf4zf = css({ color: props.color });
+const Text_hvqf4zf = css({ color: 'var(--color)' });
 
 const Code = props => {
   return (
@@ -1540,7 +1418,7 @@ const Code = props => {
     >
       <Text
         data-test-id={\`Code.Text|\`}
-        style={{}}
+        style={{ '--color': props.color }}
         className={\`views-block \${Text_hvqf4zf}\`}
       >
         {props.text}
@@ -1750,9 +1628,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import styled from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const Vertical = styled('div')(({ props }) => ({
-  height: props.height,
-}));
+const Vertical_hvqf4zf = css({ height: 'var(--height)' });
 
 class DynamicStylesApplyToBasicBlocksOnly extends React.Component {
   render() {
@@ -1761,8 +1637,8 @@ class DynamicStylesApplyToBasicBlocksOnly extends React.Component {
     return (
       <Vertical
         data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-        props={props}
-        className=\\"views-block\\"
+        style={{ '--height': \`\${props.height}px\` }}
+        className={\`views-block \${Vertical_hvqf4zf}\`}
       >
         <SomeThing
           data-test-id={\`DynamicStylesApplyToBasicBlocksOnly.OnTop|\`}
@@ -1800,13 +1676,13 @@ import SomeThing from './SomeThing.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import styled from 'react-emotion';
 
-const Vertical_hvqf4zf = css({ height: props.height });
+const Vertical_hvqf4zf = css({ height: 'var(--height)' });
 
 const DynamicStylesApplyToBasicBlocksOnly = props => {
   return (
     <Vertical
       data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-      style={{}}
+      style={{ '--height': \`\${props.height}px\` }}
       className={\`views-block \${Vertical_hvqf4zf}\`}
     >
       <SomeThing
@@ -1971,17 +1847,13 @@ const Hover_h1eiserf = css({
     backgroundColor: '#232323',
   },
 });
-const Text = styled('span')(
-  {
-    color: 'white',
-    [\`.\${Hover_h1eiserf}:hover &, .\${Hover_h1eiserf}.hover &\`]: {
-      color: 'black',
-    },
+const Text_h1uuiss4 = css({
+  color: 'white',
+  [\`.\${Hover_h1eiserf}:hover &, .\${Hover_h1eiserf}.hover &\`]: {
+    color: 'black',
   },
-  ({ props }) => ({
-    fontSize: props.fontSize,
-  })
-);
+  fontSize: 'var(--fontSize)',
+});
 
 class Hover extends React.Component {
   render() {
@@ -2003,8 +1875,8 @@ class Hover extends React.Component {
       >
         <Text
           data-test-id={\`Hover.Text|\`}
-          props={props}
-          className=\\"views-block\\"
+          style={{ '--fontSize': \`\${props.fontSize}px\` }}
+          className={\`views-block \${Text_h1uuiss4}\`}
         >
           Hey!
         </Text>
@@ -2054,7 +1926,7 @@ const Text_h1uuiss4 = css({
   [\`.\${Hover_h1eiserf}:hover &, .\${Hover_h1eiserf}.hover &\`]: {
     color: 'black',
   },
-  fontSize: props.fontSize,
+  fontSize: 'var(--fontSize)',
 });
 
 const Hover = props => {
@@ -2066,7 +1938,7 @@ const Hover = props => {
     >
       <Text
         data-test-id={\`Hover.Text|\`}
-        style={{}}
+        style={{ '--fontSize': \`\${props.fontSize}px\` }}
         className={\`views-block \${Text_h1uuiss4}\`}
       >
         Hey!
@@ -2440,9 +2312,7 @@ import chopperSvg from './chopper.svg';
 import styled from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const LocalImageSvg1 = styled('img')({ width: 50 }, ({ props }) => ({
-  height: props.height,
-}));
+const LocalImageSvg_hg0lcix = css({ width: 50, height: 'var(--height)' });
 
 class LocalImageSvg extends React.Component {
   render() {
@@ -2453,8 +2323,8 @@ class LocalImageSvg extends React.Component {
         data-test-id={\`\${props['data-test-id'] || 'LocalImageSvg'}|\`}
         alt={''}
         src={chopperSvg}
-        props={props}
-        className=\\"views-block\\"
+        style={{ '--height': \`\${props.height}px\` }}
+        className={\`views-block \${LocalImageSvg_hg0lcix}\`}
       />
     );
   }
@@ -2485,7 +2355,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import chopperSvg from './chopper.svg';
 import styled from 'react-emotion';
 
-const LocalImageSvg_hg0lcix = css({ width: 50, height: props.height });
+const LocalImageSvg_hg0lcix = css({ width: 50, height: 'var(--height)' });
 
 const LocalImageSvg = props => {
   return (
@@ -2493,7 +2363,7 @@ const LocalImageSvg = props => {
       data-test-id={\`\${props['data-test-id'] || 'LocalImageSvg'}|\`}
       alt={''}
       src={chopperSvg}
-      style={{}}
+      style={{ '--height': \`\${props.height}px\` }}
       className={\`views-block \${LocalImageSvg_hg0lcix}\`}
     />
   );
@@ -3112,13 +2982,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import styled from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const Scope1 = styled('span')(({ props }) => ({
-  color: props.somethingGreen
-    ? 'rgb(0,255,0)'
-    : props.whatMakesBlue
-      ? 'rgb(0,0,255)'
-      : !props.whatMakesBlue ? 'rgb(255,255,0)' : 'red',
-}));
+const Scope_hvqf4zf = css({ color: 'var(--color)' });
 
 class Scope extends React.Component {
   render() {
@@ -3133,8 +2997,35 @@ class Scope extends React.Component {
               ? 'whatMakesBlue|'
               : !props.whatMakesBlue ? 'notWhatMakesBlue|' : ''
         }\`}
-        props={props}
-        className=\\"views-block\\"
+        style={{
+          '--color': \`\${
+            props.somethingGreen
+              ? 'rgb(0,255,0)'
+              : props.whatMakesBlue
+                ? 'rgb(0,0,255)'
+                : !props.whatMakesBlue ? 'rgb(255,255,0)' : 'red'
+          }\`,
+          '--text': \`\${
+            props.somethingGreen
+              ? '2 green'
+              : props.whatMakesBlue
+                ? props.blue
+                : !props.whatMakesBlue ? 'is Yellow' : '1 red'
+          }\`,
+          '--color': \`\${
+            props.whatMakesBlue
+              ? 'rgb(0,0,255)'
+              : !props.whatMakesBlue ? 'rgb(255,255,0)' : 'red'
+          }\`,
+          '--text': \`\${
+            props.whatMakesBlue
+              ? props.blue
+              : !props.whatMakesBlue ? 'is Yellow' : '1 red'
+          }\`,
+          '--color': \`\${!props.whatMakesBlue ? 'rgb(255,255,0)' : 'red'}\`,
+          '--text': \`\${!props.whatMakesBlue ? 'is Yellow' : '1 red'}\`,
+        }}
+        className={\`views-block \${Scope_hvqf4zf}\`}
       >
         {props.somethingGreen
           ? '2 green'
@@ -3164,7 +3055,7 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import styled from 'react-emotion';
 
-const Scope_hvqf4zf = css({ color: 'var(--Scope1-color)' });
+const Scope_hvqf4zf = css({ color: 'var(--color)' });
 
 const Scope = props => {
   return (
@@ -3177,32 +3068,32 @@ const Scope = props => {
             : !props.whatMakesBlue ? 'notWhatMakesBlue|' : ''
       }\`}
       style={{
-        '--Scope1-color': \`\${
+        '--color': \`\${
           props.somethingGreen
             ? 'rgb(0,255,0)'
             : props.whatMakesBlue
               ? 'rgb(0,0,255)'
               : !props.whatMakesBlue ? 'rgb(255,255,0)' : 'red'
         }\`,
-        '--Scope1-text': \`\${
+        '--text': \`\${
           props.somethingGreen
             ? '2 green'
             : props.whatMakesBlue
               ? props.blue
               : !props.whatMakesBlue ? 'is Yellow' : '1 red'
         }\`,
-        '--Scope1-color': \`\${
+        '--color': \`\${
           props.whatMakesBlue
             ? 'rgb(0,0,255)'
             : !props.whatMakesBlue ? 'rgb(255,255,0)' : 'red'
         }\`,
-        '--Scope1-text': \`\${
+        '--text': \`\${
           props.whatMakesBlue
             ? props.blue
             : !props.whatMakesBlue ? 'is Yellow' : '1 red'
         }\`,
-        '--Scope1-color': \`\${!props.whatMakesBlue ? 'rgb(255,255,0)' : 'red'}\`,
-        '--Scope1-text': \`\${!props.whatMakesBlue ? 'is Yellow' : '1 red'}\`,
+        '--color': \`\${!props.whatMakesBlue ? 'rgb(255,255,0)' : 'red'}\`,
+        '--text': \`\${!props.whatMakesBlue ? 'is Yellow' : '1 red'}\`,
       }}
       className={\`views-block \${Scope_hvqf4zf}\`}
     >
@@ -3493,74 +3384,6 @@ export default ScopePopup2;
 }
 `;
 
-exports[`react-dom parses react-dom ScopePopup2: react-dom parses react-dom ScopePopup2 debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import styled from 'react-emotion';
-
-const Content_hvqf4zf = css({
-  opacity: 'var(--Content-opacity)',
-  transform: 'scale(var(--Content-scale))',
-});
-
-const ScopePopup2 = props => {
-  return (
-    <div
-      data-test-id={\`\${props['data-test-id'] || 'Popup'}|\`}
-      className=\\"views-block\\"
-    >
-      <button
-        data-test-id={\`ScopePopup2.Toggle|\`}
-        onClick={props.toggle}
-        className=\\"views-block\\"
-      >
-        <span data-test-id={\`ScopePopup2.Text|\`} className=\\"views-block\\">
-          toggle popup
-        </span>
-      </button>
-      <Content
-        data-test-id={\`ScopePopup2.Content|\${
-          props.isShown
-            ? 'isShown|'
-            : props.isSuperVisible ? 'isSuperVisible|' : ''
-        }\`}
-        style={{
-          '--Content-opacity': \`\${
-            props.isShown ? 1 : props.isSuperVisible ? 3 : 0
-          }\`,
-          '--Content-scale': \`\${
-            props.isShown ? 1 : props.isSuperVisible ? 2 : 0
-          }\`,
-          '--Content-opacity': \`\${props.isSuperVisible ? 3 : 0}\`,
-          '--Content-scale': \`\${props.isSuperVisible ? 2 : 0}\`,
-        }}
-        className={\`views-block \${Content_hvqf4zf}\`}
-      >
-        <span data-test-id={\`ScopePopup2.Text:1|\`} className=\\"views-block\\">
-          I'm inside the popup
-        </span>
-      </Content>
-      {props.children}
-    </div>
-  );
-};
-
-export default ScopePopup2;
-",
-  "fonts": Array [],
-  "slots": Array [
-    Object {
-      "defaultValue": false,
-      "name": "toggle",
-      "type": "function",
-    },
-  ],
-  "svgs": Array [],
-}
-`;
-
 exports[`react-dom parses react-dom Shadow 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -3569,12 +3392,12 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import styled from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const BoxShadow = styled('div')(({ props }) => ({
-  boxShadow: \`0px 5px 2px 2px \${props.shadowColor}\`,
-}));
-const TextShadow = styled('span')(({ props }) => ({
-  textShadow: \`2px 3px 1px \${props.shadowColor}\`,
-}));
+const BoxShadow_h187w4jn = css({
+  boxShadow: \`0px 5px 2px 2px \${props.shadowColor}undefined\`,
+});
+const TextShadow_h7rw1by = css({
+  textShadow: \`2px 3px 1px \${props.shadowColor}undefined\`,
+});
 
 class Shadow extends React.Component {
   render() {
@@ -3587,13 +3410,13 @@ class Shadow extends React.Component {
       >
         <BoxShadow
           data-test-id={\`Shadow.BoxShadow|\`}
-          props={props}
-          className=\\"views-block\\"
+          style={{ '--shadowColor': props.shadowColor }}
+          className={\`views-block \${BoxShadow_h187w4jn}\`}
         >
           <TextShadow
             data-test-id={\`Shadow.TextShadow|\`}
-            props={props}
-            className=\\"views-block\\"
+            style={{ '--shadowColor': props.shadowColor }}
+            className={\`views-block \${TextShadow_h7rw1by}\`}
           >
             hey
           </TextShadow>
@@ -3643,12 +3466,12 @@ const Shadow = props => {
     >
       <BoxShadow
         data-test-id={\`Shadow.BoxShadow|\`}
-        style={{}}
+        style={{ '--shadowColor': props.shadowColor }}
         className={\`views-block \${BoxShadow_h187w4jn}\`}
       >
         <TextShadow
           data-test-id={\`Shadow.TextShadow|\`}
-          style={{}}
+          style={{ '--shadowColor': props.shadowColor }}
           className={\`views-block \${TextShadow_h7rw1by}\`}
         >
           hey
@@ -3682,25 +3505,21 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import styled from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const WindowControl = styled('button')(
-  {
-    marginRight: 8,
-    backgroundColor: '#CBCDCE',
-    opacity: 0.7,
+const WindowControl_h122qb6y = css({
+  marginRight: 8,
+  backgroundColor: '#CBCDCE',
+  opacity: 0.7,
+  transform: 'scale(1.1)',
+  transition: 'all 0.15s ease-out',
+  width: 10,
+  height: 10,
+  '&:hover': {
     transform: 'scale(1.1)',
-    transition: 'all 0.15s ease-out',
-    width: 10,
-    height: 10,
-    '&:hover': {
-      transform: 'scale(1.1)',
-    },
   },
-  ({ props }) => ({
-    '&:hover': {
-      backgroundColor: props.backgroundColorHover,
-    },
-  })
-);
+  '&:hover': {
+    backgroundColor: 'var(--backgroundColor)',
+  },
+});
 
 class SomeMissingStyle extends React.Component {
   render() {
@@ -3719,8 +3538,8 @@ class SomeMissingStyle extends React.Component {
           })
         }
         tabIndex={-1}
-        props={props}
-        className=\\"views-block\\"
+        style={{}}
+        className={\`views-block \${WindowControl_h122qb6y}\`}
       >
         {props.children}
       </WindowControl>
@@ -3764,7 +3583,7 @@ const WindowControl_h122qb6y = css({
     transform: 'scale(1.1)',
   },
   '&:hover': {
-    backgroundColor: props.backgroundColorHover,
+    backgroundColor: 'var(--backgroundColor)',
   },
 });
 
@@ -5270,7 +5089,7 @@ const UseText_htyzezn = css({
   fontSize: 16,
   lineHeight: 1.5,
   fontWeight: 300,
-  color: 'var(--UseText1-color)',
+  color: 'var(--color)',
 });
 
 class UseText extends React.Component {
@@ -5282,7 +5101,7 @@ class UseText extends React.Component {
         data-test-id={\`\${props['data-test-id'] || 'UseText'}|\${
           props.isSomething ? 'isSomething|' : ''
         }\`}
-        style={{ '--UseText1-color': \`\${props.isSomething ? 'red' : 'blue'}\` }}
+        style={{ '--color': \`\${props.isSomething ? 'red' : 'blue'}\` }}
         className={\`views-block \${UseText_htyzezn}\`}
       >
         Hi, I'm some text
@@ -5322,7 +5141,7 @@ const UseText_htyzezn = css({
   fontSize: 16,
   lineHeight: 1.5,
   fontWeight: 300,
-  color: 'var(--UseText1-color)',
+  color: 'var(--color)',
 });
 
 const UseText = props => {
@@ -5331,7 +5150,7 @@ const UseText = props => {
       data-test-id={\`\${props['data-test-id'] || 'UseText'}|\${
         props.isSomething ? 'isSomething|' : ''
       }\`}
-      style={{ '--UseText1-color': \`\${props.isSomething ? 'red' : 'blue'}\` }}
+      style={{ '--color': \`\${props.isSomething ? 'red' : 'blue'}\` }}
       className={\`views-block \${UseText_htyzezn}\`}
     >
       Hi, I'm some text
@@ -5576,9 +5395,10 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import styled from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const ViewNameIsntUsedInStyle1 = styled('div')({ zIndex: 5 }, ({ props }) => ({
-  opacity: props.opacity,
-}));
+const ViewNameIsntUsedInStyle_h1syrwwv = css({
+  zIndex: 5,
+  opacity: 'var(--opacity)',
+});
 
 class ViewNameIsntUsedInStyle extends React.Component {
   render() {
@@ -5587,8 +5407,8 @@ class ViewNameIsntUsedInStyle extends React.Component {
     return (
       <ViewNameIsntUsedInStyle1
         data-test-id={\`\${props['data-test-id'] || 'ViewNameIsntUsedInStyle'}|\`}
-        props={props}
-        className=\\"views-block\\"
+        style={{ '--opacity': props.opacity }}
+        className={\`views-block \${ViewNameIsntUsedInStyle_h1syrwwv}\`}
       >
         {props.children}
       </ViewNameIsntUsedInStyle1>
@@ -5622,14 +5442,14 @@ import styled from 'react-emotion';
 
 const ViewNameIsntUsedInStyle_h1syrwwv = css({
   zIndex: 5,
-  opacity: props.opacity,
+  opacity: 'var(--opacity)',
 });
 
 const ViewNameIsntUsedInStyle = props => {
   return (
     <ViewNameIsntUsedInStyle1
       data-test-id={\`\${props['data-test-id'] || 'ViewNameIsntUsedInStyle'}|\`}
-      style={{}}
+      style={{ '--opacity': props.opacity }}
       className={\`views-block \${ViewNameIsntUsedInStyle_h1syrwwv}\`}
     >
       {props.children}
@@ -6297,6 +6117,7 @@ Object {
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import PropTypes from 'prop-types';
+
 const styles = StyleSheet.create({ h1dd5jy2: { display: 'block' } });
 
 class Display extends React.Component {

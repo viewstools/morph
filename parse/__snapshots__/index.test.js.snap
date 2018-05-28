@@ -280,6 +280,7 @@ Object {
                     },
                   },
                   "name": "when",
+                  "scope": "hover",
                   "slotName": "hover",
                   "tags": Object {
                     "scope": "<hover",
@@ -302,6 +303,7 @@ Object {
                     },
                   },
                   "name": "color",
+                  "scope": "hover",
                   "tags": Object {
                     "style": true,
                     "validSlot": null,
@@ -919,6 +921,7 @@ Object {
                     },
                   },
                   "name": "when",
+                  "scope": "es",
                   "slotName": "es",
                   "tags": Object {
                     "scope": "<es",
@@ -941,6 +944,7 @@ Object {
                     },
                   },
                   "name": "text",
+                  "scope": "es",
                   "tags": Object {
                     "validSlot": null,
                   },
@@ -1096,6 +1100,7 @@ Object {
                     },
                   },
                   "name": "when",
+                  "scope": undefined,
                   "tags": Object {
                     "scope": "",
                     "shouldBeSlot": true,
@@ -1116,6 +1121,7 @@ Object {
                     },
                   },
                   "name": "color",
+                  "scope": undefined,
                   "tags": Object {
                     "style": true,
                     "validSlot": null,
@@ -1146,6 +1152,7 @@ Object {
                     },
                   },
                   "name": "when",
+                  "scope": "",
                   "slotName": "",
                   "tags": Object {
                     "scope": "stuff",
@@ -1168,6 +1175,7 @@ Object {
                     },
                   },
                   "name": "backgroundColor",
+                  "scope": "",
                   "tags": Object {
                     "style": true,
                     "validSlot": null,
@@ -1187,6 +1195,7 @@ Object {
                     },
                   },
                   "name": "color",
+                  "scope": "",
                   "tags": Object {
                     "style": true,
                     "validSlot": null,

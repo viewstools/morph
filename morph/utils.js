@@ -352,6 +352,7 @@ export const getAnimatedStyles = (node, isNative) => {
   return props.map(prop => getAnimatedString(node, prop, isNative)).join(', ')
 }
 
+// TODO refactor
 export const getDynamicStyles = node => {
   const dynamic = [
     ...node.properties
@@ -372,7 +373,7 @@ export const getDynamicStyles = node => {
       )
     ),
   ].filter(Boolean)
-  console.log(dynamic)
+  // console.log(dynamic)
   return dynamic
 }
 
