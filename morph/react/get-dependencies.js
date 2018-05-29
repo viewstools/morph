@@ -4,6 +4,7 @@ const NATIVE = [
   'Animated',
   'Image',
   'KeyboardAvoidingView',
+  'FlatList',
   'ScrollView',
   'StyleSheet',
   'Text',
