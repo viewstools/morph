@@ -6,7 +6,11 @@ export function enter(node, parent, state) {
     if (!from) return
 
     if (node.nameFinal === 'FlatList') {
-      state.render.push(`data={${from.value}} renderItem={({ item }) =>`)
+      state.render.push(
+        `data={${
+          from.value
+        }} keyExtractor={(item, index) => item.id || index} renderItem={({ item, index }) =>`
+      )
     } else {
       state.render.push(
         `{Array.isArray(${from.value}) && ${from.value}.map((item, index) => `
@@ -16,12 +20,7 @@ export function enter(node, parent, state) {
 }
 
 export function leave(node, parent, state) {
-  debugger
   if (isList(node)) {
-    if (node.nameFinal === 'FlatList') {
-      state.render.push('}')
-    } else {
-      state.render.push(')}')
-    }
+    state.render.push(node.nameFinal === 'FlatList' ? '}' : ')}')
   }
 }
