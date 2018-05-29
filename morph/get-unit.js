@@ -79,6 +79,8 @@ const UNITS = {
   paddingTop: LENGTH,
   right: LENGTH,
   rotate: ANGLE,
+  rotateX: ANGLE,
+  rotateY: ANGLE,
   scale: UNITLESS,
   shadowOffsetY: LENGTH,
   shadowOffsetX: LENGTH,

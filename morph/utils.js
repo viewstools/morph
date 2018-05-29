@@ -297,30 +297,32 @@ const getDefaultValue = (node, name) => {
   return prop ? prop.value : ''
 }
 
-const isRotate = name =>
-  name === 'rotate' || name === 'rotateX' || name === 'rotateY'
+// const isRotate = name =>
+//   name === 'rotate' || name === 'rotateX' || name === 'rotateY'
 
 const getStandardAnimatedString = (node, prop, isNative) => {
-  // TODO: fix this 😬
-  if (typeof prop.value === 'number') {
-    const fromValue = isRotate(prop.name)
-      ? `\`${getDefaultValue(node, prop.name)}deg\``
-      : getDefaultValue(node, prop.name)
-    const toValue = isRotate(prop.name) ? `\`${prop.value}deg\`` : prop.value
+  const baseScopeValue = getDefaultValue(node, prop.name)
+  let fromValue
+  let toValue
 
-    return `${
-      isNative ? prop.name : `"--${prop.name}"`
-    }: getAnimatedValue(this.animatedValue${getScopeIndex(
-      node,
-      prop.scope
-    )}, ${fromValue}, ${toValue})`
+  // TODO see if native needs the unit in all cases but PX (eg for rotate it may
+  // need deg)
+  if (typeof prop.value === 'number') {
+    fromValue = isNative
+      ? baseScopeValue
+      : getPropValue({ name: prop.name, value: baseScopeValue }, false)
+    toValue = isNative ? prop.value : getPropValue(prop, false)
+  } else {
+    fromValue = `'${baseScopeValue}'`
+    toValue = `'${prop.value}'`
   }
+
   return `${
     isNative ? prop.name : `"--${prop.name}"`
   }: getAnimatedValue(this.animatedValue${getScopeIndex(
     node,
     prop.scope
-  )}, '${getDefaultValue(node, prop.name)}', '${prop.value}')`
+  )}, ${fromValue}, ${toValue})`
 }
 
 const getTransformString = (node, transform, isNative) => {
@@ -352,17 +354,21 @@ export const getAnimatedStyles = (node, isNative) => {
   return props.map(prop => getAnimatedString(node, prop, isNative)).join(', ')
 }
 
+const getPropValue = (prop, interpolateValue = true) => {
+  const unit = getUnit(prop)
+  return unit
+    ? interpolateValue
+      ? `\`\${${prop.value}}${unit}\``
+      : `"${prop.value}${unit}"`
+    : prop.value
+}
+
 // TODO refactor
 export const getDynamicStyles = node => {
   const dynamic = [
     ...node.properties
       .filter(prop => prop.tags.style && prop.tags.slot)
-      .map(prop => {
-        // console.log('prop', prop)
-        const unit = getUnit(prop)
-        const value = unit ? `\`\${${prop.value}}${unit}\`` : prop.value
-        return `'--${prop.name}': ${value}`
-      }),
+      .map(prop => `'--${prop.name}': ${getPropValue(prop)}`),
     ...flatten(
       node.scopes.map(scope =>
         scope.properties.map(prop => {
