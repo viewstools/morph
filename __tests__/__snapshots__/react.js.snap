@@ -7159,7 +7159,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import Card from './Card.view.js';
-import FlatList from './FlatList.view.js';
+import { FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 
 class ScrollableList extends React.Component {
@@ -7170,13 +7170,9 @@ class ScrollableList extends React.Component {
       <FlatList
         testID={\`\${props['testID'] || 'ScrollableList'}|\`}
         data={props.from}
-        renderItem={({ item }) => (
-          <Card
-            index={index}
-            {...item}
-            key={item.id || index}
-            testID={\`ScrollableList.Card|\`}
-          />
+        keyExtractor={(item, index) => item.id || index}
+        renderItem={({ item, index }) => (
+          <Card index={index} {...item} testID={\`ScrollableList.Card|\`} />
         )}
       />
     );
