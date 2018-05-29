@@ -4,8 +4,7 @@ import * as BlockExplicitChildren from '../react/block-explicit-children.js'
 // import * as BlockGoTo from './block-go-to.js'
 import * as BlockInList from '../react/block-in-list.js'
 import * as BlockName from './block-name.js'
-import * as BlockListBasic from './block-list-basic.js'
-import * as BlockListFlat from './block-list-flat.js'
+import * as BlockList from './block-list.js'
 import * as BlockGroup from '../react/block-group.js'
 import * as BlockProperties from './block-properties.js'
 import * as BlockProxy from '../react/block-proxy.js'
@@ -31,13 +30,11 @@ export const enter = [
   BlockAddTestIdProp.enter,
   BlockProperties.enter,
   BlockGroup.enter,
-  BlockListBasic.enter,
-  BlockListFlat.enter,
+  BlockList.enter,
 ]
 
 export const leave = [
-  BlockListBasic.leave,
-  BlockListFlat.leave,
+  BlockList.leave,
   BlockExplicitChildren.leave,
   BlockName.leave,
   BlockWrap.leave,
