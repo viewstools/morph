@@ -57,6 +57,7 @@ const dymPropMatcher = new DidYouMeanMatcher([
 export const didYouMeanBlock = block => dymBlockMatcher.get(block)
 export const didYouMeanProp = prop => dymPropMatcher.get(prop)
 
+const ANIMATION = /(.+)(?:\s)(spring|linear|easeOut|easeIn|easeInOut|ease)(?:\s?(.*)?)/
 const BASIC = /^(CaptureEmail|CaptureFile|CaptureNumber|CapturePhone|CaptureSecure|CaptureText|CaptureTextArea|Horizontal|Image|List|Svg|SvgCircle|SvgEllipse|SvgDefs|SvgGroup|SvgLinearGradient|SvgRadialGradient|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgSymbol|SvgText|SvgUse|SvgStop|Text|Vertical)$/i
 const BLOCK = /^([A-Z][a-zA-Z0-9]*)(\s+([A-Z][a-zA-Z0-9]*))?$/
 const BOOL = /^(false|true)$/i
@@ -108,6 +109,7 @@ const USER_COMMENT = /^##(.*)$/
 const SLOT = /^<((!)?([a-zA-Z0-9]+))?(\s+(.+))?$/
 
 export const is = (thing, line) => thing.test(line)
+export const isAnimation = line => is(ANIMATION, line)
 export const isBasic = line => is(BASIC, line)
 export const isBlock = line => is(BLOCK, line)
 export const isBool = line => is(BOOL, line)
@@ -128,6 +130,44 @@ export const isTrue = line => is(TRUE, line)
 export const isUserComment = line => is(USER_COMMENT, line)
 
 const get = (regex, line) => line.match(regex)
+
+const addDefaults = (animationType, properties) => {
+  if (!properties.delay) {
+    properties.delay = 0
+  }
+
+  if (animationType !== 'spring' && !properties.duration) {
+    properties.duration = 150
+  } else if (animationType === 'spring') {
+    if (!properties.speed) {
+      properties.speed = 12
+    }
+    if (!properties.bounciness) {
+      properties.bounciness = 8
+    }
+  }
+  return properties
+}
+
+export const getAnimation = line => {
+  // eslint-disable-next-line
+  const [_, defaultValue, animationType, animationValues] = get(ANIMATION, line)
+  let properties = {
+    curve: animationType,
+  }
+
+  if (animationValues) {
+    const values = animationValues.split(' ')
+    for (let i = 0; i < values.length; i = i + 2) {
+      properties[values[i]] = getValue(values[i + 1])
+    }
+  }
+
+  return {
+    defaultValue: getValue(defaultValue),
+    properties: addDefaults(animationType, properties),
+  }
+}
 
 export const getBlock = line => {
   // eslint-disable-next-line

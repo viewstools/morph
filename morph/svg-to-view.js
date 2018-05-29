@@ -28,15 +28,7 @@ const parseTransform = (prop, value) => {
       const name = transform.split('(')[0]
       const values = transform.match(/\(([^)]+)\)/)[1].split(/\s+|,/)
       const axes = ['X', 'Y', 'Z']
-      return values
-        .map((val, j) => {
-          const lastItem =
-            j === values.length - 1 && i === transforms.length - 1
-          return lastItem
-            ? `${name}${axes[j]} ${val}`
-            : `${name}${axes[j]} ${val}\n`
-        })
-        .join('')
+      return values.map((val, j) => `${name}${axes[j]} ${val}`).join('\n')
     })
     .join('')
 }

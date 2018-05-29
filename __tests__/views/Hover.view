@@ -1,6 +1,8 @@
 Hover Vertical
 backgroundColor #323232
 onClick <
+when <isStuff
+backgroundColor red
 when <hover
 backgroundColor #232323
 Text
