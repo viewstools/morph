@@ -777,23 +777,17 @@ const getAnimatedValue = (animatedValue, from, to) =>
     outputRange: [from, to],
   });
 
-const Vertical = styled(Animated.div)(
-  {
-    backgroundColor: 'red',
-    opacity: 'var(--Vertical-opacity)',
-    transform: 'var(--Vertical-translateX)',
-    transition: 'transform 150ms ease-in 0ms',
-    willChange: 'opacity, transform',
-  },
-  ({ props }) => ({
-    transform: \`rotateX(\${props.isOn ? 20 : 10}deg) translateX(\${
-      props.isOn ? 20 : 10
-    }px) translateY(\${props.isOn ? 30 : 0}px)\`,
-  })
-);
+const Vertical_h1cyenk5 = css({
+  backgroundColor: 'red',
+  transition: 'transform 150ms ease-in 0ms',
+  willChange: 'opacity, transform',
+  opacity: 'var(--opacity)',
+  transform:
+    'rotateX(var(--rotateX)) translateX(var(--translateX)) translateY(var(--translateY))',
+});
 const Text_hvqf4zf = css({
-  color: 'var(--Text-color)',
   willChange: 'color',
+  color: 'var(--color)',
 });
 
 class AnimatedButton extends React.Component {
@@ -830,24 +824,17 @@ class AnimatedButton extends React.Component {
           })
         }
         style={{
-          '--Vertical-opacity': getAnimatedValue(this.animatedValue0, 0.75, 1),
-          '--Vertical-translateX': getAnimatedValue(
-            this.animatedValue0,
-            10,
-            20
-          ),
+          '--opacity': getAnimatedValue(this.animatedValue0, 0.75, 1),
+          '--translateX': getAnimatedValue(this.animatedValue0, '10px', '20px'),
+          '--translateY': \`\${props.isOn ? 30 : 0}px\`,
+          '--rotateX': \`\${props.isOn ? 20 : 10}deg\`,
         }}
-        props={props}
-        className=\\"views-block\\"
+        className={\`views-block \${Vertical_h1cyenk5}\`}
       >
         <Text
           data-test-id={\`AnimatedButton.Text|\${props.isOn ? 'isOn|' : ''}\`}
           style={{
-            '--Text-color': getAnimatedValue(
-              this.animatedValue0,
-              'red',
-              'blue'
-            ),
+            '--color': getAnimatedValue(this.animatedValue0, 'red', 'blue'),
           }}
           className={\`views-block \${Text_hvqf4zf}\`}
         >
@@ -929,7 +916,7 @@ class AnimatedButton extends React.Component {
         onClick={props.onClick}
         style={{
           '--opacity': getAnimatedValue(this.animatedValue0, 0.75, 1),
-          '--translateX': getAnimatedValue(this.animatedValue0, 10, 20),
+          '--translateX': getAnimatedValue(this.animatedValue0, '10px', '20px'),
           '--translateY': \`\${props.isOn ? 30 : 0}px\`,
           '--rotateX': \`\${props.isOn ? 20 : 10}deg\`,
         }}
@@ -3093,25 +3080,6 @@ class Scope extends React.Component {
                 ? 'rgb(0,0,255)'
                 : !props.whatMakesBlue ? 'rgb(255,255,0)' : 'red'
           }\`,
-          '--text': \`\${
-            props.somethingGreen
-              ? '2 green'
-              : props.whatMakesBlue
-                ? props.blue
-                : !props.whatMakesBlue ? 'is Yellow' : '1 red'
-          }\`,
-          '--color': \`\${
-            props.whatMakesBlue
-              ? 'rgb(0,0,255)'
-              : !props.whatMakesBlue ? 'rgb(255,255,0)' : 'red'
-          }\`,
-          '--text': \`\${
-            props.whatMakesBlue
-              ? props.blue
-              : !props.whatMakesBlue ? 'is Yellow' : '1 red'
-          }\`,
-          '--color': \`\${!props.whatMakesBlue ? 'rgb(255,255,0)' : 'red'}\`,
-          '--text': \`\${!props.whatMakesBlue ? 'is Yellow' : '1 red'}\`,
         }}
         className={\`views-block \${Scope_hvqf4zf}\`}
       >
@@ -3163,25 +3131,6 @@ const Scope = props => {
               ? 'rgb(0,0,255)'
               : !props.whatMakesBlue ? 'rgb(255,255,0)' : 'red'
         }\`,
-        '--text': \`\${
-          props.somethingGreen
-            ? '2 green'
-            : props.whatMakesBlue
-              ? props.blue
-              : !props.whatMakesBlue ? 'is Yellow' : '1 red'
-        }\`,
-        '--color': \`\${
-          props.whatMakesBlue
-            ? 'rgb(0,0,255)'
-            : !props.whatMakesBlue ? 'rgb(255,255,0)' : 'red'
-        }\`,
-        '--text': \`\${
-          props.whatMakesBlue
-            ? props.blue
-            : !props.whatMakesBlue ? 'is Yellow' : '1 red'
-        }\`,
-        '--color': \`\${!props.whatMakesBlue ? 'rgb(255,255,0)' : 'red'}\`,
-        '--text': \`\${!props.whatMakesBlue ? 'is Yellow' : '1 red'}\`,
       }}
       className={\`views-block \${Scope_hvqf4zf}\`}
     >
@@ -3397,8 +3346,8 @@ import styled from 'react-emotion';
 import PropTypes from 'prop-types';
 
 const Content_hvqf4zf = css({
-  opacity: 'var(--Content-opacity)',
-  transform: 'scale(var(--Content-scale))',
+  opacity: 'var(--opacity)',
+  transform: 'scale(var(--scale))',
 });
 
 class ScopePopup2 extends React.Component {
@@ -3434,14 +3383,8 @@ class ScopePopup2 extends React.Component {
               : props.isSuperVisible ? 'isSuperVisible|' : ''
           }\`}
           style={{
-            '--Content-opacity': \`\${
-              props.isShown ? 1 : props.isSuperVisible ? 3 : 0
-            }\`,
-            '--Content-scale': \`\${
-              props.isShown ? 1 : props.isSuperVisible ? 2 : 0
-            }\`,
-            '--Content-opacity': \`\${props.isSuperVisible ? 3 : 0}\`,
-            '--Content-scale': \`\${props.isSuperVisible ? 2 : 0}\`,
+            '--opacity': \`\${props.isShown ? 1 : props.isSuperVisible ? 3 : 0}\`,
+            '--scale': \`\${props.isShown ? 1 : props.isSuperVisible ? 2 : 0}\`,
           }}
           className={\`views-block \${Content_hvqf4zf}\`}
         >
@@ -3508,8 +3451,6 @@ const ScopePopup2 = props => {
         style={{
           '--opacity': \`\${props.isShown ? 1 : props.isSuperVisible ? 3 : 0}\`,
           '--scale': \`\${props.isShown ? 1 : props.isSuperVisible ? 2 : 0}\`,
-          '--opacity': \`\${props.isSuperVisible ? 3 : 0}\`,
-          '--scale': \`\${props.isSuperVisible ? 2 : 0}\`,
         }}
         className={\`views-block \${Content_hvqf4zf}\`}
       >
@@ -5905,13 +5846,7 @@ class AnimatedButton extends React.Component {
               opacity: getAnimatedValue(this.animatedValue0, 0.75, 1),
               transform: [
                 { translateX: getAnimatedValue(this.animatedValue0, 10, 20) },
-                {
-                  rotateX: getAnimatedValue(
-                    this.animatedValue0,
-                    \`10deg\`,
-                    \`20deg\`
-                  ),
-                },
+                { rotateX: getAnimatedValue(this.animatedValue0, 10, 20) },
               ],
             },
           ]}

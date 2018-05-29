@@ -38,17 +38,6 @@ export function leave(node, parent, state) {
     state.scopes = node.scopes
   }
 
-  debugger
-
-  // if (hasSpringAnimation(node) || hasKeysInChildren(dynamic)) {
-  //   state.render.push(
-  //     ` style={{${getAnimatedStyles(
-  //       node,
-  //       state.isReactNative
-  //     )},${getDynamicStyles(node)}}}`
-  //   )
-  // }
-
   // dynamic merges static styles
   if (hasKeysInChildren(dynamic)) {
     state.cssDynamic = true
@@ -67,7 +56,6 @@ export function leave(node, parent, state) {
       )
 
     cssStatic = cssStatic.join(',\n')
-    debugger
 
     if (node.isAnimated) {
       cssStatic = cssStatic

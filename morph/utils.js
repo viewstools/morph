@@ -115,24 +115,32 @@ export const getScopedCondition = (
   // !alreadyInterpolated = scoped condition that contains interpolation
   // see tests in TextInterpolation.view for an example of both
 
+  const scopedProps = getScopedProps(propNode, blockNode)
+
+  if (!scopedProps) return false
+
   let conditional =
     blockNode.hasOwnProperty('interpolation') && !alreadyInterpolated
       ? interpolateText(propNode, blockNode, true)
       : maybeSafe(propNode)
 
-  if (!getScopedProps(propNode, blockNode)) return false
-
-  getScopedProps(propNode, blockNode).forEach(scope => {
+  scopedProps.forEach(scope => {
     conditional =
       `${scope.when} ? ${
         blockNode.hasOwnProperty('interpolation') && !alreadyInterpolated
           ? interpolateText(scope.prop, blockNode, true)
           : maybeSafe(scope.prop)
       } : ` + conditional
-    if (!scope.prop.animation || scope.prop.animation.curve !== 'spring') {
-      scope.prop.conditional = `\${${conditional}}${unit}`
-    }
   })
+
+  const lastScope = scopedProps[scopedProps.length - 1]
+
+  if (
+    !lastScope.prop.animation ||
+    lastScope.prop.animation.curve !== 'spring'
+  ) {
+    lastScope.prop.conditional = `\${${conditional}}${unit}`
+  }
 
   return conditional
 }
@@ -363,24 +371,20 @@ const getPropValue = (prop, interpolateValue = true) => {
     : prop.value
 }
 
-// TODO refactor
 export const getDynamicStyles = node => {
-  const dynamic = [
-    ...node.properties
+  return flatten([
+    node.properties
       .filter(prop => prop.tags.style && prop.tags.slot)
       .map(prop => `'--${prop.name}': ${getPropValue(prop)}`),
-    ...flatten(
-      node.scopes.map(scope =>
-        scope.properties.map(prop => {
-          // console.log('prop', prop)
-          // TODO remove interpolation when it isn't needed
-          return prop.conditional && `'--${prop.name}': \`${prop.conditional}\``
-        })
+    node.scopes.map(scope =>
+      scope.properties.map(
+        prop =>
+          prop.tags.style &&
+          prop.conditional &&
+          `'--${prop.name}': \`${prop.conditional}\``
       )
     ),
-  ].filter(Boolean)
-  // console.log(dynamic)
-  return dynamic
+  ]).filter(Boolean)
 }
 
 const getAnimatedString = (node, prop, isNative) =>
