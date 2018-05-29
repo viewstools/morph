@@ -1,3 +1,5 @@
+import { canUseNativeDriver, getScopeIndex, isNewScope } from '../utils.js'
+
 export default ({ state, name }) => {
   let render = state.render.join('')
   if (Object.keys(state.locals).length > 0 || state.isFormatted) {
@@ -18,9 +20,74 @@ export default ({ state, name }) => {
 
   const maybeTracking = state.track && !state.debug
 
-  if (maybeState || maybeTracking) {
+  const composeAnimation = (state, animation, index) => {
+    if (animation.curve === 'spring') {
+      return composeSpring(animation, index)
+    } else if (state.isReactNative) {
+      return composeTiming(animation, index)
+    }
+  }
+
+  const composeSpring = (animation, index) =>
+    `if (props.${animation.scope} !== next.${animation.scope}) {
+      Animated.spring(this.animatedValue${index}, {
+        toValue: next.${animation.scope} ? 1 : 0,
+        speed: ${animation.speed},
+        bounciness: ${animation.bounciness},
+        delay: ${animation.delay},
+        useNativeDriver: ${canUseNativeDriver(animation)}
+      }).start()
+    }`
+
+  const composeTiming = (animation, index) =>
+    `if (props.${animation.scope} !== next.${animation.scope}) {
+      Animated.timing(this.animatedValue${index}, {
+        toValue: next.${animation.scope} ? 1 : 0,
+        duration: ${animation.duration},
+        delay: ${animation.delay},
+        useNativeDriver: ${canUseNativeDriver(animation)}
+      }).start()
+    }`
+
+  const composeValues = (state, animation, index) => {
+    if (animation.curve === 'timing' && !state.isReactNative) return
+    return `animatedValue${index} = new Animated.Value(this.props.${
+      animation.scope
+    } ? 1 : 0)
+    `
+  }
+
+  const maybeAnimated =
+    state.isAnimated || state.hasAnimatedChild
+      ? `${state.animations
+          .map((animation, index) => {
+            return isNewScope(state, animation, index)
+              ? composeValues(
+                  state,
+                  animation,
+                  getScopeIndex(state, animation.scope)
+                )
+              : ''
+          })
+          .join('')}
+      componentWillReceiveProps(next) {
+          const { props } = this
+          ${state.animations
+            .map(animation =>
+              composeAnimation(
+                state,
+                animation,
+                getScopeIndex(state, animation.scope)
+              )
+            )
+            .join('')}
+        }`
+      : ''
+
+  if (maybeState || maybeTracking || maybeAnimated) {
     return `class ${name} extends React.Component {
   ${maybeState}
+  ${maybeAnimated}
 
   render() {
     const { ${maybeTracking ? 'context,' : ''} props, ${

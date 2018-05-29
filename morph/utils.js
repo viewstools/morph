@@ -1,7 +1,9 @@
+import flatten from 'flatten'
 import safe from './react/safe.js'
-import wrap from './react/wrap.js'
 import toCamelCase from 'to-camel-case'
 import toSlugCase from 'to-slug-case'
+import wrap from './react/wrap.js'
+import getUnit from './get-unit.js'
 
 const safeScope = value =>
   typeof value === 'string' && !isSlot(value) ? JSON.stringify(value) : value
@@ -25,17 +27,19 @@ export const deinterpolate = str => {
 }
 
 export const getObjectAsString = obj =>
-  wrap(
-    Object.keys(obj)
-      .map(k => {
-        const v =
-          typeof obj[k] === 'object' && hasKeys(obj[k])
-            ? getObjectAsString(obj[k])
-            : obj[k]
-        return `${JSON.stringify(k)}: ${v}`
-      })
-      .join(',')
-  )
+  Array.isArray(obj)
+    ? `[${obj.map(getObjectAsString)}]`
+    : wrap(
+        Object.keys(obj)
+          .map(k => {
+            const v =
+              typeof obj[k] === 'object' && hasKeys(obj[k])
+                ? getObjectAsString(obj[k])
+                : obj[k]
+            return `${JSON.stringify(k)}: ${v}`
+          })
+          .join(',')
+      )
 
 export const getPropertiesAsObject = list => {
   const obj = {}
@@ -82,7 +86,7 @@ export const interpolateText = (node, parent, isTemplateLiteral) => {
     const textNode = item.properties.find(prop => prop.name === 'text')
     node.value = isTemplateLiteral
       ? getLiteralInterpolation(node, re, textNode)
-      : getStandrdInterpolation(node, re, textNode, item)
+      : getStandardInterpolation(node, re, textNode, item)
   })
   return isTemplateLiteral ? '`' + node.value + '`' : node.value
 }
@@ -93,7 +97,7 @@ const getLiteralInterpolation = (node, re, textNode) =>
     `$${isSlot(textNode) ? wrap(textNode.value) : textNode.value}`
   )
 
-const getStandrdInterpolation = (node, re, textNode, item) =>
+const getStandardInterpolation = (node, re, textNode, item) =>
   node.value.replace(
     re,
     hasCustomScopes(textNode, item)
@@ -104,19 +108,23 @@ const getStandrdInterpolation = (node, re, textNode, item) =>
 export const getScopedCondition = (
   propNode,
   blockNode,
-  alreadyInterpolated
+  alreadyInterpolated,
+  unit = ''
 ) => {
   // alreadyInterpolated = interpolation that contains scoped condition
   // !alreadyInterpolated = scoped condition that contains interpolation
   // see tests in TextInterpolation.view for an example of both
+
+  const scopedProps = getScopedProps(propNode, blockNode)
+
+  if (!scopedProps) return false
+
   let conditional =
     blockNode.hasOwnProperty('interpolation') && !alreadyInterpolated
       ? interpolateText(propNode, blockNode, true)
       : maybeSafe(propNode)
 
-  if (!getScopedProps(propNode, blockNode)) return false
-
-  getScopedProps(propNode, blockNode).forEach(scope => {
+  scopedProps.forEach(scope => {
     conditional =
       `${scope.when} ? ${
         blockNode.hasOwnProperty('interpolation') && !alreadyInterpolated
@@ -124,6 +132,15 @@ export const getScopedCondition = (
           : maybeSafe(scope.prop)
       } : ` + conditional
   })
+
+  const lastScope = scopedProps[scopedProps.length - 1]
+
+  if (
+    !lastScope.prop.animation ||
+    lastScope.prop.animation.curve !== 'spring'
+  ) {
+    lastScope.prop.conditional = `\${${conditional}}${unit}`
+  }
 
   return conditional
 }
@@ -278,7 +295,226 @@ export const makeOnClickTracker = (node, state) => {
   }, event, props })`
 }
 
+export const hasAnimatedChild = node =>
+  node.children && node.children.some(child => child.isAnimated)
+
+const getDefaultValue = (node, name) => {
+  const prop = node.properties.find(
+    prop => prop.name === name || `"--${prop.name}` === name.split(/[0-9]/)[0]
+  )
+  return prop ? prop.value : ''
+}
+
+// const isRotate = name =>
+//   name === 'rotate' || name === 'rotateX' || name === 'rotateY'
+
+const getStandardAnimatedString = (node, prop, isNative) => {
+  const baseScopeValue = getDefaultValue(node, prop.name)
+  let fromValue
+  let toValue
+
+  // TODO see if native needs the unit in all cases but PX (eg for rotate it may
+  // need deg)
+  if (typeof prop.value === 'number') {
+    fromValue = isNative
+      ? baseScopeValue
+      : getPropValue({ name: prop.name, value: baseScopeValue }, false)
+    toValue = isNative ? prop.value : getPropValue(prop, false)
+  } else {
+    fromValue = `'${baseScopeValue}'`
+    toValue = `'${prop.value}'`
+  }
+
+  return `${
+    isNative ? prop.name : `"--${prop.name}"`
+  }: getAnimatedValue(this.animatedValue${getScopeIndex(
+    node,
+    prop.scope
+  )}, ${fromValue}, ${toValue})`
+}
+
+const getTransformString = (node, transform, isNative) => {
+  let transformStr = `transform: [`
+
+  transform.props.forEach((prop, i) => {
+    transformStr += `{${getAnimatedString(node, prop, isNative)}},`
+  })
+
+  return `${transformStr}]`
+}
+
+export const getScopeIndex = (node, currentScope) =>
+  node.scopes.findIndex(scope => {
+    return scope.slotName === currentScope
+  })
+
+export const isNewScope = (state, currentAnimation, index) =>
+  index ===
+  state.animations.findIndex(
+    animation => animation.scope === currentAnimation.scope
+  )
+
+export const getAnimatedStyles = (node, isNative) => {
+  const props = isNative
+    ? getAllAnimatedProps(node, true)
+    : getSpringProps(node)
+
+  return props.map(prop => getAnimatedString(node, prop, isNative)).join(', ')
+}
+
+const getPropValue = (prop, interpolateValue = true) => {
+  const unit = getUnit(prop)
+  return unit
+    ? interpolateValue
+      ? `\`\${${prop.value}}${unit}\``
+      : `"${prop.value}${unit}"`
+    : prop.value
+}
+
+export const getDynamicStyles = node => {
+  return flatten([
+    node.properties
+      .filter(prop => prop.tags.style && prop.tags.slot)
+      .map(prop => `'--${prop.name}': ${getPropValue(prop)}`),
+    node.scopes.map(scope =>
+      scope.properties.map(
+        prop =>
+          prop.tags.style &&
+          prop.conditional &&
+          `'--${prop.name}': \`${prop.conditional}\``
+      )
+    ),
+  ]).filter(Boolean)
+}
+
+const getAnimatedString = (node, prop, isNative) =>
+  prop.name === 'transform'
+    ? getTransformString(node, prop, isNative)
+    : getStandardAnimatedString(node, prop, isNative)
+
+export const getNonAnimatedDynamicStyles = node => {
+  const animatedProps = getAllAnimatedProps(node, true).map(prop => prop.name)
+  const animatedTransforms = animatedProps.includes('transform')
+    ? getAllAnimatedProps(node, true)
+        .find(prop => prop.name === 'transform')
+        .props.map(prop => prop.name)
+    : []
+
+  return Object.keys(node.style.dynamic.base)
+    .filter(
+      key => !animatedProps.includes(key) && !animatedTransforms.includes(key)
+    )
+    .reduce((obj, key) => {
+      obj[key] = node.style.dynamic.base[key]
+      return obj
+    }, {})
+}
+
+export const hasSpringAnimation = node =>
+  node.animations.some(anim => anim.curve === 'spring')
+
+export const hasTimingAnimation = node =>
+  node.animations.some(anim => anim.curve !== 'spring')
+
+export const getAllAnimatedProps = (node, isNative) => {
+  const props = flatten(
+    node.scopes.map(scope => scope.properties.filter(prop => prop.animation))
+  )
+  return checkForTransforms(props) && isNative
+    ? combineTransforms(props)
+    : props
+}
+
+const combineTransforms = props => {
+  // TODO: handle transforms on different scopes
+  let transform = { name: 'transform', props: [] }
+  props.forEach((prop, i) => {
+    if (TRANSFORM_WHITELIST[prop.name]) {
+      prop.isTransform = true
+      transform.props.push(prop)
+    }
+  })
+  props.push(transform)
+  return props.filter(prop => !prop.isTransform)
+}
+
+const checkForTransforms = props =>
+  props.some(prop => TRANSFORM_WHITELIST[prop.name])
+
+export const getTimingProps = node =>
+  flatten(
+    node.scopes.map(scope =>
+      scope.properties.filter(
+        prop => prop.animation && prop.animation.curve !== 'spring'
+      )
+    )
+  )
+
+const getSpringProps = node =>
+  flatten(
+    node.scopes.map(scope =>
+      scope.properties.filter(
+        prop => prop.animation && prop.animation.curve === 'spring'
+      )
+    )
+  )
+
+// https://github.com/facebook/react-native/blob/26684cf3adf4094eb6c405d345a75bf8c7c0bf88/Libraries/Animated/src/NativeAnimatedHelper.js
+/**
+ * Styles allowed by the native animated implementation.
+ *
+ * In general native animated implementation should support any numeric property that doesn't need
+ * to be updated through the shadow view hierarchy (all non-layout properties).
+ */
+const STYLES_WHITELIST = {
+  opacity: true,
+  transform: true,
+  /* ios styles */
+  shadowOpacity: true,
+  shadowRadius: true,
+  /* legacy android transform properties */
+  scaleX: true,
+  scaleY: true,
+  translateX: true,
+  translateY: true,
+}
+
+const TRANSFORM_WHITELIST = {
+  translateX: true,
+  translateY: true,
+  scale: true,
+  scaleX: true,
+  scaleY: true,
+  rotate: true,
+  rotateX: true,
+  rotateY: true,
+  perspective: true,
+}
+
+// TODO re-enable
+export const canUseNativeDriver = animation =>
+  // STYLES_WHITELIST[animation.name] ||
+  // TRANSFORM_WHITELIST[animation.name] ||
+  false
+
 const fontsOrder = ['eot', 'woff2', 'woff', 'ttf', 'svg', 'otf']
 
 export const sortFonts = (a, b) =>
   fontsOrder.indexOf(b.type) - fontsOrder.indexOf(a.type)
+
+export const createId = (node, state) => {
+  let id = node.is || node.name
+  // count repeatead ones
+  if (state.usedBlockNames[id]) {
+    id = `${id}${state.usedBlockNames[id]++}`
+  } else {
+    state.usedBlockNames[id] = 1
+  }
+
+  node.styleName = id
+  if (node.className) {
+    node.className.push(`\${${id}}`)
+  }
+
+  return id
+}

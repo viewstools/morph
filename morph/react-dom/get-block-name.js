@@ -66,6 +66,10 @@ export default (node, parent, state) => {
       break
   }
 
+  if (node.isAnimatedReallyAnimated) {
+    return `Animated.${name}`
+  }
+
   return name
 }
 

@@ -1,23 +1,46 @@
-import { getProp, isSlot } from '../utils.js'
+import { getProp, getScopedCondition, isSlot } from '../utils.js'
 import { maybeAddFallbackFont } from '../fonts.js'
 
 export default (node, parent, code) => {
+  const scopedVar = setScopedVar(node, parent)
+
+  if (scopedVar) {
+    switch (node.name) {
+      case 'rotate':
+      case 'rotateX':
+      case 'rotateY':
+      case 'scale':
+      case 'translateX':
+      case 'translateY':
+        return {
+          _isScoped: true,
+          transform: `'${getTransform(node, parent)}'`,
+        }
+
+      default:
+        return {
+          _isScoped: true,
+          [node.name]: scopedVar,
+        }
+    }
+  }
+
   switch (node.name) {
     case 'appRegion':
       return {
-        WebkitAppRegion: node.value,
+        WebkitAppRegion: maybeAsVar(node, code),
       }
 
     case 'backgroundImage':
       return {
         backgroundImage: code
-          ? `\`url(\${${node.value}})\``
+          ? `\`url(\${${asVar(node)}})\``
           : `url("${node.value}")`,
       }
 
     case 'fontFamily':
       return {
-        fontFamily: code ? node.value : maybeAddFallbackFont(node.value),
+        fontFamily: code ? asVar(node) : maybeAddFallbackFont(node.value),
       }
 
     case 'shadowColor':
@@ -33,9 +56,10 @@ export default (node, parent, code) => {
     case 'scale':
     case 'translateX':
     case 'translateY':
-      return {
-        transform: getTransform(node, parent),
-      }
+      const transform = getTransform(node, parent)
+      if (transform.includes('props.')) return false
+
+      return { transform }
 
     case 'transformOriginX':
     case 'transformOriginY':
@@ -46,23 +70,38 @@ export default (node, parent, code) => {
 
     case 'userSelect':
       return {
-        WebkitUserSelect: node.value,
+        WebkitUserSelect: maybeAsVar(node, code),
       }
 
     case 'zIndex':
       return {
-        zIndex: code ? node.value : parseInt(node.value, 10),
+        zIndex: code ? asVar(node) : parseInt(node.value, 10),
       }
 
     default:
       return {
-        [node.name]: node.value,
+        [node.name]: maybeAsVar(node, code),
       }
   }
 }
 
-const getPropValue = (prop, unit = '') => {
+const maybeAsVar = (prop, code) => (code ? asVar(prop) : prop.value)
+
+const asVar = prop => `'var(--${prop.name})'`
+
+const setScopedVar = (prop, block, unit) => {
+  if (prop.scope === 'hover') return false
+
+  const scopedCondition = getScopedCondition(prop, block, false, unit)
+  return scopedCondition && asVar(prop)
+}
+
+const getPropValue = (prop, block, unit) => {
   if (!prop) return false
+
+  const scopedVar = setScopedVar(prop, block, unit)
+
+  if (scopedVar) return scopedVar
 
   if (prop.tags.slot) {
     return `\${${prop.value}}${unit}`
@@ -81,11 +120,11 @@ const getShadow = (node, parent) => {
   const shadowSpread = getProp(parent, 'shadowSpread')
 
   let value = [
-    getPropValue(shadowOffsetX, 'px'),
-    getPropValue(shadowOffsetY, 'px'),
-    getPropValue(shadowBlur, 'px'),
-    !isText && getPropValue(shadowSpread, 'px'),
-    getPropValue(shadowColor),
+    getPropValue(shadowOffsetX, parent, 'px'),
+    getPropValue(shadowOffsetY, parent, 'px'),
+    getPropValue(shadowBlur, parent, 'px'),
+    !isText && getPropValue(shadowSpread, parent, 'px'),
+    getPropValue(shadowColor, parent),
   ]
     .filter(Boolean)
     .join(' ')
@@ -105,9 +144,9 @@ const getShadow = (node, parent) => {
   }
 }
 
-const getTransformValue = (prop, unit) => {
+const getTransformValue = (prop, parent, unit) => {
   if (!prop) return false
-  return `${prop.name}(${getPropValue(prop, unit)})`
+  return `${prop.name}(${getPropValue(prop, parent, unit)})`
 }
 
 const getTransform = (node, parent) => {
@@ -119,12 +158,12 @@ const getTransform = (node, parent) => {
   const translateY = getProp(parent, 'translateY')
 
   let value = [
-    getTransformValue(rotate, 'deg'),
-    getTransformValue(rotateX, 'deg'),
-    getTransformValue(rotateY, 'deg'),
-    getTransformValue(scale, 'px'),
-    getTransformValue(translateX, 'px'),
-    getTransformValue(translateY, 'px'),
+    getTransformValue(rotate, parent, 'deg'),
+    getTransformValue(rotateX, parent, 'deg'),
+    getTransformValue(rotateY, parent, 'deg'),
+    getTransformValue(scale, parent, ''),
+    getTransformValue(translateX, parent, 'px'),
+    getTransformValue(translateY, parent, 'px'),
   ]
     .filter(Boolean)
     .join(' ')
@@ -139,7 +178,9 @@ const getTransform = (node, parent) => {
   ) {
     value = `\`${value}\``
   }
-  return value
+  // TODO FIXME this is a hack to remove strings because my head is fried
+  // and yeah it does what we need for now :)
+  return value.replace(/'/g, '')
 }
 
 const getTransformOrigin = (node, parent) => {
@@ -148,10 +189,12 @@ const getTransformOrigin = (node, parent) => {
   let value = [
     getPropValue(
       transformOriginX,
+      parent,
       Number.isInteger(transformOriginX.value) ? 'px' : ''
     ),
     getPropValue(
       transformOriginY,
+      parent,
       Number.isInteger(transformOriginY.value) ? 'px' : ''
     ),
   ]

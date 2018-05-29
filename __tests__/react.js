@@ -1,23 +1,10 @@
 import { morph, parse } from '../index.js'
 import { join } from 'path'
-import { existsSync, readdirSync, readFileSync } from 'fs'
+import { readdirSync, readFileSync } from 'fs'
 
 const isView = f => /\.view$/.test(f)
 const getPath = (f = '.') => join(__dirname, 'views', f)
 const getName = f => f.replace(/\.view$/, '')
-
-const views = {}
-const files = []
-
-const getFiles = () =>
-  readdirSync(getPath())
-    .filter(isView)
-    .map(f => {
-      const view = getName(f)
-      const source = readFileSync(getPath(f), 'utf-8')
-      views[view] = parse({ source })
-      return f
-    })
 
 const getFont = font =>
   `./Fonts/${font.family}-${font.weight}${
@@ -27,6 +14,18 @@ const getFont = font =>
 const localSupported = ['en', 'es', 'fr']
 ;['react-dom', 'react-native', 'e2e'].forEach(as =>
   describe(as, () => {
+    const views = {}
+
+    const getFiles = () =>
+      readdirSync(getPath())
+        .filter(isView)
+        .map(f => {
+          const view = getName(f)
+          const source = readFileSync(getPath(f), 'utf-8')
+          views[view] = parse({ source })
+          return f
+        })
+
     getFiles().forEach(f => {
       const name = getName(f)
 

@@ -62,17 +62,17 @@ export default (state, getImport) => {
   }
 
   // TODO we probably want to check that the file exists and do something if it
-  // doesn;t, like warn the user at least?
+  // doesn't, like warn the user at least?
   state.images.forEach(img =>
     dependencies.push(`import ${img.name} from "${img.file}"`)
   )
 
-  if (state.cssDynamic && state.cssStatic) {
-    dependencies.push('import styled, { css } from "react-emotion"')
-  } else if (state.cssStatic) {
-    dependencies.push('import { css } from "react-emotion"')
-  } else if (state.cssDynamic) {
-    dependencies.push('import styled from "react-emotion"')
+  if (state.cssDynamic || state.cssStatic) {
+    dependencies.push('import { css } from "emotion"')
+  }
+
+  if (state.isAnimated && !state.isReactNative) {
+    dependencies.push('import Animated from "animated/lib/targets/react-dom"')
   }
 
   if (usesSvg.length > 0) {

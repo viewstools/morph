@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/viewsdx/morph#readme",
   "devDependencies": {
+    "animated": "^0.2.2",
     "babel-eslint": "^8.0.3",
     "babel-jest": "^22.0.3",
     "babel-plugin-external-helpers": "^6.22.0",

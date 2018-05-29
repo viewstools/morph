@@ -27,5 +27,5 @@ injectGlobal(\`@font-face {
 }\`)`
   }
 
-  return `import { injectGlobal } from 'react-emotion'\n${body}`
+  return `import { injectGlobal } from 'emotion'\n${body}`
 }
