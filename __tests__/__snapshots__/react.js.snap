@@ -3501,10 +3501,10 @@ Object {
 import React from 'react';
 import Card from './Card.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'react-emotion';
+import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
-const ScrollableList_h1v1ndfj = css({ overflowY: 'auto' });
+const ScrollableList1 = css({ overflowY: 'auto' });
 
 class ScrollableList extends React.Component {
   render() {
@@ -3513,7 +3513,7 @@ class ScrollableList extends React.Component {
     return (
       <div
         data-test-id={\`\${props['data-test-id'] || 'ScrollableList'}|\`}
-        className={\`views-block \${ScrollableList_h1v1ndfj}\`}
+        className={\`views-block \${ScrollableList1}\`}
       >
         {Array.isArray(props.from) &&
           props.from.map((item, index) => (
@@ -3554,15 +3554,15 @@ Object {
 import React from 'react';
 import Card from './Card.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'react-emotion';
+import { css } from 'emotion';
 
-const ScrollableList_h1v1ndfj = css({ overflowY: 'auto' });
+const ScrollableList1 = css({ overflowY: 'auto' });
 
 const ScrollableList = props => {
   return (
     <div
       data-test-id={\`\${props['data-test-id'] || 'ScrollableList'}|\`}
-      className={\`views-block \${ScrollableList_h1v1ndfj}\`}
+      className={\`views-block \${ScrollableList1}\`}
     >
       {Array.isArray(props.from) &&
         props.from.map((item, index) => (
