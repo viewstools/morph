@@ -151,7 +151,7 @@ Object {
 
 module.exports = {
   Text: get('Hover.Text'),
-  _top: get('Hover'),
+  _top: get('Hover', 'isStuff'),
 };
 ",
 }
@@ -1917,14 +1917,14 @@ import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
 const Hover1 = css({
-  backgroundColor: '#323232',
   '&:hover': {
     backgroundColor: '#232323',
   },
+  backgroundColor: 'var(--backgroundColor)',
 });
 const Text = css({
   color: 'white',
-  [\`\${Hover1}:hover &, \${Hover1}.hover &\`]: {
+  [\`.\${Hover1}:hover &, .\${Hover1}.hover &\`]: {
     color: 'black',
   },
   fontSize: 'var(--fontSize)',
@@ -1936,7 +1936,9 @@ class Hover extends React.Component {
 
     return (
       <button
-        data-test-id={\`\${props['data-test-id'] || 'Hover'}|\`}
+        data-test-id={\`\${props['data-test-id'] || 'Hover'}|\${
+          props.isStuff ? 'isStuff|' : ''
+        }\`}
         onClick={event =>
           context.track({
             block: props['data-test-id'] || 'Hover',
@@ -1946,6 +1948,7 @@ class Hover extends React.Component {
             props,
           })
         }
+        style={{ '--backgroundColor': \`\${props.isStuff ? 'red' : '#323232'}\` }}
         className={\`views-block \${Hover1}\`}
       >
         <span
@@ -1991,14 +1994,14 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const Hover1 = css({
-  backgroundColor: '#323232',
   '&:hover': {
     backgroundColor: '#232323',
   },
+  backgroundColor: 'var(--backgroundColor)',
 });
 const Text = css({
   color: 'white',
-  [\`\${Hover1}:hover &, \${Hover1}.hover &\`]: {
+  [\`.\${Hover1}:hover &, .\${Hover1}.hover &\`]: {
     color: 'black',
   },
   fontSize: 'var(--fontSize)',
@@ -2007,8 +2010,11 @@ const Text = css({
 const Hover = props => {
   return (
     <button
-      data-test-id={\`\${props['data-test-id'] || 'Hover'}|\`}
+      data-test-id={\`\${props['data-test-id'] || 'Hover'}|\${
+        props.isStuff ? 'isStuff|' : ''
+      }\`}
       onClick={props.onClick}
+      style={{ '--backgroundColor': \`\${props.isStuff ? 'red' : '#323232'}\` }}
       className={\`views-block \${Hover1}\`}
     >
       <span
@@ -6343,10 +6349,7 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 
-const styles = StyleSheet.create({
-  Hover1: { backgroundColor: '#323232' },
-  Text: { color: 'white' },
-});
+const styles = StyleSheet.create({ Text: { color: 'white' } });
 
 class Hover extends React.Component {
   render() {
@@ -6366,7 +6369,12 @@ class Hover extends React.Component {
         }
         underlayColor=\\"transparent\\"
       >
-        <View testID={\`\${props['testID'] || 'Hover'}|\`} style={styles.Hover1}>
+        <View
+          testID={\`\${props['testID'] || 'Hover'}|\${
+            props.isStuff ? 'isStuff|' : ''
+          }\`}
+          style={{ backgroundColor: props.isStuff ? 'red' : '#323232' }}
+        >
           <Animated.Text
             testID={\`Hover.Text|\`}
             style={[styles.Text, { fontSize: props.fontSize }]}

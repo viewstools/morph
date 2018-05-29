@@ -160,10 +160,7 @@ const asCss = (styles, key, scopedUnderParent) => {
 
   if (key !== 'base') {
     if (scopedUnderParent) {
-      let parent = `\${${scopedUnderParent}}`
-      if (/_/.test(scopedUnderParent)) {
-        parent = `.${parent}`
-      }
+      const parent = `.\${${scopedUnderParent}}`
       css.push(`[\`${parent}:${key} &, ${parent}.${key} &\`]: {`)
     } else if (key === 'disabled' || key === 'hover' || key === 'focus') {
       css.push(`"&:${key}": {`)

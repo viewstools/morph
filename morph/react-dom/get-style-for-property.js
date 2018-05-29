@@ -90,6 +90,8 @@ const maybeAsVar = (prop, code) => (code ? asVar(prop) : prop.value)
 const asVar = prop => `'var(--${prop.name})'`
 
 const setScopedVar = (prop, block, unit) => {
+  if (prop.scope === 'hover') return false
+
   const scopedCondition = getScopedCondition(prop, block, false, unit)
   return scopedCondition && asVar(prop)
 }
