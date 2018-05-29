@@ -63,6 +63,7 @@ export default ({
       if (
         state.uses.includes(block) ||
         /props/.test(block) ||
+        /^Animated/.test(block) ||
         block === finalName
       )
         return

@@ -428,6 +428,10 @@ export default ({
           propNode.value = currentAnimation.defaultValue
           propNode.animation = currentAnimation.properties
           block.isAnimated = true
+          if (!block.isAnimatedReallyAnimated) {
+            block.isAnimatedReallyAnimated =
+              propNode.animation.curve === 'spring'
+          }
           if (!existingScope) {
             block.animations.push({
               ...currentAnimation.properties,

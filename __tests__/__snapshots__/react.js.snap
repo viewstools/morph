@@ -810,7 +810,7 @@ class AnimatedButton extends React.Component {
     const { context, props } = this;
 
     return (
-      <button
+      <Animated.button
         data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\${
           props.isOn ? 'isOn|' : ''
         }\`}
@@ -841,7 +841,7 @@ class AnimatedButton extends React.Component {
           hey
         </span>
         {props.children}
-      </button>
+      </Animated.button>
     );
   }
 }
@@ -909,7 +909,7 @@ class AnimatedButton extends React.Component {
     const { props } = this;
 
     return (
-      <button
+      <Animated.button
         data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\${
           props.isOn ? 'isOn|' : ''
         }\`}
@@ -932,7 +932,7 @@ class AnimatedButton extends React.Component {
           hey
         </span>
         {props.children}
-      </button>
+      </Animated.button>
     );
   }
 }
