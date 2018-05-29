@@ -65,7 +65,7 @@ const getGroupBlockName = (node, state) => {
 
 const getListBlockName = node => {
   const base = hasProp(node, /^overflow/, v => v === 'auto' || v === 'scroll')
-    ? 'ScrollView'
+    ? 'FlatList'
     : 'View'
   return node.maybeAnimated ? `Animated.${base}` : base
 }

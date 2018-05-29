@@ -1,8 +1,9 @@
 export function leave(node, parent, state) {
   if (
-    (!parent && node.isGroup) ||
-    node.explicitChildren ||
-    (node.isGroup && node.children.length > 0)
+    ((!parent && node.isGroup) ||
+      node.explicitChildren ||
+      (node.isGroup && node.children.length > 0)) &&
+    node.nameFinal !== 'FlatList'
   ) {
     if (!parent && node.isGroup) {
       if (node.children.length === 0) {
