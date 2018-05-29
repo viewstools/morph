@@ -61,7 +61,7 @@ input.views-block[type='number']::-webkit-inner-spin-button {
   margin: 0;
 }`
 
-const BASE_CSS = `import { injectGlobal } from 'react-emotion'
+const BASE_CSS = `import { injectGlobal } from 'emotion'
 injectGlobal(\`${CSS}\`)`
 
 module.exports = async file => {

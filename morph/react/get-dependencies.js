@@ -66,12 +66,8 @@ export default (state, getImport) => {
     dependencies.push(`import ${img.name} from "${img.file}"`)
   )
 
-  if (state.cssDynamic && state.cssStatic) {
-    dependencies.push('import styled, { css } from "react-emotion"')
-  } else if (state.cssStatic) {
-    dependencies.push('import { css } from "react-emotion"')
-  } else if (state.cssDynamic) {
-    dependencies.push('import styled from "react-emotion"')
+  if (state.cssDynamic || state.cssStatic) {
+    dependencies.push('import { css } from "emotion"')
   }
 
   if (state.isAnimated && !state.isReactNative) {

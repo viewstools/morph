@@ -503,7 +503,7 @@ export const sortFonts = (a, b) =>
   fontsOrder.indexOf(b.type) - fontsOrder.indexOf(a.type)
 
 export const createId = (node, state) => {
-  let id = `${node.is || node.name}`
+  let id = node.is || node.name
   // count repeatead ones
   if (state.usedBlockNames[id]) {
     id = `${id}${state.usedBlockNames[id]++}`

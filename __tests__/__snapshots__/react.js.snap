@@ -633,7 +633,7 @@ Object {
 import React from 'react';
 import SubButton from './SubButton.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'react-emotion';
+import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
 const Vertical = css({
@@ -709,7 +709,7 @@ Object {
 import React from 'react';
 import SubButton from './SubButton.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'react-emotion';
+import { css } from 'emotion';
 
 const Vertical = css({
   color: 'red',
@@ -768,7 +768,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import styled from 'react-emotion';
+import { css } from 'emotion';
 import Animated from 'animated/lib/targets/react-dom';
 import PropTypes from 'prop-types';
 const getAnimatedValue = (animatedValue, from, to) =>
@@ -868,7 +868,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import styled from 'react-emotion';
+import { css } from 'emotion';
 import Animated from 'animated/lib/targets/react-dom';
 const getAnimatedValue = (animatedValue, from, to) =>
   animatedValue.interpolate({
@@ -956,7 +956,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'react-emotion';
+import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
 const Vertical = css({
@@ -996,7 +996,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'react-emotion';
+import { css } from 'emotion';
 
 const Vertical = css({
   WebkitAppRegion: 'drag',
@@ -1028,7 +1028,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import styled, { css } from 'react-emotion';
+import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
 const Vertical = css({
@@ -1084,7 +1084,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import styled, { css } from 'react-emotion';
+import { css } from 'emotion';
 
 const Vertical = css({
   backgroundImage: \\"url('https://views.tools/image.jpg')\\",
@@ -1133,9 +1133,29 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import styled from 'react-emotion';
+import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
+const Border1 = css({
+  borderColor: 'red',
+  borderStyle: 'solid',
+  borderWidth: 'var(--borderWidth)',
+});
+const Top = css({
+  borderTopStyle: 'solid',
+  borderTopColor: 'red',
+  borderTopWidth: 'var(--borderTopWidth)',
+});
+const Right = css({
+  borderRightStyle: 'solid',
+  borderRightColor: 'red',
+  borderRightWidth: 'var(--borderRightWidth)',
+});
+const Bottom = css({
+  borderBottomStyle: 'solid',
+  borderBottomColor: 'red',
+  borderBottomWidth: 'var(--borderBottomWidth)',
+});
 const Left = css({
   borderLeftStyle: 'solid',
   borderLeftColor: 'red',
@@ -1226,8 +1246,28 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import styled from 'react-emotion';
+import { css } from 'emotion';
 
+const Border1 = css({
+  borderColor: 'red',
+  borderStyle: 'solid',
+  borderWidth: 'var(--borderWidth)',
+});
+const Top = css({
+  borderTopStyle: 'solid',
+  borderTopColor: 'red',
+  borderTopWidth: 'var(--borderTopWidth)',
+});
+const Right = css({
+  borderRightStyle: 'solid',
+  borderRightColor: 'red',
+  borderRightWidth: 'var(--borderRightWidth)',
+});
+const Bottom = css({
+  borderBottomStyle: 'solid',
+  borderBottomColor: 'red',
+  borderBottomWidth: 'var(--borderBottomWidth)',
+});
 const Left = css({
   borderLeftStyle: 'solid',
   borderLeftColor: 'red',
@@ -1312,7 +1352,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'react-emotion';
+import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
 const Vertical = css({ backgroundColor: 'blue' });
@@ -1348,7 +1388,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'react-emotion';
+import { css } from 'emotion';
 
 const Vertical = css({ backgroundColor: 'blue' });
 
@@ -1376,7 +1416,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import styled, { css } from 'react-emotion';
+import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
 const Vertical = css({ backgroundColor: 'red' });
@@ -1440,7 +1480,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import styled, { css } from 'react-emotion';
+import { css } from 'emotion';
 
 const Vertical = css({ backgroundColor: 'red' });
 const Text = css({ color: 'var(--color)' });
@@ -1595,7 +1635,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'react-emotion';
+import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
 const Display1 = css({ display: 'block' });
@@ -1631,7 +1671,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'react-emotion';
+import { css } from 'emotion';
 
 const Display1 = css({ display: 'block' });
 
@@ -1660,7 +1700,7 @@ Object {
 import React from 'react';
 import SomeThing from './SomeThing.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import styled from 'react-emotion';
+import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
 const Vertical = css({ height: 'var(--height)' });
@@ -1709,7 +1749,7 @@ Object {
 import React from 'react';
 import SomeThing from './SomeThing.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import styled from 'react-emotion';
+import { css } from 'emotion';
 
 const Vertical = css({ height: 'var(--height)' });
 
@@ -1873,7 +1913,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import styled, { css } from 'react-emotion';
+import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
 const Hover1 = css({
@@ -1948,7 +1988,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import styled, { css } from 'react-emotion';
+import { css } from 'emotion';
 
 const Hover1 = css({
   backgroundColor: '#323232',
@@ -2344,7 +2384,7 @@ Object {
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import chopperSvg from './chopper.svg';
-import styled from 'react-emotion';
+import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
 const LocalImageSvg1 = css({ width: 50, height: 'var(--height)' });
@@ -2388,7 +2428,7 @@ Object {
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import chopperSvg from './chopper.svg';
-import styled from 'react-emotion';
+import { css } from 'emotion';
 
 const LocalImageSvg1 = css({ width: 50, height: 'var(--height)' });
 
@@ -2842,7 +2882,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'react-emotion';
+import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
 const Text = css({ marginTop: -10 });
@@ -2878,7 +2918,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'react-emotion';
+import { css } from 'emotion';
 
 const Text = css({ marginTop: -10 });
 
@@ -3014,7 +3054,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import styled from 'react-emotion';
+import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
 const Scope1 = css({ color: 'var(--color)' });
@@ -3069,7 +3109,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import styled from 'react-emotion';
+import { css } from 'emotion';
 
 const Scope1 = css({ color: 'var(--color)' });
 
@@ -3302,7 +3342,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import styled from 'react-emotion';
+import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
 const Content = css({
@@ -3380,7 +3420,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import styled from 'react-emotion';
+import { css } from 'emotion';
 
 const Content = css({
   opacity: 'var(--opacity)',
@@ -3442,7 +3482,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import styled from 'react-emotion';
+import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
 const BoxShadow = css({
@@ -3502,7 +3542,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import styled from 'react-emotion';
+import { css } from 'emotion';
 
 const BoxShadow = css({
   boxShadow: \`0px 5px 2px 2px \${props.shadowColor}undefined\`,
@@ -3555,7 +3595,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import styled from 'react-emotion';
+import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
 const WindowControl = css({
@@ -3622,7 +3662,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import styled from 'react-emotion';
+import { css } from 'emotion';
 
 const WindowControl = css({
   marginRight: 8,
@@ -3673,7 +3713,7 @@ Object {
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'react-emotion';
+import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
 const Horizontal = css({ flexDirection: 'row' });
@@ -3714,7 +3754,7 @@ Object {
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'react-emotion';
+import { css } from 'emotion';
 
 const Horizontal = css({ flexDirection: 'row' });
 
@@ -3938,7 +3978,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'react-emotion';
+import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
 const Transform1 = css({
@@ -3981,7 +4021,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'react-emotion';
+import { css } from 'emotion';
 
 const Transform1 = css({
   transform:
@@ -4016,7 +4056,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'react-emotion';
+import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
 const Email = css({
@@ -4078,7 +4118,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'react-emotion';
+import { css } from 'emotion';
 
 const Email = css({
   borderColor: 'black',
@@ -4692,7 +4732,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'react-emotion';
+import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
 const Horizontal = css({
@@ -4733,7 +4773,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'react-emotion';
+import { css } from 'emotion';
 
 const Horizontal = css({
   flexDirection: 'row',
@@ -4841,7 +4881,7 @@ import { Route } from 'react-router-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Topics from './Topics.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'react-emotion';
+import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
 const Horizontal = css({ flexDirection: 'row' });
@@ -4923,7 +4963,7 @@ import { Route } from 'react-router-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Topics from './Topics.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'react-emotion';
+import { css } from 'emotion';
 
 const Horizontal = css({ flexDirection: 'row' });
 
@@ -4993,7 +5033,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'react-emotion';
+import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
 const Svg = css({
@@ -5067,7 +5107,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'react-emotion';
+import { css } from 'emotion';
 
 const Svg = css({
   height: 20,
@@ -5134,7 +5174,7 @@ Object {
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import './Fonts/Montserrat-300';
-import styled from 'react-emotion';
+import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
 const UseText1 = css({
@@ -5187,7 +5227,7 @@ Object {
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import './Fonts/Montserrat-300';
-import styled from 'react-emotion';
+import { css } from 'emotion';
 
 const UseText1 = css({
   fontFamily: 'Montserrat, sans-serif',
@@ -5233,7 +5273,7 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import './Fonts/CustomFontNotOnGoogle-300';
 import './Fonts/CustomFontNotOnGoogle-400-italic';
-import { css } from 'react-emotion';
+import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
 const Normal = css({
@@ -5312,7 +5352,7 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import './Fonts/CustomFontNotOnGoogle-300';
 import './Fonts/CustomFontNotOnGoogle-400-italic';
-import { css } from 'react-emotion';
+import { css } from 'emotion';
 
 const Normal = css({
   color: 'blue',
@@ -5381,7 +5421,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'react-emotion';
+import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
 const Vertical = css({ backgroundColor: 'red' });
@@ -5417,7 +5457,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'react-emotion';
+import { css } from 'emotion';
 
 const Vertical = css({ backgroundColor: 'red' });
 
@@ -5445,7 +5485,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import styled from 'react-emotion';
+import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
 const ViewNameIsntUsedInStyle1 = css({ zIndex: 5, opacity: 'var(--opacity)' });
@@ -5488,7 +5528,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import styled from 'react-emotion';
+import { css } from 'emotion';
 
 const ViewNameIsntUsedInStyle1 = css({ zIndex: 5, opacity: 'var(--opacity)' });
 
@@ -5524,7 +5564,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'react-emotion';
+import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
 const App = css({ flexDirection: 'row' });
@@ -5571,7 +5611,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'react-emotion';
+import { css } from 'emotion';
 
 const App = css({ flexDirection: 'row' });
 

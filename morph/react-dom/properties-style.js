@@ -72,7 +72,7 @@ export function leave(node, parent, state) {
 
     const id = createId(node, state)
 
-    state.styles[node.nameFinal] = `const ${id} = css({${
+    state.styles[id] = `const ${id} = css({${
       cssStatic ? `${cssStatic}, ` : ''
     }${cssDynamic}})`
 
