@@ -1,5 +1,6 @@
 import { enter } from '../react/properties-style.js'
 import {
+  createId,
   getAnimatedStyles,
   getObjectAsString,
   hasAnimatedChild,
@@ -7,7 +8,6 @@ import {
   getNonAnimatedDynamicStyles,
   hasKeys,
 } from '../utils.js'
-import hash from '../hash.js'
 
 export { enter }
 
@@ -24,9 +24,8 @@ export const leave = (node, parent, state) => {
   }
 
   if (hasKeys(node.style.static.base)) {
-    const id = hash(node.style.static.base)
+    const id = createId(node, state)
     state.styles[id] = node.style.static.base
-    node.styleId = id
     style = `styles.${id}`
   }
 

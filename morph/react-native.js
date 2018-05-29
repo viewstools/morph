@@ -54,6 +54,7 @@ export default ({
     testIdKey: 'testID',
     testIds: {},
     track,
+    usedBlockNames: { [finalName]: 1 },
     uses: [],
     use(block) {
       if (

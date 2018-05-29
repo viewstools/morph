@@ -636,7 +636,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const Vertical_h1azf9vn = css({
+const Vertical = css({
   color: 'red',
   '&:disabled': {
     color: 'blue',
@@ -660,7 +660,7 @@ class Action extends React.Component {
           })
         }
         disabled={props.isDisabled}
-        className={\`views-block \${Vertical_h1azf9vn}\`}
+        className={\`views-block \${Vertical}\`}
       >
         <span data-test-id={\`Action.Text|\`} className=\\"views-block\\">
           click me
@@ -711,7 +711,7 @@ import SubButton from './SubButton.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'react-emotion';
 
-const Vertical_h1azf9vn = css({
+const Vertical = css({
   color: 'red',
   '&:disabled': {
     color: 'blue',
@@ -724,7 +724,7 @@ const Action = props => {
       data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
       onClick={props.onClick}
       disabled={props.isDisabled}
-      className={\`views-block \${Vertical_h1azf9vn}\`}
+      className={\`views-block \${Vertical}\`}
     >
       <span data-test-id={\`Action.Text|\`} className=\\"views-block\\">
         click me
@@ -777,7 +777,7 @@ const getAnimatedValue = (animatedValue, from, to) =>
     outputRange: [from, to],
   });
 
-const Vertical_h1cyenk5 = css({
+const Vertical = css({
   backgroundColor: 'red',
   transition: 'transform 150ms ease-in 0ms',
   willChange: 'opacity, transform',
@@ -785,7 +785,7 @@ const Vertical_h1cyenk5 = css({
   transform:
     'rotateX(var(--rotateX)) translateX(var(--translateX)) translateY(var(--translateY))',
 });
-const Text_hvqf4zf = css({
+const Text = css({
   willChange: 'color',
   color: 'var(--color)',
 });
@@ -810,7 +810,7 @@ class AnimatedButton extends React.Component {
     const { context, props } = this;
 
     return (
-      <Vertical
+      <button
         data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\${
           props.isOn ? 'isOn|' : ''
         }\`}
@@ -829,19 +829,19 @@ class AnimatedButton extends React.Component {
           '--translateY': \`\${props.isOn ? 30 : 0}px\`,
           '--rotateX': \`\${props.isOn ? 20 : 10}deg\`,
         }}
-        className={\`views-block \${Vertical_h1cyenk5}\`}
+        className={\`views-block \${Vertical}\`}
       >
-        <Text
+        <span
           data-test-id={\`AnimatedButton.Text|\${props.isOn ? 'isOn|' : ''}\`}
           style={{
             '--color': getAnimatedValue(this.animatedValue0, 'red', 'blue'),
           }}
-          className={\`views-block \${Text_hvqf4zf}\`}
+          className={\`views-block \${Text}\`}
         >
           hey
-        </Text>
+        </span>
         {props.children}
-      </Vertical>
+      </button>
     );
   }
 }
@@ -876,7 +876,7 @@ const getAnimatedValue = (animatedValue, from, to) =>
     outputRange: [from, to],
   });
 
-const Vertical_h1cyenk5 = css({
+const Vertical = css({
   backgroundColor: 'red',
   transition: 'transform 150ms ease-in 0ms',
   willChange: 'opacity, transform',
@@ -884,7 +884,7 @@ const Vertical_h1cyenk5 = css({
   transform:
     'rotateX(var(--rotateX)) translateX(var(--translateX)) translateY(var(--translateY))',
 });
-const Text_hvqf4zf = css({
+const Text = css({
   willChange: 'color',
   color: 'var(--color)',
 });
@@ -909,7 +909,7 @@ class AnimatedButton extends React.Component {
     const { props } = this;
 
     return (
-      <Vertical
+      <button
         data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\${
           props.isOn ? 'isOn|' : ''
         }\`}
@@ -920,19 +920,19 @@ class AnimatedButton extends React.Component {
           '--translateY': \`\${props.isOn ? 30 : 0}px\`,
           '--rotateX': \`\${props.isOn ? 20 : 10}deg\`,
         }}
-        className={\`views-block \${Vertical_h1cyenk5}\`}
+        className={\`views-block \${Vertical}\`}
       >
-        <Text
+        <span
           data-test-id={\`AnimatedButton.Text|\${props.isOn ? 'isOn|' : ''}\`}
           style={{
             '--color': getAnimatedValue(this.animatedValue0, 'red', 'blue'),
           }}
-          className={\`views-block \${Text_hvqf4zf}\`}
+          className={\`views-block \${Text}\`}
         >
           hey
-        </Text>
+        </span>
         {props.children}
-      </Vertical>
+      </button>
     );
   }
 }
@@ -959,7 +959,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const Vertical_h1n973fw = css({
+const Vertical = css({
   WebkitAppRegion: 'drag',
   width: '92%',
   marginTop: 'auto',
@@ -972,7 +972,7 @@ class AppRegionDrag extends React.Component {
     return (
       <div
         data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-        className={\`views-block \${Vertical_h1n973fw}\`}
+        className={\`views-block \${Vertical}\`}
       >
         {props.children}
       </div>
@@ -998,7 +998,7 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'react-emotion';
 
-const Vertical_h1n973fw = css({
+const Vertical = css({
   WebkitAppRegion: 'drag',
   width: '92%',
   marginTop: 'auto',
@@ -1008,7 +1008,7 @@ const AppRegionDrag = props => {
   return (
     <div
       data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-      className={\`views-block \${Vertical_h1n973fw}\`}
+      className={\`views-block \${Vertical}\`}
     >
       {props.children}
     </div>
@@ -1031,10 +1031,10 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import styled, { css } from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const Vertical_hi6h2fk = css({
+const Vertical = css({
   backgroundImage: \\"url('https://views.tools/image.jpg')\\",
 });
-const Horizontal_h1qzeuoz = css({
+const Horizontal = css({
   flexDirection: 'row',
   backgroundSize: 'contain',
   backgroundImage: \`url(\${'var(--backgroundImage)'})\`,
@@ -1047,12 +1047,12 @@ class BackgroundImage extends React.Component {
     return (
       <div
         data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-        className={\`views-block \${Vertical_hi6h2fk}\`}
+        className={\`views-block \${Vertical}\`}
       >
-        <Horizontal
+        <div
           data-test-id={\`BackgroundImage.Horizontal|\`}
           style={{ '--backgroundImage': props.backgroundImage }}
-          className={\`views-block \${Horizontal_h1qzeuoz}\`}
+          className={\`views-block \${Horizontal}\`}
         />
         {props.children}
       </div>
@@ -1086,10 +1086,10 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import styled, { css } from 'react-emotion';
 
-const Vertical_hi6h2fk = css({
+const Vertical = css({
   backgroundImage: \\"url('https://views.tools/image.jpg')\\",
 });
-const Horizontal_h1qzeuoz = css({
+const Horizontal = css({
   flexDirection: 'row',
   backgroundSize: 'contain',
   backgroundImage: \`url(\${'var(--backgroundImage)'})\`,
@@ -1099,12 +1099,12 @@ const BackgroundImage = props => {
   return (
     <div
       data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-      className={\`views-block \${Vertical_hi6h2fk}\`}
+      className={\`views-block \${Vertical}\`}
     >
-      <Horizontal
+      <div
         data-test-id={\`BackgroundImage.Horizontal|\`}
         style={{ '--backgroundImage': props.backgroundImage }}
-        className={\`views-block \${Horizontal_h1qzeuoz}\`}
+        className={\`views-block \${Horizontal}\`}
       />
       {props.children}
     </div>
@@ -1136,27 +1136,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import styled from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const Border_howvz65 = css({
-  borderColor: 'red',
-  borderStyle: 'solid',
-  borderWidth: 'var(--borderWidth)',
-});
-const Top_h1vfscbc = css({
-  borderTopStyle: 'solid',
-  borderTopColor: 'red',
-  borderTopWidth: 'var(--borderTopWidth)',
-});
-const Right_h1opmg39 = css({
-  borderRightStyle: 'solid',
-  borderRightColor: 'red',
-  borderRightWidth: 'var(--borderRightWidth)',
-});
-const Bottom_h9rup38 = css({
-  borderBottomStyle: 'solid',
-  borderBottomColor: 'red',
-  borderBottomWidth: 'var(--borderBottomWidth)',
-});
-const Left_h195r6cp = css({
+const Left = css({
   borderLeftStyle: 'solid',
   borderLeftColor: 'red',
   borderLeftWidth: 'var(--borderLeftWidth)',
@@ -1167,33 +1147,33 @@ class Border extends React.Component {
     const { context, props } = this;
 
     return (
-      <Border1
+      <div
         data-test-id={\`\${props['data-test-id'] || 'Border'}|\`}
         style={{ '--borderWidth': \`\${props.borderWidth}px\` }}
-        className={\`views-block \${Border_howvz65}\`}
+        className={\`views-block \${Border1}\`}
       >
-        <Top
+        <div
           data-test-id={\`Border.Top|\`}
           style={{ '--borderTopWidth': \`\${props.borderTopWidth}px\` }}
-          className={\`views-block \${Top_h1vfscbc}\`}
+          className={\`views-block \${Top}\`}
         />
-        <Right
+        <div
           data-test-id={\`Border.Right|\`}
           style={{ '--borderRightWidth': \`\${props.borderRightWidth}px\` }}
-          className={\`views-block \${Right_h1opmg39}\`}
+          className={\`views-block \${Right}\`}
         />
-        <Bottom
+        <div
           data-test-id={\`Border.Bottom|\`}
           style={{ '--borderBottomWidth': \`\${props.borderBottomWidth}px\` }}
-          className={\`views-block \${Bottom_h9rup38}\`}
+          className={\`views-block \${Bottom}\`}
         />
-        <Left
+        <div
           data-test-id={\`Border.Left|\`}
           style={{ '--borderLeftWidth': \`\${props.borderLeftWidth}px\` }}
-          className={\`views-block \${Left_h195r6cp}\`}
+          className={\`views-block \${Left}\`}
         />
         {props.children}
-      </Border1>
+      </div>
     );
   }
 }
@@ -1248,27 +1228,7 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import styled from 'react-emotion';
 
-const Border_howvz65 = css({
-  borderColor: 'red',
-  borderStyle: 'solid',
-  borderWidth: 'var(--borderWidth)',
-});
-const Top_h1vfscbc = css({
-  borderTopStyle: 'solid',
-  borderTopColor: 'red',
-  borderTopWidth: 'var(--borderTopWidth)',
-});
-const Right_h1opmg39 = css({
-  borderRightStyle: 'solid',
-  borderRightColor: 'red',
-  borderRightWidth: 'var(--borderRightWidth)',
-});
-const Bottom_h9rup38 = css({
-  borderBottomStyle: 'solid',
-  borderBottomColor: 'red',
-  borderBottomWidth: 'var(--borderBottomWidth)',
-});
-const Left_h195r6cp = css({
+const Left = css({
   borderLeftStyle: 'solid',
   borderLeftColor: 'red',
   borderLeftWidth: 'var(--borderLeftWidth)',
@@ -1276,33 +1236,33 @@ const Left_h195r6cp = css({
 
 const Border = props => {
   return (
-    <Border1
+    <div
       data-test-id={\`\${props['data-test-id'] || 'Border'}|\`}
       style={{ '--borderWidth': \`\${props.borderWidth}px\` }}
-      className={\`views-block \${Border_howvz65}\`}
+      className={\`views-block \${Border1}\`}
     >
-      <Top
+      <div
         data-test-id={\`Border.Top|\`}
         style={{ '--borderTopWidth': \`\${props.borderTopWidth}px\` }}
-        className={\`views-block \${Top_h1vfscbc}\`}
+        className={\`views-block \${Top}\`}
       />
-      <Right
+      <div
         data-test-id={\`Border.Right|\`}
         style={{ '--borderRightWidth': \`\${props.borderRightWidth}px\` }}
-        className={\`views-block \${Right_h1opmg39}\`}
+        className={\`views-block \${Right}\`}
       />
-      <Bottom
+      <div
         data-test-id={\`Border.Bottom|\`}
         style={{ '--borderBottomWidth': \`\${props.borderBottomWidth}px\` }}
-        className={\`views-block \${Bottom_h9rup38}\`}
+        className={\`views-block \${Bottom}\`}
       />
-      <Left
+      <div
         data-test-id={\`Border.Left|\`}
         style={{ '--borderLeftWidth': \`\${props.borderLeftWidth}px\` }}
-        className={\`views-block \${Left_h195r6cp}\`}
+        className={\`views-block \${Left}\`}
       />
       {props.children}
-    </Border1>
+    </div>
   );
 };
 
@@ -1355,7 +1315,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const Vertical_h118stgu = css({ backgroundColor: 'blue' });
+const Vertical = css({ backgroundColor: 'blue' });
 
 class ClassName extends React.Component {
   render() {
@@ -1364,7 +1324,7 @@ class ClassName extends React.Component {
     return (
       <div
         data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-        className={\`views-block hey \${Vertical_h118stgu}\`}
+        className={\`views-block hey \${Vertical}\`}
       >
         {props.children}
       </div>
@@ -1390,13 +1350,13 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'react-emotion';
 
-const Vertical_h118stgu = css({ backgroundColor: 'blue' });
+const Vertical = css({ backgroundColor: 'blue' });
 
 const ClassName = props => {
   return (
     <div
       data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-      className={\`views-block hey \${Vertical_h118stgu}\`}
+      className={\`views-block hey \${Vertical}\`}
     >
       {props.children}
     </div>
@@ -1419,8 +1379,8 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import styled, { css } from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const Vertical_h1cyenk5 = css({ backgroundColor: 'red' });
-const Text_hvqf4zf = css({ color: 'var(--color)' });
+const Vertical = css({ backgroundColor: 'red' });
+const Text = css({ color: 'var(--color)' });
 
 class Code extends React.Component {
   render() {
@@ -1429,16 +1389,16 @@ class Code extends React.Component {
     return (
       <div
         data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-        className={\`views-block \${Vertical_h1cyenk5}\`}
+        className={\`views-block \${Vertical}\`}
       >
-        <Text
+        <span
           data-test-id={\`Code.Text|\`}
-          innerRef={props.refText}
+          ref={props.refText}
           style={{ '--color': props.color }}
-          className={\`views-block \${Text_hvqf4zf}\`}
+          className={\`views-block \${Text}\`}
         >
           {props.text}
-        </Text>
+        </span>
         {props.children}
       </div>
     );
@@ -1482,22 +1442,22 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import styled, { css } from 'react-emotion';
 
-const Vertical_h1cyenk5 = css({ backgroundColor: 'red' });
-const Text_hvqf4zf = css({ color: 'var(--color)' });
+const Vertical = css({ backgroundColor: 'red' });
+const Text = css({ color: 'var(--color)' });
 
 const Code = props => {
   return (
     <div
       data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-      className={\`views-block \${Vertical_h1cyenk5}\`}
+      className={\`views-block \${Vertical}\`}
     >
-      <Text
+      <span
         data-test-id={\`Code.Text|\`}
         style={{ '--color': props.color }}
-        className={\`views-block \${Text_hvqf4zf}\`}
+        className={\`views-block \${Text}\`}
       >
         {props.text}
-      </Text>
+      </span>
       {props.children}
     </div>
   );
@@ -1638,7 +1598,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const Display_h1ys1kch = css({ display: 'block' });
+const Display1 = css({ display: 'block' });
 
 class Display extends React.Component {
   render() {
@@ -1647,7 +1607,7 @@ class Display extends React.Component {
     return (
       <div
         data-test-id={\`\${props['data-test-id'] || 'Display'}|\`}
-        className={\`views-block \${Display_h1ys1kch}\`}
+        className={\`views-block \${Display1}\`}
       >
         {props.children}
       </div>
@@ -1673,13 +1633,13 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'react-emotion';
 
-const Display_h1ys1kch = css({ display: 'block' });
+const Display1 = css({ display: 'block' });
 
 const Display = props => {
   return (
     <div
       data-test-id={\`\${props['data-test-id'] || 'Display'}|\`}
-      className={\`views-block \${Display_h1ys1kch}\`}
+      className={\`views-block \${Display1}\`}
     >
       {props.children}
     </div>
@@ -1703,17 +1663,17 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import styled from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const Vertical_hvqf4zf = css({ height: 'var(--height)' });
+const Vertical = css({ height: 'var(--height)' });
 
 class DynamicStylesApplyToBasicBlocksOnly extends React.Component {
   render() {
     const { context, props } = this;
 
     return (
-      <Vertical
+      <div
         data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
         style={{ '--height': \`\${props.height}px\` }}
-        className={\`views-block \${Vertical_hvqf4zf}\`}
+        className={\`views-block \${Vertical}\`}
       >
         <SomeThing
           data-test-id={\`DynamicStylesApplyToBasicBlocksOnly.OnTop|\`}
@@ -1721,7 +1681,7 @@ class DynamicStylesApplyToBasicBlocksOnly extends React.Component {
           className=\\"views-block\\"
         />
         {props.children}
-      </Vertical>
+      </div>
     );
   }
 }
@@ -1751,14 +1711,14 @@ import SomeThing from './SomeThing.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import styled from 'react-emotion';
 
-const Vertical_hvqf4zf = css({ height: 'var(--height)' });
+const Vertical = css({ height: 'var(--height)' });
 
 const DynamicStylesApplyToBasicBlocksOnly = props => {
   return (
-    <Vertical
+    <div
       data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
       style={{ '--height': \`\${props.height}px\` }}
-      className={\`views-block \${Vertical_hvqf4zf}\`}
+      className={\`views-block \${Vertical}\`}
     >
       <SomeThing
         data-test-id={\`DynamicStylesApplyToBasicBlocksOnly.OnTop|\`}
@@ -1766,7 +1726,7 @@ const DynamicStylesApplyToBasicBlocksOnly = props => {
         className=\\"views-block\\"
       />
       {props.children}
-    </Vertical>
+    </div>
   );
 };
 
@@ -1916,15 +1876,15 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import styled, { css } from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const Hover_h1eiserf = css({
+const Hover1 = css({
   backgroundColor: '#323232',
   '&:hover': {
     backgroundColor: '#232323',
   },
 });
-const Text_h1uuiss4 = css({
+const Text = css({
   color: 'white',
-  [\`.\${Hover_h1eiserf}:hover &, .\${Hover_h1eiserf}.hover &\`]: {
+  [\`\${Hover1}:hover &, \${Hover1}.hover &\`]: {
     color: 'black',
   },
   fontSize: 'var(--fontSize)',
@@ -1946,15 +1906,15 @@ class Hover extends React.Component {
             props,
           })
         }
-        className={\`views-block \${Hover_h1eiserf}\`}
+        className={\`views-block \${Hover1}\`}
       >
-        <Text
+        <span
           data-test-id={\`Hover.Text|\`}
           style={{ '--fontSize': \`\${props.fontSize}px\` }}
-          className={\`views-block \${Text_h1uuiss4}\`}
+          className={\`views-block \${Text}\`}
         >
           Hey!
-        </Text>
+        </span>
         {props.children}
       </button>
     );
@@ -1990,15 +1950,15 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import styled, { css } from 'react-emotion';
 
-const Hover_h1eiserf = css({
+const Hover1 = css({
   backgroundColor: '#323232',
   '&:hover': {
     backgroundColor: '#232323',
   },
 });
-const Text_h1uuiss4 = css({
+const Text = css({
   color: 'white',
-  [\`.\${Hover_h1eiserf}:hover &, .\${Hover_h1eiserf}.hover &\`]: {
+  [\`\${Hover1}:hover &, \${Hover1}.hover &\`]: {
     color: 'black',
   },
   fontSize: 'var(--fontSize)',
@@ -2009,15 +1969,15 @@ const Hover = props => {
     <button
       data-test-id={\`\${props['data-test-id'] || 'Hover'}|\`}
       onClick={props.onClick}
-      className={\`views-block \${Hover_h1eiserf}\`}
+      className={\`views-block \${Hover1}\`}
     >
-      <Text
+      <span
         data-test-id={\`Hover.Text|\`}
         style={{ '--fontSize': \`\${props.fontSize}px\` }}
-        className={\`views-block \${Text_h1uuiss4}\`}
+        className={\`views-block \${Text}\`}
       >
         Hey!
-      </Text>
+      </span>
       {props.children}
     </button>
   );
@@ -2387,19 +2347,19 @@ import chopperSvg from './chopper.svg';
 import styled from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const LocalImageSvg_hg0lcix = css({ width: 50, height: 'var(--height)' });
+const LocalImageSvg1 = css({ width: 50, height: 'var(--height)' });
 
 class LocalImageSvg extends React.Component {
   render() {
     const { context, props } = this;
 
     return (
-      <LocalImageSvg1
+      <img
         data-test-id={\`\${props['data-test-id'] || 'LocalImageSvg'}|\`}
         alt={''}
         src={chopperSvg}
         style={{ '--height': \`\${props.height}px\` }}
-        className={\`views-block \${LocalImageSvg_hg0lcix}\`}
+        className={\`views-block \${LocalImageSvg1}\`}
       />
     );
   }
@@ -2430,16 +2390,16 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import chopperSvg from './chopper.svg';
 import styled from 'react-emotion';
 
-const LocalImageSvg_hg0lcix = css({ width: 50, height: 'var(--height)' });
+const LocalImageSvg1 = css({ width: 50, height: 'var(--height)' });
 
 const LocalImageSvg = props => {
   return (
-    <LocalImageSvg1
+    <img
       data-test-id={\`\${props['data-test-id'] || 'LocalImageSvg'}|\`}
       alt={''}
       src={chopperSvg}
       style={{ '--height': \`\${props.height}px\` }}
-      className={\`views-block \${LocalImageSvg_hg0lcix}\`}
+      className={\`views-block \${LocalImageSvg1}\`}
     />
   );
 };
@@ -2885,7 +2845,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const Text_h7ml8je = css({ marginTop: -10 });
+const Text = css({ marginTop: -10 });
 
 class NegativeNumber extends React.Component {
   render() {
@@ -2894,7 +2854,7 @@ class NegativeNumber extends React.Component {
     return (
       <span
         data-test-id={\`\${props['data-test-id'] || 'Text'}|\`}
-        className={\`views-block \${Text_h7ml8je}\`}
+        className={\`views-block \${Text}\`}
       >
         hey
       </span>
@@ -2920,13 +2880,13 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'react-emotion';
 
-const Text_h7ml8je = css({ marginTop: -10 });
+const Text = css({ marginTop: -10 });
 
 const NegativeNumber = props => {
   return (
     <span
       data-test-id={\`\${props['data-test-id'] || 'Text'}|\`}
-      className={\`views-block \${Text_h7ml8je}\`}
+      className={\`views-block \${Text}\`}
     >
       hey
     </span>
@@ -3057,14 +3017,14 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import styled from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const Scope_hvqf4zf = css({ color: 'var(--color)' });
+const Scope1 = css({ color: 'var(--color)' });
 
 class Scope extends React.Component {
   render() {
     const { context, props } = this;
 
     return (
-      <Scope1
+      <span
         data-test-id={\`\${props['data-test-id'] || 'Scope'}|\${
           props.somethingGreen
             ? 'somethingGreen|'
@@ -3081,14 +3041,14 @@ class Scope extends React.Component {
                 : !props.whatMakesBlue ? 'rgb(255,255,0)' : 'red'
           }\`,
         }}
-        className={\`views-block \${Scope_hvqf4zf}\`}
+        className={\`views-block \${Scope1}\`}
       >
         {props.somethingGreen
           ? '2 green'
           : props.whatMakesBlue
             ? props.blue
             : !props.whatMakesBlue ? 'is Yellow' : '1 red'}
-      </Scope1>
+      </span>
     );
   }
 }
@@ -3111,11 +3071,11 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import styled from 'react-emotion';
 
-const Scope_hvqf4zf = css({ color: 'var(--color)' });
+const Scope1 = css({ color: 'var(--color)' });
 
 const Scope = props => {
   return (
-    <Scope1
+    <span
       data-test-id={\`\${props['data-test-id'] || 'Scope'}|\${
         props.somethingGreen
           ? 'somethingGreen|'
@@ -3132,14 +3092,14 @@ const Scope = props => {
               : !props.whatMakesBlue ? 'rgb(255,255,0)' : 'red'
         }\`,
       }}
-      className={\`views-block \${Scope_hvqf4zf}\`}
+      className={\`views-block \${Scope1}\`}
     >
       {props.somethingGreen
         ? '2 green'
         : props.whatMakesBlue
           ? props.blue
           : !props.whatMakesBlue ? 'is Yellow' : '1 red'}
-    </Scope1>
+    </span>
   );
 };
 
@@ -3345,7 +3305,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import styled from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const Content_hvqf4zf = css({
+const Content = css({
   opacity: 'var(--opacity)',
   transform: 'scale(var(--scale))',
 });
@@ -3376,7 +3336,7 @@ class ScopePopup2 extends React.Component {
             toggle popup
           </span>
         </button>
-        <Content
+        <div
           data-test-id={\`ScopePopup2.Content|\${
             props.isShown
               ? 'isShown|'
@@ -3386,12 +3346,12 @@ class ScopePopup2 extends React.Component {
             '--opacity': \`\${props.isShown ? 1 : props.isSuperVisible ? 3 : 0}\`,
             '--scale': \`\${props.isShown ? 1 : props.isSuperVisible ? 2 : 0}\`,
           }}
-          className={\`views-block \${Content_hvqf4zf}\`}
+          className={\`views-block \${Content}\`}
         >
           <span data-test-id={\`ScopePopup2.Text:1|\`} className=\\"views-block\\">
             I'm inside the popup
           </span>
-        </Content>
+        </div>
         {props.children}
       </div>
     );
@@ -3422,7 +3382,7 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import styled from 'react-emotion';
 
-const Content_hvqf4zf = css({
+const Content = css({
   opacity: 'var(--opacity)',
   transform: 'scale(var(--scale))',
 });
@@ -3442,7 +3402,7 @@ const ScopePopup2 = props => {
           toggle popup
         </span>
       </button>
-      <Content
+      <div
         data-test-id={\`ScopePopup2.Content|\${
           props.isShown
             ? 'isShown|'
@@ -3452,12 +3412,12 @@ const ScopePopup2 = props => {
           '--opacity': \`\${props.isShown ? 1 : props.isSuperVisible ? 3 : 0}\`,
           '--scale': \`\${props.isShown ? 1 : props.isSuperVisible ? 2 : 0}\`,
         }}
-        className={\`views-block \${Content_hvqf4zf}\`}
+        className={\`views-block \${Content}\`}
       >
         <span data-test-id={\`ScopePopup2.Text:1|\`} className=\\"views-block\\">
           I'm inside the popup
         </span>
-      </Content>
+      </div>
       {props.children}
     </div>
   );
@@ -3485,10 +3445,10 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import styled from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const BoxShadow_h187w4jn = css({
+const BoxShadow = css({
   boxShadow: \`0px 5px 2px 2px \${props.shadowColor}undefined\`,
 });
-const TextShadow_h7rw1by = css({
+const TextShadow = css({
   textShadow: \`2px 3px 1px \${props.shadowColor}undefined\`,
 });
 
@@ -3501,19 +3461,19 @@ class Shadow extends React.Component {
         data-test-id={\`\${props['data-test-id'] || 'Shadow'}|\`}
         className=\\"views-block\\"
       >
-        <BoxShadow
+        <div
           data-test-id={\`Shadow.BoxShadow|\`}
           style={{ '--shadowColor': props.shadowColor }}
-          className={\`views-block \${BoxShadow_h187w4jn}\`}
+          className={\`views-block \${BoxShadow}\`}
         >
-          <TextShadow
+          <span
             data-test-id={\`Shadow.TextShadow|\`}
             style={{ '--shadowColor': props.shadowColor }}
-            className={\`views-block \${TextShadow_h7rw1by}\`}
+            className={\`views-block \${TextShadow}\`}
           >
             hey
-          </TextShadow>
-        </BoxShadow>
+          </span>
+        </div>
         {props.children}
       </div>
     );
@@ -3544,10 +3504,10 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import styled from 'react-emotion';
 
-const BoxShadow_h187w4jn = css({
+const BoxShadow = css({
   boxShadow: \`0px 5px 2px 2px \${props.shadowColor}undefined\`,
 });
-const TextShadow_h7rw1by = css({
+const TextShadow = css({
   textShadow: \`2px 3px 1px \${props.shadowColor}undefined\`,
 });
 
@@ -3557,19 +3517,19 @@ const Shadow = props => {
       data-test-id={\`\${props['data-test-id'] || 'Shadow'}|\`}
       className=\\"views-block\\"
     >
-      <BoxShadow
+      <div
         data-test-id={\`Shadow.BoxShadow|\`}
         style={{ '--shadowColor': props.shadowColor }}
-        className={\`views-block \${BoxShadow_h187w4jn}\`}
+        className={\`views-block \${BoxShadow}\`}
       >
-        <TextShadow
+        <span
           data-test-id={\`Shadow.TextShadow|\`}
           style={{ '--shadowColor': props.shadowColor }}
-          className={\`views-block \${TextShadow_h7rw1by}\`}
+          className={\`views-block \${TextShadow}\`}
         >
           hey
-        </TextShadow>
-      </BoxShadow>
+        </span>
+      </div>
       {props.children}
     </div>
   );
@@ -3598,7 +3558,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import styled from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const WindowControl_h122qb6y = css({
+const WindowControl = css({
   marginRight: 8,
   backgroundColor: '#CBCDCE',
   opacity: 0.7,
@@ -3619,7 +3579,7 @@ class SomeMissingStyle extends React.Component {
     const { context, props } = this;
 
     return (
-      <WindowControl
+      <button
         data-test-id={\`\${props['data-test-id'] || 'WindowControl'}|\`}
         onClick={event =>
           context.track({
@@ -3632,10 +3592,10 @@ class SomeMissingStyle extends React.Component {
         }
         tabIndex={-1}
         style={{}}
-        className={\`views-block \${WindowControl_h122qb6y}\`}
+        className={\`views-block \${WindowControl}\`}
       >
         {props.children}
-      </WindowControl>
+      </button>
     );
   }
 }
@@ -3664,7 +3624,7 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import styled from 'react-emotion';
 
-const WindowControl_h122qb6y = css({
+const WindowControl = css({
   marginRight: 8,
   backgroundColor: '#CBCDCE',
   opacity: 0.7,
@@ -3682,14 +3642,14 @@ const WindowControl_h122qb6y = css({
 
 const SomeMissingStyle = props => {
   return (
-    <WindowControl
+    <button
       data-test-id={\`\${props['data-test-id'] || 'WindowControl'}|\`}
       onClick={props.onClick}
       style={{}}
-      className={\`views-block \${WindowControl_h122qb6y}\`}
+      className={\`views-block \${WindowControl}\`}
     >
       {props.children}
-    </WindowControl>
+    </button>
   );
 };
 
@@ -3716,7 +3676,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const Horizontal_h1qq1i2q = css({ flexDirection: 'row' });
+const Horizontal = css({ flexDirection: 'row' });
 
 class Teleport extends React.Component {
   render() {
@@ -3726,7 +3686,7 @@ class Teleport extends React.Component {
       <Link
         to=\\"..\\"
         data-test-id={\`\${props['data-test-id'] || 'Horizontal'}|\`}
-        className={\`views-block \${Horizontal_h1qq1i2q}\`}
+        className={\`views-block \${Horizontal}\`}
       >
         <span data-test-id={\`Teleport.Text|\`} className=\\"views-block\\">
           go back
@@ -3756,14 +3716,14 @@ import { Link } from 'react-router-dom';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'react-emotion';
 
-const Horizontal_h1qq1i2q = css({ flexDirection: 'row' });
+const Horizontal = css({ flexDirection: 'row' });
 
 const Teleport = props => {
   return (
     <Link
       to=\\"..\\"
       data-test-id={\`\${props['data-test-id'] || 'Horizontal'}|\`}
-      className={\`views-block \${Horizontal_h1qq1i2q}\`}
+      className={\`views-block \${Horizontal}\`}
     >
       <span data-test-id={\`Teleport.Text|\`} className=\\"views-block\\">
         go back
@@ -3981,7 +3941,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const Transform_h1c079al = css({
+const Transform1 = css({
   transform:
     'rotate(4deg) rotateX(5deg) rotateY(6deg) scale(3) translateX(1px) translateY(2px)',
   transformOrigin: 'center top',
@@ -3994,7 +3954,7 @@ class Transform extends React.Component {
     return (
       <div
         data-test-id={\`\${props['data-test-id'] || 'Transform'}|\`}
-        className={\`views-block \${Transform_h1c079al}\`}
+        className={\`views-block \${Transform1}\`}
       >
         <span data-test-id={\`Transform.Text|\`} className=\\"views-block\\">
           who knows what happens here :D
@@ -4023,7 +3983,7 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'react-emotion';
 
-const Transform_h1c079al = css({
+const Transform1 = css({
   transform:
     'rotate(4deg) rotateX(5deg) rotateY(6deg) scale(3) translateX(1px) translateY(2px)',
   transformOrigin: 'center top',
@@ -4033,7 +3993,7 @@ const Transform = props => {
   return (
     <div
       data-test-id={\`\${props['data-test-id'] || 'Transform'}|\`}
-      className={\`views-block \${Transform_h1c079al}\`}
+      className={\`views-block \${Transform1}\`}
     >
       <span data-test-id={\`Transform.Text|\`} className=\\"views-block\\">
         who knows what happens here :D
@@ -4059,7 +4019,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const Email_h17p6imm = css({
+const Email = css({
   borderColor: 'black',
   borderStyle: 'solid',
   borderWidth: 1,
@@ -4090,7 +4050,7 @@ class UseCaptureEmail extends React.Component {
         autoFocus={true}
         defaultValue=\\"hey this is a default value\\"
         onSubmit={props.onSubmit}
-        className={\`views-block \${Email_h17p6imm}\`}
+        className={\`views-block \${Email}\`}
       />
     );
   }
@@ -4120,7 +4080,7 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'react-emotion';
 
-const Email_h17p6imm = css({
+const Email = css({
   borderColor: 'black',
   borderStyle: 'solid',
   borderWidth: 1,
@@ -4151,7 +4111,7 @@ class UseCaptureEmail extends React.Component {
         data-test-id={\`\${props['data-test-id'] || 'Email'}|\`}
         defaultValue=\\"hey this is a default value\\"
         onSubmit={props.onSubmit}
-        className={\`views-block mousetrap \${Email_h17p6imm}\`}
+        className={\`views-block mousetrap \${Email}\`}
       />
     );
   }
@@ -4735,7 +4695,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const Horizontal_h1t8p93z = css({
+const Horizontal = css({
   flexDirection: 'row',
   borderColor: 'red',
   borderStyle: 'solid',
@@ -4749,7 +4709,7 @@ class UseHorizontal extends React.Component {
     return (
       <div
         data-test-id={\`\${props['data-test-id'] || 'Horizontal'}|\`}
-        className={\`views-block \${Horizontal_h1t8p93z}\`}
+        className={\`views-block \${Horizontal}\`}
       >
         {props.children}
       </div>
@@ -4775,7 +4735,7 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'react-emotion';
 
-const Horizontal_h1t8p93z = css({
+const Horizontal = css({
   flexDirection: 'row',
   borderColor: 'red',
   borderStyle: 'solid',
@@ -4786,7 +4746,7 @@ const UseHorizontal = props => {
   return (
     <div
       data-test-id={\`\${props['data-test-id'] || 'Horizontal'}|\`}
-      className={\`views-block \${Horizontal_h1t8p93z}\`}
+      className={\`views-block \${Horizontal}\`}
     >
       {props.children}
     </div>
@@ -4884,7 +4844,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const Horizontal_h1qq1i2q = css({ flexDirection: 'row' });
+const Horizontal = css({ flexDirection: 'row' });
 
 class UseRouter extends React.Component {
   render() {
@@ -4894,7 +4854,7 @@ class UseRouter extends React.Component {
       <Router>
         <div
           data-test-id={\`\${props['data-test-id'] || 'Horizontal'}|\`}
-          className={\`views-block \${Horizontal_h1qq1i2q}\`}
+          className={\`views-block \${Horizontal}\`}
         >
           <Route
             path=\\"/\\"
@@ -4965,14 +4925,14 @@ import Topics from './Topics.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'react-emotion';
 
-const Horizontal_h1qq1i2q = css({ flexDirection: 'row' });
+const Horizontal = css({ flexDirection: 'row' });
 
 const UseRouter = props => {
   return (
     <Router>
       <div
         data-test-id={\`\${props['data-test-id'] || 'Horizontal'}|\`}
-        className={\`views-block \${Horizontal_h1qq1i2q}\`}
+        className={\`views-block \${Horizontal}\`}
       >
         <Route
           path=\\"/\\"
@@ -5036,11 +4996,11 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const Svg_hq411mi = css({
+const Svg = css({
   height: 20,
   width: 20,
 });
-const SvgPath_h15mb53k = css({ fill: 'red' });
+const SvgPath = css({ fill: 'red' });
 
 class UseSvg extends React.Component {
   render() {
@@ -5050,12 +5010,12 @@ class UseSvg extends React.Component {
       <svg
         data-test-id={\`\${props['data-test-id'] || 'Svg'}|\`}
         viewBox=\\"0 0 20 20\\"
-        className={\`views-block \${Svg_hq411mi}\`}
+        className={\`views-block \${Svg}\`}
       >
         <path
           data-test-id={\`UseSvg.SvgPath|\`}
           d=\\"0 20\\"
-          className={\`views-block \${SvgPath_h15mb53k}\`}
+          className={\`views-block \${SvgPath}\`}
         />
         <circle
           data-test-id={\`UseSvg.SvgCircle|\`}
@@ -5109,23 +5069,23 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'react-emotion';
 
-const Svg_hq411mi = css({
+const Svg = css({
   height: 20,
   width: 20,
 });
-const SvgPath_h15mb53k = css({ fill: 'red' });
+const SvgPath = css({ fill: 'red' });
 
 const UseSvg = props => {
   return (
     <svg
       data-test-id={\`\${props['data-test-id'] || 'Svg'}|\`}
       viewBox=\\"0 0 20 20\\"
-      className={\`views-block \${Svg_hq411mi}\`}
+      className={\`views-block \${Svg}\`}
     >
       <path
         data-test-id={\`UseSvg.SvgPath|\`}
         d=\\"0 20\\"
-        className={\`views-block \${SvgPath_h15mb53k}\`}
+        className={\`views-block \${SvgPath}\`}
       />
       <circle
         data-test-id={\`UseSvg.SvgCircle|\`}
@@ -5177,7 +5137,7 @@ import './Fonts/Montserrat-300';
 import styled from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const UseText_htyzezn = css({
+const UseText1 = css({
   fontFamily: 'Montserrat, sans-serif',
   fontSize: 16,
   lineHeight: 1.5,
@@ -5190,15 +5150,15 @@ class UseText extends React.Component {
     const { context, props } = this;
 
     return (
-      <UseText1
+      <span
         data-test-id={\`\${props['data-test-id'] || 'UseText'}|\${
           props.isSomething ? 'isSomething|' : ''
         }\`}
         style={{ '--color': \`\${props.isSomething ? 'red' : 'blue'}\` }}
-        className={\`views-block \${UseText_htyzezn}\`}
+        className={\`views-block \${UseText1}\`}
       >
         Hi, I'm some text
-      </UseText1>
+      </span>
     );
   }
 }
@@ -5229,7 +5189,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import './Fonts/Montserrat-300';
 import styled from 'react-emotion';
 
-const UseText_htyzezn = css({
+const UseText1 = css({
   fontFamily: 'Montserrat, sans-serif',
   fontSize: 16,
   lineHeight: 1.5,
@@ -5239,15 +5199,15 @@ const UseText_htyzezn = css({
 
 const UseText = props => {
   return (
-    <UseText1
+    <span
       data-test-id={\`\${props['data-test-id'] || 'UseText'}|\${
         props.isSomething ? 'isSomething|' : ''
       }\`}
       style={{ '--color': \`\${props.isSomething ? 'red' : 'blue'}\` }}
-      className={\`views-block \${UseText_htyzezn}\`}
+      className={\`views-block \${UseText1}\`}
     >
       Hi, I'm some text
-    </UseText1>
+    </span>
   );
 };
 
@@ -5276,14 +5236,14 @@ import './Fonts/CustomFontNotOnGoogle-400-italic';
 import { css } from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const Normal_h10uwqya = css({
+const Normal = css({
   color: 'blue',
   fontFamily: 'CustomFontNotOnGoogle',
   fontSize: 16,
   lineHeight: 1.5,
   fontWeight: 300,
 });
-const Italic_h1p02bde = css({
+const Italic = css({
   color: 'blue',
   fontFamily: 'CustomFontNotOnGoogle',
   fontStyle: 'italic',
@@ -5304,14 +5264,14 @@ class UseTextCustomFont extends React.Component {
         <span
           data-test-id={\`UseTextCustomFont.Normal|\`}
           fontType=\\"sans-serif\\"
-          className={\`views-block \${Normal_h10uwqya}\`}
+          className={\`views-block \${Normal}\`}
         >
           Hi, I'm some text
         </span>
         <span
           data-test-id={\`UseTextCustomFont.Italic|\`}
           fontType=\\"sans-serif\\"
-          className={\`views-block \${Italic_h1p02bde}\`}
+          className={\`views-block \${Italic}\`}
         >
           Hi, I'm some text
         </span>
@@ -5354,14 +5314,14 @@ import './Fonts/CustomFontNotOnGoogle-300';
 import './Fonts/CustomFontNotOnGoogle-400-italic';
 import { css } from 'react-emotion';
 
-const Normal_h10uwqya = css({
+const Normal = css({
   color: 'blue',
   fontFamily: 'CustomFontNotOnGoogle',
   fontSize: 16,
   lineHeight: 1.5,
   fontWeight: 300,
 });
-const Italic_h1p02bde = css({
+const Italic = css({
   color: 'blue',
   fontFamily: 'CustomFontNotOnGoogle',
   fontStyle: 'italic',
@@ -5379,14 +5339,14 @@ const UseTextCustomFont = props => {
       <span
         data-test-id={\`UseTextCustomFont.Normal|\`}
         fontType=\\"sans-serif\\"
-        className={\`views-block \${Normal_h10uwqya}\`}
+        className={\`views-block \${Normal}\`}
       >
         Hi, I'm some text
       </span>
       <span
         data-test-id={\`UseTextCustomFont.Italic|\`}
         fontType=\\"sans-serif\\"
-        className={\`views-block \${Italic_h1p02bde}\`}
+        className={\`views-block \${Italic}\`}
       >
         Hi, I'm some text
       </span>
@@ -5424,7 +5384,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const Vertical_h1cyenk5 = css({ backgroundColor: 'red' });
+const Vertical = css({ backgroundColor: 'red' });
 
 class UseVertical extends React.Component {
   render() {
@@ -5433,7 +5393,7 @@ class UseVertical extends React.Component {
     return (
       <div
         data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-        className={\`views-block \${Vertical_h1cyenk5}\`}
+        className={\`views-block \${Vertical}\`}
       >
         {props.children}
       </div>
@@ -5459,13 +5419,13 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'react-emotion';
 
-const Vertical_h1cyenk5 = css({ backgroundColor: 'red' });
+const Vertical = css({ backgroundColor: 'red' });
 
 const UseVertical = props => {
   return (
     <div
       data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-      className={\`views-block \${Vertical_h1cyenk5}\`}
+      className={\`views-block \${Vertical}\`}
     >
       {props.children}
     </div>
@@ -5488,23 +5448,20 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import styled from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const ViewNameIsntUsedInStyle_h1syrwwv = css({
-  zIndex: 5,
-  opacity: 'var(--opacity)',
-});
+const ViewNameIsntUsedInStyle1 = css({ zIndex: 5, opacity: 'var(--opacity)' });
 
 class ViewNameIsntUsedInStyle extends React.Component {
   render() {
     const { context, props } = this;
 
     return (
-      <ViewNameIsntUsedInStyle1
+      <div
         data-test-id={\`\${props['data-test-id'] || 'ViewNameIsntUsedInStyle'}|\`}
         style={{ '--opacity': props.opacity }}
-        className={\`views-block \${ViewNameIsntUsedInStyle_h1syrwwv}\`}
+        className={\`views-block \${ViewNameIsntUsedInStyle1}\`}
       >
         {props.children}
-      </ViewNameIsntUsedInStyle1>
+      </div>
     );
   }
 }
@@ -5533,20 +5490,17 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import styled from 'react-emotion';
 
-const ViewNameIsntUsedInStyle_h1syrwwv = css({
-  zIndex: 5,
-  opacity: 'var(--opacity)',
-});
+const ViewNameIsntUsedInStyle1 = css({ zIndex: 5, opacity: 'var(--opacity)' });
 
 const ViewNameIsntUsedInStyle = props => {
   return (
-    <ViewNameIsntUsedInStyle1
+    <div
       data-test-id={\`\${props['data-test-id'] || 'ViewNameIsntUsedInStyle'}|\`}
       style={{ '--opacity': props.opacity }}
-      className={\`views-block \${ViewNameIsntUsedInStyle_h1syrwwv}\`}
+      className={\`views-block \${ViewNameIsntUsedInStyle1}\`}
     >
       {props.children}
-    </ViewNameIsntUsedInStyle1>
+    </div>
   );
 };
 
@@ -5573,7 +5527,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'react-emotion';
 import PropTypes from 'prop-types';
 
-const App_h1qq1i2q = css({ flexDirection: 'row' });
+const App = css({ flexDirection: 'row' });
 
 class When extends React.Component {
   render() {
@@ -5582,7 +5536,7 @@ class When extends React.Component {
     return (
       <div
         data-test-id={\`\${props['data-test-id'] || 'App'}|\`}
-        className={\`views-block \${App_h1qq1i2q}\`}
+        className={\`views-block \${App}\`}
       >
         {props.showMe ? (
           <span data-test-id={\`When.Text|\`} className=\\"views-block\\">
@@ -5619,13 +5573,13 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'react-emotion';
 
-const App_h1qq1i2q = css({ flexDirection: 'row' });
+const App = css({ flexDirection: 'row' });
 
 const When = props => {
   return (
     <div
       data-test-id={\`\${props['data-test-id'] || 'App'}|\`}
-      className={\`views-block \${App_h1qq1i2q}\`}
+      className={\`views-block \${App}\`}
     >
       {props.showMe ? (
         <span data-test-id={\`When.Text|\`} className=\\"views-block\\">
@@ -5729,7 +5683,7 @@ import SubButton from './SubButton.view.js';
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import PropTypes from 'prop-types';
 
-const styles = StyleSheet.create({ h1g2xbng: { color: 'red' } });
+const styles = StyleSheet.create({ Vertical: { color: 'red' } });
 
 class Action extends React.Component {
   render() {
@@ -5752,7 +5706,7 @@ class Action extends React.Component {
       >
         <View
           testID={\`\${props['testID'] || 'Vertical'}|\`}
-          style={styles.h1g2xbng}
+          style={styles.Vertical}
         >
           <Text testID={\`Action.Text|\`}>click me</Text>
           <SubButton testID={\`Action.SubButton|\`} isDisabled={true} />
@@ -5801,7 +5755,7 @@ const getAnimatedValue = (animatedValue, from, to) =>
     inputRange: [0, 1],
     outputRange: [from, to],
   });
-const styles = StyleSheet.create({ h1jcb2fl: { backgroundColor: 'red' } });
+const styles = StyleSheet.create({ Vertical: { backgroundColor: 'red' } });
 
 class AnimatedButton extends React.Component {
   animatedValue0 = new Animated.Value(this.props.isOn ? 1 : 0);
@@ -5841,7 +5795,7 @@ class AnimatedButton extends React.Component {
             props.isOn ? 'isOn|' : ''
           }\`}
           style={[
-            styles.h1jcb2fl,
+            styles.Vertical,
             {
               opacity: getAnimatedValue(this.animatedValue0, 0.75, 1),
               transform: [
@@ -5891,7 +5845,7 @@ import { StyleSheet, View } from 'react-native';
 import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
-  hfuuuuw: { width: '92%', marginTop: 'auto' },
+  Vertical: { width: '92%', marginTop: 'auto' },
 });
 
 class AppRegionDrag extends React.Component {
@@ -5899,7 +5853,10 @@ class AppRegionDrag extends React.Component {
     const { context, props } = this;
 
     return (
-      <View testID={\`\${props['testID'] || 'Vertical'}|\`} style={styles.hfuuuuw}>
+      <View
+        testID={\`\${props['testID'] || 'Vertical'}|\`}
+        style={styles.Vertical}
+      >
         {props.children}
       </View>
     );
@@ -5924,7 +5881,7 @@ import React from 'react';
 import { Animated, Image, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 
-const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
+const styles = StyleSheet.create({ Horizontal: { flexDirection: 'row' } });
 
 class BackgroundImage extends React.Component {
   render() {
@@ -5940,7 +5897,7 @@ class BackgroundImage extends React.Component {
           resizeMode={undefined}
           source={{ uri: props.backgroundImage }}
           testID={\`BackgroundImage.Horizontal|\`}
-          style={styles.hp2cr4d}
+          style={styles.Horizontal}
         />
         {props.children}
       </Image>
@@ -5975,11 +5932,11 @@ import { Animated, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
-  h1n9275f: { borderColor: 'red', borderStyle: 'solid' },
-  h14delot: { borderStyle: 'solid', borderTopColor: 'red' },
-  hmmoxzd: { borderStyle: 'solid', borderRightColor: 'red' },
-  h120skwi: { borderStyle: 'solid', borderBottomColor: 'red' },
-  h1en1ebe: { borderStyle: 'solid', borderLeftColor: 'red' },
+  Border1: { borderColor: 'red', borderStyle: 'solid' },
+  Top: { borderStyle: 'solid', borderTopColor: 'red' },
+  Right: { borderStyle: 'solid', borderRightColor: 'red' },
+  Bottom: { borderStyle: 'solid', borderBottomColor: 'red' },
+  Left: { borderStyle: 'solid', borderLeftColor: 'red' },
 });
 
 class Border extends React.Component {
@@ -5989,26 +5946,26 @@ class Border extends React.Component {
     return (
       <Animated.View
         testID={\`\${props['testID'] || 'Border'}|\`}
-        style={[styles.h1n9275f, { borderWidth: props.borderWidth }]}
+        style={[styles.Border1, { borderWidth: props.borderWidth }]}
       >
         <Animated.View
           testID={\`Border.Top|\`}
-          style={[styles.h14delot, { borderTopWidth: props.borderTopWidth }]}
+          style={[styles.Top, { borderTopWidth: props.borderTopWidth }]}
         />
         <Animated.View
           testID={\`Border.Right|\`}
-          style={[styles.hmmoxzd, { borderRightWidth: props.borderRightWidth }]}
+          style={[styles.Right, { borderRightWidth: props.borderRightWidth }]}
         />
         <Animated.View
           testID={\`Border.Bottom|\`}
           style={[
-            styles.h120skwi,
+            styles.Bottom,
             { borderBottomWidth: props.borderBottomWidth },
           ]}
         />
         <Animated.View
           testID={\`Border.Left|\`}
-          style={[styles.h1en1ebe, { borderLeftWidth: props.borderLeftWidth }]}
+          style={[styles.Left, { borderLeftWidth: props.borderLeftWidth }]}
         />
         {props.children}
       </Animated.View>
@@ -6066,14 +6023,17 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import PropTypes from 'prop-types';
 
-const styles = StyleSheet.create({ hkg1xou: { backgroundColor: 'blue' } });
+const styles = StyleSheet.create({ Vertical: { backgroundColor: 'blue' } });
 
 class ClassName extends React.Component {
   render() {
     const { context, props } = this;
 
     return (
-      <View testID={\`\${props['testID'] || 'Vertical'}|\`} style={styles.hkg1xou}>
+      <View
+        testID={\`\${props['testID'] || 'Vertical'}|\`}
+        style={styles.Vertical}
+      >
         {props.children}
       </View>
     );
@@ -6098,7 +6058,7 @@ import React from 'react';
 import { Animated, StyleSheet, View } from 'react-native';
 import PropTypes from 'prop-types';
 
-const styles = StyleSheet.create({ h1jcb2fl: { backgroundColor: 'red' } });
+const styles = StyleSheet.create({ Vertical: { backgroundColor: 'red' } });
 
 class Code extends React.Component {
   render() {
@@ -6107,7 +6067,7 @@ class Code extends React.Component {
     return (
       <View
         testID={\`\${props['testID'] || 'Vertical'}|\`}
-        style={styles.h1jcb2fl}
+        style={styles.Vertical}
       >
         <Animated.Text
           testID={\`Code.Text|\`}
@@ -6205,14 +6165,14 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import PropTypes from 'prop-types';
 
-const styles = StyleSheet.create({ h1dd5jy2: { display: 'block' } });
+const styles = StyleSheet.create({ Display1: { display: 'block' } });
 
 class Display extends React.Component {
   render() {
     const { context, props } = this;
 
     return (
-      <View testID={\`\${props['testID'] || 'Display'}|\`} style={styles.h1dd5jy2}>
+      <View testID={\`\${props['testID'] || 'Display'}|\`} style={styles.Display1}>
         {props.children}
       </View>
     );
@@ -6344,8 +6304,8 @@ import {
 import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
-  h14i1mtc: { backgroundColor: '#323232' },
-  hyfo4ef: { color: 'white' },
+  Hover1: { backgroundColor: '#323232' },
+  Text: { color: 'white' },
 });
 
 class Hover extends React.Component {
@@ -6366,10 +6326,10 @@ class Hover extends React.Component {
         }
         underlayColor=\\"transparent\\"
       >
-        <View testID={\`\${props['testID'] || 'Hover'}|\`} style={styles.h14i1mtc}>
+        <View testID={\`\${props['testID'] || 'Hover'}|\`} style={styles.Hover1}>
           <Animated.Text
             testID={\`Hover.Text|\`}
-            style={[styles.hyfo4ef, { fontSize: props.fontSize }]}
+            style={[styles.Text, { fontSize: props.fontSize }]}
           >
             Hey!
           </Animated.Text>
@@ -6568,7 +6528,7 @@ import chopperSvg from './chopper.svg';
 import { Image, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 
-const styles = StyleSheet.create({ h1fkj9gt: { width: 50 } });
+const styles = StyleSheet.create({ LocalImageSvg1: { width: 50 } });
 
 class LocalImageSvg extends React.Component {
   render() {
@@ -6578,7 +6538,7 @@ class LocalImageSvg extends React.Component {
       <Image
         testID={\`\${props['testID'] || 'LocalImageSvg'}|\`}
         source={chopperSvg}
-        style={[styles.h1fkj9gt, { height: props.height }]}
+        style={[styles.LocalImageSvg1, { height: props.height }]}
       />
     );
   }
@@ -6815,14 +6775,14 @@ import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 import PropTypes from 'prop-types';
 
-const styles = StyleSheet.create({ h1gnz4mf: { marginTop: -10 } });
+const styles = StyleSheet.create({ Text: { marginTop: -10 } });
 
 class NegativeNumber extends React.Component {
   render() {
     const { context, props } = this;
 
     return (
-      <Text testID={\`\${props['testID'] || 'Text'}|\`} style={styles.h1gnz4mf}>
+      <Text testID={\`\${props['testID'] || 'Text'}|\`} style={styles.Text}>
         hey
       </Text>
     );
@@ -7108,14 +7068,14 @@ import { Animated, StyleSheet, View } from 'react-native';
 import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
-  h8lazqx: {
+  BoxShadow: {
     elevation: 1,
     shadowOffset: { width: 0, height: 5 },
     shadowRadius: 2,
     shadowOpacity: 1,
     shadowColor: 'props.shadowColor',
   },
-  h9jluza: {
+  TextShadow: {
     elevation: 1,
     shadowOffset: { width: 2, height: 3 },
     shadowRadius: 1,
@@ -7133,7 +7093,7 @@ class Shadow extends React.Component {
         <Animated.View
           testID={\`Shadow.BoxShadow|\`}
           style={[
-            styles.h8lazqx,
+            styles.BoxShadow,
             {
               elevation: 1,
               shadowOffset: { width: 0, height: 5 },
@@ -7146,7 +7106,7 @@ class Shadow extends React.Component {
           <Animated.Text
             testID={\`Shadow.TextShadow|\`}
             style={[
-              styles.h9jluza,
+              styles.TextShadow,
               {
                 elevation: 1,
                 shadowOffset: { width: 2, height: 3 },
@@ -7190,7 +7150,7 @@ import { Animated, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
-  h1yk1sqs: {
+  WindowControl: {
     marginRight: 8,
     backgroundColor: '#CBCDCE',
     opacity: 0.7,
@@ -7221,7 +7181,7 @@ class SomeMissingStyle extends React.Component {
         <Animated.View
           testID={\`\${props['testID'] || 'WindowControl'}|\`}
           tabIndex={-1}
-          style={styles.h1yk1sqs}
+          style={styles.WindowControl}
         >
           {props.children}
         </Animated.View>
@@ -7255,7 +7215,7 @@ import { Link } from 'react-router-native';
 import { StyleSheet, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 
-const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
+const styles = StyleSheet.create({ Horizontal: { flexDirection: 'row' } });
 
 class Teleport extends React.Component {
   render() {
@@ -7266,7 +7226,7 @@ class Teleport extends React.Component {
         <View
           to=\\"..\\"
           testID={\`\${props['testID'] || 'Horizontal'}|\`}
-          style={styles.hp2cr4d}
+          style={styles.Horizontal}
         >
           <Text testID={\`Teleport.Text|\`}>go back</Text>
           {props.children}
@@ -7384,7 +7344,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
-  h1nd70f4: {
+  Transform1: {
     transform: [
       { rotate: '4deg' },
       { rotateX: '5deg' },
@@ -7405,7 +7365,7 @@ class Transform extends React.Component {
     return (
       <View
         testID={\`\${props['testID'] || 'Transform'}|\`}
-        style={styles.h1nd70f4}
+        style={styles.Transform1}
       >
         <Text testID={\`Transform.Text|\`}>who knows what happens here :D</Text>
         {props.children}
@@ -7433,7 +7393,7 @@ import { StyleSheet, TextInput } from 'react-native';
 import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
-  hm4pcs: {
+  Email: {
     borderColor: 'black',
     borderStyle: 'solid',
     borderWidth: 1,
@@ -7464,7 +7424,7 @@ class UseCaptureEmail extends React.Component {
         testID={\`\${props['testID'] || 'Email'}|\`}
         autoFocus={true}
         defaultValue=\\"hey this is a default value\\"
-        style={styles.hm4pcs}
+        style={styles.Email}
       />
     );
   }
@@ -7816,7 +7776,7 @@ import { StyleSheet, View } from 'react-native';
 import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
-  h13qdyyc: {
+  Horizontal: {
     flexDirection: 'row',
     borderColor: 'red',
     borderStyle: 'solid',
@@ -7831,7 +7791,7 @@ class UseHorizontal extends React.Component {
     return (
       <View
         testID={\`\${props['testID'] || 'Horizontal'}|\`}
-        style={styles.h13qdyyc}
+        style={styles.Horizontal}
       >
         {props.children}
       </View>
@@ -7899,7 +7859,7 @@ import Topics from './Topics.view.js';
 import { StyleSheet, View } from 'react-native';
 import PropTypes from 'prop-types';
 
-const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
+const styles = StyleSheet.create({ Horizontal: { flexDirection: 'row' } });
 
 class UseRouter extends React.Component {
   render() {
@@ -7909,7 +7869,7 @@ class UseRouter extends React.Component {
       <Router>
         <View
           testID={\`\${props['testID'] || 'Horizontal'}|\`}
-          style={styles.hp2cr4d}
+          style={styles.Horizontal}
         >
           <Route
             path=\\"/\\"
@@ -8017,7 +7977,7 @@ import { StyleSheet, Text } from 'react-native';
 import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
-  h1tkz54v: { fontFamily: 'Montserrat-300', fontSize: 16, lineHeight: 24 },
+  UseText1: { fontFamily: 'Montserrat-300', fontSize: 16, lineHeight: 24 },
 });
 
 class UseText extends React.Component {
@@ -8029,7 +7989,7 @@ class UseText extends React.Component {
         testID={\`\${props['testID'] || 'UseText'}|\${
           props.isSomething ? 'isSomething|' : ''
         }\`}
-        style={[styles.h1tkz54v, { color: props.isSomething ? 'red' : 'blue' }]}
+        style={[styles.UseText1, { color: props.isSomething ? 'red' : 'blue' }]}
       >
         Hi, I'm some text
       </Text>
@@ -8063,13 +8023,13 @@ import { StyleSheet, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
-  hlldui9: {
+  Normal: {
     color: 'blue',
     fontFamily: 'CustomFontNotOnGoogle-300',
     fontSize: 16,
     lineHeight: 24,
   },
-  h164u665: {
+  Italic: {
     color: 'blue',
     fontFamily: 'CustomFontNotOnGoogle-400',
     fontStyle: 'italic',
@@ -8087,14 +8047,14 @@ class UseTextCustomFont extends React.Component {
         <Text
           testID={\`UseTextCustomFont.Normal|\`}
           fontType=\\"sans-serif\\"
-          style={styles.hlldui9}
+          style={styles.Normal}
         >
           Hi, I'm some text
         </Text>
         <Text
           testID={\`UseTextCustomFont.Italic|\`}
           fontType=\\"sans-serif\\"
-          style={styles.h164u665}
+          style={styles.Italic}
         >
           Hi, I'm some text
         </Text>
@@ -8135,7 +8095,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import PropTypes from 'prop-types';
 
-const styles = StyleSheet.create({ h1jcb2fl: { backgroundColor: 'red' } });
+const styles = StyleSheet.create({ Vertical: { backgroundColor: 'red' } });
 
 class UseVertical extends React.Component {
   render() {
@@ -8144,7 +8104,7 @@ class UseVertical extends React.Component {
     return (
       <View
         testID={\`\${props['testID'] || 'Vertical'}|\`}
-        style={styles.h1jcb2fl}
+        style={styles.Vertical}
       >
         {props.children}
       </View>
@@ -8170,7 +8130,7 @@ import React from 'react';
 import { Animated, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 
-const styles = StyleSheet.create({ h15ehzpl: { zIndex: 5 } });
+const styles = StyleSheet.create({ ViewNameIsntUsedInStyle1: { zIndex: 5 } });
 
 class ViewNameIsntUsedInStyle extends React.Component {
   render() {
@@ -8179,7 +8139,7 @@ class ViewNameIsntUsedInStyle extends React.Component {
     return (
       <Animated.View
         testID={\`\${props['testID'] || 'ViewNameIsntUsedInStyle'}|\`}
-        style={[styles.h15ehzpl, { opacity: props.opacity }]}
+        style={[styles.ViewNameIsntUsedInStyle1, { opacity: props.opacity }]}
       >
         {props.children}
       </Animated.View>
@@ -8211,14 +8171,14 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 
-const styles = StyleSheet.create({ hp2cr4d: { flexDirection: 'row' } });
+const styles = StyleSheet.create({ App: { flexDirection: 'row' } });
 
 class When extends React.Component {
   render() {
     const { context, props } = this;
 
     return (
-      <View testID={\`\${props['testID'] || 'App'}|\`} style={styles.hp2cr4d}>
+      <View testID={\`\${props['testID'] || 'App'}|\`} style={styles.App}>
         {props.showMe ? (
           <Text testID={\`When.Text|\`}>I may be hidden</Text>
         ) : null}

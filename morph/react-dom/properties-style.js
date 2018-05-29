@@ -1,5 +1,6 @@
 import { enter } from '../react/properties-style.js'
 import {
+  createId,
   getActionableParent,
   getAllAnimatedProps,
   getAllowedStyleKeys,
@@ -12,7 +13,6 @@ import {
   hasSpringAnimation,
   hasTimingAnimation,
 } from '../utils.js'
-import hash from '../hash.js'
 import toSlugCase from 'to-slug-case'
 import uniq from 'array-uniq'
 
@@ -70,7 +70,7 @@ export function leave(node, parent, state) {
       )
       .join('\n')
 
-    const id = createId(node, staticStyle)
+    const id = createId(node, state)
 
     state.styles[node.nameFinal] = `const ${id} = css({${
       cssStatic ? `${cssStatic}, ` : ''
@@ -89,7 +89,7 @@ export function leave(node, parent, state) {
   } else if (hasKeysInChildren(staticStyle)) {
     state.cssStatic = true
 
-    const id = createId(node, staticStyle)
+    const id = createId(node, state)
     const css = Object.keys(staticStyle)
       .filter(
         key => allowedStyleKeys.includes(key) && hasKeys(staticStyle[key])
@@ -180,11 +180,4 @@ const asCss = (styles, key, scopedUnderParent) => {
   if (key !== 'base') css.push(`}`)
 
   return css
-}
-
-const createId = (node, staticStyle) => {
-  const id = `${node.is || node.name}_${hash(staticStyle)}`
-  node.styleName = id
-  node.className.push(`\${${id}}`)
-  return id
 }
