@@ -6,6 +6,9 @@ import {
   hasAnimatedChild,
   // TODO: Think of a better name 🙈
   getNonAnimatedDynamicStyles,
+  hasPaddingProp,
+  getPaddingProps,
+  removePaddingProps,
   hasKeys,
 } from '../utils.js'
 
@@ -14,6 +17,9 @@ export { enter }
 export const leave = (node, parent, state) => {
   const dynamicStyles = getNonAnimatedDynamicStyles(node)
   let style = null
+  let containerStyle = null
+
+  debugger
 
   if (
     node.ensureBackgroundColor &&
@@ -25,6 +31,18 @@ export const leave = (node, parent, state) => {
 
   if (hasKeys(node.style.static.base)) {
     const id = createId(node, state)
+    if (
+      node.nameFinal === 'FlatList' &&
+      hasPaddingProp(node.style.static.base)
+    ) {
+      debugger
+
+      state.styles[`${id}ContentContainer`] = getPaddingProps(
+        node.style.static.base
+      )
+      node.style.static.base = removePaddingProps(node.style.static.base)
+      containerStyle = `styles.${id}ContentContainer`
+    }
     state.styles[id] = node.style.static.base
     style = `styles.${id}`
   }
@@ -48,5 +66,9 @@ export const leave = (node, parent, state) => {
 
   if (style) {
     state.render.push(` style={${style}}`)
+  }
+
+  if (containerStyle) {
+    state.render.push(` contentContainerStyle={${containerStyle}}`)
   }
 }

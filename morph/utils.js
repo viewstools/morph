@@ -518,3 +518,22 @@ export const createId = (node, state) => {
 
   return id
 }
+
+export const hasPaddingProp = styleProps =>
+  Object.keys(styleProps).some(prop => prop.includes('padding'))
+
+export const getPaddingProps = styleProps =>
+  Object.keys(styleProps)
+    .filter(key => key.includes('padding'))
+    .reduce((obj, key) => {
+      obj[key] = styleProps[key]
+      return obj
+    }, {})
+
+export const removePaddingProps = styleProps =>
+  Object.keys(styleProps)
+    .filter(key => !key.includes('padding'))
+    .reduce((obj, key) => {
+      obj[key] = styleProps[key]
+      return obj
+    }, {})
