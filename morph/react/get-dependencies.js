@@ -43,6 +43,8 @@ export default (state, getImport) => {
       )
     } else if (d.endsWith('SvgInline')) {
       dependencies.push(`import ${d} from "./${d}.view.js"`)
+    } else if (d === 'List') {
+      dependencies.push(`import List from "react-virtualized/dist/es/List"`)
     } else if (/^[A-Z]/.test(d)) {
       dependencies.push(getImport(d))
     }
@@ -60,6 +62,7 @@ export default (state, getImport) => {
       }
     })
   }
+  debugger
 
   // TODO we probably want to check that the file exists and do something if it
   // doesn't, like warn the user at least?
