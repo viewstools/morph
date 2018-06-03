@@ -19,8 +19,6 @@ export const leave = (node, parent, state) => {
   let style = null
   let containerStyle = null
 
-  debugger
-
   if (
     node.ensureBackgroundColor &&
     (!('backgroundColor' in node.style.static.base) ||
@@ -31,19 +29,16 @@ export const leave = (node, parent, state) => {
 
   if (hasKeys(node.style.static.base)) {
     const id = createId(node, state)
-    // Sometimes the node is 'Animated.Flatlist' is that valid?
     if (
-      node.nameFinal.includes('FlatList') &&
+      node.nameFinal === 'FlatList' &&
       hasPaddingProp(node.style.static.base)
     ) {
-      debugger
       state.styles[`${id}ContentContainer`] = getPaddingProps(
         node.style.static.base
       )
       node.style.static.base = removePaddingProps(node.style.static.base)
       containerStyle = `styles.${id}ContentContainer`
     }
-    debugger
     if (hasKeys(node.style.static.base)) {
       state.styles[id] = node.style.static.base
       style = `styles.${id}`
@@ -59,12 +54,11 @@ export const leave = (node, parent, state) => {
   }
 
   if (hasKeys(dynamicStyles)) {
-    if (node.nameFinal.includes('FlatList') && hasPaddingProp(dynamicStyles)) {
+    if (node.nameFinal === 'FlatList' && hasPaddingProp(dynamicStyles)) {
       const dynamicContainerStyle = getObjectAsString(
         getPaddingProps(dynamicStyles)
       )
       dynamicStyles = removePaddingProps(dynamicStyles)
-      debugger
       containerStyle = containerStyle
         ? `[${containerStyle},${dynamicContainerStyle}]`
         : dynamicContainerStyle
@@ -73,8 +67,6 @@ export const leave = (node, parent, state) => {
       const dynamic = getObjectAsString(dynamicStyles)
       style = style ? `[${style},${dynamic}]` : dynamic
     }
-
-    debugger
   }
 
   if (hasAnimatedChild(node)) {

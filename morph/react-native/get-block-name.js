@@ -63,12 +63,10 @@ const getGroupBlockName = (node, state) => {
   return name
 }
 
-const getListBlockName = node => {
-  const base = hasProp(node, /^overflow/, v => v === 'auto' || v === 'scroll')
+const getListBlockName = node =>
+  hasProp(node, /^overflow/, v => v === 'auto' || v === 'scroll')
     ? 'FlatList'
-    : 'View'
-  return node.isAnimated || node.maybeAnimated ? `Animated.${base}` : base
-}
+    : node.isAnimated || node.maybeAnimated ? 'Animated.View' : 'View'
 
 const isSvg = str => /\.svg$/.test(str)
 const getImageName = (node, state) => {
