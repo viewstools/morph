@@ -3,6 +3,7 @@ import getBody from './get-body.js'
 import getContext from './get-context.js'
 import getDefaultProps from './get-default-props.js'
 import getDependencies from './get-dependencies.js'
+import getFlatList from './get-flatlist.js'
 import getFormatters from './get-formatters.js'
 import getLocals from './get-locals.js'
 
@@ -14,6 +15,7 @@ import React from 'react'
 ${getDependencies(state, getImport)}
 ${getAnimatedValue(state, name)}
 ${getStyles(state, name)}
+${getFlatList(state, name)}
 ${getFormatters(state, name)}
 ${getLocals(state, name)}
 

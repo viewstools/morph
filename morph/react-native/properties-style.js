@@ -30,7 +30,7 @@ export const leave = (node, parent, state) => {
   if (hasKeys(node.style.static.base)) {
     const id = createId(node, state)
     if (
-      node.nameFinal === 'FlatList' &&
+      node.nameFinal.includes('FlatList') &&
       hasPaddingProp(node.style.static.base)
     ) {
       state.styles[`${id}ContentContainer`] = getPaddingProps(
@@ -54,7 +54,7 @@ export const leave = (node, parent, state) => {
   }
 
   if (hasKeys(dynamicStyles)) {
-    if (node.nameFinal === 'FlatList' && hasPaddingProp(dynamicStyles)) {
+    if (node.nameFinal.includes('FlatList') && hasPaddingProp(dynamicStyles)) {
       const dynamicContainerStyle = getObjectAsString(
         getPaddingProps(dynamicStyles)
       )

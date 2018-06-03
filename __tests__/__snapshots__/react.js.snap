@@ -7254,20 +7254,21 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import Card from './Card.view.js';
-import { FlatList, StyleSheet } from 'react-native';
+import { Animated, FlatList, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
   ScrollableList1ContentContainer: { paddingBottom: 200 },
   ScrollableList1: { backgroundColor: 'red' },
 });
+const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
 class ScrollableList extends React.Component {
   render() {
     const { context, props } = this;
 
     return (
-      <FlatList
+      <AnimatedFlatList
         testID={\`\${props['testID'] || 'ScrollableList'}|\`}
         style={styles.ScrollableList1}
         contentContainerStyle={[
