@@ -3610,12 +3610,8 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
-const BoxShadow = css({
-  boxShadow: \`0px 5px 2px 2px \${props.shadowColor}undefined\`,
-});
-const TextShadow = css({
-  textShadow: \`2px 3px 1px \${props.shadowColor}undefined\`,
-});
+const BoxShadow = css({ boxShadow: \`0px 5px 2px 2px var(--shadowColor)\` });
+const TextShadow = css({ textShadow: \`2px 3px 1px var(--shadowColor)\` });
 
 class Shadow extends React.Component {
   render() {
@@ -3669,12 +3665,8 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const BoxShadow = css({
-  boxShadow: \`0px 5px 2px 2px \${props.shadowColor}undefined\`,
-});
-const TextShadow = css({
-  textShadow: \`2px 3px 1px \${props.shadowColor}undefined\`,
-});
+const BoxShadow = css({ boxShadow: \`0px 5px 2px 2px var(--shadowColor)\` });
+const TextShadow = css({ textShadow: \`2px 3px 1px var(--shadowColor)\` });
 
 const Shadow = props => {
   return (
@@ -4111,6 +4103,9 @@ const Transform1 = css({
     'rotate(4deg) rotateX(5deg) rotateY(6deg) scale(3) translateX(1px) translateY(2px)',
   transformOrigin: 'center top',
 });
+const Text = css({
+  transformOrigin: \`var(--transformOriginX) var(--transformOriginY)\`,
+});
 
 class Transform extends React.Component {
   render() {
@@ -4121,7 +4116,14 @@ class Transform extends React.Component {
         data-test-id={\`\${props['data-test-id'] || 'Transform'}|\`}
         className={\`views-block \${Transform1}\`}
       >
-        <span data-test-id={\`Transform.Text|\`} className=\\"views-block\\">
+        <span
+          data-test-id={\`Transform.Text|\`}
+          style={{
+            '--transformOriginX': props.transformOriginX,
+            '--transformOriginY': props.transformOriginY,
+          }}
+          className={\`views-block \${Text}\`}
+        >
           who knows what happens here :D
         </span>
         {props.children}
@@ -4136,7 +4138,18 @@ Transform.contextTypes = {
 export default Transform;
 ",
   "fonts": Array [],
-  "slots": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "transformOriginX",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "transformOriginY",
+      "type": "string",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -4153,6 +4166,9 @@ const Transform1 = css({
     'rotate(4deg) rotateX(5deg) rotateY(6deg) scale(3) translateX(1px) translateY(2px)',
   transformOrigin: 'center top',
 });
+const Text = css({
+  transformOrigin: \`var(--transformOriginX) var(--transformOriginY)\`,
+});
 
 const Transform = props => {
   return (
@@ -4160,7 +4176,14 @@ const Transform = props => {
       data-test-id={\`\${props['data-test-id'] || 'Transform'}|\`}
       className={\`views-block \${Transform1}\`}
     >
-      <span data-test-id={\`Transform.Text|\`} className=\\"views-block\\">
+      <span
+        data-test-id={\`Transform.Text|\`}
+        style={{
+          '--transformOriginX': props.transformOriginX,
+          '--transformOriginY': props.transformOriginY,
+        }}
+        className={\`views-block \${Text}\`}
+      >
         who knows what happens here :D
       </span>
       {props.children}
@@ -4171,7 +4194,18 @@ const Transform = props => {
 export default Transform;
 ",
   "fonts": Array [],
-  "slots": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "transformOriginX",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "transformOriginY",
+      "type": "string",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -7549,7 +7583,7 @@ exports[`react-native parses react-native Transform 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Animated, StyleSheet, View } from 'react-native';
 import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
@@ -7576,7 +7610,15 @@ class Transform extends React.Component {
         testID={\`\${props['testID'] || 'Transform'}|\`}
         style={styles.Transform1}
       >
-        <Text testID={\`Transform.Text|\`}>who knows what happens here :D</Text>
+        <Animated.Text
+          testID={\`Transform.Text|\`}
+          style={{
+            transformOriginX: props.transformOriginX,
+            transformOriginY: props.transformOriginY,
+          }}
+        >
+          who knows what happens here :D
+        </Animated.Text>
         {props.children}
       </View>
     );
@@ -7589,7 +7631,18 @@ Transform.contextTypes = {
 export default Transform;
 ",
   "fonts": Array [],
-  "slots": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "transformOriginX",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "transformOriginY",
+      "type": "string",
+    },
+  ],
   "svgs": Array [],
 }
 `;

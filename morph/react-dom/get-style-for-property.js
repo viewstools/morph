@@ -96,7 +96,7 @@ const setScopedVar = (prop, block, unit) => {
   return scopedCondition && asVar(prop)
 }
 
-const getPropValue = (prop, block, unit) => {
+const getPropValue = (prop, block, unit = '') => {
   if (!prop) return false
 
   const scopedVar = setScopedVar(prop, block, unit)
@@ -104,7 +104,7 @@ const getPropValue = (prop, block, unit) => {
   if (scopedVar) return scopedVar
 
   if (prop.tags.slot) {
-    return `\${${prop.value}}${unit}`
+    return `var(--${prop.name})${unit}`
   }
 
   return typeof prop.value === 'number' ? `${prop.value}${unit}` : prop.value
