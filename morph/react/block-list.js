@@ -5,7 +5,7 @@ export function enter(node, parent, state) {
     const from = getProp(node, 'from')
     if (!from) return
 
-    if (node.nameFinal === 'FlatList') {
+    if (node.nameFinal.includes('FlatList')) {
       state.render.push(
         `data={${
           from.value
@@ -21,6 +21,6 @@ export function enter(node, parent, state) {
 
 export function leave(node, parent, state) {
   if (isList(node)) {
-    state.render.push(node.nameFinal === 'FlatList' ? '}' : ')}')
+    state.render.push(node.nameFinal.includes('FlatList') ? '}' : ')}')
   }
 }

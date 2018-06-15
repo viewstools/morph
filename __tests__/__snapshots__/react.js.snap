@@ -3504,7 +3504,12 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
-const ScrollableList1 = css({ overflowY: 'auto' });
+const ScrollableList1 = css({
+  overflowY: 'auto',
+  paddingBottom: 200,
+  backgroundColor: 'red',
+  paddingLeft: 'var(--paddingLeft)',
+});
 
 class ScrollableList extends React.Component {
   render() {
@@ -3513,6 +3518,7 @@ class ScrollableList extends React.Component {
     return (
       <div
         data-test-id={\`\${props['data-test-id'] || 'ScrollableList'}|\`}
+        style={{ '--paddingLeft': \`\${props.paddingLeft}px\` }}
         className={\`views-block \${ScrollableList1}\`}
       >
         {Array.isArray(props.from) &&
@@ -3543,6 +3549,11 @@ export default ScrollableList;
       "name": "from",
       "type": "array",
     },
+    Object {
+      "defaultValue": false,
+      "name": "paddingLeft",
+      "type": "number",
+    },
   ],
   "svgs": Array [],
 }
@@ -3556,12 +3567,18 @@ import Card from './Card.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const ScrollableList1 = css({ overflowY: 'auto' });
+const ScrollableList1 = css({
+  overflowY: 'auto',
+  paddingBottom: 200,
+  backgroundColor: 'red',
+  paddingLeft: 'var(--paddingLeft)',
+});
 
 const ScrollableList = props => {
   return (
     <div
       data-test-id={\`\${props['data-test-id'] || 'ScrollableList'}|\`}
+      style={{ '--paddingLeft': \`\${props.paddingLeft}px\` }}
       className={\`views-block \${ScrollableList1}\`}
     >
       {Array.isArray(props.from) &&
@@ -3596,6 +3613,11 @@ export default ScrollableList;
       "defaultValue": false,
       "name": "from",
       "type": "array",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "paddingLeft",
+      "type": "number",
     },
   ],
   "svgs": Array [],
@@ -7266,16 +7288,27 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import Card from './Card.view.js';
-import { FlatList } from 'react-native';
+import { Animated, FlatList, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
+
+const styles = StyleSheet.create({
+  ScrollableList1ContentContainer: { paddingBottom: 200 },
+  ScrollableList1: { backgroundColor: 'red' },
+});
+const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
 class ScrollableList extends React.Component {
   render() {
     const { context, props } = this;
 
     return (
-      <FlatList
+      <AnimatedFlatList
         testID={\`\${props['testID'] || 'ScrollableList'}|\`}
+        style={styles.ScrollableList1}
+        contentContainerStyle={[
+          styles.ScrollableList1ContentContainer,
+          { paddingLeft: props.paddingLeft },
+        ]}
         data={props.from}
         keyExtractor={(item, index) => item.id || index}
         renderItem={({ item, index }) => (
@@ -7297,6 +7330,11 @@ export default ScrollableList;
       "defaultValue": false,
       "name": "from",
       "type": "array",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "paddingLeft",
+      "type": "number",
     },
   ],
   "svgs": Array [],

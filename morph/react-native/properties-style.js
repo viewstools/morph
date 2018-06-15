@@ -6,14 +6,18 @@ import {
   hasAnimatedChild,
   // TODO: Think of a better name 🙈
   getNonAnimatedDynamicStyles,
+  hasPaddingProp,
+  getPaddingProps,
+  removePaddingProps,
   hasKeys,
 } from '../utils.js'
 
 export { enter }
 
 export const leave = (node, parent, state) => {
-  const dynamicStyles = getNonAnimatedDynamicStyles(node)
+  let dynamicStyles = getNonAnimatedDynamicStyles(node)
   let style = null
+  let containerStyle = null
 
   if (
     node.ensureBackgroundColor &&
@@ -25,8 +29,20 @@ export const leave = (node, parent, state) => {
 
   if (hasKeys(node.style.static.base)) {
     const id = createId(node, state)
-    state.styles[id] = node.style.static.base
-    style = `styles.${id}`
+    if (
+      node.nameFinal.includes('FlatList') &&
+      hasPaddingProp(node.style.static.base)
+    ) {
+      state.styles[`${id}ContentContainer`] = getPaddingProps(
+        node.style.static.base
+      )
+      node.style.static.base = removePaddingProps(node.style.static.base)
+      containerStyle = `styles.${id}ContentContainer`
+    }
+    if (hasKeys(node.style.static.base)) {
+      state.styles[id] = node.style.static.base
+      style = `styles.${id}`
+    }
   }
 
   if (node.isAnimated) {
@@ -38,8 +54,19 @@ export const leave = (node, parent, state) => {
   }
 
   if (hasKeys(dynamicStyles)) {
-    const dynamic = getObjectAsString(dynamicStyles)
-    style = style ? `[${style},${dynamic}]` : dynamic
+    if (node.nameFinal.includes('FlatList') && hasPaddingProp(dynamicStyles)) {
+      const dynamicContainerStyle = getObjectAsString(
+        getPaddingProps(dynamicStyles)
+      )
+      dynamicStyles = removePaddingProps(dynamicStyles)
+      containerStyle = containerStyle
+        ? `[${containerStyle},${dynamicContainerStyle}]`
+        : dynamicContainerStyle
+    }
+    if (hasKeys(dynamicStyles)) {
+      const dynamic = getObjectAsString(dynamicStyles)
+      style = style ? `[${style},${dynamic}]` : dynamic
+    }
   }
 
   if (hasAnimatedChild(node)) {
@@ -48,5 +75,9 @@ export const leave = (node, parent, state) => {
 
   if (style) {
     state.render.push(` style={${style}}`)
+  }
+
+  if (containerStyle) {
+    state.render.push(` contentContainerStyle={${containerStyle}}`)
   }
 }
