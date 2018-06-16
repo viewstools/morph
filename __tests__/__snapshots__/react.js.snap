@@ -54,7 +54,7 @@ Object {
 
 module.exports = {
   Bottom: get('Border.Bottom'),
-  Left: get('Border.Left'),
+  Left: get('Border.Left', 'something'),
   Right: get('Border.Right'),
   Top: get('Border.Top'),
   _top: get('Border'),
@@ -1172,6 +1172,7 @@ const Left = css({
   borderLeftStyle: 'solid',
   borderLeftColor: 'red',
   borderLeftWidth: 'var(--borderLeftWidth)',
+  borderTopRightRadius: 'var(--borderTopRightRadius)',
 });
 
 class Border extends React.Component {
@@ -1200,8 +1201,11 @@ class Border extends React.Component {
           className={\`views-block \${Bottom}\`}
         />
         <div
-          data-test-id={\`Border.Left|\`}
-          style={{ '--borderLeftWidth': \`\${props.borderLeftWidth}px\` }}
+          data-test-id={\`Border.Left|\${props.something ? 'something|' : ''}\`}
+          style={{
+            '--borderLeftWidth': \`\${props.borderLeftWidth}px\`,
+            '--borderTopRightRadius': \`\${props.something ? 20 : 10}px\`,
+          }}
           className={\`views-block \${Left}\`}
         />
         {props.children}
@@ -1284,6 +1288,7 @@ const Left = css({
   borderLeftStyle: 'solid',
   borderLeftColor: 'red',
   borderLeftWidth: 'var(--borderLeftWidth)',
+  borderTopRightRadius: 'var(--borderTopRightRadius)',
 });
 
 const Border = props => {
@@ -1309,8 +1314,11 @@ const Border = props => {
         className={\`views-block \${Bottom}\`}
       />
       <div
-        data-test-id={\`Border.Left|\`}
-        style={{ '--borderLeftWidth': \`\${props.borderLeftWidth}px\` }}
+        data-test-id={\`Border.Left|\${props.something ? 'something|' : ''}\`}
+        style={{
+          '--borderLeftWidth': \`\${props.borderLeftWidth}px\`,
+          '--borderTopRightRadius': \`\${props.something ? 20 : 10}px\`,
+        }}
         className={\`views-block \${Left}\`}
       />
       {props.children}
@@ -6185,8 +6193,14 @@ class Border extends React.Component {
           ]}
         />
         <Animated.View
-          testID={\`Border.Left|\`}
-          style={[styles.Left, { borderLeftWidth: props.borderLeftWidth }]}
+          testID={\`Border.Left|\${props.something ? 'something|' : ''}\`}
+          style={[
+            styles.Left,
+            {
+              borderLeftWidth: props.borderLeftWidth,
+              borderTopRightRadius: props.something ? 20 : 10,
+            },
+          ]}
         />
         {props.children}
       </Animated.View>

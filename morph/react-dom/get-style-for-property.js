@@ -63,7 +63,6 @@ export default (node, parent, code) => {
 
     case 'transformOriginX':
     case 'transformOriginY':
-    case 'transformOriginZ':
       return {
         transformOrigin: getTransformOrigin(node, parent),
       }
@@ -89,22 +88,22 @@ const maybeAsVar = (prop, code) => (code ? asVar(prop) : prop.value)
 
 const asVar = prop => `'var(--${prop.name})'`
 
-const setScopedVar = (prop, block, unit) => {
+const setScopedVar = (prop, block) => {
   if (prop.scope === 'hover') return false
 
-  const scopedCondition = getScopedCondition(prop, block, false, unit)
+  const scopedCondition = getScopedCondition(prop, block, false)
   return scopedCondition && asVar(prop)
 }
 
 const getPropValue = (prop, block, unit = '') => {
   if (!prop) return false
 
-  const scopedVar = setScopedVar(prop, block, unit)
+  const scopedVar = setScopedVar(prop, block)
 
   if (scopedVar) return scopedVar
 
   if (prop.tags.slot) {
-    return `var(--${prop.name})${unit}`
+    return `var(--${prop.name})`
   }
 
   return typeof prop.value === 'number' ? `${prop.value}${unit}` : prop.value

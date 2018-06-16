@@ -108,8 +108,7 @@ const getStandardInterpolation = (node, re, textNode, item) =>
 export const getScopedCondition = (
   propNode,
   blockNode,
-  alreadyInterpolated,
-  unit = ''
+  alreadyInterpolated
 ) => {
   // alreadyInterpolated = interpolation that contains scoped condition
   // !alreadyInterpolated = scoped condition that contains interpolation
@@ -139,7 +138,7 @@ export const getScopedCondition = (
     !lastScope.prop.animation ||
     lastScope.prop.animation.curve !== 'spring'
   ) {
-    lastScope.prop.conditional = `\${${conditional}}${unit}`
+    lastScope.prop.conditional = `\${${conditional}}`
   }
 
   return conditional
@@ -320,6 +319,8 @@ const getStandardAnimatedString = (node, prop, isNative) => {
       ? baseScopeValue
       : getPropValue({ name: prop.name, value: baseScopeValue }, false)
     toValue = isNative ? prop.value : getPropValue(prop, false)
+    // fromValue = baseScopeValue
+    // toValue = prop.value
   } else {
     fromValue = `'${baseScopeValue}'`
     toValue = `'${prop.value}'`
@@ -377,12 +378,14 @@ export const getDynamicStyles = node => {
       .filter(prop => prop.tags.style && prop.tags.slot)
       .map(prop => `'--${prop.name}': ${getPropValue(prop)}`),
     node.scopes.map(scope =>
-      scope.properties.map(
-        prop =>
+      scope.properties.map(prop => {
+        const unit = getUnit(prop)
+        return (
           prop.tags.style &&
           prop.conditional &&
-          `'--${prop.name}': \`${prop.conditional}\``
-      )
+          `'--${prop.name}': \`${prop.conditional}${unit}\``
+        )
+      })
     ),
   ]).filter(Boolean)
 }
