@@ -141,7 +141,6 @@ module.exports = options => {
       let f = views[name]
 
       if (isView(f)) {
-        debugger
         const logicFile = logic[`${name}.view.logic`]
         if (logicFile) f = logicFile
       }
@@ -313,43 +312,8 @@ module.exports = options => {
 
       let shouldMorph = isView(file)
 
-      // const updateImports = async file => {
-      //   const currentImport = file
-      //     .split(/^(?:\.\/)(.*?)(?:.logic.js)/)
-      //     .filter(Boolean)[0]
-      //   const parents = await findInFiles.find(
-      //     currentImport,
-      //     'src',
-      //     '.+?(.view.js)'
-      //   )
-      //   console.log('parents are', parents)
-
-      //   for (let parent in parents) {
-      //     console.log('hey parent', parents[parent])
-      //     const replaceOptions = {
-      //       files: parent,
-      //       from: currentImport,
-      //       to: `${currentImport}.logic`,
-      //     }
-
-      //     // logic file is already imported
-      //     if (/logic/.test(parents[parent].line[0])) return
-
-      //     console.log('replaceOptions', replaceOptions)
-
-      //     replace(replaceOptions)
-      //       .then(changedFiles => {
-      //         console.log('Modified files:', changedFiles.join(', '))
-      //       })
-      //       .catch(error => {
-      //         console.error('Error occurred:', error)
-      //       })
-      //   }
-      // }
-
       if (isLogic(file)) {
         logic[view] = file
-        debugger
 
         updateParentImports(file, true)
 
@@ -436,17 +400,15 @@ height 50`
       return responsibleFor[view]
     }
 
-    const updateParentImports = async (file, isAdding) => {
-      // if we're adding a logic file, then regex we need to look for should have `logic` removed
-      debugger
-      const re = isAdding
+    const updateParentImports = async (file, isAddingLogic) => {
+      const re = isAddingLogic
         ? new RegExp('(.*?)(?:.logic)(.js)')
         : new RegExp('(.*?)(?:.js)')
       const currentImport = file
         .split(re)
         .filter(Boolean)
         .join('')
-      const updatedImport = isAdding
+      const updatedImport = isAddingLogic
         ? `${currentImport.split('.js')[0]}.logic`
         : `${currentImport.split('.logic')[0]}.js`
       const parents = await findInFiles.find(
@@ -454,29 +416,16 @@ height 50`
         'src',
         '.+?(.view.js)'
       )
-      console.log('file', file, 'from', currentImport, 'to', updatedImport)
-      console.log('parents are', parents)
 
       for (let parent in parents) {
-        console.log('hey parent', parents[parent])
-        const replaceOptions = {
+        // if logic file is already imported return
+        if (isAddingLogic && /logic/.test(parents[parent].line[0])) return
+
+        replace({
           files: parent,
           from: currentImport,
           to: updatedImport,
-        }
-
-        // logic file is already imported
-        if (isAdding && /logic/.test(parents[parent].line[0])) return
-
-        console.log('replaceOptions', replaceOptions)
-
-        replace(replaceOptions)
-          .then(changedFiles => {
-            console.log('Modified files:', changedFiles.join(', '))
-          })
-          .catch(error => {
-            console.error('Error occurred:', error)
-          })
+        })
       }
     }
 
@@ -654,7 +603,6 @@ height 50`
 
       let view = path.basename(file)
       if (isLogic(file)) {
-        debugger
         view = view.replace(/\.js/, '')
       } else {
         view = toPascalCase(view.replace(/\.(view\.fake|js|view)/, ''))
@@ -757,12 +705,11 @@ height 50`
       }
 
       instance.stop = () => watcher.close()
-      debugger
+
       watcher.on('add', f => {
         if (isFont(f)) {
           addFont(f)
         } else {
-          debugger
           addView(f)
         }
       })
