@@ -17,6 +17,8 @@ const morphInlineSvg = require('./morph/inline-svg.js')
 const path = require('path')
 const toPascalCase = require('to-pascal-case')
 const uniq = require('array-uniq')
+const findInFiles = require('find-in-files')
+const replace = require('replace-in-file')
 
 const FONT_TYPES = {
   '.otf': 'opentype',
@@ -139,6 +141,7 @@ module.exports = options => {
       let f = views[name]
 
       if (isView(f)) {
+        debugger
         const logicFile = logic[`${name}.view.logic`]
         if (logicFile) f = logicFile
       }
@@ -310,8 +313,48 @@ module.exports = options => {
 
       let shouldMorph = isView(file)
 
+      const checkParents = async file => {
+        const currentImport = file
+          .split(/^(?:\.\/)(.*?)(?:.logic.js)/)
+          .filter(Boolean)[0]
+        const parents = await findInFiles.find(
+          currentImport,
+          'src',
+          '.+?(.view.js)'
+        )
+        console.log('parents are', parents)
+        // debugger
+        //parents.forEach(parent => {
+        for (let parent in parents) {
+          console.log('hey parent', parents[parent])
+          const replaceOptions = {
+            files: parent,
+            from: currentImport,
+            to: `${currentImport}.logic`,
+          }
+
+          // logic file is already imported
+          if (/logic/.test(parents[parent].line[0])) return
+
+          console.log('replaceOptions', replaceOptions)
+
+          replace(replaceOptions)
+            .then(changedFiles => {
+              console.log('Modified files:', changedFiles.join(', '))
+            })
+            .catch(error => {
+              console.error('Error occurred:', error)
+            })
+
+          // fs.writeFileSync(parent)
+        }
+      }
+
       if (isLogic(file)) {
         logic[view] = file
+        debugger
+
+        checkParents(file)
 
         if (viewsLeftToBeReady === 0) {
           remorphDependenciesFor(view)
@@ -570,6 +613,7 @@ height 50`
 
       let view = path.basename(file)
       if (isLogic(file)) {
+        debugger
         view = view.replace(/\.js/, '')
       } else {
         view = toPascalCase(view.replace(/\.(view\.fake|js|view)/, ''))
@@ -671,11 +715,12 @@ height 50`
       }
 
       instance.stop = () => watcher.close()
-
+      debugger
       watcher.on('add', f => {
         if (isFont(f)) {
           addFont(f)
         } else {
+          debugger
           addView(f)
         }
       })
