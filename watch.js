@@ -313,48 +313,45 @@ module.exports = options => {
 
       let shouldMorph = isView(file)
 
-      const checkParents = async file => {
-        const currentImport = file
-          .split(/^(?:\.\/)(.*?)(?:.logic.js)/)
-          .filter(Boolean)[0]
-        const parents = await findInFiles.find(
-          currentImport,
-          'src',
-          '.+?(.view.js)'
-        )
-        console.log('parents are', parents)
-        // debugger
-        //parents.forEach(parent => {
-        for (let parent in parents) {
-          console.log('hey parent', parents[parent])
-          const replaceOptions = {
-            files: parent,
-            from: currentImport,
-            to: `${currentImport}.logic`,
-          }
+      // const updateImports = async file => {
+      //   const currentImport = file
+      //     .split(/^(?:\.\/)(.*?)(?:.logic.js)/)
+      //     .filter(Boolean)[0]
+      //   const parents = await findInFiles.find(
+      //     currentImport,
+      //     'src',
+      //     '.+?(.view.js)'
+      //   )
+      //   console.log('parents are', parents)
 
-          // logic file is already imported
-          if (/logic/.test(parents[parent].line[0])) return
+      //   for (let parent in parents) {
+      //     console.log('hey parent', parents[parent])
+      //     const replaceOptions = {
+      //       files: parent,
+      //       from: currentImport,
+      //       to: `${currentImport}.logic`,
+      //     }
 
-          console.log('replaceOptions', replaceOptions)
+      //     // logic file is already imported
+      //     if (/logic/.test(parents[parent].line[0])) return
 
-          replace(replaceOptions)
-            .then(changedFiles => {
-              console.log('Modified files:', changedFiles.join(', '))
-            })
-            .catch(error => {
-              console.error('Error occurred:', error)
-            })
+      //     console.log('replaceOptions', replaceOptions)
 
-          // fs.writeFileSync(parent)
-        }
-      }
+      //     replace(replaceOptions)
+      //       .then(changedFiles => {
+      //         console.log('Modified files:', changedFiles.join(', '))
+      //       })
+      //       .catch(error => {
+      //         console.error('Error occurred:', error)
+      //       })
+      //   }
+      // }
 
       if (isLogic(file)) {
         logic[view] = file
         debugger
 
-        checkParents(file)
+        updateParentImports(file, true)
 
         if (viewsLeftToBeReady === 0) {
           remorphDependenciesFor(view)
@@ -437,6 +434,50 @@ height 50`
       responsibleFor[view] = uniq(flatten(list))
 
       return responsibleFor[view]
+    }
+
+    const updateParentImports = async (file, isAdding) => {
+      // if we're adding a logic file, then regex we need to look for should have `logic` removed
+      debugger
+      const re = isAdding
+        ? new RegExp('(.*?)(?:.logic)(.js)')
+        : new RegExp('(.*?)(?:.js)')
+      const currentImport = file
+        .split(re)
+        .filter(Boolean)
+        .join('')
+      const updatedImport = isAdding
+        ? `${currentImport.split('.js')[0]}.logic`
+        : `${currentImport.split('.logic')[0]}.js`
+      const parents = await findInFiles.find(
+        currentImport,
+        'src',
+        '.+?(.view.js)'
+      )
+      console.log('file', file, 'from', currentImport, 'to', updatedImport)
+      console.log('parents are', parents)
+
+      for (let parent in parents) {
+        console.log('hey parent', parents[parent])
+        const replaceOptions = {
+          files: parent,
+          from: currentImport,
+          to: updatedImport,
+        }
+
+        // logic file is already imported
+        if (isAdding && /logic/.test(parents[parent].line[0])) return
+
+        console.log('replaceOptions', replaceOptions)
+
+        replace(replaceOptions)
+          .then(changedFiles => {
+            console.log('Modified files:', changedFiles.join(', '))
+          })
+          .catch(error => {
+            console.error('Error occurred:', error)
+          })
+      }
     }
 
     const addViewSkipMorph = f => addView(f, true)
@@ -632,6 +673,7 @@ height 50`
       verbose && console.log(chalk.blue('D'), view)
 
       if (isLogic(f)) {
+        updateParentImports(f, false)
         delete logic[view]
       } else {
         delete views[view]
