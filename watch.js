@@ -17,6 +17,8 @@ const morphInlineSvg = require('./morph/inline-svg.js')
 const path = require('path')
 const toPascalCase = require('to-pascal-case')
 const uniq = require('array-uniq')
+const findInFiles = require('find-in-files')
+const replace = require('replace-in-file')
 
 const FONT_TYPES = {
   '.otf': 'opentype',
@@ -313,6 +315,8 @@ module.exports = options => {
       if (isLogic(file)) {
         logic[view] = file
 
+        updateParentImports(file, true)
+
         if (viewsLeftToBeReady === 0) {
           remorphDependenciesFor(view)
         }
@@ -394,6 +398,35 @@ height 50`
       responsibleFor[view] = uniq(flatten(list))
 
       return responsibleFor[view]
+    }
+
+    const updateParentImports = async (file, isAddingLogic) => {
+      const re = isAddingLogic
+        ? new RegExp('(.*?)(?:.logic)(.js)')
+        : new RegExp('(.*?)(?:.js)')
+      const currentImport = file
+        .split(re)
+        .filter(Boolean)
+        .join('')
+      const updatedImport = isAddingLogic
+        ? `${currentImport.split('.js')[0]}.logic`
+        : `${currentImport.split('.logic')[0]}.js`
+      const parents = await findInFiles.find(
+        currentImport,
+        'src',
+        '.+?(.view.js)'
+      )
+
+      for (let parent in parents) {
+        // if logic file is already imported return
+        if (isAddingLogic && /logic/.test(parents[parent].line[0])) return
+
+        replace({
+          files: parent,
+          from: currentImport,
+          to: updatedImport,
+        })
+      }
     }
 
     const addViewSkipMorph = f => addView(f, true)
@@ -590,6 +623,7 @@ height 50`
       verbose && console.log(chalk.blue('D'), view)
 
       if (isLogic(f)) {
+        updateParentImports(f, false)
         delete logic[view]
       } else {
         delete views[view]
