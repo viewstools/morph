@@ -3,7 +3,7 @@ export function leave(node, parent, state) {
     ((!parent && node.isGroup) ||
       node.explicitChildren ||
       (node.isGroup && node.children.length > 0)) &&
-    node.nameFinal !== 'FlatList'
+    !node.nameFinal.includes('FlatList')
   ) {
     if (!parent && node.isGroup) {
       if (node.children.length === 0) {

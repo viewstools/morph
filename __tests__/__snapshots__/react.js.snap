@@ -54,7 +54,7 @@ Object {
 
 module.exports = {
   Bottom: get('Border.Bottom'),
-  Left: get('Border.Left'),
+  Left: get('Border.Left', 'something'),
   Right: get('Border.Right'),
   Top: get('Border.Top'),
   _top: get('Border'),
@@ -1172,6 +1172,7 @@ const Left = css({
   borderLeftStyle: 'solid',
   borderLeftColor: 'red',
   borderLeftWidth: 'var(--borderLeftWidth)',
+  borderTopRightRadius: 'var(--borderTopRightRadius)',
 });
 
 class Border extends React.Component {
@@ -1200,8 +1201,11 @@ class Border extends React.Component {
           className={\`views-block \${Bottom}\`}
         />
         <div
-          data-test-id={\`Border.Left|\`}
-          style={{ '--borderLeftWidth': \`\${props.borderLeftWidth}px\` }}
+          data-test-id={\`Border.Left|\${props.something ? 'something|' : ''}\`}
+          style={{
+            '--borderLeftWidth': \`\${props.borderLeftWidth}px\`,
+            '--borderTopRightRadius': \`\${props.something ? 20 : 10}px\`,
+          }}
           className={\`views-block \${Left}\`}
         />
         {props.children}
@@ -1284,6 +1288,7 @@ const Left = css({
   borderLeftStyle: 'solid',
   borderLeftColor: 'red',
   borderLeftWidth: 'var(--borderLeftWidth)',
+  borderTopRightRadius: 'var(--borderTopRightRadius)',
 });
 
 const Border = props => {
@@ -1309,8 +1314,11 @@ const Border = props => {
         className={\`views-block \${Bottom}\`}
       />
       <div
-        data-test-id={\`Border.Left|\`}
-        style={{ '--borderLeftWidth': \`\${props.borderLeftWidth}px\` }}
+        data-test-id={\`Border.Left|\${props.something ? 'something|' : ''}\`}
+        style={{
+          '--borderLeftWidth': \`\${props.borderLeftWidth}px\`,
+          '--borderTopRightRadius': \`\${props.something ? 20 : 10}px\`,
+        }}
         className={\`views-block \${Left}\`}
       />
       {props.children}
@@ -3504,7 +3512,12 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
-const ScrollableList1 = css({ overflowY: 'auto' });
+const ScrollableList1 = css({
+  overflowY: 'auto',
+  paddingBottom: 200,
+  backgroundColor: 'red',
+  paddingLeft: 'var(--paddingLeft)',
+});
 
 class ScrollableList extends React.Component {
   render() {
@@ -3513,6 +3526,7 @@ class ScrollableList extends React.Component {
     return (
       <div
         data-test-id={\`\${props['data-test-id'] || 'ScrollableList'}|\`}
+        style={{ '--paddingLeft': \`\${props.paddingLeft}px\` }}
         className={\`views-block \${ScrollableList1}\`}
       >
         {Array.isArray(props.from) &&
@@ -3543,6 +3557,11 @@ export default ScrollableList;
       "name": "from",
       "type": "array",
     },
+    Object {
+      "defaultValue": false,
+      "name": "paddingLeft",
+      "type": "number",
+    },
   ],
   "svgs": Array [],
 }
@@ -3556,12 +3575,18 @@ import Card from './Card.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const ScrollableList1 = css({ overflowY: 'auto' });
+const ScrollableList1 = css({
+  overflowY: 'auto',
+  paddingBottom: 200,
+  backgroundColor: 'red',
+  paddingLeft: 'var(--paddingLeft)',
+});
 
 const ScrollableList = props => {
   return (
     <div
       data-test-id={\`\${props['data-test-id'] || 'ScrollableList'}|\`}
+      style={{ '--paddingLeft': \`\${props.paddingLeft}px\` }}
       className={\`views-block \${ScrollableList1}\`}
     >
       {Array.isArray(props.from) &&
@@ -3597,6 +3622,11 @@ export default ScrollableList;
       "name": "from",
       "type": "array",
     },
+    Object {
+      "defaultValue": false,
+      "name": "paddingLeft",
+      "type": "number",
+    },
   ],
   "svgs": Array [],
 }
@@ -3610,12 +3640,8 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
-const BoxShadow = css({
-  boxShadow: \`0px 5px 2px 2px \${props.shadowColor}undefined\`,
-});
-const TextShadow = css({
-  textShadow: \`2px 3px 1px \${props.shadowColor}undefined\`,
-});
+const BoxShadow = css({ boxShadow: \`0px 5px 2px 2px var(--shadowColor)\` });
+const TextShadow = css({ textShadow: \`2px 3px 1px var(--shadowColor)\` });
 
 class Shadow extends React.Component {
   render() {
@@ -3669,12 +3695,8 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const BoxShadow = css({
-  boxShadow: \`0px 5px 2px 2px \${props.shadowColor}undefined\`,
-});
-const TextShadow = css({
-  textShadow: \`2px 3px 1px \${props.shadowColor}undefined\`,
-});
+const BoxShadow = css({ boxShadow: \`0px 5px 2px 2px var(--shadowColor)\` });
+const TextShadow = css({ textShadow: \`2px 3px 1px var(--shadowColor)\` });
 
 const Shadow = props => {
   return (
@@ -4111,6 +4133,9 @@ const Transform1 = css({
     'rotate(4deg) rotateX(5deg) rotateY(6deg) scale(3) translateX(1px) translateY(2px)',
   transformOrigin: 'center top',
 });
+const Text = css({
+  transformOrigin: \`var(--transformOriginX) var(--transformOriginY)\`,
+});
 
 class Transform extends React.Component {
   render() {
@@ -4121,7 +4146,14 @@ class Transform extends React.Component {
         data-test-id={\`\${props['data-test-id'] || 'Transform'}|\`}
         className={\`views-block \${Transform1}\`}
       >
-        <span data-test-id={\`Transform.Text|\`} className=\\"views-block\\">
+        <span
+          data-test-id={\`Transform.Text|\`}
+          style={{
+            '--transformOriginX': props.transformOriginX,
+            '--transformOriginY': props.transformOriginY,
+          }}
+          className={\`views-block \${Text}\`}
+        >
           who knows what happens here :D
         </span>
         {props.children}
@@ -4136,7 +4168,18 @@ Transform.contextTypes = {
 export default Transform;
 ",
   "fonts": Array [],
-  "slots": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "transformOriginX",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "transformOriginY",
+      "type": "string",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -4153,6 +4196,9 @@ const Transform1 = css({
     'rotate(4deg) rotateX(5deg) rotateY(6deg) scale(3) translateX(1px) translateY(2px)',
   transformOrigin: 'center top',
 });
+const Text = css({
+  transformOrigin: \`var(--transformOriginX) var(--transformOriginY)\`,
+});
 
 const Transform = props => {
   return (
@@ -4160,7 +4206,14 @@ const Transform = props => {
       data-test-id={\`\${props['data-test-id'] || 'Transform'}|\`}
       className={\`views-block \${Transform1}\`}
     >
-      <span data-test-id={\`Transform.Text|\`} className=\\"views-block\\">
+      <span
+        data-test-id={\`Transform.Text|\`}
+        style={{
+          '--transformOriginX': props.transformOriginX,
+          '--transformOriginY': props.transformOriginY,
+        }}
+        className={\`views-block \${Text}\`}
+      >
         who knows what happens here :D
       </span>
       {props.children}
@@ -4171,7 +4224,18 @@ const Transform = props => {
 export default Transform;
 ",
   "fonts": Array [],
-  "slots": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "transformOriginX",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "transformOriginY",
+      "type": "string",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -6129,8 +6193,14 @@ class Border extends React.Component {
           ]}
         />
         <Animated.View
-          testID={\`Border.Left|\`}
-          style={[styles.Left, { borderLeftWidth: props.borderLeftWidth }]}
+          testID={\`Border.Left|\${props.something ? 'something|' : ''}\`}
+          style={[
+            styles.Left,
+            {
+              borderLeftWidth: props.borderLeftWidth,
+              borderTopRightRadius: props.something ? 20 : 10,
+            },
+          ]}
         />
         {props.children}
       </Animated.View>
@@ -7232,16 +7302,27 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import Card from './Card.view.js';
-import { FlatList } from 'react-native';
+import { Animated, FlatList, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
+
+const styles = StyleSheet.create({
+  ScrollableList1ContentContainer: { paddingBottom: 200 },
+  ScrollableList1: { backgroundColor: 'red' },
+});
+const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
 class ScrollableList extends React.Component {
   render() {
     const { context, props } = this;
 
     return (
-      <FlatList
+      <AnimatedFlatList
         testID={\`\${props['testID'] || 'ScrollableList'}|\`}
+        style={styles.ScrollableList1}
+        contentContainerStyle={[
+          styles.ScrollableList1ContentContainer,
+          { paddingLeft: props.paddingLeft },
+        ]}
         data={props.from}
         keyExtractor={(item, index) => item.id || index}
         renderItem={({ item, index }) => (
@@ -7263,6 +7344,11 @@ export default ScrollableList;
       "defaultValue": false,
       "name": "from",
       "type": "array",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "paddingLeft",
+      "type": "number",
     },
   ],
   "svgs": Array [],
@@ -7549,7 +7635,7 @@ exports[`react-native parses react-native Transform 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Animated, StyleSheet, View } from 'react-native';
 import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
@@ -7576,7 +7662,15 @@ class Transform extends React.Component {
         testID={\`\${props['testID'] || 'Transform'}|\`}
         style={styles.Transform1}
       >
-        <Text testID={\`Transform.Text|\`}>who knows what happens here :D</Text>
+        <Animated.Text
+          testID={\`Transform.Text|\`}
+          style={{
+            transformOriginX: props.transformOriginX,
+            transformOriginY: props.transformOriginY,
+          }}
+        >
+          who knows what happens here :D
+        </Animated.Text>
         {props.children}
       </View>
     );
@@ -7589,7 +7683,18 @@ Transform.contextTypes = {
 export default Transform;
 ",
   "fonts": Array [],
-  "slots": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "transformOriginX",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "transformOriginY",
+      "type": "string",
+    },
+  ],
   "svgs": Array [],
 }
 `;

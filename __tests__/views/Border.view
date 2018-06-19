@@ -21,3 +21,6 @@ Left Vertical
 borderLeftStyle solid
 borderLeftColor red
 borderLeftWidth < 10
+borderTopRightRadius 10
+when <something
+borderTopRightRadius 20

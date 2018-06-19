@@ -559,10 +559,12 @@ height 50`
       const view = viewRaw.split('.')[0]
 
       await Promise.all(
-        responsibleFor[view].map(dep => {
-          return morphView(views[dep], true)
-        })
+        responsibleFor[view].map(dep => morphView(views[dep], true))
       )
+
+      if (Array.isArray(toMorphQueue)) {
+        await Promise.all(toMorphQueue.map(onMorph))
+      }
     }
 
     const toViewPath = f => {
