@@ -1,5 +1,4 @@
 import { getLocalsString, hasLocals } from '../utils.js'
-import wrap from './wrap.js'
 
 export function enter(node, parent, state) {
   const value = state.getValueForProperty(node, parent, state)

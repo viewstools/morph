@@ -192,6 +192,18 @@ module.exports = {
 }
 `;
 
+exports[`e2e parses e2e ListWithKey 1`] = `
+Object {
+  "code": "const { get } = require('@viewstools/e2e');
+
+module.exports = {
+  Card: get('ListWithKey.Card'),
+  List: get('ListWithKey.List'),
+};
+",
+}
+`;
+
 exports[`e2e parses e2e LocalImage 1`] = `
 Object {
   "code": "const { get } = require('@viewstools/e2e');
@@ -2148,7 +2160,7 @@ class ListOfSomething extends React.Component {
             <Something
               index={index}
               {...item}
-              key={item.id || index}
+              key={index}
               data-test-id={\`ListOfSomething.Something|\`}
               className=\\"views-block\\"
             />
@@ -2194,7 +2206,7 @@ const ListOfSomething = props => {
           <Something
             index={index}
             {...item}
-            key={item.id || index}
+            key={index}
             data-test-id={\`ListOfSomething.Something|\`}
             className=\\"views-block\\"
           />
@@ -2249,7 +2261,7 @@ class ListWhen extends React.Component {
             <Card
               index={index}
               {...item}
-              key={item.id || index}
+              key={index}
               data-test-id={\`ListWhen.Card|\`}
               className=\\"views-block\\"
             />
@@ -2300,7 +2312,7 @@ const ListWhen = props => {
           <Card
             index={index}
             {...item}
-            key={item.id || index}
+            key={index}
             data-test-id={\`ListWhen.Card|\`}
             className=\\"views-block\\"
           />
@@ -2328,6 +2340,107 @@ export default ListWhen;
       "name": "showMe",
       "type": "string",
     },
+    Object {
+      "defaultValue": false,
+      "name": "from",
+      "type": "array",
+    },
+  ],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom ListWithKey 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import Card from './Card.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+import PropTypes from 'prop-types';
+
+class ListWithKey extends React.Component {
+  render() {
+    const { context, props } = this;
+
+    return (
+      <div
+        data-test-id={\`\${props['data-test-id'] || 'List'}|\`}
+        className=\\"views-block\\"
+      >
+        {Array.isArray(props.from) &&
+          props.from.map((item, index) => (
+            <Card
+              index={index}
+              {...item}
+              key={id}
+              data-test-id={\`ListWithKey.Card|\`}
+              className=\\"views-block\\"
+            />
+          ))}
+        {props.children}
+      </div>
+    );
+  }
+}
+ListWithKey.contextTypes = {
+  track: PropTypes.func.isRequired,
+};
+
+export default ListWithKey;
+",
+  "fonts": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "from",
+      "type": "array",
+    },
+  ],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom ListWithKey: react-dom parses react-dom ListWithKey debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import Card from './Card.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+
+const ListWithKey = props => {
+  return (
+    <div
+      data-test-id={\`\${props['data-test-id'] || 'List'}|\`}
+      className=\\"views-block\\"
+    >
+      {Array.isArray(props.from) &&
+        props.from.map((item, index) => (
+          <Card
+            index={index}
+            {...item}
+            key={id}
+            data-test-id={\`ListWithKey.Card|\`}
+            className=\\"views-block\\"
+          />
+        ))}
+      {props.children}
+    </div>
+  );
+};
+
+ListWithKey.defaultProps = {
+  from: [
+    { id: 'item1' },
+    { id: 'item2' },
+    { id: 'item3' },
+    { id: 'item4' },
+    { id: 'item5' },
+  ],
+};
+export default ListWithKey;
+",
+  "fonts": Array [],
+  "slots": Array [
     Object {
       "defaultValue": false,
       "name": "from",
@@ -3534,7 +3647,7 @@ class ScrollableList extends React.Component {
             <Card
               index={index}
               {...item}
-              key={item.id || index}
+              key={index}
               data-test-id={\`ScrollableList.Card|\`}
               className=\\"views-block\\"
             />
@@ -3594,7 +3707,7 @@ const ScrollableList = props => {
           <Card
             index={index}
             {...item}
-            key={item.id || index}
+            key={index}
             data-test-id={\`ScrollableList.Card|\`}
             className=\\"views-block\\"
           />
@@ -6644,7 +6757,7 @@ class ListOfSomething extends React.Component {
             <Something
               index={index}
               {...item}
-              key={item.id || index}
+              key={index}
               testID={\`ListOfSomething.Something|\`}
             />
           ))}
@@ -6690,7 +6803,7 @@ class ListWhen extends React.Component {
             <Card
               index={index}
               {...item}
-              key={item.id || index}
+              key={index}
               testID={\`ListWhen.Card|\`}
             />
           ))}
@@ -6712,6 +6825,52 @@ export default ListWhen;
       "name": "showMe",
       "type": "string",
     },
+    Object {
+      "defaultValue": false,
+      "name": "from",
+      "type": "array",
+    },
+  ],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-native parses react-native ListWithKey 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import Card from './Card.view.js';
+import { View } from 'react-native';
+import PropTypes from 'prop-types';
+
+class ListWithKey extends React.Component {
+  render() {
+    const { context, props } = this;
+
+    return (
+      <View testID={\`\${props['testID'] || 'List'}|\`}>
+        {Array.isArray(props.from) &&
+          props.from.map((item, index) => (
+            <Card
+              index={index}
+              {...item}
+              key={id}
+              testID={\`ListWithKey.Card|\`}
+            />
+          ))}
+        {props.children}
+      </View>
+    );
+  }
+}
+ListWithKey.contextTypes = {
+  track: PropTypes.func.isRequired,
+};
+
+export default ListWithKey;
+",
+  "fonts": Array [],
+  "slots": Array [
     Object {
       "defaultValue": false,
       "name": "from",
@@ -7324,7 +7483,7 @@ class ScrollableList extends React.Component {
           { paddingLeft: props.paddingLeft },
         ]}
         data={props.from}
-        keyExtractor={(item, index) => item.id || index}
+        keyExtractor={(item, index) => index}
         renderItem={({ item, index }) => (
           <Card index={index} {...item} testID={\`ScrollableList.Card|\`} />
         )}
