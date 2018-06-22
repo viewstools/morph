@@ -6,10 +6,13 @@ export function enter(node, parent, state) {
     if (!from) return
 
     if (node.nameFinal.includes('FlatList')) {
+      let key = getProp(node.children[0], 'key')
+      key = key ? key.value : 'index'
+
       state.render.push(
         `data={${
           from.value
-        }} keyExtractor={(item, index) => item.id || index} renderItem={({ item, index }) =>`
+        }} keyExtractor={(item, index) => ${key}} renderItem={({ item, index }) =>`
       )
     } else {
       state.render.push(
