@@ -556,6 +556,7 @@ export default ({
   if (stack.length > 0) {
     while (!end(stack.pop(), lines.length - 1)) {}
   }
+  debugger
 
   return {
     fonts,
