@@ -1,5 +1,8 @@
 # Views Tools language morpher
 
+[![NPM package](https://img.shields.io/npm/v/@viewstools/morph.svg)](https://www.npmjs.com/package/@viewstools/morph)
+[![Build status](https://img.shields.io/travis/viewstools/morph.svg)](https://travis-ci.org/viewstools/morph) [![Greenkeeper badge](https://badges.greenkeeper.io/viewstools/morph.svg)](https://greenkeeper.io/)
+
 [Looking for Views Tools docs?](https://github.com/viewstools/docs)
 
 The easiest way to integrate Views with your project is to [follow this guide](https://github.com/viewstools/docs/tree/master/UseViews).
