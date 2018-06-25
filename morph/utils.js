@@ -193,6 +193,9 @@ export const getAllowedStyleKeys = node => {
 export const isList = node =>
   node && node.type === 'Block' && node.name === 'List'
 
+export const isTable = node =>
+  node && node.type === 'Block' && node.name === 'Table'
+
 export const isEmpty = list => list.length === 0
 
 export const isValidImgSrc = (node, parent) =>

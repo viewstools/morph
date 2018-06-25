@@ -4,7 +4,6 @@ export function enter(node, parent, state) {
   if (isList(node)) {
     const from = getProp(node, 'from')
     if (!from) return
-    debugger
 
     if (node.nameFinal.includes('FlatList')) {
       let key = getProp(node.children[0], 'key')

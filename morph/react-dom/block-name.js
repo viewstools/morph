@@ -7,7 +7,6 @@ export function enter(node, parent, state) {
 
   // TODO remove the use of those because they're just the name
   // and keep one
-  debugger
   node.nameFinal = name
   node.nameTag = name
   state.use(name)
