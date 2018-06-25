@@ -30,6 +30,10 @@ export default (node, parent, state) => {
     case 'Text':
       return 'span'
 
+    case 'List':
+      name = 'div'
+      break
+
     case 'Proxy':
       return null
 
