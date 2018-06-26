@@ -43,6 +43,7 @@ export default (state, getImport) => {
       )
     } else if (d.endsWith('SvgInline')) {
       dependencies.push(`import ${d} from "./${d}.view.js"`)
+    } else if (d === 'Table') {
     } else if (/^[A-Z]/.test(d)) {
       dependencies.push(getImport(d))
     }
@@ -73,6 +74,12 @@ export default (state, getImport) => {
 
   if (state.isAnimated && !state.isReactNative) {
     dependencies.push('import Animated from "animated/lib/targets/react-dom"')
+  }
+
+  if (state.isTable && !state.isReactNative) {
+    dependencies.push(
+      'import { AutoSizer, Column, Table } from "react-virtualized"'
+    )
   }
 
   if (usesSvg.length > 0) {
