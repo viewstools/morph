@@ -6,7 +6,11 @@ export function enter(node, parent, state) {
     if (!from) return
 
     state.isTable = true
-    state.render.push(`<AutoSizer>{({ height, width }) => ( `)
+    // state.render.push(`<AutoSizer>{({ height, width }) => ( `)
+    debugger
+    state.render.push(
+      ` width={width} height={height} rowCount={lfrom.length} rowGetter={({ index }) => from[index]}`
+    )
   }
 }
 

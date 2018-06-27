@@ -1,5 +1,6 @@
 import { leave } from '../react/block-name.js'
 import getBlockName from './get-block-name.js'
+import { isTable } from '../utils.js'
 
 export function enter(node, parent, state) {
   let name = getBlockName(node, parent, state)
@@ -49,6 +50,10 @@ export function enter(node, parent, state) {
   //     node.nameFinal = finalValue
   //   }
   // }
+
+  if (isTable(node)) {
+    state.render.push(`<AutoSizer>{({ height, width }) => ( `)
+  }
 
   state.render.push(`<${node.nameFinal}`)
 }
