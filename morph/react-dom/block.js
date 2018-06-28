@@ -1,5 +1,6 @@
 import * as BlockAddTestIdProp from '../react/block-add-test-id-prop.js'
 import * as BlockCapture from './block-capture.js'
+import * as BlockColumn from './block-column.js'
 import * as BlockExplicitChildren from '../react/block-explicit-children.js'
 import * as BlockGoTo from './block-go-to.js'
 import * as BlockGroup from '../react/block-group.js'
@@ -12,7 +13,7 @@ import * as BlockProxy from '../react/block-proxy.js'
 import * as BlockRoute from '../react/block-route.js'
 import * as BlockSetTestId from '../react/block-set-test-id.js'
 import * as BlockTeleport from '../react/block-teleport.js'
-import * as BlockTable from '../react/block-table.js'
+import * as BlockTable from './block-table.js'
 
 export const enter = [
   BlockSetTestId.enter,
@@ -21,6 +22,7 @@ export const enter = [
   BlockRoute.enter,
   BlockName.enter,
   BlockTable.enter,
+  BlockColumn.enter,
   BlockCapture.enter,
   BlockTeleport.enter,
   BlockGoTo.enter,
