@@ -1,14 +1,17 @@
-import { getProp, isColumn } from '../utils.js'
+import { getLabel, getProp, isColumn } from '../utils.js'
 
 export function enter(node, parent, state) {
   if (isColumn(node)) {
     debugger
-    const dataKey = getProp(node, 'key')
+    const dataKey = getProp(node, 'key').value
+    const width = getProp(node, 'width').value
+    const label = getLabel(node)
 
     state.render.push(
-      ` dataKey="${dataKey.value}"`
+      ` dataKey="${dataKey}" width={${width}} ${
+        label ? `label="${getLabel(node)}"` : ''
+      }`
       //   label="Name"
-      //   width={width / 3}
       //   className={columnStyle}`
     )
   }

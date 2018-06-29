@@ -51,6 +51,14 @@ export const getPropertiesAsObject = list => {
   return getObjectAsString(obj)
 }
 
+export const getLabel = node => {
+  const header = node.children
+    .filter(child => child.name === 'Text')
+    .find(node => getProp(node, 'isHeader'))
+
+  return header ? getProp(header, 'text').value : null
+}
+
 export const getProp = (node, key) => {
   const finder =
     typeof key === 'string' ? p => p.name === key : p => key.test(p.name)
