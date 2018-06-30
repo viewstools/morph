@@ -560,5 +560,7 @@ export const removePaddingProps = styleProps =>
       return obj
     }, {})
 
-// export const hasColumnStyles = node =>
-//   node.properties.some(prop => prop.tags.style && prop.name !== 'width')
+export const hasRowStyles = node =>
+  node.properties.some(
+    prop => prop.name.match(/^row/) && prop.name !== 'rowHeight'
+  )

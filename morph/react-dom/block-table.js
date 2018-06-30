@@ -1,4 +1,4 @@
-import { getProp, isTable } from '../utils.js'
+import { getProp, hasRowStyles, isTable } from '../utils.js'
 
 export function enter(node, parent, state) {
   if (isTable(node)) {
@@ -8,7 +8,9 @@ export function enter(node, parent, state) {
 
     state.isTable = true
     state.render.push(
-      ` width={width} height={height} rowCount={from.length} rowGetter={({ index }) => from[index]}`
+      ` width={width} height={height} rowCount={from.length} rowGetter={({ index }) => from[index]} 
+      ${hasRowStyles(node) ? `rowClassName={rowStyle}` : ''}
+      `
     )
   }
 }
