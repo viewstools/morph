@@ -559,3 +559,6 @@ export const removePaddingProps = styleProps =>
       obj[key] = styleProps[key]
       return obj
     }, {})
+
+export const hasColumnStyles = node =>
+  node.properties.some(prop => prop.tags.style && prop.name !== 'width')

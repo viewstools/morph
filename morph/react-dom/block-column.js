@@ -1,4 +1,4 @@
-import { getLabel, getProp, isColumn } from '../utils.js'
+import { getLabel, getProp, hasColumnStyles, isColumn } from '../utils.js'
 
 export function enter(node, parent, state) {
   if (isColumn(node)) {
@@ -10,7 +10,7 @@ export function enter(node, parent, state) {
     state.render.push(
       ` dataKey="${dataKey}" width={${width}} ${
         label ? `label="${label}"` : ''
-      }`
+      } ${hasColumnStyles(node) ? `className={columnStyle}` : ''}`
       //   className={columnStyle}`
     )
   }
