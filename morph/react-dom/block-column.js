@@ -9,9 +9,8 @@ export function enter(node, parent, state) {
 
     state.render.push(
       ` dataKey="${dataKey}" width={${width}} ${
-        label ? `label="${getLabel(node)}"` : ''
+        label ? `label="${label}"` : ''
       }`
-      //   label="Name"
       //   className={columnStyle}`
     )
   }

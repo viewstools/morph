@@ -56,6 +56,11 @@ export const getLabel = node => {
     .filter(child => child.name === 'Text')
     .find(node => getProp(node, 'isHeader'))
 
+  if (header) {
+    // removing the text node, because the column handles the label
+    node.children.splice(node.children.indexOf(header), 1)
+  }
+
   return header ? getProp(header, 'text').value : null
 }
 
