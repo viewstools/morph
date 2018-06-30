@@ -6,7 +6,7 @@ module.exports = async src => {
   const options = {
     bashNative: ['linux'],
     cwd: src,
-    ignore: '*node_modules*',
+    ignore: ['*node_modules*'],
     // filter: f => !/node_modules/.test(f),
   }
 
