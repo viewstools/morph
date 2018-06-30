@@ -4,6 +4,7 @@ export function enter(node, parent, state) {
   if (isTable(node)) {
     const from = getProp(node, 'from')
     if (!from) return
+    debugger
 
     state.isTable = true
     state.render.push(
