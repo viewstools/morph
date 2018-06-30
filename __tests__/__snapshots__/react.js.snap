@@ -4565,6 +4565,8 @@ class UseCaptureNumber extends React.Component {
     return (
       <input
         type=\\"number\\"
+        inputmode=\\"numeric\\"
+        pattern=\\"[0-9]*\\"
         onChange={event => this.setState({ number: event.target.value })}
         value={state.number}
         data-test-id={\`\${props['data-test-id'] || 'Number'}|\`}
@@ -4603,6 +4605,8 @@ class UseCaptureNumber extends React.Component {
     return (
       <input
         type=\\"number\\"
+        inputmode=\\"numeric\\"
+        pattern=\\"[0-9]*\\"
         onChange={event => this.setState({ number: event.target.value })}
         value={state.number}
         tabIndex={-1}
