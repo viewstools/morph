@@ -16,6 +16,7 @@ const dymPropMatcher = new DidYouMeanMatcher([
   'fill',
   'stroke',
   'from',
+  'key',
   'viewBox',
   'stroke',
   'strokeWidth',
