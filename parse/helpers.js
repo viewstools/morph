@@ -115,6 +115,7 @@ export const isBasic = line => is(BASIC, line)
 export const isBlock = line => is(BLOCK, line)
 export const isBool = line => is(BOOL, line)
 export const isCapture = line => is(CAPTURE, line)
+export const isColumn = line => line === 'Column'
 export const isComment = line => is(COMMENT, line)
 export const isEmptyText = line => line === ''
 export const isEnd = line => line === ''
@@ -125,6 +126,7 @@ export const isList = line => line === 'List'
 export const isInt = line => is(INT, line)
 export const isProp = line => is(PROP, line)
 export const isSlot = line => is(SLOT, line)
+export const isTable = line => line === 'Table'
 export const isUnsupportedShorthand = name => name in UNSUPPORTED_SHORTHAND
 export { isStyle }
 export const isTrue = line => is(TRUE, line)

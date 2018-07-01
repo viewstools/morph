@@ -12,12 +12,14 @@ import {
   isBasic,
   isBlock,
   isCapture,
+  isColumn,
   isComment,
   isEnd,
   isFontable,
   isGroup,
   isList,
   isProp,
+  isTable,
   isLocalScope,
   isSystemScope,
   isTextInterpolation,
@@ -143,6 +145,7 @@ export default ({
       name,
       isAnimated: false,
       isBasic: isBasic(name),
+      isColumn: isColumn(name),
       isGroup: false,
       loc: getLoc(i, 0),
       properties: [],
@@ -202,6 +205,12 @@ export default ({
             } else {
               last.children.push(block)
             }
+          } else if (block.isColumn && !last.isTable) {
+            warnings.push({
+              loc: block.loc,
+              type: `Only tables can contain columns. Put this column directly inside a table.`,
+              line,
+            })
           } else {
             last.children.push(block)
           }
@@ -262,6 +271,7 @@ export default ({
     if (isGroup(name)) {
       block.isGroup = true
       block.isList = isList(name)
+      block.isTable = isTable(name)
       block.children = []
     }
 
