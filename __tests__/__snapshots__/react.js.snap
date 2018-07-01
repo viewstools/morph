@@ -661,6 +661,7 @@ import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
 const Vertical = css({
+  label: 'Vertical',
   color: 'red',
   '&:disabled': {
     color: 'blue',
@@ -736,6 +737,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const Vertical = css({
+  label: 'Vertical',
   color: 'red',
   '&:disabled': {
     color: 'blue',
@@ -802,6 +804,7 @@ const getAnimatedValue = (animatedValue, from, to) =>
   });
 
 const Vertical = css({
+  label: 'Vertical',
   backgroundColor: 'red',
   transition: 'transform 150ms ease-in 0ms',
   willChange: 'opacity, transform',
@@ -810,6 +813,8 @@ const Vertical = css({
     'rotateX(var(--rotateX)) translateX(var(--translateX)) translateY(var(--translateY))',
 });
 const Text = css({
+  label: 'Text',
+
   willChange: 'color',
   color: 'var(--color)',
 });
@@ -901,6 +906,7 @@ const getAnimatedValue = (animatedValue, from, to) =>
   });
 
 const Vertical = css({
+  label: 'Vertical',
   backgroundColor: 'red',
   transition: 'transform 150ms ease-in 0ms',
   willChange: 'opacity, transform',
@@ -909,6 +915,8 @@ const Vertical = css({
     'rotateX(var(--rotateX)) translateX(var(--translateX)) translateY(var(--translateY))',
 });
 const Text = css({
+  label: 'Text',
+
   willChange: 'color',
   color: 'var(--color)',
 });
@@ -984,6 +992,7 @@ import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
 const Vertical = css({
+  label: 'Vertical',
   WebkitAppRegion: 'drag',
   width: '92%',
   marginTop: 'auto',
@@ -1023,6 +1032,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const Vertical = css({
+  label: 'Vertical',
   WebkitAppRegion: 'drag',
   width: '92%',
   marginTop: 'auto',
@@ -1056,9 +1066,11 @@ import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
 const Vertical = css({
+  label: 'Vertical',
   backgroundImage: \\"url('https://views.tools/image.jpg')\\",
 });
 const Horizontal = css({
+  label: 'Horizontal',
   flexDirection: 'row',
   backgroundSize: 'contain',
   backgroundImage: \`url(\${'var(--backgroundImage)'})\`,
@@ -1111,9 +1123,11 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const Vertical = css({
+  label: 'Vertical',
   backgroundImage: \\"url('https://views.tools/image.jpg')\\",
 });
 const Horizontal = css({
+  label: 'Horizontal',
   flexDirection: 'row',
   backgroundSize: 'contain',
   backgroundImage: \`url(\${'var(--backgroundImage)'})\`,
@@ -1161,26 +1175,31 @@ import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
 const Border1 = css({
+  label: 'Border1',
   borderColor: 'red',
   borderStyle: 'solid',
   borderWidth: 'var(--borderWidth)',
 });
 const Top = css({
+  label: 'Top',
   borderTopStyle: 'solid',
   borderTopColor: 'red',
   borderTopWidth: 'var(--borderTopWidth)',
 });
 const Right = css({
+  label: 'Right',
   borderRightStyle: 'solid',
   borderRightColor: 'red',
   borderRightWidth: 'var(--borderRightWidth)',
 });
 const Bottom = css({
+  label: 'Bottom',
   borderBottomStyle: 'solid',
   borderBottomColor: 'red',
   borderBottomWidth: 'var(--borderBottomWidth)',
 });
 const Left = css({
+  label: 'Left',
   borderLeftStyle: 'solid',
   borderLeftColor: 'red',
   borderLeftWidth: 'var(--borderLeftWidth)',
@@ -1277,26 +1296,31 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const Border1 = css({
+  label: 'Border1',
   borderColor: 'red',
   borderStyle: 'solid',
   borderWidth: 'var(--borderWidth)',
 });
 const Top = css({
+  label: 'Top',
   borderTopStyle: 'solid',
   borderTopColor: 'red',
   borderTopWidth: 'var(--borderTopWidth)',
 });
 const Right = css({
+  label: 'Right',
   borderRightStyle: 'solid',
   borderRightColor: 'red',
   borderRightWidth: 'var(--borderRightWidth)',
 });
 const Bottom = css({
+  label: 'Bottom',
   borderBottomStyle: 'solid',
   borderBottomColor: 'red',
   borderBottomWidth: 'var(--borderBottomWidth)',
 });
 const Left = css({
+  label: 'Left',
   borderLeftStyle: 'solid',
   borderLeftColor: 'red',
   borderLeftWidth: 'var(--borderLeftWidth)',
@@ -1387,7 +1411,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
-const Vertical = css({ backgroundColor: 'blue' });
+const Vertical = css({ label: 'Vertical', backgroundColor: 'blue' });
 
 class ClassName extends React.Component {
   render() {
@@ -1422,7 +1446,7 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const Vertical = css({ backgroundColor: 'blue' });
+const Vertical = css({ label: 'Vertical', backgroundColor: 'blue' });
 
 const ClassName = props => {
   return (
@@ -1451,8 +1475,11 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
-const Vertical = css({ backgroundColor: 'red' });
-const Text = css({ color: 'var(--color)' });
+const Vertical = css({ label: 'Vertical', backgroundColor: 'red' });
+const Text = css({
+  label: 'Text',
+  color: 'var(--color)',
+});
 
 class Code extends React.Component {
   render() {
@@ -1514,8 +1541,11 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const Vertical = css({ backgroundColor: 'red' });
-const Text = css({ color: 'var(--color)' });
+const Vertical = css({ label: 'Vertical', backgroundColor: 'red' });
+const Text = css({
+  label: 'Text',
+  color: 'var(--color)',
+});
 
 const Code = props => {
   return (
@@ -1670,7 +1700,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
-const Display1 = css({ display: 'block' });
+const Display1 = css({ label: 'Display1', display: 'block' });
 
 class Display extends React.Component {
   render() {
@@ -1705,7 +1735,7 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const Display1 = css({ display: 'block' });
+const Display1 = css({ label: 'Display1', display: 'block' });
 
 const Display = props => {
   return (
@@ -1735,7 +1765,10 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
-const Vertical = css({ height: 'var(--height)' });
+const Vertical = css({
+  label: 'Vertical',
+  height: 'var(--height)',
+});
 
 class DynamicStylesApplyToBasicBlocksOnly extends React.Component {
   render() {
@@ -1783,7 +1816,10 @@ import SomeThing from './SomeThing.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const Vertical = css({ height: 'var(--height)' });
+const Vertical = css({
+  label: 'Vertical',
+  height: 'var(--height)',
+});
 
 const DynamicStylesApplyToBasicBlocksOnly = props => {
   return (
@@ -1949,12 +1985,14 @@ import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
 const Hover1 = css({
+  label: 'Hover1',
   '&:hover': {
     backgroundColor: '#232323',
   },
   backgroundColor: 'var(--backgroundColor)',
 });
 const Text = css({
+  label: 'Text',
   color: 'white',
   [\`.\${Hover1}:hover &, .\${Hover1}.hover &\`]: {
     color: 'black',
@@ -2026,12 +2064,14 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const Hover1 = css({
+  label: 'Hover1',
   '&:hover': {
     backgroundColor: '#232323',
   },
   backgroundColor: 'var(--backgroundColor)',
 });
 const Text = css({
+  label: 'Text',
   color: 'white',
   [\`.\${Hover1}:hover &, .\${Hover1}.hover &\`]: {
     color: 'black',
@@ -2526,7 +2566,11 @@ import chopperSvg from './chopper.svg';
 import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
-const LocalImageSvg1 = css({ width: 50, height: 'var(--height)' });
+const LocalImageSvg1 = css({
+  label: 'LocalImageSvg1',
+  width: 50,
+  height: 'var(--height)',
+});
 
 class LocalImageSvg extends React.Component {
   render() {
@@ -2569,7 +2613,11 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import chopperSvg from './chopper.svg';
 import { css } from 'emotion';
 
-const LocalImageSvg1 = css({ width: 50, height: 'var(--height)' });
+const LocalImageSvg1 = css({
+  label: 'LocalImageSvg1',
+  width: 50,
+  height: 'var(--height)',
+});
 
 const LocalImageSvg = props => {
   return (
@@ -3024,7 +3072,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
-const Text = css({ marginTop: -10 });
+const Text = css({ label: 'Text', marginTop: -10 });
 
 class NegativeNumber extends React.Component {
   render() {
@@ -3059,7 +3107,7 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const Text = css({ marginTop: -10 });
+const Text = css({ label: 'Text', marginTop: -10 });
 
 const NegativeNumber = props => {
   return (
@@ -3196,7 +3244,10 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
-const Scope1 = css({ color: 'var(--color)' });
+const Scope1 = css({
+  label: 'Scope1',
+  color: 'var(--color)',
+});
 
 class Scope extends React.Component {
   render() {
@@ -3250,7 +3301,10 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const Scope1 = css({ color: 'var(--color)' });
+const Scope1 = css({
+  label: 'Scope1',
+  color: 'var(--color)',
+});
 
 const Scope = props => {
   return (
@@ -3485,6 +3539,7 @@ import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
 const Content = css({
+  label: 'Content',
   opacity: 'var(--opacity)',
   transform: 'scale(var(--scale))',
 });
@@ -3562,6 +3617,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const Content = css({
+  label: 'Content',
   opacity: 'var(--opacity)',
   transform: 'scale(var(--scale))',
 });
@@ -3626,6 +3682,7 @@ import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
 const ScrollableList1 = css({
+  label: 'ScrollableList1',
   overflowY: 'auto',
   paddingBottom: 200,
   backgroundColor: 'red',
@@ -3689,6 +3746,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const ScrollableList1 = css({
+  label: 'ScrollableList1',
   overflowY: 'auto',
   paddingBottom: 200,
   backgroundColor: 'red',
@@ -3753,8 +3811,14 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
-const BoxShadow = css({ boxShadow: \`0px 5px 2px 2px var(--shadowColor)\` });
-const TextShadow = css({ textShadow: \`2px 3px 1px var(--shadowColor)\` });
+const BoxShadow = css({
+  label: 'BoxShadow',
+  boxShadow: \`0px 5px 2px 2px var(--shadowColor)\`,
+});
+const TextShadow = css({
+  label: 'TextShadow',
+  textShadow: \`2px 3px 1px var(--shadowColor)\`,
+});
 
 class Shadow extends React.Component {
   render() {
@@ -3808,8 +3872,14 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const BoxShadow = css({ boxShadow: \`0px 5px 2px 2px var(--shadowColor)\` });
-const TextShadow = css({ textShadow: \`2px 3px 1px var(--shadowColor)\` });
+const BoxShadow = css({
+  label: 'BoxShadow',
+  boxShadow: \`0px 5px 2px 2px var(--shadowColor)\`,
+});
+const TextShadow = css({
+  label: 'TextShadow',
+  textShadow: \`2px 3px 1px var(--shadowColor)\`,
+});
 
 const Shadow = props => {
   return (
@@ -3859,6 +3929,7 @@ import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
 const WindowControl = css({
+  label: 'WindowControl',
   marginRight: 8,
   backgroundColor: '#CBCDCE',
   opacity: 0.7,
@@ -3925,6 +3996,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const WindowControl = css({
+  label: 'WindowControl',
   marginRight: 8,
   backgroundColor: '#CBCDCE',
   opacity: 0.7,
@@ -3976,7 +4048,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
-const Horizontal = css({ flexDirection: 'row' });
+const Horizontal = css({ label: 'Horizontal', flexDirection: 'row' });
 
 class Teleport extends React.Component {
   render() {
@@ -4016,7 +4088,7 @@ import { Link } from 'react-router-dom';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const Horizontal = css({ flexDirection: 'row' });
+const Horizontal = css({ label: 'Horizontal', flexDirection: 'row' });
 
 const Teleport = props => {
   return (
@@ -4242,11 +4314,13 @@ import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
 const Transform1 = css({
+  label: 'Transform1',
   transform:
     'rotate(4deg) rotateX(5deg) rotateY(6deg) scale(3) translateX(1px) translateY(2px)',
   transformOrigin: 'center top',
 });
 const Text = css({
+  label: 'Text',
   transformOrigin: \`var(--transformOriginX) var(--transformOriginY)\`,
 });
 
@@ -4305,11 +4379,13 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const Transform1 = css({
+  label: 'Transform1',
   transform:
     'rotate(4deg) rotateX(5deg) rotateY(6deg) scale(3) translateX(1px) translateY(2px)',
   transformOrigin: 'center top',
 });
 const Text = css({
+  label: 'Text',
   transformOrigin: \`var(--transformOriginX) var(--transformOriginY)\`,
 });
 
@@ -4362,6 +4438,7 @@ import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
 const Email = css({
+  label: 'Email',
   borderColor: 'black',
   borderStyle: 'solid',
   borderWidth: 1,
@@ -4423,6 +4500,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const Email = css({
+  label: 'Email',
   borderColor: 'black',
   borderStyle: 'solid',
   borderWidth: 1,
@@ -5042,6 +5120,7 @@ import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
 const Horizontal = css({
+  label: 'Horizontal',
   flexDirection: 'row',
   borderColor: 'red',
   borderStyle: 'solid',
@@ -5082,6 +5161,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const Horizontal = css({
+  label: 'Horizontal',
   flexDirection: 'row',
   borderColor: 'red',
   borderStyle: 'solid',
@@ -5190,7 +5270,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
-const Horizontal = css({ flexDirection: 'row' });
+const Horizontal = css({ label: 'Horizontal', flexDirection: 'row' });
 
 class UseRouter extends React.Component {
   render() {
@@ -5271,7 +5351,7 @@ import Topics from './Topics.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const Horizontal = css({ flexDirection: 'row' });
+const Horizontal = css({ label: 'Horizontal', flexDirection: 'row' });
 
 const UseRouter = props => {
   return (
@@ -5343,10 +5423,11 @@ import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
 const Svg = css({
+  label: 'Svg',
   height: 20,
   width: 20,
 });
-const SvgPath = css({ fill: 'red' });
+const SvgPath = css({ label: 'SvgPath', fill: 'red' });
 
 class UseSvg extends React.Component {
   render() {
@@ -5416,10 +5497,11 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const Svg = css({
+  label: 'Svg',
   height: 20,
   width: 20,
 });
-const SvgPath = css({ fill: 'red' });
+const SvgPath = css({ label: 'SvgPath', fill: 'red' });
 
 const UseSvg = props => {
   return (
@@ -5484,6 +5566,7 @@ import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
 const UseText1 = css({
+  label: 'UseText1',
   fontFamily: 'Montserrat, sans-serif',
   fontSize: 16,
   lineHeight: 1.5,
@@ -5536,6 +5619,7 @@ import './Fonts/Montserrat-300';
 import { css } from 'emotion';
 
 const UseText1 = css({
+  label: 'UseText1',
   fontFamily: 'Montserrat, sans-serif',
   fontSize: 16,
   lineHeight: 1.5,
@@ -5583,6 +5667,7 @@ import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
 const Normal = css({
+  label: 'Normal',
   color: 'blue',
   fontFamily: 'CustomFontNotOnGoogle',
   fontSize: 16,
@@ -5590,6 +5675,7 @@ const Normal = css({
   fontWeight: 300,
 });
 const Italic = css({
+  label: 'Italic',
   color: 'blue',
   fontFamily: 'CustomFontNotOnGoogle',
   fontStyle: 'italic',
@@ -5661,6 +5747,7 @@ import './Fonts/CustomFontNotOnGoogle-400-italic';
 import { css } from 'emotion';
 
 const Normal = css({
+  label: 'Normal',
   color: 'blue',
   fontFamily: 'CustomFontNotOnGoogle',
   fontSize: 16,
@@ -5668,6 +5755,7 @@ const Normal = css({
   fontWeight: 300,
 });
 const Italic = css({
+  label: 'Italic',
   color: 'blue',
   fontFamily: 'CustomFontNotOnGoogle',
   fontStyle: 'italic',
@@ -5730,7 +5818,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
-const Vertical = css({ backgroundColor: 'red' });
+const Vertical = css({ label: 'Vertical', backgroundColor: 'red' });
 
 class UseVertical extends React.Component {
   render() {
@@ -5765,7 +5853,7 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const Vertical = css({ backgroundColor: 'red' });
+const Vertical = css({ label: 'Vertical', backgroundColor: 'red' });
 
 const UseVertical = props => {
   return (
@@ -5794,7 +5882,11 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
-const ViewNameIsntUsedInStyle1 = css({ zIndex: 5, opacity: 'var(--opacity)' });
+const ViewNameIsntUsedInStyle1 = css({
+  label: 'ViewNameIsntUsedInStyle1',
+  zIndex: 5,
+  opacity: 'var(--opacity)',
+});
 
 class ViewNameIsntUsedInStyle extends React.Component {
   render() {
@@ -5836,7 +5928,11 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const ViewNameIsntUsedInStyle1 = css({ zIndex: 5, opacity: 'var(--opacity)' });
+const ViewNameIsntUsedInStyle1 = css({
+  label: 'ViewNameIsntUsedInStyle1',
+  zIndex: 5,
+  opacity: 'var(--opacity)',
+});
 
 const ViewNameIsntUsedInStyle = props => {
   return (
@@ -5873,7 +5969,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 import PropTypes from 'prop-types';
 
-const App = css({ flexDirection: 'row' });
+const App = css({ label: 'App', flexDirection: 'row' });
 
 class When extends React.Component {
   render() {
@@ -5919,7 +6015,7 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const App = css({ flexDirection: 'row' });
+const App = css({ label: 'App', flexDirection: 'row' });
 
 const When = props => {
   return (
