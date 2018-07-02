@@ -72,9 +72,9 @@ export function leave(node, parent, state) {
 
     const id = createId(node, state)
 
-    state.styles[id] = `const ${id} = css({${
-      cssStatic ? `${cssStatic}, ` : ''
-    }${cssDynamic}})`
+    state.styles[id] = `const ${id} = css({
+    label: '${id}',
+    ${cssStatic ? `${cssStatic}, ` : ''}${cssDynamic}})`
 
     if (hasSpringAnimation(node)) {
       state.render.push(
@@ -100,7 +100,7 @@ export function leave(node, parent, state) {
       .join(',\n')
 
     if (css) {
-      state.styles[id] = `const ${id} = css({${css}})`
+      state.styles[id] = `const ${id} = css({label: '${id}', ${css}})`
     }
   }
 }
