@@ -4643,7 +4643,7 @@ class UseCaptureNumber extends React.Component {
     return (
       <input
         type=\\"number\\"
-        inputmode=\\"numeric\\"
+        inputMode=\\"numeric\\"
         pattern=\\"[0-9]*\\"
         onChange={event => this.setState({ number: event.target.value })}
         value={state.number}
@@ -4683,7 +4683,7 @@ class UseCaptureNumber extends React.Component {
     return (
       <input
         type=\\"number\\"
-        inputmode=\\"numeric\\"
+        inputMode=\\"numeric\\"
         pattern=\\"[0-9]*\\"
         onChange={event => this.setState({ number: event.target.value })}
         value={state.number}

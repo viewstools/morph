@@ -26,7 +26,7 @@ export const enter = (node, parent, state) => {
   // fix for iOS Safari to show the numpad on
   // http://danielfriesen.name/blog/2013/09/19/input-type-number-and-ios-numeric-keypad/
   if (blockType === 'CaptureNumber') {
-    state.render.push(` inputmode="numeric" pattern="[0-9]*"`)
+    state.render.push(` inputMode="numeric" pattern="[0-9]*"`)
   }
 
   // if you specify a value, then you're supposed to manage the input from
