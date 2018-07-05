@@ -822,11 +822,11 @@ const Text = css({
 class AnimatedButton extends React.Component {
   animatedValue0 = new Animated.Value(this.props.isOn ? 1 : 0);
 
-  componentWillReceiveProps(next) {
+  componentDidUpdate(prev) {
     const { props } = this;
-    if (props.isOn !== next.isOn) {
+    if (props.isOn !== prev.isOn) {
       Animated.spring(this.animatedValue0, {
-        toValue: next.isOn ? 1 : 0,
+        toValue: props.isOn ? 1 : 0,
         speed: 12,
         bounciness: 8,
         delay: 0,
@@ -924,11 +924,11 @@ const Text = css({
 class AnimatedButton extends React.Component {
   animatedValue0 = new Animated.Value(this.props.isOn ? 1 : 0);
 
-  componentWillReceiveProps(next) {
+  componentDidUpdate(prev) {
     const { props } = this;
-    if (props.isOn !== next.isOn) {
+    if (props.isOn !== prev.isOn) {
       Animated.spring(this.animatedValue0, {
-        toValue: next.isOn ? 1 : 0,
+        toValue: props.isOn ? 1 : 0,
         speed: 12,
         bounciness: 8,
         delay: 0,
@@ -6202,11 +6202,11 @@ const styles = StyleSheet.create({ Vertical: { backgroundColor: 'red' } });
 class AnimatedButton extends React.Component {
   animatedValue0 = new Animated.Value(this.props.isOn ? 1 : 0);
 
-  componentWillReceiveProps(next) {
+  componentDidUpdate(prev) {
     const { props } = this;
-    if (props.isOn !== next.isOn) {
+    if (props.isOn !== prev.isOn) {
       Animated.spring(this.animatedValue0, {
-        toValue: next.isOn ? 1 : 0,
+        toValue: props.isOn ? 1 : 0,
         speed: 12,
         bounciness: 8,
         delay: 0,

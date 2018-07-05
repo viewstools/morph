@@ -29,9 +29,9 @@ export default ({ state, name }) => {
   }
 
   const composeSpring = (animation, index) =>
-    `if (props.${animation.scope} !== next.${animation.scope}) {
+    `if (props.${animation.scope} !== prev.${animation.scope}) {
       Animated.spring(this.animatedValue${index}, {
-        toValue: next.${animation.scope} ? 1 : 0,
+        toValue: props.${animation.scope} ? 1 : 0,
         speed: ${animation.speed},
         bounciness: ${animation.bounciness},
         delay: ${animation.delay},
@@ -40,9 +40,9 @@ export default ({ state, name }) => {
     }`
 
   const composeTiming = (animation, index) =>
-    `if (props.${animation.scope} !== next.${animation.scope}) {
+    `if (props.${animation.scope} !== prev.${animation.scope}) {
       Animated.timing(this.animatedValue${index}, {
-        toValue: next.${animation.scope} ? 1 : 0,
+        toValue: props.${animation.scope} ? 1 : 0,
         duration: ${animation.duration},
         delay: ${animation.delay},
         useNativeDriver: ${canUseNativeDriver(animation)}
@@ -70,7 +70,7 @@ export default ({ state, name }) => {
               : ''
           })
           .join('')}
-      componentWillReceiveProps(next) {
+      componentDidUpdate(prev) {
           const { props } = this
           ${state.animations
             .map(animation =>
