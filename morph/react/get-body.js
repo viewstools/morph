@@ -61,6 +61,7 @@ export default ({ state, name }) => {
     state.isAnimated || state.hasAnimatedChild
       ? `${state.animations
           .map((animation, index) => {
+            console.log(index, 'animation', animation)
             return isNewScope(state, animation, index)
               ? composeValues(
                   state,

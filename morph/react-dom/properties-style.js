@@ -34,7 +34,7 @@ export function leave(node, parent, state) {
 
   if (node.isAnimated && hasSpringAnimation(node)) {
     state.isAnimated = true
-    state.animations = node.animations
+    state.animations = state.animations.concat(node.animations)
     state.scopes = node.scopes
   }
 

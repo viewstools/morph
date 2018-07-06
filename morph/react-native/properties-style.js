@@ -49,7 +49,7 @@ export const leave = (node, parent, state) => {
     const animated = getAnimatedStyles(node, state.isReactNative)
     style = style ? `[${style},{${animated}}]` : `{${animated}}`
     state.isAnimated = true
-    state.animations = node.animations
+    state.animations = state.animations.concat(node.animations)
     state.scopes = node.scopes
   }
 

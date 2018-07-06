@@ -6,8 +6,8 @@ translateY 0
 rotateX 10
 onClick <
 when <isOn
-opacity 1 spring
-translateX 20 spring
+opacity 1 spring bounciness 10 speed 1
+translateX 20 spring bounciness 15 speed 2
 translateY 30
 rotateX 20 easeIn
 Text

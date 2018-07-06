@@ -141,6 +141,7 @@ export default ({
     const block = {
       type: 'Block',
       name,
+      animations: [],
       isAnimated: false,
       isBasic: isBasic(name),
       isGroup: false,
@@ -286,7 +287,6 @@ export default ({
     const scopes = []
     let scope
     let inScope = false
-    block.animations = []
 
     for (let j = i; j <= endOfBlockIndex; j++) {
       const line = lines[j]
@@ -415,30 +415,21 @@ export default ({
         }
 
         if (tags.animation && scope) {
+          block.isAnimated = true
+
           const currentAnimation = getAnimation(value)
-          const existingScope =
-            block.animations.length > 0 &&
-            // eslint-disable-next-line
-            block.animations.some(animation => {
-              return (
-                animation.scope === scope.slotName &&
-                animation.curve === currentAnimation.properties.curve
-              )
-            }, currentAnimation)
           propNode.value = currentAnimation.defaultValue
           propNode.animation = currentAnimation.properties
-          block.isAnimated = true
-          if (!block.isAnimatedReallyAnimated) {
-            block.isAnimatedReallyAnimated =
-              propNode.animation.curve === 'spring'
-          }
-          if (!existingScope) {
-            block.animations.push({
-              ...currentAnimation.properties,
-              name,
-              scope: scope.slotName,
-            })
-          }
+
+          block.isAnimatedReallyAnimated =
+            block.isAnimatedReallyAnimated ||
+            propNode.animation.curve === 'spring'
+
+          block.animations.push({
+            ...currentAnimation.properties,
+            name,
+            scope: scope.slotName,
+          })
         }
 
         if (scope) {

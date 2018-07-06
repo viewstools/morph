@@ -37,6 +37,7 @@ export default ({
   }
 
   const state = {
+    animations: [],
     captures: [],
     images: [],
     getFont,
