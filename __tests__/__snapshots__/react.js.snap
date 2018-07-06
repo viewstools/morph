@@ -19,7 +19,7 @@ Object {
 
 module.exports = {
   Text: get('AnimatedButton.Text', 'isOn'),
-  Vertical: get('AnimatedButton.Vertical', 'isOn'),
+  _top: get('AnimatedButton', 'isOn'),
 };
 ",
 }
@@ -803,8 +803,8 @@ const getAnimatedValue = (animatedValue, from, to) =>
     outputRange: [from, to],
   });
 
-const Vertical = css({
-  label: 'Vertical',
+const AnimatedButton1 = css({
+  label: 'AnimatedButton1',
   backgroundColor: 'red',
   transition: 'transform 150ms ease-in 0ms',
   willChange: 'opacity, transform',
@@ -820,57 +820,60 @@ const Text = css({
 });
 
 class AnimatedButton extends React.Component {
-  animatedValue0 = new Animated.Value(this.props.isOn ? 1 : 0);
-
-  componentDidUpdate(prev) {
-    const { props } = this;
-    if (props.isOn !== prev.isOn) {
-      Animated.spring(this.animatedValue0, {
-        toValue: props.isOn ? 1 : 0,
-        speed: 12,
-        bounciness: 8,
-        delay: 0,
-        useNativeDriver: false,
-      }).start();
-    }
-  }
-
   render() {
     const { context, props } = this;
 
     return (
-      <Animated.button
-        data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\${
-          props.isOn ? 'isOn|' : ''
-        }\`}
-        onClick={event =>
-          context.track({
-            block: props['data-test-id'] || 'AnimatedButton',
-            action: 'click',
-            callback: props.onClick,
-            event,
-            props,
-          })
-        }
-        style={{
-          '--opacity': getAnimatedValue(this.animatedValue0, 0.75, 1),
-          '--translateX': getAnimatedValue(this.animatedValue0, '10px', '20px'),
-          '--translateY': \`\${props.isOn ? 30 : 0}px\`,
-          '--rotateX': \`\${props.isOn ? 20 : 10}deg\`,
-        }}
-        className={\`views-block \${Vertical}\`}
+      <AnimatedSpringComponent
+        config={{ bounciness: 10, speed: 1 }}
+        delay={0}
+        to={{ opacity: props.isOn ? 1 : 0.75 }}
       >
-        <span
-          data-test-id={\`AnimatedButton.Text|\${props.isOn ? 'isOn|' : ''}\`}
-          style={{
-            '--color': getAnimatedValue(this.animatedValue0, 'red', 'blue'),
-          }}
-          className={\`views-block \${Text}\`}
+        animatedAnimatedButton => (<AnimatedSpringComponent
+          config={{ bounciness: 15, speed: 2 }}
+          delay={0}
+          to={{ translateX: props.isOn ? 20 : 10 }}
         >
-          hey
-        </span>
-        {props.children}
-      </Animated.button>
+          animatedAnimatedButton => (<AnimatedSpringComponent
+            config={{ bounciness: 8, speed: 12 }}
+            delay={0}
+            to={{ color: props.isOn ? 'blue' : 'red' }}
+          >
+            animatedText => (<Animated.button
+              data-test-id={\`\${props['data-test-id'] || 'AnimatedButton'}|\${
+                props.isOn ? 'isOn|' : ''
+              }\`}
+              onClick={event =>
+                context.track({
+                  block: props['data-test-id'] || 'AnimatedButton',
+                  action: 'click',
+                  callback: props.onClick,
+                  event,
+                  props,
+                })
+              }
+              style={{
+                '--opacity': animatedAnimatedButton.opacity,
+                '--translateX': animatedAnimatedButton.translateX,
+                '--translateY': \`\${props.isOn ? 30 : 0}px\`,
+                '--rotateX': \`\${props.isOn ? 20 : 10}deg\`,
+              }}
+              className={\`views-block \${AnimatedButton1}\`}
+            >
+              <span
+                data-test-id={\`AnimatedButton.Text|\${
+                  props.isOn ? 'isOn|' : ''
+                }\`}
+                style={{ '--color': animatedText.color }}
+                className={\`views-block \${Text}\`}
+              >
+                hey
+              </span>
+              {props.children}
+            </Animated.button>)}
+          </AnimatedSpringComponent>)}
+        </AnimatedSpringComponent>)}
+      </AnimatedSpringComponent>
     );
   }
 }
@@ -905,8 +908,8 @@ const getAnimatedValue = (animatedValue, from, to) =>
     outputRange: [from, to],
   });
 
-const Vertical = css({
-  label: 'Vertical',
+const AnimatedButton1 = css({
+  label: 'AnimatedButton1',
   backgroundColor: 'red',
   transition: 'transform 150ms ease-in 0ms',
   willChange: 'opacity, transform',
@@ -922,49 +925,52 @@ const Text = css({
 });
 
 class AnimatedButton extends React.Component {
-  animatedValue0 = new Animated.Value(this.props.isOn ? 1 : 0);
-
-  componentDidUpdate(prev) {
-    const { props } = this;
-    if (props.isOn !== prev.isOn) {
-      Animated.spring(this.animatedValue0, {
-        toValue: props.isOn ? 1 : 0,
-        speed: 12,
-        bounciness: 8,
-        delay: 0,
-        useNativeDriver: false,
-      }).start();
-    }
-  }
-
   render() {
     const { props } = this;
 
     return (
-      <Animated.button
-        data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\${
-          props.isOn ? 'isOn|' : ''
-        }\`}
-        onClick={props.onClick}
-        style={{
-          '--opacity': getAnimatedValue(this.animatedValue0, 0.75, 1),
-          '--translateX': getAnimatedValue(this.animatedValue0, '10px', '20px'),
-          '--translateY': \`\${props.isOn ? 30 : 0}px\`,
-          '--rotateX': \`\${props.isOn ? 20 : 10}deg\`,
-        }}
-        className={\`views-block \${Vertical}\`}
+      <AnimatedSpringComponent
+        config={{ bounciness: 10, speed: 1 }}
+        delay={0}
+        to={{ opacity: props.isOn ? 1 : 0.75 }}
       >
-        <span
-          data-test-id={\`AnimatedButton.Text|\${props.isOn ? 'isOn|' : ''}\`}
-          style={{
-            '--color': getAnimatedValue(this.animatedValue0, 'red', 'blue'),
-          }}
-          className={\`views-block \${Text}\`}
+        animatedAnimatedButton => (<AnimatedSpringComponent
+          config={{ bounciness: 15, speed: 2 }}
+          delay={0}
+          to={{ translateX: props.isOn ? 20 : 10 }}
         >
-          hey
-        </span>
-        {props.children}
-      </Animated.button>
+          animatedAnimatedButton => (<AnimatedSpringComponent
+            config={{ bounciness: 8, speed: 12 }}
+            delay={0}
+            to={{ color: props.isOn ? 'blue' : 'red' }}
+          >
+            animatedText => (<Animated.button
+              data-test-id={\`\${props['data-test-id'] || 'AnimatedButton'}|\${
+                props.isOn ? 'isOn|' : ''
+              }\`}
+              onClick={props.onClick}
+              style={{
+                '--opacity': animatedAnimatedButton.opacity,
+                '--translateX': animatedAnimatedButton.translateX,
+                '--translateY': \`\${props.isOn ? 30 : 0}px\`,
+                '--rotateX': \`\${props.isOn ? 20 : 10}deg\`,
+              }}
+              className={\`views-block \${AnimatedButton1}\`}
+            >
+              <span
+                data-test-id={\`AnimatedButton.Text|\${
+                  props.isOn ? 'isOn|' : ''
+                }\`}
+                style={{ '--color': animatedText.color }}
+                className={\`views-block \${Text}\`}
+              >
+                hey
+              </span>
+              {props.children}
+            </Animated.button>)}
+          </AnimatedSpringComponent>)}
+        </AnimatedSpringComponent>)}
+      </AnimatedSpringComponent>
     );
   }
 }

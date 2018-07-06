@@ -45,6 +45,24 @@ export default ({
   const warnings = []
   let lastCapture
 
+  const blockIds = []
+  const getBlockId = node => {
+    let maybeId = node.is || node.name
+
+    if (!blockIds.includes(maybeId)) {
+      blockIds.push(maybeId)
+      return maybeId
+    }
+
+    let index = 1
+    while (blockIds.includes(`${maybeId}${index}`)) {
+      index++
+    }
+    const id = `${maybeId}${index}`
+    blockIds.push(id)
+    return id
+  }
+
   const getChildrenProxyMap = block => {
     const childrenProxyMap = {}
 
@@ -171,6 +189,7 @@ export default ({
         lastCapture = block
       }
     }
+    block.id = getBlockId(block)
 
     const last = stack[stack.length - 1]
     if (last) {
@@ -425,10 +444,19 @@ export default ({
             block.isAnimatedReallyAnimated ||
             propNode.animation.curve === 'spring'
 
+          let baseValue = null
+          const baseProp = properties.find(prop => prop.name === name)
+          if (baseProp) {
+            baseValue = baseProp.value
+          }
+
           block.animations.push({
             ...currentAnimation.properties,
+            id: currentAnimation.id,
             name,
             scope: scope.slotName,
+            value: currentAnimation.defaultValue,
+            baseValue,
           })
         }
 

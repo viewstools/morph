@@ -163,9 +163,15 @@ export const getAnimation = line => {
     }
   }
 
+  addDefaults(animationType, properties)
+
   return {
+    id: Object.keys(properties)
+      .sort()
+      .map(key => `${key}${properties[key]}`)
+      .join(''),
     defaultValue: getValue(defaultValue),
-    properties: addDefaults(animationType, properties),
+    properties,
   }
 }
 

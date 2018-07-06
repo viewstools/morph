@@ -9,6 +9,7 @@ Object {
     Object {
       "animations": Array [],
       "children": Array [],
+      "id": "Main",
       "is": "Main",
       "isAnimated": false,
       "isBasic": true,
@@ -45,6 +46,7 @@ Object {
       "children": Array [
         Object {
           "animations": Array [],
+          "id": "Text",
           "isAnimated": false,
           "isBasic": true,
           "isGroup": false,
@@ -64,6 +66,7 @@ Object {
           "type": "Block",
         },
       ],
+      "id": "Main",
       "is": "Main",
       "isAnimated": false,
       "isBasic": true,
@@ -100,6 +103,7 @@ Object {
       "children": Array [
         Object {
           "animations": Array [],
+          "id": "Before",
           "is": "Before",
           "isAnimated": false,
           "isBasic": true,
@@ -124,6 +128,7 @@ Object {
           "children": Array [
             Object {
               "animations": Array [],
+              "id": "ImageInside",
               "is": "ImageInside",
               "isAnimated": false,
               "isBasic": true,
@@ -165,6 +170,7 @@ Object {
             Object {
               "animations": Array [],
               "children": Array [],
+              "id": "VerticalInside",
               "is": "VerticalInside",
               "isAnimated": false,
               "isBasic": true,
@@ -186,6 +192,7 @@ Object {
               "type": "Block",
             },
           ],
+          "id": "Nested",
           "is": "Nested",
           "isAnimated": false,
           "isBasic": true,
@@ -208,6 +215,7 @@ Object {
         },
         Object {
           "animations": Array [],
+          "id": "After",
           "is": "After",
           "isAnimated": false,
           "isBasic": true,
@@ -322,6 +330,7 @@ Object {
         Object {
           "animations": Array [],
           "children": Array [],
+          "id": "Last",
           "is": "Last",
           "isAnimated": false,
           "isBasic": true,
@@ -363,6 +372,7 @@ Object {
           "type": "Block",
         },
       ],
+      "id": "BlueButton",
       "is": "BlueButton",
       "isAnimated": false,
       "isBasic": true,
@@ -399,6 +409,7 @@ Object {
       "children": Array [
         Object {
           "animations": Array [],
+          "id": "A1",
           "is": "A1",
           "isAnimated": false,
           "isBasic": true,
@@ -440,6 +451,7 @@ Object {
         },
         Object {
           "animations": Array [],
+          "id": "A2",
           "is": "A2",
           "isAnimated": false,
           "isBasic": true,
@@ -480,6 +492,7 @@ Object {
           "type": "Block",
         },
       ],
+      "id": "A",
       "is": "A",
       "isAnimated": false,
       "isBasic": true,
@@ -571,6 +584,7 @@ Object {
       "children": Array [
         Object {
           "animations": Array [],
+          "id": "Title",
           "is": "Title",
           "isAnimated": false,
           "isBasic": true,
@@ -659,6 +673,7 @@ Object {
         },
         Object {
           "animations": Array [],
+          "id": "CaptureText",
           "isAnimated": false,
           "isBasic": true,
           "isGroup": false,
@@ -707,6 +722,7 @@ Object {
               "animations": Array [],
               "children": Array [],
               "childrenProxyMap": null,
+              "id": "Stuff",
               "isAnimated": false,
               "isBasic": false,
               "isGroup": true,
@@ -727,6 +743,7 @@ Object {
               "type": "Block",
             },
           ],
+          "id": "List",
           "isAnimated": false,
           "isBasic": true,
           "isGroup": true,
@@ -770,6 +787,7 @@ Object {
           "type": "Block",
         },
       ],
+      "id": "Vertical",
       "isAnimated": false,
       "isBasic": true,
       "isGroup": true,
@@ -868,6 +886,7 @@ Object {
       "children": Array [
         Object {
           "animations": Array [],
+          "id": "Text",
           "isAnimated": false,
           "isBasic": true,
           "isGroup": false,
@@ -960,6 +979,7 @@ Object {
           "type": "Block",
         },
       ],
+      "id": "Locals",
       "is": "Locals",
       "isAnimated": false,
       "isBasic": true,
@@ -1003,6 +1023,7 @@ Object {
         Object {
           "animations": Array [],
           "children": Array [],
+          "id": "EmptyWhen",
           "is": "EmptyWhen",
           "isAnimated": false,
           "isBasic": true,
@@ -1212,6 +1233,7 @@ Object {
           "type": "Block",
         },
       ],
+      "id": "Warning",
       "is": "Warning",
       "isAnimated": false,
       "isBasic": true,

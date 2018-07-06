@@ -308,30 +308,27 @@ const getDefaultValue = (node, name) => {
 //   name === 'rotate' || name === 'rotateX' || name === 'rotateY'
 
 const getStandardAnimatedString = (node, prop, isNative) => {
-  const baseScopeValue = getDefaultValue(node, prop.name)
-  let fromValue
-  let toValue
+  // const baseScopeValue = getDefaultValue(node, prop.name)
+  // let fromValue
+  // let toValue
 
-  // TODO see if native needs the unit in all cases but PX (eg for rotate it may
-  // need deg)
-  if (typeof prop.value === 'number') {
-    fromValue = isNative
-      ? baseScopeValue
-      : getPropValue({ name: prop.name, value: baseScopeValue }, false)
-    toValue = isNative ? prop.value : getPropValue(prop, false)
-    // fromValue = baseScopeValue
-    // toValue = prop.value
-  } else {
-    fromValue = `'${baseScopeValue}'`
-    toValue = `'${prop.value}'`
-  }
+  // // TODO see if native needs the unit in all cases but PX (eg for rotate it may
+  // // need deg)
+  // if (typeof prop.value === 'number') {
+  //   fromValue = isNative
+  //     ? baseScopeValue
+  //     : getPropValue({ name: prop.name, value: baseScopeValue }, false)
+  //   toValue = isNative ? prop.value : getPropValue(prop, false)
+  //   // fromValue = baseScopeValue
+  //   // toValue = prop.value
+  // } else {
+  //   fromValue = `'${baseScopeValue}'`
+  //   toValue = `'${prop.value}'`
+  // }
 
-  return `${
-    isNative ? prop.name : `"--${prop.name}"`
-  }: getAnimatedValue(this.animatedValue${getScopeIndex(
-    node,
-    prop.scope
-  )}, ${fromValue}, ${toValue})`
+  return `${isNative ? prop.name : `"--${prop.name}"`}: animated${node.id}.${
+    prop.name
+  }`
 }
 
 const getTransformString = (node, transform, isNative) => {

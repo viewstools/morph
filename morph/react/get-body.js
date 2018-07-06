@@ -1,4 +1,5 @@
-import { canUseNativeDriver, getScopeIndex, isNewScope } from '../utils.js'
+import { canUseNativeDriver } from '../utils.js'
+import toPascalCase from 'to-pascal-case'
 
 export default ({ state, name }) => {
   let render = state.render.join('')
@@ -57,45 +58,80 @@ export default ({ state, name }) => {
     `
   }
 
-  const maybeAnimated =
-    state.isAnimated || state.hasAnimatedChild
-      ? `${state.animations
-          .map((animation, index) => {
-            console.log(index, 'animation', animation)
-            return isNewScope(state, animation, index)
-              ? composeValues(
-                  state,
-                  animation,
-                  getScopeIndex(state, animation.scope)
-                )
-              : ''
+  let maybeAnimated = false
+  let animatedOpen = []
+  let animatedClose = []
+  if (state.isAnimated || state.hasAnimatedChild) {
+    maybeAnimated = true
+
+    Object.keys(state.animations).forEach(blockId => {
+      const blockAnimations = {}
+      state.animations[blockId].forEach(item => {
+        if (!state.isReactNative && item.curve !== 'spring') return
+
+        if (!blockAnimations[item.id]) {
+          blockAnimations[item.id] = {
+            animation: item,
+            props: {
+              [item.name]: {
+                name: item.name,
+                scopes: [],
+                value: item.baseValue,
+              },
+            },
+          }
+        }
+
+        blockAnimations[item.id].props[item.name].scopes.push({
+          name: item.scope,
+          value: item.value,
+        })
+      })
+
+      Object.entries(blockAnimations).forEach(([id, item]) => {
+        const tag = `Animated${toPascalCase(item.animation.curve)}Component`
+        // TODO do this somewhere else
+        const config =
+          item.animation.curve === 'spring'
+            ? `{ bounciness: ${item.animation.bounciness}, speed: ${
+                item.animation.speed
+              } }`
+            : `{ duration: ${item.animation.duration} }`
+
+        const to = Object.entries(item.props)
+          .map(([_, prop]) => {
+            prop.scopes.reverse()
+            return `${JSON.stringify(prop.name)}: ${prop.scopes.reduce(
+              (current, scope) =>
+                `props.${scope.name}? ${JSON.stringify(
+                  scope.value
+                )} : ${current}`,
+              JSON.stringify(prop.value)
+            )} `
           })
-          .join('')}
-      componentDidUpdate(prev) {
-          const { props } = this
-          ${state.animations
-            .map(animation =>
-              composeAnimation(
-                state,
-                animation,
-                getScopeIndex(state, animation.scope)
-              )
-            )
-            .join('')}
-        }`
-      : ''
+          .join(',\n')
+
+        animatedOpen.push(
+          `<${tag} config={${config}} delay={${
+            item.animation.delay
+          }} to={{${to}}}>{animated${blockId} => (`
+        )
+
+        animatedClose.push(`)}</${tag}>`)
+      })
+    })
+  }
 
   if (maybeState || maybeTracking || maybeAnimated) {
     return `class ${name} extends React.Component {
   ${maybeState}
-  ${maybeAnimated}
 
   render() {
     const { ${maybeTracking ? 'context,' : ''} props, ${
       maybeState ? 'state' : ''
     } } = this
     ${maybeChildrenArray}
-    return (${render})
+    return (${animatedOpen.join('')}${render}${animatedClose.join('')})
   }
 }`
   } else {
