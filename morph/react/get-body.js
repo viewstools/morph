@@ -74,7 +74,6 @@ export default ({ state, name }) => {
         const useNativeDriver = state.isReactNative
           ? false // !Object.keys(item.props).some(canUseNativeDriver)
           : true
-
         animatedOpen.push(
           `<${tag} ${
             useNativeDriver ? 'native' : ''
@@ -97,7 +96,9 @@ export default ({ state, name }) => {
       maybeState ? 'state' : ''
     } } = this
     ${maybeChildrenArray}
-    return (${animatedOpen.join('')}${render}${animatedClose.join('')})
+    return (${animatedOpen.join('')}${render}${animatedClose
+      .reverse()
+      .join('')})
   }
 }`
   } else {

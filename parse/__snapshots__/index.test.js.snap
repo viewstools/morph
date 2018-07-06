@@ -7,7 +7,7 @@ Object {
   "slots": Array [],
   "views": Array [
     Object {
-      "animations": Array [],
+      "animations": Object {},
       "children": Array [],
       "id": "Main",
       "is": "Main",
@@ -42,10 +42,10 @@ Object {
   "slots": Array [],
   "views": Array [
     Object {
-      "animations": Array [],
+      "animations": Object {},
       "children": Array [
         Object {
-          "animations": Array [],
+          "animations": Object {},
           "id": "Text",
           "isAnimated": false,
           "isBasic": true,
@@ -99,10 +99,10 @@ Object {
   "slots": Array [],
   "views": Array [
     Object {
-      "animations": Array [],
+      "animations": Object {},
       "children": Array [
         Object {
-          "animations": Array [],
+          "animations": Object {},
           "id": "Before",
           "is": "Before",
           "isAnimated": false,
@@ -124,10 +124,10 @@ Object {
           "type": "Block",
         },
         Object {
-          "animations": Array [],
+          "animations": Object {},
           "children": Array [
             Object {
-              "animations": Array [],
+              "animations": Object {},
               "id": "ImageInside",
               "is": "ImageInside",
               "isAnimated": false,
@@ -168,7 +168,7 @@ Object {
               "type": "Block",
             },
             Object {
-              "animations": Array [],
+              "animations": Object {},
               "children": Array [],
               "id": "VerticalInside",
               "is": "VerticalInside",
@@ -214,7 +214,7 @@ Object {
           "type": "Block",
         },
         Object {
-          "animations": Array [],
+          "animations": Object {},
           "id": "After",
           "is": "After",
           "isAnimated": false,
@@ -328,7 +328,7 @@ Object {
           "type": "Block",
         },
         Object {
-          "animations": Array [],
+          "animations": Object {},
           "children": Array [],
           "id": "Last",
           "is": "Last",
@@ -405,10 +405,10 @@ Object {
   "slots": Array [],
   "views": Array [
     Object {
-      "animations": Array [],
+      "animations": Object {},
       "children": Array [
         Object {
-          "animations": Array [],
+          "animations": Object {},
           "id": "A1",
           "is": "A1",
           "isAnimated": false,
@@ -450,7 +450,7 @@ Object {
           "type": "Block",
         },
         Object {
-          "animations": Array [],
+          "animations": Object {},
           "id": "A2",
           "is": "A2",
           "isAnimated": false,
@@ -580,10 +580,10 @@ Object {
   ],
   "views": Array [
     Object {
-      "animations": Array [],
+      "animations": Object {},
       "children": Array [
         Object {
-          "animations": Array [],
+          "animations": Object {},
           "id": "Title",
           "is": "Title",
           "isAnimated": false,
@@ -672,7 +672,7 @@ Object {
           "type": "Block",
         },
         Object {
-          "animations": Array [],
+          "animations": Object {},
           "id": "CaptureText",
           "isAnimated": false,
           "isBasic": true,
@@ -716,10 +716,10 @@ Object {
           "type": "Block",
         },
         Object {
-          "animations": Array [],
+          "animations": Object {},
           "children": Array [
             Object {
-              "animations": Array [],
+              "animations": Object {},
               "children": Array [],
               "childrenProxyMap": null,
               "id": "Stuff",
@@ -882,10 +882,10 @@ Object {
   "slots": Array [],
   "views": Array [
     Object {
-      "animations": Array [],
+      "animations": Object {},
       "children": Array [
         Object {
-          "animations": Array [],
+          "animations": Object {},
           "id": "Text",
           "isAnimated": false,
           "isBasic": true,
@@ -1018,10 +1018,10 @@ Object {
   ],
   "views": Array [
     Object {
-      "animations": Array [],
+      "animations": Object {},
       "children": Array [
         Object {
-          "animations": Array [],
+          "animations": Object {},
           "children": Array [],
           "id": "EmptyWhen",
           "is": "EmptyWhen",

@@ -654,11 +654,11 @@ module.exports = {
 exports[`react-dom parses react-dom Action 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import SubButton from './SubButton.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
-import PropTypes from 'prop-types';
 
 const Vertical = css({
   label: 'Vertical',
@@ -792,25 +792,20 @@ export default Action;
 exports[`react-dom parses react-dom AnimatedButton 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
+import { animated, Spring } from '@viewstools/animations/dom';
 import { css } from 'emotion';
-import Animated from 'animated/lib/targets/react-dom';
-import PropTypes from 'prop-types';
-const getAnimatedValue = (animatedValue, from, to) =>
-  animatedValue.interpolate({
-    inputRange: [0, 1],
-    outputRange: [from, to],
-  });
 
 const AnimatedButton1 = css({
   label: 'AnimatedButton1',
   backgroundColor: 'red',
-  transition: 'transform 150ms ease-in 0ms',
+  transition: 'transform 150ms ease-in 0ms, transform 150ms ease-in-out 0ms',
   willChange: 'opacity, transform',
   opacity: 'var(--opacity)',
   transform:
-    'rotateX(var(--rotateX)) translateX(var(--translateX)) translateY(var(--translateY))',
+    'rotateX(var(--rotateX)) rotateY(var(--rotateY)) translateX(var(--translateX)) translateY(var(--translateY))',
 });
 const Text = css({
   label: 'Text',
@@ -824,56 +819,68 @@ class AnimatedButton extends React.Component {
     const { context, props } = this;
 
     return (
-      <AnimatedSpringComponent
-        config={{ bounciness: 10, speed: 1 }}
+      <Spring
+        native
+        bounciness={10}
+        speed={1}
         delay={0}
         to={{ opacity: props.isOn ? 1 : 0.75 }}
       >
-        animatedAnimatedButton => (<AnimatedSpringComponent
-          config={{ bounciness: 15, speed: 2 }}
-          delay={0}
-          to={{ translateX: props.isOn ? 20 : 10 }}
-        >
-          animatedAnimatedButton => (<AnimatedSpringComponent
-            config={{ bounciness: 8, speed: 12 }}
+        {animatedAnimatedButton => (
+          <Spring
+            native
+            bounciness={15}
+            speed={2}
             delay={0}
-            to={{ color: props.isOn ? 'blue' : 'red' }}
+            to={{ translateX: \`\${props.isOn ? 20 : 10}px\` }}
           >
-            animatedText => (<Animated.button
-              data-test-id={\`\${props['data-test-id'] || 'AnimatedButton'}|\${
-                props.isOn ? 'isOn|' : ''
-              }\`}
-              onClick={event =>
-                context.track({
-                  block: props['data-test-id'] || 'AnimatedButton',
-                  action: 'click',
-                  callback: props.onClick,
-                  event,
-                  props,
-                })
-              }
-              style={{
-                '--opacity': animatedAnimatedButton.opacity,
-                '--translateX': animatedAnimatedButton.translateX,
-                '--translateY': \`\${props.isOn ? 30 : 0}px\`,
-                '--rotateX': \`\${props.isOn ? 20 : 10}deg\`,
-              }}
-              className={\`views-block \${AnimatedButton1}\`}
-            >
-              <span
-                data-test-id={\`AnimatedButton.Text|\${
-                  props.isOn ? 'isOn|' : ''
-                }\`}
-                style={{ '--color': animatedText.color }}
-                className={\`views-block \${Text}\`}
+            {animatedAnimatedButton1 => (
+              <Spring
+                native
+                delay={0}
+                speed={12}
+                bounciness={8}
+                to={{ color: props.isOn ? 'blue' : 'red' }}
               >
-                hey
-              </span>
-              {props.children}
-            </Animated.button>)}
-          </AnimatedSpringComponent>)}
-        </AnimatedSpringComponent>)}
-      </AnimatedSpringComponent>
+                {animatedText => (
+                  <animated.button
+                    data-test-id={\`\${props['data-test-id'] ||
+                      'AnimatedButton'}|\${props.isOn ? 'isOn|' : ''}\`}
+                    onClick={event =>
+                      context.track({
+                        block: props['data-test-id'] || 'AnimatedButton',
+                        action: 'click',
+                        callback: props.onClick,
+                        event,
+                        props,
+                      })
+                    }
+                    style={{
+                      '--opacity': animatedAnimatedButton.opacity,
+                      '--translateX': animatedAnimatedButton1.translateX,
+                      '--translateY': \`\${props.isOn ? 30 : 0}px\`,
+                      '--rotateX': \`\${props.isOn ? 20 : 10}deg\`,
+                      '--rotateY': \`\${props.isOn ? 20 : 10}deg\`,
+                    }}
+                    className={\`views-block \${AnimatedButton1}\`}
+                  >
+                    <span
+                      data-test-id={\`AnimatedButton.Text|\${
+                        props.isOn ? 'isOn|' : ''
+                      }\`}
+                      style={{ '--color': animatedText.color }}
+                      className={\`views-block \${Text}\`}
+                    >
+                      hey
+                    </span>
+                    {props.children}
+                  </animated.button>
+                )}
+              </Spring>
+            )}
+          </Spring>
+        )}
+      </Spring>
     );
   }
 }
@@ -900,22 +907,17 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
+import { animated, Spring } from '@viewstools/animations/dom';
 import { css } from 'emotion';
-import Animated from 'animated/lib/targets/react-dom';
-const getAnimatedValue = (animatedValue, from, to) =>
-  animatedValue.interpolate({
-    inputRange: [0, 1],
-    outputRange: [from, to],
-  });
 
 const AnimatedButton1 = css({
   label: 'AnimatedButton1',
   backgroundColor: 'red',
-  transition: 'transform 150ms ease-in 0ms',
+  transition: 'transform 150ms ease-in 0ms, transform 150ms ease-in-out 0ms',
   willChange: 'opacity, transform',
   opacity: 'var(--opacity)',
   transform:
-    'rotateX(var(--rotateX)) translateX(var(--translateX)) translateY(var(--translateY))',
+    'rotateX(var(--rotateX)) rotateY(var(--rotateY)) translateX(var(--translateX)) translateY(var(--translateY))',
 });
 const Text = css({
   label: 'Text',
@@ -929,48 +931,60 @@ class AnimatedButton extends React.Component {
     const { props } = this;
 
     return (
-      <AnimatedSpringComponent
-        config={{ bounciness: 10, speed: 1 }}
+      <Spring
+        native
+        bounciness={10}
+        speed={1}
         delay={0}
         to={{ opacity: props.isOn ? 1 : 0.75 }}
       >
-        animatedAnimatedButton => (<AnimatedSpringComponent
-          config={{ bounciness: 15, speed: 2 }}
-          delay={0}
-          to={{ translateX: props.isOn ? 20 : 10 }}
-        >
-          animatedAnimatedButton => (<AnimatedSpringComponent
-            config={{ bounciness: 8, speed: 12 }}
+        {animatedAnimatedButton => (
+          <Spring
+            native
+            bounciness={15}
+            speed={2}
             delay={0}
-            to={{ color: props.isOn ? 'blue' : 'red' }}
+            to={{ translateX: \`\${props.isOn ? 20 : 10}px\` }}
           >
-            animatedText => (<Animated.button
-              data-test-id={\`\${props['data-test-id'] || 'AnimatedButton'}|\${
-                props.isOn ? 'isOn|' : ''
-              }\`}
-              onClick={props.onClick}
-              style={{
-                '--opacity': animatedAnimatedButton.opacity,
-                '--translateX': animatedAnimatedButton.translateX,
-                '--translateY': \`\${props.isOn ? 30 : 0}px\`,
-                '--rotateX': \`\${props.isOn ? 20 : 10}deg\`,
-              }}
-              className={\`views-block \${AnimatedButton1}\`}
-            >
-              <span
-                data-test-id={\`AnimatedButton.Text|\${
-                  props.isOn ? 'isOn|' : ''
-                }\`}
-                style={{ '--color': animatedText.color }}
-                className={\`views-block \${Text}\`}
+            {animatedAnimatedButton1 => (
+              <Spring
+                native
+                delay={0}
+                speed={12}
+                bounciness={8}
+                to={{ color: props.isOn ? 'blue' : 'red' }}
               >
-                hey
-              </span>
-              {props.children}
-            </Animated.button>)}
-          </AnimatedSpringComponent>)}
-        </AnimatedSpringComponent>)}
-      </AnimatedSpringComponent>
+                {animatedText => (
+                  <animated.button
+                    data-test-id={\`\${props['data-test-id'] ||
+                      'AnimatedButton'}|\${props.isOn ? 'isOn|' : ''}\`}
+                    onClick={props.onClick}
+                    style={{
+                      '--opacity': animatedAnimatedButton.opacity,
+                      '--translateX': animatedAnimatedButton1.translateX,
+                      '--translateY': \`\${props.isOn ? 30 : 0}px\`,
+                      '--rotateX': \`\${props.isOn ? 20 : 10}deg\`,
+                      '--rotateY': \`\${props.isOn ? 20 : 10}deg\`,
+                    }}
+                    className={\`views-block \${AnimatedButton1}\`}
+                  >
+                    <span
+                      data-test-id={\`AnimatedButton.Text|\${
+                        props.isOn ? 'isOn|' : ''
+                      }\`}
+                      style={{ '--color': animatedText.color }}
+                      className={\`views-block \${Text}\`}
+                    >
+                      hey
+                    </span>
+                    {props.children}
+                  </animated.button>
+                )}
+              </Spring>
+            )}
+          </Spring>
+        )}
+      </Spring>
     );
   }
 }
@@ -992,10 +1006,10 @@ export default AnimatedButton;
 exports[`react-dom parses react-dom AppRegionDrag 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
-import PropTypes from 'prop-types';
 
 const Vertical = css({
   label: 'Vertical',
@@ -1066,10 +1080,10 @@ export default AppRegionDrag;
 exports[`react-dom parses react-dom BackgroundImage 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
-import PropTypes from 'prop-types';
 
 const Vertical = css({
   label: 'Vertical',
@@ -1175,10 +1189,10 @@ export default BackgroundImage;
 exports[`react-dom parses react-dom Border 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
-import PropTypes from 'prop-types';
 
 const Border1 = css({
   label: 'Border1',
@@ -1412,10 +1426,10 @@ export default Border;
 exports[`react-dom parses react-dom ClassName 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
-import PropTypes from 'prop-types';
 
 const Vertical = css({ label: 'Vertical', backgroundColor: 'blue' });
 
@@ -1476,10 +1490,10 @@ export default ClassName;
 exports[`react-dom parses react-dom Code 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
-import PropTypes from 'prop-types';
 
 const Vertical = css({ label: 'Vertical', backgroundColor: 'red' });
 const Text = css({
@@ -1602,9 +1616,9 @@ export default Code;
 exports[`react-dom parses react-dom DefaultProps 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import PropTypes from 'prop-types';
 
 class DefaultProps extends React.Component {
   render() {
@@ -1701,10 +1715,10 @@ export default DefaultProps;
 exports[`react-dom parses react-dom Display 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
-import PropTypes from 'prop-types';
 
 const Display1 = css({ label: 'Display1', display: 'block' });
 
@@ -1765,11 +1779,11 @@ export default Display;
 exports[`react-dom parses react-dom DynamicStylesApplyToBasicBlocksOnly 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import SomeThing from './SomeThing.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
-import PropTypes from 'prop-types';
 
 const Vertical = css({
   label: 'Vertical',
@@ -1861,9 +1875,9 @@ export default DynamicStylesApplyToBasicBlocksOnly;
 exports[`react-dom parses react-dom EmptyText 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import PropTypes from 'prop-types';
 
 class EmptyText extends React.Component {
   render() {
@@ -1915,9 +1929,9 @@ export default EmptyText;
 exports[`react-dom parses react-dom GoTo 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import PropTypes from 'prop-types';
 
 class GoTo extends React.Component {
   render() {
@@ -1985,10 +1999,10 @@ export default GoTo;
 exports[`react-dom parses react-dom Hover 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
-import PropTypes from 'prop-types';
 
 const Hover1 = css({
   label: 'Hover1',
@@ -2129,9 +2143,9 @@ export default Hover;
 exports[`react-dom parses react-dom JustText 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import PropTypes from 'prop-types';
 
 class JustText extends React.Component {
   render() {
@@ -2187,10 +2201,10 @@ export default JustText;
 exports[`react-dom parses react-dom ListOfSomething 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import Something from './Something.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import PropTypes from 'prop-types';
 
 class ListOfSomething extends React.Component {
   render() {
@@ -2288,10 +2302,10 @@ export default ListOfSomething;
 exports[`react-dom parses react-dom ListWhen 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
 import Card from './Card.view.js';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
 import PropTypes from 'prop-types';
+import React from 'react';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 
 class ListWhen extends React.Component {
   render() {
@@ -2343,8 +2357,8 @@ export default ListWhen;
 exports[`react-dom parses react-dom ListWhen: react-dom parses react-dom ListWhen debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
 import Card from './Card.view.js';
+import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 
 const ListWhen = props => {
@@ -2399,10 +2413,10 @@ export default ListWhen;
 exports[`react-dom parses react-dom ListWithKey 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
 import Card from './Card.view.js';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
 import PropTypes from 'prop-types';
+import React from 'react';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 
 class ListWithKey extends React.Component {
   render() {
@@ -2449,8 +2463,8 @@ export default ListWithKey;
 exports[`react-dom parses react-dom ListWithKey: react-dom parses react-dom ListWithKey debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
 import Card from './Card.view.js';
+import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 
 const ListWithKey = props => {
@@ -2500,11 +2514,11 @@ export default ListWithKey;
 exports[`react-dom parses react-dom LocalImage 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import garfieldPng from './garfield.png';
 import chopperJpg from './chopper.jpg';
-import PropTypes from 'prop-types';
+import garfieldPng from './garfield.png';
 
 class LocalImage extends React.Component {
   render() {
@@ -2539,8 +2553,8 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import garfieldPng from './garfield.png';
 import chopperJpg from './chopper.jpg';
+import garfieldPng from './garfield.png';
 
 const LocalImage = props => {
   return (
@@ -2566,11 +2580,11 @@ export default LocalImage;
 exports[`react-dom parses react-dom LocalImageSvg 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import chopperSvg from './chopper.svg';
 import { css } from 'emotion';
-import PropTypes from 'prop-types';
 
 const LocalImageSvg1 = css({
   label: 'LocalImageSvg1',
@@ -2655,9 +2669,9 @@ export default LocalImageSvg;
 exports[`react-dom parses react-dom LocalOrRemoteImageWhenCode 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import PropTypes from 'prop-types';
 
 class LocalOrRemoteImageWhenCode extends React.Component {
   render() {
@@ -2731,11 +2745,11 @@ export default LocalOrRemoteImageWhenCode;
 exports[`react-dom parses react-dom Locals 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import LocalContainer from './LocalContainer.view.js';
+import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import PropTypes from 'prop-types';
 import { Subscribe } from 'unstated';
-import LocalContainer from './LocalContainer.view.js';
 
 const TextLocal = {
   es: 'Hola',
@@ -2791,10 +2805,10 @@ export default Locals;
 exports[`react-dom parses react-dom Locals: react-dom parses react-dom Locals debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import LocalContainer from './LocalContainer.view.js';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { Subscribe } from 'unstated';
-import LocalContainer from './LocalContainer.view.js';
 
 const TextLocal = {
   es: 'Hola',
@@ -2843,9 +2857,9 @@ export default Locals;
 exports[`react-dom parses react-dom LocalsFormat 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import PropTypes from 'prop-types';
 
 const currencyOptions = { style: 'currency', currency: 'USD' };
 const currencyFormatters = {
@@ -3015,9 +3029,9 @@ export default LocalsFormat;
 exports[`react-dom parses react-dom NameIsType 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import PropTypes from 'prop-types';
 
 class NameIsType extends React.Component {
   render() {
@@ -3073,10 +3087,10 @@ export default NameIsType;
 exports[`react-dom parses react-dom NegativeNumber 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
-import PropTypes from 'prop-types';
 
 const Text = css({ label: 'Text', marginTop: -10 });
 
@@ -3137,12 +3151,12 @@ export default NegativeNumber;
 exports[`react-dom parses react-dom NestedRoutes 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Route } from 'react-router-dom';
 import Topic from './Topic.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 class NestedRoutes extends React.Component {
   render() {
@@ -3196,10 +3210,10 @@ exports[`react-dom parses react-dom NestedRoutes: react-dom parses react-dom Nes
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Route } from 'react-router-dom';
 import Topic from './Topic.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
+import { Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 const NestedRoutes = props => {
   return (
@@ -3245,10 +3259,10 @@ export default NestedRoutes;
 exports[`react-dom parses react-dom Scope 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
-import PropTypes from 'prop-types';
 
 const Scope1 = css({
   label: 'Scope1',
@@ -3353,10 +3367,10 @@ export default Scope;
 exports[`react-dom parses react-dom ScopeOnCustomView 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
 import Button from './Button.view.js';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
 import PropTypes from 'prop-types';
+import React from 'react';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 
 class ScopeOnCustomView extends React.Component {
   render() {
@@ -3398,8 +3412,8 @@ export default ScopeOnCustomView;
 exports[`react-dom parses react-dom ScopeOnCustomView: react-dom parses react-dom ScopeOnCustomView debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
 import Button from './Button.view.js';
+import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 
 const ScopeOnCustomView = props => {
@@ -3435,9 +3449,9 @@ export default ScopeOnCustomView;
 exports[`react-dom parses react-dom ScopePopup 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import PropTypes from 'prop-types';
 
 class ScopePopup extends React.Component {
   render() {
@@ -3539,10 +3553,10 @@ export default ScopePopup;
 exports[`react-dom parses react-dom ScopePopup2 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
-import PropTypes from 'prop-types';
 
 const Content = css({
   label: 'Content',
@@ -3681,11 +3695,11 @@ export default ScopePopup2;
 exports[`react-dom parses react-dom ScrollableList 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
 import Card from './Card.view.js';
+import PropTypes from 'prop-types';
+import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
-import PropTypes from 'prop-types';
 
 const ScrollableList1 = css({
   label: 'ScrollableList1',
@@ -3746,8 +3760,8 @@ export default ScrollableList;
 exports[`react-dom parses react-dom ScrollableList: react-dom parses react-dom ScrollableList debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
 import Card from './Card.view.js';
+import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
@@ -3812,10 +3826,10 @@ export default ScrollableList;
 exports[`react-dom parses react-dom Shadow 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
-import PropTypes from 'prop-types';
 
 const BoxShadow = css({
   label: 'BoxShadow',
@@ -3929,10 +3943,10 @@ export default Shadow;
 exports[`react-dom parses react-dom SomeMissingStyle 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
-import PropTypes from 'prop-types';
 
 const WindowControl = css({
   label: 'WindowControl',
@@ -4048,11 +4062,11 @@ export default SomeMissingStyle;
 exports[`react-dom parses react-dom Teleport 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import { Link } from 'react-router-dom';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'emotion';
 import PropTypes from 'prop-types';
+import React from 'react';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+import { Link } from 'react-router-dom';
+import { css } from 'emotion';
 
 const Horizontal = css({ label: 'Horizontal', flexDirection: 'row' });
 
@@ -4090,8 +4104,8 @@ exports[`react-dom parses react-dom Teleport: react-dom parses react-dom Telepor
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
 import React from 'react';
-import { Link } from 'react-router-dom';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
+import { Link } from 'react-router-dom';
 import { css } from 'emotion';
 
 const Horizontal = css({ label: 'Horizontal', flexDirection: 'row' });
@@ -4122,10 +4136,10 @@ export default Teleport;
 exports[`react-dom parses react-dom TestIds 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
 import External from './External.view.js';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
 import PropTypes from 'prop-types';
+import React from 'react';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 
 class TestIds extends React.Component {
   render() {
@@ -4166,8 +4180,8 @@ export default TestIds;
 exports[`react-dom parses react-dom TestIds: react-dom parses react-dom TestIds debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
 import External from './External.view.js';
+import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 
 const TestIds = props => {
@@ -4202,9 +4216,9 @@ export default TestIds;
 exports[`react-dom parses react-dom TextInterpolation 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import PropTypes from 'prop-types';
 
 class TextInterpolation extends React.Component {
   render() {
@@ -4314,10 +4328,10 @@ export default TextInterpolation;
 exports[`react-dom parses react-dom Transform 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
-import PropTypes from 'prop-types';
 
 const Transform1 = css({
   label: 'Transform1',
@@ -4438,10 +4452,10 @@ export default Transform;
 exports[`react-dom parses react-dom UseCaptureEmail 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
-import PropTypes from 'prop-types';
 
 const Email = css({
   label: 'Email',
@@ -4560,9 +4574,9 @@ export default UseCaptureEmail;
 exports[`react-dom parses react-dom UseCaptureFile 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import PropTypes from 'prop-types';
 
 class UseCaptureFile extends React.Component {
   constructor(props) {
@@ -4633,9 +4647,9 @@ export default UseCaptureFile;
 exports[`react-dom parses react-dom UseCaptureNumber 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import PropTypes from 'prop-types';
 
 class UseCaptureNumber extends React.Component {
   constructor(props) {
@@ -4712,9 +4726,9 @@ export default UseCaptureNumber;
 exports[`react-dom parses react-dom UseCapturePhone 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import PropTypes from 'prop-types';
 
 class UseCapturePhone extends React.Component {
   constructor(props) {
@@ -4787,9 +4801,9 @@ export default UseCapturePhone;
 exports[`react-dom parses react-dom UseCaptureSecure 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import PropTypes from 'prop-types';
 
 class UseCaptureSecure extends React.Component {
   constructor(props) {
@@ -4862,11 +4876,11 @@ export default UseCaptureSecure;
 exports[`react-dom parses react-dom UseCaptureText 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import LocalContainer from './LocalContainer.view.js';
+import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import PropTypes from 'prop-types';
 import { Subscribe } from 'unstated';
-import LocalContainer from './LocalContainer.view.js';
 
 const TextLocal = {
   es: 'Escriba sus comentarios aqui...',
@@ -4912,10 +4926,10 @@ export default UseCaptureText;
 exports[`react-dom parses react-dom UseCaptureText: react-dom parses react-dom UseCaptureText debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import LocalContainer from './LocalContainer.view.js';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { Subscribe } from 'unstated';
-import LocalContainer from './LocalContainer.view.js';
 
 const TextLocal = {
   es: 'Escriba sus comentarios aqui...',
@@ -4959,9 +4973,9 @@ export default UseCaptureText;
 exports[`react-dom parses react-dom UseCaptureTextArea 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import PropTypes from 'prop-types';
 
 class UseCaptureTextArea extends React.Component {
   constructor(props) {
@@ -5036,9 +5050,9 @@ export default UseCaptureTextArea;
 exports[`react-dom parses react-dom UseCaptureTextManagedFromOutside 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import PropTypes from 'prop-types';
 
 class UseCaptureTextManagedFromOutside extends React.Component {
   constructor(props) {
@@ -5120,10 +5134,10 @@ export default UseCaptureTextManagedFromOutside;
 exports[`react-dom parses react-dom UseHorizontal 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
-import PropTypes from 'prop-types';
 
 const Horizontal = css({
   label: 'Horizontal',
@@ -5196,9 +5210,9 @@ export default UseHorizontal;
 exports[`react-dom parses react-dom UseImage 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import PropTypes from 'prop-types';
 
 class UseImage extends React.Component {
   render() {
@@ -5266,15 +5280,15 @@ export default UseImage;
 exports[`react-dom parses react-dom UseRouter 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
 import About from './About.view.js';
 import Home from './Home.view.js';
-import { Route } from 'react-router-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import React from 'react';
 import Topics from './Topics.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { css } from 'emotion';
-import PropTypes from 'prop-types';
 
 const Horizontal = css({ label: 'Horizontal', flexDirection: 'row' });
 
@@ -5348,13 +5362,13 @@ export default UseRouter;
 exports[`react-dom parses react-dom UseRouter: react-dom parses react-dom UseRouter debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
 import About from './About.view.js';
 import Home from './Home.view.js';
-import { Route } from 'react-router-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
+import React from 'react';
 import Topics from './Topics.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { css } from 'emotion';
 
 const Horizontal = css({ label: 'Horizontal', flexDirection: 'row' });
@@ -5423,10 +5437,10 @@ export default UseRouter;
 exports[`react-dom parses react-dom UseSvg 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
-import PropTypes from 'prop-types';
 
 const Svg = css({
   label: 'Svg',
@@ -5565,11 +5579,11 @@ export default UseSvg;
 exports[`react-dom parses react-dom UseText 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import './Fonts/Montserrat-300';
+import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import './Fonts/Montserrat-300';
 import { css } from 'emotion';
-import PropTypes from 'prop-types';
 
 const UseText1 = css({
   label: 'UseText1',
@@ -5619,9 +5633,9 @@ export default UseText;
 exports[`react-dom parses react-dom UseText: react-dom parses react-dom UseText debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import './Fonts/Montserrat-300';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import './Fonts/Montserrat-300';
 import { css } from 'emotion';
 
 const UseText1 = css({
@@ -5665,12 +5679,12 @@ export default UseText;
 exports[`react-dom parses react-dom UseTextCustomFont 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
 import './Fonts/CustomFontNotOnGoogle-300';
 import './Fonts/CustomFontNotOnGoogle-400-italic';
-import { css } from 'emotion';
 import PropTypes from 'prop-types';
+import React from 'react';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+import { css } from 'emotion';
 
 const Normal = css({
   label: 'Normal',
@@ -5746,10 +5760,10 @@ export default UseTextCustomFont;
 exports[`react-dom parses react-dom UseTextCustomFont: react-dom parses react-dom UseTextCustomFont debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
 import './Fonts/CustomFontNotOnGoogle-300';
 import './Fonts/CustomFontNotOnGoogle-400-italic';
+import React from 'react';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const Normal = css({
@@ -5819,10 +5833,10 @@ export default UseTextCustomFont;
 exports[`react-dom parses react-dom UseVertical 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
-import PropTypes from 'prop-types';
 
 const Vertical = css({ label: 'Vertical', backgroundColor: 'red' });
 
@@ -5883,10 +5897,10 @@ export default UseVertical;
 exports[`react-dom parses react-dom ViewNameIsntUsedInStyle 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
-import PropTypes from 'prop-types';
 
 const ViewNameIsntUsedInStyle1 = css({
   label: 'ViewNameIsntUsedInStyle1',
@@ -5970,10 +5984,10 @@ export default ViewNameIsntUsedInStyle;
 exports[`react-dom parses react-dom When 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
-import PropTypes from 'prop-types';
 
 const App = css({ label: 'App', flexDirection: 'row' });
 
@@ -6056,9 +6070,9 @@ export default When;
 exports[`react-dom parses react-dom WhenTopLevel 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import PropTypes from 'prop-types';
 
 class WhenTopLevel extends React.Component {
   render() {
@@ -6126,10 +6140,10 @@ export default WhenTopLevel;
 exports[`react-native parses react-native Action 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import SubButton from './SubButton.view.js';
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
-import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({ Vertical: { color: 'red' } });
 
@@ -6195,75 +6209,112 @@ export default Action;
 exports[`react-native parses react-native AnimatedButton 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Animated, StyleSheet, TouchableWithoutFeedback } from 'react-native';
-import PropTypes from 'prop-types';
-const getAnimatedValue = (animatedValue, from, to) =>
-  animatedValue.interpolate({
-    inputRange: [0, 1],
-    outputRange: [from, to],
-  });
-const styles = StyleSheet.create({ Vertical: { backgroundColor: 'red' } });
+import { Spring, Timing } from '@viewstools/animations/native';
+
+const styles = StyleSheet.create({
+  AnimatedButton1: { backgroundColor: 'red' },
+});
 
 class AnimatedButton extends React.Component {
-  animatedValue0 = new Animated.Value(this.props.isOn ? 1 : 0);
-
-  componentDidUpdate(prev) {
-    const { props } = this;
-    if (props.isOn !== prev.isOn) {
-      Animated.spring(this.animatedValue0, {
-        toValue: props.isOn ? 1 : 0,
-        speed: 12,
-        bounciness: 8,
-        delay: 0,
-        useNativeDriver: false,
-      }).start();
-    }
-  }
-
   render() {
     const { context, props } = this;
 
     return (
-      <TouchableWithoutFeedback
-        activeOpacity={0.7}
-        onPress={event =>
-          context.track({
-            block: props['testID'] || 'AnimatedButton',
-            action: 'click',
-            callback: props.onClick,
-            event,
-            props,
-          })
-        }
-        underlayColor=\\"transparent\\"
+      <Spring
+        bounciness={10}
+        speed={1}
+        delay={0}
+        to={{ opacity: props.isOn ? 1 : 0.75 }}
       >
-        <Animated.View
-          testID={\`\${props['testID'] || 'Vertical'}|\${
-            props.isOn ? 'isOn|' : ''
-          }\`}
-          style={[
-            styles.Vertical,
-            {
-              opacity: getAnimatedValue(this.animatedValue0, 0.75, 1),
-              transform: [
-                { translateX: getAnimatedValue(this.animatedValue0, 10, 20) },
-                { rotateX: getAnimatedValue(this.animatedValue0, 10, 20) },
-              ],
-            },
-          ]}
-        >
-          <Animated.Text
-            testID={\`AnimatedButton.Text|\${props.isOn ? 'isOn|' : ''}\`}
-            style={{
-              color: getAnimatedValue(this.animatedValue0, 'red', 'blue'),
-            }}
+        {animatedAnimatedButton => (
+          <Spring
+            bounciness={15}
+            speed={2}
+            delay={0}
+            to={{ translateX: props.isOn ? 20 : 10 }}
           >
-            hey
-          </Animated.Text>
-          {props.children}
-        </Animated.View>
-      </TouchableWithoutFeedback>
+            {animatedAnimatedButton1 => (
+              <Timing
+                curve=\\"easeIn\\"
+                delay={0}
+                duration={150}
+                to={{ rotateX: props.isOn ? 20 : 10 }}
+              >
+                {animatedAnimatedButton2 => (
+                  <Timing
+                    curve=\\"easeInOut\\"
+                    delay={0}
+                    duration={150}
+                    to={{ rotateY: props.isOn ? 20 : 10 }}
+                  >
+                    {animatedAnimatedButton3 => (
+                      <Spring
+                        delay={0}
+                        speed={12}
+                        bounciness={8}
+                        to={{ color: props.isOn ? 'blue' : 'red' }}
+                      >
+                        {animatedText => (
+                          <TouchableWithoutFeedback
+                            activeOpacity={0.7}
+                            onPress={event =>
+                              context.track({
+                                block: props['testID'] || 'AnimatedButton',
+                                action: 'click',
+                                callback: props.onClick,
+                                event,
+                                props,
+                              })
+                            }
+                            underlayColor=\\"transparent\\"
+                          >
+                            <Animated.View
+                              testID={\`\${props['testID'] || 'AnimatedButton'}|\${
+                                props.isOn ? 'isOn|' : ''
+                              }\`}
+                              style={[
+                                styles.AnimatedButton1,
+                                {
+                                  opacity: animatedAnimatedButton.opacity,
+                                  transform: [
+                                    {
+                                      translateX:
+                                        animatedAnimatedButton1.translateX,
+                                    },
+                                    {
+                                      rotateX: animatedAnimatedButton2.rotateX,
+                                    },
+                                    {
+                                      rotateY: animatedAnimatedButton3.rotateY,
+                                    },
+                                  ],
+                                },
+                              ]}
+                            >
+                              <Animated.Text
+                                testID={\`AnimatedButton.Text|\${
+                                  props.isOn ? 'isOn|' : ''
+                                }\`}
+                                style={{ color: animatedText.color }}
+                              >
+                                hey
+                              </Animated.Text>
+                              {props.children}
+                            </Animated.View>
+                          </TouchableWithoutFeedback>
+                        )}
+                      </Spring>
+                    )}
+                  </Timing>
+                )}
+              </Timing>
+            )}
+          </Spring>
+        )}
+      </Spring>
     );
   }
 }
@@ -6288,9 +6339,9 @@ export default AnimatedButton;
 exports[`react-native parses react-native AppRegionDrag 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
   Vertical: { width: '92%', marginTop: 'auto' },
@@ -6325,9 +6376,9 @@ export default AppRegionDrag;
 exports[`react-native parses react-native BackgroundImage 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Animated, Image, StyleSheet } from 'react-native';
-import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({ Horizontal: { flexDirection: 'row' } });
 
@@ -6375,9 +6426,9 @@ export default BackgroundImage;
 exports[`react-native parses react-native Border 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Animated, StyleSheet } from 'react-native';
-import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
   Border1: { borderColor: 'red', borderStyle: 'solid' },
@@ -6473,9 +6524,9 @@ export default Border;
 exports[`react-native parses react-native ClassName 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({ Vertical: { backgroundColor: 'blue' } });
 
@@ -6508,9 +6559,9 @@ export default ClassName;
 exports[`react-native parses react-native Code 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Animated, StyleSheet, View } from 'react-native';
-import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({ Vertical: { backgroundColor: 'red' } });
 
@@ -6569,9 +6620,9 @@ export default Code;
 exports[`react-native parses react-native DefaultProps 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Text, View } from 'react-native';
-import PropTypes from 'prop-types';
 
 class DefaultProps extends React.Component {
   render() {
@@ -6615,9 +6666,9 @@ export default DefaultProps;
 exports[`react-native parses react-native Display 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({ Display1: { display: 'block' } });
 
@@ -6647,10 +6698,10 @@ export default Display;
 exports[`react-native parses react-native DynamicStylesApplyToBasicBlocksOnly 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import SomeThing from './SomeThing.view.js';
 import { Animated } from 'react-native';
-import PropTypes from 'prop-types';
 
 class DynamicStylesApplyToBasicBlocksOnly extends React.Component {
   render() {
@@ -6691,9 +6742,9 @@ export default DynamicStylesApplyToBasicBlocksOnly;
 exports[`react-native parses react-native EmptyText 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Text } from 'react-native';
-import PropTypes from 'prop-types';
 
 class EmptyText extends React.Component {
   render() {
@@ -6717,9 +6768,9 @@ export default EmptyText;
 exports[`react-native parses react-native GoTo 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Text, View } from 'react-native';
-import PropTypes from 'prop-types';
 
 class GoTo extends React.Component {
   render() {
@@ -6748,6 +6799,7 @@ export default GoTo;
 exports[`react-native parses react-native Hover 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import {
   Animated,
@@ -6755,7 +6807,6 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({ Text: { color: 'white' } });
 
@@ -6821,9 +6872,9 @@ export default Hover;
 exports[`react-native parses react-native JustText 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Text } from 'react-native';
-import PropTypes from 'prop-types';
 
 class JustText extends React.Component {
   render() {
@@ -6847,10 +6898,10 @@ export default JustText;
 exports[`react-native parses react-native ListOfSomething 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import Something from './Something.view.js';
 import { View } from 'react-native';
-import PropTypes from 'prop-types';
 
 class ListOfSomething extends React.Component {
   render() {
@@ -6893,10 +6944,10 @@ export default ListOfSomething;
 exports[`react-native parses react-native ListWhen 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
 import Card from './Card.view.js';
-import { View } from 'react-native';
 import PropTypes from 'prop-types';
+import React from 'react';
+import { View } from 'react-native';
 
 class ListWhen extends React.Component {
   render() {
@@ -6944,10 +6995,10 @@ export default ListWhen;
 exports[`react-native parses react-native ListWithKey 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
 import Card from './Card.view.js';
-import { View } from 'react-native';
 import PropTypes from 'prop-types';
+import React from 'react';
+import { View } from 'react-native';
 
 class ListWithKey extends React.Component {
   render() {
@@ -6990,11 +7041,11 @@ export default ListWithKey;
 exports[`react-native parses react-native LocalImage 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import garfieldPng from './garfield.png';
-import chopperJpg from './chopper.jpg';
-import { Image } from 'react-native';
 import PropTypes from 'prop-types';
+import React from 'react';
+import chopperJpg from './chopper.jpg';
+import garfieldPng from './garfield.png';
+import { Image } from 'react-native';
 
 class LocalImage extends React.Component {
   render() {
@@ -7025,10 +7076,10 @@ export default LocalImage;
 exports[`react-native parses react-native LocalImageSvg 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import chopperSvg from './chopper.svg';
 import { Image, StyleSheet } from 'react-native';
-import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({ LocalImageSvg1: { width: 50 } });
 
@@ -7066,9 +7117,9 @@ export default LocalImageSvg;
 exports[`react-native parses react-native LocalOrRemoteImageWhenCode 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Image } from 'react-native';
-import PropTypes from 'prop-types';
 
 class LocalOrRemoteImageWhenCode extends React.Component {
   render() {
@@ -7105,11 +7156,11 @@ export default LocalOrRemoteImageWhenCode;
 exports[`react-native parses react-native Locals 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import { Text, View } from 'react-native';
-import PropTypes from 'prop-types';
-import { Subscribe } from 'unstated';
 import LocalContainer from './LocalContainer.view.js';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { Subscribe } from 'unstated';
+import { Text, View } from 'react-native';
 
 const TextLocal = {
   es: 'Hola',
@@ -7162,9 +7213,9 @@ export default Locals;
 exports[`react-native parses react-native LocalsFormat 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Text, View } from 'react-native';
-import PropTypes from 'prop-types';
 
 const currencyOptions = { style: 'currency', currency: 'USD' };
 const currencyFormatters = {
@@ -7247,9 +7298,9 @@ export default LocalsFormat;
 exports[`react-native parses react-native NameIsType 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Text } from 'react-native';
-import PropTypes from 'prop-types';
 
 class NameIsType extends React.Component {
   render() {
@@ -7273,9 +7324,9 @@ export default NameIsType;
 exports[`react-native parses react-native NegativeNumber 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import { StyleSheet, Text } from 'react-native';
-import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({ Text: { marginTop: -10 } });
 
@@ -7305,12 +7356,12 @@ export default NegativeNumber;
 exports[`react-native parses react-native NestedRoutes 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
+import Topic from './Topic.view.js';
 import { Link } from 'react-router-native';
 import { Route } from 'react-router-native';
-import Topic from './Topic.view.js';
 import { Text, View } from 'react-native';
-import PropTypes from 'prop-types';
 
 class NestedRoutes extends React.Component {
   render() {
@@ -7350,9 +7401,9 @@ export default NestedRoutes;
 exports[`react-native parses react-native Scope 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Text } from 'react-native';
-import PropTypes from 'prop-types';
 
 class Scope extends React.Component {
   render() {
@@ -7399,9 +7450,9 @@ export default Scope;
 exports[`react-native parses react-native ScopeOnCustomView 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
 import Button from './Button.view.js';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 class ScopeOnCustomView extends React.Component {
   render() {
@@ -7442,9 +7493,9 @@ export default ScopeOnCustomView;
 exports[`react-native parses react-native ScopePopup 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Text, TouchableWithoutFeedback, View } from 'react-native';
-import PropTypes from 'prop-types';
 
 class ScopePopup extends React.Component {
   render() {
@@ -7497,9 +7548,9 @@ export default ScopePopup;
 exports[`react-native parses react-native ScopePopup2 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Text, TouchableWithoutFeedback, View } from 'react-native';
-import PropTypes from 'prop-types';
 
 class ScopePopup2 extends React.Component {
   render() {
@@ -7565,10 +7616,10 @@ export default ScopePopup2;
 exports[`react-native parses react-native ScrollableList 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
 import Card from './Card.view.js';
-import { Animated, FlatList, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
+import React from 'react';
+import { Animated, FlatList, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   ScrollableList1ContentContainer: { paddingBottom: 200 },
@@ -7623,9 +7674,9 @@ export default ScrollableList;
 exports[`react-native parses react-native Shadow 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Animated, StyleSheet, View } from 'react-native';
-import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
   BoxShadow: {
@@ -7705,9 +7756,9 @@ export default Shadow;
 exports[`react-native parses react-native SomeMissingStyle 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Animated, StyleSheet, TouchableWithoutFeedback } from 'react-native';
-import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
   WindowControl: {
@@ -7770,10 +7821,10 @@ export default SomeMissingStyle;
 exports[`react-native parses react-native Teleport 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-native';
 import { StyleSheet, Text, View } from 'react-native';
-import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({ Horizontal: { flexDirection: 'row' } });
 
@@ -7810,10 +7861,10 @@ export default Teleport;
 exports[`react-native parses react-native TestIds 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
 import External from './External.view.js';
-import { Text, View } from 'react-native';
 import PropTypes from 'prop-types';
+import React from 'react';
+import { Text, View } from 'react-native';
 
 class TestIds extends React.Component {
   render() {
@@ -7845,9 +7896,9 @@ export default TestIds;
 exports[`react-native parses react-native TextInterpolation 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Text, View } from 'react-native';
-import PropTypes from 'prop-types';
 
 class TextInterpolation extends React.Component {
   render() {
@@ -7899,9 +7950,9 @@ export default TextInterpolation;
 exports[`react-native parses react-native Transform 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Animated, StyleSheet, View } from 'react-native';
-import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
   Transform1: {
@@ -7967,9 +8018,9 @@ export default Transform;
 exports[`react-native parses react-native UseCaptureEmail 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import { StyleSheet, TextInput } from 'react-native';
-import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
   Email: {
@@ -8029,9 +8080,9 @@ export default UseCaptureEmail;
 exports[`react-native parses react-native UseCaptureFile 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
 import CaptureFile from './CaptureFile.view.js';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 class UseCaptureFile extends React.Component {
   constructor(props) {
@@ -8072,9 +8123,9 @@ export default UseCaptureFile;
 exports[`react-native parses react-native UseCaptureNumber 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import { TextInput } from 'react-native';
-import PropTypes from 'prop-types';
 
 class UseCaptureNumber extends React.Component {
   constructor(props) {
@@ -8115,9 +8166,9 @@ export default UseCaptureNumber;
 exports[`react-native parses react-native UseCapturePhone 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import { TextInput } from 'react-native';
-import PropTypes from 'prop-types';
 
 class UseCapturePhone extends React.Component {
   constructor(props) {
@@ -8158,9 +8209,9 @@ export default UseCapturePhone;
 exports[`react-native parses react-native UseCaptureSecure 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import { TextInput } from 'react-native';
-import PropTypes from 'prop-types';
 
 class UseCaptureSecure extends React.Component {
   constructor(props) {
@@ -8201,11 +8252,11 @@ export default UseCaptureSecure;
 exports[`react-native parses react-native UseCaptureText 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import { TextInput } from 'react-native';
-import PropTypes from 'prop-types';
-import { Subscribe } from 'unstated';
 import LocalContainer from './LocalContainer.view.js';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { Subscribe } from 'unstated';
+import { TextInput } from 'react-native';
 
 const TextLocal = {
   es: 'Escriba sus comentarios aqui...',
@@ -8256,9 +8307,9 @@ export default UseCaptureText;
 exports[`react-native parses react-native UseCaptureTextArea 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import { TextInput } from 'react-native';
-import PropTypes from 'prop-types';
 
 class UseCaptureTextArea extends React.Component {
   constructor(props) {
@@ -8300,9 +8351,9 @@ export default UseCaptureTextArea;
 exports[`react-native parses react-native UseCaptureTextManagedFromOutside 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import { TextInput } from 'react-native';
-import PropTypes from 'prop-types';
 
 class UseCaptureTextManagedFromOutside extends React.Component {
   constructor(props) {
@@ -8350,9 +8401,9 @@ export default UseCaptureTextManagedFromOutside;
 exports[`react-native parses react-native UseHorizontal 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
   Horizontal: {
@@ -8392,9 +8443,9 @@ export default UseHorizontal;
 exports[`react-native parses react-native UseImage 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Image } from 'react-native';
-import PropTypes from 'prop-types';
 
 class UseImage extends React.Component {
   render() {
@@ -8429,14 +8480,14 @@ export default UseImage;
 exports[`react-native parses react-native UseRouter 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
 import About from './About.view.js';
 import Home from './Home.view.js';
-import { Route } from 'react-router-native';
-import { NativeRouter as Router } from 'react-router-native';
-import Topics from './Topics.view.js';
-import { StyleSheet, View } from 'react-native';
 import PropTypes from 'prop-types';
+import React from 'react';
+import Topics from './Topics.view.js';
+import { NativeRouter as Router } from 'react-router-native';
+import { Route } from 'react-router-native';
+import { StyleSheet, View } from 'react-native';
 
 const styles = StyleSheet.create({ Horizontal: { flexDirection: 'row' } });
 
@@ -8501,6 +8552,7 @@ export default UseRouter;
 exports[`react-native parses react-native UseSvg 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import Svg, {
   Circle as SvgCircle,
@@ -8508,7 +8560,6 @@ import Svg, {
   Path as SvgPath,
   Text as SvgText,
 } from 'react-native-svg';
-import PropTypes from 'prop-types';
 
 class UseSvg extends React.Component {
   render() {
@@ -8551,9 +8602,9 @@ export default UseSvg;
 exports[`react-native parses react-native UseText 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import { StyleSheet, Text } from 'react-native';
-import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
   UseText1: { fontFamily: 'Montserrat-300', fontSize: 16, lineHeight: 24 },
@@ -8597,9 +8648,9 @@ export default UseText;
 exports[`react-native parses react-native UseTextCustomFont 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
   Normal: {
@@ -8670,9 +8721,9 @@ export default UseTextCustomFont;
 exports[`react-native parses react-native UseVertical 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({ Vertical: { backgroundColor: 'red' } });
 
@@ -8705,9 +8756,9 @@ export default UseVertical;
 exports[`react-native parses react-native ViewNameIsntUsedInStyle 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Animated, StyleSheet } from 'react-native';
-import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({ ViewNameIsntUsedInStyle1: { zIndex: 5 } });
 
@@ -8746,9 +8797,9 @@ export default ViewNameIsntUsedInStyle;
 exports[`react-native parses react-native When 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({ App: { flexDirection: 'row' } });
 
@@ -8787,9 +8838,9 @@ export default When;
 exports[`react-native parses react-native WhenTopLevel 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Text } from 'react-native';
-import PropTypes from 'prop-types';
 
 class WhenTopLevel extends React.Component {
   render() {
