@@ -27,6 +27,7 @@ export function leave(node, parent, state) {
 
   if (node.hasSpringAnimation) {
     state.isAnimated = true
+    state.hasSpringAnimation = true
     state.animations[node.id] = node.animations
     state.scopes = node.scopes
   }

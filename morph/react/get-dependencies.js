@@ -73,22 +73,19 @@ export default (state, getImport) => {
   }
 
   if (state.isAnimated) {
-    dependencies.push(
-      `import { ${
-        state.isReactNative ? '' : 'animated, '
-      }Spring } from "react-spring/dist/${
-        state.isReactNative ? 'native' : 'web'
-      }"`
-    )
-    dependencies.push(
-      `import SpringAnimation from "@viewstools/react-spring-animation-${
-        state.isReactNative ? 'native' : 'web'
-      }"`
-    )
+    const animations = [
+      !state.isReactNative && 'animated',
+      state.hasSpringAnimation && 'Spring',
+      state.hasTimingAnimation && state.isReactNative && 'Timing',
+    ].filter(Boolean)
 
-    // dependencies.push(
-    //   `const Animated = { View: animated(View), Text: animated(Text) }`
-    // )
+    if (animations.length > 0) {
+      dependencies.push(
+        `import { ${animations.join(', ')} } from "@viewstools/animations/${
+          state.isReactNative ? 'native' : 'dom'
+        }"`
+      )
+    }
   }
 
   if (usesSvg.length > 0) {

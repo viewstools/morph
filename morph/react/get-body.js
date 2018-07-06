@@ -30,16 +30,19 @@ export default ({ state, name }) => {
 
     Object.keys(state.animations).forEach(blockId => {
       Object.values(state.animations[blockId]).forEach(item => {
-        const { curve, delay, ...configValues } = item.animation.properties
+        const { curve, ...configValues } = item.animation.properties
 
         if (!state.isReactNative && curve !== 'spring') return
 
-        // react-spring only exposes Spring as a component,
-        // you can configure the Timing animations with the TimingAnimation bit
-        const tag = 'Spring' // toPascalCase(curve)
-        const config = Object.entries(configValues)
-          .map(([key, value]) => `${key}: ${value}`)
-          .join(',')
+        const tag = curve === 'spring' ? 'Spring' : 'Timing'
+        let config = Object.entries(configValues)
+          .map(([key, value]) => `${key}={${value}}`)
+          .join(' ')
+
+        if (curve !== 'spring') {
+          config = `curve="${curve}" ${config}`
+        }
+
         const to = Object.values(item.props)
           .map(prop => {
             prop.scopes.reverse()
@@ -72,12 +75,10 @@ export default ({ state, name }) => {
           ? false // !Object.keys(item.props).some(canUseNativeDriver)
           : true
 
-        const impl = curve === 'spring' ? 'SpringAnimation' : 'TimingAnimation'
-
         animatedOpen.push(
-          `<${tag} impl={${impl}} ${
+          `<${tag} ${
             useNativeDriver ? 'native' : ''
-          } config={{${config}}} delay={${delay}} to={{${to}}}>{animated${blockId}${
+          } ${config} to={{${to}}}>{animated${blockId}${
             item.index > 0 ? item.index : ''
           } => (`
         )

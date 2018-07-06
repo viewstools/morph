@@ -49,6 +49,13 @@ export const leave = (node, parent, state) => {
     style = style ? `[${style},{${animated}}]` : `{${animated}}`
     state.isAnimated = true
     state.animations[node.id] = node.animations
+    if (node.hasSpringAnimation) {
+      state.hasSpringAnimation = true
+    }
+
+    if (node.hasTimingAnimation) {
+      state.hasTimingAnimation = true
+    }
     state.scopes = node.scopes
   }
 
