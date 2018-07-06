@@ -1,6 +1,6 @@
 {
   "name": "@viewstools/morph",
-  "version": "14.0.8",
+  "version": "14.0.9",
   "description": "Views language morpher",
   "main": "lib.js",
   "bin": {
@@ -9,7 +9,7 @@
   "private": false,
   "scripts": {
     "precommit": "lint-staged",
-    "prepare": "NODE_ENV=production rollup --config rollup.config.js; NODE_ENV=production rollup --config rollup.config.parse.js;",
+    "prepare": "cross-env NODE_ENV=production rollup --config rollup.config.js && cross-env NODE_ENV=production rollup --config rollup.config.parse.js",
     "test": "jest",
     "watch": "rollup --config rollup.config.js --watch"
   },
@@ -31,6 +31,7 @@
     "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-preset-env": "^1.6.0",
+    "cross-env": "^5.2.0",
     "eslint": "^4.13.1",
     "eslint-plugin-import": "^2.3.0",
     "husky": "^0.14.3",

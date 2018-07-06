@@ -37,7 +37,7 @@ const isFont = f => Object.keys(FONT_TYPES).includes(path.extname(f))
 const getFontFileId = file => path.basename(file).split('.')[0]
 
 const relativise = (from, to) => {
-  const r = path.relative(from, to)
+  const r = path.relative(from, to).replace(/\\/g, '/')
   return r.substr(r.startsWith('../..') ? 3 : 1)
 }
 
