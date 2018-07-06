@@ -73,6 +73,17 @@ export const getProp = (node, key) => {
 
 export const getScope = node => node.value.split('when ')[1]
 
+const calculateWidth = parent => {
+  debugger
+  const columns = parent.children.filter(child => child.name === 'Column')
+  return `width/${columns.length}`
+}
+
+export const getWidth = (node, parent) => {
+  const width = getProp(node, 'width')
+  return width ? width : calculateWidth(parent)
+}
+
 const maybeSafe = node =>
   node.tags.slot
     ? node.value
