@@ -29,7 +29,8 @@ export default (state, getImport) => {
     }
   }
 
-  const dependencies = []
+  const dependencies = [`import React from 'react'`]
+
   state.uses.sort().forEach(d => {
     if (state.isReactNative && NATIVE.includes(d)) {
       useNative(d)
@@ -71,8 +72,23 @@ export default (state, getImport) => {
     dependencies.push('import { css } from "emotion"')
   }
 
-  if (state.isAnimated && !state.isReactNative) {
-    dependencies.push('import Animated from "animated/lib/targets/react-dom"')
+  if (state.isAnimated) {
+    dependencies.push(
+      `import { ${
+        state.isReactNative ? '' : 'animated, '
+      }Spring } from "react-spring/dist/${
+        state.isReactNative ? 'native' : 'web'
+      }"`
+    )
+    dependencies.push(
+      `import SpringAnimation from "@viewstools/react-spring-animation-${
+        state.isReactNative ? 'native' : 'web'
+      }"`
+    )
+
+    // dependencies.push(
+    //   `const Animated = { View: animated(View), Text: animated(Text) }`
+    // )
   }
 
   if (usesSvg.length > 0) {
@@ -93,5 +109,8 @@ export default (state, getImport) => {
     dependencies.push(getImport('LocalContainer'))
   }
 
-  return dependencies.join('\n')
+  return dependencies
+    .filter(Boolean)
+    .sort()
+    .join('\n')
 }

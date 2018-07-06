@@ -3,7 +3,6 @@ import {
   createId,
   getAnimatedStyles,
   getObjectAsString,
-  hasAnimatedChild,
   // TODO: Think of a better name 🙈
   getNonAnimatedDynamicStyles,
   hasPaddingProp,
@@ -67,10 +66,6 @@ export const leave = (node, parent, state) => {
       const dynamic = getObjectAsString(dynamicStyles)
       style = style ? `[${style},${dynamic}]` : dynamic
     }
-  }
-
-  if (hasAnimatedChild(node)) {
-    state.hasAnimatedChild = true
   }
 
   if (style) {

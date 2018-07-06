@@ -1,5 +1,6 @@
-import { canUseNativeDriver } from '../utils.js'
-import toPascalCase from 'to-pascal-case'
+// import { canUseNativeDriver } from '../utils.js'
+import getUnit from '../get-unit.js'
+// import toPascalCase from 'to-pascal-case'
 
 export default ({ state, name }) => {
   let render = state.render.join('')
@@ -21,100 +22,64 @@ export default ({ state, name }) => {
 
   const maybeTracking = state.track && !state.debug
 
-  const composeAnimation = (state, animation, index) => {
-    if (animation.curve === 'spring') {
-      return composeSpring(animation, index)
-    } else if (state.isReactNative) {
-      return composeTiming(animation, index)
-    }
-  }
-
-  const composeSpring = (animation, index) =>
-    `if (props.${animation.scope} !== prev.${animation.scope}) {
-      Animated.spring(this.animatedValue${index}, {
-        toValue: props.${animation.scope} ? 1 : 0,
-        speed: ${animation.speed},
-        bounciness: ${animation.bounciness},
-        delay: ${animation.delay},
-        useNativeDriver: ${canUseNativeDriver(animation)}
-      }).start()
-    }`
-
-  const composeTiming = (animation, index) =>
-    `if (props.${animation.scope} !== prev.${animation.scope}) {
-      Animated.timing(this.animatedValue${index}, {
-        toValue: props.${animation.scope} ? 1 : 0,
-        duration: ${animation.duration},
-        delay: ${animation.delay},
-        useNativeDriver: ${canUseNativeDriver(animation)}
-      }).start()
-    }`
-
-  const composeValues = (state, animation, index) => {
-    if (animation.curve === 'timing' && !state.isReactNative) return
-    return `animatedValue${index} = new Animated.Value(this.props.${
-      animation.scope
-    } ? 1 : 0)
-    `
-  }
-
   let maybeAnimated = false
   let animatedOpen = []
   let animatedClose = []
-  if (state.isAnimated || state.hasAnimatedChild) {
+  if (state.isAnimated) {
     maybeAnimated = true
 
     Object.keys(state.animations).forEach(blockId => {
-      const blockAnimations = {}
-      state.animations[blockId].forEach(item => {
-        if (!state.isReactNative && item.curve !== 'spring') return
+      Object.values(state.animations[blockId]).forEach(item => {
+        const { curve, delay, ...configValues } = item.animation.properties
 
-        if (!blockAnimations[item.id]) {
-          blockAnimations[item.id] = {
-            animation: item,
-            props: {
-              [item.name]: {
-                name: item.name,
-                scopes: [],
-                value: item.baseValue,
-              },
-            },
-          }
-        }
+        if (!state.isReactNative && curve !== 'spring') return
 
-        blockAnimations[item.id].props[item.name].scopes.push({
-          name: item.scope,
-          value: item.value,
-        })
-      })
-
-      Object.entries(blockAnimations).forEach(([id, item]) => {
-        const tag = `Animated${toPascalCase(item.animation.curve)}Component`
-        // TODO do this somewhere else
-        const config =
-          item.animation.curve === 'spring'
-            ? `{ bounciness: ${item.animation.bounciness}, speed: ${
-                item.animation.speed
-              } }`
-            : `{ duration: ${item.animation.duration} }`
-
-        const to = Object.entries(item.props)
-          .map(([_, prop]) => {
+        // react-spring only exposes Spring as a component,
+        // you can configure the Timing animations with the TimingAnimation bit
+        const tag = 'Spring' // toPascalCase(curve)
+        const config = Object.entries(configValues)
+          .map(([key, value]) => `${key}: ${value}`)
+          .join(',')
+        const to = Object.values(item.props)
+          .map(prop => {
             prop.scopes.reverse()
-            return `${JSON.stringify(prop.name)}: ${prop.scopes.reduce(
+
+            let value = prop.scopes.reduce(
               (current, scope) =>
                 `props.${scope.name}? ${JSON.stringify(
                   scope.value
                 )} : ${current}`,
               JSON.stringify(prop.value)
-            )} `
+            )
+
+            const unit = getUnit(prop)
+            if (!state.isReactNative && unit) {
+              value = `\`$\{${value}}${unit}\``
+            }
+
+            return `${JSON.stringify(prop.name)}: ${value}`
           })
-          .join(',\n')
+          .join(',')
+
+        // TODO bring back native driver when possible in RN
+        // there's an issue with animated(View) in react-spring's
+        // implementation that is preventing us from using it,
+        // it doesn't seem to recognise regular styles, so we
+        // have to use RN's Animated the thing is that the native flag on
+        // react-spring breaks things, I imagine it's because it's a different
+        // implementation altogether, so we'll see it at some later stage.
+        const useNativeDriver = state.isReactNative
+          ? false // !Object.keys(item.props).some(canUseNativeDriver)
+          : true
+
+        const impl = curve === 'spring' ? 'SpringAnimation' : 'TimingAnimation'
 
         animatedOpen.push(
-          `<${tag} config={${config}} delay={${
-            item.animation.delay
-          }} to={{${to}}}>{animated${blockId} => (`
+          `<${tag} impl={${impl}} ${
+            useNativeDriver ? 'native' : ''
+          } config={{${config}}} delay={${delay}} to={{${to}}}>{animated${blockId}${
+            item.index > 0 ? item.index : ''
+          } => (`
         )
 
         animatedClose.push(`)}</${tag}>`)

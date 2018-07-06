@@ -7,11 +7,8 @@ import {
   getAnimatedStyles,
   getDynamicStyles,
   getTimingProps,
-  hasAnimatedChild,
   hasKeys,
   hasKeysInChildren,
-  hasSpringAnimation,
-  hasTimingAnimation,
 } from '../utils.js'
 import toSlugCase from 'to-slug-case'
 import uniq from 'array-uniq'
@@ -28,11 +25,7 @@ export function leave(node, parent, state) {
     scopedUnderParent = scopedUnderParent.styleName
   }
 
-  if (hasAnimatedChild(node) && hasSpringAnimation(node)) {
-    state.hasAnimatedChild = true
-  }
-
-  if (node.isAnimated && hasSpringAnimation(node)) {
+  if (node.hasSpringAnimation) {
     state.isAnimated = true
     state.animations[node.id] = node.animations
     state.scopes = node.scopes
@@ -76,7 +69,7 @@ export function leave(node, parent, state) {
     label: '${id}',
     ${cssStatic ? `${cssStatic}, ` : ''}${cssDynamic}})`
 
-    if (hasSpringAnimation(node)) {
+    if (node.hasSpringAnimation) {
       state.render.push(
         ` style={{${getAnimatedStyles(
           node,
@@ -106,7 +99,7 @@ export function leave(node, parent, state) {
 }
 
 const asAnimatedCss = node => {
-  if (hasTimingAnimation(node)) {
+  if (node.hasTimingAnimation) {
     const transition = uniq(getTimingProps(node).map(makeTransition)).join(', ')
 
     return `\ntransition: '${transition}',\nwillChange: '${getUniqueNames(

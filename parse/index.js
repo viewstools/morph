@@ -159,7 +159,7 @@ export default ({
     const block = {
       type: 'Block',
       name,
-      animations: [],
+      animations: {},
       isAnimated: false,
       isBasic: isBasic(name),
       isGroup: false,
@@ -440,23 +440,40 @@ export default ({
           propNode.value = currentAnimation.defaultValue
           propNode.animation = currentAnimation.properties
 
-          block.isAnimatedReallyAnimated =
-            block.isAnimatedReallyAnimated ||
-            propNode.animation.curve === 'spring'
-
-          let baseValue = null
-          const baseProp = properties.find(prop => prop.name === name)
-          if (baseProp) {
-            baseValue = baseProp.value
+          if (propNode.animation.curve === 'spring') {
+            block.hasSpringAnimation = true
+          } else {
+            block.hasTimingAnimation = true
           }
 
-          block.animations.push({
-            ...currentAnimation.properties,
-            id: currentAnimation.id,
-            name,
-            scope: scope.slotName,
+          const animationIndexOnBlock = Object.keys(block.animations).length
+          propNode.animationIndexOnBlock = animationIndexOnBlock
+
+          if (!block.animations[currentAnimation.id]) {
+            block.animations[currentAnimation.id] = {
+              index: animationIndexOnBlock,
+              animation: currentAnimation,
+              props: {},
+            }
+          }
+
+          if (!block.animations[currentAnimation.id].props[name]) {
+            let baseValue = null
+            const baseProp = properties.find(prop => prop.name === name)
+            if (baseProp) {
+              baseValue = baseProp.value
+            }
+
+            block.animations[currentAnimation.id].props[name] = {
+              name,
+              scopes: [],
+              value: baseValue,
+            }
+          }
+
+          block.animations[currentAnimation.id].props[name].scopes.push({
+            name: scope.slotName,
             value: currentAnimation.defaultValue,
-            baseValue,
           })
         }
 

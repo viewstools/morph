@@ -66,8 +66,8 @@ export default (node, parent, state) => {
       break
   }
 
-  if (node.isAnimatedReallyAnimated) {
-    return `Animated.${name}`
+  if (node.hasSpringAnimation) {
+    return `animated.${name}`
   }
 
   return name
