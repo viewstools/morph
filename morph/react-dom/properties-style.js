@@ -16,9 +16,8 @@ import uniq from 'array-uniq'
 export { enter }
 
 export function leave(node, parent, state) {
-  const { dynamic, static: staticStyle } = node.style
-
   const allowedStyleKeys = getAllowedStyleKeys(node)
+
   let scopedUnderParent =
     !node.isCapture && !node.action && getActionableParent(node)
   if (scopedUnderParent) {
@@ -32,74 +31,76 @@ export function leave(node, parent, state) {
     state.scopes = node.scopes
   }
 
-  // dynamic merges static styles
-  if (hasKeysInChildren(dynamic)) {
-    state.cssDynamic = true
-    node.styleName = node.nameFinal
+  const css = [
+    getStaticCss({ node, scopedUnderParent, state, allowedStyleKeys }),
+    node.isAnimated && getAnimatedCss(node),
+    getDynamicCss({ node, scopedUnderParent, state, allowedStyleKeys }),
+  ].filter(Boolean)
 
-    let cssStatic = Object.keys(staticStyle)
-      .filter(
-        key => allowedStyleKeys.includes(key) && hasKeys(staticStyle[key])
-      )
-      .map(key =>
-        asCss(
-          asStaticCss(staticStyle[key], Object.keys(dynamic[key])),
-          key,
-          scopedUnderParent
-        ).join('\n')
-      )
-
-    cssStatic = cssStatic.join(',\n')
-
-    if (node.isAnimated) {
-      cssStatic = cssStatic
-        ? `${cssStatic}, ${asAnimatedCss(node)}`
-        : asAnimatedCss(node)
-    }
-
-    let cssDynamic = Object.keys(dynamic)
-      .filter(key => allowedStyleKeys.includes(key) && hasKeys(dynamic[key]))
-      .map(key =>
-        asCss(asDynamicCss(dynamic[key]), key, scopedUnderParent).join('\n')
-      )
-      .join('\n')
-
+  if (css.length > 0) {
     const id = createId(node, state)
-
-    state.styles[id] = `const ${id} = css({
-    label: '${id}',
-    ${cssStatic ? `${cssStatic}, ` : ''}${cssDynamic}})`
-
-    if (node.hasSpringAnimation) {
-      state.render.push(
-        ` style={{${getAnimatedStyles(
-          node,
-          state.isReactNative
-        )},${getDynamicStyles(node)}}}`
-      )
-    } else {
-      state.render.push(` style={{${getDynamicStyles(node)}}}`)
-    }
-  } else if (hasKeysInChildren(staticStyle)) {
-    state.cssStatic = true
-
-    const id = createId(node, state)
-    const css = Object.keys(staticStyle)
-      .filter(
-        key => allowedStyleKeys.includes(key) && hasKeys(staticStyle[key])
-      )
-      .map(key =>
-        asCss(asStaticCss(staticStyle[key]), key, scopedUnderParent).join('\n')
-      )
-      .join(',\n')
-
-    if (css) {
-      state.styles[id] = `const ${id} = css({label: '${id}', ${css}})`
-    }
+    state.styles[id] = `const ${id} = css({label: '${id}', ${css.join(', ')}})`
   }
 }
 
-const asAnimatedCss = node => {
+const getStaticCss = ({ node, scopedUnderParent, state, allowedStyleKeys }) => {
+  const style = node.style.static
+  if (!hasKeysInChildren(style)) return false
+
+  state.cssStatic = true
+
+  const hasDynamicCss = hasKeysInChildren(node.style.dynamic)
+
+  return Object.keys(style)
+    .filter(key => allowedStyleKeys.includes(key) && hasKeys(style[key]))
+    .map(key =>
+      asCss(
+        asStaticCss(
+          style[key],
+          hasDynamicCss ? Object.keys(node.style.dynamic[key]) : []
+        ),
+        key,
+        scopedUnderParent
+      ).join('\n')
+    )
+    .join(',\n')
+}
+
+const getDynamicCss = ({
+  node,
+  scopedUnderParent,
+  state,
+  allowedStyleKeys,
+}) => {
+  const style = node.style.dynamic
+  if (!hasKeysInChildren(style)) return false
+
+  state.cssDynamic = true
+  node.styleName = node.nameFinal
+
+  if (node.hasSpringAnimation) {
+    state.render.push(
+      ` style={{${getAnimatedStyles(
+        node,
+        state.isReactNative
+      )},${getDynamicStyles(node)}}}`
+    )
+  } else {
+    const inlineDynamicStyles = getDynamicStyles(node)
+    if (inlineDynamicStyles) {
+      state.render.push(` style={{${inlineDynamicStyles}}}`)
+    }
+  }
+
+  return Object.keys(style)
+    .filter(key => allowedStyleKeys.includes(key) && hasKeys(style[key]))
+    .map(key =>
+      asCss(asDynamicCss(style[key]), key, scopedUnderParent).join('\n')
+    )
+    .join(',\n')
+}
+
+const getAnimatedCss = node => {
   if (node.hasTimingAnimation) {
     const transition = uniq(getTimingProps(node).map(makeTransition)).join(', ')
 

@@ -1,0 +1,5 @@
+AnimatedButtonHoverOnly Vertical
+backgroundColor red
+onClick <
+when <hover
+backgroundColor blue easeOut

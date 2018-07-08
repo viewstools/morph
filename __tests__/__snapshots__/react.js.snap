@@ -25,6 +25,17 @@ module.exports = {
 }
 `;
 
+exports[`e2e parses e2e AnimatedButtonHoverOnly 1`] = `
+Object {
+  "code": "const { get } = require('@viewstools/e2e');
+
+module.exports = {
+  _top: get('AnimatedButtonHoverOnly'),
+};
+",
+}
+`;
+
 exports[`e2e parses e2e AppRegionDrag 1`] = `
 Object {
   "code": "const { get } = require('@viewstools/e2e');
@@ -809,7 +820,6 @@ const AnimatedButton1 = css({
 });
 const Text = css({
   label: 'Text',
-
   willChange: 'color, font-size',
   color: 'var(--color)',
   fontSize: 'var(--fontSize)',
@@ -928,7 +938,6 @@ const AnimatedButton1 = css({
 });
 const Text = css({
   label: 'Text',
-
   willChange: 'color, font-size',
   color: 'var(--color)',
   fontSize: 'var(--fontSize)',
@@ -1004,6 +1013,108 @@ class AnimatedButton extends React.Component {
 }
 
 export default AnimatedButton;
+",
+  "fonts": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "onClick",
+      "type": "function",
+    },
+  ],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom AnimatedButtonHoverOnly 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
+import React from 'react';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+import { css } from 'emotion';
+
+const AnimatedButtonHoverOnly1 = css({
+  label: 'AnimatedButtonHoverOnly1',
+  backgroundColor: 'red',
+  '&:hover': {
+    backgroundColor: 'blue',
+  },
+  transition: 'background-color 150ms ease-out 0ms',
+  willChange: 'background-color',
+});
+
+class AnimatedButtonHoverOnly extends React.Component {
+  render() {
+    const { context, props } = this;
+
+    return (
+      <button
+        data-test-id={\`\${props['data-test-id'] || 'AnimatedButtonHoverOnly'}|\`}
+        onClick={event =>
+          context.track({
+            block: props['data-test-id'] || 'AnimatedButtonHoverOnly',
+            action: 'click',
+            callback: props.onClick,
+            event,
+            props,
+          })
+        }
+        className={\`views-block \${AnimatedButtonHoverOnly1}\`}
+      >
+        {props.children}
+      </button>
+    );
+  }
+}
+AnimatedButtonHoverOnly.contextTypes = {
+  track: PropTypes.func.isRequired,
+};
+
+export default AnimatedButtonHoverOnly;
+",
+  "fonts": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "onClick",
+      "type": "function",
+    },
+  ],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom AnimatedButtonHoverOnly: react-dom parses react-dom AnimatedButtonHoverOnly debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+import { css } from 'emotion';
+
+const AnimatedButtonHoverOnly1 = css({
+  label: 'AnimatedButtonHoverOnly1',
+  backgroundColor: 'red',
+  '&:hover': {
+    backgroundColor: 'blue',
+  },
+  transition: 'background-color 150ms ease-out 0ms',
+  willChange: 'background-color',
+});
+
+const AnimatedButtonHoverOnly = props => {
+  return (
+    <button
+      data-test-id={\`\${props['data-test-id'] || 'AnimatedButtonHoverOnly'}|\`}
+      onClick={props.onClick}
+      className={\`views-block \${AnimatedButtonHoverOnly1}\`}
+    >
+      {props.children}
+    </button>
+  );
+};
+
+export default AnimatedButtonHoverOnly;
 ",
   "fonts": Array [],
   "slots": Array [
@@ -1510,10 +1621,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const Vertical = css({ label: 'Vertical', backgroundColor: 'red' });
-const Text = css({
-  label: 'Text',
-  color: 'var(--color)',
-});
+const Text = css({ label: 'Text', color: 'var(--color)' });
 
 class Code extends React.Component {
   render() {
@@ -1576,10 +1684,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const Vertical = css({ label: 'Vertical', backgroundColor: 'red' });
-const Text = css({
-  label: 'Text',
-  color: 'var(--color)',
-});
+const Text = css({ label: 'Text', color: 'var(--color)' });
 
 const Code = props => {
   return (
@@ -1799,10 +1904,7 @@ import SomeThing from './SomeThing.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const Vertical = css({
-  label: 'Vertical',
-  height: 'var(--height)',
-});
+const Vertical = css({ label: 'Vertical', height: 'var(--height)' });
 
 class DynamicStylesApplyToBasicBlocksOnly extends React.Component {
   render() {
@@ -1850,10 +1952,7 @@ import SomeThing from './SomeThing.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const Vertical = css({
-  label: 'Vertical',
-  height: 'var(--height)',
-});
+const Vertical = css({ label: 'Vertical', height: 'var(--height)' });
 
 const DynamicStylesApplyToBasicBlocksOnly = props => {
   return (
@@ -3278,10 +3377,7 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const Scope1 = css({
-  label: 'Scope1',
-  color: 'var(--color)',
-});
+const Scope1 = css({ label: 'Scope1', color: 'var(--color)' });
 
 class Scope extends React.Component {
   render() {
@@ -3335,10 +3431,7 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const Scope1 = css({
-  label: 'Scope1',
-  color: 'var(--color)',
-});
+const Scope1 = css({ label: 'Scope1', color: 'var(--color)' });
 
 const Scope = props => {
   return (
@@ -6339,6 +6432,79 @@ AnimatedButton.contextTypes = {
 };
 
 export default AnimatedButton;
+",
+  "fonts": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "onClick",
+      "type": "function",
+    },
+  ],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-native parses react-native AnimatedButtonHoverOnly 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
+import React from 'react';
+import { Animated, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import { Timing } from '@viewstools/animations/native';
+
+const styles = StyleSheet.create({
+  AnimatedButtonHoverOnly1: { backgroundColor: 'red' },
+});
+
+class AnimatedButtonHoverOnly extends React.Component {
+  render() {
+    const { context, props } = this;
+
+    return (
+      <Timing
+        curve=\\"easeOut\\"
+        delay={0}
+        duration={150}
+        to={{ backgroundColor: props.hover ? 'blue' : 'red' }}
+      >
+        {animatedAnimatedButtonHoverOnly => (
+          <TouchableWithoutFeedback
+            activeOpacity={0.7}
+            onPress={event =>
+              context.track({
+                block: props['testID'] || 'AnimatedButtonHoverOnly',
+                action: 'click',
+                callback: props.onClick,
+                event,
+                props,
+              })
+            }
+            underlayColor=\\"transparent\\"
+          >
+            <Animated.View
+              testID={\`\${props['testID'] || 'AnimatedButtonHoverOnly'}|\`}
+              style={[
+                styles.AnimatedButtonHoverOnly1,
+                {
+                  backgroundColor:
+                    animatedAnimatedButtonHoverOnly.backgroundColor,
+                },
+              ]}
+            >
+              {props.children}
+            </Animated.View>
+          </TouchableWithoutFeedback>
+        )}
+      </Timing>
+    );
+  }
+}
+AnimatedButtonHoverOnly.contextTypes = {
+  track: PropTypes.func.isRequired,
+};
+
+export default AnimatedButtonHoverOnly;
 ",
   "fonts": Array [],
   "slots": Array [
