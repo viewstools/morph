@@ -446,16 +446,15 @@ export default ({
             block.hasTimingAnimation = true
           }
 
-          const animationIndexOnBlock = Object.keys(block.animations).length
-          propNode.animationIndexOnBlock = animationIndexOnBlock
-
           if (!block.animations[currentAnimation.id]) {
             block.animations[currentAnimation.id] = {
-              index: animationIndexOnBlock,
+              index: Object.keys(block.animations).length,
               animation: currentAnimation,
               props: {},
             }
           }
+          propNode.animationIndexOnBlock =
+            block.animations[currentAnimation.id].animationIndexOnBlock
 
           if (!block.animations[currentAnimation.id].props[name]) {
             let baseValue = null

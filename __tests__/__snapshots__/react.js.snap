@@ -810,8 +810,9 @@ const AnimatedButton1 = css({
 const Text = css({
   label: 'Text',
 
-  willChange: 'color',
+  willChange: 'color, font-size',
   color: 'var(--color)',
+  fontSize: 'var(--fontSize)',
 });
 
 class AnimatedButton extends React.Component {
@@ -840,7 +841,10 @@ class AnimatedButton extends React.Component {
                 delay={0}
                 speed={12}
                 bounciness={8}
-                to={{ color: props.isOn ? 'blue' : 'red' }}
+                to={{
+                  color: props.isOn ? 'blue' : 'red',
+                  fontSize: \`\${props.isOn ? 18 : 12}px\`,
+                }}
               >
                 {animatedText => (
                   <animated.button
@@ -857,7 +861,7 @@ class AnimatedButton extends React.Component {
                     }
                     style={{
                       '--opacity': animatedAnimatedButton.opacity,
-                      '--translateX': animatedAnimatedButton1.translateX,
+                      '--translateX': animatedAnimatedButton.translateX,
                       '--translateY': \`\${props.isOn ? 30 : 0}px\`,
                       '--rotateX': \`\${props.isOn ? 20 : 10}deg\`,
                       '--rotateY': \`\${props.isOn ? 20 : 10}deg\`,
@@ -868,7 +872,10 @@ class AnimatedButton extends React.Component {
                       data-test-id={\`AnimatedButton.Text|\${
                         props.isOn ? 'isOn|' : ''
                       }\`}
-                      style={{ '--color': animatedText.color }}
+                      style={{
+                        '--color': animatedText.color,
+                        '--fontSize': animatedText.fontSize,
+                      }}
                       className={\`views-block \${Text}\`}
                     >
                       hey
@@ -922,8 +929,9 @@ const AnimatedButton1 = css({
 const Text = css({
   label: 'Text',
 
-  willChange: 'color',
+  willChange: 'color, font-size',
   color: 'var(--color)',
+  fontSize: 'var(--fontSize)',
 });
 
 class AnimatedButton extends React.Component {
@@ -952,7 +960,10 @@ class AnimatedButton extends React.Component {
                 delay={0}
                 speed={12}
                 bounciness={8}
-                to={{ color: props.isOn ? 'blue' : 'red' }}
+                to={{
+                  color: props.isOn ? 'blue' : 'red',
+                  fontSize: \`\${props.isOn ? 18 : 12}px\`,
+                }}
               >
                 {animatedText => (
                   <animated.button
@@ -961,7 +972,7 @@ class AnimatedButton extends React.Component {
                     onClick={props.onClick}
                     style={{
                       '--opacity': animatedAnimatedButton.opacity,
-                      '--translateX': animatedAnimatedButton1.translateX,
+                      '--translateX': animatedAnimatedButton.translateX,
                       '--translateY': \`\${props.isOn ? 30 : 0}px\`,
                       '--rotateX': \`\${props.isOn ? 20 : 10}deg\`,
                       '--rotateY': \`\${props.isOn ? 20 : 10}deg\`,
@@ -972,7 +983,10 @@ class AnimatedButton extends React.Component {
                       data-test-id={\`AnimatedButton.Text|\${
                         props.isOn ? 'isOn|' : ''
                       }\`}
-                      style={{ '--color': animatedText.color }}
+                      style={{
+                        '--color': animatedText.color,
+                        '--fontSize': animatedText.fontSize,
+                      }}
                       className={\`views-block \${Text}\`}
                     >
                       hey
@@ -6255,7 +6269,10 @@ class AnimatedButton extends React.Component {
                         delay={0}
                         speed={12}
                         bounciness={8}
-                        to={{ color: props.isOn ? 'blue' : 'red' }}
+                        to={{
+                          color: props.isOn ? 'blue' : 'red',
+                          fontSize: props.isOn ? 18 : 12,
+                        }}
                       >
                         {animatedText => (
                           <TouchableWithoutFeedback
@@ -6282,14 +6299,10 @@ class AnimatedButton extends React.Component {
                                   transform: [
                                     {
                                       translateX:
-                                        animatedAnimatedButton1.translateX,
+                                        animatedAnimatedButton.translateX,
                                     },
-                                    {
-                                      rotateX: animatedAnimatedButton2.rotateX,
-                                    },
-                                    {
-                                      rotateY: animatedAnimatedButton3.rotateY,
-                                    },
+                                    { rotateX: animatedAnimatedButton.rotateX },
+                                    { rotateY: animatedAnimatedButton.rotateY },
                                   ],
                                 },
                               ]}
@@ -6298,7 +6311,10 @@ class AnimatedButton extends React.Component {
                                 testID={\`AnimatedButton.Text|\${
                                   props.isOn ? 'isOn|' : ''
                                 }\`}
-                                style={{ color: animatedText.color }}
+                                style={{
+                                  color: animatedText.color,
+                                  fontSize: animatedText.fontSize,
+                                }}
                               >
                                 hey
                               </Animated.Text>

@@ -15,5 +15,7 @@ rotateY 20 easeInOut
 Text
 color red
 text hey
+fontSize 12
 when <isOn
 color blue spring
+fontSize 18 spring
