@@ -3,7 +3,6 @@ import {
   createId,
   getAnimatedStyles,
   getObjectAsString,
-  hasAnimatedChild,
   // TODO: Think of a better name 🙈
   getNonAnimatedDynamicStyles,
   hasPaddingProp,
@@ -49,7 +48,14 @@ export const leave = (node, parent, state) => {
     const animated = getAnimatedStyles(node, state.isReactNative)
     style = style ? `[${style},{${animated}}]` : `{${animated}}`
     state.isAnimated = true
-    state.animations = node.animations
+    state.animations[node.id] = node.animations
+    if (node.hasSpringAnimation) {
+      state.hasSpringAnimation = true
+    }
+
+    if (node.hasTimingAnimation) {
+      state.hasTimingAnimation = true
+    }
     state.scopes = node.scopes
   }
 
@@ -67,10 +73,6 @@ export const leave = (node, parent, state) => {
       const dynamic = getObjectAsString(dynamicStyles)
       style = style ? `[${style},${dynamic}]` : dynamic
     }
-  }
-
-  if (hasAnimatedChild(node)) {
-    state.hasAnimatedChild = true
   }
 
   if (style) {

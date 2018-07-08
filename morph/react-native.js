@@ -2,7 +2,6 @@ import * as visitor from './react-native/block.js'
 import getStyleForProperty from './react-native/get-style-for-property.js'
 import getStyles from './react-native/get-styles.js'
 import getValueForProperty from './react-native/get-value-for-property.js'
-import maybeUsesAnimated from './react-native/maybe-uses-animated.js'
 import maybeUsesTextInput from './react-native/maybe-uses-text-input.js'
 import maybeUsesRouter from './react-native/maybe-uses-router.js'
 import maybeUsesStyleSheet from './react-native/maybe-uses-style-sheet.js'
@@ -37,6 +36,7 @@ export default ({
   }
 
   const state = {
+    animations: {},
     captures: [],
     images: [],
     getFont,
@@ -75,7 +75,6 @@ export default ({
 
   walk(parsed.views[0], visitor, state)
 
-  maybeUsesAnimated(state)
   maybeUsesTextInput(state)
   maybeUsesRouter(state)
   maybeUsesStyleSheet(state)

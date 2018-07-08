@@ -31,4 +31,6 @@ export default [
   'Router',
   'Route',
   'Link',
+  'Spring',
+  'Timing',
 ]
