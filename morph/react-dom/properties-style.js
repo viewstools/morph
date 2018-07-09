@@ -10,8 +10,10 @@ import {
   hasAnimatedChild,
   hasKeys,
   hasKeysInChildren,
+  hasRowStyles,
   hasSpringAnimation,
   hasTimingAnimation,
+  isTable,
 } from '../utils.js'
 import toSlugCase from 'to-slug-case'
 import uniq from 'array-uniq'
@@ -36,6 +38,12 @@ export function leave(node, parent, state) {
     state.isAnimated = true
     state.animations = node.animations
     state.scopes = node.scopes
+  }
+
+  if (isTable(node) && hasRowStyles(node)) {
+    state.render.push(` rowClassName={Row}`)
+    debugger
+    state.styles['Row'] = `const Row = css()`
   }
 
   // dynamic merges static styles

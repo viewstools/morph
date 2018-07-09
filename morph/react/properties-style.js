@@ -26,6 +26,12 @@ export function enter(node, parent, state) {
     scope.properties.forEach(propNode => {
       if (propNode.name === 'when') return
 
+      // if(/^row/.test(propNode.name)){
+
+      // }
+
+      // debugger
+
       const { _isProp, ...styleForProperty } = state.getStyleForProperty(
         propNode,
         node,

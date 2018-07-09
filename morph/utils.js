@@ -74,7 +74,6 @@ export const getProp = (node, key) => {
 export const getScope = node => node.value.split('when ')[1]
 
 const calculateWidth = parent => {
-  debugger
   const columns = parent.children.filter(child => child.name === 'Column')
   return `width/${columns.length}`
 }
@@ -197,6 +196,7 @@ export const hasDefaultProp = (node, parent) =>
 export const isSlot = node =>
   typeof node === 'string' ? /props/.test(node) : isTag(node, 'slot')
 export const isStyle = node => isTag(node, 'style')
+export const isRowStyle = node => isTag(node, 'rowtyle')
 export const isTag = (node, tag) => node && node.tags[tag]
 
 export const getActionableParent = node => {

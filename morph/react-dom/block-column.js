@@ -5,7 +5,6 @@ export function enter(node, parent, state) {
     const dataKey = getProp(node, 'key')
     const width = getWidth(node, parent)
     const label = getLabel(node)
-    debugger
 
     if (width) {
       // removing from properties so it's not in the compiled css

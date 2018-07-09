@@ -1,4 +1,4 @@
-import { isStyle, STYLE } from './prop-is-style.js'
+import { isRowStyle, isStyle, STYLE } from './prop-is-style.js'
 import DidYouMeanMatcher from './did-you-mean.js'
 import isNumber from './prop-is-number.js'
 import locales from 'i18n-locales'
@@ -128,7 +128,7 @@ export const isProp = line => is(PROP, line)
 export const isSlot = line => is(SLOT, line)
 export const isTable = line => line === 'Table'
 export const isUnsupportedShorthand = name => name in UNSUPPORTED_SHORTHAND
-export { isStyle }
+export { isRowStyle, isStyle }
 export const isTrue = line => is(TRUE, line)
 export const isUserComment = line => is(USER_COMMENT, line)
 
