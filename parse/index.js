@@ -454,7 +454,7 @@ export default ({
             }
           }
           propNode.animationIndexOnBlock =
-            block.animations[currentAnimation.id].animationIndexOnBlock
+            block.animations[currentAnimation.id].index
 
           if (!block.animations[currentAnimation.id].props[name]) {
             let baseValue = null

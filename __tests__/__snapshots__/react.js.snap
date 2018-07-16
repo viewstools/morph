@@ -36,6 +36,17 @@ module.exports = {
 }
 `;
 
+exports[`e2e parses e2e AnimatedButtonScopeOnly 1`] = `
+Object {
+  "code": "const { get } = require('@viewstools/e2e');
+
+module.exports = {
+  _top: get('AnimatedButtonScopeOnly', 'before'),
+};
+",
+}
+`;
+
 exports[`e2e parses e2e AppRegionDrag 1`] = `
 Object {
   "code": "const { get } = require('@viewstools/e2e');
@@ -871,7 +882,7 @@ class AnimatedButton extends React.Component {
                     }
                     style={{
                       '--opacity': animatedAnimatedButton.opacity,
-                      '--translateX': animatedAnimatedButton.translateX,
+                      '--translateX': animatedAnimatedButton1.translateX,
                       '--translateY': \`\${props.isOn ? 30 : 0}px\`,
                       '--rotateX': \`\${props.isOn ? 20 : 10}deg\`,
                       '--rotateY': \`\${props.isOn ? 20 : 10}deg\`,
@@ -981,7 +992,7 @@ class AnimatedButton extends React.Component {
                     onClick={props.onClick}
                     style={{
                       '--opacity': animatedAnimatedButton.opacity,
-                      '--translateX': animatedAnimatedButton.translateX,
+                      '--translateX': animatedAnimatedButton1.translateX,
                       '--translateY': \`\${props.isOn ? 30 : 0}px\`,
                       '--rotateX': \`\${props.isOn ? 20 : 10}deg\`,
                       '--rotateY': \`\${props.isOn ? 20 : 10}deg\`,
@@ -1115,6 +1126,142 @@ const AnimatedButtonHoverOnly = props => {
 };
 
 export default AnimatedButtonHoverOnly;
+",
+  "fonts": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "onClick",
+      "type": "function",
+    },
+  ],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom AnimatedButtonScopeOnly 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
+import React from 'react';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+import { animated, Spring } from '@viewstools/animations/dom';
+import { css } from 'emotion';
+
+const AnimatedButtonScopeOnly1 = css({
+  label: 'AnimatedButtonScopeOnly1',
+  transition: 'opacity 150ms linear 0ms',
+  willChange: 'background-color, opacity',
+  backgroundColor: 'var(--backgroundColor)',
+  opacity: 'var(--opacity)',
+});
+
+class AnimatedButtonScopeOnly extends React.Component {
+  render() {
+    const { context, props } = this;
+
+    return (
+      <Spring
+        native
+        delay={0}
+        speed={12}
+        bounciness={8}
+        to={{ backgroundColor: props.before ? 'blue' : 'red' }}
+      >
+        {animatedAnimatedButtonScopeOnly => (
+          <animated.button
+            data-test-id={\`\${props['data-test-id'] ||
+              'AnimatedButtonScopeOnly'}|\${props.before ? 'before|' : ''}\`}
+            onClick={event =>
+              context.track({
+                block: props['data-test-id'] || 'AnimatedButtonScopeOnly',
+                action: 'click',
+                callback: props.onClick,
+                event,
+                props,
+              })
+            }
+            style={{
+              '--backgroundColor':
+                animatedAnimatedButtonScopeOnly.backgroundColor,
+              '--opacity': \`\${props.before ? 1 : 1}\`,
+            }}
+            className={\`views-block \${AnimatedButtonScopeOnly1}\`}
+          >
+            {props.children}
+          </animated.button>
+        )}
+      </Spring>
+    );
+  }
+}
+AnimatedButtonScopeOnly.contextTypes = {
+  track: PropTypes.func.isRequired,
+};
+
+export default AnimatedButtonScopeOnly;
+",
+  "fonts": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "onClick",
+      "type": "function",
+    },
+  ],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom AnimatedButtonScopeOnly: react-dom parses react-dom AnimatedButtonScopeOnly debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+import { animated, Spring } from '@viewstools/animations/dom';
+import { css } from 'emotion';
+
+const AnimatedButtonScopeOnly1 = css({
+  label: 'AnimatedButtonScopeOnly1',
+  transition: 'opacity 150ms linear 0ms',
+  willChange: 'background-color, opacity',
+  backgroundColor: 'var(--backgroundColor)',
+  opacity: 'var(--opacity)',
+});
+
+class AnimatedButtonScopeOnly extends React.Component {
+  render() {
+    const { props } = this;
+
+    return (
+      <Spring
+        native
+        delay={0}
+        speed={12}
+        bounciness={8}
+        to={{ backgroundColor: props.before ? 'blue' : 'red' }}
+      >
+        {animatedAnimatedButtonScopeOnly => (
+          <animated.button
+            data-test-id={\`\${props['data-test-id'] ||
+              'AnimatedButtonScopeOnly'}|\${props.before ? 'before|' : ''}\`}
+            onClick={props.onClick}
+            style={{
+              '--backgroundColor':
+                animatedAnimatedButtonScopeOnly.backgroundColor,
+              '--opacity': \`\${props.before ? 1 : 1}\`,
+            }}
+            className={\`views-block \${AnimatedButtonScopeOnly1}\`}
+          >
+            {props.children}
+          </animated.button>
+        )}
+      </Spring>
+    );
+  }
+}
+
+export default AnimatedButtonScopeOnly;
 ",
   "fonts": Array [],
   "slots": Array [
@@ -6392,10 +6539,14 @@ class AnimatedButton extends React.Component {
                                   transform: [
                                     {
                                       translateX:
-                                        animatedAnimatedButton.translateX,
+                                        animatedAnimatedButton1.translateX,
                                     },
-                                    { rotateX: animatedAnimatedButton.rotateX },
-                                    { rotateY: animatedAnimatedButton.rotateY },
+                                    {
+                                      rotateX: animatedAnimatedButton2.rotateX,
+                                    },
+                                    {
+                                      rotateY: animatedAnimatedButton3.rotateY,
+                                    },
                                   ],
                                 },
                               ]}
@@ -6505,6 +6656,84 @@ AnimatedButtonHoverOnly.contextTypes = {
 };
 
 export default AnimatedButtonHoverOnly;
+",
+  "fonts": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "onClick",
+      "type": "function",
+    },
+  ],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-native parses react-native AnimatedButtonScopeOnly 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
+import React from 'react';
+import { Animated, TouchableWithoutFeedback } from 'react-native';
+import { Spring, Timing } from '@viewstools/animations/native';
+
+class AnimatedButtonScopeOnly extends React.Component {
+  render() {
+    const { context, props } = this;
+
+    return (
+      <Spring
+        delay={0}
+        speed={12}
+        bounciness={8}
+        to={{ backgroundColor: props.before ? 'blue' : 'red' }}
+      >
+        {animatedAnimatedButtonScopeOnly => (
+          <Timing
+            curve=\\"linear\\"
+            delay={0}
+            duration={150}
+            to={{ opacity: props.before ? 1 : 1 }}
+          >
+            {animatedAnimatedButtonScopeOnly1 => (
+              <TouchableWithoutFeedback
+                activeOpacity={0.7}
+                onPress={event =>
+                  context.track({
+                    block: props['testID'] || 'AnimatedButtonScopeOnly',
+                    action: 'click',
+                    callback: props.onClick,
+                    event,
+                    props,
+                  })
+                }
+                underlayColor=\\"transparent\\"
+              >
+                <Animated.View
+                  testID={\`\${props['testID'] || 'AnimatedButtonScopeOnly'}|\${
+                    props.before ? 'before|' : ''
+                  }\`}
+                  style={{
+                    backgroundColor:
+                      animatedAnimatedButtonScopeOnly.backgroundColor,
+                    opacity: animatedAnimatedButtonScopeOnly1.opacity,
+                  }}
+                >
+                  {props.children}
+                </Animated.View>
+              </TouchableWithoutFeedback>
+            )}
+          </Timing>
+        )}
+      </Spring>
+    );
+  }
+}
+AnimatedButtonScopeOnly.contextTypes = {
+  track: PropTypes.func.isRequired,
+};
+
+export default AnimatedButtonScopeOnly;
 ",
   "fonts": Array [],
   "slots": Array [
