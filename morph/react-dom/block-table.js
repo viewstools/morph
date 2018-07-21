@@ -7,7 +7,7 @@ export function enter(node, parent, state) {
 
     state.isTable = true
     state.render.push(
-      ` width={width} height={height} rowCount={from.length} rowGetter={({ index }) => from[index]}`
+      ` width={width} height={height} rowCount={props.from.length} rowGetter={({ index }) => props.from[index]}`
     )
   }
 }

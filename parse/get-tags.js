@@ -13,7 +13,7 @@ export default ({ name, isSlot, slotName, slotIsNot, value, block }) => {
 
   if (isAnimation(value) && name !== 'text') tags.animation = true
   if (isStyle(name)) tags.style = true
-  if (isRowStyle(name)) tags.rowstyle = true
+  if (isRowStyle(name)) tags.rowStyle = true
   if (
     isUnsupportedShorthand(name) &&
     block.isBasic &&

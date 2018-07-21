@@ -17,7 +17,6 @@ export function enter(node, parent, state) {
   PropertyFormat.enter(node, parent, state)
 
   node.properties.forEach(propNode => {
-    debugger
     if (
       propNode.name === 'at' ||
       propNode.name === 'when' ||

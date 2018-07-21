@@ -14,7 +14,8 @@ export function enter(node, parent, state) {
     state.render.push(
       ` dataKey="${dataKey.value}" width={${width}} ${
         label ? `label="${label}"` : ''
-      }`
+      }
+      cellRenderer={columnCellRenderer}`
     )
   }
 }

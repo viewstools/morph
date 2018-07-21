@@ -86,7 +86,9 @@ export const getWidth = (node, parent) => {
 const maybeSafe = node =>
   node.tags.slot
     ? node.value
-    : typeof node.value === 'string' ? safe(node.value) : node.value
+    : typeof node.value === 'string'
+      ? safe(node.value)
+      : node.value
 
 const getScopedProps = (propNode, blockNode) => {
   const scopes = blockNode.scopes
@@ -125,7 +127,9 @@ const getStandardInterpolation = (node, re, textNode, item) =>
     re,
     hasCustomScopes(textNode, item)
       ? wrap(getScopedCondition(textNode, item, true))
-      : isSlot(textNode) ? wrap(textNode.value) : textNode.value
+      : isSlot(textNode)
+        ? wrap(textNode.value)
+        : textNode.value
   )
 
 export const getScopedCondition = (
@@ -196,7 +200,7 @@ export const hasDefaultProp = (node, parent) =>
 export const isSlot = node =>
   typeof node === 'string' ? /props/.test(node) : isTag(node, 'slot')
 export const isStyle = node => isTag(node, 'style')
-export const isRowStyle = node => isTag(node, 'rowtyle')
+export const isRowStyle = node => isTag(node, 'rowStyle')
 export const isTag = (node, tag) => node && node.tags[tag]
 
 export const getActionableParent = node => {

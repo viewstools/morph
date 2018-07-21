@@ -1,5 +1,6 @@
 import getAnimatedValue from './get-animated-value.js'
 import getBody from './get-body.js'
+import getCellRenderer from './get-cell-renderer.js'
 import getContext from './get-context.js'
 import getDefaultProps from './get-default-props.js'
 import getDependencies from './get-dependencies.js'
@@ -16,6 +17,7 @@ ${getDependencies(state, getImport)}
 ${getAnimatedValue(state, name)}
 ${getStyles(state, name)}
 ${getFlatList(state, name)}
+${getCellRenderer(state)}
 ${getFormatters(state, name)}
 ${getLocals(state, name)}
 

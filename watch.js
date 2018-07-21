@@ -198,6 +198,7 @@ module.exports = options => {
     }
 
     const makeGetImport = (view, file) => {
+      debugger
       dependsOn[view] = []
 
       return name => {
@@ -628,7 +629,7 @@ height 50`
     ].filter(Boolean)
 
     const fontsDirectory = path.join(src, 'Fonts')
-    if (!await fs.exists(fontsDirectory)) {
+    if (!(await fs.exists(fontsDirectory))) {
       await fs.mkdir(fontsDirectory)
     }
     const customFonts = await glob(
