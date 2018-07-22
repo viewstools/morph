@@ -198,10 +198,11 @@ module.exports = options => {
     }
 
     const makeGetImport = (view, file) => {
-      debugger
       dependsOn[view] = []
 
       return name => {
+        // Column is imported from react-virtualized
+        if (name === 'Column') return
         if (name === 'ViewsBaseCss') {
           return isBundlingBaseCss
             ? `import '${relativise(file, instance.baseCss)}'`
