@@ -1,10 +1,10 @@
 import { leave } from '../react/block-name.js'
 import getBlockName from './get-block-name.js'
-import { isTable } from '../utils.js'
+import { isCell, isTable } from '../utils.js'
 
 export function enter(node, parent, state) {
   let name = getBlockName(node, parent, state)
-  if (name === null) return true
+  if (name === null || isCell(node)) return true
 
   // TODO remove the use of those because they're just the name
   // and keep one

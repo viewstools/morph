@@ -221,6 +221,9 @@ export const getAllowedStyleKeys = node => {
 export const isList = node =>
   node && node.type === 'Block' && node.name === 'List'
 
+export const isCell = node =>
+  node.properties.some(prop => prop.name === 'isCell')
+
 export const isColumn = node =>
   node && node.type === 'Block' && node.name === 'Column'
 
