@@ -1,7 +1,7 @@
 export default state => {
   return state.isTable
     ? `const columnCellRenderer = ({ cellData }) => { 
-        return <${state.cell.name} cellData={cellData} />;
+        return <${state.cell.name} value={cellData} />;
       };`
     : ''
 }

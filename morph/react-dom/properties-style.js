@@ -42,7 +42,7 @@ export function leave(node, parent, state) {
 
   if (isTable(node) && hasRowStyles(node)) {
     state.render.push(` rowClassName={Row}`)
-    state.styles['Row'] = `const Row = css()`
+    state.styles['Row'] = `const Row = css({ display: 'flex' })`
   }
 
   // dynamic merges static styles
