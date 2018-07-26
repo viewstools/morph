@@ -42,7 +42,6 @@ export function leave(node, parent, state) {
 
   if (isTable(node) && hasRowStyles(node)) {
     state.render.push(` rowClassName={Row}`)
-    debugger
     state.styles['Row'] = `const Row = css()`
   }
 

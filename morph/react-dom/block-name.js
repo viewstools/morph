@@ -4,7 +4,7 @@ import { isCell, isTable } from '../utils.js'
 
 export function enter(node, parent, state) {
   let name = getBlockName(node, parent, state)
-  if (name === null || isCell(node)) return true
+  if (name === null) return true
 
   // TODO remove the use of those because they're just the name
   // and keep one
@@ -50,6 +50,10 @@ export function enter(node, parent, state) {
   //     node.nameFinal = finalValue
   //   }
   // }
+
+  if (isCell(node)) {
+    return (state.cell = node)
+  }
 
   if (isTable(node)) {
     state.render.push(`<AutoSizer>{({ height, width }) => ( `)

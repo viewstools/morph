@@ -283,7 +283,7 @@ export default ({
     lookForFonts(block)
   }
 
-  const parseProps = (i, block, last) => {
+  const parseProps = (i, block) => {
     let endOfBlockIndex = i
     while (
       endOfBlockIndex < lines.length - 1 &&
