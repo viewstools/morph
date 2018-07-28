@@ -12,14 +12,6 @@ export default ({ state, name }) => {
     ? `const childrenArray = React.Children.toArray(props.children)`
     : ''
 
-  const maybeState =
-    state.captures.length > 0
-      ? `constructor(props) {
-    super(props)
-    this.state = {}
-  }`
-      : ''
-
   const maybeTracking = state.track && !state.debug
 
   let maybeAnimated = false
@@ -87,14 +79,10 @@ export default ({ state, name }) => {
     })
   }
 
-  if (maybeState || maybeTracking || maybeAnimated) {
+  if (state.hasRefs || maybeTracking || maybeAnimated) {
     return `class ${name} extends React.Component {
-  ${maybeState}
-
   render() {
-    const { ${maybeTracking ? 'context,' : ''} props, ${
-      maybeState ? 'state' : ''
-    } } = this
+    const { ${maybeTracking ? 'context,' : ''} props } = this
     ${maybeChildrenArray}
     return (${animatedOpen.join('')}${render}${animatedClose
       .reverse()

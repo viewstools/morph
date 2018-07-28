@@ -71,5 +71,8 @@
       "prettier --trailing-comma es5 --single-quote --no-semi --write",
       "git add"
     ]
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }

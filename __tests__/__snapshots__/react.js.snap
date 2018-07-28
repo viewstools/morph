@@ -3537,7 +3537,9 @@ class Scope extends React.Component {
             ? 'somethingGreen|'
             : props.whatMakesBlue
               ? 'whatMakesBlue|'
-              : !props.whatMakesBlue ? 'notWhatMakesBlue|' : ''
+              : !props.whatMakesBlue
+                ? 'notWhatMakesBlue|'
+                : ''
         }\`}
         style={{
           '--color': \`\${
@@ -3545,7 +3547,9 @@ class Scope extends React.Component {
               ? 'rgb(0,255,0)'
               : props.whatMakesBlue
                 ? 'rgb(0,0,255)'
-                : !props.whatMakesBlue ? 'rgb(255,255,0)' : 'red'
+                : !props.whatMakesBlue
+                  ? 'rgb(255,255,0)'
+                  : 'red'
           }\`,
         }}
         className={\`views-block \${Scope1}\`}
@@ -3554,7 +3558,9 @@ class Scope extends React.Component {
           ? '2 green'
           : props.whatMakesBlue
             ? props.blue
-            : !props.whatMakesBlue ? 'is Yellow' : '1 red'}
+            : !props.whatMakesBlue
+              ? 'is Yellow'
+              : '1 red'}
       </span>
     );
   }
@@ -3588,7 +3594,9 @@ const Scope = props => {
           ? 'somethingGreen|'
           : props.whatMakesBlue
             ? 'whatMakesBlue|'
-            : !props.whatMakesBlue ? 'notWhatMakesBlue|' : ''
+            : !props.whatMakesBlue
+              ? 'notWhatMakesBlue|'
+              : ''
       }\`}
       style={{
         '--color': \`\${
@@ -3596,7 +3604,9 @@ const Scope = props => {
             ? 'rgb(0,255,0)'
             : props.whatMakesBlue
               ? 'rgb(0,0,255)'
-              : !props.whatMakesBlue ? 'rgb(255,255,0)' : 'red'
+              : !props.whatMakesBlue
+                ? 'rgb(255,255,0)'
+                : 'red'
         }\`,
       }}
       className={\`views-block \${Scope1}\`}
@@ -3605,7 +3615,9 @@ const Scope = props => {
         ? '2 green'
         : props.whatMakesBlue
           ? props.blue
-          : !props.whatMakesBlue ? 'is Yellow' : '1 red'}
+          : !props.whatMakesBlue
+            ? 'is Yellow'
+            : '1 red'}
     </span>
   );
 };
@@ -3720,12 +3732,16 @@ class ScopePopup extends React.Component {
           data-test-id={\`ScopePopup.Toggle|\${
             props.somethingGreen
               ? 'somethingGreen|'
-              : props.whatMakesBlue ? 'whatMakesBlue|' : ''
+              : props.whatMakesBlue
+                ? 'whatMakesBlue|'
+                : ''
           }\`}
           onClick={
             props.somethingGreen
               ? props.onClickGreen
-              : props.whatMakesBlue ? props.onClickBlue : props.toggle
+              : props.whatMakesBlue
+                ? props.onClickBlue
+                : props.toggle
           }
           className=\\"views-block\\"
         >
@@ -3772,12 +3788,16 @@ const ScopePopup = props => {
         data-test-id={\`ScopePopup.Toggle|\${
           props.somethingGreen
             ? 'somethingGreen|'
-            : props.whatMakesBlue ? 'whatMakesBlue|' : ''
+            : props.whatMakesBlue
+              ? 'whatMakesBlue|'
+              : ''
         }\`}
         onClick={
           props.somethingGreen
             ? props.onClickGreen
-            : props.whatMakesBlue ? props.onClickBlue : props.toggle
+            : props.whatMakesBlue
+              ? props.onClickBlue
+              : props.toggle
         }
         className=\\"views-block\\"
       >
@@ -3848,7 +3868,9 @@ class ScopePopup2 extends React.Component {
           data-test-id={\`ScopePopup2.Content|\${
             props.isShown
               ? 'isShown|'
-              : props.isSuperVisible ? 'isSuperVisible|' : ''
+              : props.isSuperVisible
+                ? 'isSuperVisible|'
+                : ''
           }\`}
           style={{
             '--opacity': \`\${props.isShown ? 1 : props.isSuperVisible ? 3 : 0}\`,
@@ -3915,7 +3937,9 @@ const ScopePopup2 = props => {
         data-test-id={\`ScopePopup2.Content|\${
           props.isShown
             ? 'isShown|'
-            : props.isSuperVisible ? 'isSuperVisible|' : ''
+            : props.isSuperVisible
+              ? 'isSuperVisible|'
+              : ''
         }\`}
         style={{
           '--opacity': \`\${props.isShown ? 1 : props.isSuperVisible ? 3 : 0}\`,
@@ -4726,19 +4750,12 @@ const Email = css({
 });
 
 class UseCaptureEmail extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   render() {
-    const { context, props, state } = this;
+    const { context, props } = this;
 
     return (
       <input
         type=\\"email\\"
-        onChange={event => this.setState({ email: event.target.value })}
-        value={state.email}
         data-test-id={\`\${props['data-test-id'] || 'Email'}|\`}
         autoFocus={true}
         defaultValue=\\"hey this is a default value\\"
@@ -4787,29 +4804,17 @@ const Email = css({
   },
 });
 
-class UseCaptureEmail extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  render() {
-    const { props, state } = this;
-
-    return (
-      <input
-        type=\\"email\\"
-        onChange={event => this.setState({ email: event.target.value })}
-        value={state.email}
-        tabIndex={-1}
-        data-test-id={\`\${props['data-test-id'] || 'Email'}|\`}
-        defaultValue=\\"hey this is a default value\\"
-        onSubmit={props.onSubmit}
-        className={\`views-block mousetrap \${Email}\`}
-      />
-    );
-  }
-}
+const UseCaptureEmail = props => {
+  return (
+    <input
+      type=\\"email\\"
+      data-test-id={\`\${props['data-test-id'] || 'Email'}|\`}
+      defaultValue=\\"hey this is a default value\\"
+      onSubmit={props.onSubmit}
+      className={\`views-block mousetrap \${Email}\`}
+    />
+  );
+};
 
 export default UseCaptureEmail;
 ",
@@ -4833,18 +4838,11 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 
 class UseCaptureFile extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   render() {
-    const { context, props, state } = this;
+    const { context, props } = this;
 
     return (
       <input
-        onChange={event => this.setState({ file: event.target.value })}
-        value={state.file}
         data-test-id={\`\${props['data-test-id'] || 'File'}|\`}
         className=\\"views-block\\"
       />
@@ -4869,26 +4867,14 @@ Object {
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 
-class UseCaptureFile extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  render() {
-    const { props, state } = this;
-
-    return (
-      <input
-        onChange={event => this.setState({ file: event.target.value })}
-        value={state.file}
-        tabIndex={-1}
-        data-test-id={\`\${props['data-test-id'] || 'File'}|\`}
-        className={\`views-block mousetrap\`}
-      />
-    );
-  }
-}
+const UseCaptureFile = props => {
+  return (
+    <input
+      data-test-id={\`\${props['data-test-id'] || 'File'}|\`}
+      className={\`views-block mousetrap\`}
+    />
+  );
+};
 
 export default UseCaptureFile;
 ",
@@ -4906,21 +4892,14 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 
 class UseCaptureNumber extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   render() {
-    const { context, props, state } = this;
+    const { context, props } = this;
 
     return (
       <input
         type=\\"number\\"
         inputMode=\\"numeric\\"
         pattern=\\"[0-9]*\\"
-        onChange={event => this.setState({ number: event.target.value })}
-        value={state.number}
         data-test-id={\`\${props['data-test-id'] || 'Number'}|\`}
         className=\\"views-block\\"
       />
@@ -4945,29 +4924,17 @@ Object {
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 
-class UseCaptureNumber extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  render() {
-    const { props, state } = this;
-
-    return (
-      <input
-        type=\\"number\\"
-        inputMode=\\"numeric\\"
-        pattern=\\"[0-9]*\\"
-        onChange={event => this.setState({ number: event.target.value })}
-        value={state.number}
-        tabIndex={-1}
-        data-test-id={\`\${props['data-test-id'] || 'Number'}|\`}
-        className={\`views-block mousetrap\`}
-      />
-    );
-  }
-}
+const UseCaptureNumber = props => {
+  return (
+    <input
+      type=\\"number\\"
+      inputMode=\\"numeric\\"
+      pattern=\\"[0-9]*\\"
+      data-test-id={\`\${props['data-test-id'] || 'Number'}|\`}
+      className={\`views-block mousetrap\`}
+    />
+  );
+};
 
 export default UseCaptureNumber;
 ",
@@ -4985,19 +4952,12 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 
 class UseCapturePhone extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   render() {
-    const { context, props, state } = this;
+    const { context, props } = this;
 
     return (
       <input
         type=\\"tel\\"
-        onChange={event => this.setState({ phone: event.target.value })}
-        value={state.phone}
         data-test-id={\`\${props['data-test-id'] || 'Phone'}|\`}
         className=\\"views-block\\"
       />
@@ -5022,27 +4982,15 @@ Object {
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 
-class UseCapturePhone extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  render() {
-    const { props, state } = this;
-
-    return (
-      <input
-        type=\\"tel\\"
-        onChange={event => this.setState({ phone: event.target.value })}
-        value={state.phone}
-        tabIndex={-1}
-        data-test-id={\`\${props['data-test-id'] || 'Phone'}|\`}
-        className={\`views-block mousetrap\`}
-      />
-    );
-  }
-}
+const UseCapturePhone = props => {
+  return (
+    <input
+      type=\\"tel\\"
+      data-test-id={\`\${props['data-test-id'] || 'Phone'}|\`}
+      className={\`views-block mousetrap\`}
+    />
+  );
+};
 
 export default UseCapturePhone;
 ",
@@ -5060,19 +5008,12 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 
 class UseCaptureSecure extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   render() {
-    const { context, props, state } = this;
+    const { context, props } = this;
 
     return (
       <input
         type=\\"password\\"
-        onChange={event => this.setState({ secure: event.target.value })}
-        value={state.secure}
         data-test-id={\`\${props['data-test-id'] || 'Secure'}|\`}
         className=\\"views-block\\"
       />
@@ -5097,27 +5038,15 @@ Object {
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 
-class UseCaptureSecure extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  render() {
-    const { props, state } = this;
-
-    return (
-      <input
-        type=\\"password\\"
-        onChange={event => this.setState({ secure: event.target.value })}
-        value={state.secure}
-        tabIndex={-1}
-        data-test-id={\`\${props['data-test-id'] || 'Secure'}|\`}
-        className={\`views-block mousetrap\`}
-      />
-    );
-  }
-}
+const UseCaptureSecure = props => {
+  return (
+    <input
+      type=\\"password\\"
+      data-test-id={\`\${props['data-test-id'] || 'Secure'}|\`}
+      className={\`views-block mousetrap\`}
+    />
+  );
+};
 
 export default UseCaptureSecure;
 ",
@@ -5141,21 +5070,14 @@ const TextLocal = {
 };
 
 class UseCaptureText extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   render() {
-    const { context, props, state } = this;
+    const { context, props } = this;
 
     return (
       <Subscribe to={[LocalContainer]}>
         {local => (
           <input
             type=\\"text\\"
-            onChange={event => this.setState({ text: event.target.value })}
-            value={state.text}
             data-test-id={\`\${props['data-test-id'] || 'Text'}|\`}
             placeholder={TextLocal[local.state.lang] || 'Type feedback here...'}
             className=\\"views-block\\"
@@ -5189,32 +5111,20 @@ const TextLocal = {
   es: 'Escriba sus comentarios aqui...',
 };
 
-class UseCaptureText extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  render() {
-    const { props, state } = this;
-
-    return (
-      <Subscribe to={[LocalContainer]}>
-        {local => (
-          <input
-            type=\\"text\\"
-            onChange={event => this.setState({ text: event.target.value })}
-            value={state.text}
-            tabIndex={-1}
-            data-test-id={\`\${props['data-test-id'] || 'Text'}|\`}
-            placeholder={TextLocal[local.state.lang] || 'Type feedback here...'}
-            className={\`views-block mousetrap\`}
-          />
-        )}
-      </Subscribe>
-    );
-  }
-}
+const UseCaptureText = props => {
+  return (
+    <Subscribe to={[LocalContainer]}>
+      {local => (
+        <input
+          type=\\"text\\"
+          data-test-id={\`\${props['data-test-id'] || 'Text'}|\`}
+          placeholder={TextLocal[local.state.lang] || 'Type feedback here...'}
+          className={\`views-block mousetrap\`}
+        />
+      )}
+    </Subscribe>
+  );
+};
 
 export default UseCaptureText;
 ",
@@ -5232,20 +5142,11 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 
 class UseCaptureTextArea extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   render() {
-    const { context, props, state } = this;
+    const { context, props } = this;
 
     return (
       <textarea
-        onChange={event =>
-          this.setState({ captureTextArea: event.target.value })
-        }
-        value={state.captureTextArea}
         data-test-id={\`\${props['data-test-id'] || 'CaptureTextArea'}|\`}
         className=\\"views-block\\"
       />
@@ -5270,28 +5171,14 @@ Object {
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 
-class UseCaptureTextArea extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  render() {
-    const { props, state } = this;
-
-    return (
-      <textarea
-        onChange={event =>
-          this.setState({ captureTextArea: event.target.value })
-        }
-        value={state.captureTextArea}
-        tabIndex={-1}
-        data-test-id={\`\${props['data-test-id'] || 'CaptureTextArea'}|\`}
-        className={\`views-block mousetrap\`}
-      />
-    );
-  }
-}
+const UseCaptureTextArea = props => {
+  return (
+    <textarea
+      data-test-id={\`\${props['data-test-id'] || 'CaptureTextArea'}|\`}
+      className={\`views-block mousetrap\`}
+    />
+  );
+};
 
 export default UseCaptureTextArea;
 ",
@@ -5309,13 +5196,8 @@ import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 
 class UseCaptureTextManagedFromOutside extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   render() {
-    const { context, props, state } = this;
+    const { context, props } = this;
 
     return (
       <input
@@ -5351,25 +5233,16 @@ Object {
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 
-class UseCaptureTextManagedFromOutside extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  render() {
-    const { props, state } = this;
-
-    return (
-      <input
-        type=\\"text\\"
-        data-test-id={\`\${props['data-test-id'] || 'CaptureText'}|\`}
-        value={props.external}
-        className={\`views-block mousetrap\`}
-      />
-    );
-  }
-}
+const UseCaptureTextManagedFromOutside = props => {
+  return (
+    <input
+      type=\\"text\\"
+      data-test-id={\`\${props['data-test-id'] || 'CaptureText'}|\`}
+      value={props.external}
+      className={\`views-block mousetrap\`}
+    />
+  );
+};
 
 export default UseCaptureTextManagedFromOutside;
 ",
@@ -7827,21 +7700,27 @@ class Scope extends React.Component {
             ? 'somethingGreen|'
             : props.whatMakesBlue
               ? 'whatMakesBlue|'
-              : !props.whatMakesBlue ? 'notWhatMakesBlue|' : ''
+              : !props.whatMakesBlue
+                ? 'notWhatMakesBlue|'
+                : ''
         }\`}
         style={{
           color: props.somethingGreen
             ? 'rgb(0,255,0)'
             : props.whatMakesBlue
               ? 'rgb(0,0,255)'
-              : !props.whatMakesBlue ? 'rgb(255,255,0)' : 'red',
+              : !props.whatMakesBlue
+                ? 'rgb(255,255,0)'
+                : 'red',
         }}
       >
         {props.somethingGreen
           ? '2 green'
           : props.whatMakesBlue
             ? props.blue
-            : !props.whatMakesBlue ? 'is Yellow' : '1 red'}
+            : !props.whatMakesBlue
+              ? 'is Yellow'
+              : '1 red'}
       </Text>
     );
   }
@@ -7919,7 +7798,9 @@ class ScopePopup extends React.Component {
           onPress={
             props.somethingGreen
               ? props.onClickGreen
-              : props.whatMakesBlue ? props.onClickBlue : props.toggle
+              : props.whatMakesBlue
+                ? props.onClickBlue
+                : props.toggle
           }
           underlayColor=\\"transparent\\"
         >
@@ -7927,7 +7808,9 @@ class ScopePopup extends React.Component {
             testID={\`ScopePopup.Toggle|\${
               props.somethingGreen
                 ? 'somethingGreen|'
-                : props.whatMakesBlue ? 'whatMakesBlue|' : ''
+                : props.whatMakesBlue
+                  ? 'whatMakesBlue|'
+                  : ''
             }\`}
           >
             <Text testID={\`ScopePopup.Text|\`}>toggle popup</Text>
@@ -7990,7 +7873,9 @@ class ScopePopup2 extends React.Component {
           testID={\`ScopePopup2.Content|\${
             props.isShown
               ? 'isShown|'
-              : props.isSuperVisible ? 'isSuperVisible|' : ''
+              : props.isSuperVisible
+                ? 'isSuperVisible|'
+                : ''
           }\`}
           style={{
             opacity: props.isShown ? 1 : props.isSuperVisible ? 3 : 0,
@@ -8443,23 +8328,13 @@ const styles = StyleSheet.create({
 });
 
 class UseCaptureEmail extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   render() {
-    const { context, props, state } = this;
+    const { context, props } = this;
 
     return (
       <TextInput
-        returnKeyType=\\"done\\"
-        onChangeText={email => this.setState({ email })}
-        ref={$e => (this.$email = $e)}
-        value={state.email}
         keyboardType=\\"email-address\\"
         autoCorrect={false}
-        defaultValue={undefined}
         underlineColorAndroid=\\"transparent\\"
         textAlignVertical=\\"top\\"
         testID={\`\${props['testID'] || 'Email'}|\`}
@@ -8496,20 +8371,11 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 class UseCaptureFile extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   render() {
-    const { context, props, state } = this;
+    const { context, props } = this;
 
     return (
       <CaptureFile
-        returnKeyType=\\"done\\"
-        onChangeText={file => this.setState({ file })}
-        ref={$e => (this.$file = $e)}
-        value={state.file}
         keyboardType=\\"undefined\\"
         autoCorrect={false}
         underlineColorAndroid=\\"transparent\\"
@@ -8539,20 +8405,11 @@ import React from 'react';
 import { TextInput } from 'react-native';
 
 class UseCaptureNumber extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   render() {
-    const { context, props, state } = this;
+    const { context, props } = this;
 
     return (
       <TextInput
-        returnKeyType=\\"done\\"
-        onChangeText={number => this.setState({ number })}
-        ref={$e => (this.$number = $e)}
-        value={state.number}
         keyboardType=\\"numeric\\"
         autoCorrect={false}
         underlineColorAndroid=\\"transparent\\"
@@ -8582,20 +8439,11 @@ import React from 'react';
 import { TextInput } from 'react-native';
 
 class UseCapturePhone extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   render() {
-    const { context, props, state } = this;
+    const { context, props } = this;
 
     return (
       <TextInput
-        returnKeyType=\\"done\\"
-        onChangeText={phone => this.setState({ phone })}
-        ref={$e => (this.$phone = $e)}
-        value={state.phone}
         keyboardType=\\"phone-pad\\"
         autoCorrect={false}
         underlineColorAndroid=\\"transparent\\"
@@ -8625,20 +8473,11 @@ import React from 'react';
 import { TextInput } from 'react-native';
 
 class UseCaptureSecure extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   render() {
-    const { context, props, state } = this;
+    const { context, props } = this;
 
     return (
       <TextInput
-        returnKeyType=\\"done\\"
-        onChangeText={secure => this.setState({ secure })}
-        ref={$e => (this.$secure = $e)}
-        value={state.secure}
         secureTextEntry
         autoCorrect={false}
         underlineColorAndroid=\\"transparent\\"
@@ -8674,25 +8513,15 @@ const TextLocal = {
 };
 
 class UseCaptureText extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   render() {
-    const { context, props, state } = this;
+    const { context, props } = this;
 
     return (
       <Subscribe to={[LocalContainer]}>
         {local => (
           <TextInput
-            returnKeyType=\\"done\\"
-            onChangeText={text => this.setState({ text })}
-            ref={$e => (this.$text = $e)}
-            value={state.text}
             keyboardType=\\"default\\"
             autoCorrect={false}
-            placeholder={undefined}
             underlineColorAndroid=\\"transparent\\"
             textAlignVertical=\\"top\\"
             testID={\`\${props['testID'] || 'Text'}|\`}
@@ -8723,20 +8552,11 @@ import React from 'react';
 import { TextInput } from 'react-native';
 
 class UseCaptureTextArea extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   render() {
-    const { context, props, state } = this;
+    const { context, props } = this;
 
     return (
       <TextInput
-        returnKeyType=\\"done\\"
-        onChangeText={captureTextArea => this.setState({ captureTextArea })}
-        ref={$e => (this.$captureTextArea = $e)}
-        value={state.captureTextArea}
         keyboardType=\\"default\\"
         multiline={true}
         autoCorrect={false}
@@ -8767,20 +8587,11 @@ import React from 'react';
 import { TextInput } from 'react-native';
 
 class UseCaptureTextManagedFromOutside extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   render() {
-    const { context, props, state } = this;
+    const { context, props } = this;
 
     return (
       <TextInput
-        returnKeyType=\\"done\\"
-        onChangeText={captureText => this.setState({ captureText })}
-        ref={$e => (this.$captureText = $e)}
-        value={state.captureText}
         keyboardType=\\"default\\"
         autoCorrect={false}
         underlineColorAndroid=\\"transparent\\"
