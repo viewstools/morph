@@ -41,9 +41,28 @@ export function leave(node, parent, state) {
   }
 
   if (isTable(node) && hasRowStyles(node)) {
-    debugger
+    const styles = node.properties.filter(prop =>
+      prop.tags.hasOwnProperty('rowStyle')
+    )
+
+    const rowScopes = node.scopes.filter(scope =>
+      scope.properties.some(prop => prop.tags.hasOwnProperty('rowStyle'))
+    )
     state.render.push(` rowClassName={Row}`)
-    state.styles['Row'] = `const Row = css({ ${composeRowStyles(node)} })`
+    state.styles[
+      'Row'
+    ] = `const Row = css({ display: 'flex', ${composeRowStyles(styles)}, ${
+      rowScopes
+        ? rowScopes.map(
+            scope =>
+              `'&:${scope.value}': {${composeRowStyles(
+                scope.properties.filter(prop =>
+                  prop.tags.hasOwnProperty('rowStyle')
+                )
+              )}}`
+          )
+        : ''
+    }})`
   }
 
   // dynamic merges static styles
@@ -197,10 +216,7 @@ const getStyleString = (styles, regex) =>
     })
     .join(`,\n`)
 
-const composeRowStyles = node => {
-  const styles = node.properties.filter(prop =>
-    prop.tags.hasOwnProperty('rowStyle')
-  )
+const composeRowStyles = styles => {
   const defaults = styles.filter(style => !/Alternate/.test(style.name))
   const alternates = styles.filter(style => /Alternate/.test(style.name))
 
@@ -210,7 +226,6 @@ const composeRowStyles = node => {
     : null
 
   return `
-    display: 'flex',
     ${defaultStyles ? `${defaultStyles},` : ''}
     ${alternateStyles ? `"&:nth-child(even)": {${alternateStyles}}` : ''}
   `
