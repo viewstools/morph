@@ -1,7 +1,6 @@
 import {
   checkParentStem,
   getStyleType,
-  isRowStyle,
   isSlot,
   isStyle,
   isSvg,
@@ -10,7 +9,7 @@ import safe from './safe.js'
 
 export function enter(node, parent, state) {
   if (
-    (!isRowStyle(node) && !isStyle(node)) ||
+    !isStyle(node) ||
     !parent.isBasic ||
     (isSvg(parent) && state.isReactNative) ||
     parent.name === 'SvgGroup'

@@ -25,7 +25,8 @@ export function enter(node, parent, state) {
       propNode.tags.unsupportedShorthand ||
       (!isValidPropertyForBlock(propNode, node, state) && node.isBasic) ||
       (propNode.name === 'from' && node.name === 'List') ||
-      (propNode.name === 'key' && parent.isList)
+      (propNode.name === 'key' && parent.isList) ||
+      propNode.tags.rowStyle
     )
       return
 
