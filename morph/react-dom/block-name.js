@@ -11,7 +11,6 @@ export function enter(node, parent, state) {
   node.nameFinal = name
   node.nameTag = name
   state.use(name)
-  debugger
 
   // if (node.isBasic) {
   //   const hasAnimatedStyles = node.properties.some(

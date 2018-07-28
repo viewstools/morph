@@ -41,8 +41,10 @@ export function leave(node, parent, state) {
   }
 
   if (isTable(node) && hasRowStyles(node)) {
+    debugger
+    const rowStyles = composeRowStyles(node)
     state.render.push(` rowClassName={Row}`)
-    state.styles['Row'] = `const Row = css({ display: 'flex' })`
+    state.styles['Row'] = `const Row = css({ ${rowStyles} })`
   }
 
   // dynamic merges static styles
@@ -184,4 +186,44 @@ const asCss = (styles, key, scopedUnderParent) => {
   if (key !== 'base') css.push(`}`)
 
   return css
+}
+
+const composeRowStyles = node => {
+  const styles = node.properties.filter(prop =>
+    prop.tags.hasOwnProperty('rowStyle')
+  )
+  let alternateStyles
+
+  if (styles.some(style => /Alternate/.test(style.name))) {
+    const alternates = styles.filter(style => /Alternate/.test(style.name))
+    debugger
+    alternateStyles = alternates
+      .map(alternate => {
+        let name = alternate.name.match(/^row(.*?)Alternate/)[1]
+        name = name.replace(/^.{1}/g, name[0].toLowerCase())
+
+        return `
+          ${name}: '${alternate.value}'`
+      })
+      .join(',')
+  }
+
+  const defaults = styles.filter(style => !/Alternate/.test(style.name))
+  debugger
+
+  const defaultStyles = defaults
+    .map(style => {
+      debugger
+      let name = style.name.match(/^row(.*?)$/)[1]
+      name = name.replace(/^.{1}/g, name[0].toLowerCase())
+
+      return `${name}: '${style.value}'`
+    })
+    .join(',')
+
+  return `
+    display: 'flex',
+    ${defaultStyles && `${defaultStyles},`}
+    ${alternateStyles && `"&:nth-child(even)": {${alternateStyles}}`}
+  `
 }
