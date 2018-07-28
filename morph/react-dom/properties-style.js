@@ -188,42 +188,32 @@ const asCss = (styles, key, scopedUnderParent) => {
   return css
 }
 
-const composeRowStyles = node => {
-  const styles = node.properties.filter(prop =>
-    prop.tags.hasOwnProperty('rowStyle')
-  )
-  let alternateStyles
-
-  if (styles.some(style => /Alternate/.test(style.name))) {
-    const alternates = styles.filter(style => /Alternate/.test(style.name))
-    debugger
-    alternateStyles = alternates
-      .map(alternate => {
-        let name = alternate.name.match(/^row(.*?)Alternate/)[1]
-        name = name.replace(/^.{1}/g, name[0].toLowerCase())
-
-        return `
-          ${name}: '${alternate.value}'`
-      })
-      .join(',')
-  }
-
-  const defaults = styles.filter(style => !/Alternate/.test(style.name))
-  debugger
-
-  const defaultStyles = defaults
+const getRowStyles = (styles, regex) =>
+  styles
     .map(style => {
       debugger
-      let name = style.name.match(/^row(.*?)$/)[1]
+      let name = style.name.match(new RegExp(regex))[1]
       name = name.replace(/^.{1}/g, name[0].toLowerCase())
 
       return `${name}: '${style.value}'`
     })
-    .join(',')
+    .join(`,\n`)
+
+const composeRowStyles = node => {
+  const styles = node.properties.filter(prop =>
+    prop.tags.hasOwnProperty('rowStyle')
+  )
+  const defaults = styles.filter(style => !/Alternate/.test(style.name))
+  const alternates = styles.filter(style => /Alternate/.test(style.name))
+
+  const defaultStyles = getRowStyles(defaults, '^row(.*?)$')
+  const alternateStyles = alternates.length
+    ? getRowStyles(alternates, '^row(.*?)Alternate')
+    : null
 
   return `
     display: 'flex',
-    ${defaultStyles && `${defaultStyles},`}
-    ${alternateStyles && `"&:nth-child(even)": {${alternateStyles}}`}
+    ${defaultStyles ? `${defaultStyles},` : ''}
+    ${alternateStyles ? `"&:nth-child(even)": {${alternateStyles}}` : ''}
   `
 }
