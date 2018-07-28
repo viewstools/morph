@@ -42,9 +42,8 @@ export function leave(node, parent, state) {
 
   if (isTable(node) && hasRowStyles(node)) {
     debugger
-    const rowStyles = composeRowStyles(node)
     state.render.push(` rowClassName={Row}`)
-    state.styles['Row'] = `const Row = css({ ${rowStyles} })`
+    state.styles['Row'] = `const Row = css({ ${composeRowStyles(node)} })`
   }
 
   // dynamic merges static styles
@@ -188,10 +187,9 @@ const asCss = (styles, key, scopedUnderParent) => {
   return css
 }
 
-const getRowStyles = (styles, regex) =>
+const getStyleString = (styles, regex) =>
   styles
     .map(style => {
-      debugger
       let name = style.name.match(new RegExp(regex))[1]
       name = name.replace(/^.{1}/g, name[0].toLowerCase())
 
@@ -206,9 +204,9 @@ const composeRowStyles = node => {
   const defaults = styles.filter(style => !/Alternate/.test(style.name))
   const alternates = styles.filter(style => /Alternate/.test(style.name))
 
-  const defaultStyles = getRowStyles(defaults, '^row(.*?)$')
+  const defaultStyles = getStyleString(defaults, '^row(.*?)$')
   const alternateStyles = alternates.length
-    ? getRowStyles(alternates, '^row(.*?)Alternate')
+    ? getStyleString(alternates, '^row(.*?)Alternate')
     : null
 
   return `
