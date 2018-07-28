@@ -37,11 +37,11 @@ export default ({
 
   const state = {
     animations: {},
-    captures: [],
     images: [],
     getFont,
     getStyleForProperty,
     getValueForProperty,
+    hasRefs: false,
     isReactNative: true,
     local,
     locals: {},
