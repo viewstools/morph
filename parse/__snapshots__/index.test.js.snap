@@ -12,8 +12,10 @@ Object {
       "is": "Main",
       "isAnimated": false,
       "isBasic": true,
+      "isColumn": false,
       "isGroup": true,
       "isList": false,
+      "isTable": false,
       "loc": Object {
         "end": Object {
           "column": 12,
@@ -47,6 +49,7 @@ Object {
           "animations": Array [],
           "isAnimated": false,
           "isBasic": true,
+          "isColumn": false,
           "isGroup": false,
           "loc": Object {
             "end": Object {
@@ -67,8 +70,10 @@ Object {
       "is": "Main",
       "isAnimated": false,
       "isBasic": true,
+      "isColumn": false,
       "isGroup": true,
       "isList": false,
+      "isTable": false,
       "loc": Object {
         "end": Object {
           "column": 3,
@@ -103,6 +108,7 @@ Object {
           "is": "Before",
           "isAnimated": false,
           "isBasic": true,
+          "isColumn": false,
           "isGroup": false,
           "loc": Object {
             "end": Object {
@@ -127,6 +133,7 @@ Object {
               "is": "ImageInside",
               "isAnimated": false,
               "isBasic": true,
+              "isColumn": false,
               "isGroup": false,
               "loc": Object {
                 "end": Object {
@@ -168,8 +175,10 @@ Object {
               "is": "VerticalInside",
               "isAnimated": false,
               "isBasic": true,
+              "isColumn": false,
               "isGroup": true,
               "isList": false,
+              "isTable": false,
               "loc": Object {
                 "end": Object {
                   "column": 0,
@@ -189,8 +198,10 @@ Object {
           "is": "Nested",
           "isAnimated": false,
           "isBasic": true,
+          "isColumn": false,
           "isGroup": true,
           "isList": false,
+          "isTable": false,
           "loc": Object {
             "end": Object {
               "column": 0,
@@ -211,6 +222,7 @@ Object {
           "is": "After",
           "isAnimated": false,
           "isBasic": true,
+          "isColumn": false,
           "isGroup": false,
           "loc": Object {
             "end": Object {
@@ -325,8 +337,10 @@ Object {
           "is": "Last",
           "isAnimated": false,
           "isBasic": true,
+          "isColumn": false,
           "isGroup": true,
           "isList": false,
+          "isTable": false,
           "loc": Object {
             "end": Object {
               "column": 19,
@@ -366,8 +380,10 @@ Object {
       "is": "BlueButton",
       "isAnimated": false,
       "isBasic": true,
+      "isColumn": false,
       "isGroup": true,
       "isList": false,
+      "isTable": false,
       "loc": Object {
         "end": Object {
           "column": 19,
@@ -402,6 +418,7 @@ Object {
           "is": "A1",
           "isAnimated": false,
           "isBasic": true,
+          "isColumn": false,
           "isGroup": false,
           "loc": Object {
             "end": Object {
@@ -443,6 +460,7 @@ Object {
           "is": "A2",
           "isAnimated": false,
           "isBasic": true,
+          "isColumn": false,
           "isGroup": false,
           "loc": Object {
             "end": Object {
@@ -483,8 +501,10 @@ Object {
       "is": "A",
       "isAnimated": false,
       "isBasic": true,
+      "isColumn": false,
       "isGroup": true,
       "isList": false,
+      "isTable": false,
       "loc": Object {
         "end": Object {
           "column": 10,
@@ -574,6 +594,7 @@ Object {
           "is": "Title",
           "isAnimated": false,
           "isBasic": true,
+          "isColumn": false,
           "isGroup": false,
           "loc": Object {
             "end": Object {
@@ -661,6 +682,7 @@ Object {
           "animations": Array [],
           "isAnimated": false,
           "isBasic": true,
+          "isColumn": false,
           "isGroup": false,
           "loc": Object {
             "end": Object {
@@ -709,8 +731,10 @@ Object {
               "childrenProxyMap": null,
               "isAnimated": false,
               "isBasic": false,
+              "isColumn": false,
               "isGroup": true,
               "isList": false,
+              "isTable": false,
               "loc": Object {
                 "end": Object {
                   "column": 4,
@@ -729,8 +753,10 @@ Object {
           ],
           "isAnimated": false,
           "isBasic": true,
+          "isColumn": false,
           "isGroup": true,
           "isList": true,
+          "isTable": false,
           "loc": Object {
             "end": Object {
               "column": 4,
@@ -772,8 +798,10 @@ Object {
       ],
       "isAnimated": false,
       "isBasic": true,
+      "isColumn": false,
       "isGroup": true,
       "isList": false,
+      "isTable": false,
       "loc": Object {
         "end": Object {
           "column": 4,
@@ -870,6 +898,7 @@ Object {
           "animations": Array [],
           "isAnimated": false,
           "isBasic": true,
+          "isColumn": false,
           "isGroup": false,
           "loc": Object {
             "end": Object {
@@ -963,8 +992,10 @@ Object {
       "is": "Locals",
       "isAnimated": false,
       "isBasic": true,
+      "isColumn": false,
       "isGroup": true,
       "isList": false,
+      "isTable": false,
       "loc": Object {
         "end": Object {
           "column": 8,
@@ -1006,8 +1037,10 @@ Object {
           "is": "EmptyWhen",
           "isAnimated": false,
           "isBasic": true,
+          "isColumn": false,
           "isGroup": true,
           "isList": false,
+          "isTable": false,
           "loc": Object {
             "end": Object {
               "column": 10,
@@ -1215,8 +1248,10 @@ Object {
       "is": "Warning",
       "isAnimated": false,
       "isBasic": true,
+      "isColumn": false,
       "isGroup": true,
       "isList": false,
+      "isTable": false,
       "loc": Object {
         "end": Object {
           "column": 10,
