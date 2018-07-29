@@ -65,6 +65,7 @@ module.exports = options => {
       track,
       verbose,
       viewNotFound,
+      warnOfDefaultValue,
     } = Object.assign(
       {
         as: 'react-dom',
@@ -83,12 +84,18 @@ module.exports = options => {
         src: process.cwd(),
         track: true,
         verbose: true,
+        warnOfDefaultValue: false,
       },
       options
     )
 
     if (shouldClean) {
       clean(src)
+    }
+
+    const shouldDisplayWarning = warning => {
+      if (!verbose) return false
+      return /default value/.test(warning.type) ? warnOfDefaultValue : true
     }
 
     if (!viewNotFound)
@@ -408,12 +415,14 @@ height 50`
         viewsSources[view] = source
         viewsParsed[view] = parsed
 
-        if (parsed.warnings.length > 0) {
+        const warnings = parsed.warnings.filter(shouldDisplayWarning)
+
+        if (warnings.length > 0) {
           console.error(
             chalk.red(view),
             chalk.dim(path.resolve(src, views[view]))
           )
-          parsed.warnings.forEach(warning => {
+          warnings.forEach(warning => {
             console.error(
               `  ${chalk.blue(warning.type)} ${chalk.yellow(
                 `line ${warning.loc.start.line}`
@@ -628,7 +637,7 @@ height 50`
     ].filter(Boolean)
 
     const fontsDirectory = path.join(src, 'Fonts')
-    if (!await fs.exists(fontsDirectory)) {
+    if (!(await fs.exists(fontsDirectory))) {
       await fs.mkdir(fontsDirectory)
     }
     const customFonts = await glob(

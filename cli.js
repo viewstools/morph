@@ -9,15 +9,17 @@ const morphInlineSvg = require('./morph/inline-svg.js')
 let {
   _,
   as,
+  bundleBaseCss: isBundlingBaseCss,
   compile,
   help,
-  isBundlingBaseCss,
   local,
   logic,
   pretty,
   track,
   watch: shouldWatch,
+  verbose,
   version,
+  warnOfDefaultValue,
 } = require('minimist')(process.argv.slice(2), {
   alias: {
     help: 'h',
@@ -27,13 +29,15 @@ let {
   default: {
     as: 'react-dom',
     compile: false,
-    isBundlingBaseCss: false,
+    bundleBaseCss: false,
     local: 'en',
     logic: true,
     pretty: true,
     track: false,
-    watch: false,
+    verbose: true,
     version: false,
+    warnOfDefaultValue: false,
+    watch: false,
   },
 })
 
@@ -48,7 +52,7 @@ if (help) {
                       e2e
 
     --compile       if true, produces ES5 JS, defaults to false
-    --bundle-base-css if true, it will bundle the base CSS in react-dom,
+    --bundleBaseCss if true, it will bundle the base CSS in react-dom,
                       otherwise you will need to include it in your
                       build system as a .css file. Defaults to false
     --local         default local language, defaults to English (en)
@@ -56,8 +60,10 @@ if (help) {
                       the output, defaults to true
     --pretty        format output code, defaults to true
     --track         enable UI tracking, defaults to false
-    --watch         watch a directory and produce .view.js files
+    --verbose       defaults to true
     --version       print the version
+    --watch         watch a directory and produce .view.js files
+    --warnOfDefaultValue defaults to false
   `)
 
   process.exit()
@@ -114,6 +120,8 @@ if (shouldWatch) {
     pretty,
     src: input,
     track,
+    verbose,
+    warnOfDefaultValue,
   })
 } else {
   if (statSync(input).isDirectory()) {
@@ -127,6 +135,8 @@ if (shouldWatch) {
       pretty,
       src: input,
       track,
+      verbose,
+      warnOfDefaultValue,
     })
   } else {
     if (input.includes('.svg')) {
