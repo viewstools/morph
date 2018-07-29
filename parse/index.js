@@ -121,7 +121,7 @@ export default ({
 
   const end = (block, endLine) => {
     block.loc.end = {
-      line: endLine,
+      line: endLine + 1,
       column: Math.max(0, lines[endLine].length - 1),
     }
 
@@ -140,7 +140,7 @@ export default ({
       warnings.push({
         loc: block.loc,
         type: `A List needs "from <" to work`,
-        line: lines[block.loc.start.line],
+        line: lines[block.loc.start.line - 1],
       })
     }
 
@@ -163,7 +163,7 @@ export default ({
       isAnimated: false,
       isBasic: isBasic(name),
       isGroup: false,
-      loc: getLoc(i, 0),
+      loc: getLoc(i + 1, 0),
       properties: [],
       scopes: [],
     }
@@ -314,7 +314,7 @@ export default ({
 
       if (isProp(line)) {
         const { name, isSlot, slotName, slotIsNot, value } = getProp(line)
-        const loc = getLoc(j, line.indexOf(name), line.length - 1)
+        const loc = getLoc(j + 1, line.indexOf(name), line.length - 1)
         const tags = getTags({
           name,
           isSlot,
@@ -533,7 +533,7 @@ export default ({
 
         propNode = {
           type: 'Property',
-          loc: getLoc(j, 0, line.length - 1),
+          loc: getLoc(j + 1, 0, line.length - 1),
           value,
           tags: { comment: true, userComment },
         }
@@ -574,7 +574,7 @@ export default ({
         type: `You have some spaces before or after this line. Clean them up.`,
         loc: {
           start: {
-            line: i,
+            line: i + 1,
           },
         },
         line: rlines[i],

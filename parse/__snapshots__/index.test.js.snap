@@ -18,11 +18,11 @@ Object {
       "loc": Object {
         "end": Object {
           "column": 12,
-          "line": 0,
+          "line": 1,
         },
         "start": Object {
           "column": 0,
-          "line": 0,
+          "line": 1,
         },
       },
       "name": "Vertical",
@@ -53,11 +53,11 @@ Object {
           "loc": Object {
             "end": Object {
               "column": 3,
-              "line": 1,
+              "line": 2,
             },
             "start": Object {
               "column": 0,
-              "line": 1,
+              "line": 2,
             },
           },
           "name": "Text",
@@ -75,11 +75,11 @@ Object {
       "loc": Object {
         "end": Object {
           "column": 3,
-          "line": 1,
+          "line": 2,
         },
         "start": Object {
           "column": 0,
-          "line": 0,
+          "line": 1,
         },
       },
       "name": "Vertical",
@@ -111,11 +111,11 @@ Object {
           "loc": Object {
             "end": Object {
               "column": 0,
-              "line": 2,
+              "line": 3,
             },
             "start": Object {
               "column": 0,
-              "line": 1,
+              "line": 2,
             },
           },
           "name": "Text",
@@ -136,11 +136,11 @@ Object {
               "loc": Object {
                 "end": Object {
                   "column": 0,
-                  "line": 6,
+                  "line": 7,
                 },
                 "start": Object {
                   "column": 0,
-                  "line": 4,
+                  "line": 5,
                 },
               },
               "name": "Image",
@@ -149,11 +149,11 @@ Object {
                   "loc": Object {
                     "end": Object {
                       "column": 32,
-                      "line": 5,
+                      "line": 6,
                     },
                     "start": Object {
                       "column": 0,
-                      "line": 5,
+                      "line": 6,
                     },
                   },
                   "name": "source",
@@ -179,11 +179,11 @@ Object {
               "loc": Object {
                 "end": Object {
                   "column": 0,
-                  "line": 8,
+                  "line": 9,
                 },
                 "start": Object {
                   "column": 0,
-                  "line": 7,
+                  "line": 8,
                 },
               },
               "name": "Vertical",
@@ -201,11 +201,11 @@ Object {
           "loc": Object {
             "end": Object {
               "column": 0,
-              "line": 9,
+              "line": 10,
             },
             "start": Object {
               "column": 0,
-              "line": 3,
+              "line": 4,
             },
           },
           "name": "Vertical",
@@ -223,11 +223,11 @@ Object {
           "loc": Object {
             "end": Object {
               "column": 0,
-              "line": 15,
+              "line": 16,
             },
             "start": Object {
               "column": 0,
-              "line": 10,
+              "line": 11,
             },
           },
           "name": "Text",
@@ -236,11 +236,11 @@ Object {
               "loc": Object {
                 "end": Object {
                   "column": 9,
-                  "line": 11,
+                  "line": 12,
                 },
                 "start": Object {
                   "column": 0,
-                  "line": 11,
+                  "line": 12,
                 },
               },
               "name": "text",
@@ -254,11 +254,11 @@ Object {
               "loc": Object {
                 "end": Object {
                   "column": 11,
-                  "line": 12,
+                  "line": 13,
                 },
                 "start": Object {
                   "column": 0,
-                  "line": 12,
+                  "line": 13,
                 },
               },
               "name": "color",
@@ -280,11 +280,11 @@ Object {
                   "loc": Object {
                     "end": Object {
                       "column": 10,
-                      "line": 13,
+                      "line": 14,
                     },
                     "start": Object {
                       "column": 0,
-                      "line": 13,
+                      "line": 14,
                     },
                   },
                   "name": "when",
@@ -303,11 +303,11 @@ Object {
                   "loc": Object {
                     "end": Object {
                       "column": 8,
-                      "line": 14,
+                      "line": 15,
                     },
                     "start": Object {
                       "column": 0,
-                      "line": 14,
+                      "line": 15,
                     },
                   },
                   "name": "color",
@@ -339,11 +339,11 @@ Object {
           "loc": Object {
             "end": Object {
               "column": 19,
-              "line": 17,
+              "line": 18,
             },
             "start": Object {
               "column": 0,
-              "line": 16,
+              "line": 17,
             },
           },
           "name": "Vertical",
@@ -352,11 +352,11 @@ Object {
               "loc": Object {
                 "end": Object {
                   "column": 19,
-                  "line": 17,
+                  "line": 18,
                 },
                 "start": Object {
                   "column": 0,
-                  "line": 17,
+                  "line": 18,
                 },
               },
               "name": "backgroundColor",
@@ -381,11 +381,11 @@ Object {
       "loc": Object {
         "end": Object {
           "column": 19,
-          "line": 17,
+          "line": 18,
         },
         "start": Object {
           "column": 0,
-          "line": 0,
+          "line": 1,
         },
       },
       "name": "Vertical",
@@ -417,11 +417,11 @@ Object {
           "loc": Object {
             "end": Object {
               "column": 0,
-              "line": 3,
+              "line": 4,
             },
             "start": Object {
               "column": 0,
-              "line": 1,
+              "line": 2,
             },
           },
           "name": "Text",
@@ -430,11 +430,11 @@ Object {
               "loc": Object {
                 "end": Object {
                   "column": 8,
-                  "line": 2,
+                  "line": 3,
                 },
                 "start": Object {
                   "column": 0,
-                  "line": 2,
+                  "line": 3,
                 },
               },
               "name": "color",
@@ -459,11 +459,11 @@ Object {
           "loc": Object {
             "end": Object {
               "column": 10,
-              "line": 5,
+              "line": 6,
             },
             "start": Object {
               "column": 0,
-              "line": 4,
+              "line": 5,
             },
           },
           "name": "Text",
@@ -472,11 +472,11 @@ Object {
               "loc": Object {
                 "end": Object {
                   "column": 10,
-                  "line": 5,
+                  "line": 6,
                 },
                 "start": Object {
                   "column": 0,
-                  "line": 5,
+                  "line": 6,
                 },
               },
               "name": "color",
@@ -501,11 +501,11 @@ Object {
       "loc": Object {
         "end": Object {
           "column": 10,
-          "line": 5,
+          "line": 6,
         },
         "start": Object {
           "column": 0,
-          "line": 0,
+          "line": 1,
         },
       },
       "name": "Vertical",
@@ -519,7 +519,7 @@ Object {
       "line": "A Vertical ",
       "loc": Object {
         "start": Object {
-          "line": 0,
+          "line": 1,
         },
       },
       "type": "You have some spaces before or after this line. Clean them up.",
@@ -528,7 +528,7 @@ Object {
       "line": "A2 Text    ",
       "loc": Object {
         "start": Object {
-          "line": 4,
+          "line": 5,
         },
       },
       "type": "You have some spaces before or after this line. Clean them up.",
@@ -592,11 +592,11 @@ Object {
           "loc": Object {
             "end": Object {
               "column": 0,
-              "line": 7,
+              "line": 8,
             },
             "start": Object {
               "column": 0,
-              "line": 3,
+              "line": 4,
             },
           },
           "maybeAnimated": true,
@@ -607,11 +607,11 @@ Object {
               "loc": Object {
                 "end": Object {
                   "column": 10,
-                  "line": 4,
+                  "line": 5,
                 },
                 "start": Object {
                   "column": 0,
-                  "line": 4,
+                  "line": 5,
                 },
               },
               "name": "color",
@@ -629,11 +629,11 @@ Object {
               "loc": Object {
                 "end": Object {
                   "column": 14,
-                  "line": 5,
+                  "line": 6,
                 },
                 "start": Object {
                   "column": 0,
-                  "line": 5,
+                  "line": 6,
                 },
               },
               "name": "marginLeft",
@@ -651,11 +651,11 @@ Object {
               "loc": Object {
                 "end": Object {
                   "column": 28,
-                  "line": 6,
+                  "line": 7,
                 },
                 "start": Object {
                   "column": 0,
-                  "line": 6,
+                  "line": 7,
                 },
               },
               "name": "text",
@@ -680,11 +680,11 @@ Object {
           "loc": Object {
             "end": Object {
               "column": 0,
-              "line": 10,
+              "line": 11,
             },
             "start": Object {
               "column": 0,
-              "line": 8,
+              "line": 9,
             },
           },
           "name": "CaptureText",
@@ -694,11 +694,11 @@ Object {
               "loc": Object {
                 "end": Object {
                   "column": 8,
-                  "line": 9,
+                  "line": 10,
                 },
                 "start": Object {
                   "column": 0,
-                  "line": 9,
+                  "line": 10,
                 },
               },
               "name": "onFocus",
@@ -730,11 +730,11 @@ Object {
               "loc": Object {
                 "end": Object {
                   "column": 4,
-                  "line": 13,
+                  "line": 14,
                 },
                 "start": Object {
                   "column": 0,
-                  "line": 13,
+                  "line": 14,
                 },
               },
               "name": "Stuff",
@@ -751,11 +751,11 @@ Object {
           "loc": Object {
             "end": Object {
               "column": 4,
-              "line": 13,
+              "line": 14,
             },
             "start": Object {
               "column": 0,
-              "line": 11,
+              "line": 12,
             },
           },
           "name": "List",
@@ -765,11 +765,11 @@ Object {
               "loc": Object {
                 "end": Object {
                   "column": 5,
-                  "line": 12,
+                  "line": 13,
                 },
                 "start": Object {
                   "column": 0,
-                  "line": 12,
+                  "line": 13,
                 },
               },
               "name": "from",
@@ -795,11 +795,11 @@ Object {
       "loc": Object {
         "end": Object {
           "column": 4,
-          "line": 13,
+          "line": 14,
         },
         "start": Object {
           "column": 0,
-          "line": 0,
+          "line": 1,
         },
       },
       "maybeAnimated": true,
@@ -810,11 +810,11 @@ Object {
           "loc": Object {
             "end": Object {
               "column": 31,
-              "line": 1,
+              "line": 2,
             },
             "start": Object {
               "column": 0,
-              "line": 1,
+              "line": 2,
             },
           },
           "name": "backgroundColor",
@@ -832,11 +832,11 @@ Object {
           "loc": Object {
             "end": Object {
               "column": 15,
-              "line": 2,
+              "line": 3,
             },
             "start": Object {
               "column": 0,
-              "line": 2,
+              "line": 3,
             },
           },
           "name": "onClick",
@@ -860,11 +860,11 @@ Object {
       "loc": Object {
         "end": Object {
           "column": 31,
-          "line": 1,
+          "line": 2,
         },
         "start": Object {
           "column": 0,
-          "line": 1,
+          "line": 2,
         },
       },
       "type": "Add a default value to \\"backgroundColor\\" like: \\"backgroundColor <backgroundColor default value\\"",
@@ -893,11 +893,11 @@ Object {
           "loc": Object {
             "end": Object {
               "column": 8,
-              "line": 4,
+              "line": 5,
             },
             "start": Object {
               "column": 0,
-              "line": 1,
+              "line": 2,
             },
           },
           "name": "Text",
@@ -906,11 +906,11 @@ Object {
               "loc": Object {
                 "end": Object {
                   "column": 6,
-                  "line": 2,
+                  "line": 3,
                 },
                 "start": Object {
                   "column": 0,
-                  "line": 2,
+                  "line": 3,
                 },
               },
               "name": "text",
@@ -932,11 +932,11 @@ Object {
                   "loc": Object {
                     "end": Object {
                       "column": 7,
-                      "line": 3,
+                      "line": 4,
                     },
                     "start": Object {
                       "column": 0,
-                      "line": 3,
+                      "line": 4,
                     },
                   },
                   "name": "when",
@@ -955,11 +955,11 @@ Object {
                   "loc": Object {
                     "end": Object {
                       "column": 8,
-                      "line": 4,
+                      "line": 5,
                     },
                     "start": Object {
                       "column": 0,
-                      "line": 4,
+                      "line": 5,
                     },
                   },
                   "name": "text",
@@ -988,11 +988,11 @@ Object {
       "loc": Object {
         "end": Object {
           "column": 8,
-          "line": 4,
+          "line": 5,
         },
         "start": Object {
           "column": 0,
-          "line": 0,
+          "line": 1,
         },
       },
       "name": "Vertical",
@@ -1032,11 +1032,11 @@ Object {
           "loc": Object {
             "end": Object {
               "column": 10,
-              "line": 9,
+              "line": 10,
             },
             "start": Object {
               "column": 0,
-              "line": 1,
+              "line": 2,
             },
           },
           "maybeAnimated": true,
@@ -1046,11 +1046,11 @@ Object {
               "loc": Object {
                 "end": Object {
                   "column": 9,
-                  "line": 2,
+                  "line": 3,
                 },
                 "start": Object {
                   "column": 0,
-                  "line": 2,
+                  "line": 3,
                 },
               },
               "name": "color",
@@ -1066,11 +1066,11 @@ Object {
               "loc": Object {
                 "end": Object {
                   "column": 10,
-                  "line": 3,
+                  "line": 4,
                 },
                 "start": Object {
                   "column": 0,
-                  "line": 3,
+                  "line": 4,
                 },
               },
               "name": "marginTop",
@@ -1087,11 +1087,11 @@ Object {
               "loc": Object {
                 "end": Object {
                   "column": 19,
-                  "line": 4,
+                  "line": 5,
                 },
                 "start": Object {
                   "column": 0,
-                  "line": 4,
+                  "line": 5,
                 },
               },
               "name": "border",
@@ -1113,11 +1113,11 @@ Object {
                   "loc": Object {
                     "end": Object {
                       "column": 3,
-                      "line": 5,
+                      "line": 6,
                     },
                     "start": Object {
                       "column": 0,
-                      "line": 5,
+                      "line": 6,
                     },
                   },
                   "name": "when",
@@ -1134,11 +1134,11 @@ Object {
                   "loc": Object {
                     "end": Object {
                       "column": 8,
-                      "line": 6,
+                      "line": 7,
                     },
                     "start": Object {
                       "column": 0,
-                      "line": 6,
+                      "line": 7,
                     },
                   },
                   "name": "color",
@@ -1165,11 +1165,11 @@ Object {
                   "loc": Object {
                     "end": Object {
                       "column": 11,
-                      "line": 7,
+                      "line": 8,
                     },
                     "start": Object {
                       "column": 0,
-                      "line": 7,
+                      "line": 8,
                     },
                   },
                   "name": "when",
@@ -1188,11 +1188,11 @@ Object {
                   "loc": Object {
                     "end": Object {
                       "column": 21,
-                      "line": 8,
+                      "line": 9,
                     },
                     "start": Object {
                       "column": 0,
-                      "line": 8,
+                      "line": 9,
                     },
                   },
                   "name": "backgroundColor",
@@ -1208,11 +1208,11 @@ Object {
                   "loc": Object {
                     "end": Object {
                       "column": 10,
-                      "line": 9,
+                      "line": 10,
                     },
                     "start": Object {
                       "column": 0,
-                      "line": 9,
+                      "line": 10,
                     },
                   },
                   "name": "color",
@@ -1242,11 +1242,11 @@ Object {
       "loc": Object {
         "end": Object {
           "column": 10,
-          "line": 9,
+          "line": 10,
         },
         "start": Object {
           "column": 0,
-          "line": 0,
+          "line": 1,
         },
       },
       "name": "Vertical",
@@ -1261,11 +1261,11 @@ Object {
       "loc": Object {
         "end": Object {
           "column": 10,
-          "line": 3,
+          "line": 4,
         },
         "start": Object {
           "column": 0,
-          "line": 3,
+          "line": 4,
         },
       },
       "type": "Add a default value to \\"marginTop\\" like: \\"marginTop < default value\\"",
@@ -1275,11 +1275,11 @@ Object {
       "loc": Object {
         "end": Object {
           "column": 19,
-          "line": 4,
+          "line": 5,
         },
         "start": Object {
           "column": 0,
-          "line": 4,
+          "line": 5,
         },
       },
       "type": "The shorthand border isn't supported. You need to expand it like:
@@ -1292,11 +1292,11 @@ borderColor red",
       "loc": Object {
         "end": Object {
           "column": 3,
-          "line": 5,
+          "line": 6,
         },
         "start": Object {
           "column": 0,
-          "line": 5,
+          "line": 6,
         },
       },
       "type": "This when has no condition assigned to it. Add one like: \\"when <isCondition\\"",
@@ -1306,11 +1306,11 @@ borderColor red",
       "loc": Object {
         "end": Object {
           "column": 21,
-          "line": 8,
+          "line": 9,
         },
         "start": Object {
           "column": 0,
-          "line": 8,
+          "line": 9,
         },
       },
       "type": "You're missing a base prop for backgroundColor. Add it before all whens on the block.",
