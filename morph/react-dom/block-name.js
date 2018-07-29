@@ -1,6 +1,6 @@
 import { leave } from '../react/block-name.js'
 import getBlockName from './get-block-name.js'
-import { isCell, isTable } from '../utils.js'
+import { isCell, isHeader, isTable } from '../utils.js'
 
 export function enter(node, parent, state) {
   let name = getBlockName(node, parent, state)
@@ -53,6 +53,10 @@ export function enter(node, parent, state) {
 
   if (isCell(node)) {
     return (state.cell = node)
+  }
+
+  if (isHeader(node) && node.name !== 'Text') {
+    return (state.externalHeader = node)
   }
 
   if (isTable(node)) {

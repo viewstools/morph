@@ -52,16 +52,17 @@ export const getPropertiesAsObject = list => {
 }
 
 export const getLabel = node => {
-  const header = node.children
-    .filter(child => child.name === 'Text')
-    .find(node => getProp(node, 'isHeader'))
+  const header = node.children.find(node => getProp(node, 'isHeader'))
+  if (!header) return
 
-  if (header) {
+  if (header.name === 'Text') {
     // removing the text node, because the column handles the label
     node.children.splice(node.children.indexOf(header), 1)
+  } else {
+    node.externalHeader = header
   }
 
-  return header ? getProp(header, 'text').value : null
+  return getProp(header, 'text').value
 }
 
 export const getProp = (node, key) => {
@@ -223,6 +224,9 @@ export const isList = node =>
 
 export const isCell = node =>
   node.properties.some(prop => prop.name === 'isCell')
+
+export const isHeader = node =>
+  node.properties.some(prop => prop.name === 'isHeader')
 
 export const isColumn = node =>
   node && node.type === 'Block' && node.name === 'Column'

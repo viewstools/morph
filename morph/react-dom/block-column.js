@@ -15,7 +15,8 @@ export function enter(node, parent, state) {
       ` dataKey="${dataKey.value}" width={${width}} ${
         label ? `label="${label}"` : ''
       }
-      cellRenderer={columnCellRenderer}`
+      ${node.externalHeader ? `headerRenderer={headerRenderer}` : ''}
+      cellRenderer={cellRenderer}`
     )
   }
 }
