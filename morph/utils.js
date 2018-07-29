@@ -81,7 +81,7 @@ const calculateWidth = parent => {
 
 export const getWidth = (node, parent) => {
   const width = getProp(node, 'width')
-  return width ? width : calculateWidth(parent)
+  return width ? width.value : calculateWidth(parent)
 }
 
 const maybeSafe = node =>
