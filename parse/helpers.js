@@ -52,6 +52,9 @@ const dymPropMatcher = new DidYouMeanMatcher([
   'text',
   'value',
   'when',
+  'key',
+  'maxLength',
+  'step',
 ])
 
 export const didYouMeanBlock = block => dymBlockMatcher.get(block)
@@ -332,7 +335,11 @@ const isActionable = name => name !== 'onWhen' && /^on[A-Z]/.test(name)
 export const getPropType = (block, name, defaultValue) =>
   block.isList && name === 'from'
     ? 'array'
-    : isActionable(name) ? 'function' : isNumber[name] ? 'number' : 'string'
+    : isActionable(name)
+      ? 'function'
+      : isNumber[name]
+        ? 'number'
+        : 'string'
 
 export const isTextInterpolation = (block, previous) => {
   const previousText = previous.properties.find(prop => prop.name === 'text')

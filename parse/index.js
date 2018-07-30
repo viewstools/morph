@@ -403,11 +403,13 @@ export default ({
 
           scopes.push(scope)
         } else if ((tags.slot || tags.shouldBeSlot) && !tags.validSlot) {
-          warnings.push({
-            loc,
-            type: `The value you used in the slot "${name}" is invalid`,
-            line,
-          })
+          if ((name === 'from' && block.name === 'List') || name !== 'from') {
+            warnings.push({
+              loc,
+              type: `The value you used in the slot "${name}" is invalid`,
+              line,
+            })
+          }
         }
 
         if (name === 'onWhen' && properties.length > 0) {
