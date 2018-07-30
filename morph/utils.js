@@ -81,6 +81,11 @@ const calculateWidth = parent => {
 
 export const getWidth = (node, parent) => {
   const width = getProp(node, 'width')
+  if (width) {
+    // removing from properties so it's not in the compiled css
+    node.properties.splice(node.properties.indexOf(width), 1)
+  }
+
   return width ? width.value : calculateWidth(parent)
 }
 

@@ -1,0 +1,44 @@
+UseTable Table
+from <
+headerHeight 40
+rowHeight 20
+rowColor #1C1C1C
+rowBackgroundColor white
+# rowColorAlternate <rowColor
+rowBackgroundColorAlternate black
+when <hover
+rowColor red
+rowBackgroundColor black
+rowColorAlternate green
+rowBackgroundColorAlternate white
+Name Column
+key name
+width 90
+borderBottomStyle solid
+borderBottomColor <borderColor
+borderBottomWidth 1
+Header
+isHeader true
+text Name
+
+Cell
+isCell true
+
+
+Location Column
+key location
+borderBottomStyle solid
+borderBottomColor black
+borderBottomWidth 1
+Text
+isHeader true
+text location
+
+Cell
+isCell true
+
+
+Description Column
+key description
+Cell
+isCell true

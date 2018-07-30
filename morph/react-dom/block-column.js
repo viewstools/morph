@@ -6,11 +6,6 @@ export function enter(node, parent, state) {
     const width = getWidth(node, parent)
     const label = getLabel(node)
 
-    if (width) {
-      // removing from properties so it's not in the compiled css
-      node.properties.splice(node.properties.indexOf(width), 1)
-    }
-
     state.render.push(
       ` dataKey="${dataKey.value}" width={${width}} ${
         label ? `label="${label}"` : ''

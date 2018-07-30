@@ -582,6 +582,25 @@ module.exports = {
 }
 `;
 
+exports[`e2e parses e2e UseTable 1`] = `
+Object {
+  "code": "const { get } = require('@viewstools/e2e');
+
+module.exports = {
+  Cell1: get('UseTable.Cell:1'),
+  Cell2: get('UseTable.Cell:2'),
+  Cell: get('UseTable.Cell'),
+  Description: get('UseTable.Description'),
+  Header: get('UseTable.Header'),
+  Location: get('UseTable.Location'),
+  Name: get('UseTable.Name'),
+  Text: get('UseTable.Text'),
+  _top: get('UseTable'),
+};
+",
+}
+`;
+
 exports[`e2e parses e2e UseText 1`] = `
 Object {
   "code": "const { get } = require('@viewstools/e2e');
@@ -5470,6 +5489,239 @@ export default UseSvg;
 }
 `;
 
+exports[`react-dom parses react-dom UseTable 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import Cell from './Cell.view.js';
+import Column from './Column.view.js';
+import Header from './Header.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+import { css } from 'emotion';
+import { AutoSizer, Column, Table } from 'react-virtualized';
+import PropTypes from 'prop-types';
+
+const Row = css({
+  display: 'flex',
+  color: '#1C1C1C',
+  backgroundColor: 'white',
+  '&:nth-child(even)': { backgroundColor: 'black' },
+  '&:hover': {
+    color: 'red',
+    backgroundColor: 'black',
+    '&:nth-child(even)': {
+      color: 'green',
+      backgroundColor: 'white',
+    },
+  },
+});
+const Name = css({
+  borderBottomStyle: 'solid',
+  borderBottomWidth: 1,
+  borderBottomColor: 'var(--borderBottomColor)',
+});
+const Location = css({
+  borderBottomStyle: 'solid',
+  borderBottomColor: 'black',
+  borderBottomWidth: 1,
+});
+
+const headerRenderer = ({ label }) => {
+  return <Header value={label} />;
+};
+const cellRenderer = ({ cellData }) => {
+  return <Cell value={cellData} />;
+};
+
+class UseTable extends React.Component {
+  render() {
+    const { context, props } = this;
+
+    return (
+      <AutoSizer>
+        {({ height, width }) => (
+          <Table
+            width={width}
+            height={height}
+            rowCount={props.from.length}
+            rowGetter={({ index }) => props.from[index]}
+            data-test-id={\`\${props['data-test-id'] || 'UseTable'}|\`}
+            from={props.from}
+            headerHeight={40}
+            rowHeight={20}
+            rowClassName={Row}
+            className=\\"views-block\\"
+          >
+            <Column
+              dataKey=\\"name\\"
+              width={90}
+              label=\\"Name\\"
+              headerRenderer={headerRenderer}
+              cellRenderer={cellRenderer}
+              data-test-id={\`UseTable.Name|\`}
+              key=\\"name\\"
+              style={{ '--borderBottomColor': props.borderColor }}
+              className={\`views-block \${Name}\`}
+            />
+            <Column
+              dataKey=\\"location\\"
+              width={width / 3}
+              label=\\"location\\"
+              cellRenderer={cellRenderer}
+              data-test-id={\`UseTable.Location|\`}
+              key=\\"location\\"
+              className={\`views-block \${Location}\`}
+            />
+            <Column
+              dataKey=\\"description\\"
+              width={width / 3}
+              cellRenderer={cellRenderer}
+              data-test-id={\`UseTable.Description|\`}
+              key=\\"description\\"
+              className=\\"views-block\\"
+            />
+            {props.children}
+          </Table>
+        )}
+      </AutoSizer>
+    );
+  }
+}
+UseTable.contextTypes = {
+  track: PropTypes.func.isRequired,
+};
+
+export default UseTable;
+",
+  "fonts": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "from",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "borderColor",
+      "type": "string",
+    },
+  ],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom UseTable: react-dom parses react-dom UseTable debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import Cell from './Cell.view.js';
+import Column from './Column.view.js';
+import Header from './Header.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+import { css } from 'emotion';
+import { AutoSizer, Column, Table } from 'react-virtualized';
+
+const Row = css({
+  display: 'flex',
+  color: '#1C1C1C',
+  backgroundColor: 'white',
+  '&:nth-child(even)': { backgroundColor: 'black' },
+  '&:hover': {
+    color: 'red',
+    backgroundColor: 'black',
+    '&:nth-child(even)': {
+      color: 'green',
+      backgroundColor: 'white',
+    },
+  },
+});
+const Name = css({
+  borderBottomStyle: 'solid',
+  borderBottomWidth: 1,
+  borderBottomColor: 'var(--borderBottomColor)',
+});
+const Location = css({
+  borderBottomStyle: 'solid',
+  borderBottomColor: 'black',
+  borderBottomWidth: 1,
+});
+
+const headerRenderer = ({ label }) => {
+  return <Header value={label} />;
+};
+const cellRenderer = ({ cellData }) => {
+  return <Cell value={cellData} />;
+};
+
+const UseTable = props => {
+  return (
+    <AutoSizer>
+      {({ height, width }) => (
+        <Table
+          width={width}
+          height={height}
+          rowCount={props.from.length}
+          rowGetter={({ index }) => props.from[index]}
+          data-test-id={\`\${props['data-test-id'] || 'UseTable'}|\`}
+          from={props.from}
+          headerHeight={40}
+          rowHeight={20}
+          rowClassName={Row}
+          className=\\"views-block\\"
+        >
+          <Column
+            dataKey=\\"name\\"
+            width={width / 3}
+            label=\\"Name\\"
+            headerRenderer={headerRenderer}
+            cellRenderer={cellRenderer}
+            data-test-id={\`UseTable.Name|\`}
+            key=\\"name\\"
+            style={{ '--borderBottomColor': props.borderColor }}
+            className={\`views-block \${Name}\`}
+          />
+          <Column
+            dataKey=\\"location\\"
+            width={width / 3}
+            cellRenderer={cellRenderer}
+            data-test-id={\`UseTable.Location|\`}
+            key=\\"location\\"
+            className={\`views-block \${Location}\`}
+          />
+          <Column
+            dataKey=\\"description\\"
+            width={width / 3}
+            cellRenderer={cellRenderer}
+            data-test-id={\`UseTable.Description|\`}
+            key=\\"description\\"
+            className=\\"views-block\\"
+          />
+          {props.children}
+        </Table>
+      )}
+    </AutoSizer>
+  );
+};
+
+export default UseTable;
+",
+  "fonts": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "from",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "borderColor",
+      "type": "string",
+    },
+  ],
+  "svgs": Array [],
+}
+`;
+
 exports[`react-dom parses react-dom UseText 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -8438,6 +8690,88 @@ export default UseSvg;
 ",
   "fonts": Array [],
   "slots": Array [],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-native parses react-native UseTable 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import Cell from './Cell.view.js';
+import Column from './Column.view.js';
+import Header from './Header.view.js';
+import { StyleSheet, Text } from 'react-native';
+import PropTypes from 'prop-types';
+
+const styles = StyleSheet.create({
+  Name: { width: 90, borderStyle: 'solid', borderBottomWidth: 1 },
+  Location: {
+    borderStyle: 'solid',
+    borderBottomColor: 'black',
+    borderBottomWidth: 1,
+  },
+});
+
+class UseTable extends React.Component {
+  render() {
+    const { context, props } = this;
+
+    return (
+      <Table
+        testID={\`\${props['testID'] || 'UseTable'}|\`}
+        from={props.from}
+        headerHeight={40}
+        rowHeight={20}
+        rowColor=\\"#1C1C1C\\"
+        rowBackgroundColor=\\"white\\"
+        rowBackgroundColorAlternate=\\"black\\"
+      >
+        <Column
+          testID={\`UseTable.Name|\`}
+          key=\\"name\\"
+          style={[styles.Name, { borderBottomColor: props.borderColor }]}
+        >
+          <Header testID={\`UseTable.Header|\`} isHeader={true} text=\\"Name\\" />
+          <Cell testID={\`UseTable.Cell|\`} isCell={true} />
+        </Column>
+        <Column
+          testID={\`UseTable.Location|\`}
+          key=\\"location\\"
+          style={styles.Location}
+        >
+          <Text testID={\`UseTable.Text|\`} isHeader={true}>
+            location
+          </Text>
+          <Cell testID={\`UseTable.Cell:1|\`} isCell={true} />
+        </Column>
+        <Column testID={\`UseTable.Description|\`} key=\\"description\\">
+          <Cell testID={\`UseTable.Cell:2|\`} isCell={true} />
+        </Column>
+        {props.children}
+      </Table>
+    );
+  }
+}
+UseTable.contextTypes = {
+  track: PropTypes.func.isRequired,
+};
+
+export default UseTable;
+",
+  "fonts": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "from",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "borderColor",
+      "type": "string",
+    },
+  ],
   "svgs": Array [],
 }
 `;
