@@ -5573,6 +5573,7 @@ const Svg = css({
   label: 'Svg',
   height: 20,
   width: 20,
+  opacity: 'var(--opacity)',
 });
 const SvgPath = css({ label: 'SvgPath', fill: 'red' });
 
@@ -5584,6 +5585,7 @@ class UseSvg extends React.Component {
       <svg
         data-test-id={\`\${props['data-test-id'] || 'Svg'}|\`}
         viewBox=\\"0 0 20 20\\"
+        style={{ '--opacity': props.opacity }}
         className={\`views-block \${Svg}\`}
       >
         <path
@@ -5627,11 +5629,17 @@ class UseSvg extends React.Component {
 UseSvg.contextTypes = {
   track: PropTypes.func.isRequired,
 };
-
+UseSvg.defaultProps = { opacity: 0.5 };
 export default UseSvg;
 ",
   "fonts": Array [],
-  "slots": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": 0.5,
+      "name": "opacity",
+      "type": "number",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -5647,6 +5655,7 @@ const Svg = css({
   label: 'Svg',
   height: 20,
   width: 20,
+  opacity: 'var(--opacity)',
 });
 const SvgPath = css({ label: 'SvgPath', fill: 'red' });
 
@@ -5655,6 +5664,7 @@ const UseSvg = props => {
     <svg
       data-test-id={\`\${props['data-test-id'] || 'Svg'}|\`}
       viewBox=\\"0 0 20 20\\"
+      style={{ '--opacity': props.opacity }}
       className={\`views-block \${Svg}\`}
     >
       <path
@@ -5695,10 +5705,17 @@ const UseSvg = props => {
   );
 };
 
+UseSvg.defaultProps = { opacity: 0.5 };
 export default UseSvg;
 ",
   "fonts": Array [],
-  "slots": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": 0.5,
+      "name": "opacity",
+      "type": "number",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -8794,7 +8811,12 @@ class UseSvg extends React.Component {
         height={20}
         width={20}
       >
-        <SvgPath testID={\`UseSvg.SvgPath|\`} d=\\"0 20\\" fill=\\"red\\" />
+        <SvgPath
+          testID={\`UseSvg.SvgPath|\`}
+          d=\\"0 20\\"
+          fill=\\"red\\"
+          fillOpacity={props.opacity}
+        />
         <SvgCircle testID={\`UseSvg.SvgCircle|\`} cx={10} cy={5} r={5} />
         <SvgGroup
           testID={\`UseSvg.SvgGroup|\`}
@@ -8812,11 +8834,17 @@ class UseSvg extends React.Component {
 UseSvg.contextTypes = {
   track: PropTypes.func.isRequired,
 };
-
+UseSvg.defaultProps = { opacity: 0.5 };
 export default UseSvg;
 ",
   "fonts": Array [],
-  "slots": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": 0.5,
+      "name": "opacity",
+      "type": "number",
+    },
+  ],
   "svgs": Array [],
 }
 `;
