@@ -24,8 +24,10 @@ export function leave(node, parent, state) {
   const { dynamic, static: staticStyle } = node.style
 
   const allowedStyleKeys = getAllowedStyleKeys(node)
+  const id = createId(node, state)
   let scopedUnderParent =
     !node.isCapture && !node.action && getActionableParent(node)
+
   if (scopedUnderParent) {
     scopedUnderParent = scopedUnderParent.styleName
   }
@@ -48,10 +50,10 @@ export function leave(node, parent, state) {
     const rowScopes = node.scopes.filter(scope =>
       scope.properties.some(prop => prop.tags.hasOwnProperty('rowStyle'))
     )
-    state.render.push(` rowClassName={Row}`)
+    state.render.push(` rowClassName={${id}Row }`)
     state.styles[
       'Row'
-    ] = `const Row = css({ display: 'flex', ${composeRowStyles(styles)}, ${
+    ] = `const ${id}Row = css({ display: 'flex', ${composeRowStyles(styles)}, ${
       rowScopes
         ? rowScopes.map(
             scope =>
@@ -97,7 +99,7 @@ export function leave(node, parent, state) {
       )
       .join('\n')
 
-    const id = createId(node, state)
+    // const id = createId(node, state)
 
     state.styles[id] = `const ${id} = css({${
       cssStatic ? `${cssStatic}, ` : ''
