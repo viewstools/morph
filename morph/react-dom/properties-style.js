@@ -24,6 +24,7 @@ export function leave(node, parent, state) {
   const { dynamic, static: staticStyle } = node.style
 
   const allowedStyleKeys = getAllowedStyleKeys(node)
+  // need to move this
   const id = createId(node, state)
   let scopedUnderParent =
     !node.isCapture && !node.action && getActionableParent(node)
@@ -43,28 +44,111 @@ export function leave(node, parent, state) {
   }
 
   if (isTable(node) && hasRowStyles(node)) {
-    const styles = node.properties.filter(prop =>
-      prop.tags.hasOwnProperty('rowStyle')
+    // const styles = node.properties.filter(prop =>
+    //   prop.tags.hasOwnProperty('rowStyle')
+    // )
+
+    // const rowScopes = node.scopes.filter(scope =>
+    //   scope.properties.some(prop => prop.tags.hasOwnProperty('rowStyle'))
+    // )
+
+    const normalStyles = {}
+    const alternateStyles = {}
+    Object.entries(node.style).forEach(([type, typeScopes]) => {
+      if (!(type in alternateStyles)) {
+        alternateStyles[type] = {}
+      }
+      if (!(type in normalStyles)) {
+        normalStyles[type] = {}
+      }
+
+      Object.entries(typeScopes).forEach(([scope, scopeStyles]) => {
+        if (!(scope in alternateStyles[type])) {
+          alternateStyles[type][scope] = {}
+        }
+        if (!(scope in normalStyles[type])) {
+          normalStyles[type][scope] = {}
+        }
+
+        Object.entries(scopeStyles).forEach(([key, value]) => {
+          switch (key) {
+            case 'rowColor':
+              normalStyles[type][scope]['color'] = value
+              delete node.style[type][scope][key]
+              break
+            case 'rowBackgroundColor':
+              normalStyles[type][scope]['backgroundColor'] = value
+              delete node.style[type][scope][key]
+              break
+            case 'rowColorAlternate':
+              alternateStyles[type][scope]['color'] = value
+              delete node.style[type][scope][key]
+              break
+            case 'rowBackgroundColorAlternate':
+              alternateStyles[type][scope]['backgroundColor'] = value
+              delete node.style[type][scope][key]
+              break
+
+            default:
+              break
+          }
+        })
+      })
+    })
+    debugger
+
+    let { cssDynamic: normalDynamic, cssStatic: normalStatic } = composeStyles(
+      state,
+      node,
+      normalStyles,
+      scopedUnderParent
     )
 
-    const rowScopes = node.scopes.filter(scope =>
-      scope.properties.some(prop => prop.tags.hasOwnProperty('rowStyle'))
-    )
-    state.render.push(` rowClassName={${id}Row }`)
-    state.styles[
-      'Row'
-    ] = `const ${id}Row = css({ display: 'flex', ${composeRowStyles(styles)}, ${
-      rowScopes
-        ? rowScopes.map(
-            scope =>
-              `'&:${scope.value}': {${composeRowStyles(
-                scope.properties.filter(prop =>
-                  prop.tags.hasOwnProperty('rowStyle')
-                )
-              )}}`
-          )
-        : ''
-    }})`
+    let {
+      cssDynamic: alternateDynamic,
+      cssStatic: alternateStatic,
+    } = composeStyles(state, node, alternateStyles, scopedUnderParent)
+
+    debugger
+
+    // state.render.push(` rowClassName={${id}Row }`)
+
+    // state.styles[id] = `const ${id} = css({${
+    //   cssStatic ? `${cssStatic}, ` : ''
+    // }${cssDynamic}})`
+
+    const normalCss = `${normalStatic ? `${normalStatic}` : ''} ${
+      normalDynamic ? `, ${normalDynamic}` : ''
+    }`
+
+    const alternateCss = `${alternateStatic ? `${alternateStatic}` : ''} ${
+      alternateDynamic ? `, ${alternateDynamic}` : ''
+    }`
+
+    debugger
+
+    // debugger
+
+    state.styles[`${id}Row`] = `const ${id}Row = css({ display: 'flex'
+    ${normalCss ? `, ${normalCss}` : ''}
+    ${alternateCss ? `, "&:nth-child(even)": {${alternateCss}}` : ''}
+    })`
+
+    // state.styles[
+    //   'Row'
+    // ] = `const ${id}Row = css({ display: 'flex', ${composeRowStyles(styles)}, ${
+    //   rowScopes
+    //     ? rowScopes.map(
+    //         scope =>
+    //           `'&:${scope.value}': {${composeRowStyles(
+    //             scope.properties.filter(prop =>
+    //               prop.tags.hasOwnProperty('rowStyle')
+    //             )
+    //           )}}`
+    //       )
+    //     : ''
+    // }})`
+    // })
   }
 
   // dynamic merges static styles
@@ -72,19 +156,26 @@ export function leave(node, parent, state) {
     state.cssDynamic = true
     node.styleName = node.nameFinal
 
-    let cssStatic = Object.keys(staticStyle)
-      .filter(
-        key => allowedStyleKeys.includes(key) && hasKeys(staticStyle[key])
-      )
-      .map(key =>
-        asCss(
-          asStaticCss(staticStyle[key], Object.keys(dynamic[key])),
-          key,
-          scopedUnderParent
-        ).join('\n')
-      )
+    // let cssStatic = Object.keys(staticStyle)
+    //   .filter(
+    //     key => allowedStyleKeys.includes(key) && hasKeys(staticStyle[key])
+    //   )
+    //   .map(key =>
+    //     asCss(
+    //       asStaticCss(staticStyle[key], Object.keys(dynamic[key])),
+    //       key,
+    //       scopedUnderParent
+    //     ).join('\n')
+    //   )
 
-    cssStatic = cssStatic.join(',\n')
+    // cssStatic = cssStatic.join(',\n')
+
+    let { cssDynamic, cssStatic } = composeStyles(
+      state,
+      node,
+      node.style,
+      scopedUnderParent
+    )
 
     if (node.isAnimated) {
       cssStatic = cssStatic
@@ -92,14 +183,14 @@ export function leave(node, parent, state) {
         : asAnimatedCss(node)
     }
 
-    let cssDynamic = Object.keys(dynamic)
-      .filter(key => allowedStyleKeys.includes(key) && hasKeys(dynamic[key]))
-      .map(key =>
-        asCss(asDynamicCss(dynamic[key]), key, scopedUnderParent).join('\n')
-      )
-      .join('\n')
+    // let cssDynamic = Object.keys(dynamic)
+    //   .filter(key => allowedStyleKeys.includes(key) && hasKeys(dynamic[key]))
+    //   .map(key =>
+    //     asCss(asDynamicCss(dynamic[key]), key, scopedUnderParent).join('\n')
+    //   )
+    //   .join('\n')
 
-    // const id = createId(node, state)
+    const id = createId(node, state)
 
     state.styles[id] = `const ${id} = css({${
       cssStatic ? `${cssStatic}, ` : ''
@@ -119,19 +210,73 @@ export function leave(node, parent, state) {
     state.cssStatic = true
 
     const id = createId(node, state)
-    const css = Object.keys(staticStyle)
-      .filter(
-        key => allowedStyleKeys.includes(key) && hasKeys(staticStyle[key])
-      )
-      .map(key =>
-        asCss(asStaticCss(staticStyle[key]), key, scopedUnderParent).join('\n')
-      )
-      .join(',\n')
+    // const css = Object.keys(staticStyle)
+    //   .filter(
+    //     key => allowedStyleKeys.includes(key) && hasKeys(staticStyle[key])
+    //   )
+    //   .map(key =>
+    //     asCss(asStaticCss(staticStyle[key]), key, scopedUnderParent).join('\n')
+    //   )
+    //   .join(',\n')
 
-    if (css) {
-      state.styles[id] = `const ${id} = css({${css}})`
+    const { cssStatic } = composeStyles(
+      state,
+      node,
+      node.style,
+      scopedUnderParent
+    )
+
+    if (cssStatic) {
+      state.styles[id] = `const ${id} = css({${cssStatic}})`
     }
   }
+}
+
+const composeStyles = (state, node, styles, scopedUnderParent) => {
+  const allowedStyleKeys = getAllowedStyleKeys(node)
+  debugger
+
+  let cssStatic
+
+  if (hasKeysInChildren(styles.dynamic)) {
+    let cssStatic = Object.keys(styles.static)
+      .filter(
+        key => allowedStyleKeys.includes(key) && hasKeys(styles.static[key])
+      )
+      .map(key =>
+        asCss(
+          asStaticCss(styles.static[key], Object.keys(styles.dynamic[key])),
+          key,
+          scopedUnderParent
+        ).join('\n')
+      )
+
+    cssStatic = cssStatic.join(',\n')
+
+    let cssDynamic = Object.keys(styles.dynamic)
+      .filter(
+        key => allowedStyleKeys.includes(key) && hasKeys(styles.dynamic[key])
+      )
+      .map(key =>
+        asCss(asDynamicCss(styles.dynamic[key]), key, scopedUnderParent).join(
+          '\n'
+        )
+      )
+      .join('\n')
+
+    return { cssDynamic, cssStatic }
+  }
+
+  cssStatic = Object.keys(styles.static)
+    .filter(
+      key => allowedStyleKeys.includes(key) && hasKeys(styles.static[key])
+    )
+    .map(key =>
+      asCss(asStaticCss(styles.static[key]), key, scopedUnderParent).join('\n')
+    )
+    .join(',\n')
+
+  return { cssStatic }
 }
 
 const asAnimatedCss = node => {
@@ -208,27 +353,27 @@ const asCss = (styles, key, scopedUnderParent) => {
   return css
 }
 
-const getStyleString = (styles, regex) =>
-  styles
-    .map(style => {
-      let name = style.name.match(new RegExp(regex))[1]
-      name = name.replace(/^.{1}/g, name[0].toLowerCase())
+// const getStyleString = (styles, regex) =>
+//   styles
+//     .map(style => {
+//       let name = style.name.match(new RegExp(regex))[1]
+//       name = name.replace(/^.{1}/g, name[0].toLowerCase())
 
-      return `${name}: '${style.value}'`
-    })
-    .join(`,\n`)
+//       return `${name}: '${style.value}'`
+//     })
+//     .join(`,\n`)
 
-const composeRowStyles = styles => {
-  const defaults = styles.filter(style => !/Alternate/.test(style.name))
-  const alternates = styles.filter(style => /Alternate/.test(style.name))
+// const composeRowStyles = styles => {
+//   const defaults = styles.filter(style => !/Alternate/.test(style.name))
+//   const alternates = styles.filter(style => /Alternate/.test(style.name))
 
-  const defaultStyles = getStyleString(defaults, '^row(.*?)$')
-  const alternateStyles = alternates.length
-    ? getStyleString(alternates, '^row(.*?)Alternate')
-    : null
+//   const defaultStyles = getStyleString(defaults, '^row(.*?)$')
+//   const alternateStyles = alternates.length
+//     ? getStyleString(alternates, '^row(.*?)Alternate')
+//     : null
 
-  return `
-    ${defaultStyles ? `${defaultStyles},` : ''}
-    ${alternateStyles ? `"&:nth-child(even)": {${alternateStyles}}` : ''}
-  `
-}
+//   return `
+//     ${defaultStyles ? `${defaultStyles},` : ''}
+//     ${alternateStyles ? `"&:nth-child(even)": {${alternateStyles}}` : ''}
+//   `
+// }
