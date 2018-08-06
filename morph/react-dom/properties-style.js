@@ -23,9 +23,6 @@ export { enter }
 export function leave(node, parent, state) {
   const { dynamic, static: staticStyle } = node.style
 
-  const allowedStyleKeys = getAllowedStyleKeys(node)
-  // need to move this
-  const id = createId(node, state)
   let scopedUnderParent =
     !node.isCapture && !node.action && getActionableParent(node)
 
@@ -44,16 +41,10 @@ export function leave(node, parent, state) {
   }
 
   if (isTable(node) && hasRowStyles(node)) {
-    // const styles = node.properties.filter(prop =>
-    //   prop.tags.hasOwnProperty('rowStyle')
-    // )
-
-    // const rowScopes = node.scopes.filter(scope =>
-    //   scope.properties.some(prop => prop.tags.hasOwnProperty('rowStyle'))
-    // )
-
     const normalStyles = {}
     const alternateStyles = {}
+    const id = createId(node, state)
+
     Object.entries(node.style).forEach(([type, typeScopes]) => {
       if (!(type in alternateStyles)) {
         alternateStyles[type] = {}
@@ -95,27 +86,16 @@ export function leave(node, parent, state) {
         })
       })
     })
-    debugger
 
-    let { cssDynamic: normalDynamic, cssStatic: normalStatic } = composeStyles(
-      state,
-      node,
-      normalStyles,
-      scopedUnderParent
-    )
+    const {
+      cssDynamic: normalDynamic,
+      cssStatic: normalStatic,
+    } = composeStyles(node, normalStyles, scopedUnderParent)
 
-    let {
+    const {
       cssDynamic: alternateDynamic,
       cssStatic: alternateStatic,
-    } = composeStyles(state, node, alternateStyles, scopedUnderParent)
-
-    debugger
-
-    // state.render.push(` rowClassName={${id}Row }`)
-
-    // state.styles[id] = `const ${id} = css({${
-    //   cssStatic ? `${cssStatic}, ` : ''
-    // }${cssDynamic}})`
+    } = composeStyles(node, alternateStyles, scopedUnderParent)
 
     const normalCss = `${normalStatic ? `${normalStatic}` : ''} ${
       normalDynamic ? `, ${normalDynamic}` : ''
@@ -125,10 +105,7 @@ export function leave(node, parent, state) {
       alternateDynamic ? `, ${alternateDynamic}` : ''
     }`
 
-    debugger
-
-    // debugger
-
+    state.render.push(` rowClassName={${id}Row}`)
     state.styles[`${id}Row`] = `const ${id}Row = css({ display: 'flex'
     ${normalCss ? `, ${normalCss}` : ''}
     ${alternateCss ? `, "&:nth-child(even)": {${alternateCss}}` : ''}
@@ -155,6 +132,7 @@ export function leave(node, parent, state) {
   if (hasKeysInChildren(dynamic)) {
     state.cssDynamic = true
     node.styleName = node.nameFinal
+    const id = createId(node, state)
 
     // let cssStatic = Object.keys(staticStyle)
     //   .filter(
@@ -171,7 +149,6 @@ export function leave(node, parent, state) {
     // cssStatic = cssStatic.join(',\n')
 
     let { cssDynamic, cssStatic } = composeStyles(
-      state,
       node,
       node.style,
       scopedUnderParent
@@ -182,15 +159,6 @@ export function leave(node, parent, state) {
         ? `${cssStatic}, ${asAnimatedCss(node)}`
         : asAnimatedCss(node)
     }
-
-    // let cssDynamic = Object.keys(dynamic)
-    //   .filter(key => allowedStyleKeys.includes(key) && hasKeys(dynamic[key]))
-    //   .map(key =>
-    //     asCss(asDynamicCss(dynamic[key]), key, scopedUnderParent).join('\n')
-    //   )
-    //   .join('\n')
-
-    const id = createId(node, state)
 
     state.styles[id] = `const ${id} = css({${
       cssStatic ? `${cssStatic}, ` : ''
@@ -208,23 +176,9 @@ export function leave(node, parent, state) {
     }
   } else if (hasKeysInChildren(staticStyle)) {
     state.cssStatic = true
-
     const id = createId(node, state)
-    // const css = Object.keys(staticStyle)
-    //   .filter(
-    //     key => allowedStyleKeys.includes(key) && hasKeys(staticStyle[key])
-    //   )
-    //   .map(key =>
-    //     asCss(asStaticCss(staticStyle[key]), key, scopedUnderParent).join('\n')
-    //   )
-    //   .join(',\n')
 
-    const { cssStatic } = composeStyles(
-      state,
-      node,
-      node.style,
-      scopedUnderParent
-    )
+    const { cssStatic } = composeStyles(node, node.style, scopedUnderParent)
 
     if (cssStatic) {
       state.styles[id] = `const ${id} = css({${cssStatic}})`
@@ -232,11 +186,10 @@ export function leave(node, parent, state) {
   }
 }
 
-const composeStyles = (state, node, styles, scopedUnderParent) => {
+const composeStyles = (node, styles, scopedUnderParent) => {
   const allowedStyleKeys = getAllowedStyleKeys(node)
-  debugger
 
-  let cssStatic
+  debugger
 
   if (hasKeysInChildren(styles.dynamic)) {
     let cssStatic = Object.keys(styles.static)
@@ -253,7 +206,7 @@ const composeStyles = (state, node, styles, scopedUnderParent) => {
 
     cssStatic = cssStatic.join(',\n')
 
-    let cssDynamic = Object.keys(styles.dynamic)
+    const cssDynamic = Object.keys(styles.dynamic)
       .filter(
         key => allowedStyleKeys.includes(key) && hasKeys(styles.dynamic[key])
       )
@@ -267,7 +220,7 @@ const composeStyles = (state, node, styles, scopedUnderParent) => {
     return { cssDynamic, cssStatic }
   }
 
-  cssStatic = Object.keys(styles.static)
+  const cssStatic = Object.keys(styles.static)
     .filter(
       key => allowedStyleKeys.includes(key) && hasKeys(styles.static[key])
     )
