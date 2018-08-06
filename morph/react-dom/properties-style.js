@@ -105,10 +105,10 @@ export function leave(node, parent, state) {
       alternateDynamic ? `, ${alternateDynamic}` : ''
     }`
 
-    debugger
     node.hasDynamicRowStyles = !!(normalDynamic || alternateDynamic)
     state.render.push(` style={{${getDynamicStyles(node)}}}`)
     state.render.push(` rowClassName={${id}Row}`)
+
     state.styles[`${id}Row`] = `const ${id}Row = css({ display: 'flex'
     ${normalCss ? `, ${normalCss}` : ''}
     ${alternateCss ? `, "&:nth-child(even)": {${alternateCss}}` : ''}
@@ -120,20 +120,6 @@ export function leave(node, parent, state) {
     state.cssDynamic = true
     node.styleName = node.nameFinal
     const id = createId(node, state)
-
-    // let cssStatic = Object.keys(staticStyle)
-    //   .filter(
-    //     key => allowedStyleKeys.includes(key) && hasKeys(staticStyle[key])
-    //   )
-    //   .map(key =>
-    //     asCss(
-    //       asStaticCss(staticStyle[key], Object.keys(dynamic[key])),
-    //       key,
-    //       scopedUnderParent
-    //     ).join('\n')
-    //   )
-
-    // cssStatic = cssStatic.join(',\n')
 
     let { cssDynamic, cssStatic } = composeStyles(
       node,
@@ -290,28 +276,3 @@ const asCss = (styles, key, scopedUnderParent) => {
 
   return css
 }
-
-// const getStyleString = (styles, regex) =>
-//   styles
-//     .map(style => {
-//       let name = style.name.match(new RegExp(regex))[1]
-//       name = name.replace(/^.{1}/g, name[0].toLowerCase())
-
-//       return `${name}: '${style.value}'`
-//     })
-//     .join(`,\n`)
-
-// const composeRowStyles = styles => {
-//   const defaults = styles.filter(style => !/Alternate/.test(style.name))
-//   const alternates = styles.filter(style => /Alternate/.test(style.name))
-
-//   const defaultStyles = getStyleString(defaults, '^row(.*?)$')
-//   const alternateStyles = alternates.length
-//     ? getStyleString(alternates, '^row(.*?)Alternate')
-//     : null
-
-//   return `
-//     ${defaultStyles ? `${defaultStyles},` : ''}
-//     ${alternateStyles ? `"&:nth-child(even)": {${alternateStyles}}` : ''}
-//   `
-// }

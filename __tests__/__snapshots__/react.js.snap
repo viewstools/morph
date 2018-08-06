@@ -5501,18 +5501,13 @@ import { css } from 'emotion';
 import { AutoSizer, Column, Table } from 'react-virtualized';
 import PropTypes from 'prop-types';
 
-const Row = css({
+const UseTable1Row = css({
   display: 'flex',
   color: '#1C1C1C',
   backgroundColor: 'white',
-  '&:nth-child(even)': { backgroundColor: 'black' },
-  '&:hover': {
-    color: 'red',
+  '&:nth-child(even)': {
     backgroundColor: 'black',
-    '&:nth-child(even)': {
-      color: 'green',
-      backgroundColor: 'white',
-    },
+    color: 'var(--rowColorAlternate)',
   },
 });
 const Name = css({
@@ -5549,8 +5544,9 @@ class UseTable extends React.Component {
             from={props.from}
             headerHeight={40}
             rowHeight={20}
-            rowClassName={Row}
-            className=\\"views-block\\"
+            style={{ '--rowColorAlternate': props.rowColor }}
+            rowClassName={UseTable1Row}
+            className={\`views-block \${UseTable1}\`}
           >
             <Column
               dataKey=\\"name\\"
@@ -5602,6 +5598,11 @@ export default UseTable;
     },
     Object {
       "defaultValue": false,
+      "name": "rowColor",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": false,
       "name": "borderColor",
       "type": "string",
     },
@@ -5621,18 +5622,13 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 import { AutoSizer, Column, Table } from 'react-virtualized';
 
-const Row = css({
+const UseTable1Row = css({
   display: 'flex',
   color: '#1C1C1C',
   backgroundColor: 'white',
-  '&:nth-child(even)': { backgroundColor: 'black' },
-  '&:hover': {
-    color: 'red',
+  '&:nth-child(even)': {
     backgroundColor: 'black',
-    '&:nth-child(even)': {
-      color: 'green',
-      backgroundColor: 'white',
-    },
+    color: 'var(--rowColorAlternate)',
   },
 });
 const Name = css({
@@ -5666,8 +5662,9 @@ const UseTable = props => {
           from={props.from}
           headerHeight={40}
           rowHeight={20}
-          rowClassName={Row}
-          className=\\"views-block\\"
+          style={{ '--rowColorAlternate': props.rowColor }}
+          rowClassName={UseTable1Row}
+          className={\`views-block \${UseTable1}\`}
         >
           <Column
             dataKey=\\"name\\"
@@ -5710,6 +5707,11 @@ export default UseTable;
     Object {
       "defaultValue": false,
       "name": "from",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "rowColor",
       "type": "string",
     },
     Object {
@@ -8705,6 +8707,11 @@ import { StyleSheet, Text } from 'react-native';
 import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
+  UseTable1: {
+    rowColor: '#1C1C1C',
+    rowBackgroundColor: 'white',
+    rowBackgroundColorAlternate: 'black',
+  },
   Name: { width: 90, borderStyle: 'solid', borderBottomWidth: 1 },
   Location: {
     borderStyle: 'solid',
@@ -8723,9 +8730,7 @@ class UseTable extends React.Component {
         from={props.from}
         headerHeight={40}
         rowHeight={20}
-        rowColor=\\"#1C1C1C\\"
-        rowBackgroundColor=\\"white\\"
-        rowBackgroundColorAlternate=\\"black\\"
+        style={[styles.UseTable1, { rowColorAlternate: props.rowColor }]}
       >
         <Column
           testID={\`UseTable.Name|\`}
@@ -8764,6 +8769,11 @@ export default UseTable;
     Object {
       "defaultValue": false,
       "name": "from",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "rowColor",
       "type": "string",
     },
     Object {
