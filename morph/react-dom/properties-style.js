@@ -110,22 +110,6 @@ export function leave(node, parent, state) {
     ${normalCss ? `, ${normalCss}` : ''}
     ${alternateCss ? `, "&:nth-child(even)": {${alternateCss}}` : ''}
     })`
-
-    // state.styles[
-    //   'Row'
-    // ] = `const ${id}Row = css({ display: 'flex', ${composeRowStyles(styles)}, ${
-    //   rowScopes
-    //     ? rowScopes.map(
-    //         scope =>
-    //           `'&:${scope.value}': {${composeRowStyles(
-    //             scope.properties.filter(prop =>
-    //               prop.tags.hasOwnProperty('rowStyle')
-    //             )
-    //           )}}`
-    //       )
-    //     : ''
-    // }})`
-    // })
   }
 
   // dynamic merges static styles

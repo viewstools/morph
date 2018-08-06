@@ -210,6 +210,7 @@ export const isRowStyle = node => isTag(node, 'rowStyle')
 export const isTag = (node, tag) => node && node.tags[tag]
 
 export const getActionableParent = node => {
+  debugger
   if (!node.parent) return false
   if (node.parent.action) return node.parent
   return getActionableParent(node.parent)
