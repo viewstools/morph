@@ -105,6 +105,9 @@ export function leave(node, parent, state) {
       alternateDynamic ? `, ${alternateDynamic}` : ''
     }`
 
+    debugger
+    node.hasDynamicRowStyles = !!(normalDynamic || alternateDynamic)
+    state.render.push(` style={{${getDynamicStyles(node)}}}`)
     state.render.push(` rowClassName={${id}Row}`)
     state.styles[`${id}Row`] = `const ${id}Row = css({ display: 'flex'
     ${normalCss ? `, ${normalCss}` : ''}
@@ -155,7 +158,7 @@ export function leave(node, parent, state) {
           state.isReactNative
         )},${getDynamicStyles(node)}}}`
       )
-    } else {
+    } else if (!node.hasDynamicRowStyles) {
       state.render.push(` style={{${getDynamicStyles(node)}}}`)
     }
   } else if (hasKeysInChildren(staticStyle)) {
@@ -172,8 +175,6 @@ export function leave(node, parent, state) {
 
 const composeStyles = (node, styles, scopedUnderParent) => {
   const allowedStyleKeys = getAllowedStyleKeys(node)
-
-  debugger
 
   if (hasKeysInChildren(styles.dynamic)) {
     let cssStatic = Object.keys(styles.static)
