@@ -63,7 +63,9 @@ export const getScope = node => node.value.split('when ')[1]
 const maybeSafe = node =>
   node.tags.slot
     ? node.value
-    : typeof node.value === 'string' ? safe(node.value) : node.value
+    : typeof node.value === 'string'
+      ? safe(node.value)
+      : node.value
 
 const getScopedProps = (propNode, blockNode) => {
   const scopes = blockNode.scopes
@@ -102,7 +104,9 @@ const getStandardInterpolation = (node, re, textNode, item) =>
     re,
     hasCustomScopes(textNode, item)
       ? wrap(getScopedCondition(textNode, item, true))
-      : isSlot(textNode) ? wrap(textNode.value) : textNode.value
+      : isSlot(textNode)
+        ? wrap(textNode.value)
+        : textNode.value
   )
 
 export const getScopedCondition = (
@@ -489,20 +493,34 @@ export const createId = (node, state) => {
   return id
 }
 
-export const hasPaddingProp = styleProps =>
-  Object.keys(styleProps).some(prop => prop.includes('padding'))
+const CONTENT_CONTAINER_STYLE_PROPS = [
+  'paddingTop',
+  'paddingBottom',
+  'paddingLeft',
+  'paddingRight',
+  'flexDirection',
+  'flexWrap',
+  'justifyContent',
+  'alignItems',
+]
 
-export const getPaddingProps = styleProps =>
+const isContentContainerStyleProp = prop =>
+  CONTENT_CONTAINER_STYLE_PROPS.includes(prop)
+
+export const hasContentContainerStyleProp = styleProps =>
+  Object.keys(styleProps).some(isContentContainerStyleProp)
+
+export const getContentContainerStyleProps = styleProps =>
   Object.keys(styleProps)
-    .filter(key => key.includes('padding'))
+    .filter(isContentContainerStyleProp)
     .reduce((obj, key) => {
       obj[key] = styleProps[key]
       return obj
     }, {})
 
-export const removePaddingProps = styleProps =>
+export const removeContentContainerStyleProps = styleProps =>
   Object.keys(styleProps)
-    .filter(key => !key.includes('padding'))
+    .filter(key => !isContentContainerStyleProp(key))
     .reduce((obj, key) => {
       obj[key] = styleProps[key]
       return obj

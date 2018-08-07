@@ -2465,6 +2465,18 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Something from './Something.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
+import { css } from 'emotion';
+
+const ListOfSomething1 = css({
+  label: 'ListOfSomething1',
+  paddingLeft: 2,
+  justifyContent: 'center',
+  alignItems: 'center',
+  flexDirection: 'row',
+  flexWrap: 'wrap',
+  overflowY: 'auto',
+  backgroundColor: 'red',
+});
 
 class ListOfSomething extends React.Component {
   render() {
@@ -2473,7 +2485,7 @@ class ListOfSomething extends React.Component {
     return (
       <div
         data-test-id={\`\${props['data-test-id'] || 'ListOfSomething'}|\`}
-        className=\\"views-block\\"
+        className={\`views-block \${ListOfSomething1}\`}
       >
         {Array.isArray(props.from) &&
           props.from.map((item, index) => (
@@ -2514,12 +2526,24 @@ Object {
 import React from 'react';
 import Something from './Something.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
+import { css } from 'emotion';
+
+const ListOfSomething1 = css({
+  label: 'ListOfSomething1',
+  paddingLeft: 2,
+  justifyContent: 'center',
+  alignItems: 'center',
+  flexDirection: 'row',
+  flexWrap: 'wrap',
+  overflowY: 'auto',
+  backgroundColor: 'red',
+});
 
 const ListOfSomething = props => {
   return (
     <div
       data-test-id={\`\${props['data-test-id'] || 'ListOfSomething'}|\`}
-      className=\\"views-block\\"
+      className={\`views-block \${ListOfSomething1}\`}
     >
       {Array.isArray(props.from) &&
         props.from.map((item, index) => (
@@ -7202,25 +7226,38 @@ Object {
 import PropTypes from 'prop-types';
 import React from 'react';
 import Something from './Something.view.js';
-import { View } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
+
+const styles = StyleSheet.create({
+  ListOfSomething1ContentContainer: {
+    paddingLeft: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  ListOfSomething1: { backgroundColor: 'red' },
+});
 
 class ListOfSomething extends React.Component {
   render() {
     const { context, props } = this;
 
     return (
-      <View testID={\`\${props['testID'] || 'ListOfSomething'}|\`}>
-        {Array.isArray(props.from) &&
-          props.from.map((item, index) => (
-            <Something
-              index={index}
-              {...item}
-              key={index}
-              testID={\`ListOfSomething.Something|\`}
-            />
-          ))}
-        {props.children}
-      </View>
+      <FlatList
+        testID={\`\${props['testID'] || 'ListOfSomething'}|\`}
+        style={styles.ListOfSomething1}
+        contentContainerStyle={styles.ListOfSomething1ContentContainer}
+        data={props.from}
+        keyExtractor={(item, index) => index}
+        renderItem={({ item, index }) => (
+          <Something
+            index={index}
+            {...item}
+            testID={\`ListOfSomething.Something|\`}
+          />
+        )}
+      />
     );
   }
 }
