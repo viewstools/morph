@@ -38,7 +38,7 @@
     "import-export": "^1.0.1",
     "jest": "^23.1.0",
     "lint-staged": "^7.2.0",
-    "rollup": "^0.63.0",
+    "rollup": "^0.64.1",
     "rollup-plugin-babel": "^3.0.3",
     "rollup-watch": "^4.3.1"
   },
