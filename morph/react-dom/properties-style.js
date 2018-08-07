@@ -87,8 +87,6 @@ export function leave(node, parent, state) {
       })
     })
 
-    debugger
-
     const {
       cssDynamic: normalDynamic,
       cssStatic: normalStatic,
@@ -108,6 +106,7 @@ export function leave(node, parent, state) {
     }`
 
     node.hasDynamicRowStyles = !!(normalDynamic || alternateDynamic)
+    debugger
     state.render.push(` style={{${getDynamicStyles(node)}}}`)
     state.render.push(` rowClassName={${id}Row}`)
 
@@ -163,7 +162,6 @@ export function leave(node, parent, state) {
 
 const composeStyles = (node, styles, scopedUnderParent) => {
   const allowedStyleKeys = getAllowedStyleKeys(node)
-  debugger
 
   if (hasKeysInChildren(styles.dynamic)) {
     let cssStatic = Object.keys(styles.static)

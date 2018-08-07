@@ -92,9 +92,7 @@ export const getWidth = (node, parent) => {
 const maybeSafe = node =>
   node.tags.slot
     ? node.value
-    : typeof node.value === 'string'
-      ? safe(node.value)
-      : node.value
+    : typeof node.value === 'string' ? safe(node.value) : node.value
 
 const getScopedProps = (propNode, blockNode) => {
   const scopes = blockNode.scopes
@@ -133,9 +131,7 @@ const getStandardInterpolation = (node, re, textNode, item) =>
     re,
     hasCustomScopes(textNode, item)
       ? wrap(getScopedCondition(textNode, item, true))
-      : isSlot(textNode)
-        ? wrap(textNode.value)
-        : textNode.value
+      : isSlot(textNode) ? wrap(textNode.value) : textNode.value
   )
 
 export const getScopedCondition = (
@@ -146,7 +142,6 @@ export const getScopedCondition = (
   // alreadyInterpolated = interpolation that contains scoped condition
   // !alreadyInterpolated = scoped condition that contains interpolation
   // see tests in TextInterpolation.view for an example of both
-
   const scopedProps = getScopedProps(propNode, blockNode)
 
   if (!scopedProps) return false
@@ -423,16 +418,21 @@ export const getDynamicStyles = node => {
     node.properties
       .filter(prop => prop.tags.style && prop.tags.slot)
       .map(prop => `'--${prop.name}': ${getPropValue(prop)}`),
-    node.scopes.map(scope =>
-      scope.properties.map(prop => {
+    node.scopes.map(scope => {
+      debugger
+      return scope.properties.map(prop => {
         const unit = getUnit(prop)
         return (
-          prop.tags.style &&
-          prop.conditional &&
-          `'--${prop.name}': \`${prop.conditional}${unit}\``
+          (prop.tags.style &&
+            prop.conditional &&
+            `'--${prop.name}': \`${prop.conditional}${unit}\``) ||
+          (prop.tags.style &&
+            prop.tags.slot &&
+            prop.scope === 'hover' &&
+            `'--${prop.name}': ${getPropValue(prop)}`)
         )
       })
-    ),
+    }),
   ]).filter(Boolean)
 }
 
