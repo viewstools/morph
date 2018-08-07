@@ -3910,7 +3910,7 @@ class SomeMissingStyle extends React.Component {
           })
         }
         tabIndex={-1}
-        style={{}}
+        style={{ '--backgroundColor': props.backgroundColorHover }}
         className={\`views-block \${WindowControl}\`}
       >
         {props.children}
@@ -3964,7 +3964,7 @@ const SomeMissingStyle = props => {
     <button
       data-test-id={\`\${props['data-test-id'] || 'WindowControl'}|\`}
       onClick={props.onClick}
-      style={{}}
+      style={{ '--backgroundColor': props.backgroundColorHover }}
       className={\`views-block \${WindowControl}\`}
     >
       {props.children}
@@ -5505,9 +5505,19 @@ const UseTable1Row = css({
   display: 'flex',
   color: '#1C1C1C',
   backgroundColor: 'white',
+  '&:hover': {
+    color: 'red',
+    backgroundColor: 'black',
+  },
   '&:nth-child(even)': {
     backgroundColor: 'black',
+    '&:hover': {
+      color: 'green',
+    },
     color: 'var(--rowColorAlternate)',
+    '&:hover': {
+      backgroundColor: 'var(--rowBackgroundColorAlternate)',
+    },
   },
 });
 const Name = css({
@@ -5544,7 +5554,10 @@ class UseTable extends React.Component {
             from={props.from}
             headerHeight={40}
             rowHeight={20}
-            style={{ '--rowColorAlternate': props.rowColor }}
+            style={{
+              '--rowColorAlternate': props.rowColorAlternate,
+              '--rowBackgroundColorAlternate': props.rowBgColorAlternate,
+            }}
             rowClassName={UseTable1Row}
             className={\`views-block \${UseTable1}\`}
           >
@@ -5598,7 +5611,12 @@ export default UseTable;
     },
     Object {
       "defaultValue": false,
-      "name": "rowColor",
+      "name": "margin",
+      "type": "number",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "rowColorAlternate",
       "type": "string",
     },
     Object {
@@ -5626,9 +5644,19 @@ const UseTable1Row = css({
   display: 'flex',
   color: '#1C1C1C',
   backgroundColor: 'white',
+  '&:hover': {
+    color: 'red',
+    backgroundColor: 'black',
+  },
   '&:nth-child(even)': {
     backgroundColor: 'black',
+    '&:hover': {
+      color: 'green',
+    },
     color: 'var(--rowColorAlternate)',
+    '&:hover': {
+      backgroundColor: 'var(--rowBackgroundColorAlternate)',
+    },
   },
 });
 const Name = css({
@@ -5662,7 +5690,10 @@ const UseTable = props => {
           from={props.from}
           headerHeight={40}
           rowHeight={20}
-          style={{ '--rowColorAlternate': props.rowColor }}
+          style={{
+            '--rowColorAlternate': props.rowColorAlternate,
+            '--rowBackgroundColorAlternate': props.rowBgColorAlternate,
+          }}
           rowClassName={UseTable1Row}
           className={\`views-block \${UseTable1}\`}
         >
@@ -5711,7 +5742,12 @@ export default UseTable;
     },
     Object {
       "defaultValue": false,
-      "name": "rowColor",
+      "name": "margin",
+      "type": "number",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "rowColorAlternate",
       "type": "string",
     },
     Object {
@@ -8730,7 +8766,10 @@ class UseTable extends React.Component {
         from={props.from}
         headerHeight={40}
         rowHeight={20}
-        style={[styles.UseTable1, { rowColorAlternate: props.rowColor }]}
+        style={[
+          styles.UseTable1,
+          { rowColorAlternate: props.rowColorAlternate },
+        ]}
       >
         <Column
           testID={\`UseTable.Name|\`}
@@ -8773,7 +8812,12 @@ export default UseTable;
     },
     Object {
       "defaultValue": false,
-      "name": "rowColor",
+      "name": "margin",
+      "type": "number",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "rowColorAlternate",
       "type": "string",
     },
     Object {

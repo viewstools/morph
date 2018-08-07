@@ -418,9 +418,8 @@ export const getDynamicStyles = node => {
     node.properties
       .filter(prop => prop.tags.style && prop.tags.slot)
       .map(prop => `'--${prop.name}': ${getPropValue(prop)}`),
-    node.scopes.map(scope => {
-      debugger
-      return scope.properties.map(prop => {
+    node.scopes.map(scope =>
+      scope.properties.map(prop => {
         const unit = getUnit(prop)
         return (
           (prop.tags.style &&
@@ -432,7 +431,7 @@ export const getDynamicStyles = node => {
             `'--${prop.name}': ${getPropValue(prop)}`)
         )
       })
-    }),
+    ),
   ]).filter(Boolean)
 }
 

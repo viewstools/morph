@@ -134,6 +134,8 @@ export function leave(node, parent, state) {
         : asAnimatedCss(node)
     }
 
+    debugger
+
     state.styles[id] = `const ${id} = css({${
       cssStatic ? `${cssStatic}, ` : ''
     }${cssDynamic}})`
@@ -151,6 +153,7 @@ export function leave(node, parent, state) {
   } else if (hasKeysInChildren(staticStyle)) {
     state.cssStatic = true
     const id = createId(node, state)
+    debugger
 
     const { cssStatic } = composeStyles(node, node.style, scopedUnderParent)
 

@@ -11,7 +11,7 @@ when <hover
 rowColor red
 rowBackgroundColor black
 rowColorAlternate green
-rowBackgroundColorAlternate <rowBgAlternate
+rowBackgroundColorAlternate <rowBgColorAlternate
 Name Column
 key name
 width 90
