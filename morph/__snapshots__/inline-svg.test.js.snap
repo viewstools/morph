@@ -7,6 +7,7 @@ marginTop < 0
 marginBottom < 0
 marginLeft < 0
 marginRight < 0
+opacity < 1
 width < 50
 height < 50
 SvgGroup

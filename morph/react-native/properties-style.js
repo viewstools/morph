@@ -5,9 +5,9 @@ import {
   getObjectAsString,
   // TODO: Think of a better name 🙈
   getNonAnimatedDynamicStyles,
-  hasPaddingProp,
-  getPaddingProps,
-  removePaddingProps,
+  hasContentContainerStyleProp,
+  getContentContainerStyleProps,
+  removeContentContainerStyleProps,
   hasKeys,
 } from '../utils.js'
 
@@ -30,12 +30,14 @@ export const leave = (node, parent, state) => {
     const id = createId(node, state)
     if (
       node.nameFinal.includes('FlatList') &&
-      hasPaddingProp(node.style.static.base)
+      hasContentContainerStyleProp(node.style.static.base)
     ) {
-      state.styles[`${id}ContentContainer`] = getPaddingProps(
+      state.styles[`${id}ContentContainer`] = getContentContainerStyleProps(
         node.style.static.base
       )
-      node.style.static.base = removePaddingProps(node.style.static.base)
+      node.style.static.base = removeContentContainerStyleProps(
+        node.style.static.base
+      )
       containerStyle = `styles.${id}ContentContainer`
     }
     if (hasKeys(node.style.static.base)) {
@@ -60,11 +62,14 @@ export const leave = (node, parent, state) => {
   }
 
   if (hasKeys(dynamicStyles)) {
-    if (node.nameFinal.includes('FlatList') && hasPaddingProp(dynamicStyles)) {
+    if (
+      node.nameFinal.includes('FlatList') &&
+      hasContentContainerStyleProp(dynamicStyles)
+    ) {
       const dynamicContainerStyle = getObjectAsString(
-        getPaddingProps(dynamicStyles)
+        getContentContainerStyleProps(dynamicStyles)
       )
-      dynamicStyles = removePaddingProps(dynamicStyles)
+      dynamicStyles = removeContentContainerStyleProps(dynamicStyles)
       containerStyle = containerStyle
         ? `[${containerStyle},${dynamicContainerStyle}]`
         : dynamicContainerStyle
