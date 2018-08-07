@@ -218,7 +218,7 @@ export const getActionableParent = node => {
 export const getAllowedStyleKeys = node => {
   if (node.isCapture) {
     return ['base', 'focus', 'hover', 'disabled', 'placeholder', 'print']
-  } else if (node.action || getActionableParent(node)) {
+  } else if (node.action || isTable(node) || getActionableParent(node)) {
     return ['base', 'focus', 'hover', 'disabled', 'print']
   }
   return ['base', 'focus', 'print']

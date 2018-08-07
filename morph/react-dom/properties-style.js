@@ -87,6 +87,8 @@ export function leave(node, parent, state) {
       })
     })
 
+    debugger
+
     const {
       cssDynamic: normalDynamic,
       cssStatic: normalStatic,
@@ -161,6 +163,7 @@ export function leave(node, parent, state) {
 
 const composeStyles = (node, styles, scopedUnderParent) => {
   const allowedStyleKeys = getAllowedStyleKeys(node)
+  debugger
 
   if (hasKeysInChildren(styles.dynamic)) {
     let cssStatic = Object.keys(styles.static)
@@ -186,7 +189,7 @@ const composeStyles = (node, styles, scopedUnderParent) => {
           '\n'
         )
       )
-      .join('\n')
+      .join(',\n')
 
     return { cssDynamic, cssStatic }
   }
