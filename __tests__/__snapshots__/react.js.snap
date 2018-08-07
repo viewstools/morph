@@ -7234,9 +7234,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
-    flexWrap: 'wrap',
   },
-  ListOfSomething1: { backgroundColor: 'red' },
+  ListOfSomething1: { flexWrap: 'wrap', backgroundColor: 'red' },
 });
 
 class ListOfSomething extends React.Component {

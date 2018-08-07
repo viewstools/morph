@@ -499,7 +499,6 @@ const CONTENT_CONTAINER_STYLE_PROPS = [
   'paddingLeft',
   'paddingRight',
   'flexDirection',
-  'flexWrap',
   'justifyContent',
   'alignItems',
 ]
