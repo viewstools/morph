@@ -1,4 +1,3 @@
-import getAnimatedValue from './get-animated-value.js'
 import getBody from './get-body.js'
 import getCellRenderer from './get-cell-renderer.js'
 import getHeaderRenderer from './get-header-renderer.js'
@@ -13,9 +12,8 @@ export default ({ getImport, getStyles, name, state }) => {
   // TODO Emojis should be wrapped in <span>, have role="img", and have an accessible description
   // with aria-label or aria-labelledby  jsx-a11y/accessible-emoji
   return `/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react'
 ${getDependencies(state, getImport)}
-${getAnimatedValue(state, name)}
+
 ${getStyles(state, name)}
 ${getFlatList(state, name)}
 ${getHeaderRenderer(state)}

@@ -47,6 +47,24 @@ export default ({
   const warnings = []
   let lastCapture
 
+  const blockIds = []
+  const getBlockId = node => {
+    let maybeId = node.is || node.name
+
+    if (!blockIds.includes(maybeId)) {
+      blockIds.push(maybeId)
+      return maybeId
+    }
+
+    let index = 1
+    while (blockIds.includes(`${maybeId}${index}`)) {
+      index++
+    }
+    const id = `${maybeId}${index}`
+    blockIds.push(id)
+    return id
+  }
+
   const getChildrenProxyMap = block => {
     const childrenProxyMap = {}
 
@@ -105,7 +123,7 @@ export default ({
 
   const end = (block, endLine) => {
     block.loc.end = {
-      line: endLine,
+      line: endLine + 1,
       column: Math.max(0, lines[endLine].length - 1),
     }
 
@@ -124,7 +142,7 @@ export default ({
       warnings.push({
         loc: block.loc,
         type: `A List needs "from <" to work`,
-        line: lines[block.loc.start.line],
+        line: lines[block.loc.start.line - 1],
       })
     }
 
@@ -143,11 +161,12 @@ export default ({
     const block = {
       type: 'Block',
       name,
+      animations: {},
       isAnimated: false,
       isBasic: isBasic(name),
       isColumn: isColumn(name),
       isGroup: false,
-      loc: getLoc(i, 0),
+      loc: getLoc(i + 1, 0),
       properties: [],
       scopes: [],
     }
@@ -173,6 +192,7 @@ export default ({
         lastCapture = block
       }
     }
+    block.id = getBlockId(block)
 
     const last = stack[stack.length - 1]
     if (last) {
@@ -296,7 +316,6 @@ export default ({
     const scopes = []
     let scope
     let inScope = false
-    block.animations = []
 
     for (let j = i; j <= endOfBlockIndex; j++) {
       const line = lines[j]
@@ -305,7 +324,7 @@ export default ({
 
       if (isProp(line)) {
         const { name, isSlot, slotName, slotIsNot, value } = getProp(line)
-        const loc = getLoc(j, line.indexOf(name), line.length - 1)
+        const loc = getLoc(j + 1, line.indexOf(name), line.length - 1)
         const tags = getTags({
           name,
           isSlot,
@@ -394,11 +413,13 @@ export default ({
 
           scopes.push(scope)
         } else if ((tags.slot || tags.shouldBeSlot) && !tags.validSlot) {
-          warnings.push({
-            loc,
-            type: `The value you used in the slot "${name}" is invalid`,
-            line,
-          })
+          if ((name === 'from' && block.name === 'List') || name !== 'from') {
+            warnings.push({
+              loc,
+              type: `The value you used in the slot "${name}" is invalid`,
+              line,
+            })
+          }
         }
 
         if (name === 'onWhen' && properties.length > 0) {
@@ -425,30 +446,46 @@ export default ({
         }
 
         if (tags.animation && scope) {
+          block.isAnimated = true
+
           const currentAnimation = getAnimation(value)
-          const existingScope =
-            block.animations.length > 0 &&
-            // eslint-disable-next-line
-            block.animations.some(animation => {
-              return (
-                animation.scope === scope.slotName &&
-                animation.curve === currentAnimation.properties.curve
-              )
-            }, currentAnimation)
           propNode.value = currentAnimation.defaultValue
           propNode.animation = currentAnimation.properties
-          block.isAnimated = true
-          if (!block.isAnimatedReallyAnimated) {
-            block.isAnimatedReallyAnimated =
-              propNode.animation.curve === 'spring'
+
+          if (propNode.animation.curve === 'spring') {
+            block.hasSpringAnimation = true
+          } else {
+            block.hasTimingAnimation = true
           }
-          if (!existingScope) {
-            block.animations.push({
-              ...currentAnimation.properties,
+
+          if (!block.animations[currentAnimation.id]) {
+            block.animations[currentAnimation.id] = {
+              index: Object.keys(block.animations).length,
+              animation: currentAnimation,
+              props: {},
+            }
+          }
+          propNode.animationIndexOnBlock =
+            block.animations[currentAnimation.id].index
+
+          if (!block.animations[currentAnimation.id].props[name]) {
+            let baseValue = null
+            const baseProp = properties.find(prop => prop.name === name)
+            if (baseProp) {
+              baseValue = baseProp.value
+            }
+
+            block.animations[currentAnimation.id].props[name] = {
               name,
-              scope: scope.slotName,
-            })
+              scopes: [],
+              value: baseValue,
+            }
           }
+
+          block.animations[currentAnimation.id].props[name].scopes.push({
+            name: scope.slotName,
+            value: currentAnimation.defaultValue,
+          })
         }
 
         if (scope) {
@@ -508,7 +545,7 @@ export default ({
 
         propNode = {
           type: 'Property',
-          loc: getLoc(j, 0, line.length - 1),
+          loc: getLoc(j + 1, 0, line.length - 1),
           value,
           tags: { comment: true, userComment },
         }
@@ -549,7 +586,7 @@ export default ({
         type: `You have some spaces before or after this line. Clean them up.`,
         loc: {
           start: {
-            line: i,
+            line: i + 1,
           },
         },
         line: rlines[i],

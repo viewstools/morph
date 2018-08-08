@@ -7,12 +7,9 @@ import {
   getAnimatedStyles,
   getDynamicStyles,
   getTimingProps,
-  hasAnimatedChild,
   hasKeys,
   hasKeysInChildren,
   hasRowStyles,
-  hasSpringAnimation,
-  hasTimingAnimation,
   isTable,
 } from '../utils.js'
 import toSlugCase from 'to-slug-case'
@@ -21,7 +18,7 @@ import uniq from 'array-uniq'
 export { enter }
 
 export function leave(node, parent, state) {
-  const { dynamic, static: staticStyle } = node.style
+  const allowedStyleKeys = getAllowedStyleKeys(node)
 
   let scopedUnderParent =
     !node.isCapture && !node.action && getActionableParent(node)
@@ -30,132 +27,32 @@ export function leave(node, parent, state) {
     scopedUnderParent = scopedUnderParent.styleName
   }
 
-  if (hasAnimatedChild(node) && hasSpringAnimation(node)) {
-    state.hasAnimatedChild = true
-  }
-
-  if (node.isAnimated && hasSpringAnimation(node)) {
+  if (node.hasSpringAnimation) {
     state.isAnimated = true
-    state.animations = node.animations
+    state.hasSpringAnimation = true
+    state.animations[node.id] = node.animations
     state.scopes = node.scopes
   }
 
+  let id = null
+
   if (isTable(node) && hasRowStyles(node)) {
-    const normalStyles = {}
-    const alternateStyles = {}
-    const id = createId(node, state)
-
-    Object.entries(node.style).forEach(([type, typeScopes]) => {
-      if (!(type in alternateStyles)) {
-        alternateStyles[type] = {}
-      }
-      if (!(type in normalStyles)) {
-        normalStyles[type] = {}
-      }
-
-      Object.entries(typeScopes).forEach(([scope, scopeStyles]) => {
-        if (!(scope in alternateStyles[type])) {
-          alternateStyles[type][scope] = {}
-        }
-        if (!(scope in normalStyles[type])) {
-          normalStyles[type][scope] = {}
-        }
-
-        Object.entries(scopeStyles).forEach(([key, value]) => {
-          switch (key) {
-            case 'rowColor':
-              normalStyles[type][scope]['color'] = value
-              delete node.style[type][scope][key]
-              break
-            case 'rowBackgroundColor':
-              normalStyles[type][scope]['backgroundColor'] = value
-              delete node.style[type][scope][key]
-              break
-            case 'rowColorAlternate':
-              alternateStyles[type][scope]['color'] = value
-              delete node.style[type][scope][key]
-              break
-            case 'rowBackgroundColorAlternate':
-              alternateStyles[type][scope]['backgroundColor'] = value
-              delete node.style[type][scope][key]
-              break
-
-            default:
-              break
-          }
-        })
-      })
-    })
-
-    const {
-      cssDynamic: normalDynamic,
-      cssStatic: normalStatic,
-    } = composeStyles(node, normalStyles, scopedUnderParent)
-
-    const {
-      cssDynamic: alternateDynamic,
-      cssStatic: alternateStatic,
-    } = composeStyles(node, alternateStyles, scopedUnderParent)
-
-    const normalCss = `${normalStatic ? `${normalStatic}` : ''} ${
-      normalDynamic ? `, ${normalDynamic}` : ''
-    }`
-
-    const alternateCss = `${alternateStatic ? `${alternateStatic}` : ''} ${
-      alternateDynamic ? `, ${alternateDynamic}` : ''
-    }`
-
-    node.hasDynamicRowStyles = !!(normalDynamic || alternateDynamic)
-    state.render.push(` style={{${getDynamicStyles(node)}}}`)
-    state.render.push(` rowClassName={${id}Row}`)
-
-    state.styles[`${id}Row`] = `const ${id}Row = css({ display: 'flex'
-    ${normalCss ? `, ${normalCss}` : ''}
-    ${alternateCss ? `, "&:nth-child(even)": {${alternateCss}}` : ''}
-    })`
+    id = createId(node, state)
+    getTableRowStyles({ node, state, id, scopedUnderParent })
   }
 
-  // dynamic merges static styles
-  if (hasKeysInChildren(dynamic)) {
-    state.cssDynamic = true
-    node.styleName = node.nameFinal
-    const id = createId(node, state)
+  const css = [
+    getStaticCss({ node, scopedUnderParent, state, allowedStyleKeys }),
+    node.isAnimated && getAnimatedCss(node),
+    getDynamicCss({ node, scopedUnderParent, state, allowedStyleKeys }),
+  ].filter(Boolean)
 
-    let { cssDynamic, cssStatic } = composeStyles(
-      node,
-      node.style,
-      scopedUnderParent
-    )
-
-    if (node.isAnimated) {
-      cssStatic = cssStatic
-        ? `${cssStatic}, ${asAnimatedCss(node)}`
-        : asAnimatedCss(node)
+  if (css.length > 0) {
+    if (id === null) {
+      id = createId(node, state)
     }
 
-    state.styles[id] = `const ${id} = css({${
-      cssStatic ? `${cssStatic}, ` : ''
-    }${cssDynamic}})`
-
-    if (hasSpringAnimation(node)) {
-      state.render.push(
-        ` style={{${getAnimatedStyles(
-          node,
-          state.isReactNative
-        )},${getDynamicStyles(node)}}}`
-      )
-    } else if (!node.hasDynamicRowStyles) {
-      state.render.push(` style={{${getDynamicStyles(node)}}}`)
-    }
-  } else if (hasKeysInChildren(staticStyle)) {
-    state.cssStatic = true
-    const id = createId(node, state)
-
-    const { cssStatic } = composeStyles(node, node.style, scopedUnderParent)
-
-    if (cssStatic) {
-      state.styles[id] = `const ${id} = css({${cssStatic}})`
-    }
+    state.styles[id] = `const ${id} = css({label: '${id}', ${css.join(', ')}})`
   }
 }
 
@@ -203,8 +100,65 @@ const composeStyles = (node, styles, scopedUnderParent) => {
   return { cssStatic }
 }
 
-const asAnimatedCss = node => {
-  if (hasTimingAnimation(node)) {
+const getStaticCss = ({ node, scopedUnderParent, state, allowedStyleKeys }) => {
+  const style = node.style.static
+  if (!hasKeysInChildren(style)) return false
+
+  state.cssStatic = true
+
+  const hasDynamicCss = hasKeysInChildren(node.style.dynamic)
+
+  return Object.keys(style)
+    .filter(key => allowedStyleKeys.includes(key) && hasKeys(style[key]))
+    .map(key =>
+      asCss(
+        asStaticCss(
+          style[key],
+          hasDynamicCss ? Object.keys(node.style.dynamic[key]) : []
+        ),
+        key,
+        scopedUnderParent
+      ).join('\n')
+    )
+    .join(',\n')
+}
+
+const getDynamicCss = ({
+  node,
+  scopedUnderParent,
+  state,
+  allowedStyleKeys,
+}) => {
+  const style = node.style.dynamic
+  if (!hasKeysInChildren(style)) return false
+
+  state.cssDynamic = true
+  node.styleName = node.nameFinal
+
+  if (node.hasSpringAnimation) {
+    state.render.push(
+      ` style={{${getAnimatedStyles(
+        node,
+        state.isReactNative
+      )},${getDynamicStyles(node)}}}`
+    )
+  } else {
+    const inlineDynamicStyles = getDynamicStyles(node)
+    if (inlineDynamicStyles) {
+      state.render.push(` style={{${inlineDynamicStyles}}}`)
+    }
+  }
+
+  return Object.keys(style)
+    .filter(key => allowedStyleKeys.includes(key) && hasKeys(style[key]))
+    .map(key =>
+      asCss(asDynamicCss(style[key]), key, scopedUnderParent).join('\n')
+    )
+    .join(',\n')
+}
+
+const getAnimatedCss = node => {
+  if (node.hasTimingAnimation) {
     const transition = uniq(getTimingProps(node).map(makeTransition)).join(', ')
 
     return `\ntransition: '${transition}',\nwillChange: '${getUniqueNames(
@@ -275,4 +229,79 @@ const asCss = (styles, key, scopedUnderParent) => {
   if (key !== 'base') css.push(`}`)
 
   return css
+}
+
+const getTableRowStyles = ({ node, state, id, scopedUnderParent }) => {
+  const normalStyles = {}
+  const alternateStyles = {}
+
+  Object.entries(node.style).forEach(([type, typeScopes]) => {
+    if (!(type in alternateStyles)) {
+      alternateStyles[type] = {}
+    }
+    if (!(type in normalStyles)) {
+      normalStyles[type] = {}
+    }
+
+    Object.entries(typeScopes).forEach(([scope, scopeStyles]) => {
+      if (!(scope in alternateStyles[type])) {
+        alternateStyles[type][scope] = {}
+      }
+      if (!(scope in normalStyles[type])) {
+        normalStyles[type][scope] = {}
+      }
+
+      Object.entries(scopeStyles).forEach(([key, value]) => {
+        switch (key) {
+          case 'rowColor':
+            normalStyles[type][scope]['color'] = value
+            delete node.style[type][scope][key]
+            break
+          case 'rowBackgroundColor':
+            normalStyles[type][scope]['backgroundColor'] = value
+            delete node.style[type][scope][key]
+            break
+          case 'rowColorAlternate':
+            alternateStyles[type][scope]['color'] = value
+            delete node.style[type][scope][key]
+            break
+          case 'rowBackgroundColorAlternate':
+            alternateStyles[type][scope]['backgroundColor'] = value
+            delete node.style[type][scope][key]
+            break
+
+          default:
+            break
+        }
+      })
+    })
+  })
+
+  const { cssDynamic: normalDynamic, cssStatic: normalStatic } = composeStyles(
+    node,
+    normalStyles,
+    scopedUnderParent
+  )
+
+  const {
+    cssDynamic: alternateDynamic,
+    cssStatic: alternateStatic,
+  } = composeStyles(node, alternateStyles, scopedUnderParent)
+
+  const normalCss = `${normalStatic ? `${normalStatic}` : ''} ${
+    normalDynamic ? `, ${normalDynamic}` : ''
+  }`
+
+  const alternateCss = `${alternateStatic ? `${alternateStatic}` : ''} ${
+    alternateDynamic ? `, ${alternateDynamic}` : ''
+  }`
+
+  node.hasDynamicRowStyles = !!(normalDynamic || alternateDynamic)
+  state.render.push(` style={{${getDynamicStyles(node)}}}`)
+  state.render.push(` rowClassName={${id}Row}`)
+
+  state.styles[`${id}Row`] = `const ${id}Row = css({ display: 'flex'
+    ${normalCss ? `, ${normalCss}` : ''}
+    ${alternateCss ? `, "&:nth-child(even)": {${alternateCss}}` : ''}
+    })`
 }

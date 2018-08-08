@@ -1,6 +1,6 @@
 {
   "name": "@viewstools/morph",
-  "version": "14.0.6",
+  "version": "14.3.3",
   "description": "Views language morpher",
   "main": "lib.js",
   "bin": {
@@ -9,7 +9,7 @@
   "private": false,
   "scripts": {
     "precommit": "lint-staged",
-    "prepare": "NODE_ENV=production rollup --config rollup.config.js; NODE_ENV=production rollup --config rollup.config.parse.js;",
+    "prepare": "cross-env NODE_ENV=production rollup --config rollup.config.js && cross-env NODE_ENV=production rollup --config rollup.config.parse.js",
     "test": "jest",
     "watch": "rollup --config rollup.config.js --watch"
   },
@@ -31,13 +31,14 @@
     "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-preset-env": "^1.6.0",
+    "cross-env": "^5.2.0",
     "eslint": "^4.13.1",
     "eslint-plugin-import": "^2.3.0",
     "husky": "^0.14.3",
     "import-export": "^1.0.1",
     "jest": "^23.1.0",
     "lint-staged": "^7.2.0",
-    "rollup": "^0.61.1",
+    "rollup": "^0.63.0",
     "rollup-plugin-babel": "^3.0.3",
     "rollup-watch": "^4.3.1"
   },
@@ -70,5 +71,8 @@
       "prettier --trailing-comma es5 --single-quote --no-semi --write",
       "git add"
     ]
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }

@@ -37,7 +37,7 @@ const isFont = f => Object.keys(FONT_TYPES).includes(path.extname(f))
 const getFontFileId = file => path.basename(file).split('.')[0]
 
 const relativise = (from, to) => {
-  const r = path.relative(from, to)
+  const r = path.relative(from, to).replace(/\\/g, '/')
   return r.substr(r.startsWith('../..') ? 3 : 1)
 }
 
@@ -65,6 +65,7 @@ module.exports = options => {
       track,
       verbose,
       viewNotFound,
+      warnOfDefaultValue,
     } = Object.assign(
       {
         as: 'react-dom',
@@ -83,12 +84,18 @@ module.exports = options => {
         src: process.cwd(),
         track: true,
         verbose: true,
+        warnOfDefaultValue: false,
       },
       options
     )
 
     if (shouldClean) {
       clean(src)
+    }
+
+    const shouldDisplayWarning = warning => {
+      if (!verbose) return false
+      return /default value/.test(warning.type) ? warnOfDefaultValue : true
     }
 
     if (!viewNotFound)
@@ -410,12 +417,14 @@ height 50`
         viewsSources[view] = source
         viewsParsed[view] = parsed
 
-        if (parsed.warnings.length > 0) {
+        const warnings = parsed.warnings.filter(shouldDisplayWarning)
+
+        if (warnings.length > 0) {
           console.error(
             chalk.red(view),
             chalk.dim(path.resolve(src, views[view]))
           )
-          parsed.warnings.forEach(warning => {
+          warnings.forEach(warning => {
             console.error(
               `  ${chalk.blue(warning.type)} ${chalk.yellow(
                 `line ${warning.loc.start.line}`

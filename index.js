@@ -50,6 +50,7 @@ export const morph = ({
 
   if (pretty) {
     morphed.code = prettier.format(morphed.code, {
+      parser: 'babylon',
       singleQuote: true,
       trailingComma: 'es5',
     })

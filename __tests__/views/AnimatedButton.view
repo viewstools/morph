@@ -1,17 +1,21 @@
-Vertical
+AnimatedButton Vertical
 backgroundColor red
 opacity 0.75
 translateX 10
 translateY 0
 rotateX 10
+rotateY 10
 onClick <
 when <isOn
-opacity 1 spring
-translateX 20 spring
+opacity 1 spring bounciness 10 speed 1
+translateX 20 spring bounciness 15 speed 2
 translateY 30
 rotateX 20 easeIn
+rotateY 20 easeInOut
 Text
 color red
 text hey
+fontSize 12
 when <isOn
 color blue spring
+fontSize 18 spring

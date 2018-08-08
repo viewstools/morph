@@ -92,7 +92,9 @@ export const getWidth = (node, parent) => {
 const maybeSafe = node =>
   node.tags.slot
     ? node.value
-    : typeof node.value === 'string' ? safe(node.value) : node.value
+    : typeof node.value === 'string'
+      ? safe(node.value)
+      : node.value
 
 const getScopedProps = (propNode, blockNode) => {
   const scopes = blockNode.scopes
@@ -131,7 +133,9 @@ const getStandardInterpolation = (node, re, textNode, item) =>
     re,
     hasCustomScopes(textNode, item)
       ? wrap(getScopedCondition(textNode, item, true))
-      : isSlot(textNode) ? wrap(textNode.value) : textNode.value
+      : isSlot(textNode)
+        ? wrap(textNode.value)
+        : textNode.value
   )
 
 export const getScopedCondition = (
@@ -335,44 +339,20 @@ export const makeOnClickTracker = (node, state) => {
   }, event, props })`
 }
 
-export const hasAnimatedChild = node =>
-  node.children && node.children.some(child => child.isAnimated)
-
-const getDefaultValue = (node, name) => {
-  const prop = node.properties.find(
-    prop => prop.name === name || `"--${prop.name}` === name.split(/[0-9]/)[0]
-  )
-  return prop ? prop.value : ''
-}
-
 // const isRotate = name =>
 //   name === 'rotate' || name === 'rotateX' || name === 'rotateY'
 
 const getStandardAnimatedString = (node, prop, isNative) => {
-  const baseScopeValue = getDefaultValue(node, prop.name)
-  let fromValue
-  let toValue
+  let value = `animated${node.id}${
+    prop.animationIndexOnBlock > 0 ? prop.animationIndexOnBlock : ''
+  }.${prop.name}`
 
-  // TODO see if native needs the unit in all cases but PX (eg for rotate it may
-  // need deg)
-  if (typeof prop.value === 'number') {
-    fromValue = isNative
-      ? baseScopeValue
-      : getPropValue({ name: prop.name, value: baseScopeValue }, false)
-    toValue = isNative ? prop.value : getPropValue(prop, false)
-    // fromValue = baseScopeValue
-    // toValue = prop.value
-  } else {
-    fromValue = `'${baseScopeValue}'`
-    toValue = `'${prop.value}'`
-  }
+  // const unit = getUnit(prop)
+  // if (unit) {
+  //   value = `\`\${${value}}${unit}\``
+  // }
 
-  return `${
-    isNative ? prop.name : `"--${prop.name}"`
-  }: getAnimatedValue(this.animatedValue${getScopeIndex(
-    node,
-    prop.scope
-  )}, ${fromValue}, ${toValue})`
+  return `${isNative ? prop.name : `"--${prop.name}"`}: ${value}`
 }
 
 const getTransformString = (node, transform, isNative) => {
@@ -458,12 +438,6 @@ export const getNonAnimatedDynamicStyles = node => {
     }, {})
 }
 
-export const hasSpringAnimation = node =>
-  node.animations.some(anim => anim.curve === 'spring')
-
-export const hasTimingAnimation = node =>
-  node.animations.some(anim => anim.curve !== 'spring')
-
 export const getAllAnimatedProps = (node, isNative) => {
   const props = flatten(
     node.scopes.map(scope => scope.properties.filter(prop => prop.animation))
@@ -539,11 +513,8 @@ const TRANSFORM_WHITELIST = {
   perspective: true,
 }
 
-// TODO re-enable
-export const canUseNativeDriver = animation =>
-  // STYLES_WHITELIST[animation.name] ||
-  // TRANSFORM_WHITELIST[animation.name] ||
-  false
+export const canUseNativeDriver = name =>
+  STYLES_WHITELIST[name] || TRANSFORM_WHITELIST[name] || false
 
 const fontsOrder = ['eot', 'woff2', 'woff', 'ttf', 'svg', 'otf']
 
@@ -567,20 +538,33 @@ export const createId = (node, state) => {
   return id
 }
 
-export const hasPaddingProp = styleProps =>
-  Object.keys(styleProps).some(prop => prop.includes('padding'))
+const CONTENT_CONTAINER_STYLE_PROPS = [
+  'paddingTop',
+  'paddingBottom',
+  'paddingLeft',
+  'paddingRight',
+  'flexDirection',
+  'justifyContent',
+  'alignItems',
+]
 
-export const getPaddingProps = styleProps =>
+const isContentContainerStyleProp = prop =>
+  CONTENT_CONTAINER_STYLE_PROPS.includes(prop)
+
+export const hasContentContainerStyleProp = styleProps =>
+  Object.keys(styleProps).some(isContentContainerStyleProp)
+
+export const getContentContainerStyleProps = styleProps =>
   Object.keys(styleProps)
-    .filter(key => key.includes('padding'))
+    .filter(isContentContainerStyleProp)
     .reduce((obj, key) => {
       obj[key] = styleProps[key]
       return obj
     }, {})
 
-export const removePaddingProps = styleProps =>
+export const removeContentContainerStyleProps = styleProps =>
   Object.keys(styleProps)
-    .filter(key => !key.includes('padding'))
+    .filter(key => !isContentContainerStyleProp(key))
     .reduce((obj, key) => {
       obj[key] = styleProps[key]
       return obj

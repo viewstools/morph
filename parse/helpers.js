@@ -53,12 +53,15 @@ const dymPropMatcher = new DidYouMeanMatcher([
   'text',
   'value',
   'when',
+  'key',
+  'maxLength',
+  'step',
 ])
 
 export const didYouMeanBlock = block => dymBlockMatcher.get(block)
 export const didYouMeanProp = prop => dymPropMatcher.get(prop)
 
-const ANIMATION = /(.+)(?:\s)(spring|linear|easeOut|easeIn|easeInOut|ease)(?:\s?(.*)?)/
+const ANIMATION = /(.+)(?:\s)(spring|linear|easeOut|easeInOut|easeIn|ease)(?:\s?(.*)?)/
 const BASIC = /^(CaptureEmail|CaptureFile|CaptureNumber|CapturePhone|CaptureSecure|CaptureText|CaptureTextArea|Column|Horizontal|Image|List|Svg|SvgCircle|SvgEllipse|SvgDefs|SvgGroup|SvgLinearGradient|SvgRadialGradient|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgSymbol|SvgText|SvgUse|SvgStop|Table|Text|Vertical)$/i
 const BLOCK = /^([A-Z][a-zA-Z0-9]*)(\s+([A-Z][a-zA-Z0-9]*))?$/
 const BOOL = /^(false|true)$/i
@@ -166,9 +169,15 @@ export const getAnimation = line => {
     }
   }
 
+  addDefaults(animationType, properties)
+
   return {
+    id: Object.keys(properties)
+      .sort()
+      .map(key => `${key}${properties[key]}`)
+      .join(''),
     defaultValue: getValue(defaultValue),
-    properties: addDefaults(animationType, properties),
+    properties,
   }
 }
 
@@ -329,7 +338,11 @@ const isActionable = name => name !== 'onWhen' && /^on[A-Z]/.test(name)
 export const getPropType = (block, name, defaultValue) =>
   block.isList && name === 'from'
     ? 'array'
-    : isActionable(name) ? 'function' : isNumber[name] ? 'number' : 'string'
+    : isActionable(name)
+      ? 'function'
+      : isNumber[name]
+        ? 'number'
+        : 'string'
 
 export const isTextInterpolation = (block, previous) => {
   const previousText = previous.properties.find(prop => prop.name === 'text')

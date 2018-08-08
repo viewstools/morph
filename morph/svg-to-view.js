@@ -10,6 +10,7 @@ const svgCustomStyles = [
   'marginBottom < 0',
   'marginLeft < 0',
   'marginRight < 0',
+  'opacity < 1',
 ]
 
 const slotNames = ['fill', 'stroke']
@@ -33,7 +34,15 @@ const parseTransform = (prop, value) => {
     .join('')
 }
 
-const IGNORE_ATTRS = ['xmlns', 'id', 'class', 'onclick', 'aria-label', 'style']
+const IGNORE_ATTRS = [
+  'xmlns',
+  'id',
+  'class',
+  'onclick',
+  'aria-label',
+  'style',
+  'baseProfile',
+]
 
 const getAttrs = (attr, tag) =>
   Object.keys(attr)

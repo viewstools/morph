@@ -4,6 +4,7 @@ import * as BlockExplicitChildren from '../react/block-explicit-children.js'
 // import * as BlockGoTo from './block-go-to.js'
 import * as BlockInList from '../react/block-in-list.js'
 import * as BlockName from './block-name.js'
+import * as BlockSvg from './block-svg.js'
 import * as BlockList from '../react/block-list.js'
 import * as BlockGroup from '../react/block-group.js'
 import * as BlockProperties from './block-properties.js'
@@ -22,6 +23,7 @@ export const enter = [
   BlockRoute.enter,
   BlockWrap.enter,
   BlockName.enter,
+  BlockSvg.enter,
   BlockCapture.enter,
   BlockBackgroundImage.enter,
   BlockTeleport.enter,

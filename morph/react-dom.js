@@ -35,7 +35,7 @@ export default ({
   }
 
   const state = {
-    captures: [],
+    animations: {},
     cssDynamic: false,
     cssStatic: false,
     enableAnimated,
@@ -44,6 +44,7 @@ export default ({
     getFont,
     getStyleForProperty,
     getValueForProperty,
+    hasRefs: false,
     images: [],
     isDynamic: false,
     isReactNative: false,

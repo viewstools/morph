@@ -1,3 +1,10 @@
 ListOfSomething List
 from <
+paddingLeft 2
+justifyContent center
+alignItems center
+flexDirection row
+flexWrap wrap
+overflowY auto
+backgroundColor red
 Something
