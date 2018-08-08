@@ -38,7 +38,7 @@ export function leave(node, parent, state) {
 
   if (isTable(node) && hasRowStyles(node)) {
     id = createId(node, state)
-    getTableRowStyles({ node, state, id, scopedUnderParent })
+    getTableRowCss({ node, state, id, scopedUnderParent })
   }
 
   const css = [
@@ -231,7 +231,7 @@ const asCss = (styles, key, scopedUnderParent) => {
   return css
 }
 
-const getTableRowStyles = ({ node, state, id, scopedUnderParent }) => {
+const getTableRowCss = ({ node, state, id, scopedUnderParent }) => {
   const normalStyles = {}
   const alternateStyles = {}
 
@@ -297,7 +297,6 @@ const getTableRowStyles = ({ node, state, id, scopedUnderParent }) => {
   }`
 
   node.hasDynamicRowStyles = !!(normalDynamic || alternateDynamic)
-  state.render.push(` style={{${getDynamicStyles(node)}}}`)
   state.render.push(` rowClassName={${id}Row}`)
 
   state.styles[`${id}Row`] = `const ${id}Row = css({ display: 'flex'

@@ -5766,14 +5766,14 @@ export default UseSvg;
 exports[`react-dom parses react-dom UseTable 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
 import Cell from './Cell.view.js';
 import Column from './Column.view.js';
 import Header from './Header.view.js';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'emotion';
-import { AutoSizer, Column, Table } from 'react-virtualized';
 import PropTypes from 'prop-types';
+import React from 'react';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+import { AutoSizer, Column, Table } from 'react-virtualized';
+import { css } from 'emotion';
 
 const UseTable1Row = css({
   display: 'flex',
@@ -5794,13 +5794,15 @@ const UseTable1Row = css({
     },
   },
 });
-const UseTable2 = css({ marginLeft: 'var(--marginLeft)' });
+const UseTable1 = css({ label: 'UseTable1', marginLeft: 'var(--marginLeft)' });
 const Name = css({
+  label: 'Name',
   borderBottomStyle: 'solid',
   borderBottomWidth: 1,
   borderBottomColor: 'var(--borderBottomColor)',
 });
 const Location = css({
+  label: 'Location',
   borderBottomStyle: 'solid',
   borderBottomColor: 'black',
   borderBottomWidth: 1,
@@ -5829,13 +5831,13 @@ class UseTable extends React.Component {
             from={props.from}
             headerHeight={40}
             rowHeight={20}
+            rowClassName={UseTable1Row}
             style={{
               '--marginLeft': \`\${props.marginLeft}px\`,
               '--rowColorAlternate': props.rowColorAlternate,
               '--rowBackgroundColorAlternate': props.rowBgColorAlternate,
             }}
-            rowClassName={UseTable1Row}
-            className={\`views-block \${UseTable1} \${UseTable2}\`}
+            className={\`views-block \${UseTable1}\`}
           >
             <Column
               dataKey=\\"name\\"
@@ -5908,13 +5910,13 @@ export default UseTable;
 exports[`react-dom parses react-dom UseTable: react-dom parses react-dom UseTable debug 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
 import Cell from './Cell.view.js';
 import Column from './Column.view.js';
 import Header from './Header.view.js';
+import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'emotion';
 import { AutoSizer, Column, Table } from 'react-virtualized';
+import { css } from 'emotion';
 
 const UseTable1Row = css({
   display: 'flex',
@@ -5935,13 +5937,15 @@ const UseTable1Row = css({
     },
   },
 });
-const UseTable2 = css({ marginLeft: 'var(--marginLeft)' });
+const UseTable1 = css({ label: 'UseTable1', marginLeft: 'var(--marginLeft)' });
 const Name = css({
+  label: 'Name',
   borderBottomStyle: 'solid',
   borderBottomWidth: 1,
   borderBottomColor: 'var(--borderBottomColor)',
 });
 const Location = css({
+  label: 'Location',
   borderBottomStyle: 'solid',
   borderBottomColor: 'black',
   borderBottomWidth: 1,
@@ -5967,13 +5971,13 @@ const UseTable = props => {
           from={props.from}
           headerHeight={40}
           rowHeight={20}
+          rowClassName={UseTable1Row}
           style={{
             '--marginLeft': \`\${props.marginLeft}px\`,
             '--rowColorAlternate': props.rowColorAlternate,
             '--rowBackgroundColorAlternate': props.rowBgColorAlternate,
           }}
-          rowClassName={UseTable1Row}
-          className={\`views-block \${UseTable1} \${UseTable2}\`}
+          className={\`views-block \${UseTable1}\`}
         >
           <Column
             dataKey=\\"name\\"
@@ -9182,12 +9186,12 @@ export default UseSvg;
 exports[`react-native parses react-native UseTable 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
 import Cell from './Cell.view.js';
 import Column from './Column.view.js';
 import Header from './Header.view.js';
-import { StyleSheet, Text } from 'react-native';
 import PropTypes from 'prop-types';
+import React from 'react';
+import { StyleSheet, Text } from 'react-native';
 
 const styles = StyleSheet.create({
   UseTable1: {
