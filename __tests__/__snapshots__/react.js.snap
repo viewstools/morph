@@ -5520,6 +5520,7 @@ const UseTable1Row = css({
     },
   },
 });
+const UseTable2 = css({ marginLeft: 'var(--marginLeft)' });
 const Name = css({
   borderBottomStyle: 'solid',
   borderBottomWidth: 1,
@@ -5555,11 +5556,12 @@ class UseTable extends React.Component {
             headerHeight={40}
             rowHeight={20}
             style={{
+              '--marginLeft': \`\${props.marginLeft}px\`,
               '--rowColorAlternate': props.rowColorAlternate,
               '--rowBackgroundColorAlternate': props.rowBgColorAlternate,
             }}
             rowClassName={UseTable1Row}
-            className={\`views-block \${UseTable1}\`}
+            className={\`views-block \${UseTable1} \${UseTable2}\`}
           >
             <Column
               dataKey=\\"name\\"
@@ -5611,7 +5613,7 @@ export default UseTable;
     },
     Object {
       "defaultValue": false,
-      "name": "margin",
+      "name": "marginLeft",
       "type": "number",
     },
     Object {
@@ -5659,6 +5661,7 @@ const UseTable1Row = css({
     },
   },
 });
+const UseTable2 = css({ marginLeft: 'var(--marginLeft)' });
 const Name = css({
   borderBottomStyle: 'solid',
   borderBottomWidth: 1,
@@ -5691,11 +5694,12 @@ const UseTable = props => {
           headerHeight={40}
           rowHeight={20}
           style={{
+            '--marginLeft': \`\${props.marginLeft}px\`,
             '--rowColorAlternate': props.rowColorAlternate,
             '--rowBackgroundColorAlternate': props.rowBgColorAlternate,
           }}
           rowClassName={UseTable1Row}
-          className={\`views-block \${UseTable1}\`}
+          className={\`views-block \${UseTable1} \${UseTable2}\`}
         >
           <Column
             dataKey=\\"name\\"
@@ -5742,7 +5746,7 @@ export default UseTable;
     },
     Object {
       "defaultValue": false,
-      "name": "margin",
+      "name": "marginLeft",
       "type": "number",
     },
     Object {
@@ -8768,7 +8772,10 @@ class UseTable extends React.Component {
         rowHeight={20}
         style={[
           styles.UseTable1,
-          { rowColorAlternate: props.rowColorAlternate },
+          {
+            marginLeft: props.marginLeft,
+            rowColorAlternate: props.rowColorAlternate,
+          },
         ]}
       >
         <Column
@@ -8812,7 +8819,7 @@ export default UseTable;
     },
     Object {
       "defaultValue": false,
-      "name": "margin",
+      "name": "marginLeft",
       "type": "number",
     },
     Object {
