@@ -616,6 +616,7 @@ module.exports = {
   Header: get('UseTable.Header'),
   Location: get('UseTable.Location'),
   Name: get('UseTable.Name'),
+  Table: get('UseTable.Table'),
   Text: get('UseTable.Text'),
   _top: get('UseTable'),
 };
@@ -5775,7 +5776,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { AutoSizer, Column, Table } from 'react-virtualized';
 import { css } from 'emotion';
 
-const UseTable1Row = css({
+const Table1Row = css({
   display: 'flex',
   color: '#1C1C1C',
   backgroundColor: 'white',
@@ -5794,7 +5795,7 @@ const UseTable1Row = css({
     },
   },
 });
-const UseTable1 = css({ label: 'UseTable1', marginLeft: 'var(--marginLeft)' });
+const Table1 = css({ label: 'Table1', marginLeft: 'var(--marginLeft)' });
 const Name = css({
   label: 'Name',
   borderBottomStyle: 'solid',
@@ -5820,57 +5821,62 @@ class UseTable extends React.Component {
     const { context, props } = this;
 
     return (
-      <AutoSizer>
-        {({ height, width }) => (
-          <Table
-            width={width}
-            height={height}
-            rowCount={props.from.length}
-            rowGetter={({ index }) => props.from[index]}
-            data-test-id={\`\${props['data-test-id'] || 'UseTable'}|\`}
-            from={props.from}
-            headerHeight={40}
-            rowHeight={20}
-            rowClassName={UseTable1Row}
-            style={{
-              '--marginLeft': \`\${props.marginLeft}px\`,
-              '--rowColorAlternate': props.rowColorAlternate,
-              '--rowBackgroundColorAlternate': props.rowBgColorAlternate,
-            }}
-            className={\`views-block \${UseTable1}\`}
-          >
-            <Column
-              dataKey=\\"name\\"
-              width={90}
-              label=\\"Name\\"
-              headerRenderer={headerRenderer}
-              cellRenderer={cellRenderer}
-              data-test-id={\`UseTable.Name|\`}
-              key=\\"name\\"
-              style={{ '--borderBottomColor': props.borderColor }}
-              className={\`views-block \${Name}\`}
-            />
-            <Column
-              dataKey=\\"location\\"
-              width={width / 3}
-              label=\\"location\\"
-              cellRenderer={cellRenderer}
-              data-test-id={\`UseTable.Location|\`}
-              key=\\"location\\"
-              className={\`views-block \${Location}\`}
-            />
-            <Column
-              dataKey=\\"description\\"
-              width={width / 3}
-              cellRenderer={cellRenderer}
-              data-test-id={\`UseTable.Description|\`}
-              key=\\"description\\"
-              className=\\"views-block\\"
-            />
-            {props.children}
-          </Table>
-        )}
-      </AutoSizer>
+      <div
+        data-test-id={\`\${props['data-test-id'] || 'UseTable'}|\`}
+        className=\\"views-block\\"
+      >
+        <AutoSizer>
+          {({ height, width }) => (
+            <Table
+              width={width}
+              height={height}
+              rowCount={props.from.length}
+              rowGetter={({ index }) => props.from[index]}
+              data-test-id={\`UseTable.Table|\`}
+              from={props.from}
+              headerHeight={40}
+              rowHeight={20}
+              rowClassName={Table1Row}
+              style={{
+                '--marginLeft': \`\${props.marginLeft}px\`,
+                '--rowColorAlternate': props.rowColorAlternate,
+                '--rowBackgroundColorAlternate': props.rowBgColorAlternate,
+              }}
+              className={\`views-block \${Table1}\`}
+            >
+              <Column
+                dataKey=\\"name\\"
+                width={90}
+                label=\\"Name\\"
+                headerRenderer={headerRenderer}
+                cellRenderer={cellRenderer}
+                data-test-id={\`UseTable.Name|\`}
+                key=\\"name\\"
+                style={{ '--borderBottomColor': props.borderColor }}
+                className={\`views-block \${Name}\`}
+              />
+              <Column
+                dataKey=\\"location\\"
+                width={width / 3}
+                label=\\"location\\"
+                cellRenderer={cellRenderer}
+                data-test-id={\`UseTable.Location|\`}
+                key=\\"location\\"
+                className={\`views-block \${Location}\`}
+              />
+              <Column
+                dataKey=\\"description\\"
+                width={width / 3}
+                cellRenderer={cellRenderer}
+                data-test-id={\`UseTable.Description|\`}
+                key=\\"description\\"
+                className=\\"views-block\\"
+              />
+            </Table>
+          )}
+        </AutoSizer>
+        {props.children}
+      </div>
     );
   }
 }
@@ -5918,7 +5924,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { AutoSizer, Column, Table } from 'react-virtualized';
 import { css } from 'emotion';
 
-const UseTable1Row = css({
+const Table1Row = css({
   display: 'flex',
   color: '#1C1C1C',
   backgroundColor: 'white',
@@ -5937,7 +5943,7 @@ const UseTable1Row = css({
     },
   },
 });
-const UseTable1 = css({ label: 'UseTable1', marginLeft: 'var(--marginLeft)' });
+const Table1 = css({ label: 'Table1', marginLeft: 'var(--marginLeft)' });
 const Name = css({
   label: 'Name',
   borderBottomStyle: 'solid',
@@ -5960,56 +5966,61 @@ const cellRenderer = ({ cellData }) => {
 
 const UseTable = props => {
   return (
-    <AutoSizer>
-      {({ height, width }) => (
-        <Table
-          width={width}
-          height={height}
-          rowCount={props.from.length}
-          rowGetter={({ index }) => props.from[index]}
-          data-test-id={\`\${props['data-test-id'] || 'UseTable'}|\`}
-          from={props.from}
-          headerHeight={40}
-          rowHeight={20}
-          rowClassName={UseTable1Row}
-          style={{
-            '--marginLeft': \`\${props.marginLeft}px\`,
-            '--rowColorAlternate': props.rowColorAlternate,
-            '--rowBackgroundColorAlternate': props.rowBgColorAlternate,
-          }}
-          className={\`views-block \${UseTable1}\`}
-        >
-          <Column
-            dataKey=\\"name\\"
-            width={width / 3}
-            label=\\"Name\\"
-            headerRenderer={headerRenderer}
-            cellRenderer={cellRenderer}
-            data-test-id={\`UseTable.Name|\`}
-            key=\\"name\\"
-            style={{ '--borderBottomColor': props.borderColor }}
-            className={\`views-block \${Name}\`}
-          />
-          <Column
-            dataKey=\\"location\\"
-            width={width / 3}
-            cellRenderer={cellRenderer}
-            data-test-id={\`UseTable.Location|\`}
-            key=\\"location\\"
-            className={\`views-block \${Location}\`}
-          />
-          <Column
-            dataKey=\\"description\\"
-            width={width / 3}
-            cellRenderer={cellRenderer}
-            data-test-id={\`UseTable.Description|\`}
-            key=\\"description\\"
-            className=\\"views-block\\"
-          />
-          {props.children}
-        </Table>
-      )}
-    </AutoSizer>
+    <div
+      data-test-id={\`\${props['data-test-id'] || 'UseTable'}|\`}
+      className=\\"views-block\\"
+    >
+      <AutoSizer>
+        {({ height, width }) => (
+          <Table
+            width={width}
+            height={height}
+            rowCount={props.from.length}
+            rowGetter={({ index }) => props.from[index]}
+            data-test-id={\`UseTable.Table|\`}
+            from={props.from}
+            headerHeight={40}
+            rowHeight={20}
+            rowClassName={Table1Row}
+            style={{
+              '--marginLeft': \`\${props.marginLeft}px\`,
+              '--rowColorAlternate': props.rowColorAlternate,
+              '--rowBackgroundColorAlternate': props.rowBgColorAlternate,
+            }}
+            className={\`views-block \${Table1}\`}
+          >
+            <Column
+              dataKey=\\"name\\"
+              width={width / 3}
+              label=\\"Name\\"
+              headerRenderer={headerRenderer}
+              cellRenderer={cellRenderer}
+              data-test-id={\`UseTable.Name|\`}
+              key=\\"name\\"
+              style={{ '--borderBottomColor': props.borderColor }}
+              className={\`views-block \${Name}\`}
+            />
+            <Column
+              dataKey=\\"location\\"
+              width={width / 3}
+              cellRenderer={cellRenderer}
+              data-test-id={\`UseTable.Location|\`}
+              key=\\"location\\"
+              className={\`views-block \${Location}\`}
+            />
+            <Column
+              dataKey=\\"description\\"
+              width={width / 3}
+              cellRenderer={cellRenderer}
+              data-test-id={\`UseTable.Description|\`}
+              key=\\"description\\"
+              className=\\"views-block\\"
+            />
+          </Table>
+        )}
+      </AutoSizer>
+      {props.children}
+    </div>
   );
 };
 
@@ -9191,10 +9202,10 @@ import Column from './Column.view.js';
 import Header from './Header.view.js';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 const styles = StyleSheet.create({
-  UseTable1: {
+  Table1: {
     rowColor: '#1C1C1C',
     rowBackgroundColor: 'white',
     rowBackgroundColorAlternate: 'black',
@@ -9212,42 +9223,44 @@ class UseTable extends React.Component {
     const { context, props } = this;
 
     return (
-      <Table
-        testID={\`\${props['testID'] || 'UseTable'}|\`}
-        from={props.from}
-        headerHeight={40}
-        rowHeight={20}
-        style={[
-          styles.UseTable1,
-          {
-            marginLeft: props.marginLeft,
-            rowColorAlternate: props.rowColorAlternate,
-          },
-        ]}
-      >
-        <Column
-          testID={\`UseTable.Name|\`}
-          key=\\"name\\"
-          style={[styles.Name, { borderBottomColor: props.borderColor }]}
+      <View testID={\`\${props['testID'] || 'UseTable'}|\`}>
+        <Table
+          testID={\`UseTable.Table|\`}
+          from={props.from}
+          headerHeight={40}
+          rowHeight={20}
+          style={[
+            styles.Table1,
+            {
+              marginLeft: props.marginLeft,
+              rowColorAlternate: props.rowColorAlternate,
+            },
+          ]}
         >
-          <Header testID={\`UseTable.Header|\`} isHeader={true} text=\\"Name\\" />
-          <Cell testID={\`UseTable.Cell|\`} isCell={true} />
-        </Column>
-        <Column
-          testID={\`UseTable.Location|\`}
-          key=\\"location\\"
-          style={styles.Location}
-        >
-          <Text testID={\`UseTable.Text|\`} isHeader={true}>
-            location
-          </Text>
-          <Cell testID={\`UseTable.Cell:1|\`} isCell={true} />
-        </Column>
-        <Column testID={\`UseTable.Description|\`} key=\\"description\\">
-          <Cell testID={\`UseTable.Cell:2|\`} isCell={true} />
-        </Column>
+          <Column
+            testID={\`UseTable.Name|\`}
+            key=\\"name\\"
+            style={[styles.Name, { borderBottomColor: props.borderColor }]}
+          >
+            <Header testID={\`UseTable.Header|\`} isHeader={true} text=\\"Name\\" />
+            <Cell testID={\`UseTable.Cell|\`} isCell={true} />
+          </Column>
+          <Column
+            testID={\`UseTable.Location|\`}
+            key=\\"location\\"
+            style={styles.Location}
+          >
+            <Text testID={\`UseTable.Text|\`} isHeader={true}>
+              location
+            </Text>
+            <Cell testID={\`UseTable.Cell:1|\`} isCell={true} />
+          </Column>
+          <Column testID={\`UseTable.Description|\`} key=\\"description\\">
+            <Cell testID={\`UseTable.Cell:2|\`} isCell={true} />
+          </Column>
+        </Table>
         {props.children}
-      </Table>
+      </View>
     );
   }
 }

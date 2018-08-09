@@ -1,4 +1,5 @@
-UseTable Table
+UseTable Vertical
+Table
 from <
 marginLeft <marginLeft
 headerHeight 40
