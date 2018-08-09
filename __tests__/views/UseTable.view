@@ -16,9 +16,6 @@ rowBackgroundColorAlternate <rowBgColorAlternate
 Name Column
 key name
 width 90
-borderBottomStyle solid
-borderBottomColor <borderColor
-borderBottomWidth 1
 Header
 isHeader true
 text Name
@@ -29,9 +26,7 @@ isCell true
 
 Location Column
 key location
-borderBottomStyle solid
-borderBottomColor black
-borderBottomWidth 1
+width auto
 Text
 isHeader true
 text location

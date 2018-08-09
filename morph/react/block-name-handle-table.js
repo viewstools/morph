@@ -9,13 +9,7 @@ export default (node, parent, state) => {
     state.isTable = true
 
     state.render.push(`<AutoSizer>{({ width, height }) => (`)
-  } else if (isCell(node)) {
-    state.cell = node
-    return true
-  } else if (isHeader(node) && node.name !== 'Text') {
-    state.externalHeader = node
-    return true
   }
 
-  return false
+  return isCell(node) || isHeader(node)
 }

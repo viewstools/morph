@@ -1,6 +1,4 @@
 import getBody from './get-body.js'
-import getCellRenderer from './get-cell-renderer.js'
-import getHeaderRenderer from './get-header-renderer.js'
 import getContext from './get-context.js'
 import getDefaultProps from './get-default-props.js'
 import getDependencies from './get-dependencies.js'
@@ -16,8 +14,6 @@ ${getDependencies(state, getImport)}
 
 ${getStyles(state, name)}
 ${getFlatList(state, name)}
-${getHeaderRenderer(state)}
-${getCellRenderer(state)}
 ${getFormatters(state, name)}
 ${getLocals(state, name)}
 

@@ -51,20 +51,6 @@ export const getPropertiesAsObject = list => {
   return getObjectAsString(obj)
 }
 
-export const getLabel = node => {
-  const header = node.children.find(node => getProp(node, 'isHeader'))
-  if (!header) return
-
-  if (header.name === 'Text') {
-    // removing the text node, because the column handles the label
-    node.children.splice(node.children.indexOf(header), 1)
-  } else {
-    node.externalHeader = header
-  }
-
-  return getProp(header, 'text').value
-}
-
 export const getProp = (node, key) => {
   const finder =
     typeof key === 'string' ? p => p.name === key : p => key.test(p.name)
@@ -73,31 +59,6 @@ export const getProp = (node, key) => {
 }
 
 export const getScope = node => node.value.split('when ')[1]
-
-const calculateWidth = parent => {
-  const columns = parent.children.filter(child => child.name === 'Column')
-  const columnsWithFixedWidth = columns
-    .map(node => {
-      const width = getProp(node, 'width')
-      return width && typeof width.value === 'number' && width.value
-    })
-    .filter(Boolean)
-
-  const columnsWidthSum = columnsWithFixedWidth.reduce(
-    (res, value) => res + value,
-    0
-  )
-
-  return columnsWidthSum
-    ? `(width - ${columnsWidthSum}) / ${columns.length -
-        columnsWithFixedWidth.length}`
-    : `width / ${columns.length}`
-}
-
-export const getWidth = (node, parent) => {
-  const width = getProp(node, 'width')
-  return width ? width.value : calculateWidth(parent)
-}
 
 const maybeSafe = node =>
   node.tags.slot
