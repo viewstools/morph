@@ -5848,7 +5848,6 @@ class UseTable extends React.Component {
               rowCount={Array.isArray(props.from) ? props.from.length : 0}
               rowGetter={({ index }) => props.from[index]}
               data-test-id={\`UseTable.Table|\`}
-              from={props.from}
               headerHeight={40}
               rowHeight={20}
               rowClassName={Table1Row}
@@ -5872,7 +5871,7 @@ class UseTable extends React.Component {
               />
               <Column
                 dataKey=\\"location\\"
-                width={width / 3}
+                width={(width - 90) / 2}
                 label=\\"location\\"
                 cellRenderer={cellRenderer}
                 data-test-id={\`UseTable.Location|\`}
@@ -5881,7 +5880,7 @@ class UseTable extends React.Component {
               />
               <Column
                 dataKey=\\"description\\"
-                width={width / 3}
+                width={(width - 90) / 2}
                 cellRenderer={cellRenderer}
                 data-test-id={\`UseTable.Description|\`}
                 key=\\"description\\"
@@ -5993,7 +5992,6 @@ const UseTable = props => {
             rowCount={Array.isArray(props.from) ? props.from.length : 0}
             rowGetter={({ index }) => props.from[index]}
             data-test-id={\`UseTable.Table|\`}
-            from={props.from}
             headerHeight={40}
             rowHeight={20}
             rowClassName={Table1Row}
@@ -6006,7 +6004,7 @@ const UseTable = props => {
           >
             <Column
               dataKey=\\"name\\"
-              width={width / 3}
+              width={90}
               label=\\"Name\\"
               headerRenderer={headerRenderer}
               cellRenderer={cellRenderer}
@@ -6017,7 +6015,7 @@ const UseTable = props => {
             />
             <Column
               dataKey=\\"location\\"
-              width={width / 3}
+              width={(width - 90) / 2}
               cellRenderer={cellRenderer}
               data-test-id={\`UseTable.Location|\`}
               key=\\"location\\"
@@ -6025,7 +6023,7 @@ const UseTable = props => {
             />
             <Column
               dataKey=\\"description\\"
-              width={width / 3}
+              width={(width - 90) / 2}
               cellRenderer={cellRenderer}
               data-test-id={\`UseTable.Description|\`}
               key=\\"description\\"
@@ -6132,7 +6130,6 @@ class UseTableOnWhen extends React.Component {
                 rowCount={Array.isArray(props.from) ? props.from.length : 0}
                 rowGetter={({ index }) => props.from[index]}
                 data-test-id={\`UseTableOnWhen.Table|\`}
-                from={props.from}
                 headerHeight={40}
                 rowHeight={20}
                 rowClassName={Table1Row}
@@ -6261,7 +6258,6 @@ const UseTableOnWhen = props => {
               rowCount={Array.isArray(props.from) ? props.from.length : 0}
               rowGetter={({ index }) => props.from[index]}
               data-test-id={\`UseTableOnWhen.Table|\`}
-              from={props.from}
               headerHeight={40}
               rowHeight={20}
               rowClassName={Table1Row}
@@ -6274,7 +6270,7 @@ const UseTableOnWhen = props => {
             >
               <Column
                 dataKey=\\"name\\"
-                width={width / 1}
+                width={90}
                 label=\\"Name\\"
                 headerRenderer={headerRenderer}
                 cellRenderer={cellRenderer}
@@ -9513,7 +9509,6 @@ class UseTable extends React.Component {
               rowCount={Array.isArray(props.from) ? props.from.length : 0}
               rowGetter={({ index }) => props.from[index]}
               testID={\`UseTable.Table|\`}
-              from={props.from}
               headerHeight={40}
               rowHeight={20}
               style={[
@@ -9536,7 +9531,7 @@ class UseTable extends React.Component {
               />
               <Column
                 dataKey=\\"location\\"
-                width={width / 3}
+                width={(width - 90) / 2}
                 label=\\"location\\"
                 cellRenderer={cellRenderer}
                 testID={\`UseTable.Location|\`}
@@ -9545,7 +9540,7 @@ class UseTable extends React.Component {
               />
               <Column
                 dataKey=\\"description\\"
-                width={width / 3}
+                width={(width - 90) / 2}
                 cellRenderer={cellRenderer}
                 testID={\`UseTable.Description|\`}
                 key=\\"description\\"
@@ -9633,7 +9628,6 @@ class UseTableOnWhen extends React.Component {
                 rowCount={Array.isArray(props.from) ? props.from.length : 0}
                 rowGetter={({ index }) => props.from[index]}
                 testID={\`UseTableOnWhen.Table|\`}
-                from={props.from}
                 headerHeight={40}
                 rowHeight={20}
                 style={[

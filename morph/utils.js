@@ -75,21 +75,27 @@ export const getProp = (node, key) => {
 export const getScope = node => node.value.split('when ')[1]
 
 const calculateWidth = parent => {
-  const columns = parent.children
-    .filter(child => child.name === 'Column')
-    .map(node => getProp(node, 'width'))
+  const columns = parent.children.filter(child => child.name === 'Column')
+  const columnsWithFixedWidth = columns
+    .map(node => {
+      const width = getProp(node, 'width')
+      return width && typeof width.value === 'number' && width.value
+    })
+    .filter(Boolean)
 
-  console.log('columns', columns)
-  return `width / ${columns.length}`
+  const columnsWidthSum = columnsWithFixedWidth.reduce(
+    (res, value) => res + value,
+    0
+  )
+
+  return columnsWidthSum
+    ? `(width - ${columnsWidthSum}) / ${columns.length -
+        columnsWithFixedWidth.length}`
+    : `width / ${columns.length}`
 }
 
 export const getWidth = (node, parent) => {
   const width = getProp(node, 'width')
-  if (width) {
-    // removing from properties so it's not in the compiled css
-    node.properties.splice(node.properties.indexOf(width), 1)
-  }
-
   return width ? width.value : calculateWidth(parent)
 }
 
