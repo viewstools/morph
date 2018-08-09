@@ -75,8 +75,12 @@ export const getProp = (node, key) => {
 export const getScope = node => node.value.split('when ')[1]
 
 const calculateWidth = parent => {
-  const columns = parent.children.filter(child => child.name === 'Column')
-  return `width/${columns.length}`
+  const columns = parent.children
+    .filter(child => child.name === 'Column')
+    .map(node => getProp(node, 'width'))
+
+  console.log('columns', columns)
+  return `size.width / ${columns.length}`
 }
 
 export const getWidth = (node, parent) => {

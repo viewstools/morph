@@ -5838,34 +5838,38 @@ class UseTable extends React.Component {
           }}
           className={\`views-block \${Table1}\`}
         >
-          <Column
-            dataKey=\\"name\\"
-            width={90}
-            label=\\"Name\\"
-            headerRenderer={headerRenderer}
-            cellRenderer={cellRenderer}
-            data-test-id={\`UseTable.Name|\`}
-            key=\\"name\\"
-            style={{ '--borderBottomColor': props.borderColor }}
-            className={\`views-block \${Name}\`}
-          />
-          <Column
-            dataKey=\\"location\\"
-            width={width / 3}
-            label=\\"location\\"
-            cellRenderer={cellRenderer}
-            data-test-id={\`UseTable.Location|\`}
-            key=\\"location\\"
-            className={\`views-block \${Location}\`}
-          />
-          <Column
-            dataKey=\\"description\\"
-            width={width / 3}
-            cellRenderer={cellRenderer}
-            data-test-id={\`UseTable.Description|\`}
-            key=\\"description\\"
-            className=\\"views-block\\"
-          />
+          {size => (
+            <React.Fragment>
+              <Column
+                dataKey=\\"name\\"
+                width={90}
+                label=\\"Name\\"
+                headerRenderer={headerRenderer}
+                cellRenderer={cellRenderer}
+                data-test-id={\`UseTable.Name|\`}
+                key=\\"name\\"
+                style={{ '--borderBottomColor': props.borderColor }}
+                className={\`views-block \${Name}\`}
+              />
+              <Column
+                dataKey=\\"location\\"
+                width={size.width / 3}
+                label=\\"location\\"
+                cellRenderer={cellRenderer}
+                data-test-id={\`UseTable.Location|\`}
+                key=\\"location\\"
+                className={\`views-block \${Location}\`}
+              />
+              <Column
+                dataKey=\\"description\\"
+                width={size.width / 3}
+                cellRenderer={cellRenderer}
+                data-test-id={\`UseTable.Description|\`}
+                key=\\"description\\"
+                className=\\"views-block\\"
+              />
+            </React.Fragment>
+          )}
         </Table>
         {props.children}
       </div>
@@ -5975,33 +5979,37 @@ const UseTable = props => {
         }}
         className={\`views-block \${Table1}\`}
       >
-        <Column
-          dataKey=\\"name\\"
-          width={width / 3}
-          label=\\"Name\\"
-          headerRenderer={headerRenderer}
-          cellRenderer={cellRenderer}
-          data-test-id={\`UseTable.Name|\`}
-          key=\\"name\\"
-          style={{ '--borderBottomColor': props.borderColor }}
-          className={\`views-block \${Name}\`}
-        />
-        <Column
-          dataKey=\\"location\\"
-          width={width / 3}
-          cellRenderer={cellRenderer}
-          data-test-id={\`UseTable.Location|\`}
-          key=\\"location\\"
-          className={\`views-block \${Location}\`}
-        />
-        <Column
-          dataKey=\\"description\\"
-          width={width / 3}
-          cellRenderer={cellRenderer}
-          data-test-id={\`UseTable.Description|\`}
-          key=\\"description\\"
-          className=\\"views-block\\"
-        />
+        {size => (
+          <React.Fragment>
+            <Column
+              dataKey=\\"name\\"
+              width={size.width / 3}
+              label=\\"Name\\"
+              headerRenderer={headerRenderer}
+              cellRenderer={cellRenderer}
+              data-test-id={\`UseTable.Name|\`}
+              key=\\"name\\"
+              style={{ '--borderBottomColor': props.borderColor }}
+              className={\`views-block \${Name}\`}
+            />
+            <Column
+              dataKey=\\"location\\"
+              width={size.width / 3}
+              cellRenderer={cellRenderer}
+              data-test-id={\`UseTable.Location|\`}
+              key=\\"location\\"
+              className={\`views-block \${Location}\`}
+            />
+            <Column
+              dataKey=\\"description\\"
+              width={size.width / 3}
+              cellRenderer={cellRenderer}
+              data-test-id={\`UseTable.Description|\`}
+              key=\\"description\\"
+              className=\\"views-block\\"
+            />
+          </React.Fragment>
+        )}
       </Table>
       {props.children}
     </div>
@@ -9187,7 +9195,7 @@ import Header from './Header.view.js';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Column, Table } from '@viewstools/tables/native';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 const styles = StyleSheet.create({
   Table1: {
@@ -9195,7 +9203,7 @@ const styles = StyleSheet.create({
     rowBackgroundColor: 'white',
     rowBackgroundColorAlternate: 'black',
   },
-  Name: { width: 90, borderStyle: 'solid', borderBottomWidth: 1 },
+  Name: { borderStyle: 'solid', borderBottomWidth: 1 },
   Location: {
     borderStyle: 'solid',
     borderBottomColor: 'black',
@@ -9229,21 +9237,36 @@ class UseTable extends React.Component {
             },
           ]}
         >
-          <Column
-            testID={\`UseTable.Name|\`}
-            key=\\"name\\"
-            style={[styles.Name, { borderBottomColor: props.borderColor }]}
-          />
-          <Column
-            testID={\`UseTable.Location|\`}
-            key=\\"location\\"
-            style={styles.Location}
-          >
-            <Text testID={\`UseTable.Text|\`} isHeader={true}>
-              location
-            </Text>
-          </Column>
-          <Column testID={\`UseTable.Description|\`} key=\\"description\\" />
+          {size => (
+            <React.Fragment>
+              <Column
+                dataKey=\\"name\\"
+                width={90}
+                label=\\"Name\\"
+                headerRenderer={headerRenderer}
+                cellRenderer={cellRenderer}
+                testID={\`UseTable.Name|\`}
+                key=\\"name\\"
+                style={[styles.Name, { borderBottomColor: props.borderColor }]}
+              />
+              <Column
+                dataKey=\\"location\\"
+                width={size.width / 3}
+                label=\\"location\\"
+                cellRenderer={cellRenderer}
+                testID={\`UseTable.Location|\`}
+                key=\\"location\\"
+                style={styles.Location}
+              />
+              <Column
+                dataKey=\\"description\\"
+                width={size.width / 3}
+                cellRenderer={cellRenderer}
+                testID={\`UseTable.Description|\`}
+                key=\\"description\\"
+              />
+            </React.Fragment>
+          )}
         </Table>
         {props.children}
       </View>
