@@ -248,6 +248,17 @@ module.exports = {
 }
 `;
 
+exports[`e2e parses e2e LocalImageWithDefault 1`] = `
+Object {
+  "code": "const { get } = require('@viewstools/e2e');
+
+module.exports = {
+  _top: get('LocalImageWithDefault'),
+};
+",
+}
+`;
+
 exports[`e2e parses e2e LocalOrRemoteImageWhenCode 1`] = `
 Object {
   "code": "const { get } = require('@viewstools/e2e');
@@ -2560,15 +2571,6 @@ const ListOfSomething = props => {
   );
 };
 
-ListOfSomething.defaultProps = {
-  from: [
-    { id: 'item1' },
-    { id: 'item2' },
-    { id: 'item3' },
-    { id: 'item4' },
-    { id: 'item5' },
-  ],
-};
 export default ListOfSomething;
 ",
   "fonts": Array [],
@@ -2666,15 +2668,6 @@ const ListWhen = props => {
   ) : null;
 };
 
-ListWhen.defaultProps = {
-  from: [
-    { id: 'item1' },
-    { id: 'item2' },
-    { id: 'item3' },
-    { id: 'item4' },
-    { id: 'item5' },
-  ],
-};
 export default ListWhen;
 ",
   "fonts": Array [],
@@ -2772,15 +2765,6 @@ const ListWithKey = props => {
   );
 };
 
-ListWithKey.defaultProps = {
-  from: [
-    { id: 'item1' },
-    { id: 'item2' },
-    { id: 'item3' },
-    { id: 'item4' },
-    { id: 'item5' },
-  ],
-};
 export default ListWithKey;
 ",
   "fonts": Array [],
@@ -2944,6 +2928,78 @@ export default LocalImageSvg;
       "defaultValue": 50,
       "name": "height",
       "type": "number",
+    },
+  ],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom LocalImageWithDefault 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
+import React from 'react';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+import fileJpg from 'file.jpg';
+
+class LocalImageWithDefault extends React.Component {
+  render() {
+    const { context, props } = this;
+
+    return (
+      <img
+        data-test-id={\`\${props['data-test-id'] || 'LocalImageWithDefault'}|\`}
+        alt={''}
+        src={props.source}
+        className=\\"views-block\\"
+      />
+    );
+  }
+}
+LocalImageWithDefault.contextTypes = {
+  track: PropTypes.func.isRequired,
+};
+LocalImageWithDefault.defaultProps = { source: fileJpg };
+export default LocalImageWithDefault;
+",
+  "fonts": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": "fileJpg",
+      "name": "source",
+      "type": "import",
+    },
+  ],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom LocalImageWithDefault: react-dom parses react-dom LocalImageWithDefault debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import React from 'react';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+
+const LocalImageWithDefault = props => {
+  return (
+    <img
+      data-test-id={\`\${props['data-test-id'] || 'LocalImageWithDefault'}|\`}
+      alt={''}
+      src={props.source}
+      className=\\"views-block\\"
+    />
+  );
+};
+
+LocalImageWithDefault.defaultProps = { source: fileJpg };
+export default LocalImageWithDefault;
+",
+  "fonts": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": "fileJpg",
+      "name": "source",
+      "type": "import",
     },
   ],
   "svgs": Array [],
@@ -4097,15 +4153,6 @@ const ScrollableList = props => {
   );
 };
 
-ScrollableList.defaultProps = {
-  from: [
-    { id: 'item1' },
-    { id: 'item2' },
-    { id: 'item3' },
-    { id: 'item4' },
-    { id: 'item5' },
-  ],
-};
 export default ScrollableList;
 ",
   "fonts": Array [],
@@ -7445,6 +7492,44 @@ export default LocalImageSvg;
       "defaultValue": 50,
       "name": "height",
       "type": "number",
+    },
+  ],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-native parses react-native LocalImageWithDefault 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
+import React from 'react';
+import fileJpg from 'file.jpg';
+import { Image } from 'react-native';
+
+class LocalImageWithDefault extends React.Component {
+  render() {
+    const { context, props } = this;
+
+    return (
+      <Image
+        testID={\`\${props['testID'] || 'LocalImageWithDefault'}|\`}
+        source={{ uri: props.source }}
+      />
+    );
+  }
+}
+LocalImageWithDefault.contextTypes = {
+  track: PropTypes.func.isRequired,
+};
+LocalImageWithDefault.defaultProps = { source: fileJpg };
+export default LocalImageWithDefault;
+",
+  "fonts": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": "fileJpg",
+      "name": "source",
+      "type": "import",
     },
   ],
   "svgs": Array [],

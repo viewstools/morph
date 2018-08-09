@@ -14,9 +14,25 @@ const isUrl = str => /^https?:\/\//.test(str)
 
 const getImageSource = (node, state, parent) => {
   const scopes = getScopes(node, parent)
+
   if (scopes && (isUrl(node.value) || node.tags.slot)) {
     return wrap(getScopedCondition(node, parent))
   } else if (isUrl(node.value) || node.tags.slot) {
+    if (node.defaultValue && !isUrl(node.defaultValue)) {
+      state.slots.forEach(item => {
+        if (item.defaultValue === node.defaultValue) {
+          item.type = 'import'
+          const name = toCamelCase(item.defaultValue)
+          if (!state.images.includes(item.defaultValue)) {
+            state.images.push({
+              name,
+              file: item.defaultValue,
+            })
+          }
+          item.defaultValue = name
+        }
+      })
+    }
     return safe(node.value)
   } else {
     if (scopes) {
