@@ -89,9 +89,11 @@ export default (state, getImport) => {
     }
   }
 
-  if (state.isTable && !state.isReactNative) {
+  if (state.isTable) {
     dependencies.push(
-      'import { AutoSizer, Column, Table } from "react-virtualized"'
+      `import { Column, Table } from "@viewstools/tables/${
+        state.isReactNative ? 'native' : 'dom'
+      }"`
     )
   }
 

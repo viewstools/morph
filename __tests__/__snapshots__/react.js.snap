@@ -5773,7 +5773,7 @@ import Header from './Header.view.js';
 import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { AutoSizer, Column, Table } from 'react-virtualized';
+import { Column, Table } from '@viewstools/tables/dom';
 import { css } from 'emotion';
 
 const Table1Row = css({
@@ -5825,56 +5825,48 @@ class UseTable extends React.Component {
         data-test-id={\`\${props['data-test-id'] || 'UseTable'}|\`}
         className=\\"views-block\\"
       >
-        <AutoSizer>
-          {({ height, width }) => (
-            <Table
-              width={width}
-              height={height}
-              rowCount={props.from.length}
-              rowGetter={({ index }) => props.from[index]}
-              data-test-id={\`UseTable.Table|\`}
-              from={props.from}
-              headerHeight={40}
-              rowHeight={20}
-              rowClassName={Table1Row}
-              style={{
-                '--marginLeft': \`\${props.marginLeft}px\`,
-                '--rowColorAlternate': props.rowColorAlternate,
-                '--rowBackgroundColorAlternate': props.rowBgColorAlternate,
-              }}
-              className={\`views-block \${Table1}\`}
-            >
-              <Column
-                dataKey=\\"name\\"
-                width={90}
-                label=\\"Name\\"
-                headerRenderer={headerRenderer}
-                cellRenderer={cellRenderer}
-                data-test-id={\`UseTable.Name|\`}
-                key=\\"name\\"
-                style={{ '--borderBottomColor': props.borderColor }}
-                className={\`views-block \${Name}\`}
-              />
-              <Column
-                dataKey=\\"location\\"
-                width={width / 3}
-                label=\\"location\\"
-                cellRenderer={cellRenderer}
-                data-test-id={\`UseTable.Location|\`}
-                key=\\"location\\"
-                className={\`views-block \${Location}\`}
-              />
-              <Column
-                dataKey=\\"description\\"
-                width={width / 3}
-                cellRenderer={cellRenderer}
-                data-test-id={\`UseTable.Description|\`}
-                key=\\"description\\"
-                className=\\"views-block\\"
-              />
-            </Table>
-          )}
-        </AutoSizer>
+        <Table
+          data-test-id={\`UseTable.Table|\`}
+          from={props.from}
+          headerHeight={40}
+          rowHeight={20}
+          rowClassName={Table1Row}
+          style={{
+            '--marginLeft': \`\${props.marginLeft}px\`,
+            '--rowColorAlternate': props.rowColorAlternate,
+            '--rowBackgroundColorAlternate': props.rowBgColorAlternate,
+          }}
+          className={\`views-block \${Table1}\`}
+        >
+          <Column
+            dataKey=\\"name\\"
+            width={90}
+            label=\\"Name\\"
+            headerRenderer={headerRenderer}
+            cellRenderer={cellRenderer}
+            data-test-id={\`UseTable.Name|\`}
+            key=\\"name\\"
+            style={{ '--borderBottomColor': props.borderColor }}
+            className={\`views-block \${Name}\`}
+          />
+          <Column
+            dataKey=\\"location\\"
+            width={width / 3}
+            label=\\"location\\"
+            cellRenderer={cellRenderer}
+            data-test-id={\`UseTable.Location|\`}
+            key=\\"location\\"
+            className={\`views-block \${Location}\`}
+          />
+          <Column
+            dataKey=\\"description\\"
+            width={width / 3}
+            cellRenderer={cellRenderer}
+            data-test-id={\`UseTable.Description|\`}
+            key=\\"description\\"
+            className=\\"views-block\\"
+          />
+        </Table>
         {props.children}
       </div>
     );
@@ -5921,7 +5913,7 @@ import Column from './Column.view.js';
 import Header from './Header.view.js';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { AutoSizer, Column, Table } from 'react-virtualized';
+import { Column, Table } from '@viewstools/tables/dom';
 import { css } from 'emotion';
 
 const Table1Row = css({
@@ -5970,55 +5962,47 @@ const UseTable = props => {
       data-test-id={\`\${props['data-test-id'] || 'UseTable'}|\`}
       className=\\"views-block\\"
     >
-      <AutoSizer>
-        {({ height, width }) => (
-          <Table
-            width={width}
-            height={height}
-            rowCount={props.from.length}
-            rowGetter={({ index }) => props.from[index]}
-            data-test-id={\`UseTable.Table|\`}
-            from={props.from}
-            headerHeight={40}
-            rowHeight={20}
-            rowClassName={Table1Row}
-            style={{
-              '--marginLeft': \`\${props.marginLeft}px\`,
-              '--rowColorAlternate': props.rowColorAlternate,
-              '--rowBackgroundColorAlternate': props.rowBgColorAlternate,
-            }}
-            className={\`views-block \${Table1}\`}
-          >
-            <Column
-              dataKey=\\"name\\"
-              width={width / 3}
-              label=\\"Name\\"
-              headerRenderer={headerRenderer}
-              cellRenderer={cellRenderer}
-              data-test-id={\`UseTable.Name|\`}
-              key=\\"name\\"
-              style={{ '--borderBottomColor': props.borderColor }}
-              className={\`views-block \${Name}\`}
-            />
-            <Column
-              dataKey=\\"location\\"
-              width={width / 3}
-              cellRenderer={cellRenderer}
-              data-test-id={\`UseTable.Location|\`}
-              key=\\"location\\"
-              className={\`views-block \${Location}\`}
-            />
-            <Column
-              dataKey=\\"description\\"
-              width={width / 3}
-              cellRenderer={cellRenderer}
-              data-test-id={\`UseTable.Description|\`}
-              key=\\"description\\"
-              className=\\"views-block\\"
-            />
-          </Table>
-        )}
-      </AutoSizer>
+      <Table
+        data-test-id={\`UseTable.Table|\`}
+        from={props.from}
+        headerHeight={40}
+        rowHeight={20}
+        rowClassName={Table1Row}
+        style={{
+          '--marginLeft': \`\${props.marginLeft}px\`,
+          '--rowColorAlternate': props.rowColorAlternate,
+          '--rowBackgroundColorAlternate': props.rowBgColorAlternate,
+        }}
+        className={\`views-block \${Table1}\`}
+      >
+        <Column
+          dataKey=\\"name\\"
+          width={width / 3}
+          label=\\"Name\\"
+          headerRenderer={headerRenderer}
+          cellRenderer={cellRenderer}
+          data-test-id={\`UseTable.Name|\`}
+          key=\\"name\\"
+          style={{ '--borderBottomColor': props.borderColor }}
+          className={\`views-block \${Name}\`}
+        />
+        <Column
+          dataKey=\\"location\\"
+          width={width / 3}
+          cellRenderer={cellRenderer}
+          data-test-id={\`UseTable.Location|\`}
+          key=\\"location\\"
+          className={\`views-block \${Location}\`}
+        />
+        <Column
+          dataKey=\\"description\\"
+          width={width / 3}
+          cellRenderer={cellRenderer}
+          data-test-id={\`UseTable.Description|\`}
+          key=\\"description\\"
+          className=\\"views-block\\"
+        />
+      </Table>
       {props.children}
     </div>
   );
@@ -9202,6 +9186,7 @@ import Column from './Column.view.js';
 import Header from './Header.view.js';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { Column, Table } from '@viewstools/tables/native';
 import { StyleSheet, Text, View } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -9217,6 +9202,13 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
 });
+
+const headerRenderer = ({ label }) => {
+  return <Header value={label} />;
+};
+const cellRenderer = ({ cellData }) => {
+  return <Cell value={cellData} />;
+};
 
 class UseTable extends React.Component {
   render() {
@@ -9241,10 +9233,7 @@ class UseTable extends React.Component {
             testID={\`UseTable.Name|\`}
             key=\\"name\\"
             style={[styles.Name, { borderBottomColor: props.borderColor }]}
-          >
-            <Header testID={\`UseTable.Header|\`} isHeader={true} text=\\"Name\\" />
-            <Cell testID={\`UseTable.Cell|\`} isCell={true} />
-          </Column>
+          />
           <Column
             testID={\`UseTable.Location|\`}
             key=\\"location\\"
@@ -9253,11 +9242,8 @@ class UseTable extends React.Component {
             <Text testID={\`UseTable.Text|\`} isHeader={true}>
               location
             </Text>
-            <Cell testID={\`UseTable.Cell:1|\`} isCell={true} />
           </Column>
-          <Column testID={\`UseTable.Description|\`} key=\\"description\\">
-            <Cell testID={\`UseTable.Cell:2|\`} isCell={true} />
-          </Column>
+          <Column testID={\`UseTable.Description|\`} key=\\"description\\" />
         </Table>
         {props.children}
       </View>

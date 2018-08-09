@@ -55,7 +55,7 @@ export default ({
     render: [],
     styles: {},
     svgs: [],
-    usedBlockNames: { [finalName]: 1, Table: 1 },
+    usedBlockNames: { [finalName]: 1, Column: 1, Table: 1 },
     uses: [],
     testIdKey: 'data-test-id',
     testIds: {},

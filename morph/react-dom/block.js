@@ -13,7 +13,6 @@ import * as BlockProxy from '../react/block-proxy.js'
 import * as BlockRoute from '../react/block-route.js'
 import * as BlockSetTestId from '../react/block-set-test-id.js'
 import * as BlockTeleport from '../react/block-teleport.js'
-import * as BlockTable from './block-table.js'
 
 export const enter = [
   BlockSetTestId.enter,
@@ -21,7 +20,6 @@ export const enter = [
   BlockProxy.enter,
   BlockRoute.enter,
   BlockName.enter,
-  BlockTable.enter,
   BlockColumn.enter,
   BlockCapture.enter,
   BlockTeleport.enter,
@@ -37,7 +35,6 @@ export const leave = [
   BlockList.leave,
   BlockExplicitChildren.leave,
   BlockName.leave,
-  BlockTable.leave,
   BlockRoute.leave,
   BlockOffWhen.leave,
 ]
