@@ -80,7 +80,7 @@ const calculateWidth = parent => {
     .map(node => getProp(node, 'width'))
 
   console.log('columns', columns)
-  return `size.width / ${columns.length}`
+  return `width / ${columns.length}`
 }
 
 export const getWidth = (node, parent) => {

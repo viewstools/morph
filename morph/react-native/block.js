@@ -25,6 +25,7 @@ export const enter = [
   BlockRoute.enter,
   BlockWrap.enter,
   BlockName.enter,
+  BlockTable.enter,
   BlockColumn.enter,
   BlockSvg.enter,
   BlockCapture.enter,
@@ -36,14 +37,13 @@ export const enter = [
   BlockProperties.enter,
   BlockGroup.enter,
   BlockList.enter,
-  BlockTable.enter,
 ]
 
 export const leave = [
-  BlockTable.leave,
   BlockList.leave,
   BlockExplicitChildren.leave,
   BlockName.leave,
+  BlockTable.leave,
   BlockWrap.leave,
   BlockRoute.leave,
   BlockOffWhen.leave,

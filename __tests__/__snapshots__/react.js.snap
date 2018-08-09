@@ -624,6 +624,21 @@ module.exports = {
 }
 `;
 
+exports[`e2e parses e2e UseTableOnWhen 1`] = `
+Object {
+  "code": "const { get } = require('@viewstools/e2e');
+
+module.exports = {
+  Cell: get('UseTableOnWhen.Cell'),
+  Header: get('UseTableOnWhen.Header'),
+  Name: get('UseTableOnWhen.Name'),
+  Table: get('UseTableOnWhen.Table'),
+  _top: get('UseTableOnWhen'),
+};
+",
+}
+`;
+
 exports[`e2e parses e2e UseText 1`] = `
 Object {
   "code": "const { get } = require('@viewstools/e2e');
@@ -5773,7 +5788,7 @@ import Header from './Header.view.js';
 import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { Column, Table } from '@viewstools/tables/dom';
+import { AutoSizer, Column, Table } from '@viewstools/tables/dom';
 import { css } from 'emotion';
 
 const Table1Row = css({
@@ -5825,21 +5840,25 @@ class UseTable extends React.Component {
         data-test-id={\`\${props['data-test-id'] || 'UseTable'}|\`}
         className=\\"views-block\\"
       >
-        <Table
-          data-test-id={\`UseTable.Table|\`}
-          from={props.from}
-          headerHeight={40}
-          rowHeight={20}
-          rowClassName={Table1Row}
-          style={{
-            '--marginLeft': \`\${props.marginLeft}px\`,
-            '--rowColorAlternate': props.rowColorAlternate,
-            '--rowBackgroundColorAlternate': props.rowBgColorAlternate,
-          }}
-          className={\`views-block \${Table1}\`}
-        >
-          {size => (
-            <React.Fragment>
+        <AutoSizer>
+          {({ width, height }) => (
+            <Table
+              width={width}
+              height={height}
+              rowCount={Array.isArray(props.from) ? props.from.length : 0}
+              rowGetter={({ index }) => props.from[index]}
+              data-test-id={\`UseTable.Table|\`}
+              from={props.from}
+              headerHeight={40}
+              rowHeight={20}
+              rowClassName={Table1Row}
+              style={{
+                '--marginLeft': \`\${props.marginLeft}px\`,
+                '--rowColorAlternate': props.rowColorAlternate,
+                '--rowBackgroundColorAlternate': props.rowBgColorAlternate,
+              }}
+              className={\`views-block \${Table1}\`}
+            >
               <Column
                 dataKey=\\"name\\"
                 width={90}
@@ -5853,7 +5872,7 @@ class UseTable extends React.Component {
               />
               <Column
                 dataKey=\\"location\\"
-                width={size.width / 3}
+                width={width / 3}
                 label=\\"location\\"
                 cellRenderer={cellRenderer}
                 data-test-id={\`UseTable.Location|\`}
@@ -5862,15 +5881,15 @@ class UseTable extends React.Component {
               />
               <Column
                 dataKey=\\"description\\"
-                width={size.width / 3}
+                width={width / 3}
                 cellRenderer={cellRenderer}
                 data-test-id={\`UseTable.Description|\`}
                 key=\\"description\\"
                 className=\\"views-block\\"
               />
-            </React.Fragment>
+            </Table>
           )}
-        </Table>
+        </AutoSizer>
         {props.children}
       </div>
     );
@@ -5917,7 +5936,7 @@ import Column from './Column.view.js';
 import Header from './Header.view.js';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { Column, Table } from '@viewstools/tables/dom';
+import { AutoSizer, Column, Table } from '@viewstools/tables/dom';
 import { css } from 'emotion';
 
 const Table1Row = css({
@@ -5966,24 +5985,28 @@ const UseTable = props => {
       data-test-id={\`\${props['data-test-id'] || 'UseTable'}|\`}
       className=\\"views-block\\"
     >
-      <Table
-        data-test-id={\`UseTable.Table|\`}
-        from={props.from}
-        headerHeight={40}
-        rowHeight={20}
-        rowClassName={Table1Row}
-        style={{
-          '--marginLeft': \`\${props.marginLeft}px\`,
-          '--rowColorAlternate': props.rowColorAlternate,
-          '--rowBackgroundColorAlternate': props.rowBgColorAlternate,
-        }}
-        className={\`views-block \${Table1}\`}
-      >
-        {size => (
-          <React.Fragment>
+      <AutoSizer>
+        {({ width, height }) => (
+          <Table
+            width={width}
+            height={height}
+            rowCount={Array.isArray(props.from) ? props.from.length : 0}
+            rowGetter={({ index }) => props.from[index]}
+            data-test-id={\`UseTable.Table|\`}
+            from={props.from}
+            headerHeight={40}
+            rowHeight={20}
+            rowClassName={Table1Row}
+            style={{
+              '--marginLeft': \`\${props.marginLeft}px\`,
+              '--rowColorAlternate': props.rowColorAlternate,
+              '--rowBackgroundColorAlternate': props.rowBgColorAlternate,
+            }}
+            className={\`views-block \${Table1}\`}
+          >
             <Column
               dataKey=\\"name\\"
-              width={size.width / 3}
+              width={width / 3}
               label=\\"Name\\"
               headerRenderer={headerRenderer}
               cellRenderer={cellRenderer}
@@ -5994,7 +6017,7 @@ const UseTable = props => {
             />
             <Column
               dataKey=\\"location\\"
-              width={size.width / 3}
+              width={width / 3}
               cellRenderer={cellRenderer}
               data-test-id={\`UseTable.Location|\`}
               key=\\"location\\"
@@ -6002,15 +6025,15 @@ const UseTable = props => {
             />
             <Column
               dataKey=\\"description\\"
-              width={size.width / 3}
+              width={width / 3}
               cellRenderer={cellRenderer}
               data-test-id={\`UseTable.Description|\`}
               key=\\"description\\"
               className=\\"views-block\\"
             />
-          </React.Fragment>
+          </Table>
         )}
-      </Table>
+      </AutoSizer>
       {props.children}
     </div>
   );
@@ -6020,6 +6043,264 @@ export default UseTable;
 ",
   "fonts": Array [],
   "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "from",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "marginLeft",
+      "type": "number",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "rowColorAlternate",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "borderColor",
+      "type": "string",
+    },
+  ],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom UseTableOnWhen 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import Cell from './Cell.view.js';
+import Column from './Column.view.js';
+import Header from './Header.view.js';
+import PropTypes from 'prop-types';
+import React from 'react';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+import { AutoSizer, Column, Table } from '@viewstools/tables/dom';
+import { css } from 'emotion';
+
+const Table1Row = css({
+  display: 'flex',
+  color: '#1C1C1C',
+  backgroundColor: 'white',
+  '&:hover': {
+    color: 'red',
+    backgroundColor: 'black',
+  },
+  '&:nth-child(even)': {
+    backgroundColor: 'black',
+    '&:hover': {
+      color: 'green',
+    },
+    color: 'var(--rowColorAlternate)',
+    '&:hover': {
+      backgroundColor: 'var(--rowBackgroundColorAlternate)',
+    },
+  },
+});
+const Table1 = css({ label: 'Table1', marginLeft: 'var(--marginLeft)' });
+const Name = css({
+  label: 'Name',
+  borderBottomStyle: 'solid',
+  borderBottomWidth: 1,
+  borderBottomColor: 'var(--borderBottomColor)',
+});
+
+const headerRenderer = ({ label }) => {
+  return <Header value={label} />;
+};
+const cellRenderer = ({ cellData }) => {
+  return <Cell value={cellData} />;
+};
+
+class UseTableOnWhen extends React.Component {
+  render() {
+    const { context, props } = this;
+
+    return (
+      <div
+        data-test-id={\`\${props['data-test-id'] || 'UseTableOnWhen'}|\`}
+        className=\\"views-block\\"
+      >
+        {props.stuff ? (
+          <AutoSizer>
+            {({ width, height }) => (
+              <Table
+                width={width}
+                height={height}
+                rowCount={Array.isArray(props.from) ? props.from.length : 0}
+                rowGetter={({ index }) => props.from[index]}
+                data-test-id={\`UseTableOnWhen.Table|\`}
+                from={props.from}
+                headerHeight={40}
+                rowHeight={20}
+                rowClassName={Table1Row}
+                style={{
+                  '--marginLeft': \`\${props.marginLeft}px\`,
+                  '--rowColorAlternate': props.rowColorAlternate,
+                  '--rowBackgroundColorAlternate': props.rowBgColorAlternate,
+                }}
+                className={\`views-block \${Table1}\`}
+              >
+                <Column
+                  dataKey=\\"name\\"
+                  width={90}
+                  label=\\"Name\\"
+                  headerRenderer={headerRenderer}
+                  cellRenderer={cellRenderer}
+                  data-test-id={\`UseTableOnWhen.Name|\`}
+                  key=\\"name\\"
+                  style={{ '--borderBottomColor': props.borderColor }}
+                  className={\`views-block \${Name}\`}
+                />
+              </Table>
+            )}
+          </AutoSizer>
+        ) : null}
+        {props.children}
+      </div>
+    );
+  }
+}
+UseTableOnWhen.contextTypes = {
+  track: PropTypes.func.isRequired,
+};
+
+export default UseTableOnWhen;
+",
+  "fonts": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "stuff",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "from",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "marginLeft",
+      "type": "number",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "rowColorAlternate",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "borderColor",
+      "type": "string",
+    },
+  ],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom UseTableOnWhen: react-dom parses react-dom UseTableOnWhen debug 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import Cell from './Cell.view.js';
+import Column from './Column.view.js';
+import Header from './Header.view.js';
+import React from 'react';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+import { AutoSizer, Column, Table } from '@viewstools/tables/dom';
+import { css } from 'emotion';
+
+const Table1Row = css({
+  display: 'flex',
+  color: '#1C1C1C',
+  backgroundColor: 'white',
+  '&:hover': {
+    color: 'red',
+    backgroundColor: 'black',
+  },
+  '&:nth-child(even)': {
+    backgroundColor: 'black',
+    '&:hover': {
+      color: 'green',
+    },
+    color: 'var(--rowColorAlternate)',
+    '&:hover': {
+      backgroundColor: 'var(--rowBackgroundColorAlternate)',
+    },
+  },
+});
+const Table1 = css({ label: 'Table1', marginLeft: 'var(--marginLeft)' });
+const Name = css({
+  label: 'Name',
+  borderBottomStyle: 'solid',
+  borderBottomWidth: 1,
+  borderBottomColor: 'var(--borderBottomColor)',
+});
+
+const headerRenderer = ({ label }) => {
+  return <Header value={label} />;
+};
+const cellRenderer = ({ cellData }) => {
+  return <Cell value={cellData} />;
+};
+
+const UseTableOnWhen = props => {
+  return (
+    <div
+      data-test-id={\`\${props['data-test-id'] || 'UseTableOnWhen'}|\`}
+      className=\\"views-block\\"
+    >
+      {props.stuff ? (
+        <AutoSizer>
+          {({ width, height }) => (
+            <Table
+              width={width}
+              height={height}
+              rowCount={Array.isArray(props.from) ? props.from.length : 0}
+              rowGetter={({ index }) => props.from[index]}
+              data-test-id={\`UseTableOnWhen.Table|\`}
+              from={props.from}
+              headerHeight={40}
+              rowHeight={20}
+              rowClassName={Table1Row}
+              style={{
+                '--marginLeft': \`\${props.marginLeft}px\`,
+                '--rowColorAlternate': props.rowColorAlternate,
+                '--rowBackgroundColorAlternate': props.rowBgColorAlternate,
+              }}
+              className={\`views-block \${Table1}\`}
+            >
+              <Column
+                dataKey=\\"name\\"
+                width={width / 1}
+                label=\\"Name\\"
+                headerRenderer={headerRenderer}
+                cellRenderer={cellRenderer}
+                data-test-id={\`UseTableOnWhen.Name|\`}
+                key=\\"name\\"
+                style={{ '--borderBottomColor': props.borderColor }}
+                className={\`views-block \${Name}\`}
+              />
+            </Table>
+          )}
+        </AutoSizer>
+      ) : null}
+      {props.children}
+    </div>
+  );
+};
+
+export default UseTableOnWhen;
+",
+  "fonts": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "stuff",
+      "type": "string",
+    },
     Object {
       "defaultValue": false,
       "name": "from",
@@ -9194,7 +9475,7 @@ import Column from './Column.view.js';
 import Header from './Header.view.js';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Column, Table } from '@viewstools/tables/native';
+import { AutoSizer, Column, Table } from '@viewstools/tables/native';
 import { StyleSheet, View } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -9224,21 +9505,25 @@ class UseTable extends React.Component {
 
     return (
       <View testID={\`\${props['testID'] || 'UseTable'}|\`}>
-        <Table
-          testID={\`UseTable.Table|\`}
-          from={props.from}
-          headerHeight={40}
-          rowHeight={20}
-          style={[
-            styles.Table1,
-            {
-              marginLeft: props.marginLeft,
-              rowColorAlternate: props.rowColorAlternate,
-            },
-          ]}
-        >
-          {size => (
-            <React.Fragment>
+        <AutoSizer>
+          {({ width, height }) => (
+            <Table
+              width={width}
+              height={height}
+              rowCount={Array.isArray(props.from) ? props.from.length : 0}
+              rowGetter={({ index }) => props.from[index]}
+              testID={\`UseTable.Table|\`}
+              from={props.from}
+              headerHeight={40}
+              rowHeight={20}
+              style={[
+                styles.Table1,
+                {
+                  marginLeft: props.marginLeft,
+                  rowColorAlternate: props.rowColorAlternate,
+                },
+              ]}
+            >
               <Column
                 dataKey=\\"name\\"
                 width={90}
@@ -9251,7 +9536,7 @@ class UseTable extends React.Component {
               />
               <Column
                 dataKey=\\"location\\"
-                width={size.width / 3}
+                width={width / 3}
                 label=\\"location\\"
                 cellRenderer={cellRenderer}
                 testID={\`UseTable.Location|\`}
@@ -9260,14 +9545,14 @@ class UseTable extends React.Component {
               />
               <Column
                 dataKey=\\"description\\"
-                width={size.width / 3}
+                width={width / 3}
                 cellRenderer={cellRenderer}
                 testID={\`UseTable.Description|\`}
                 key=\\"description\\"
               />
-            </React.Fragment>
+            </Table>
           )}
-        </Table>
+        </AutoSizer>
         {props.children}
       </View>
     );
@@ -9281,6 +9566,119 @@ export default UseTable;
 ",
   "fonts": Array [],
   "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "from",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "marginLeft",
+      "type": "number",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "rowColorAlternate",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "borderColor",
+      "type": "string",
+    },
+  ],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-native parses react-native UseTableOnWhen 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import Cell from './Cell.view.js';
+import Column from './Column.view.js';
+import Header from './Header.view.js';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { AutoSizer, Column, Table } from '@viewstools/tables/native';
+import { StyleSheet, View } from 'react-native';
+
+const styles = StyleSheet.create({
+  Table1: {
+    rowColor: '#1C1C1C',
+    rowBackgroundColor: 'white',
+    rowBackgroundColorAlternate: 'black',
+  },
+  Name: { borderStyle: 'solid', borderBottomWidth: 1 },
+});
+
+const headerRenderer = ({ label }) => {
+  return <Header value={label} />;
+};
+const cellRenderer = ({ cellData }) => {
+  return <Cell value={cellData} />;
+};
+
+class UseTableOnWhen extends React.Component {
+  render() {
+    const { context, props } = this;
+
+    return (
+      <View testID={\`\${props['testID'] || 'UseTableOnWhen'}|\`}>
+        {props.stuff ? (
+          <AutoSizer>
+            {({ width, height }) => (
+              <Table
+                width={width}
+                height={height}
+                rowCount={Array.isArray(props.from) ? props.from.length : 0}
+                rowGetter={({ index }) => props.from[index]}
+                testID={\`UseTableOnWhen.Table|\`}
+                from={props.from}
+                headerHeight={40}
+                rowHeight={20}
+                style={[
+                  styles.Table1,
+                  {
+                    marginLeft: props.marginLeft,
+                    rowColorAlternate: props.rowColorAlternate,
+                  },
+                ]}
+              >
+                <Column
+                  dataKey=\\"name\\"
+                  width={90}
+                  label=\\"Name\\"
+                  headerRenderer={headerRenderer}
+                  cellRenderer={cellRenderer}
+                  testID={\`UseTableOnWhen.Name|\`}
+                  key=\\"name\\"
+                  style={[
+                    styles.Name,
+                    { borderBottomColor: props.borderColor },
+                  ]}
+                />
+              </Table>
+            )}
+          </AutoSizer>
+        ) : null}
+        {props.children}
+      </View>
+    );
+  }
+}
+UseTableOnWhen.contextTypes = {
+  track: PropTypes.func.isRequired,
+};
+
+export default UseTableOnWhen;
+",
+  "fonts": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "stuff",
+      "type": "string",
+    },
     Object {
       "defaultValue": false,
       "name": "from",

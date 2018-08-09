@@ -21,6 +21,7 @@ export const enter = [
   BlockProxy.enter,
   BlockRoute.enter,
   BlockName.enter,
+  BlockTable.enter,
   BlockColumn.enter,
   BlockCapture.enter,
   BlockTeleport.enter,
@@ -30,14 +31,13 @@ export const enter = [
   BlockProperties.enter,
   BlockGroup.enter,
   BlockList.enter,
-  BlockTable.enter,
 ]
 
 export const leave = [
-  BlockTable.leave,
   BlockList.leave,
   BlockExplicitChildren.leave,
   BlockName.leave,
+  BlockTable.leave,
   BlockRoute.leave,
   BlockOffWhen.leave,
 ]

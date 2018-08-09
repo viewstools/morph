@@ -1,3 +1,5 @@
+import { isTable } from '../utils.js'
+
 export function leave(node, parent, state) {
   if (
     ((!parent && node.isGroup) ||

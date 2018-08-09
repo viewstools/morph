@@ -1,0 +1,28 @@
+UseTableOnWhen Vertical
+Table
+onWhen <stuff
+from <
+marginLeft <marginLeft
+headerHeight 40
+rowHeight 20
+rowColor #1C1C1C
+rowBackgroundColor white
+rowColorAlternate <rowColorAlternate
+rowBackgroundColorAlternate black
+when <hover
+rowColor red
+rowBackgroundColor black
+rowColorAlternate green
+rowBackgroundColorAlternate <rowBgColorAlternate
+Name Column
+key name
+width 90
+borderBottomStyle solid
+borderBottomColor <borderColor
+borderBottomWidth 1
+Header
+isHeader true
+text Name
+
+Cell
+isCell true
