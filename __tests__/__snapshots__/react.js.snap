@@ -5789,7 +5789,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { AutoSizer, Column, Table } from '@viewstools/tables/dom';
-import { css } from 'emotion';
 
 const Table1Row = css({
   display: 'flex',
@@ -5810,7 +5809,6 @@ const Table1Row = css({
     },
   },
 });
-const Table1 = css({ label: 'Table1', marginLeft: 'var(--marginLeft)' });
 
 class UseTable extends React.Component {
   render() {
@@ -5832,12 +5830,7 @@ class UseTable extends React.Component {
               headerHeight={40}
               rowHeight={20}
               rowClassName={Table1Row}
-              style={{
-                '--marginLeft': \`\${props.marginLeft}px\`,
-                '--rowColorAlternate': props.rowColorAlternate,
-                '--rowBackgroundColorAlternate': props.rowBgColorAlternate,
-              }}
-              className={\`views-block \${Table1}\`}
+              className=\\"views-block\\"
             >
               <Column
                 dataKey=\\"name\\"
@@ -5889,11 +5882,6 @@ export default UseTable;
     },
     Object {
       "defaultValue": false,
-      "name": "marginLeft",
-      "type": "number",
-    },
-    Object {
-      "defaultValue": false,
       "name": "rowColorAlternate",
       "type": "string",
     },
@@ -5911,7 +5899,6 @@ import Header from './Header.view.js';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { AutoSizer, Column, Table } from '@viewstools/tables/dom';
-import { css } from 'emotion';
 
 const Table1Row = css({
   display: 'flex',
@@ -5932,7 +5919,6 @@ const Table1Row = css({
     },
   },
 });
-const Table1 = css({ label: 'Table1', marginLeft: 'var(--marginLeft)' });
 
 const UseTable = props => {
   return (
@@ -5951,12 +5937,7 @@ const UseTable = props => {
             headerHeight={40}
             rowHeight={20}
             rowClassName={Table1Row}
-            style={{
-              '--marginLeft': \`\${props.marginLeft}px\`,
-              '--rowColorAlternate': props.rowColorAlternate,
-              '--rowBackgroundColorAlternate': props.rowBgColorAlternate,
-            }}
-            className={\`views-block \${Table1}\`}
+            className=\\"views-block\\"
           >
             <Column
               dataKey=\\"name\\"
@@ -6001,11 +5982,6 @@ export default UseTable;
       "defaultValue": false,
       "name": "from",
       "type": "string",
-    },
-    Object {
-      "defaultValue": false,
-      "name": "marginLeft",
-      "type": "number",
     },
     Object {
       "defaultValue": false,
@@ -9439,10 +9415,7 @@ class UseTable extends React.Component {
               rowHeight={20}
               style={[
                 styles.Table1,
-                {
-                  marginLeft: props.marginLeft,
-                  rowColorAlternate: props.rowColorAlternate,
-                },
+                { rowColorAlternate: props.rowColorAlternate },
               ]}
             >
               <Column
@@ -9489,11 +9462,6 @@ export default UseTable;
       "defaultValue": false,
       "name": "from",
       "type": "string",
-    },
-    Object {
-      "defaultValue": false,
-      "name": "marginLeft",
-      "type": "number",
     },
     Object {
       "defaultValue": false,

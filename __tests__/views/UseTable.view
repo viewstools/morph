@@ -1,7 +1,6 @@
 UseTable Vertical
 Table
 from <
-marginLeft <marginLeft
 headerHeight 40
 rowHeight 20
 rowColor #1C1C1C

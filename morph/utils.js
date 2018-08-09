@@ -492,7 +492,7 @@ const fontsOrder = ['eot', 'woff2', 'woff', 'ttf', 'svg', 'otf']
 export const sortFonts = (a, b) =>
   fontsOrder.indexOf(b.type) - fontsOrder.indexOf(a.type)
 
-export const createId = (node, state) => {
+export const createId = (node, state, addClassName = true) => {
   let id = node.is || node.name
   // count repeatead ones
   if (state.usedBlockNames[id]) {
@@ -502,7 +502,7 @@ export const createId = (node, state) => {
   }
 
   node.styleName = id
-  if (node.className) {
+  if (addClassName && node.className) {
     node.className.push(`\${${id}}`)
   }
 

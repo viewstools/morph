@@ -37,7 +37,7 @@ export function leave(node, parent, state) {
   let id = null
 
   if (isTable(node) && hasRowStyles(node)) {
-    id = createId(node, state)
+    id = createId(node, state, false)
     getTableRowCss({ node, state, id, scopedUnderParent })
   }
 
@@ -50,6 +50,10 @@ export function leave(node, parent, state) {
   if (css.length > 0) {
     if (id === null) {
       id = createId(node, state)
+    } else if (isTable(node)) {
+      if (node.className) {
+        node.className.push(`\${${id}}`)
+      }
     }
 
     state.styles[id] = `const ${id} = css({label: '${id}', ${css.join(', ')}})`
