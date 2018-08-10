@@ -11,6 +11,8 @@ export default [
   'Image',
   'Text',
   'List',
+  'Table',
+  'Column',
   'Proxy',
   'SvgText',
   'Svg',

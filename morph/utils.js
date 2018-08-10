@@ -117,7 +117,6 @@ export const getScopedCondition = (
   // alreadyInterpolated = interpolation that contains scoped condition
   // !alreadyInterpolated = scoped condition that contains interpolation
   // see tests in TextInterpolation.view for an example of both
-
   const scopedProps = getScopedProps(propNode, blockNode)
 
   if (!scopedProps) return false
@@ -177,6 +176,7 @@ export const hasDefaultProp = (node, parent) =>
 export const isSlot = node =>
   typeof node === 'string' ? /props/.test(node) : isTag(node, 'slot')
 export const isStyle = node => isTag(node, 'style')
+export const isRowStyle = node => isTag(node, 'rowStyle')
 export const isTag = (node, tag) => node && node.tags[tag]
 
 export const getActionableParent = node => {
@@ -188,7 +188,7 @@ export const getActionableParent = node => {
 export const getAllowedStyleKeys = node => {
   if (node.isCapture) {
     return ['base', 'focus', 'hover', 'disabled', 'placeholder', 'print']
-  } else if (node.action || getActionableParent(node)) {
+  } else if (node.action || isTable(node) || getActionableParent(node)) {
     return ['base', 'focus', 'hover', 'disabled', 'print']
   }
   return ['base', 'focus', 'print']
@@ -196,6 +196,18 @@ export const getAllowedStyleKeys = node => {
 
 export const isList = node =>
   node && node.type === 'Block' && node.name === 'List'
+
+export const isCell = node =>
+  node.properties.some(prop => prop.name === 'isCell')
+
+export const isHeader = node =>
+  node.properties.some(prop => prop.name === 'isHeader')
+
+export const isColumn = node =>
+  node && node.type === 'Block' && node.name === 'Column'
+
+export const isTable = node =>
+  node && node.type === 'Block' && node.name === 'Table'
 
 export const isEmpty = list => list.length === 0
 
@@ -361,9 +373,13 @@ export const getDynamicStyles = node => {
       scope.properties.map(prop => {
         const unit = getUnit(prop)
         return (
-          prop.tags.style &&
-          prop.conditional &&
-          `'--${prop.name}': \`${prop.conditional}${unit}\``
+          (prop.tags.style &&
+            prop.conditional &&
+            `'--${prop.name}': \`${prop.conditional}${unit}\``) ||
+          (prop.tags.style &&
+            prop.tags.slot &&
+            prop.scope === 'hover' &&
+            `'--${prop.name}': ${getPropValue(prop)}`)
         )
       })
     ),
@@ -476,7 +492,7 @@ const fontsOrder = ['eot', 'woff2', 'woff', 'ttf', 'svg', 'otf']
 export const sortFonts = (a, b) =>
   fontsOrder.indexOf(b.type) - fontsOrder.indexOf(a.type)
 
-export const createId = (node, state) => {
+export const createId = (node, state, addClassName = true) => {
   let id = node.is || node.name
   // count repeatead ones
   if (state.usedBlockNames[id]) {
@@ -486,7 +502,7 @@ export const createId = (node, state) => {
   }
 
   node.styleName = id
-  if (node.className) {
+  if (addClassName && node.className) {
     node.className.push(`\${${id}}`)
   }
 
@@ -524,3 +540,8 @@ export const removeContentContainerStyleProps = styleProps =>
       obj[key] = styleProps[key]
       return obj
     }, {})
+
+export const hasRowStyles = node =>
+  node.properties.some(
+    prop => prop.name.match(/^row/) && prop.name !== 'rowHeight'
+  )

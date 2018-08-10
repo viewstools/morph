@@ -44,6 +44,7 @@ export default (state, getImport) => {
       )
     } else if (d.endsWith('SvgInline')) {
       dependencies.push(`import ${d} from "./${d}.view.js"`)
+    } else if (d === 'Table') {
     } else if (/^[A-Z]/.test(d)) {
       dependencies.push(getImport(d))
     }
@@ -86,6 +87,14 @@ export default (state, getImport) => {
         }"`
       )
     }
+  }
+
+  if (state.isTable) {
+    dependencies.push(
+      `import { AutoSizer, Column, Table } from "@viewstools/tables/${
+        state.isReactNative ? 'native' : 'dom'
+      }"`
+    )
   }
 
   if (usesSvg.length > 0) {

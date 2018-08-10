@@ -1,4 +1,4 @@
-import { isStyle, STYLE } from './prop-is-style.js'
+import { isRowStyle, isStyle, STYLE } from './prop-is-style.js'
 import DidYouMeanMatcher from './did-you-mean.js'
 import isNumber from './prop-is-number.js'
 import locales from 'i18n-locales'
@@ -16,6 +16,7 @@ const dymPropMatcher = new DidYouMeanMatcher([
   'fill',
   'stroke',
   'from',
+  'key',
   'viewBox',
   'stroke',
   'strokeWidth',
@@ -61,7 +62,7 @@ export const didYouMeanBlock = block => dymBlockMatcher.get(block)
 export const didYouMeanProp = prop => dymPropMatcher.get(prop)
 
 const ANIMATION = /(.+)(?:\s)(spring|linear|easeOut|easeInOut|easeIn|ease)(?:\s?(.*)?)/
-const BASIC = /^(CaptureEmail|CaptureFile|CaptureNumber|CapturePhone|CaptureSecure|CaptureText|CaptureTextArea|Horizontal|Image|List|Svg|SvgCircle|SvgEllipse|SvgDefs|SvgGroup|SvgLinearGradient|SvgRadialGradient|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgSymbol|SvgText|SvgUse|SvgStop|Text|Vertical)$/i
+const BASIC = /^(CaptureEmail|CaptureFile|CaptureNumber|CapturePhone|CaptureSecure|CaptureText|CaptureTextArea|Column|Horizontal|Image|List|Svg|SvgCircle|SvgEllipse|SvgDefs|SvgGroup|SvgLinearGradient|SvgRadialGradient|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgSymbol|SvgText|SvgUse|SvgStop|Table|Text|Vertical)$/i
 const BLOCK = /^([A-Z][a-zA-Z0-9]*)(\s+([A-Z][a-zA-Z0-9]*))?$/
 const BOOL = /^(false|true)$/i
 const CAPTURE = /^(CaptureEmail|CaptureFile|CaptureNumber|CapturePhone|CaptureSecure|CaptureText|CaptureTextArea)$/i
@@ -117,6 +118,7 @@ export const isBasic = line => is(BASIC, line)
 export const isBlock = line => is(BLOCK, line)
 export const isBool = line => is(BOOL, line)
 export const isCapture = line => is(CAPTURE, line)
+export const isColumn = line => line === 'Column'
 export const isComment = line => is(COMMENT, line)
 export const isEmptyText = line => line === ''
 export const isEnd = line => line === ''
@@ -127,8 +129,9 @@ export const isList = line => line === 'List'
 export const isInt = line => is(INT, line)
 export const isProp = line => is(PROP, line)
 export const isSlot = line => is(SLOT, line)
+export const isTable = line => line === 'Table'
 export const isUnsupportedShorthand = name => name in UNSUPPORTED_SHORTHAND
-export { isStyle }
+export { isRowStyle, isStyle }
 export const isTrue = line => is(TRUE, line)
 export const isUserComment = line => is(USER_COMMENT, line)
 

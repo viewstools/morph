@@ -189,5 +189,12 @@ export const STYLE = [
   // 'verticalAlign',
   // 'visibility',
 ]
+export const ROWSTYLE = [
+  'rowBackgroundColor',
+  'rowBackgroundColorAlternate',
+  'rowColor',
+  'rowColorAlternate',
+]
 
 export const isStyle = name => STYLE.includes(name)
+export const isRowStyle = name => ROWSTYLE.includes(name)
