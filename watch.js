@@ -31,7 +31,7 @@ const isMorphedView = f => /\.view\.js$/.test(f)
 
 const isJs = f => path.extname(f) === '.js'
 const isLogic = f => /\.view\.logic\.js$/.test(f)
-const isView = f => path.extname(f) === '.view' || /\.view\.fake$/.test(f)
+const isView = f => path.extname(f) === '.view'
 const isFont = f => Object.keys(FONT_TYPES).includes(path.extname(f))
 
 const getFontFileId = file => path.basename(file).split('.')[0]
@@ -52,7 +52,6 @@ module.exports = options => {
       compile,
       debug,
       enableAnimated,
-      fake: shouldIncludeFake,
       isBundlingBaseCss,
       local,
       logic: shouldIncludeLogic,
@@ -73,7 +72,6 @@ module.exports = options => {
         compile: false,
         debug: false,
         enableAnimated: true,
-        fake: false,
         isBundlingBaseCss: false,
         local: 'en',
         logic: true,
@@ -311,10 +309,6 @@ module.exports = options => {
         return
       }
 
-      if (isJsComponent(f) && shouldIncludeFake) {
-        return maybeFakeJs(f, file, view)
-      }
-
       verbose && console.log(chalk.yellow('A'), view, chalk.dim(`-> ${f}`))
 
       let shouldMorph = isView(file)
@@ -340,29 +334,6 @@ module.exports = options => {
 
     const makeResponsibleFor = () => {
       Object.keys(views).forEach(updateResponsibleFor)
-    }
-
-    const maybeFakeJs = (f, file, view) => {
-      const fakeView = `${view}.view.fake`
-
-      if (!(isJsComponent(f) && shouldIncludeFake && !views[view])) return
-
-      const fakeFile = path.join(path.dirname(f), fakeView)
-
-      // TODO async
-      if (fs.existsSync(path.join(src, fakeFile))) return
-
-      // TODO async
-      fs.writeFileSync(
-        path.join(src, fakeFile),
-        `${view}Fake Vertical
-backgroundColor rgba(53,63,69,0.5)
-width 50
-height 50`
-      )
-      console.log(chalk.green('🐿 '), view, chalk.dim(`-> ${fakeFile}`))
-
-      return fakeFile
     }
 
     const maybeIsReady = () => {
@@ -585,7 +556,7 @@ height 50`
       if (isLogic(file)) {
         view = view.replace(/\.js/, '')
       } else {
-        view = toPascalCase(view.replace(/\.(view\.fake|js|view)/, ''))
+        view = toPascalCase(view.replace(/\.(js|view)/, ''))
       }
 
       return {
@@ -628,7 +599,6 @@ height 50`
       `**/*.js`,
       `**/*.view`,
       shouldIncludeLogic && `**/*.view.logic.js`,
-      shouldIncludeFake && `**/*.view.fake`,
       // fonts,
       'Fonts/*.eot',
       'Fonts/*.otf',
