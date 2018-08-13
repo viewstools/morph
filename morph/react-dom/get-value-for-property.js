@@ -66,12 +66,7 @@ export default (node, parent, state) => {
     return {
       [node.name]: safe(getScopedCondition(node, parent)),
     }
-  } else if (
-    parent.isBasic &&
-    node.name === 'onClick' &&
-    state.track &&
-    !state.debug
-  ) {
+  } else if (parent.isBasic && node.name === 'onClick' && state.track) {
     return {
       onClick: wrap(makeOnClickTracker(node, state)),
     }

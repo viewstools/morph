@@ -50,7 +50,6 @@ module.exports = options => {
       as,
       clean: shouldClean,
       compile,
-      debug,
       enableAnimated,
       isBundlingBaseCss,
       local,
@@ -70,7 +69,6 @@ module.exports = options => {
         as: 'react-dom',
         clean: true,
         compile: false,
-        debug: false,
         enableAnimated: true,
         isBundlingBaseCss: false,
         local: 'en',
@@ -384,7 +382,7 @@ module.exports = options => {
       try {
         const rawFile = path.join(src, f)
         const source = await fs.readFile(rawFile, 'utf-8')
-        const parsed = parse({ enableSystemScopes: !debug, source })
+        const parsed = parse({ source })
         viewsSources[view] = source
         viewsParsed[view] = parsed
 
@@ -442,7 +440,6 @@ module.exports = options => {
         const res = morph({
           as,
           compile,
-          debug,
           enableAnimated,
           file: { raw: rawFile, relative: file },
           name: view,
@@ -498,7 +495,6 @@ module.exports = options => {
                 const res = morph({
                   as,
                   compile,
-                  debug,
                   enableAnimated,
                   file: { raw: rawFile, relative: file },
                   name: svg.view,
