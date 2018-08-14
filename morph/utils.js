@@ -365,12 +365,23 @@ const getPropValue = (prop, interpolateValue = true) => {
 }
 
 export const getDynamicStyles = node => {
+  const scopedProps = flatten([
+    node.scopes.map(scope =>
+      scope.properties
+        .map(prop => prop.name !== 'when' && prop.name)
+        .filter(Boolean)
+    ),
+  ])
+
   return flatten([
     node.properties
-      .filter(prop => prop.tags.style && prop.tags.slot)
+      .filter(
+        prop =>
+          prop.tags.style && prop.tags.slot && !scopedProps.includes(prop.name)
+      )
       .map(prop => `'--${prop.name}': ${getPropValue(prop)}`),
-    node.scopes.map(scope =>
-      scope.properties.map(prop => {
+    node.scopes.map(scope => {
+      return scope.properties.map(prop => {
         const unit = getUnit(prop)
         return (
           (prop.tags.style &&
@@ -382,7 +393,7 @@ export const getDynamicStyles = node => {
             `'--${prop.name}': ${getPropValue(prop)}`)
         )
       })
-    ),
+    }),
   ]).filter(Boolean)
 }
 
