@@ -10,10 +10,6 @@ export const enter = (node, parent, state) => {
       className.tags.slot ? `\${${className.value}}` : className.value
     )
   }
-
-  if (state.debug && node.isCapture) {
-    node.className.push('mousetrap')
-  }
 }
 
 export const leave = (node, parent, state) => {

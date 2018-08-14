@@ -13,7 +13,6 @@ const DEFAULT_IMPORT = name => `import ${name} from './${name}.view.js'`
 export const morph = ({
   as,
   compile,
-  debug,
   enableAnimated,
   file = {},
   getFont,
@@ -26,7 +25,6 @@ export const morph = ({
   views = {},
 }) => {
   let morphed = doMorph[as]({
-    debug,
     enableAnimated,
     file,
     getFont,

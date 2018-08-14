@@ -18,7 +18,6 @@ export function enter(node, parent, state) {
       propNode.name === 'at' ||
       propNode.name === 'when' ||
       propNode.name === 'onWhen' ||
-      (propNode.name === 'ref' && state.debug) ||
       propNode.tags.unsupportedShorthand ||
       (!isValidPropertyForBlock(propNode, node, state) && node.isBasic) ||
       (propNode.name === 'from' &&

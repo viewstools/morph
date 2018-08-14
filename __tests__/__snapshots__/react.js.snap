@@ -802,67 +802,6 @@ export default Action;
 }
 `;
 
-exports[`react-dom parses react-dom Action: react-dom parses react-dom Action debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import SubButton from './SubButton.view.js';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'emotion';
-
-const Vertical = css({
-  label: 'Vertical',
-  color: 'red',
-  '&:disabled': {
-    color: 'blue',
-  },
-});
-
-const Action = props => {
-  return props.check ? (
-    <button
-      data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-      onClick={props.onClick}
-      disabled={props.isDisabled}
-      className={\`views-block \${Vertical}\`}
-    >
-      <span data-test-id={\`Action.Text|\`} className=\\"views-block\\">
-        click me
-      </span>
-      <SubButton
-        data-test-id={\`Action.SubButton|\`}
-        isDisabled={true}
-        className=\\"views-block\\"
-      />
-      {props.children}
-    </button>
-  ) : null;
-};
-
-export default Action;
-",
-  "fonts": Array [],
-  "slots": Array [
-    Object {
-      "defaultValue": false,
-      "name": "check",
-      "type": "string",
-    },
-    Object {
-      "defaultValue": false,
-      "name": "onClick",
-      "type": "function",
-    },
-    Object {
-      "defaultValue": false,
-      "name": "isDisabled",
-      "type": "string",
-    },
-  ],
-  "svgs": Array [],
-}
-`;
-
 exports[`react-dom parses react-dom AnimatedButton 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -982,113 +921,6 @@ export default AnimatedButton;
 }
 `;
 
-exports[`react-dom parses react-dom AnimatedButton: react-dom parses react-dom AnimatedButton debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { animated, Spring } from '@viewstools/animations/dom';
-import { css } from 'emotion';
-
-const AnimatedButton1 = css({
-  label: 'AnimatedButton1',
-  backgroundColor: 'red',
-  transition: 'transform 150ms ease-in 0ms, transform 150ms ease-in-out 0ms',
-  willChange: 'opacity, transform',
-  opacity: 'var(--opacity)',
-  transform:
-    'rotateX(var(--rotateX)) rotateY(var(--rotateY)) translateX(var(--translateX)) translateY(var(--translateY))',
-});
-const Text = css({
-  label: 'Text',
-  willChange: 'color, font-size',
-  color: 'var(--color)',
-  fontSize: 'var(--fontSize)',
-});
-
-class AnimatedButton extends React.Component {
-  render() {
-    const { props } = this;
-
-    return (
-      <Spring
-        native
-        bounciness={10}
-        speed={1}
-        delay={0}
-        to={{ opacity: props.isOn ? 1 : 0.75 }}
-      >
-        {animatedAnimatedButton => (
-          <Spring
-            native
-            bounciness={15}
-            speed={2}
-            delay={0}
-            to={{ translateX: \`\${props.isOn ? 20 : 10}px\` }}
-          >
-            {animatedAnimatedButton1 => (
-              <Spring
-                native
-                delay={0}
-                speed={12}
-                bounciness={8}
-                to={{
-                  color: props.isOn ? 'blue' : 'red',
-                  fontSize: \`\${props.isOn ? 18 : 12}px\`,
-                }}
-              >
-                {animatedText => (
-                  <animated.button
-                    data-test-id={\`\${props['data-test-id'] ||
-                      'AnimatedButton'}|\${props.isOn ? 'isOn|' : ''}\`}
-                    onClick={props.onClick}
-                    style={{
-                      '--opacity': animatedAnimatedButton.opacity,
-                      '--translateX': animatedAnimatedButton1.translateX,
-                      '--translateY': \`\${props.isOn ? 30 : 0}px\`,
-                      '--rotateX': \`\${props.isOn ? 20 : 10}deg\`,
-                      '--rotateY': \`\${props.isOn ? 20 : 10}deg\`,
-                    }}
-                    className={\`views-block \${AnimatedButton1}\`}
-                  >
-                    <span
-                      data-test-id={\`AnimatedButton.Text|\${
-                        props.isOn ? 'isOn|' : ''
-                      }\`}
-                      style={{
-                        '--color': animatedText.color,
-                        '--fontSize': animatedText.fontSize,
-                      }}
-                      className={\`views-block \${Text}\`}
-                    >
-                      hey
-                    </span>
-                    {props.children}
-                  </animated.button>
-                )}
-              </Spring>
-            )}
-          </Spring>
-        )}
-      </Spring>
-    );
-  }
-}
-
-export default AnimatedButton;
-",
-  "fonts": Array [],
-  "slots": Array [
-    Object {
-      "defaultValue": false,
-      "name": "onClick",
-      "type": "function",
-    },
-  ],
-  "svgs": Array [],
-}
-`;
-
 exports[`react-dom parses react-dom AnimatedButtonHoverOnly 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -1132,49 +964,6 @@ class AnimatedButtonHoverOnly extends React.Component {
 }
 AnimatedButtonHoverOnly.contextTypes = {
   track: PropTypes.func.isRequired,
-};
-
-export default AnimatedButtonHoverOnly;
-",
-  "fonts": Array [],
-  "slots": Array [
-    Object {
-      "defaultValue": false,
-      "name": "onClick",
-      "type": "function",
-    },
-  ],
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom AnimatedButtonHoverOnly: react-dom parses react-dom AnimatedButtonHoverOnly debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'emotion';
-
-const AnimatedButtonHoverOnly1 = css({
-  label: 'AnimatedButtonHoverOnly1',
-  backgroundColor: 'red',
-  '&:hover': {
-    backgroundColor: 'blue',
-  },
-  transition: 'background-color 150ms ease-out 0ms',
-  willChange: 'background-color',
-});
-
-const AnimatedButtonHoverOnly = props => {
-  return (
-    <button
-      data-test-id={\`\${props['data-test-id'] || 'AnimatedButtonHoverOnly'}|\`}
-      onClick={props.onClick}
-      className={\`views-block \${AnimatedButtonHoverOnly1}\`}
-    >
-      {props.children}
-    </button>
-  );
 };
 
 export default AnimatedButtonHoverOnly;
@@ -1265,68 +1054,6 @@ export default AnimatedButtonScopeOnly;
 }
 `;
 
-exports[`react-dom parses react-dom AnimatedButtonScopeOnly: react-dom parses react-dom AnimatedButtonScopeOnly debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { animated, Spring } from '@viewstools/animations/dom';
-import { css } from 'emotion';
-
-const AnimatedButtonScopeOnly1 = css({
-  label: 'AnimatedButtonScopeOnly1',
-  transition: 'opacity 150ms linear 0ms',
-  willChange: 'background-color, opacity',
-  backgroundColor: 'var(--backgroundColor)',
-  opacity: 'var(--opacity)',
-});
-
-class AnimatedButtonScopeOnly extends React.Component {
-  render() {
-    const { props } = this;
-
-    return (
-      <Spring
-        native
-        delay={0}
-        speed={12}
-        bounciness={8}
-        to={{ backgroundColor: props.before ? 'blue' : 'red' }}
-      >
-        {animatedAnimatedButtonScopeOnly => (
-          <animated.button
-            data-test-id={\`\${props['data-test-id'] ||
-              'AnimatedButtonScopeOnly'}|\${props.before ? 'before|' : ''}\`}
-            onClick={props.onClick}
-            style={{
-              '--backgroundColor':
-                animatedAnimatedButtonScopeOnly.backgroundColor,
-              '--opacity': \`\${props.before ? 1 : 1}\`,
-            }}
-            className={\`views-block \${AnimatedButtonScopeOnly1}\`}
-          >
-            {props.children}
-          </animated.button>
-        )}
-      </Spring>
-    );
-  }
-}
-
-export default AnimatedButtonScopeOnly;
-",
-  "fonts": Array [],
-  "slots": Array [
-    Object {
-      "defaultValue": false,
-      "name": "onClick",
-      "type": "function",
-    },
-  ],
-  "svgs": Array [],
-}
-`;
-
 exports[`react-dom parses react-dom AppRegionDrag 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -1358,39 +1085,6 @@ class AppRegionDrag extends React.Component {
 }
 AppRegionDrag.contextTypes = {
   track: PropTypes.func.isRequired,
-};
-
-export default AppRegionDrag;
-",
-  "fonts": Array [],
-  "slots": Array [],
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom AppRegionDrag: react-dom parses react-dom AppRegionDrag debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'emotion';
-
-const Vertical = css({
-  label: 'Vertical',
-  WebkitAppRegion: 'drag',
-  width: '92%',
-  marginTop: 'auto',
-});
-
-const AppRegionDrag = props => {
-  return (
-    <div
-      data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-      className={\`views-block \${Vertical}\`}
-    >
-      {props.children}
-    </div>
-  );
 };
 
 export default AppRegionDrag;
@@ -1442,57 +1136,6 @@ class BackgroundImage extends React.Component {
 BackgroundImage.contextTypes = {
   track: PropTypes.func.isRequired,
 };
-BackgroundImage.defaultProps = {
-  backgroundImage: 'https://views.tools/image.jpg',
-};
-export default BackgroundImage;
-",
-  "fonts": Array [],
-  "slots": Array [
-    Object {
-      "defaultValue": "https://views.tools/image.jpg",
-      "name": "backgroundImage",
-      "type": "string",
-    },
-  ],
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom BackgroundImage: react-dom parses react-dom BackgroundImage debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'emotion';
-
-const Vertical = css({
-  label: 'Vertical',
-  backgroundImage: \\"url('https://views.tools/image.jpg')\\",
-});
-const Horizontal = css({
-  label: 'Horizontal',
-  flexDirection: 'row',
-  backgroundSize: 'contain',
-  backgroundImage: \`url(\${'var(--backgroundImage)'})\`,
-});
-
-const BackgroundImage = props => {
-  return (
-    <div
-      data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-      className={\`views-block \${Vertical}\`}
-    >
-      <div
-        data-test-id={\`BackgroundImage.Horizontal|\`}
-        style={{ '--backgroundImage': props.backgroundImage }}
-        className={\`views-block \${Horizontal}\`}
-      />
-      {props.children}
-    </div>
-  );
-};
-
 BackgroundImage.defaultProps = {
   backgroundImage: 'https://views.tools/image.jpg',
 };
@@ -1632,121 +1275,6 @@ export default Border;
 }
 `;
 
-exports[`react-dom parses react-dom Border: react-dom parses react-dom Border debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'emotion';
-
-const Border1 = css({
-  label: 'Border1',
-  borderColor: 'red',
-  borderStyle: 'solid',
-  borderWidth: 'var(--borderWidth)',
-});
-const Top = css({
-  label: 'Top',
-  borderTopStyle: 'solid',
-  borderTopColor: 'red',
-  borderTopWidth: 'var(--borderTopWidth)',
-});
-const Right = css({
-  label: 'Right',
-  borderRightStyle: 'solid',
-  borderRightColor: 'red',
-  borderRightWidth: 'var(--borderRightWidth)',
-});
-const Bottom = css({
-  label: 'Bottom',
-  borderBottomStyle: 'solid',
-  borderBottomColor: 'red',
-  borderBottomWidth: 'var(--borderBottomWidth)',
-});
-const Left = css({
-  label: 'Left',
-  borderLeftStyle: 'solid',
-  borderLeftColor: 'red',
-  borderLeftWidth: 'var(--borderLeftWidth)',
-  borderTopRightRadius: 'var(--borderTopRightRadius)',
-});
-
-const Border = props => {
-  return (
-    <div
-      data-test-id={\`\${props['data-test-id'] || 'Border'}|\`}
-      style={{ '--borderWidth': \`\${props.borderWidth}px\` }}
-      className={\`views-block \${Border1}\`}
-    >
-      <div
-        data-test-id={\`Border.Top|\`}
-        style={{ '--borderTopWidth': \`\${props.borderTopWidth}px\` }}
-        className={\`views-block \${Top}\`}
-      />
-      <div
-        data-test-id={\`Border.Right|\`}
-        style={{ '--borderRightWidth': \`\${props.borderRightWidth}px\` }}
-        className={\`views-block \${Right}\`}
-      />
-      <div
-        data-test-id={\`Border.Bottom|\`}
-        style={{ '--borderBottomWidth': \`\${props.borderBottomWidth}px\` }}
-        className={\`views-block \${Bottom}\`}
-      />
-      <div
-        data-test-id={\`Border.Left|\${props.something ? 'something|' : ''}\`}
-        style={{
-          '--borderLeftWidth': \`\${props.borderLeftWidth}px\`,
-          '--borderTopRightRadius': \`\${props.something ? 20 : 10}px\`,
-        }}
-        className={\`views-block \${Left}\`}
-      />
-      {props.children}
-    </div>
-  );
-};
-
-Border.defaultProps = {
-  borderWidth: 10,
-  borderTopWidth: 10,
-  borderRightWidth: 10,
-  borderBottomWidth: 10,
-  borderLeftWidth: 10,
-};
-export default Border;
-",
-  "fonts": Array [],
-  "slots": Array [
-    Object {
-      "defaultValue": 10,
-      "name": "borderWidth",
-      "type": "number",
-    },
-    Object {
-      "defaultValue": 10,
-      "name": "borderTopWidth",
-      "type": "number",
-    },
-    Object {
-      "defaultValue": 10,
-      "name": "borderRightWidth",
-      "type": "number",
-    },
-    Object {
-      "defaultValue": 10,
-      "name": "borderBottomWidth",
-      "type": "number",
-    },
-    Object {
-      "defaultValue": 10,
-      "name": "borderLeftWidth",
-      "type": "number",
-    },
-  ],
-  "svgs": Array [],
-}
-`;
-
 exports[`react-dom parses react-dom ClassName 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -1773,34 +1301,6 @@ class ClassName extends React.Component {
 }
 ClassName.contextTypes = {
   track: PropTypes.func.isRequired,
-};
-
-export default ClassName;
-",
-  "fonts": Array [],
-  "slots": Array [],
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom ClassName: react-dom parses react-dom ClassName debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'emotion';
-
-const Vertical = css({ label: 'Vertical', backgroundColor: 'blue' });
-
-const ClassName = props => {
-  return (
-    <div
-      data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-      className={\`views-block hey \${Vertical}\`}
-    >
-      {props.children}
-    </div>
-  );
 };
 
 export default ClassName;
@@ -1847,62 +1347,6 @@ class Code extends React.Component {
 Code.contextTypes = {
   track: PropTypes.func.isRequired,
 };
-Code.defaultProps = {
-  text: 'hey',
-  color: 'white',
-};
-export default Code;
-",
-  "fonts": Array [],
-  "slots": Array [
-    Object {
-      "defaultValue": "hey",
-      "name": "text",
-      "type": "string",
-    },
-    Object {
-      "defaultValue": "white",
-      "name": "color",
-      "type": "string",
-    },
-    Object {
-      "defaultValue": false,
-      "name": "refText",
-      "type": "string",
-    },
-  ],
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom Code: react-dom parses react-dom Code debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'emotion';
-
-const Vertical = css({ label: 'Vertical', backgroundColor: 'red' });
-const Text = css({ label: 'Text', color: 'var(--color)' });
-
-const Code = props => {
-  return (
-    <div
-      data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-      className={\`views-block \${Vertical}\`}
-    >
-      <span
-        data-test-id={\`Code.Text|\`}
-        style={{ '--color': props.color }}
-        className={\`views-block \${Text}\`}
-      >
-        {props.text}
-      </span>
-      {props.children}
-    </div>
-  );
-};
-
 Code.defaultProps = {
   text: 'hey',
   color: 'white',
@@ -1984,52 +1428,6 @@ export default DefaultProps;
 }
 `;
 
-exports[`react-dom parses react-dom DefaultProps: react-dom parses react-dom DefaultProps debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-
-const DefaultProps = props => {
-  return (
-    <div
-      data-test-id={\`\${props['data-test-id'] || 'DefaultProps'}|\`}
-      className=\\"views-block\\"
-    >
-      <span data-test-id={\`DefaultProps.Text|\`} className=\\"views-block\\">
-        {props.text}
-      </span>
-      <span data-test-id={\`DefaultProps.Text:1|\`} className=\\"views-block\\">
-        {props.texto}
-      </span>
-      {props.children}
-    </div>
-  );
-};
-
-DefaultProps.defaultProps = {
-  text: 'hey',
-  texto: 'ho',
-};
-export default DefaultProps;
-",
-  "fonts": Array [],
-  "slots": Array [
-    Object {
-      "defaultValue": "hey",
-      "name": "text",
-      "type": "string",
-    },
-    Object {
-      "defaultValue": "ho",
-      "name": "texto",
-      "type": "string",
-    },
-  ],
-  "svgs": Array [],
-}
-`;
-
 exports[`react-dom parses react-dom Display 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -2056,34 +1454,6 @@ class Display extends React.Component {
 }
 Display.contextTypes = {
   track: PropTypes.func.isRequired,
-};
-
-export default Display;
-",
-  "fonts": Array [],
-  "slots": Array [],
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom Display: react-dom parses react-dom Display debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'emotion';
-
-const Display1 = css({ label: 'Display1', display: 'block' });
-
-const Display = props => {
-  return (
-    <div
-      data-test-id={\`\${props['data-test-id'] || 'Display'}|\`}
-      className={\`views-block \${Display1}\`}
-    >
-      {props.children}
-    </div>
-  );
 };
 
 export default Display;
@@ -2143,47 +1513,6 @@ export default DynamicStylesApplyToBasicBlocksOnly;
 }
 `;
 
-exports[`react-dom parses react-dom DynamicStylesApplyToBasicBlocksOnly: react-dom parses react-dom DynamicStylesApplyToBasicBlocksOnly debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import SomeThing from './SomeThing.view.js';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'emotion';
-
-const Vertical = css({ label: 'Vertical', height: 'var(--height)' });
-
-const DynamicStylesApplyToBasicBlocksOnly = props => {
-  return (
-    <div
-      data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-      style={{ '--height': \`\${props.height}px\` }}
-      className={\`views-block \${Vertical}\`}
-    >
-      <SomeThing
-        data-test-id={\`DynamicStylesApplyToBasicBlocksOnly.OnTop|\`}
-        height={props.height}
-        className=\\"views-block\\"
-      />
-      {props.children}
-    </div>
-  );
-};
-
-export default DynamicStylesApplyToBasicBlocksOnly;
-",
-  "fonts": Array [],
-  "slots": Array [
-    Object {
-      "defaultValue": false,
-      "name": "height",
-      "type": "number",
-    },
-  ],
-  "svgs": Array [],
-}
-`;
-
 exports[`react-dom parses react-dom EmptyText 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -2205,29 +1534,6 @@ class EmptyText extends React.Component {
 }
 EmptyText.contextTypes = {
   track: PropTypes.func.isRequired,
-};
-
-export default EmptyText;
-",
-  "fonts": Array [],
-  "slots": Array [],
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom EmptyText: react-dom parses react-dom EmptyText debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-
-const EmptyText = props => {
-  return (
-    <span
-      data-test-id={\`\${props['data-test-id'] || 'EmptyText'}|\`}
-      className=\\"views-block\\"
-    />
-  );
 };
 
 export default EmptyText;
@@ -2267,37 +1573,6 @@ class GoTo extends React.Component {
 }
 GoTo.contextTypes = {
   track: PropTypes.func.isRequired,
-};
-
-export default GoTo;
-",
-  "fonts": Array [],
-  "slots": Array [],
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom GoTo: react-dom parses react-dom GoTo debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-
-const GoTo = props => {
-  return (
-    <a
-      href=\\"https://views.tools\\"
-      rel=\\"noopener noreferrer\\"
-      target=\\"_blank\\"
-      data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-      className=\\"views-block\\"
-    >
-      <span data-test-id={\`GoTo.Text|\`} className=\\"views-block\\">
-        Go to Views Tools website!
-      </span>
-      {props.children}
-    </a>
-  );
 };
 
 export default GoTo;
@@ -2388,70 +1663,6 @@ export default Hover;
 }
 `;
 
-exports[`react-dom parses react-dom Hover: react-dom parses react-dom Hover debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'emotion';
-
-const Hover1 = css({
-  label: 'Hover1',
-  '&:hover': {
-    backgroundColor: '#232323',
-  },
-  backgroundColor: 'var(--backgroundColor)',
-});
-const Text = css({
-  label: 'Text',
-  color: 'white',
-  [\`.\${Hover1}:hover &, .\${Hover1}.hover &\`]: {
-    color: 'black',
-  },
-  fontSize: 'var(--fontSize)',
-});
-
-const Hover = props => {
-  return (
-    <button
-      data-test-id={\`\${props['data-test-id'] || 'Hover'}|\${
-        props.isStuff ? 'isStuff|' : ''
-      }\`}
-      onClick={props.onClick}
-      style={{ '--backgroundColor': \`\${props.isStuff ? 'red' : '#323232'}\` }}
-      className={\`views-block \${Hover1}\`}
-    >
-      <span
-        data-test-id={\`Hover.Text|\`}
-        style={{ '--fontSize': \`\${props.fontSize}px\` }}
-        className={\`views-block \${Text}\`}
-      >
-        Hey!
-      </span>
-      {props.children}
-    </button>
-  );
-};
-
-export default Hover;
-",
-  "fonts": Array [],
-  "slots": Array [
-    Object {
-      "defaultValue": false,
-      "name": "onClick",
-      "type": "function",
-    },
-    Object {
-      "defaultValue": false,
-      "name": "fontSize",
-      "type": "number",
-    },
-  ],
-  "svgs": Array [],
-}
-`;
-
 exports[`react-dom parses react-dom JustText 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -2475,31 +1686,6 @@ class JustText extends React.Component {
 }
 JustText.contextTypes = {
   track: PropTypes.func.isRequired,
-};
-
-export default JustText;
-",
-  "fonts": Array [],
-  "slots": Array [],
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom JustText: react-dom parses react-dom JustText debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-
-const JustText = props => {
-  return (
-    <span
-      data-test-id={\`\${props['data-test-id'] || 'JustText'}|\`}
-      className=\\"views-block\\"
-    >
-      hey!
-    </span>
-  );
 };
 
 export default JustText;
@@ -2572,60 +1758,6 @@ export default ListOfSomething;
 }
 `;
 
-exports[`react-dom parses react-dom ListOfSomething: react-dom parses react-dom ListOfSomething debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import Something from './Something.view.js';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'emotion';
-
-const ListOfSomething1 = css({
-  label: 'ListOfSomething1',
-  paddingLeft: 2,
-  justifyContent: 'center',
-  alignItems: 'center',
-  flexDirection: 'row',
-  flexWrap: 'wrap',
-  overflowY: 'auto',
-  backgroundColor: 'red',
-});
-
-const ListOfSomething = props => {
-  return (
-    <div
-      data-test-id={\`\${props['data-test-id'] || 'ListOfSomething'}|\`}
-      className={\`views-block \${ListOfSomething1}\`}
-    >
-      {Array.isArray(props.from) &&
-        props.from.map((item, index) => (
-          <Something
-            index={index}
-            {...item}
-            key={index}
-            data-test-id={\`ListOfSomething.Something|\`}
-            className=\\"views-block\\"
-          />
-        ))}
-      {props.children}
-    </div>
-  );
-};
-
-export default ListOfSomething;
-",
-  "fonts": Array [],
-  "slots": Array [
-    Object {
-      "defaultValue": false,
-      "name": "from",
-      "type": "array",
-    },
-  ],
-  "svgs": Array [],
-}
-`;
-
 exports[`react-dom parses react-dom ListWhen 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -2660,53 +1792,6 @@ class ListWhen extends React.Component {
 }
 ListWhen.contextTypes = {
   track: PropTypes.func.isRequired,
-};
-
-export default ListWhen;
-",
-  "fonts": Array [],
-  "slots": Array [
-    Object {
-      "defaultValue": false,
-      "name": "showMe",
-      "type": "string",
-    },
-    Object {
-      "defaultValue": false,
-      "name": "from",
-      "type": "array",
-    },
-  ],
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom ListWhen: react-dom parses react-dom ListWhen debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import Card from './Card.view.js';
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-
-const ListWhen = props => {
-  return props.showMe ? (
-    <div
-      data-test-id={\`\${props['data-test-id'] || 'List'}|\`}
-      className=\\"views-block\\"
-    >
-      {Array.isArray(props.from) &&
-        props.from.map((item, index) => (
-          <Card
-            index={index}
-            {...item}
-            key={index}
-            data-test-id={\`ListWhen.Card|\`}
-            className=\\"views-block\\"
-          />
-        ))}
-      {props.children}
-    </div>
-  ) : null;
 };
 
 export default ListWhen;
@@ -2778,48 +1863,6 @@ export default ListWithKey;
 }
 `;
 
-exports[`react-dom parses react-dom ListWithKey: react-dom parses react-dom ListWithKey debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import Card from './Card.view.js';
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-
-const ListWithKey = props => {
-  return (
-    <div
-      data-test-id={\`\${props['data-test-id'] || 'List'}|\`}
-      className=\\"views-block\\"
-    >
-      {Array.isArray(props.from) &&
-        props.from.map((item, index) => (
-          <Card
-            index={index}
-            {...item}
-            key={id}
-            data-test-id={\`ListWithKey.Card|\`}
-            className=\\"views-block\\"
-          />
-        ))}
-      {props.children}
-    </div>
-  );
-};
-
-export default ListWithKey;
-",
-  "fonts": Array [],
-  "slots": Array [
-    Object {
-      "defaultValue": false,
-      "name": "from",
-      "type": "array",
-    },
-  ],
-  "svgs": Array [],
-}
-`;
-
 exports[`react-dom parses react-dom LocalImage 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -2847,35 +1890,6 @@ class LocalImage extends React.Component {
 }
 LocalImage.contextTypes = {
   track: PropTypes.func.isRequired,
-};
-
-export default LocalImage;
-",
-  "fonts": Array [],
-  "slots": Array [],
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom LocalImage: react-dom parses react-dom LocalImage debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import chopperJpg from './chopper.jpg';
-import garfieldPng from './garfield.png';
-
-const LocalImage = props => {
-  return (
-    <img
-      data-test-id={\`\${props['data-test-id'] || 'LocalImage'}|\${
-        props.isCat ? 'isCat|' : ''
-      }\`}
-      alt={''}
-      src={props.isCat ? garfieldPng : chopperJpg}
-      className=\\"views-block\\"
-    />
-  );
 };
 
 export default LocalImage;
@@ -2934,47 +1948,6 @@ export default LocalImageSvg;
 }
 `;
 
-exports[`react-dom parses react-dom LocalImageSvg: react-dom parses react-dom LocalImageSvg debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import chopperSvg from './chopper.svg';
-import { css } from 'emotion';
-
-const LocalImageSvg1 = css({
-  label: 'LocalImageSvg1',
-  width: 50,
-  height: 'var(--height)',
-});
-
-const LocalImageSvg = props => {
-  return (
-    <img
-      data-test-id={\`\${props['data-test-id'] || 'LocalImageSvg'}|\`}
-      alt={''}
-      src={chopperSvg}
-      style={{ '--height': \`\${props.height}px\` }}
-      className={\`views-block \${LocalImageSvg1}\`}
-    />
-  );
-};
-
-LocalImageSvg.defaultProps = { height: 50 };
-export default LocalImageSvg;
-",
-  "fonts": Array [],
-  "slots": Array [
-    Object {
-      "defaultValue": 50,
-      "name": "height",
-      "type": "number",
-    },
-  ],
-  "svgs": Array [],
-}
-`;
-
 exports[`react-dom parses react-dom LocalImageWithDefault 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -3015,38 +1988,6 @@ export default LocalImageWithDefault;
 }
 `;
 
-exports[`react-dom parses react-dom LocalImageWithDefault: react-dom parses react-dom LocalImageWithDefault debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-
-const LocalImageWithDefault = props => {
-  return (
-    <img
-      data-test-id={\`\${props['data-test-id'] || 'LocalImageWithDefault'}|\`}
-      alt={''}
-      src={props.source}
-      className=\\"views-block\\"
-    />
-  );
-};
-
-LocalImageWithDefault.defaultProps = { source: fileJpg };
-export default LocalImageWithDefault;
-",
-  "fonts": Array [],
-  "slots": Array [
-    Object {
-      "defaultValue": "fileJpg",
-      "name": "source",
-      "type": "import",
-    },
-  ],
-  "svgs": Array [],
-}
-`;
-
 exports[`react-dom parses react-dom LocalOrRemoteImageWhenCode 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -3072,40 +2013,6 @@ class LocalOrRemoteImageWhenCode extends React.Component {
 LocalOrRemoteImageWhenCode.contextTypes = {
   track: PropTypes.func.isRequired,
 };
-LocalOrRemoteImageWhenCode.defaultProps = {
-  source: 'https://views.tools/image.jpg',
-};
-export default LocalOrRemoteImageWhenCode;
-",
-  "fonts": Array [],
-  "slots": Array [
-    Object {
-      "defaultValue": "https://views.tools/image.jpg",
-      "name": "source",
-      "type": "string",
-    },
-  ],
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom LocalOrRemoteImageWhenCode: react-dom parses react-dom LocalOrRemoteImageWhenCode debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-
-const LocalOrRemoteImageWhenCode = props => {
-  return (
-    <img
-      data-test-id={\`\${props['data-test-id'] || 'LocalOrRemoteImageWhenCode'}|\`}
-      alt={''}
-      src={props.source}
-      className=\\"views-block\\"
-    />
-  );
-};
-
 LocalOrRemoteImageWhenCode.defaultProps = {
   source: 'https://views.tools/image.jpg',
 };
@@ -3173,58 +2080,6 @@ class Locals extends React.Component {
 }
 Locals.contextTypes = {
   track: PropTypes.func.isRequired,
-};
-
-export default Locals;
-",
-  "fonts": Array [],
-  "slots": Array [],
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom Locals: react-dom parses react-dom Locals debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import LocalContainer from './LocalContainer.view.js';
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { Subscribe } from 'unstated';
-
-const TextLocal = {
-  es: 'Hola',
-  pl: 'Cześć',
-  zhHansCN: '嗨',
-};
-const TextLocal1 = {
-  es: 'Mas',
-};
-const NamedLocal = {
-  es: 'Chau, \\"dijo el amigo de alguien\\"!',
-};
-
-const Locals = props => {
-  return (
-    <Subscribe to={[LocalContainer]}>
-      {local => (
-        <div
-          data-test-id={\`\${props['data-test-id'] || 'Locals'}|\`}
-          className=\\"views-block\\"
-        >
-          <span data-test-id={\`Locals.Text|\`} className=\\"views-block\\">
-            {TextLocal[local.state.lang] || 'Hi'}
-          </span>
-          <span data-test-id={\`Locals.Text:1|\`} className=\\"views-block\\">
-            {TextLocal1[local.state.lang] || 'More'}
-          </span>
-          <span data-test-id={\`Locals.Named|\`} className=\\"views-block\\">
-            {NamedLocal[local.state.lang] || 'Bye, \\"Said someone\\\\'s friend\\"!'}
-          </span>
-          {props.children}
-        </div>
-      )}
-    </Subscribe>
-  );
 };
 
 export default Locals;
@@ -3326,87 +2181,6 @@ export default LocalsFormat;
 }
 `;
 
-exports[`react-dom parses react-dom LocalsFormat: react-dom parses react-dom LocalsFormat debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-
-const currencyOptions = { style: 'currency', currency: 'USD' };
-const currencyFormatters = {
-  en: new Intl.NumberFormat('en', currencyOptions),
-  es: new Intl.NumberFormat('es', currencyOptions),
-  fr: new Intl.NumberFormat('fr', currencyOptions),
-};
-const dateOptions = {
-  weekday: 'long',
-  year: 'numeric',
-  month: 'numeric',
-  day: '2-digit',
-};
-const dateFormatters = {
-  en: new Intl.DateTimeFormat('en', dateOptions),
-  es: new Intl.DateTimeFormat('es', dateOptions),
-  fr: new Intl.DateTimeFormat('fr', dateOptions),
-};
-const percentOptions = { style: 'percent', maximumFractionDigits: 2 };
-const percentFormatters = {
-  en: new Intl.NumberFormat('en', percentOptions),
-  es: new Intl.NumberFormat('es', percentOptions),
-  fr: new Intl.NumberFormat('fr', percentOptions),
-};
-const timeOptions = {
-  hour: 'numeric',
-  minute: 'numeric',
-  second: '2-digit',
-  hour12: true,
-};
-const timeFormatters = {
-  en: new Intl.DateTimeFormat('en', timeOptions),
-  es: new Intl.DateTimeFormat('es', timeOptions),
-  fr: new Intl.DateTimeFormat('fr', timeOptions),
-};
-
-const LocalsFormat = props => {
-  return (
-    <Subscribe to={[LocalContainer]}>
-      {local => (
-        <div
-          data-test-id={\`\${props['data-test-id'] || 'LocalsFormat'}|\`}
-          className=\\"views-block\\"
-        >
-          <span data-test-id={\`LocalsFormat.Price|\`} className=\\"views-block\\">
-            {currencyFormatters[local.state.lang].format(100)}
-          </span>
-          <span data-test-id={\`LocalsFormat.Date|\`} className=\\"views-block\\">
-            {dateFormatters[local.state.lang].format(Date.parse('2018-07-08'))}
-          </span>
-          <span
-            data-test-id={\`LocalsFormat.Percentage|\`}
-            className=\\"views-block\\"
-          >
-            {percentFormatters[local.state.lang].format(0.805)}
-          </span>
-          <span data-test-id={\`LocalsFormat.Time|\`} className=\\"views-block\\">
-            {timeFormatters[local.state.lang].format(
-              Date.UTC(2018, 14, 3, 3, 0)
-            )}
-          </span>
-          {props.children}
-        </div>
-      )}
-    </Subscribe>
-  );
-};
-
-export default LocalsFormat;
-",
-  "fonts": Array [],
-  "slots": Array [],
-  "svgs": Array [],
-}
-`;
-
 exports[`react-dom parses react-dom NameIsType 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -3430,31 +2204,6 @@ class NameIsType extends React.Component {
 }
 NameIsType.contextTypes = {
   track: PropTypes.func.isRequired,
-};
-
-export default NameIsType;
-",
-  "fonts": Array [],
-  "slots": Array [],
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom NameIsType: react-dom parses react-dom NameIsType debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-
-const NameIsType = props => {
-  return (
-    <span
-      data-test-id={\`\${props['data-test-id'] || 'Texto'}|\`}
-      className=\\"views-block\\"
-    >
-      iam
-    </span>
-  );
 };
 
 export default NameIsType;
@@ -3491,34 +2240,6 @@ class NegativeNumber extends React.Component {
 }
 NegativeNumber.contextTypes = {
   track: PropTypes.func.isRequired,
-};
-
-export default NegativeNumber;
-",
-  "fonts": Array [],
-  "slots": Array [],
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom NegativeNumber: react-dom parses react-dom NegativeNumber debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'emotion';
-
-const Text = css({ label: 'Text', marginTop: -10 });
-
-const NegativeNumber = props => {
-  return (
-    <span
-      data-test-id={\`\${props['data-test-id'] || 'Text'}|\`}
-      className={\`views-block \${Text}\`}
-    >
-      hey
-    </span>
-  );
 };
 
 export default NegativeNumber;
@@ -3577,56 +2298,6 @@ class NestedRoutes extends React.Component {
 }
 NestedRoutes.contextTypes = {
   track: PropTypes.func.isRequired,
-};
-
-export default NestedRoutes;
-",
-  "fonts": Array [],
-  "slots": Array [],
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom NestedRoutes: react-dom parses react-dom NestedRoutes debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import Topic from './Topic.view.js';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { Link } from 'react-router-dom';
-import { Route } from 'react-router-dom';
-
-const NestedRoutes = props => {
-  return (
-    <div
-      data-test-id={\`\${props['data-test-id'] || 'Topics'}|\`}
-      className=\\"views-block\\"
-    >
-      <span data-test-id={\`NestedRoutes.Text|\`} className=\\"views-block\\">
-        topics
-      </span>
-      <Link
-        to=\\"rendering\\"
-        data-test-id={\`NestedRoutes.Link|\`}
-        className=\\"views-block\\"
-      >
-        <span data-test-id={\`NestedRoutes.Text:1|\`} className=\\"views-block\\">
-          Rendering with React
-        </span>
-      </Link>
-      <Route
-        path=\\":topic\\"
-        render={routeProps => (
-          <Topic
-            data-test-id={\`NestedRoutes.Topic|\`}
-            {...routeProps}
-            className=\\"views-block\\"
-          />
-        )}
-      />
-      {props.children}
-    </div>
-  );
 };
 
 export default NestedRoutes;
@@ -3702,63 +2373,6 @@ export default Scope;
 }
 `;
 
-exports[`react-dom parses react-dom Scope: react-dom parses react-dom Scope debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'emotion';
-
-const Scope1 = css({ label: 'Scope1', color: 'var(--color)' });
-
-const Scope = props => {
-  return (
-    <span
-      data-test-id={\`\${props['data-test-id'] || 'Scope'}|\${
-        props.somethingGreen
-          ? 'somethingGreen|'
-          : props.whatMakesBlue
-            ? 'whatMakesBlue|'
-            : !props.whatMakesBlue
-              ? 'notWhatMakesBlue|'
-              : props.testingStyleSlots
-                ? 'testingStyleSlots|'
-                : ''
-      }\`}
-      style={{
-        '--color': \`\${
-          props.somethingGreen
-            ? 'rgb(0,255,0)'
-            : props.whatMakesBlue
-              ? 'rgb(0,0,255)'
-              : !props.whatMakesBlue
-                ? 'rgb(255,255,0)'
-                : props.testingStyleSlots
-                  ? props.anotherColor
-                  : 'red'
-        }\`,
-      }}
-      className={\`views-block \${Scope1}\`}
-    >
-      {props.somethingGreen
-        ? '2 green'
-        : props.whatMakesBlue
-          ? props.blue
-          : !props.whatMakesBlue
-            ? 'is Yellow'
-            : '1 red'}
-    </span>
-  );
-};
-
-export default Scope;
-",
-  "fonts": Array [],
-  "slots": Array [],
-  "svgs": Array [],
-}
-`;
-
 exports[`react-dom parses react-dom ScopeOnCustomView 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -3788,43 +2402,6 @@ class ScopeOnCustomView extends React.Component {
 }
 ScopeOnCustomView.contextTypes = {
   track: PropTypes.func.isRequired,
-};
-
-export default ScopeOnCustomView;
-",
-  "fonts": Array [],
-  "slots": Array [
-    Object {
-      "defaultValue": false,
-      "name": "more",
-      "type": "string",
-    },
-  ],
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom ScopeOnCustomView: react-dom parses react-dom ScopeOnCustomView debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import Button from './Button.view.js';
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-
-const ScopeOnCustomView = props => {
-  return (
-    <Button
-      data-test-id={\`\${props['data-test-id'] || 'Button'}|\${
-        props.a ? 'a|' : props.b ? 'b|' : ''
-      }\`}
-      label={props.a ? 'ho' : props.b ? 'this is b' : 'hey'}
-      another={props.a ? 1 : 0}
-      more={props.a ? props.more : props.more}
-      className=\\"views-block\\"
-    >
-      {props.children}
-    </Button>
-  );
 };
 
 export default ScopeOnCustomView;
@@ -3885,58 +2462,6 @@ class ScopePopup extends React.Component {
 }
 ScopePopup.contextTypes = {
   track: PropTypes.func.isRequired,
-};
-
-export default ScopePopup;
-",
-  "fonts": Array [],
-  "slots": Array [
-    Object {
-      "defaultValue": false,
-      "name": "toggle",
-      "type": "function",
-    },
-  ],
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom ScopePopup: react-dom parses react-dom ScopePopup debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-
-const ScopePopup = props => {
-  return (
-    <div
-      data-test-id={\`\${props['data-test-id'] || 'Popup'}|\`}
-      className=\\"views-block\\"
-    >
-      <button
-        data-test-id={\`ScopePopup.Toggle|\${
-          props.somethingGreen
-            ? 'somethingGreen|'
-            : props.whatMakesBlue
-              ? 'whatMakesBlue|'
-              : ''
-        }\`}
-        onClick={
-          props.somethingGreen
-            ? props.onClickGreen
-            : props.whatMakesBlue
-              ? props.onClickBlue
-              : props.toggle
-        }
-        className=\\"views-block\\"
-      >
-        <span data-test-id={\`ScopePopup.Text|\`} className=\\"views-block\\">
-          toggle popup
-        </span>
-      </button>
-      {props.children}
-    </div>
-  );
 };
 
 export default ScopePopup;
@@ -4034,71 +2559,6 @@ export default ScopePopup2;
 }
 `;
 
-exports[`react-dom parses react-dom ScopePopup2: react-dom parses react-dom ScopePopup2 debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'emotion';
-
-const Content = css({
-  label: 'Content',
-  opacity: 'var(--opacity)',
-  transform: 'scale(var(--scale))',
-});
-
-const ScopePopup2 = props => {
-  return (
-    <div
-      data-test-id={\`\${props['data-test-id'] || 'Popup'}|\`}
-      className=\\"views-block\\"
-    >
-      <button
-        data-test-id={\`ScopePopup2.Toggle|\`}
-        onClick={props.toggle}
-        className=\\"views-block\\"
-      >
-        <span data-test-id={\`ScopePopup2.Text|\`} className=\\"views-block\\">
-          toggle popup
-        </span>
-      </button>
-      <div
-        data-test-id={\`ScopePopup2.Content|\${
-          props.isShown
-            ? 'isShown|'
-            : props.isSuperVisible
-              ? 'isSuperVisible|'
-              : ''
-        }\`}
-        style={{
-          '--opacity': \`\${props.isShown ? 1 : props.isSuperVisible ? 3 : 0}\`,
-          '--scale': \`\${props.isShown ? 1 : props.isSuperVisible ? 2 : 0}\`,
-        }}
-        className={\`views-block \${Content}\`}
-      >
-        <span data-test-id={\`ScopePopup2.Text:1|\`} className=\\"views-block\\">
-          I'm inside the popup
-        </span>
-      </div>
-      {props.children}
-    </div>
-  );
-};
-
-export default ScopePopup2;
-",
-  "fonts": Array [],
-  "slots": Array [
-    Object {
-      "defaultValue": false,
-      "name": "toggle",
-      "type": "function",
-    },
-  ],
-  "svgs": Array [],
-}
-`;
-
 exports[`react-dom parses react-dom ScrollableList 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -4143,63 +2603,6 @@ class ScrollableList extends React.Component {
 }
 ScrollableList.contextTypes = {
   track: PropTypes.func.isRequired,
-};
-
-export default ScrollableList;
-",
-  "fonts": Array [],
-  "slots": Array [
-    Object {
-      "defaultValue": false,
-      "name": "from",
-      "type": "array",
-    },
-    Object {
-      "defaultValue": false,
-      "name": "paddingLeft",
-      "type": "number",
-    },
-  ],
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom ScrollableList: react-dom parses react-dom ScrollableList debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import Card from './Card.view.js';
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'emotion';
-
-const ScrollableList1 = css({
-  label: 'ScrollableList1',
-  overflowY: 'auto',
-  paddingBottom: 200,
-  backgroundColor: 'red',
-  paddingLeft: 'var(--paddingLeft)',
-});
-
-const ScrollableList = props => {
-  return (
-    <div
-      data-test-id={\`\${props['data-test-id'] || 'ScrollableList'}|\`}
-      style={{ '--paddingLeft': \`\${props.paddingLeft}px\` }}
-      className={\`views-block \${ScrollableList1}\`}
-    >
-      {Array.isArray(props.from) &&
-        props.from.map((item, index) => (
-          <Card
-            index={index}
-            {...item}
-            key={index}
-            data-test-id={\`ScrollableList.Card|\`}
-            className=\\"views-block\\"
-          />
-        ))}
-      {props.children}
-    </div>
-  );
 };
 
 export default ScrollableList;
@@ -4283,61 +2686,6 @@ export default Shadow;
 }
 `;
 
-exports[`react-dom parses react-dom Shadow: react-dom parses react-dom Shadow debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'emotion';
-
-const BoxShadow = css({
-  label: 'BoxShadow',
-  boxShadow: \`0px 5px 2px 2px var(--shadowColor)\`,
-});
-const TextShadow = css({
-  label: 'TextShadow',
-  textShadow: \`2px 3px 1px var(--shadowColor)\`,
-});
-
-const Shadow = props => {
-  return (
-    <div
-      data-test-id={\`\${props['data-test-id'] || 'Shadow'}|\`}
-      className=\\"views-block\\"
-    >
-      <div
-        data-test-id={\`Shadow.BoxShadow|\`}
-        style={{ '--shadowColor': props.shadowColor }}
-        className={\`views-block \${BoxShadow}\`}
-      >
-        <span
-          data-test-id={\`Shadow.TextShadow|\`}
-          style={{ '--shadowColor': props.shadowColor }}
-          className={\`views-block \${TextShadow}\`}
-        >
-          hey
-        </span>
-      </div>
-      {props.children}
-    </div>
-  );
-};
-
-Shadow.defaultProps = { shadowColor: 'red' };
-export default Shadow;
-",
-  "fonts": Array [],
-  "slots": Array [
-    Object {
-      "defaultValue": "red",
-      "name": "shadowColor",
-      "type": "string",
-    },
-  ],
-  "svgs": Array [],
-}
-`;
-
 exports[`react-dom parses react-dom SomeMissingStyle 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -4406,57 +2754,6 @@ export default SomeMissingStyle;
 }
 `;
 
-exports[`react-dom parses react-dom SomeMissingStyle: react-dom parses react-dom SomeMissingStyle debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'emotion';
-
-const WindowControl = css({
-  label: 'WindowControl',
-  marginRight: 8,
-  backgroundColor: '#CBCDCE',
-  opacity: 0.7,
-  transform: 'scale(1.1)',
-  transition: 'all 0.15s ease-out',
-  width: 10,
-  height: 10,
-  '&:hover': {
-    transform: 'scale(1.1)',
-  },
-  '&:hover': {
-    backgroundColor: 'var(--backgroundColor)',
-  },
-});
-
-const SomeMissingStyle = props => {
-  return (
-    <button
-      data-test-id={\`\${props['data-test-id'] || 'WindowControl'}|\`}
-      onClick={props.onClick}
-      style={{ '--backgroundColor': props.backgroundColorHover }}
-      className={\`views-block \${WindowControl}\`}
-    >
-      {props.children}
-    </button>
-  );
-};
-
-export default SomeMissingStyle;
-",
-  "fonts": Array [],
-  "slots": Array [
-    Object {
-      "defaultValue": false,
-      "name": "onClick",
-      "type": "function",
-    },
-  ],
-  "svgs": Array [],
-}
-`;
-
 exports[`react-dom parses react-dom Teleport 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -4488,39 +2785,6 @@ class Teleport extends React.Component {
 }
 Teleport.contextTypes = {
   track: PropTypes.func.isRequired,
-};
-
-export default Teleport;
-",
-  "fonts": Array [],
-  "slots": Array [],
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom Teleport: react-dom parses react-dom Teleport debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { Link } from 'react-router-dom';
-import { css } from 'emotion';
-
-const Horizontal = css({ label: 'Horizontal', flexDirection: 'row' });
-
-const Teleport = props => {
-  return (
-    <Link
-      to=\\"..\\"
-      data-test-id={\`\${props['data-test-id'] || 'Horizontal'}|\`}
-      className={\`views-block \${Horizontal}\`}
-    >
-      <span data-test-id={\`Teleport.Text|\`} className=\\"views-block\\">
-        go back
-      </span>
-      {props.children}
-    </Link>
-  );
 };
 
 export default Teleport;
@@ -4575,42 +2839,6 @@ export default TestIds;
 }
 `;
 
-exports[`react-dom parses react-dom TestIds: react-dom parses react-dom TestIds debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import External from './External.view.js';
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-
-const TestIds = props => {
-  return (
-    <div
-      data-test-id={\`\${props['data-test-id'] || 'App'}|\`}
-      className=\\"views-block\\"
-    >
-      <span data-test-id={\`TestIds.Text|\`} className=\\"views-block\\">
-        1
-      </span>
-      <span data-test-id={\`TestIds.Text:1|\`} className=\\"views-block\\">
-        2
-      </span>
-      <External data-test-id={\`TestIds.External|\`} className=\\"views-block\\" />
-      <span data-test-id={\`TestIds.Name|\`} className=\\"views-block\\">
-        name
-      </span>
-      {props.children}
-    </div>
-  );
-};
-
-export default TestIds;
-",
-  "fonts": Array [],
-  "slots": Array [],
-  "svgs": Array [],
-}
-`;
-
 exports[`react-dom parses react-dom TextInterpolation 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -4649,57 +2877,6 @@ class TextInterpolation extends React.Component {
 TextInterpolation.contextTypes = {
   track: PropTypes.func.isRequired,
 };
-TextInterpolation.defaultProps = {
-  firstName: '',
-  surname: '',
-};
-export default TextInterpolation;
-",
-  "fonts": Array [],
-  "slots": Array [
-    Object {
-      "defaultValue": "",
-      "name": "firstName",
-      "type": "string",
-    },
-    Object {
-      "defaultValue": "",
-      "name": "surname",
-      "type": "string",
-    },
-  ],
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom TextInterpolation: react-dom parses react-dom TextInterpolation debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-
-const TextInterpolation = props => {
-  return (
-    <div
-      data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-      className=\\"views-block\\"
-    >
-      <span
-        data-test-id={\`TextInterpolation.Standard|\${
-          !props.firstName ? 'notFirstName|' : ''
-        }\`}
-        className=\\"views-block\\"
-      >
-        {!props.firstName ? \`Hi stranger!\` : \`Hi \${props.firstName}!\`}
-      </span>
-      <span data-test-id={\`TextInterpolation.Scoped|\`} className=\\"views-block\\">
-        Hello, Prof. {!props.surname ? 'Anonymous' : props.surname}.
-      </span>
-      {props.children}
-    </div>
-  );
-};
-
 TextInterpolation.defaultProps = {
   firstName: '',
   surname: '',
@@ -4789,64 +2966,6 @@ export default Transform;
 }
 `;
 
-exports[`react-dom parses react-dom Transform: react-dom parses react-dom Transform debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'emotion';
-
-const Transform1 = css({
-  label: 'Transform1',
-  transform:
-    'rotate(4deg) rotateX(5deg) rotateY(6deg) scale(3) translateX(1px) translateY(2px)',
-  transformOrigin: 'center top',
-});
-const Text = css({
-  label: 'Text',
-  transformOrigin: \`var(--transformOriginX) var(--transformOriginY)\`,
-});
-
-const Transform = props => {
-  return (
-    <div
-      data-test-id={\`\${props['data-test-id'] || 'Transform'}|\`}
-      className={\`views-block \${Transform1}\`}
-    >
-      <span
-        data-test-id={\`Transform.Text|\`}
-        style={{
-          '--transformOriginX': props.transformOriginX,
-          '--transformOriginY': props.transformOriginY,
-        }}
-        className={\`views-block \${Text}\`}
-      >
-        who knows what happens here :D
-      </span>
-      {props.children}
-    </div>
-  );
-};
-
-export default Transform;
-",
-  "fonts": Array [],
-  "slots": Array [
-    Object {
-      "defaultValue": false,
-      "name": "transformOriginX",
-      "type": "string",
-    },
-    Object {
-      "defaultValue": false,
-      "name": "transformOriginY",
-      "type": "string",
-    },
-  ],
-  "svgs": Array [],
-}
-`;
-
 exports[`react-dom parses react-dom UseCaptureEmail 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -4903,53 +3022,6 @@ export default UseCaptureEmail;
 }
 `;
 
-exports[`react-dom parses react-dom UseCaptureEmail: react-dom parses react-dom UseCaptureEmail debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'emotion';
-
-const Email = css({
-  label: 'Email',
-  borderColor: 'black',
-  borderStyle: 'solid',
-  borderWidth: 1,
-  color: 'red',
-  '&:focus': {
-    color: 'purple',
-  },
-  '&::placeholder': {
-    color: 'blue',
-  },
-});
-
-const UseCaptureEmail = props => {
-  return (
-    <input
-      type=\\"email\\"
-      data-test-id={\`\${props['data-test-id'] || 'Email'}|\`}
-      defaultValue=\\"hey this is a default value\\"
-      onSubmit={props.onSubmit}
-      className={\`views-block mousetrap \${Email}\`}
-    />
-  );
-};
-
-export default UseCaptureEmail;
-",
-  "fonts": Array [],
-  "slots": Array [
-    Object {
-      "defaultValue": false,
-      "name": "onSubmit",
-      "type": "function",
-    },
-  ],
-  "svgs": Array [],
-}
-`;
-
 exports[`react-dom parses react-dom UseCaptureFile 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -4971,29 +3043,6 @@ class UseCaptureFile extends React.Component {
 }
 UseCaptureFile.contextTypes = {
   track: PropTypes.func.isRequired,
-};
-
-export default UseCaptureFile;
-",
-  "fonts": Array [],
-  "slots": Array [],
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom UseCaptureFile: react-dom parses react-dom UseCaptureFile debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-
-const UseCaptureFile = props => {
-  return (
-    <input
-      data-test-id={\`\${props['data-test-id'] || 'File'}|\`}
-      className={\`views-block mousetrap\`}
-    />
-  );
 };
 
 export default UseCaptureFile;
@@ -5038,32 +3087,6 @@ export default UseCaptureNumber;
 }
 `;
 
-exports[`react-dom parses react-dom UseCaptureNumber: react-dom parses react-dom UseCaptureNumber debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-
-const UseCaptureNumber = props => {
-  return (
-    <input
-      type=\\"number\\"
-      inputMode=\\"numeric\\"
-      pattern=\\"[0-9]*\\"
-      data-test-id={\`\${props['data-test-id'] || 'Number'}|\`}
-      className={\`views-block mousetrap\`}
-    />
-  );
-};
-
-export default UseCaptureNumber;
-",
-  "fonts": Array [],
-  "slots": Array [],
-  "svgs": Array [],
-}
-`;
-
 exports[`react-dom parses react-dom UseCapturePhone 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -5096,30 +3119,6 @@ export default UseCapturePhone;
 }
 `;
 
-exports[`react-dom parses react-dom UseCapturePhone: react-dom parses react-dom UseCapturePhone debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-
-const UseCapturePhone = props => {
-  return (
-    <input
-      type=\\"tel\\"
-      data-test-id={\`\${props['data-test-id'] || 'Phone'}|\`}
-      className={\`views-block mousetrap\`}
-    />
-  );
-};
-
-export default UseCapturePhone;
-",
-  "fonts": Array [],
-  "slots": Array [],
-  "svgs": Array [],
-}
-`;
-
 exports[`react-dom parses react-dom UseCaptureSecure 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -5142,30 +3141,6 @@ class UseCaptureSecure extends React.Component {
 }
 UseCaptureSecure.contextTypes = {
   track: PropTypes.func.isRequired,
-};
-
-export default UseCaptureSecure;
-",
-  "fonts": Array [],
-  "slots": Array [],
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom UseCaptureSecure: react-dom parses react-dom UseCaptureSecure debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-
-const UseCaptureSecure = props => {
-  return (
-    <input
-      type=\\"password\\"
-      data-test-id={\`\${props['data-test-id'] || 'Secure'}|\`}
-      className={\`views-block mousetrap\`}
-    />
-  );
 };
 
 export default UseCaptureSecure;
@@ -5219,41 +3194,6 @@ export default UseCaptureText;
 }
 `;
 
-exports[`react-dom parses react-dom UseCaptureText: react-dom parses react-dom UseCaptureText debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import LocalContainer from './LocalContainer.view.js';
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { Subscribe } from 'unstated';
-
-const TextLocal = {
-  es: 'Escriba sus comentarios aqui...',
-};
-
-const UseCaptureText = props => {
-  return (
-    <Subscribe to={[LocalContainer]}>
-      {local => (
-        <input
-          type=\\"text\\"
-          data-test-id={\`\${props['data-test-id'] || 'Text'}|\`}
-          placeholder={TextLocal[local.state.lang] || 'Type feedback here...'}
-          className={\`views-block mousetrap\`}
-        />
-      )}
-    </Subscribe>
-  );
-};
-
-export default UseCaptureText;
-",
-  "fonts": Array [],
-  "slots": Array [],
-  "svgs": Array [],
-}
-`;
-
 exports[`react-dom parses react-dom UseCaptureTextArea 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -5275,29 +3215,6 @@ class UseCaptureTextArea extends React.Component {
 }
 UseCaptureTextArea.contextTypes = {
   track: PropTypes.func.isRequired,
-};
-
-export default UseCaptureTextArea;
-",
-  "fonts": Array [],
-  "slots": Array [],
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom UseCaptureTextArea: react-dom parses react-dom UseCaptureTextArea debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-
-const UseCaptureTextArea = props => {
-  return (
-    <textarea
-      data-test-id={\`\${props['data-test-id'] || 'CaptureTextArea'}|\`}
-      className={\`views-block mousetrap\`}
-    />
-  );
 };
 
 export default UseCaptureTextArea;
@@ -5331,37 +3248,6 @@ class UseCaptureTextManagedFromOutside extends React.Component {
 }
 UseCaptureTextManagedFromOutside.contextTypes = {
   track: PropTypes.func.isRequired,
-};
-
-export default UseCaptureTextManagedFromOutside;
-",
-  "fonts": Array [],
-  "slots": Array [
-    Object {
-      "defaultValue": false,
-      "name": "external",
-      "type": "string",
-    },
-  ],
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom UseCaptureTextManagedFromOutside: react-dom parses react-dom UseCaptureTextManagedFromOutside debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-
-const UseCaptureTextManagedFromOutside = props => {
-  return (
-    <input
-      type=\\"text\\"
-      data-test-id={\`\${props['data-test-id'] || 'CaptureText'}|\`}
-      value={props.external}
-      className={\`views-block mousetrap\`}
-    />
-  );
 };
 
 export default UseCaptureTextManagedFromOutside;
@@ -5420,40 +3306,6 @@ export default UseHorizontal;
 }
 `;
 
-exports[`react-dom parses react-dom UseHorizontal: react-dom parses react-dom UseHorizontal debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'emotion';
-
-const Horizontal = css({
-  label: 'Horizontal',
-  flexDirection: 'row',
-  borderColor: 'red',
-  borderStyle: 'solid',
-  borderWidth: 1,
-});
-
-const UseHorizontal = props => {
-  return (
-    <div
-      data-test-id={\`\${props['data-test-id'] || 'Horizontal'}|\`}
-      className={\`views-block \${Horizontal}\`}
-    >
-      {props.children}
-    </div>
-  );
-};
-
-export default UseHorizontal;
-",
-  "fonts": Array [],
-  "slots": Array [],
-  "svgs": Array [],
-}
-`;
-
 exports[`react-dom parses react-dom UseImage 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -5483,37 +3335,6 @@ class UseImage extends React.Component {
 }
 UseImage.contextTypes = {
   track: PropTypes.func.isRequired,
-};
-
-export default UseImage;
-",
-  "fonts": Array [],
-  "slots": Array [],
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom UseImage: react-dom parses react-dom UseImage debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-
-const UseImage = props => {
-  return (
-    <img
-      data-test-id={\`\${props['data-test-id'] || 'Image'}|\${
-        props.another ? 'another|' : ''
-      }\`}
-      alt={''}
-      src={
-        props.another
-          ? 'https://views.tools/hi.jpg'
-          : 'https://views.tools/rocks.jpg'
-      }
-      className=\\"views-block\\"
-    />
-  );
 };
 
 export default UseImage;
@@ -5606,81 +3427,6 @@ export default UseRouter;
 }
 `;
 
-exports[`react-dom parses react-dom UseRouter: react-dom parses react-dom UseRouter debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import About from './About.view.js';
-import Home from './Home.view.js';
-import React from 'react';
-import Topics from './Topics.view.js';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { Route } from 'react-router-dom';
-import { css } from 'emotion';
-
-const Horizontal = css({ label: 'Horizontal', flexDirection: 'row' });
-
-const UseRouter = props => {
-  return (
-    <Router>
-      <div
-        data-test-id={\`\${props['data-test-id'] || 'Horizontal'}|\`}
-        className={\`views-block \${Horizontal}\`}
-      >
-        <Route
-          path=\\"/\\"
-          exact
-          render={routeProps => (
-            <Home
-              data-test-id={\`UseRouter.Home|\`}
-              height={props.height}
-              width={360}
-              {...routeProps}
-              className=\\"views-block\\"
-            />
-          )}
-        />
-        <Route
-          path=\\"/about\\"
-          render={routeProps => (
-            <About
-              data-test-id={\`UseRouter.About|\`}
-              {...routeProps}
-              className=\\"views-block\\"
-            />
-          )}
-        />
-        <Route
-          path=\\"/topics\\"
-          render={routeProps => (
-            <Topics
-              data-test-id={\`UseRouter.Topics|\`}
-              {...routeProps}
-              className=\\"views-block\\"
-            />
-          )}
-        />
-        {props.children}
-      </div>
-    </Router>
-  );
-};
-
-UseRouter.defaultProps = { height: 10 };
-export default UseRouter;
-",
-  "fonts": Array [],
-  "slots": Array [
-    Object {
-      "defaultValue": 10,
-      "name": "height",
-      "type": "number",
-    },
-  ],
-  "svgs": Array [],
-}
-`;
-
 exports[`react-dom parses react-dom UseSvg 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -5749,82 +3495,6 @@ class UseSvg extends React.Component {
 UseSvg.contextTypes = {
   track: PropTypes.func.isRequired,
 };
-UseSvg.defaultProps = { opacity: 0.5 };
-export default UseSvg;
-",
-  "fonts": Array [],
-  "slots": Array [
-    Object {
-      "defaultValue": 0.5,
-      "name": "opacity",
-      "type": "number",
-    },
-  ],
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom UseSvg: react-dom parses react-dom UseSvg debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'emotion';
-
-const Svg = css({
-  label: 'Svg',
-  height: 20,
-  width: 20,
-  opacity: 'var(--opacity)',
-});
-const SvgPath = css({ label: 'SvgPath', fill: 'red' });
-
-const UseSvg = props => {
-  return (
-    <svg
-      data-test-id={\`\${props['data-test-id'] || 'Svg'}|\`}
-      viewBox=\\"0 0 20 20\\"
-      style={{ '--opacity': props.opacity }}
-      className={\`views-block \${Svg}\`}
-    >
-      <path
-        data-test-id={\`UseSvg.SvgPath|\`}
-        d=\\"0 20\\"
-        className={\`views-block \${SvgPath}\`}
-      />
-      <circle
-        data-test-id={\`UseSvg.SvgCircle|\`}
-        cx={10}
-        cy={5}
-        r={5}
-        className=\\"views-block\\"
-      />
-      <g
-        data-test-id={\`UseSvg.SvgGroup|\`}
-        transform=\\"translate(6.000000, 5.000000)\\"
-        className=\\"views-block\\"
-      >
-        <path
-          data-test-id={\`UseSvg.SvgPath:1|\`}
-          d={1}
-          className=\\"views-block\\"
-        />
-        <path
-          data-test-id={\`UseSvg.SvgPath:2|\`}
-          d={2}
-          className=\\"views-block\\"
-        />
-      </g>
-      <text
-        data-test-id={\`UseSvg.SvgText|\`}
-        text=\\"hey\\"
-        className=\\"views-block\\"
-      />
-      {props.children}
-    </svg>
-  );
-};
-
 UseSvg.defaultProps = { opacity: 0.5 };
 export default UseSvg;
 ",
@@ -5930,109 +3600,6 @@ class UseTable extends React.Component {
 }
 UseTable.contextTypes = {
   track: PropTypes.func.isRequired,
-};
-
-export default UseTable;
-",
-  "fonts": Array [],
-  "slots": Array [
-    Object {
-      "defaultValue": false,
-      "name": "from",
-      "type": "string",
-    },
-    Object {
-      "defaultValue": false,
-      "name": "rowColorAlternate",
-      "type": "string",
-    },
-  ],
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom UseTable: react-dom parses react-dom UseTable debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import Cell from './Cell.view.js';
-import Column from './Column.view.js';
-import Header from './Header.view.js';
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { AutoSizer, Column, Table } from '@viewstools/tables/dom';
-
-const Table1Row = css({
-  display: 'flex',
-  color: '#1C1C1C',
-  backgroundColor: 'white',
-  '&:hover': {
-    color: 'red',
-    backgroundColor: 'black',
-  },
-  '&:nth-child(even)': {
-    backgroundColor: 'black',
-    '&:hover': {
-      color: 'green',
-    },
-    color: 'var(--rowColorAlternate)',
-    '&:hover': {
-      backgroundColor: 'var(--rowBackgroundColorAlternate)',
-    },
-  },
-});
-
-const UseTable = props => {
-  return (
-    <div
-      data-test-id={\`\${props['data-test-id'] || 'UseTable'}|\`}
-      className=\\"views-block\\"
-    >
-      <AutoSizer>
-        {({ width, height }) => (
-          <Table
-            width={width}
-            height={height}
-            rowCount={Array.isArray(props.from) ? props.from.length : 0}
-            rowGetter={({ index }) => props.from[index]}
-            data-test-id={\`UseTable.Table|\`}
-            headerHeight={40}
-            rowHeight={20}
-            rowClassName={Table1Row}
-            className=\\"views-block\\"
-          >
-            <Column
-              dataKey=\\"name\\"
-              width={90}
-              headerRenderer={headerProps => (
-                <Header {...headerProps} text=\\"Name\\" />
-              )}
-              cellRenderer={cellProps => <Cell {...cellProps} />}
-              data-test-id={\`UseTable.Name|\`}
-              key=\\"name\\"
-              className=\\"views-block\\"
-            />
-            <Column
-              dataKey=\\"location\\"
-              width={(width - 90) / 2}
-              cellRenderer={cellProps => <Cell {...cellProps} />}
-              data-test-id={\`UseTable.Location|\`}
-              key=\\"location\\"
-              className=\\"views-block\\"
-            />
-            <Column
-              dataKey=\\"description\\"
-              width={(width - 90) / 2}
-              cellRenderer={cellProps => <Cell {...cellProps} />}
-              data-test-id={\`UseTable.Description|\`}
-              key=\\"description\\"
-              className=\\"views-block\\"
-            />
-          </Table>
-        )}
-      </AutoSizer>
-      {props.children}
-    </div>
-  );
 };
 
 export default UseTable;
@@ -6180,124 +3747,6 @@ export default UseTableOnWhen;
 }
 `;
 
-exports[`react-dom parses react-dom UseTableOnWhen: react-dom parses react-dom UseTableOnWhen debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import Cell from './Cell.view.js';
-import Column from './Column.view.js';
-import Header from './Header.view.js';
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { AutoSizer, Column, Table } from '@viewstools/tables/dom';
-import { css } from 'emotion';
-
-const Table1Row = css({
-  display: 'flex',
-  color: '#1C1C1C',
-  backgroundColor: 'white',
-  '&:hover': {
-    color: 'red',
-    backgroundColor: 'black',
-  },
-  '&:nth-child(even)': {
-    backgroundColor: 'black',
-    '&:hover': {
-      color: 'green',
-    },
-    color: 'var(--rowColorAlternate)',
-    '&:hover': {
-      backgroundColor: 'var(--rowBackgroundColorAlternate)',
-    },
-  },
-});
-const Table1 = css({ label: 'Table1', marginLeft: 'var(--marginLeft)' });
-const Name = css({
-  label: 'Name',
-  borderBottomStyle: 'solid',
-  borderBottomWidth: 1,
-  borderBottomColor: 'var(--borderBottomColor)',
-});
-
-const UseTableOnWhen = props => {
-  return (
-    <div
-      data-test-id={\`\${props['data-test-id'] || 'UseTableOnWhen'}|\`}
-      className=\\"views-block\\"
-    >
-      {props.stuff ? (
-        <AutoSizer>
-          {({ width, height }) => (
-            <Table
-              width={width}
-              height={height}
-              rowCount={Array.isArray(props.from) ? props.from.length : 0}
-              rowGetter={({ index }) => props.from[index]}
-              data-test-id={\`UseTableOnWhen.Table|\`}
-              headerHeight={40}
-              rowHeight={20}
-              rowClassName={Table1Row}
-              style={{
-                '--marginLeft': \`\${props.marginLeft}px\`,
-                '--rowColorAlternate': props.rowColorAlternate,
-                '--rowBackgroundColorAlternate': props.rowBgColorAlternate,
-              }}
-              className={\`views-block \${Table1}\`}
-            >
-              <Column
-                dataKey=\\"name\\"
-                width={90}
-                headerRenderer={headerProps => (
-                  <Header {...headerProps} text=\\"Name\\" />
-                )}
-                cellRenderer={cellProps => <Cell {...cellProps} />}
-                data-test-id={\`UseTableOnWhen.Name|\`}
-                key=\\"name\\"
-                style={{ '--borderBottomColor': props.borderColor }}
-                className={\`views-block \${Name}\`}
-              />
-            </Table>
-          )}
-        </AutoSizer>
-      ) : null}
-      {props.children}
-    </div>
-  );
-};
-
-export default UseTableOnWhen;
-",
-  "fonts": Array [],
-  "slots": Array [
-    Object {
-      "defaultValue": false,
-      "name": "stuff",
-      "type": "string",
-    },
-    Object {
-      "defaultValue": false,
-      "name": "from",
-      "type": "string",
-    },
-    Object {
-      "defaultValue": false,
-      "name": "marginLeft",
-      "type": "number",
-    },
-    Object {
-      "defaultValue": false,
-      "name": "rowColorAlternate",
-      "type": "string",
-    },
-    Object {
-      "defaultValue": false,
-      "name": "borderColor",
-      "type": "string",
-    },
-  ],
-  "svgs": Array [],
-}
-`;
-
 exports[`react-dom parses react-dom UseText 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -6335,52 +3784,6 @@ class UseText extends React.Component {
 }
 UseText.contextTypes = {
   track: PropTypes.func.isRequired,
-};
-
-export default UseText;
-",
-  "fonts": Array [
-    Object {
-      "family": "Montserrat",
-      "id": "Montserrat-300",
-      "style": "normal",
-      "weight": "300",
-    },
-  ],
-  "slots": Array [],
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom UseText: react-dom parses react-dom UseText debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import './Fonts/Montserrat-300';
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'emotion';
-
-const UseText1 = css({
-  label: 'UseText1',
-  fontFamily: 'Montserrat, sans-serif',
-  fontSize: 16,
-  lineHeight: 1.5,
-  fontWeight: 300,
-  color: 'var(--color)',
-});
-
-const UseText = props => {
-  return (
-    <span
-      data-test-id={\`\${props['data-test-id'] || 'UseText'}|\${
-        props.isSomething ? 'isSomething|' : ''
-      }\`}
-      style={{ '--color': \`\${props.isSomething ? 'red' : 'blue'}\` }}
-      className={\`views-block \${UseText1}\`}
-    >
-      Hi, I'm some text
-    </span>
-  );
 };
 
 export default UseText;
@@ -6479,79 +3882,6 @@ export default UseTextCustomFont;
 }
 `;
 
-exports[`react-dom parses react-dom UseTextCustomFont: react-dom parses react-dom UseTextCustomFont debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import './Fonts/CustomFontNotOnGoogle-300';
-import './Fonts/CustomFontNotOnGoogle-400-italic';
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'emotion';
-
-const Normal = css({
-  label: 'Normal',
-  color: 'blue',
-  fontFamily: 'CustomFontNotOnGoogle',
-  fontSize: 16,
-  lineHeight: 1.5,
-  fontWeight: 300,
-});
-const Italic = css({
-  label: 'Italic',
-  color: 'blue',
-  fontFamily: 'CustomFontNotOnGoogle',
-  fontStyle: 'italic',
-  fontSize: 16,
-  lineHeight: 1.5,
-  fontWeight: 400,
-});
-
-const UseTextCustomFont = props => {
-  return (
-    <div
-      data-test-id={\`\${props['data-test-id'] || 'UseTextCustomFont'}|\`}
-      className=\\"views-block\\"
-    >
-      <span
-        data-test-id={\`UseTextCustomFont.Normal|\`}
-        fontType=\\"sans-serif\\"
-        className={\`views-block \${Normal}\`}
-      >
-        Hi, I'm some text
-      </span>
-      <span
-        data-test-id={\`UseTextCustomFont.Italic|\`}
-        fontType=\\"sans-serif\\"
-        className={\`views-block \${Italic}\`}
-      >
-        Hi, I'm some text
-      </span>
-      {props.children}
-    </div>
-  );
-};
-
-export default UseTextCustomFont;
-",
-  "fonts": Array [
-    Object {
-      "family": "CustomFontNotOnGoogle",
-      "id": "CustomFontNotOnGoogle-300",
-      "style": "normal",
-      "weight": "300",
-    },
-    Object {
-      "family": "CustomFontNotOnGoogle",
-      "id": "CustomFontNotOnGoogle-400-italic",
-      "style": "italic",
-      "weight": "400",
-    },
-  ],
-  "slots": Array [],
-  "svgs": Array [],
-}
-`;
-
 exports[`react-dom parses react-dom UseVertical 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -6578,34 +3908,6 @@ class UseVertical extends React.Component {
 }
 UseVertical.contextTypes = {
   track: PropTypes.func.isRequired,
-};
-
-export default UseVertical;
-",
-  "fonts": Array [],
-  "slots": Array [],
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom UseVertical: react-dom parses react-dom UseVertical debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'emotion';
-
-const Vertical = css({ label: 'Vertical', backgroundColor: 'red' });
-
-const UseVertical = props => {
-  return (
-    <div
-      data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-      className={\`views-block \${Vertical}\`}
-    >
-      {props.children}
-    </div>
-  );
 };
 
 export default UseVertical;
@@ -6648,46 +3950,6 @@ class ViewNameIsntUsedInStyle extends React.Component {
 ViewNameIsntUsedInStyle.contextTypes = {
   track: PropTypes.func.isRequired,
 };
-ViewNameIsntUsedInStyle.defaultProps = { opacity: 1 };
-export default ViewNameIsntUsedInStyle;
-",
-  "fonts": Array [],
-  "slots": Array [
-    Object {
-      "defaultValue": 1,
-      "name": "opacity",
-      "type": "number",
-    },
-  ],
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom ViewNameIsntUsedInStyle: react-dom parses react-dom ViewNameIsntUsedInStyle debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'emotion';
-
-const ViewNameIsntUsedInStyle1 = css({
-  label: 'ViewNameIsntUsedInStyle1',
-  zIndex: 5,
-  opacity: 'var(--opacity)',
-});
-
-const ViewNameIsntUsedInStyle = props => {
-  return (
-    <div
-      data-test-id={\`\${props['data-test-id'] || 'ViewNameIsntUsedInStyle'}|\`}
-      style={{ '--opacity': props.opacity }}
-      className={\`views-block \${ViewNameIsntUsedInStyle1}\`}
-    >
-      {props.children}
-    </div>
-  );
-};
-
 ViewNameIsntUsedInStyle.defaultProps = { opacity: 1 };
 export default ViewNameIsntUsedInStyle;
 ",
@@ -6750,45 +4012,6 @@ export default When;
 }
 `;
 
-exports[`react-dom parses react-dom When: react-dom parses react-dom When debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { css } from 'emotion';
-
-const App = css({ label: 'App', flexDirection: 'row' });
-
-const When = props => {
-  return (
-    <div
-      data-test-id={\`\${props['data-test-id'] || 'App'}|\`}
-      className={\`views-block \${App}\`}
-    >
-      {props.showMe ? (
-        <span data-test-id={\`When.Text|\`} className=\\"views-block\\">
-          I may be hidden
-        </span>
-      ) : null}
-      {props.children}
-    </div>
-  );
-};
-
-export default When;
-",
-  "fonts": Array [],
-  "slots": Array [
-    Object {
-      "defaultValue": false,
-      "name": "showMe",
-      "type": "string",
-    },
-  ],
-  "svgs": Array [],
-}
-`;
-
 exports[`react-dom parses react-dom WhenTopLevel 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -6812,37 +4035,6 @@ class WhenTopLevel extends React.Component {
 }
 WhenTopLevel.contextTypes = {
   track: PropTypes.func.isRequired,
-};
-
-export default WhenTopLevel;
-",
-  "fonts": Array [],
-  "slots": Array [
-    Object {
-      "defaultValue": false,
-      "name": "showMe",
-      "type": "string",
-    },
-  ],
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom WhenTopLevel: react-dom parses react-dom WhenTopLevel debug 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
-import React from 'react';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-
-const WhenTopLevel = props => {
-  return props.showMe ? (
-    <span
-      data-test-id={\`\${props['data-test-id'] || 'Text'}|\`}
-      className=\\"views-block\\"
-    >
-      I may be hidden
-    </span>
-  ) : null;
 };
 
 export default WhenTopLevel;

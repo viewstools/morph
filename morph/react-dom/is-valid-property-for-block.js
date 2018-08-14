@@ -11,13 +11,6 @@ const blacklist = [
   'transformoriginz',
   'perspective',
 ]
-const blacklistDebug = ['autofocus', 'tabindex']
 
-export default (node, parent, state) => {
-  const name = node.name.toLowerCase()
-
-  return !(
-    blacklist.includes(name) ||
-    (state.debug && blacklistDebug.includes(name))
-  )
-}
+export default (node, parent, state) =>
+  !blacklist.includes(node.name.toLowerCase())

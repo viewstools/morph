@@ -40,20 +40,6 @@ const localSupported = ['en', 'es', 'fr']
             views,
           })
         ).toMatchSnapshot()
-
-        if (as === 'react-dom') {
-          expect(
-            morph({
-              as,
-              debug: true,
-              getFont,
-              localSupported,
-              name,
-              pretty: true,
-              views,
-            })
-          ).toMatchSnapshot(`${as} parses ${as} ${name} debug`)
-        }
       })
       // TODO test rendered morphed view
     })

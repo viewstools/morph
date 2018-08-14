@@ -14,7 +14,6 @@ const imports = {
 }
 
 export default ({
-  debug,
   enableAnimated = true,
   file,
   getFont = () => false,
@@ -39,7 +38,6 @@ export default ({
     cssDynamic: false,
     cssStatic: false,
     enableAnimated,
-    debug,
     file,
     getFont,
     getStyleForProperty,
