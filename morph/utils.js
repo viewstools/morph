@@ -383,8 +383,8 @@ export const getDynamicStyles = node => {
           prop.tags.style && prop.tags.slot && !propIsScoped(prop, scopedSlots)
       )
       .map(prop => `'--${prop.name}': ${getPropValue(prop)}`),
-    node.scopes.map(scope => {
-      return scope.properties.map(prop => {
+    node.scopes.map(scope =>
+      scope.properties.map(prop => {
         const unit = getUnit(prop)
         return (
           (prop.tags.style &&
@@ -396,7 +396,7 @@ export const getDynamicStyles = node => {
             `'--${prop.name}': ${getPropValue(prop)}`)
         )
       })
-    }),
+    ),
   ]).filter(Boolean)
 }
 
