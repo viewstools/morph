@@ -91,13 +91,9 @@ const getFontFamily = (node, parent) => {
   const fontFamily = node.value.replace(/\s/g, '')
 
   if (fontWeight && (node.tags.slot || fontWeight.tags.slot)) {
-    return (
-      '`' +
-      `${node.tags.slot ? '${props.fontFamily}' : fontFamily}-${
-        fontWeight.tags.slot ? '${props.fontWeight}' : fontWeight.value
-      }` +
-      '`'
-    )
+    return `\`${node.tags.slot ? '${props.fontFamily}' : fontFamily}-${
+      fontWeight.tags.slot ? '${props.fontWeight}' : fontWeight.value
+    }\``
   }
 
   return fontWeight ? `${fontFamily}-${fontWeight.value}` : fontFamily
