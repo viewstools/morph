@@ -1,0 +1,18 @@
+App Vertical
+DynamicFamily Text
+fontSize 14
+fontWeight 200
+text Some text
+fontFamily < Montserrat
+
+DynamicWeight Text
+fontSize 14
+fontWeight < 200
+text Some text
+fontFamily Montserrat
+
+DynamicFamilyAndWeight Text
+fontSize 14
+fontWeight < 200
+text Some text
+fontFamily < Montserrat
