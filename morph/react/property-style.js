@@ -16,7 +16,14 @@ export function enter(node, parent, state) {
   )
     return
 
-  const code = isSlot(node)
+  let code = isSlot(node, parent)
+
+  if (node.name === 'fontFamily' && !code && state.isReactNative) {
+    const fontWeight = parent.properties.find(
+      prop => prop.name === 'fontWeight'
+    )
+    if (fontWeight && fontWeight.tags.slot) code = true
+  }
 
   const { _isProp, _isScoped, ...styleForProperty } = state.getStyleForProperty(
     node,
