@@ -6,16 +6,6 @@ export default (node, parent, code) => {
 
   if (scopedVar) {
     switch (node.name) {
-      // case 'shadowColor':
-      // case 'shadowBlur':
-      // case 'shadowOffsetX':
-      // case 'shadowOffsetY':
-      // case 'shadowSpread':
-      // return {
-      //   _isScoped: true,
-      //   getShadow(node, parent)
-      // }
-
       case 'rotate':
       case 'rotateX':
       case 'rotateY':
