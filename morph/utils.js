@@ -173,6 +173,9 @@ export const hasProp = (node, key, match) => {
 export const hasDefaultProp = (node, parent) =>
   parent.properties.some(prop => prop.nameRaw === node.nameRaw)
 
+export const isShadowStyle = node =>
+  node.name === 'shadowBlur' || node.name === 'shadowColor'
+
 export const isSlot = node =>
   typeof node === 'string' ? /props/.test(node) : isTag(node, 'slot')
 export const isStyle = node => isTag(node, 'style')

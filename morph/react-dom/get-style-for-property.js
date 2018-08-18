@@ -6,6 +6,16 @@ export default (node, parent, code) => {
 
   if (scopedVar) {
     switch (node.name) {
+      // case 'shadowColor':
+      // case 'shadowBlur':
+      // case 'shadowOffsetX':
+      // case 'shadowOffsetY':
+      // case 'shadowSpread':
+      // return {
+      //   _isScoped: true,
+      //   getShadow(node, parent)
+      // }
+
       case 'rotate':
       case 'rotateX':
       case 'rotateY':
@@ -127,6 +137,7 @@ const getShadow = (node, parent) => {
   ]
     .filter(Boolean)
     .join(' ')
+    .replace(/'/g, '')
 
   if (
     isSlot(shadowColor) ||
