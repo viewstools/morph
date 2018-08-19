@@ -1,7 +1,6 @@
 import {
   checkParentStem,
   getStyleType,
-  isShadowStyle,
   isSlot,
   isStyle,
   isSvg,
@@ -29,7 +28,7 @@ export function enter(node, parent, state) {
     Object.keys(styleForProperty).forEach(k =>
       state.render.push(` ${k}=${safe(styleForProperty[k], node)}`)
     )
-  } else if (!isShadowStyle(node)) {
+  } else {
     const hasMatchingParent =
       parent && node.isDynamic
         ? checkParentStem(node, getStyleType(node))
