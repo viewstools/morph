@@ -118,7 +118,6 @@ const getPropValue = (prop, block, unit = '') => {
 
 const getShadow = (node, parent) => {
   const isText = parent.name === 'Text'
-  debugger
 
   const shadowColor = getProp(parent, 'shadowColor')
   const shadowBlur = getProp(parent, 'shadowBlur')
@@ -187,7 +186,6 @@ const getTransform = (node, parent) => {
     value = `\`${value}\``
   }
 
-  debugger
   // TODO FIXME this is a hack to remove strings because my head is fried
   // and yeah it does what we need for now :)
   return value.replace(/'/g, '')
