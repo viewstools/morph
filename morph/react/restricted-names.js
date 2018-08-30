@@ -22,6 +22,7 @@ export default [
   'SvgLinearGradient',
   'SvgRadialGradient',
   'SvgLine',
+  'SvgMask',
   'SvgPath',
   'SvgPolygon',
   'SvgPolyline',

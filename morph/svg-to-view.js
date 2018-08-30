@@ -36,7 +36,6 @@ const parseTransform = (prop, value) => {
 
 const IGNORE_ATTRS = [
   'xmlns',
-  'id',
   'class',
   'onclick',
   'aria-label',
@@ -77,16 +76,7 @@ const getBlock = raw => {
   }
 }
 
-const IGNORE_TAGS = [
-  'clippath',
-  'defs',
-  'desc',
-  'filter',
-  'script',
-  'style',
-  'title',
-  'use',
-]
+const IGNORE_TAGS = ['clippath', 'desc', 'filter', 'script', 'style', 'title']
 
 const parseSvg = ({ attr, child, tag }) => {
   const s = []

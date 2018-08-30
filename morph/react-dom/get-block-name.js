@@ -59,6 +59,7 @@ export default (node, parent, state) => {
     case 'SvgUse':
     case 'SvgDefs':
     case 'SvgStop':
+    case 'SvgMask':
       name = toCamelCase(node.name.replace('Svg', ''))
       break
 

@@ -8,6 +8,7 @@ const SVG_BLOCKS_WITH_OPACITY = [
   'SvgPolyline',
   'SvgRect',
   'SvgText',
+  'SvgMask',
 ]
 
 export function enter(node, parent, state) {
