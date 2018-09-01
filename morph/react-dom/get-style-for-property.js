@@ -84,7 +84,19 @@ export default (node, parent, code) => {
   }
 }
 
-const maybeAsVar = (prop, code) => (code ? asVar(prop) : prop.value)
+const maybeAsVar = (prop, code) =>
+  code ? asVar(prop) : maybeMakeHyphenated(prop.value)
+
+const maybeMakeHyphenated = value => {
+  if (/^[a-zA-Z]+$/.test(value)) {
+    let splitStrings = value.split(/(?=[A-Z])/)
+    if (splitStrings.length > 1) {
+      return splitStrings.map(string => string.toLowerCase()).join('-')
+    }
+  }
+
+  return value
+}
 
 const asVar = prop => `'var(--${prop.name})'`
 
