@@ -546,13 +546,5 @@ export const hasRowStyles = node =>
     prop => prop.name.match(/^row/) && prop.name !== 'rowHeight'
   )
 
-export const maybeMakeHyphenated = value => {
-  if (/^[a-zA-Z]+$/.test(value)) {
-    let splitStrings = value.split(/(?=[A-Z])/)
-    if (splitStrings.length > 1) {
-      return splitStrings.map(string => string.toLowerCase()).join('-')
-    }
-  }
-
-  return value
-}
+export const maybeMakeHyphenated = value =>
+  /^[a-zA-Z]+$/.test(value) ? toSlugCase(value) : value
