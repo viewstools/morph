@@ -84,7 +84,7 @@ export default (node, parent, code) => {
 
     default:
       return {
-        [node.name]: maybeMakeHyphenated(node.value),
+        [node.name]: maybeMakeHyphenated(node),
       }
   }
 }

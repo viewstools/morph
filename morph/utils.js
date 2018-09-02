@@ -546,5 +546,35 @@ export const hasRowStyles = node =>
     prop => prop.name.match(/^row/) && prop.name !== 'rowHeight'
   )
 
-export const maybeMakeHyphenated = value =>
-  /^[a-zA-Z]+$/.test(value) ? toSlugCase(value) : value
+const MAYBE_HYPHENATED_STYLE_PROPS = [
+  'alignContent',
+  'alignItems',
+  'alignSelf',
+  'backgroundBlendMode',
+  'backgroundClip',
+  'backgroudOrigin',
+  'backgroundRepeat',
+  'boxSizing',
+  'clear',
+  'cursor',
+  'flexBasis',
+  'flexDirection',
+  'flexFlow',
+  'flexWrap',
+  'float',
+  'fontFamily',
+  'fontStretch',
+  'justifyContent',
+  'objectFit',
+  'overflowWrap',
+  'textAlign',
+  'textDecorationLine',
+  'textTransform',
+  'whiteSpace',
+  'wordBreak',
+]
+
+export const maybeMakeHyphenated = ({ name, value }) =>
+  MAYBE_HYPHENATED_STYLE_PROPS.includes(name) && /^[a-zA-Z]+$/.test(value)
+    ? toSlugCase(value)
+    : value

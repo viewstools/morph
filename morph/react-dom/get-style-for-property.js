@@ -90,7 +90,7 @@ export default (node, parent, code) => {
 }
 
 const maybeAsVar = (prop, code) =>
-  code ? asVar(prop) : maybeMakeHyphenated(prop.value)
+  code ? asVar(prop) : maybeMakeHyphenated(prop)
 
 const asVar = prop => `'var(--${prop.name})'`
 
