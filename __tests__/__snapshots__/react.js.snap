@@ -1714,7 +1714,7 @@ const ListOfSomething1 = css({
   label: 'ListOfSomething1',
   paddingLeft: 2,
   justifyContent: 'center',
-  alignItems: 'center',
+  alignItems: 'flex-start',
   flexDirection: 'row',
   flexWrap: 'wrap',
   overflowY: 'auto',
@@ -5012,7 +5012,7 @@ const styles = StyleSheet.create({
   ListOfSomething1ContentContainer: {
     paddingLeft: 2,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     flexDirection: 'row',
   },
   ListOfSomething1: { flexWrap: 'wrap', backgroundColor: 'red' },
