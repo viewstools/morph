@@ -1,4 +1,9 @@
-import { getProp, getScopedCondition, isTag } from '../utils.js'
+import {
+  getProp,
+  getScopedCondition,
+  isTag,
+  maybeMakeHyphenated,
+} from '../utils.js'
 
 export default (node, parent, code) => {
   const scopedCondition = getScopedCondition(node, parent)
@@ -79,7 +84,7 @@ export default (node, parent, code) => {
 
     default:
       return {
-        [node.name]: node.value,
+        [node.name]: maybeMakeHyphenated(node.value),
       }
   }
 }
