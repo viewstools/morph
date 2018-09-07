@@ -1,5 +1,4 @@
 // import { canUseNativeDriver } from '../utils.js'
-import { getSpringScopes } from '../utils.js'
 import getUnit from '../get-unit.js'
 // import toPascalCase from 'to-pascal-case'
 
@@ -24,7 +23,6 @@ export default ({ state, name }) => {
       debugger
       Object.values(state.animations[blockId]).forEach(item => {
         const { curve, ...configValues } = item.animation.properties
-        deugger
 
         if (!state.isReactNative && curve !== 'spring') return
 
@@ -68,26 +66,20 @@ export default ({ state, name }) => {
         const useNativeDriver = state.isReactNative
           ? false // !Object.keys(item.props).some(canUseNativeDriver)
           : true
+        debugger
         animatedOpen.push(
           `<${tag} ${useNativeDriver ? 'native' : ''} ${config} to={{${to}}}
           onRest={() => {
-            ${getSpringScopes(state)
-              .map(
-                scope =>
-                  `props.onAnimationDone({
-                scope: '${scope.slotName}',
-                props: [${scope.properties
-                  .map(
-                    prop =>
-                      prop.name !== 'when' &&
-                      prop.animation.curve === 'spring' &&
-                      `'${prop.name}'`
-                  )
-                  .filter(Boolean)
-                  .join(',')}],
-              })`
-              )
-              .join(';')}
+            props.onAnimationDone({
+              scope: ${Object.values(item.props)
+                .map(prop =>
+                  prop.scopes.map(scope => JSON.stringify(scope.name))
+                )
+                .join(',')},
+              props: [${Object.keys(item.props)
+                .map(prop => JSON.stringify(prop))
+                .join(',')}]
+            })
           }}>{animated${blockId}${item.index > 0 ? item.index : ''} => (`
         )
 
@@ -97,6 +89,30 @@ export default ({ state, name }) => {
       })
     })
   }
+
+  // scope: '${
+  //   Object.values(item.props).map(prop =>
+  //     prop.scopes.map(scope => scope.name)
+  //   )[0]
+  // }',
+
+  // ${getSpringScopes(state)
+  //   .map(
+  //     scope =>
+  //       `props.onAnimationDone({
+  //     scope: '${scope.slotName}',
+  //     props: [${scope.properties
+  //       .map(
+  //         prop =>
+  //           prop.name !== 'when' &&
+  //           prop.animation.curve === 'spring' &&
+  //           `'${prop.name}'`
+  //       )
+  //       .filter(Boolean)
+  //       .join(',')}],
+  //   })`
+  //   )
+  //   .join(';')}
 
   if (state.hasRefs || state.track || maybeAnimated) {
     return `class ${name} extends React.Component {

@@ -460,14 +460,6 @@ export const getTimingScopes = node =>
       ) && scope
   )
 
-export const getSpringScopes = node =>
-  node.scopes.map(
-    scope =>
-      scope.properties.some(
-        prop => prop.animation && prop.animation.curve === 'spring'
-      ) && scope
-  )
-
 // https://github.com/facebook/react-native/blob/26684cf3adf4094eb6c405d345a75bf8c7c0bf88/Libraries/Animated/src/NativeAnimatedHelper.js
 /**
  * Styles allowed by the native animated implementation.

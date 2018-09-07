@@ -18,7 +18,7 @@ export function enter(node, parent, state) {
                 prop =>
                   prop.name !== 'when' &&
                   prop.animation.curve !== 'spring' &&
-                  `'${prop.name}'`
+                  JSON.stringify(prop.name)
               )
               .filter(Boolean)
               .join(',')}],
