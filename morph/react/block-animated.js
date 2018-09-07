@@ -16,8 +16,9 @@ export function enter(node, parent, state) {
     ` onTransitionEnd={() => {
       if (props.onAnimationDone) {
         props.onAnimationDone({
-          scope: ${timingScopes.join(',')},
+          scope: ${timingScopes.map(scope => `'${scope}'`).join(',')}
         })
-      }`
+      }
+    }}`
   )
 }
