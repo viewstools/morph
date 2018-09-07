@@ -23,6 +23,7 @@ export default ({ state, name }) => {
       debugger
       Object.values(state.animations[blockId]).forEach(item => {
         const { curve, ...configValues } = item.animation.properties
+        deugger
 
         if (!state.isReactNative && curve !== 'spring') return
 
@@ -67,17 +68,28 @@ export default ({ state, name }) => {
           ? false // !Object.keys(item.props).some(canUseNativeDriver)
           : true
         animatedOpen.push(
-          `<${tag} ${
-            useNativeDriver ? 'native' : ''
-          } ${config} to={{${to}}}>{animated${blockId}${
-            item.index > 0 ? item.index : ''
-          } => (`
+          `<${tag} ${useNativeDriver ? 'native' : ''} ${config} to={{${to}}}
+          onRest={() => {
+            props.onAnimationDone({
+              scope: 'isActive',
+              props: ['scale'],
+            })
+          }}>{animated${blockId}${item.index > 0 ? item.index : ''} => (`
         )
+
+        debugger
 
         animatedClose.push(`)}</${tag}>`)
       })
     })
   }
+
+  // onRest={() => {
+  //   props.onAnimationDone({
+  //     scope: 'isActive',
+  //     props: ['scale'],
+  //   })
+  // }}
 
   if (state.hasRefs || state.track || maybeAnimated) {
     return `class ${name} extends React.Component {

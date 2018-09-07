@@ -1,19 +1,15 @@
-export function enter(node, state) {
-  if (!node.hasTimingAnimation) return
+import { getProp } from '../utils.js'
+import { getTimingScopes } from '../utils.js'
 
-  const timingScopes = node.scopes.map(
-    scope =>
-      scope.properties.some(
-        prop => prop.animation && prop.animation.curve === 'linear'
-      ) && scope
-  )
+export function enter(node, parent, state) {
+  if (!node.hasTimingAnimation) return
 
   debugger
 
   state.render.push(
     ` onTransitionEnd={() => {
       if (props.onAnimationDone) {
-        ${timingScopes
+        ${getTimingScopes(node)
           .map(
             scope =>
               `props.onAnimationDone({
