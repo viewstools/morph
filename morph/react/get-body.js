@@ -3,6 +3,7 @@ import getUnit from '../get-unit.js'
 // import toPascalCase from 'to-pascal-case'
 
 export default ({ state, name }) => {
+  debugger
   let render = state.render.join('')
   if (Object.keys(state.locals).length > 0 || state.isFormatted) {
     render = `<Subscribe to={[LocalContainer]}>\n{local =>\n${render}\n}</Subscribe>`
@@ -19,6 +20,7 @@ export default ({ state, name }) => {
     maybeAnimated = true
 
     Object.keys(state.animations).forEach(blockId => {
+      debugger
       Object.values(state.animations[blockId]).forEach(item => {
         const { curve, ...configValues } = item.animation.properties
 

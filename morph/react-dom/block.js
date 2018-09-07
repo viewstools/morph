@@ -1,4 +1,5 @@
 import * as BlockAddTestIdProp from '../react/block-add-test-id-prop.js'
+import * as BlockAnimated from '../react/block-animated.js'
 import * as BlockCapture from './block-capture.js'
 import * as BlockColumn from '../react/block-column.js'
 import * as BlockExplicitChildren from '../react/block-explicit-children.js'
@@ -31,6 +32,7 @@ export const enter = [
   BlockProperties.enter,
   BlockGroup.enter,
   BlockList.enter,
+  BlockAnimated.enter,
 ]
 
 export const leave = [
