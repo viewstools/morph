@@ -1,23 +1,30 @@
-import { getProp, isTable } from '../utils.js'
-
-export function enter(node, parent, state) {
+export function enter(node, state) {
   if (!node.hasTimingAnimation) return
 
-  const timingScopes = node.scopes.map(scope => {
-    scope.properties.some(
-      prop => prop.animation && prop.animation.curve === 'linear'
-    )
-    return scope.slotName
-  })
+  const timingScopes = node.scopes.map(
+    scope =>
+      scope.properties.some(
+        prop => prop.animation && prop.animation.curve === 'linear'
+      ) && scope
+  )
 
   debugger
 
   state.render.push(
     ` onTransitionEnd={() => {
       if (props.onAnimationDone) {
-        props.onAnimationDone({
-          scope: ${timingScopes.map(scope => `'${scope}'`).join(',')}
-        })
+        ${timingScopes
+          .map(
+            scope =>
+              `props.onAnimationDone({
+            scope: '${scope.slotName}',
+            props: [${scope.properties
+              .map(prop => prop.name !== 'when' && `'${prop.name}'`)
+              .filter(Boolean)
+              .join(',')}],
+          })`
+          )
+          .join(';')}
       }
     }}`
   )

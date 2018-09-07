@@ -23,7 +23,6 @@ export const enter = [
   BlockRoute.enter,
   BlockName.enter,
   BlockTable.enter,
-  BlockAnimated.enter,
   BlockColumn.enter,
   BlockCapture.enter,
   BlockTeleport.enter,
@@ -31,6 +30,7 @@ export const enter = [
   BlockInList.enter,
   BlockAddTestIdProp.enter,
   BlockProperties.enter,
+  BlockAnimated.enter,
   BlockGroup.enter,
   BlockList.enter,
 ]
