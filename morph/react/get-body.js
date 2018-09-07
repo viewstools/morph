@@ -1,9 +1,9 @@
 // import { canUseNativeDriver } from '../utils.js'
+import { getDoneParams } from '../utils.js'
 import getUnit from '../get-unit.js'
 // import toPascalCase from 'to-pascal-case'
 
 export default ({ state, name }) => {
-  debugger
   let render = state.render.join('')
   if (Object.keys(state.locals).length > 0 || state.isFormatted) {
     render = `<Subscribe to={[LocalContainer]}>\n{local =>\n${render}\n}</Subscribe>`
@@ -20,10 +20,8 @@ export default ({ state, name }) => {
     maybeAnimated = true
 
     Object.keys(state.animations).forEach(blockId => {
-      debugger
       Object.values(state.animations[blockId]).forEach(item => {
         const { curve, ...configValues } = item.animation.properties
-        deugger
 
         if (!state.isReactNative && curve !== 'spring') return
 
@@ -70,26 +68,14 @@ export default ({ state, name }) => {
         animatedOpen.push(
           `<${tag} ${useNativeDriver ? 'native' : ''} ${config} to={{${to}}}
           onRest={() => {
-            props.onAnimationDone({
-              scope: 'isActive',
-              props: ['scale'],
-            })
+            ${getDoneParams(state, 'spring')}
           }}>{animated${blockId}${item.index > 0 ? item.index : ''} => (`
         )
-
-        debugger
 
         animatedClose.push(`)}</${tag}>`)
       })
     })
   }
-
-  // onRest={() => {
-  //   props.onAnimationDone({
-  //     scope: 'isActive',
-  //     props: ['scale'],
-  //   })
-  // }}
 
   if (state.hasRefs || state.track || maybeAnimated) {
     return `class ${name} extends React.Component {

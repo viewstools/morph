@@ -452,13 +452,39 @@ const getSpringProps = node =>
     )
   )
 
-export const getTimingScopes = node =>
+const getTimingScopes = node =>
   node.scopes.map(
     scope =>
       scope.properties.some(
         prop => prop.animation && prop.animation.curve !== 'spring'
       ) && scope
   )
+
+const getSpringScopes = node =>
+  node.scopes.map(
+    scope =>
+      scope.properties.some(
+        prop => prop.animation && prop.animation.curve === 'spring'
+      ) && scope
+  )
+
+export const getDoneParams = (node, animationType) => {
+  const scopes = (animationType = 'spring'
+    ? getSpringScopes(node)
+    : getTimingScopes(node))
+  return `${scopes
+    .map(
+      scope =>
+        `props.onAnimationDone({
+      scope: '${scope.slotName}',
+      props: [${scope.properties
+        .map(prop => prop.name !== 'when' && `'${prop.name}'`)
+        .filter(Boolean)
+        .join(',')}],
+    })`
+    )
+    .join(';')}`
+}
 
 // https://github.com/facebook/react-native/blob/26684cf3adf4094eb6c405d345a75bf8c7c0bf88/Libraries/Animated/src/NativeAnimatedHelper.js
 /**

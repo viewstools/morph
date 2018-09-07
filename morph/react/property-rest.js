@@ -10,7 +10,7 @@ export function enter(node, parent, state) {
           ` ${k}=${getLocalsString(node, parent, state)}`
         )
       }
-      debugger
+
       return state.render.push(` ${k}=${value[k]}`)
     })
   }
