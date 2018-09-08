@@ -4224,6 +4224,12 @@ class AnimatedButton extends React.Component {
         speed={1}
         delay={0}
         to={{ opacity: props.isOn ? 1 : 0.75 }}
+        onRest={() => {
+          props.onAnimationDone({
+            scope: 'isOn',
+            props: ['opacity'],
+          });
+        }}
       >
         {animatedAnimatedButton => (
           <Spring
@@ -4231,6 +4237,12 @@ class AnimatedButton extends React.Component {
             speed={2}
             delay={0}
             to={{ translateX: props.isOn ? 20 : 10 }}
+            onRest={() => {
+              props.onAnimationDone({
+                scope: 'isOn',
+                props: ['translateX'],
+              });
+            }}
           >
             {animatedAnimatedButton1 => (
               <Timing
@@ -4238,6 +4250,12 @@ class AnimatedButton extends React.Component {
                 delay={0}
                 duration={150}
                 to={{ rotateX: props.isOn ? 20 : 10 }}
+                onRest={() => {
+                  props.onAnimationDone({
+                    scope: 'isOn',
+                    props: ['rotateX'],
+                  });
+                }}
               >
                 {animatedAnimatedButton2 => (
                   <Timing
@@ -4245,6 +4263,12 @@ class AnimatedButton extends React.Component {
                     delay={0}
                     duration={150}
                     to={{ rotateY: props.isOn ? 20 : 10 }}
+                    onRest={() => {
+                      props.onAnimationDone({
+                        scope: 'isOn',
+                        props: ['rotateY'],
+                      });
+                    }}
                   >
                     {animatedAnimatedButton3 => (
                       <Spring
@@ -4254,6 +4278,12 @@ class AnimatedButton extends React.Component {
                         to={{
                           color: props.isOn ? 'blue' : 'red',
                           fontSize: props.isOn ? 18 : 12,
+                        }}
+                        onRest={() => {
+                          props.onAnimationDone({
+                            scope: 'isOn',
+                            props: ['color', 'fontSize'],
+                          });
                         }}
                       >
                         {animatedText => (
