@@ -1,4 +1,3 @@
-import * as BlockAnimated from '../react/block-animated.js'
 import * as BlockBackgroundImage from './block-background-image.js'
 import * as BlockCapture from './block-capture.js'
 import * as BlockColumn from '../react/block-column.js'
@@ -36,7 +35,6 @@ export const enter = [
   BlockInList.enter,
   BlockAddTestIdProp.enter,
   BlockProperties.enter,
-  BlockAnimated.enter,
   BlockGroup.enter,
   BlockList.enter,
 ]

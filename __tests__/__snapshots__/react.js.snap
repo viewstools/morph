@@ -843,6 +843,12 @@ class AnimatedButton extends React.Component {
         speed={1}
         delay={0}
         to={{ opacity: props.isOn ? 1 : 0.75 }}
+        onRest={() => {
+          props.onAnimationDone({
+            scope: 'isOn',
+            props: ['opacity'],
+          });
+        }}
       >
         {animatedAnimatedButton => (
           <Spring
@@ -851,6 +857,12 @@ class AnimatedButton extends React.Component {
             speed={2}
             delay={0}
             to={{ translateX: \`\${props.isOn ? 20 : 10}px\` }}
+            onRest={() => {
+              props.onAnimationDone({
+                scope: 'isOn',
+                props: ['translateX'],
+              });
+            }}
           >
             {animatedAnimatedButton1 => (
               <Spring
@@ -861,6 +873,12 @@ class AnimatedButton extends React.Component {
                 to={{
                   color: props.isOn ? 'blue' : 'red',
                   fontSize: \`\${props.isOn ? 18 : 12}px\`,
+                }}
+                onRest={() => {
+                  props.onAnimationDone({
+                    scope: 'isOn',
+                    props: ['color', 'fontSize'],
+                  });
                 }}
               >
                 {animatedText => (
@@ -884,6 +902,14 @@ class AnimatedButton extends React.Component {
                       '--rotateY': \`\${props.isOn ? 20 : 10}deg\`,
                     }}
                     className={\`views-block \${AnimatedButton1}\`}
+                    onTransitionEnd={() => {
+                      if (props.onAnimationDone) {
+                        props.onAnimationDone({
+                          scope: 'isOn',
+                          props: ['rotateX', 'rotateY'],
+                        });
+                      }
+                    }}
                   >
                     <span
                       data-test-id={\`AnimatedButton.Text|\${
@@ -961,6 +987,14 @@ class AnimatedButtonHoverOnly extends React.Component {
           })
         }
         className={\`views-block \${AnimatedButtonHoverOnly1}\`}
+        onTransitionEnd={() => {
+          if (props.onAnimationDone) {
+            props.onAnimationDone({
+              scope: 'hover',
+              props: ['backgroundColor'],
+            });
+          }
+        }}
       >
         {props.children}
       </button>
@@ -1013,6 +1047,12 @@ class AnimatedButtonScopeOnly extends React.Component {
         speed={12}
         bounciness={8}
         to={{ backgroundColor: props.before ? 'blue' : 'red' }}
+        onRest={() => {
+          props.onAnimationDone({
+            scope: 'before',
+            props: ['backgroundColor'],
+          });
+        }}
       >
         {animatedAnimatedButtonScopeOnly => (
           <animated.button
@@ -1033,6 +1073,14 @@ class AnimatedButtonScopeOnly extends React.Component {
               '--opacity': \`\${props.before ? 1 : 1}\`,
             }}
             className={\`views-block \${AnimatedButtonScopeOnly1}\`}
+            onTransitionEnd={() => {
+              if (props.onAnimationDone) {
+                props.onAnimationDone({
+                  scope: 'before',
+                  props: ['opacity'],
+                });
+              }
+            }}
           >
             {props.children}
           </animated.button>
@@ -4312,6 +4360,12 @@ class AnimatedButtonHoverOnly extends React.Component {
         delay={0}
         duration={150}
         to={{ backgroundColor: props.hover ? 'blue' : 'red' }}
+        onRest={() => {
+          props.onAnimationDone({
+            scope: 'hover',
+            props: ['backgroundColor'],
+          });
+        }}
       >
         {animatedAnimatedButtonHoverOnly => (
           <TouchableWithoutFeedback
@@ -4381,6 +4435,12 @@ class AnimatedButtonScopeOnly extends React.Component {
         speed={12}
         bounciness={8}
         to={{ backgroundColor: props.before ? 'blue' : 'red' }}
+        onRest={() => {
+          props.onAnimationDone({
+            scope: 'before',
+            props: ['backgroundColor'],
+          });
+        }}
       >
         {animatedAnimatedButtonScopeOnly => (
           <Timing
@@ -4388,6 +4448,12 @@ class AnimatedButtonScopeOnly extends React.Component {
             delay={0}
             duration={150}
             to={{ opacity: props.before ? 1 : 1 }}
+            onRest={() => {
+              props.onAnimationDone({
+                scope: 'before',
+                props: ['opacity'],
+              });
+            }}
           >
             {animatedAnimatedButtonScopeOnly1 => (
               <TouchableWithoutFeedback
