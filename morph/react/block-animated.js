@@ -3,8 +3,6 @@ import { getTimingScopes } from '../utils.js'
 export function enter(node, parent, state) {
   if (!node.hasTimingAnimation) return
 
-  debugger
-
   state.render.push(
     ` onTransitionEnd={() => {
       if (props.onAnimationDone) {

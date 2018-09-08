@@ -1,9 +1,9 @@
 // import { canUseNativeDriver } from '../utils.js'
+import flatten from 'flatten'
 import getUnit from '../get-unit.js'
 // import toPascalCase from 'to-pascal-case'
 
 export default ({ state, name }) => {
-  debugger
   let render = state.render.join('')
   if (Object.keys(state.locals).length > 0 || state.isFormatted) {
     render = `<Subscribe to={[LocalContainer]}>\n{local =>\n${render}\n}</Subscribe>`
@@ -20,7 +20,6 @@ export default ({ state, name }) => {
     maybeAnimated = true
 
     Object.keys(state.animations).forEach(blockId => {
-      debugger
       Object.values(state.animations[blockId]).forEach(item => {
         const { curve, ...configValues } = item.animation.properties
 
@@ -56,6 +55,13 @@ export default ({ state, name }) => {
           })
           .join(',')
 
+        const uniqueScopes = flatten(
+          Object.values(item.props).map(prop => prop.scopes)
+        ).filter(
+          (currentScope, index, self) =>
+            self.findIndex(scope => scope.name === currentScope.name) === index
+        )
+
         // TODO bring back native driver when possible in RN
         // there's an issue with animated(View) in react-spring's
         // implementation that is preventing us from using it,
@@ -66,53 +72,34 @@ export default ({ state, name }) => {
         const useNativeDriver = state.isReactNative
           ? false // !Object.keys(item.props).some(canUseNativeDriver)
           : true
-        debugger
+
         animatedOpen.push(
           `<${tag} ${useNativeDriver ? 'native' : ''} ${config} to={{${to}}}
           onRest={() => {
-            props.onAnimationDone({
-              scope: ${Object.values(item.props)
-                .map(prop =>
-                  prop.scopes.map(scope => JSON.stringify(scope.name))
+              ${uniqueScopes
+                .map(
+                  currentScope => `
+                props.onAnimationDone({
+                  scope: '${currentScope.name}',
+                  props: [${Object.values(item.props)
+                    .map(
+                      prop =>
+                        prop.scopes.some(
+                          scope => scope.name === currentScope.name
+                        ) && JSON.stringify(prop.name)
+                    )
+                    .filter(Boolean)
+                    .join(',')}]
+                })`
                 )
-                .join(',')},
-              props: [${Object.keys(item.props)
-                .map(prop => JSON.stringify(prop))
-                .join(',')}]
-            })
+                .join(';')}
           }}>{animated${blockId}${item.index > 0 ? item.index : ''} => (`
         )
-
-        debugger
 
         animatedClose.push(`)}</${tag}>`)
       })
     })
   }
-
-  // scope: '${
-  //   Object.values(item.props).map(prop =>
-  //     prop.scopes.map(scope => scope.name)
-  //   )[0]
-  // }',
-
-  // ${getSpringScopes(state)
-  //   .map(
-  //     scope =>
-  //       `props.onAnimationDone({
-  //     scope: '${scope.slotName}',
-  //     props: [${scope.properties
-  //       .map(
-  //         prop =>
-  //           prop.name !== 'when' &&
-  //           prop.animation.curve === 'spring' &&
-  //           `'${prop.name}'`
-  //       )
-  //       .filter(Boolean)
-  //       .join(',')}],
-  //   })`
-  //   )
-  //   .join(';')}
 
   if (state.hasRefs || state.track || maybeAnimated) {
     return `class ${name} extends React.Component {
