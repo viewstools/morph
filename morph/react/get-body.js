@@ -75,7 +75,7 @@ export default ({ state, name }) => {
 
         animatedOpen.push(
           `<${tag} ${useNativeDriver ? 'native' : ''} ${config} to={{${to}}}
-          onRest={() => {
+          onDone={() => {
               ${uniqueScopes
                 .map(
                   currentScope => `

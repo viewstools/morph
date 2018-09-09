@@ -843,7 +843,7 @@ class AnimatedButton extends React.Component {
         speed={1}
         delay={0}
         to={{ opacity: props.isOn ? 1 : 0.75 }}
-        onRest={() => {
+        onDone={() => {
           props.onAnimationDone({
             scope: 'isOn',
             props: ['opacity'],
@@ -857,7 +857,7 @@ class AnimatedButton extends React.Component {
             speed={2}
             delay={0}
             to={{ translateX: \`\${props.isOn ? 20 : 10}px\` }}
-            onRest={() => {
+            onDone={() => {
               props.onAnimationDone({
                 scope: 'isOn',
                 props: ['translateX'],
@@ -874,7 +874,7 @@ class AnimatedButton extends React.Component {
                   color: props.isOn ? 'blue' : 'red',
                   fontSize: \`\${props.isOn ? 18 : 12}px\`,
                 }}
-                onRest={() => {
+                onDone={() => {
                   props.onAnimationDone({
                     scope: 'isOn',
                     props: ['color', 'fontSize'],
@@ -1047,7 +1047,7 @@ class AnimatedButtonScopeOnly extends React.Component {
         speed={12}
         bounciness={8}
         to={{ backgroundColor: props.before ? 'blue' : 'red' }}
-        onRest={() => {
+        onDone={() => {
           props.onAnimationDone({
             scope: 'before',
             props: ['backgroundColor'],
@@ -4224,7 +4224,7 @@ class AnimatedButton extends React.Component {
         speed={1}
         delay={0}
         to={{ opacity: props.isOn ? 1 : 0.75 }}
-        onRest={() => {
+        onDone={() => {
           props.onAnimationDone({
             scope: 'isOn',
             props: ['opacity'],
@@ -4237,7 +4237,7 @@ class AnimatedButton extends React.Component {
             speed={2}
             delay={0}
             to={{ translateX: props.isOn ? 20 : 10 }}
-            onRest={() => {
+            onDone={() => {
               props.onAnimationDone({
                 scope: 'isOn',
                 props: ['translateX'],
@@ -4250,7 +4250,7 @@ class AnimatedButton extends React.Component {
                 delay={0}
                 duration={150}
                 to={{ rotateX: props.isOn ? 20 : 10 }}
-                onRest={() => {
+                onDone={() => {
                   props.onAnimationDone({
                     scope: 'isOn',
                     props: ['rotateX'],
@@ -4263,7 +4263,7 @@ class AnimatedButton extends React.Component {
                     delay={0}
                     duration={150}
                     to={{ rotateY: props.isOn ? 20 : 10 }}
-                    onRest={() => {
+                    onDone={() => {
                       props.onAnimationDone({
                         scope: 'isOn',
                         props: ['rotateY'],
@@ -4279,7 +4279,7 @@ class AnimatedButton extends React.Component {
                           color: props.isOn ? 'blue' : 'red',
                           fontSize: props.isOn ? 18 : 12,
                         }}
-                        onRest={() => {
+                        onDone={() => {
                           props.onAnimationDone({
                             scope: 'isOn',
                             props: ['color', 'fontSize'],
@@ -4390,7 +4390,7 @@ class AnimatedButtonHoverOnly extends React.Component {
         delay={0}
         duration={150}
         to={{ backgroundColor: props.hover ? 'blue' : 'red' }}
-        onRest={() => {
+        onDone={() => {
           props.onAnimationDone({
             scope: 'hover',
             props: ['backgroundColor'],
@@ -4465,7 +4465,7 @@ class AnimatedButtonScopeOnly extends React.Component {
         speed={12}
         bounciness={8}
         to={{ backgroundColor: props.before ? 'blue' : 'red' }}
-        onRest={() => {
+        onDone={() => {
           props.onAnimationDone({
             scope: 'before',
             props: ['backgroundColor'],
@@ -4478,7 +4478,7 @@ class AnimatedButtonScopeOnly extends React.Component {
             delay={0}
             duration={150}
             to={{ opacity: props.before ? 1 : 1 }}
-            onRest={() => {
+            onDone={() => {
               props.onAnimationDone({
                 scope: 'before',
                 props: ['opacity'],
