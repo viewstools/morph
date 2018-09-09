@@ -10,7 +10,6 @@ export function enter(node, parent, state) {
           ` ${k}=${getLocalsString(node, parent, state)}`
         )
       }
-
       return state.render.push(` ${k}=${value[k]}`)
     })
   }

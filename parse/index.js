@@ -437,15 +437,6 @@ export default ({
           block.maybeAnimated = true
         }
 
-        if (value === '' && name !== 'text') {
-          warnings.push({
-            loc,
-            type: `"${name}" has no value. Please give it a value.`,
-            line,
-          })
-          continue
-        }
-
         propNode = {
           type: 'Property',
           loc,
