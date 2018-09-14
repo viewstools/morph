@@ -9,7 +9,7 @@ const chalk = require('chalk')
 const chokidar = require('chokidar')
 const clean = require('./clean.js')
 const ensureBaseCss = require('./ensure-base-css.js')
-const ensureLocalContainer = require('./ensure-local-container.js')
+const ensureLocalContext = require('./ensure-local-context.js')
 const flatten = require('flatten')
 const fs = require('mz/fs')
 const glob = require('fast-glob')
@@ -212,10 +212,10 @@ module.exports = options => {
             : ''
         }
 
-        if (name === 'LocalContainer') {
-          return `import LocalContainer from '${relativise(
+        if (name === 'LocalConsumer') {
+          return `import { LocalConsumer } from '${relativise(
             file,
-            instance.localContainer
+            instance.localContext
           )}'`
         }
 
@@ -263,12 +263,12 @@ module.exports = options => {
         }
 
         if (instance.localSupported.length > 1) {
-          ensureLocalContainer({
+          ensureLocalContext({
             as,
-            file: path.join(src, instance.localContainer),
+            file: path.join(src, instance.localContext),
             fileGetInitialLanguage: path.join(
               src,
-              instance.localContainerGetInitialLanguage
+              instance.localContextGetInitialLanguage
             ),
             supported: instance.localSupported,
           })
@@ -277,8 +277,8 @@ module.exports = options => {
     }
 
     if (local) {
-      instance.localContainer = 'LocalContainer.js'
-      instance.localContainerGetInitialLanguage = 'get-initial-language.js'
+      instance.localContext = 'LocalContext.js'
+      instance.localContextGetInitialLanguage = 'get-initial-language.js'
       instance.localSupported = [local]
 
       maybeUpdateLocal()

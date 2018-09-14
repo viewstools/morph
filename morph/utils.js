@@ -293,7 +293,7 @@ export const getLocalsString = (propNode, blockNode, state) => {
   }
 
   state.locals[localName] = getLocals(propNode, blockNode, state)
-  return wrap(`${localName}[local.state.lang] || ${safe(propNode.value)}`)
+  return wrap(`${localName}[lang] || ${safe(propNode.value)}`)
 }
 
 export const makeOnClickTracker = (node, state) => {

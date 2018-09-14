@@ -28,11 +28,13 @@ list.find(item => base(item) === value) ||
     : list[0];`,
 }
 
-const LOCAL_CONTAINER = {
-  'react-dom': supported => `import { Container } from 'unstated';
+const LOCAL_CONTEXT = {
+  'react-dom': supported => `import React from "react";
 import getInitialLanguage from './get-initial-language.js';
 
-export default class LocalContainer extends Container {
+const LocalContext = React.createContext();
+
+export class LocalProvider extends React.Component {
   constructor() {
     super()
 
@@ -49,11 +51,33 @@ export default class LocalContainer extends Container {
 
     this.setState({ lang });
   }
-}`,
-  'react-native': supported => `import { Container } from 'unstated';
+
+  render() {
+    const { props, state } = this
+
+    return (
+      <LocalContext.Provider
+        value={{
+          set: this.set,
+          lang: state.lang,
+          supported: state.supported,
+        }}
+      >
+
+        {props.children}
+      </LocalContext.Provider>
+    );
+  }
+}
+
+export const LocalConsumer = LocalContext.Consumer;
+`,
+  'react-native': supported => `import React from "react";
 import getInitialLanguage from './get-initial-language.js';
 
-export default class LocalContainer extends Container {
+const LocalContext = React.createContext();
+
+export class LocalProvider extends React.Component {
   constructor() {
     super()
 
@@ -72,14 +96,33 @@ export default class LocalContainer extends Container {
 
     this.setState({ lang });
   }
-}`,
+
+  render() {
+    const { props, state } = this
+
+    return (
+      <LocalContext.Provider
+        value={{
+          set: this.set,
+          lang: state.lang,
+          supported: state.supported,
+        }}
+      >
+
+        {props.children}
+      </LocalContext.Provider>
+    );
+  }
+}
+
+export const LocalConsumer = LocalContext.Consumer;`,
 }
 
 module.exports = async ({ as, file, fileGetInitialLanguage, supported }) => {
-  if (!await fs.exists(fileGetInitialLanguage)) {
+  if (!(await fs.exists(fileGetInitialLanguage))) {
     await fs.writeFile(fileGetInitialLanguage, GET_INITIAL_LANGUAGE[as], {
       encoding: 'utf8',
     })
   }
-  await fs.writeFile(file, LOCAL_CONTAINER[as](supported), { encoding: 'utf8' })
+  await fs.writeFile(file, LOCAL_CONTEXT[as](supported), { encoding: 'utf8' })
 }

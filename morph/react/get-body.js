@@ -5,7 +5,7 @@ import getUnit from '../get-unit.js'
 export default ({ state, name }) => {
   let render = state.render.join('')
   if (Object.keys(state.locals).length > 0 || state.isFormatted) {
-    render = `<Subscribe to={[LocalContainer]}>\n{local =>\n${render}\n}</Subscribe>`
+    render = `<LocalConsumer>\n{({ lang }) => (\n${render}\n)}</LocalConsumer>`
   }
 
   const maybeChildrenArray = state.usesChildrenArray
