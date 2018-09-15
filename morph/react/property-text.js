@@ -36,7 +36,7 @@ export function enter(node, parent, state) {
       parent.explicitChildren = getLocalsString(node, parent, state)
     } else if (parent.hasOwnProperty('format')) {
       const type = Object.keys(parent.format)[0]
-      parent.explicitChildren = `{${type}Formatters[local.state.lang].format(${parseFormatValue(
+      parent.explicitChildren = `{${type}Formatters[lang].format(${parseFormatValue(
         node.value,
         type
       )})}`
