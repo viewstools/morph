@@ -1,0 +1,4 @@
+Content Vertical
+alignItems center
+when <inDesignSystem
+alignItems flexStart
