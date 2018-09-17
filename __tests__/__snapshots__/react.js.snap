@@ -179,6 +179,21 @@ module.exports = {
 }
 `;
 
+exports[`e2e parses e2e HyphenatedProps 1`] = `
+Object {
+  "code": "const { get } = require('@viewstools/e2e');
+
+module.exports = {
+  Content: get('HyphenatedProps.Content', 'inDesignSystem'),
+  SomeViewThatExposesAlignItems: get(
+    'HyphenatedProps.SomeViewThatExposesAlignItems'
+  ),
+  Vertical: get('HyphenatedProps.Vertical'),
+};
+",
+}
+`;
+
 exports[`e2e parses e2e JustText 1`] = `
 Object {
   "code": "const { get } = require('@viewstools/e2e');
@@ -1664,6 +1679,57 @@ export default Hover;
       "type": "number",
     },
   ],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom HyphenatedProps 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
+import React from 'react';
+import SomeViewThatExposesAlignItems from './SomeViewThatExposesAlignItems.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+import { css } from 'emotion';
+
+const Content = css({ label: 'Content', alignItems: 'var(--alignItems)' });
+
+class HyphenatedProps extends React.Component {
+  render() {
+    const { context, props } = this;
+
+    return (
+      <div
+        data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
+        className=\\"views-block\\"
+      >
+        <div
+          data-test-id={\`HyphenatedProps.Content|\${
+            props.inDesignSystem ? 'inDesignSystem|' : ''
+          }\`}
+          style={{
+            '--alignItems': \`\${props.inDesignSystem ? 'flex-start' : 'center'}\`,
+          }}
+          className={\`views-block \${Content}\`}
+        />
+        <SomeViewThatExposesAlignItems
+          data-test-id={\`HyphenatedProps.SomeViewThatExposesAlignItems|\`}
+          alignItems=\\"flex-start\\"
+          className=\\"views-block\\"
+        />
+        {props.children}
+      </div>
+    );
+  }
+}
+HyphenatedProps.contextTypes = {
+  track: PropTypes.func.isRequired,
+};
+
+export default HyphenatedProps;
+",
+  "fonts": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -4970,6 +5036,47 @@ export default Hover;
       "type": "number",
     },
   ],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-native parses react-native HyphenatedProps 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
+import React from 'react';
+import SomeViewThatExposesAlignItems from './SomeViewThatExposesAlignItems.view.js';
+import { View } from 'react-native';
+
+class HyphenatedProps extends React.Component {
+  render() {
+    const { context, props } = this;
+
+    return (
+      <View testID={\`\${props['testID'] || 'Vertical'}|\`}>
+        <View
+          testID={\`HyphenatedProps.Content|\${
+            props.inDesignSystem ? 'inDesignSystem|' : ''
+          }\`}
+          style={{ alignItems: props.inDesignSystem ? 'flex-start' : 'center' }}
+        />
+        <SomeViewThatExposesAlignItems
+          testID={\`HyphenatedProps.SomeViewThatExposesAlignItems|\`}
+          alignItems=\\"flex-start\\"
+        />
+        {props.children}
+      </View>
+    );
+  }
+}
+HyphenatedProps.contextTypes = {
+  track: PropTypes.func.isRequired,
+};
+
+export default HyphenatedProps;
+",
+  "fonts": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
