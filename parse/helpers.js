@@ -56,6 +56,8 @@ const dymPropMatcher = new DidYouMeanMatcher([
   'key',
   'maxLength',
   'step',
+  'id',
+  'className',
 ])
 
 export const didYouMeanBlock = block => dymBlockMatcher.get(block)
