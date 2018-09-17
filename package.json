@@ -60,7 +60,7 @@
     "mz": "^2.6.0",
     "prettier": "^1.4.2",
     "save": "^2.3.2",
-    "svgo": "^1.0.3",
+    "svgo": "^1.1.1",
     "to-camel-case": "^1.0.0",
     "to-pascal-case": "^1.0.0",
     "to-slug-case": "^1.0.0",
