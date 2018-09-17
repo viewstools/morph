@@ -2,6 +2,7 @@ import { isRowStyle, isStyle, STYLE } from './prop-is-style.js'
 import DidYouMeanMatcher from './did-you-mean.js'
 import isNumber from './prop-is-number.js'
 import locales from 'i18n-locales'
+import toSlugCase from 'to-slug-case'
 
 const LOCAL_SCOPES = locales.map(item => item.replace(/-/g, ''))
 
@@ -306,7 +307,7 @@ export const getUnsupportedShorthandExpanded = (name, value) => {
 
   return []
 }
-export const getValue = value => {
+export const getValue = (value, name) => {
   if (isFloat(value)) {
     return parseFloat(value, 10)
   } else if (isInt(value)) {
@@ -316,7 +317,7 @@ export const getValue = value => {
   } else if (isBool(value)) {
     return isTrue(value)
   } else {
-    return value
+    return maybeMakeHyphenated(value, name)
   }
 }
 
@@ -352,3 +353,36 @@ export const isTextInterpolation = (block, previous) => {
     previousText.value.includes(block.is || block.name)
   )
 }
+
+const MAYBE_HYPHENATED_STYLE_PROPS = [
+  'alignContent',
+  'alignItems',
+  'alignSelf',
+  'backgroundBlendMode',
+  'backgroundClip',
+  'backgroudOrigin',
+  'backgroundRepeat',
+  'boxSizing',
+  'clear',
+  'cursor',
+  'flexBasis',
+  'flexDirection',
+  'flexFlow',
+  'flexWrap',
+  'float',
+  'fontFamily',
+  'fontStretch',
+  'justifyContent',
+  'objectFit',
+  'overflowWrap',
+  'textAlign',
+  'textDecorationLine',
+  'textTransform',
+  'whiteSpace',
+  'wordBreak',
+]
+
+export const maybeMakeHyphenated = (value, name) =>
+  MAYBE_HYPHENATED_STYLE_PROPS.includes(name) && /^[a-zA-Z]+$/.test(value)
+    ? toSlugCase(value)
+    : value
