@@ -370,7 +370,6 @@ const MAYBE_HYPHENATED_STYLE_PROPS = [
   'flexFlow',
   'flexWrap',
   'float',
-  'fontFamily',
   'fontStretch',
   'justifyContent',
   'objectFit',
