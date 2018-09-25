@@ -296,18 +296,20 @@ export const getLocalsString = (propNode, blockNode, state) => {
   return wrap(`${localName}[local.state.lang] || ${safe(propNode.value)}`)
 }
 
-export const makeOnClickTracker = (node, state) => {
+export const makeOnClickTracker = (node, parent, state) => {
   if (!state.track) return node.value
 
-  const block = node.testId
-    ? `"${state.name}.${node.testId}"`
+  const block = parent.testId
+    ? `"${state.name}.${parent.testId}"`
     : `props["${state.testIdKey}"] || "${state.name}"`
 
   state.isTracking = true
 
-  return `event => context.track({ block: ${block}, action: "click", callback: ${
-    node.value
-  }, event, props })`
+  return `event => {
+    typeof ${node.value} === 'function' && ${node.value}(event);
+
+    context.track({ block: ${block}, action: "click", event, props });
+  }`
 }
 
 // const isRotate = name =>

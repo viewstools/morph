@@ -68,7 +68,7 @@ export default (node, parent, state) => {
     }
   } else if (parent.isBasic && node.name === 'onClick' && state.track) {
     return {
-      onClick: wrap(makeOnClickTracker(node, state)),
+      onClick: wrap(makeOnClickTracker(node, parent, state)),
     }
   } else {
     return {

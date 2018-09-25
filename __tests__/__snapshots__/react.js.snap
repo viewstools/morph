@@ -769,15 +769,16 @@ class Action extends React.Component {
     return props.check ? (
       <button
         data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-        onClick={event =>
+        onClick={event => {
+          typeof props.onClick === 'function' && props.onClick(event);
+
           context.track({
-            block: props['data-test-id'] || 'Action',
+            block: 'Action.Vertical',
             action: 'click',
-            callback: props.onClick,
             event,
             props,
-          })
-        }
+          });
+        }}
         disabled={props.isDisabled}
         className={\`views-block \${Vertical}\`}
       >
@@ -882,15 +883,17 @@ class AnimatedButton extends React.Component {
                   <animated.button
                     data-test-id={\`\${props['data-test-id'] ||
                       'AnimatedButton'}|\${props.isOn ? 'isOn|' : ''}\`}
-                    onClick={event =>
+                    onClick={event => {
+                      typeof props.onClick === 'function' &&
+                        props.onClick(event);
+
                       context.track({
-                        block: props['data-test-id'] || 'AnimatedButton',
+                        block: 'AnimatedButton.AnimatedButton',
                         action: 'click',
-                        callback: props.onClick,
                         event,
                         props,
-                      })
-                    }
+                      });
+                    }}
                     style={{
                       '--opacity': animatedAnimatedButton.opacity,
                       '--translateX': animatedAnimatedButton1.translateX,
@@ -966,15 +969,16 @@ class AnimatedButtonHoverOnly extends React.Component {
     return (
       <button
         data-test-id={\`\${props['data-test-id'] || 'AnimatedButtonHoverOnly'}|\`}
-        onClick={event =>
+        onClick={event => {
+          typeof props.onClick === 'function' && props.onClick(event);
+
           context.track({
-            block: props['data-test-id'] || 'AnimatedButtonHoverOnly',
+            block: 'AnimatedButtonHoverOnly.AnimatedButtonHoverOnly',
             action: 'click',
-            callback: props.onClick,
             event,
             props,
-          })
-        }
+          });
+        }}
         className={\`views-block \${AnimatedButtonHoverOnly1}\`}
       >
         {props.children}
@@ -1033,15 +1037,16 @@ class AnimatedButtonScopeOnly extends React.Component {
           <animated.button
             data-test-id={\`\${props['data-test-id'] ||
               'AnimatedButtonScopeOnly'}|\${props.before ? 'before|' : ''}\`}
-            onClick={event =>
+            onClick={event => {
+              typeof props.onClick === 'function' && props.onClick(event);
+
               context.track({
-                block: props['data-test-id'] || 'AnimatedButtonScopeOnly',
+                block: 'AnimatedButtonScopeOnly.AnimatedButtonScopeOnly',
                 action: 'click',
-                callback: props.onClick,
                 event,
                 props,
-              })
-            }
+              });
+            }}
             style={{
               '--backgroundColor':
                 animatedAnimatedButtonScopeOnly.backgroundColor,
@@ -1636,15 +1641,16 @@ class Hover extends React.Component {
         data-test-id={\`\${props['data-test-id'] || 'Hover'}|\${
           props.isStuff ? 'isStuff|' : ''
         }\`}
-        onClick={event =>
+        onClick={event => {
+          typeof props.onClick === 'function' && props.onClick(event);
+
           context.track({
-            block: props['data-test-id'] || 'Hover',
+            block: 'Hover.Hover',
             action: 'click',
-            callback: props.onClick,
             event,
             props,
-          })
-        }
+          });
+        }}
         style={{ '--backgroundColor': \`\${props.isStuff ? 'red' : '#323232'}\` }}
         className={\`views-block \${Hover1}\`}
       >
@@ -2570,15 +2576,16 @@ class ScopePopup2 extends React.Component {
       >
         <button
           data-test-id={\`ScopePopup2.Toggle|\`}
-          onClick={event =>
+          onClick={event => {
+            typeof props.toggle === 'function' && props.toggle(event);
+
             context.track({
-              block: props['data-test-id'] || 'ScopePopup2',
+              block: 'ScopePopup2.Toggle',
               action: 'click',
-              callback: props.toggle,
               event,
               props,
-            })
-          }
+            });
+          }}
           className=\\"views-block\\"
         >
           <span data-test-id={\`ScopePopup2.Text|\`} className=\\"views-block\\">
@@ -2785,15 +2792,16 @@ class SomeMissingStyle extends React.Component {
     return (
       <button
         data-test-id={\`\${props['data-test-id'] || 'WindowControl'}|\`}
-        onClick={event =>
+        onClick={event => {
+          typeof props.onClick === 'function' && props.onClick(event);
+
           context.track({
-            block: props['data-test-id'] || 'SomeMissingStyle',
+            block: 'SomeMissingStyle.WindowControl',
             action: 'click',
-            callback: props.onClick,
             event,
             props,
-          })
-        }
+          });
+        }}
         tabIndex={-1}
         style={{ '--backgroundColor': props.backgroundColorHover }}
         className={\`views-block \${WindowControl}\`}
@@ -4168,15 +4176,16 @@ class Action extends React.Component {
     return props.check ? (
       <TouchableWithoutFeedback
         activeOpacity={0.7}
-        onPress={event =>
+        onPress={event => {
+          typeof props.onClick === 'function' && props.onClick(event);
+
           context.track({
-            block: props['testID'] || 'Action',
+            block: 'Action.Vertical',
             action: 'click',
-            callback: props.onClick,
             event,
             props,
-          })
-        }
+          });
+        }}
         disabled={props.isDisabled}
         underlayColor=\\"transparent\\"
       >
@@ -4277,15 +4286,17 @@ class AnimatedButton extends React.Component {
                         {animatedText => (
                           <TouchableWithoutFeedback
                             activeOpacity={0.7}
-                            onPress={event =>
+                            onPress={event => {
+                              typeof props.onClick === 'function' &&
+                                props.onClick(event);
+
                               context.track({
-                                block: props['testID'] || 'AnimatedButton',
+                                block: 'AnimatedButton.AnimatedButton',
                                 action: 'click',
-                                callback: props.onClick,
                                 event,
                                 props,
-                              })
-                            }
+                              });
+                            }}
                             underlayColor=\\"transparent\\"
                           >
                             <Animated.View
@@ -4382,15 +4393,16 @@ class AnimatedButtonHoverOnly extends React.Component {
         {animatedAnimatedButtonHoverOnly => (
           <TouchableWithoutFeedback
             activeOpacity={0.7}
-            onPress={event =>
+            onPress={event => {
+              typeof props.onClick === 'function' && props.onClick(event);
+
               context.track({
-                block: props['testID'] || 'AnimatedButtonHoverOnly',
+                block: 'AnimatedButtonHoverOnly.AnimatedButtonHoverOnly',
                 action: 'click',
-                callback: props.onClick,
                 event,
                 props,
-              })
-            }
+              });
+            }}
             underlayColor=\\"transparent\\"
           >
             <Animated.View
@@ -4458,15 +4470,16 @@ class AnimatedButtonScopeOnly extends React.Component {
             {animatedAnimatedButtonScopeOnly1 => (
               <TouchableWithoutFeedback
                 activeOpacity={0.7}
-                onPress={event =>
+                onPress={event => {
+                  typeof props.onClick === 'function' && props.onClick(event);
+
                   context.track({
-                    block: props['testID'] || 'AnimatedButtonScopeOnly',
+                    block: 'AnimatedButtonScopeOnly.AnimatedButtonScopeOnly',
                     action: 'click',
-                    callback: props.onClick,
                     event,
                     props,
-                  })
-                }
+                  });
+                }}
                 underlayColor=\\"transparent\\"
               >
                 <Animated.View
@@ -4988,15 +5001,16 @@ class Hover extends React.Component {
     return (
       <TouchableWithoutFeedback
         activeOpacity={0.7}
-        onPress={event =>
+        onPress={event => {
+          typeof props.onClick === 'function' && props.onClick(event);
+
           context.track({
-            block: props['testID'] || 'Hover',
+            block: 'Hover.Hover',
             action: 'click',
-            callback: props.onClick,
             event,
             props,
-          })
-        }
+          });
+        }}
         underlayColor=\\"transparent\\"
       >
         <View
@@ -5832,15 +5846,16 @@ class ScopePopup2 extends React.Component {
       <View testID={\`\${props['testID'] || 'Popup'}|\`}>
         <TouchableWithoutFeedback
           activeOpacity={0.7}
-          onPress={event =>
+          onPress={event => {
+            typeof props.toggle === 'function' && props.toggle(event);
+
             context.track({
-              block: props['testID'] || 'ScopePopup2',
+              block: 'ScopePopup2.Toggle',
               action: 'click',
-              callback: props.toggle,
               event,
               props,
-            })
-          }
+            });
+          }}
           underlayColor=\\"transparent\\"
         >
           <View testID={\`ScopePopup2.Toggle|\`}>
@@ -6052,15 +6067,16 @@ class SomeMissingStyle extends React.Component {
     return (
       <TouchableWithoutFeedback
         activeOpacity={0.7}
-        onPress={event =>
+        onPress={event => {
+          typeof props.onClick === 'function' && props.onClick(event);
+
           context.track({
-            block: props['testID'] || 'SomeMissingStyle',
+            block: 'SomeMissingStyle.WindowControl',
             action: 'click',
-            callback: props.onClick,
             event,
             props,
-          })
-        }
+          });
+        }}
         underlayColor=\\"transparent\\"
       >
         <Animated.View

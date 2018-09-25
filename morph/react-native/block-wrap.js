@@ -29,7 +29,7 @@ export const enter = (node, parent, state) => {
           ${
             hasScopedActions
               ? `onPress=${wrap(getScopedCondition(onClick, node))}`
-              : `onPress=${wrap(makeOnClickTracker(onClick, state))}`
+              : `onPress=${wrap(makeOnClickTracker(onClick, node, state))}`
           }
           ${isDisabled ? `disabled=${wrap(isDisabled.value)}` : ''}
           underlayColor='transparent'
