@@ -1225,28 +1225,28 @@ class Border extends React.Component {
     return (
       <div
         data-test-id={\`\${props['data-test-id'] || 'Border'}|\`}
-        style={{ '--borderWidth': \`\${props.borderWidth}px\` }}
+        style={{ '--borderWidth': props.borderWidth }}
         className={\`views-block \${Border1}\`}
       >
         <div
           data-test-id={\`Border.Top|\`}
-          style={{ '--borderTopWidth': \`\${props.borderTopWidth}px\` }}
+          style={{ '--borderTopWidth': props.borderTopWidth }}
           className={\`views-block \${Top}\`}
         />
         <div
           data-test-id={\`Border.Right|\`}
-          style={{ '--borderRightWidth': \`\${props.borderRightWidth}px\` }}
+          style={{ '--borderRightWidth': props.borderRightWidth }}
           className={\`views-block \${Right}\`}
         />
         <div
           data-test-id={\`Border.Bottom|\`}
-          style={{ '--borderBottomWidth': \`\${props.borderBottomWidth}px\` }}
+          style={{ '--borderBottomWidth': props.borderBottomWidth }}
           className={\`views-block \${Bottom}\`}
         />
         <div
           data-test-id={\`Border.Left|\${props.something ? 'something|' : ''}\`}
           style={{
-            '--borderLeftWidth': \`\${props.borderLeftWidth}px\`,
+            '--borderLeftWidth': props.borderLeftWidth,
             '--borderTopRightRadius': \`\${props.something ? 20 : 10}px\`,
           }}
           className={\`views-block \${Left}\`}
@@ -1507,7 +1507,7 @@ class DynamicStylesApplyToBasicBlocksOnly extends React.Component {
     return (
       <div
         data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-        style={{ '--height': \`\${props.height}px\` }}
+        style={{ '--height': props.height }}
         className={\`views-block \${Vertical}\`}
       >
         <SomeThing
@@ -1656,7 +1656,7 @@ class Hover extends React.Component {
       >
         <span
           data-test-id={\`Hover.Text|\`}
-          style={{ '--fontSize': \`\${props.fontSize}px\` }}
+          style={{ '--fontSize': props.fontSize }}
           className={\`views-block \${Text}\`}
         >
           Hey!
@@ -2001,7 +2001,7 @@ class LocalImageSvg extends React.Component {
         data-test-id={\`\${props['data-test-id'] || 'LocalImageSvg'}|\`}
         alt={''}
         src={chopperSvg}
-        style={{ '--height': \`\${props.height}px\` }}
+        style={{ '--height': props.height }}
         className={\`views-block \${LocalImageSvg1}\`}
       />
     );
@@ -2657,7 +2657,7 @@ class ScrollableList extends React.Component {
     return (
       <div
         data-test-id={\`\${props['data-test-id'] || 'ScrollableList'}|\`}
-        style={{ '--paddingLeft': \`\${props.paddingLeft}px\` }}
+        style={{ '--paddingLeft': props.paddingLeft }}
         className={\`views-block \${ScrollableList1}\`}
       >
         {Array.isArray(props.from) &&
@@ -3790,7 +3790,7 @@ class UseTableOnWhen extends React.Component {
                 rowHeight={20}
                 rowClassName={Table1Row}
                 style={{
-                  '--marginLeft': \`\${props.marginLeft}px\`,
+                  '--marginLeft': props.marginLeft,
                   '--rowColorAlternate': props.rowColorAlternate,
                   '--rowBackgroundColorAlternate': props.rowBgColorAlternate,
                 }}

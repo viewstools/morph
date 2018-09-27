@@ -358,7 +358,7 @@ export const getAnimatedStyles = (node, isNative) => {
 }
 
 const getPropValue = (prop, interpolateValue = true) => {
-  const unit = getUnit(prop)
+  const unit = !prop.tags.slot && getUnit(prop)
   return unit
     ? interpolateValue
       ? `\`\${${prop.value}}${unit}\``
