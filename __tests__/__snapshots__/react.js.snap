@@ -132,6 +132,20 @@ module.exports = {
 }
 `;
 
+exports[`e2e parses e2e DynamicFontProps 1`] = `
+Object {
+  "code": "const { get } = require('@viewstools/e2e');
+
+module.exports = {
+  App: get('DynamicFontProps.App'),
+  DynamicFamily: get('DynamicFontProps.DynamicFamily'),
+  DynamicFamilyAndWeight: get('DynamicFontProps.DynamicFamilyAndWeight'),
+  DynamicWeight: get('DynamicFontProps.DynamicWeight'),
+};
+",
+}
+`;
+
 exports[`e2e parses e2e DynamicStylesApplyToBasicBlocksOnly 1`] = `
 Object {
   "code": "const { get } = require('@viewstools/e2e');
@@ -174,6 +188,21 @@ Object {
 module.exports = {
   Text: get('Hover.Text'),
   _top: get('Hover', 'isStuff'),
+};
+",
+}
+`;
+
+exports[`e2e parses e2e HyphenatedProps 1`] = `
+Object {
+  "code": "const { get } = require('@viewstools/e2e');
+
+module.exports = {
+  Content: get('HyphenatedProps.Content', 'inDesignSystem'),
+  SomeViewThatExposesAlignItems: get(
+    'HyphenatedProps.SomeViewThatExposesAlignItems'
+  ),
+  Vertical: get('HyphenatedProps.Vertical'),
 };
 ",
 }
@@ -590,6 +619,17 @@ module.exports = {
 }
 `;
 
+exports[`e2e parses e2e UseProxy 1`] = `
+Object {
+  "code": "const { get } = require('@viewstools/e2e');
+
+module.exports = {
+  _top: get('UseProxy'),
+};
+",
+}
+`;
+
 exports[`e2e parses e2e UseRouter 1`] = `
 Object {
   "code": "const { get } = require('@viewstools/e2e');
@@ -749,15 +789,16 @@ class Action extends React.Component {
     return props.check ? (
       <button
         data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-        onClick={event =>
+        onClick={event => {
+          typeof props.onClick === 'function' && props.onClick(event);
+
           context.track({
-            block: props['data-test-id'] || 'Action',
+            block: 'Action.Vertical',
             action: 'click',
-            callback: props.onClick,
             event,
             props,
-          })
-        }
+          });
+        }}
         disabled={props.isDisabled}
         className={\`views-block \${Vertical}\`}
       >
@@ -862,15 +903,17 @@ class AnimatedButton extends React.Component {
                   <animated.button
                     data-test-id={\`\${props['data-test-id'] ||
                       'AnimatedButton'}|\${props.isOn ? 'isOn|' : ''}\`}
-                    onClick={event =>
+                    onClick={event => {
+                      typeof props.onClick === 'function' &&
+                        props.onClick(event);
+
                       context.track({
-                        block: props['data-test-id'] || 'AnimatedButton',
+                        block: 'AnimatedButton.AnimatedButton',
                         action: 'click',
-                        callback: props.onClick,
                         event,
                         props,
-                      })
-                    }
+                      });
+                    }}
                     style={{
                       '--opacity': animatedAnimatedButton.opacity,
                       '--translateX': animatedAnimatedButton1.translateX,
@@ -946,15 +989,16 @@ class AnimatedButtonHoverOnly extends React.Component {
     return (
       <button
         data-test-id={\`\${props['data-test-id'] || 'AnimatedButtonHoverOnly'}|\`}
-        onClick={event =>
+        onClick={event => {
+          typeof props.onClick === 'function' && props.onClick(event);
+
           context.track({
-            block: props['data-test-id'] || 'AnimatedButtonHoverOnly',
+            block: 'AnimatedButtonHoverOnly.AnimatedButtonHoverOnly',
             action: 'click',
-            callback: props.onClick,
             event,
             props,
-          })
-        }
+          });
+        }}
         className={\`views-block \${AnimatedButtonHoverOnly1}\`}
       >
         {props.children}
@@ -1013,15 +1057,16 @@ class AnimatedButtonScopeOnly extends React.Component {
           <animated.button
             data-test-id={\`\${props['data-test-id'] ||
               'AnimatedButtonScopeOnly'}|\${props.before ? 'before|' : ''}\`}
-            onClick={event =>
+            onClick={event => {
+              typeof props.onClick === 'function' && props.onClick(event);
+
               context.track({
-                block: props['data-test-id'] || 'AnimatedButtonScopeOnly',
+                block: 'AnimatedButtonScopeOnly.AnimatedButtonScopeOnly',
                 action: 'click',
-                callback: props.onClick,
                 event,
                 props,
-              })
-            }
+              });
+            }}
             style={{
               '--backgroundColor':
                 animatedAnimatedButtonScopeOnly.backgroundColor,
@@ -1464,6 +1509,119 @@ export default Display;
 }
 `;
 
+exports[`react-dom parses react-dom DynamicFontProps 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import './Fonts/Montserrat-props.fontWeight';
+import './Fonts/props.fontFamily-200';
+import './Fonts/props.fontFamily-props.fontWeight';
+import PropTypes from 'prop-types';
+import React from 'react';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+import { css } from 'emotion';
+
+const DynamicFamily = css({
+  label: 'DynamicFamily',
+  fontSize: 14,
+  fontWeight: 200,
+  fontFamily: 'var(--fontFamily)',
+});
+const DynamicWeight = css({
+  label: 'DynamicWeight',
+  fontSize: 14,
+  fontFamily: 'Montserrat, sans-serif',
+  fontWeight: 'var(--fontWeight)',
+});
+const DynamicFamilyAndWeight = css({
+  label: 'DynamicFamilyAndWeight',
+  fontSize: 14,
+  fontWeight: 'var(--fontWeight)',
+  fontFamily: 'var(--fontFamily)',
+});
+
+class DynamicFontProps extends React.Component {
+  render() {
+    const { context, props } = this;
+
+    return (
+      <div
+        data-test-id={\`\${props['data-test-id'] || 'App'}|\`}
+        className=\\"views-block\\"
+      >
+        <span
+          data-test-id={\`DynamicFontProps.DynamicFamily|\`}
+          style={{ '--fontFamily': props.fontFamily }}
+          className={\`views-block \${DynamicFamily}\`}
+        >
+          Some text
+        </span>
+        <span
+          data-test-id={\`DynamicFontProps.DynamicWeight|\`}
+          style={{ '--fontWeight': props.fontWeight }}
+          className={\`views-block \${DynamicWeight}\`}
+        >
+          Some text
+        </span>
+        <span
+          data-test-id={\`DynamicFontProps.DynamicFamilyAndWeight|\`}
+          style={{
+            '--fontWeight': props.fontWeight,
+            '--fontFamily': props.fontFamily,
+          }}
+          className={\`views-block \${DynamicFamilyAndWeight}\`}
+        >
+          Some text
+        </span>
+        {props.children}
+      </div>
+    );
+  }
+}
+DynamicFontProps.contextTypes = {
+  track: PropTypes.func.isRequired,
+};
+DynamicFontProps.defaultProps = {
+  fontFamily: 'Montserrat',
+  fontWeight: 200,
+};
+export default DynamicFontProps;
+",
+  "fonts": Array [
+    Object {
+      "family": "props.fontFamily",
+      "id": "props.fontFamily-200",
+      "style": "normal",
+      "weight": "200",
+    },
+    Object {
+      "family": "Montserrat",
+      "id": "Montserrat-props.fontWeight",
+      "style": "normal",
+      "weight": "props.fontWeight",
+    },
+    Object {
+      "family": "props.fontFamily",
+      "id": "props.fontFamily-props.fontWeight",
+      "style": "normal",
+      "weight": "props.fontWeight",
+    },
+  ],
+  "slots": Array [
+    Object {
+      "defaultValue": "Montserrat",
+      "name": "fontFamily",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": 200,
+      "name": "fontWeight",
+      "type": "number",
+    },
+  ],
+  "svgs": Array [],
+}
+`;
+
 exports[`react-dom parses react-dom DynamicStylesApplyToBasicBlocksOnly 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -1616,15 +1774,16 @@ class Hover extends React.Component {
         data-test-id={\`\${props['data-test-id'] || 'Hover'}|\${
           props.isStuff ? 'isStuff|' : ''
         }\`}
-        onClick={event =>
+        onClick={event => {
+          typeof props.onClick === 'function' && props.onClick(event);
+
           context.track({
-            block: props['data-test-id'] || 'Hover',
+            block: 'Hover.Hover',
             action: 'click',
-            callback: props.onClick,
             event,
             props,
-          })
-        }
+          });
+        }}
         style={{ '--backgroundColor': \`\${props.isStuff ? 'red' : '#323232'}\` }}
         className={\`views-block \${Hover1}\`}
       >
@@ -1659,6 +1818,57 @@ export default Hover;
       "type": "number",
     },
   ],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom HyphenatedProps 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
+import React from 'react';
+import SomeViewThatExposesAlignItems from './SomeViewThatExposesAlignItems.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+import { css } from 'emotion';
+
+const Content = css({ label: 'Content', alignItems: 'var(--alignItems)' });
+
+class HyphenatedProps extends React.Component {
+  render() {
+    const { context, props } = this;
+
+    return (
+      <div
+        data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
+        className=\\"views-block\\"
+      >
+        <div
+          data-test-id={\`HyphenatedProps.Content|\${
+            props.inDesignSystem ? 'inDesignSystem|' : ''
+          }\`}
+          style={{
+            '--alignItems': \`\${props.inDesignSystem ? 'flex-start' : 'center'}\`,
+          }}
+          className={\`views-block \${Content}\`}
+        />
+        <SomeViewThatExposesAlignItems
+          data-test-id={\`HyphenatedProps.SomeViewThatExposesAlignItems|\`}
+          alignItems=\\"flex-start\\"
+          className=\\"views-block\\"
+        />
+        {props.children}
+      </div>
+    );
+  }
+}
+HyphenatedProps.contextTypes = {
+  track: PropTypes.func.isRequired,
+};
+
+export default HyphenatedProps;
+",
+  "fonts": Array [],
+  "slots": Array [],
   "svgs": Array [],
 }
 `;
@@ -1709,7 +1919,7 @@ const ListOfSomething1 = css({
   label: 'ListOfSomething1',
   paddingLeft: 2,
   justifyContent: 'center',
-  alignItems: 'center',
+  alignItems: 'flex-start',
   flexDirection: 'row',
   flexWrap: 'wrap',
   overflowY: 'auto',
@@ -2503,15 +2713,16 @@ class ScopePopup2 extends React.Component {
       >
         <button
           data-test-id={\`ScopePopup2.Toggle|\`}
-          onClick={event =>
+          onClick={event => {
+            typeof props.toggle === 'function' && props.toggle(event);
+
             context.track({
-              block: props['data-test-id'] || 'ScopePopup2',
+              block: 'ScopePopup2.Toggle',
               action: 'click',
-              callback: props.toggle,
               event,
               props,
-            })
-          }
+            });
+          }}
           className=\\"views-block\\"
         >
           <span data-test-id={\`ScopePopup2.Text|\`} className=\\"views-block\\">
@@ -2718,15 +2929,16 @@ class SomeMissingStyle extends React.Component {
     return (
       <button
         data-test-id={\`\${props['data-test-id'] || 'WindowControl'}|\`}
-        onClick={event =>
+        onClick={event => {
+          typeof props.onClick === 'function' && props.onClick(event);
+
           context.track({
-            block: props['data-test-id'] || 'SomeMissingStyle',
+            block: 'SomeMissingStyle.WindowControl',
             action: 'click',
-            callback: props.onClick,
             event,
             props,
-          })
-        }
+          });
+        }}
         tabIndex={-1}
         style={{ '--backgroundColor': props.backgroundColorHover }}
         className={\`views-block \${WindowControl}\`}
@@ -3338,6 +3550,39 @@ UseImage.contextTypes = {
 };
 
 export default UseImage;
+",
+  "fonts": Array [],
+  "slots": Array [],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom UseProxy 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
+import React from 'react';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+
+class UseProxy extends React.Component {
+  render() {
+    const { context, props } = this;
+
+    return (
+      <div
+        data-test-id={\`\${props['data-test-id'] || 'UseProxy'}|\`}
+        className=\\"views-block\\"
+      >
+        {props.children}
+      </div>
+    );
+  }
+}
+UseProxy.contextTypes = {
+  track: PropTypes.func.isRequired,
+};
+
+export default UseProxy;
 ",
   "fonts": Array [],
   "slots": Array [],
@@ -4068,15 +4313,16 @@ class Action extends React.Component {
     return props.check ? (
       <TouchableWithoutFeedback
         activeOpacity={0.7}
-        onPress={event =>
+        onPress={event => {
+          typeof props.onClick === 'function' && props.onClick(event);
+
           context.track({
-            block: props['testID'] || 'Action',
+            block: 'Action.Vertical',
             action: 'click',
-            callback: props.onClick,
             event,
             props,
-          })
-        }
+          });
+        }}
         disabled={props.isDisabled}
         underlayColor=\\"transparent\\"
       >
@@ -4177,15 +4423,17 @@ class AnimatedButton extends React.Component {
                         {animatedText => (
                           <TouchableWithoutFeedback
                             activeOpacity={0.7}
-                            onPress={event =>
+                            onPress={event => {
+                              typeof props.onClick === 'function' &&
+                                props.onClick(event);
+
                               context.track({
-                                block: props['testID'] || 'AnimatedButton',
+                                block: 'AnimatedButton.AnimatedButton',
                                 action: 'click',
-                                callback: props.onClick,
                                 event,
                                 props,
-                              })
-                            }
+                              });
+                            }}
                             underlayColor=\\"transparent\\"
                           >
                             <Animated.View
@@ -4282,15 +4530,16 @@ class AnimatedButtonHoverOnly extends React.Component {
         {animatedAnimatedButtonHoverOnly => (
           <TouchableWithoutFeedback
             activeOpacity={0.7}
-            onPress={event =>
+            onPress={event => {
+              typeof props.onClick === 'function' && props.onClick(event);
+
               context.track({
-                block: props['testID'] || 'AnimatedButtonHoverOnly',
+                block: 'AnimatedButtonHoverOnly.AnimatedButtonHoverOnly',
                 action: 'click',
-                callback: props.onClick,
                 event,
                 props,
-              })
-            }
+              });
+            }}
             underlayColor=\\"transparent\\"
           >
             <Animated.View
@@ -4358,15 +4607,16 @@ class AnimatedButtonScopeOnly extends React.Component {
             {animatedAnimatedButtonScopeOnly1 => (
               <TouchableWithoutFeedback
                 activeOpacity={0.7}
-                onPress={event =>
+                onPress={event => {
+                  typeof props.onClick === 'function' && props.onClick(event);
+
                   context.track({
-                    block: props['testID'] || 'AnimatedButtonScopeOnly',
+                    block: 'AnimatedButtonScopeOnly.AnimatedButtonScopeOnly',
                     action: 'click',
-                    callback: props.onClick,
                     event,
                     props,
-                  })
-                }
+                  });
+                }}
                 underlayColor=\\"transparent\\"
               >
                 <Animated.View
@@ -4766,6 +5016,102 @@ export default Display;
 }
 `;
 
+exports[`react-native parses react-native DynamicFontProps 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
+import React from 'react';
+import { Animated, StyleSheet, View } from 'react-native';
+
+const styles = StyleSheet.create({
+  DynamicFamily: { fontSize: 14 },
+  DynamicWeight: { fontSize: 14 },
+  DynamicFamilyAndWeight: { fontSize: 14 },
+});
+
+class DynamicFontProps extends React.Component {
+  render() {
+    const { context, props } = this;
+
+    return (
+      <View testID={\`\${props['testID'] || 'App'}|\`}>
+        <Animated.Text
+          testID={\`DynamicFontProps.DynamicFamily|\`}
+          style={[
+            styles.DynamicFamily,
+            { fontFamily: \`\${props.fontFamily}-200\` },
+          ]}
+        >
+          Some text
+        </Animated.Text>
+        <Animated.Text
+          testID={\`DynamicFontProps.DynamicWeight|\`}
+          style={[
+            styles.DynamicWeight,
+            { fontFamily: \`Montserrat-\${props.fontWeight}\` },
+          ]}
+        >
+          Some text
+        </Animated.Text>
+        <Animated.Text
+          testID={\`DynamicFontProps.DynamicFamilyAndWeight|\`}
+          style={[
+            styles.DynamicFamilyAndWeight,
+            { fontFamily: \`\${props.fontFamily}-\${props.fontWeight}\` },
+          ]}
+        >
+          Some text
+        </Animated.Text>
+        {props.children}
+      </View>
+    );
+  }
+}
+DynamicFontProps.contextTypes = {
+  track: PropTypes.func.isRequired,
+};
+DynamicFontProps.defaultProps = {
+  fontFamily: 'Montserrat',
+  fontWeight: 200,
+};
+export default DynamicFontProps;
+",
+  "fonts": Array [
+    Object {
+      "family": "props.fontFamily",
+      "id": "props.fontFamily-200",
+      "style": "normal",
+      "weight": "200",
+    },
+    Object {
+      "family": "Montserrat",
+      "id": "Montserrat-props.fontWeight",
+      "style": "normal",
+      "weight": "props.fontWeight",
+    },
+    Object {
+      "family": "props.fontFamily",
+      "id": "props.fontFamily-props.fontWeight",
+      "style": "normal",
+      "weight": "props.fontWeight",
+    },
+  ],
+  "slots": Array [
+    Object {
+      "defaultValue": "Montserrat",
+      "name": "fontFamily",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": 200,
+      "name": "fontWeight",
+      "type": "number",
+    },
+  ],
+  "svgs": Array [],
+}
+`;
+
 exports[`react-native parses react-native DynamicStylesApplyToBasicBlocksOnly 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -4888,15 +5234,16 @@ class Hover extends React.Component {
     return (
       <TouchableWithoutFeedback
         activeOpacity={0.7}
-        onPress={event =>
+        onPress={event => {
+          typeof props.onClick === 'function' && props.onClick(event);
+
           context.track({
-            block: props['testID'] || 'Hover',
+            block: 'Hover.Hover',
             action: 'click',
-            callback: props.onClick,
             event,
             props,
-          })
-        }
+          });
+        }}
         underlayColor=\\"transparent\\"
       >
         <View
@@ -4940,6 +5287,47 @@ export default Hover;
 }
 `;
 
+exports[`react-native parses react-native HyphenatedProps 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
+import React from 'react';
+import SomeViewThatExposesAlignItems from './SomeViewThatExposesAlignItems.view.js';
+import { View } from 'react-native';
+
+class HyphenatedProps extends React.Component {
+  render() {
+    const { context, props } = this;
+
+    return (
+      <View testID={\`\${props['testID'] || 'Vertical'}|\`}>
+        <View
+          testID={\`HyphenatedProps.Content|\${
+            props.inDesignSystem ? 'inDesignSystem|' : ''
+          }\`}
+          style={{ alignItems: props.inDesignSystem ? 'flex-start' : 'center' }}
+        />
+        <SomeViewThatExposesAlignItems
+          testID={\`HyphenatedProps.SomeViewThatExposesAlignItems|\`}
+          alignItems=\\"flex-start\\"
+        />
+        {props.children}
+      </View>
+    );
+  }
+}
+HyphenatedProps.contextTypes = {
+  track: PropTypes.func.isRequired,
+};
+
+export default HyphenatedProps;
+",
+  "fonts": Array [],
+  "slots": Array [],
+  "svgs": Array [],
+}
+`;
+
 exports[`react-native parses react-native JustText 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
@@ -4978,7 +5366,7 @@ const styles = StyleSheet.create({
   ListOfSomething1ContentContainer: {
     paddingLeft: 2,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     flexDirection: 'row',
   },
   ListOfSomething1: { flexWrap: 'wrap', backgroundColor: 'red' },
@@ -5695,15 +6083,16 @@ class ScopePopup2 extends React.Component {
       <View testID={\`\${props['testID'] || 'Popup'}|\`}>
         <TouchableWithoutFeedback
           activeOpacity={0.7}
-          onPress={event =>
+          onPress={event => {
+            typeof props.toggle === 'function' && props.toggle(event);
+
             context.track({
-              block: props['testID'] || 'ScopePopup2',
+              block: 'ScopePopup2.Toggle',
               action: 'click',
-              callback: props.toggle,
               event,
               props,
-            })
-          }
+            });
+          }}
           underlayColor=\\"transparent\\"
         >
           <View testID={\`ScopePopup2.Toggle|\`}>
@@ -5915,15 +6304,16 @@ class SomeMissingStyle extends React.Component {
     return (
       <TouchableWithoutFeedback
         activeOpacity={0.7}
-        onPress={event =>
+        onPress={event => {
+          typeof props.onClick === 'function' && props.onClick(event);
+
           context.track({
-            block: props['testID'] || 'SomeMissingStyle',
+            block: 'SomeMissingStyle.WindowControl',
             action: 'click',
-            callback: props.onClick,
             event,
             props,
-          })
-        }
+          });
+        }}
         underlayColor=\\"transparent\\"
       >
         <Animated.View
@@ -6533,6 +6923,34 @@ UseImage.contextTypes = {
 };
 
 export default UseImage;
+",
+  "fonts": Array [],
+  "slots": Array [],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-native parses react-native UseProxy 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
+import React from 'react';
+import { View } from 'react-native';
+
+class UseProxy extends React.Component {
+  render() {
+    const { context, props } = this;
+
+    return (
+      <View testID={\`\${props['testID'] || 'UseProxy'}|\`}>{props.children}</View>
+    );
+  }
+}
+UseProxy.contextTypes = {
+  track: PropTypes.func.isRequired,
+};
+
+export default UseProxy;
 ",
   "fonts": Array [],
   "slots": Array [],
