@@ -43,6 +43,7 @@ export default (node, parent, code) => {
     case 'shadowOffsetY':
       return getShadow(node, parent)
 
+    case 'fontWeight':
     case 'fontFamily':
       return {
         fontFamily: getFontFamily(node, parent),
@@ -93,6 +94,12 @@ const getFontFamily = (node, parent) => {
   const fontWeight = getProp(parent, 'fontWeight')
   // const key = node.key.value
   const fontFamily = node.value.replace(/\s/g, '')
+
+  if (fontWeight && (node.tags.slot || fontWeight.tags.slot)) {
+    return `\`${node.tags.slot ? '${props.fontFamily}' : fontFamily}-${
+      fontWeight.tags.slot ? '${props.fontWeight}' : fontWeight.value
+    }\``
+  }
 
   return fontWeight ? `${fontFamily}-${fontWeight.value}` : fontFamily
 }

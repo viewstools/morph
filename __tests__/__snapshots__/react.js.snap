@@ -132,6 +132,20 @@ module.exports = {
 }
 `;
 
+exports[`e2e parses e2e DynamicFontProps 1`] = `
+Object {
+  "code": "const { get } = require('@viewstools/e2e');
+
+module.exports = {
+  App: get('DynamicFontProps.App'),
+  DynamicFamily: get('DynamicFontProps.DynamicFamily'),
+  DynamicFamilyAndWeight: get('DynamicFontProps.DynamicFamilyAndWeight'),
+  DynamicWeight: get('DynamicFontProps.DynamicWeight'),
+};
+",
+}
+`;
+
 exports[`e2e parses e2e DynamicStylesApplyToBasicBlocksOnly 1`] = `
 Object {
   "code": "const { get } = require('@viewstools/e2e');
@@ -1485,6 +1499,119 @@ export default Display;
 ",
   "fonts": Array [],
   "slots": Array [],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom DynamicFontProps 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import './Fonts/Montserrat-props.fontWeight';
+import './Fonts/props.fontFamily-200';
+import './Fonts/props.fontFamily-props.fontWeight';
+import PropTypes from 'prop-types';
+import React from 'react';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+import { css } from 'emotion';
+
+const DynamicFamily = css({
+  label: 'DynamicFamily',
+  fontSize: 14,
+  fontWeight: 200,
+  fontFamily: 'var(--fontFamily)',
+});
+const DynamicWeight = css({
+  label: 'DynamicWeight',
+  fontSize: 14,
+  fontFamily: 'Montserrat, sans-serif',
+  fontWeight: 'var(--fontWeight)',
+});
+const DynamicFamilyAndWeight = css({
+  label: 'DynamicFamilyAndWeight',
+  fontSize: 14,
+  fontWeight: 'var(--fontWeight)',
+  fontFamily: 'var(--fontFamily)',
+});
+
+class DynamicFontProps extends React.Component {
+  render() {
+    const { context, props } = this;
+
+    return (
+      <div
+        data-test-id={\`\${props['data-test-id'] || 'App'}|\`}
+        className=\\"views-block\\"
+      >
+        <span
+          data-test-id={\`DynamicFontProps.DynamicFamily|\`}
+          style={{ '--fontFamily': props.fontFamily }}
+          className={\`views-block \${DynamicFamily}\`}
+        >
+          Some text
+        </span>
+        <span
+          data-test-id={\`DynamicFontProps.DynamicWeight|\`}
+          style={{ '--fontWeight': props.fontWeight }}
+          className={\`views-block \${DynamicWeight}\`}
+        >
+          Some text
+        </span>
+        <span
+          data-test-id={\`DynamicFontProps.DynamicFamilyAndWeight|\`}
+          style={{
+            '--fontWeight': props.fontWeight,
+            '--fontFamily': props.fontFamily,
+          }}
+          className={\`views-block \${DynamicFamilyAndWeight}\`}
+        >
+          Some text
+        </span>
+        {props.children}
+      </div>
+    );
+  }
+}
+DynamicFontProps.contextTypes = {
+  track: PropTypes.func.isRequired,
+};
+DynamicFontProps.defaultProps = {
+  fontFamily: 'Montserrat',
+  fontWeight: 200,
+};
+export default DynamicFontProps;
+",
+  "fonts": Array [
+    Object {
+      "family": "props.fontFamily",
+      "id": "props.fontFamily-200",
+      "style": "normal",
+      "weight": "200",
+    },
+    Object {
+      "family": "Montserrat",
+      "id": "Montserrat-props.fontWeight",
+      "style": "normal",
+      "weight": "props.fontWeight",
+    },
+    Object {
+      "family": "props.fontFamily",
+      "id": "props.fontFamily-props.fontWeight",
+      "style": "normal",
+      "weight": "props.fontWeight",
+    },
+  ],
+  "slots": Array [
+    Object {
+      "defaultValue": "Montserrat",
+      "name": "fontFamily",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": 200,
+      "name": "fontWeight",
+      "type": "number",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -4875,6 +5002,102 @@ export default Display;
 ",
   "fonts": Array [],
   "slots": Array [],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-native parses react-native DynamicFontProps 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars */
+import PropTypes from 'prop-types';
+import React from 'react';
+import { Animated, StyleSheet, View } from 'react-native';
+
+const styles = StyleSheet.create({
+  DynamicFamily: { fontSize: 14 },
+  DynamicWeight: { fontSize: 14 },
+  DynamicFamilyAndWeight: { fontSize: 14 },
+});
+
+class DynamicFontProps extends React.Component {
+  render() {
+    const { context, props } = this;
+
+    return (
+      <View testID={\`\${props['testID'] || 'App'}|\`}>
+        <Animated.Text
+          testID={\`DynamicFontProps.DynamicFamily|\`}
+          style={[
+            styles.DynamicFamily,
+            { fontFamily: \`\${props.fontFamily}-200\` },
+          ]}
+        >
+          Some text
+        </Animated.Text>
+        <Animated.Text
+          testID={\`DynamicFontProps.DynamicWeight|\`}
+          style={[
+            styles.DynamicWeight,
+            { fontFamily: \`Montserrat-\${props.fontWeight}\` },
+          ]}
+        >
+          Some text
+        </Animated.Text>
+        <Animated.Text
+          testID={\`DynamicFontProps.DynamicFamilyAndWeight|\`}
+          style={[
+            styles.DynamicFamilyAndWeight,
+            { fontFamily: \`\${props.fontFamily}-\${props.fontWeight}\` },
+          ]}
+        >
+          Some text
+        </Animated.Text>
+        {props.children}
+      </View>
+    );
+  }
+}
+DynamicFontProps.contextTypes = {
+  track: PropTypes.func.isRequired,
+};
+DynamicFontProps.defaultProps = {
+  fontFamily: 'Montserrat',
+  fontWeight: 200,
+};
+export default DynamicFontProps;
+",
+  "fonts": Array [
+    Object {
+      "family": "props.fontFamily",
+      "id": "props.fontFamily-200",
+      "style": "normal",
+      "weight": "200",
+    },
+    Object {
+      "family": "Montserrat",
+      "id": "Montserrat-props.fontWeight",
+      "style": "normal",
+      "weight": "props.fontWeight",
+    },
+    Object {
+      "family": "props.fontFamily",
+      "id": "props.fontFamily-props.fontWeight",
+      "style": "normal",
+      "weight": "props.fontWeight",
+    },
+  ],
+  "slots": Array [
+    Object {
+      "defaultValue": "Montserrat",
+      "name": "fontFamily",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": 200,
+      "name": "fontWeight",
+      "type": "number",
+    },
+  ],
   "svgs": Array [],
 }
 `;
