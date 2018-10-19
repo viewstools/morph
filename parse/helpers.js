@@ -2,11 +2,12 @@ import { isRowStyle, isStyle, STYLE } from './prop-is-style.js'
 import DidYouMeanMatcher from './did-you-mean.js'
 import isNumber from './prop-is-number.js'
 import locales from 'i18n-locales'
+import toSlugCase from 'to-slug-case'
 
 const LOCAL_SCOPES = locales.map(item => item.replace(/-/g, ''))
 
 const dymBlockMatcher = new DidYouMeanMatcher(
-  'CaptureEmail|CaptureFile|CaptureNumber|CapturePhone|CaptureSecure|CaptureText|CaptureTextArea|G|Horizontal|Image|List|Svg|SvgCircle|SvgEllipse|SvgDefs|SvgGroup|SvgLinearGradient|SvgRadialGradient|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgSymbol|SvgText|SvgUse|SvgStop|Text|Vertical'.split(
+  'CaptureEmail|CaptureFile|CaptureNumber|CapturePhone|CaptureSecure|CaptureText|CaptureTextArea|G|Horizontal|Image|List|Proxy|Svg|SvgCircle|SvgEllipse|SvgDefs|SvgGroup|SvgLinearGradient|SvgRadialGradient|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgSymbol|SvgText|SvgUse|SvgStop|Text|Vertical'.split(
     '|'
   )
 )
@@ -56,13 +57,15 @@ const dymPropMatcher = new DidYouMeanMatcher([
   'key',
   'maxLength',
   'step',
+  'id',
+  'className',
 ])
 
 export const didYouMeanBlock = block => dymBlockMatcher.get(block)
 export const didYouMeanProp = prop => dymPropMatcher.get(prop)
 
 const ANIMATION = /(.+)(?:\s)(spring|linear|easeOut|easeInOut|easeIn|ease)(?:\s?(.*)?)/
-const BASIC = /^(CaptureEmail|CaptureFile|CaptureNumber|CapturePhone|CaptureSecure|CaptureText|CaptureTextArea|Column|Horizontal|Image|List|Svg|SvgCircle|SvgEllipse|SvgDefs|SvgGroup|SvgLinearGradient|SvgRadialGradient|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgSymbol|SvgText|SvgUse|SvgStop|Table|Text|Vertical)$/i
+const BASIC = /^(CaptureEmail|CaptureFile|CaptureNumber|CapturePhone|CaptureSecure|CaptureText|CaptureTextArea|Column|Horizontal|Image|List|Proxy|Svg|SvgCircle|SvgEllipse|SvgDefs|SvgGroup|SvgLinearGradient|SvgRadialGradient|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgSymbol|SvgText|SvgUse|SvgStop|Table|Text|Vertical)$/i
 const BLOCK = /^([A-Z][a-zA-Z0-9]*)(\s+([A-Z][a-zA-Z0-9]*))?$/
 const BOOL = /^(false|true)$/i
 const CAPTURE = /^(CaptureEmail|CaptureFile|CaptureNumber|CapturePhone|CaptureSecure|CaptureText|CaptureTextArea)$/i
@@ -306,7 +309,7 @@ export const getUnsupportedShorthandExpanded = (name, value) => {
 
   return []
 }
-export const getValue = value => {
+export const getValue = (value, name) => {
   if (isFloat(value)) {
     return parseFloat(value, 10)
   } else if (isInt(value)) {
@@ -316,7 +319,7 @@ export const getValue = value => {
   } else if (isBool(value)) {
     return isTrue(value)
   } else {
-    return value
+    return maybeMakeHyphenated(value, name)
   }
 }
 
@@ -352,3 +355,35 @@ export const isTextInterpolation = (block, previous) => {
     previousText.value.includes(block.is || block.name)
   )
 }
+
+const MAYBE_HYPHENATED_STYLE_PROPS = [
+  'alignContent',
+  'alignItems',
+  'alignSelf',
+  'backgroundBlendMode',
+  'backgroundClip',
+  'backgroudOrigin',
+  'backgroundRepeat',
+  'boxSizing',
+  'clear',
+  'cursor',
+  'flexBasis',
+  'flexDirection',
+  'flexFlow',
+  'flexWrap',
+  'float',
+  'fontStretch',
+  'justifyContent',
+  'objectFit',
+  'overflowWrap',
+  'textAlign',
+  'textDecorationLine',
+  'textTransform',
+  'whiteSpace',
+  'wordBreak',
+]
+
+export const maybeMakeHyphenated = (value, name) =>
+  MAYBE_HYPHENATED_STYLE_PROPS.includes(name) && /^[a-zA-Z]+$/.test(value)
+    ? toSlugCase(value)
+    : value

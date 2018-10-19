@@ -442,7 +442,7 @@ export default ({
           loc,
           name,
           tags,
-          value: getValue(value),
+          value: getValue(value, name),
         }
 
         if (tags.animation && scope) {

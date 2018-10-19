@@ -1,4 +1,9 @@
-import { getProp, getScopedCondition, isTag } from '../utils.js'
+import {
+  getProp,
+  getScopedCondition,
+  isTag,
+  maybeMakeHyphenated,
+} from '../utils.js'
 
 export default (node, parent, code) => {
   const scopedCondition = getScopedCondition(node, parent)
@@ -38,6 +43,7 @@ export default (node, parent, code) => {
     case 'shadowOffsetY':
       return getShadow(node, parent)
 
+    case 'fontWeight':
     case 'fontFamily':
       return {
         fontFamily: getFontFamily(node, parent),
@@ -79,7 +85,7 @@ export default (node, parent, code) => {
 
     default:
       return {
-        [node.name]: node.value,
+        [node.name]: maybeMakeHyphenated(node),
       }
   }
 }
@@ -88,6 +94,12 @@ const getFontFamily = (node, parent) => {
   const fontWeight = getProp(parent, 'fontWeight')
   // const key = node.key.value
   const fontFamily = node.value.replace(/\s/g, '')
+
+  if (fontWeight && (node.tags.slot || fontWeight.tags.slot)) {
+    return `\`${node.tags.slot ? '${props.fontFamily}' : fontFamily}-${
+      fontWeight.tags.slot ? '${props.fontWeight}' : fontWeight.value
+    }\``
+  }
 
   return fontWeight ? `${fontFamily}-${fontWeight.value}` : fontFamily
 }

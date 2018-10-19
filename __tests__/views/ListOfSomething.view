@@ -2,7 +2,7 @@ ListOfSomething List
 from <
 paddingLeft 2
 justifyContent center
-alignItems center
+alignItems flexStart
 flexDirection row
 flexWrap wrap
 overflowY auto

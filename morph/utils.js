@@ -296,18 +296,20 @@ export const getLocalsString = (propNode, blockNode, state) => {
   return wrap(`${localName}[local.state.lang] || ${safe(propNode.value)}`)
 }
 
-export const makeOnClickTracker = (node, state) => {
+export const makeOnClickTracker = (node, parent, state) => {
   if (!state.track) return node.value
 
-  const block = node.testId
-    ? `"${state.name}.${node.testId}"`
+  const block = parent.testId
+    ? `"${state.name}.${parent.testId}"`
     : `props["${state.testIdKey}"] || "${state.name}"`
 
   state.isTracking = true
 
-  return `event => context.track({ block: ${block}, action: "click", callback: ${
-    node.value
-  }, event, props })`
+  return `event => {
+    typeof ${node.value} === 'function' && ${node.value}(event);
+
+    context.track({ block: ${block}, action: "click", event, props });
+  }`
 }
 
 // const isRotate = name =>
@@ -545,3 +547,36 @@ export const hasRowStyles = node =>
   node.properties.some(
     prop => prop.name.match(/^row/) && prop.name !== 'rowHeight'
   )
+
+const MAYBE_HYPHENATED_STYLE_PROPS = [
+  'alignContent',
+  'alignItems',
+  'alignSelf',
+  'backgroundBlendMode',
+  'backgroundClip',
+  'backgroudOrigin',
+  'backgroundRepeat',
+  'boxSizing',
+  'clear',
+  'cursor',
+  'flexBasis',
+  'flexDirection',
+  'flexFlow',
+  'flexWrap',
+  'float',
+  'fontFamily',
+  'fontStretch',
+  'justifyContent',
+  'objectFit',
+  'overflowWrap',
+  'textAlign',
+  'textDecorationLine',
+  'textTransform',
+  'whiteSpace',
+  'wordBreak',
+]
+
+export const maybeMakeHyphenated = ({ name, value }) =>
+  MAYBE_HYPHENATED_STYLE_PROPS.includes(name) && /^[a-zA-Z]+$/.test(value)
+    ? toSlugCase(value)
+    : value

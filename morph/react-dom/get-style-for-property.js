@@ -1,4 +1,9 @@
-import { getProp, getScopedCondition, isSlot } from '../utils.js'
+import {
+  getProp,
+  getScopedCondition,
+  isSlot,
+  maybeMakeHyphenated,
+} from '../utils.js'
 import { maybeAddFallbackFont } from '../fonts.js'
 
 export default (node, parent, code) => {
@@ -91,7 +96,8 @@ export default (node, parent, code) => {
   }
 }
 
-const maybeAsVar = (prop, code) => (code ? asVar(prop) : prop.value)
+const maybeAsVar = (prop, code) =>
+  code ? asVar(prop) : maybeMakeHyphenated(prop)
 
 const asVar = prop => `'var(--${prop.name})'`
 
