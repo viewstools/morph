@@ -10,5 +10,3 @@ text <blue
 when <!whatMakesBlue
 color rgb(255,255,0)
 text  is Yellow
-when <testingStyleSlots
-color <anotherColor

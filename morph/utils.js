@@ -366,23 +366,11 @@ const getPropValue = (prop, interpolateValue = true) => {
     : prop.value
 }
 
-const propIsScoped = (prop, scopedSlots) =>
-  scopedSlots.some(scopedSlot => RegExp(`^${prop.name}`).test(scopedSlot))
-
 export const getDynamicStyles = node => {
-  const scopedSlots = flatten([
-    node.scopes.map(scope =>
-      scope.properties
-        .map(prop => prop.name !== 'when' && prop.tags.slot && prop.name)
-        .filter(Boolean)
-    ),
-  ])
-
   return flatten([
     node.properties
       .filter(
-        prop =>
-          prop.tags.style && prop.tags.slot && !propIsScoped(prop, scopedSlots)
+        prop => prop.tags.style && prop.tags.slot && !getScopedProps(prop, node)
       )
       .map(prop => `'--${prop.name}': ${getPropValue(prop)}`),
     node.scopes.map(scope =>
