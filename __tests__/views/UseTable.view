@@ -7,7 +7,7 @@ rowColor #1C1C1C
 rowBackgroundColor white
 rowColorAlternate <rowColorAlternate
 rowBackgroundColorAlternate black
-when <hover
+when <isHovered
 rowColor red
 rowBackgroundColor black
 rowColorAlternate green

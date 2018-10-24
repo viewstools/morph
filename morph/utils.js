@@ -9,7 +9,7 @@ const safeScope = value =>
   typeof value === 'string' && !isSlot(value) ? JSON.stringify(value) : value
 
 export const checkParentStem = (node, styleKey) => {
-  if (styleKey !== 'hover' || styleKey !== 'disabled' || !node.parent)
+  if (styleKey !== 'isHovered' || styleKey !== 'isDisabled' || !node.parent)
     return false
 
   const matchingParentStem = node.parent.scopes.some(
@@ -157,7 +157,13 @@ export const getScopedImageCondition = (scopes, scopedNames, defaultName) => {
   return conditional
 }
 
-const styleStems = ['hover', 'focus', 'placeholder', 'disabled', 'print']
+const styleStems = [
+  'isHovered',
+  'isFocused',
+  'isPlaceholder',
+  'isDisabled',
+  'print',
+]
 export const getStyleType = node =>
   styleStems.find(tag => isTag(node, tag)) || 'base'
 export const hasKeys = obj => Object.keys(obj).length > 0
@@ -187,11 +193,18 @@ export const getActionableParent = node => {
 
 export const getAllowedStyleKeys = node => {
   if (node.isCapture) {
-    return ['base', 'focus', 'hover', 'disabled', 'placeholder', 'print']
+    return [
+      'base',
+      'isFocused',
+      'isHovered',
+      'isDisabled',
+      'isPlaceholder',
+      'print',
+    ]
   } else if (node.action || isTable(node) || getActionableParent(node)) {
-    return ['base', 'focus', 'hover', 'disabled', 'print']
+    return ['base', 'isFocused', 'isHovered', 'isDisabled', 'print']
   }
-  return ['base', 'focus', 'print']
+  return ['base', 'isFocused', 'print']
 }
 
 export const isList = node =>
@@ -382,7 +395,7 @@ export const getDynamicStyles = node => {
             `'--${prop.name}': \`${prop.conditional}${unit}\``) ||
           (prop.tags.style &&
             prop.tags.slot &&
-            prop.scope === 'hover' &&
+            prop.scope === 'isHovered' &&
             `'--${prop.name}': ${getPropValue(prop)}`)
         )
       })

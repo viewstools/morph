@@ -1,5 +1,5 @@
 AnimatedButtonHoverOnly Vertical
 backgroundColor red
 onClick <
-when <hover
+when <isHovered
 backgroundColor blue easeOut

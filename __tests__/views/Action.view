@@ -3,7 +3,7 @@ onWhen <check
 onClick <
 isDisabled <
 color red
-when <disabled
+when <isDisabled
 color blue
 Text
 text click me

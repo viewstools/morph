@@ -4652,7 +4652,7 @@ class AnimatedButtonHoverOnly extends React.Component {
         curve=\\"easeOut\\"
         delay={0}
         duration={150}
-        to={{ backgroundColor: props.hover ? 'blue' : 'red' }}
+        to={{ backgroundColor: props.isHovered ? 'blue' : 'red' }}
       >
         {animatedAnimatedButtonHoverOnly => (
           <TouchableWithoutFeedback
