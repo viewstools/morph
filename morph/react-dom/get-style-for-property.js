@@ -11,13 +11,6 @@ export default (node, parent, code) => {
 
   if (scopedVar) {
     switch (node.name) {
-      case 'shadowColor':
-      case 'shadowBlur':
-      case 'shadowOffsetX':
-      case 'shadowOffsetY':
-      case 'shadowSpread':
-        return getShadow(node, parent)
-
       case 'rotate':
       case 'rotateX':
       case 'rotateY':
@@ -68,10 +61,7 @@ export default (node, parent, code) => {
     case 'scale':
     case 'translateX':
     case 'translateY':
-      const transform = getTransform(node, parent)
-      if (transform.includes('props.')) return false
-
-      return { transform }
+      return { transform: getTransform(node, parent) }
 
     case 'transformOriginX':
     case 'transformOriginY':

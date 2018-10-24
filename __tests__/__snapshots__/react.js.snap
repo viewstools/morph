@@ -2783,9 +2783,10 @@ const ScopedShadows1 = css({
   label: 'ScopedShadows1',
   flexDirection: 'row',
   boxShadow: '0px 5px var(--shadowBlur) 0px var(--shadowColor)',
-  transition: 'boxShadow 150ms ease 0ms',
-  willChange: 'boxShadow',
-  transform: 'rotateX(var(--rotateX)) rotateY(var(--rotateY))',
+  transition: 'box-shadow 150ms linear 0ms',
+  willChange: 'box-shadow',
+  shadowColor: 'var(--shadowColor)',
+  shadowBlur: 'var(--shadowBlur)',
 });
 
 class ScopedShadows extends React.Component {
@@ -2797,15 +2798,16 @@ class ScopedShadows extends React.Component {
         data-test-id={\`\${props['data-test-id'] || 'ScopedShadows'}|\${
           props.isClicked ? 'isClicked|' : ''
         }\`}
-        onClick={event =>
+        onClick={event => {
+          typeof props.onClick === 'function' && props.onClick(event);
+
           context.track({
-            block: props['data-test-id'] || 'ScopedShadows',
+            block: 'ScopedShadows.ScopedShadows',
             action: 'click',
-            callback: props.onClick,
             event,
             props,
-          })
-        }
+          });
+        }}
         style={{
           '--shadowColor': \`\${
             props.isClicked
@@ -2813,8 +2815,6 @@ class ScopedShadows extends React.Component {
               : 'rgba(232, 188, 0, 0.66)'
           }\`,
           '--shadowBlur': \`\${props.isClicked ? 10 : 20}px\`,
-          '--rotateX': \`\${props.isClicked ? 20 : 10}deg\`,
-          '--rotateY': \`\${props.isClicked ? 5 : 2}deg\`,
         }}
         className={\`views-block \${ScopedShadows1}\`}
       >
@@ -6231,23 +6231,29 @@ class ScopedShadows extends React.Component {
 
     return (
       <Timing
-        curve=\\"ease\\"
+        curve=\\"linear\\"
         delay={0}
         duration={150}
-        to={{ shadowBlur: props.isClicked ? 10 : 20 }}
+        to={{
+          shadowColor: props.isClicked
+            ? 'rgba(14, 0, 232, 0.66)'
+            : 'rgba(232, 188, 0, 0.66)',
+          shadowBlur: props.isClicked ? 10 : 20,
+        }}
       >
         {animatedScopedShadows => (
           <TouchableWithoutFeedback
             activeOpacity={0.7}
-            onPress={event =>
+            onPress={event => {
+              typeof props.onClick === 'function' && props.onClick(event);
+
               context.track({
-                block: props['testID'] || 'ScopedShadows',
+                block: 'ScopedShadows.ScopedShadows',
                 action: 'click',
-                callback: props.onClick,
                 event,
                 props,
-              })
-            }
+              });
+            }}
             underlayColor=\\"transparent\\"
           >
             <Animated.View
@@ -6255,18 +6261,10 @@ class ScopedShadows extends React.Component {
                 props.isClicked ? 'isClicked|' : ''
               }\`}
               style={[
-                [
-                  styles.ScopedShadows1,
-                  { shadowBlur: animatedScopedShadows.shadowBlur },
-                ],
+                styles.ScopedShadows1,
                 {
-                  shadowColor: props.isClicked
-                    ? 'rgba(14, 0, 232, 0.66)'
-                    : 'rgba(232, 188, 0, 0.66)',
-                  transform: [
-                    { rotateX: \`\${props.isClicked ? 20 : 10}deg\` },
-                    { rotateY: \`\${props.isClicked ? 5 : 2}deg\` },
-                  ],
+                  shadowColor: animatedScopedShadows.shadowColor,
+                  shadowBlur: animatedScopedShadows.shadowBlur,
                 },
               ]}
             >
