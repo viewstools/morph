@@ -369,7 +369,9 @@ const getPropValue = (prop, interpolateValue = true) => {
 export const getDynamicStyles = node => {
   return flatten([
     node.properties
-      .filter(prop => prop.tags.style && prop.tags.slot)
+      .filter(
+        prop => prop.tags.style && prop.tags.slot && !getScopedProps(prop, node)
+      )
       .map(prop => `'--${prop.name}': ${getPropValue(prop)}`),
     node.scopes.map(scope =>
       scope.properties.map(prop => {
