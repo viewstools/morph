@@ -1135,59 +1135,27 @@ Object {
               "type": "Property",
               "value": "1px solid red",
             },
+            Object {
+              "loc": Object {
+                "end": Object {
+                  "column": 8,
+                  "line": 7,
+                },
+                "start": Object {
+                  "column": 0,
+                  "line": 7,
+                },
+              },
+              "name": "color",
+              "tags": Object {
+                "style": true,
+                "validSlot": null,
+              },
+              "type": "Property",
+              "value": "red",
+            },
           ],
           "scopes": Array [
-            Object {
-              "isLocal": false,
-              "isSystem": false,
-              "name": "when",
-              "properties": Array [
-                Object {
-                  "loc": Object {
-                    "end": Object {
-                      "column": 3,
-                      "line": 6,
-                    },
-                    "start": Object {
-                      "column": 0,
-                      "line": 6,
-                    },
-                  },
-                  "name": "when",
-                  "scope": undefined,
-                  "tags": Object {
-                    "scope": "",
-                    "shouldBeSlot": true,
-                    "validSlot": null,
-                  },
-                  "type": "Property",
-                  "value": "",
-                },
-                Object {
-                  "loc": Object {
-                    "end": Object {
-                      "column": 8,
-                      "line": 7,
-                    },
-                    "start": Object {
-                      "column": 0,
-                      "line": 7,
-                    },
-                  },
-                  "name": "color",
-                  "scope": undefined,
-                  "tags": Object {
-                    "style": true,
-                    "validSlot": null,
-                  },
-                  "type": "Property",
-                  "value": "red",
-                },
-              ],
-              "slotIsNot": undefined,
-              "slotName": undefined,
-              "value": "props.when",
-            },
             Object {
               "isLocal": false,
               "isSystem": false,
