@@ -33,6 +33,7 @@ export default ({
   enableLocalScopes = true,
   enableSystemScopes = true,
   skipComments = true,
+  skipInvalidProps = true,
   source,
 } = {}) => {
   // convert crlf to lf
@@ -373,14 +374,14 @@ export default ({
                 'This when has no condition assigned to it. Add one like: "when <isCondition"',
               line,
             })
-            continue
+            if (skipInvalidProps) continue
           } else if (!tags.validSlot) {
             warnings.push({
               loc,
               type: `The slot name "${name}" isn't valid. Fix it like: "when <isCondition" `,
               line,
             })
-            continue
+            if (skipInvalidProps) continue
           }
 
           if (isSystem && slotIsNot) {
@@ -421,7 +422,7 @@ export default ({
               type: `The value you used in the slot "${name}" is invalid`,
               line,
             })
-            continue
+            if (skipInvalidProps) continue
           }
         }
 
@@ -446,7 +447,7 @@ export default ({
             type: `"${name}" has no value. Please give it a value.`,
             line,
           })
-          continue
+          if (skipInvalidProps) continue
         }
 
         propNode = {
