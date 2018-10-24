@@ -190,6 +190,13 @@ const ensurePropName = name => {
     case 'translateY':
       return 'transform'
 
+    case 'shadowColor':
+    case 'shadowBlur':
+    case 'shadowOffsetX':
+    case 'shadowOffsetY':
+    case 'shadowSpread':
+      return 'box-shadow'
+
     default:
       return toSlugCase(name)
   }
