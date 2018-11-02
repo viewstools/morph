@@ -70,6 +70,10 @@ export default (node, parent, state) => {
     return {
       onClick: wrap(makeOnClickTracker(node, parent, state)),
     }
+  } else if (!state.isReactNative && parent.isRoute && node.name === 'at') {
+    return {
+      path: safe(node.routePath),
+    }
   } else {
     return {
       [node.name]: safe(node.value, node),

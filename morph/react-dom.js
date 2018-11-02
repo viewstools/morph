@@ -8,9 +8,8 @@ import toComponent from './react/to-component.js'
 import walk from './walk.js'
 
 const imports = {
-  Link: "import { Link } from 'react-router-dom'",
-  Route: "import { Route } from 'react-router-dom'",
-  Router: "import { BrowserRouter as Router } from 'react-router-dom'",
+  Link: "import { Link } from '@reach/router'",
+  Router: "import { Router } from '@reach/router'",
 }
 
 export default ({

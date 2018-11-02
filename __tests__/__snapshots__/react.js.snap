@@ -2483,8 +2483,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Topic from './Topic.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { Link } from 'react-router-dom';
-import { Route } from 'react-router-dom';
+import { Link } from '@reach/router';
 
 class NestedRoutes extends React.Component {
   render() {
@@ -2507,15 +2506,10 @@ class NestedRoutes extends React.Component {
             Rendering with React
           </span>
         </Link>
-        <Route
+        <Topic
+          data-test-id={\`NestedRoutes.Topic|\`}
           path=\\":topic\\"
-          render={routeProps => (
-            <Topic
-              data-test-id={\`NestedRoutes.Topic|\`}
-              {...routeProps}
-              className=\\"views-block\\"
-            />
-          )}
+          className=\\"views-block\\"
         />
         {props.children}
       </div>
@@ -3099,7 +3093,7 @@ Object {
 import PropTypes from 'prop-types';
 import React from 'react';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { Link } from 'react-router-dom';
+import { Link } from '@reach/router';
 import { css } from 'emotion';
 
 const Horizontal = css({ label: 'Horizontal', flexDirection: 'row' });
@@ -3726,8 +3720,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Topics from './Topics.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { Route } from 'react-router-dom';
+import { Router } from '@reach/router';
 import { css } from 'emotion';
 
 const Horizontal = css({ label: 'Horizontal', flexDirection: 'row' });
@@ -3742,38 +3735,22 @@ class UseRouter extends React.Component {
           data-test-id={\`\${props['data-test-id'] || 'Horizontal'}|\`}
           className={\`views-block \${Horizontal}\`}
         >
-          <Route
+          <Home
+            data-test-id={\`UseRouter.Home|\`}
             path=\\"/\\"
-            exact
-            render={routeProps => (
-              <Home
-                data-test-id={\`UseRouter.Home|\`}
-                height={props.height}
-                width={360}
-                {...routeProps}
-                className=\\"views-block\\"
-              />
-            )}
+            height={props.height}
+            width={360}
+            className=\\"views-block\\"
           />
-          <Route
+          <About
+            data-test-id={\`UseRouter.About|\`}
             path=\\"/about\\"
-            render={routeProps => (
-              <About
-                data-test-id={\`UseRouter.About|\`}
-                {...routeProps}
-                className=\\"views-block\\"
-              />
-            )}
+            className=\\"views-block\\"
           />
-          <Route
+          <Topics
+            data-test-id={\`UseRouter.Topics|\`}
             path=\\"/topics\\"
-            render={routeProps => (
-              <Topics
-                data-test-id={\`UseRouter.Topics|\`}
-                {...routeProps}
-                className=\\"views-block\\"
-              />
-            )}
+            className=\\"views-block\\"
           />
           {props.children}
         </div>

@@ -19,7 +19,6 @@ export function enter(node, parent, state) {
 
   node.properties.forEach(propNode => {
     if (
-      propNode.name === 'at' ||
       propNode.name === 'when' ||
       propNode.name === 'onWhen' ||
       propNode.tags.unsupportedShorthand ||

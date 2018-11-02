@@ -4,27 +4,33 @@ import safe from './safe.js'
 export function enter(node, parent, state) {
   const at = getProp(node, 'at')
   if (at) {
+    node.isRoute = true
+
     let [path, isExact = false] = at.value.split(' ')
-    state.use('Route')
+
+    at.routePath = path
 
     if (path === '/') state.use('Router')
 
-    if (!path.startsWith('/')) {
-      path = isSlot(path) ? `\`\${${path}}\`` : path
-      // path = `\`\${props.match.url}/${to}\``
-    }
+    if (state.isReactNative) {
+      state.use('Route')
 
-    node.isRoute = true
-    state.render.push(
-      `<Route path=${safe(path)} ${
-        isExact ? 'exact' : ''
-      } render={routeProps => `
-    )
+      if (!path.startsWith('/')) {
+        path = isSlot(path) ? `\`\${${path}}\`` : path
+        // path = `\`\${props.match.url}/${to}\``
+      }
+
+      state.render.push(
+        `<Route path=${safe(path)} ${
+          isExact ? 'exact' : ''
+        } render={routeProps => `
+      )
+    }
   }
 }
 
 export function leave(node, parent, state) {
-  if (node.isRoute) {
+  if (node.isRoute && state.isReactNative) {
     state.render.push('} />')
   }
 }
