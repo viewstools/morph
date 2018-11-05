@@ -355,6 +355,10 @@ export default ({
               })
             }
           }
+        } else {
+          if (name === 'lazy') {
+            block.isLazy = true
+          }
         }
 
         if (name === 'when') {

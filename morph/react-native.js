@@ -43,6 +43,7 @@ export default ({
     getValueForProperty,
     hasRefs: false,
     isReactNative: true,
+    lazy: {},
     local,
     locals: {},
     localSupported: [],
@@ -56,7 +57,11 @@ export default ({
     track,
     usedBlockNames: { [finalName]: 1, AutoSizer: 1, Column: 1, Table: 1 },
     uses: [],
-    use(block) {
+    use(block, isLazy = false) {
+      if (isLazy) {
+        state.lazy[block] = true
+      }
+
       if (
         state.uses.includes(block) ||
         /props/.test(block) ||
@@ -78,7 +83,8 @@ export default ({
   maybeUsesTextInput(state)
   maybeUsesRouter(state)
   maybeUsesStyleSheet(state)
-  const finalGetImport = name => imports[name] || getImport(name)
+  const finalGetImport = (name, isLazy) =>
+    imports[name] || getImport(name, isLazy)
 
   return {
     code: toComponent({

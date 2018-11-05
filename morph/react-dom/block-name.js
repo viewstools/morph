@@ -9,7 +9,7 @@ export function enter(node, parent, state) {
   // TODO remove the use of those because they're just the name and keep one
   node.nameFinal = name
   node.nameTag = name
-  state.use(name)
+  state.use(name, node.isLazy)
 
   if (handleTable(node, parent, state)) return true
 

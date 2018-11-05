@@ -204,7 +204,7 @@ module.exports = options => {
     const makeGetImport = (view, file) => {
       dependsOn[view] = []
 
-      return name => {
+      return (name, isLazy) => {
         // Column is imported from react-virtualized
         if (name === 'Column') return
         if (name === 'ViewsBaseCss') {
@@ -233,8 +233,12 @@ module.exports = options => {
         // TODO track dependencies to make it easy to rebuild files as new ones get
         // added, eg logic is added, we need to rebuild upwards
 
+        const importPath = getImportFileName(name, file)
+
         return views[name]
-          ? `import ${name} from '${getImportFileName(name, file)}'`
+          ? isLazy
+            ? `const ${name} = React.lazy(() => import('${importPath}'))`
+            : `import ${name} from '${importPath}'`
           : viewNotFound(name)
       }
     }

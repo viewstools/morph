@@ -14,6 +14,21 @@ const NATIVE = [
   'View',
 ]
 
+const sortAlphabetically = (a, b) => {
+  return a === b ? 0 : a < b ? -1 : 1
+}
+
+const importsFirst = (a, b) => {
+  const aIsImport = a.startsWith('import')
+  const bIsImport = b.startsWith('import')
+
+  if ((aIsImport && bIsImport) || (!aIsImport && !bIsImport))
+    return sortAlphabetically(a, b)
+
+  if (aIsImport) return -1
+  if (bIsImport) return 1
+}
+
 export default (state, getImport) => {
   const usesNative = []
   const usesSvg = []
@@ -46,7 +61,7 @@ export default (state, getImport) => {
       dependencies.push(`import ${d} from "./${d}.view.js"`)
     } else if (d === 'Table') {
     } else if (/^[A-Z]/.test(d)) {
-      dependencies.push(getImport(d))
+      dependencies.push(getImport(d, state.lazy[d]))
     }
   })
 
@@ -117,6 +132,6 @@ export default (state, getImport) => {
 
   return dependencies
     .filter(Boolean)
-    .sort()
+    .sort(importsFirst)
     .join('\n')
 }
