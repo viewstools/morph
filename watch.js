@@ -10,6 +10,7 @@ const chokidar = require('chokidar')
 const clean = require('./clean.js')
 const ensureBaseCss = require('./ensure-base-css.js')
 const ensureLocalContainer = require('./ensure-local-container.js')
+const ensureTrackContext = require('./ensure-track-context.js')
 const flatten = require('flatten')
 const fs = require('mz/fs')
 const glob = require('fast-glob')
@@ -219,6 +220,13 @@ module.exports = options => {
           )}'`
         }
 
+        if (name === 'TrackContext') {
+          return `import { TrackContext } from '${relativise(
+            file,
+            instance.trackContext
+          )}'`
+        }
+
         if (!dependsOn[view].includes(name)) {
           dependsOn[view].push(name)
         }
@@ -282,6 +290,14 @@ module.exports = options => {
       instance.localSupported = [local]
 
       maybeUpdateLocal()
+    }
+
+    if (track) {
+      instance.trackContext = 'TrackContext.js'
+
+      ensureTrackContext({
+        file: path.join(src, instance.trackContext),
+      })
     }
 
     const addView = filter((f, skipMorph = false) => {

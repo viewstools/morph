@@ -321,7 +321,7 @@ export const makeOnClickTracker = (node, parent, state) => {
   return `event => {
     typeof ${node.value} === 'function' && ${node.value}(event);
 
-    context.track({ block: ${block}, action: "click", event, props });
+    track({ block: ${block}, action: "click", event, props });
   }`
 }
 

@@ -1,5 +1,4 @@
 import getBody from './get-body.js'
-import getContext from './get-context.js'
 import getDefaultProps from './get-default-props.js'
 import getDependencies from './get-dependencies.js'
 import getFlatList from './get-flatlist.js'
@@ -18,7 +17,6 @@ ${getFormatters(state, name)}
 ${getLocals(state, name)}
 
 ${getBody({ state, name })}
-${getContext({ state, name })}
 ${getDefaultProps({ state, name })}
 export default ${name}`
 }

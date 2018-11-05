@@ -107,7 +107,7 @@ export default (state, getImport) => {
   }
 
   if (state.track) {
-    dependencies.push('import PropTypes from "prop-types"')
+    dependencies.push(getImport('TrackContext'))
   }
 
   if (Object.keys(state.locals).length > 0) {
