@@ -61,10 +61,7 @@ export default (node, parent, code) => {
     case 'scale':
     case 'translateX':
     case 'translateY':
-      const transform = getTransform(node, parent)
-      if (transform.includes('props.')) return false
-
-      return { transform }
+      return { transform: getTransform(node, parent) }
 
     case 'transformOriginX':
     case 'transformOriginY':
@@ -95,7 +92,7 @@ const maybeAsVar = (prop, code) =>
 const asVar = prop => `'var(--${prop.name})'`
 
 const setScopedVar = (prop, block) => {
-  if (prop.scope === 'hover') return false
+  if (prop.scope === 'isHovered') return false
 
   const scopedCondition = getScopedCondition(prop, block, false)
   return scopedCondition && asVar(prop)
@@ -133,6 +130,7 @@ const getShadow = (node, parent) => {
   ]
     .filter(Boolean)
     .join(' ')
+    .replace(/'/g, '')
 
   if (
     isSlot(shadowColor) ||
@@ -183,6 +181,7 @@ const getTransform = (node, parent) => {
   ) {
     value = `\`${value}\``
   }
+
   // TODO FIXME this is a hack to remove strings because my head is fried
   // and yeah it does what we need for now :)
   return value.replace(/'/g, '')

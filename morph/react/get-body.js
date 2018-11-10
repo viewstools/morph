@@ -77,18 +77,22 @@ export default ({ state, name }) => {
     })
   }
 
-  if (state.hasRefs || state.track || maybeAnimated) {
+  if (state.hasRefs || maybeAnimated) {
+    animatedOpen = animatedOpen.join('')
+    animatedClose = animatedClose.reverse().join('')
+
+    let trackOpen = state.track ? '<TrackContext.Consumer>{track => (' : ''
+    let trackClose = state.track ? ')}</TrackContext.Consumer>' : ''
     return `class ${name} extends React.Component {
   render() {
-    const { ${state.track ? 'context,' : ''} props } = this
+    const { props } = this
     ${maybeChildrenArray}
-    return (${animatedOpen.join('')}${render}${animatedClose
-      .reverse()
-      .join('')})
+    return (${trackOpen}${animatedOpen}${render}${animatedClose}${trackClose})
   }
 }`
   } else {
-    return `const ${name} = (props ${state.track ? ', context' : ''}) => {
+    return `const ${name} = (props) => {
+    ${state.track ? `const track = React.useContext(TrackContext)` : ''}
   ${maybeChildrenArray}
   return (${render})
 }`

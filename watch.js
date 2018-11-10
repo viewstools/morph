@@ -10,6 +10,7 @@ const chokidar = require('chokidar')
 const clean = require('./clean.js')
 const ensureBaseCss = require('./ensure-base-css.js')
 const ensureLocalContainer = require('./ensure-local-container.js')
+const ensureTrackContext = require('./ensure-track-context.js')
 const flatten = require('flatten')
 const fs = require('mz/fs')
 const glob = require('fast-glob')
@@ -203,7 +204,7 @@ module.exports = options => {
     const makeGetImport = (view, file) => {
       dependsOn[view] = []
 
-      return name => {
+      return (name, isLazy) => {
         // Column is imported from react-virtualized
         if (name === 'Column') return
         if (name === 'ViewsBaseCss') {
@@ -219,14 +220,25 @@ module.exports = options => {
           )}'`
         }
 
+        if (name === 'TrackContext') {
+          return `import { TrackContext } from '${relativise(
+            file,
+            instance.trackContext
+          )}'`
+        }
+
         if (!dependsOn[view].includes(name)) {
           dependsOn[view].push(name)
         }
         // TODO track dependencies to make it easy to rebuild files as new ones get
         // added, eg logic is added, we need to rebuild upwards
 
+        const importPath = getImportFileName(name, file)
+
         return views[name]
-          ? `import ${name} from '${getImportFileName(name, file)}'`
+          ? isLazy
+            ? `const ${name} = React.lazy(() => import('${importPath}'))`
+            : `import ${name} from '${importPath}'`
           : viewNotFound(name)
       }
     }
@@ -282,6 +294,14 @@ module.exports = options => {
       instance.localSupported = [local]
 
       maybeUpdateLocal()
+    }
+
+    if (track) {
+      instance.trackContext = 'TrackContext.js'
+
+      ensureTrackContext({
+        file: path.join(src, instance.trackContext),
+      })
     }
 
     const addView = filter((f, skipMorph = false) => {

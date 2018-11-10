@@ -46,6 +46,7 @@ export default ({
     images: [],
     isDynamic: false,
     isReactNative: false,
+    lazy: {},
     local,
     locals: {},
     localSupported: [],
@@ -58,7 +59,11 @@ export default ({
     testIdKey: 'data-test-id',
     testIds: {},
     track,
-    use(block) {
+    use(block, isLazy = false) {
+      if (isLazy) {
+        state.lazy[block] = true
+      }
+
       if (
         state.uses.includes(block) ||
         /props/.test(block) ||
@@ -85,7 +90,8 @@ export default ({
   walk(parsed.views[0], visitor, state)
   maybeUsesRouter(state)
 
-  const finalGetImport = name => imports[name] || getImport(name)
+  const finalGetImport = (name, isLazy) =>
+    imports[name] || getImport(name, isLazy)
 
   return {
     code: toComponent({

@@ -326,12 +326,10 @@ export const getValue = (value, name) => {
 export const isLocalScope = name => LOCAL_SCOPES.includes(name)
 
 const SYSTEM_SCOPES = [
-  'active',
-  // TODO disabled should be a prop instead I think
-  'disabled',
-  'focus',
-  'hover',
-  'placeholder',
+  'isDisabled',
+  'isFocused',
+  'isHovered',
+  'isPlaceholder',
   // TODO do we want to do media queries here?
 ]
 export const isSystemScope = name => SYSTEM_SCOPES.includes(name)

@@ -190,6 +190,13 @@ const ensurePropName = name => {
     case 'translateY':
       return 'transform'
 
+    case 'shadowColor':
+    case 'shadowBlur':
+    case 'shadowOffsetX':
+    case 'shadowOffsetY':
+    case 'shadowSpread':
+      return 'box-shadow'
+
     default:
       return toSlugCase(name)
   }
@@ -211,19 +218,31 @@ const asStaticCss = (styles, dynamicStyles = []) =>
     .filter(prop => !dynamicStyles.includes(prop))
     .map(prop => `${prop}: ${safe(styles[prop])}`)
 
+const systemScopeToCssKey = {
+  isDisabled: 'disabled',
+  isHovered: 'hover',
+  isFocused: 'focus',
+}
+const ensureSystemScopeCssKey = key => systemScopeToCssKey[key] || key
+
 const asCss = (styles, key, scopedUnderParent) => {
   let css = []
 
   if (key !== 'base') {
     if (scopedUnderParent) {
       const parent = `.\${${scopedUnderParent}}`
-      css.push(`[\`${parent}:${key} &, ${parent}.${key} &\`]: {`)
-    } else if (key === 'disabled' || key === 'hover' || key === 'focus') {
-      css.push(`"&:${key}": {`)
+      const theKey = ensureSystemScopeCssKey(key)
+      css.push(`[\`${parent}:${theKey} &, ${parent}.${theKey} &\`]: {`)
+    } else if (
+      key === 'isDisabled' ||
+      key === 'isHovered' ||
+      key === 'isFocused'
+    ) {
+      css.push(`"&:${ensureSystemScopeCssKey(key)}": {`)
     } else if (key === 'print') {
       // TODO can we use this to support all media queries?
       css.push('"@media print": {')
-    } else if (key === 'placeholder') {
+    } else if (key === 'isPlaceholder') {
       css.push(`"&::placeholder": {`)
     }
   }

@@ -25,7 +25,7 @@ VerticalInside Vertical
 After Text
 text after
 color purple
-when <hover
+when <isHovered
 color red
 
 Last Vertical

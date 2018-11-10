@@ -5,18 +5,18 @@ export function enter(node, parent, state) {
   node.style = {
     dynamic: {
       base: {},
-      hover: {},
-      focus: {},
-      disabled: {},
-      placeholder: {},
+      isHovered: {},
+      isFocused: {},
+      isDisabled: {},
+      isPlaceholder: {},
       print: {},
     },
     static: {
       base: {},
-      hover: {},
-      focus: {},
-      disabled: {},
-      placeholder: {},
+      isHovered: {},
+      isFocused: {},
+      isDisabled: {},
+      isPlaceholder: {},
       print: {},
     },
   }
@@ -43,6 +43,7 @@ export function enter(node, parent, state) {
           isSlot(propNode) || hasMatchingParent
             ? node.style.dynamic
             : node.style.static
+
         Object.assign(target[scope.value], styleForProperty)
       }
     })

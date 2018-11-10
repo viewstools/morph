@@ -34,6 +34,11 @@ const localSupported = ['en', 'es', 'fr']
           morph({
             as,
             getFont,
+            getImport: (name, isLazy) => {
+              return isLazy
+                ? `const ${name} = React.lazy(() => import('./${name}.view.js'))`
+                : `import ${name} from './${name}.view.js'`
+            },
             localSupported,
             name,
             pretty: true,

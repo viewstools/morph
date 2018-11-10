@@ -3,11 +3,11 @@ backgroundColor #323232
 onClick <
 when <isStuff
 backgroundColor red
-when <hover
+when <isHovered
 backgroundColor #232323
 Text
 color white
 fontSize <
 text Hey!
-when <hover
+when <isHovered
 color black

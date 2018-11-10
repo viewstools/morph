@@ -291,7 +291,7 @@ Object {
                 Object {
                   "loc": Object {
                     "end": Object {
-                      "column": 10,
+                      "column": 14,
                       "line": 14,
                     },
                     "start": Object {
@@ -300,16 +300,16 @@ Object {
                     },
                   },
                   "name": "when",
-                  "scope": "hover",
-                  "slotName": "hover",
+                  "scope": "isHovered",
+                  "slotName": "isHovered",
                   "tags": Object {
-                    "scope": "<hover",
+                    "scope": "<isHovered",
                     "shouldBeSlot": true,
                     "slot": true,
                     "validSlot": true,
                   },
                   "type": "Property",
-                  "value": "hover",
+                  "value": "isHovered",
                 },
                 Object {
                   "loc": Object {
@@ -323,7 +323,7 @@ Object {
                     },
                   },
                   "name": "color",
-                  "scope": "hover",
+                  "scope": "isHovered",
                   "tags": Object {
                     "style": true,
                     "validSlot": null,
@@ -333,8 +333,8 @@ Object {
                 },
               ],
               "slotIsNot": false,
-              "slotName": "hover",
-              "value": "hover",
+              "slotName": "isHovered",
+              "value": "isHovered",
             },
           ],
           "type": "Block",
@@ -1135,59 +1135,27 @@ Object {
               "type": "Property",
               "value": "1px solid red",
             },
+            Object {
+              "loc": Object {
+                "end": Object {
+                  "column": 8,
+                  "line": 7,
+                },
+                "start": Object {
+                  "column": 0,
+                  "line": 7,
+                },
+              },
+              "name": "color",
+              "tags": Object {
+                "style": true,
+                "validSlot": null,
+              },
+              "type": "Property",
+              "value": "red",
+            },
           ],
           "scopes": Array [
-            Object {
-              "isLocal": false,
-              "isSystem": false,
-              "name": "when",
-              "properties": Array [
-                Object {
-                  "loc": Object {
-                    "end": Object {
-                      "column": 3,
-                      "line": 6,
-                    },
-                    "start": Object {
-                      "column": 0,
-                      "line": 6,
-                    },
-                  },
-                  "name": "when",
-                  "scope": undefined,
-                  "tags": Object {
-                    "scope": "",
-                    "shouldBeSlot": true,
-                    "validSlot": null,
-                  },
-                  "type": "Property",
-                  "value": "",
-                },
-                Object {
-                  "loc": Object {
-                    "end": Object {
-                      "column": 8,
-                      "line": 7,
-                    },
-                    "start": Object {
-                      "column": 0,
-                      "line": 7,
-                    },
-                  },
-                  "name": "color",
-                  "scope": undefined,
-                  "tags": Object {
-                    "style": true,
-                    "validSlot": null,
-                  },
-                  "type": "Property",
-                  "value": "red",
-                },
-              ],
-              "slotIsNot": undefined,
-              "slotName": undefined,
-              "value": "props.when",
-            },
             Object {
               "isLocal": false,
               "isSystem": false,
