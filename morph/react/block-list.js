@@ -3,6 +3,7 @@ import { getProp, isList } from '../utils.js'
 export function enter(node, parent, state) {
   if (isList(node)) {
     const from = getProp(node, 'from')
+    const pass = getProp(node, 'pass')
     if (!from) return
 
     if (node.nameFinal.includes('FlatList')) {
@@ -16,7 +17,9 @@ export function enter(node, parent, state) {
       )
     } else {
       state.render.push(
-        `{Array.isArray(${from.value}) && ${from.value}.map((item, index) => `
+        `{Array.isArray(${from.value}) && ${from.value}.map((${
+          pass ? pass.value : 'item'
+        }, index) => `
       )
     }
   }
