@@ -1,4 +1,7 @@
 Vertical
 goTo https://views.tools
+backgroundColor gray
+when <isHovered
+backgroundColor red
 Text
 text Go to Views Tools website!

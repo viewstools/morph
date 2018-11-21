@@ -1679,6 +1679,15 @@ Object {
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
+import { css } from 'emotion';
+
+const Vertical = css({
+  label: 'Vertical',
+  backgroundColor: 'gray',
+  '&:hover': {
+    backgroundColor: 'red',
+  },
+});
 
 const GoTo = props => {
   const track = React.useContext(TrackContext);
@@ -1689,7 +1698,7 @@ const GoTo = props => {
       rel=\\"noopener noreferrer\\"
       target=\\"_blank\\"
       data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-      className=\\"views-block\\"
+      className={\`views-block \${Vertical}\`}
     >
       <span data-test-id={\`GoTo.Text|\`} className=\\"views-block\\">
         Go to Views Tools website!
@@ -4978,13 +4987,15 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
-import { Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+
+const styles = StyleSheet.create({ Vertical: { backgroundColor: 'gray' } });
 
 const GoTo = props => {
   const track = React.useContext(TrackContext);
 
   return (
-    <View testID={\`\${props['testID'] || 'Vertical'}|\`}>
+    <View testID={\`\${props['testID'] || 'Vertical'}|\`} style={styles.Vertical}>
       <Text testID={\`GoTo.Text|\`}>Go to Views Tools website!</Text>
       {props.children}
     </View>

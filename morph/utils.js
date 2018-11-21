@@ -64,8 +64,8 @@ const maybeSafe = node =>
   node.tags.slot
     ? node.value
     : typeof node.value === 'string'
-      ? safe(node.value)
-      : node.value
+    ? safe(node.value)
+    : node.value
 
 const getScopedProps = (propNode, blockNode) => {
   const scopes = blockNode.scopes
@@ -105,8 +105,8 @@ const getStandardInterpolation = (node, re, textNode, item) =>
     hasCustomScopes(textNode, item)
       ? wrap(getScopedCondition(textNode, item, true))
       : isSlot(textNode)
-        ? wrap(textNode.value)
-        : textNode.value
+      ? wrap(textNode.value)
+      : textNode.value
   )
 
 export const getScopedCondition = (
@@ -203,6 +203,8 @@ export const getAllowedStyleKeys = node => {
     ]
   } else if (node.action || isTable(node) || getActionableParent(node)) {
     return ['base', 'isFocused', 'isHovered', 'isDisabled', 'print']
+  } else if (node.goTo) {
+    return ['base', 'isFocused', 'isHovered', 'print']
   }
   return ['base', 'isFocused', 'print']
 }
@@ -287,12 +289,14 @@ export const hasLocals = (propNode, blockNode) =>
 export const getLocals = (propNode, blockNode, state) => {
   const locals = {}
 
-  blockNode.scopes.filter(scope => scope.isLocal).forEach(scope => {
-    const prop = scope.properties.find(prop => prop.name === propNode.name)
-    if (prop) {
-      locals[scope.value] = prop.value
-    }
-  })
+  blockNode.scopes
+    .filter(scope => scope.isLocal)
+    .forEach(scope => {
+      const prop = scope.properties.find(prop => prop.name === propNode.name)
+      if (prop) {
+        locals[scope.value] = prop.value
+      }
+    })
 
   return locals
 }
