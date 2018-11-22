@@ -5,3 +5,6 @@ when <isHovered
 backgroundColor red
 Text
 text Go to Views Tools website!
+color blue
+when <isHovered
+color green

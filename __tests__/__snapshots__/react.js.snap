@@ -1688,6 +1688,13 @@ const Vertical = css({
     backgroundColor: 'red',
   },
 });
+const Text = css({
+  label: 'Text',
+  color: 'blue',
+  [\`.\${Vertical}:hover &, .\${Vertical}.hover &\`]: {
+    color: 'green',
+  },
+});
 
 const GoTo = props => {
   const track = React.useContext(TrackContext);
@@ -1700,7 +1707,7 @@ const GoTo = props => {
       data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
       className={\`views-block \${Vertical}\`}
     >
-      <span data-test-id={\`GoTo.Text|\`} className=\\"views-block\\">
+      <span data-test-id={\`GoTo.Text|\`} className={\`views-block \${Text}\`}>
         Go to Views Tools website!
       </span>
       {props.children}
@@ -4989,14 +4996,19 @@ import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import { StyleSheet, Text, View } from 'react-native';
 
-const styles = StyleSheet.create({ Vertical: { backgroundColor: 'gray' } });
+const styles = StyleSheet.create({
+  Vertical: { backgroundColor: 'gray' },
+  Text: { color: 'blue' },
+});
 
 const GoTo = props => {
   const track = React.useContext(TrackContext);
 
   return (
     <View testID={\`\${props['testID'] || 'Vertical'}|\`} style={styles.Vertical}>
-      <Text testID={\`GoTo.Text|\`}>Go to Views Tools website!</Text>
+      <Text testID={\`GoTo.Text|\`} style={styles.Text}>
+        Go to Views Tools website!
+      </Text>
       {props.children}
     </View>
   );

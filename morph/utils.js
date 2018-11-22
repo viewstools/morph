@@ -187,7 +187,7 @@ export const isTag = (node, tag) => node && node.tags[tag]
 
 export const getActionableParent = node => {
   if (!node.parent) return false
-  if (node.parent.action) return node.parent
+  if (node.parent.action || node.parent.goTo) return node.parent
   return getActionableParent(node.parent)
 }
 
