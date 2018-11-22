@@ -102,6 +102,7 @@ export default ({
       name: finalName,
       state,
     }),
+    dependencies: state.dependencies,
     fonts: parsed.fonts,
     slots: parsed.slots,
     svgs: state.svgs,
