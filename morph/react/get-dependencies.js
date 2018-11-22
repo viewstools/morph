@@ -54,8 +54,8 @@ export default (state, getImport) => {
         d === 'Svg'
           ? d
           : d === 'SvgGroup'
-            ? `G as SvgGroup`
-            : `${d.replace('Svg', '')} as ${d}`
+          ? `G as SvgGroup`
+          : `${d.replace('Svg', '')} as ${d}`
       )
     } else if (d.endsWith('SvgInline')) {
       dependencies.push(`import ${d} from "./${d}.view.js"`)
@@ -86,21 +86,36 @@ export default (state, getImport) => {
 
   if (state.cssDynamic || state.cssStatic) {
     dependencies.push('import { css } from "emotion"')
+    state.dependencies.add('emotion')
   }
 
   if (state.isAnimated) {
     const animations = [
-      !state.isReactNative && 'animated',
-      state.hasSpringAnimation && 'Spring',
-      state.hasTimingAnimation && state.isReactNative && 'Timing',
+      'animated',
+      (state.hasSpringAnimation ||
+        (state.hasTimingAnimation && state.isReactNative)) &&
+        'Spring',
     ].filter(Boolean)
 
     if (animations.length > 0) {
       dependencies.push(
-        `import { ${animations.join(', ')} } from "@viewstools/animations/${
-          state.isReactNative ? 'native' : 'dom'
+        `import { ${animations.join(', ')} } from "react-spring/dist/${
+          state.isReactNative ? 'native' : 'web'
         }"`
       )
+
+      state.dependencies.add('react-spring')
+
+      if (state.hasTimingAnimation && state.isReactNative) {
+        dependencies.push(`import * as Easing from 'd3-ease'`)
+        state.dependencies.add('d3-ease')
+      }
+    }
+  }
+
+  if (state.isReactNative) {
+    for (let component of state.animated) {
+      dependencies.push(`let Animated${component} = animated(${component})`)
     }
   }
 
@@ -110,6 +125,7 @@ export default (state, getImport) => {
         state.isReactNative ? 'native' : 'dom'
       }"`
     )
+    state.dependencies.add('@viewstools/tables')
   }
 
   if (usesSvg.length > 0) {
@@ -128,6 +144,7 @@ export default (state, getImport) => {
   if (Object.keys(state.locals).length > 0) {
     dependencies.push('import { Subscribe } from "unstated"')
     dependencies.push(getImport('LocalContainer'))
+    state.dependencies.add('unstated')
   }
 
   return dependencies

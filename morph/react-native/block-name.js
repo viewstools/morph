@@ -11,7 +11,7 @@ export function enter(node, parent, state) {
     name = 'AnimatedFlatList'
   }
 
-  state.use(/Animated/.test(name) ? 'Animated' : name, node.isLazy)
+  state.use(node.isBasic ? name.replace(/^Animated/, '') : name, node.isLazy)
 
   node.nameFinal = name
 

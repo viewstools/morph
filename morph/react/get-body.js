@@ -1,6 +1,4 @@
-// import { canUseNativeDriver } from '../utils.js'
 import getUnit from '../get-unit.js'
-// import toPascalCase from 'to-pascal-case'
 
 export default ({ state, name }) => {
   let render = state.render.join('')
@@ -24,13 +22,13 @@ export default ({ state, name }) => {
 
         if (!state.isReactNative && curve !== 'spring') return
 
-        const tag = curve === 'spring' ? 'Spring' : 'Timing'
-        let config = Object.entries(configValues)
-          .map(([key, value]) => `${key}={${value}}`)
-          .join(' ')
+        let config = `config={${JSON.stringify(configValues)}}`
 
-        if (curve !== 'spring') {
-          config = `curve="${curve}" ${config}`
+        if (curve !== 'spring' && curve !== 'linear') {
+          config = `easing={Easing.${curve.replace(
+            'ease',
+            'easeCubic'
+          )}} ${config}`
         }
 
         const to = Object.values(item.props)
@@ -54,25 +52,13 @@ export default ({ state, name }) => {
           })
           .join(',')
 
-        // TODO bring back native driver when possible in RN
-        // there's an issue with animated(View) in react-spring's
-        // implementation that is preventing us from using it,
-        // it doesn't seem to recognise regular styles, so we
-        // have to use RN's Animated the thing is that the native flag on
-        // react-spring breaks things, I imagine it's because it's a different
-        // implementation altogether, so we'll see it at some later stage.
-        const useNativeDriver = state.isReactNative
-          ? false // !Object.keys(item.props).some(canUseNativeDriver)
-          : true
         animatedOpen.push(
-          `<${tag} ${
-            useNativeDriver ? 'native' : ''
-          } ${config} to={{${to}}}>{animated${blockId}${
+          `<Spring native ${config} to={{${to}}}>{animated${blockId}${
             item.index > 0 ? item.index : ''
           } => (`
         )
 
-        animatedClose.push(`)}</${tag}>`)
+        animatedClose.push(`)}</Spring>`)
       })
     })
   }

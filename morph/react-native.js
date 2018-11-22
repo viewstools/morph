@@ -37,7 +37,9 @@ export default ({
 
   const state = {
     animations: {},
+    animated: new Set(),
     images: [],
+    dependencies: new Set(),
     getFont,
     getStyleForProperty,
     getValueForProperty,

@@ -867,13 +867,14 @@ Object {
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { animated, Spring } from '@viewstools/animations/dom';
+import { animated, Spring } from 'react-spring/dist/web';
 import { css } from 'emotion';
 
 const AnimatedButton1 = css({
   label: 'AnimatedButton1',
   backgroundColor: 'red',
-  transition: 'transform 150ms ease-in 0ms, transform 150ms ease-in-out 0ms',
+  transition:
+    'transform 150ms ease-in undefinedms, transform 150ms ease-in-out undefinedms',
   willChange: 'opacity, transform',
   opacity: 'var(--opacity)',
   transform:
@@ -895,25 +896,19 @@ class AnimatedButton extends React.Component {
         {track => (
           <Spring
             native
-            bounciness={10}
-            speed={1}
-            delay={0}
+            config={{ friction: 10, tension: 1 }}
             to={{ opacity: props.isOn ? 1 : 0.75 }}
           >
             {animatedAnimatedButton => (
               <Spring
                 native
-                bounciness={15}
-                speed={2}
-                delay={0}
+                config={{ friction: 15, tension: 2 }}
                 to={{ translateX: \`\${props.isOn ? 20 : 10}px\` }}
               >
                 {animatedAnimatedButton1 => (
                   <Spring
                     native
-                    delay={0}
-                    speed={12}
-                    bounciness={8}
+                    config={{ tension: 170, friction: 26 }}
                     to={{
                       color: props.isOn ? 'blue' : 'red',
                       fontSize: \`\${props.isOn ? 18 : 12}px\`,
@@ -997,7 +992,7 @@ const AnimatedButtonHoverOnly1 = css({
   '&:hover': {
     backgroundColor: 'blue',
   },
-  transition: 'background-color 150ms ease-out 0ms',
+  transition: 'background-color 150ms ease-out undefinedms',
   willChange: 'background-color',
 });
 
@@ -1044,12 +1039,12 @@ Object {
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { animated, Spring } from '@viewstools/animations/dom';
+import { animated, Spring } from 'react-spring/dist/web';
 import { css } from 'emotion';
 
 const AnimatedButtonScopeOnly1 = css({
   label: 'AnimatedButtonScopeOnly1',
-  transition: 'opacity 150ms linear 0ms',
+  transition: 'opacity 150ms linear undefinedms',
   willChange: 'background-color, opacity',
   backgroundColor: 'var(--backgroundColor)',
   opacity: 'var(--opacity)',
@@ -1064,9 +1059,7 @@ class AnimatedButtonScopeOnly extends React.Component {
         {track => (
           <Spring
             native
-            delay={0}
-            speed={12}
-            bounciness={8}
+            config={{ tension: 170, friction: 26 }}
             to={{ backgroundColor: props.before ? 'blue' : 'red' }}
           >
             {animatedAnimatedButtonScopeOnly => (
@@ -2666,7 +2659,7 @@ const ScopedShadows1 = css({
   label: 'ScopedShadows1',
   flexDirection: 'row',
   boxShadow: '0px 5px var(--shadowBlur) 0px var(--shadowColor)',
-  transition: 'box-shadow 150ms linear 0ms',
+  transition: 'box-shadow 150ms linear undefinedms',
   willChange: 'box-shadow',
   shadowColor: 'var(--shadowColor)',
   shadowBlur: 'var(--shadowBlur)',
@@ -4204,10 +4197,13 @@ export default Action;
 exports[`react-native parses react-native AnimatedButton 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
+import * as Easing from 'd3-ease';
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
-import { Animated, StyleSheet, TouchableWithoutFeedback } from 'react-native';
-import { Spring, Timing } from '@viewstools/animations/native';
+import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
+import { animated, Spring } from 'react-spring/dist/native';
+let AnimatedText = animated(Text);
+let AnimatedView = animated(View);
 
 const styles = StyleSheet.create({
   AnimatedButton1: { backgroundColor: 'red' },
@@ -4221,37 +4217,34 @@ class AnimatedButton extends React.Component {
       <TrackContext.Consumer>
         {track => (
           <Spring
-            bounciness={10}
-            speed={1}
-            delay={0}
+            native
+            config={{ friction: 10, tension: 1 }}
             to={{ opacity: props.isOn ? 1 : 0.75 }}
           >
             {animatedAnimatedButton => (
               <Spring
-                bounciness={15}
-                speed={2}
-                delay={0}
+                native
+                config={{ friction: 15, tension: 2 }}
                 to={{ translateX: props.isOn ? 20 : 10 }}
               >
                 {animatedAnimatedButton1 => (
-                  <Timing
-                    curve=\\"easeIn\\"
-                    delay={0}
-                    duration={150}
+                  <Spring
+                    native
+                    easing={Easing.easeCubicIn}
+                    config={{ duration: 150 }}
                     to={{ rotateX: props.isOn ? 20 : 10 }}
                   >
                     {animatedAnimatedButton2 => (
-                      <Timing
-                        curve=\\"easeInOut\\"
-                        delay={0}
-                        duration={150}
+                      <Spring
+                        native
+                        easing={Easing.easeCubicInOut}
+                        config={{ duration: 150 }}
                         to={{ rotateY: props.isOn ? 20 : 10 }}
                       >
                         {animatedAnimatedButton3 => (
                           <Spring
-                            delay={0}
-                            speed={12}
-                            bounciness={8}
+                            native
+                            config={{ tension: 170, friction: 26 }}
                             to={{
                               color: props.isOn ? 'blue' : 'red',
                               fontSize: props.isOn ? 18 : 12,
@@ -4273,7 +4266,7 @@ class AnimatedButton extends React.Component {
                                 }}
                                 underlayColor=\\"transparent\\"
                               >
-                                <Animated.View
+                                <AnimatedView
                                   testID={\`\${props['testID'] ||
                                     'AnimatedButton'}|\${
                                     props.isOn ? 'isOn|' : ''
@@ -4299,7 +4292,7 @@ class AnimatedButton extends React.Component {
                                     },
                                   ]}
                                 >
-                                  <Animated.Text
+                                  <AnimatedText
                                     testID={\`AnimatedButton.Text|\${
                                       props.isOn ? 'isOn|' : ''
                                     }\`}
@@ -4309,16 +4302,16 @@ class AnimatedButton extends React.Component {
                                     }}
                                   >
                                     hey
-                                  </Animated.Text>
+                                  </AnimatedText>
                                   {props.children}
-                                </Animated.View>
+                                </AnimatedView>
                               </TouchableWithoutFeedback>
                             )}
                           </Spring>
                         )}
-                      </Timing>
+                      </Spring>
                     )}
-                  </Timing>
+                  </Spring>
                 )}
               </Spring>
             )}
@@ -4346,10 +4339,12 @@ export default AnimatedButton;
 exports[`react-native parses react-native AnimatedButtonHoverOnly 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
+import * as Easing from 'd3-ease';
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
-import { Animated, StyleSheet, TouchableWithoutFeedback } from 'react-native';
-import { Timing } from '@viewstools/animations/native';
+import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
+import { animated, Spring } from 'react-spring/dist/native';
+let AnimatedView = animated(View);
 
 const styles = StyleSheet.create({
   AnimatedButtonHoverOnly1: { backgroundColor: 'red' },
@@ -4362,10 +4357,10 @@ class AnimatedButtonHoverOnly extends React.Component {
     return (
       <TrackContext.Consumer>
         {track => (
-          <Timing
-            curve=\\"easeOut\\"
-            delay={0}
-            duration={150}
+          <Spring
+            native
+            easing={Easing.easeCubicOut}
+            config={{ duration: 150 }}
             to={{ backgroundColor: props.isHovered ? 'blue' : 'red' }}
           >
             {animatedAnimatedButtonHoverOnly => (
@@ -4383,7 +4378,7 @@ class AnimatedButtonHoverOnly extends React.Component {
                 }}
                 underlayColor=\\"transparent\\"
               >
-                <Animated.View
+                <AnimatedView
                   testID={\`\${props['testID'] || 'AnimatedButtonHoverOnly'}|\`}
                   style={[
                     styles.AnimatedButtonHoverOnly1,
@@ -4394,10 +4389,10 @@ class AnimatedButtonHoverOnly extends React.Component {
                   ]}
                 >
                   {props.children}
-                </Animated.View>
+                </AnimatedView>
               </TouchableWithoutFeedback>
             )}
-          </Timing>
+          </Spring>
         )}
       </TrackContext.Consumer>
     );
@@ -4421,10 +4416,12 @@ export default AnimatedButtonHoverOnly;
 exports[`react-native parses react-native AnimatedButtonScopeOnly 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
+import * as Easing from 'd3-ease';
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
-import { Animated, TouchableWithoutFeedback } from 'react-native';
-import { Spring, Timing } from '@viewstools/animations/native';
+import { TouchableWithoutFeedback, View } from 'react-native';
+import { animated, Spring } from 'react-spring/dist/native';
+let AnimatedView = animated(View);
 
 class AnimatedButtonScopeOnly extends React.Component {
   render() {
@@ -4434,16 +4431,14 @@ class AnimatedButtonScopeOnly extends React.Component {
       <TrackContext.Consumer>
         {track => (
           <Spring
-            delay={0}
-            speed={12}
-            bounciness={8}
+            native
+            config={{ tension: 170, friction: 26 }}
             to={{ backgroundColor: props.before ? 'blue' : 'red' }}
           >
             {animatedAnimatedButtonScopeOnly => (
-              <Timing
-                curve=\\"linear\\"
-                delay={0}
-                duration={150}
+              <Spring
+                native
+                config={{ duration: 150 }}
                 to={{ opacity: props.before ? 1 : 1 }}
               >
                 {animatedAnimatedButtonScopeOnly1 => (
@@ -4463,7 +4458,7 @@ class AnimatedButtonScopeOnly extends React.Component {
                     }}
                     underlayColor=\\"transparent\\"
                   >
-                    <Animated.View
+                    <AnimatedView
                       testID={\`\${props['testID'] ||
                         'AnimatedButtonScopeOnly'}|\${
                         props.before ? 'before|' : ''
@@ -4475,10 +4470,10 @@ class AnimatedButtonScopeOnly extends React.Component {
                       }}
                     >
                       {props.children}
-                    </Animated.View>
+                    </AnimatedView>
                   </TouchableWithoutFeedback>
                 )}
-              </Timing>
+              </Spring>
             )}
           </Spring>
         )}
@@ -4535,7 +4530,8 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
-import { Animated, Image, StyleSheet } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
+let AnimatedImage = animated(Image);
 
 const styles = StyleSheet.create({ Horizontal: { flexDirection: 'row' } });
 
@@ -4548,7 +4544,7 @@ const BackgroundImage = props => {
       source={{ uri: 'https://views.tools/image.jpg' }}
       testID={\`\${props['testID'] || 'Vertical'}|\`}
     >
-      <Animated.Image
+      <AnimatedImage
         resizeMode={undefined}
         source={{ uri: props.backgroundImage }}
         testID={\`BackgroundImage.Horizontal|\`}
@@ -4580,7 +4576,8 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
-import { Animated, StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+let AnimatedView = animated(View);
 
 const styles = StyleSheet.create({
   Border1: { borderColor: 'red', borderStyle: 'solid' },
@@ -4594,23 +4591,23 @@ const Border = props => {
   const track = React.useContext(TrackContext);
 
   return (
-    <Animated.View
+    <AnimatedView
       testID={\`\${props['testID'] || 'Border'}|\`}
       style={[styles.Border1, { borderWidth: props.borderWidth }]}
     >
-      <Animated.View
+      <AnimatedView
         testID={\`Border.Top|\`}
         style={[styles.Top, { borderTopWidth: props.borderTopWidth }]}
       />
-      <Animated.View
+      <AnimatedView
         testID={\`Border.Right|\`}
         style={[styles.Right, { borderRightWidth: props.borderRightWidth }]}
       />
-      <Animated.View
+      <AnimatedView
         testID={\`Border.Bottom|\`}
         style={[styles.Bottom, { borderBottomWidth: props.borderBottomWidth }]}
       />
-      <Animated.View
+      <AnimatedView
         testID={\`Border.Left|\${props.something ? 'something|' : ''}\`}
         style={[
           styles.Left,
@@ -4621,7 +4618,7 @@ const Border = props => {
         ]}
       />
       {props.children}
-    </Animated.View>
+    </AnimatedView>
   );
 };
 Border.defaultProps = {
@@ -4697,7 +4694,8 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
-import { Animated, StyleSheet, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+let AnimatedText = animated(Text);
 
 const styles = StyleSheet.create({ Vertical: { backgroundColor: 'red' } });
 
@@ -4712,13 +4710,13 @@ class Code extends React.Component {
             testID={\`\${props['testID'] || 'Vertical'}|\`}
             style={styles.Vertical}
           >
-            <Animated.Text
+            <AnimatedText
               testID={\`Code.Text|\`}
               ref={props.refText}
               style={{ color: props.color }}
             >
               {props.text}
-            </Animated.Text>
+            </AnimatedText>
             {props.children}
           </View>
         )}
@@ -4827,7 +4825,8 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
-import { Animated, StyleSheet, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+let AnimatedText = animated(Text);
 
 const styles = StyleSheet.create({
   DynamicFamily: { fontSize: 14 },
@@ -4840,7 +4839,7 @@ const DynamicFontProps = props => {
 
   return (
     <View testID={\`\${props['testID'] || 'App'}|\`}>
-      <Animated.Text
+      <AnimatedText
         testID={\`DynamicFontProps.DynamicFamily|\`}
         style={[
           styles.DynamicFamily,
@@ -4848,8 +4847,8 @@ const DynamicFontProps = props => {
         ]}
       >
         Some text
-      </Animated.Text>
-      <Animated.Text
+      </AnimatedText>
+      <AnimatedText
         testID={\`DynamicFontProps.DynamicWeight|\`}
         style={[
           styles.DynamicWeight,
@@ -4857,8 +4856,8 @@ const DynamicFontProps = props => {
         ]}
       >
         Some text
-      </Animated.Text>
-      <Animated.Text
+      </AnimatedText>
+      <AnimatedText
         testID={\`DynamicFontProps.DynamicFamilyAndWeight|\`}
         style={[
           styles.DynamicFamilyAndWeight,
@@ -4866,7 +4865,7 @@ const DynamicFontProps = props => {
         ]}
       >
         Some text
-      </Animated.Text>
+      </AnimatedText>
       {props.children}
     </View>
   );
@@ -4919,13 +4918,14 @@ Object {
 import React from 'react';
 import SomeThing from './SomeThing.view.js';
 import TrackContext from './TrackContext.view.js';
-import { Animated } from 'react-native';
+import { View } from 'react-native';
+let AnimatedView = animated(View);
 
 const DynamicStylesApplyToBasicBlocksOnly = props => {
   const track = React.useContext(TrackContext);
 
   return (
-    <Animated.View
+    <AnimatedView
       testID={\`\${props['testID'] || 'Vertical'}|\`}
       style={{ height: props.height }}
     >
@@ -4934,7 +4934,7 @@ const DynamicStylesApplyToBasicBlocksOnly = props => {
         height={props.height}
       />
       {props.children}
-    </Animated.View>
+    </AnimatedView>
   );
 };
 
@@ -5004,12 +5004,8 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
-import {
-  Animated,
-  StyleSheet,
-  TouchableWithoutFeedback,
-  View,
-} from 'react-native';
+import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
+let AnimatedText = animated(Text);
 
 const styles = StyleSheet.create({ Text: { color: 'white' } });
 
@@ -5032,12 +5028,12 @@ const Hover = props => {
         }\`}
         style={{ backgroundColor: props.isStuff ? 'red' : '#323232' }}
       >
-        <Animated.Text
+        <AnimatedText
           testID={\`Hover.Text|\`}
           style={[styles.Text, { fontSize: props.fontSize }]}
         >
           Hey!
-        </Animated.Text>
+        </AnimatedText>
         {props.children}
       </View>
     </TouchableWithoutFeedback>
@@ -5834,10 +5830,12 @@ export default ScopePopup2;
 exports[`react-native parses react-native ScopedShadows 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
+import * as Easing from 'd3-ease';
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
-import { Animated, StyleSheet, TouchableWithoutFeedback } from 'react-native';
-import { Timing } from '@viewstools/animations/native';
+import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
+import { animated, Spring } from 'react-spring/dist/native';
+let AnimatedView = animated(View);
 
 const styles = StyleSheet.create({
   ScopedShadows1: {
@@ -5857,10 +5855,9 @@ class ScopedShadows extends React.Component {
     return (
       <TrackContext.Consumer>
         {track => (
-          <Timing
-            curve=\\"linear\\"
-            delay={0}
-            duration={150}
+          <Spring
+            native
+            config={{ duration: 150 }}
             to={{
               shadowColor: props.isClicked
                 ? 'rgba(14, 0, 232, 0.66)'
@@ -5883,7 +5880,7 @@ class ScopedShadows extends React.Component {
                 }}
                 underlayColor=\\"transparent\\"
               >
-                <Animated.View
+                <AnimatedView
                   testID={\`\${props['testID'] || 'ScopedShadows'}|\${
                     props.isClicked ? 'isClicked|' : ''
                   }\`}
@@ -5896,10 +5893,10 @@ class ScopedShadows extends React.Component {
                   ]}
                 >
                   {props.children}
-                </Animated.View>
+                </AnimatedView>
               </TouchableWithoutFeedback>
             )}
-          </Timing>
+          </Spring>
         )}
       </TrackContext.Consumer>
     );
@@ -5926,13 +5923,13 @@ Object {
 import Card from './Card.view.js';
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
-import { Animated, FlatList, StyleSheet } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
+let AnimatedFlatList = animated(FlatList);
 
 const styles = StyleSheet.create({
   ScrollableList1ContentContainer: { paddingBottom: 200 },
   ScrollableList1: { backgroundColor: 'red' },
 });
-const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
 const ScrollableList = props => {
   const track = React.useContext(TrackContext);
@@ -5978,7 +5975,9 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
-import { Animated, StyleSheet, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+let AnimatedText = animated(Text);
+let AnimatedView = animated(View);
 
 const styles = StyleSheet.create({
   BoxShadow: {
@@ -6002,7 +6001,7 @@ const Shadow = props => {
 
   return (
     <View testID={\`\${props['testID'] || 'Shadow'}|\`}>
-      <Animated.View
+      <AnimatedView
         testID={\`Shadow.BoxShadow|\`}
         style={[
           styles.BoxShadow,
@@ -6015,7 +6014,7 @@ const Shadow = props => {
           },
         ]}
       >
-        <Animated.Text
+        <AnimatedText
           testID={\`Shadow.TextShadow|\`}
           style={[
             styles.TextShadow,
@@ -6029,8 +6028,8 @@ const Shadow = props => {
           ]}
         >
           hey
-        </Animated.Text>
-      </Animated.View>
+        </AnimatedText>
+      </AnimatedView>
       {props.children}
     </View>
   );
@@ -6055,13 +6054,14 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
-import { Animated } from 'react-native';
+import { Text } from 'react-native';
+let AnimatedText = animated(Text);
 
 const SlotOnBaseAndValueOnScope = props => {
   const track = React.useContext(TrackContext);
 
   return (
-    <Animated.Text
+    <AnimatedText
       testID={\`\${props['testID'] || 'SlotOnBaseAndValueOnScope'}|\${
         props.something ? 'something|' : ''
       }\`}
@@ -6089,7 +6089,8 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
-import { Animated, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
+let AnimatedView = animated(View);
 
 const styles = StyleSheet.create({
   WindowControl: {
@@ -6120,13 +6121,13 @@ const SomeMissingStyle = props => {
       }}
       underlayColor=\\"transparent\\"
     >
-      <Animated.View
+      <AnimatedView
         testID={\`\${props['testID'] || 'WindowControl'}|\`}
         tabIndex={-1}
         style={styles.WindowControl}
       >
         {props.children}
-      </Animated.View>
+      </AnimatedView>
     </TouchableWithoutFeedback>
   );
 };
@@ -6264,7 +6265,8 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
-import { Animated, StyleSheet, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+let AnimatedText = animated(Text);
 
 const styles = StyleSheet.create({
   Transform1: {
@@ -6289,7 +6291,7 @@ const Transform = props => {
       testID={\`\${props['testID'] || 'Transform'}|\`}
       style={styles.Transform1}
     >
-      <Animated.Text
+      <AnimatedText
         testID={\`Transform.Text|\`}
         style={{
           transformOriginX: props.transformOriginX,
@@ -6297,7 +6299,7 @@ const Transform = props => {
         }}
       >
         who knows what happens here :D
-      </Animated.Text>
+      </AnimatedText>
       {props.children}
     </View>
   );
@@ -7135,7 +7137,8 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
-import { Animated, StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+let AnimatedView = animated(View);
 
 const styles = StyleSheet.create({ ViewNameIsntUsedInStyle1: { zIndex: 5 } });
 
@@ -7143,12 +7146,12 @@ const ViewNameIsntUsedInStyle = props => {
   const track = React.useContext(TrackContext);
 
   return (
-    <Animated.View
+    <AnimatedView
       testID={\`\${props['testID'] || 'ViewNameIsntUsedInStyle'}|\`}
       style={[styles.ViewNameIsntUsedInStyle1, { opacity: props.opacity }]}
     >
       {props.children}
-    </Animated.View>
+    </AnimatedView>
   );
 };
 ViewNameIsntUsedInStyle.defaultProps = { opacity: 1 };

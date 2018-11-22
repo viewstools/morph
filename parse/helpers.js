@@ -141,18 +141,18 @@ export const isUserComment = line => is(USER_COMMENT, line)
 const get = (regex, line) => line.match(regex)
 
 const addDefaults = (animationType, properties) => {
-  if (!properties.delay) {
-    properties.delay = 0
-  }
+  // if (!properties.delay) {
+  //   properties.delay = 0
+  // }
 
   if (animationType !== 'spring' && !properties.duration) {
     properties.duration = 150
   } else if (animationType === 'spring') {
-    if (!properties.speed) {
-      properties.speed = 12
+    if (!properties.tension) {
+      properties.tension = 170
     }
-    if (!properties.bounciness) {
-      properties.bounciness = 8
+    if (!properties.friction) {
+      properties.friction = 26
     }
   }
   return properties
@@ -340,10 +340,10 @@ export const getPropType = (block, name, defaultValue) =>
   block.isList && name === 'from'
     ? 'array'
     : isActionable(name)
-      ? 'function'
-      : isNumber[name]
-        ? 'number'
-        : 'string'
+    ? 'function'
+    : isNumber[name]
+    ? 'number'
+    : 'string'
 
 export const isTextInterpolation = (block, previous) => {
   const previousText = previous.properties.find(prop => prop.name === 'text')

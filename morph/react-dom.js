@@ -34,9 +34,11 @@ export default ({
   }
 
   const state = {
+    animated: new Set(),
     animations: {},
     cssDynamic: false,
     cssStatic: false,
+    dependencies: new Set(),
     enableAnimated,
     file,
     getFont,
