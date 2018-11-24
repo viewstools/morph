@@ -620,7 +620,6 @@ Object {
               "line": 4,
             },
           },
-          "maybeAnimated": true,
           "name": "Text",
           "properties": Array [
             Object {
@@ -830,7 +829,6 @@ Object {
           "line": 1,
         },
       },
-      "maybeAnimated": true,
       "name": "Vertical",
       "properties": Array [
         Object {
@@ -1072,7 +1070,6 @@ Object {
               "line": 2,
             },
           },
-          "maybeAnimated": true,
           "name": "Vertical",
           "properties": Array [
             Object {

@@ -839,6 +839,9 @@ const Action = props => {
 
 export default Action;
 ",
+  "dependencies": Set {
+    "emotion",
+  },
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -966,6 +969,10 @@ class AnimatedButton extends React.Component {
 
 export default AnimatedButton;
 ",
+  "dependencies": Set {
+    "emotion",
+    "react-spring",
+  },
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -1021,6 +1028,9 @@ const AnimatedButtonHoverOnly = props => {
 
 export default AnimatedButtonHoverOnly;
 ",
+  "dependencies": Set {
+    "emotion",
+  },
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -1095,6 +1105,10 @@ class AnimatedButtonScopeOnly extends React.Component {
 
 export default AnimatedButtonScopeOnly;
 ",
+  "dependencies": Set {
+    "emotion",
+    "react-spring",
+  },
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -1137,6 +1151,9 @@ const AppRegionDrag = props => {
 
 export default AppRegionDrag;
 ",
+  "dependencies": Set {
+    "emotion",
+  },
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -1184,6 +1201,9 @@ BackgroundImage.defaultProps = {
 };
 export default BackgroundImage;
 ",
+  "dependencies": Set {
+    "emotion",
+  },
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -1281,6 +1301,9 @@ Border.defaultProps = {
 };
 export default Border;
 ",
+  "dependencies": Set {
+    "emotion",
+  },
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -1338,6 +1361,9 @@ const ClassName = props => {
 
 export default ClassName;
 ",
+  "dependencies": Set {
+    "emotion",
+  },
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -1387,6 +1413,9 @@ Code.defaultProps = {
 };
 export default Code;
 ",
+  "dependencies": Set {
+    "emotion",
+  },
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -1440,6 +1469,7 @@ DefaultProps.defaultProps = {
 };
 export default DefaultProps;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -1482,6 +1512,9 @@ const Display = props => {
 
 export default Display;
 ",
+  "dependencies": Set {
+    "emotion",
+  },
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -1560,6 +1593,9 @@ DynamicFontProps.defaultProps = {
 };
 export default DynamicFontProps;
 ",
+  "dependencies": Set {
+    "emotion",
+  },
   "fonts": Array [
     Object {
       "family": "props.fontFamily",
@@ -1628,6 +1664,9 @@ const DynamicStylesApplyToBasicBlocksOnly = props => {
 
 export default DynamicStylesApplyToBasicBlocksOnly;
 ",
+  "dependencies": Set {
+    "emotion",
+  },
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -1660,6 +1699,7 @@ const EmptyText = props => {
 
 export default EmptyText;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -1694,6 +1734,7 @@ const GoTo = props => {
 
 export default GoTo;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -1754,6 +1795,9 @@ const Hover = props => {
 
 export default Hover;
 ",
+  "dependencies": Set {
+    "emotion",
+  },
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -1811,6 +1855,9 @@ const HyphenatedProps = props => {
 
 export default HyphenatedProps;
 ",
+  "dependencies": Set {
+    "emotion",
+  },
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -1839,6 +1886,7 @@ const JustText = props => {
 
 export default JustText;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -1869,6 +1917,7 @@ const Lazy = props => {
 
 export default Lazy;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -1920,6 +1969,9 @@ const ListOfSomething = props => {
 
 export default ListOfSomething;
 ",
+  "dependencies": Set {
+    "emotion",
+  },
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -1965,6 +2017,7 @@ const ListWhen = props => {
 
 export default ListWhen;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -2015,6 +2068,7 @@ const ListWithKey = props => {
 
 export default ListWithKey;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -2053,6 +2107,7 @@ const LocalImage = props => {
 
 export default LocalImage;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -2090,6 +2145,9 @@ const LocalImageSvg = props => {
 LocalImageSvg.defaultProps = { height: 50 };
 export default LocalImageSvg;
 ",
+  "dependencies": Set {
+    "emotion",
+  },
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -2125,6 +2183,7 @@ const LocalImageWithDefault = props => {
 LocalImageWithDefault.defaultProps = { source: fileJpg };
 export default LocalImageWithDefault;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -2161,6 +2220,7 @@ LocalOrRemoteImageWhenCode.defaultProps = {
 };
 export default LocalOrRemoteImageWhenCode;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -2222,6 +2282,9 @@ const Locals = props => {
 
 export default Locals;
 ",
+  "dependencies": Set {
+    "unstated",
+  },
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -2306,6 +2369,7 @@ const LocalsFormat = props => {
 
 export default LocalsFormat;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -2334,6 +2398,7 @@ const NameIsType = props => {
 
 export default NameIsType;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -2365,6 +2430,9 @@ const NegativeNumber = props => {
 
 export default NegativeNumber;
 ",
+  "dependencies": Set {
+    "emotion",
+  },
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -2418,6 +2486,7 @@ const NestedRoutes = props => {
 
 export default NestedRoutes;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -2474,6 +2543,9 @@ const Scope = props => {
 
 export default Scope;
 ",
+  "dependencies": Set {
+    "emotion",
+  },
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -2508,6 +2580,7 @@ const ScopeOnCustomView = props => {
 
 export default ScopeOnCustomView;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -2563,6 +2636,7 @@ const ScopePopup = props => {
 
 export default ScopePopup;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -2635,6 +2709,9 @@ const ScopePopup2 = props => {
 
 export default ScopePopup2;
 ",
+  "dependencies": Set {
+    "emotion",
+  },
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -2698,6 +2775,9 @@ const ScopedShadows = props => {
 
 export default ScopedShadows;
 ",
+  "dependencies": Set {
+    "emotion",
+  },
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -2753,6 +2833,9 @@ const ScrollableList = props => {
 
 export default ScrollableList;
 ",
+  "dependencies": Set {
+    "emotion",
+  },
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -2815,6 +2898,9 @@ const Shadow = props => {
 Shadow.defaultProps = { shadowColor: 'red' };
 export default Shadow;
 ",
+  "dependencies": Set {
+    "emotion",
+  },
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -2856,6 +2942,9 @@ const SlotOnBaseAndValueOnScope = props => {
 
 export default SlotOnBaseAndValueOnScope;
 ",
+  "dependencies": Set {
+    "emotion",
+  },
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -2920,6 +3009,9 @@ const SomeMissingStyle = props => {
 
 export default SomeMissingStyle;
 ",
+  "dependencies": Set {
+    "emotion",
+  },
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -2962,6 +3054,9 @@ const Teleport = props => {
 
 export default Teleport;
 ",
+  "dependencies": Set {
+    "emotion",
+  },
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -3001,6 +3096,7 @@ const TestIds = props => {
 
 export default TestIds;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -3043,6 +3139,7 @@ TextInterpolation.defaultProps = {
 };
 export default TextInterpolation;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -3104,6 +3201,9 @@ const Transform = props => {
 
 export default Transform;
 ",
+  "dependencies": Set {
+    "emotion",
+  },
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -3160,6 +3260,9 @@ const UseCaptureEmail = props => {
 
 export default UseCaptureEmail;
 ",
+  "dependencies": Set {
+    "emotion",
+  },
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -3192,6 +3295,7 @@ const UseCaptureFile = props => {
 
 export default UseCaptureFile;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -3221,6 +3325,7 @@ const UseCaptureNumber = props => {
 
 export default UseCaptureNumber;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -3248,6 +3353,7 @@ const UseCapturePhone = props => {
 
 export default UseCapturePhone;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -3275,6 +3381,7 @@ const UseCaptureSecure = props => {
 
 export default UseCaptureSecure;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -3313,6 +3420,9 @@ const UseCaptureText = props => {
 
 export default UseCaptureText;
 ",
+  "dependencies": Set {
+    "unstated",
+  },
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -3339,6 +3449,7 @@ const UseCaptureTextArea = props => {
 
 export default UseCaptureTextArea;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -3367,6 +3478,7 @@ const UseCaptureTextManagedFromOutside = props => {
 
 export default UseCaptureTextManagedFromOutside;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -3410,6 +3522,9 @@ const UseHorizontal = props => {
 
 export default UseHorizontal;
 ",
+  "dependencies": Set {
+    "emotion",
+  },
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -3444,6 +3559,7 @@ const UseImage = props => {
 
 export default UseImage;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -3472,6 +3588,7 @@ const UseProxy = props => {
 
 export default UseProxy;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -3543,6 +3660,9 @@ const UseRouter = props => {
 UseRouter.defaultProps = { height: 10 };
 export default UseRouter;
 ",
+  "dependencies": Set {
+    "emotion",
+  },
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -3621,6 +3741,9 @@ const UseSvg = props => {
 UseSvg.defaultProps = { opacity: 0.5 };
 export default UseSvg;
 ",
+  "dependencies": Set {
+    "emotion",
+  },
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -3722,6 +3845,9 @@ const UseTable = props => {
 
 export default UseTable;
 ",
+  "dependencies": Set {
+    "@viewstools/tables",
+  },
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -3828,6 +3954,10 @@ const UseTableOnWhen = props => {
 
 export default UseTableOnWhen;
 ",
+  "dependencies": Set {
+    "emotion",
+    "@viewstools/tables",
+  },
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -3896,6 +4026,9 @@ const UseText = props => {
 
 export default UseText;
 ",
+  "dependencies": Set {
+    "emotion",
+  },
   "fonts": Array [
     Object {
       "family": "Montserrat",
@@ -3966,6 +4099,9 @@ const UseTextCustomFont = props => {
 
 export default UseTextCustomFont;
 ",
+  "dependencies": Set {
+    "emotion",
+  },
   "fonts": Array [
     Object {
       "family": "CustomFontNotOnGoogle",
@@ -4010,6 +4146,9 @@ const UseVertical = props => {
 
 export default UseVertical;
 ",
+  "dependencies": Set {
+    "emotion",
+  },
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -4046,6 +4185,9 @@ const ViewNameIsntUsedInStyle = props => {
 ViewNameIsntUsedInStyle.defaultProps = { opacity: 1 };
 export default ViewNameIsntUsedInStyle;
 ",
+  "dependencies": Set {
+    "emotion",
+  },
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -4088,6 +4230,9 @@ const When = props => {
 
 export default When;
 ",
+  "dependencies": Set {
+    "emotion",
+  },
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -4122,6 +4267,7 @@ const WhenTopLevel = props => {
 
 export default WhenTopLevel;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -4172,6 +4318,7 @@ const Action = props => {
 
 export default Action;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -4324,6 +4471,10 @@ class AnimatedButton extends React.Component {
 
 export default AnimatedButton;
 ",
+  "dependencies": Set {
+    "react-spring",
+    "d3-ease",
+  },
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -4401,6 +4552,10 @@ class AnimatedButtonHoverOnly extends React.Component {
 
 export default AnimatedButtonHoverOnly;
 ",
+  "dependencies": Set {
+    "react-spring",
+    "d3-ease",
+  },
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -4484,6 +4639,10 @@ class AnimatedButtonScopeOnly extends React.Component {
 
 export default AnimatedButtonScopeOnly;
 ",
+  "dependencies": Set {
+    "react-spring",
+    "d3-ease",
+  },
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -4519,6 +4678,7 @@ const AppRegionDrag = props => {
 
 export default AppRegionDrag;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -4531,7 +4691,6 @@ Object {
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import { Image, StyleSheet } from 'react-native';
-let AnimatedImage = animated(Image);
 
 const styles = StyleSheet.create({ Horizontal: { flexDirection: 'row' } });
 
@@ -4544,7 +4703,7 @@ const BackgroundImage = props => {
       source={{ uri: 'https://views.tools/image.jpg' }}
       testID={\`\${props['testID'] || 'Vertical'}|\`}
     >
-      <AnimatedImage
+      <Image
         resizeMode={undefined}
         source={{ uri: props.backgroundImage }}
         testID={\`BackgroundImage.Horizontal|\`}
@@ -4559,6 +4718,7 @@ BackgroundImage.defaultProps = {
 };
 export default BackgroundImage;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -4577,7 +4737,6 @@ Object {
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import { StyleSheet, View } from 'react-native';
-let AnimatedView = animated(View);
 
 const styles = StyleSheet.create({
   Border1: { borderColor: 'red', borderStyle: 'solid' },
@@ -4591,23 +4750,23 @@ const Border = props => {
   const track = React.useContext(TrackContext);
 
   return (
-    <AnimatedView
+    <View
       testID={\`\${props['testID'] || 'Border'}|\`}
       style={[styles.Border1, { borderWidth: props.borderWidth }]}
     >
-      <AnimatedView
+      <View
         testID={\`Border.Top|\`}
         style={[styles.Top, { borderTopWidth: props.borderTopWidth }]}
       />
-      <AnimatedView
+      <View
         testID={\`Border.Right|\`}
         style={[styles.Right, { borderRightWidth: props.borderRightWidth }]}
       />
-      <AnimatedView
+      <View
         testID={\`Border.Bottom|\`}
         style={[styles.Bottom, { borderBottomWidth: props.borderBottomWidth }]}
       />
-      <AnimatedView
+      <View
         testID={\`Border.Left|\${props.something ? 'something|' : ''}\`}
         style={[
           styles.Left,
@@ -4618,7 +4777,7 @@ const Border = props => {
         ]}
       />
       {props.children}
-    </AnimatedView>
+    </View>
   );
 };
 Border.defaultProps = {
@@ -4630,6 +4789,7 @@ Border.defaultProps = {
 };
 export default Border;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -4683,6 +4843,7 @@ const ClassName = props => {
 
 export default ClassName;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -4695,7 +4856,6 @@ Object {
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import { StyleSheet, Text, View } from 'react-native';
-let AnimatedText = animated(Text);
 
 const styles = StyleSheet.create({ Vertical: { backgroundColor: 'red' } });
 
@@ -4710,13 +4870,13 @@ class Code extends React.Component {
             testID={\`\${props['testID'] || 'Vertical'}|\`}
             style={styles.Vertical}
           >
-            <AnimatedText
+            <Text
               testID={\`Code.Text|\`}
               ref={props.refText}
               style={{ color: props.color }}
             >
               {props.text}
-            </AnimatedText>
+            </Text>
             {props.children}
           </View>
         )}
@@ -4730,6 +4890,7 @@ Code.defaultProps = {
 };
 export default Code;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -4776,6 +4937,7 @@ DefaultProps.defaultProps = {
 };
 export default DefaultProps;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -4814,6 +4976,7 @@ const Display = props => {
 
 export default Display;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -4826,7 +4989,6 @@ Object {
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import { StyleSheet, Text, View } from 'react-native';
-let AnimatedText = animated(Text);
 
 const styles = StyleSheet.create({
   DynamicFamily: { fontSize: 14 },
@@ -4839,7 +5001,7 @@ const DynamicFontProps = props => {
 
   return (
     <View testID={\`\${props['testID'] || 'App'}|\`}>
-      <AnimatedText
+      <Text
         testID={\`DynamicFontProps.DynamicFamily|\`}
         style={[
           styles.DynamicFamily,
@@ -4847,8 +5009,8 @@ const DynamicFontProps = props => {
         ]}
       >
         Some text
-      </AnimatedText>
-      <AnimatedText
+      </Text>
+      <Text
         testID={\`DynamicFontProps.DynamicWeight|\`}
         style={[
           styles.DynamicWeight,
@@ -4856,8 +5018,8 @@ const DynamicFontProps = props => {
         ]}
       >
         Some text
-      </AnimatedText>
-      <AnimatedText
+      </Text>
+      <Text
         testID={\`DynamicFontProps.DynamicFamilyAndWeight|\`}
         style={[
           styles.DynamicFamilyAndWeight,
@@ -4865,7 +5027,7 @@ const DynamicFontProps = props => {
         ]}
       >
         Some text
-      </AnimatedText>
+      </Text>
       {props.children}
     </View>
   );
@@ -4876,6 +5038,7 @@ DynamicFontProps.defaultProps = {
 };
 export default DynamicFontProps;
 ",
+  "dependencies": Set {},
   "fonts": Array [
     Object {
       "family": "props.fontFamily",
@@ -4919,13 +5082,12 @@ import React from 'react';
 import SomeThing from './SomeThing.view.js';
 import TrackContext from './TrackContext.view.js';
 import { View } from 'react-native';
-let AnimatedView = animated(View);
 
 const DynamicStylesApplyToBasicBlocksOnly = props => {
   const track = React.useContext(TrackContext);
 
   return (
-    <AnimatedView
+    <View
       testID={\`\${props['testID'] || 'Vertical'}|\`}
       style={{ height: props.height }}
     >
@@ -4934,12 +5096,13 @@ const DynamicStylesApplyToBasicBlocksOnly = props => {
         height={props.height}
       />
       {props.children}
-    </AnimatedView>
+    </View>
   );
 };
 
 export default DynamicStylesApplyToBasicBlocksOnly;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -4967,6 +5130,7 @@ const EmptyText = props => {
 
 export default EmptyText;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -4993,6 +5157,7 @@ const GoTo = props => {
 
 export default GoTo;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -5005,7 +5170,6 @@ Object {
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
-let AnimatedText = animated(Text);
 
 const styles = StyleSheet.create({ Text: { color: 'white' } });
 
@@ -5028,12 +5192,12 @@ const Hover = props => {
         }\`}
         style={{ backgroundColor: props.isStuff ? 'red' : '#323232' }}
       >
-        <AnimatedText
+        <Text
           testID={\`Hover.Text|\`}
           style={[styles.Text, { fontSize: props.fontSize }]}
         >
           Hey!
-        </AnimatedText>
+        </Text>
         {props.children}
       </View>
     </TouchableWithoutFeedback>
@@ -5042,6 +5206,7 @@ const Hover = props => {
 
 export default Hover;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -5089,6 +5254,7 @@ const HyphenatedProps = props => {
 
 export default HyphenatedProps;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -5110,6 +5276,7 @@ const JustText = props => {
 
 export default JustText;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -5137,6 +5304,7 @@ const Lazy = props => {
 
 export default Lazy;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -5184,6 +5352,7 @@ const ListOfSomething = props => {
 
 export default ListOfSomething;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -5220,6 +5389,7 @@ const ListWhen = props => {
 
 export default ListWhen;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -5261,6 +5431,7 @@ const ListWithKey = props => {
 
 export default ListWithKey;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -5297,6 +5468,7 @@ const LocalImage = props => {
 
 export default LocalImage;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -5327,6 +5499,7 @@ const LocalImageSvg = props => {
 LocalImageSvg.defaultProps = { height: 50 };
 export default LocalImageSvg;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -5360,6 +5533,7 @@ const LocalImageWithDefault = props => {
 LocalImageWithDefault.defaultProps = { source: fileJpg };
 export default LocalImageWithDefault;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -5394,6 +5568,7 @@ LocalOrRemoteImageWhenCode.defaultProps = {
 };
 export default LocalOrRemoteImageWhenCode;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -5452,6 +5627,9 @@ const Locals = props => {
 
 export default Locals;
 ",
+  "dependencies": Set {
+    "unstated",
+  },
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -5530,6 +5708,7 @@ const LocalsFormat = props => {
 
 export default LocalsFormat;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -5551,6 +5730,7 @@ const NameIsType = props => {
 
 export default NameIsType;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -5578,6 +5758,7 @@ const NegativeNumber = props => {
 
 export default NegativeNumber;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -5618,6 +5799,7 @@ const NestedRoutes = props => {
 
 export default NestedRoutes;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -5668,6 +5850,7 @@ const Scope = props => {
 
 export default Scope;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -5700,6 +5883,7 @@ const ScopeOnCustomView = props => {
 
 export default ScopeOnCustomView;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -5754,6 +5938,7 @@ const ScopePopup = props => {
 
 export default ScopePopup;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -5815,6 +6000,7 @@ const ScopePopup2 = props => {
 
 export default ScopePopup2;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -5905,6 +6091,10 @@ class ScopedShadows extends React.Component {
 
 export default ScopedShadows;
 ",
+  "dependencies": Set {
+    "react-spring",
+    "d3-ease",
+  },
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -5924,7 +6114,6 @@ import Card from './Card.view.js';
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import { FlatList, StyleSheet } from 'react-native';
-let AnimatedFlatList = animated(FlatList);
 
 const styles = StyleSheet.create({
   ScrollableList1ContentContainer: { paddingBottom: 200 },
@@ -5935,7 +6124,7 @@ const ScrollableList = props => {
   const track = React.useContext(TrackContext);
 
   return (
-    <AnimatedFlatList
+    <FlatList
       testID={\`\${props['testID'] || 'ScrollableList'}|\`}
       style={styles.ScrollableList1}
       contentContainerStyle={[
@@ -5953,6 +6142,7 @@ const ScrollableList = props => {
 
 export default ScrollableList;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -5976,8 +6166,6 @@ Object {
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import { StyleSheet, Text, View } from 'react-native';
-let AnimatedText = animated(Text);
-let AnimatedView = animated(View);
 
 const styles = StyleSheet.create({
   BoxShadow: {
@@ -6001,7 +6189,7 @@ const Shadow = props => {
 
   return (
     <View testID={\`\${props['testID'] || 'Shadow'}|\`}>
-      <AnimatedView
+      <View
         testID={\`Shadow.BoxShadow|\`}
         style={[
           styles.BoxShadow,
@@ -6014,7 +6202,7 @@ const Shadow = props => {
           },
         ]}
       >
-        <AnimatedText
+        <Text
           testID={\`Shadow.TextShadow|\`}
           style={[
             styles.TextShadow,
@@ -6028,8 +6216,8 @@ const Shadow = props => {
           ]}
         >
           hey
-        </AnimatedText>
-      </AnimatedView>
+        </Text>
+      </View>
       {props.children}
     </View>
   );
@@ -6037,6 +6225,7 @@ const Shadow = props => {
 Shadow.defaultProps = { shadowColor: 'red' };
 export default Shadow;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -6055,13 +6244,12 @@ Object {
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import { Text } from 'react-native';
-let AnimatedText = animated(Text);
 
 const SlotOnBaseAndValueOnScope = props => {
   const track = React.useContext(TrackContext);
 
   return (
-    <AnimatedText
+    <Text
       testID={\`\${props['testID'] || 'SlotOnBaseAndValueOnScope'}|\${
         props.something ? 'something|' : ''
       }\`}
@@ -6072,6 +6260,7 @@ const SlotOnBaseAndValueOnScope = props => {
 
 export default SlotOnBaseAndValueOnScope;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -6090,7 +6279,6 @@ Object {
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
-let AnimatedView = animated(View);
 
 const styles = StyleSheet.create({
   WindowControl: {
@@ -6121,19 +6309,20 @@ const SomeMissingStyle = props => {
       }}
       underlayColor=\\"transparent\\"
     >
-      <AnimatedView
+      <View
         testID={\`\${props['testID'] || 'WindowControl'}|\`}
         tabIndex={-1}
         style={styles.WindowControl}
       >
         {props.children}
-      </AnimatedView>
+      </View>
     </TouchableWithoutFeedback>
   );
 };
 
 export default SomeMissingStyle;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -6175,6 +6364,7 @@ const Teleport = props => {
 
 export default Teleport;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -6205,6 +6395,7 @@ const TestIds = props => {
 
 export default TestIds;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -6243,6 +6434,7 @@ TextInterpolation.defaultProps = {
 };
 export default TextInterpolation;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -6266,7 +6458,6 @@ Object {
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import { StyleSheet, Text, View } from 'react-native';
-let AnimatedText = animated(Text);
 
 const styles = StyleSheet.create({
   Transform1: {
@@ -6291,7 +6482,7 @@ const Transform = props => {
       testID={\`\${props['testID'] || 'Transform'}|\`}
       style={styles.Transform1}
     >
-      <AnimatedText
+      <Text
         testID={\`Transform.Text|\`}
         style={{
           transformOriginX: props.transformOriginX,
@@ -6299,7 +6490,7 @@ const Transform = props => {
         }}
       >
         who knows what happens here :D
-      </AnimatedText>
+      </Text>
       {props.children}
     </View>
   );
@@ -6307,6 +6498,7 @@ const Transform = props => {
 
 export default Transform;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -6359,6 +6551,7 @@ const UseCaptureEmail = props => {
 
 export default UseCaptureEmail;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -6394,6 +6587,7 @@ const UseCaptureFile = props => {
 
 export default UseCaptureFile;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -6423,6 +6617,7 @@ const UseCaptureNumber = props => {
 
 export default UseCaptureNumber;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -6452,6 +6647,7 @@ const UseCapturePhone = props => {
 
 export default UseCapturePhone;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -6481,6 +6677,7 @@ const UseCaptureSecure = props => {
 
 export default UseCaptureSecure;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -6521,6 +6718,9 @@ const UseCaptureText = props => {
 
 export default UseCaptureText;
 ",
+  "dependencies": Set {
+    "unstated",
+  },
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -6551,6 +6751,7 @@ const UseCaptureTextArea = props => {
 
 export default UseCaptureTextArea;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -6581,6 +6782,7 @@ const UseCaptureTextManagedFromOutside = props => {
 
 export default UseCaptureTextManagedFromOutside;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -6624,6 +6826,7 @@ const UseHorizontal = props => {
 
 export default UseHorizontal;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -6656,6 +6859,7 @@ const UseImage = props => {
 
 export default UseImage;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -6679,6 +6883,7 @@ const UseProxy = props => {
 
 export default UseProxy;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -6740,6 +6945,7 @@ const UseRouter = props => {
 UseRouter.defaultProps = { height: 10 };
 export default UseRouter;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -6796,6 +7002,7 @@ const UseSvg = props => {
 UseSvg.defaultProps = { opacity: 0.5 };
 export default UseSvg;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -6881,6 +7088,9 @@ const UseTable = props => {
 
 export default UseTable;
 ",
+  "dependencies": Set {
+    "@viewstools/tables",
+  },
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -6964,6 +7174,9 @@ const UseTableOnWhen = props => {
 
 export default UseTableOnWhen;
 ",
+  "dependencies": Set {
+    "@viewstools/tables",
+  },
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -7024,6 +7237,7 @@ const UseText = props => {
 
 export default UseText;
 ",
+  "dependencies": Set {},
   "fonts": Array [
     Object {
       "family": "Montserrat",
@@ -7086,6 +7300,7 @@ const UseTextCustomFont = props => {
 
 export default UseTextCustomFont;
 ",
+  "dependencies": Set {},
   "fonts": Array [
     Object {
       "family": "CustomFontNotOnGoogle",
@@ -7126,6 +7341,7 @@ const UseVertical = props => {
 
 export default UseVertical;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -7138,7 +7354,6 @@ Object {
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import { StyleSheet, View } from 'react-native';
-let AnimatedView = animated(View);
 
 const styles = StyleSheet.create({ ViewNameIsntUsedInStyle1: { zIndex: 5 } });
 
@@ -7146,17 +7361,18 @@ const ViewNameIsntUsedInStyle = props => {
   const track = React.useContext(TrackContext);
 
   return (
-    <AnimatedView
+    <View
       testID={\`\${props['testID'] || 'ViewNameIsntUsedInStyle'}|\`}
       style={[styles.ViewNameIsntUsedInStyle1, { opacity: props.opacity }]}
     >
       {props.children}
-    </AnimatedView>
+    </View>
   );
 };
 ViewNameIsntUsedInStyle.defaultProps = { opacity: 1 };
 export default ViewNameIsntUsedInStyle;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -7191,6 +7407,7 @@ const When = props => {
 
 export default When;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [
     Object {
@@ -7220,6 +7437,7 @@ const WhenTopLevel = props => {
 
 export default WhenTopLevel;
 ",
+  "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [
     Object {

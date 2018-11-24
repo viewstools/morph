@@ -10,12 +10,9 @@ export default ({ state, name }) => {
     ? `const childrenArray = React.Children.toArray(props.children)`
     : ''
 
-  let maybeAnimated = false
   let animatedOpen = []
   let animatedClose = []
   if (state.isAnimated) {
-    maybeAnimated = true
-
     Object.keys(state.animations).forEach(blockId => {
       Object.values(state.animations[blockId]).forEach(item => {
         const { curve, ...configValues } = item.animation.properties
@@ -63,7 +60,7 @@ export default ({ state, name }) => {
     })
   }
 
-  if (state.hasRefs || maybeAnimated) {
+  if (state.hasRefs || state.isAnimated) {
     animatedOpen = animatedOpen.join('')
     animatedClose = animatedClose.reverse().join('')
 

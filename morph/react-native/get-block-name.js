@@ -26,7 +26,7 @@ export default (node, parent, state) => {
       return null
 
     case 'Text':
-      if (node.isAnimated || node.maybeAnimated) {
+      if (node.isAnimated) {
         state.animated.add('Text')
         return 'AnimatedText'
       } else {
@@ -61,7 +61,7 @@ const getGroupBlockName = (node, state) => {
     name = 'ScrollView'
   }
 
-  if ((node.isAnimated || node.maybeAnimated) && name !== 'Link') {
+  if (node.isAnimated && name !== 'Link') {
     state.animated.add(name)
     name = `Animated${name}`
   }
@@ -73,7 +73,7 @@ const getListBlockName = (node, state) => {
   const base = hasProp(node, /^overflow/, v => v === 'auto' || v === 'scroll')
     ? 'FlatList'
     : 'View'
-  if (node.isAnimated || node.maybeAnimated) {
+  if (node.isAnimated) {
     state.animated.add(base)
     return `Animated${base}`
   } else {
