@@ -29,6 +29,14 @@ export default (node, parent, code) => {
   }
 
   switch (node.name) {
+    case 'borderTopLeftRadius':
+    case 'borderTopRightRadius':
+    case 'borderBottomLeftRadius':
+    case 'borderBottomRightRadius':
+      return {
+        [parent.name === 'Image' ? 'borderRadius' : node.name]: node.value,
+      }
+
     case 'borderTopStyle':
     case 'borderBottomStyle':
     case 'borderLeftStyle':
