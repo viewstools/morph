@@ -99,9 +99,7 @@ export default (state, getImport) => {
 
     if (animations.length > 0) {
       dependencies.push(
-        `import { ${animations.join(', ')} } from "react-spring/dist/${
-          state.isReactNative ? 'native' : 'web'
-        }"`
+        `import { ${animations.join(', ')} } from "react-spring"`
       )
 
       state.dependencies.add('react-spring')

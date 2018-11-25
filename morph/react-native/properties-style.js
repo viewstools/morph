@@ -15,7 +15,9 @@ export { enter }
 
 export const leave = (node, parent, state) => {
   let dynamicStyles = getNonAnimatedDynamicStyles(node)
-  let style = null
+  let baseStyle = null
+  let animatedStyle = null
+  let dynamicStyle = null
   let containerStyle = null
 
   if (
@@ -42,13 +44,13 @@ export const leave = (node, parent, state) => {
     }
     if (hasKeys(node.style.static.base)) {
       state.styles[id] = node.style.static.base
-      style = `styles.${id}`
+      baseStyle = `styles.${id}`
     }
   }
 
   if (node.isAnimated) {
-    const animated = getAnimatedStyles(node, state.isReactNative)
-    style = style ? `[${style},{${animated}}]` : `{${animated}}`
+    animatedStyle = getAnimatedStyles(node, state.isReactNative)
+
     state.isAnimated = true
     state.animations[node.id] = node.animations
     if (node.hasSpringAnimation) {
@@ -75,12 +77,21 @@ export const leave = (node, parent, state) => {
         : dynamicContainerStyle
     }
     if (hasKeys(dynamicStyles)) {
-      const dynamic = getObjectAsString(dynamicStyles)
-      style = style ? `[${style},${dynamic}]` : dynamic
+      dynamicStyle = getObjectAsString(dynamicStyles)
+      dynamicStyle = dynamicStyle.substr(1, dynamicStyle.length - 2)
     }
   }
 
-  if (style) {
+  if (baseStyle || animatedStyle || dynamicStyle) {
+    let style = baseStyle
+    if (animatedStyle) {
+      // TODO once https://github.com/drcmda/react-spring/issues/337 gets
+      // fixed, come back to using the array notation
+      style = `{...${baseStyle},${animatedStyle},${dynamicStyle || ''}}`
+    } else if (dynamicStyle) {
+      style = `[${baseStyle},{${dynamicStyle}}]`
+    }
+
     state.render.push(` style={${style}}`)
   }
 

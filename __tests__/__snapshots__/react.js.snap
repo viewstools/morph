@@ -870,7 +870,7 @@ Object {
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { animated, Spring } from 'react-spring/dist/web';
+import { animated, Spring } from 'react-spring';
 import { css } from 'emotion';
 
 const AnimatedButton1 = css({
@@ -1049,7 +1049,7 @@ Object {
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { animated, Spring } from 'react-spring/dist/web';
+import { animated, Spring } from 'react-spring';
 import { css } from 'emotion';
 
 const AnimatedButtonScopeOnly1 = css({
@@ -4348,7 +4348,7 @@ import * as Easing from 'd3-ease';
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
-import { animated, Spring } from 'react-spring/dist/native';
+import { animated, Spring } from 'react-spring';
 let AnimatedText = animated(Text);
 let AnimatedView = animated(View);
 
@@ -4418,32 +4418,31 @@ class AnimatedButton extends React.Component {
                                     'AnimatedButton'}|\${
                                     props.isOn ? 'isOn|' : ''
                                   }\`}
-                                  style={[
-                                    styles.AnimatedButton1,
-                                    {
-                                      opacity: animatedAnimatedButton.opacity,
-                                      transform: [
-                                        {
-                                          translateX:
-                                            animatedAnimatedButton1.translateX,
-                                        },
-                                        {
-                                          rotateX:
-                                            animatedAnimatedButton2.rotateX,
-                                        },
-                                        {
-                                          rotateY:
-                                            animatedAnimatedButton3.rotateY,
-                                        },
-                                      ],
-                                    },
-                                  ]}
+                                  style={{
+                                    ...styles.AnimatedButton1,
+                                    opacity: animatedAnimatedButton.opacity,
+                                    transform: [
+                                      {
+                                        translateX:
+                                          animatedAnimatedButton1.translateX,
+                                      },
+                                      {
+                                        rotateX:
+                                          animatedAnimatedButton2.rotateX,
+                                      },
+                                      {
+                                        rotateY:
+                                          animatedAnimatedButton3.rotateY,
+                                      },
+                                    ],
+                                  }}
                                 >
                                   <AnimatedText
                                     testID={\`AnimatedButton.Text|\${
                                       props.isOn ? 'isOn|' : ''
                                     }\`}
                                     style={{
+                                      ...null,
                                       color: animatedText.color,
                                       fontSize: animatedText.fontSize,
                                     }}
@@ -4494,7 +4493,7 @@ import * as Easing from 'd3-ease';
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
-import { animated, Spring } from 'react-spring/dist/native';
+import { animated, Spring } from 'react-spring';
 let AnimatedView = animated(View);
 
 const styles = StyleSheet.create({
@@ -4531,13 +4530,11 @@ class AnimatedButtonHoverOnly extends React.Component {
               >
                 <AnimatedView
                   testID={\`\${props['testID'] || 'AnimatedButtonHoverOnly'}|\`}
-                  style={[
-                    styles.AnimatedButtonHoverOnly1,
-                    {
-                      backgroundColor:
-                        animatedAnimatedButtonHoverOnly.backgroundColor,
-                    },
-                  ]}
+                  style={{
+                    ...styles.AnimatedButtonHoverOnly1,
+                    backgroundColor:
+                      animatedAnimatedButtonHoverOnly.backgroundColor,
+                  }}
                 >
                   {props.children}
                 </AnimatedView>
@@ -4575,7 +4572,7 @@ import * as Easing from 'd3-ease';
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import { TouchableWithoutFeedback, View } from 'react-native';
-import { animated, Spring } from 'react-spring/dist/native';
+import { animated, Spring } from 'react-spring';
 let AnimatedView = animated(View);
 
 class AnimatedButtonScopeOnly extends React.Component {
@@ -4619,6 +4616,7 @@ class AnimatedButtonScopeOnly extends React.Component {
                         props.before ? 'before|' : ''
                       }\`}
                       style={{
+                        ...null,
                         backgroundColor:
                           animatedAnimatedButtonScopeOnly.backgroundColor,
                         opacity: animatedAnimatedButtonScopeOnly1.opacity,
@@ -4873,7 +4871,7 @@ class Code extends React.Component {
             <Text
               testID={\`Code.Text|\`}
               ref={props.refText}
-              style={{ color: props.color }}
+              style={[null, { color: props.color }]}
             >
               {props.text}
             </Text>
@@ -5089,7 +5087,7 @@ const DynamicStylesApplyToBasicBlocksOnly = props => {
   return (
     <View
       testID={\`\${props['testID'] || 'Vertical'}|\`}
-      style={{ height: props.height }}
+      style={[null, { height: props.height }]}
     >
       <SomeThing
         testID={\`DynamicStylesApplyToBasicBlocksOnly.OnTop|\`}
@@ -5190,7 +5188,7 @@ const Hover = props => {
         testID={\`\${props['testID'] || 'Hover'}|\${
           props.isStuff ? 'isStuff|' : ''
         }\`}
-        style={{ backgroundColor: props.isStuff ? 'red' : '#323232' }}
+        style={[null, { backgroundColor: props.isStuff ? 'red' : '#323232' }]}
       >
         <Text
           testID={\`Hover.Text|\`}
@@ -5241,7 +5239,10 @@ const HyphenatedProps = props => {
         testID={\`HyphenatedProps.Content|\${
           props.inDesignSystem ? 'inDesignSystem|' : ''
         }\`}
-        style={{ alignItems: props.inDesignSystem ? 'flex-start' : 'center' }}
+        style={[
+          null,
+          { alignItems: props.inDesignSystem ? 'flex-start' : 'center' },
+        ]}
       />
       <SomeViewThatExposesAlignItems
         testID={\`HyphenatedProps.SomeViewThatExposesAlignItems|\`}
@@ -5827,15 +5828,18 @@ const Scope = props => {
               ? 'notWhatMakesBlue|'
               : ''
       }\`}
-      style={{
-        color: props.somethingGreen
-          ? 'rgb(0,255,0)'
-          : props.whatMakesBlue
-            ? 'rgb(0,0,255)'
-            : !props.whatMakesBlue
-              ? 'rgb(255,255,0)'
-              : 'red',
-      }}
+      style={[
+        null,
+        {
+          color: props.somethingGreen
+            ? 'rgb(0,255,0)'
+            : props.whatMakesBlue
+              ? 'rgb(0,0,255)'
+              : !props.whatMakesBlue
+                ? 'rgb(255,255,0)'
+                : 'red',
+        },
+      ]}
     >
       {props.somethingGreen
         ? '2 green'
@@ -5984,12 +5988,15 @@ const ScopePopup2 = props => {
               ? 'isSuperVisible|'
               : ''
         }\`}
-        style={{
-          opacity: props.isShown ? 1 : props.isSuperVisible ? 3 : 0,
-          transform: [
-            { scale: props.isShown ? 1 : props.isSuperVisible ? 2 : 0 },
-          ],
-        }}
+        style={[
+          null,
+          {
+            opacity: props.isShown ? 1 : props.isSuperVisible ? 3 : 0,
+            transform: [
+              { scale: props.isShown ? 1 : props.isSuperVisible ? 2 : 0 },
+            ],
+          },
+        ]}
       >
         <Text testID={\`ScopePopup2.Text:1|\`}>I'm inside the popup</Text>
       </View>
@@ -6020,7 +6027,7 @@ import * as Easing from 'd3-ease';
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
-import { animated, Spring } from 'react-spring/dist/native';
+import { animated, Spring } from 'react-spring';
 let AnimatedView = animated(View);
 
 const styles = StyleSheet.create({
@@ -6070,13 +6077,11 @@ class ScopedShadows extends React.Component {
                   testID={\`\${props['testID'] || 'ScopedShadows'}|\${
                     props.isClicked ? 'isClicked|' : ''
                   }\`}
-                  style={[
-                    styles.ScopedShadows1,
-                    {
-                      shadowColor: animatedScopedShadows.shadowColor,
-                      shadowBlur: animatedScopedShadows.shadowBlur,
-                    },
-                  ]}
+                  style={{
+                    ...styles.ScopedShadows1,
+                    shadowColor: animatedScopedShadows.shadowColor,
+                    shadowBlur: animatedScopedShadows.shadowBlur,
+                  }}
                 >
                   {props.children}
                 </AnimatedView>
@@ -6253,7 +6258,7 @@ const SlotOnBaseAndValueOnScope = props => {
       testID={\`\${props['testID'] || 'SlotOnBaseAndValueOnScope'}|\${
         props.something ? 'something|' : ''
       }\`}
-      style={{ color: props.something ? 'blue' : props.color }}
+      style={[null, { color: props.something ? 'blue' : props.color }]}
     />
   );
 };
@@ -6484,10 +6489,13 @@ const Transform = props => {
     >
       <Text
         testID={\`Transform.Text|\`}
-        style={{
-          transformOriginX: props.transformOriginX,
-          transformOriginY: props.transformOriginY,
-        }}
+        style={[
+          null,
+          {
+            transformOriginX: props.transformOriginX,
+            transformOriginY: props.transformOriginY,
+          },
+        ]}
       >
         who knows what happens here :D
       </Text>
