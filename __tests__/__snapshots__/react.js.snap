@@ -4990,7 +4990,10 @@ import { StyleSheet, Text, View } from 'react-native';
 
 const styles = StyleSheet.create({
   DynamicFamily: { fontSize: 14 },
-  DynamicWeight: { fontSize: 14 },
+  DynamicWeight: {
+    fontSize: 14,
+    fontFamily: '\`Montserrat-\${props.fontWeight}\`',
+  },
   DynamicFamilyAndWeight: { fontSize: 14 },
 });
 
@@ -5010,10 +5013,7 @@ const DynamicFontProps = props => {
       </Text>
       <Text
         testID={\`DynamicFontProps.DynamicWeight|\`}
-        style={[
-          styles.DynamicWeight,
-          { fontFamily: \`Montserrat-\${props.fontWeight}\` },
-        ]}
+        style={styles.DynamicWeight}
       >
         Some text
       </Text>
@@ -6033,11 +6033,9 @@ let AnimatedView = animated(View);
 const styles = StyleSheet.create({
   ScopedShadows1: {
     flexDirection: 'row',
-    elevation: 1,
     shadowOffset: { width: 0, height: 5 },
-    shadowRadius: 20,
+    elevation: 1,
     shadowOpacity: 1,
-    shadowColor: 'rgba(232, 188, 0, 0.66)',
   },
 });
 
@@ -6174,18 +6172,16 @@ import { StyleSheet, Text, View } from 'react-native';
 
 const styles = StyleSheet.create({
   BoxShadow: {
-    elevation: 1,
-    shadowOffset: { width: 0, height: 5 },
     shadowRadius: 2,
+    elevation: 1,
     shadowOpacity: 1,
-    shadowColor: 'props.shadowColor',
+    shadowOffset: { width: 0, height: 5 },
   },
   TextShadow: {
-    elevation: 1,
-    shadowOffset: { width: 2, height: 3 },
     shadowRadius: 1,
+    elevation: 1,
     shadowOpacity: 1,
-    shadowColor: 'props.shadowColor',
+    shadowOffset: { width: 2, height: 3 },
   },
 });
 
@@ -6198,26 +6194,14 @@ const Shadow = props => {
         testID={\`Shadow.BoxShadow|\`}
         style={[
           styles.BoxShadow,
-          {
-            elevation: 1,
-            shadowOffset: { width: 0, height: 5 },
-            shadowRadius: 2,
-            shadowOpacity: 1,
-            shadowColor: props.shadowColor,
-          },
+          { shadowColor: props.shadowColor, elevation: 1, shadowOpacity: 1 },
         ]}
       >
         <Text
           testID={\`Shadow.TextShadow|\`}
           style={[
             styles.TextShadow,
-            {
-              elevation: 1,
-              shadowOffset: { width: 2, height: 3 },
-              shadowRadius: 1,
-              shadowOpacity: 1,
-              shadowColor: props.shadowColor,
-            },
+            { shadowColor: props.shadowColor, elevation: 1, shadowOpacity: 1 },
           ]}
         >
           hey
