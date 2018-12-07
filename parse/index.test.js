@@ -33,11 +33,11 @@ backgroundColor blue`,
 
   // ensure that empty spaces at the end of the block don't block the block from
   // being recognised as a stop point for the props of the previous block
-  `A Vertical 
+  `A Vertical
 A1 Text
 color red
 
-A2 Text    
+A2 Text
 color white`,
 
   `Vertical
@@ -65,8 +65,10 @@ text hola`,
 const WARNING = `Warning Vertical
 EmptyWhen Vertical
 color blue
+height 100
 marginTop <
 border 1px solid red
+height 302
 when
 color red
 when < stuff
