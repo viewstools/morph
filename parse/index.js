@@ -140,7 +140,7 @@ export default ({
           loc: block.loc,
           type: `You have declared a value for ${mulitple[0]} ${
             mulitple[1]
-          } times. Please delete multiples as only the final value will be applied.`,
+          } times. Only the last value will be used. You may want to delete the ones you don't use.`,
           line: lines[block.loc.start.line - 1],
         })
       )
