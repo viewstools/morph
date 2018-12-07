@@ -621,7 +621,7 @@ export default ({
   }
 
   lines.forEach((line, i) => {
-    if (line !== rlines[i]) {
+    if (line !== rlines[i].trimLeft()) {
       warnings.push({
         type: `You have some spaces before or after this line. Clean them up.`,
         loc: {
