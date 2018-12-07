@@ -208,6 +208,22 @@ module.exports = {
 }
 `;
 
+exports[`e2e parses e2e Indented 1`] = `
+Object {
+  "code": "const { get } = require('@viewstools/e2e');
+
+module.exports = {
+  Horizontal: get('Indented.Horizontal', 'notStuff', 'move'),
+  Text1: get('Indented.Text:1'),
+  Text2: get('Indented.Text:2'),
+  Text: get('Indented.Text'),
+  Vertical: get('Indented.Vertical'),
+  _top: get('Indented', 'isSomething'),
+};
+",
+}
+`;
+
 exports[`e2e parses e2e JustText 1`] = `
 Object {
   "code": "const { get } = require('@viewstools/e2e');
@@ -1860,6 +1876,90 @@ export default HyphenatedProps;
   },
   "fonts": Array [],
   "slots": Array [],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom Indented 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
+import React from 'react';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+import { css } from 'emotion';
+
+const Indented1 = css({
+  label: 'Indented1',
+  backgroundColor: 'var(--backgroundColor)',
+});
+const Horizontal = css({
+  label: 'Horizontal',
+  flexDirection: 'row',
+  backgroundColor: 'blue',
+  paddingTop: 4,
+  paddingBottom: 4,
+  paddingLeft: 'var(--paddingLeft)',
+  paddingRight: 'var(--paddingRight)',
+});
+
+const Indented = props => {
+  const track = React.useContext(TrackContext);
+
+  return props.stuff ? (
+    <div
+      data-test-id={\`\${props['data-test-id'] || 'Indented'}|\${
+        props.isSomething ? 'isSomething|' : ''
+      }\`}
+      style={{ '--backgroundColor': \`\${props.isSomething ? 'blue' : 'red'}\` }}
+      className={\`views-block \${Indented1}\`}
+    >
+      <span data-test-id={\`Indented.Text|\`} className=\\"views-block\\">
+        hey
+      </span>
+      <div data-test-id={\`Indented.Vertical|\`} className=\\"views-block\\">
+        <span data-test-id={\`Indented.Text:1|\`} className=\\"views-block\\">
+          ho
+        </span>
+        {!props.showStuff ? (
+          <div
+            data-test-id={\`Indented.Horizontal|\${
+              props.move ? 'move|' : !props.stuff ? 'notStuff|' : ''
+            }\`}
+            style={{
+              '--paddingLeft': \`\${props.move ? 40 : 4}px\`,
+              '--paddingRight': \`\${!props.stuff ? 20 : 4}px\`,
+            }}
+            className={\`views-block \${Horizontal}\`}
+          >
+            <span data-test-id={\`Indented.Text:2|\`} className=\\"views-block\\">
+              more
+            </span>
+          </div>
+        ) : null}
+      </div>
+      {props.children}
+    </div>
+  ) : null;
+};
+
+export default Indented;
+",
+  "dependencies": Set {
+    "emotion",
+  },
+  "fonts": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "stuff",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "showStuff",
+      "type": "string",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -5258,6 +5358,77 @@ export default HyphenatedProps;
   "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-native parses react-native Indented 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
+import React from 'react';
+import TrackContext from './TrackContext.view.js';
+import { StyleSheet, Text, View } from 'react-native';
+
+const styles = StyleSheet.create({
+  Horizontal: {
+    flexDirection: 'row',
+    backgroundColor: 'blue',
+    paddingTop: 4,
+    paddingBottom: 4,
+  },
+});
+
+const Indented = props => {
+  const track = React.useContext(TrackContext);
+
+  return props.stuff ? (
+    <View
+      testID={\`\${props['testID'] || 'Indented'}|\${
+        props.isSomething ? 'isSomething|' : ''
+      }\`}
+      style={[null, { backgroundColor: props.isSomething ? 'blue' : 'red' }]}
+    >
+      <Text testID={\`Indented.Text|\`}>hey</Text>
+      <View testID={\`Indented.Vertical|\`}>
+        <Text testID={\`Indented.Text:1|\`}>ho</Text>
+        {!props.showStuff ? (
+          <View
+            testID={\`Indented.Horizontal|\${
+              props.move ? 'move|' : !props.stuff ? 'notStuff|' : ''
+            }\`}
+            style={[
+              styles.Horizontal,
+              {
+                paddingLeft: props.move ? 40 : 4,
+                paddingRight: !props.stuff ? 20 : 4,
+              },
+            ]}
+          >
+            <Text testID={\`Indented.Text:2|\`}>more</Text>
+          </View>
+        ) : null}
+      </View>
+      {props.children}
+    </View>
+  ) : null;
+};
+
+export default Indented;
+",
+  "dependencies": Set {},
+  "fonts": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "stuff",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": false,
+      "name": "showStuff",
+      "type": "string",
+    },
+  ],
   "svgs": Array [],
 }
 `;
