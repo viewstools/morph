@@ -42,25 +42,31 @@ const isFont = f => Object.keys(FONT_TYPES).includes(path.extname(f))
 
 const getFontFileId = file => path.basename(file).split('.')[0]
 
+const getFilePath = (rawFile, view) => {
+  const pattern = new RegExp(`(.+)(${view})`)
+  return `${rawFile.match(pattern)[1]}.${rawFile.match(pattern)[2]}`
+}
+
+const getExtension = (as, shouldWriteBoth) => {
+  if (as === 'e2e') {
+    return '.page.js'
+  }
+  if (shouldWriteBoth && as === 'react-dom') {
+    return '.web.js'
+  }
+  if (shouldWriteBoth && as === 'react-native') {
+    return '.native.js'
+  }
+  return '.js'
+}
+
 const relativise = (from, to) => {
   const r = path.relative(from, to).replace(/\\/g, '/')
   return r.substr(r.startsWith('../..') ? 3 : 1)
 }
 
 const onMorphWriteFile = ({ as, file, code }, shouldWriteBoth) => {
-  debugger
-  let extension
-  if (as === 'e2e') {
-    extension = '.page.js'
-  } else if (shouldWriteBoth && as === 'react-dom') {
-    extension = '.web.js'
-  } else if (shouldWriteBoth && as === 'react-native') {
-    extension = '.native.js'
-  } else {
-    extension = '.js'
-  }
-
-  fs.writeFile(`${file}${extension}`, code)
+  fs.writeFile(`${file}${getExtension(as, shouldWriteBoth)}`, code)
 }
 
 module.exports = options => {
@@ -539,7 +545,7 @@ const runWatcher = (options, shouldWriteBoth) => {
           code: res.code,
           dependsOn: dependsOn[view],
           // responsibleFor: responsibleFor[view],
-          file: /[^]+([^.view]+)/g.exec(rawFile)[0],
+          file: getFilePath(rawFile, view),
           fonts: res.fonts,
           slots: res.slots,
           source: viewsSources[view],
