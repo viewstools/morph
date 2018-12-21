@@ -47,10 +47,32 @@ const relativise = (from, to) => {
   return r.substr(r.startsWith('../..') ? 3 : 1)
 }
 
-const onMorphWriteFile = ({ as, file, code }) =>
-  fs.writeFile(`${file}${as === 'e2e' ? '.page.js' : '.js'}`, code)
+const onMorphWriteFile = ({ as, file, code }, shouldWriteBoth) => {
+  debugger
+  let extension
+  if (as === 'e2e') {
+    extension = '.page.js'
+  } else if (shouldWriteBoth && as === 'react-dom') {
+    extension = '.web.js'
+  } else if (shouldWriteBoth && as === 'react-native') {
+    extension = '.native.js'
+  } else {
+    extension = '.js'
+  }
+
+  fs.writeFile(`${file}${extension}`, code)
+}
 
 module.exports = options => {
+  if (options.as === 'both') {
+    runWatcher({ ...options, as: 'react-dom' }, true)
+    runWatcher({ ...options, as: 'react-native' }, true)
+  } else {
+    runWatcher(options, false)
+  }
+}
+
+const runWatcher = (options, shouldWriteBoth) => {
   return new Promise(async (resolve, reject) => {
     let {
       as,
@@ -147,6 +169,8 @@ module.exports = options => {
     const getImportFileName = (name, file) => {
       let f = views[name]
 
+      debugger
+
       if (isView(f)) {
         const logicFile = logic[`${name}.view.logic`]
         if (logicFile) f = logicFile
@@ -208,6 +232,7 @@ module.exports = options => {
 
     const makeGetImport = (view, file) => {
       dependsOn[view] = []
+      debugger
 
       return (name, isLazy) => {
         // Column is imported from react-virtualized
@@ -514,7 +539,7 @@ module.exports = options => {
           code: res.code,
           dependsOn: dependsOn[view],
           // responsibleFor: responsibleFor[view],
-          file: rawFile,
+          file: /[^]+([^.view]+)/g.exec(rawFile)[0],
           fonts: res.fonts,
           slots: res.slots,
           source: viewsSources[view],
@@ -538,7 +563,7 @@ module.exports = options => {
             toMorphQueue = null
           }
         } else {
-          await onMorph(toMorph)
+          await onMorph(toMorph, shouldWriteBoth)
         }
 
         maybeUpdateExternalDependencies()
@@ -566,13 +591,16 @@ module.exports = options => {
                   },
                 })
 
-                await onMorph({
-                  as,
-                  code: res.code,
-                  isInlineSvg: true,
-                  file: path.resolve(rawFile, '..', `${svg.view}.view`),
-                  view,
-                })
+                await onMorph(
+                  {
+                    as,
+                    code: res.code,
+                    isInlineSvg: true,
+                    file: path.resolve(rawFile, '..', `${svg.view}.view`),
+                    view,
+                  },
+                  shouldWriteBoth
+                )
               } catch (error) {
                 console.error(
                   chalk.magenta('M'),
@@ -646,6 +674,7 @@ module.exports = options => {
       delete dependsOn[view]
     })
 
+    // TODO
     const watcherOptions = {
       bashNative: ['linux'],
       cwd: src,
@@ -703,6 +732,7 @@ module.exports = options => {
     }
 
     if (!once) {
+      //TODO
       const watcher = chokidar.watch(watcherPattern, {
         cwd: src,
         ignored: /(node_modules|\.view.js)/,

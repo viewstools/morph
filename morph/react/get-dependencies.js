@@ -54,13 +54,15 @@ export default (state, getImport) => {
         d === 'Svg'
           ? d
           : d === 'SvgGroup'
-          ? `G as SvgGroup`
-          : `${d.replace('Svg', '')} as ${d}`
+            ? `G as SvgGroup`
+            : `${d.replace('Svg', '')} as ${d}`
       )
     } else if (d.endsWith('SvgInline')) {
+      debugger
       dependencies.push(`import ${d} from "./${d}.view.js"`)
     } else if (d === 'Table') {
     } else if (/^[A-Z]/.test(d)) {
+      debugger
       dependencies.push(getImport(d, state.lazy[d]))
     }
   })

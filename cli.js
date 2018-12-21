@@ -124,6 +124,7 @@ if (shouldWatch) {
     warnOfDefaultValue,
   })
 } else {
+  debugger
   if (statSync(input).isDirectory()) {
     watch({
       as,
@@ -143,6 +144,7 @@ if (shouldWatch) {
       return morphInlineSvg(input).then(code => console.log(code))
     } else {
       const name = pathToName(input)
+      debugger
 
       const { code } = morph({
         as,

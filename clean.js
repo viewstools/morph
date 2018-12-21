@@ -15,6 +15,7 @@ module.exports = async src => {
     options
   )
 
+  debugger // fix once i put the full stop at the start
   const morphed = await glob(
     ['**/*.view.css', '**/*.view.js', '**/*.view.tests.js'],
     options
