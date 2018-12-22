@@ -56,7 +56,7 @@ if (help) {
                       otherwise you will need to include it in your
                       build system as a .css file. Defaults to false
     --local         default local language, defaults to English (en)
-    --logic         if true, it includes .logic.js files in
+    --logic         if true, it includes .view.logic.js files in
                       the output, defaults to true
     --pretty        format output code, defaults to true
     --track         enable UI tracking, defaults to false

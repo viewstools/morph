@@ -11,12 +11,12 @@ module.exports = async src => {
   }
 
   const created = await glob(
-    ['**/*.view', '**/*.logic.js', '**/*.view.tests'],
+    ['**/*.view', '**/*.view.logic.js', '**/*.view.tests'],
     options
   )
 
   const morphed = await glob(
-    ['**/*.view.css', '**/*.view.js', '**/*.view.tests.js'],
+    ['**/*.view.css', '**/*.*.js', '**/*.view.tests.js'],
     options
   )
 
