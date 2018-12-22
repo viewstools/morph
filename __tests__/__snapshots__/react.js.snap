@@ -1997,9 +1997,9 @@ exports[`react-dom parses react-dom Lazy 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.view.js';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-const HeavyStuff = React.lazy(() => import('./HeavyStuff.view.js'));
+import TrackContext from './TrackContext.js';
+import ViewsBaseCss from './ViewsBaseCss.js';
+const HeavyStuff = React.lazy(() => import('./HeavyStuff.js'));
 
 const Lazy = props => {
   const track = React.useContext(TrackContext);
@@ -5459,9 +5459,9 @@ exports[`react-native parses react-native Lazy 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.view.js';
+import TrackContext from './TrackContext.js';
 import { View } from 'react-native';
-const HeavyStuff = React.lazy(() => import('./HeavyStuff.view.js'));
+const HeavyStuff = React.lazy(() => import('./HeavyStuff.js'));
 
 const Lazy = props => {
   const track = React.useContext(TrackContext);
