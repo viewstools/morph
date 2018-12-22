@@ -36,7 +36,6 @@ export const morph = ({
     views,
   })
 
-  debugger
   if (compile) {
     morphed.code = buble.transform(morphed.code, {
       objectAssign: 'Object.assign',

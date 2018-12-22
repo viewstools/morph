@@ -11,11 +11,10 @@ module.exports = async src => {
   }
 
   const created = await glob(
-    ['**/*.view', '**/*.view.logic.js', '**/*.view.tests'],
+    ['**/*.view', '**/*.logic.js', '**/*.view.tests'],
     options
   )
 
-  debugger // fix once i put the full stop at the start
   const morphed = await glob(
     ['**/*.view.css', '**/*.view.js', '**/*.view.tests.js'],
     options

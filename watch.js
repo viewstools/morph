@@ -178,7 +178,7 @@ const runWatcher = (options, shouldWriteBoth) => {
       debugger
 
       if (isView(f)) {
-        const logicFile = logic[`${name}.view.logic`]
+        const logicFile = logic[`${name}.logic`]
         if (logicFile) f = logicFile
       }
 
@@ -689,7 +689,7 @@ const runWatcher = (options, shouldWriteBoth) => {
     const watcherPattern = [
       `**/*.js`,
       `**/*.view`,
-      shouldIncludeLogic && `**/*.view.logic.js`,
+      shouldIncludeLogic && `**/*.logic.js`,
       // fonts,
       'Fonts/*.eot',
       'Fonts/*.otf',
