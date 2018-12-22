@@ -43,9 +43,11 @@ const isFont = f => Object.keys(FONT_TYPES).includes(path.extname(f))
 
 const getFontFileId = file => path.basename(file).split('.')[0]
 
-const getFilePath = (rawFile, view) => {
-  const pattern = new RegExp(`(.+)(${view})`)
-  return `${rawFile.match(pattern)[1]}.${rawFile.match(pattern)[2]}`
+const modifyFilePath = (rawFile, view) => {
+  const pattern = new RegExp(`(.+)?(${view})`)
+  return `${view}.view` === rawFile
+    ? `.${view}`
+    : `${rawFile.match(pattern)[1]}.${rawFile.match(pattern)[2]}`
 }
 
 const relativise = (from, to) => {
@@ -534,7 +536,7 @@ const runWatcher = (options, shouldWriteBoth) => {
           code: res.code,
           dependsOn: dependsOn[view],
           // responsibleFor: responsibleFor[view],
-          file: getFilePath(rawFile, view),
+          file: modifyFilePath(rawFile, view),
           fonts: res.fonts,
           slots: res.slots,
           source: viewsSources[view],
