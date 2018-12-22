@@ -8,6 +8,7 @@ import toPascalCase from 'to-pascal-case'
 import prettier from 'prettier'
 import parse from './parse/index.js'
 
+debugger
 const DEFAULT_IMPORT = name => `import ${name} from './${name}.view.js'`
 
 export const morph = ({
@@ -21,9 +22,11 @@ export const morph = ({
   localSupported = [],
   name,
   pretty = false,
+  shouldWriteBoth,
   track = true,
   views = {},
 }) => {
+  debugger
   let morphed = doMorph[as]({
     enableAnimated,
     file,
@@ -32,6 +35,7 @@ export const morph = ({
     local,
     localSupported,
     name,
+    shouldWriteBoth,
     track,
     views,
   })

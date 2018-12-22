@@ -174,7 +174,6 @@ const runWatcher = (options, shouldWriteBoth) => {
 
     const getImportFileName = (name, file) => {
       let f = views[name]
-
       debugger
 
       if (isView(f)) {
@@ -184,7 +183,9 @@ const runWatcher = (options, shouldWriteBoth) => {
 
       const ret = relativise(file, f)
 
-      return isJs(ret) ? ret.replace(/\.js$/, '') : `${ret}.js`
+      return isJs(ret)
+        ? ret.replace(/\.js$/, '')
+        : `.${name}${getExtension(as, shouldWriteBoth)}` //`${ret}.js`
     }
 
     const addFont = file => {
@@ -236,7 +237,7 @@ const runWatcher = (options, shouldWriteBoth) => {
       }
     }
 
-    const makeGetImport = (view, file) => {
+    const makeGetImport = (view, file, as, shouldWriteBoth) => {
       dependsOn[view] = []
       debugger
 
@@ -269,8 +270,9 @@ const runWatcher = (options, shouldWriteBoth) => {
         // TODO track dependencies to make it easy to rebuild files as new ones get
         // added, eg logic is added, we need to rebuild upwards
 
-        const importPath = getImportFileName(name, file)
+        const importPath = getImportFileName(name, file, as, shouldWriteBoth)
 
+        debugger
         return views[name]
           ? isLazy
             ? `const ${name} = React.lazy(() => import('${importPath}'))`
@@ -513,7 +515,8 @@ const runWatcher = (options, shouldWriteBoth) => {
         as === 'react-native'
           ? makeGetNativeFonts(view)
           : makeGetDomFont(view, file)
-      const getImport = makeGetImport(view, file)
+      debugger
+      const getImport = makeGetImport(view, file, as, shouldWriteBoth)
       let calledMaybeIsReady = false
 
       try {
@@ -532,6 +535,7 @@ const runWatcher = (options, shouldWriteBoth) => {
           getImport,
           localSupported: instance.localSupported,
           pretty,
+          shouldWriteBoth,
           track,
           views: viewsParsed,
         })

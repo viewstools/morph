@@ -21,6 +21,7 @@ export default ({
   local,
   localSupported,
   name,
+  shouldWriteBoth,
   track = true,
   views,
 }) => {
@@ -54,6 +55,7 @@ export default ({
     localSupported: [],
     name: finalName,
     render: [],
+    shouldWriteBoth,
     styles: {},
     svgs: [],
     usedBlockNames: { [finalName]: 1, AutoSizer: 1, Column: 1, Table: 1 },
