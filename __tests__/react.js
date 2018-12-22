@@ -35,7 +35,6 @@ const localSupported = ['en', 'es', 'fr']
             as,
             getFont,
             getImport: (componentName, isLazy, fileName) => {
-              debugger
               const file = fileName ? fileName : `${componentName}.js`
               return isLazy
                 ? `const ${componentName} = React.lazy(() => import('./${file}'))`

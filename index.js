@@ -62,18 +62,14 @@ export const morph = ({
   return morphed
 }
 
-export const getExtension = (as, shouldWriteBoth) => {
-  if (as === 'e2e') {
-    return '.page.js'
-  }
-  if (shouldWriteBoth && as === 'react-dom') {
-    return '.web.js'
-  }
-  if (shouldWriteBoth && as === 'react-native') {
-    return '.native.js'
-  }
-  return '.js'
-}
+export const getExtension = (as, shouldWriteBoth) =>
+  shouldWriteBoth && as === 'react-dom'
+    ? '.web.js'
+    : shouldWriteBoth && as === 'react-native'
+      ? '.native.js'
+      : as === 'e2e'
+        ? '.page.js'
+        : '.js'
 
 export const getViewNotFound = (as, name, warning) =>
   doGetViewNotFound[as](name, warning)

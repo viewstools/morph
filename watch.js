@@ -48,19 +48,6 @@ const getFilePath = (rawFile, view) => {
   return `${rawFile.match(pattern)[1]}.${rawFile.match(pattern)[2]}`
 }
 
-// const getExtension = (as, shouldWriteBoth) => {
-//   if (as === 'e2e') {
-//     return '.page.js'
-//   }
-//   if (shouldWriteBoth && as === 'react-dom') {
-//     return '.web.js'
-//   }
-//   if (shouldWriteBoth && as === 'react-native') {
-//     return '.native.js'
-//   }
-//   return '.js'
-// }
-
 const relativise = (from, to) => {
   const r = path.relative(from, to).replace(/\\/g, '/')
   return r.substr(r.startsWith('../..') ? 3 : 1)
