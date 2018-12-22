@@ -9,7 +9,8 @@ import prettier from 'prettier'
 import parse from './parse/index.js'
 
 debugger
-const DEFAULT_IMPORT = name => `import ${name} from './${name}.view.js'`
+const DEFAULT_IMPORT = (name, as, shouldWriteBoth) =>
+  `import ${name} from './${name}${getExtension(as, shouldWriteBoth)}'`
 
 export const morph = ({
   as,
@@ -59,6 +60,19 @@ export const morph = ({
   }
 
   return morphed
+}
+
+export const getExtension = (as, shouldWriteBoth) => {
+  if (as === 'e2e') {
+    return '.page.js'
+  }
+  if (shouldWriteBoth && as === 'react-dom') {
+    return '.web.js'
+  }
+  if (shouldWriteBoth && as === 'react-native') {
+    return '.native.js'
+  }
+  return '.js'
 }
 
 export const getViewNotFound = (as, name, warning) =>

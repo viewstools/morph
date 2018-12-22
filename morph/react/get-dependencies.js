@@ -29,6 +29,19 @@ const importsFirst = (a, b) => {
   if (bIsImport) return 1
 }
 
+const getExtension = (as, shouldWriteBoth) => {
+  if (as === 'e2e') {
+    return '.page.js'
+  }
+  if (shouldWriteBoth && as === 'react-dom') {
+    return '.web.js'
+  }
+  if (shouldWriteBoth && as === 'react-native') {
+    return '.native.js'
+  }
+  return '.js'
+}
+
 export default (state, getImport) => {
   const usesNative = []
   const usesSvg = []
@@ -47,6 +60,10 @@ export default (state, getImport) => {
   const dependencies = [`import React from 'react'`]
 
   state.uses.sort().forEach(d => {
+    const fileName = `.${d}${getExtension(
+      state.isReactNative ? 'react-native' : 'react-dom',
+      state.shouldWriteBoth
+    )}`
     if (state.isReactNative && NATIVE.includes(d)) {
       useNative(d)
     } else if (state.isReactNative && SVG.includes(d)) {
@@ -59,17 +76,18 @@ export default (state, getImport) => {
       )
     } else if (d.endsWith('SvgInline')) {
       debugger
-      dependencies.push(`import ${d} from "./${d}.view.js"`)
+      dependencies.push(`import ${d} from "${fileName}"`)
     } else if (d === 'Table') {
     } else if (/^[A-Z]/.test(d)) {
       debugger
-      dependencies.push(getImport(d, state.lazy[d]))
+      dependencies.push(getImport(d, state.lazy[d], fileName))
     }
   })
 
   if (state.isReactNative) {
     state.getFont(state.fonts)
   } else {
+    debugger
     dependencies.push(getImport('ViewsBaseCss'))
 
     state.fonts.forEach(usedFont => {
