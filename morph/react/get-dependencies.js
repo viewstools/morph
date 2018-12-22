@@ -71,11 +71,9 @@ export default (state, getImport) => {
             : `${d.replace('Svg', '')} as ${d}`
       )
     } else if (d.endsWith('SvgInline')) {
-      debugger
       dependencies.push(`import ${d} from "${fileName}"`)
     } else if (d === 'Table') {
     } else if (/^[A-Z]/.test(d)) {
-      debugger
       dependencies.push(getImport(d, state.lazy[d], fileName))
     }
   })
@@ -83,7 +81,6 @@ export default (state, getImport) => {
   if (state.isReactNative) {
     state.getFont(state.fonts)
   } else {
-    debugger
     dependencies.push(getImport('ViewsBaseCss'))
 
     state.fonts.forEach(usedFont => {

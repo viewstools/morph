@@ -162,7 +162,6 @@ const runWatcher = (options, shouldWriteBoth) => {
 
     const getImportFileName = (name, file) => {
       let f = views[name]
-      debugger
 
       if (isView(f)) {
         const logicFile = logic[`${name}.logic`]
@@ -173,7 +172,7 @@ const runWatcher = (options, shouldWriteBoth) => {
 
       return isJs(ret)
         ? ret.replace(/\.js$/, '')
-        : `.${name}${getExtension(as, shouldWriteBoth)}` //`${ret}.js`
+        : `.${name}${getExtension(as, shouldWriteBoth)}`
     }
 
     const addFont = file => {
@@ -227,7 +226,6 @@ const runWatcher = (options, shouldWriteBoth) => {
 
     const makeGetImport = (view, file, as, shouldWriteBoth) => {
       dependsOn[view] = []
-      debugger
 
       return (name, isLazy) => {
         // Column is imported from react-virtualized
@@ -260,7 +258,6 @@ const runWatcher = (options, shouldWriteBoth) => {
 
         const importPath = getImportFileName(name, file, as, shouldWriteBoth)
 
-        debugger
         return views[name]
           ? isLazy
             ? `const ${name} = React.lazy(() => import('${importPath}'))`
@@ -503,7 +500,7 @@ const runWatcher = (options, shouldWriteBoth) => {
         as === 'react-native'
           ? makeGetNativeFonts(view)
           : makeGetDomFont(view, file)
-      debugger
+
       const getImport = makeGetImport(view, file, as, shouldWriteBoth)
       let calledMaybeIsReady = false
 
