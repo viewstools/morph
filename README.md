@@ -21,13 +21,16 @@ your project's folder:
 views-morph src --watch --as react-dom
 
 # run on the current directory and morph as react-native
-views-morph . --watch --as react-dom
+views-morph . --watch --as react-native
+
+# run on the current directory and morph as both react-native and react-dom
+views-morph . --watch --as both
 ```
 
-Views morphs `.view` files into `.view.js`. You may want to add those to `.gitignore`:
+If you are morphing for one platform Views morphs `*.view` files into `.*.js`. If you are morphing for both web and native Views morphs `*.view` files into `.*.web.js` and `.*.native.js`. You may want to add those to `.gitignore`:
 
 ```
-**/*.view.js
+**/*.*.js
 ```
 
 ## Want to contribute?
