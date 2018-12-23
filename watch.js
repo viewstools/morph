@@ -55,7 +55,7 @@ const relativise = (from, to) => {
   return r.substr(r.startsWith('../..') ? 3 : 1)
 }
 
-const onMorphWriteFile = ({ as, file, code }, shouldWriteBoth) => {
+const onMorphWriteFile = ({ as, file, code, shouldWriteBoth = false }) => {
   fs.writeFile(`${file}${getExtension(as, shouldWriteBoth)}`, code)
 }
 
@@ -106,7 +106,8 @@ const runWatcher = (options, shouldWriteBoth) => {
         verbose: true,
         warnOfDefaultValue: false,
       },
-      options
+      options,
+      shouldWriteBoth
     )
 
     if (shouldClean) {
@@ -538,6 +539,7 @@ const runWatcher = (options, shouldWriteBoth) => {
           // responsibleFor: responsibleFor[view],
           file: modifyFilePath(rawFile, view),
           fonts: res.fonts,
+          shouldWriteBoth,
           slots: res.slots,
           source: viewsSources[view],
           view,
@@ -560,7 +562,7 @@ const runWatcher = (options, shouldWriteBoth) => {
             toMorphQueue = null
           }
         } else {
-          await onMorph(toMorph, shouldWriteBoth)
+          await onMorph(toMorph)
         }
 
         maybeUpdateExternalDependencies()
@@ -588,16 +590,13 @@ const runWatcher = (options, shouldWriteBoth) => {
                   },
                 })
 
-                await onMorph(
-                  {
-                    as,
-                    code: res.code,
-                    isInlineSvg: true,
-                    file: path.resolve(rawFile, '..', `${svg.view}.view`),
-                    view,
-                  },
-                  shouldWriteBoth
-                )
+                await onMorph({
+                  as,
+                  code: res.code,
+                  isInlineSvg: true,
+                  file: path.resolve(rawFile, '..', `${svg.view}.view`),
+                  view,
+                })
               } catch (error) {
                 console.error(
                   chalk.magenta('M'),
@@ -691,7 +690,7 @@ const runWatcher = (options, shouldWriteBoth) => {
     ].filter(Boolean)
 
     const fontsDirectory = path.join(src, 'Fonts')
-    if (!(await fs.exists(fontsDirectory))) {
+    if (!await fs.exists(fontsDirectory)) {
       await fs.mkdir(fontsDirectory)
     }
     const customFonts = await glob(

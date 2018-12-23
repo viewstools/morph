@@ -27,5 +27,5 @@ module.exports = async src => {
     return !created.includes(m.replace(/\.(js|css)$/, ''))
   })
 
-  toRemove.forEach(f => fs.unlinkSync(path.join(src, f)))
+  // toRemove.forEach(f => fs.unlinkSync(path.join(src, f)))
 }
