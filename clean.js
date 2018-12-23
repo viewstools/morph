@@ -14,18 +14,25 @@ module.exports = async src => {
     ['**/*.view', '**/*.view.logic.js', '**/*.view.tests'],
     options
   )
-  debugger
 
   const morphed = await glob(
     ['**/*.view.css', '**/.*.js', '**/*.view.tests.js'],
     options
   )
-  debugger
 
   const toRemove = morphed.filter(m => {
-    debugger
-    return !created.includes(m.replace(/\.(js|css)$/, ''))
+    const match = m
+      .match(/^([a-zA-Z/]*\/)?(?:\.)([a-zA-Z]*)(?:.*[.js]$)/)
+      .filter(Boolean)
+
+    const pattern = match[2]
+      ? `${match[1]}${match[2]}.view`
+      : `${match[1]}.view`
+
+    return (
+      !created.includes(m.replace(/\.(css)$/, '')) || !created.includes(pattern)
+    )
   })
 
-  // toRemove.forEach(f => fs.unlinkSync(path.join(src, f)))
+  toRemove.forEach(f => fs.unlinkSync(path.join(src, f)))
 }
