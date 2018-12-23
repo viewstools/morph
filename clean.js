@@ -14,15 +14,18 @@ module.exports = async src => {
     ['**/*.view', '**/*.view.logic.js', '**/*.view.tests'],
     options
   )
+  debugger
 
   const morphed = await glob(
-    ['**/*.view.css', '**/*.*.js', '**/*.view.tests.js'],
+    ['**/*.view.css', '**/.*.js', '**/*.view.tests.js'],
     options
   )
+  debugger
 
-  const toRemove = morphed.filter(
-    m => !created.includes(m.replace(/\.(js|css)$/, ''))
-  )
+  const toRemove = morphed.filter(m => {
+    debugger
+    return !created.includes(m.replace(/\.(js|css)$/, ''))
+  })
 
   toRemove.forEach(f => fs.unlinkSync(path.join(src, f)))
 }

@@ -813,9 +813,9 @@ exports[`react-dom parses react-dom Action 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import SubButton from './SubButton.js';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import SubButton from './.SubButton.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const Vertical = css({
@@ -884,8 +884,8 @@ exports[`react-dom parses react-dom AnimatedButton 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { animated, Spring } from 'react-spring';
 import { css } from 'emotion';
 
@@ -1005,8 +1005,8 @@ exports[`react-dom parses react-dom AnimatedButtonHoverOnly 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const AnimatedButtonHoverOnly1 = css({
@@ -1063,8 +1063,8 @@ exports[`react-dom parses react-dom AnimatedButtonScopeOnly 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { animated, Spring } from 'react-spring';
 import { css } from 'emotion';
 
@@ -1141,8 +1141,8 @@ exports[`react-dom parses react-dom AppRegionDrag 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const Vertical = css({
@@ -1180,8 +1180,8 @@ exports[`react-dom parses react-dom BackgroundImage 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const Vertical = css({
@@ -1236,8 +1236,8 @@ exports[`react-dom parses react-dom Border 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const Border1 = css({
@@ -1356,8 +1356,8 @@ exports[`react-dom parses react-dom ClassName 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const Vertical = css({ label: 'Vertical', backgroundColor: 'blue' });
@@ -1390,8 +1390,8 @@ exports[`react-dom parses react-dom Code 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const Vertical = css({ label: 'Vertical', backgroundColor: 'red' });
@@ -1458,8 +1458,8 @@ exports[`react-dom parses react-dom DefaultProps 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 
 const DefaultProps = props => {
   const track = React.useContext(TrackContext);
@@ -1507,8 +1507,8 @@ exports[`react-dom parses react-dom Display 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const Display1 = css({ label: 'Display1', display: 'block' });
@@ -1544,8 +1544,8 @@ import './Fonts/Montserrat-props.fontWeight';
 import './Fonts/props.fontFamily-200';
 import './Fonts/props.fontFamily-props.fontWeight';
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const DynamicFamily = css({
@@ -1652,9 +1652,9 @@ exports[`react-dom parses react-dom DynamicStylesApplyToBasicBlocksOnly 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import SomeThing from './SomeThing.js';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import SomeThing from './.SomeThing.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const Vertical = css({ label: 'Vertical', height: 'var(--height)' });
@@ -1699,8 +1699,8 @@ exports[`react-dom parses react-dom EmptyText 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 
 const EmptyText = props => {
   const track = React.useContext(TrackContext);
@@ -1726,8 +1726,8 @@ exports[`react-dom parses react-dom GoTo 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 
 const GoTo = props => {
   const track = React.useContext(TrackContext);
@@ -1761,8 +1761,8 @@ exports[`react-dom parses react-dom Hover 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const Hover1 = css({
@@ -1835,9 +1835,9 @@ exports[`react-dom parses react-dom HyphenatedProps 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import SomeViewThatExposesAlignItems from './SomeViewThatExposesAlignItems.js';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import SomeViewThatExposesAlignItems from './.SomeViewThatExposesAlignItems.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const Content = css({ label: 'Content', alignItems: 'var(--alignItems)' });
@@ -1884,8 +1884,8 @@ exports[`react-dom parses react-dom Indented 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const Indented1 = css({
@@ -1968,8 +1968,8 @@ exports[`react-dom parses react-dom JustText 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 
 const JustText = props => {
   const track = React.useContext(TrackContext);
@@ -1997,9 +1997,9 @@ exports[`react-dom parses react-dom Lazy 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
-const HeavyStuff = React.lazy(() => import('./HeavyStuff.js'));
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+const HeavyStuff = React.lazy(() => import('./.HeavyStuff.js'));
 
 const Lazy = props => {
   const track = React.useContext(TrackContext);
@@ -2028,9 +2028,9 @@ exports[`react-dom parses react-dom ListOfSomething 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import Something from './Something.js';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import Something from './.Something.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const ListOfSomething1 = css({
@@ -2087,10 +2087,10 @@ export default ListOfSomething;
 exports[`react-dom parses react-dom ListWhen 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
-import Card from './Card.js';
+import Card from './.Card.js';
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 
 const ListWhen = props => {
   const track = React.useContext(TrackContext);
@@ -2138,10 +2138,10 @@ export default ListWhen;
 exports[`react-dom parses react-dom ListWithKey 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
-import Card from './Card.js';
+import Card from './.Card.js';
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 
 const ListWithKey = props => {
   const track = React.useContext(TrackContext);
@@ -2185,8 +2185,8 @@ exports[`react-dom parses react-dom LocalImage 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 import chopperJpg from './chopper.jpg';
 import garfieldPng from './garfield.png';
 
@@ -2218,8 +2218,8 @@ exports[`react-dom parses react-dom LocalImageSvg 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 import chopperSvg from './chopper.svg';
 import { css } from 'emotion';
 
@@ -2264,8 +2264,8 @@ exports[`react-dom parses react-dom LocalImageWithDefault 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 import fileJpg from 'file.jpg';
 
 const LocalImageWithDefault = props => {
@@ -2300,8 +2300,8 @@ exports[`react-dom parses react-dom LocalOrRemoteImageWhenCode 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 
 const LocalOrRemoteImageWhenCode = props => {
   const track = React.useContext(TrackContext);
@@ -2336,10 +2336,10 @@ export default LocalOrRemoteImageWhenCode;
 exports[`react-dom parses react-dom Locals 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
-import LocalContainer from './LocalContainer.js';
+import LocalContainer from './LocalContainer.view.js';
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { Subscribe } from 'unstated';
 
 const TextLocal = {
@@ -2395,8 +2395,8 @@ exports[`react-dom parses react-dom LocalsFormat 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 
 const currencyOptions = { style: 'currency', currency: 'USD' };
 const currencyFormatters = {
@@ -2480,8 +2480,8 @@ exports[`react-dom parses react-dom NameIsType 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 
 const NameIsType = props => {
   const track = React.useContext(TrackContext);
@@ -2509,8 +2509,8 @@ exports[`react-dom parses react-dom NegativeNumber 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const Text = css({ label: 'Text', marginTop: -10 });
@@ -2543,9 +2543,9 @@ exports[`react-dom parses react-dom NestedRoutes 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import Topic from './Topic.js';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import Topic from './.Topic.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { Link } from 'react-router-dom';
 import { Route } from 'react-router-dom';
 
@@ -2597,8 +2597,8 @@ exports[`react-dom parses react-dom Scope 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const Scope1 = css({ label: 'Scope1', color: 'var(--color)' });
@@ -2655,10 +2655,10 @@ export default Scope;
 exports[`react-dom parses react-dom ScopeOnCustomView 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
-import Button from './Button.js';
+import Button from './.Button.js';
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 
 const ScopeOnCustomView = props => {
   const track = React.useContext(TrackContext);
@@ -2697,8 +2697,8 @@ exports[`react-dom parses react-dom ScopePopup 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 
 const ScopePopup = props => {
   const track = React.useContext(TrackContext);
@@ -2753,8 +2753,8 @@ exports[`react-dom parses react-dom ScopePopup2 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const Content = css({
@@ -2828,8 +2828,8 @@ exports[`react-dom parses react-dom ScopedShadows 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const ScopedShadows1 = css({
@@ -2893,10 +2893,10 @@ export default ScopedShadows;
 exports[`react-dom parses react-dom ScrollableList 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
-import Card from './Card.js';
+import Card from './.Card.js';
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const ScrollableList1 = css({
@@ -2957,8 +2957,8 @@ exports[`react-dom parses react-dom Shadow 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const BoxShadow = css({
@@ -3017,8 +3017,8 @@ exports[`react-dom parses react-dom SlotOnBaseAndValueOnScope 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const SlotOnBaseAndValueOnScope1 = css({
@@ -3061,8 +3061,8 @@ exports[`react-dom parses react-dom SomeMissingStyle 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const WindowControl = css({
@@ -3128,8 +3128,8 @@ exports[`react-dom parses react-dom Teleport 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { Link } from 'react-router-dom';
 import { css } from 'emotion';
 
@@ -3166,10 +3166,10 @@ export default Teleport;
 exports[`react-dom parses react-dom TestIds 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
-import External from './External.js';
+import External from './.External.js';
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 
 const TestIds = props => {
   const track = React.useContext(TrackContext);
@@ -3207,8 +3207,8 @@ exports[`react-dom parses react-dom TextInterpolation 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 
 const TextInterpolation = props => {
   const track = React.useContext(TrackContext);
@@ -3261,8 +3261,8 @@ exports[`react-dom parses react-dom Transform 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const Transform1 = css({
@@ -3325,8 +3325,8 @@ exports[`react-dom parses react-dom UseCaptureEmail 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const Email = css({
@@ -3379,8 +3379,8 @@ exports[`react-dom parses react-dom UseCaptureFile 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 
 const UseCaptureFile = props => {
   const track = React.useContext(TrackContext);
@@ -3406,8 +3406,8 @@ exports[`react-dom parses react-dom UseCaptureNumber 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 
 const UseCaptureNumber = props => {
   const track = React.useContext(TrackContext);
@@ -3436,8 +3436,8 @@ exports[`react-dom parses react-dom UseCapturePhone 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 
 const UseCapturePhone = props => {
   const track = React.useContext(TrackContext);
@@ -3464,8 +3464,8 @@ exports[`react-dom parses react-dom UseCaptureSecure 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 
 const UseCaptureSecure = props => {
   const track = React.useContext(TrackContext);
@@ -3491,10 +3491,10 @@ export default UseCaptureSecure;
 exports[`react-dom parses react-dom UseCaptureText 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
-import LocalContainer from './LocalContainer.js';
+import LocalContainer from './LocalContainer.view.js';
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { Subscribe } from 'unstated';
 
 const TextLocal = {
@@ -3533,8 +3533,8 @@ exports[`react-dom parses react-dom UseCaptureTextArea 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 
 const UseCaptureTextArea = props => {
   const track = React.useContext(TrackContext);
@@ -3560,8 +3560,8 @@ exports[`react-dom parses react-dom UseCaptureTextManagedFromOutside 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 
 const UseCaptureTextManagedFromOutside = props => {
   const track = React.useContext(TrackContext);
@@ -3595,8 +3595,8 @@ exports[`react-dom parses react-dom UseHorizontal 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const Horizontal = css({
@@ -3635,8 +3635,8 @@ exports[`react-dom parses react-dom UseImage 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 
 const UseImage = props => {
   const track = React.useContext(TrackContext);
@@ -3670,8 +3670,8 @@ exports[`react-dom parses react-dom UseProxy 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 
 const UseProxy = props => {
   const track = React.useContext(TrackContext);
@@ -3698,12 +3698,12 @@ export default UseProxy;
 exports[`react-dom parses react-dom UseRouter 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
-import About from './About.js';
-import Home from './Home.js';
+import About from './.About.js';
+import Home from './.Home.js';
 import React from 'react';
-import Topics from './Topics.js';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import Topics from './.Topics.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Route } from 'react-router-dom';
 import { css } from 'emotion';
@@ -3779,8 +3779,8 @@ exports[`react-dom parses react-dom UseSvg 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const Svg = css({
@@ -3859,12 +3859,12 @@ export default UseSvg;
 exports[`react-dom parses react-dom UseTable 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
-import Cell from './Cell.js';
-import Column from './Column.js';
-import Header from './Header.js';
+import Cell from './.Cell.js';
+import Column from './.Column.js';
+import Header from './.Header.js';
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { AutoSizer, Column, Table } from '@viewstools/tables/dom';
 
 const Table1Row = css({
@@ -3968,12 +3968,12 @@ export default UseTable;
 exports[`react-dom parses react-dom UseTableOnWhen 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
-import Cell from './Cell.js';
-import Column from './Column.js';
-import Header from './Header.js';
+import Cell from './.Cell.js';
+import Column from './.Column.js';
+import Header from './.Header.js';
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { AutoSizer, Column, Table } from '@viewstools/tables/dom';
 import { css } from 'emotion';
 
@@ -4095,8 +4095,8 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import './Fonts/Montserrat-300';
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const UseText1 = css({
@@ -4148,8 +4148,8 @@ Object {
 import './Fonts/CustomFontNotOnGoogle-300';
 import './Fonts/CustomFontNotOnGoogle-400-italic';
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const Normal = css({
@@ -4225,8 +4225,8 @@ exports[`react-dom parses react-dom UseVertical 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const Vertical = css({ label: 'Vertical', backgroundColor: 'red' });
@@ -4259,8 +4259,8 @@ exports[`react-dom parses react-dom ViewNameIsntUsedInStyle 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const ViewNameIsntUsedInStyle1 = css({
@@ -4304,8 +4304,8 @@ exports[`react-dom parses react-dom When 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 const App = css({ label: 'App', flexDirection: 'row' });
@@ -4349,8 +4349,8 @@ exports[`react-dom parses react-dom WhenTopLevel 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
-import ViewsBaseCss from './ViewsBaseCss.js';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
 
 const WhenTopLevel = props => {
   const track = React.useContext(TrackContext);
@@ -4384,8 +4384,8 @@ exports[`react-native parses react-native Action 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import SubButton from './SubButton.js';
-import TrackContext from './TrackContext.js';
+import SubButton from './.SubButton.js';
+import TrackContext from './TrackContext.view.js';
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 
 const styles = StyleSheet.create({ Vertical: { color: 'red' } });
@@ -4446,7 +4446,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import * as Easing from 'd3-ease';
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import { animated, Spring } from 'react-spring';
 let AnimatedText = animated(Text);
@@ -4591,7 +4591,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import * as Easing from 'd3-ease';
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import { animated, Spring } from 'react-spring';
 let AnimatedView = animated(View);
@@ -4670,7 +4670,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import * as Easing from 'd3-ease';
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { TouchableWithoutFeedback, View } from 'react-native';
 import { animated, Spring } from 'react-spring';
 let AnimatedView = animated(View);
@@ -4757,7 +4757,7 @@ exports[`react-native parses react-native AppRegionDrag 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { StyleSheet, View } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -4787,7 +4787,7 @@ exports[`react-native parses react-native BackgroundImage 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { Image, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({ Horizontal: { flexDirection: 'row' } });
@@ -4833,7 +4833,7 @@ exports[`react-native parses react-native Border 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { StyleSheet, View } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -4924,7 +4924,7 @@ exports[`react-native parses react-native ClassName 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { StyleSheet, View } from 'react-native';
 
 const styles = StyleSheet.create({ Vertical: { backgroundColor: 'blue' } });
@@ -4952,7 +4952,7 @@ exports[`react-native parses react-native Code 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { StyleSheet, Text, View } from 'react-native';
 
 const styles = StyleSheet.create({ Vertical: { backgroundColor: 'red' } });
@@ -5015,7 +5015,7 @@ exports[`react-native parses react-native DefaultProps 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { Text, View } from 'react-native';
 
 const DefaultProps = props => {
@@ -5057,7 +5057,7 @@ exports[`react-native parses react-native Display 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { StyleSheet, View } from 'react-native';
 
 const styles = StyleSheet.create({ Display1: { display: 'block' } });
@@ -5085,7 +5085,7 @@ exports[`react-native parses react-native DynamicFontProps 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { StyleSheet, Text, View } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -5177,8 +5177,8 @@ exports[`react-native parses react-native DynamicStylesApplyToBasicBlocksOnly 1`
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import SomeThing from './SomeThing.js';
-import TrackContext from './TrackContext.js';
+import SomeThing from './.SomeThing.js';
+import TrackContext from './TrackContext.view.js';
 import { View } from 'react-native';
 
 const DynamicStylesApplyToBasicBlocksOnly = props => {
@@ -5217,7 +5217,7 @@ exports[`react-native parses react-native EmptyText 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { Text } from 'react-native';
 
 const EmptyText = props => {
@@ -5239,7 +5239,7 @@ exports[`react-native parses react-native GoTo 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { Text, View } from 'react-native';
 
 const GoTo = props => {
@@ -5266,7 +5266,7 @@ exports[`react-native parses react-native Hover 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 
 const styles = StyleSheet.create({ Text: { color: 'white' } });
@@ -5326,8 +5326,8 @@ exports[`react-native parses react-native HyphenatedProps 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import SomeViewThatExposesAlignItems from './SomeViewThatExposesAlignItems.js';
-import TrackContext from './TrackContext.js';
+import SomeViewThatExposesAlignItems from './.SomeViewThatExposesAlignItems.js';
+import TrackContext from './TrackContext.view.js';
 import { View } from 'react-native';
 
 const HyphenatedProps = props => {
@@ -5366,7 +5366,7 @@ exports[`react-native parses react-native Indented 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { StyleSheet, Text, View } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -5437,7 +5437,7 @@ exports[`react-native parses react-native JustText 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { Text } from 'react-native';
 
 const JustText = props => {
@@ -5459,9 +5459,9 @@ exports[`react-native parses react-native Lazy 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { View } from 'react-native';
-const HeavyStuff = React.lazy(() => import('./HeavyStuff.js'));
+const HeavyStuff = React.lazy(() => import('./.HeavyStuff.js'));
 
 const Lazy = props => {
   const track = React.useContext(TrackContext);
@@ -5487,8 +5487,8 @@ exports[`react-native parses react-native ListOfSomething 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import Something from './Something.js';
-import TrackContext from './TrackContext.js';
+import Something from './.Something.js';
+import TrackContext from './TrackContext.view.js';
 import { FlatList, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -5540,9 +5540,9 @@ export default ListOfSomething;
 exports[`react-native parses react-native ListWhen 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
-import Card from './Card.js';
+import Card from './.Card.js';
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { View } from 'react-native';
 
 const ListWhen = props => {
@@ -5582,9 +5582,9 @@ export default ListWhen;
 exports[`react-native parses react-native ListWithKey 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
-import Card from './Card.js';
+import Card from './.Card.js';
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { View } from 'react-native';
 
 const ListWithKey = props => {
@@ -5620,7 +5620,7 @@ exports[`react-native parses react-native LocalImage 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import chopperJpg from './chopper.jpg';
 import garfieldPng from './garfield.png';
 import { Image } from 'react-native';
@@ -5651,7 +5651,7 @@ exports[`react-native parses react-native LocalImageSvg 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import chopperSvg from './chopper.svg';
 import { Image, StyleSheet } from 'react-native';
 
@@ -5688,7 +5688,7 @@ exports[`react-native parses react-native LocalImageWithDefault 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import fileJpg from 'file.jpg';
 import { Image } from 'react-native';
 
@@ -5722,7 +5722,7 @@ exports[`react-native parses react-native LocalOrRemoteImageWhenCode 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { Image } from 'react-native';
 
 const LocalOrRemoteImageWhenCode = props => {
@@ -5756,9 +5756,9 @@ export default LocalOrRemoteImageWhenCode;
 exports[`react-native parses react-native Locals 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
-import LocalContainer from './LocalContainer.js';
+import LocalContainer from './LocalContainer.view.js';
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { Subscribe } from 'unstated';
 import { Text, View } from 'react-native';
 
@@ -5812,7 +5812,7 @@ exports[`react-native parses react-native LocalsFormat 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { Text, View } from 'react-native';
 
 const currencyOptions = { style: 'currency', currency: 'USD' };
@@ -5891,7 +5891,7 @@ exports[`react-native parses react-native NameIsType 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { Text } from 'react-native';
 
 const NameIsType = props => {
@@ -5913,7 +5913,7 @@ exports[`react-native parses react-native NegativeNumber 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { StyleSheet, Text } from 'react-native';
 
 const styles = StyleSheet.create({ Text: { marginTop: -10 } });
@@ -5941,8 +5941,8 @@ exports[`react-native parses react-native NestedRoutes 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import Topic from './Topic.js';
-import TrackContext from './TrackContext.js';
+import Topic from './.Topic.js';
+import TrackContext from './TrackContext.view.js';
 import { Link } from 'react-router-native';
 import { Route } from 'react-router-native';
 import { Text, View } from 'react-native';
@@ -5982,7 +5982,7 @@ exports[`react-native parses react-native Scope 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { Text } from 'react-native';
 
 const Scope = props => {
@@ -6035,9 +6035,9 @@ export default Scope;
 exports[`react-native parses react-native ScopeOnCustomView 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
-import Button from './Button.js';
+import Button from './.Button.js';
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 
 const ScopeOnCustomView = props => {
   const track = React.useContext(TrackContext);
@@ -6075,7 +6075,7 @@ exports[`react-native parses react-native ScopePopup 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { Text, TouchableWithoutFeedback, View } from 'react-native';
 
 const ScopePopup = props => {
@@ -6130,7 +6130,7 @@ exports[`react-native parses react-native ScopePopup2 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { Text, TouchableWithoutFeedback, View } from 'react-native';
 
 const ScopePopup2 = props => {
@@ -6196,7 +6196,7 @@ Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import * as Easing from 'd3-ease';
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import { animated, Spring } from 'react-spring';
 let AnimatedView = animated(View);
@@ -6284,9 +6284,9 @@ export default ScopedShadows;
 exports[`react-native parses react-native ScrollableList 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
-import Card from './Card.js';
+import Card from './.Card.js';
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { FlatList, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -6338,7 +6338,7 @@ exports[`react-native parses react-native Shadow 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { StyleSheet, Text, View } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -6402,7 +6402,7 @@ exports[`react-native parses react-native SlotOnBaseAndValueOnScope 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { Text } from 'react-native';
 
 const SlotOnBaseAndValueOnScope = props => {
@@ -6437,7 +6437,7 @@ exports[`react-native parses react-native SomeMissingStyle 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -6499,7 +6499,7 @@ exports[`react-native parses react-native Teleport 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { Link } from 'react-router-native';
 import { StyleSheet, Text, View } from 'react-native';
 
@@ -6534,9 +6534,9 @@ export default Teleport;
 exports[`react-native parses react-native TestIds 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
-import External from './External.js';
+import External from './.External.js';
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { Text, View } from 'react-native';
 
 const TestIds = props => {
@@ -6566,7 +6566,7 @@ exports[`react-native parses react-native TextInterpolation 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { Text, View } from 'react-native';
 
 const TextInterpolation = props => {
@@ -6616,7 +6616,7 @@ exports[`react-native parses react-native Transform 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { StyleSheet, Text, View } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -6683,7 +6683,7 @@ exports[`react-native parses react-native UseCaptureEmail 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { StyleSheet, TextInput } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -6730,9 +6730,9 @@ export default UseCaptureEmail;
 exports[`react-native parses react-native UseCaptureFile 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
-import CaptureFile from './CaptureFile.js';
+import CaptureFile from './.CaptureFile.js';
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 
 const UseCaptureFile = props => {
   const track = React.useContext(TrackContext);
@@ -6761,7 +6761,7 @@ exports[`react-native parses react-native UseCaptureNumber 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { TextInput } from 'react-native';
 
 const UseCaptureNumber = props => {
@@ -6791,7 +6791,7 @@ exports[`react-native parses react-native UseCapturePhone 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { TextInput } from 'react-native';
 
 const UseCapturePhone = props => {
@@ -6821,7 +6821,7 @@ exports[`react-native parses react-native UseCaptureSecure 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { TextInput } from 'react-native';
 
 const UseCaptureSecure = props => {
@@ -6850,9 +6850,9 @@ export default UseCaptureSecure;
 exports[`react-native parses react-native UseCaptureText 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
-import LocalContainer from './LocalContainer.js';
+import LocalContainer from './LocalContainer.view.js';
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { Subscribe } from 'unstated';
 import { TextInput } from 'react-native';
 
@@ -6894,7 +6894,7 @@ exports[`react-native parses react-native UseCaptureTextArea 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { TextInput } from 'react-native';
 
 const UseCaptureTextArea = props => {
@@ -6925,7 +6925,7 @@ exports[`react-native parses react-native UseCaptureTextManagedFromOutside 1`] =
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { TextInput } from 'react-native';
 
 const UseCaptureTextManagedFromOutside = props => {
@@ -6962,7 +6962,7 @@ exports[`react-native parses react-native UseHorizontal 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { StyleSheet, View } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -7000,7 +7000,7 @@ exports[`react-native parses react-native UseImage 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { Image } from 'react-native';
 
 const UseImage = props => {
@@ -7033,7 +7033,7 @@ exports[`react-native parses react-native UseProxy 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { View } from 'react-native';
 
 const UseProxy = props => {
@@ -7056,11 +7056,11 @@ export default UseProxy;
 exports[`react-native parses react-native UseRouter 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
-import About from './About.js';
-import Home from './Home.js';
+import About from './.About.js';
+import Home from './.Home.js';
 import React from 'react';
-import Topics from './Topics.js';
-import TrackContext from './TrackContext.js';
+import Topics from './.Topics.js';
+import TrackContext from './TrackContext.view.js';
 import { NativeRouter as Router } from 'react-router-native';
 import { Route } from 'react-router-native';
 import { StyleSheet, View } from 'react-native';
@@ -7131,7 +7131,7 @@ import Svg, {
   Path as SvgPath,
   Text as SvgText,
 } from 'react-native-svg';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 
 const UseSvg = props => {
   const track = React.useContext(TrackContext);
@@ -7181,11 +7181,11 @@ export default UseSvg;
 exports[`react-native parses react-native UseTable 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
-import Cell from './Cell.js';
-import Column from './Column.js';
-import Header from './Header.js';
+import Cell from './.Cell.js';
+import Column from './.Column.js';
+import Header from './.Header.js';
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { AutoSizer, Column, Table } from '@viewstools/tables/native';
 import { StyleSheet, Text, View } from 'react-native';
 
@@ -7274,11 +7274,11 @@ export default UseTable;
 exports[`react-native parses react-native UseTableOnWhen 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
-import Cell from './Cell.js';
-import Column from './Column.js';
-import Header from './Header.js';
+import Cell from './.Cell.js';
+import Column from './.Column.js';
+import Header from './.Header.js';
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { AutoSizer, Column, Table } from '@viewstools/tables/native';
 import { StyleSheet, View } from 'react-native';
 
@@ -7376,7 +7376,7 @@ exports[`react-native parses react-native UseText 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { StyleSheet, Text } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -7418,7 +7418,7 @@ exports[`react-native parses react-native UseTextCustomFont 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { StyleSheet, Text, View } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -7487,7 +7487,7 @@ exports[`react-native parses react-native UseVertical 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { StyleSheet, View } from 'react-native';
 
 const styles = StyleSheet.create({ Vertical: { backgroundColor: 'red' } });
@@ -7515,7 +7515,7 @@ exports[`react-native parses react-native ViewNameIsntUsedInStyle 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { StyleSheet, View } from 'react-native';
 
 const styles = StyleSheet.create({ ViewNameIsntUsedInStyle1: { zIndex: 5 } });
@@ -7552,7 +7552,7 @@ exports[`react-native parses react-native When 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { StyleSheet, Text, View } from 'react-native';
 
 const styles = StyleSheet.create({ App: { flexDirection: 'row' } });
@@ -7587,7 +7587,7 @@ exports[`react-native parses react-native WhenTopLevel 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
 import React from 'react';
-import TrackContext from './TrackContext.js';
+import TrackContext from './TrackContext.view.js';
 import { Text } from 'react-native';
 
 const WhenTopLevel = props => {

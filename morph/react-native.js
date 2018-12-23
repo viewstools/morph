@@ -85,8 +85,8 @@ export default ({
   maybeUsesTextInput(state)
   maybeUsesRouter(state)
   maybeUsesStyleSheet(state)
-  const finalGetImport = (name, isLazy) =>
-    imports[name] || getImport(name, isLazy)
+  const finalGetImport = (componentName, isLazy, fileName) =>
+    imports[componentName] || getImport(componentName, isLazy, fileName)
 
   return {
     code: toComponent({

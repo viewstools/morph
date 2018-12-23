@@ -94,8 +94,8 @@ export default ({
   walk(parsed.views[0], visitor, state)
   maybeUsesRouter(state)
 
-  const finalGetImport = (name, isLazy) =>
-    imports[name] || getImport(name, isLazy)
+  const finalGetImport = (componentName, isLazy, fileName) =>
+    imports[componentName] || getImport(componentName, isLazy, fileName)
 
   return {
     code: toComponent({
