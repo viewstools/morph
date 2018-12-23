@@ -264,7 +264,6 @@ const runWatcher = (options, shouldWriteBoth) => {
 
         const importPath = getImportFileName(name, file, as, shouldWriteBoth)
 
-        debugger
         return views[name]
           ? isLazy
             ? `const ${name} = React.lazy(() => import('${importPath}'))`

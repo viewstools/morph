@@ -6,7 +6,7 @@ module.exports = async src => {
   const options = {
     bashNative: ['linux'],
     cwd: src,
-    ignore: ['*node_modules*'],
+    ignore: ['**node_modules/**'],
     // filter: f => !/node_modules/.test(f),
   }
 
@@ -30,7 +30,7 @@ module.exports = async src => {
       : `${match[1]}.view`
 
     return (
-      !created.includes(m.replace(/\.(css)$/, '')) || !created.includes(pattern)
+      !created.includes(m.replace(/\.(css)$/, '')) && !created.includes(pattern)
     )
   })
 
