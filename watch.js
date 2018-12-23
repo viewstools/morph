@@ -175,7 +175,10 @@ const runWatcher = (options, shouldWriteBoth) => {
 
       return isJs(ret)
         ? ret.replace(/\.js$/, '')
-        : `.${name}${getExtension(as, shouldWriteBoth)}`
+        : `${ret.match(/(.*)(?:.view)$/)[1]}${getExtension(
+            as,
+            shouldWriteBoth
+          )}`
     }
 
     const addFont = file => {
@@ -261,6 +264,7 @@ const runWatcher = (options, shouldWriteBoth) => {
 
         const importPath = getImportFileName(name, file, as, shouldWriteBoth)
 
+        debugger
         return views[name]
           ? isLazy
             ? `const ${name} = React.lazy(() => import('${importPath}'))`
@@ -690,7 +694,7 @@ const runWatcher = (options, shouldWriteBoth) => {
     ].filter(Boolean)
 
     const fontsDirectory = path.join(src, 'Fonts')
-    if (!await fs.exists(fontsDirectory)) {
+    if (!(await fs.exists(fontsDirectory))) {
       await fs.mkdir(fontsDirectory)
     }
     const customFonts = await glob(
