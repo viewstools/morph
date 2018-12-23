@@ -673,7 +673,6 @@ const runWatcher = (options, shouldWriteBoth) => {
       delete dependsOn[view]
     })
 
-    // TODO
     const watcherOptions = {
       bashNative: ['linux'],
       cwd: src,
@@ -693,7 +692,7 @@ const runWatcher = (options, shouldWriteBoth) => {
     ].filter(Boolean)
 
     const fontsDirectory = path.join(src, 'Fonts')
-    if (!(await fs.exists(fontsDirectory))) {
+    if (!await fs.exists(fontsDirectory)) {
       await fs.mkdir(fontsDirectory)
     }
     const customFonts = await glob(
@@ -731,7 +730,6 @@ const runWatcher = (options, shouldWriteBoth) => {
     }
 
     if (!once) {
-      //TODO
       const watcher = chokidar.watch(watcherPattern, {
         cwd: src,
         ignored: /(node_modules|\.view.js)/,
