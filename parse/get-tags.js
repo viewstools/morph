@@ -1,6 +1,7 @@
 import {
   isAnimation,
   isRowStyle,
+  isFragment,
   isStyle,
   isUnsupportedShorthand,
 } from './helpers.js'
@@ -30,6 +31,8 @@ export default ({ name, isSlot, slotName, slotIsNot, value, block }) => {
   if (slotIsNot) tags.slotIsNot = true
 
   tags.validSlot = tags.slot || (tags.shouldBeSlot && tags.slot) || null
+
+  if (isFragment(name)) tags.fragment = true
 
   return tags
 }

@@ -70,6 +70,7 @@ export default ({
         state.uses.includes(block) ||
         /props/.test(block) ||
         /^Animated/.test(block) ||
+        'React.Fragment' === block ||
         block === finalName
       )
         return

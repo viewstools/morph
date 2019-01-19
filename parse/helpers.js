@@ -126,6 +126,7 @@ export const isComment = line => is(COMMENT, line)
 export const isEmptyText = line => line === ''
 export const isEnd = line => line === ''
 export const isFloat = line => is(FLOAT, line)
+export const isFragment = line => line === 'isFragment'
 export const isFontable = line => is(FONTABLE, line)
 export const isGroup = line => !is(NOT_GROUP, line) && !isCapture(line)
 export const isList = line => line === 'List'

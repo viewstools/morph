@@ -67,6 +67,7 @@ export default ({
       if (
         state.uses.includes(block) ||
         /props/.test(block) ||
+        'React.Fragment' === block ||
         block === finalName
       )
         return

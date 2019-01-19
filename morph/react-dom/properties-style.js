@@ -18,6 +18,8 @@ import uniq from 'array-uniq'
 export { enter }
 
 export function leave(node, parent, state) {
+  if (node.isFragment) return
+
   const allowedStyleKeys = getAllowedStyleKeys(node)
 
   let scopedUnderParent =

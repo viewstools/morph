@@ -14,6 +14,8 @@ import {
 export { enter }
 
 export const leave = (node, parent, state) => {
+  if (node.isFragment) return
+
   let dynamicStyles = getNonAnimatedDynamicStyles(node)
   let baseStyle = null
   let animatedStyle = null

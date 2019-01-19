@@ -9,6 +9,7 @@ const blacklist = [
   'format',
   'goto',
   'isdisabled',
+  'isfragment',
   'onclick',
   'onsubmit',
   'overflow',

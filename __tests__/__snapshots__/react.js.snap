@@ -169,6 +169,20 @@ module.exports = {
 }
 `;
 
+exports[`e2e parses e2e Fragment 1`] = `
+Object {
+  "code": "const { get } = require('@viewstools/e2e');
+
+module.exports = {
+  Horizontal: get('Fragment.Horizontal'),
+  Text1: get('Fragment.Text:1'),
+  Text: get('Fragment.Text'),
+  Vertical: get('Fragment.Vertical'),
+};
+",
+}
+`;
+
 exports[`e2e parses e2e GoTo 1`] = `
 Object {
   "code": "const { get } = require('@viewstools/e2e');
@@ -1718,6 +1732,67 @@ export default EmptyText;
   "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom Fragment 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
+import React from 'react';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+import { css } from 'emotion';
+
+const Vertical = css({ label: 'Vertical', backgroundColor: 'red' });
+const Horizontal = css({
+  label: 'Horizontal',
+  flexDirection: 'row',
+  paddingLeft: 20,
+});
+
+const Fragment = props => {
+  const track = React.useContext(TrackContext);
+
+  return (
+    <React.Fragment>
+      <div
+        data-test-id={\`Fragment.Vertical|\`}
+        className={\`views-block \${Vertical}\`}
+      />
+      <div
+        data-test-id={\`Fragment.Horizontal|\`}
+        className={\`views-block \${Horizontal}\`}
+      >
+        <span data-test-id={\`Fragment.Text|\`} className=\\"views-block\\">
+          hey
+        </span>
+        {props.isShown ? (
+          <React.Fragment>
+            <span data-test-id={\`Fragment.Text:1|\`} className=\\"views-block\\">
+              hi
+            </span>
+          </React.Fragment>
+        ) : null}
+      </div>
+      {props.children}
+    </React.Fragment>
+  );
+};
+
+export default Fragment;
+",
+  "dependencies": Set {
+    "emotion",
+  },
+  "fonts": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "isShown",
+      "type": "string",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -5231,6 +5306,52 @@ export default EmptyText;
   "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-native parses react-native Fragment 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
+import React from 'react';
+import TrackContext from './TrackContext.view.js';
+import { StyleSheet, Text, View } from 'react-native';
+
+const styles = StyleSheet.create({
+  Vertical: { backgroundColor: 'red' },
+  Horizontal: { flexDirection: 'row', paddingLeft: 20 },
+});
+
+const Fragment = props => {
+  const track = React.useContext(TrackContext);
+
+  return (
+    <React.Fragment>
+      <View testID={\`Fragment.Vertical|\`} style={styles.Vertical} />
+      <View testID={\`Fragment.Horizontal|\`} style={styles.Horizontal}>
+        <Text testID={\`Fragment.Text|\`}>hey</Text>
+        {props.isShown ? (
+          <React.Fragment>
+            <Text testID={\`Fragment.Text:1|\`}>hi</Text>
+          </React.Fragment>
+        ) : null}
+      </View>
+      {props.children}
+    </React.Fragment>
+  );
+};
+
+export default Fragment;
+",
+  "dependencies": Set {},
+  "fonts": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "isShown",
+      "type": "string",
+    },
+  ],
   "svgs": Array [],
 }
 `;

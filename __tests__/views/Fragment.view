@@ -1,0 +1,19 @@
+Fragment Vertical
+isFragment true
+Vertical
+backgroundColor red
+
+Horizontal
+paddingLeft 20
+Text
+text hey
+
+Vertical
+backgroundColor red
+isFragment <
+
+Vertical
+onWhen <isShown
+isFragment true
+Text
+text hi

@@ -2,7 +2,7 @@ import { getScopeDescription } from '../utils.js'
 
 export const enter = [
   (node, parent, state) => {
-    if (node.name === 'Proxy') return
+    if (node.name === 'Proxy' || node.isFragment) return
 
     let blockName = node.is || node.name
 

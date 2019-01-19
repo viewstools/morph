@@ -1,15 +1,16 @@
 const blacklist = [
   'classname',
   'format',
-  'teleportto',
   'goto',
-  'translatez',
+  'isfragment',
+  'perspective',
+  'rotatez',
   'scalex',
   'scaley',
   'scalez',
-  'rotatez',
+  'teleportto',
   'transformoriginz',
-  'perspective',
+  'translatez',
 ]
 
 export default (node, parent, state) =>

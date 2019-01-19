@@ -381,6 +381,17 @@ export default ({
               })
             }
           }
+
+          if (tags.fragment && block.isGroup) {
+            if (isSlot) {
+              warnings.push({
+                loc,
+                type: `The isFragment prop can't be a slot. You need to change it to isFragment true. Treating it as true for now.`,
+                line,
+              })
+            }
+            block.isFragment = true
+          }
         } else {
           if (name === 'lazy') {
             block.isLazy = true
@@ -566,7 +577,11 @@ export default ({
               }
             }
 
-            if (!inScope && !slots.some(vp => vp.name === (slotName || name))) {
+            if (
+              !inScope &&
+              !propNode.tags.fragment &&
+              !slots.some(vp => vp.name === (slotName || name))
+            ) {
               slots.push({
                 name: slotName || name,
                 type: getPropType(block, name, value),
@@ -618,6 +633,22 @@ export default ({
 
     block.properties = properties
     block.scopes = scopes
+
+    if (block.isFragment) {
+      let invalidProps = properties
+        .filter(prop => prop.name !== 'isFragment' || prop.name !== 'onWhen')
+        .map(prop => prop.name)
+
+      if (invalidProps.length > 0) {
+        warnings.push({
+          type: `A fragment can only have isFragment and onWhen props.\nEvery other prop will be dismissed.\nEither remove ${invalidProps.join(
+            ', '
+          )} or remove isFragment.`,
+          loc: block.loc,
+          line: rlines[i],
+        })
+      }
+    }
   }
 
   lines.forEach((line, i) => {

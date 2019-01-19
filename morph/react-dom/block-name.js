@@ -3,6 +3,8 @@ import handleTable from '../react/block-name-handle-table.js'
 import getBlockName from './get-block-name.js'
 
 export function enter(node, parent, state) {
+  if (node.isFragment && node.children.length === 0) return true
+
   let name = getBlockName(node, parent, state)
   if (name === null) return true
 

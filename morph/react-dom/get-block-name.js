@@ -76,7 +76,9 @@ export default (node, parent, state) => {
 const getGroupBlockName = (node, parent, state) => {
   let name = 'div'
 
-  if (hasProp(node, 'teleportTo')) {
+  if (node.isFragment) {
+    name = 'React.Fragment'
+  } else if (hasProp(node, 'teleportTo')) {
     name = 'Link'
     node.teleport = true
   } else if (hasProp(node, 'goTo')) {

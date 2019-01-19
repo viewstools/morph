@@ -41,7 +41,9 @@ export default (node, parent, state) => {
 const getGroupBlockName = (node, state) => {
   let name = 'View'
 
-  if (hasProp(node, 'teleportTo')) {
+  if (node.isFragment) {
+    name = 'React.Fragment'
+  } else if (hasProp(node, 'teleportTo')) {
     node.teleport = true
   } else if (hasProp(node, 'goTo')) {
     node.goTo = true

@@ -13,6 +13,8 @@ export const enter = (node, parent, state) => {
 }
 
 export const leave = (node, parent, state) => {
+  if (node.isFragment) return
+
   if (node.className.length === 1) {
     let className = node.className[0]
     let shouldWrap = true
