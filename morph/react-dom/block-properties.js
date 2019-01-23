@@ -28,6 +28,7 @@ export function enter(node, parent, state) {
       (propNode.name === 'from' &&
         (node.name === 'List' || node.name === 'Table')) ||
       (propNode.name === 'key' && parent.isList) ||
+      (propNode.name === 'pass' && node.isList) ||
       (propNode.name === 'width' && isColumn(node))
     )
       return

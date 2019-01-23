@@ -2,11 +2,13 @@ import { getProp, isList } from '../utils.js'
 
 export function enter(node, parent, state) {
   if (isList(parent)) {
-    const pass = getProp(parent, 'pass')
+    state.render.push(` index={index}`)
+
+    let pass = getProp(parent, 'pass')
     if (pass) {
-      state.render.push(` index={index} ${pass.value}={${pass.value}}`)
+      state.render.push(` ${pass.value}={${pass.value}}`)
     } else {
-      state.render.push(' index={index} {...item}')
+      state.render.push(' {...item}')
     }
 
     if (!parent.nameFinal.includes('FlatList')) {

@@ -2,9 +2,11 @@ import { getProp, isList } from '../utils.js'
 
 export function enter(node, parent, state) {
   if (isList(node)) {
-    const from = getProp(node, 'from')
-    const pass = getProp(node, 'pass')
+    let from = getProp(node, 'from')
     if (!from) return
+
+    let pass = getProp(node, 'pass')
+    let itemName = pass ? pass.value : 'item'
 
     if (node.nameFinal.includes('FlatList')) {
       let key = getProp(node.children[0], 'key')
@@ -13,13 +15,13 @@ export function enter(node, parent, state) {
       state.render.push(
         `data={${
           from.value
-        }} keyExtractor={(item, index) => ${key}} renderItem={({ item, index }) =>`
+        }} keyExtractor={(item, index) => ${key}} renderItem={({ ${itemName}, index }) =>`
       )
     } else {
       state.render.push(
-        `{Array.isArray(${from.value}) && ${from.value}.map((${
-          pass ? pass.value : 'item'
-        }, index) => `
+        `{Array.isArray(${from.value}) && ${
+          from.value
+        }.map((${itemName}, index) => `
       )
     }
   }
