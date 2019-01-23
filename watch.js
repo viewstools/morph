@@ -1,3 +1,4 @@
+const { exec } = require('child_process')
 const {
   getViewNotFound,
   isViewNameRestricted,
@@ -8,16 +9,20 @@ const {
 const chalk = require('chalk')
 const chokidar = require('chokidar')
 const clean = require('./clean.js')
+const debounce = require('debounce')
 const ensureBaseCss = require('./ensure-base-css.js')
 const ensureLocalContainer = require('./ensure-local-container.js')
 const ensureTrackContext = require('./ensure-track-context.js')
+const getLatestVersion = require('latest-version')
 const flatten = require('flatten')
 const fs = require('mz/fs')
 const glob = require('fast-glob')
+const hasYarn = require('has-yarn')
 const morphInlineSvg = require('./morph/inline-svg.js')
 const path = require('path')
 const toPascalCase = require('to-pascal-case')
 const uniq = require('array-uniq')
+const readPkgUp = require('read-pkg-up')
 
 const FONT_TYPES = {
   '.otf': 'opentype',
@@ -252,12 +257,41 @@ module.exports = options => {
 
     const instance = {
       customFonts: [],
+      externalDependencies: new Set(),
       dependsOn,
       responsibleFor,
       logic,
       views,
       stop() {},
     }
+
+    let maybeUpdateExternalDependencies = debounce(async function() {
+      let pkg = await readPkgUp(src)
+
+      if (!pkg.pkg) return
+
+      if (!pkg.pkg.dependencies) {
+        pkg.pkg.dependencies = {}
+      }
+
+      let cwd = path.dirname(pkg.path)
+      let shouldUpdate = false
+
+      for (let dep of instance.externalDependencies) {
+        if (!(dep in pkg.pkg.dependencies)) {
+          let version = await getLatestVersion(dep)
+          pkg.pkg.dependencies[dep] = `^${version}`
+
+          console.log(`⚙️  installing Views dependency ${dep} v${version}`)
+          shouldUpdate = true
+        }
+      }
+
+      if (shouldUpdate) {
+        await fs.writeFile(pkg.path, JSON.stringify(pkg.pkg, null, 2))
+        exec(hasYarn(cwd) ? 'yarn' : 'npm install')
+      }
+    }, 100)
 
     if (as === 'react-dom' && isBundlingBaseCss) {
       instance.baseCss = 'ViewsBaseCss.js'
@@ -471,6 +505,10 @@ module.exports = options => {
           views: viewsParsed,
         })
 
+        for (let dep of res.dependencies) {
+          instance.externalDependencies.add(dep)
+        }
+
         const toMorph = {
           as,
           code: res.code,
@@ -502,6 +540,8 @@ module.exports = options => {
         } else {
           await onMorph(toMorph)
         }
+
+        maybeUpdateExternalDependencies()
 
         if (Array.isArray(res.svgs)) {
           await Promise.all(
@@ -656,7 +696,11 @@ module.exports = options => {
     await Promise.all(viewsToMorph.map(getViewSource))
 
     viewsLeftToBeReady = viewsToMorph.length
-    viewsToMorph.forEach(v => morphView(v, false, true))
+    if (viewsLeftToBeReady === 0) {
+      resolve(instance)
+    } else {
+      viewsToMorph.forEach(v => morphView(v, false, true))
+    }
 
     if (!once) {
       const watcher = chokidar.watch(watcherPattern, {

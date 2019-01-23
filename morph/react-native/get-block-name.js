@@ -20,13 +20,18 @@ export default (node, parent, state) => {
       return getImageName(node, state)
 
     case 'List':
-      return getListBlockName(node)
+      return getListBlockName(node, state)
 
     case 'Proxy':
       return null
 
     case 'Text':
-      return node.isAnimated || node.maybeAnimated ? `Animated.Text` : 'Text'
+      if (node.isAnimated) {
+        state.animated.add('Text')
+        return 'AnimatedText'
+      } else {
+        return 'Text'
+      }
 
     default:
       return node.name
@@ -36,7 +41,9 @@ export default (node, parent, state) => {
 const getGroupBlockName = (node, state) => {
   let name = 'View'
 
-  if (hasProp(node, 'teleportTo')) {
+  if (node.isFragment) {
+    name = 'React.Fragment'
+  } else if (hasProp(node, 'teleportTo')) {
     node.teleport = true
   } else if (hasProp(node, 'goTo')) {
     node.goTo = true
@@ -56,18 +63,24 @@ const getGroupBlockName = (node, state) => {
     name = 'ScrollView'
   }
 
-  if ((node.isAnimated || node.maybeAnimated) && name !== 'Link') {
-    name = `Animated.${name}`
+  if (node.isAnimated && name !== 'Link') {
+    state.animated.add(name)
+    name = `Animated${name}`
   }
 
   return name
 }
 
-const getListBlockName = node => {
+const getListBlockName = (node, state) => {
   const base = hasProp(node, /^overflow/, v => v === 'auto' || v === 'scroll')
     ? 'FlatList'
     : 'View'
-  return node.isAnimated || node.maybeAnimated ? `Animated.${base}` : base
+  if (node.isAnimated) {
+    state.animated.add(base)
+    return `Animated${base}`
+  } else {
+    return base
+  }
 }
 
 const isSvg = str => /\.svg$/.test(str)

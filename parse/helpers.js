@@ -126,6 +126,7 @@ export const isComment = line => is(COMMENT, line)
 export const isEmptyText = line => line === ''
 export const isEnd = line => line === ''
 export const isFloat = line => is(FLOAT, line)
+export const isFragment = line => line === 'isFragment'
 export const isFontable = line => is(FONTABLE, line)
 export const isGroup = line => !is(NOT_GROUP, line) && !isCapture(line)
 export const isList = line => line === 'List'
@@ -141,18 +142,18 @@ export const isUserComment = line => is(USER_COMMENT, line)
 const get = (regex, line) => line.match(regex)
 
 const addDefaults = (animationType, properties) => {
-  if (!properties.delay) {
-    properties.delay = 0
-  }
+  // if (!properties.delay) {
+  //   properties.delay = 0
+  // }
 
   if (animationType !== 'spring' && !properties.duration) {
     properties.duration = 150
   } else if (animationType === 'spring') {
-    if (!properties.speed) {
-      properties.speed = 12
+    if (!properties.tension) {
+      properties.tension = 170
     }
-    if (!properties.bounciness) {
-      properties.bounciness = 8
+    if (!properties.friction) {
+      properties.friction = 26
     }
   }
   return properties
@@ -340,10 +341,10 @@ export const getPropType = (block, name, defaultValue) =>
   block.isList && name === 'from'
     ? 'array'
     : isActionable(name)
-      ? 'function'
-      : isNumber[name]
-        ? 'number'
-        : 'string'
+    ? 'function'
+    : isNumber[name]
+    ? 'number'
+    : 'string'
 
 export const isTextInterpolation = (block, previous) => {
   const previousText = previous.properties.find(prop => prop.name === 'text')

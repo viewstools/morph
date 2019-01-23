@@ -122,6 +122,31 @@ export default ({
     }
   }
 
+  const lookForMultiples = block => {
+    const names = block.properties.map(prop => prop.name)
+
+    const occurences = names.reduce((prev, cur) => {
+      prev[cur] = (prev[cur] || 0) + 1
+      return prev
+    }, {})
+
+    const multiples = Object.entries(occurences).filter(
+      ([key, value]) => value > 1
+    )
+
+    if (multiples.length > 0) {
+      multiples.forEach(mulitple =>
+        warnings.push({
+          loc: block.loc,
+          type: `You have declared a value for ${mulitple[0]} ${
+            mulitple[1]
+          } times. Only the last value will be used. You may want to delete the ones you don't use.`,
+          line: lines[block.loc.start.line - 1],
+        })
+      )
+    }
+  }
+
   const end = (block, endLine) => {
     block.loc.end = {
       line: endLine + 1,
@@ -302,6 +327,7 @@ export default ({
 
     parseProps(i, block, last)
     lookForFonts(block)
+    lookForMultiples(block)
   }
 
   const parseProps = (i, block) => {
@@ -354,6 +380,17 @@ export default ({
                 line,
               })
             }
+          }
+
+          if (tags.fragment && block.isGroup) {
+            if (isSlot) {
+              warnings.push({
+                loc,
+                type: `The isFragment prop can't be a slot. You need to change it to isFragment true. Treating it as true for now.`,
+                line,
+              })
+            }
+            block.isFragment = true
           }
         } else {
           if (name === 'lazy') {
@@ -440,9 +477,6 @@ export default ({
 
         if (name === 'format') {
           block.format = getFormat(value)
-        }
-        if (tags.style && tags.slot) {
-          block.maybeAnimated = true
         }
 
         if (value === '' && name !== 'text') {
@@ -543,7 +577,11 @@ export default ({
               }
             }
 
-            if (!inScope && !slots.some(vp => vp.name === (slotName || name))) {
+            if (
+              !inScope &&
+              !propNode.tags.fragment &&
+              !slots.some(vp => vp.name === (slotName || name))
+            ) {
               slots.push({
                 name: slotName || name,
                 type: getPropType(block, name, value),
@@ -595,10 +633,26 @@ export default ({
 
     block.properties = properties
     block.scopes = scopes
+
+    if (block.isFragment) {
+      let invalidProps = properties
+        .filter(prop => prop.name !== 'isFragment' || prop.name !== 'onWhen')
+        .map(prop => prop.name)
+
+      if (invalidProps.length > 0) {
+        warnings.push({
+          type: `A fragment can only have isFragment and onWhen props.\nEvery other prop will be dismissed.\nEither remove ${invalidProps.join(
+            ', '
+          )} or remove isFragment.`,
+          loc: block.loc,
+          line: rlines[i],
+        })
+      }
+    }
   }
 
   lines.forEach((line, i) => {
-    if (line !== rlines[i]) {
+    if (line !== rlines[i].trimLeft()) {
       warnings.push({
         type: `You have some spaces before or after this line. Clean them up.`,
         loc: {

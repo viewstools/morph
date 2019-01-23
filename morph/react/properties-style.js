@@ -21,33 +21,39 @@ export function enter(node, parent, state) {
     },
   }
 
+  if (node.isFragment) return
+
   // TODO use this directly in styles without having to go through this
-  node.scopes.filter(scope => scope.isSystem).forEach(scope => {
-    scope.properties.forEach(propNode => {
-      if (propNode.name === 'when') return
+  node.scopes
+    .filter(scope => scope.isSystem)
+    .forEach(scope => {
+      scope.properties.forEach(propNode => {
+        if (propNode.name === 'when') return
 
-      const { _isProp, ...styleForProperty } = state.getStyleForProperty(
-        propNode,
-        node,
-        isSlot(propNode)
-      )
-
-      if (_isProp) {
-        Object.keys(styleForProperty).forEach(k =>
-          state.render.push(` ${k}=${safe(styleForProperty[k], node)}`)
+        const { _isProp, ...styleForProperty } = state.getStyleForProperty(
+          propNode,
+          node,
+          isSlot(propNode)
         )
-      } else {
-        const hasMatchingParent =
-          parent && node.isDynamic ? checkParentStem(node, scope.value) : false
-        const target =
-          isSlot(propNode) || hasMatchingParent
-            ? node.style.dynamic
-            : node.style.static
 
-        Object.assign(target[scope.value], styleForProperty)
-      }
+        if (_isProp) {
+          Object.keys(styleForProperty).forEach(k =>
+            state.render.push(` ${k}=${safe(styleForProperty[k], node)}`)
+          )
+        } else {
+          const hasMatchingParent =
+            parent && node.isDynamic
+              ? checkParentStem(node, scope.value)
+              : false
+          const target =
+            isSlot(propNode) || hasMatchingParent
+              ? node.style.dynamic
+              : node.style.static
+
+          Object.assign(target[scope.value], styleForProperty)
+        }
+      })
     })
-  })
 
   // ensure flex-direction in Horizontals
   if (node.isGroup && node.name === 'Horizontal') {

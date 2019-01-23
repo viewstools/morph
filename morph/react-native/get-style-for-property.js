@@ -29,6 +29,14 @@ export default (node, parent, code) => {
   }
 
   switch (node.name) {
+    case 'borderTopLeftRadius':
+    case 'borderTopRightRadius':
+    case 'borderBottomLeftRadius':
+    case 'borderBottomRightRadius':
+      return {
+        [parent.name === 'Image' ? 'borderRadius' : node.name]: node.value,
+      }
+
     case 'borderTopStyle':
     case 'borderBottomStyle':
     case 'borderLeftStyle':
@@ -38,10 +46,18 @@ export default (node, parent, code) => {
       }
 
     case 'shadowColor':
+      return decorateShadow({
+        shadowColor: node.value,
+      })
+
     case 'shadowBlur':
+      return decorateShadow({
+        shadowRadius: node.value,
+      })
+
     case 'shadowOffsetX':
     case 'shadowOffsetY':
-      return getShadow(node, parent)
+      return getShadowOffset(node, parent)
 
     case 'fontWeight':
     case 'fontFamily':
@@ -111,24 +127,23 @@ const getLineHeight = (node, parent) => {
   return node.value * fontSizeValue
 }
 
-const getShadow = (node, parent) => {
-  const shadowColor = getProp(parent, 'shadowColor')
-  const shadowBlur = getProp(parent, 'shadowBlur')
+const getShadowOffset = (node, parent) => {
   const shadowOffsetX = getProp(parent, 'shadowOffsetX')
   const shadowOffsetY = getProp(parent, 'shadowOffsetY')
 
-  return {
-    // Android
-    elevation: 1,
+  return decorateShadow({
     // iOS,
     shadowOffset: {
-      width: shadowOffsetX ? shadowOffsetX.value : undefined,
-      height: shadowOffsetY ? shadowOffsetY.value : undefined,
+      width: shadowOffsetX ? shadowOffsetX.value : 0,
+      height: shadowOffsetY ? shadowOffsetY.value : 0,
     },
-    shadowRadius: shadowBlur ? shadowBlur.value : undefined,
-    shadowOpacity: 1,
-    shadowColor: shadowColor ? shadowColor.value : undefined,
-  }
+  })
+}
+
+let decorateShadow = obj => {
+  obj.elevation = 1 // for Android
+  obj.shadowOpacity = 1
+  return obj
 }
 
 const getPropValue = (prop, block, unit = '') => {

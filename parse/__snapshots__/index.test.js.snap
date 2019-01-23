@@ -534,26 +534,7 @@ Object {
       "type": "Block",
     },
   ],
-  "warnings": Array [
-    Object {
-      "line": "A Vertical ",
-      "loc": Object {
-        "start": Object {
-          "line": 1,
-        },
-      },
-      "type": "You have some spaces before or after this line. Clean them up.",
-    },
-    Object {
-      "line": "A2 Text    ",
-      "loc": Object {
-        "start": Object {
-          "line": 5,
-        },
-      },
-      "type": "You have some spaces before or after this line. Clean them up.",
-    },
-  ],
+  "warnings": Array [],
 }
 `;
 
@@ -620,7 +601,6 @@ Object {
               "line": 4,
             },
           },
-          "maybeAnimated": true,
           "name": "Text",
           "properties": Array [
             Object {
@@ -830,7 +810,6 @@ Object {
           "line": 1,
         },
       },
-      "maybeAnimated": true,
       "name": "Vertical",
       "properties": Array [
         Object {
@@ -1065,14 +1044,13 @@ Object {
           "loc": Object {
             "end": Object {
               "column": 10,
-              "line": 10,
+              "line": 12,
             },
             "start": Object {
               "column": 0,
               "line": 2,
             },
           },
-          "maybeAnimated": true,
           "name": "Vertical",
           "properties": Array [
             Object {
@@ -1095,15 +1073,34 @@ Object {
               "value": "blue",
             },
             Object {
-              "defaultValue": false,
               "loc": Object {
                 "end": Object {
-                  "column": 10,
+                  "column": 9,
                   "line": 4,
                 },
                 "start": Object {
                   "column": 0,
                   "line": 4,
+                },
+              },
+              "name": "height",
+              "tags": Object {
+                "style": true,
+                "validSlot": null,
+              },
+              "type": "Property",
+              "value": 100,
+            },
+            Object {
+              "defaultValue": false,
+              "loc": Object {
+                "end": Object {
+                  "column": 10,
+                  "line": 5,
+                },
+                "start": Object {
+                  "column": 0,
+                  "line": 5,
                 },
               },
               "name": "marginTop",
@@ -1120,11 +1117,11 @@ Object {
               "loc": Object {
                 "end": Object {
                   "column": 19,
-                  "line": 5,
+                  "line": 6,
                 },
                 "start": Object {
                   "column": 0,
-                  "line": 5,
+                  "line": 6,
                 },
               },
               "name": "border",
@@ -1138,12 +1135,31 @@ Object {
             Object {
               "loc": Object {
                 "end": Object {
-                  "column": 8,
+                  "column": 9,
                   "line": 7,
                 },
                 "start": Object {
                   "column": 0,
                   "line": 7,
+                },
+              },
+              "name": "height",
+              "tags": Object {
+                "style": true,
+                "validSlot": null,
+              },
+              "type": "Property",
+              "value": 302,
+            },
+            Object {
+              "loc": Object {
+                "end": Object {
+                  "column": 8,
+                  "line": 9,
+                },
+                "start": Object {
+                  "column": 0,
+                  "line": 9,
                 },
               },
               "name": "color",
@@ -1166,11 +1182,11 @@ Object {
                   "loc": Object {
                     "end": Object {
                       "column": 11,
-                      "line": 8,
+                      "line": 10,
                     },
                     "start": Object {
                       "column": 0,
-                      "line": 8,
+                      "line": 10,
                     },
                   },
                   "name": "when",
@@ -1189,11 +1205,11 @@ Object {
                   "loc": Object {
                     "end": Object {
                       "column": 21,
-                      "line": 9,
+                      "line": 11,
                     },
                     "start": Object {
                       "column": 0,
-                      "line": 9,
+                      "line": 11,
                     },
                   },
                   "name": "backgroundColor",
@@ -1209,11 +1225,11 @@ Object {
                   "loc": Object {
                     "end": Object {
                       "column": 10,
-                      "line": 10,
+                      "line": 12,
                     },
                     "start": Object {
                       "column": 0,
-                      "line": 10,
+                      "line": 12,
                     },
                   },
                   "name": "color",
@@ -1245,7 +1261,7 @@ Object {
       "loc": Object {
         "end": Object {
           "column": 10,
-          "line": 10,
+          "line": 12,
         },
         "start": Object {
           "column": 0,
@@ -1264,11 +1280,11 @@ Object {
       "loc": Object {
         "end": Object {
           "column": 10,
-          "line": 4,
+          "line": 5,
         },
         "start": Object {
           "column": 0,
-          "line": 4,
+          "line": 5,
         },
       },
       "type": "Add a default value to \\"marginTop\\" like: \\"marginTop < default value\\"",
@@ -1278,11 +1294,11 @@ Object {
       "loc": Object {
         "end": Object {
           "column": 19,
-          "line": 5,
+          "line": 6,
         },
         "start": Object {
           "column": 0,
-          "line": 5,
+          "line": 6,
         },
       },
       "type": "The shorthand border isn't supported. You need to expand it like:
@@ -1295,11 +1311,11 @@ borderColor red",
       "loc": Object {
         "end": Object {
           "column": 3,
-          "line": 6,
+          "line": 8,
         },
         "start": Object {
           "column": 0,
-          "line": 6,
+          "line": 8,
         },
       },
       "type": "This when has no condition assigned to it. Add one like: \\"when <isCondition\\"",
@@ -1309,14 +1325,42 @@ borderColor red",
       "loc": Object {
         "end": Object {
           "column": 21,
-          "line": 9,
+          "line": 11,
         },
         "start": Object {
           "column": 0,
-          "line": 9,
+          "line": 11,
         },
       },
       "type": "You're missing a base prop for backgroundColor. Add it before all whens on the block.",
+    },
+    Object {
+      "line": "EmptyWhen Vertical",
+      "loc": Object {
+        "end": Object {
+          "column": 10,
+          "line": 12,
+        },
+        "start": Object {
+          "column": 0,
+          "line": 2,
+        },
+      },
+      "type": "You have declared a value for color 2 times. Only the last value will be used. You may want to delete the ones you don't use.",
+    },
+    Object {
+      "line": "EmptyWhen Vertical",
+      "loc": Object {
+        "end": Object {
+          "column": 10,
+          "line": 12,
+        },
+        "start": Object {
+          "column": 0,
+          "line": 2,
+        },
+      },
+      "type": "You have declared a value for height 2 times. Only the last value will be used. You may want to delete the ones you don't use.",
     },
   ],
 }

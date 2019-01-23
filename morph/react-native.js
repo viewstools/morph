@@ -37,7 +37,9 @@ export default ({
 
   const state = {
     animations: {},
+    animated: new Set(),
     images: [],
+    dependencies: new Set(),
     getFont,
     getStyleForProperty,
     getValueForProperty,
@@ -65,6 +67,7 @@ export default ({
       if (
         state.uses.includes(block) ||
         /props/.test(block) ||
+        'React.Fragment' === block ||
         block === finalName
       )
         return
@@ -93,6 +96,7 @@ export default ({
       name: finalName,
       state,
     }),
+    dependencies: state.dependencies,
     fonts: parsed.fonts,
     slots: parsed.slots,
     svgs: state.svgs,

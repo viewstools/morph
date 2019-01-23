@@ -34,9 +34,11 @@ export default ({
   }
 
   const state = {
+    animated: new Set(),
     animations: {},
     cssDynamic: false,
     cssStatic: false,
+    dependencies: new Set(),
     enableAnimated,
     file,
     getFont,
@@ -68,6 +70,7 @@ export default ({
         state.uses.includes(block) ||
         /props/.test(block) ||
         /^Animated/.test(block) ||
+        'React.Fragment' === block ||
         block === finalName
       )
         return
@@ -100,6 +103,7 @@ export default ({
       name: finalName,
       state,
     }),
+    dependencies: state.dependencies,
     fonts: parsed.fonts,
     slots: parsed.slots,
     svgs: state.svgs,

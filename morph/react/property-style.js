@@ -8,6 +8,12 @@ import {
 } from '../utils.js'
 import safe from './safe.js'
 
+let PROPS_THAT_IMPLY_CODE_FOR_OTHERS = {
+  fontFamily: 'fontSize',
+  shadowOffsetX: 'shadowOffsetY',
+  shadowOffsetY: 'shadowOffsetX',
+}
+
 export function enter(node, parent, state) {
   if (
     !isStyle(node) ||
@@ -19,8 +25,11 @@ export function enter(node, parent, state) {
 
   let code = isSlot(node)
 
-  if (node.name === 'fontFamily' && !code && state.isReactNative) {
-    code = isSlot(getProp(parent, 'fontWeight'))
+  if (!code && state.isReactNative) {
+    let otherProp = PROPS_THAT_IMPLY_CODE_FOR_OTHERS[node.name]
+    if (otherProp) {
+      code = isSlot(getProp(parent, otherProp))
+    }
   }
 
   const { _isProp, _isScoped, ...styleForProperty } = state.getStyleForProperty(
@@ -42,6 +51,7 @@ export function enter(node, parent, state) {
       code || _isScoped || hasMatchingParent
         ? parent.style.dynamic
         : parent.style.static
+
     Object.assign(target[getStyleType(node)], styleForProperty)
   }
 

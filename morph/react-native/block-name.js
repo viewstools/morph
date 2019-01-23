@@ -3,6 +3,8 @@ import handleTable from '../react/block-name-handle-table.js'
 import getBlockName from './get-block-name.js'
 
 export function enter(node, parent, state) {
+  if (node.isFragment && node.children.length === 0) return true
+
   let name = getBlockName(node, parent, state)
   if (name === null) return true
 
@@ -11,7 +13,7 @@ export function enter(node, parent, state) {
     name = 'AnimatedFlatList'
   }
 
-  state.use(/Animated/.test(name) ? 'Animated' : name, node.isLazy)
+  state.use(node.isBasic ? name.replace(/^Animated/, '') : name, node.isLazy)
 
   node.nameFinal = name
 
