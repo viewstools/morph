@@ -111,18 +111,24 @@ if (shouldWatch) {
   console.log(chalk.magenta('X'), ` = View name is invalid`)
   console.log('\n\nPress', chalk.blue('ctrl+c'), 'to stop at any time.\n\n')
 
-  watch({
-    as,
-    compile,
-    isBundlingBaseCss,
-    local,
-    logic,
-    pretty,
-    src: input,
-    track,
-    verbose,
-    warnOfDefaultValue,
-  })
+  // FIXME remove setTimeout once https://github.com/facebook/create-react-app/issues/5809
+  // is fixed.
+  // For now we're artificially delaying the watcher to prevent a white screen
+  // on load when using CRA
+  setTimeout(() => {
+    watch({
+      as,
+      compile,
+      isBundlingBaseCss,
+      local,
+      logic,
+      pretty,
+      src: input,
+      track,
+      verbose,
+      warnOfDefaultValue,
+    })
+  }, 10000)
 } else {
   if (statSync(input).isDirectory()) {
     watch({
