@@ -878,7 +878,7 @@ const Action = props => {
       disabled={props.isDisabled}
       className={\`views-block \${Vertical}\`}
     >
-      <span data-test-id={\`Action.Text|\`} className=\\"views-block\\">
+      <span data-test-id={\`Action.Text|\`} className=\\"views-text\\">
         click me
       </span>
       <SubButton
@@ -1003,7 +1003,7 @@ class AnimatedButton extends React.Component {
                             '--color': animatedText.color,
                             '--fontSize': animatedText.fontSize,
                           }}
-                          className={\`views-block \${Text}\`}
+                          className={\`views-text \${Text}\`}
                         >
                           hey
                         </span>
@@ -1450,7 +1450,7 @@ class Code extends React.Component {
               data-test-id={\`Code.Text|\`}
               ref={props.refText}
               style={{ '--color': props.color }}
-              className={\`views-block \${Text}\`}
+              className={\`views-text \${Text}\`}
             >
               {props.text}
             </span>
@@ -1507,10 +1507,10 @@ const DefaultProps = props => {
       data-test-id={\`\${props['data-test-id'] || 'DefaultProps'}|\`}
       className=\\"views-block\\"
     >
-      <span data-test-id={\`DefaultProps.Text|\`} className=\\"views-block\\">
+      <span data-test-id={\`DefaultProps.Text|\`} className=\\"views-text\\">
         {props.text}
       </span>
-      <span data-test-id={\`DefaultProps.Text:1|\`} className=\\"views-block\\">
+      <span data-test-id={\`DefaultProps.Text:1|\`} className=\\"views-text\\">
         {props.texto}
       </span>
       {props.children}
@@ -1616,14 +1616,14 @@ const DynamicFontProps = props => {
       <span
         data-test-id={\`DynamicFontProps.DynamicFamily|\`}
         style={{ '--fontFamily': props.fontFamily }}
-        className={\`views-block \${DynamicFamily}\`}
+        className={\`views-text \${DynamicFamily}\`}
       >
         Some text
       </span>
       <span
         data-test-id={\`DynamicFontProps.DynamicWeight|\`}
         style={{ '--fontWeight': props.fontWeight }}
-        className={\`views-block \${DynamicWeight}\`}
+        className={\`views-text \${DynamicWeight}\`}
       >
         Some text
       </span>
@@ -1633,7 +1633,7 @@ const DynamicFontProps = props => {
           '--fontWeight': props.fontWeight,
           '--fontFamily': props.fontFamily,
         }}
-        className={\`views-block \${DynamicFamilyAndWeight}\`}
+        className={\`views-text \${DynamicFamilyAndWeight}\`}
       >
         Some text
       </span>
@@ -1746,7 +1746,7 @@ const EmptyText = props => {
   return (
     <span
       data-test-id={\`\${props['data-test-id'] || 'EmptyText'}|\`}
-      className=\\"views-block\\"
+      className=\\"views-text\\"
     />
   );
 };
@@ -1839,12 +1839,12 @@ const Fragment = props => {
         data-test-id={\`Fragment.Horizontal|\`}
         className={\`views-block \${Horizontal}\`}
       >
-        <span data-test-id={\`Fragment.Text|\`} className=\\"views-block\\">
+        <span data-test-id={\`Fragment.Text|\`} className=\\"views-text\\">
           hey
         </span>
         {props.isShown ? (
           <React.Fragment>
-            <span data-test-id={\`Fragment.Text:1|\`} className=\\"views-block\\">
+            <span data-test-id={\`Fragment.Text:1|\`} className=\\"views-text\\">
               hi
             </span>
           </React.Fragment>
@@ -1890,7 +1890,7 @@ const GoTo = props => {
       data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
       className=\\"views-block\\"
     >
-      <span data-test-id={\`GoTo.Text|\`} className=\\"views-block\\">
+      <span data-test-id={\`GoTo.Text|\`} className=\\"views-text\\">
         Go to Views Tools website!
       </span>
       {props.children}
@@ -1950,7 +1950,7 @@ const Hover = props => {
       <span
         data-test-id={\`Hover.Text|\`}
         style={{ '--fontSize': \`\${props.fontSize}px\` }}
-        className={\`views-block \${Text}\`}
+        className={\`views-text \${Text}\`}
       >
         Hey!
       </span>
@@ -2063,11 +2063,11 @@ const Indented = props => {
       style={{ '--backgroundColor': \`\${props.isSomething ? 'blue' : 'red'}\` }}
       className={\`views-block \${Indented1}\`}
     >
-      <span data-test-id={\`Indented.Text|\`} className=\\"views-block\\">
+      <span data-test-id={\`Indented.Text|\`} className=\\"views-text\\">
         hey
       </span>
       <div data-test-id={\`Indented.Vertical|\`} className=\\"views-block\\">
-        <span data-test-id={\`Indented.Text:1|\`} className=\\"views-block\\">
+        <span data-test-id={\`Indented.Text:1|\`} className=\\"views-text\\">
           ho
         </span>
         {!props.showStuff ? (
@@ -2081,7 +2081,7 @@ const Indented = props => {
             }}
             className={\`views-block \${Horizontal}\`}
           >
-            <span data-test-id={\`Indented.Text:2|\`} className=\\"views-block\\">
+            <span data-test-id={\`Indented.Text:2|\`} className=\\"views-text\\">
               more
             </span>
           </div>
@@ -2127,7 +2127,7 @@ const JustText = props => {
   return (
     <span
       data-test-id={\`\${props['data-test-id'] || 'JustText'}|\`}
-      className=\\"views-block\\"
+      className=\\"views-text\\"
     >
       hey!
     </span>
@@ -2560,13 +2560,13 @@ const Locals = props => {
           data-test-id={\`\${props['data-test-id'] || 'Locals'}|\`}
           className=\\"views-block\\"
         >
-          <span data-test-id={\`Locals.Text|\`} className=\\"views-block\\">
+          <span data-test-id={\`Locals.Text|\`} className=\\"views-text\\">
             {TextLocal[local.state.lang] || 'Hi'}
           </span>
-          <span data-test-id={\`Locals.Text:1|\`} className=\\"views-block\\">
+          <span data-test-id={\`Locals.Text:1|\`} className=\\"views-text\\">
             {TextLocal1[local.state.lang] || 'More'}
           </span>
-          <span data-test-id={\`Locals.Named|\`} className=\\"views-block\\">
+          <span data-test-id={\`Locals.Named|\`} className=\\"views-text\\">
             {NamedLocal[local.state.lang] || 'Bye, \\"Said someone\\\\'s friend\\"!'}
           </span>
           {props.children}
@@ -2639,19 +2639,19 @@ const LocalsFormat = props => {
           data-test-id={\`\${props['data-test-id'] || 'LocalsFormat'}|\`}
           className=\\"views-block\\"
         >
-          <span data-test-id={\`LocalsFormat.Price|\`} className=\\"views-block\\">
+          <span data-test-id={\`LocalsFormat.Price|\`} className=\\"views-text\\">
             {currencyFormatters[local.state.lang].format(100)}
           </span>
-          <span data-test-id={\`LocalsFormat.Date|\`} className=\\"views-block\\">
+          <span data-test-id={\`LocalsFormat.Date|\`} className=\\"views-text\\">
             {dateFormatters[local.state.lang].format(Date.parse('2018-07-08'))}
           </span>
           <span
             data-test-id={\`LocalsFormat.Percentage|\`}
-            className=\\"views-block\\"
+            className=\\"views-text\\"
           >
             {percentFormatters[local.state.lang].format(0.805)}
           </span>
-          <span data-test-id={\`LocalsFormat.Time|\`} className=\\"views-block\\">
+          <span data-test-id={\`LocalsFormat.Time|\`} className=\\"views-text\\">
             {timeFormatters[local.state.lang].format(
               Date.UTC(2018, 14, 3, 3, 0)
             )}
@@ -2685,7 +2685,7 @@ const NameIsType = props => {
   return (
     <span
       data-test-id={\`\${props['data-test-id'] || 'Texto'}|\`}
-      className=\\"views-block\\"
+      className=\\"views-text\\"
     >
       iam
     </span>
@@ -2717,7 +2717,7 @@ const NegativeNumber = props => {
   return (
     <span
       data-test-id={\`\${props['data-test-id'] || 'Text'}|\`}
-      className={\`views-block \${Text}\`}
+      className={\`views-text \${Text}\`}
     >
       hey
     </span>
@@ -2753,7 +2753,7 @@ const NestedRoutes = props => {
       data-test-id={\`\${props['data-test-id'] || 'Topics'}|\`}
       className=\\"views-block\\"
     >
-      <span data-test-id={\`NestedRoutes.Text|\`} className=\\"views-block\\">
+      <span data-test-id={\`NestedRoutes.Text|\`} className=\\"views-text\\">
         topics
       </span>
       <Link
@@ -2761,7 +2761,7 @@ const NestedRoutes = props => {
         data-test-id={\`NestedRoutes.Link|\`}
         className=\\"views-block\\"
       >
-        <span data-test-id={\`NestedRoutes.Text:1|\`} className=\\"views-block\\">
+        <span data-test-id={\`NestedRoutes.Text:1|\`} className=\\"views-text\\">
           Rendering with React
         </span>
       </Link>
@@ -2824,7 +2824,7 @@ const Scope = props => {
                 : 'red'
         }\`,
       }}
-      className={\`views-block \${Scope1}\`}
+      className={\`views-text \${Scope1}\`}
     >
       {props.somethingGreen
         ? '2 green'
@@ -2921,7 +2921,7 @@ const ScopePopup = props => {
         }
         className=\\"views-block\\"
       >
-        <span data-test-id={\`ScopePopup.Text|\`} className=\\"views-block\\">
+        <span data-test-id={\`ScopePopup.Text|\`} className=\\"views-text\\">
           toggle popup
         </span>
       </button>
@@ -2976,7 +2976,7 @@ const ScopePopup2 = props => {
         }}
         className=\\"views-block\\"
       >
-        <span data-test-id={\`ScopePopup2.Text|\`} className=\\"views-block\\">
+        <span data-test-id={\`ScopePopup2.Text|\`} className=\\"views-text\\">
           toggle popup
         </span>
       </button>
@@ -2994,7 +2994,7 @@ const ScopePopup2 = props => {
         }}
         className={\`views-block \${Content}\`}
       >
-        <span data-test-id={\`ScopePopup2.Text:1|\`} className=\\"views-block\\">
+        <span data-test-id={\`ScopePopup2.Text:1|\`} className=\\"views-text\\">
           I'm inside the popup
         </span>
       </div>
@@ -3182,7 +3182,7 @@ const Shadow = props => {
         <span
           data-test-id={\`Shadow.TextShadow|\`}
           style={{ '--shadowColor': props.shadowColor }}
-          className={\`views-block \${TextShadow}\`}
+          className={\`views-text \${TextShadow}\`}
         >
           hey
         </span>
@@ -3231,7 +3231,7 @@ const SlotOnBaseAndValueOnScope = props => {
         props.something ? 'something|' : ''
       }\`}
       style={{ '--color': \`\${props.something ? 'blue' : props.color}\` }}
-      className={\`views-block \${SlotOnBaseAndValueOnScope1}\`}
+      className={\`views-text \${SlotOnBaseAndValueOnScope1}\`}
     />
   );
 };
@@ -3340,7 +3340,7 @@ const Teleport = props => {
       data-test-id={\`\${props['data-test-id'] || 'Horizontal'}|\`}
       className={\`views-block \${Horizontal}\`}
     >
-      <span data-test-id={\`Teleport.Text|\`} className=\\"views-block\\">
+      <span data-test-id={\`Teleport.Text|\`} className=\\"views-text\\">
         go back
       </span>
       {props.children}
@@ -3375,14 +3375,14 @@ const TestIds = props => {
       data-test-id={\`\${props['data-test-id'] || 'App'}|\`}
       className=\\"views-block\\"
     >
-      <span data-test-id={\`TestIds.Text|\`} className=\\"views-block\\">
+      <span data-test-id={\`TestIds.Text|\`} className=\\"views-text\\">
         1
       </span>
-      <span data-test-id={\`TestIds.Text:1|\`} className=\\"views-block\\">
+      <span data-test-id={\`TestIds.Text:1|\`} className=\\"views-text\\">
         2
       </span>
       <External data-test-id={\`TestIds.External|\`} className=\\"views-block\\" />
-      <span data-test-id={\`TestIds.Name|\`} className=\\"views-block\\">
+      <span data-test-id={\`TestIds.Name|\`} className=\\"views-text\\">
         name
       </span>
       {props.children}
@@ -3418,11 +3418,11 @@ const TextInterpolation = props => {
         data-test-id={\`TextInterpolation.Standard|\${
           !props.firstName ? 'notFirstName|' : ''
         }\`}
-        className=\\"views-block\\"
+        className=\\"views-text\\"
       >
         {!props.firstName ? \`Hi stranger!\` : \`Hi \${props.firstName}!\`}
       </span>
-      <span data-test-id={\`TextInterpolation.Scoped|\`} className=\\"views-block\\">
+      <span data-test-id={\`TextInterpolation.Scoped|\`} className=\\"views-text\\">
         Hello, Prof. {!props.surname ? 'Anonymous' : props.surname}.
       </span>
       {props.children}
@@ -3486,7 +3486,7 @@ const Transform = props => {
           '--transformOriginX': props.transformOriginX,
           '--transformOriginY': props.transformOriginY,
         }}
-        className={\`views-block \${Text}\`}
+        className={\`views-text \${Text}\`}
       >
         who knows what happens here :D
       </span>
@@ -3549,7 +3549,7 @@ const UseCaptureEmail = props => {
       autoFocus={true}
       defaultValue=\\"hey this is a default value\\"
       onSubmit={props.onSubmit}
-      className={\`views-block \${Email}\`}
+      className={\`views-capture \${Email}\`}
     />
   );
 };
@@ -3584,7 +3584,7 @@ const UseCaptureFile = props => {
   return (
     <input
       data-test-id={\`\${props['data-test-id'] || 'File'}|\`}
-      className=\\"views-block\\"
+      className=\\"views-capture\\"
     />
   );
 };
@@ -3614,7 +3614,7 @@ const UseCaptureNumber = props => {
       inputMode=\\"numeric\\"
       pattern=\\"[0-9]*\\"
       data-test-id={\`\${props['data-test-id'] || 'Number'}|\`}
-      className=\\"views-block\\"
+      className=\\"views-capture\\"
     />
   );
 };
@@ -3642,7 +3642,7 @@ const UseCapturePhone = props => {
     <input
       type=\\"tel\\"
       data-test-id={\`\${props['data-test-id'] || 'Phone'}|\`}
-      className=\\"views-block\\"
+      className=\\"views-capture\\"
     />
   );
 };
@@ -3670,7 +3670,7 @@ const UseCaptureSecure = props => {
     <input
       type=\\"password\\"
       data-test-id={\`\${props['data-test-id'] || 'Secure'}|\`}
-      className=\\"views-block\\"
+      className=\\"views-capture\\"
     />
   );
 };
@@ -3707,7 +3707,7 @@ const UseCaptureText = props => {
           type=\\"text\\"
           data-test-id={\`\${props['data-test-id'] || 'Text'}|\`}
           placeholder={TextLocal[local.state.lang] || 'Type feedback here...'}
-          className=\\"views-block\\"
+          className=\\"views-capture\\"
         />
       )}
     </Subscribe>
@@ -3738,7 +3738,7 @@ const UseCaptureTextArea = props => {
   return (
     <textarea
       data-test-id={\`\${props['data-test-id'] || 'CaptureTextArea'}|\`}
-      className=\\"views-block\\"
+      className=\\"views-capture\\"
     />
   );
 };
@@ -3767,7 +3767,7 @@ const UseCaptureTextManagedFromOutside = props => {
       type=\\"text\\"
       data-test-id={\`\${props['data-test-id'] || 'CaptureText'}|\`}
       value={props.external}
-      className=\\"views-block\\"
+      className=\\"views-capture\\"
     />
   );
 };
@@ -4313,7 +4313,7 @@ const UseText = props => {
         props.isSomething ? 'isSomething|' : ''
       }\`}
       style={{ '--color': \`\${props.isSomething ? 'red' : 'blue'}\` }}
-      className={\`views-block \${UseText1}\`}
+      className={\`views-text \${UseText1}\`}
     >
       Hi, I'm some text
     </span>
@@ -4377,14 +4377,14 @@ const UseTextCustomFont = props => {
       <span
         data-test-id={\`UseTextCustomFont.Normal|\`}
         fontType=\\"sans-serif\\"
-        className={\`views-block \${Normal}\`}
+        className={\`views-text \${Normal}\`}
       >
         Hi, I'm some text
       </span>
       <span
         data-test-id={\`UseTextCustomFont.Italic|\`}
         fontType=\\"sans-serif\\"
-        className={\`views-block \${Italic}\`}
+        className={\`views-text \${Italic}\`}
       >
         Hi, I'm some text
       </span>
@@ -4515,7 +4515,7 @@ const When = props => {
       className={\`views-block \${App}\`}
     >
       {props.showMe ? (
-        <span data-test-id={\`When.Text|\`} className=\\"views-block\\">
+        <span data-test-id={\`When.Text|\`} className=\\"views-text\\">
           I may be hidden
         </span>
       ) : null}
@@ -4554,7 +4554,7 @@ const WhenTopLevel = props => {
   return props.showMe ? (
     <span
       data-test-id={\`\${props['data-test-id'] || 'Text'}|\`}
-      className=\\"views-block\\"
+      className=\\"views-text\\"
     >
       I may be hidden
     </span>
