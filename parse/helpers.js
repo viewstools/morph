@@ -14,6 +14,7 @@ const dymBlockMatcher = new DidYouMeanMatcher(
 const dymPropMatcher = new DidYouMeanMatcher([
   ...STYLE,
   'defaultValue',
+  'type',
   'fill',
   'stroke',
   'from',
