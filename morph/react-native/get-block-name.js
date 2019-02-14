@@ -3,12 +3,7 @@ import toPascalCase from 'to-pascal-case'
 
 export default (node, parent, state) => {
   switch (node.name) {
-    case 'CaptureEmail':
-    // case 'CaptureFile':
-    case 'CaptureNumber':
-    case 'CapturePhone':
-    case 'CaptureSecure':
-    case 'CaptureText':
+    case 'Capture':
     case 'CaptureTextArea':
       return 'TextInput'
 

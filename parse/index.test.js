@@ -48,7 +48,8 @@ color < red
 marginLeft < 10
 text <title This is the title
 
-CaptureText
+Capture
+type text
 onFocus <
 
 List

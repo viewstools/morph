@@ -39,6 +39,7 @@ body,
   word-wrap: break-word;
 }
 .views-capture {
+  background-color: transparent;
   box-sizing: border-box;
   border-radius: 0;
   border: 0;

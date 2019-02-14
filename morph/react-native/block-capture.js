@@ -1,40 +1,55 @@
-import { getProp } from '../utils.js'
+import { getProp, isSlot } from '../utils.js'
 
-const keyboardType = {
-  CaptureEmail: 'email-address',
-  CaptureText: 'default',
-  CaptureTextArea: 'default',
-  CaptureNumber: 'numeric',
-  CapturePhone: 'phone-pad',
+let keyboardType = {
+  email: 'email-address',
+  number: 'numeric',
+  phone: 'phone-pad',
 }
 
-export const enter = (node, parent, state) => {
-  const blockType = node.name
-
-  if (!/Capture/.test(node.name)) return
-  node.isCapture = true
-
-  if (node.name === 'CaptureSecure') {
-    state.render.push(` secureTextEntry`)
-  } else {
-    state.render.push(` keyboardType='${keyboardType[blockType]}'`)
-  }
+export let enter = (node, parent, state) => {
+  if (!node.isCapture) return
 
   if (node.name === 'CaptureTextArea') {
     state.render.push(` multiline={true}`)
+  } else {
+    let type = getProp(node, 'type')
+
+    // TODO warn on parser
+    // TODO support file upload in RN
+    if (type.value === 'file') {
+      type.value = 'text'
+    }
+
+    if (type.value === 'secure') {
+      state.render.push(` secureTextEntry`)
+    } else {
+      if (isSlot(type)) {
+        let dynamicKeyboardType = `
+          ${type.value} === 'email'?
+            '${keyboardType.email}' :
+              ${type.value} === 'number'?
+                '${keyboardType.number}' :
+                ${type.value} === 'phone'?
+                  '${keyboardType.phone}' : 'default'
+        `
+        state.render.push(` keyboardType={${dynamicKeyboardType}}`)
+      } else if (keyboardType[type.value]) {
+        state.render.push(` keyboardType='${keyboardType[type.value]}'`)
+      }
+    }
   }
 
-  const autoCorrect = getProp(node, 'autoCorrect')
+  let autoCorrect = getProp(node, 'autoCorrect')
   if (!autoCorrect) {
     state.render.push(` autoCorrect={false}`)
   }
 
-  const underlineColorAndroid = getProp(node, 'underlineColorAndroid')
+  let underlineColorAndroid = getProp(node, 'underlineColorAndroid')
   if (!underlineColorAndroid) {
     state.render.push(` underlineColorAndroid="transparent"`)
   }
 
-  const textAlignVertical = getProp(node, 'textAlignVertical')
+  let textAlignVertical = getProp(node, 'textAlignVertical')
   if (!textAlignVertical) {
     state.render.push(` textAlignVertical="top"`)
   }

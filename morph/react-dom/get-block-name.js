@@ -5,12 +5,7 @@ export default (node, parent, state) => {
   let name = node.name
 
   switch (node.name) {
-    case 'CaptureEmail':
-    case 'CaptureFile':
-    case 'CaptureNumber':
-    case 'CapturePhone':
-    case 'CaptureSecure':
-    case 'CaptureText':
+    case 'Capture':
       name = 'input'
       break
 

@@ -13,6 +13,7 @@ Object {
       "is": "Main",
       "isAnimated": false,
       "isBasic": true,
+      "isCapture": false,
       "isColumn": false,
       "isGroup": true,
       "isList": false,
@@ -51,6 +52,7 @@ Object {
           "id": "Text",
           "isAnimated": false,
           "isBasic": true,
+          "isCapture": false,
           "isColumn": false,
           "isGroup": false,
           "loc": Object {
@@ -73,6 +75,7 @@ Object {
       "is": "Main",
       "isAnimated": false,
       "isBasic": true,
+      "isCapture": false,
       "isColumn": false,
       "isGroup": true,
       "isList": false,
@@ -112,6 +115,7 @@ Object {
           "is": "Before",
           "isAnimated": false,
           "isBasic": true,
+          "isCapture": false,
           "isColumn": false,
           "isGroup": false,
           "loc": Object {
@@ -138,6 +142,7 @@ Object {
               "is": "ImageInside",
               "isAnimated": false,
               "isBasic": true,
+              "isCapture": false,
               "isColumn": false,
               "isGroup": false,
               "loc": Object {
@@ -181,6 +186,7 @@ Object {
               "is": "VerticalInside",
               "isAnimated": false,
               "isBasic": true,
+              "isCapture": false,
               "isColumn": false,
               "isGroup": true,
               "isList": false,
@@ -205,6 +211,7 @@ Object {
           "is": "Nested",
           "isAnimated": false,
           "isBasic": true,
+          "isCapture": false,
           "isColumn": false,
           "isGroup": true,
           "isList": false,
@@ -230,6 +237,7 @@ Object {
           "is": "After",
           "isAnimated": false,
           "isBasic": true,
+          "isCapture": false,
           "isColumn": false,
           "isGroup": false,
           "loc": Object {
@@ -346,6 +354,7 @@ Object {
           "is": "Last",
           "isAnimated": false,
           "isBasic": true,
+          "isCapture": false,
           "isColumn": false,
           "isGroup": true,
           "isList": false,
@@ -390,6 +399,7 @@ Object {
       "is": "BlueButton",
       "isAnimated": false,
       "isBasic": true,
+      "isCapture": false,
       "isColumn": false,
       "isGroup": true,
       "isList": false,
@@ -429,6 +439,7 @@ Object {
           "is": "A1",
           "isAnimated": false,
           "isBasic": true,
+          "isCapture": false,
           "isColumn": false,
           "isGroup": false,
           "loc": Object {
@@ -472,6 +483,7 @@ Object {
           "is": "A2",
           "isAnimated": false,
           "isBasic": true,
+          "isCapture": false,
           "isColumn": false,
           "isGroup": false,
           "loc": Object {
@@ -514,6 +526,7 @@ Object {
       "is": "A",
       "isAnimated": false,
       "isBasic": true,
+      "isCapture": false,
       "isColumn": false,
       "isGroup": true,
       "isList": false,
@@ -589,6 +602,7 @@ Object {
           "is": "Title",
           "isAnimated": false,
           "isBasic": true,
+          "isCapture": false,
           "isColumn": false,
           "isGroup": false,
           "loc": Object {
@@ -674,25 +688,25 @@ Object {
         },
         Object {
           "animations": Object {},
-          "id": "CaptureText",
+          "id": "Capture",
           "isAnimated": false,
           "isBasic": true,
+          "isCapture": true,
           "isColumn": false,
           "isGroup": false,
           "loc": Object {
             "end": Object {
               "column": 0,
-              "line": 11,
+              "line": 12,
             },
             "start": Object {
               "column": 0,
               "line": 9,
             },
           },
-          "name": "CaptureText",
+          "name": "Capture",
           "properties": Array [
             Object {
-              "defaultValue": "",
               "loc": Object {
                 "end": Object {
                   "column": 8,
@@ -701,6 +715,25 @@ Object {
                 "start": Object {
                   "column": 0,
                   "line": 10,
+                },
+              },
+              "name": "type",
+              "tags": Object {
+                "validSlot": null,
+              },
+              "type": "Property",
+              "value": "text",
+            },
+            Object {
+              "defaultValue": "",
+              "loc": Object {
+                "end": Object {
+                  "column": 8,
+                  "line": 11,
+                },
+                "start": Object {
+                  "column": 0,
+                  "line": 11,
                 },
               },
               "name": "onFocus",
@@ -727,6 +760,7 @@ Object {
               "id": "Stuff",
               "isAnimated": false,
               "isBasic": false,
+              "isCapture": false,
               "isColumn": false,
               "isGroup": true,
               "isList": false,
@@ -734,11 +768,11 @@ Object {
               "loc": Object {
                 "end": Object {
                   "column": 4,
-                  "line": 14,
+                  "line": 15,
                 },
                 "start": Object {
                   "column": 0,
-                  "line": 14,
+                  "line": 15,
                 },
               },
               "name": "Stuff",
@@ -750,6 +784,7 @@ Object {
           "id": "List",
           "isAnimated": false,
           "isBasic": true,
+          "isCapture": false,
           "isColumn": false,
           "isGroup": true,
           "isList": true,
@@ -757,11 +792,11 @@ Object {
           "loc": Object {
             "end": Object {
               "column": 4,
-              "line": 14,
+              "line": 15,
             },
             "start": Object {
               "column": 0,
-              "line": 12,
+              "line": 13,
             },
           },
           "name": "List",
@@ -771,11 +806,11 @@ Object {
               "loc": Object {
                 "end": Object {
                   "column": 5,
-                  "line": 13,
+                  "line": 14,
                 },
                 "start": Object {
                   "column": 0,
-                  "line": 13,
+                  "line": 14,
                 },
               },
               "name": "from",
@@ -796,6 +831,7 @@ Object {
       "id": "Vertical",
       "isAnimated": false,
       "isBasic": true,
+      "isCapture": false,
       "isColumn": false,
       "isGroup": true,
       "isList": false,
@@ -803,7 +839,7 @@ Object {
       "loc": Object {
         "end": Object {
           "column": 4,
-          "line": 14,
+          "line": 15,
         },
         "start": Object {
           "column": 0,
@@ -876,6 +912,20 @@ Object {
       },
       "type": "Add a default value to \\"backgroundColor\\" like: \\"backgroundColor <backgroundColor default value\\"",
     },
+    Object {
+      "line": "type text",
+      "loc": Object {
+        "end": Object {
+          "column": 8,
+          "line": 10,
+        },
+        "start": Object {
+          "column": 0,
+          "line": 10,
+        },
+      },
+      "type": "Did you mean \\"top\\" instead of \\"type\\"?",
+    },
   ],
 }
 `;
@@ -896,6 +946,7 @@ Object {
           "id": "Text",
           "isAnimated": false,
           "isBasic": true,
+          "isCapture": false,
           "isColumn": false,
           "isGroup": false,
           "loc": Object {
@@ -991,6 +1042,7 @@ Object {
       "is": "Locals",
       "isAnimated": false,
       "isBasic": true,
+      "isCapture": false,
       "isColumn": false,
       "isGroup": true,
       "isList": false,
@@ -1037,6 +1089,7 @@ Object {
           "is": "EmptyWhen",
           "isAnimated": false,
           "isBasic": true,
+          "isCapture": false,
           "isColumn": false,
           "isGroup": true,
           "isList": false,
@@ -1254,6 +1307,7 @@ Object {
       "is": "Warning",
       "isAnimated": false,
       "isBasic": true,
+      "isCapture": false,
       "isColumn": false,
       "isGroup": true,
       "isList": false,

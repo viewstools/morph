@@ -1,4 +1,5 @@
-Email CaptureEmail
+Email Capture
+type email
 autoFocus true
 borderColor black
 borderStyle solid

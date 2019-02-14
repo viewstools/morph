@@ -5,10 +5,7 @@ export const enter = (node, parent, state) => {
   if (node.goTo) {
     const goTo = getProp(node, 'goTo')
     state.render.push(
-      ` href=${safe(
-        goTo.value,
-        goTo
-      )} rel='noopener noreferrer' target='_blank'`
+      ` href=${safe(goTo.value)} rel='noopener noreferrer' target='_blank'`
     )
   }
 }

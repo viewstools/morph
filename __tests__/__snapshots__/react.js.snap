@@ -132,6 +132,17 @@ module.exports = {
 }
 `;
 
+exports[`e2e parses e2e DynamicCaptureType 1`] = `
+Object {
+  "code": "const { get } = require('@viewstools/e2e');
+
+module.exports = {
+  Capture: get('DynamicCaptureType.Capture'),
+};
+",
+}
+`;
+
 exports[`e2e parses e2e DynamicFontProps 1`] = `
 Object {
   "code": "const { get } = require('@viewstools/e2e');
@@ -673,7 +684,7 @@ Object {
   "code": "const { get } = require('@viewstools/e2e');
 
 module.exports = {
-  CaptureText: get('UseCaptureTextManagedFromOutside.CaptureText'),
+  Capture: get('UseCaptureTextManagedFromOutside.Capture'),
 };
 ",
 }
@@ -1571,6 +1582,48 @@ export default Display;
   },
   "fonts": Array [],
   "slots": Array [],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom DynamicCaptureType 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
+import React from 'react';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+
+const DynamicCaptureType = props => {
+  const track = React.useContext(TrackContext);
+
+  return (
+    <input
+      type={props.type}
+      inputMode={
+        props.type === 'number' || props.type === 'phone'
+          ? 'numeric'
+          : undefined
+      }
+      pattern={
+        props.type === 'number' || props.type === 'phone' ? '[0-9]*' : undefined
+      }
+      data-test-id={\`\${props['data-test-id'] || 'Capture'}|\`}
+      className=\\"views-capture\\"
+    />
+  );
+};
+DynamicCaptureType.defaultProps = { type: 'number' };
+export default DynamicCaptureType;
+",
+  "dependencies": Set {},
+  "fonts": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": "number",
+      "name": "type",
+      "type": "string",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -3583,6 +3636,7 @@ const UseCaptureFile = props => {
 
   return (
     <input
+      type=\\"file\\"
       data-test-id={\`\${props['data-test-id'] || 'File'}|\`}
       className=\\"views-capture\\"
     />
@@ -3641,6 +3695,8 @@ const UseCapturePhone = props => {
   return (
     <input
       type=\\"tel\\"
+      inputMode=\\"numeric\\"
+      pattern=\\"[0-9]*\\"
       data-test-id={\`\${props['data-test-id'] || 'Phone'}|\`}
       className=\\"views-capture\\"
     />
@@ -3765,7 +3821,7 @@ const UseCaptureTextManagedFromOutside = props => {
   return (
     <input
       type=\\"text\\"
-      data-test-id={\`\${props['data-test-id'] || 'CaptureText'}|\`}
+      data-test-id={\`\${props['data-test-id'] || 'Capture'}|\`}
       value={props.external}
       className=\\"views-capture\\"
     />
@@ -5273,6 +5329,50 @@ export default Display;
   "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-native parses react-native DynamicCaptureType 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
+import React from 'react';
+import TrackContext from './TrackContext.view.js';
+import { TextInput } from 'react-native';
+
+const DynamicCaptureType = props => {
+  const track = React.useContext(TrackContext);
+
+  return (
+    <TextInput
+      keyboardType={
+        props.type === 'email'
+          ? 'email-address'
+          : props.type === 'number'
+            ? 'numeric'
+            : props.type === 'phone'
+              ? 'phone-pad'
+              : 'default'
+      }
+      autoCorrect={false}
+      underlineColorAndroid=\\"transparent\\"
+      textAlignVertical=\\"top\\"
+      testID={\`\${props['testID'] || 'Capture'}|\`}
+    />
+  );
+};
+DynamicCaptureType.defaultProps = { type: 'number' };
+export default DynamicCaptureType;
+",
+  "dependencies": Set {},
+  "fonts": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": "number",
+      "name": "type",
+      "type": "string",
+    },
+  ],
   "svgs": Array [],
 }
 `;
@@ -7052,16 +7152,15 @@ export default UseCaptureEmail;
 exports[`react-native parses react-native UseCaptureFile 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
-import CaptureFile from './CaptureFile.view.js';
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
+import { TextInput } from 'react-native';
 
 const UseCaptureFile = props => {
   const track = React.useContext(TrackContext);
 
   return (
-    <CaptureFile
-      keyboardType=\\"undefined\\"
+    <TextInput
       autoCorrect={false}
       underlineColorAndroid=\\"transparent\\"
       textAlignVertical=\\"top\\"
@@ -7189,7 +7288,6 @@ const UseCaptureText = props => {
     <Subscribe to={[LocalContainer]}>
       {local => (
         <TextInput
-          keyboardType=\\"default\\"
           autoCorrect={false}
           underlineColorAndroid=\\"transparent\\"
           textAlignVertical=\\"top\\"
@@ -7224,7 +7322,6 @@ const UseCaptureTextArea = props => {
 
   return (
     <TextInput
-      keyboardType=\\"default\\"
       multiline={true}
       autoCorrect={false}
       underlineColorAndroid=\\"transparent\\"
@@ -7255,11 +7352,10 @@ const UseCaptureTextManagedFromOutside = props => {
 
   return (
     <TextInput
-      keyboardType=\\"default\\"
       autoCorrect={false}
       underlineColorAndroid=\\"transparent\\"
       textAlignVertical=\\"top\\"
-      testID={\`\${props['testID'] || 'CaptureText'}|\`}
+      testID={\`\${props['testID'] || 'Capture'}|\`}
       value={props.external}
     />
   );

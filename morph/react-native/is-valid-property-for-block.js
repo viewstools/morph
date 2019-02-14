@@ -28,6 +28,7 @@ const blacklist = [
   'transformoriginz',
   'transition',
   'translatez',
+  'type',
   'userselect',
 ]
 

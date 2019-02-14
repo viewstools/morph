@@ -1,4 +1,5 @@
 import {
+  CAPTURE_TYPES,
   didYouMeanBlock,
   didYouMeanProp,
   getAnimation,
@@ -46,7 +47,6 @@ export default ({
   const slots = []
   const views = []
   const warnings = []
-  let lastCapture
 
   const blockIds = []
   const getBlockId = node => {
@@ -190,6 +190,7 @@ export default ({
       animations: {},
       isAnimated: false,
       isBasic: isBasic(name),
+      isCapture: isCapture(name),
       isColumn: isColumn(name),
       isGroup: false,
       loc: getLoc(i + 1, 0),
@@ -210,13 +211,6 @@ export default ({
 
     if (is) {
       block.is = is
-
-      if (isCapture(name)) {
-        if (lastCapture) {
-          lastCapture.captureNext = is
-        }
-        lastCapture = block
-      }
     }
     block.id = getBlockId(block)
 
@@ -350,7 +344,7 @@ export default ({
       let propNode = null
 
       if (isProp(line)) {
-        const { name, isSlot, slotName, slotIsNot, value } = getProp(line)
+        let { name, isSlot, slotName, slotIsNot, value } = getProp(line)
         const loc = getLoc(j + 1, line.indexOf(name), line.length - 1)
         const tags = getTags({
           name,
@@ -391,6 +385,25 @@ export default ({
               })
             }
             block.isFragment = true
+          }
+
+          if (block.type === 'Capture' && !CAPTURE_TYPES.includes(value)) {
+            if (/textarea/i.test(value)) {
+              warnings.push({
+                loc,
+                type: `Invalid type ${value} for Capture. Perhaps you want to use a CaptureTextArea block instead? Using type text as a default.`,
+                line,
+              })
+            } else {
+              warnings.push({
+                loc,
+                type: `Invalid type ${value} for Capture. You can use ${CAPTURE_TYPES.join(
+                  ', '
+                )}. Using type text as a default.`,
+                line,
+              })
+            }
+            value = 'text'
           }
         } else {
           if (name === 'lazy') {

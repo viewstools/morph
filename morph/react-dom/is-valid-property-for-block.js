@@ -11,6 +11,7 @@ const blacklist = [
   'teleportto',
   'transformoriginz',
   'translatez',
+  'type',
 ]
 
 export default (node, parent, state) =>
