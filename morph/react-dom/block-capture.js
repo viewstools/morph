@@ -13,7 +13,14 @@ let typesMap = {
 export let enter = (node, parent, state) => {
   if (!node.isCapture || node.name === 'CaptureTextArea') return
 
+  debugger
+
   let type = getProp(node, 'type')
+  let mask = getProp(node, 'mask')
+
+  if (mask) {
+    state.hasCaptureMask = true
+  }
 
   if (isSlot(type)) {
     state.render.push(` type=${safe(type.value)}`)

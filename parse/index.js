@@ -213,6 +213,7 @@ export default ({
       block.is = is
     }
     block.id = getBlockId(block)
+    debugger
 
     const last = stack[stack.length - 1]
     if (last) {

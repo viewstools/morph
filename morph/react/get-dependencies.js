@@ -33,6 +33,8 @@ export default (state, getImport) => {
   const usesNative = []
   const usesSvg = []
 
+  debugger
+
   const useNative = d => {
     if (!usesNative.includes(d)) {
       usesNative.push(d)
@@ -54,8 +56,8 @@ export default (state, getImport) => {
         d === 'Svg'
           ? d
           : d === 'SvgGroup'
-          ? `G as SvgGroup`
-          : `${d.replace('Svg', '')} as ${d}`
+            ? `G as SvgGroup`
+            : `${d.replace('Svg', '')} as ${d}`
       )
     } else if (d.endsWith('SvgInline')) {
       dependencies.push(`import ${d} from "./${d}.view.js"`)
@@ -124,6 +126,14 @@ export default (state, getImport) => {
       }"`
     )
     state.dependencies.add('@viewstools/tables')
+  }
+
+  if (state.hasCaptureMask) {
+    dependencies.push(
+      `import { useRef } from 'react'
+       import useMaskedInput from '@viewstools/use-masked-input'`
+    )
+    state.dependencies.add('@viewstools/use-masked-input')
   }
 
   if (usesSvg.length > 0) {
