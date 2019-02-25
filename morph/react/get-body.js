@@ -60,6 +60,16 @@ export default ({ state, name }) => {
     })
   }
 
+  const maybeCaptureMask = state.hasCaptureMask
+    ? `let input = useRef(null)
+
+    let onChange = useMaskedInput({
+      input,
+      mask: ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
+      onChange: props.onChange,
+    })`
+    : ''
+
   if (state.hasRefs || state.isAnimated) {
     animatedOpen = animatedOpen.join('')
     animatedClose = animatedClose.reverse().join('')
@@ -69,6 +79,7 @@ export default ({ state, name }) => {
     return `class ${name} extends React.Component {
   render() {
     const { props } = this
+    ${maybeCaptureMask}
     ${maybeChildrenArray}
     return (${trackOpen}${animatedOpen}${render}${animatedClose}${trackClose})
   }
@@ -76,6 +87,7 @@ export default ({ state, name }) => {
   } else {
     return `const ${name} = (props) => {
     ${state.track ? `const track = React.useContext(TrackContext)` : ''}
+    ${maybeCaptureMask}
   ${maybeChildrenArray}
   return (${render})
 }`
