@@ -20,6 +20,7 @@ export let enter = (node, parent, state) => {
 
   if (mask) {
     state.hasCaptureMask = true
+    state.render.push(` ref={input} onChange={onChange}`)
   }
 
   if (isSlot(type)) {
