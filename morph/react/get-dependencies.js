@@ -128,7 +128,7 @@ export default (state, getImport) => {
     state.dependencies.add('@viewstools/tables')
   }
 
-  if (state.hasCaptureMask) {
+  if (state.captureMask) {
     dependencies.push(
       `import { useRef } from 'react'
        import useMaskedInput from '@viewstools/use-masked-input'`

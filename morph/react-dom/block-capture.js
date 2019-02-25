@@ -10,6 +10,12 @@ let typesMap = {
   file: 'file',
 }
 
+let maskFormats = {
+  creditCard: `[/\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/]`,
+  date: `[/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]`,
+  phoneUS: `['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]`,
+}
+
 export let enter = (node, parent, state) => {
   if (!node.isCapture || node.name === 'CaptureTextArea') return
 
@@ -19,8 +25,10 @@ export let enter = (node, parent, state) => {
   let mask = getProp(node, 'mask')
 
   if (mask) {
-    state.hasCaptureMask = true
+    state.captureMask = maskFormats[mask.value]
+    debugger
     state.render.push(` ref={input} onChange={onChange}`)
+    type = type === 'number' || type === 'email' ? 'text' : type
   }
 
   if (isSlot(type)) {
