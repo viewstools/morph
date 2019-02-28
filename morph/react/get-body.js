@@ -67,6 +67,7 @@ export default ({ state, name }) => {
       input,
       mask: ${state.captureMask},
       onChange: props.onChange,
+      showMask: true,
     })`
   }
 
