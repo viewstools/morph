@@ -205,9 +205,12 @@ const ensurePropName = name => {
 }
 
 const makeTransition = ({ name, animation }) =>
-  `${ensurePropName(name)} ${animation.duration}ms ${toSlugCase(
-    animation.curve
-  )} ${animation.delay}ms`
+  [
+    ensurePropName(name),
+    `${animation.duration}ms`,
+    toSlugCase(animation.curve),
+    animation.delay && `${animation.delay}ms`,
+  ].join(' ')
 
 const asDynamicCss = styles =>
   Object.keys(styles).map(prop => `${prop}: ${styles[prop]}`)
