@@ -61,8 +61,6 @@ export default ({ state, name }) => {
   }
 
   const addCaptureMask = () => {
-    debugger
-
     return `let input = useRef(null)
 
     let onChange = useMaskedInput({

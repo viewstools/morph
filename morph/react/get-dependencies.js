@@ -33,8 +33,6 @@ export default (state, getImport) => {
   const usesNative = []
   const usesSvg = []
 
-  debugger
-
   const useNative = d => {
     if (!usesNative.includes(d)) {
       usesNative.push(d)

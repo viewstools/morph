@@ -19,15 +19,13 @@ let maskFormats = {
 export let enter = (node, parent, state) => {
   if (!node.isCapture || node.name === 'CaptureTextArea') return
 
-  debugger
-
   let type = getProp(node, 'type')
   let mask = getProp(node, 'mask')
 
   if (mask) {
     state.captureMask = maskFormats[mask.value]
-    debugger
     state.render.push(` ref={input} onChange={onChange}`)
+    node.properties = node.properties.filter(prop => prop.name !== 'mask')
     type = type === 'number' || type === 'email' ? 'text' : type
   }
 
