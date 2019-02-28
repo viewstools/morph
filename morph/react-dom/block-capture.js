@@ -11,9 +11,9 @@ let typesMap = {
 }
 
 let maskFormats = {
-  creditCard: `[/\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/]`,
-  date: `[/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]`,
-  phoneUS: `['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]`,
+  creditCard: `[/\\d/, /\\d/, /\\d/, /\\d/, ' ', /\\d/, /\\d/, /\\d/, /\\d/, ' ', /\\d/, /\\d/, /\\d/, /\\d/, ' ', /\\d/, /\\d/, /\\d/, /\\d/]`,
+  date: `[/\\d/, /\\d/, '/', /\\d/, /\\d/, '/', /\\d/, /\\d/, /\\d/, /\\d/]`,
+  phoneUS: `['(', /[1-9]/, /\\d/, /\\d/, ')', ' ', /\\d/, /\\d/, /\\d/, '-', /\\d/, /\\d/, /\\d/, /\\d/]`,
 }
 
 export let enter = (node, parent, state) => {
@@ -26,7 +26,8 @@ export let enter = (node, parent, state) => {
     state.captureMask = maskFormats[mask.value]
     state.render.push(` ref={input} onChange={onChange}`)
     node.properties = node.properties.filter(prop => prop.name !== 'mask')
-    type = type === 'number' || type === 'email' ? 'text' : type
+    type.value =
+      type.value === 'number' || type.value === 'email' ? 'text' : type.value
   }
 
   if (isSlot(type)) {
