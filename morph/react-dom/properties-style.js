@@ -210,7 +210,9 @@ const makeTransition = ({ name, animation }) =>
     `${animation.duration}ms`,
     toSlugCase(animation.curve),
     animation.delay && `${animation.delay}ms`,
-  ].join(' ')
+  ]
+    .filter(Boolean)
+    .join(' ')
 
 const asDynamicCss = styles =>
   Object.keys(styles).map(prop => `${prop}: ${styles[prop]}`)

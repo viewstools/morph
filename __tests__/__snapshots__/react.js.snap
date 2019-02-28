@@ -941,8 +941,7 @@ import { css } from 'emotion';
 const AnimatedButton1 = css({
   label: 'AnimatedButton1',
   backgroundColor: 'red',
-  transition:
-    'transform 150ms ease-in undefinedms, transform 150ms ease-in-out undefinedms',
+  transition: 'transform 150ms ease-in, transform 150ms ease-in-out',
   willChange: 'opacity, transform',
   opacity: 'var(--opacity)',
   transform:
@@ -1064,7 +1063,7 @@ const AnimatedButtonHoverOnly1 = css({
   '&:hover': {
     backgroundColor: 'blue',
   },
-  transition: 'background-color 150ms ease-out undefinedms',
+  transition: 'background-color 150ms ease-out',
   willChange: 'background-color',
 });
 
@@ -1119,7 +1118,7 @@ import { css } from 'emotion';
 
 const AnimatedButtonScopeOnly1 = css({
   label: 'AnimatedButtonScopeOnly1',
-  transition: 'opacity 150ms linear undefinedms',
+  transition: 'opacity 150ms linear',
   willChange: 'background-color, opacity',
   backgroundColor: 'var(--backgroundColor)',
   opacity: 'var(--opacity)',
@@ -3085,7 +3084,7 @@ const ScopedShadows1 = css({
   label: 'ScopedShadows1',
   flexDirection: 'row',
   boxShadow: '0px 5px var(--shadowBlur) 0px var(--shadowColor)',
-  transition: 'box-shadow 150ms linear undefinedms',
+  transition: 'box-shadow 150ms linear',
   willChange: 'box-shadow',
   shadowColor: 'var(--shadowColor)',
   shadowBlur: 'var(--shadowBlur)',
