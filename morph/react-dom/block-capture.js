@@ -23,8 +23,8 @@ export let enter = (node, parent, state) => {
   let mask = getProp(node, 'mask')
 
   if (mask) {
-    state.captureMask = maskFormats[mask.value]
-    state.render.push(` ref={input} onChange={onChange}`)
+    state.captureMasks[node.id] = maskFormats[mask.value]
+    state.render.push(` ref={input${node.id}} onChange={onChange${node.id}}`)
     node.properties = node.properties.filter(prop => prop.name !== 'mask')
     type.value =
       type.value === 'number' || type.value === 'email' ? 'text' : type.value

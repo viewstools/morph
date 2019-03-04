@@ -44,7 +44,11 @@ export default (state, getImport) => {
     }
   }
 
-  const dependencies = [`import React from 'react'`]
+  const usesCaptureMask = Object.keys(state.captureMasks).length > 0
+
+  const dependencies = [
+    `import React${usesCaptureMask && `, { useRef }`} from 'react'`,
+  ]
 
   state.uses.sort().forEach(d => {
     if (state.isReactNative && NATIVE.includes(d)) {
@@ -126,10 +130,9 @@ export default (state, getImport) => {
     state.dependencies.add('@viewstools/tables')
   }
 
-  if (state.captureMask) {
+  if (usesCaptureMask) {
     dependencies.push(
-      `import { useRef } from 'react'
-       import useMaskedInput from '@viewstools/use-masked-input'`
+      `import useMaskedInput from '@viewstools/use-masked-input'`
     )
     state.dependencies.add('@viewstools/use-masked-input')
   }

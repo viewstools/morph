@@ -36,6 +36,7 @@ export default ({
   const state = {
     animated: new Set(),
     animations: {},
+    captureMasks: {},
     cssDynamic: false,
     cssStatic: false,
     dependencies: new Set(),

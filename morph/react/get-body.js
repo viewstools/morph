@@ -60,16 +60,19 @@ export default ({ state, name }) => {
     })
   }
 
-  const addCaptureMask = () => {
-    return `let input = useRef(null)
-
-    let onChange = useMaskedInput({
-      input,
-      mask: ${state.captureMask},
-      onChange: props.onChange,
+  const addCaptureMasks = () =>
+    Object.keys(state.captureMasks)
+      .map(
+        key =>
+          `let input${key} = useRef(null)
+    let onChange${key} = useMaskedInput({
+      input: input${key},
+      mask: ${state.captureMasks[key]},
+      onChange: props.onChange${key},
       showMask: true,
     })`
-  }
+      )
+      .join('; \n\n')
 
   if (state.hasRefs || state.isAnimated) {
     animatedOpen = animatedOpen.join('')
@@ -80,7 +83,7 @@ export default ({ state, name }) => {
     return `class ${name} extends React.Component {
   render() {
     const { props } = this
-    ${state.captureMask && addCaptureMask()}
+    ${Object.keys(state.captureMasks).length > 0 && addCaptureMasks()}
     ${maybeChildrenArray}
     return (${trackOpen}${animatedOpen}${render}${animatedClose}${trackClose})
   }
@@ -88,7 +91,7 @@ export default ({ state, name }) => {
   } else {
     return `const ${name} = (props) => {
     ${state.track ? `const track = React.useContext(TrackContext)` : ''}
-    ${state.captureMask && addCaptureMask()}
+    ${Object.keys(state.captureMasks).length > 0 && addCaptureMasks()}
   ${maybeChildrenArray}
   return (${render})
 }`
