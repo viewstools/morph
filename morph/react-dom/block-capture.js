@@ -1,4 +1,4 @@
-import { getProp, isSlot } from '../utils.js'
+import { getProp, isSlot, makeOnClickTracker } from '../utils.js'
 import safe from '../react/safe.js'
 
 let typesMap = {
@@ -23,7 +23,7 @@ export let enter = (node, parent, state) => {
   let mask = getProp(node, 'mask')
 
   if (mask) {
-    state.captureMasks[node.id] = maskFormats[mask.value]
+    state.captureMasks[node.id] = maskFormats[mask.value] || mask.value
     state.render.push(` ref={input${node.id}} onChange={onChange${node.id}}`)
     node.properties = node.properties.filter(prop => prop.name !== 'mask')
     type.value =
