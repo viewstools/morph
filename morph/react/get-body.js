@@ -1,4 +1,5 @@
 import getUnit from '../get-unit.js'
+import { maskFormats } from '../utils.js'
 
 export default ({ state, name }) => {
   let render = state.render.join('')
@@ -60,8 +61,18 @@ export default ({ state, name }) => {
     })
   }
 
-  const addCaptureMasks = () =>
-    Object.keys(state.captureMasks)
+  const addCaptureMasks = () => {
+    let masks = ''
+    debugger
+    if (Object.values(state.captureMasks).includes(maskFormats.dollar)) {
+      masks += `const numberMask = createNumberMask({
+        prefix: '$',
+        allowDecimal: true,
+      })
+      `
+    }
+
+    masks += Object.keys(state.captureMasks)
       .map(
         key =>
           `let input${key} = useRef(null)
@@ -73,6 +84,9 @@ export default ({ state, name }) => {
     })`
       )
       .join('; \n\n')
+
+    return masks
+  }
 
   if (state.hasRefs || state.isAnimated) {
     animatedOpen = animatedOpen.join('')

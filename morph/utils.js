@@ -595,3 +595,13 @@ export const maybeMakeHyphenated = ({ name, value }) =>
   MAYBE_HYPHENATED_STYLE_PROPS.includes(name) && /^[a-zA-Z]+$/.test(value)
     ? toSlugCase(value)
     : value
+
+export let maskFormats = {
+  creditCard: `[/\\d/, /\\d/, /\\d/, /\\d/, ' ', /\\d/, /\\d/, /\\d/, /\\d/, ' ', /\\d/, /\\d/, /\\d/, /\\d/, ' ', /\\d/, /\\d/, /\\d/, /\\d/]`,
+  dollar: 'numberMask',
+  phoneUS: `['(', /[1-9]/, /\\d/, /\\d/, ')', ' ', /\\d/, /\\d/, /\\d/, '-', /\\d/, /\\d/, /\\d/, /\\d/]`,
+  'DD/MM/YYYY': `[/\\d/, /\\d/, '/', /\\d/, /\\d/, '/', /\\d/, /\\d/, /\\d/, /\\d/]`,
+  'YYYY-MM-DD': `[/\\d/, /\\d/, /\\d/, /\\d/, '/', /\\d/, /\\d/, '/', /\\d/, /\\d/]`,
+  'MM-YY': `[/\\d/, /\\d/, '/', /\\d/, /\\d/]`,
+  'HH:MM': `[/\\[0-2]/, /\\d/, ':', /\\[0-5]/, /\\d/]`,
+}

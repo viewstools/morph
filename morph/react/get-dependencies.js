@@ -1,4 +1,5 @@
 import SVG from './svg.js'
+import { maskFormats } from '../utils.js'
 
 const NATIVE = [
   'Animated',
@@ -135,6 +136,14 @@ export default (state, getImport) => {
       `import useMaskedInput from '@viewstools/use-masked-input'`
     )
     state.dependencies.add('@viewstools/use-masked-input')
+    debugger
+
+    if (Object.values(state.captureMasks).includes(maskFormats.dollar)) {
+      dependencies.push(
+        `import createNumberMask from 'text-mask-addons/dist/createNumberMask'`
+      )
+      state.dependencies.add('text-mask-addons')
+    }
   }
 
   if (usesSvg.length > 0) {

@@ -1,4 +1,4 @@
-import { getProp, isSlot, makeOnClickTracker } from '../utils.js'
+import { getProp, isSlot, maskFormats } from '../utils.js'
 import safe from '../react/safe.js'
 
 let typesMap = {
@@ -8,12 +8,6 @@ let typesMap = {
   phone: 'tel',
   secure: 'password',
   file: 'file',
-}
-
-let maskFormats = {
-  creditCard: `[/\\d/, /\\d/, /\\d/, /\\d/, ' ', /\\d/, /\\d/, /\\d/, /\\d/, ' ', /\\d/, /\\d/, /\\d/, /\\d/, ' ', /\\d/, /\\d/, /\\d/, /\\d/]`,
-  date: `[/\\d/, /\\d/, '/', /\\d/, /\\d/, '/', /\\d/, /\\d/, /\\d/, /\\d/]`,
-  phoneUS: `['(', /[1-9]/, /\\d/, /\\d/, ')', ' ', /\\d/, /\\d/, /\\d/, '-', /\\d/, /\\d/, /\\d/, /\\d/]`,
 }
 
 export let enter = (node, parent, state) => {
