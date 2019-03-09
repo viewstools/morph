@@ -48,8 +48,14 @@ export default (state, getImport) => {
   const usesCaptureMask = Object.keys(state.captureMasks).length > 0
 
   const dependencies = [
-    `import React${usesCaptureMask && `, { useRef }`} from 'react'`,
+    usesCaptureMask
+      ? `import React, { useRef } from 'react'`
+      : `import React from 'react'`,
   ]
+
+  // const dependencies = [
+  //   `import React${usesCaptureMask && `, { useRef }`} from 'react'`,
+  // ]
 
   state.uses.sort().forEach(d => {
     if (state.isReactNative && NATIVE.includes(d)) {

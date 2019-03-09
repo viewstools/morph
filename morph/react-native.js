@@ -38,6 +38,7 @@ export default ({
   const state = {
     animations: {},
     animated: new Set(),
+    captureMasks: {},
     images: [],
     dependencies: new Set(),
     getFont,

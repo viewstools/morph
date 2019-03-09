@@ -9,6 +9,8 @@ let keyboardType = {
 export let enter = (node, parent, state) => {
   if (!node.isCapture) return
 
+  node.properties = node.properties.filter(prop => prop.name !== 'mask')
+
   if (node.name === 'CaptureTextArea') {
     state.render.push(` multiline={true}`)
   } else {

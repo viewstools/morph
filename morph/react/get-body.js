@@ -63,7 +63,6 @@ export default ({ state, name }) => {
 
   const addCaptureMasks = () => {
     let masks = ''
-    debugger
     if (Object.values(state.captureMasks).includes(maskFormats.dollar)) {
       masks += `const numberMask = createNumberMask({
         prefix: '$',
@@ -97,7 +96,7 @@ export default ({ state, name }) => {
     return `class ${name} extends React.Component {
   render() {
     const { props } = this
-    ${Object.keys(state.captureMasks).length > 0 && addCaptureMasks()}
+    ${Object.keys(state.captureMasks).length > 0 ? addCaptureMasks() : ''}
     ${maybeChildrenArray}
     return (${trackOpen}${animatedOpen}${render}${animatedClose}${trackClose})
   }
@@ -105,7 +104,7 @@ export default ({ state, name }) => {
   } else {
     return `const ${name} = (props) => {
     ${state.track ? `const track = React.useContext(TrackContext)` : ''}
-    ${Object.keys(state.captureMasks).length > 0 && addCaptureMasks()}
+    ${Object.keys(state.captureMasks).length > 0 ? addCaptureMasks() : ''}
   ${maybeChildrenArray}
   return (${render})
 }`

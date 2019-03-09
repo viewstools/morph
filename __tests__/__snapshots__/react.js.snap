@@ -3655,18 +3655,33 @@ export default UseCaptureFile;
 exports[`react-dom parses react-dom UseCaptureNumber 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
-import React from 'react';
+import React, { useRef } from 'react';
 import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
+import createNumberMask from 'text-mask-addons/dist/createNumberMask';
+import useMaskedInput from '@viewstools/use-masked-input';
 
 const UseCaptureNumber = props => {
   const track = React.useContext(TrackContext);
+  const numberMask = createNumberMask({
+    prefix: '$',
+    allowDecimal: true,
+  });
+  let inputNumber = useRef(null);
+  let onChangeNumber = useMaskedInput({
+    input: inputNumber,
+    mask: numberMask,
+    onChange: props.onChangeNumber,
+    showMask: true,
+  });
 
   return (
     <input
-      type=\\"number\\"
+      ref={inputNumber}
+      onChange={onChangeNumber}
       inputMode=\\"numeric\\"
       pattern=\\"[0-9]*\\"
+      type=\\"text\\"
       data-test-id={\`\${props['data-test-id'] || 'Number'}|\`}
       className=\\"views-capture\\"
     />
@@ -3675,7 +3690,10 @@ const UseCaptureNumber = props => {
 
 export default UseCaptureNumber;
 ",
-  "dependencies": Set {},
+  "dependencies": Set {
+    "@viewstools/use-masked-input",
+    "text-mask-addons",
+  },
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
@@ -3685,18 +3703,43 @@ export default UseCaptureNumber;
 exports[`react-dom parses react-dom UseCapturePhone 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
-import React from 'react';
+import React, { useRef } from 'react';
 import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
+import useMaskedInput from '@viewstools/use-masked-input';
 
 const UseCapturePhone = props => {
   const track = React.useContext(TrackContext);
+  let inputPhone = useRef(null);
+  let onChangePhone = useMaskedInput({
+    input: inputPhone,
+    mask: [
+      '(',
+      /[1-9]/,
+      /\\\\d/,
+      /\\\\d/,
+      ')',
+      ' ',
+      /\\\\d/,
+      /\\\\d/,
+      /\\\\d/,
+      '-',
+      /\\\\d/,
+      /\\\\d/,
+      /\\\\d/,
+      /\\\\d/,
+    ],
+    onChange: props.onChangePhone,
+    showMask: true,
+  });
 
   return (
     <input
-      type=\\"tel\\"
+      ref={inputPhone}
+      onChange={onChangePhone}
       inputMode=\\"numeric\\"
       pattern=\\"[0-9]*\\"
+      type=\\"tel\\"
       data-test-id={\`\${props['data-test-id'] || 'Phone'}|\`}
       className=\\"views-capture\\"
     />
@@ -3705,7 +3748,9 @@ const UseCapturePhone = props => {
 
 export default UseCapturePhone;
 ",
-  "dependencies": Set {},
+  "dependencies": Set {
+    "@viewstools/use-masked-input",
+  },
   "fonts": Array [],
   "slots": Array [],
   "svgs": Array [],
