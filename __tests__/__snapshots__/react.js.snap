@@ -941,8 +941,7 @@ import { css } from 'emotion';
 const AnimatedButton1 = css({
   label: 'AnimatedButton1',
   backgroundColor: 'red',
-  transition:
-    'transform 150ms ease-in undefinedms, transform 150ms ease-in-out undefinedms',
+  transition: 'transform 150ms ease-in, transform 150ms ease-in-out',
   willChange: 'opacity, transform',
   opacity: 'var(--opacity)',
   transform:
@@ -1064,7 +1063,7 @@ const AnimatedButtonHoverOnly1 = css({
   '&:hover': {
     backgroundColor: 'blue',
   },
-  transition: 'background-color 150ms ease-out undefinedms',
+  transition: 'background-color 150ms ease-out',
   willChange: 'background-color',
 });
 
@@ -1119,7 +1118,7 @@ import { css } from 'emotion';
 
 const AnimatedButtonScopeOnly1 = css({
   label: 'AnimatedButtonScopeOnly1',
-  transition: 'opacity 150ms linear undefinedms',
+  transition: 'opacity 150ms linear',
   willChange: 'background-color, opacity',
   backgroundColor: 'var(--backgroundColor)',
   opacity: 'var(--opacity)',
@@ -1472,10 +1471,7 @@ class Code extends React.Component {
     );
   }
 }
-Code.defaultProps = {
-  text: 'hey',
-  color: 'white',
-};
+Code.defaultProps = { text: 'hey', color: 'white' };
 export default Code;
 ",
   "dependencies": Set {
@@ -1528,10 +1524,7 @@ const DefaultProps = props => {
     </div>
   );
 };
-DefaultProps.defaultProps = {
-  text: 'hey',
-  texto: 'ho',
-};
+DefaultProps.defaultProps = { text: 'hey', texto: 'ho' };
 export default DefaultProps;
 ",
   "dependencies": Set {},
@@ -1694,10 +1687,7 @@ const DynamicFontProps = props => {
     </div>
   );
 };
-DynamicFontProps.defaultProps = {
-  fontFamily: 'Montserrat',
-  fontWeight: 200,
-};
+DynamicFontProps.defaultProps = { fontFamily: 'Montserrat', fontWeight: 200 };
 export default DynamicFontProps;
 ",
   "dependencies": Set {
@@ -2861,20 +2851,20 @@ const Scope = props => {
         props.somethingGreen
           ? 'somethingGreen|'
           : props.whatMakesBlue
-            ? 'whatMakesBlue|'
-            : !props.whatMakesBlue
-              ? 'notWhatMakesBlue|'
-              : ''
+          ? 'whatMakesBlue|'
+          : !props.whatMakesBlue
+          ? 'notWhatMakesBlue|'
+          : ''
       }\`}
       style={{
         '--color': \`\${
           props.somethingGreen
             ? 'rgb(0,255,0)'
             : props.whatMakesBlue
-              ? 'rgb(0,0,255)'
-              : !props.whatMakesBlue
-                ? 'rgb(255,255,0)'
-                : 'red'
+            ? 'rgb(0,0,255)'
+            : !props.whatMakesBlue
+            ? 'rgb(255,255,0)'
+            : 'red'
         }\`,
       }}
       className={\`views-text \${Scope1}\`}
@@ -2882,10 +2872,10 @@ const Scope = props => {
       {props.somethingGreen
         ? '2 green'
         : props.whatMakesBlue
-          ? props.blue
-          : !props.whatMakesBlue
-            ? 'is Yellow'
-            : '1 red'}
+        ? props.blue
+        : !props.whatMakesBlue
+        ? 'is Yellow'
+        : '1 red'}
     </span>
   );
 };
@@ -2962,15 +2952,15 @@ const ScopePopup = props => {
           props.somethingGreen
             ? 'somethingGreen|'
             : props.whatMakesBlue
-              ? 'whatMakesBlue|'
-              : ''
+            ? 'whatMakesBlue|'
+            : ''
         }\`}
         onClick={
           props.somethingGreen
             ? props.onClickGreen
             : props.whatMakesBlue
-              ? props.onClickBlue
-              : props.toggle
+            ? props.onClickBlue
+            : props.toggle
         }
         className=\\"views-block\\"
       >
@@ -3038,8 +3028,8 @@ const ScopePopup2 = props => {
           props.isShown
             ? 'isShown|'
             : props.isSuperVisible
-              ? 'isSuperVisible|'
-              : ''
+            ? 'isSuperVisible|'
+            : ''
         }\`}
         style={{
           '--opacity': \`\${props.isShown ? 1 : props.isSuperVisible ? 3 : 0}\`,
@@ -3085,7 +3075,7 @@ const ScopedShadows1 = css({
   label: 'ScopedShadows1',
   flexDirection: 'row',
   boxShadow: '0px 5px var(--shadowBlur) 0px var(--shadowColor)',
-  transition: 'box-shadow 150ms linear undefinedms',
+  transition: 'box-shadow 150ms linear',
   willChange: 'box-shadow',
   shadowColor: 'var(--shadowColor)',
   shadowBlur: 'var(--shadowBlur)',
@@ -3482,10 +3472,7 @@ const TextInterpolation = props => {
     </div>
   );
 };
-TextInterpolation.defaultProps = {
-  firstName: '',
-  surname: '',
-};
+TextInterpolation.defaultProps = { firstName: '', surname: '' };
 export default TextInterpolation;
 ",
   "dependencies": Set {},
@@ -5279,10 +5266,7 @@ class Code extends React.Component {
     );
   }
 }
-Code.defaultProps = {
-  text: 'hey',
-  color: 'white',
-};
+Code.defaultProps = { text: 'hey', color: 'white' };
 export default Code;
 ",
   "dependencies": Set {},
@@ -5326,10 +5310,7 @@ const DefaultProps = props => {
     </View>
   );
 };
-DefaultProps.defaultProps = {
-  text: 'hey',
-  texto: 'ho',
-};
+DefaultProps.defaultProps = { text: 'hey', texto: 'ho' };
 export default DefaultProps;
 ",
   "dependencies": Set {},
@@ -5394,10 +5375,10 @@ const DynamicCaptureType = props => {
         props.type === 'email'
           ? 'email-address'
           : props.type === 'number'
-            ? 'numeric'
-            : props.type === 'phone'
-              ? 'phone-pad'
-              : 'default'
+          ? 'numeric'
+          : props.type === 'phone'
+          ? 'phone-pad'
+          : 'default'
       }
       autoCorrect={false}
       underlineColorAndroid=\\"transparent\\"
@@ -5471,10 +5452,7 @@ const DynamicFontProps = props => {
     </View>
   );
 };
-DynamicFontProps.defaultProps = {
-  fontFamily: 'Montserrat',
-  fontWeight: 200,
-};
+DynamicFontProps.defaultProps = { fontFamily: 'Montserrat', fontWeight: 200 };
 export default DynamicFontProps;
 ",
   "dependencies": Set {},
@@ -6461,10 +6439,10 @@ const Scope = props => {
         props.somethingGreen
           ? 'somethingGreen|'
           : props.whatMakesBlue
-            ? 'whatMakesBlue|'
-            : !props.whatMakesBlue
-              ? 'notWhatMakesBlue|'
-              : ''
+          ? 'whatMakesBlue|'
+          : !props.whatMakesBlue
+          ? 'notWhatMakesBlue|'
+          : ''
       }\`}
       style={[
         null,
@@ -6472,20 +6450,20 @@ const Scope = props => {
           color: props.somethingGreen
             ? 'rgb(0,255,0)'
             : props.whatMakesBlue
-              ? 'rgb(0,0,255)'
-              : !props.whatMakesBlue
-                ? 'rgb(255,255,0)'
-                : 'red',
+            ? 'rgb(0,0,255)'
+            : !props.whatMakesBlue
+            ? 'rgb(255,255,0)'
+            : 'red',
         },
       ]}
     >
       {props.somethingGreen
         ? '2 green'
         : props.whatMakesBlue
-          ? props.blue
-          : !props.whatMakesBlue
-            ? 'is Yellow'
-            : '1 red'}
+        ? props.blue
+        : !props.whatMakesBlue
+        ? 'is Yellow'
+        : '1 red'}
     </Text>
   );
 };
@@ -6556,8 +6534,8 @@ const ScopePopup = props => {
           props.somethingGreen
             ? props.onClickGreen
             : props.whatMakesBlue
-              ? props.onClickBlue
-              : props.toggle
+            ? props.onClickBlue
+            : props.toggle
         }
         underlayColor=\\"transparent\\"
       >
@@ -6566,8 +6544,8 @@ const ScopePopup = props => {
             props.somethingGreen
               ? 'somethingGreen|'
               : props.whatMakesBlue
-                ? 'whatMakesBlue|'
-                : ''
+              ? 'whatMakesBlue|'
+              : ''
           }\`}
         >
           <Text testID={\`ScopePopup.Text|\`}>toggle popup</Text>
@@ -6623,8 +6601,8 @@ const ScopePopup2 = props => {
           props.isShown
             ? 'isShown|'
             : props.isSuperVisible
-              ? 'isSuperVisible|'
-              : ''
+            ? 'isSuperVisible|'
+            : ''
         }\`}
         style={[
           null,
@@ -7055,10 +7033,7 @@ const TextInterpolation = props => {
     </View>
   );
 };
-TextInterpolation.defaultProps = {
-  firstName: '',
-  surname: '',
-};
+TextInterpolation.defaultProps = { firstName: '', surname: '' };
 export default TextInterpolation;
 ",
   "dependencies": Set {},
