@@ -36,7 +36,7 @@
     "eslint-plugin-import": "^2.3.0",
     "husky": "^0.14.3",
     "import-export": "^1.0.1",
-    "jest": "^23.1.0",
+    "jest": "24.3.0",
     "lint-staged": "^7.2.0",
     "rollup": "^0.63.0",
     "rollup-plugin-babel": "^3.0.3",
