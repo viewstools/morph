@@ -7,7 +7,7 @@ export default {
   output: {
     file: 'lib.js',
     format: 'cjs',
-    sourcemap: false,
+    sourcemap: true,
   },
   plugins: [
     babel({
