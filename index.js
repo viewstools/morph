@@ -48,7 +48,7 @@ export const morph = ({
 
   if (pretty) {
     morphed.code = prettier.format(morphed.code, {
-      parser: 'babylon',
+      parser: 'babel',
       singleQuote: true,
       trailingComma: 'es5',
     })
