@@ -15,6 +15,7 @@ export let enter = (node, parent, state) => {
 
   let type = getProp(node, 'type')
   let mask = getProp(node, 'mask')
+  debugger
 
   if (mask) {
     state.captureMasks[node.id] = maskFormats[mask.value] || mask.value
@@ -26,7 +27,7 @@ export let enter = (node, parent, state) => {
     // fix for iOS Safari to show the numpad on
     // http://danielfriesen.name/blog/2013/09/19/input-type-number-and-ios-numeric-keypad/
     let maybeNumber = (name, valueWhenTrue) =>
-      `${name}={${type.value} === 'number' || ${
+      ` ${name}={${type.value} === 'number' || ${
         type.value
       } === 'phone'? "${valueWhenTrue}" : undefined}`
     state.render.push(maybeNumber('inputMode', 'numeric'))
@@ -38,7 +39,6 @@ export let enter = (node, parent, state) => {
     }
 
     if (mask) {
-      debugger
       type.value =
         type.value === 'number' || type.value === 'email' ? 'text' : type.value
     }

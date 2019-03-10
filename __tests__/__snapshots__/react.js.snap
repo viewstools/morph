@@ -1598,7 +1598,6 @@ const DynamicCaptureType = props => {
 
   return (
     <input
-      type={props.type}
       inputMode={
         props.type === 'number' || props.type === 'phone'
           ? 'numeric'
@@ -1607,6 +1606,7 @@ const DynamicCaptureType = props => {
       pattern={
         props.type === 'number' || props.type === 'phone' ? '[0-9]*' : undefined
       }
+      type={props.type}
       data-test-id={\`\${props['data-test-id'] || 'Capture'}|\`}
       className=\\"views-capture\\"
     />
