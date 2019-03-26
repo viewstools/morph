@@ -147,6 +147,10 @@ module.exports = options => {
     const getImportFileName = (name, file) => {
       let f = views[name]
 
+      if (!f) {
+        throw new Error(`${chalk.magenta(name)} does not exist, you are trying to use it in ${chalk.magenta(file)}. There is either a spelling mistake or the view does not exist and needs to be created.`)
+      }
+
       if (isView(f)) {
         const logicFile = logic[`${name}.view.logic`]
         if (logicFile) f = logicFile
