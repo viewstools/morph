@@ -169,6 +169,17 @@ module.exports = {
 }
 `;
 
+exports[`e2e parses e2e DynamicWidth 1`] = `
+Object {
+  "code": "const { get } = require('@viewstools/e2e');
+
+module.exports = {
+  Vertical: get('DynamicWidth.Vertical'),
+};
+",
+}
+`;
+
 exports[`e2e parses e2e EmptyText 1`] = `
 Object {
   "code": "const { get } = require('@viewstools/e2e');
@@ -1326,28 +1337,51 @@ const Border = props => {
   return (
     <div
       data-test-id={\`\${props['data-test-id'] || 'Border'}|\`}
-      style={{ '--borderWidth': \`\${props.borderWidth}px\` }}
+      style={{
+        '--borderWidth':
+          typeof props.borderWidth === 'number'
+            ? \`\${props.borderWidth}px\`
+            : props.borderWidth,
+      }}
       className={\`views-block \${Border1}\`}
     >
       <div
         data-test-id={\`Border.Top|\`}
-        style={{ '--borderTopWidth': \`\${props.borderTopWidth}px\` }}
+        style={{
+          '--borderTopWidth':
+            typeof props.borderTopWidth === 'number'
+              ? \`\${props.borderTopWidth}px\`
+              : props.borderTopWidth,
+        }}
         className={\`views-block \${Top}\`}
       />
       <div
         data-test-id={\`Border.Right|\`}
-        style={{ '--borderRightWidth': \`\${props.borderRightWidth}px\` }}
+        style={{
+          '--borderRightWidth':
+            typeof props.borderRightWidth === 'number'
+              ? \`\${props.borderRightWidth}px\`
+              : props.borderRightWidth,
+        }}
         className={\`views-block \${Right}\`}
       />
       <div
         data-test-id={\`Border.Bottom|\`}
-        style={{ '--borderBottomWidth': \`\${props.borderBottomWidth}px\` }}
+        style={{
+          '--borderBottomWidth':
+            typeof props.borderBottomWidth === 'number'
+              ? \`\${props.borderBottomWidth}px\`
+              : props.borderBottomWidth,
+        }}
         className={\`views-block \${Bottom}\`}
       />
       <div
         data-test-id={\`Border.Left|\${props.something ? 'something|' : ''}\`}
         style={{
-          '--borderLeftWidth': \`\${props.borderLeftWidth}px\`,
+          '--borderLeftWidth':
+            typeof props.borderLeftWidth === 'number'
+              ? \`\${props.borderLeftWidth}px\`
+              : props.borderLeftWidth,
           '--borderTopRightRadius': \`\${props.something ? 20 : 10}px\`,
         }}
         className={\`views-block \${Left}\`}
@@ -1746,7 +1780,10 @@ const DynamicStylesApplyToBasicBlocksOnly = props => {
   return (
     <div
       data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-      style={{ '--height': \`\${props.height}px\` }}
+      style={{
+        '--height':
+          typeof props.height === 'number' ? \`\${props.height}px\` : props.height,
+      }}
       className={\`views-block \${Vertical}\`}
     >
       <SomeThing
@@ -1769,6 +1806,50 @@ export default DynamicStylesApplyToBasicBlocksOnly;
     Object {
       "defaultValue": false,
       "name": "height",
+      "type": "number",
+    },
+  ],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom DynamicWidth 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
+import React from 'react';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+import { css } from 'emotion';
+
+const Vertical = css({ label: 'Vertical', width: 'var(--width)' });
+
+const DynamicWidth = props => {
+  const track = React.useContext(TrackContext);
+
+  return (
+    <div
+      data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
+      style={{
+        '--width':
+          typeof props.width === 'number' ? \`\${props.width}px\` : props.width,
+      }}
+      className={\`views-block \${Vertical}\`}
+    >
+      {props.children}
+    </div>
+  );
+};
+DynamicWidth.defaultProps = { width: '10%' };
+export default DynamicWidth;
+",
+  "dependencies": Set {
+    "emotion",
+  },
+  "fonts": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": "10%",
+      "name": "width",
       "type": "number",
     },
   ],
@@ -1992,7 +2073,12 @@ const Hover = props => {
     >
       <span
         data-test-id={\`Hover.Text|\`}
-        style={{ '--fontSize': \`\${props.fontSize}px\` }}
+        style={{
+          '--fontSize':
+            typeof props.fontSize === 'number'
+              ? \`\${props.fontSize}px\`
+              : props.fontSize,
+        }}
         className={\`views-text \${Text}\`}
       >
         Hey!
@@ -2476,7 +2562,10 @@ const LocalImageSvg = props => {
       data-test-id={\`\${props['data-test-id'] || 'LocalImageSvg'}|\`}
       alt={''}
       src={chopperSvg}
-      style={{ '--height': \`\${props.height}px\` }}
+      style={{
+        '--height':
+          typeof props.height === 'number' ? \`\${props.height}px\` : props.height,
+      }}
       className={\`views-block \${LocalImageSvg1}\`}
     />
   );
@@ -3152,7 +3241,12 @@ const ScrollableList = props => {
   return (
     <div
       data-test-id={\`\${props['data-test-id'] || 'ScrollableList'}|\`}
-      style={{ '--paddingLeft': \`\${props.paddingLeft}px\` }}
+      style={{
+        '--paddingLeft':
+          typeof props.paddingLeft === 'number'
+            ? \`\${props.paddingLeft}px\`
+            : props.paddingLeft,
+      }}
       className={\`views-block \${ScrollableList1}\`}
     >
       {Array.isArray(props.from) &&
@@ -4264,7 +4358,10 @@ const UseTableOnWhen = props => {
               rowHeight={20}
               rowClassName={Table1Row}
               style={{
-                '--marginLeft': \`\${props.marginLeft}px\`,
+                '--marginLeft':
+                  typeof props.marginLeft === 'number'
+                    ? \`\${props.marginLeft}px\`
+                    : props.marginLeft,
                 '--rowColorAlternate': props.rowColorAlternate,
                 '--rowBackgroundColorAlternate': props.rowBgColorAlternate,
               }}
@@ -5480,6 +5577,41 @@ export default DynamicStylesApplyToBasicBlocksOnly;
     Object {
       "defaultValue": false,
       "name": "height",
+      "type": "number",
+    },
+  ],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-native parses react-native DynamicWidth 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
+import React from 'react';
+import TrackContext from './TrackContext.view.js';
+import { View } from 'react-native';
+
+const DynamicWidth = props => {
+  const track = React.useContext(TrackContext);
+
+  return (
+    <View
+      testID={\`\${props['testID'] || 'Vertical'}|\`}
+      style={[null, { width: props.width }]}
+    >
+      {props.children}
+    </View>
+  );
+};
+DynamicWidth.defaultProps = { width: '10%' };
+export default DynamicWidth;
+",
+  "dependencies": Set {},
+  "fonts": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": "10%",
+      "name": "width",
       "type": "number",
     },
   ],

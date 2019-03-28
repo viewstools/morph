@@ -64,8 +64,8 @@ const maybeSafe = node =>
   node.tags.slot
     ? node.value
     : typeof node.value === 'string'
-      ? safe(node.value)
-      : node.value
+    ? safe(node.value)
+    : node.value
 
 const getScopedProps = (propNode, blockNode) => {
   const scopes = blockNode.scopes
@@ -105,8 +105,8 @@ const getStandardInterpolation = (node, re, textNode, item) =>
     hasCustomScopes(textNode, item)
       ? wrap(getScopedCondition(textNode, item, true))
       : isSlot(textNode)
-        ? wrap(textNode.value)
-        : textNode.value
+      ? wrap(textNode.value)
+      : textNode.value
   )
 
 export const getScopedCondition = (
@@ -287,12 +287,14 @@ export const hasLocals = (propNode, blockNode) =>
 export const getLocals = (propNode, blockNode, state) => {
   const locals = {}
 
-  blockNode.scopes.filter(scope => scope.isLocal).forEach(scope => {
-    const prop = scope.properties.find(prop => prop.name === propNode.name)
-    if (prop) {
-      locals[scope.value] = prop.value
-    }
-  })
+  blockNode.scopes
+    .filter(scope => scope.isLocal)
+    .forEach(scope => {
+      const prop = scope.properties.find(prop => prop.name === propNode.name)
+      if (prop) {
+        locals[scope.value] = prop.value
+      }
+    })
 
   return locals
 }
@@ -372,11 +374,14 @@ export const getAnimatedStyles = (node, isNative) => {
 
 const getPropValue = (prop, interpolateValue = true) => {
   const unit = getUnit(prop)
-  return unit
-    ? interpolateValue
+  if (unit) {
+    let value = interpolateValue
       ? `\`\${${prop.value}}${unit}\``
       : `"${prop.value}${unit}"`
-    : prop.value
+    return `typeof ${prop.value} === 'number' ? ${value} : ${prop.value}`
+  } else {
+    return prop.value
+  }
 }
 
 export const getDynamicStyles = node => {
