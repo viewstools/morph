@@ -6,6 +6,8 @@ export const STYLE = [
   'background',
   'backgroundColor',
   'backgroundImage',
+  'backgroundPosition',
+  'backgroundRepeat',
   'backgroundSize',
   'borderBottomColor',
   'borderBottomLeftRadius',
