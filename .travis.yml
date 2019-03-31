@@ -7,3 +7,10 @@ env:
 before_install: yarn global add greenkeeper-lockfile@1
 before_script: greenkeeper-lockfile-update
 after_script: greenkeeper-lockfile-upload
+addons:
+  sonarcloud:
+    organization: "viewstools" # the key of the org you chose at step #3
+    token:
+      secure: wyKhWxaquaWgnHfi2WjHHtmVbRPPgE9dAYhiRi8j2HHZ16wium6xgSi1TiAyh3JgqIbI1siCDA+PcyHnc+Lf8n0HerU+HcE2ZPiy/zkdcwk4uwyLyKuFxp05znYCmXJ6wv7OLVYIjTWKOrC6qZaAn17LRtZCB2SD9VQ9jw+dzFbWKJ7SLecngcTS/DdSocXFiLUAkxLnmmy6gGCUatXgvSniyb5jdG3p0zQydjXqcOW6CPJcCdkGNPZf901Bpv2JerMLwjKUCfMIeYK/UpnJ9waNePRyOzXEzfjPcNuljyif+2xqNA5nPCTpOSaLK2bTW5/WT211ldAfxJV4aew/KuqEsef5jcuMgbsAcRDY4qk1HANKsxq2KJWzPqmJ0onDoJQzUFihVyf7/tq7d8tUttmf8LIV177qu0fe6ojWNmuGy7zAAiN83Oct45AfuaoxFSiAsxvr7ol7ynsouiZaZTkq19ewhsqDPrv8x8gJyq3Ymsfe6Auef0vMBVMDf8hWRWHnLZDQpSo3gSakXDa1TD7g+th7Cvlf6PcIrVDRQmVP1Hcjl/BhuRU9PqchNUBlowhTEFoliZd+Ofn2Vh6bZ6nlpBg1EbgkagVQ4VA39np5KJ1jSSbUtY6zBcNithHd63d6Vm4Lq6in01DmW2P5M2VZfIt5YDRNXYob9OT7lZk=
+script:
+  - sonar-scanner
