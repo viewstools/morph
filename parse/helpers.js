@@ -67,7 +67,7 @@ export const didYouMeanProp = prop => dymPropMatcher.get(prop)
 
 const ANIMATION = /(.+)(?:\s)(spring|linear|easeOut|easeInOut|easeIn|ease)(?:\s?(.*)?)/
 const BASIC = /^(Capture|CaptureTextArea|Column|Horizontal|Image|List|Proxy|Svg|SvgCircle|SvgEllipse|SvgDefs|SvgGroup|SvgLinearGradient|SvgRadialGradient|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgSymbol|SvgText|SvgUse|SvgStop|Table|Text|Vertical)$/i
-const BLOCK = /^([A-Z][a-zA-Z0-9]*)(\s+([A-Z][a-zA-Z0-9]*))?$/
+const BLOCK = /^(\s*)([A-Z][a-zA-Z0-9]*)(\s+([A-Z][a-zA-Z0-9]*))?$/
 const BOOL = /^(false|true)$/i
 const CAPTURE = /^(Capture|CaptureTextArea)$/i
 export let CAPTURE_TYPES = [
@@ -196,10 +196,11 @@ export const getAnimation = line => {
 
 export const getBlock = line => {
   // eslint-disable-next-line
-  const [_, is, _1, block] = get(BLOCK, line)
+  const [_, indentation, is, _1, block] = get(BLOCK, line)
   return {
     block: block || is,
     is: block ? is : null,
+    level: Math.floor(indentation.length / 2),
   }
 }
 export const getComment = line => {
@@ -354,15 +355,6 @@ export const getPropType = (block, name, defaultValue) =>
     : isNumber[name]
     ? 'number'
     : 'string'
-
-export const isTextInterpolation = (block, previous) => {
-  const previousText = previous.properties.find(prop => prop.name === 'text')
-  return (
-    block.name === 'Text' &&
-    previousText &&
-    previousText.value.includes(block.is || block.name)
-  )
-}
 
 const MAYBE_HYPHENATED_STYLE_PROPS = [
   'alignContent',

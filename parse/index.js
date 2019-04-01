@@ -23,7 +23,6 @@ import {
   isTable,
   isLocalScope,
   isSystemScope,
-  isTextInterpolation,
   isUserComment,
 } from './helpers.js'
 import getLoc from './get-loc.js'
@@ -40,7 +39,7 @@ export default ({
   // convert crlf to lf
   const text = source.replace(/\r\n/g, '\n')
   const rlines = text.split('\n')
-  const lines = rlines.map(line => line.trim())
+  const lines = rlines.map(line => line.trimRight())
   const fonts = []
   const locals = []
   const stack = []
@@ -181,7 +180,7 @@ export default ({
   }
 
   const parseBlock = (line, i) => {
-    const { block: name, is } = getBlock(line)
+    let { block: name, is, level } = getBlock(line)
     let shouldPushToStack = false
 
     const block = {
@@ -193,6 +192,7 @@ export default ({
       isCapture: isCapture(name),
       isColumn: isColumn(name),
       isGroup: false,
+      level,
       loc: getLoc(i + 1, 0),
       properties: [],
       scopes: [],
@@ -214,96 +214,73 @@ export default ({
     }
     block.id = getBlockId(block)
 
-    const last = stack[stack.length - 1]
+    let last = stack[stack.length - 1]
+    while (last && last.level >= block.level) {
+      end(stack.pop(), i)
+      last = stack[stack.length - 1]
+    }
+
     if (last) {
-      if (isTextInterpolation(block, last)) {
-        if (!last.interpolation) {
-          last.interpolation = []
-        }
-        last.interpolation.push(block)
-      } else {
-        shouldPushToStack = true
-        if (last.isGroup) {
-          if (last.isList) {
-            if (block.isBasic) {
-              warnings.push({
-                loc: block.loc,
-                type: `A basic block "${
-                  block.name
-                }" can't be inside a List. Use a view you made instead.`,
-                line,
-                blocker: true,
-              })
-            } else if (last.children.length > 0) {
-              warnings.push({
-                loc: block.loc,
-                type: `A List can only have one view inside. "${
-                  block.name
-                }" is outside of it. Put 1 empty line before.`,
-                line,
-              })
-            } else {
-              last.children.push(block)
-            }
-          } else if (block.isColumn && !last.isTable) {
+      shouldPushToStack = true
+
+      if (last.isGroup) {
+        if (last.isList) {
+          if (block.isBasic) {
             warnings.push({
               loc: block.loc,
-              type: `Only tables can contain columns. Put this column directly inside a table.`,
+              type: `A basic block "${
+                block.name
+              }" can't be inside a List. Use a view you made instead.`,
+              line,
+              blocker: true,
+            })
+          } else if (last.children.length > 0) {
+            warnings.push({
+              loc: block.loc,
+              type: `A List can only have one view inside. "${
+                block.name
+              }" is outside of it. Put 1 empty line before.`,
               line,
             })
           } else {
             last.children.push(block)
           }
-        } else if (!isTextInterpolation(block, last)) {
-          // the block is inside a block that isn't a group
-          end(stack.pop(), i)
+        } else if (block.isColumn && !last.isTable) {
+          warnings.push({
+            loc: block.loc,
+            type: `Only tables can contain columns. Put this column directly inside a table.`,
+            line,
+          })
+        } else {
+          last.children.push(block)
+        }
+      } else {
+        end(stack.pop(), i)
 
-          if (last.isBasic) {
-            warnings.push({
-              loc: block.loc,
-              type: `An empty line is required after every block. Put 1 empty line before`,
-              line,
-            })
-          } else if (views[0] && views[0].isGroup) {
-            warnings.push({
-              loc: block.loc,
-              type:
-                lines[i - 1] === ''
-                  ? `Put 1 empty line before`
-                  : `Put 2 empty lines before`,
-              line,
-            })
-          } else {
-            warnings.push({
-              loc: block.loc,
-              type: `Add Vertical at the top`,
-              line,
-            })
-          }
+        // inside a block that isn't a group
+        if (last.isBasic) {
+          warnings.push({
+            loc: block.loc,
+            type: `${block.is || block.name} is inside a block ${last.is ||
+              last.name} but ${
+              last.name
+            } isn't a container and can't have blocks inside of it.\nIndent it one level less.`,
+            line,
+          })
+        } else {
+          warnings.push({
+            loc: block.loc,
+            type: `${block.is ||
+              block.name} is inside a view. While that's allowed for now, it may break in the future. Ideally, you'd refactor it into its specific own view.`,
+            line,
+          })
         }
       }
     } else if (views.length > 0) {
-      // the block is outside the top level block
-      let newLinesBeforePreviousBlock = 1
-      while (isEnd(lines[i - newLinesBeforePreviousBlock])) {
-        newLinesBeforePreviousBlock++
-      }
-
-      const help = []
-      if (!views[0].isGroup) {
-        help.push(`Add Vertical at the top`)
-      }
-      if (newLinesBeforePreviousBlock > 2) {
-        const linesToRemove = newLinesBeforePreviousBlock - 2
-        help.push(
-          `remove ${linesToRemove} empty line${
-            linesToRemove > 1 ? 's' : ''
-          } before`
-        )
-      }
       warnings.push({
         loc: block.loc,
-        type: help.join(', '),
+        type: `${block.is ||
+          block.name} is outside of the top block and it won't render.\nTo fix it, either:\na) add a Vertical at the top and indent all the code inside of it, or\nb) remove it.`,
         line,
       })
     }
@@ -339,7 +316,7 @@ export default ({
     let inScope = false
 
     for (let j = i; j <= endOfBlockIndex; j++) {
-      const line = lines[j]
+      const line = lines[j].trim()
 
       let propNode = null
 
@@ -665,7 +642,7 @@ export default ({
   }
 
   lines.forEach((line, i) => {
-    if (line !== rlines[i].trimLeft()) {
+    if (line !== rlines[i].trimRight()) {
       warnings.push({
         type: `You have some spaces before or after this line. Clean them up.`,
         loc: {
@@ -679,14 +656,17 @@ export default ({
 
     if (isBlock(line)) {
       parseBlock(line, i)
-    } else if (isEnd(line) && stack.length > 0) {
-      end(stack.pop(), i)
     }
   })
 
   if (stack.length > 0) {
     while (!end(stack.pop(), lines.length - 1)) {}
   }
+
+  // if (source.startsWith('Action Vertical')) {
+  //   console.log('ACTION VERTICAL ->>>>>')
+  // console.log(JSON.stringify(views, null, '  '))
+  // }
 
   return {
     fonts,

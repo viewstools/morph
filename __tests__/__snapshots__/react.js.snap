@@ -588,19 +588,6 @@ module.exports = {
 }
 `;
 
-exports[`e2e parses e2e TextInterpolation 1`] = `
-Object {
-  "code": "const { get } = require('@viewstools/e2e');
-
-module.exports = {
-  Scoped: get('TextInterpolation.Scoped'),
-  Standard: get('TextInterpolation.Standard', 'notFirstName'),
-  Vertical: get('TextInterpolation.Vertical'),
-};
-",
-}
-`;
-
 exports[`e2e parses e2e Transform 1`] = `
 Object {
   "code": "const { get } = require('@viewstools/e2e');
@@ -2278,7 +2265,7 @@ Object {
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-const HeavyStuff = React.lazy(() => import('./HeavyStuff.view.js'));
+let HeavyStuff = React.lazy(() => import('./HeavyStuff.view.js'));
 
 const Lazy = props => {
   const track = React.useContext(TrackContext);
@@ -3532,57 +3519,6 @@ export default TestIds;
   "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
-  "svgs": Array [],
-}
-`;
-
-exports[`react-dom parses react-dom TextInterpolation 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
-import React from 'react';
-import TrackContext from './TrackContext.view.js';
-import ViewsBaseCss from './ViewsBaseCss.view.js';
-
-const TextInterpolation = props => {
-  const track = React.useContext(TrackContext);
-
-  return (
-    <div
-      data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-      className=\\"views-block\\"
-    >
-      <span
-        data-test-id={\`TextInterpolation.Standard|\${
-          !props.firstName ? 'notFirstName|' : ''
-        }\`}
-        className=\\"views-text\\"
-      >
-        {!props.firstName ? \`Hi stranger!\` : \`Hi \${props.firstName}!\`}
-      </span>
-      <span data-test-id={\`TextInterpolation.Scoped|\`} className=\\"views-text\\">
-        Hello, Prof. {!props.surname ? 'Anonymous' : props.surname}.
-      </span>
-      {props.children}
-    </div>
-  );
-};
-TextInterpolation.defaultProps = { firstName: '', surname: '' };
-export default TextInterpolation;
-",
-  "dependencies": Set {},
-  "fonts": Array [],
-  "slots": Array [
-    Object {
-      "defaultValue": "",
-      "name": "firstName",
-      "type": "string",
-    },
-    Object {
-      "defaultValue": "",
-      "name": "surname",
-      "type": "string",
-    },
-  ],
   "svgs": Array [],
 }
 `;
@@ -5951,7 +5887,7 @@ Object {
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import { View } from 'react-native';
-const HeavyStuff = React.lazy(() => import('./HeavyStuff.view.js'));
+let HeavyStuff = React.lazy(() => import('./HeavyStuff.view.js'));
 
 const Lazy = props => {
   const track = React.useContext(TrackContext);
@@ -7090,53 +7026,6 @@ export default TestIds;
   "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
-  "svgs": Array [],
-}
-`;
-
-exports[`react-native parses react-native TextInterpolation 1`] = `
-Object {
-  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
-import React from 'react';
-import TrackContext from './TrackContext.view.js';
-import { Text, View } from 'react-native';
-
-const TextInterpolation = props => {
-  const track = React.useContext(TrackContext);
-
-  return (
-    <View testID={\`\${props['testID'] || 'Vertical'}|\`}>
-      <Text
-        testID={\`TextInterpolation.Standard|\${
-          !props.firstName ? 'notFirstName|' : ''
-        }\`}
-      >
-        {!props.firstName ? \`Hi stranger!\` : \`Hi \${props.firstName}!\`}
-      </Text>
-      <Text testID={\`TextInterpolation.Scoped|\`}>
-        Hello, Prof. {!props.surname ? 'Anonymous' : props.surname}.
-      </Text>
-      {props.children}
-    </View>
-  );
-};
-TextInterpolation.defaultProps = { firstName: '', surname: '' };
-export default TextInterpolation;
-",
-  "dependencies": Set {},
-  "fonts": Array [],
-  "slots": Array [
-    Object {
-      "defaultValue": "",
-      "name": "firstName",
-      "type": "string",
-    },
-    Object {
-      "defaultValue": "",
-      "name": "surname",
-      "type": "string",
-    },
-  ],
   "svgs": Array [],
 }
 `;

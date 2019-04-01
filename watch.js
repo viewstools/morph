@@ -148,7 +148,13 @@ module.exports = options => {
       let f = views[name]
 
       if (!f) {
-        throw new Error(`${chalk.magenta(name)} does not exist, you are trying to use it in ${chalk.magenta(file)}. There is either a spelling mistake or the view does not exist and needs to be created.`)
+        throw new Error(
+          `${chalk.magenta(
+            name
+          )} does not exist, you are trying to use it in ${chalk.magenta(
+            file
+          )}. There is either a spelling mistake or the view does not exist and needs to be created.`
+        )
       }
 
       if (isView(f)) {
@@ -246,7 +252,7 @@ module.exports = options => {
 
         return views[name]
           ? isLazy
-            ? `const ${name} = React.lazy(() => import('${importPath}'))`
+            ? `let ${name} = React.lazy(() => import('${importPath}'))`
             : `import ${name} from '${importPath}'`
           : viewNotFound(name)
       }

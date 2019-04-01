@@ -18,6 +18,7 @@ Object {
       "isGroup": true,
       "isList": false,
       "isTable": false,
+      "level": 0,
       "loc": Object {
         "end": Object {
           "column": 12,
@@ -55,9 +56,10 @@ Object {
           "isCapture": false,
           "isColumn": false,
           "isGroup": false,
+          "level": 1,
           "loc": Object {
             "end": Object {
-              "column": 3,
+              "column": 5,
               "line": 2,
             },
             "start": Object {
@@ -80,9 +82,10 @@ Object {
       "isGroup": true,
       "isList": false,
       "isTable": false,
+      "level": 0,
       "loc": Object {
         "end": Object {
-          "column": 3,
+          "column": 5,
           "line": 2,
         },
         "start": Object {
@@ -118,9 +121,10 @@ Object {
           "isCapture": false,
           "isColumn": false,
           "isGroup": false,
+          "level": 1,
           "loc": Object {
             "end": Object {
-              "column": 0,
+              "column": 16,
               "line": 3,
             },
             "start": Object {
@@ -145,14 +149,15 @@ Object {
               "isCapture": false,
               "isColumn": false,
               "isGroup": false,
+              "level": 2,
               "loc": Object {
                 "end": Object {
-                  "column": 0,
-                  "line": 7,
+                  "column": 26,
+                  "line": 6,
                 },
                 "start": Object {
                   "column": 0,
-                  "line": 5,
+                  "line": 4,
                 },
               },
               "name": "Image",
@@ -161,11 +166,11 @@ Object {
                   "loc": Object {
                     "end": Object {
                       "column": 32,
-                      "line": 6,
+                      "line": 5,
                     },
                     "start": Object {
                       "column": 0,
-                      "line": 6,
+                      "line": 5,
                     },
                   },
                   "name": "source",
@@ -191,14 +196,15 @@ Object {
               "isGroup": true,
               "isList": false,
               "isTable": false,
+              "level": 2,
               "loc": Object {
                 "end": Object {
-                  "column": 0,
-                  "line": 9,
+                  "column": 11,
+                  "line": 7,
                 },
                 "start": Object {
                   "column": 0,
-                  "line": 8,
+                  "line": 6,
                 },
               },
               "name": "Vertical",
@@ -216,14 +222,15 @@ Object {
           "isGroup": true,
           "isList": false,
           "isTable": false,
+          "level": 1,
           "loc": Object {
             "end": Object {
-              "column": 0,
-              "line": 10,
+              "column": 11,
+              "line": 7,
             },
             "start": Object {
               "column": 0,
-              "line": 4,
+              "line": 3,
             },
           },
           "name": "Vertical",
@@ -240,14 +247,15 @@ Object {
           "isCapture": false,
           "isColumn": false,
           "isGroup": false,
+          "level": 1,
           "loc": Object {
             "end": Object {
-              "column": 0,
-              "line": 16,
+              "column": 14,
+              "line": 12,
             },
             "start": Object {
               "column": 0,
-              "line": 11,
+              "line": 7,
             },
           },
           "name": "Text",
@@ -256,11 +264,11 @@ Object {
               "loc": Object {
                 "end": Object {
                   "column": 9,
-                  "line": 12,
+                  "line": 8,
                 },
                 "start": Object {
                   "column": 0,
-                  "line": 12,
+                  "line": 8,
                 },
               },
               "name": "text",
@@ -274,11 +282,11 @@ Object {
               "loc": Object {
                 "end": Object {
                   "column": 11,
-                  "line": 13,
+                  "line": 9,
                 },
                 "start": Object {
                   "column": 0,
-                  "line": 13,
+                  "line": 9,
                 },
               },
               "name": "color",
@@ -300,11 +308,11 @@ Object {
                   "loc": Object {
                     "end": Object {
                       "column": 14,
-                      "line": 14,
+                      "line": 10,
                     },
                     "start": Object {
                       "column": 0,
-                      "line": 14,
+                      "line": 10,
                     },
                   },
                   "name": "when",
@@ -323,11 +331,11 @@ Object {
                   "loc": Object {
                     "end": Object {
                       "column": 8,
-                      "line": 15,
+                      "line": 11,
                     },
                     "start": Object {
                       "column": 0,
-                      "line": 15,
+                      "line": 11,
                     },
                   },
                   "name": "color",
@@ -359,14 +367,15 @@ Object {
           "isGroup": true,
           "isList": false,
           "isTable": false,
+          "level": 1,
           "loc": Object {
             "end": Object {
-              "column": 19,
-              "line": 18,
+              "column": 23,
+              "line": 13,
             },
             "start": Object {
               "column": 0,
-              "line": 17,
+              "line": 12,
             },
           },
           "name": "Vertical",
@@ -375,11 +384,11 @@ Object {
               "loc": Object {
                 "end": Object {
                   "column": 19,
-                  "line": 18,
+                  "line": 13,
                 },
                 "start": Object {
                   "column": 0,
-                  "line": 18,
+                  "line": 13,
                 },
               },
               "name": "backgroundColor",
@@ -404,10 +413,11 @@ Object {
       "isGroup": true,
       "isList": false,
       "isTable": false,
+      "level": 0,
       "loc": Object {
         "end": Object {
-          "column": 19,
-          "line": 18,
+          "column": 23,
+          "line": 13,
         },
         "start": Object {
           "column": 0,
@@ -442,9 +452,10 @@ Object {
           "isCapture": false,
           "isColumn": false,
           "isGroup": false,
+          "level": 1,
           "loc": Object {
             "end": Object {
-              "column": 0,
+              "column": 8,
               "line": 4,
             },
             "start": Object {
@@ -486,14 +497,15 @@ Object {
           "isCapture": false,
           "isColumn": false,
           "isGroup": false,
+          "level": 1,
           "loc": Object {
             "end": Object {
-              "column": 10,
-              "line": 6,
+              "column": 14,
+              "line": 5,
             },
             "start": Object {
               "column": 0,
-              "line": 5,
+              "line": 4,
             },
           },
           "name": "Text",
@@ -502,11 +514,11 @@ Object {
               "loc": Object {
                 "end": Object {
                   "column": 10,
-                  "line": 6,
+                  "line": 5,
                 },
                 "start": Object {
                   "column": 0,
-                  "line": 6,
+                  "line": 5,
                 },
               },
               "name": "color",
@@ -531,10 +543,11 @@ Object {
       "isGroup": true,
       "isList": false,
       "isTable": false,
+      "level": 0,
       "loc": Object {
         "end": Object {
-          "column": 10,
-          "line": 6,
+          "column": 14,
+          "line": 5,
         },
         "start": Object {
           "column": 0,
@@ -605,9 +618,10 @@ Object {
           "isCapture": false,
           "isColumn": false,
           "isGroup": false,
+          "level": 1,
           "loc": Object {
             "end": Object {
-              "column": 0,
+              "column": 8,
               "line": 8,
             },
             "start": Object {
@@ -694,14 +708,15 @@ Object {
           "isCapture": true,
           "isColumn": false,
           "isGroup": false,
+          "level": 1,
           "loc": Object {
             "end": Object {
-              "column": 0,
-              "line": 12,
+              "column": 5,
+              "line": 11,
             },
             "start": Object {
               "column": 0,
-              "line": 9,
+              "line": 8,
             },
           },
           "name": "Capture",
@@ -710,11 +725,11 @@ Object {
               "loc": Object {
                 "end": Object {
                   "column": 8,
-                  "line": 10,
+                  "line": 9,
                 },
                 "start": Object {
                   "column": 0,
-                  "line": 10,
+                  "line": 9,
                 },
               },
               "name": "type",
@@ -729,11 +744,11 @@ Object {
               "loc": Object {
                 "end": Object {
                   "column": 8,
-                  "line": 11,
+                  "line": 10,
                 },
                 "start": Object {
                   "column": 0,
-                  "line": 11,
+                  "line": 10,
                 },
               },
               "name": "onFocus",
@@ -765,14 +780,15 @@ Object {
               "isGroup": true,
               "isList": false,
               "isTable": false,
+              "level": 2,
               "loc": Object {
                 "end": Object {
-                  "column": 4,
-                  "line": 15,
+                  "column": 8,
+                  "line": 13,
                 },
                 "start": Object {
                   "column": 0,
-                  "line": 15,
+                  "line": 13,
                 },
               },
               "name": "Stuff",
@@ -789,14 +805,15 @@ Object {
           "isGroup": true,
           "isList": true,
           "isTable": false,
+          "level": 1,
           "loc": Object {
             "end": Object {
-              "column": 4,
-              "line": 15,
+              "column": 8,
+              "line": 13,
             },
             "start": Object {
               "column": 0,
-              "line": 13,
+              "line": 11,
             },
           },
           "name": "List",
@@ -806,11 +823,11 @@ Object {
               "loc": Object {
                 "end": Object {
                   "column": 5,
-                  "line": 14,
+                  "line": 12,
                 },
                 "start": Object {
                   "column": 0,
-                  "line": 14,
+                  "line": 12,
                 },
               },
               "name": "from",
@@ -836,10 +853,11 @@ Object {
       "isGroup": true,
       "isList": false,
       "isTable": false,
+      "level": 0,
       "loc": Object {
         "end": Object {
-          "column": 4,
-          "line": 15,
+          "column": 8,
+          "line": 13,
         },
         "start": Object {
           "column": 0,
@@ -935,9 +953,10 @@ Object {
           "isCapture": false,
           "isColumn": false,
           "isGroup": false,
+          "level": 1,
           "loc": Object {
             "end": Object {
-              "column": 8,
+              "column": 12,
               "line": 5,
             },
             "start": Object {
@@ -1033,9 +1052,10 @@ Object {
       "isGroup": true,
       "isList": false,
       "isTable": false,
+      "level": 0,
       "loc": Object {
         "end": Object {
-          "column": 8,
+          "column": 12,
           "line": 5,
         },
         "start": Object {
@@ -1080,9 +1100,10 @@ Object {
           "isGroup": true,
           "isList": false,
           "isTable": false,
+          "level": 1,
           "loc": Object {
             "end": Object {
-              "column": 10,
+              "column": 14,
               "line": 12,
             },
             "start": Object {
@@ -1298,9 +1319,10 @@ Object {
       "isGroup": true,
       "isList": false,
       "isTable": false,
+      "level": 0,
       "loc": Object {
         "end": Object {
-          "column": 10,
+          "column": 14,
           "line": 12,
         },
         "start": Object {
@@ -1375,10 +1397,10 @@ borderColor red",
       "type": "You're missing a base prop for backgroundColor. Add it before all whens on the block.",
     },
     Object {
-      "line": "EmptyWhen Vertical",
+      "line": "  EmptyWhen Vertical",
       "loc": Object {
         "end": Object {
-          "column": 10,
+          "column": 14,
           "line": 12,
         },
         "start": Object {
@@ -1389,10 +1411,10 @@ borderColor red",
       "type": "You have declared a value for color 2 times. Only the last value will be used. You may want to delete the ones you don't use.",
     },
     Object {
-      "line": "EmptyWhen Vertical",
+      "line": "  EmptyWhen Vertical",
       "loc": Object {
         "end": Object {
-          "column": 10,
+          "column": 14,
           "line": 12,
         },
         "start": Object {

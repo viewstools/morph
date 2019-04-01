@@ -3,10 +3,8 @@ import {
   getScopedCondition,
   hasCustomScopes,
   hasLocals,
-  interpolateText,
   isSlot,
 } from '../utils.js'
-import safe from './safe.js'
 import wrap from './wrap.js'
 
 const parseFormatValue = (value, type) => {
@@ -40,8 +38,6 @@ export function enter(node, parent, state) {
         node.value,
         type
       )})}`
-    } else if (parent.hasOwnProperty('interpolation')) {
-      parent.explicitChildren = interpolateText(node, parent)
     } else {
       parent.explicitChildren = node.value
     }
