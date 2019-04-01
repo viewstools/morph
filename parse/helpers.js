@@ -43,6 +43,7 @@ const dymPropMatcher = new DidYouMeanMatcher([
   'onDragEnd',
   'onDragOver',
   'onDragStart',
+  'onDrop',
   'onFocus',
   'onMouseDown',
   'onMouseMove',
