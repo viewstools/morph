@@ -1,9 +1,9 @@
 Popup Vertical
-Toggle Vertical
-onClick <toggle
-when <somethingGreen
-onClick <onClickGreen
-when <whatMakesBlue
-onClick <onClickBlue
-Text
-text toggle popup
+  Toggle Vertical
+    onClick <toggle
+    when <somethingGreen
+    onClick <onClickGreen
+    when <whatMakesBlue
+    onClick <onClickBlue
+    Text
+      text toggle popup

@@ -1,8 +1,7 @@
 Vertical
-Content Vertical
-alignItems center
-when <inDesignSystem
-alignItems flexStart
-
-SomeViewThatExposesAlignItems
-alignItems flexStart
+  Content Vertical
+    alignItems center
+    when <inDesignSystem
+    alignItems flexStart
+  SomeViewThatExposesAlignItems
+    alignItems flexStart

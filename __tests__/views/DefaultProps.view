@@ -1,6 +1,5 @@
 DefaultProps Vertical
-Text
-text < hey
-
-Text
-text <texto ho
+  Text
+    text < hey
+  Text
+    text <texto ho

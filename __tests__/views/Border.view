@@ -1,26 +1,23 @@
 Border Vertical
-borderColor red
-borderStyle solid
-borderWidth < 10
-Top Vertical
-borderTopStyle solid
-borderTopColor red
-borderTopWidth < 10
-
-Right Vertical
-borderRightStyle solid
-borderRightColor red
-borderRightWidth < 10
-
-Bottom Vertical
-borderBottomStyle solid
-borderBottomColor red
-borderBottomWidth < 10
-
-Left Vertical
-borderLeftStyle solid
-borderLeftColor red
-borderLeftWidth < 10
-borderTopRightRadius 10
-when <something
-borderTopRightRadius 20
+  borderColor red
+  borderStyle solid
+  borderWidth < 10
+  Top Vertical
+    borderTopStyle solid
+    borderTopColor red
+    borderTopWidth < 10
+  Right Vertical
+    borderRightStyle solid
+    borderRightColor red
+    borderRightWidth < 10
+  Bottom Vertical
+    borderBottomStyle solid
+    borderBottomColor red
+    borderBottomWidth < 10
+  Left Vertical
+    borderLeftStyle solid
+    borderLeftColor red
+    borderLeftWidth < 10
+    borderTopRightRadius 10
+    when <something
+    borderTopRightRadius 20

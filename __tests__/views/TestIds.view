@@ -1,11 +1,8 @@
 App Vertical
-Text
-text 1
-
-Text
-text 2
-
-External
-
-Name Text
-text name
+  Text
+    text 1
+  Text
+    text 2
+  External
+  Name Text
+    text name

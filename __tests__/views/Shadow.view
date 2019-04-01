@@ -1,13 +1,13 @@
 Shadow Vertical
-BoxShadow Vertical
-shadowBlur 2
-shadowColor < red
-shadowOffsetX 0
-shadowOffsetY 5
-shadowSpread 2
-TextShadow Text
-shadowBlur 1
-shadowColor < blue
-shadowOffsetX 2
-shadowOffsetY 3
-text hey
+  BoxShadow Vertical
+    shadowBlur 2
+    shadowColor < red
+    shadowOffsetX 0
+    shadowOffsetY 5
+    shadowSpread 2
+    TextShadow Text
+      shadowBlur 1
+      shadowColor < blue
+      shadowOffsetX 2
+      shadowOffsetY 3
+      text hey

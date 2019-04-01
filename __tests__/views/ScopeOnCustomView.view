@@ -1,10 +1,10 @@
 Button
-label hey
-another 0
-more <
-when <a
-label ho
-another 1
-more <
-when <b
-label this is b
+  label hey
+  another 0
+  more <
+  when <a
+  label ho
+  another 1
+  more <
+  when <b
+  label this is b

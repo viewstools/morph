@@ -1,10 +1,10 @@
 ListOfSomething List
-from <
-paddingLeft 2
-justifyContent center
-alignItems flexStart
-flexDirection row
-flexWrap wrap
-overflowY auto
-backgroundColor red
-Something
+  from <
+  paddingLeft 2
+  justifyContent center
+  alignItems flexStart
+  flexDirection row
+  flexWrap wrap
+  overflowY auto
+  backgroundColor red
+  Something

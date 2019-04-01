@@ -1,13 +1,13 @@
 Hover Vertical
-backgroundColor #323232
-onClick <
-when <isStuff
-backgroundColor red
-when <isHovered
-backgroundColor #232323
-Text
-color white
-fontSize <
-text Hey!
-when <isHovered
-color black
+  backgroundColor #323232
+  onClick <
+  when <isStuff
+  backgroundColor red
+  when <isHovered
+  backgroundColor #232323
+  Text
+    color white
+    fontSize <
+    text Hey!
+    when <isHovered
+    color black

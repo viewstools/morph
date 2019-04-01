@@ -1,17 +1,15 @@
 Indented Vertical
-  onWhen <stuff
+onWhen <stuff
   backgroundColor red
   when <isSomething
   backgroundColor blue
   Text
     text hey
-
   Vertical
     Text
       text ho
-
     Horizontal
-      onWhen <!showStuff
+    onWhen <!showStuff
       backgroundColor blue
       paddingTop 4
       paddingBottom 4
@@ -21,5 +19,5 @@ Indented Vertical
       paddingLeft 40
       when <!stuff
       paddingRight 20
-        Text
-          text more
+      Text
+        text more

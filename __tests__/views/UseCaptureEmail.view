@@ -1,13 +1,13 @@
 Email Capture
-type email
-autoFocus true
-borderColor black
-borderStyle solid
-borderWidth 1
-color red
-defaultValue hey this is a default value
-onSubmit <
-when <isFocused
-color purple
-when <isPlaceholder
-color blue
+  type email
+  autoFocus true
+  borderColor black
+  borderStyle solid
+  borderWidth 1
+  color red
+  defaultValue hey this is a default value
+  onSubmit <
+  when <isFocused
+  color purple
+  when <isPlaceholder
+  color blue

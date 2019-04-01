@@ -1,6 +1,6 @@
 Vertical
-backgroundColor red
-Text
-text < hey
-color < white
-ref <refText
+  backgroundColor red
+  Text
+    text < hey
+    color < white
+    ref <refText

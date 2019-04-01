@@ -1,4 +1,4 @@
 LocalImage Image
-source ./chopper.jpg
-when <isCat
-source ./garfield.png
+  source ./chopper.jpg
+  when <isCat
+  source ./garfield.png
