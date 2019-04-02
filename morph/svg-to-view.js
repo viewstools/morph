@@ -1,40 +1,36 @@
-const { html2json } = require('html2json')
-const flatten = require('flatten')
-const SvgOptimiser = require('svgo')
-const toCamelCase = require('to-camel-case')
-const toPascalCase = require('to-pascal-case')
+let { html2json } = require('html2json')
+let flatten = require('flatten')
+let SvgOptimiser = require('svgo')
+let toCamelCase = require('to-camel-case')
+let toPascalCase = require('to-pascal-case')
 
-const svgCustomStyles = [
-  'alignSelf < auto',
-  'marginTop < 0',
-  'marginBottom < 0',
-  'marginLeft < 0',
-  'marginRight < 0',
-  'opacity < 1',
+let svgCustomStyles = [
+  '  alignSelf < auto',
+  '  marginTop < 0',
+  '  marginBottom < 0',
+  '  marginLeft < 0',
+  '  marginRight < 0',
+  '  opacity < 1',
 ]
 
-const slotNames = ['fill', 'stroke']
+let slotNames = ['fill', 'stroke']
 
-const addSlots = (prop, value) => {
-  const match = slotNames.some(name => prop === name)
+let addSlots = (prop, value) => {
+  let match = slotNames.some(name => prop === name)
   value = match ? `< ${value}` : value
 
   return value
 }
 
-const parseTransform = (prop, value) => {
-  const transforms = value.split(/\s(?=[a-z])/)
-  return transforms
-    .map((transform, i) => {
-      const name = transform.split('(')[0]
-      const values = transform.match(/\(([^)]+)\)/)[1].split(/\s+|,/)
-      const axes = ['X', 'Y', 'Z']
-      return values.map((val, j) => `${name}${axes[j]} ${val}`).join('\n')
-    })
-    .join('')
-}
+let TRANSFORM_AXES = ['X', 'Y', 'Z']
+let parseTransform = value =>
+  value.split(/\s(?=[a-z])/).map(transform => {
+    let name = transform.split('(')[0]
+    let values = transform.match(/\(([^)]+)\)/)[1].split(/\s+|,/)
+    return values.map((val, j) => `${name}${TRANSFORM_AXES[j]} ${val}`)
+  })
 
-const IGNORE_ATTRS = [
+let IGNORE_ATTRS = [
   'xmlns',
   'id',
   'class',
@@ -44,7 +40,7 @@ const IGNORE_ATTRS = [
   'baseProfile',
 ]
 
-const getAttrs = (attr, tag) =>
+let getAttrs = (attr, tag) =>
   Object.keys(attr)
     .filter(a => !IGNORE_ATTRS.includes(a))
     .map(prop => {
@@ -53,12 +49,12 @@ const getAttrs = (attr, tag) =>
         value = value.join(' ')
       }
       if (prop === 'transform' && tag !== 'g') {
-        return `${parseTransform(prop, value)}`
+        return parseTransform(value)
       }
       return `${toCamelCase(prop)} ${addSlots(prop, value)}`
     })
 
-const getBlock = raw => {
+let getBlock = raw => {
   switch (raw) {
     case 'svg':
       return 'Svg'
@@ -77,7 +73,7 @@ const getBlock = raw => {
   }
 }
 
-const IGNORE_TAGS = [
+let IGNORE_TAGS = [
   'clippath',
   'defs',
   'desc',
@@ -88,40 +84,42 @@ const IGNORE_TAGS = [
   'use',
 ]
 
-const parseSvg = ({ attr, child, tag }) => {
-  const s = []
+let indent = level => new Array(Math.max(level, 0)).fill('  ').join('')
 
+let parseSvg = ({ attr, child, tag }, level = 0) => {
   if (!tag || IGNORE_TAGS.includes(tag.toLowerCase())) return false
 
-  s.push(getBlock(tag))
+  let s = []
+  let nextLevel = level + 1
+
+  s.push(`${indent(level)}${getBlock(tag)}`)
+
   if (tag === 'svg') {
     s.push(svgCustomStyles)
   }
+
   if (attr) {
     let attrs = getAttrs(attr, tag)
+
     if (attr.viewBox) {
       attrs = addDimensions(attrs, attr)
     }
     if (tag === 'svg') {
       ensureWidthAndHeightAsOpenSlots(attrs)
     }
-    s.push(attrs)
+
+    s.push(flatten(attrs).map(a => `${indent(nextLevel)}${a}`))
   }
 
   if (child) {
-    s.push(
-      child.map(c => {
-        const parsed = parseSvg(c)
-        return parsed && [parsed, '']
-      })
-    )
+    s.push(child.map(c => parseSvg(c, nextLevel)))
   }
 
   return s
 }
 
 // if width or height props aren't declared, get them from the viewbox
-const addDimensions = (attrs, { viewBox, width, height }) => {
+let addDimensions = (attrs, { viewBox, width, height }) => {
   if (!width) {
     attrs.push(`width < ${viewBox[2]}`)
   }
@@ -131,11 +129,11 @@ const addDimensions = (attrs, { viewBox, width, height }) => {
   return attrs
 }
 
-const ensureSlot = (attrs, prop, defaultValue) => {
-  const slotRe = new RegExp(`${prop} <`)
+let ensureSlot = (attrs, prop, defaultValue) => {
+  let slotRe = new RegExp(`${prop} <`)
 
   if (!attrs.some(item => slotRe.test(item))) {
-    const staticPropIndex = attrs.findIndex(item => item.startsWith(prop))
+    let staticPropIndex = attrs.findIndex(item => item.startsWith(prop))
     if (staticPropIndex !== -1) {
       attrs[staticPropIndex] = attrs[staticPropIndex].replace(prop, `${prop} <`)
     } else {
@@ -144,23 +142,25 @@ const ensureSlot = (attrs, prop, defaultValue) => {
   }
 }
 
-const ensureWidthAndHeightAsOpenSlots = attrs => {
+let ensureWidthAndHeightAsOpenSlots = attrs => {
   ensureSlot(attrs, 'width', 50)
   ensureSlot(attrs, 'height', 50)
 }
 
-const addNamedSlot = (line, name, num) =>
-  `${line.split(' < ')[0]} <${name}${num} ${line.split(' < ')[1]}`
+let addNamedSlot = (line, name, num) => {
+  let [slotName, slotValue] = line.split(' < ')
+  return `${slotName} <${name}${num} ${slotValue}`
+}
 
 // if there are duplicate properties, expose them as fill2, fill3 etc
-const checkDuplicates = result => {
+let fixDuplicates = result => {
   slotNames.forEach(name => {
     let count = 0
     let values = []
     result.forEach((line, index) => {
-      const re = new RegExp(`${name} <`)
+      let re = new RegExp(`${name} <`)
       if (line && re.exec(line)) {
-        const value = line.split('< ')[1]
+        let value = line.split('< ')[1]
         count++
 
         if (count > 1 && !values.includes(value)) {
@@ -171,7 +171,7 @@ const checkDuplicates = result => {
           // duplicate properties and value does already exist
           // but if indexOf(value) === 1 then it matches the first slot
           // and does not need to be named
-          const i = values.indexOf(value)
+          let i = values.indexOf(value)
           result[index] = addNamedSlot(line, name, i)
         } else {
           // first property
@@ -180,12 +180,12 @@ const checkDuplicates = result => {
       }
     })
   })
-
-  return result
 }
 
+let isString = l => typeof l === 'string'
+
 module.exports = async raw => {
-  const svgo = new SvgOptimiser()
+  let svgo = new SvgOptimiser()
   // TODO revisit this hack to SVGO's plugin config :/, it's too complex
   // and undocumented to spend time going through it
   svgo.config.plugins = svgo.config.plugins
@@ -202,11 +202,8 @@ module.exports = async raw => {
     )
     .filter(list => list.length)
 
-  const res = await svgo.optimize(raw)
-
-  return checkDuplicates(
-    flatten(parseSvg(html2json(res.data).child[0])).filter(
-      l => typeof l === 'string'
-    )
-  ).join('\n')
+  let res = await svgo.optimize(raw)
+  let lines = flatten(parseSvg(html2json(res.data).child[0])).filter(isString)
+  fixDuplicates(lines)
+  return lines.join('\n')
 }
