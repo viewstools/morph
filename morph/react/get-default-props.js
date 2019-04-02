@@ -1,9 +1,12 @@
-const stringify = slot =>
-  slot.type === 'array'
-    ? JSON.stringify([])
-    : /^[0-9]+$/.test(slot.defaultValue) || slot.type === 'import'
-      ? slot.defaultValue
-      : JSON.stringify(slot.defaultValue)
+const stringify = slot => {
+  if (slot.type === 'array') {
+    return JSON.stringify([])
+  } else if (/^[0-9]+$/.test(slot.defaultValue) || slot.type === 'import') {
+    return slot.defaultValue
+  } else {
+    return JSON.stringify(slot.defaultValue)
+  }
+}
 
 export default ({ state, name }) => {
   const slots = state.slots

@@ -10,9 +10,7 @@ export function leave(node, parent, state) {
         state.render.push('>')
       }
 
-      if (!node.usesProxy) {
-        state.render.push(`{props.children}`)
-      }
+      state.render.push(`{props.children}`)
     }
     state.render.push(`</${node.nameFinal}>`)
   } else {

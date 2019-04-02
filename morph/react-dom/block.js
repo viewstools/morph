@@ -18,9 +18,9 @@ import * as BlockTeleport from '../react/block-teleport.js'
 export const enter = [
   BlockSetTestId.enter,
   BlockOffWhen.enter,
-  BlockProxy.enter,
   BlockRoute.enter,
   BlockName.enter,
+  BlockProxy.enter,
   BlockTable.enter,
   BlockColumn.enter,
   BlockCapture.enter,

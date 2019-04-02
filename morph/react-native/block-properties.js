@@ -1,4 +1,3 @@
-import * as PropertiesChildrenProxyMap from '../react/properties-children-proxy-map.js'
 import * as PropertiesRoute from '../react/properties-route.js'
 import * as PropertiesStyle from './properties-style.js'
 import * as PropertyFormat from '../react/property-format.js'
@@ -38,5 +37,4 @@ export function enter(node, parent, state) {
 
   PropertiesStyle.leave(node, parent, state)
   PropertiesRoute.leave(node, parent, state)
-  PropertiesChildrenProxyMap.leave(node, parent, state)
 }

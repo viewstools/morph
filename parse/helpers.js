@@ -7,7 +7,7 @@ import toSlugCase from 'to-slug-case'
 const LOCAL_SCOPES = locales.map(item => item.replace(/-/g, ''))
 
 const dymBlockMatcher = new DidYouMeanMatcher(
-  'Capture|CaptureTextArea|G|Horizontal|Image|List|Proxy|Svg|SvgCircle|SvgEllipse|SvgDefs|SvgGroup|SvgLinearGradient|SvgRadialGradient|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgSymbol|SvgText|SvgUse|SvgStop|Text|Vertical'.split(
+  'Capture|CaptureTextArea|G|Horizontal|Image|List|Svg|SvgCircle|SvgEllipse|SvgDefs|SvgGroup|SvgLinearGradient|SvgRadialGradient|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgSymbol|SvgText|SvgUse|SvgStop|Text|Vertical'.split(
     '|'
   )
 )
@@ -67,7 +67,7 @@ export const didYouMeanBlock = block => dymBlockMatcher.get(block)
 export const didYouMeanProp = prop => dymPropMatcher.get(prop)
 
 const ANIMATION = /(.+)(?:\s)(spring|linear|easeOut|easeInOut|easeIn|ease)(?:\s?(.*)?)/
-const BASIC = /^(Capture|CaptureTextArea|Column|Horizontal|Image|List|Proxy|Svg|SvgCircle|SvgEllipse|SvgDefs|SvgGroup|SvgLinearGradient|SvgRadialGradient|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgSymbol|SvgText|SvgUse|SvgStop|Table|Text|Vertical)$/i
+const BASIC = /^(Capture|CaptureTextArea|Column|Horizontal|Image|List|Svg|SvgCircle|SvgEllipse|SvgDefs|SvgGroup|SvgLinearGradient|SvgRadialGradient|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgSymbol|SvgText|SvgUse|SvgStop|Table|Text|Vertical)$/i
 const BLOCK = /^(\s*)([A-Z][a-zA-Z0-9]*)(\s+([A-Z][a-zA-Z0-9]*))?$/
 const BOOL = /^(false|true)$/i
 const CAPTURE = /^(Capture|CaptureTextArea)$/i
@@ -83,7 +83,7 @@ const COMMENT = /^#(.+)$/
 const FLOAT = /^-?[0-9]+\.[0-9]+$/
 const FONTABLE = /^(Capture|CaptureTextArea|Text)$/
 const INT = /^-?[0-9]+$/
-const NOT_GROUP = /^(Image|Text|Proxy|SvgCircle|SvgEllipse|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgText|SvgStop)$/i
+const NOT_GROUP = /^(Image|Text|SvgCircle|SvgEllipse|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgText|SvgStop)$/i
 const PROP = /^([a-z][a-zA-Z0-9]*)(\s+(.+))?$/
 const UNSUPPORTED_SHORTHAND = {
   border: ['borderWidth', 'borderStyle', 'borderColor'],

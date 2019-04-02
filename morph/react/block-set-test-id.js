@@ -1,6 +1,4 @@
 export const enter = (node, parent, state) => {
-  if (node.name === 'Proxy') return
-
   let blockName = node.is || node.name
 
   if (typeof state.testIds[blockName] === 'number') {

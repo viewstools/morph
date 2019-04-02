@@ -29,9 +29,6 @@ export default (node, parent, state) => {
       name = 'div'
       break
 
-    case 'Proxy':
-      return null
-
     case 'Svg':
       name = 'svg'
       break

@@ -1,7 +1,7 @@
 import { getScopeDescription } from '../utils.js'
 
 export const enter = (node, parent, state) => {
-  if (node.name === 'Proxy' || node.isFragment) return
+  if (node.isFragment) return
 
   const scopes = node.scopes
     .filter(scope => !scope.isSystem && !scope.isLocal)

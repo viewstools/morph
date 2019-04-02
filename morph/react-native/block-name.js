@@ -3,6 +3,7 @@ import handleTable from '../react/block-name-handle-table.js'
 import getBlockName from './get-block-name.js'
 
 export function enter(node, parent, state) {
+  if (parent && !parent.isBasic && !node.isBasic) return true
   if (node.isFragment && node.children.length === 0) return true
 
   let name = getBlockName(node, parent, state)
@@ -15,6 +16,9 @@ export function enter(node, parent, state) {
 
   state.use(node.isBasic ? name.replace(/^Animated/, '') : name, node.isLazy)
 
+  if (node.isProxy) {
+    name = `props.proxy${name}`
+  }
   node.nameFinal = name
 
   if (handleTable(node, parent, state)) return true

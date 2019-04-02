@@ -17,6 +17,7 @@ Object {
       "isColumn": false,
       "isGroup": true,
       "isList": false,
+      "isProxy": false,
       "isTable": false,
       "level": 0,
       "loc": Object {
@@ -56,6 +57,7 @@ Object {
           "isCapture": false,
           "isColumn": false,
           "isGroup": false,
+          "isProxy": false,
           "level": 1,
           "loc": Object {
             "end": Object {
@@ -81,6 +83,7 @@ Object {
       "isColumn": false,
       "isGroup": true,
       "isList": false,
+      "isProxy": false,
       "isTable": false,
       "level": 0,
       "loc": Object {
@@ -121,6 +124,7 @@ Object {
           "isCapture": false,
           "isColumn": false,
           "isGroup": false,
+          "isProxy": false,
           "level": 1,
           "loc": Object {
             "end": Object {
@@ -149,6 +153,7 @@ Object {
               "isCapture": false,
               "isColumn": false,
               "isGroup": false,
+              "isProxy": false,
               "level": 2,
               "loc": Object {
                 "end": Object {
@@ -195,6 +200,7 @@ Object {
               "isColumn": false,
               "isGroup": true,
               "isList": false,
+              "isProxy": false,
               "isTable": false,
               "level": 2,
               "loc": Object {
@@ -221,6 +227,7 @@ Object {
           "isColumn": false,
           "isGroup": true,
           "isList": false,
+          "isProxy": false,
           "isTable": false,
           "level": 1,
           "loc": Object {
@@ -247,6 +254,7 @@ Object {
           "isCapture": false,
           "isColumn": false,
           "isGroup": false,
+          "isProxy": false,
           "level": 1,
           "loc": Object {
             "end": Object {
@@ -366,6 +374,7 @@ Object {
           "isColumn": false,
           "isGroup": true,
           "isList": false,
+          "isProxy": false,
           "isTable": false,
           "level": 1,
           "loc": Object {
@@ -412,6 +421,7 @@ Object {
       "isColumn": false,
       "isGroup": true,
       "isList": false,
+      "isProxy": false,
       "isTable": false,
       "level": 0,
       "loc": Object {
@@ -452,6 +462,7 @@ Object {
           "isCapture": false,
           "isColumn": false,
           "isGroup": false,
+          "isProxy": false,
           "level": 1,
           "loc": Object {
             "end": Object {
@@ -497,6 +508,7 @@ Object {
           "isCapture": false,
           "isColumn": false,
           "isGroup": false,
+          "isProxy": false,
           "level": 1,
           "loc": Object {
             "end": Object {
@@ -542,6 +554,7 @@ Object {
       "isColumn": false,
       "isGroup": true,
       "isList": false,
+      "isProxy": false,
       "isTable": false,
       "level": 0,
       "loc": Object {
@@ -618,6 +631,7 @@ Object {
           "isCapture": false,
           "isColumn": false,
           "isGroup": false,
+          "isProxy": false,
           "level": 1,
           "loc": Object {
             "end": Object {
@@ -708,6 +722,7 @@ Object {
           "isCapture": true,
           "isColumn": false,
           "isGroup": false,
+          "isProxy": false,
           "level": 1,
           "loc": Object {
             "end": Object {
@@ -779,6 +794,7 @@ Object {
               "isColumn": false,
               "isGroup": true,
               "isList": false,
+              "isProxy": false,
               "isTable": false,
               "level": 2,
               "loc": Object {
@@ -804,6 +820,7 @@ Object {
           "isColumn": false,
           "isGroup": true,
           "isList": true,
+          "isProxy": false,
           "isTable": false,
           "level": 1,
           "loc": Object {
@@ -852,6 +869,7 @@ Object {
       "isColumn": false,
       "isGroup": true,
       "isList": false,
+      "isProxy": false,
       "isTable": false,
       "level": 0,
       "loc": Object {
@@ -953,6 +971,7 @@ Object {
           "isCapture": false,
           "isColumn": false,
           "isGroup": false,
+          "isProxy": false,
           "level": 1,
           "loc": Object {
             "end": Object {
@@ -1051,6 +1070,7 @@ Object {
       "isColumn": false,
       "isGroup": true,
       "isList": false,
+      "isProxy": false,
       "isTable": false,
       "level": 0,
       "loc": Object {
@@ -1099,6 +1119,7 @@ Object {
           "isColumn": false,
           "isGroup": true,
           "isList": false,
+          "isProxy": false,
           "isTable": false,
           "level": 1,
           "loc": Object {
@@ -1318,6 +1339,7 @@ Object {
       "isColumn": false,
       "isGroup": true,
       "isList": false,
+      "isProxy": false,
       "isTable": false,
       "level": 0,
       "loc": Object {

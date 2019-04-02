@@ -17,9 +17,6 @@ export default (node, parent, state) => {
     case 'List':
       return getListBlockName(node, state)
 
-    case 'Proxy':
-      return null
-
     case 'Text':
       if (node.isAnimated) {
         state.animated.add('Text')

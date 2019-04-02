@@ -68,16 +68,11 @@ export default ({
   const getChildrenProxyMap = block => {
     const childrenProxyMap = {}
 
-    block.children.forEach((child, i) => {
-      let maybeName = child.is || child.name
-      let name = maybeName
-      let next = 1
-      while (name in childrenProxyMap) {
-        name = `${maybeName}${next}`
-        next++
-      }
-      childrenProxyMap[name] = i
-    })
+    block.children
+      .filter(child => child.is)
+      .forEach(child => {
+        childrenProxyMap[child.is] = child.name
+      })
 
     return Object.keys(childrenProxyMap).length === 0 ? null : childrenProxyMap
   }
@@ -192,6 +187,7 @@ export default ({
       isCapture: isCapture(name),
       isColumn: isColumn(name),
       isGroup: false,
+      isProxy: false,
       level,
       loc: getLoc(i + 1, 0),
       properties: [],
@@ -251,6 +247,35 @@ export default ({
             type: `Only tables can contain columns. Put this column directly inside a table.`,
             line,
           })
+        } else if (!last.isBasic) {
+          if (block.isBasic) {
+            warnings.push({
+              loc: block.loc,
+              type: `A basic block "${
+                block.name
+              }" cant' be inside a View. Use a view you made instead.`,
+              line,
+              blocker: true,
+            })
+          } else {
+            if (!block.is) {
+              warnings.push({
+                loc: block.loc,
+                type: `A view inside a view needs to be named after the view it will be proxied at.
+Your proxied view probably looks like:
+${block.name}
+  SomeView
+    proxy true
+
+You should replace "${block.name}" with "SomeView ${block.name}"
+
+That would mean that SomeView in ${block.name} will be replaced by ${
+                  block.name
+                }.`,
+              })
+            }
+            last.children.push(block)
+          }
         } else {
           last.children.push(block)
         }
@@ -385,6 +410,15 @@ export default ({
         } else {
           if (name === 'lazy') {
             block.isLazy = true
+          }
+          if (name === 'proxy') {
+            block.isProxy = true
+
+            slots.push({
+              name: `proxy${block.name}`,
+              type: 'import',
+              defaultValue: block.name,
+            })
           }
         }
 

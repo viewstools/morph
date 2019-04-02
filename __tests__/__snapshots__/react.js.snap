@@ -453,6 +453,19 @@ module.exports = {
 }
 `;
 
+exports[`e2e parses e2e Proxy 1`] = `
+Object {
+  "code": "const { get } = require('@viewstools/e2e');
+
+module.exports = {
+  ActionGhostedProps: get('Proxy.ActionGhostedProps', 'isSelected'),
+  Button: get('Proxy.Button'),
+  Text: get('Proxy.Text'),
+};
+",
+}
+`;
+
 exports[`e2e parses e2e Scope 1`] = `
 Object {
   "code": "const { get } = require('@viewstools/e2e');
@@ -715,6 +728,8 @@ Object {
   "code": "const { get } = require('@viewstools/e2e');
 
 module.exports = {
+  ActionGhostedProps: get('UseProxy.ActionGhostedProps'),
+  Button: get('UseProxy.Button'),
   _top: get('UseProxy'),
 };
 ",
@@ -2908,6 +2923,104 @@ export default NestedRoutes;
 }
 `;
 
+exports[`react-dom parses react-dom Proxy 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
+import ActionGhostedProps from './ActionGhostedProps.view.js';
+import React from 'react';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+import { css } from 'emotion';
+
+const Button = css({
+  label: 'Button',
+  alignItems: 'center',
+  backgroundColor: '#f2f2f2',
+  paddingBottom: 8,
+  paddingLeft: 12,
+  paddingRight: 12,
+  paddingTop: 8,
+});
+const Text = css({
+  label: 'Text',
+  marginTop: 4,
+  [\`.\${Button}:hover &, .\${Button}.hover &\`]: {
+    color: 'fuchsia',
+  },
+  color: 'var(--color)',
+});
+
+const Proxy = props => {
+  const track = React.useContext(TrackContext);
+
+  return (
+    <button
+      data-test-id={\`\${props['data-test-id'] || 'Button'}|\`}
+      onClick={event => {
+        typeof props.onClick === 'function' && props.onClick(event);
+
+        track({ block: 'Proxy.Button', action: 'click', event, props });
+      }}
+      className={\`views-block \${Button}\`}
+    >
+      <props.proxyActionGhostedProps
+        data-test-id={\`Proxy.ActionGhostedProps|\${
+          props.isSelected ? 'isSelected|' : ''
+        }\`}
+        proxy={true}
+        stroke={props.isSelected ? 'purple' : 'red'}
+        height={props.isSelected ? 24 : 20}
+        width={props.isSelected ? 24 : 20}
+        className=\\"views-block\\"
+      />
+      <span
+        data-test-id={\`Proxy.Text|\`}
+        style={{ '--color': props.color }}
+        className={\`views-text \${Text}\`}
+      >
+        {props.text}
+      </span>
+      {props.children}
+    </button>
+  );
+};
+Proxy.defaultProps = {
+  proxyActionGhostedProps: ActionGhostedProps,
+  color: '#404040',
+  text: 'Label',
+};
+export default Proxy;
+",
+  "dependencies": Set {
+    "emotion",
+  },
+  "fonts": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "onClick",
+      "type": "function",
+    },
+    Object {
+      "defaultValue": "ActionGhostedProps",
+      "name": "proxyActionGhostedProps",
+      "type": "import",
+    },
+    Object {
+      "defaultValue": "#404040",
+      "name": "color",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": "Label",
+      "name": "text",
+      "type": "string",
+    },
+  ],
+  "svgs": Array [],
+}
+`;
+
 exports[`react-dom parses react-dom Scope 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
@@ -3938,6 +4051,8 @@ export default UseImage;
 exports[`react-dom parses react-dom UseProxy 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
+import AnotherIcon from './AnotherIcon.view.js';
+import Button from './Button.view.js';
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
@@ -3950,6 +4065,11 @@ const UseProxy = props => {
       data-test-id={\`\${props['data-test-id'] || 'UseProxy'}|\`}
       className=\\"views-block\\"
     >
+      <Button
+        proxyActionGhostedProps={AnotherIcon}
+        data-test-id={\`UseProxy.Button|\`}
+        className=\\"views-block\\"
+      />
       {props.children}
     </div>
   );
@@ -6446,6 +6566,95 @@ export default NestedRoutes;
 }
 `;
 
+exports[`react-native parses react-native Proxy 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
+import ActionGhostedProps from './ActionGhostedProps.view.js';
+import React from 'react';
+import TrackContext from './TrackContext.view.js';
+import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
+
+const styles = StyleSheet.create({
+  Button: {
+    alignItems: 'center',
+    backgroundColor: '#f2f2f2',
+    paddingBottom: 8,
+    paddingLeft: 12,
+    paddingRight: 12,
+    paddingTop: 8,
+  },
+  Text: { marginTop: 4 },
+});
+
+const Proxy = props => {
+  const track = React.useContext(TrackContext);
+
+  return (
+    <TouchableWithoutFeedback
+      activeOpacity={0.7}
+      onPress={event => {
+        typeof props.onClick === 'function' && props.onClick(event);
+
+        track({ block: 'Proxy.Button', action: 'click', event, props });
+      }}
+      underlayColor=\\"transparent\\"
+    >
+      <View testID={\`\${props['testID'] || 'Button'}|\`} style={styles.Button}>
+        <props.proxyActionGhostedProps
+          testID={\`Proxy.ActionGhostedProps|\${
+            props.isSelected ? 'isSelected|' : ''
+          }\`}
+          proxy={true}
+          stroke={props.isSelected ? 'purple' : 'red'}
+          height={props.isSelected ? 24 : 20}
+          width={props.isSelected ? 24 : 20}
+        />
+        <Text
+          testID={\`Proxy.Text|\`}
+          style={[styles.Text, { color: props.color }]}
+        >
+          {props.text}
+        </Text>
+        {props.children}
+      </View>
+    </TouchableWithoutFeedback>
+  );
+};
+Proxy.defaultProps = {
+  proxyActionGhostedProps: ActionGhostedProps,
+  color: '#404040',
+  text: 'Label',
+};
+export default Proxy;
+",
+  "dependencies": Set {},
+  "fonts": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "onClick",
+      "type": "function",
+    },
+    Object {
+      "defaultValue": "ActionGhostedProps",
+      "name": "proxyActionGhostedProps",
+      "type": "import",
+    },
+    Object {
+      "defaultValue": "#404040",
+      "name": "color",
+      "type": "string",
+    },
+    Object {
+      "defaultValue": "Label",
+      "name": "text",
+      "type": "string",
+    },
+  ],
+  "svgs": Array [],
+}
+`;
+
 exports[`react-native parses react-native Scope 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
@@ -7446,6 +7655,8 @@ export default UseImage;
 exports[`react-native parses react-native UseProxy 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
+import AnotherIcon from './AnotherIcon.view.js';
+import Button from './Button.view.js';
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import { View } from 'react-native';
@@ -7454,7 +7665,13 @@ const UseProxy = props => {
   const track = React.useContext(TrackContext);
 
   return (
-    <View testID={\`\${props['testID'] || 'UseProxy'}|\`}>{props.children}</View>
+    <View testID={\`\${props['testID'] || 'UseProxy'}|\`}>
+      <Button
+        proxyActionGhostedProps={AnotherIcon}
+        testID={\`UseProxy.Button|\`}
+      />
+      {props.children}
+    </View>
   );
 };
 
