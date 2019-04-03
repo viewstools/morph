@@ -1,15 +1,13 @@
 import { hasKeys } from '../utils.js'
 
-export default ({ styles }) => {
+export default ({ styles, stylesOrder }) => {
   if (!hasKeys(styles)) return ''
 
-  let res = [`let styles = {`]
+  let res = [`let styles = {}`]
 
-  Object.entries(styles).forEach(([id, css]) => {
-    res.push(`${id}: ${css},`)
+  stylesOrder.forEach(id => {
+    res.push(`styles.${id} = ${styles[id]}`)
   })
-
-  res.push('}')
 
   return res.join('\n')
 }

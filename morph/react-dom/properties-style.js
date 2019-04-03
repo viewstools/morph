@@ -59,6 +59,7 @@ export function leave(node, parent, state) {
     }
 
     state.styles[id] = `css({label: '${id}', ${css.join(', ')}})`
+    state.stylesOrder.push(id)
   }
 }
 
@@ -333,4 +334,5 @@ const getTableRowCss = ({ node, state, id, scopedUnderParent }) => {
     ${normalCss ? `, ${normalCss}` : ''}
     ${alternateCss ? `, "&:nth-child(even)": {${alternateCss}}` : ''}
     })`
+  state.stylesOrder.push(`${id}Row`)
 }

@@ -55,6 +55,7 @@ export default ({
     name: finalName,
     render: [],
     styles: {},
+    stylesOrder: [],
     svgs: [],
     usedBlockNames: { [finalName]: 1, AutoSizer: 1, Column: 1, Table: 1 },
     uses: [],
