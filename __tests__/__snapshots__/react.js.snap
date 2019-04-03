@@ -2095,7 +2095,7 @@ let styles = {
   Text: css({
     label: 'Text',
     color: 'white',
-    [\`.\${Hover1}:hover &, .\${Hover1}.hover &\`]: {
+    [\`.\${styles.Hover1}:hover &, .\${styles.Hover1}.hover &\`]: {
       color: 'black',
     },
     fontSize: 'var(--fontSize)',
@@ -3000,7 +3000,7 @@ let styles = {
   Text: css({
     label: 'Text',
     marginTop: 4,
-    [\`.\${Button}:hover &, .\${Button}.hover &\`]: {
+    [\`.\${styles.Button}:hover &, .\${styles.Button}.hover &\`]: {
       color: 'fuchsia',
     },
     color: 'var(--color)',

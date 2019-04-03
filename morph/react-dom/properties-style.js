@@ -237,7 +237,7 @@ const asCss = (styles, key, scopedUnderParent) => {
 
   if (key !== 'base') {
     if (scopedUnderParent) {
-      const parent = `.\${${scopedUnderParent}}`
+      const parent = `.\${styles.${scopedUnderParent}}`
       const theKey = ensureSystemScopeCssKey(key)
       css.push(`[\`${parent}:${theKey} &, ${parent}.${theKey} &\`]: {`)
     } else if (
