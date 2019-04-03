@@ -894,8 +894,13 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 let styles = {
-  Vertical:
-    'css({label: \\\\'Vertical\\\\', color: \\"red\\",\\\\n\\"&:disabled\\": {\\\\ncolor: \\"blue\\"\\\\n}})',
+  Vertical: css({
+    label: 'Vertical',
+    color: 'red',
+    '&:disabled': {
+      color: 'blue',
+    },
+  }),
 };
 
 const Action = props => {
@@ -962,10 +967,21 @@ import { animated, Spring } from 'react-spring';
 import { css } from 'emotion';
 
 let styles = {
-  AnimatedButton1:
-    \\"css({label: 'AnimatedButton1', backgroundColor: \\\\\\"red\\\\\\", \\\\ntransition: 'transform 150ms ease-in, transform 150ms ease-in-out',\\\\nwillChange: 'opacity, transform', opacity: 'var(--opacity)',\\\\ntransform: 'rotateX(var(--rotateX)) rotateY(var(--rotateY)) translateX(var(--translateX)) translateY(var(--translateY))'})\\",
-  Text:
-    \\"css({label: 'Text', \\\\nwillChange: 'color, font-size', color: 'var(--color)',\\\\nfontSize: 'var(--fontSize)'})\\",
+  AnimatedButton1: css({
+    label: 'AnimatedButton1',
+    backgroundColor: 'red',
+    transition: 'transform 150ms ease-in, transform 150ms ease-in-out',
+    willChange: 'opacity, transform',
+    opacity: 'var(--opacity)',
+    transform:
+      'rotateX(var(--rotateX)) rotateY(var(--rotateY)) translateX(var(--translateX)) translateY(var(--translateY))',
+  }),
+  Text: css({
+    label: 'Text',
+    willChange: 'color, font-size',
+    color: 'var(--color)',
+    fontSize: 'var(--fontSize)',
+  }),
 };
 
 class AnimatedButton extends React.Component {
@@ -1072,8 +1088,15 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 let styles = {
-  AnimatedButtonHoverOnly1:
-    'css({label: \\\\'AnimatedButtonHoverOnly1\\\\', backgroundColor: \\"red\\",\\\\n\\"&:hover\\": {\\\\nbackgroundColor: \\"blue\\"\\\\n}, \\\\ntransition: \\\\'background-color 150ms ease-out\\\\',\\\\nwillChange: \\\\'background-color\\\\'})',
+  AnimatedButtonHoverOnly1: css({
+    label: 'AnimatedButtonHoverOnly1',
+    backgroundColor: 'red',
+    '&:hover': {
+      backgroundColor: 'blue',
+    },
+    transition: 'background-color 150ms ease-out',
+    willChange: 'background-color',
+  }),
 };
 
 const AnimatedButtonHoverOnly = props => {
@@ -1126,8 +1149,13 @@ import { animated, Spring } from 'react-spring';
 import { css } from 'emotion';
 
 let styles = {
-  AnimatedButtonScopeOnly1:
-    \\"css({label: 'AnimatedButtonScopeOnly1', \\\\ntransition: 'opacity 150ms linear',\\\\nwillChange: 'background-color, opacity', backgroundColor: 'var(--backgroundColor)',\\\\nopacity: 'var(--opacity)'})\\",
+  AnimatedButtonScopeOnly1: css({
+    label: 'AnimatedButtonScopeOnly1',
+    transition: 'opacity 150ms linear',
+    willChange: 'background-color, opacity',
+    backgroundColor: 'var(--backgroundColor)',
+    opacity: 'var(--opacity)',
+  }),
 };
 
 class AnimatedButtonScopeOnly extends React.Component {
@@ -1200,8 +1228,12 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 let styles = {
-  Vertical:
-    'css({label: \\\\'Vertical\\\\', WebkitAppRegion: \\"drag\\",\\\\nwidth: \\"92%\\",\\\\nmarginTop: \\"auto\\"})',
+  Vertical: css({
+    label: 'Vertical',
+    WebkitAppRegion: 'drag',
+    width: '92%',
+    marginTop: 'auto',
+  }),
 };
 
 const AppRegionDrag = props => {
@@ -1237,10 +1269,16 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 let styles = {
-  Vertical:
-    \\"css({label: 'Vertical', backgroundImage: \\\\\\"url('https://views.tools/image.jpg')\\\\\\"})\\",
-  Horizontal:
-    'css({label: \\\\'Horizontal\\\\', flexDirection: \\"row\\",\\\\nbackgroundSize: \\"contain\\", backgroundImage: \`url(\${\\\\'var(--backgroundImage)\\\\'})\`})',
+  Vertical: css({
+    label: 'Vertical',
+    backgroundImage: \\"url('https://views.tools/image.jpg')\\",
+  }),
+  Horizontal: css({
+    label: 'Horizontal',
+    flexDirection: 'row',
+    backgroundSize: 'contain',
+    backgroundImage: \`url(\${'var(--backgroundImage)'})\`,
+  }),
 };
 
 const BackgroundImage = props => {
@@ -1289,16 +1327,37 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 let styles = {
-  Border1:
-    'css({label: \\\\'Border1\\\\', borderColor: \\"red\\",\\\\nborderStyle: \\"solid\\", borderWidth: \\\\'var(--borderWidth)\\\\'})',
-  Top:
-    'css({label: \\\\'Top\\\\', borderTopStyle: \\"solid\\",\\\\nborderTopColor: \\"red\\", borderTopWidth: \\\\'var(--borderTopWidth)\\\\'})',
-  Right:
-    'css({label: \\\\'Right\\\\', borderRightStyle: \\"solid\\",\\\\nborderRightColor: \\"red\\", borderRightWidth: \\\\'var(--borderRightWidth)\\\\'})',
-  Bottom:
-    'css({label: \\\\'Bottom\\\\', borderBottomStyle: \\"solid\\",\\\\nborderBottomColor: \\"red\\", borderBottomWidth: \\\\'var(--borderBottomWidth)\\\\'})',
-  Left:
-    \\"css({label: 'Left', borderLeftStyle: \\\\\\"solid\\\\\\",\\\\nborderLeftColor: \\\\\\"red\\\\\\", borderLeftWidth: 'var(--borderLeftWidth)',\\\\nborderTopRightRadius: 'var(--borderTopRightRadius)'})\\",
+  Border1: css({
+    label: 'Border1',
+    borderColor: 'red',
+    borderStyle: 'solid',
+    borderWidth: 'var(--borderWidth)',
+  }),
+  Top: css({
+    label: 'Top',
+    borderTopStyle: 'solid',
+    borderTopColor: 'red',
+    borderTopWidth: 'var(--borderTopWidth)',
+  }),
+  Right: css({
+    label: 'Right',
+    borderRightStyle: 'solid',
+    borderRightColor: 'red',
+    borderRightWidth: 'var(--borderRightWidth)',
+  }),
+  Bottom: css({
+    label: 'Bottom',
+    borderBottomStyle: 'solid',
+    borderBottomColor: 'red',
+    borderBottomWidth: 'var(--borderBottomWidth)',
+  }),
+  Left: css({
+    label: 'Left',
+    borderLeftStyle: 'solid',
+    borderLeftColor: 'red',
+    borderLeftWidth: 'var(--borderLeftWidth)',
+    borderTopRightRadius: 'var(--borderTopRightRadius)',
+  }),
 };
 
 const Border = props => {
@@ -1413,7 +1472,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 let styles = {
-  Vertical: 'css({label: \\\\'Vertical\\\\', backgroundColor: \\"blue\\"})',
+  Vertical: css({ label: 'Vertical', backgroundColor: 'blue' }),
 };
 
 const ClassName = props => {
@@ -1449,8 +1508,8 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 let styles = {
-  Vertical: 'css({label: \\\\'Vertical\\\\', backgroundColor: \\"red\\"})',
-  Text: \\"css({label: 'Text', color: 'var(--color)'})\\",
+  Vertical: css({ label: 'Vertical', backgroundColor: 'red' }),
+  Text: css({ label: 'Text', color: 'var(--color)' }),
 };
 
 class Code extends React.Component {
@@ -1561,7 +1620,9 @@ import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-let styles = { Display1: 'css({label: \\\\'Display1\\\\', display: \\"block\\"})' };
+let styles = {
+  Display1: css({ label: 'Display1', display: 'block' }),
+};
 
 const Display = props => {
   const track = React.useContext(TrackContext);
@@ -1641,12 +1702,24 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 let styles = {
-  DynamicFamily:
-    \\"css({label: 'DynamicFamily', fontSize: 14,\\\\nfontWeight: 200, fontFamily: 'var(--fontFamily)'})\\",
-  DynamicWeight:
-    \\"css({label: 'DynamicWeight', fontSize: 14,\\\\nfontFamily: \\\\\\"Montserrat, sans-serif\\\\\\", fontWeight: 'var(--fontWeight)'})\\",
-  DynamicFamilyAndWeight:
-    \\"css({label: 'DynamicFamilyAndWeight', fontSize: 14, fontWeight: 'var(--fontWeight)',\\\\nfontFamily: 'var(--fontFamily)'})\\",
+  DynamicFamily: css({
+    label: 'DynamicFamily',
+    fontSize: 14,
+    fontWeight: 200,
+    fontFamily: 'var(--fontFamily)',
+  }),
+  DynamicWeight: css({
+    label: 'DynamicWeight',
+    fontSize: 14,
+    fontFamily: 'Montserrat, sans-serif',
+    fontWeight: 'var(--fontWeight)',
+  }),
+  DynamicFamilyAndWeight: css({
+    label: 'DynamicFamilyAndWeight',
+    fontSize: 14,
+    fontWeight: 'var(--fontWeight)',
+    fontFamily: 'var(--fontFamily)',
+  }),
 };
 
 const DynamicFontProps = props => {
@@ -1736,7 +1809,9 @@ import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-let styles = { Vertical: \\"css({label: 'Vertical', height: 'var(--height)'})\\" };
+let styles = {
+  Vertical: css({ label: 'Vertical', height: 'var(--height)' }),
+};
 
 const DynamicStylesApplyToBasicBlocksOnly = props => {
   const track = React.useContext(TrackContext);
@@ -1785,7 +1860,9 @@ import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-let styles = { Vertical: \\"css({label: 'Vertical', width: 'var(--width)'})\\" };
+let styles = {
+  Vertical: css({ label: 'Vertical', width: 'var(--width)' }),
+};
 
 const DynamicWidth = props => {
   const track = React.useContext(TrackContext);
@@ -1857,7 +1934,9 @@ import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-let styles = { List: 'css({label: \\\\'List\\\\', overflowY: \\"auto\\"})' };
+let styles = {
+  List: css({ label: 'List', overflowY: 'auto' }),
+};
 
 const FlatListPass = props => {
   const track = React.useContext(TrackContext);
@@ -1908,9 +1987,12 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 let styles = {
-  Vertical: 'css({label: \\\\'Vertical\\\\', backgroundColor: \\"red\\"})',
-  Horizontal:
-    'css({label: \\\\'Horizontal\\\\', flexDirection: \\"row\\",\\\\npaddingLeft: 20})',
+  Vertical: css({ label: 'Vertical', backgroundColor: 'red' }),
+  Horizontal: css({
+    label: 'Horizontal',
+    flexDirection: 'row',
+    paddingLeft: 20,
+  }),
 };
 
 const Fragment = props => {
@@ -2003,10 +2085,21 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 let styles = {
-  Hover1:
-    'css({label: \\\\'Hover1\\\\', \\"&:hover\\": {\\\\nbackgroundColor: \\"#232323\\"\\\\n}, backgroundColor: \\\\'var(--backgroundColor)\\\\'})',
-  Text:
-    'css({label: \\\\'Text\\\\', color: \\"white\\",\\\\n[\`.\${Hover1}:hover &, .\${Hover1}.hover &\`]: {\\\\ncolor: \\"black\\"\\\\n}, fontSize: \\\\'var(--fontSize)\\\\'})',
+  Hover1: css({
+    label: 'Hover1',
+    '&:hover': {
+      backgroundColor: '#232323',
+    },
+    backgroundColor: 'var(--backgroundColor)',
+  }),
+  Text: css({
+    label: 'Text',
+    color: 'white',
+    [\`.\${Hover1}:hover &, .\${Hover1}.hover &\`]: {
+      color: 'black',
+    },
+    fontSize: 'var(--fontSize)',
+  }),
 };
 
 const Hover = props => {
@@ -2074,7 +2167,7 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 let styles = {
-  Content: \\"css({label: 'Content', alignItems: 'var(--alignItems)'})\\",
+  Content: css({ label: 'Content', alignItems: 'var(--alignItems)' }),
 };
 
 const HyphenatedProps = props => {
@@ -2124,10 +2217,19 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 let styles = {
-  Indented1:
-    \\"css({label: 'Indented1', backgroundColor: 'var(--backgroundColor)'})\\",
-  Horizontal:
-    \\"css({label: 'Horizontal', flexDirection: \\\\\\"row\\\\\\",\\\\nbackgroundColor: \\\\\\"blue\\\\\\",\\\\npaddingTop: 4,\\\\npaddingBottom: 4, paddingLeft: 'var(--paddingLeft)',\\\\npaddingRight: 'var(--paddingRight)'})\\",
+  Indented1: css({
+    label: 'Indented1',
+    backgroundColor: 'var(--backgroundColor)',
+  }),
+  Horizontal: css({
+    label: 'Horizontal',
+    flexDirection: 'row',
+    backgroundColor: 'blue',
+    paddingTop: 4,
+    paddingBottom: 4,
+    paddingLeft: 'var(--paddingLeft)',
+    paddingRight: 'var(--paddingRight)',
+  }),
 };
 
 const Indented = props => {
@@ -2262,8 +2364,16 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 let styles = {
-  ListOfSomething1:
-    'css({label: \\\\'ListOfSomething1\\\\', paddingLeft: 2,\\\\njustifyContent: \\"center\\",\\\\nalignItems: \\"flex-start\\",\\\\nflexDirection: \\"row\\",\\\\nflexWrap: \\"wrap\\",\\\\noverflowY: \\"auto\\",\\\\nbackgroundColor: \\"red\\"})',
+  ListOfSomething1: css({
+    label: 'ListOfSomething1',
+    paddingLeft: 2,
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    overflowY: 'auto',
+    backgroundColor: 'red',
+  }),
 };
 
 const ListOfSomething = props => {
@@ -2492,8 +2602,11 @@ import chopperSvg from './chopper.svg';
 import { css } from 'emotion';
 
 let styles = {
-  LocalImageSvg1:
-    \\"css({label: 'LocalImageSvg1', width: 50, height: 'var(--height)'})\\",
+  LocalImageSvg1: css({
+    label: 'LocalImageSvg1',
+    width: 50,
+    height: 'var(--height)',
+  }),
 };
 
 const LocalImageSvg = props => {
@@ -2783,7 +2896,9 @@ import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-let styles = { Text: \\"css({label: 'Text', marginTop: -10})\\" };
+let styles = {
+  Text: css({ label: 'Text', marginTop: -10 }),
+};
 
 const NegativeNumber = props => {
   const track = React.useContext(TrackContext);
@@ -2873,10 +2988,23 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 let styles = {
-  Button:
-    'css({label: \\\\'Button\\\\', alignItems: \\"center\\",\\\\nbackgroundColor: \\"#f2f2f2\\",\\\\npaddingBottom: 8,\\\\npaddingLeft: 12,\\\\npaddingRight: 12,\\\\npaddingTop: 8})',
-  Text:
-    \\"css({label: 'Text', marginTop: 4,\\\\n[\`.\${Button}:hover &, .\${Button}.hover &\`]: {\\\\ncolor: \\\\\\"fuchsia\\\\\\"\\\\n}, color: 'var(--color)'})\\",
+  Button: css({
+    label: 'Button',
+    alignItems: 'center',
+    backgroundColor: '#f2f2f2',
+    paddingBottom: 8,
+    paddingLeft: 12,
+    paddingRight: 12,
+    paddingTop: 8,
+  }),
+  Text: css({
+    label: 'Text',
+    marginTop: 4,
+    [\`.\${Button}:hover &, .\${Button}.hover &\`]: {
+      color: 'fuchsia',
+    },
+    color: 'var(--color)',
+  }),
 };
 
 const Proxy = props => {
@@ -2958,7 +3086,9 @@ import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-let styles = { Scope1: \\"css({label: 'Scope1', color: 'var(--color)'})\\" };
+let styles = {
+  Scope1: css({ label: 'Scope1', color: 'var(--color)' }),
+};
 
 const Scope = props => {
   const track = React.useContext(TrackContext);
@@ -3115,8 +3245,11 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 let styles = {
-  Content:
-    \\"css({label: 'Content', opacity: 'var(--opacity)',\\\\ntransform: 'scale(var(--scale))'})\\",
+  Content: css({
+    label: 'Content',
+    opacity: 'var(--opacity)',
+    transform: 'scale(var(--scale))',
+  }),
 };
 
 const ScopePopup2 = props => {
@@ -3189,8 +3322,15 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 let styles = {
-  ScopedShadows1:
-    \\"css({label: 'ScopedShadows1', flexDirection: \\\\\\"row\\\\\\",\\\\nboxShadow: \\\\\\"0px 5px var(--shadowBlur) 0px var(--shadowColor)\\\\\\", \\\\ntransition: 'box-shadow 150ms linear',\\\\nwillChange: 'box-shadow', shadowColor: 'var(--shadowColor)',\\\\nshadowBlur: 'var(--shadowBlur)'})\\",
+  ScopedShadows1: css({
+    label: 'ScopedShadows1',
+    flexDirection: 'row',
+    boxShadow: '0px 5px var(--shadowBlur) 0px var(--shadowColor)',
+    transition: 'box-shadow 150ms linear',
+    willChange: 'box-shadow',
+    shadowColor: 'var(--shadowColor)',
+    shadowBlur: 'var(--shadowBlur)',
+  }),
 };
 
 const ScopedShadows = props => {
@@ -3251,8 +3391,13 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 let styles = {
-  ScrollableList1:
-    'css({label: \\\\'ScrollableList1\\\\', overflowY: \\"auto\\",\\\\npaddingBottom: 200,\\\\nbackgroundColor: \\"red\\", paddingLeft: \\\\'var(--paddingLeft)\\\\'})',
+  ScrollableList1: css({
+    label: 'ScrollableList1',
+    overflowY: 'auto',
+    paddingBottom: 200,
+    backgroundColor: 'red',
+    paddingLeft: 'var(--paddingLeft)',
+  }),
 };
 
 const ScrollableList = props => {
@@ -3315,10 +3460,14 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 let styles = {
-  BoxShadow:
-    \\"css({label: 'BoxShadow', boxShadow: \`0px 5px 2px 2px var(--shadowColor)\`})\\",
-  TextShadow:
-    \\"css({label: 'TextShadow', textShadow: \`2px 3px 1px var(--shadowColor)\`})\\",
+  BoxShadow: css({
+    label: 'BoxShadow',
+    boxShadow: \`0px 5px 2px 2px var(--shadowColor)\`,
+  }),
+  TextShadow: css({
+    label: 'TextShadow',
+    textShadow: \`2px 3px 1px var(--shadowColor)\`,
+  }),
 };
 
 const Shadow = props => {
@@ -3373,8 +3522,10 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 let styles = {
-  SlotOnBaseAndValueOnScope1:
-    \\"css({label: 'SlotOnBaseAndValueOnScope1', color: 'var(--color)'})\\",
+  SlotOnBaseAndValueOnScope1: css({
+    label: 'SlotOnBaseAndValueOnScope1',
+    color: 'var(--color)',
+  }),
 };
 
 const SlotOnBaseAndValueOnScope = props => {
@@ -3417,8 +3568,22 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 let styles = {
-  WindowControl:
-    'css({label: \\\\'WindowControl\\\\', marginRight: 8,\\\\nbackgroundColor: \\"#CBCDCE\\",\\\\nopacity: 0.7,\\\\ntransform: \\"scale(1.1)\\",\\\\ntransition: \\"all 0.15s ease-out\\",\\\\nwidth: 10,\\\\nheight: 10,\\\\n\\"&:hover\\": {\\\\ntransform: \\"scale(1.1)\\"\\\\n}, \\"&:hover\\": {\\\\nbackgroundColor: \\\\'var(--backgroundColor)\\\\'\\\\n}})',
+  WindowControl: css({
+    label: 'WindowControl',
+    marginRight: 8,
+    backgroundColor: '#CBCDCE',
+    opacity: 0.7,
+    transform: 'scale(1.1)',
+    transition: 'all 0.15s ease-out',
+    width: 10,
+    height: 10,
+    '&:hover': {
+      transform: 'scale(1.1)',
+    },
+    '&:hover': {
+      backgroundColor: 'var(--backgroundColor)',
+    },
+  }),
 };
 
 const SomeMissingStyle = props => {
@@ -3473,7 +3638,7 @@ import { Link } from 'react-router-dom';
 import { css } from 'emotion';
 
 let styles = {
-  Horizontal: 'css({label: \\\\'Horizontal\\\\', flexDirection: \\"row\\"})',
+  Horizontal: css({ label: 'Horizontal', flexDirection: 'row' }),
 };
 
 const Teleport = props => {
@@ -3553,10 +3718,16 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 let styles = {
-  Transform1:
-    'css({label: \\\\'Transform1\\\\', transform: \\"rotate(4deg) rotateX(5deg) rotateY(6deg) scale(3) translateX(1px) translateY(2px)\\",\\\\ntransformOrigin: \\"center top\\"})',
-  Text:
-    \\"css({label: 'Text', transformOrigin: \`var(--transformOriginX) var(--transformOriginY)\`})\\",
+  Transform1: css({
+    label: 'Transform1',
+    transform:
+      'rotate(4deg) rotateX(5deg) rotateY(6deg) scale(3) translateX(1px) translateY(2px)',
+    transformOrigin: 'center top',
+  }),
+  Text: css({
+    label: 'Text',
+    transformOrigin: \`var(--transformOriginX) var(--transformOriginY)\`,
+  }),
 };
 
 const Transform = props => {
@@ -3613,8 +3784,19 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 let styles = {
-  Email:
-    'css({label: \\\\'Email\\\\', borderColor: \\"black\\",\\\\nborderStyle: \\"solid\\",\\\\nborderWidth: 1,\\\\ncolor: \\"red\\",\\\\n\\"&:focus\\": {\\\\ncolor: \\"purple\\"\\\\n},\\\\n\\"&::placeholder\\": {\\\\ncolor: \\"blue\\"\\\\n}})',
+  Email: css({
+    label: 'Email',
+    borderColor: 'black',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    color: 'red',
+    '&:focus': {
+      color: 'purple',
+    },
+    '&::placeholder': {
+      color: 'blue',
+    },
+  }),
 };
 
 const UseCaptureEmail = props => {
@@ -3877,8 +4059,13 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 let styles = {
-  Horizontal:
-    'css({label: \\\\'Horizontal\\\\', flexDirection: \\"row\\",\\\\nborderColor: \\"red\\",\\\\nborderStyle: \\"solid\\",\\\\nborderWidth: 1})',
+  Horizontal: css({
+    label: 'Horizontal',
+    flexDirection: 'row',
+    borderColor: 'red',
+    borderStyle: 'solid',
+    borderWidth: 1,
+  }),
 };
 
 const UseHorizontal = props => {
@@ -3990,7 +4177,7 @@ import { Route } from 'react-router-dom';
 import { css } from 'emotion';
 
 let styles = {
-  Horizontal: 'css({label: \\\\'Horizontal\\\\', flexDirection: \\"row\\"})',
+  Horizontal: css({ label: 'Horizontal', flexDirection: 'row' }),
 };
 
 const UseRouter = props => {
@@ -4067,8 +4254,8 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 let styles = {
-  Svg: \\"css({label: 'Svg', height: 20,\\\\nwidth: 20, opacity: 'var(--opacity)'})\\",
-  SvgPath: 'css({label: \\\\'SvgPath\\\\', fill: \\"red\\"})',
+  Svg: css({ label: 'Svg', height: 20, width: 20, opacity: 'var(--opacity)' }),
+  SvgPath: css({ label: 'SvgPath', fill: 'red' }),
 };
 
 const UseSvg = props => {
@@ -4148,8 +4335,25 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { AutoSizer, Column, Table } from '@viewstools/tables/dom';
 
 let styles = {
-  Table1Row:
-    'css({ display: \\\\'flex\\\\'\\\\n    , color: \\"#1C1C1C\\",\\\\nbackgroundColor: \\"white\\",\\\\n\\"&:hover\\": {\\\\ncolor: \\"red\\",\\\\nbackgroundColor: \\"black\\"\\\\n} \\\\n    , \\"&:nth-child(even)\\": {backgroundColor: \\"black\\",\\\\n\\"&:hover\\": {\\\\ncolor: \\"green\\"\\\\n} , color: \\\\'var(--rowColorAlternate)\\\\',\\\\n\\"&:hover\\": {\\\\nbackgroundColor: \\\\'var(--rowBackgroundColorAlternate)\\\\'\\\\n}}\\\\n    })',
+  Table1Row: css({
+    display: 'flex',
+    color: '#1C1C1C',
+    backgroundColor: 'white',
+    '&:hover': {
+      color: 'red',
+      backgroundColor: 'black',
+    },
+    '&:nth-child(even)': {
+      backgroundColor: 'black',
+      '&:hover': {
+        color: 'green',
+      },
+      color: 'var(--rowColorAlternate)',
+      '&:hover': {
+        backgroundColor: 'var(--rowBackgroundColorAlternate)',
+      },
+    },
+  }),
 };
 
 const UseTable = props => {
@@ -4243,11 +4447,32 @@ import { AutoSizer, Column, Table } from '@viewstools/tables/dom';
 import { css } from 'emotion';
 
 let styles = {
-  Table1Row:
-    'css({ display: \\\\'flex\\\\'\\\\n    , color: \\"#1C1C1C\\",\\\\nbackgroundColor: \\"white\\",\\\\n\\"&:hover\\": {\\\\ncolor: \\"red\\",\\\\nbackgroundColor: \\"black\\"\\\\n} \\\\n    , \\"&:nth-child(even)\\": {backgroundColor: \\"black\\",\\\\n\\"&:hover\\": {\\\\ncolor: \\"green\\"\\\\n} , color: \\\\'var(--rowColorAlternate)\\\\',\\\\n\\"&:hover\\": {\\\\nbackgroundColor: \\\\'var(--rowBackgroundColorAlternate)\\\\'\\\\n}}\\\\n    })',
-  Table1: \\"css({label: 'Table1', marginLeft: 'var(--marginLeft)'})\\",
-  Name:
-    \\"css({label: 'Name', borderBottomStyle: \\\\\\"solid\\\\\\",\\\\nborderBottomWidth: 1, borderBottomColor: 'var(--borderBottomColor)'})\\",
+  Table1Row: css({
+    display: 'flex',
+    color: '#1C1C1C',
+    backgroundColor: 'white',
+    '&:hover': {
+      color: 'red',
+      backgroundColor: 'black',
+    },
+    '&:nth-child(even)': {
+      backgroundColor: 'black',
+      '&:hover': {
+        color: 'green',
+      },
+      color: 'var(--rowColorAlternate)',
+      '&:hover': {
+        backgroundColor: 'var(--rowBackgroundColorAlternate)',
+      },
+    },
+  }),
+  Table1: css({ label: 'Table1', marginLeft: 'var(--marginLeft)' }),
+  Name: css({
+    label: 'Name',
+    borderBottomStyle: 'solid',
+    borderBottomWidth: 1,
+    borderBottomColor: 'var(--borderBottomColor)',
+  }),
 };
 
 const UseTableOnWhen = props => {
@@ -4349,8 +4574,14 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 let styles = {
-  UseText1:
-    \\"css({label: 'UseText1', fontFamily: \\\\\\"Montserrat, sans-serif\\\\\\",\\\\nfontSize: 16,\\\\nlineHeight: 1.5,\\\\nfontWeight: 300, color: 'var(--color)'})\\",
+  UseText1: css({
+    label: 'UseText1',
+    fontFamily: 'Montserrat, sans-serif',
+    fontSize: 16,
+    lineHeight: 1.5,
+    fontWeight: 300,
+    color: 'var(--color)',
+  }),
 };
 
 const UseText = props => {
@@ -4398,10 +4629,23 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 let styles = {
-  Normal:
-    'css({label: \\\\'Normal\\\\', color: \\"blue\\",\\\\nfontFamily: \\"CustomFontNotOnGoogle\\",\\\\nfontSize: 16,\\\\nlineHeight: 1.5,\\\\nfontWeight: 300})',
-  Italic:
-    'css({label: \\\\'Italic\\\\', color: \\"blue\\",\\\\nfontFamily: \\"CustomFontNotOnGoogle\\",\\\\nfontStyle: \\"italic\\",\\\\nfontSize: 16,\\\\nlineHeight: 1.5,\\\\nfontWeight: 400})',
+  Normal: css({
+    label: 'Normal',
+    color: 'blue',
+    fontFamily: 'CustomFontNotOnGoogle',
+    fontSize: 16,
+    lineHeight: 1.5,
+    fontWeight: 300,
+  }),
+  Italic: css({
+    label: 'Italic',
+    color: 'blue',
+    fontFamily: 'CustomFontNotOnGoogle',
+    fontStyle: 'italic',
+    fontSize: 16,
+    lineHeight: 1.5,
+    fontWeight: 400,
+  }),
 };
 
 const UseTextCustomFont = props => {
@@ -4463,7 +4707,9 @@ import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-let styles = { Vertical: 'css({label: \\\\'Vertical\\\\', backgroundColor: \\"red\\"})' };
+let styles = {
+  Vertical: css({ label: 'Vertical', backgroundColor: 'red' }),
+};
 
 const UseVertical = props => {
   const track = React.useContext(TrackContext);
@@ -4498,7 +4744,9 @@ import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-let styles = { Button: 'css({label: \\\\'Button\\\\', backgroundColor: \\"red\\"})' };
+let styles = {
+  Button: css({ label: 'Button', backgroundColor: 'red' }),
+};
 
 const ViewAndBlockSameName = props => {
   const track = React.useContext(TrackContext);
@@ -4541,8 +4789,11 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
 let styles = {
-  ViewNameIsntUsedInStyle1:
-    \\"css({label: 'ViewNameIsntUsedInStyle1', zIndex: 5, opacity: 'var(--opacity)'})\\",
+  ViewNameIsntUsedInStyle1: css({
+    label: 'ViewNameIsntUsedInStyle1',
+    zIndex: 5,
+    opacity: 'var(--opacity)',
+  }),
 };
 
 const ViewNameIsntUsedInStyle = props => {
@@ -4584,7 +4835,9 @@ import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-let styles = { App: 'css({label: \\\\'App\\\\', flexDirection: \\"row\\"})' };
+let styles = {
+  App: css({ label: 'App', flexDirection: 'row' }),
+};
 
 const When = props => {
   const track = React.useContext(TrackContext);
