@@ -1,4 +1,4 @@
+import { hasKeys } from '../utils.js'
+
 export default ({ styles }) =>
-  `\n${Object.keys(styles)
-    .map(k => styles[k])
-    .join('\n')}`
+  hasKeys(styles) ? `let styles = ${JSON.stringify(styles)}` : ''

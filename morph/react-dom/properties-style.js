@@ -54,11 +54,11 @@ export function leave(node, parent, state) {
       id = createId(node, state)
     } else if (isTable(node)) {
       if (node.className) {
-        node.className.push(`\${${id}}`)
+        node.className.push(`\${styles.${id}}`)
       }
     }
 
-    state.styles[id] = `const ${id} = css({label: '${id}', ${css.join(', ')}})`
+    state.styles[id] = `css({label: '${id}', ${css.join(', ')}})`
   }
 }
 
@@ -327,9 +327,9 @@ const getTableRowCss = ({ node, state, id, scopedUnderParent }) => {
   }`
 
   node.hasDynamicRowStyles = !!(normalDynamic || alternateDynamic)
-  state.render.push(` rowClassName={${id}Row}`)
+  state.render.push(` rowClassName={styles.${id}Row}`)
 
-  state.styles[`${id}Row`] = `const ${id}Row = css({ display: 'flex'
+  state.styles[`${id}Row`] = `css({ display: 'flex'
     ${normalCss ? `, ${normalCss}` : ''}
     ${alternateCss ? `, "&:nth-child(even)": {${alternateCss}}` : ''}
     })`

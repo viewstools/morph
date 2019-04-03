@@ -837,6 +837,19 @@ module.exports = {
 }
 `;
 
+exports[`e2e parses e2e ViewAndBlockSameName 1`] = `
+Object {
+  "code": "const { get } = require('@viewstools/e2e');
+
+module.exports = {
+  App: get('ViewAndBlockSameName.App'),
+  Button: get('ViewAndBlockSameName.Button'),
+  Thing: get('ViewAndBlockSameName.Thing'),
+};
+",
+}
+`;
+
 exports[`e2e parses e2e ViewNameIsntUsedInStyle 1`] = `
 Object {
   "code": "const { get } = require('@viewstools/e2e');
@@ -880,13 +893,10 @@ import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const Vertical = css({
-  label: 'Vertical',
-  color: 'red',
-  '&:disabled': {
-    color: 'blue',
-  },
-});
+let styles = {
+  Vertical:
+    'css({label: \\\\'Vertical\\\\', color: \\"red\\",\\\\n\\"&:disabled\\": {\\\\ncolor: \\"blue\\"\\\\n}})',
+};
 
 const Action = props => {
   const track = React.useContext(TrackContext);
@@ -900,7 +910,7 @@ const Action = props => {
         track({ block: 'Action.Vertical', action: 'click', event, props });
       }}
       disabled={props.isDisabled}
-      className={\`views-block \${Vertical}\`}
+      className={\`views-block \${styles.Vertical}\`}
     >
       <span data-test-id={\`Action.Text|\`} className=\\"views-text\\">
         click me
@@ -951,21 +961,12 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { animated, Spring } from 'react-spring';
 import { css } from 'emotion';
 
-const AnimatedButton1 = css({
-  label: 'AnimatedButton1',
-  backgroundColor: 'red',
-  transition: 'transform 150ms ease-in, transform 150ms ease-in-out',
-  willChange: 'opacity, transform',
-  opacity: 'var(--opacity)',
-  transform:
-    'rotateX(var(--rotateX)) rotateY(var(--rotateY)) translateX(var(--translateX)) translateY(var(--translateY))',
-});
-const Text = css({
-  label: 'Text',
-  willChange: 'color, font-size',
-  color: 'var(--color)',
-  fontSize: 'var(--fontSize)',
-});
+let styles = {
+  AnimatedButton1:
+    \\"css({label: 'AnimatedButton1', backgroundColor: \\\\\\"red\\\\\\", \\\\ntransition: 'transform 150ms ease-in, transform 150ms ease-in-out',\\\\nwillChange: 'opacity, transform', opacity: 'var(--opacity)',\\\\ntransform: 'rotateX(var(--rotateX)) rotateY(var(--rotateY)) translateX(var(--translateX)) translateY(var(--translateY))'})\\",
+  Text:
+    \\"css({label: 'Text', \\\\nwillChange: 'color, font-size', color: 'var(--color)',\\\\nfontSize: 'var(--fontSize)'})\\",
+};
 
 class AnimatedButton extends React.Component {
   render() {
@@ -1016,7 +1017,7 @@ class AnimatedButton extends React.Component {
                           '--rotateX': \`\${props.isOn ? 20 : 10}deg\`,
                           '--rotateY': \`\${props.isOn ? 20 : 10}deg\`,
                         }}
-                        className={\`views-block \${AnimatedButton1}\`}
+                        className={\`views-block \${styles.AnimatedButton1}\`}
                       >
                         <span
                           data-test-id={\`AnimatedButton.Text|\${
@@ -1026,7 +1027,7 @@ class AnimatedButton extends React.Component {
                             '--color': animatedText.color,
                             '--fontSize': animatedText.fontSize,
                           }}
-                          className={\`views-text \${Text}\`}
+                          className={\`views-text \${styles.Text}\`}
                         >
                           hey
                         </span>
@@ -1070,15 +1071,10 @@ import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const AnimatedButtonHoverOnly1 = css({
-  label: 'AnimatedButtonHoverOnly1',
-  backgroundColor: 'red',
-  '&:hover': {
-    backgroundColor: 'blue',
-  },
-  transition: 'background-color 150ms ease-out',
-  willChange: 'background-color',
-});
+let styles = {
+  AnimatedButtonHoverOnly1:
+    'css({label: \\\\'AnimatedButtonHoverOnly1\\\\', backgroundColor: \\"red\\",\\\\n\\"&:hover\\": {\\\\nbackgroundColor: \\"blue\\"\\\\n}, \\\\ntransition: \\\\'background-color 150ms ease-out\\\\',\\\\nwillChange: \\\\'background-color\\\\'})',
+};
 
 const AnimatedButtonHoverOnly = props => {
   const track = React.useContext(TrackContext);
@@ -1096,7 +1092,7 @@ const AnimatedButtonHoverOnly = props => {
           props,
         });
       }}
-      className={\`views-block \${AnimatedButtonHoverOnly1}\`}
+      className={\`views-block \${styles.AnimatedButtonHoverOnly1}\`}
     >
       {props.children}
     </button>
@@ -1129,13 +1125,10 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { animated, Spring } from 'react-spring';
 import { css } from 'emotion';
 
-const AnimatedButtonScopeOnly1 = css({
-  label: 'AnimatedButtonScopeOnly1',
-  transition: 'opacity 150ms linear',
-  willChange: 'background-color, opacity',
-  backgroundColor: 'var(--backgroundColor)',
-  opacity: 'var(--opacity)',
-});
+let styles = {
+  AnimatedButtonScopeOnly1:
+    \\"css({label: 'AnimatedButtonScopeOnly1', \\\\ntransition: 'opacity 150ms linear',\\\\nwillChange: 'background-color, opacity', backgroundColor: 'var(--backgroundColor)',\\\\nopacity: 'var(--opacity)'})\\",
+};
 
 class AnimatedButtonScopeOnly extends React.Component {
   render() {
@@ -1168,7 +1161,7 @@ class AnimatedButtonScopeOnly extends React.Component {
                     animatedAnimatedButtonScopeOnly.backgroundColor,
                   '--opacity': \`\${props.before ? 1 : 1}\`,
                 }}
-                className={\`views-block \${AnimatedButtonScopeOnly1}\`}
+                className={\`views-block \${styles.AnimatedButtonScopeOnly1}\`}
               >
                 {props.children}
               </animated.button>
@@ -1206,12 +1199,10 @@ import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const Vertical = css({
-  label: 'Vertical',
-  WebkitAppRegion: 'drag',
-  width: '92%',
-  marginTop: 'auto',
-});
+let styles = {
+  Vertical:
+    'css({label: \\\\'Vertical\\\\', WebkitAppRegion: \\"drag\\",\\\\nwidth: \\"92%\\",\\\\nmarginTop: \\"auto\\"})',
+};
 
 const AppRegionDrag = props => {
   const track = React.useContext(TrackContext);
@@ -1219,7 +1210,7 @@ const AppRegionDrag = props => {
   return (
     <div
       data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-      className={\`views-block \${Vertical}\`}
+      className={\`views-block \${styles.Vertical}\`}
     >
       {props.children}
     </div>
@@ -1245,16 +1236,12 @@ import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const Vertical = css({
-  label: 'Vertical',
-  backgroundImage: \\"url('https://views.tools/image.jpg')\\",
-});
-const Horizontal = css({
-  label: 'Horizontal',
-  flexDirection: 'row',
-  backgroundSize: 'contain',
-  backgroundImage: \`url(\${'var(--backgroundImage)'})\`,
-});
+let styles = {
+  Vertical:
+    \\"css({label: 'Vertical', backgroundImage: \\\\\\"url('https://views.tools/image.jpg')\\\\\\"})\\",
+  Horizontal:
+    'css({label: \\\\'Horizontal\\\\', flexDirection: \\"row\\",\\\\nbackgroundSize: \\"contain\\", backgroundImage: \`url(\${\\\\'var(--backgroundImage)\\\\'})\`})',
+};
 
 const BackgroundImage = props => {
   const track = React.useContext(TrackContext);
@@ -1262,12 +1249,12 @@ const BackgroundImage = props => {
   return (
     <div
       data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-      className={\`views-block \${Vertical}\`}
+      className={\`views-block \${styles.Vertical}\`}
     >
       <div
         data-test-id={\`BackgroundImage.Horizontal|\`}
         style={{ '--backgroundImage': props.backgroundImage }}
-        className={\`views-block \${Horizontal}\`}
+        className={\`views-block \${styles.Horizontal}\`}
       />
       {props.children}
     </div>
@@ -1301,37 +1288,18 @@ import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const Border1 = css({
-  label: 'Border1',
-  borderColor: 'red',
-  borderStyle: 'solid',
-  borderWidth: 'var(--borderWidth)',
-});
-const Top = css({
-  label: 'Top',
-  borderTopStyle: 'solid',
-  borderTopColor: 'red',
-  borderTopWidth: 'var(--borderTopWidth)',
-});
-const Right = css({
-  label: 'Right',
-  borderRightStyle: 'solid',
-  borderRightColor: 'red',
-  borderRightWidth: 'var(--borderRightWidth)',
-});
-const Bottom = css({
-  label: 'Bottom',
-  borderBottomStyle: 'solid',
-  borderBottomColor: 'red',
-  borderBottomWidth: 'var(--borderBottomWidth)',
-});
-const Left = css({
-  label: 'Left',
-  borderLeftStyle: 'solid',
-  borderLeftColor: 'red',
-  borderLeftWidth: 'var(--borderLeftWidth)',
-  borderTopRightRadius: 'var(--borderTopRightRadius)',
-});
+let styles = {
+  Border1:
+    'css({label: \\\\'Border1\\\\', borderColor: \\"red\\",\\\\nborderStyle: \\"solid\\", borderWidth: \\\\'var(--borderWidth)\\\\'})',
+  Top:
+    'css({label: \\\\'Top\\\\', borderTopStyle: \\"solid\\",\\\\nborderTopColor: \\"red\\", borderTopWidth: \\\\'var(--borderTopWidth)\\\\'})',
+  Right:
+    'css({label: \\\\'Right\\\\', borderRightStyle: \\"solid\\",\\\\nborderRightColor: \\"red\\", borderRightWidth: \\\\'var(--borderRightWidth)\\\\'})',
+  Bottom:
+    'css({label: \\\\'Bottom\\\\', borderBottomStyle: \\"solid\\",\\\\nborderBottomColor: \\"red\\", borderBottomWidth: \\\\'var(--borderBottomWidth)\\\\'})',
+  Left:
+    \\"css({label: 'Left', borderLeftStyle: \\\\\\"solid\\\\\\",\\\\nborderLeftColor: \\\\\\"red\\\\\\", borderLeftWidth: 'var(--borderLeftWidth)',\\\\nborderTopRightRadius: 'var(--borderTopRightRadius)'})\\",
+};
 
 const Border = props => {
   const track = React.useContext(TrackContext);
@@ -1345,7 +1313,7 @@ const Border = props => {
             ? \`\${props.borderWidth}px\`
             : props.borderWidth,
       }}
-      className={\`views-block \${Border1}\`}
+      className={\`views-block \${styles.Border1}\`}
     >
       <div
         data-test-id={\`Border.Top|\`}
@@ -1355,7 +1323,7 @@ const Border = props => {
               ? \`\${props.borderTopWidth}px\`
               : props.borderTopWidth,
         }}
-        className={\`views-block \${Top}\`}
+        className={\`views-block \${styles.Top}\`}
       />
       <div
         data-test-id={\`Border.Right|\`}
@@ -1365,7 +1333,7 @@ const Border = props => {
               ? \`\${props.borderRightWidth}px\`
               : props.borderRightWidth,
         }}
-        className={\`views-block \${Right}\`}
+        className={\`views-block \${styles.Right}\`}
       />
       <div
         data-test-id={\`Border.Bottom|\`}
@@ -1375,7 +1343,7 @@ const Border = props => {
               ? \`\${props.borderBottomWidth}px\`
               : props.borderBottomWidth,
         }}
-        className={\`views-block \${Bottom}\`}
+        className={\`views-block \${styles.Bottom}\`}
       />
       <div
         data-test-id={\`Border.Left|\${props.something ? 'something|' : ''}\`}
@@ -1386,7 +1354,7 @@ const Border = props => {
               : props.borderLeftWidth,
           '--borderTopRightRadius': \`\${props.something ? 20 : 10}px\`,
         }}
-        className={\`views-block \${Left}\`}
+        className={\`views-block \${styles.Left}\`}
       />
       {props.children}
     </div>
@@ -1444,7 +1412,9 @@ import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const Vertical = css({ label: 'Vertical', backgroundColor: 'blue' });
+let styles = {
+  Vertical: 'css({label: \\\\'Vertical\\\\', backgroundColor: \\"blue\\"})',
+};
 
 const ClassName = props => {
   const track = React.useContext(TrackContext);
@@ -1452,7 +1422,7 @@ const ClassName = props => {
   return (
     <div
       data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-      className={\`views-block hey \${Vertical}\`}
+      className={\`views-block hey \${styles.Vertical}\`}
     >
       {props.children}
     </div>
@@ -1478,8 +1448,10 @@ import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const Vertical = css({ label: 'Vertical', backgroundColor: 'red' });
-const Text = css({ label: 'Text', color: 'var(--color)' });
+let styles = {
+  Vertical: 'css({label: \\\\'Vertical\\\\', backgroundColor: \\"red\\"})',
+  Text: \\"css({label: 'Text', color: 'var(--color)'})\\",
+};
 
 class Code extends React.Component {
   render() {
@@ -1490,13 +1462,13 @@ class Code extends React.Component {
         {track => (
           <div
             data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-            className={\`views-block \${Vertical}\`}
+            className={\`views-block \${styles.Vertical}\`}
           >
             <span
               data-test-id={\`Code.Text|\`}
               ref={props.refText}
               style={{ '--color': props.color }}
-              className={\`views-text \${Text}\`}
+              className={\`views-text \${styles.Text}\`}
             >
               {props.text}
             </span>
@@ -1589,7 +1561,7 @@ import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const Display1 = css({ label: 'Display1', display: 'block' });
+let styles = { Display1: 'css({label: \\\\'Display1\\\\', display: \\"block\\"})' };
 
 const Display = props => {
   const track = React.useContext(TrackContext);
@@ -1597,7 +1569,7 @@ const Display = props => {
   return (
     <div
       data-test-id={\`\${props['data-test-id'] || 'Display'}|\`}
-      className={\`views-block \${Display1}\`}
+      className={\`views-block \${styles.Display1}\`}
     >
       {props.children}
     </div>
@@ -1668,24 +1640,14 @@ import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const DynamicFamily = css({
-  label: 'DynamicFamily',
-  fontSize: 14,
-  fontWeight: 200,
-  fontFamily: 'var(--fontFamily)',
-});
-const DynamicWeight = css({
-  label: 'DynamicWeight',
-  fontSize: 14,
-  fontFamily: 'Montserrat, sans-serif',
-  fontWeight: 'var(--fontWeight)',
-});
-const DynamicFamilyAndWeight = css({
-  label: 'DynamicFamilyAndWeight',
-  fontSize: 14,
-  fontWeight: 'var(--fontWeight)',
-  fontFamily: 'var(--fontFamily)',
-});
+let styles = {
+  DynamicFamily:
+    \\"css({label: 'DynamicFamily', fontSize: 14,\\\\nfontWeight: 200, fontFamily: 'var(--fontFamily)'})\\",
+  DynamicWeight:
+    \\"css({label: 'DynamicWeight', fontSize: 14,\\\\nfontFamily: \\\\\\"Montserrat, sans-serif\\\\\\", fontWeight: 'var(--fontWeight)'})\\",
+  DynamicFamilyAndWeight:
+    \\"css({label: 'DynamicFamilyAndWeight', fontSize: 14, fontWeight: 'var(--fontWeight)',\\\\nfontFamily: 'var(--fontFamily)'})\\",
+};
 
 const DynamicFontProps = props => {
   const track = React.useContext(TrackContext);
@@ -1698,14 +1660,14 @@ const DynamicFontProps = props => {
       <span
         data-test-id={\`DynamicFontProps.DynamicFamily|\`}
         style={{ '--fontFamily': props.fontFamily }}
-        className={\`views-text \${DynamicFamily}\`}
+        className={\`views-text \${styles.DynamicFamily}\`}
       >
         Some text
       </span>
       <span
         data-test-id={\`DynamicFontProps.DynamicWeight|\`}
         style={{ '--fontWeight': props.fontWeight }}
-        className={\`views-text \${DynamicWeight}\`}
+        className={\`views-text \${styles.DynamicWeight}\`}
       >
         Some text
       </span>
@@ -1715,7 +1677,7 @@ const DynamicFontProps = props => {
           '--fontWeight': props.fontWeight,
           '--fontFamily': props.fontFamily,
         }}
-        className={\`views-text \${DynamicFamilyAndWeight}\`}
+        className={\`views-text \${styles.DynamicFamilyAndWeight}\`}
       >
         Some text
       </span>
@@ -1774,7 +1736,7 @@ import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const Vertical = css({ label: 'Vertical', height: 'var(--height)' });
+let styles = { Vertical: \\"css({label: 'Vertical', height: 'var(--height)'})\\" };
 
 const DynamicStylesApplyToBasicBlocksOnly = props => {
   const track = React.useContext(TrackContext);
@@ -1786,7 +1748,7 @@ const DynamicStylesApplyToBasicBlocksOnly = props => {
         '--height':
           typeof props.height === 'number' ? \`\${props.height}px\` : props.height,
       }}
-      className={\`views-block \${Vertical}\`}
+      className={\`views-block \${styles.Vertical}\`}
     >
       <SomeThing
         data-test-id={\`DynamicStylesApplyToBasicBlocksOnly.OnTop|\`}
@@ -1823,7 +1785,7 @@ import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const Vertical = css({ label: 'Vertical', width: 'var(--width)' });
+let styles = { Vertical: \\"css({label: 'Vertical', width: 'var(--width)'})\\" };
 
 const DynamicWidth = props => {
   const track = React.useContext(TrackContext);
@@ -1835,7 +1797,7 @@ const DynamicWidth = props => {
         '--width':
           typeof props.width === 'number' ? \`\${props.width}px\` : props.width,
       }}
-      className={\`views-block \${Vertical}\`}
+      className={\`views-block \${styles.Vertical}\`}
     >
       {props.children}
     </div>
@@ -1895,7 +1857,7 @@ import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const List = css({ label: 'List', overflowY: 'auto' });
+let styles = { List: 'css({label: \\\\'List\\\\', overflowY: \\"auto\\"})' };
 
 const FlatListPass = props => {
   const track = React.useContext(TrackContext);
@@ -1903,7 +1865,7 @@ const FlatListPass = props => {
   return (
     <div
       data-test-id={\`\${props['data-test-id'] || 'List'}|\`}
-      className={\`views-block \${List}\`}
+      className={\`views-block \${styles.List}\`}
     >
       {Array.isArray(props.from) &&
         props.from.map((stuff, index) => (
@@ -1945,12 +1907,11 @@ import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const Vertical = css({ label: 'Vertical', backgroundColor: 'red' });
-const Horizontal = css({
-  label: 'Horizontal',
-  flexDirection: 'row',
-  paddingLeft: 20,
-});
+let styles = {
+  Vertical: 'css({label: \\\\'Vertical\\\\', backgroundColor: \\"red\\"})',
+  Horizontal:
+    'css({label: \\\\'Horizontal\\\\', flexDirection: \\"row\\",\\\\npaddingLeft: 20})',
+};
 
 const Fragment = props => {
   const track = React.useContext(TrackContext);
@@ -1959,11 +1920,11 @@ const Fragment = props => {
     <React.Fragment>
       <div
         data-test-id={\`Fragment.Vertical|\`}
-        className={\`views-block \${Vertical}\`}
+        className={\`views-block \${styles.Vertical}\`}
       />
       <div
         data-test-id={\`Fragment.Horizontal|\`}
-        className={\`views-block \${Horizontal}\`}
+        className={\`views-block \${styles.Horizontal}\`}
       >
         <span data-test-id={\`Fragment.Text|\`} className=\\"views-text\\">
           hey
@@ -2041,21 +2002,12 @@ import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const Hover1 = css({
-  label: 'Hover1',
-  '&:hover': {
-    backgroundColor: '#232323',
-  },
-  backgroundColor: 'var(--backgroundColor)',
-});
-const Text = css({
-  label: 'Text',
-  color: 'white',
-  [\`.\${Hover1}:hover &, .\${Hover1}.hover &\`]: {
-    color: 'black',
-  },
-  fontSize: 'var(--fontSize)',
-});
+let styles = {
+  Hover1:
+    'css({label: \\\\'Hover1\\\\', \\"&:hover\\": {\\\\nbackgroundColor: \\"#232323\\"\\\\n}, backgroundColor: \\\\'var(--backgroundColor)\\\\'})',
+  Text:
+    'css({label: \\\\'Text\\\\', color: \\"white\\",\\\\n[\`.\${Hover1}:hover &, .\${Hover1}.hover &\`]: {\\\\ncolor: \\"black\\"\\\\n}, fontSize: \\\\'var(--fontSize)\\\\'})',
+};
 
 const Hover = props => {
   const track = React.useContext(TrackContext);
@@ -2071,7 +2023,7 @@ const Hover = props => {
         track({ block: 'Hover.Hover', action: 'click', event, props });
       }}
       style={{ '--backgroundColor': \`\${props.isStuff ? 'red' : '#323232'}\` }}
-      className={\`views-block \${Hover1}\`}
+      className={\`views-block \${styles.Hover1}\`}
     >
       <span
         data-test-id={\`Hover.Text|\`}
@@ -2081,7 +2033,7 @@ const Hover = props => {
               ? \`\${props.fontSize}px\`
               : props.fontSize,
         }}
-        className={\`views-text \${Text}\`}
+        className={\`views-text \${styles.Text}\`}
       >
         Hey!
       </span>
@@ -2121,7 +2073,9 @@ import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const Content = css({ label: 'Content', alignItems: 'var(--alignItems)' });
+let styles = {
+  Content: \\"css({label: 'Content', alignItems: 'var(--alignItems)'})\\",
+};
 
 const HyphenatedProps = props => {
   const track = React.useContext(TrackContext);
@@ -2138,7 +2092,7 @@ const HyphenatedProps = props => {
         style={{
           '--alignItems': \`\${props.inDesignSystem ? 'flex-start' : 'center'}\`,
         }}
-        className={\`views-block \${Content}\`}
+        className={\`views-block \${styles.Content}\`}
       />
       <SomeViewThatExposesAlignItems
         data-test-id={\`HyphenatedProps.SomeViewThatExposesAlignItems|\`}
@@ -2169,19 +2123,12 @@ import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const Indented1 = css({
-  label: 'Indented1',
-  backgroundColor: 'var(--backgroundColor)',
-});
-const Horizontal = css({
-  label: 'Horizontal',
-  flexDirection: 'row',
-  backgroundColor: 'blue',
-  paddingTop: 4,
-  paddingBottom: 4,
-  paddingLeft: 'var(--paddingLeft)',
-  paddingRight: 'var(--paddingRight)',
-});
+let styles = {
+  Indented1:
+    \\"css({label: 'Indented1', backgroundColor: 'var(--backgroundColor)'})\\",
+  Horizontal:
+    \\"css({label: 'Horizontal', flexDirection: \\\\\\"row\\\\\\",\\\\nbackgroundColor: \\\\\\"blue\\\\\\",\\\\npaddingTop: 4,\\\\npaddingBottom: 4, paddingLeft: 'var(--paddingLeft)',\\\\npaddingRight: 'var(--paddingRight)'})\\",
+};
 
 const Indented = props => {
   const track = React.useContext(TrackContext);
@@ -2192,7 +2139,7 @@ const Indented = props => {
         props.isSomething ? 'isSomething|' : ''
       }\`}
       style={{ '--backgroundColor': \`\${props.isSomething ? 'blue' : 'red'}\` }}
-      className={\`views-block \${Indented1}\`}
+      className={\`views-block \${styles.Indented1}\`}
     >
       <span data-test-id={\`Indented.Text|\`} className=\\"views-text\\">
         hey
@@ -2210,7 +2157,7 @@ const Indented = props => {
               '--paddingLeft': \`\${props.move ? 40 : 4}px\`,
               '--paddingRight': \`\${!props.stuff ? 20 : 4}px\`,
             }}
-            className={\`views-block \${Horizontal}\`}
+            className={\`views-block \${styles.Horizontal}\`}
           >
             <span data-test-id={\`Indented.Text:2|\`} className=\\"views-text\\">
               more
@@ -2314,16 +2261,10 @@ import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const ListOfSomething1 = css({
-  label: 'ListOfSomething1',
-  paddingLeft: 2,
-  justifyContent: 'center',
-  alignItems: 'flex-start',
-  flexDirection: 'row',
-  flexWrap: 'wrap',
-  overflowY: 'auto',
-  backgroundColor: 'red',
-});
+let styles = {
+  ListOfSomething1:
+    'css({label: \\\\'ListOfSomething1\\\\', paddingLeft: 2,\\\\njustifyContent: \\"center\\",\\\\nalignItems: \\"flex-start\\",\\\\nflexDirection: \\"row\\",\\\\nflexWrap: \\"wrap\\",\\\\noverflowY: \\"auto\\",\\\\nbackgroundColor: \\"red\\"})',
+};
 
 const ListOfSomething = props => {
   const track = React.useContext(TrackContext);
@@ -2331,7 +2272,7 @@ const ListOfSomething = props => {
   return (
     <div
       data-test-id={\`\${props['data-test-id'] || 'ListOfSomething'}|\`}
-      className={\`views-block \${ListOfSomething1}\`}
+      className={\`views-block \${styles.ListOfSomething1}\`}
     >
       {Array.isArray(props.from) &&
         props.from.map((item, index) => (
@@ -2550,11 +2491,10 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import chopperSvg from './chopper.svg';
 import { css } from 'emotion';
 
-const LocalImageSvg1 = css({
-  label: 'LocalImageSvg1',
-  width: 50,
-  height: 'var(--height)',
-});
+let styles = {
+  LocalImageSvg1:
+    \\"css({label: 'LocalImageSvg1', width: 50, height: 'var(--height)'})\\",
+};
 
 const LocalImageSvg = props => {
   const track = React.useContext(TrackContext);
@@ -2568,7 +2508,7 @@ const LocalImageSvg = props => {
         '--height':
           typeof props.height === 'number' ? \`\${props.height}px\` : props.height,
       }}
-      className={\`views-block \${LocalImageSvg1}\`}
+      className={\`views-block \${styles.LocalImageSvg1}\`}
     />
   );
 };
@@ -2843,7 +2783,7 @@ import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const Text = css({ label: 'Text', marginTop: -10 });
+let styles = { Text: \\"css({label: 'Text', marginTop: -10})\\" };
 
 const NegativeNumber = props => {
   const track = React.useContext(TrackContext);
@@ -2851,7 +2791,7 @@ const NegativeNumber = props => {
   return (
     <span
       data-test-id={\`\${props['data-test-id'] || 'Text'}|\`}
-      className={\`views-text \${Text}\`}
+      className={\`views-text \${styles.Text}\`}
     >
       hey
     </span>
@@ -2932,23 +2872,12 @@ import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const Button = css({
-  label: 'Button',
-  alignItems: 'center',
-  backgroundColor: '#f2f2f2',
-  paddingBottom: 8,
-  paddingLeft: 12,
-  paddingRight: 12,
-  paddingTop: 8,
-});
-const Text = css({
-  label: 'Text',
-  marginTop: 4,
-  [\`.\${Button}:hover &, .\${Button}.hover &\`]: {
-    color: 'fuchsia',
-  },
-  color: 'var(--color)',
-});
+let styles = {
+  Button:
+    'css({label: \\\\'Button\\\\', alignItems: \\"center\\",\\\\nbackgroundColor: \\"#f2f2f2\\",\\\\npaddingBottom: 8,\\\\npaddingLeft: 12,\\\\npaddingRight: 12,\\\\npaddingTop: 8})',
+  Text:
+    \\"css({label: 'Text', marginTop: 4,\\\\n[\`.\${Button}:hover &, .\${Button}.hover &\`]: {\\\\ncolor: \\\\\\"fuchsia\\\\\\"\\\\n}, color: 'var(--color)'})\\",
+};
 
 const Proxy = props => {
   const track = React.useContext(TrackContext);
@@ -2961,7 +2890,7 @@ const Proxy = props => {
 
         track({ block: 'Proxy.Button', action: 'click', event, props });
       }}
-      className={\`views-block \${Button}\`}
+      className={\`views-block \${styles.Button}\`}
     >
       <props.proxyActionGhostedProps
         data-test-id={\`Proxy.ActionGhostedProps|\${
@@ -2976,7 +2905,7 @@ const Proxy = props => {
       <span
         data-test-id={\`Proxy.Text|\`}
         style={{ '--color': props.color }}
-        className={\`views-text \${Text}\`}
+        className={\`views-text \${styles.Text}\`}
       >
         {props.text}
       </span>
@@ -3029,7 +2958,7 @@ import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const Scope1 = css({ label: 'Scope1', color: 'var(--color)' });
+let styles = { Scope1: \\"css({label: 'Scope1', color: 'var(--color)'})\\" };
 
 const Scope = props => {
   const track = React.useContext(TrackContext);
@@ -3056,7 +2985,7 @@ const Scope = props => {
             : 'red'
         }\`,
       }}
-      className={\`views-text \${Scope1}\`}
+      className={\`views-text \${styles.Scope1}\`}
     >
       {props.somethingGreen
         ? '2 green'
@@ -3185,11 +3114,10 @@ import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const Content = css({
-  label: 'Content',
-  opacity: 'var(--opacity)',
-  transform: 'scale(var(--scale))',
-});
+let styles = {
+  Content:
+    \\"css({label: 'Content', opacity: 'var(--opacity)',\\\\ntransform: 'scale(var(--scale))'})\\",
+};
 
 const ScopePopup2 = props => {
   const track = React.useContext(TrackContext);
@@ -3224,7 +3152,7 @@ const ScopePopup2 = props => {
           '--opacity': \`\${props.isShown ? 1 : props.isSuperVisible ? 3 : 0}\`,
           '--scale': \`\${props.isShown ? 1 : props.isSuperVisible ? 2 : 0}\`,
         }}
-        className={\`views-block \${Content}\`}
+        className={\`views-block \${styles.Content}\`}
       >
         <span data-test-id={\`ScopePopup2.Text:1|\`} className=\\"views-text\\">
           I'm inside the popup
@@ -3260,15 +3188,10 @@ import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const ScopedShadows1 = css({
-  label: 'ScopedShadows1',
-  flexDirection: 'row',
-  boxShadow: '0px 5px var(--shadowBlur) 0px var(--shadowColor)',
-  transition: 'box-shadow 150ms linear',
-  willChange: 'box-shadow',
-  shadowColor: 'var(--shadowColor)',
-  shadowBlur: 'var(--shadowBlur)',
-});
+let styles = {
+  ScopedShadows1:
+    \\"css({label: 'ScopedShadows1', flexDirection: \\\\\\"row\\\\\\",\\\\nboxShadow: \\\\\\"0px 5px var(--shadowBlur) 0px var(--shadowColor)\\\\\\", \\\\ntransition: 'box-shadow 150ms linear',\\\\nwillChange: 'box-shadow', shadowColor: 'var(--shadowColor)',\\\\nshadowBlur: 'var(--shadowBlur)'})\\",
+};
 
 const ScopedShadows = props => {
   const track = React.useContext(TrackContext);
@@ -3294,7 +3217,7 @@ const ScopedShadows = props => {
         }\`,
         '--shadowBlur': \`\${props.isClicked ? 10 : 20}px\`,
       }}
-      className={\`views-block \${ScopedShadows1}\`}
+      className={\`views-block \${styles.ScopedShadows1}\`}
     >
       {props.children}
     </button>
@@ -3327,13 +3250,10 @@ import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const ScrollableList1 = css({
-  label: 'ScrollableList1',
-  overflowY: 'auto',
-  paddingBottom: 200,
-  backgroundColor: 'red',
-  paddingLeft: 'var(--paddingLeft)',
-});
+let styles = {
+  ScrollableList1:
+    'css({label: \\\\'ScrollableList1\\\\', overflowY: \\"auto\\",\\\\npaddingBottom: 200,\\\\nbackgroundColor: \\"red\\", paddingLeft: \\\\'var(--paddingLeft)\\\\'})',
+};
 
 const ScrollableList = props => {
   const track = React.useContext(TrackContext);
@@ -3347,7 +3267,7 @@ const ScrollableList = props => {
             ? \`\${props.paddingLeft}px\`
             : props.paddingLeft,
       }}
-      className={\`views-block \${ScrollableList1}\`}
+      className={\`views-block \${styles.ScrollableList1}\`}
     >
       {Array.isArray(props.from) &&
         props.from.map((item, index) => (
@@ -3394,14 +3314,12 @@ import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const BoxShadow = css({
-  label: 'BoxShadow',
-  boxShadow: \`0px 5px 2px 2px var(--shadowColor)\`,
-});
-const TextShadow = css({
-  label: 'TextShadow',
-  textShadow: \`2px 3px 1px var(--shadowColor)\`,
-});
+let styles = {
+  BoxShadow:
+    \\"css({label: 'BoxShadow', boxShadow: \`0px 5px 2px 2px var(--shadowColor)\`})\\",
+  TextShadow:
+    \\"css({label: 'TextShadow', textShadow: \`2px 3px 1px var(--shadowColor)\`})\\",
+};
 
 const Shadow = props => {
   const track = React.useContext(TrackContext);
@@ -3414,12 +3332,12 @@ const Shadow = props => {
       <div
         data-test-id={\`Shadow.BoxShadow|\`}
         style={{ '--shadowColor': props.shadowColor }}
-        className={\`views-block \${BoxShadow}\`}
+        className={\`views-block \${styles.BoxShadow}\`}
       >
         <span
           data-test-id={\`Shadow.TextShadow|\`}
           style={{ '--shadowColor': props.shadowColor }}
-          className={\`views-text \${TextShadow}\`}
+          className={\`views-text \${styles.TextShadow}\`}
         >
           hey
         </span>
@@ -3454,10 +3372,10 @@ import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const SlotOnBaseAndValueOnScope1 = css({
-  label: 'SlotOnBaseAndValueOnScope1',
-  color: 'var(--color)',
-});
+let styles = {
+  SlotOnBaseAndValueOnScope1:
+    \\"css({label: 'SlotOnBaseAndValueOnScope1', color: 'var(--color)'})\\",
+};
 
 const SlotOnBaseAndValueOnScope = props => {
   const track = React.useContext(TrackContext);
@@ -3468,7 +3386,7 @@ const SlotOnBaseAndValueOnScope = props => {
         props.something ? 'something|' : ''
       }\`}
       style={{ '--color': \`\${props.something ? 'blue' : props.color}\` }}
-      className={\`views-text \${SlotOnBaseAndValueOnScope1}\`}
+      className={\`views-text \${styles.SlotOnBaseAndValueOnScope1}\`}
     />
   );
 };
@@ -3498,22 +3416,10 @@ import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const WindowControl = css({
-  label: 'WindowControl',
-  marginRight: 8,
-  backgroundColor: '#CBCDCE',
-  opacity: 0.7,
-  transform: 'scale(1.1)',
-  transition: 'all 0.15s ease-out',
-  width: 10,
-  height: 10,
-  '&:hover': {
-    transform: 'scale(1.1)',
-  },
-  '&:hover': {
-    backgroundColor: 'var(--backgroundColor)',
-  },
-});
+let styles = {
+  WindowControl:
+    'css({label: \\\\'WindowControl\\\\', marginRight: 8,\\\\nbackgroundColor: \\"#CBCDCE\\",\\\\nopacity: 0.7,\\\\ntransform: \\"scale(1.1)\\",\\\\ntransition: \\"all 0.15s ease-out\\",\\\\nwidth: 10,\\\\nheight: 10,\\\\n\\"&:hover\\": {\\\\ntransform: \\"scale(1.1)\\"\\\\n}, \\"&:hover\\": {\\\\nbackgroundColor: \\\\'var(--backgroundColor)\\\\'\\\\n}})',
+};
 
 const SomeMissingStyle = props => {
   const track = React.useContext(TrackContext);
@@ -3533,7 +3439,7 @@ const SomeMissingStyle = props => {
       }}
       tabIndex={-1}
       style={{ '--backgroundColor': props.backgroundColorHover }}
-      className={\`views-block \${WindowControl}\`}
+      className={\`views-block \${styles.WindowControl}\`}
     >
       {props.children}
     </button>
@@ -3566,7 +3472,9 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { Link } from 'react-router-dom';
 import { css } from 'emotion';
 
-const Horizontal = css({ label: 'Horizontal', flexDirection: 'row' });
+let styles = {
+  Horizontal: 'css({label: \\\\'Horizontal\\\\', flexDirection: \\"row\\"})',
+};
 
 const Teleport = props => {
   const track = React.useContext(TrackContext);
@@ -3575,7 +3483,7 @@ const Teleport = props => {
     <Link
       to=\\"..\\"
       data-test-id={\`\${props['data-test-id'] || 'Horizontal'}|\`}
-      className={\`views-block \${Horizontal}\`}
+      className={\`views-block \${styles.Horizontal}\`}
     >
       <span data-test-id={\`Teleport.Text|\`} className=\\"views-text\\">
         go back
@@ -3644,16 +3552,12 @@ import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const Transform1 = css({
-  label: 'Transform1',
-  transform:
-    'rotate(4deg) rotateX(5deg) rotateY(6deg) scale(3) translateX(1px) translateY(2px)',
-  transformOrigin: 'center top',
-});
-const Text = css({
-  label: 'Text',
-  transformOrigin: \`var(--transformOriginX) var(--transformOriginY)\`,
-});
+let styles = {
+  Transform1:
+    'css({label: \\\\'Transform1\\\\', transform: \\"rotate(4deg) rotateX(5deg) rotateY(6deg) scale(3) translateX(1px) translateY(2px)\\",\\\\ntransformOrigin: \\"center top\\"})',
+  Text:
+    \\"css({label: 'Text', transformOrigin: \`var(--transformOriginX) var(--transformOriginY)\`})\\",
+};
 
 const Transform = props => {
   const track = React.useContext(TrackContext);
@@ -3661,7 +3565,7 @@ const Transform = props => {
   return (
     <div
       data-test-id={\`\${props['data-test-id'] || 'Transform'}|\`}
-      className={\`views-block \${Transform1}\`}
+      className={\`views-block \${styles.Transform1}\`}
     >
       <span
         data-test-id={\`Transform.Text|\`}
@@ -3669,7 +3573,7 @@ const Transform = props => {
           '--transformOriginX': props.transformOriginX,
           '--transformOriginY': props.transformOriginY,
         }}
-        className={\`views-text \${Text}\`}
+        className={\`views-text \${styles.Text}\`}
       >
         who knows what happens here :D
       </span>
@@ -3708,19 +3612,10 @@ import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const Email = css({
-  label: 'Email',
-  borderColor: 'black',
-  borderStyle: 'solid',
-  borderWidth: 1,
-  color: 'red',
-  '&:focus': {
-    color: 'purple',
-  },
-  '&::placeholder': {
-    color: 'blue',
-  },
-});
+let styles = {
+  Email:
+    'css({label: \\\\'Email\\\\', borderColor: \\"black\\",\\\\nborderStyle: \\"solid\\",\\\\nborderWidth: 1,\\\\ncolor: \\"red\\",\\\\n\\"&:focus\\": {\\\\ncolor: \\"purple\\"\\\\n},\\\\n\\"&::placeholder\\": {\\\\ncolor: \\"blue\\"\\\\n}})',
+};
 
 const UseCaptureEmail = props => {
   const track = React.useContext(TrackContext);
@@ -3732,7 +3627,7 @@ const UseCaptureEmail = props => {
       autoFocus={true}
       defaultValue=\\"hey this is a default value\\"
       onSubmit={props.onSubmit}
-      className={\`views-capture \${Email}\`}
+      className={\`views-capture \${styles.Email}\`}
     />
   );
 };
@@ -3981,13 +3876,10 @@ import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const Horizontal = css({
-  label: 'Horizontal',
-  flexDirection: 'row',
-  borderColor: 'red',
-  borderStyle: 'solid',
-  borderWidth: 1,
-});
+let styles = {
+  Horizontal:
+    'css({label: \\\\'Horizontal\\\\', flexDirection: \\"row\\",\\\\nborderColor: \\"red\\",\\\\nborderStyle: \\"solid\\",\\\\nborderWidth: 1})',
+};
 
 const UseHorizontal = props => {
   const track = React.useContext(TrackContext);
@@ -3995,7 +3887,7 @@ const UseHorizontal = props => {
   return (
     <div
       data-test-id={\`\${props['data-test-id'] || 'Horizontal'}|\`}
-      className={\`views-block \${Horizontal}\`}
+      className={\`views-block \${styles.Horizontal}\`}
     >
       {props.children}
     </div>
@@ -4097,7 +3989,9 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Route } from 'react-router-dom';
 import { css } from 'emotion';
 
-const Horizontal = css({ label: 'Horizontal', flexDirection: 'row' });
+let styles = {
+  Horizontal: 'css({label: \\\\'Horizontal\\\\', flexDirection: \\"row\\"})',
+};
 
 const UseRouter = props => {
   const track = React.useContext(TrackContext);
@@ -4106,7 +4000,7 @@ const UseRouter = props => {
     <Router>
       <div
         data-test-id={\`\${props['data-test-id'] || 'Horizontal'}|\`}
-        className={\`views-block \${Horizontal}\`}
+        className={\`views-block \${styles.Horizontal}\`}
       >
         <Route
           path=\\"/\\"
@@ -4172,13 +4066,10 @@ import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const Svg = css({
-  label: 'Svg',
-  height: 20,
-  width: 20,
-  opacity: 'var(--opacity)',
-});
-const SvgPath = css({ label: 'SvgPath', fill: 'red' });
+let styles = {
+  Svg: \\"css({label: 'Svg', height: 20,\\\\nwidth: 20, opacity: 'var(--opacity)'})\\",
+  SvgPath: 'css({label: \\\\'SvgPath\\\\', fill: \\"red\\"})',
+};
 
 const UseSvg = props => {
   const track = React.useContext(TrackContext);
@@ -4188,12 +4079,12 @@ const UseSvg = props => {
       data-test-id={\`\${props['data-test-id'] || 'Svg'}|\`}
       viewBox=\\"0 0 20 20\\"
       style={{ '--opacity': props.opacity }}
-      className={\`views-block \${Svg}\`}
+      className={\`views-block \${styles.Svg}\`}
     >
       <path
         data-test-id={\`UseSvg.SvgPath|\`}
         d=\\"0 20\\"
-        className={\`views-block \${SvgPath}\`}
+        className={\`views-block \${styles.SvgPath}\`}
       />
       <circle
         data-test-id={\`UseSvg.SvgCircle|\`}
@@ -4256,25 +4147,10 @@ import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { AutoSizer, Column, Table } from '@viewstools/tables/dom';
 
-const Table1Row = css({
-  display: 'flex',
-  color: '#1C1C1C',
-  backgroundColor: 'white',
-  '&:hover': {
-    color: 'red',
-    backgroundColor: 'black',
-  },
-  '&:nth-child(even)': {
-    backgroundColor: 'black',
-    '&:hover': {
-      color: 'green',
-    },
-    color: 'var(--rowColorAlternate)',
-    '&:hover': {
-      backgroundColor: 'var(--rowBackgroundColorAlternate)',
-    },
-  },
-});
+let styles = {
+  Table1Row:
+    'css({ display: \\\\'flex\\\\'\\\\n    , color: \\"#1C1C1C\\",\\\\nbackgroundColor: \\"white\\",\\\\n\\"&:hover\\": {\\\\ncolor: \\"red\\",\\\\nbackgroundColor: \\"black\\"\\\\n} \\\\n    , \\"&:nth-child(even)\\": {backgroundColor: \\"black\\",\\\\n\\"&:hover\\": {\\\\ncolor: \\"green\\"\\\\n} , color: \\\\'var(--rowColorAlternate)\\\\',\\\\n\\"&:hover\\": {\\\\nbackgroundColor: \\\\'var(--rowBackgroundColorAlternate)\\\\'\\\\n}}\\\\n    })',
+};
 
 const UseTable = props => {
   const track = React.useContext(TrackContext);
@@ -4294,7 +4170,7 @@ const UseTable = props => {
             data-test-id={\`UseTable.Table|\`}
             headerHeight={40}
             rowHeight={20}
-            rowClassName={Table1Row}
+            rowClassName={styles.Table1Row}
             className=\\"views-block\\"
           >
             <Column
@@ -4366,32 +4242,13 @@ import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { AutoSizer, Column, Table } from '@viewstools/tables/dom';
 import { css } from 'emotion';
 
-const Table1Row = css({
-  display: 'flex',
-  color: '#1C1C1C',
-  backgroundColor: 'white',
-  '&:hover': {
-    color: 'red',
-    backgroundColor: 'black',
-  },
-  '&:nth-child(even)': {
-    backgroundColor: 'black',
-    '&:hover': {
-      color: 'green',
-    },
-    color: 'var(--rowColorAlternate)',
-    '&:hover': {
-      backgroundColor: 'var(--rowBackgroundColorAlternate)',
-    },
-  },
-});
-const Table1 = css({ label: 'Table1', marginLeft: 'var(--marginLeft)' });
-const Name = css({
-  label: 'Name',
-  borderBottomStyle: 'solid',
-  borderBottomWidth: 1,
-  borderBottomColor: 'var(--borderBottomColor)',
-});
+let styles = {
+  Table1Row:
+    'css({ display: \\\\'flex\\\\'\\\\n    , color: \\"#1C1C1C\\",\\\\nbackgroundColor: \\"white\\",\\\\n\\"&:hover\\": {\\\\ncolor: \\"red\\",\\\\nbackgroundColor: \\"black\\"\\\\n} \\\\n    , \\"&:nth-child(even)\\": {backgroundColor: \\"black\\",\\\\n\\"&:hover\\": {\\\\ncolor: \\"green\\"\\\\n} , color: \\\\'var(--rowColorAlternate)\\\\',\\\\n\\"&:hover\\": {\\\\nbackgroundColor: \\\\'var(--rowBackgroundColorAlternate)\\\\'\\\\n}}\\\\n    })',
+  Table1: \\"css({label: 'Table1', marginLeft: 'var(--marginLeft)'})\\",
+  Name:
+    \\"css({label: 'Name', borderBottomStyle: \\\\\\"solid\\\\\\",\\\\nborderBottomWidth: 1, borderBottomColor: 'var(--borderBottomColor)'})\\",
+};
 
 const UseTableOnWhen = props => {
   const track = React.useContext(TrackContext);
@@ -4412,7 +4269,7 @@ const UseTableOnWhen = props => {
               data-test-id={\`UseTableOnWhen.Table|\`}
               headerHeight={40}
               rowHeight={20}
-              rowClassName={Table1Row}
+              rowClassName={styles.Table1Row}
               style={{
                 '--marginLeft':
                   typeof props.marginLeft === 'number'
@@ -4421,7 +4278,7 @@ const UseTableOnWhen = props => {
                 '--rowColorAlternate': props.rowColorAlternate,
                 '--rowBackgroundColorAlternate': props.rowBgColorAlternate,
               }}
-              className={\`views-block \${Table1}\`}
+              className={\`views-block \${styles.Table1}\`}
             >
               <Column
                 dataKey=\\"name\\"
@@ -4433,7 +4290,7 @@ const UseTableOnWhen = props => {
                 data-test-id={\`UseTableOnWhen.Name|\`}
                 key=\\"name\\"
                 style={{ '--borderBottomColor': props.borderColor }}
-                className={\`views-block \${Name}\`}
+                className={\`views-block \${styles.Name}\`}
               />
             </Table>
           )}
@@ -4491,14 +4348,10 @@ import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const UseText1 = css({
-  label: 'UseText1',
-  fontFamily: 'Montserrat, sans-serif',
-  fontSize: 16,
-  lineHeight: 1.5,
-  fontWeight: 300,
-  color: 'var(--color)',
-});
+let styles = {
+  UseText1:
+    \\"css({label: 'UseText1', fontFamily: \\\\\\"Montserrat, sans-serif\\\\\\",\\\\nfontSize: 16,\\\\nlineHeight: 1.5,\\\\nfontWeight: 300, color: 'var(--color)'})\\",
+};
 
 const UseText = props => {
   const track = React.useContext(TrackContext);
@@ -4509,7 +4362,7 @@ const UseText = props => {
         props.isSomething ? 'isSomething|' : ''
       }\`}
       style={{ '--color': \`\${props.isSomething ? 'red' : 'blue'}\` }}
-      className={\`views-text \${UseText1}\`}
+      className={\`views-text \${styles.UseText1}\`}
     >
       Hi, I'm some text
     </span>
@@ -4544,23 +4397,12 @@ import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const Normal = css({
-  label: 'Normal',
-  color: 'blue',
-  fontFamily: 'CustomFontNotOnGoogle',
-  fontSize: 16,
-  lineHeight: 1.5,
-  fontWeight: 300,
-});
-const Italic = css({
-  label: 'Italic',
-  color: 'blue',
-  fontFamily: 'CustomFontNotOnGoogle',
-  fontStyle: 'italic',
-  fontSize: 16,
-  lineHeight: 1.5,
-  fontWeight: 400,
-});
+let styles = {
+  Normal:
+    'css({label: \\\\'Normal\\\\', color: \\"blue\\",\\\\nfontFamily: \\"CustomFontNotOnGoogle\\",\\\\nfontSize: 16,\\\\nlineHeight: 1.5,\\\\nfontWeight: 300})',
+  Italic:
+    'css({label: \\\\'Italic\\\\', color: \\"blue\\",\\\\nfontFamily: \\"CustomFontNotOnGoogle\\",\\\\nfontStyle: \\"italic\\",\\\\nfontSize: 16,\\\\nlineHeight: 1.5,\\\\nfontWeight: 400})',
+};
 
 const UseTextCustomFont = props => {
   const track = React.useContext(TrackContext);
@@ -4573,14 +4415,14 @@ const UseTextCustomFont = props => {
       <span
         data-test-id={\`UseTextCustomFont.Normal|\`}
         fontType=\\"sans-serif\\"
-        className={\`views-text \${Normal}\`}
+        className={\`views-text \${styles.Normal}\`}
       >
         Hi, I'm some text
       </span>
       <span
         data-test-id={\`UseTextCustomFont.Italic|\`}
         fontType=\\"sans-serif\\"
-        className={\`views-text \${Italic}\`}
+        className={\`views-text \${styles.Italic}\`}
       >
         Hi, I'm some text
       </span>
@@ -4621,7 +4463,7 @@ import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const Vertical = css({ label: 'Vertical', backgroundColor: 'red' });
+let styles = { Vertical: 'css({label: \\\\'Vertical\\\\', backgroundColor: \\"red\\"})' };
 
 const UseVertical = props => {
   const track = React.useContext(TrackContext);
@@ -4629,7 +4471,7 @@ const UseVertical = props => {
   return (
     <div
       data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
-      className={\`views-block \${Vertical}\`}
+      className={\`views-block \${styles.Vertical}\`}
     >
       {props.children}
     </div>
@@ -4637,6 +4479,49 @@ const UseVertical = props => {
 };
 
 export default UseVertical;
+",
+  "dependencies": Set {
+    "emotion",
+  },
+  "fonts": Array [],
+  "slots": Array [],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom ViewAndBlockSameName 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
+import Button from './Button.view.js';
+import React from 'react';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+import { css } from 'emotion';
+
+let styles = { Button: 'css({label: \\\\'Button\\\\', backgroundColor: \\"red\\"})' };
+
+const ViewAndBlockSameName = props => {
+  const track = React.useContext(TrackContext);
+
+  return (
+    <div
+      data-test-id={\`\${props['data-test-id'] || 'App'}|\`}
+      className=\\"views-block\\"
+    >
+      <div
+        data-test-id={\`ViewAndBlockSameName.Button|\`}
+        className={\`views-block \${styles.Button}\`}
+      />
+      <Button
+        data-test-id={\`ViewAndBlockSameName.Thing|\`}
+        className=\\"views-block\\"
+      />
+      {props.children}
+    </div>
+  );
+};
+
+export default ViewAndBlockSameName;
 ",
   "dependencies": Set {
     "emotion",
@@ -4655,11 +4540,10 @@ import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const ViewNameIsntUsedInStyle1 = css({
-  label: 'ViewNameIsntUsedInStyle1',
-  zIndex: 5,
-  opacity: 'var(--opacity)',
-});
+let styles = {
+  ViewNameIsntUsedInStyle1:
+    \\"css({label: 'ViewNameIsntUsedInStyle1', zIndex: 5, opacity: 'var(--opacity)'})\\",
+};
 
 const ViewNameIsntUsedInStyle = props => {
   const track = React.useContext(TrackContext);
@@ -4668,7 +4552,7 @@ const ViewNameIsntUsedInStyle = props => {
     <div
       data-test-id={\`\${props['data-test-id'] || 'ViewNameIsntUsedInStyle'}|\`}
       style={{ '--opacity': props.opacity }}
-      className={\`views-block \${ViewNameIsntUsedInStyle1}\`}
+      className={\`views-block \${styles.ViewNameIsntUsedInStyle1}\`}
     >
       {props.children}
     </div>
@@ -4700,7 +4584,7 @@ import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
 import { css } from 'emotion';
 
-const App = css({ label: 'App', flexDirection: 'row' });
+let styles = { App: 'css({label: \\\\'App\\\\', flexDirection: \\"row\\"})' };
 
 const When = props => {
   const track = React.useContext(TrackContext);
@@ -4708,7 +4592,7 @@ const When = props => {
   return (
     <div
       data-test-id={\`\${props['data-test-id'] || 'App'}|\`}
-      className={\`views-block \${App}\`}
+      className={\`views-block \${styles.App}\`}
     >
       {props.showMe ? (
         <span data-test-id={\`When.Text|\`} className=\\"views-text\\">
@@ -4780,7 +4664,7 @@ import SubButton from './SubButton.view.js';
 import TrackContext from './TrackContext.view.js';
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 
-const styles = StyleSheet.create({ Vertical: { color: 'red' } });
+let styles = StyleSheet.create({ Vertical: { color: 'red' } });
 
 const Action = props => {
   const track = React.useContext(TrackContext);
@@ -4844,9 +4728,7 @@ import { animated, Spring } from 'react-spring';
 let AnimatedText = animated(Text);
 let AnimatedView = animated(View);
 
-const styles = StyleSheet.create({
-  AnimatedButton1: { backgroundColor: 'red' },
-});
+let styles = StyleSheet.create({ AnimatedButton1: { backgroundColor: 'red' } });
 
 class AnimatedButton extends React.Component {
   render() {
@@ -4988,7 +4870,7 @@ import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import { animated, Spring } from 'react-spring';
 let AnimatedView = animated(View);
 
-const styles = StyleSheet.create({
+let styles = StyleSheet.create({
   AnimatedButtonHoverOnly1: { backgroundColor: 'red' },
 });
 
@@ -5152,7 +5034,7 @@ import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import { StyleSheet, View } from 'react-native';
 
-const styles = StyleSheet.create({
+let styles = StyleSheet.create({
   Vertical: { width: '92%', marginTop: 'auto' },
 });
 
@@ -5182,7 +5064,7 @@ import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import { Image, StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({ Horizontal: { flexDirection: 'row' } });
+let styles = StyleSheet.create({ Horizontal: { flexDirection: 'row' } });
 
 const BackgroundImage = props => {
   const track = React.useContext(TrackContext);
@@ -5228,7 +5110,7 @@ import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import { StyleSheet, View } from 'react-native';
 
-const styles = StyleSheet.create({
+let styles = StyleSheet.create({
   Border1: { borderColor: 'red', borderStyle: 'solid' },
   Top: { borderStyle: 'solid', borderTopColor: 'red' },
   Right: { borderStyle: 'solid', borderRightColor: 'red' },
@@ -5319,7 +5201,7 @@ import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import { StyleSheet, View } from 'react-native';
 
-const styles = StyleSheet.create({ Vertical: { backgroundColor: 'blue' } });
+let styles = StyleSheet.create({ Vertical: { backgroundColor: 'blue' } });
 
 const ClassName = props => {
   const track = React.useContext(TrackContext);
@@ -5347,7 +5229,7 @@ import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import { StyleSheet, Text, View } from 'react-native';
 
-const styles = StyleSheet.create({ Vertical: { backgroundColor: 'red' } });
+let styles = StyleSheet.create({ Vertical: { backgroundColor: 'red' } });
 
 class Code extends React.Component {
   render() {
@@ -5446,7 +5328,7 @@ import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import { StyleSheet, View } from 'react-native';
 
-const styles = StyleSheet.create({ Display1: { display: 'block' } });
+let styles = StyleSheet.create({ Display1: { display: 'block' } });
 
 const Display = props => {
   const track = React.useContext(TrackContext);
@@ -5518,7 +5400,7 @@ import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import { StyleSheet, Text, View } from 'react-native';
 
-const styles = StyleSheet.create({
+let styles = StyleSheet.create({
   DynamicFamily: { fontSize: 14 },
   DynamicWeight: {
     fontSize: 14,
@@ -5742,7 +5624,7 @@ import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import { StyleSheet, Text, View } from 'react-native';
 
-const styles = StyleSheet.create({
+let styles = StyleSheet.create({
   Vertical: { backgroundColor: 'red' },
   Horizontal: { flexDirection: 'row', paddingLeft: 20 },
 });
@@ -5815,7 +5697,7 @@ import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 
-const styles = StyleSheet.create({ Text: { color: 'white' } });
+let styles = StyleSheet.create({ Text: { color: 'white' } });
 
 const Hover = props => {
   const track = React.useContext(TrackContext);
@@ -5915,7 +5797,7 @@ import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import { StyleSheet, Text, View } from 'react-native';
 
-const styles = StyleSheet.create({
+let styles = StyleSheet.create({
   Horizontal: {
     flexDirection: 'row',
     backgroundColor: 'blue',
@@ -6037,7 +5919,7 @@ import Something from './Something.view.js';
 import TrackContext from './TrackContext.view.js';
 import { FlatList, StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
+let styles = StyleSheet.create({
   ListOfSomething1ContentContainer: {
     paddingLeft: 2,
     justifyContent: 'center',
@@ -6243,7 +6125,7 @@ import TrackContext from './TrackContext.view.js';
 import chopperSvg from './chopper.svg';
 import { Image, StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({ LocalImageSvg1: { width: 50 } });
+let styles = StyleSheet.create({ LocalImageSvg1: { width: 50 } });
 
 const LocalImageSvg = props => {
   const track = React.useContext(TrackContext);
@@ -6504,7 +6386,7 @@ import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import { StyleSheet, Text } from 'react-native';
 
-const styles = StyleSheet.create({ Text: { marginTop: -10 } });
+let styles = StyleSheet.create({ Text: { marginTop: -10 } });
 
 const NegativeNumber = props => {
   const track = React.useContext(TrackContext);
@@ -6574,7 +6456,7 @@ import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 
-const styles = StyleSheet.create({
+let styles = StyleSheet.create({
   Button: {
     alignItems: 'center',
     backgroundColor: '#f2f2f2',
@@ -6878,7 +6760,7 @@ import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import { animated, Spring } from 'react-spring';
 let AnimatedView = animated(View);
 
-const styles = StyleSheet.create({
+let styles = StyleSheet.create({
   ScopedShadows1: {
     flexDirection: 'row',
     shadowOffset: { width: 0, height: 5 },
@@ -6966,7 +6848,7 @@ import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import { FlatList, StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
+let styles = StyleSheet.create({
   ScrollableList1ContentContainer: { paddingBottom: 200 },
   ScrollableList1: { backgroundColor: 'red' },
 });
@@ -7018,7 +6900,7 @@ import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import { StyleSheet, Text, View } from 'react-native';
 
-const styles = StyleSheet.create({
+let styles = StyleSheet.create({
   BoxShadow: {
     shadowRadius: 2,
     elevation: 1,
@@ -7117,7 +6999,7 @@ import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 
-const styles = StyleSheet.create({
+let styles = StyleSheet.create({
   WindowControl: {
     marginRight: 8,
     backgroundColor: '#CBCDCE',
@@ -7180,7 +7062,7 @@ import TrackContext from './TrackContext.view.js';
 import { Link } from 'react-router-native';
 import { StyleSheet, Text, View } from 'react-native';
 
-const styles = StyleSheet.create({ Horizontal: { flexDirection: 'row' } });
+let styles = StyleSheet.create({ Horizontal: { flexDirection: 'row' } });
 
 const Teleport = props => {
   const track = React.useContext(TrackContext);
@@ -7246,7 +7128,7 @@ import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import { StyleSheet, Text, View } from 'react-native';
 
-const styles = StyleSheet.create({
+let styles = StyleSheet.create({
   Transform1: {
     transform: [
       { rotate: '4deg' },
@@ -7313,7 +7195,7 @@ import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import { StyleSheet, TextInput } from 'react-native';
 
-const styles = StyleSheet.create({
+let styles = StyleSheet.create({
   Email: {
     borderColor: 'black',
     borderStyle: 'solid',
@@ -7588,7 +7470,7 @@ import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import { StyleSheet, View } from 'react-native';
 
-const styles = StyleSheet.create({
+let styles = StyleSheet.create({
   Horizontal: {
     flexDirection: 'row',
     borderColor: 'red',
@@ -7696,7 +7578,7 @@ import { NativeRouter as Router } from 'react-router-native';
 import { Route } from 'react-router-native';
 import { StyleSheet, View } from 'react-native';
 
-const styles = StyleSheet.create({ Horizontal: { flexDirection: 'row' } });
+let styles = StyleSheet.create({ Horizontal: { flexDirection: 'row' } });
 
 const UseRouter = props => {
   const track = React.useContext(TrackContext);
@@ -7820,7 +7702,7 @@ import TrackContext from './TrackContext.view.js';
 import { AutoSizer, Column, Table } from '@viewstools/tables/native';
 import { StyleSheet, Text, View } from 'react-native';
 
-const styles = StyleSheet.create({
+let styles = StyleSheet.create({
   Table1: {
     rowColor: '#1C1C1C',
     rowBackgroundColor: 'white',
@@ -7913,7 +7795,7 @@ import TrackContext from './TrackContext.view.js';
 import { AutoSizer, Column, Table } from '@viewstools/tables/native';
 import { StyleSheet, View } from 'react-native';
 
-const styles = StyleSheet.create({
+let styles = StyleSheet.create({
   Table1: {
     rowColor: '#1C1C1C',
     rowBackgroundColor: 'white',
@@ -8010,7 +7892,7 @@ import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import { StyleSheet, Text } from 'react-native';
 
-const styles = StyleSheet.create({
+let styles = StyleSheet.create({
   UseText1: { fontFamily: 'Montserrat-300', fontSize: 16, lineHeight: 24 },
 });
 
@@ -8052,7 +7934,7 @@ import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import { StyleSheet, Text, View } from 'react-native';
 
-const styles = StyleSheet.create({
+let styles = StyleSheet.create({
   Normal: {
     color: 'blue',
     fontFamily: 'CustomFontNotOnGoogle-300',
@@ -8121,7 +8003,7 @@ import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import { StyleSheet, View } from 'react-native';
 
-const styles = StyleSheet.create({ Vertical: { backgroundColor: 'red' } });
+let styles = StyleSheet.create({ Vertical: { backgroundColor: 'red' } });
 
 const UseVertical = props => {
   const track = React.useContext(TrackContext);
@@ -8142,6 +8024,37 @@ export default UseVertical;
 }
 `;
 
+exports[`react-native parses react-native ViewAndBlockSameName 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
+import Button from './Button.view.js';
+import React from 'react';
+import TrackContext from './TrackContext.view.js';
+import { StyleSheet, View } from 'react-native';
+
+let styles = StyleSheet.create({ Button: { backgroundColor: 'red' } });
+
+const ViewAndBlockSameName = props => {
+  const track = React.useContext(TrackContext);
+
+  return (
+    <View testID={\`\${props['testID'] || 'App'}|\`}>
+      <View testID={\`ViewAndBlockSameName.Button|\`} style={styles.Button} />
+      <Button testID={\`ViewAndBlockSameName.Thing|\`} />
+      {props.children}
+    </View>
+  );
+};
+
+export default ViewAndBlockSameName;
+",
+  "dependencies": Set {},
+  "fonts": Array [],
+  "slots": Array [],
+  "svgs": Array [],
+}
+`;
+
 exports[`react-native parses react-native ViewNameIsntUsedInStyle 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
@@ -8149,7 +8062,7 @@ import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import { StyleSheet, View } from 'react-native';
 
-const styles = StyleSheet.create({ ViewNameIsntUsedInStyle1: { zIndex: 5 } });
+let styles = StyleSheet.create({ ViewNameIsntUsedInStyle1: { zIndex: 5 } });
 
 const ViewNameIsntUsedInStyle = props => {
   const track = React.useContext(TrackContext);
@@ -8186,7 +8099,7 @@ import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import { StyleSheet, Text, View } from 'react-native';
 
-const styles = StyleSheet.create({ App: { flexDirection: 'row' } });
+let styles = StyleSheet.create({ App: { flexDirection: 'row' } });
 
 const When = props => {
   const track = React.useContext(TrackContext);

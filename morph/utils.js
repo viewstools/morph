@@ -528,7 +528,7 @@ export const createId = (node, state, addClassName = true) => {
 
   node.styleName = id
   if (addClassName && node.className) {
-    node.className.push(`\${${id}}`)
+    node.className.push(`\${styles.${id}}`)
   }
 
   return id
