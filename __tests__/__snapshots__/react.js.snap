@@ -962,7 +962,7 @@ Object {
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { animated, Spring } from 'react-spring';
+import { animated, Spring } from 'react-spring/renderprops';
 import { css } from 'emotion';
 
 let styles = {};
@@ -1142,7 +1142,7 @@ Object {
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import ViewsBaseCss from './ViewsBaseCss.view.js';
-import { animated, Spring } from 'react-spring';
+import { animated, Spring } from 'react-spring/renderprops';
 import { css } from 'emotion';
 
 let styles = {};
@@ -4939,7 +4939,7 @@ import * as Easing from 'd3-ease';
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
-import { animated, Spring } from 'react-spring';
+import { animated, Spring } from 'react-spring/renderprops';
 let AnimatedText = animated(Text);
 let AnimatedView = animated(View);
 
@@ -5082,7 +5082,7 @@ import * as Easing from 'd3-ease';
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
-import { animated, Spring } from 'react-spring';
+import { animated, Spring } from 'react-spring/renderprops';
 let AnimatedView = animated(View);
 
 let styles = StyleSheet.create({
@@ -5161,7 +5161,7 @@ import * as Easing from 'd3-ease';
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import { TouchableWithoutFeedback, View } from 'react-native';
-import { animated, Spring } from 'react-spring';
+import { animated, Spring } from 'react-spring/renderprops';
 let AnimatedView = animated(View);
 
 class AnimatedButtonScopeOnly extends React.Component {
@@ -6972,7 +6972,7 @@ import * as Easing from 'd3-ease';
 import React from 'react';
 import TrackContext from './TrackContext.view.js';
 import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
-import { animated, Spring } from 'react-spring';
+import { animated, Spring } from 'react-spring/renderprops';
 let AnimatedView = animated(View);
 
 let styles = StyleSheet.create({

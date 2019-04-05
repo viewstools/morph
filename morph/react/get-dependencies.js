@@ -99,7 +99,7 @@ export default (state, getImport) => {
 
     if (animations.length > 0) {
       dependencies.push(
-        `import { ${animations.join(', ')} } from "react-spring"`
+        `import { ${animations.join(', ')} } from "react-spring/renderprops"`
       )
 
       state.dependencies.add('react-spring')
