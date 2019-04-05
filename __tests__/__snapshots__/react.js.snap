@@ -13,6 +13,18 @@ module.exports = {
 }
 `;
 
+exports[`e2e parses e2e ActionUseDiv 1`] = `
+Object {
+  "code": "const { get } = require('@viewstools/e2e');
+
+module.exports = {
+  Text: get('ActionUseDiv.Text'),
+  Vertical: get('ActionUseDiv.Vertical'),
+};
+",
+}
+`;
+
 exports[`e2e parses e2e AnimatedButton 1`] = `
 Object {
   "code": "const { get } = require('@viewstools/e2e');
@@ -950,6 +962,54 @@ export default Action;
       "defaultValue": false,
       "name": "isDisabled",
       "type": "string",
+    },
+  ],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-dom parses react-dom ActionUseDiv 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
+import React from 'react';
+import TrackContext from './TrackContext.view.js';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+
+const ActionUseDiv = props => {
+  const track = React.useContext(TrackContext);
+
+  return (
+    <div
+      data-test-id={\`\${props['data-test-id'] || 'Vertical'}|\`}
+      onClick={event => {
+        typeof props.onClick === 'function' && props.onClick(event);
+
+        track({
+          block: 'ActionUseDiv.Vertical',
+          action: 'click',
+          event,
+          props,
+        });
+      }}
+      className=\\"views-block\\"
+    >
+      <span data-test-id={\`ActionUseDiv.Text|\`} className=\\"views-text\\">
+        click me
+      </span>
+      {props.children}
+    </div>
+  );
+};
+
+export default ActionUseDiv;
+",
+  "dependencies": Set {},
+  "fonts": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "onClick",
+      "type": "function",
     },
   ],
   "svgs": Array [],
@@ -4926,6 +4986,54 @@ export default Action;
       "defaultValue": false,
       "name": "isDisabled",
       "type": "string",
+    },
+  ],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-native parses react-native ActionUseDiv 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
+import React from 'react';
+import TrackContext from './TrackContext.view.js';
+import { Text, TouchableWithoutFeedback, View } from 'react-native';
+
+const ActionUseDiv = props => {
+  const track = React.useContext(TrackContext);
+
+  return (
+    <TouchableWithoutFeedback
+      activeOpacity={0.7}
+      onPress={event => {
+        typeof props.onClick === 'function' && props.onClick(event);
+
+        track({
+          block: 'ActionUseDiv.Vertical',
+          action: 'click',
+          event,
+          props,
+        });
+      }}
+      underlayColor=\\"transparent\\"
+    >
+      <View testID={\`\${props['testID'] || 'Vertical'}|\`}>
+        <Text testID={\`ActionUseDiv.Text|\`}>click me</Text>
+        {props.children}
+      </View>
+    </TouchableWithoutFeedback>
+  );
+};
+
+export default ActionUseDiv;
+",
+  "dependencies": Set {},
+  "fonts": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "onClick",
+      "type": "function",
     },
   ],
   "svgs": Array [],

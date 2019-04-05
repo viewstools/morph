@@ -3,6 +3,7 @@ const blacklist = [
   'format',
   'goto',
   'isfragment',
+  'onclickusediv',
   'perspective',
   'rotatez',
   'scalex',

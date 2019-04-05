@@ -11,6 +11,7 @@ const blacklist = [
   'isdisabled',
   'isfragment',
   'onclick',
+  'onclickusediv',
   'onsubmit',
   'overflow',
   'overflowx',
