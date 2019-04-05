@@ -6,10 +6,34 @@ import {
   isUnsupportedShorthand,
 } from './helpers.js'
 
-const SLOT_PROPS = ['from', 'when', 'onClick', 'onFocus', 'onWhen']
-const shouldBeSlot = prop => SLOT_PROPS.includes(prop) || /^on[A-Z]/.test(prop)
+const SLOT_PROPS = [
+  'onBlur',
+  'onChange',
+  'onClick',
+  'onDrag',
+  'onDragEnd',
+  'onDragEnter',
+  'onDragExit',
+  'onDragLeave',
+  'onDragOver',
+  'onDragStart',
+  'onDrop',
+  'onFocus',
+  'onFocus',
+  'onMouseDown',
+  'onMouseEnter',
+  'onMouseLeave',
+  'onMouseMove',
+  'onMouseOver',
+  'onMouseUp',
+  'onWheel',
+  'onWhen',
+  'when',
+]
+const shouldBeSlot = (prop, block) =>
+  SLOT_PROPS.includes(prop) || (block.isList && prop === 'from')
 
-export default ({ name, isSlot, slotName, slotIsNot, value, block }) => {
+export default ({ name, isSlot, slotIsNot, value, block }) => {
   const tags = {}
 
   if (isAnimation(value) && name !== 'text') tags.animation = true
@@ -26,7 +50,7 @@ export default ({ name, isSlot, slotName, slotIsNot, value, block }) => {
     tags.unsupportedShorthand = true
   }
 
-  if (shouldBeSlot(name)) tags.shouldBeSlot = true
+  if (shouldBeSlot(name, block)) tags.shouldBeSlot = true
   if (isSlot) tags.slot = true
   if (slotIsNot) tags.slotIsNot = true
 
