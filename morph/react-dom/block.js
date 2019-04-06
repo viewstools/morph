@@ -15,7 +15,7 @@ import * as BlockSetTestId from '../react/block-set-test-id.js'
 import * as BlockTable from '../react/block-table.js'
 import * as BlockTeleport from '../react/block-teleport.js'
 
-export const enter = [
+export let enter = [
   BlockSetTestId.enter,
   BlockOffWhen.enter,
   BlockRoute.enter,
@@ -33,7 +33,7 @@ export const enter = [
   BlockList.enter,
 ]
 
-export const leave = [
+export let leave = [
   BlockList.leave,
   BlockExplicitChildren.leave,
   BlockName.leave,

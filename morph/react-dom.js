@@ -7,7 +7,7 @@ import restrictedNames from './react-dom/restricted-names.js'
 import toComponent from './react/to-component.js'
 import walk from './walk.js'
 
-const imports = {
+let imports = {
   Link: "import { Link } from 'react-router-dom'",
   Route: "import { Route } from 'react-router-dom'",
   Router: "import { BrowserRouter as Router } from 'react-router-dom'",
@@ -24,7 +24,7 @@ export default ({
   track = true,
   views,
 }) => {
-  const finalName = restrictedNames.includes(name) ? `${name}1` : name
+  let finalName = restrictedNames.includes(name) ? `${name}1` : name
   if (name !== finalName) {
     console.warn(
       `// "${name}" is a Views reserved name.
@@ -33,7 +33,7 @@ export default ({
     )
   }
 
-  const state = {
+  let state = {
     animated: new Set(),
     animations: {},
     cssDynamic: false,
@@ -59,7 +59,7 @@ export default ({
     svgs: [],
     usedBlockNames: { [finalName]: 1, AutoSizer: 1, Column: 1, Table: 1 },
     uses: [],
-    testIdKey: 'data-test-id',
+    testIdKey: 'data-testid',
     testIds: {},
     track,
     use(block, isLazy = false) {
@@ -86,7 +86,7 @@ export default ({
     )
   }
 
-  const parsed = views[name]
+  let parsed = views[name]
   state.fonts = parsed.fonts
   state.slots = parsed.slots
   state.localSupported = localSupported
@@ -94,7 +94,7 @@ export default ({
   walk(parsed.views[0], visitor, state)
   maybeUsesRouter(state)
 
-  const finalGetImport = (name, isLazy) =>
+  let finalGetImport = (name, isLazy) =>
     imports[name] || getImport(name, isLazy)
 
   return {

@@ -2,7 +2,7 @@ import { getProp, isSlot } from '../utils.js'
 import safe from './safe.js'
 
 export function enter(node, parent, state) {
-  const at = getProp(node, 'at')
+  let at = getProp(node, 'at')
   if (at) {
     let [path, isExact = false] = at.value.split(' ')
     state.use('Route')

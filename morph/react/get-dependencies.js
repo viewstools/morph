@@ -1,6 +1,6 @@
 import SVG from './svg.js'
 
-const NATIVE = [
+let NATIVE = [
   'Animated',
   'Image',
   'KeyboardAvoidingView',
@@ -14,13 +14,13 @@ const NATIVE = [
   'View',
 ]
 
-const sortAlphabetically = (a, b) => {
+let sortAlphabetically = (a, b) => {
   return a === b ? 0 : a < b ? -1 : 1
 }
 
-const importsFirst = (a, b) => {
-  const aIsImport = a.startsWith('import')
-  const bIsImport = b.startsWith('import')
+let importsFirst = (a, b) => {
+  let aIsImport = a.startsWith('import')
+  let bIsImport = b.startsWith('import')
 
   if ((aIsImport && bIsImport) || (!aIsImport && !bIsImport))
     return sortAlphabetically(a, b)
@@ -30,21 +30,21 @@ const importsFirst = (a, b) => {
 }
 
 export default (state, getImport) => {
-  const usesNative = []
-  const usesSvg = []
+  let usesNative = []
+  let usesSvg = []
 
-  const useNative = d => {
+  let useNative = d => {
     if (!usesNative.includes(d)) {
       usesNative.push(d)
     }
   }
-  const useSvg = d => {
+  let useSvg = d => {
     if (!usesSvg.includes(d)) {
       usesSvg.push(d)
     }
   }
 
-  const dependencies = [`import React from 'react'`]
+  let dependencies = [`import React from 'react'`]
 
   state.uses.sort().forEach(d => {
     if (state.isReactNative && NATIVE.includes(d)) {
@@ -71,7 +71,7 @@ export default (state, getImport) => {
     dependencies.push(getImport('ViewsBaseCss'))
 
     state.fonts.forEach(usedFont => {
-      const font = state.getFont(usedFont)
+      let font = state.getFont(usedFont)
       if (font) {
         dependencies.push(`import "${font}"`)
       }
@@ -90,7 +90,7 @@ export default (state, getImport) => {
   }
 
   if (state.isAnimated) {
-    const animations = [
+    let animations = [
       'animated',
       (state.hasSpringAnimation ||
         (state.hasTimingAnimation && state.isReactNative)) &&
@@ -127,7 +127,7 @@ export default (state, getImport) => {
   }
 
   if (usesSvg.length > 0) {
-    const svg = usesSvg.filter(m => m !== 'Svg').join(', ')
+    let svg = usesSvg.filter(m => m !== 'Svg').join(', ')
     dependencies.push(`import Svg, { ${svg} } from 'react-native-svg'`)
   }
 

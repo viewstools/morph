@@ -6,7 +6,7 @@ import {
 } from '../utils.js'
 
 export default (node, parent, code) => {
-  const scopedCondition = getScopedCondition(node, parent)
+  let scopedCondition = getScopedCondition(node, parent)
   if (scopedCondition) {
     switch (node.name) {
       case 'rotate':
@@ -106,10 +106,10 @@ export default (node, parent, code) => {
   }
 }
 
-const getFontFamily = (node, parent) => {
-  const fontWeight = getProp(parent, 'fontWeight')
-  // const key = node.key.value
-  const fontFamily = node.value.replace(/\s/g, '')
+let getFontFamily = (node, parent) => {
+  let fontWeight = getProp(parent, 'fontWeight')
+  // let key = node.key.value
+  let fontFamily = node.value.replace(/\s/g, '')
 
   if (fontWeight && (node.tags.slot || fontWeight.tags.slot)) {
     return `\`${node.tags.slot ? '${props.fontFamily}' : fontFamily}-${
@@ -120,16 +120,16 @@ const getFontFamily = (node, parent) => {
   return fontWeight ? `${fontFamily}-${fontWeight.value}` : fontFamily
 }
 
-const getLineHeight = (node, parent) => {
-  const fontSize = getProp(parent, 'fontSize')
+let getLineHeight = (node, parent) => {
+  let fontSize = getProp(parent, 'fontSize')
   // using a default font size of 16 if none specified
-  const fontSizeValue = fontSize ? fontSize.value : 16
+  let fontSizeValue = fontSize ? fontSize.value : 16
   return node.value * fontSizeValue
 }
 
-const getShadowOffset = (node, parent) => {
-  const shadowOffsetX = getProp(parent, 'shadowOffsetX')
-  const shadowOffsetY = getProp(parent, 'shadowOffsetY')
+let getShadowOffset = (node, parent) => {
+  let shadowOffsetX = getProp(parent, 'shadowOffsetX')
+  let shadowOffsetY = getProp(parent, 'shadowOffsetY')
 
   return decorateShadow({
     // iOS,
@@ -146,10 +146,10 @@ let decorateShadow = obj => {
   return obj
 }
 
-const getPropValue = (prop, block, unit = '') => {
+let getPropValue = (prop, block, unit = '') => {
   if (!prop) return false
 
-  const scopedCondition = getScopedCondition(prop, block)
+  let scopedCondition = getScopedCondition(prop, block)
   if (scopedCondition) {
     return unit ? `\`\${${scopedCondition}}${unit}\`` : scopedCondition
   }
@@ -163,18 +163,18 @@ const getPropValue = (prop, block, unit = '') => {
     : prop.value
 }
 
-const getTransformValue = (prop, parent, unit) =>
+let getTransformValue = (prop, parent, unit) =>
   prop && {
     [prop.name]: getPropValue(prop, parent, unit),
   }
 
-const getTransform = (node, parent) => {
-  const rotate = getProp(parent, 'rotate')
-  const rotateX = getProp(parent, 'rotateX')
-  const rotateY = getProp(parent, 'rotateY')
-  const scale = getProp(parent, 'scale')
-  const translateX = getProp(parent, 'translateX')
-  const translateY = getProp(parent, 'translateY')
+let getTransform = (node, parent) => {
+  let rotate = getProp(parent, 'rotate')
+  let rotateX = getProp(parent, 'rotateX')
+  let rotateY = getProp(parent, 'rotateY')
+  let scale = getProp(parent, 'scale')
+  let translateX = getProp(parent, 'translateX')
+  let translateY = getProp(parent, 'translateY')
 
   return [
     getTransformValue(rotate, parent, 'deg'),

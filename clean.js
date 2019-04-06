@@ -1,26 +1,26 @@
-const glob = require('fast-glob')
-const fs = require('fs')
-const path = require('path')
+let glob = require('fast-glob')
+let fs = require('fs')
+let path = require('path')
 
 module.exports = async src => {
-  const options = {
+  let options = {
     bashNative: ['linux'],
     cwd: src,
     ignore: ['*node_modules*'],
     // filter: f => !/node_modules/.test(f),
   }
 
-  const created = await glob(
+  let created = await glob(
     ['**/*.view', '**/*.view.logic.js', '**/*.view.tests'],
     options
   )
 
-  const morphed = await glob(
+  let morphed = await glob(
     ['**/*.view.css', '**/*.view.js', '**/*.view.tests.js'],
     options
   )
 
-  const toRemove = morphed.filter(
+  let toRemove = morphed.filter(
     m => !created.includes(m.replace(/\.(js|css)$/, ''))
   )
 

@@ -1,30 +1,30 @@
-const { exec } = require('child_process')
-const {
+let { exec } = require('child_process')
+let {
   getViewNotFound,
   isViewNameRestricted,
   morph,
   morphFont,
   parse,
 } = require('./lib.js')
-const chalk = require('chalk')
-const chokidar = require('chokidar')
-const clean = require('./clean.js')
-const debounce = require('debounce')
-const ensureBaseCss = require('./ensure-base-css.js')
-const ensureLocalContainer = require('./ensure-local-container.js')
-const ensureTrackContext = require('./ensure-track-context.js')
-const getLatestVersion = require('latest-version')
-const flatten = require('flatten')
-const fs = require('mz/fs')
-const glob = require('fast-glob')
-const hasYarn = require('has-yarn')
-const morphInlineSvg = require('./morph/inline-svg.js')
-const path = require('path')
-const toPascalCase = require('to-pascal-case')
-const uniq = require('array-uniq')
-const readPkgUp = require('read-pkg-up')
+let chalk = require('chalk')
+let chokidar = require('chokidar')
+let clean = require('./clean.js')
+let debounce = require('debounce')
+let ensureBaseCss = require('./ensure-base-css.js')
+let ensureLocalContainer = require('./ensure-local-container.js')
+let ensureTrackContext = require('./ensure-track-context.js')
+let getLatestVersion = require('latest-version')
+let flatten = require('flatten')
+let fs = require('mz/fs')
+let glob = require('fast-glob')
+let hasYarn = require('has-yarn')
+let morphInlineSvg = require('./morph/inline-svg.js')
+let path = require('path')
+let toPascalCase = require('to-pascal-case')
+let uniq = require('array-uniq')
+let readPkgUp = require('read-pkg-up')
 
-const FONT_TYPES = {
+let FONT_TYPES = {
   '.otf': 'opentype',
   '.eot': 'eot',
   '.svg': 'svg',
@@ -33,22 +33,21 @@ const FONT_TYPES = {
   '.woff2': 'woff2',
 }
 
-const isMorphedView = f => /\.view\.js$/.test(f)
+let isMorphedView = f => /\.view\.js$/.test(f)
 
-const isJs = f => path.extname(f) === '.js'
-const isLogic = f => /\.view\.logic\.js$/.test(f)
-const isView = f => path.extname(f) === '.view'
-const isFont = f => Object.keys(FONT_TYPES).includes(path.extname(f))
+let isJs = f => path.extname(f) === '.js'
+let isLogic = f => /\.view\.logic\.js$/.test(f)
+let isView = f => path.extname(f) === '.view'
+let isFont = f => Object.keys(FONT_TYPES).includes(path.extname(f))
 
-const getFontFileId = file => path.basename(file).split('.')[0]
+let getFontFileId = file => path.basename(file).split('.')[0]
 
-const relativise = (from, to) => {
-  const r = path.relative(from, to).replace(/\\/g, '/')
+let relativise = (from, to) => {
+  let r = path.relative(from, to).replace(/\\/g, '/')
   return r.substr(r.startsWith('../..') ? 3 : 1)
 }
 
-const onMorphWriteFile = ({ as, file, code }) =>
-  fs.writeFile(`${file}${as === 'e2e' ? '.page.js' : '.js'}`, code)
+let onMorphWriteFile = ({ as, file, code }) => fs.writeFile(`${file}.js`, code)
 
 module.exports = options => {
   return new Promise(async (resolve, reject) => {
@@ -95,34 +94,34 @@ module.exports = options => {
       clean(src)
     }
 
-    const shouldDisplayWarning = warning => {
+    let shouldDisplayWarning = warning => {
       if (!verbose) return false
       return /default value/.test(warning.type) ? warnOfDefaultValue : true
     }
 
     if (!viewNotFound)
       viewNotFound = name => {
-        const warning = `${src}/${name}.view doesn't exist but it is being used. Create the file!`
+        let warning = `${src}/${name}.view doesn't exist but it is being used. Create the file!`
         verbose && console.log(chalk.magenta(`! ${warning}`))
         return getViewNotFound(as, name, warning)
       }
 
-    const jsComponents = {}
-    const isJsComponent = f => {
+    let jsComponents = {}
+    let isJsComponent = f => {
       if (jsComponents.hasOwnProperty(f)) return jsComponents[f]
       let is = false
 
       try {
         // TODO async
-        const filePath = path.join(src, f)
-        const content = fs.readFileSync(filePath, 'utf-8')
+        let filePath = path.join(src, f)
+        let content = fs.readFileSync(filePath, 'utf-8')
         is = /\/\/ @view/.test(content)
       } catch (err) {}
 
       return (jsComponents[f] = is)
     }
 
-    const isDirectory = f => {
+    let isDirectory = f => {
       try {
         // TODO async
         return fs.statSync(f).isDirectory()
@@ -131,7 +130,7 @@ module.exports = options => {
       }
     }
 
-    const filter = fn => (f, a, b) => {
+    let filter = fn => (f, a, b) => {
       if (
         isMorphedView(f, a, b) ||
         (isJs(f) && !isJsComponent(f) && !isLogic(f)) ||
@@ -144,7 +143,7 @@ module.exports = options => {
       return fn(f, a, b)
     }
 
-    const getImportFileName = (name, file) => {
+    let getImportFileName = (name, file) => {
       let f = views[name]
 
       if (!f) {
@@ -158,18 +157,18 @@ module.exports = options => {
       }
 
       if (isView(f)) {
-        const logicFile = logic[`${name}.view.logic`]
+        let logicFile = logic[`${name}.view.logic`]
         if (logicFile) f = logicFile
       }
 
-      const ret = relativise(file, f)
+      let ret = relativise(file, f)
 
       return isJs(ret) ? ret.replace(/\.js$/, '') : `${ret}.js`
     }
 
-    const addFont = file => {
-      const id = getFontFileId(file)
-      const type = FONT_TYPES[path.extname(file)]
+    let addFont = file => {
+      let id = getFontFileId(file)
+      let type = FONT_TYPES[path.extname(file)]
 
       if (
         instance.customFonts.some(font => font.id === id && font.type === type)
@@ -183,14 +182,14 @@ module.exports = options => {
         type,
       })
     }
-    const removeFont = file => {
-      const id = getFontFileId(file)
+    let removeFont = file => {
+      let id = getFontFileId(file)
       instance.customFonts = instance.customFonts.filter(font => font.id !== id)
     }
 
-    const fonts = {}
+    let fonts = {}
 
-    const makeGetDomFont = (view, file) => {
+    let makeGetDomFont = (view, file) => {
       return font => {
         if (!fonts[font.id]) {
           fonts[font.id] = `Fonts/${font.id}.js`
@@ -205,7 +204,7 @@ module.exports = options => {
       }
     }
 
-    const makeGetNativeFonts = view => {
+    let makeGetNativeFonts = view => {
       return fonts => {
         // TODO revisit, it's overwriting the fonts with an empty object, so
         // I'll disable it for now until we have more time to look into it.
@@ -216,7 +215,7 @@ module.exports = options => {
       }
     }
 
-    const makeGetImport = (view, file) => {
+    let makeGetImport = (view, file) => {
       dependsOn[view] = []
 
       return (name, isLazy) => {
@@ -248,7 +247,7 @@ module.exports = options => {
         // TODO track dependencies to make it easy to rebuild files as new ones get
         // added, eg logic is added, we need to rebuild upwards
 
-        const importPath = getImportFileName(name, file)
+        let importPath = getImportFileName(name, file)
 
         return views[name]
           ? isLazy
@@ -258,14 +257,14 @@ module.exports = options => {
       }
     }
 
-    const dependsOn = {}
-    const responsibleFor = {}
-    const logic = {}
-    const views = Object.assign({}, map)
-    const viewsSources = {}
-    const viewsParsed = {}
+    let dependsOn = {}
+    let responsibleFor = {}
+    let logic = {}
+    let views = Object.assign({}, map)
+    let viewsSources = {}
+    let viewsParsed = {}
 
-    const instance = {
+    let instance = {
       customFonts: [],
       externalDependencies: new Set(),
       dependsOn,
@@ -308,7 +307,7 @@ module.exports = options => {
       ensureBaseCss(path.join(src, instance.baseCss))
     }
 
-    const maybeUpdateLocal = supported => {
+    let maybeUpdateLocal = supported => {
       if (local) {
         if (supported) {
           supported.forEach(lang => {
@@ -348,8 +347,8 @@ module.exports = options => {
       })
     }
 
-    const addView = filter((f, skipMorph = false) => {
-      const { file, view } = toViewPath(f)
+    let addView = filter((f, skipMorph = false) => {
+      let { file, view } = toViewPath(f)
 
       if (isViewNameRestricted(view, as)) {
         verbose &&
@@ -394,12 +393,12 @@ module.exports = options => {
       }
     })
 
-    const makeResponsibleFor = () => {
+    let makeResponsibleFor = () => {
       Object.keys(views).forEach(updateResponsibleFor)
     }
 
-    const maybeIsReady = () => {
-      const isReady = viewsLeftToBeReady === 0
+    let maybeIsReady = () => {
+      let isReady = viewsLeftToBeReady === 0
 
       if (isReady) return true
 
@@ -414,18 +413,16 @@ module.exports = options => {
       }
     }
 
-    const getPointsOfUseFor = view =>
+    let getPointsOfUseFor = view =>
       Object.keys(dependsOn).filter(dep => dependsOn[dep].includes(view))
 
-    const updateResponsibleFor = viewRaw => {
-      if (as === 'e2e') return
-
-      const view = viewRaw.split('.')[0]
-      const list = []
-      const left = getPointsOfUseFor(view)
+    let updateResponsibleFor = viewRaw => {
+      let view = viewRaw.split('.')[0]
+      let list = []
+      let left = getPointsOfUseFor(view)
 
       while (left.length > 0) {
-        const next = left.pop()
+        let next = left.pop()
 
         if (!list.includes(next)) {
           list.push(next)
@@ -438,19 +435,19 @@ module.exports = options => {
       return responsibleFor[view]
     }
 
-    const addViewSkipMorph = f => addView(f, true)
+    let addViewSkipMorph = f => addView(f, true)
 
-    const getViewSource = async f => {
-      const { view } = toViewPath(f)
+    let getViewSource = async f => {
+      let { view } = toViewPath(f)
 
       try {
-        const rawFile = path.join(src, f)
-        const source = await fs.readFile(rawFile, 'utf-8')
-        const parsed = parse({ source })
+        let rawFile = path.join(src, f)
+        let source = await fs.readFile(rawFile, 'utf-8')
+        let parsed = parse({ source })
         viewsSources[view] = source
         viewsParsed[view] = parsed
 
-        const warnings = parsed.warnings.filter(shouldDisplayWarning)
+        let warnings = parsed.warnings.filter(shouldDisplayWarning)
 
         if (warnings.length > 0) {
           console.error(
@@ -473,8 +470,8 @@ module.exports = options => {
     }
 
     let toMorphQueue = null
-    const morphView = filter(async (f, skipRemorph, skipSource) => {
-      const { file, view } = toViewPath(f)
+    let morphView = filter(async (f, skipRemorph, skipSource) => {
+      let { file, view } = toViewPath(f)
       if (isViewNameRestricted(view, as)) {
         verbose &&
           console.log(
@@ -488,20 +485,20 @@ module.exports = options => {
 
       if (isJs(f)) return
 
-      const getFont =
+      let getFont =
         as === 'react-native'
           ? makeGetNativeFonts(view)
           : makeGetDomFont(view, file)
-      const getImport = makeGetImport(view, file)
+      let getImport = makeGetImport(view, file)
       let calledMaybeIsReady = false
 
       try {
-        const rawFile = path.join(src, f)
+        let rawFile = path.join(src, f)
         if (!skipSource) {
           await getViewSource(f)
         }
 
-        const res = morph({
+        let res = morph({
           as,
           compile,
           enableAnimated,
@@ -519,7 +516,7 @@ module.exports = options => {
           instance.externalDependencies.add(dep)
         }
 
-        const toMorph = {
+        let toMorph = {
           as,
           code: res.code,
           dependsOn: dependsOn[view],
@@ -556,13 +553,13 @@ module.exports = options => {
         if (Array.isArray(res.svgs)) {
           await Promise.all(
             res.svgs.map(async svg => {
-              const svgFile = path.resolve(rawFile, '..', svg.source)
+              let svgFile = path.resolve(rawFile, '..', svg.source)
 
               try {
-                const inlined = await morphInlineSvg(svgFile)
+                let inlined = await morphInlineSvg(svgFile)
 
                 // TODO revisit as most of the options don't matter here
-                const res = morph({
+                let res = morph({
                   as,
                   compile,
                   enableAnimated,
@@ -603,8 +600,8 @@ module.exports = options => {
       }
     })
 
-    const remorphDependenciesFor = async viewRaw => {
-      const view = viewRaw.split('.')[0]
+    let remorphDependenciesFor = async viewRaw => {
+      let view = viewRaw.split('.')[0]
 
       await Promise.all(
         responsibleFor[view].map(dep => morphView(views[dep], true))
@@ -615,8 +612,8 @@ module.exports = options => {
       }
     }
 
-    const toViewPath = f => {
-      const file = f.replace(/(\.ios|\.android|\.web)/, '')
+    let toViewPath = f => {
+      let file = f.replace(/(\.ios|\.android|\.web)/, '')
 
       let view = path.basename(file)
       if (isLogic(file)) {
@@ -631,8 +628,8 @@ module.exports = options => {
       }
     }
 
-    const removeView = filter(f => {
-      const { view } = toViewPath(f)
+    let removeView = filter(f => {
+      let { view } = toViewPath(f)
       if (isViewNameRestricted(view, as)) return
 
       verbose && console.log(chalk.blue('D'), view)
@@ -656,12 +653,12 @@ module.exports = options => {
       delete dependsOn[view]
     })
 
-    const watcherOptions = {
+    let watcherOptions = {
       bashNative: ['linux'],
       cwd: src,
       ignore: ['**/node_modules/**', '**/*.view.js'],
     }
-    const watcherPattern = [
+    let watcherPattern = [
       `**/*.js`,
       `**/*.view`,
       shouldIncludeLogic && `**/*.view.logic.js`,
@@ -674,11 +671,11 @@ module.exports = options => {
       'Fonts/*.woff2',
     ].filter(Boolean)
 
-    const fontsDirectory = path.join(src, 'Fonts')
+    let fontsDirectory = path.join(src, 'Fonts')
     if (!(await fs.exists(fontsDirectory))) {
       await fs.mkdir(fontsDirectory)
     }
-    const customFonts = await glob(
+    let customFonts = await glob(
       [
         // fonts,
         'Fonts/*.eot',
@@ -700,8 +697,8 @@ module.exports = options => {
 
     let viewsLeftToBeReady = null
 
-    const listToMorph = await glob(watcherPattern, watcherOptions)
-    const viewsToMorph = listToMorph.map(addViewSkipMorph).filter(Boolean)
+    let listToMorph = await glob(watcherPattern, watcherOptions)
+    let viewsToMorph = listToMorph.map(addViewSkipMorph).filter(Boolean)
 
     await Promise.all(viewsToMorph.map(getViewSource))
 
@@ -713,7 +710,7 @@ module.exports = options => {
     }
 
     if (!once) {
-      const watcher = chokidar.watch(watcherPattern, {
+      let watcher = chokidar.watch(watcherPattern, {
         cwd: src,
         ignored: /(node_modules|\.view.js)/,
         ignoreInitial: true,

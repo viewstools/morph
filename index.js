@@ -8,9 +8,9 @@ import toPascalCase from 'to-pascal-case'
 import prettier from 'prettier'
 import parse from './parse/index.js'
 
-const DEFAULT_IMPORT = name => `import ${name} from './${name}.view.js'`
+let DEFAULT_IMPORT = name => `import ${name} from './${name}.view.js'`
 
-export const morph = ({
+export let morph = ({
   as,
   compile,
   enableAnimated,
@@ -57,10 +57,10 @@ export const morph = ({
   return morphed
 }
 
-export const getViewNotFound = (as, name, warning) =>
+export let getViewNotFound = (as, name, warning) =>
   doGetViewNotFound[as](name, warning)
 
-const sanitize = input =>
+let sanitize = input =>
   basename(input)
     .replace(extname(input), '')
     .replace(/[^a-zA-Z_$0-9]+/g, '_')
@@ -68,10 +68,10 @@ const sanitize = input =>
     .replace(/_$/, '')
     .replace(/^(\d)/, '_$1')
 
-export const pathToName = path =>
+export let pathToName = path =>
   toPascalCase(sanitize(basename(path).replace('.view', '')))
 
-export const isViewNameRestricted = (view, as) =>
+export let isViewNameRestricted = (view, as) =>
   restrictedNames[as].includes(view)
 
 export { morphFont }

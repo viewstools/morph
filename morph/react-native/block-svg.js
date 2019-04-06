@@ -1,6 +1,6 @@
 import { getProp, hasProp } from '../utils.js'
 
-const SVG_BLOCKS_WITH_OPACITY = [
+let SVG_BLOCKS_WITH_OPACITY = [
   'SvgPath',
   'SvgCircle',
   'SvgEllipse',

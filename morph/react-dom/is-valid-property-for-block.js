@@ -1,8 +1,11 @@
-const blacklist = [
+let blacklist = [
   'classname',
   'format',
   'goto',
   'isfragment',
+  'onclickid',
+  'onclickselected',
+  'onclickselectedtype',
   'onclickusediv',
   'perspective',
   'rotatez',

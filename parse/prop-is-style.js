@@ -1,4 +1,4 @@
-export const STYLE = [
+export let STYLE = [
   'alignContent',
   'alignItems',
   'alignSelf',
@@ -191,12 +191,12 @@ export const STYLE = [
   // 'verticalAlign',
   // 'visibility',
 ]
-export const ROWSTYLE = [
+export let ROWSTYLE = [
   'rowBackgroundColor',
   'rowBackgroundColorAlternate',
   'rowColor',
   'rowColorAlternate',
 ]
 
-export const isStyle = name => STYLE.includes(name)
-export const isRowStyle = name => ROWSTYLE.includes(name)
+export let isStyle = name => STYLE.includes(name)
+export let isRowStyle = name => ROWSTYLE.includes(name)

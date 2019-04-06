@@ -11,7 +11,7 @@ export default (font, files) => {
       '+'
     )}:${font.weight}${font.style === 'italic' ? 'i' : ''}');body{}")`
   } else {
-    const sources = sort(files.filter(src => font.id === src.id), sortFonts)
+    let sources = sort(files.filter(src => font.id === src.id), sortFonts)
 
     body = `${sources
       .map(src => `import ${src.type} from '${src.relativeFile}'`)

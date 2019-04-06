@@ -6,16 +6,12 @@ export default ({ state, name }) => {
     render = `<Subscribe to={[LocalContainer]}>\n{local =>\n${render}\n}</Subscribe>`
   }
 
-  const maybeChildrenArray = state.usesChildrenArray
-    ? `const childrenArray = React.Children.toArray(props.children)`
-    : ''
-
   let animatedOpen = []
   let animatedClose = []
   if (state.isAnimated) {
     Object.keys(state.animations).forEach(blockId => {
       Object.values(state.animations[blockId]).forEach(item => {
-        const { curve, ...configValues } = item.animation.properties
+        let { curve, ...configValues } = item.animation.properties
 
         if (!state.isReactNative && curve !== 'spring') return
 
@@ -28,7 +24,7 @@ export default ({ state, name }) => {
           )}} ${config}`
         }
 
-        const to = Object.values(item.props)
+        let to = Object.values(item.props)
           .map(prop => {
             prop.scopes.reverse()
 
@@ -40,7 +36,7 @@ export default ({ state, name }) => {
               JSON.stringify(prop.value)
             )
 
-            const unit = getUnit(prop)
+            let unit = getUnit(prop)
             if (!state.isReactNative && unit) {
               value = `\`$\{${value}}${unit}\``
             }
@@ -68,15 +64,13 @@ export default ({ state, name }) => {
     let trackClose = state.track ? ')}</TrackContext.Consumer>' : ''
     return `class ${name} extends React.Component {
   render() {
-    const { props } = this
-    ${maybeChildrenArray}
+    let { props } = this
     return (${trackOpen}${animatedOpen}${render}${animatedClose}${trackClose})
   }
 }`
   } else {
-    return `const ${name} = (props) => {
-    ${state.track ? `const track = React.useContext(TrackContext)` : ''}
-  ${maybeChildrenArray}
+    return `let ${name} = (props) => {
+    ${state.track ? `let track = React.useContext(TrackContext)` : ''}
   return (${render})
 }`
   }

@@ -1,6 +1,6 @@
-const fs = require('mz/fs')
+let fs = require('mz/fs')
 
-const CSS = `* {
+let CSS = `* {
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: -ms-autohiding-scrollbar;
 }
@@ -60,7 +60,7 @@ body,
 }
 `
 
-const BASE_CSS = `import { injectGlobal } from 'emotion'
+let BASE_CSS = `import { injectGlobal } from 'emotion'
 injectGlobal(\`${CSS}\`)`
 
 module.exports = async file => {

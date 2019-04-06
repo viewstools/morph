@@ -1,5 +1,5 @@
 export default ({ uses }) => {
   return uses.includes('Animated') && uses.includes('FlatList')
-    ? `const AnimatedFlatList = Animated.createAnimatedComponent(FlatList)`
+    ? `let AnimatedFlatList = Animated.createAnimatedComponent(FlatList)`
     : ''
 }

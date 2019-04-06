@@ -30,7 +30,7 @@ export default (node, parent, state) => {
   }
 }
 
-const getGroupBlockName = (node, state) => {
+let getGroupBlockName = (node, state) => {
   let name = 'View'
 
   if (node.isFragment) {
@@ -40,12 +40,12 @@ const getGroupBlockName = (node, state) => {
   } else if (hasProp(node, 'goTo')) {
     node.goTo = true
   } else if (hasProp(node, 'onClick')) {
-    const propNode = getProp(node, 'onClick')
+    let propNode = getProp(node, 'onClick')
     node.action = propNode.value
   }
 
   if (hasProp(node, 'backgroundImage')) {
-    const propNode = getProp(node, 'backgroundImage')
+    let propNode = getProp(node, 'backgroundImage')
     node.backgroundImage = isSlot(propNode)
       ? propNode.value
       : JSON.stringify(propNode.value)
@@ -63,8 +63,8 @@ const getGroupBlockName = (node, state) => {
   return name
 }
 
-const getListBlockName = (node, state) => {
-  const base = hasProp(node, /^overflow/, v => v === 'auto' || v === 'scroll')
+let getListBlockName = (node, state) => {
+  let base = hasProp(node, /^overflow/, v => v === 'auto' || v === 'scroll')
     ? 'FlatList'
     : 'View'
   if (node.isAnimated) {
@@ -75,14 +75,14 @@ const getListBlockName = (node, state) => {
   }
 }
 
-const isSvg = str => /\.svg$/.test(str)
-const getImageName = (node, state) => {
+let isSvg = str => /\.svg$/.test(str)
+let getImageName = (node, state) => {
   if (hasProp(node, 'source')) {
-    const source = getProp(node, 'source')
-    const { value } = source.value
+    let source = getProp(node, 'source')
+    let { value } = source.value
 
     if (isSvg(value)) {
-      const name = `${toPascalCase(value)}Inline`
+      let name = `${toPascalCase(value)}Inline`
       node.isSvg = true
 
       if (!state.svgs.some(svg => svg.source === value)) {

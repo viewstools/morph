@@ -1,6 +1,6 @@
 export default state => (state.isFormatted ? createFormatters(state) : '')
 
-const createFormatters = ({ formats, localSupported }) => {
+let createFormatters = ({ formats, localSupported }) => {
   return formats
     .map(format => {
       return getFormat(format, localSupported)
@@ -8,13 +8,12 @@ const createFormatters = ({ formats, localSupported }) => {
     .join('')
 }
 
-const getFormat = (format, localSupported) => {
-  const style = Object.keys(format)[0]
-  const type =
-    style === 'currency' || style === 'percent' ? 'Number' : 'DateTime'
+let getFormat = (format, localSupported) => {
+  let style = Object.keys(format)[0]
+  let type = style === 'currency' || style === 'percent' ? 'Number' : 'DateTime'
 
-  const options = getOptions(format[`${style}`], style, type)
-  let string = `const ${style}Options = ${options}\nconst ${style}Formatters = {`
+  let options = getOptions(format[`${style}`], style, type)
+  let string = `let ${style}Options = ${options}\nlet ${style}Formatters = {`
   localSupported.forEach(local => {
     string += `${local}: new Intl.${type}Format('${local}', ${style}Options),\n`
   })
@@ -22,7 +21,7 @@ const getFormat = (format, localSupported) => {
   return `${string} }\n`
 }
 
-const getOptions = (format, style, type) => {
+let getOptions = (format, style, type) => {
   if (style === 'currency')
     return `{ style: 'currency', currency: '${format}' }`
 

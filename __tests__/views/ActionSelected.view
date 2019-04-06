@@ -1,0 +1,61 @@
+# each when <isSelected is coupled with their onClick
+ActionSelectedWrapper Vertical
+  ActionSelectedFixedId Vertical
+    backgroundColor red
+    onClick <
+    onClickId some-fixed-id
+    onClickSelected <
+    when <isSelected
+    backgroundColor blue
+    Text
+      text test
+      when <isSelected
+      text another
+  ActionSelectedDynamicID Vertical
+    backgroundColor red
+    onClick <onClick2
+    onClickId <onClick2
+    onClickSelected <onClickSelected2
+    when <isSelected
+    backgroundColor blue
+    Text
+      text hey
+      when <isSelected
+      text ho
+  ActionSelectedRadio Vertical
+    backgroundColor red
+    onClick <onClick2
+    onClickId <onClick2
+    onClickSelected <onClickSelected2
+    # radio is the default
+    onClickSelectedType radio
+    when <isSelected
+    backgroundColor blue
+    Text
+      text hey
+      when <isSelected
+      text ho
+  ActionSelectedCheckbox Vertical
+    backgroundColor red
+    onClick <onClick3
+    onClickId <onClick3
+    onClickSelected <onClickSelected3
+    onClickSelectedType checkbox
+    when <isSelected
+    backgroundColor blue
+    Text
+      text hey
+      when <isSelected
+      text ho
+  ActionSelectedDynamicType Vertical
+    backgroundColor red
+    onClick <onClick4
+    onClickId <onClick4
+    onClickSelected <onClickSelected4
+    onClickSelectedType < radio
+    when <isSelected
+    backgroundColor blue
+    Text
+      text hey
+      when <isSelected
+      text ho

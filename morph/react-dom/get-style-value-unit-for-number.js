@@ -1,32 +1,32 @@
-const IS_INT = /^([0-9]+)(.*)$/
-const IS_FLOAT = /^([0-9]+\.[0-9]+)(.*)$/
+let IS_INT = /^([0-9]+)(.*)$/
+let IS_FLOAT = /^([0-9]+\.[0-9]+)(.*)$/
 
-const PIXEL = 'px'
-const PERCENTAGE = '%'
-const EM = 'em'
-const REM = 'rem'
-const VW = 'vw'
-const VH = 'vh'
+let PIXEL = 'px'
+let PERCENTAGE = '%'
+let EM = 'em'
+let REM = 'rem'
+let VW = 'vw'
+let VH = 'vh'
 
-const DEGREES = 'deg'
-const GRADIANS = 'grad'
-const RADIANS = 'rad'
-const TURN = 'turn'
+let DEGREES = 'deg'
+let GRADIANS = 'grad'
+let RADIANS = 'rad'
+let TURN = 'turn'
 
 export default (key, value) => {
-  const units = getUnits(key)
+  let units = getUnits(key)
 
   if (typeof value === 'number') return units[0] || ''
 
-  const match = value.match(IS_INT.test(value) ? IS_INT : IS_FLOAT)
+  let match = value.match(IS_INT.test(value) ? IS_INT : IS_FLOAT)
   return match ? '' : units[0] || ''
 }
 
-const LENGTH = [PIXEL, PERCENTAGE, EM, REM, VW, VH]
-const ANGLE = [DEGREES, GRADIANS, RADIANS, TURN]
-const UNITLESS = []
+let LENGTH = [PIXEL, PERCENTAGE, EM, REM, VW, VH]
+let ANGLE = [DEGREES, GRADIANS, RADIANS, TURN]
+let UNITLESS = []
 
-const UNITS = {
+let UNITS = {
   borderBottomLeftRadius: LENGTH,
   borderBottomRightRadius: LENGTH,
   borderBottomWidth: LENGTH,
@@ -70,9 +70,9 @@ const UNITS = {
   wordSpacing: LENGTH,
   zIndex: UNITLESS,
 }
-const UNITS_KEYS = Object.keys(UNITS)
+let UNITS_KEYS = Object.keys(UNITS)
 
-const getUnits = key => {
-  const found = UNITS_KEYS.find(ukey => key.startsWith(ukey))
+let getUnits = key => {
+  let found = UNITS_KEYS.find(ukey => key.startsWith(ukey))
   return UNITS[found] || UNITLESS
 }

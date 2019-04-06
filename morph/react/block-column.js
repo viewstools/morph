@@ -4,17 +4,17 @@ import { getProp, isColumn, isHeader, isCell } from '../utils.js'
 export function enter(node, parent, state) {
   if (!isColumn(node)) return
 
-  const dataKey = getProp(node, 'key')
-  const width = getWidth(node, parent)
+  let dataKey = getProp(node, 'key')
+  let width = getWidth(node, parent)
 
   state.render.push(` dataKey="${dataKey.value}" width={${width}}`)
 
-  // const label = getLabel(node)
+  // let label = getLabel(node)
   // if (label) {
   //   state.render.push(`label="${label}"`)
   // }
 
-  const header = node.children.find(isHeader)
+  let header = node.children.find(isHeader)
   if (header && !header.isBasic) {
     state.render.push(
       ` headerRenderer={headerProps => <${header.name} {...headerProps} `
@@ -26,7 +26,7 @@ export function enter(node, parent, state) {
     state.render.push(` />}`)
   }
 
-  const cell = node.children.find(isCell)
+  let cell = node.children.find(isCell)
   if (cell && !cell.isBasic) {
     state.render.push(
       ` cellRenderer={cellProps => <${cell.name} {...cellProps} `
@@ -39,21 +39,21 @@ export function enter(node, parent, state) {
   }
 }
 
-const getWidth = (node, parent) => {
-  const width = getProp(node, 'width')
+let getWidth = (node, parent) => {
+  let width = getProp(node, 'width')
   if (width && width.value !== 'auto') {
     return width.value
   }
 
-  const columns = parent.children.filter(child => child.name === 'Column')
-  const columnsWithFixedWidth = columns
+  let columns = parent.children.filter(child => child.name === 'Column')
+  let columnsWithFixedWidth = columns
     .map(node => {
-      const width = getProp(node, 'width')
+      let width = getProp(node, 'width')
       return width && typeof width.value === 'number' && width.value
     })
     .filter(Boolean)
 
-  const columnsWidthSum = columnsWithFixedWidth.reduce(
+  let columnsWidthSum = columnsWithFixedWidth.reduce(
     (res, value) => res + value,
     0
   )
@@ -64,8 +64,8 @@ const getWidth = (node, parent) => {
     : `width / ${columns.length}`
 }
 
-// const getLabel = node => {
-//   const header = node.children.find(node => getProp(node, 'isHeader'))
+// let getLabel = node => {
+//   let header = node.children.find(node => getProp(node, 'isHeader'))
 //   if (!header) return
 
 //   if (header.name === 'Text') {

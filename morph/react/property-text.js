@@ -7,14 +7,14 @@ import {
 } from '../utils.js'
 import wrap from './wrap.js'
 
-const parseFormatValue = (value, type) => {
+let parseFormatValue = (value, type) => {
   switch (type) {
     case 'percent':
       return value / 100
     case 'date':
       return `Date.parse('${value}')`
     case 'time':
-      const timeValues = value.split(':')
+      let timeValues = value.split(':')
       let timeStr = `Date.UTC(2018, 14, 3`
       // parseInt to remove leading zeroes, it isn't a valid number otherwise
       timeValues.forEach(val => (timeStr += `, ${parseInt(val, 10)}`))
@@ -33,7 +33,7 @@ export function enter(node, parent, state) {
     } else if (hasLocals(node, parent)) {
       parent.explicitChildren = getLocalsString(node, parent, state)
     } else if (parent.hasOwnProperty('format')) {
-      const type = Object.keys(parent.format)[0]
+      let type = Object.keys(parent.format)[0]
       parent.explicitChildren = `{${type}Formatters[local.state.lang].format(${parseFormatValue(
         node.value,
         type

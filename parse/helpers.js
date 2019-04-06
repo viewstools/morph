@@ -4,14 +4,14 @@ import isNumber from './prop-is-number.js'
 import locales from 'i18n-locales'
 import toSlugCase from 'to-slug-case'
 
-const LOCAL_SCOPES = locales.map(item => item.replace(/-/g, ''))
+let LOCAL_SCOPES = locales.map(item => item.replace(/-/g, ''))
 
-const dymBlockMatcher = new DidYouMeanMatcher(
+let dymBlockMatcher = new DidYouMeanMatcher(
   'Capture|CaptureTextArea|G|Horizontal|Image|List|Svg|SvgCircle|SvgEllipse|SvgDefs|SvgGroup|SvgLinearGradient|SvgRadialGradient|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgSymbol|SvgText|SvgUse|SvgStop|Text|Vertical'.split(
     '|'
   )
 )
-const dymPropMatcher = new DidYouMeanMatcher([
+let dymPropMatcher = new DidYouMeanMatcher([
   ...STYLE,
   'defaultValue',
   'type',
@@ -39,6 +39,10 @@ const dymPropMatcher = new DidYouMeanMatcher([
   'onBlur',
   'onChange',
   'onClick',
+  'onClickId',
+  'onClickSelected',
+  'onClickSelectedType',
+  'onClickUseDiv',
   'onDrag',
   'onDragEnd',
   'onDragEnter',
@@ -69,14 +73,14 @@ const dymPropMatcher = new DidYouMeanMatcher([
   'className',
 ])
 
-export const didYouMeanBlock = block => dymBlockMatcher.get(block)
-export const didYouMeanProp = prop => dymPropMatcher.get(prop)
+export let didYouMeanBlock = block => dymBlockMatcher.get(block)
+export let didYouMeanProp = prop => dymPropMatcher.get(prop)
 
-const ANIMATION = /(.+)(?:\s)(spring|linear|easeOut|easeInOut|easeIn|ease)(?:\s?(.*)?)/
-const BASIC = /^(Capture|CaptureTextArea|Column|Horizontal|Image|List|Svg|SvgCircle|SvgEllipse|SvgDefs|SvgGroup|SvgLinearGradient|SvgRadialGradient|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgSymbol|SvgText|SvgUse|SvgStop|Table|Text|Vertical)$/i
-const BLOCK = /^(\s*)([A-Z][a-zA-Z0-9]*)(\s+([A-Z][a-zA-Z0-9]*))?$/
-const BOOL = /^(false|true)$/i
-const CAPTURE = /^(Capture|CaptureTextArea)$/i
+let ANIMATION = /(.+)(?:\s)(spring|linear|easeOut|easeInOut|easeIn|ease)(?:\s?(.*)?)/
+let BASIC = /^(Capture|CaptureTextArea|Column|Horizontal|Image|List|Svg|SvgCircle|SvgEllipse|SvgDefs|SvgGroup|SvgLinearGradient|SvgRadialGradient|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgSymbol|SvgText|SvgUse|SvgStop|Table|Text|Vertical)$/i
+let BLOCK = /^(\s*)([A-Z][a-zA-Z0-9]*)(\s+([A-Z][a-zA-Z0-9]*))?$/
+let BOOL = /^(false|true)$/i
+let CAPTURE = /^(Capture|CaptureTextArea)$/i
 export let CAPTURE_TYPES = [
   'email',
   'file',
@@ -85,13 +89,13 @@ export let CAPTURE_TYPES = [
   'secure',
   'text',
 ]
-const COMMENT = /^#(.+)$/
-const FLOAT = /^-?[0-9]+\.[0-9]+$/
-const FONTABLE = /^(Capture|CaptureTextArea|Text)$/
-const INT = /^-?[0-9]+$/
-const NOT_GROUP = /^(Image|Text|SvgCircle|SvgEllipse|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgText|SvgStop)$/i
-const PROP = /^([a-z][a-zA-Z0-9]*)(\s+(.+))?$/
-const UNSUPPORTED_SHORTHAND = {
+let COMMENT = /^#(.+)$/
+let FLOAT = /^-?[0-9]+\.[0-9]+$/
+let FONTABLE = /^(Capture|CaptureTextArea|Text)$/
+let INT = /^-?[0-9]+$/
+let NOT_GROUP = /^(Image|Text|SvgCircle|SvgEllipse|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgText|SvgStop)$/i
+let PROP = /^([a-z][a-zA-Z0-9]*)(\s+(.+))?$/
+let UNSUPPORTED_SHORTHAND = {
   border: ['borderWidth', 'borderStyle', 'borderColor'],
   borderBottom: ['borderBottomWidth', 'borderBottomStyle', 'borderBottomColor'],
   borderTop: ['borderTopWidth', 'borderTopStyle', 'borderTopColor'],
@@ -126,38 +130,38 @@ const UNSUPPORTED_SHORTHAND = {
   ],
   transformOrigin: ['transformOriginX', 'transformOriginY'],
 }
-const TRUE = /^true$/i
-const USER_COMMENT = /^##(.*)$/
+let TRUE = /^true$/i
+let USER_COMMENT = /^##(.*)$/
 // TODO slot can't start with a number
-const SLOT = /^<((!)?([a-zA-Z0-9]+))?(\s+(.+))?$/
+let SLOT = /^<((!)?([a-zA-Z0-9]+))?(\s+(.+))?$/
 
-export const is = (thing, line) => thing.test(line)
-export const isAnimation = line => is(ANIMATION, line)
-export const isBasic = line => is(BASIC, line)
-export const isBlock = line => is(BLOCK, line)
-export const isBool = line => is(BOOL, line)
-export const isCapture = line => is(CAPTURE, line)
-export const isColumn = line => line === 'Column'
-export const isComment = line => is(COMMENT, line)
-export const isEmptyText = line => line === ''
-export const isEnd = line => line === ''
-export const isFloat = line => is(FLOAT, line)
-export const isFragment = line => line === 'isFragment'
-export const isFontable = line => is(FONTABLE, line)
-export const isGroup = line => !is(NOT_GROUP, line) && !isCapture(line)
-export const isList = line => line === 'List'
-export const isInt = line => is(INT, line)
-export const isProp = line => is(PROP, line)
-export const isSlot = line => is(SLOT, line)
-export const isTable = line => line === 'Table'
-export const isUnsupportedShorthand = name => name in UNSUPPORTED_SHORTHAND
+export let is = (thing, line) => thing.test(line)
+export let isAnimation = line => is(ANIMATION, line)
+export let isBasic = line => is(BASIC, line)
+export let isBlock = line => is(BLOCK, line)
+export let isBool = line => is(BOOL, line)
+export let isCapture = line => is(CAPTURE, line)
+export let isColumn = line => line === 'Column'
+export let isComment = line => is(COMMENT, line)
+export let isEmptyText = line => line === ''
+export let isEnd = line => line === ''
+export let isFloat = line => is(FLOAT, line)
+export let isFragment = line => line === 'isFragment'
+export let isFontable = line => is(FONTABLE, line)
+export let isGroup = line => !is(NOT_GROUP, line) && !isCapture(line)
+export let isList = line => line === 'List'
+export let isInt = line => is(INT, line)
+export let isProp = line => is(PROP, line)
+export let isSlot = line => is(SLOT, line)
+export let isTable = line => line === 'Table'
+export let isUnsupportedShorthand = name => name in UNSUPPORTED_SHORTHAND
 export { isRowStyle, isStyle }
-export const isTrue = line => is(TRUE, line)
-export const isUserComment = line => is(USER_COMMENT, line)
+export let isTrue = line => is(TRUE, line)
+export let isUserComment = line => is(USER_COMMENT, line)
 
-const get = (regex, line) => line.match(regex)
+let get = (regex, line) => line.match(regex)
 
-const addDefaults = (animationType, properties) => {
+let addDefaults = (animationType, properties) => {
   // if (!properties.delay) {
   //   properties.delay = 0
   // }
@@ -175,15 +179,15 @@ const addDefaults = (animationType, properties) => {
   return properties
 }
 
-export const getAnimation = line => {
+export let getAnimation = line => {
   // eslint-disable-next-line
-  const [_, defaultValue, animationType, animationValues] = get(ANIMATION, line)
+  let [_, defaultValue, animationType, animationValues] = get(ANIMATION, line)
   let properties = {
     curve: animationType,
   }
 
   if (animationValues) {
-    const values = animationValues.split(' ')
+    let values = animationValues.split(' ')
     for (let i = 0; i < values.length; i = i + 2) {
       properties[values[i]] = getValue(values[i + 1])
     }
@@ -201,26 +205,26 @@ export const getAnimation = line => {
   }
 }
 
-export const getBlock = line => {
+export let getBlock = line => {
   // eslint-disable-next-line
-  const [_, indentation, is, _1, block] = get(BLOCK, line)
+  let [_, indentation, is, _1, block] = get(BLOCK, line)
   return {
     block: block || is,
     is: block ? is : null,
     level: Math.floor(indentation.length / 2),
   }
 }
-export const getComment = line => {
+export let getComment = line => {
   try {
     return get(COMMENT, line).slice(1)
   } catch (err) {
     return ''
   }
 }
-export const getFormat = line => {
+export let getFormat = line => {
   let properties = {}
-  const values = line.split(' ')
-  const formatKey = values[0]
+  let values = line.split(' ')
+  let formatKey = values[0]
 
   if (values.length === 2) {
     properties[formatKey] = values[1]
@@ -233,14 +237,14 @@ export const getFormat = line => {
 
   return properties
 }
-export const getProp = line => {
+export let getProp = line => {
   // eslint-disable-next-line
   let [_, name, _1, value = ''] = get(PROP, line)
 
-  const prop = { name, isSlot: false, value }
+  let prop = { name, isSlot: false, value }
 
   if (is(SLOT, value)) {
-    const [
+    let [
       // eslint-disable-next-line
       _2,
       slotIsNot = false,
@@ -259,12 +263,12 @@ export const getProp = line => {
 
   return prop
 }
-export const getSlot = line => get(SLOT, line).slice(1)
-export const getUnsupportedShorthandExpanded = (name, value) => {
-  const props = UNSUPPORTED_SHORTHAND[name]
+export let getSlot = line => get(SLOT, line).slice(1)
+export let getUnsupportedShorthandExpanded = (name, value) => {
+  let props = UNSUPPORTED_SHORTHAND[name]
 
   if (name === 'borderRadius') {
-    const theValue = value.replace('px', '')
+    let theValue = value.replace('px', '')
 
     return [
       `${props[0]} ${theValue}`,
@@ -273,7 +277,7 @@ export const getUnsupportedShorthandExpanded = (name, value) => {
       `${props[3]} ${theValue}`,
     ]
   } else if (name.startsWith('border') || name === 'outline') {
-    const [width, style, ...color] = value.split(' ')
+    let [width, style, ...color] = value.split(' ')
 
     return [
       `${props[0]} ${width.replace('px', '')}`,
@@ -281,7 +285,7 @@ export const getUnsupportedShorthandExpanded = (name, value) => {
       `${props[2]} ${color.join(' ')}`,
     ]
   } else if (name === 'boxShadow') {
-    const [offsetX, offsetY, blurRadius, spreadRadius, ...color] = value.split(
+    let [offsetX, offsetY, blurRadius, spreadRadius, ...color] = value.split(
       ' '
     )
 
@@ -293,7 +297,7 @@ export const getUnsupportedShorthandExpanded = (name, value) => {
       `${props[4]} ${color.join(' ')}`,
     ]
   } else if (name === 'textShadow') {
-    const [offsetX, offsetY, blurRadius, ...color] = value.split(' ')
+    let [offsetX, offsetY, blurRadius, ...color] = value.split(' ')
 
     return [
       `${props[0]} ${offsetX.replace('px', '')}`,
@@ -321,13 +325,13 @@ export const getUnsupportedShorthandExpanded = (name, value) => {
   } else if (name === 'transform') {
     return [`expand the values like: translateX 10`]
   } else if (name === 'transformOrigin') {
-    const [x, y] = value.split(' ')
+    let [x, y] = value.split(' ')
     return [`${props[0]} ${x}`, `${props[1]} ${y || x}`]
   }
 
   return []
 }
-export const getValue = (value, name) => {
+export let getValue = (value, name) => {
   if (isFloat(value)) {
     return parseFloat(value, 10)
   } else if (isInt(value)) {
@@ -341,20 +345,21 @@ export const getValue = (value, name) => {
   }
 }
 
-export const isLocalScope = name => LOCAL_SCOPES.includes(name)
+export let isLocalScope = name => LOCAL_SCOPES.includes(name)
 
-const SYSTEM_SCOPES = [
+let SYSTEM_SCOPES = [
   'isDisabled',
   'isFocused',
   'isHovered',
   'isPlaceholder',
+  // 'isSelected',
   // TODO do we want to do media queries here?
 ]
-export const isSystemScope = name => SYSTEM_SCOPES.includes(name)
+export let isSystemScope = name => SYSTEM_SCOPES.includes(name)
 
-const isActionable = name => name !== 'onWhen' && /^on[A-Z]/.test(name)
+let isActionable = name => name !== 'onWhen' && /^on[A-Z]/.test(name)
 
-export const getPropType = (block, name, defaultValue) =>
+export let getPropType = (block, name, defaultValue) =>
   block.isList && name === 'from'
     ? 'array'
     : isActionable(name)
@@ -363,7 +368,7 @@ export const getPropType = (block, name, defaultValue) =>
     ? 'number'
     : 'string'
 
-const MAYBE_HYPHENATED_STYLE_PROPS = [
+let MAYBE_HYPHENATED_STYLE_PROPS = [
   'alignContent',
   'alignItems',
   'alignSelf',
@@ -390,7 +395,7 @@ const MAYBE_HYPHENATED_STYLE_PROPS = [
   'wordBreak',
 ]
 
-export const maybeMakeHyphenated = (value, name) =>
+export let maybeMakeHyphenated = (value, name) =>
   MAYBE_HYPHENATED_STYLE_PROPS.includes(name) && /^[a-zA-Z]+$/.test(value)
     ? toSlugCase(value)
     : value

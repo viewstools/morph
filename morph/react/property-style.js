@@ -32,7 +32,7 @@ export function enter(node, parent, state) {
     }
   }
 
-  const { _isProp, _isScoped, ...styleForProperty } = state.getStyleForProperty(
+  let { _isProp, _isScoped, ...styleForProperty } = state.getStyleForProperty(
     node,
     parent,
     code
@@ -43,11 +43,11 @@ export function enter(node, parent, state) {
       state.render.push(` ${k}=${safe(styleForProperty[k], node)}`)
     )
   } else {
-    const hasMatchingParent =
+    let hasMatchingParent =
       parent && node.isDynamic
         ? checkParentStem(node, getStyleType(node))
         : false
-    const target =
+    let target =
       code || _isScoped || hasMatchingParent
         ? parent.style.dynamic
         : parent.style.static

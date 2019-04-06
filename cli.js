@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-const { readFileSync, statSync } = require('fs')
-const { morph, parse, pathToName } = require('./lib.js')
-const chalk = require('chalk')
-const watch = require('./watch.js')
-const morphInlineSvg = require('./morph/inline-svg.js')
+let { readFileSync, statSync } = require('fs')
+let { morph, parse, pathToName } = require('./lib.js')
+let chalk = require('chalk')
+let watch = require('./watch.js')
+let morphInlineSvg = require('./morph/inline-svg.js')
 
 let {
   _,
@@ -49,7 +49,6 @@ if (help) {
     --as            target platform
                       react-dom (default)
                       react-native
-                      e2e
 
     --compile       if true, produces ES5 JS, defaults to false
     --bundleBaseCss if true, it will bundle the base CSS in react-dom,
@@ -70,12 +69,12 @@ if (help) {
 }
 
 if (version) {
-  const pkg = require('./package.json')
+  let pkg = require('./package.json')
   console.log(`v${pkg.version}`)
   process.exit()
 }
 
-const input = Array.isArray(_) && _[0]
+let input = Array.isArray(_) && _[0]
 if (!input) {
   console.error(
     'You need to specify an input file. Eg run views-morph some.view'
@@ -91,8 +90,8 @@ if (shouldWatch) {
     process.exit()
   }
 
-  const updateNotifier = require('update-notifier')
-  const pkg = require('./package.json')
+  let updateNotifier = require('update-notifier')
+  let pkg = require('./package.json')
 
   updateNotifier({ pkg }).notify()
 
@@ -142,9 +141,9 @@ if (shouldWatch) {
     if (input.includes('.svg')) {
       return morphInlineSvg(input).then(code => console.log(code))
     } else {
-      const name = pathToName(input)
+      let name = pathToName(input)
 
-      const { code } = morph({
+      let { code } = morph({
         as,
         compile,
         file: { raw: input, relative: input },

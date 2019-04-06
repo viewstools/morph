@@ -1,4 +1,4 @@
-export const enter = (node, parent, state) => {
+export let enter = (node, parent, state) => {
   if (node.children && node.children.some(child => child.format)) {
     state.isFormatted = true
     state.formats = []

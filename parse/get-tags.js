@@ -6,10 +6,11 @@ import {
   isUnsupportedShorthand,
 } from './helpers.js'
 
-const SLOT_PROPS = [
+let SLOT_PROPS = [
   'onBlur',
   'onChange',
   'onClick',
+  'onClickSelected',
   'onDrag',
   'onDragEnd',
   'onDragEnter',
@@ -30,11 +31,11 @@ const SLOT_PROPS = [
   'onWhen',
   'when',
 ]
-const shouldBeSlot = (prop, block) =>
+let shouldBeSlot = (prop, block) =>
   SLOT_PROPS.includes(prop) || (block.isList && prop === 'from')
 
 export default ({ name, isSlot, slotIsNot, value, block }) => {
-  const tags = {}
+  let tags = {}
 
   if (isAnimation(value) && name !== 'text') tags.animation = true
   if (isStyle(name)) tags.style = true

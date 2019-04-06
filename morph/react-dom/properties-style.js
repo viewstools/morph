@@ -20,7 +20,7 @@ export { enter }
 export function leave(node, parent, state) {
   if (node.isFragment) return
 
-  const allowedStyleKeys = getAllowedStyleKeys(node)
+  let allowedStyleKeys = getAllowedStyleKeys(node)
 
   let scopedUnderParent =
     !node.isCapture && !node.action && getActionableParent(node)
@@ -43,7 +43,7 @@ export function leave(node, parent, state) {
     getTableRowCss({ node, state, id, scopedUnderParent })
   }
 
-  const css = [
+  let css = [
     getStaticCss({ node, scopedUnderParent, state, allowedStyleKeys }),
     node.isAnimated && getAnimatedCss(node),
     getDynamicCss({ node, scopedUnderParent, state, allowedStyleKeys }),
@@ -63,8 +63,8 @@ export function leave(node, parent, state) {
   }
 }
 
-const composeStyles = (node, styles, scopedUnderParent) => {
-  const allowedStyleKeys = getAllowedStyleKeys(node)
+let composeStyles = (node, styles, scopedUnderParent) => {
+  let allowedStyleKeys = getAllowedStyleKeys(node)
 
   if (hasKeysInChildren(styles.dynamic)) {
     let cssStatic = Object.keys(styles.static)
@@ -81,7 +81,7 @@ const composeStyles = (node, styles, scopedUnderParent) => {
 
     cssStatic = cssStatic.join(',\n')
 
-    const cssDynamic = Object.keys(styles.dynamic)
+    let cssDynamic = Object.keys(styles.dynamic)
       .filter(
         key => allowedStyleKeys.includes(key) && hasKeys(styles.dynamic[key])
       )
@@ -95,7 +95,7 @@ const composeStyles = (node, styles, scopedUnderParent) => {
     return { cssDynamic, cssStatic }
   }
 
-  const cssStatic = Object.keys(styles.static)
+  let cssStatic = Object.keys(styles.static)
     .filter(
       key => allowedStyleKeys.includes(key) && hasKeys(styles.static[key])
     )
@@ -107,13 +107,13 @@ const composeStyles = (node, styles, scopedUnderParent) => {
   return { cssStatic }
 }
 
-const getStaticCss = ({ node, scopedUnderParent, state, allowedStyleKeys }) => {
-  const style = node.style.static
+let getStaticCss = ({ node, scopedUnderParent, state, allowedStyleKeys }) => {
+  let style = node.style.static
   if (!hasKeysInChildren(style)) return false
 
   state.cssStatic = true
 
-  const hasDynamicCss = hasKeysInChildren(node.style.dynamic)
+  let hasDynamicCss = hasKeysInChildren(node.style.dynamic)
 
   return Object.keys(style)
     .filter(key => allowedStyleKeys.includes(key) && hasKeys(style[key]))
@@ -130,13 +130,8 @@ const getStaticCss = ({ node, scopedUnderParent, state, allowedStyleKeys }) => {
     .join(',\n')
 }
 
-const getDynamicCss = ({
-  node,
-  scopedUnderParent,
-  state,
-  allowedStyleKeys,
-}) => {
-  const style = node.style.dynamic
+let getDynamicCss = ({ node, scopedUnderParent, state, allowedStyleKeys }) => {
+  let style = node.style.dynamic
   if (!hasKeysInChildren(style)) return false
 
   state.cssDynamic = true
@@ -150,7 +145,7 @@ const getDynamicCss = ({
       )},${getDynamicStyles(node)}}}`
     )
   } else {
-    const inlineDynamicStyles = getDynamicStyles(node)
+    let inlineDynamicStyles = getDynamicStyles(node)
     if (inlineDynamicStyles) {
       state.render.push(` style={{${inlineDynamicStyles}}}`)
     }
@@ -164,9 +159,9 @@ const getDynamicCss = ({
     .join(',\n')
 }
 
-const getAnimatedCss = node => {
+let getAnimatedCss = node => {
   if (node.hasTimingAnimation) {
-    const transition = uniq(getTimingProps(node).map(makeTransition)).join(', ')
+    let transition = uniq(getTimingProps(node).map(makeTransition)).join(', ')
 
     return `\ntransition: '${transition}',\nwillChange: '${getUniqueNames(
       node
@@ -176,14 +171,14 @@ const getAnimatedCss = node => {
   return `\nwillChange: '${getUniqueNames(node)}'`
 }
 
-const getUniqueNames = node => {
-  const names = [
+let getUniqueNames = node => {
+  let names = [
     ...new Set(getAllAnimatedProps(node, false).map(prop => prop.name)),
   ]
   return uniq(names.map(name => ensurePropName(name))).join(', ')
 }
 
-const ensurePropName = name => {
+let ensurePropName = name => {
   switch (name) {
     case 'rotate':
     case 'rotateX':
@@ -205,7 +200,7 @@ const ensurePropName = name => {
   }
 }
 
-const makeTransition = ({ name, animation }) =>
+let makeTransition = ({ name, animation }) =>
   [
     ensurePropName(name),
     `${animation.duration}ms`,
@@ -215,41 +210,39 @@ const makeTransition = ({ name, animation }) =>
     .filter(Boolean)
     .join(' ')
 
-const asDynamicCss = styles =>
+let asDynamicCss = styles =>
   Object.keys(styles).map(prop => `${prop}: ${styles[prop]}`)
 
-const safe = str =>
+let safe = str =>
   typeof str === 'string' ? `"${str.replace(/"/g, "'")}"` : str
 
-const asStaticCss = (styles, dynamicStyles = []) =>
+let asStaticCss = (styles, dynamicStyles = []) =>
   Object.keys(styles)
     .filter(prop => !dynamicStyles.includes(prop))
     .map(prop => `${prop}: ${safe(styles[prop])}`)
 
-const systemScopeToCssKey = {
+let systemScopeToCssKey = {
   isDisabled: 'disabled',
   isHovered: 'hover',
   isFocused: 'focus',
 }
-const ensureSystemScopeCssKey = key => systemScopeToCssKey[key] || key
+let ensureSystemScopeCssKey = key => systemScopeToCssKey[key] || key
 
-const asCss = (styles, key, scopedUnderParent) => {
+let asCss = (styles, key, scopedUnderParent) => {
   let css = []
 
   if (key !== 'base') {
     if (scopedUnderParent) {
-      const parent = `.\${styles.${scopedUnderParent}}`
-      const theKey = ensureSystemScopeCssKey(key)
-      css.push(`[\`${parent}:${theKey} &, ${parent}.${theKey} &\`]: {`)
+      let parent = `.\${styles.${scopedUnderParent}}`
+      let theKey = ensureSystemScopeCssKey(key)
+      css.push(`[\`${parent}:${theKey} &\`]: {`)
     } else if (
       key === 'isDisabled' ||
       key === 'isHovered' ||
-      key === 'isFocused'
+      key === 'isFocused' ||
+      key === 'isSelected'
     ) {
       css.push(`"&:${ensureSystemScopeCssKey(key)}": {`)
-    } else if (key === 'print') {
-      // TODO can we use this to support all media queries?
-      css.push('"@media print": {')
     } else if (key === 'isPlaceholder') {
       css.push(`"&::placeholder": {`)
     }
@@ -262,9 +255,9 @@ const asCss = (styles, key, scopedUnderParent) => {
   return css
 }
 
-const getTableRowCss = ({ node, state, id, scopedUnderParent }) => {
-  const normalStyles = {}
-  const alternateStyles = {}
+let getTableRowCss = ({ node, state, id, scopedUnderParent }) => {
+  let normalStyles = {}
+  let alternateStyles = {}
 
   Object.entries(node.style).forEach(([type, typeScopes]) => {
     if (!(type in alternateStyles)) {
@@ -308,22 +301,22 @@ const getTableRowCss = ({ node, state, id, scopedUnderParent }) => {
     })
   })
 
-  const { cssDynamic: normalDynamic, cssStatic: normalStatic } = composeStyles(
+  let { cssDynamic: normalDynamic, cssStatic: normalStatic } = composeStyles(
     node,
     normalStyles,
     scopedUnderParent
   )
 
-  const {
+  let {
     cssDynamic: alternateDynamic,
     cssStatic: alternateStatic,
   } = composeStyles(node, alternateStyles, scopedUnderParent)
 
-  const normalCss = `${normalStatic ? `${normalStatic}` : ''} ${
+  let normalCss = `${normalStatic ? `${normalStatic}` : ''} ${
     normalDynamic ? `, ${normalDynamic}` : ''
   }`
 
-  const alternateCss = `${alternateStatic ? `${alternateStatic}` : ''} ${
+  let alternateCss = `${alternateStatic ? `${alternateStatic}` : ''} ${
     alternateDynamic ? `, ${alternateDynamic}` : ''
   }`
 

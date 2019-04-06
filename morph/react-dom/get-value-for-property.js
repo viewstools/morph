@@ -10,10 +10,10 @@ import safe from '../react/safe.js'
 import wrap from '../react/wrap.js'
 import toCamelCase from 'to-camel-case'
 
-const isUrl = str => /^https?:\/\//.test(str)
+let isUrl = str => /^https?:\/\//.test(str)
 
-const getImageSource = (node, state, parent) => {
-  const scopes = getScopes(node, parent)
+let getImageSource = (node, state, parent) => {
+  let scopes = getScopes(node, parent)
 
   if (scopes && (isUrl(node.value) || node.tags.slot)) {
     return wrap(getScopedCondition(node, parent))
@@ -22,7 +22,7 @@ const getImageSource = (node, state, parent) => {
       state.slots.forEach(item => {
         if (item.defaultValue === node.defaultValue) {
           item.type = 'import'
-          const name = toCamelCase(item.defaultValue)
+          let name = toCamelCase(item.defaultValue)
           if (!state.images.includes(item.defaultValue)) {
             state.images.push({
               name,
@@ -38,7 +38,7 @@ const getImageSource = (node, state, parent) => {
     if (scopes) {
       pushImageToState(state, scopes.scopedNames, scopes.paths)
     }
-    const name = toCamelCase(node.value)
+    let name = toCamelCase(node.value)
     if (!state.images.includes(node.value)) {
       state.images.push({
         name,

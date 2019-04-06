@@ -15,7 +15,6 @@ import {
   isCapture,
   isColumn,
   isComment,
-  isEnd,
   isFontable,
   isGroup,
   isList,
@@ -37,18 +36,18 @@ export default ({
   source,
 } = {}) => {
   // convert crlf to lf
-  const text = source.replace(/\r\n/g, '\n')
-  const rlines = text.split('\n')
-  const lines = rlines.map(line => line.trimRight())
-  const fonts = []
-  const locals = []
-  const stack = []
-  const slots = []
-  const views = []
-  const warnings = []
+  let text = source.replace(/\r\n/g, '\n')
+  let rlines = text.split('\n')
+  let lines = rlines.map(line => line.trimRight())
+  let fonts = []
+  let locals = []
+  let stack = []
+  let slots = []
+  let views = []
+  let warnings = []
 
-  const blockIds = []
-  const getBlockId = node => {
+  let blockIds = []
+  let getBlockId = node => {
     let maybeId = node.is || node.name
 
     if (!blockIds.includes(maybeId)) {
@@ -60,13 +59,13 @@ export default ({
     while (blockIds.includes(`${maybeId}${index}`)) {
       index++
     }
-    const id = `${maybeId}${index}`
+    let id = `${maybeId}${index}`
     blockIds.push(id)
     return id
   }
 
-  const getChildrenProxyMap = block => {
-    const childrenProxyMap = {}
+  let getChildrenProxyMap = block => {
+    let childrenProxyMap = {}
 
     block.children
       .filter(child => child.is)
@@ -77,21 +76,19 @@ export default ({
     return Object.keys(childrenProxyMap).length === 0 ? null : childrenProxyMap
   }
 
-  const lookForFonts = block => {
+  let lookForFonts = block => {
     if (block.properties && (isFontable(block.name) || !block.isBasic)) {
-      const fontFamilyProp = block.properties.find(p => p.name === 'fontFamily')
+      let fontFamilyProp = block.properties.find(p => p.name === 'fontFamily')
 
       if (fontFamilyProp) {
-        const fontFamily = fontFamilyProp.value
-        const fontWeightProp = block.properties.find(
-          p => p.name === 'fontWeight'
-        )
-        const fontStyleProp = block.properties.find(p => p.name === 'fontStyle')
-        const fontWeight = fontWeightProp
+        let fontFamily = fontFamilyProp.value
+        let fontWeightProp = block.properties.find(p => p.name === 'fontWeight')
+        let fontStyleProp = block.properties.find(p => p.name === 'fontStyle')
+        let fontWeight = fontWeightProp
           ? fontWeightProp.value.toString()
           : '400'
 
-        const fontStyle = fontStyleProp
+        let fontStyle = fontStyleProp
           ? fontStyleProp.value.toString()
           : 'normal'
 
@@ -116,17 +113,15 @@ export default ({
     }
   }
 
-  const lookForMultiples = block => {
-    const names = block.properties.map(prop => prop.name)
+  let lookForMultiples = block => {
+    let names = block.properties.map(prop => prop.name)
 
-    const occurences = names.reduce((prev, cur) => {
+    let occurences = names.reduce((prev, cur) => {
       prev[cur] = (prev[cur] || 0) + 1
       return prev
     }, {})
 
-    const multiples = Object.entries(occurences).filter(
-      ([key, value]) => value > 1
-    )
+    let multiples = Object.values(occurences).filter(value => value > 1)
 
     if (multiples.length > 0) {
       multiples.forEach(mulitple =>
@@ -141,7 +136,7 @@ export default ({
     }
   }
 
-  const end = (block, endLine) => {
+  let end = (block, endLine) => {
     block.loc.end = {
       line: endLine + 1,
       column: Math.max(0, lines[endLine].length - 1),
@@ -174,11 +169,11 @@ export default ({
     return false
   }
 
-  const parseBlock = (line, i) => {
+  let parseBlock = (line, i) => {
     let { block: name, is, level } = getBlock(line)
     let shouldPushToStack = false
 
-    const block = {
+    let block = {
       type: 'Block',
       name,
       animations: {},
@@ -195,7 +190,7 @@ export default ({
     }
 
     if (is && !block.isBasic) {
-      const meant = didYouMeanBlock(name)
+      let meant = didYouMeanBlock(name)
       if (meant && meant !== name) {
         warnings.push({
           loc: block.loc,
@@ -326,7 +321,7 @@ That would mean that SomeView in ${block.name} will be replaced by ${
     lookForMultiples(block)
   }
 
-  const parseProps = (i, block) => {
+  let parseProps = (i, block) => {
     let endOfBlockIndex = i
     while (
       endOfBlockIndex < lines.length - 1 &&
@@ -335,20 +330,20 @@ That would mean that SomeView in ${block.name} will be replaced by ${
       endOfBlockIndex++
     }
 
-    const properties = []
-    const scopes = []
+    let properties = []
+    let scopes = []
     let scope
     let inScope = false
 
     for (let j = i; j <= endOfBlockIndex; j++) {
-      const line = lines[j].trim()
+      let line = lines[j].trim()
 
       let propNode = null
 
       if (isProp(line)) {
         let { name, isSlot, slotName, slotIsNot, value } = getProp(line)
-        const loc = getLoc(j + 1, line.indexOf(name), line.length - 1)
-        const tags = getTags({
+        let loc = getLoc(j + 1, line.indexOf(name), line.length - 1)
+        let tags = getTags({
           name,
           isSlot,
           slotIsNot,
@@ -368,7 +363,7 @@ That would mean that SomeView in ${block.name} will be replaced by ${
               line,
             })
           } else {
-            const meant = didYouMeanProp(name)
+            let meant = didYouMeanProp(name)
             if (meant && meant !== name) {
               warnings.push({
                 loc,
@@ -423,8 +418,8 @@ That would mean that SomeView in ${block.name} will be replaced by ${
         }
 
         if (name === 'when') {
-          const isSystem = enableSystemScopes && isSystemScope(slotName)
-          const isLocal = enableLocalScopes && isLocalScope(slotName)
+          let isSystem = enableSystemScopes && isSystemScope(slotName)
+          let isLocal = enableLocalScopes && isLocalScope(slotName)
 
           if (isLocal) {
             if (!locals.includes(value)) {
@@ -523,7 +518,7 @@ That would mean that SomeView in ${block.name} will be replaced by ${
         if (tags.animation && scope) {
           block.isAnimated = true
 
-          const currentAnimation = getAnimation(value)
+          let currentAnimation = getAnimation(value)
           propNode.value = currentAnimation.defaultValue
           propNode.animation = currentAnimation.properties
 
@@ -545,7 +540,7 @@ That would mean that SomeView in ${block.name} will be replaced by ${
 
           if (!block.animations[currentAnimation.id].props[name]) {
             let baseValue = null
-            const baseProp = properties.find(prop => prop.name === name)
+            let baseProp = properties.find(prop => prop.name === name)
             if (baseProp) {
               baseValue = baseProp.value
             }
@@ -568,8 +563,7 @@ That would mean that SomeView in ${block.name} will be replaced by ${
         }
 
         if (tags.slot) {
-          const needsDefaultValue =
-            !tags.shouldBeSlot && /</.test(propNode.value)
+          let needsDefaultValue = !tags.shouldBeSlot && /</.test(propNode.value)
 
           if (typeof propNode.value === 'string') {
             propNode.value = propNode.value.replace(/^</, '')
@@ -617,7 +611,7 @@ That would mean that SomeView in ${block.name} will be replaced by ${
       } else if (isComment(line) && !skipComments) {
         let [value] = getComment(line)
 
-        const userComment = isUserComment(line)
+        let userComment = isUserComment(line)
         if (userComment) {
           value = getComment(value)
         }

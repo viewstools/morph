@@ -5,34 +5,39 @@ import toSlugCase from 'to-slug-case'
 import wrap from './react/wrap.js'
 import getUnit from './get-unit.js'
 
-const safeScope = value =>
+let safeScope = value =>
   typeof value === 'string' && !isSlot(value) ? JSON.stringify(value) : value
 
-export const checkParentStem = (node, styleKey) => {
-  if (styleKey !== 'isHovered' || styleKey !== 'isDisabled' || !node.parent)
+export let checkParentStem = (node, styleKey) => {
+  if (
+    styleKey !== 'isHovered' ||
+    styleKey !== 'isDisabled' ||
+    styleKey !== 'isSelected' ||
+    !node.parent
+  )
     return false
 
-  const matchingParentStem = node.parent.scopes.some(
+  let matchingParentStem = node.parent.scopes.some(
     scope => scope.value === styleKey
   )
 
   return matchingParentStem && (node.parent.is || node.parent.name)
 }
 
-const INTERPOLATION = /\${(.+)}/
-export const isInterpolation = str => INTERPOLATION.test(str)
-export const deinterpolate = str => {
-  const match = str.match(INTERPOLATION)
+let INTERPOLATION = /\${(.+)}/
+export let isInterpolation = str => INTERPOLATION.test(str)
+export let deinterpolate = str => {
+  let match = str.match(INTERPOLATION)
   return match ? match[1] : str
 }
 
-export const getObjectAsString = obj =>
+export let getObjectAsString = obj =>
   Array.isArray(obj)
     ? `[${obj.map(getObjectAsString)}]`
     : wrap(
         Object.keys(obj)
           .map(k => {
-            const v =
+            let v =
               typeof obj[k] === 'object' && hasKeys(obj[k])
                 ? getObjectAsString(obj[k])
                 : obj[k]
@@ -41,8 +46,8 @@ export const getObjectAsString = obj =>
           .join(',')
       )
 
-export const getPropertiesAsObject = list => {
-  const obj = {}
+export let getPropertiesAsObject = list => {
+  let obj = {}
 
   list.forEach(prop => {
     obj[prop.name] = safeScope(prop.value)
@@ -51,27 +56,27 @@ export const getPropertiesAsObject = list => {
   return getObjectAsString(obj)
 }
 
-export const getProp = (node, key) => {
-  const finder =
+export let getProp = (node, key) => {
+  let finder =
     typeof key === 'string' ? p => p.name === key : p => key.test(p.name)
 
   return node.properties && node.properties.find(finder)
 }
 
-export const getScope = node => node.value.split('when ')[1]
+export let getScope = node => node.value.split('when ')[1]
 
-const maybeSafe = node =>
+let maybeSafe = node =>
   node.tags.slot
     ? node.value
     : typeof node.value === 'string'
     ? safe(node.value)
     : node.value
 
-const getScopedProps = (propNode, blockNode) => {
-  const scopes = blockNode.scopes
+let getScopedProps = (propNode, blockNode) => {
+  let scopes = blockNode.scopes
     .filter(scope => !scope.isSystem && !scope.isLocal)
     .map(scope => {
-      const prop = scope.properties.find(prop => prop.name === propNode.name)
+      let prop = scope.properties.find(prop => prop.name === propNode.name)
       return prop && { prop, when: scope.value }
     })
     .filter(Boolean)
@@ -82,10 +87,10 @@ const getScopedProps = (propNode, blockNode) => {
   return scopes
 }
 
-// export const interpolateText = (node, parent, isTemplateLiteral) => {
+// export let interpolateText = (node, parent, isTemplateLiteral) => {
 //   parent.interpolation.forEach(item => {
-//     const re = new RegExp(`${item.is ? item.is : item.name}`)
-//     const textNode = item.properties.find(prop => prop.name === 'text')
+//     let re = new RegExp(`${item.is ? item.is : item.name}`)
+//     let textNode = item.properties.find(prop => prop.name === 'text')
 //     node.value = isTemplateLiteral
 //       ? getLiteralInterpolation(node, re, textNode)
 //       : getStandardInterpolation(node, re, textNode, item)
@@ -93,13 +98,13 @@ const getScopedProps = (propNode, blockNode) => {
 //   return isTemplateLiteral ? '`' + node.value + '`' : node.value
 // }
 
-// const getLiteralInterpolation = (node, re, textNode) =>
+// let getLiteralInterpolation = (node, re, textNode) =>
 //   node.value.replace(
 //     re,
 //     `$${isSlot(textNode) ? wrap(textNode.value) : textNode.value}`
 //   )
 
-// const getStandardInterpolation = (node, re, textNode, item) =>
+// let getStandardInterpolation = (node, re, textNode, item) =>
 //   node.value.replace(
 //     re,
 //     hasCustomScopes(textNode, item)
@@ -109,15 +114,11 @@ const getScopedProps = (propNode, blockNode) => {
 //       : textNode.value
 //   )
 
-export const getScopedCondition = (
-  propNode,
-  blockNode,
-  alreadyInterpolated
-) => {
+export let getScopedCondition = (propNode, blockNode, alreadyInterpolated) => {
   // alreadyInterpolated = interpolation that contains scoped condition
   // !alreadyInterpolated = scoped condition that contains interpolation
   // see tests in TextInterpolation.view for an example of both
-  const scopedProps = getScopedProps(propNode, blockNode)
+  let scopedProps = getScopedProps(propNode, blockNode)
 
   if (!scopedProps) return false
 
@@ -138,7 +139,7 @@ export const getScopedCondition = (
     //   } : ` + conditional
   })
 
-  const lastScope = scopedProps[scopedProps.length - 1]
+  let lastScope = scopedProps[scopedProps.length - 1]
 
   if (
     !lastScope.prop.animation ||
@@ -150,7 +151,7 @@ export const getScopedCondition = (
   return conditional
 }
 
-export const getScopedImageCondition = (scopes, scopedNames, defaultName) => {
+export let getScopedImageCondition = (scopes, scopedNames, defaultName) => {
   let conditional = defaultName
 
   scopes.forEach((scope, index) => {
@@ -160,79 +161,71 @@ export const getScopedImageCondition = (scopes, scopedNames, defaultName) => {
   return conditional
 }
 
-const styleStems = [
+let styleStems = [
   'isHovered',
   'isFocused',
   'isPlaceholder',
   'isDisabled',
-  'print',
+  'isSelected',
 ]
-export const getStyleType = node =>
+export let getStyleType = node =>
   styleStems.find(tag => isTag(node, tag)) || 'base'
-export const hasKeys = obj => Object.keys(obj).length > 0
-export const hasKeysInChildren = obj =>
+export let hasKeys = obj => Object.keys(obj).length > 0
+export let hasKeysInChildren = obj =>
   Object.keys(obj).some(k => hasKeys(obj[k]))
 
-export const hasProp = (node, key, match) => {
-  const prop = getProp(node, key)
+export let hasProp = (node, key, match) => {
+  let prop = getProp(node, key)
   if (!prop) return false
   return typeof match === 'function' ? match(prop.value) : true
 }
 
-export const hasDefaultProp = (node, parent) =>
+export let hasDefaultProp = (node, parent) =>
   parent.properties.some(prop => prop.nameRaw === node.nameRaw)
 
-export const isSlot = node =>
+export let isSlot = node =>
   typeof node === 'string' ? /props/.test(node) : isTag(node, 'slot')
-export const isStyle = node => isTag(node, 'style')
-export const isRowStyle = node => isTag(node, 'rowStyle')
-export const isTag = (node, tag) => node && node.tags[tag]
+export let isStyle = node => isTag(node, 'style')
+export let isRowStyle = node => isTag(node, 'rowStyle')
+export let isTag = (node, tag) => node && node.tags[tag]
 
-export const getActionableParent = node => {
+export let getActionableParent = node => {
   if (!node.parent) return false
   if (node.parent.action) return node.parent
   return getActionableParent(node.parent)
 }
 
-export const getAllowedStyleKeys = node => {
+export let getAllowedStyleKeys = node => {
   if (node.isCapture) {
-    return [
-      'base',
-      'isFocused',
-      'isHovered',
-      'isDisabled',
-      'isPlaceholder',
-      'print',
-    ]
+    return ['base', 'isFocused', 'isHovered', 'isDisabled', 'isPlaceholder']
   } else if (node.action || isTable(node) || getActionableParent(node)) {
-    return ['base', 'isFocused', 'isHovered', 'isDisabled', 'print']
+    return ['base', 'isFocused', 'isHovered', 'isDisabled', 'isSelected']
   }
-  return ['base', 'isFocused', 'print']
+  return ['base', 'isFocused']
 }
 
-export const isList = node =>
+export let isList = node =>
   node && node.type === 'Block' && node.name === 'List'
 
-export const isCell = node =>
-  node.properties.some(prop => prop.name === 'isCell')
+export let isCell = node => node.properties.some(prop => prop.name === 'isCell')
 
-export const isHeader = node =>
+export let isHeader = node =>
   node.properties.some(prop => prop.name === 'isHeader')
 
-export const isColumn = node =>
+export let isColumn = node =>
   node && node.type === 'Block' && node.name === 'Column'
 
-export const isTable = node =>
+export let isTable = node =>
   node && node.type === 'Block' && node.name === 'Table'
 
-export const isEmpty = list => list.length === 0
+export let isEmpty = list => list.length === 0
 
-export const isValidImgSrc = (node, parent) =>
+export let isValidImgSrc = (node, parent) =>
   node.name === 'source' && parent.name === 'Image' && parent.isBasic
 
-export const pushImageToState = (state, scopedNames, paths) =>
+export let pushImageToState = (state, scopedNames, paths) =>
   scopedNames.forEach(name => {
-    const path = paths[scopedNames.findIndex(item => item === name)]
+    let path = paths[scopedNames.findIndex(item => item === name)]
     if (!state.images.includes(path)) {
       state.images.push({
         name,
@@ -241,42 +234,18 @@ export const pushImageToState = (state, scopedNames, paths) =>
     }
   })
 
-export const getScopes = (node, parent) => {
-  const scopedProps = getScopedProps(node, parent)
+export let getScopes = (node, parent) => {
+  let scopedProps = getScopedProps(node, parent)
   if (!scopedProps) return false
-  const paths = scopedProps.map(scope => scope.prop.value)
-  const scopedNames = paths.map(path => toCamelCase(path))
+  let paths = scopedProps.map(scope => scope.prop.value)
+  let scopedNames = paths.map(path => toCamelCase(path))
 
   return { scopedProps, paths, scopedNames }
 }
 
-export const isSvg = node => /^Svg/.test(node.name) && node.isBasic
+export let isSvg = node => /^Svg/.test(node.name) && node.isBasic
 
-export const getScopeDescription = scope => {
-  const dictionary = {}
-  const re = /(?:^|\W)props.(\w+)(?!\w)/g
-
-  let match = re.exec(scope)
-  while (match) {
-    dictionary[match[1]] = toSlugCase(match[1])
-    match = re.exec(scope)
-  }
-
-  for (let key in dictionary) {
-    scope = scope.replace(new RegExp(key, 'g'), dictionary[key])
-  }
-
-  return toCamelCase(
-    scope
-      .replace(/\|\|/g, '-or-')
-      .replace(/!/g, 'not-')
-      .replace(/&&/g, '-and-')
-      .replace(/props\./g, '')
-      .replace(/\s/g, '')
-  )
-}
-
-export const hasCustomScopes = (propNode, blockNode) =>
+export let hasCustomScopes = (propNode, blockNode) =>
   blockNode.scopes.some(
     scope =>
       !scope.isLocal &&
@@ -284,16 +253,16 @@ export const hasCustomScopes = (propNode, blockNode) =>
       scope.properties.some(prop => prop.name === propNode.name)
   )
 
-export const hasLocals = (propNode, blockNode) =>
+export let hasLocals = (propNode, blockNode) =>
   blockNode.scopes.some(scope => scope.isLocal)
 
-export const getLocals = (propNode, blockNode, state) => {
-  const locals = {}
+export let getLocals = (propNode, blockNode, state) => {
+  let locals = {}
 
   blockNode.scopes
     .filter(scope => scope.isLocal)
     .forEach(scope => {
-      const prop = scope.properties.find(prop => prop.name === propNode.name)
+      let prop = scope.properties.find(prop => prop.name === propNode.name)
       if (prop) {
         locals[scope.value] = prop.value
       }
@@ -302,8 +271,8 @@ export const getLocals = (propNode, blockNode, state) => {
   return locals
 }
 
-export const getLocalsString = (propNode, blockNode, state) => {
-  const baseLocalName = `${blockNode.is || blockNode.name}Local`
+export let getLocalsString = (propNode, blockNode, state) => {
+  let baseLocalName = `${blockNode.is || blockNode.name}Local`
   let localName = baseLocalName
   let index = 1
   while (localName in state.locals) {
@@ -314,10 +283,10 @@ export const getLocalsString = (propNode, blockNode, state) => {
   return wrap(`${localName}[local.state.lang] || ${safe(propNode.value)}`)
 }
 
-export const makeOnClickTracker = (node, parent, state) => {
+export let makeOnClickTracker = (node, parent, state) => {
   if (!state.track) return node.value
 
-  const block = parent.testId
+  let block = parent.testId
     ? `"${state.name}.${parent.testId}"`
     : `props["${state.testIdKey}"] || "${state.name}"`
 
@@ -330,15 +299,15 @@ export const makeOnClickTracker = (node, parent, state) => {
   }`
 }
 
-// const isRotate = name =>
+// let isRotate = name =>
 //   name === 'rotate' || name === 'rotateX' || name === 'rotateY'
 
-const getStandardAnimatedString = (node, prop, isNative) => {
+let getStandardAnimatedString = (node, prop, isNative) => {
   let value = `animated${node.id}${
     prop.animationIndexOnBlock > 0 ? prop.animationIndexOnBlock : ''
   }.${prop.name}`
 
-  // const unit = getUnit(prop)
+  // let unit = getUnit(prop)
   // if (unit) {
   //   value = `\`\${${value}}${unit}\``
   // }
@@ -346,7 +315,7 @@ const getStandardAnimatedString = (node, prop, isNative) => {
   return `${isNative ? prop.name : `"--${prop.name}"`}: ${value}`
 }
 
-const getTransformString = (node, transform, isNative) => {
+let getTransformString = (node, transform, isNative) => {
   let transformStr = `transform: [`
 
   transform.props.forEach((prop, i) => {
@@ -356,27 +325,25 @@ const getTransformString = (node, transform, isNative) => {
   return `${transformStr}]`
 }
 
-export const getScopeIndex = (node, currentScope) =>
+export let getScopeIndex = (node, currentScope) =>
   node.scopes.findIndex(scope => {
     return scope.slotName === currentScope
   })
 
-export const isNewScope = (state, currentAnimation, index) =>
+export let isNewScope = (state, currentAnimation, index) =>
   index ===
   state.animations.findIndex(
     animation => animation.scope === currentAnimation.scope
   )
 
-export const getAnimatedStyles = (node, isNative) => {
-  const props = isNative
-    ? getAllAnimatedProps(node, true)
-    : getSpringProps(node)
+export let getAnimatedStyles = (node, isNative) => {
+  let props = isNative ? getAllAnimatedProps(node, true) : getSpringProps(node)
 
   return props.map(prop => getAnimatedString(node, prop, isNative)).join(', ')
 }
 
-const getPropValue = (prop, interpolateValue = true) => {
-  const unit = getUnit(prop)
+let getPropValue = (prop, interpolateValue = true) => {
+  let unit = getUnit(prop)
   if (unit) {
     let value = interpolateValue
       ? `\`\${${prop.value}}${unit}\``
@@ -387,7 +354,7 @@ const getPropValue = (prop, interpolateValue = true) => {
   }
 }
 
-export const getDynamicStyles = node => {
+export let getDynamicStyles = node => {
   return flatten([
     node.properties
       .filter(
@@ -396,7 +363,7 @@ export const getDynamicStyles = node => {
       .map(prop => `'--${prop.name}': ${getPropValue(prop)}`),
     node.scopes.map(scope =>
       scope.properties.map(prop => {
-        const unit = getUnit(prop)
+        let unit = getUnit(prop)
         return (
           (prop.tags.style &&
             prop.conditional &&
@@ -411,14 +378,14 @@ export const getDynamicStyles = node => {
   ]).filter(Boolean)
 }
 
-const getAnimatedString = (node, prop, isNative) =>
+let getAnimatedString = (node, prop, isNative) =>
   prop.name === 'transform'
     ? getTransformString(node, prop, isNative)
     : getStandardAnimatedString(node, prop, isNative)
 
-export const getNonAnimatedDynamicStyles = node => {
-  const animatedProps = getAllAnimatedProps(node, true).map(prop => prop.name)
-  const animatedTransforms = animatedProps.includes('transform')
+export let getNonAnimatedDynamicStyles = node => {
+  let animatedProps = getAllAnimatedProps(node, true).map(prop => prop.name)
+  let animatedTransforms = animatedProps.includes('transform')
     ? getAllAnimatedProps(node, true)
         .find(prop => prop.name === 'transform')
         .props.map(prop => prop.name)
@@ -434,8 +401,8 @@ export const getNonAnimatedDynamicStyles = node => {
     }, {})
 }
 
-export const getAllAnimatedProps = (node, isNative) => {
-  const props = flatten(
+export let getAllAnimatedProps = (node, isNative) => {
+  let props = flatten(
     node.scopes.map(scope => scope.properties.filter(prop => prop.animation))
   )
   return checkForTransforms(props) && isNative
@@ -443,7 +410,7 @@ export const getAllAnimatedProps = (node, isNative) => {
     : props
 }
 
-const combineTransforms = props => {
+let combineTransforms = props => {
   // TODO: handle transforms on different scopes
   let transform = { name: 'transform', props: [] }
   props.forEach((prop, i) => {
@@ -456,10 +423,10 @@ const combineTransforms = props => {
   return props.filter(prop => !prop.isTransform)
 }
 
-const checkForTransforms = props =>
+let checkForTransforms = props =>
   props.some(prop => TRANSFORM_WHITELIST[prop.name])
 
-export const getTimingProps = node =>
+export let getTimingProps = node =>
   flatten(
     node.scopes.map(scope =>
       scope.properties.filter(
@@ -468,7 +435,7 @@ export const getTimingProps = node =>
     )
   )
 
-const getSpringProps = node =>
+let getSpringProps = node =>
   flatten(
     node.scopes.map(scope =>
       scope.properties.filter(
@@ -484,7 +451,7 @@ const getSpringProps = node =>
  * In general native animated implementation should support any numeric property that doesn't need
  * to be updated through the shadow view hierarchy (all non-layout properties).
  */
-const STYLES_WHITELIST = {
+let STYLES_WHITELIST = {
   opacity: true,
   transform: true,
   /* ios styles */
@@ -497,7 +464,7 @@ const STYLES_WHITELIST = {
   translateY: true,
 }
 
-const TRANSFORM_WHITELIST = {
+let TRANSFORM_WHITELIST = {
   translateX: true,
   translateY: true,
   scale: true,
@@ -509,15 +476,15 @@ const TRANSFORM_WHITELIST = {
   perspective: true,
 }
 
-export const canUseNativeDriver = name =>
+export let canUseNativeDriver = name =>
   STYLES_WHITELIST[name] || TRANSFORM_WHITELIST[name] || false
 
-const fontsOrder = ['eot', 'woff2', 'woff', 'ttf', 'svg', 'otf']
+let fontsOrder = ['eot', 'woff2', 'woff', 'ttf', 'svg', 'otf']
 
-export const sortFonts = (a, b) =>
+export let sortFonts = (a, b) =>
   fontsOrder.indexOf(b.type) - fontsOrder.indexOf(a.type)
 
-export const createId = (node, state, addClassName = true) => {
+export let createId = (node, state, addClassName = true) => {
   let id = node.is || node.name
   // count repeatead ones
   if (state.usedBlockNames[id]) {
@@ -534,7 +501,7 @@ export const createId = (node, state, addClassName = true) => {
   return id
 }
 
-const CONTENT_CONTAINER_STYLE_PROPS = [
+let CONTENT_CONTAINER_STYLE_PROPS = [
   'paddingTop',
   'paddingBottom',
   'paddingLeft',
@@ -544,13 +511,13 @@ const CONTENT_CONTAINER_STYLE_PROPS = [
   'alignItems',
 ]
 
-const isContentContainerStyleProp = prop =>
+let isContentContainerStyleProp = prop =>
   CONTENT_CONTAINER_STYLE_PROPS.includes(prop)
 
-export const hasContentContainerStyleProp = styleProps =>
+export let hasContentContainerStyleProp = styleProps =>
   Object.keys(styleProps).some(isContentContainerStyleProp)
 
-export const getContentContainerStyleProps = styleProps =>
+export let getContentContainerStyleProps = styleProps =>
   Object.keys(styleProps)
     .filter(isContentContainerStyleProp)
     .reduce((obj, key) => {
@@ -558,7 +525,7 @@ export const getContentContainerStyleProps = styleProps =>
       return obj
     }, {})
 
-export const removeContentContainerStyleProps = styleProps =>
+export let removeContentContainerStyleProps = styleProps =>
   Object.keys(styleProps)
     .filter(key => !isContentContainerStyleProp(key))
     .reduce((obj, key) => {
@@ -566,12 +533,12 @@ export const removeContentContainerStyleProps = styleProps =>
       return obj
     }, {})
 
-export const hasRowStyles = node =>
+export let hasRowStyles = node =>
   node.properties.some(
     prop => prop.name.match(/^row/) && prop.name !== 'rowHeight'
   )
 
-const MAYBE_HYPHENATED_STYLE_PROPS = [
+let MAYBE_HYPHENATED_STYLE_PROPS = [
   'alignContent',
   'alignItems',
   'alignSelf',
@@ -599,7 +566,7 @@ const MAYBE_HYPHENATED_STYLE_PROPS = [
   'wordBreak',
 ]
 
-export const maybeMakeHyphenated = ({ name, value }) =>
+export let maybeMakeHyphenated = ({ name, value }) =>
   MAYBE_HYPHENATED_STYLE_PROPS.includes(name) && /^[a-zA-Z]+$/.test(value)
     ? toSlugCase(value)
     : value

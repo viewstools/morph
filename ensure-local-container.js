@@ -1,10 +1,10 @@
-const fs = require('mz/fs')
+let fs = require('mz/fs')
 
-const GET_INITIAL_LANGUAGE = {
+let GET_INITIAL_LANGUAGE = {
   'react-dom': `export default supported => closest(navigator.language || navigator.browserLanguage, supported)
 
-const base = item => item.substr(0, 2);
-const closest = (value, list) =>
+let base = item => item.substr(0, 2);
+let closest = (value, list) =>
   value
     ? list.find(item => item === value) ||
 list.find(item => base(item) === value) ||
@@ -19,8 +19,8 @@ list.find(item => base(item) === value) ||
 
 export default async supported => closest(await Util.getCurrentLocaleAsync(), supported)
 
-const base = item => item.substr(0, 2);
-const closest = (value, list) =>
+let base = item => item.substr(0, 2);
+let closest = (value, list) =>
   value
     ? list.find(item => item === value) ||
 list.find(item => base(item) === value) ||
@@ -28,7 +28,7 @@ list.find(item => base(item) === value) ||
     : list[0];`,
 }
 
-const LOCAL_CONTAINER = {
+let LOCAL_CONTAINER = {
   'react-dom': supported => `import { Container } from 'unstated';
 import getInitialLanguage from './get-initial-language.js';
 
@@ -36,7 +36,7 @@ export default class LocalContainer extends Container {
   constructor() {
     super()
 
-    const supported = ${JSON.stringify(supported).replace(/"/g, "'")}
+    let supported = ${JSON.stringify(supported).replace(/"/g, "'")}
 
     this.state = {
       lang: getInitialLanguage(supported),
@@ -57,7 +57,7 @@ export default class LocalContainer extends Container {
   constructor() {
     super()
 
-    const supported = ${JSON.stringify(supported).replace(/"/g, "'")}
+    let supported = ${JSON.stringify(supported).replace(/"/g, "'")}
 
     this.state = {
       lang: supported[0],
@@ -76,7 +76,7 @@ export default class LocalContainer extends Container {
 }
 
 module.exports = async ({ as, file, fileGetInitialLanguage, supported }) => {
-  if (!await fs.exists(fileGetInitialLanguage)) {
+  if (!(await fs.exists(fileGetInitialLanguage))) {
     await fs.writeFile(fileGetInitialLanguage, GET_INITIAL_LANGUAGE[as], {
       encoding: 'utf8',
     })

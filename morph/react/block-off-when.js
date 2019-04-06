@@ -4,7 +4,7 @@ export function enter(node, parent, state) {
   if (node.isFragment && node.children.length === 0) return
 
   // onWhen lets you show/hide blocks depending on props
-  const onWhen = getProp(node, 'onWhen')
+  let onWhen = getProp(node, 'onWhen')
 
   if (onWhen) {
     node.onWhen = true

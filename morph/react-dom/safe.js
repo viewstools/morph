@@ -1,3 +1,9 @@
-const interpolateCode = s => (/props|item/.test(s) ? '${' + s + '}' : s)
+let interpolateCode = s => (/props|item/.test(s) ? '${' + s + '}' : s)
 
-export default s => '`' + s.split(' ').map(interpolateCode).join(' ') + '`'
+export default s =>
+  '`' +
+  s
+    .split(' ')
+    .map(interpolateCode)
+    .join(' ') +
+  '`'

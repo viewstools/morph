@@ -1,4 +1,4 @@
-export const enter = (node, parent, state) => {
+export let enter = (node, parent, state) => {
   let blockName = node.is || node.name
 
   if (typeof state.testIds[blockName] === 'number') {

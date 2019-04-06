@@ -1,5 +1,5 @@
-const toSvg = require('./inline-svg.js')
-const path = require('path')
+let toSvg = require('./inline-svg.js')
+let path = require('path')
 
 test('#toSvg', async () => {
   expect(

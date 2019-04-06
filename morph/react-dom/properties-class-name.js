@@ -1,7 +1,7 @@
 import { deinterpolate, getProp, isSlot, isInterpolation } from '../utils.js'
 import wrap from '../react/wrap.js'
 
-export const enter = (node, parent, state) => {
+export let enter = (node, parent, state) => {
   node.className = [
     node.name === 'Text'
       ? 'views-text'
@@ -10,7 +10,7 @@ export const enter = (node, parent, state) => {
       : 'views-block',
   ]
 
-  const className = getProp(node, 'className')
+  let className = getProp(node, 'className')
   if (className) {
     node.className.push(
       className.tags.slot ? `\${${className.value}}` : className.value
@@ -18,7 +18,7 @@ export const enter = (node, parent, state) => {
   }
 }
 
-export const leave = (node, parent, state) => {
+export let leave = (node, parent, state) => {
   if (node.isFragment) return
 
   if (node.className.length === 1) {
@@ -34,7 +34,7 @@ export const leave = (node, parent, state) => {
 
     state.render.push(` className=${shouldWrap ? wrap(className) : className}`)
   } else if (node.className.length > 1) {
-    const className = `\`${node.className.join(' ')}\``
+    let className = `\`${node.className.join(' ')}\``
     state.render.push(` className=${wrap(className)}`)
   }
 }

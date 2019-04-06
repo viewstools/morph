@@ -1,8 +1,8 @@
-const fs = require('mz/fs')
+let fs = require('mz/fs')
 
-const TRACK_CONTEXT = `import React from 'react'
+let TRACK_CONTEXT = `import React from 'react'
 
-export const TrackContext = React.createContext()
+export let TrackContext = React.createContext()
 
 export class Track extends React.Component {
   track = ({ block, action, event }) => {

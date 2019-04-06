@@ -1,7 +1,7 @@
 import { getLocalsString, hasLocals } from '../utils.js'
 
 export function enter(node, parent, state) {
-  const value = state.getValueForProperty(node, parent, state)
+  let value = state.getValueForProperty(node, parent, state)
 
   if (value) {
     Object.keys(value).forEach(k => {

@@ -12,7 +12,7 @@ let getFont = font =>
   }`
 
 let localSupported = ['en', 'es', 'fr']
-let targets = ['react-dom', 'react-native', 'e2e']
+let targets = ['react-dom', 'react-native']
 
 targets.forEach(as => {
   global.describe(as, () => {
@@ -43,6 +43,7 @@ targets.forEach(as => {
             localSupported,
             name,
             pretty: true,
+            track: false,
             views,
           })
         ).toMatchSnapshot()

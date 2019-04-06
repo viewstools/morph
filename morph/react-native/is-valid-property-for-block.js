@@ -1,4 +1,4 @@
-const blacklist = [
+let blacklist = [
   'appregion',
   'backgroundimage',
   'backgroundsize',
@@ -11,6 +11,9 @@ const blacklist = [
   'isdisabled',
   'isfragment',
   'onclick',
+  'onclickid',
+  'onclickselected',
+  'onclickselectedtype',
   'onclickusediv',
   'onsubmit',
   'overflow',

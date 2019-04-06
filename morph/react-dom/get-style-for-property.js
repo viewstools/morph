@@ -7,7 +7,7 @@ import {
 import { maybeAddFallbackFont } from '../fonts.js'
 
 export default (node, parent, code) => {
-  const scopedVar = setScopedVar(node, parent)
+  let scopedVar = setScopedVar(node, parent)
 
   if (scopedVar) {
     switch (node.name) {
@@ -86,22 +86,22 @@ export default (node, parent, code) => {
   }
 }
 
-const maybeAsVar = (prop, code) =>
+let maybeAsVar = (prop, code) =>
   code ? asVar(prop) : maybeMakeHyphenated(prop)
 
-const asVar = prop => `'var(--${prop.name})'`
+let asVar = prop => `'var(--${prop.name})'`
 
-const setScopedVar = (prop, block) => {
+let setScopedVar = (prop, block) => {
   if (prop.scope === 'isHovered') return false
 
-  const scopedCondition = getScopedCondition(prop, block, false)
+  let scopedCondition = getScopedCondition(prop, block, false)
   return scopedCondition && asVar(prop)
 }
 
-const getPropValue = (prop, block, unit = '') => {
+let getPropValue = (prop, block, unit = '') => {
   if (!prop) return false
 
-  const scopedVar = setScopedVar(prop, block)
+  let scopedVar = setScopedVar(prop, block)
 
   if (scopedVar) return scopedVar
 
@@ -112,14 +112,14 @@ const getPropValue = (prop, block, unit = '') => {
   return typeof prop.value === 'number' ? `${prop.value}${unit}` : prop.value
 }
 
-const getShadow = (node, parent) => {
-  const isText = parent.name === 'Text'
+let getShadow = (node, parent) => {
+  let isText = parent.name === 'Text'
 
-  const shadowColor = getProp(parent, 'shadowColor')
-  const shadowBlur = getProp(parent, 'shadowBlur')
-  const shadowOffsetX = getProp(parent, 'shadowOffsetX')
-  const shadowOffsetY = getProp(parent, 'shadowOffsetY')
-  const shadowSpread = getProp(parent, 'shadowSpread')
+  let shadowColor = getProp(parent, 'shadowColor')
+  let shadowBlur = getProp(parent, 'shadowBlur')
+  let shadowOffsetX = getProp(parent, 'shadowOffsetX')
+  let shadowOffsetY = getProp(parent, 'shadowOffsetY')
+  let shadowSpread = getProp(parent, 'shadowSpread')
 
   let value = [
     getPropValue(shadowOffsetX, parent, 'px'),
@@ -147,18 +147,18 @@ const getShadow = (node, parent) => {
   }
 }
 
-const getTransformValue = (prop, parent, unit) => {
+let getTransformValue = (prop, parent, unit) => {
   if (!prop) return false
   return `${prop.name}(${getPropValue(prop, parent, unit)})`
 }
 
-const getTransform = (node, parent) => {
-  const rotate = getProp(parent, 'rotate')
-  const rotateX = getProp(parent, 'rotateX')
-  const rotateY = getProp(parent, 'rotateY')
-  const scale = getProp(parent, 'scale')
-  const translateX = getProp(parent, 'translateX')
-  const translateY = getProp(parent, 'translateY')
+let getTransform = (node, parent) => {
+  let rotate = getProp(parent, 'rotate')
+  let rotateX = getProp(parent, 'rotateX')
+  let rotateY = getProp(parent, 'rotateY')
+  let scale = getProp(parent, 'scale')
+  let translateX = getProp(parent, 'translateX')
+  let translateY = getProp(parent, 'translateY')
 
   let value = [
     getTransformValue(rotate, parent, 'deg'),
@@ -187,9 +187,9 @@ const getTransform = (node, parent) => {
   return value.replace(/'/g, '')
 }
 
-const getTransformOrigin = (node, parent) => {
-  const transformOriginX = getProp(parent, 'transformOriginX')
-  const transformOriginY = getProp(parent, 'transformOriginY')
+let getTransformOrigin = (node, parent) => {
+  let transformOriginX = getProp(parent, 'transformOriginX')
+  let transformOriginY = getProp(parent, 'transformOriginY')
   let value = [
     getPropValue(
       transformOriginX,

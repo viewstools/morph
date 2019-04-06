@@ -9,7 +9,7 @@ import restrictedNames from './react-native/restricted-names.js'
 import toComponent from './react/to-component.js'
 import walk from './walk.js'
 
-const imports = {
+let imports = {
   DismissKeyboard: `import dismissKeyboard from 'dismissKeyboard'`,
   Link: "import { Link } from 'react-router-native'",
   Route: "import { Route } from 'react-router-native'",
@@ -26,7 +26,7 @@ export default ({
   track = true,
   views,
 }) => {
-  const finalName = restrictedNames.includes(name) ? `${name}1` : name
+  let finalName = restrictedNames.includes(name) ? `${name}1` : name
   if (name !== finalName) {
     console.warn(
       `// "${name}" is a Views reserved name.
@@ -35,7 +35,7 @@ export default ({
     )
   }
 
-  const state = {
+  let state = {
     animations: {},
     animated: new Set(),
     images: [],
@@ -76,7 +76,7 @@ export default ({
     },
   }
 
-  const parsed = views[name]
+  let parsed = views[name]
   state.fonts = parsed.fonts
   state.slots = parsed.slots
   state.localSupported = localSupported
@@ -86,7 +86,7 @@ export default ({
   maybeUsesTextInput(state)
   maybeUsesRouter(state)
   maybeUsesStyleSheet(state)
-  const finalGetImport = (name, isLazy) =>
+  let finalGetImport = (name, isLazy) =>
     imports[name] || getImport(name, isLazy)
 
   return {

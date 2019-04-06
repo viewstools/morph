@@ -1,6 +1,6 @@
 import { hasProp, getObjectAsString, getProp } from '../utils.js'
 import safe from '../react/safe.js'
-const BORDER_RADIUS = [
+let BORDER_RADIUS = [
   'borderRadius',
   'borderTopLeftRadius',
   'borderTopRightRadius',
@@ -8,9 +8,9 @@ const BORDER_RADIUS = [
   'borderBottomRightRadius',
 ]
 
-export const enter = (node, parent, state) => {
+export let enter = (node, parent, state) => {
   if (node.backgroundImage) {
-    const source = getObjectAsString({ uri: node.backgroundImage })
+    let source = getObjectAsString({ uri: node.backgroundImage })
 
     let resizeMode = getProp(node, 'backgroundSize')
     resizeMode = safe(resizeMode ? resizeMode.value.value : 'cover')
@@ -21,7 +21,7 @@ export const enter = (node, parent, state) => {
     // is fixed
     BORDER_RADIUS.forEach(prop => {
       if (hasProp(node, prop)) {
-        const propNode = getProp(node, prop)
+        let propNode = getProp(node, prop)
         state.render.push(` ${prop}={${propNode.value.value}}`)
       }
     })

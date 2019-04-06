@@ -6,7 +6,7 @@ test('#parse', () => {
   expect(parse({ source: WARNING })).toMatchSnapshot()
 })
 
-const VIEWS = [
+let VIEWS = [
   `Main Vertical`,
   `Main Vertical
   Text`,
@@ -48,7 +48,7 @@ const VIEWS = [
     text hola`,
 ]
 
-const WARNING = `Warning Vertical
+let WARNING = `Warning Vertical
   EmptyWhen Vertical
     color blue
     height 100

@@ -65,7 +65,7 @@ export default (node, parent, state) => {
   return name
 }
 
-const getGroupBlockName = (node, parent, state) => {
+let getGroupBlockName = (node, parent, state) => {
   let name = 'div'
 
   if (node.isFragment) {
@@ -77,7 +77,7 @@ const getGroupBlockName = (node, parent, state) => {
     name = 'a'
     node.goTo = true
   } else if (hasProp(node, 'onClick')) {
-    const propNode = getProp(node, 'onClick')
+    let propNode = getProp(node, 'onClick')
     let prevParent = parent
     let canBeButton = true
 

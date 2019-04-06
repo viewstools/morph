@@ -9,7 +9,7 @@ export function enter(node, parent, state) {
       isFocused: {},
       isDisabled: {},
       isPlaceholder: {},
-      print: {},
+      isSelected: {},
     },
     static: {
       base: {},
@@ -17,7 +17,7 @@ export function enter(node, parent, state) {
       isFocused: {},
       isDisabled: {},
       isPlaceholder: {},
-      print: {},
+      isSelected: {},
     },
   }
 
@@ -30,7 +30,7 @@ export function enter(node, parent, state) {
       scope.properties.forEach(propNode => {
         if (propNode.name === 'when') return
 
-        const { _isProp, ...styleForProperty } = state.getStyleForProperty(
+        let { _isProp, ...styleForProperty } = state.getStyleForProperty(
           propNode,
           node,
           isSlot(propNode)
@@ -41,11 +41,11 @@ export function enter(node, parent, state) {
             state.render.push(` ${k}=${safe(styleForProperty[k], node)}`)
           )
         } else {
-          const hasMatchingParent =
+          let hasMatchingParent =
             parent && node.isDynamic
               ? checkParentStem(node, scope.value)
               : false
-          const target =
+          let target =
             isSlot(propNode) || hasMatchingParent
               ? node.style.dynamic
               : node.style.static

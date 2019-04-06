@@ -13,7 +13,7 @@ import {
 
 export { enter }
 
-export const leave = (node, parent, state) => {
+export let leave = (node, parent, state) => {
   if (node.isFragment) return
 
   let dynamicStyles = getNonAnimatedDynamicStyles(node)
@@ -31,7 +31,7 @@ export const leave = (node, parent, state) => {
   }
 
   if (hasKeys(node.style.static.base)) {
-    const id = createId(node, state)
+    let id = createId(node, state)
     if (
       node.nameFinal.includes('FlatList') &&
       hasContentContainerStyleProp(node.style.static.base)
@@ -70,7 +70,7 @@ export const leave = (node, parent, state) => {
       node.nameFinal.includes('FlatList') &&
       hasContentContainerStyleProp(dynamicStyles)
     ) {
-      const dynamicContainerStyle = getObjectAsString(
+      let dynamicContainerStyle = getObjectAsString(
         getContentContainerStyleProps(dynamicStyles)
       )
       dynamicStyles = removeContentContainerStyleProps(dynamicStyles)

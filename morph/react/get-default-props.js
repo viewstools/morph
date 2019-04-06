@@ -1,4 +1,4 @@
-const stringify = slot => {
+let stringify = slot => {
   if (slot.type === 'array') {
     return JSON.stringify([])
   } else if (/^[0-9]+$/.test(slot.defaultValue) || slot.type === 'import') {
@@ -9,7 +9,7 @@ const stringify = slot => {
 }
 
 export default ({ state, name }) => {
-  const slots = state.slots
+  let slots = state.slots
     .filter(slot => slot.defaultValue !== false)
     .map(slot => `${slot.name}: ${stringify(slot)}`)
 
