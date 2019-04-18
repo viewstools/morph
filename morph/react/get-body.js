@@ -56,10 +56,15 @@ export default ({ state, name }) => {
     })
   }
 
-  let flow = ''
+  let flow = []
   if (state.flow === 'separate' && state.flowDefaultState !== null) {
-    flow = `let state = useFlowState("${state.name}")`
+    flow.push(`let state = fromFlow.useFlowState("${state.name}")`)
   }
+  if (state.flowSetState) {
+    flow.push(`let setState = fromFlow.useFlowSetState()`)
+  }
+
+  flow = flow.join('\n')
 
   if (state.hasRefs || state.isAnimated) {
     animatedOpen = animatedOpen.join('')

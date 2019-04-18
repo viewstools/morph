@@ -228,8 +228,8 @@ module.exports = options => {
             : ''
         }
 
-        if (name === 'ViewsUseFlowState') {
-          return `import { useFlowState } from '${relativise(
+        if (name === 'ViewsUseFlow') {
+          return `import * as fromFlow from '${relativise(
             file,
             instance.useFlow
           )}'`

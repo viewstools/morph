@@ -2,13 +2,15 @@ import { deinterpolate, getProp, isSlot, isInterpolation } from '../utils.js'
 import wrap from '../react/wrap.js'
 
 export let enter = (node, parent, state) => {
-  node.className = [
-    node.name === 'Text'
-      ? 'views-text'
-      : node.isCapture
-      ? 'views-capture'
-      : 'views-block',
-  ]
+  node.className = node.isBasic
+    ? [
+        node.name === 'Text'
+          ? 'views-text'
+          : node.isCapture
+          ? 'views-capture'
+          : 'views-block',
+      ]
+    : []
 
   let className = getProp(node, 'className')
   if (className) {

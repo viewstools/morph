@@ -1,7 +1,9 @@
 import {
+  getProp,
   getScopedCondition,
   getScopedImageCondition,
   getScopes,
+  hasProp,
   isValidImgSrc,
   makeOnClickTracker,
   pushImageToState,
@@ -66,10 +68,22 @@ export default (node, parent, state) => {
     return {
       [node.name]: safe(getScopedCondition(node, parent)),
     }
-  } else if (parent.isBasic && node.name === 'onClick' && state.track) {
-    return {
-      onClick: wrap(makeOnClickTracker(node, parent, state)),
+  } else if (parent.isBasic && node.name === 'onClick') {
+    let onClick = safe(node.value, node)
+
+    if (node.slotName === 'setState') {
+      let [key, value] = node.defaultValue.split(' ')
+      onClick = `{() => setState("${key}", "${value}")}`
+      state.use('ViewsUseFlow')
+      state.flowSetState = true
     }
+
+    // TODO merge with track
+    if (state.track) {
+      onClick = wrap(makeOnClickTracker(node, parent, state))
+    }
+
+    return { onClick }
   } else {
     return {
       [node.name]: safe(node.value, node),

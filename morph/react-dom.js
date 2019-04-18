@@ -42,6 +42,7 @@ export default ({
     enableAnimated,
     file,
     flow: null,
+    flowSetState: false,
     getFont,
     getStyleForProperty,
     getValueForProperty,

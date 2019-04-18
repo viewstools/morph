@@ -19,7 +19,7 @@ export function enter(node, parent, state) {
   }
 
   if (!node.isBasic && state.flow === 'separate') {
-    state.use('ViewsUseFlowState')
+    state.use('ViewsUseFlow')
 
     if (state.flowDefaultState === null) {
       state.flowDefaultState = node.name

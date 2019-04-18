@@ -11,6 +11,8 @@ import { isColumn } from '../utils.js'
 import isValidPropertyForBlock from './is-valid-property-for-block.js'
 
 export function enter(node, parent, state) {
+  if (node.isFragment) return false
+
   PropertiesStyle.enter(node, parent, state)
   PropertiesClassName.enter(node, parent, state)
   PropertiesImage.enter(node, parent, state)
