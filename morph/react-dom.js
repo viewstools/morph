@@ -41,6 +41,7 @@ export default ({
     dependencies: new Set(),
     enableAnimated,
     file,
+    flow: null,
     getFont,
     getStyleForProperty,
     getValueForProperty,
@@ -105,6 +106,9 @@ export default ({
       state,
     }),
     dependencies: state.dependencies,
+    flow: state.flow,
+    flowDefaultState: state.flowDefaultState,
+    // TODO flow supported states
     fonts: parsed.fonts,
     slots: parsed.slots,
     svgs: state.svgs,

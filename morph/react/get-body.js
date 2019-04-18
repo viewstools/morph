@@ -56,6 +56,11 @@ export default ({ state, name }) => {
     })
   }
 
+  let flow = ''
+  if (state.flow === 'separate' && state.flowDefaultState !== null) {
+    flow = `let state = useFlowState("${state.name}")`
+  }
+
   if (state.hasRefs || state.isAnimated) {
     animatedOpen = animatedOpen.join('')
     animatedClose = animatedClose.reverse().join('')
@@ -71,6 +76,7 @@ export default ({ state, name }) => {
   } else {
     return `let ${name} = (props) => {
     ${state.track ? `let track = React.useContext(TrackContext)` : ''}
+    ${flow}
   return (${render})
 }`
   }

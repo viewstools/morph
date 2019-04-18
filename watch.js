@@ -11,6 +11,7 @@ let chokidar = require('chokidar')
 let clean = require('./clean.js')
 let debounce = require('debounce')
 let ensureBaseCss = require('./ensure-base-css.js')
+let ensureFlow = require('./ensure-flow.js')
 let ensureLocalContainer = require('./ensure-local-container.js')
 let ensureTrackContext = require('./ensure-track-context.js')
 let getLatestVersion = require('latest-version')
@@ -227,6 +228,13 @@ module.exports = options => {
             : ''
         }
 
+        if (name === 'ViewsUseFlowState') {
+          return `import { useFlowState } from '${relativise(
+            file,
+            instance.useFlow
+          )}'`
+        }
+
         if (name === 'LocalContainer') {
           return `import LocalContainer from '${relativise(
             file,
@@ -268,6 +276,8 @@ module.exports = options => {
       customFonts: [],
       externalDependencies: new Set(),
       dependsOn,
+      useFlow: 'use-flow.js',
+      flow: {},
       responsibleFor,
       logic,
       views,
@@ -306,6 +316,8 @@ module.exports = options => {
       instance.baseCss = 'ViewsBaseCss.js'
       ensureBaseCss(path.join(src, instance.baseCss))
     }
+
+    ensureFlow(path.join(src, instance.useFlow), instance.flow)
 
     let maybeUpdateLocal = supported => {
       if (local) {
@@ -515,6 +527,14 @@ module.exports = options => {
         for (let dep of res.dependencies) {
           instance.externalDependencies.add(dep)
         }
+
+        // TODO nested flows
+        if (res.flow === 'separate') {
+          instance.flow[view] = res.flowDefaultState
+        } else {
+          delete instance.flow[view]
+        }
+        ensureFlow(path.join(src, instance.useFlow), instance.flow)
 
         let toMorph = {
           as,

@@ -63,6 +63,10 @@ export let getProp = (node, key) => {
   return node.properties && node.properties.find(finder)
 }
 
+export let getPropValueOrDefault = (node, key, defaultValue) => {
+  return hasProp(node, key) ? getProp(node, key).value : defaultValue
+}
+
 export let getScope = node => node.value.split('when ')[1]
 
 let maybeSafe = node =>

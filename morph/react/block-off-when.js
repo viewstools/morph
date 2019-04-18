@@ -12,6 +12,10 @@ export function enter(node, parent, state) {
     if (parent && !isList(parent)) state.render.push('{')
 
     state.render.push(`${onWhen.value} ? `)
+  } else if (!node.isBasic && state.flow === 'separate') {
+    node.onWhen = true
+
+    state.render.push(`{state === "${node.name}" ? `)
   }
 }
 
