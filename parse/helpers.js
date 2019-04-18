@@ -7,7 +7,7 @@ import toSlugCase from 'to-slug-case'
 let LOCAL_SCOPES = locales.map(item => item.replace(/-/g, ''))
 
 let dymBlockMatcher = new DidYouMeanMatcher(
-  'Capture|CaptureTextArea|G|Horizontal|Image|List|Svg|SvgCircle|SvgEllipse|SvgDefs|SvgGroup|SvgLinearGradient|SvgRadialGradient|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgSymbol|SvgText|SvgUse|SvgStop|Text|Vertical'.split(
+  'Capture|CaptureTextArea|G|Horizontal|Image|List|Svg|SvgCircle|SvgEllipse|SvgDefs|SvgGroup|SvgLinearGradient|SvgRadialGradient|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgSymbol|SvgText|SvgUse|SvgStop|Text|View|Vertical'.split(
     '|'
   )
 )
@@ -17,6 +17,7 @@ let dymPropMatcher = new DidYouMeanMatcher([
   'type',
   'fill',
   'stroke',
+  'flow',
   'from',
   'key',
   'viewBox',
@@ -77,7 +78,7 @@ export let didYouMeanBlock = block => dymBlockMatcher.get(block)
 export let didYouMeanProp = prop => dymPropMatcher.get(prop)
 
 let ANIMATION = /(.+)(?:\s)(spring|linear|easeOut|easeInOut|easeIn|ease)(?:\s?(.*)?)/
-let BASIC = /^(Capture|CaptureTextArea|Column|Horizontal|Image|List|Svg|SvgCircle|SvgEllipse|SvgDefs|SvgGroup|SvgLinearGradient|SvgRadialGradient|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgSymbol|SvgText|SvgUse|SvgStop|Table|Text|Vertical)$/i
+let BASIC = /^(Capture|CaptureTextArea|Column|Horizontal|Image|List|Svg|SvgCircle|SvgEllipse|SvgDefs|SvgGroup|SvgLinearGradient|SvgRadialGradient|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgSymbol|SvgText|SvgUse|SvgStop|Table|Text|View|Vertical)$/i
 let BLOCK = /^(\s*)([A-Z][a-zA-Z0-9]*)(\s+([A-Z][a-zA-Z0-9]*))?$/
 let BOOL = /^(false|true)$/i
 let CAPTURE = /^(Capture|CaptureTextArea)$/i

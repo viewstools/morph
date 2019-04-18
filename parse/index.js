@@ -312,6 +312,25 @@ That would mean that SomeView in ${block.name} will be replaced by ${
       block.children = []
     }
 
+    if (block.isBasic && block.name === 'View') {
+      block.isFragment = true
+      if (stack.length > 0) {
+        warnings.push({
+          type: `A view can only have one View block. Maybe you want to split this block into another view?`,
+          line,
+          loc: block.loc,
+        })
+      }
+    } else if (stack.length === 0) {
+      warnings.push({
+        type: `A view must start with a View block. ${
+          block.name
+        } isn't valid.\nWrap everything within a View block at the top.`,
+        line,
+        loc: block.loc,
+      })
+    }
+
     if (shouldPushToStack || stack.length === 0) {
       stack.push(block)
     }
@@ -652,7 +671,7 @@ That would mean that SomeView in ${block.name} will be replaced by ${
     block.properties = properties
     block.scopes = scopes
 
-    if (block.isFragment) {
+    if (block.name !== 'View' && block.isFragment) {
       let invalidProps = properties
         .filter(prop => prop.name !== 'isFragment' || prop.name !== 'onWhen')
         .map(prop => prop.name)
@@ -690,11 +709,6 @@ That would mean that SomeView in ${block.name} will be replaced by ${
   if (stack.length > 0) {
     while (!end(stack.pop(), lines.length - 1)) {}
   }
-
-  // if (source.startsWith('Action Vertical')) {
-  //   console.log('ACTION VERTICAL ->>>>>')
-  // console.log(JSON.stringify(views, null, '  '))
-  // }
 
   return {
     fonts,

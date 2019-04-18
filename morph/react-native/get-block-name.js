@@ -25,6 +25,9 @@ export default (node, parent, state) => {
         return 'Text'
       }
 
+    case 'View':
+      return 'React.Fragment'
+
     default:
       return node.name
   }
