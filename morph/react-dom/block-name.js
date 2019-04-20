@@ -10,10 +10,12 @@ export function enter(node, parent, state) {
       let name = getPropValueOrDefault(node, 'name', state.name)
       if (hasProp(node, 'actions')) {
         let actions = getProp(node, 'actions').value.split(',')
-        if (actions.length > 0) {
+        if (actions.length > 1) {
           state.render.push('<React.Fragment>')
           state.use('React.Fragment')
+          state.render.push(name)
         }
+
         actions.forEach(raction => {
           let action = raction.trim()
           let parts = action.split('/')
@@ -21,12 +23,13 @@ export function enter(node, parent, state) {
           let value = parts[parts.length - 1]
 
           state.render.push(
-            `<button onClick={() => setState("${key}", "${value}")}>${name}</button>`
+            `<button onClick={() => setState("${key}", "${value}")}>${key} -> ${value}</button>`
           )
           state.use('ViewsUseFlow')
           state.flowSetState = true
         })
-        if (actions.length > 0) {
+
+        if (actions.length > 1) {
           state.render.push('</React.Fragment>')
         }
       } else {
