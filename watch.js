@@ -317,8 +317,6 @@ module.exports = options => {
       ensureBaseCss(path.join(src, instance.baseCss))
     }
 
-    ensureFlow(path.join(src, instance.useFlow), instance.flow)
-
     let maybeUpdateLocal = supported => {
       if (local) {
         if (supported) {
@@ -534,7 +532,6 @@ module.exports = options => {
         } else {
           delete instance.flow[view]
         }
-        ensureFlow(path.join(src, instance.useFlow), instance.flow)
 
         let toMorph = {
           as,
@@ -564,6 +561,8 @@ module.exports = options => {
             await Promise.all(toMorphQueue.map(onMorph))
             toMorphQueue = null
           }
+
+          ensureFlow(path.join(src, instance.useFlow), instance.flow)
         } else {
           await onMorph(toMorph)
         }
@@ -728,6 +727,8 @@ module.exports = options => {
     } else {
       viewsToMorph.forEach(v => morphView(v, false, true))
     }
+
+    ensureFlow(path.join(src, instance.useFlow), instance.flow)
 
     if (!once) {
       let watcher = chokidar.watch(watcherPattern, {

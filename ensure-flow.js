@@ -9,7 +9,7 @@ export let useFlowState = key => useContext(FlowState)[key]
 export let useFlowSetState = () => useContext(FlowSetState)
 
 export function Flow(props) {
-  let [state, _setState] = useState(${JSON.stringify(flow, null, '  ')})
+  let [state, _setState] = useState(props.initialState)
 
   let setState = useCallback(
     (key, value) => _setState({ ...state, [key]: value }),
@@ -23,7 +23,11 @@ export function Flow(props) {
       </FlowState.Provider>
     </FlowSetState.Provider>
   )
-}`
+}
+Flow.defaultProps = {
+  initialState: ${JSON.stringify(flow, null, '  ')}
+}
+`
 
 module.exports = async (file, flow) => {
   await fs.writeFile(file, makeFlow(flow), { encoding: 'utf8' })
