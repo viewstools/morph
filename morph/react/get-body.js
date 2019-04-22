@@ -58,7 +58,11 @@ export default ({ state, name }) => {
 
   let flow = []
   if (state.flow === 'separate' && state.flowDefaultState !== null) {
-    flow.push(`let flowState = fromFlow.useFlowState("${state.name}")`)
+    flow.push(
+      `let flowState = fromFlow.useFlowState("${state.name}", "${
+        state.flowDefaultState
+      }")`
+    )
   }
   if (state.flowSetState) {
     flow.push(`let setFlowState = fromFlow.useFlowSetState()`)

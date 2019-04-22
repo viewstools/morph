@@ -1,11 +1,23 @@
 let fs = require('mz/fs')
+let prettier = require('prettier')
 
-let makeFlow = flow => `import React, { useCallback, useContext, useState } from 'react'
+let makeFlow = flow => `import React, { useCallback, useContext, useLayoutEffect, useState } from 'react'
 
 let FlowState = React.createContext({})
 let FlowSetState = React.createContext()
 
-export let useFlowState = key => useContext(FlowState)[key]
+export let useFlowState = (key, initialValue) => {
+  let state = useContext(FlowState)
+  let setState = useFlowSetState()
+
+  useLayoutEffect(() => {
+    if (!(key in state)) {
+      setState(key, initialValue)
+    }
+  }, [])
+
+  return state[key]
+}
 export let useFlowSetState = () => useContext(FlowSetState)
 
 export function Flow(props) {
@@ -30,5 +42,13 @@ Flow.defaultProps = {
 `
 
 module.exports = async (file, flow) => {
-  await fs.writeFile(file, makeFlow(flow), { encoding: 'utf8' })
+  await fs.writeFile(
+    file,
+    prettier.format(makeFlow(flow), {
+      parser: 'babel',
+      singleQuote: true,
+      trailingComma: 'es5',
+    }),
+    { encoding: 'utf8' }
+  )
 }
