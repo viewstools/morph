@@ -68,14 +68,17 @@ export default (node, parent, state) => {
     return {
       [node.name]: safe(getScopedCondition(node, parent)),
     }
-  } else if (parent.isBasic && node.name === 'onClick') {
+  } else if (node.name === 'onClick') {
     let onClick = safe(node.value, node)
 
-    if (node.slotName === 'setState') {
-      let [key, value] = node.defaultValue.split(' ')
-      onClick = `{() => setState("${key}", "${value}")}`
+    if (node.slotName === 'setFlowState') {
+      let parts = node.defaultValue.split('/')
+      let key = parts[parts.length - 2]
+      let value = parts[parts.length - 1]
+      onClick = `{() => setFlowState("${key}", "${value}")}`
       state.use('ViewsUseFlow')
       state.flowSetState = true
+      // TODO warn if action is used but it isn't in actions
     }
 
     // TODO merge with track

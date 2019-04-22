@@ -58,10 +58,10 @@ export default ({ state, name }) => {
 
   let flow = []
   if (state.flow === 'separate' && state.flowDefaultState !== null) {
-    flow.push(`let state = fromFlow.useFlowState("${state.name}")`)
+    flow.push(`let flowState = fromFlow.useFlowState("${state.name}")`)
   }
   if (state.flowSetState) {
-    flow.push(`let setState = fromFlow.useFlowSetState()`)
+    flow.push(`let setFlowState = fromFlow.useFlowSetState()`)
   }
 
   flow = flow.join('\n')
@@ -79,10 +79,12 @@ export default ({ state, name }) => {
   }
 }`
   } else {
+    let ret = render ? `(${render})` : null
+
     return `let ${name} = (props) => {
     ${state.track ? `let track = React.useContext(TrackContext)` : ''}
     ${flow}
-  return (${render})
+  return ${ret}
 }`
   }
 }

@@ -479,6 +479,16 @@ module.exports = options => {
       }
     }
 
+    let isStory = viewId => {
+      try {
+        let view = viewsParsed[viewId]
+        return view.views[0].properties.some(p => p.name === 'flow')
+      } catch (error) {
+        console.error(viewId, error)
+        return false
+      }
+    }
+
     let toMorphQueue = null
     let morphView = filter(async (f, skipRemorph, skipSource) => {
       let { file, view } = toViewPath(f)
@@ -516,6 +526,7 @@ module.exports = options => {
           name: view,
           getFont,
           getImport,
+          isStory,
           localSupported: instance.localSupported,
           pretty,
           track,
@@ -585,6 +596,7 @@ module.exports = options => {
                   file: { raw: rawFile, relative: file },
                   name: svg.view,
                   getImport,
+                  isStory,
                   pretty,
                   track,
                   views: {
