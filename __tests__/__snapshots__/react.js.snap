@@ -3100,6 +3100,68 @@ export default UseImage;
 }
 `;
 
+exports[`react-dom parses react-dom UseModal 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
+import React from 'react';
+import ViewsBaseCss from './ViewsBaseCss.view.js';
+import {
+  DialogOverlay as ModalOverlay,
+  DialogContent as ModalContent,
+} from '@reach/dialog';
+import { css } from 'emotion';
+
+let styles = {};
+styles.UseModal1 = css({
+  label: 'UseModal1',
+  alignItems: 'center',
+  backgroundColor: 'rgba(0, 188, 112, 0.70)',
+  justifyContent: 'center',
+});
+styles.ModalContent = css({
+  label: 'ModalContent',
+  backgroundColor: '#ffffff',
+  boxShadow: '0px 10px 30px 0px rgba(0, 139, 83, 0.83)',
+  width: 400,
+});
+
+let UseModal = props => {
+  return (
+    <ModalOverlay
+      data-testid={\`\${props['data-testid'] || 'UseModal'}\`}
+      isOpen={props.isOpen}
+      className={\`views-block \${styles.UseModal1}\`}
+    >
+      <ModalContent
+        data-testid=\\"UseModal.ModalContent\\"
+        className={\`views-block \${styles.ModalContent}\`}
+      >
+        <span data-testid=\\"UseModal.Text\\" className=\\"views-text\\">
+          stuff inside modal
+        </span>
+      </ModalContent>
+      {props.children}
+    </ModalOverlay>
+  );
+};
+
+export default UseModal;
+",
+  "dependencies": Set {
+    "emotion",
+  },
+  "fonts": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "isOpen",
+      "type": "string",
+    },
+  ],
+  "svgs": Array [],
+}
+`;
+
 exports[`react-dom parses react-dom UseProxy 1`] = `
 Object {
   "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
@@ -6553,6 +6615,60 @@ export default UseImage;
   "dependencies": Set {},
   "fonts": Array [],
   "slots": Array [],
+  "svgs": Array [],
+}
+`;
+
+exports[`react-native parses react-native UseModal 1`] = `
+Object {
+  "code": "/* eslint-disable jsx-a11y/accessible-emoji, no-unused-vars, no-dupe-keys */
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+
+let styles = StyleSheet.create({
+  UseModal1: {
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 188, 112, 0.70)',
+    justifyContent: 'center',
+  },
+  ModalContent: {
+    backgroundColor: '#ffffff',
+    shadowRadius: 30,
+    elevation: 1,
+    shadowOpacity: 1,
+    shadowColor: 'rgba(0, 139, 83, 0.83)',
+    shadowOffset: { width: 0, height: 10 },
+    width: 400,
+  },
+});
+
+let UseModal = props => {
+  return (
+    <View
+      testID={\`\${props['testID'] || 'UseModal'}\`}
+      isModal={true}
+      isOpen={props.isOpen}
+      style={styles.UseModal1}
+    >
+      <View testID=\\"UseModal.ModalContent\\" style={styles.ModalContent}>
+        <Text testID=\\"UseModal.Text\\">stuff inside modal</Text>
+      </View>
+      {props.children}
+    </View>
+  );
+};
+
+export default UseModal;
+",
+  "dependencies": Set {},
+  "fonts": Array [],
+  "slots": Array [
+    Object {
+      "defaultValue": false,
+      "name": "isOpen",
+      "type": "string",
+    },
+  ],
   "svgs": Array [],
 }
 `;
