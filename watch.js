@@ -131,18 +131,12 @@ module.exports = options => {
       }
     }
 
-    let filter = fn => (f, a, b) => {
-      if (
-        isMorphedView(f, a, b) ||
-        (isJs(f) && !isJsComponent(f) && !isLogic(f)) ||
-        (!shouldIncludeLogic && isLogic(f)) ||
-        isDirectory(f) ||
-        isFont(f)
-      )
-        return
-
-      return fn(f, a, b)
-    }
+    let dontMorph = f =>
+      isMorphedView(f) ||
+      (isJs(f) && !isJsComponent(f) && !isLogic(f)) ||
+      (!shouldIncludeLogic && isLogic(f)) ||
+      isDirectory(f) ||
+      isFont(f)
 
     let getImportFileName = (name, file) => {
       let f = views[name]
@@ -357,7 +351,9 @@ module.exports = options => {
       })
     }
 
-    let addView = filter((f, skipMorph = false) => {
+    let addView = (f, skipMorph = false) => {
+      if (dontMorph(f)) return
+
       let { file, view } = toViewPath(f)
 
       if (isViewNameRestricted(view, as)) {
@@ -401,7 +397,7 @@ module.exports = options => {
           morphView(f)
         }
       }
-    })
+    }
 
     let makeResponsibleFor = () => {
       Object.keys(views).forEach(updateResponsibleFor)
@@ -482,15 +478,18 @@ module.exports = options => {
     let isStory = viewId => {
       try {
         let view = viewsParsed[viewId]
-        return view.views[0].properties.some(p => p.name === 'flow')
+        return view && view.views[0].properties.some(p => p.name === 'flow')
       } catch (error) {
         console.error(viewId, error)
         return false
       }
     }
 
+    let morphing = new Set()
     let toMorphQueue = null
-    let morphView = filter(async (f, skipRemorph, skipSource) => {
+    let morphView = async (f, skipRemorph, skipSource) => {
+      if (morphing.has(f) || dontMorph(f) || isJs(f)) return
+
       let { file, view } = toViewPath(f)
       if (isViewNameRestricted(view, as)) {
         verbose &&
@@ -503,7 +502,7 @@ module.exports = options => {
         return
       }
 
-      if (isJs(f)) return
+      morphing.add(f)
 
       let getFont =
         as === 'react-native'
@@ -629,7 +628,9 @@ module.exports = options => {
           maybeIsReady()
         }
       }
-    })
+
+      morphing.delete(f)
+    }
 
     let remorphDependenciesFor = async viewRaw => {
       let view = viewRaw.split('.')[0]
@@ -659,7 +660,9 @@ module.exports = options => {
       }
     }
 
-    let removeView = filter(f => {
+    let removeView = f => {
+      if (dontMorph(f)) return
+
       let { view } = toViewPath(f)
       if (isViewNameRestricted(view, as)) return
 
@@ -682,7 +685,7 @@ module.exports = options => {
       remorphDependenciesFor(view)
 
       delete dependsOn[view]
-    })
+    }
 
     let watcherOptions = {
       bashNative: ['linux'],
