@@ -23,6 +23,8 @@ export default {
   opacity: true,
   zIndex: true,
   scale: true,
+  scaleX: true,
+  scaleY: true,
   translateX: true,
   translateY: true,
   borderBottomLeftRadius: true,

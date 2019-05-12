@@ -13,6 +13,8 @@ export default (node, parent, code) => {
       case 'rotateX':
       case 'rotateY':
       case 'scale':
+      case 'scaleX':
+      case 'scaleY':
       case 'translateX':
       case 'translateY':
         return {
@@ -69,6 +71,8 @@ export default (node, parent, code) => {
     case 'rotateX':
     case 'rotateY':
     case 'scale':
+    case 'scaleX':
+    case 'scaleY':
     case 'translateX':
     case 'translateY':
       return {
@@ -173,6 +177,8 @@ let getTransform = (node, parent) => {
   let rotateX = getProp(parent, 'rotateX')
   let rotateY = getProp(parent, 'rotateY')
   let scale = getProp(parent, 'scale')
+  let scaleX = getProp(parent, 'scaleX')
+  let scaleY = getProp(parent, 'scaleY')
   let translateX = getProp(parent, 'translateX')
   let translateY = getProp(parent, 'translateY')
 
@@ -181,6 +187,8 @@ let getTransform = (node, parent) => {
     getTransformValue(rotateX, parent, 'deg'),
     getTransformValue(rotateY, parent, 'deg'),
     getTransformValue(scale, parent),
+    getTransformValue(scaleX, parent),
+    getTransformValue(scaleY, parent),
     getTransformValue(translateX, parent),
     getTransformValue(translateY, parent),
   ].filter(Boolean)

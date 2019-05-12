@@ -90,6 +90,8 @@ export let STYLE = [
   'translateX',
   'translateY',
   'scale',
+  'scaleX',
+  'scaleY',
   'rotate',
   'rotateX',
   'rotateY',

@@ -22,8 +22,6 @@ let blacklist = [
   'pagebreakinside',
   'perspective',
   'rotatez',
-  'scalex',
-  'scaley',
   'scalez',
   'shadowspread',
   'teleportto',

@@ -184,6 +184,8 @@ let ensurePropName = name => {
     case 'rotateX':
     case 'rotateY':
     case 'scale':
+    case 'scaleX':
+    case 'scaleY':
     case 'translateX':
     case 'translateY':
       return 'transform'

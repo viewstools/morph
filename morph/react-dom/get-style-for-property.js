@@ -15,6 +15,8 @@ export default (node, parent, code) => {
       case 'rotateX':
       case 'rotateY':
       case 'scale':
+      case 'scaleX':
+      case 'scaleY':
       case 'translateX':
       case 'translateY':
         return {
@@ -59,6 +61,8 @@ export default (node, parent, code) => {
     case 'rotateX':
     case 'rotateY':
     case 'scale':
+    case 'scaleX':
+    case 'scaleY':
     case 'translateX':
     case 'translateY':
       return { transform: getTransform(node, parent) }
@@ -157,6 +161,8 @@ let getTransform = (node, parent) => {
   let rotateX = getProp(parent, 'rotateX')
   let rotateY = getProp(parent, 'rotateY')
   let scale = getProp(parent, 'scale')
+  let scaleX = getProp(parent, 'scaleX')
+  let scaleY = getProp(parent, 'scaleY')
   let translateX = getProp(parent, 'translateX')
   let translateY = getProp(parent, 'translateY')
 
@@ -165,6 +171,9 @@ let getTransform = (node, parent) => {
     getTransformValue(rotateX, parent, 'deg'),
     getTransformValue(rotateY, parent, 'deg'),
     getTransformValue(scale, parent, ''),
+    getTransformValue(scaleX, parent, ''),
+    getTransformValue(scaleY, parent, ''),
+
     getTransformValue(translateX, parent, 'px'),
     getTransformValue(translateY, parent, 'px'),
   ]
@@ -176,6 +185,8 @@ let getTransform = (node, parent) => {
     isSlot(rotateX) ||
     isSlot(rotateY) ||
     isSlot(scale) ||
+    isSlot(scaleX) ||
+    isSlot(scaleY) ||
     isSlot(translateX) ||
     isSlot(translateY)
   ) {

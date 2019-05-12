@@ -62,6 +62,8 @@ let UNITS = {
   right: LENGTH,
   rotate: ANGLE,
   scale: UNITLESS,
+  scaleX: UNITLESS,
+  scaleY: UNITLESS,
   skew: ANGLE,
   top: LENGTH,
   translateX: LENGTH,

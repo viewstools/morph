@@ -82,6 +82,8 @@ let UNITS = {
   rotateX: ANGLE,
   rotateY: ANGLE,
   scale: UNITLESS,
+  scaleX: UNITLESS,
+  scaleY: UNITLESS,
   shadowOffsetY: LENGTH,
   shadowOffsetX: LENGTH,
   shadowBlur: LENGTH,

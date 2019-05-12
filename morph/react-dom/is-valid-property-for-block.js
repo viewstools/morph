@@ -9,8 +9,6 @@ let blacklist = [
   'onclickusediv',
   'perspective',
   'rotatez',
-  'scalex',
-  'scaley',
   'scalez',
   'teleportto',
   'transformoriginz',
