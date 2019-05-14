@@ -6,6 +6,8 @@ export default [
   'Image',
   'Link',
   'List',
+  'ModalContent',
+  'ModalOverlay',
   'Route',
   'Router',
   'Spring',

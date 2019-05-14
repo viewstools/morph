@@ -11,6 +11,8 @@ let imports = {
   Link: "import { Link } from 'react-router-dom'",
   Route: "import { Route } from 'react-router-dom'",
   Router: "import { BrowserRouter as Router } from 'react-router-dom'",
+  ModalOverlay:
+    "import { DialogOverlay as ModalOverlay, DialogContent as ModalContent } from '@reach/dialog'",
 }
 
 export default ({
@@ -76,6 +78,7 @@ export default ({
         /props/.test(block) ||
         /^Animated/.test(block) ||
         'React.Fragment' === block ||
+        'ModalContent' === block ||
         block === finalName
       )
         return

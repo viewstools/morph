@@ -3,6 +3,7 @@ let blacklist = [
   'format',
   'goto',
   'isfragment',
+  'ismodal',
   'onclickid',
   'onclickselected',
   'onclickselectedtype',

@@ -75,6 +75,10 @@ let getGroupBlockName = (node, parent, state) => {
 
   if (node.isFragment) {
     name = 'React.Fragment'
+  } else if (hasProp(node, 'isModal')) {
+    name = 'ModalOverlay'
+  } else if (parent && hasProp(parent, 'isModal')) {
+    name = 'ModalContent'
   } else if (hasProp(node, 'teleportTo')) {
     name = 'Link'
     node.teleport = true
