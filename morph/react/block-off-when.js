@@ -1,4 +1,4 @@
-import { getProp, isList } from '../utils.js'
+import { getProp, isList, isStory } from '../utils.js'
 
 export function enter(node, parent, state) {
   if (node.isFragment && node.children.length === 0) return
@@ -12,13 +12,8 @@ export function enter(node, parent, state) {
     if (parent && !isList(parent)) state.render.push('{')
 
     state.render.push(`${onWhen.value} ? `)
-  } else if (
-    !node.isBasic &&
-    state.isStory(node.name) &&
-    state.flow === 'separate'
-  ) {
+  } else if (isStory(node, state)) {
     node.onWhen = true
-
     state.render.push(`{flowState === "${node.name}" ? `)
   }
 }

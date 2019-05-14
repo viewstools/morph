@@ -1,4 +1,4 @@
-import { getProp, getPropValueOrDefault, hasProp } from '../utils.js'
+import { getProp, getPropValueOrDefault, hasProp, isStory } from '../utils.js'
 import { leave } from '../react/block-name.js'
 import handleTable from '../react/block-name-handle-table.js'
 import getBlockName from './get-block-name.js'
@@ -45,7 +45,7 @@ export function enter(node, parent, state) {
     state.flowDefaultState = null
   }
 
-  if (!node.isBasic && state.flow === 'separate') {
+  if (isStory(node, state)) {
     state.use('ViewsUseFlow')
 
     if (state.flowDefaultState === null) {

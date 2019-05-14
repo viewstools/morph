@@ -574,3 +574,6 @@ export let maybeMakeHyphenated = ({ name, value }) =>
   MAYBE_HYPHENATED_STYLE_PROPS.includes(name) && /^[a-zA-Z]+$/.test(value)
     ? toSlugCase(value)
     : value
+
+export let isStory = (node, state) =>
+  !node.isBasic && state.isStory(node.name) && state.flow === 'separate'
