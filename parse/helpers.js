@@ -31,6 +31,8 @@ let dymPropMatcher = new DidYouMeanMatcher([
   'cx',
   'cy',
   'r',
+  'rx',
+  'ry',
   'x1',
   'y1',
   'y',
