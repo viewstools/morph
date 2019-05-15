@@ -24,9 +24,13 @@ export function Flow(props) {
   let [state, _setState] = useState(props.initialState)
 
   let setState = useCallback(
-    (key, value) => _setState({ ...state, [key]: value }),
-    [state, _setState],
+    (key, value) => _setState(state => ({ ...state, [key]: value })),
+    [_setState],
   )
+
+  if (process.env.NODE_ENV === 'development') {
+    console.table(state)
+  }
 
   return (
     <FlowSetState.Provider value={setState}>
