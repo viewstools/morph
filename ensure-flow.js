@@ -6,8 +6,10 @@ let makeFlow = flow => `import React, { useCallback, useContext, useLayoutEffect
 let FlowState = React.createContext({})
 let FlowSetState = React.createContext()
 
+export let useFlow = () => useContext(FlowState)
+
 export let useFlowState = (key, initialValue) => {
-  let state = useContext(FlowState)
+  let state = useFlow()
   let setState = useFlowSetState()
 
   useLayoutEffect(() => {
@@ -18,6 +20,7 @@ export let useFlowState = (key, initialValue) => {
 
   return state[key]
 }
+
 export let useFlowSetState = () => useContext(FlowSetState)
 
 export function Flow(props) {
