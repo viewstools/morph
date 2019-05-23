@@ -4,5 +4,4 @@ import reactNative from './morph/react-native/restricted-names.js'
 export default {
   'react-dom': reactDom,
   'react-native': reactNative,
-  e2e: [],
 }

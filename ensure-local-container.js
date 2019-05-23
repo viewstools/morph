@@ -1,4 +1,4 @@
-let fs = require('mz/fs')
+import fs from 'mz/fs.js'
 
 let GET_INITIAL_LANGUAGE = {
   'react-dom': `export default supported => closest(navigator.language || navigator.browserLanguage, supported)
@@ -75,7 +75,12 @@ export default class LocalContainer extends Container {
 }`,
 }
 
-module.exports = async ({ as, file, fileGetInitialLanguage, supported }) => {
+export default async function ensureLocalContainer({
+  as,
+  file,
+  fileGetInitialLanguage,
+  supported,
+}) {
   if (!(await fs.exists(fileGetInitialLanguage))) {
     await fs.writeFile(fileGetInitialLanguage, GET_INITIAL_LANGUAGE[as], {
       encoding: 'utf8',

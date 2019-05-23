@@ -1,8 +1,8 @@
-let glob = require('fast-glob')
-let fs = require('fs')
-let path = require('path')
+import glob from 'fast-glob'
+import fs from 'fs'
+import path from 'path'
 
-module.exports = async src => {
+export default async function clean(src) {
   let options = {
     bashNative: ['linux'],
     cwd: src,

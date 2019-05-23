@@ -1,5 +1,5 @@
-let fs = require('mz/fs')
-let prettier = require('prettier')
+import fs from 'mz/fs.js'
+import prettier from 'prettier'
 
 let makeFlow = flow => `import React, { useCallback, useContext, useLayoutEffect, useState } from 'react'
 
@@ -48,8 +48,8 @@ Flow.defaultProps = {
 }
 `
 
-module.exports = async (file, flow) => {
-  await fs.writeFile(
+export default function ensureFlow(file, flow) {
+  return fs.writeFile(
     file,
     prettier.format(makeFlow(flow), {
       parser: 'babel',

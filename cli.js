@@ -1,10 +1,12 @@
-#!/usr/bin/env node
+#!/usr/bin/env node --experimental-modules --experimental-json-modules
 
-let { readFileSync, statSync } = require('fs')
-let { morph, parse, pathToName } = require('./lib.js')
-let chalk = require('chalk')
-let cleanup = require('./clean.js')
-let watch = require('./watch.js')
+import { statSync } from 'fs'
+import chalk from 'chalk'
+import cleanup from './clean.js'
+import minimist from 'minimist'
+import watch from './watch.js'
+import updateNotifier from 'update-notifier'
+import pkg from './package.json'
 
 let {
   _,
@@ -16,7 +18,7 @@ let {
   watch: shouldWatch,
   verbose,
   version,
-} = require('minimist')(process.argv.slice(2), {
+} = minimist(process.argv.slice(2), {
   alias: {
     help: 'h',
   },
@@ -53,7 +55,6 @@ if (help) {
 }
 
 if (version) {
-  let pkg = require('./package.json')
   console.log(`v${pkg.version}`)
   process.exit()
 }
@@ -71,9 +72,6 @@ if (clean) {
   cleanup(input)
   process.exit()
 }
-
-let updateNotifier = require('update-notifier')
-let pkg = require('./package.json')
 
 updateNotifier({ pkg }).notify()
 

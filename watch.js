@@ -1,20 +1,20 @@
-let { exec } = require('child_process')
-let { isViewNameRestricted, morph, morphFont, parse } = require('./lib.js')
-let chalk = require('chalk')
-let chokidar = require('chokidar')
-let debounce = require('debounce')
-let ensureFlow = require('./ensure-flow.js')
-let ensureLocalContainer = require('./ensure-local-container.js')
-let ensureTrackContext = require('./ensure-track-context.js')
-let getLatestVersion = require('latest-version')
-let flatten = require('flatten')
-let fs = require('mz/fs')
-let glob = require('fast-glob')
-let hasYarn = require('has-yarn')
-let path = require('path')
-let toPascalCase = require('to-pascal-case')
-let uniq = require('array-uniq')
-let readPkgUp = require('read-pkg-up')
+import { exec } from 'child_process'
+import { isViewNameRestricted, morph, morphFont, parse } from './index.js'
+import chalk from 'chalk'
+import chokidar from 'chokidar'
+import debounce from 'debounce'
+import ensureFlow from './ensure-flow.js'
+import ensureLocalContainer from './ensure-local-container.js'
+import ensureTrackContext from './ensure-track-context.js'
+import getLatestVersion from 'latest-version'
+import flatten from 'flatten'
+import fs from 'mz/fs.js'
+import glob from 'fast-glob'
+import hasYarn from 'has-yarn'
+import path from 'path'
+import toPascalCase from 'to-pascal-case'
+import uniq from 'array-uniq'
+import readPkgUp from 'read-pkg-up'
 
 let FONT_TYPES = {
   '.otf': 'opentype',
@@ -41,7 +41,7 @@ let relativise = (from, to) => {
 
 let onMorph = ({ file, code }) => fs.writeFile(`${file}.js`, code)
 
-module.exports = async function watch({
+export default async function watch({
   as = 'react-dom',
   enableAnimated = true,
   local = 'en',

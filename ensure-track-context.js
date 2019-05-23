@@ -1,4 +1,4 @@
-let fs = require('mz/fs')
+import fs from 'mz/fs.js'
 
 let TRACK_CONTEXT = `import React from 'react'
 
@@ -19,7 +19,7 @@ export class Track extends React.Component {
   }
 }`
 
-module.exports = async ({ file }) => {
+export default async function ensureTrackContext({ file }) {
   if (!(await fs.exists(file))) {
     await fs.writeFile(file, TRACK_CONTEXT, {
       encoding: 'utf8',
