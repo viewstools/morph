@@ -43,7 +43,6 @@ let onMorph = ({ file, code }) => fs.writeFile(`${file}.js`, code)
 
 export default async function watch({
   as = 'react-dom',
-  enableAnimated = true,
   local = 'en',
   once = false,
   src = process.cwd(),
@@ -433,7 +432,6 @@ export default async function watch({
 
       let res = morph({
         as,
-        enableAnimated,
         file: { raw: rawFile, relative: file },
         name: view,
         getFont,

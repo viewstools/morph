@@ -16,7 +16,6 @@ let imports = {
 }
 
 export default ({
-  enableAnimated = true,
   file,
   getFont = () => false,
   getImport,
@@ -42,7 +41,6 @@ export default ({
     cssDynamic: false,
     cssStatic: false,
     dependencies: new Set(),
-    enableAnimated,
     file,
     flow: null,
     flowSetState: false,
