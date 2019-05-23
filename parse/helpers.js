@@ -6,11 +6,6 @@ import toSlugCase from 'to-slug-case'
 
 let LOCAL_SCOPES = locales.map(item => item.replace(/-/g, ''))
 
-let dymBlockMatcher = new DidYouMeanMatcher(
-  'Capture|CaptureTextArea|G|Horizontal|Image|List|Svg|SvgCircle|SvgEllipse|SvgDefs|SvgGroup|SvgLinearGradient|SvgRadialGradient|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgSymbol|SvgText|SvgUse|SvgStop|Text|View|Vertical'.split(
-    '|'
-  )
-)
 let dymPropMatcher = new DidYouMeanMatcher([
   ...STYLE,
   'defaultValue',
@@ -76,7 +71,14 @@ let dymPropMatcher = new DidYouMeanMatcher([
   'className',
 ])
 
-export let didYouMeanBlock = block => dymBlockMatcher.get(block)
+export let makeDidYouMeanBlock = views => {
+  let dymBlockMatcher = new DidYouMeanMatcher(
+    'Capture|CaptureTextArea|Horizontal|Image|List|Svg|SvgCircle|SvgEllipse|SvgDefs|SvgGroup|SvgLinearGradient|SvgRadialGradient|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgSymbol|SvgText|SvgUse|SvgStop|Text|View|Vertical'
+      .split('|')
+      .concat(Object.keys(views))
+  )
+  return block => dymBlockMatcher.get(block)
+}
 export let didYouMeanProp = prop => dymPropMatcher.get(prop)
 
 let ANIMATION = /(.+)(?:\s)(spring|linear|easeOut|easeInOut|easeIn|ease)(?:\s?(.*)?)/

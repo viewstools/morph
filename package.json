@@ -40,7 +40,6 @@
   "dependencies": {
     "array-uniq": "^2.0.0",
     "bubblesort": "^1.0.1",
-    "buble": "^0.19.3",
     "chalk": "^2.3.0",
     "chokidar": "^2.0.4",
     "color": "^3.0.0",

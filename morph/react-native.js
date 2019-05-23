@@ -55,7 +55,6 @@ export default ({
     remap: {},
     render: [],
     styles: {},
-    svgs: [],
     testIdKey: 'testID',
     testIds: {},
     track,
@@ -83,7 +82,7 @@ export default ({
   state.slots = parsed.slots
   state.localSupported = localSupported
 
-  walk(parsed.views[0], visitor, state)
+  walk(parsed.view, visitor, state)
 
   maybeUsesTextInput(state)
   maybeUsesRouter(state)
@@ -101,6 +100,5 @@ export default ({
     dependencies: state.dependencies,
     fonts: parsed.fonts,
     slots: parsed.slots,
-    svgs: state.svgs,
   }
 }

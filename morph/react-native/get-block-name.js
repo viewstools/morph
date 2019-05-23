@@ -11,9 +11,6 @@ export default (node, parent, state) => {
     case 'Vertical':
       return getGroupBlockName(node, state)
 
-    case 'Image':
-      return getImageName(node, state)
-
     case 'List':
       return getListBlockName(node, state)
 
@@ -76,27 +73,4 @@ let getListBlockName = (node, state) => {
   } else {
     return base
   }
-}
-
-let isSvg = str => /\.svg$/.test(str)
-let getImageName = (node, state) => {
-  if (hasProp(node, 'source')) {
-    let source = getProp(node, 'source')
-    let { value } = source.value
-
-    if (isSvg(value)) {
-      let name = `${toPascalCase(value)}Inline`
-      node.isSvg = true
-
-      if (!state.svgs.some(svg => svg.source === value)) {
-        state.svgs.push({
-          source: value,
-          view: name,
-        })
-      }
-      return name
-    }
-  }
-
-  return 'Image'
 }

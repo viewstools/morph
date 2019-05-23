@@ -62,7 +62,6 @@ export default ({
     render: [],
     styles: {},
     stylesOrder: [],
-    svgs: [],
     usedBlockNames: { [finalName]: 1, AutoSizer: 1, Column: 1, Table: 1 },
     uses: [],
     testIdKey: 'data-testid',
@@ -98,7 +97,7 @@ export default ({
   state.slots = parsed.slots
   state.localSupported = localSupported
 
-  walk(parsed.views[0], visitor, state)
+  walk(parsed.view, visitor, state)
   maybeUsesRouter(state)
 
   let finalGetImport = (name, isLazy) =>
@@ -117,6 +116,5 @@ export default ({
     // TODO flow supported states
     fonts: parsed.fonts,
     slots: parsed.slots,
-    svgs: state.svgs,
   }
 }

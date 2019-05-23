@@ -57,8 +57,6 @@ export default (state, getImport) => {
           ? `G as SvgGroup`
           : `${d.replace('Svg', '')} as ${d}`
       )
-    } else if (d.endsWith('SvgInline')) {
-      dependencies.push(`import ${d} from "./${d}.view.js"`)
     } else if (d === 'Table') {
     } else if (/^[A-Z]/.test(d)) {
       dependencies.push(getImport(d, state.lazy[d]))
@@ -68,8 +66,6 @@ export default (state, getImport) => {
   if (state.isReactNative) {
     state.getFont(state.fonts)
   } else {
-    dependencies.push(getImport('ViewsBaseCss'))
-
     state.fonts.forEach(usedFont => {
       let font = state.getFont(usedFont)
       if (font) {

@@ -6,6 +6,7 @@ import * as BlockExplicitChildren from '../react/block-explicit-children.js'
 import * as BlockGroup from '../react/block-group.js'
 import * as BlockInList from '../react/block-in-list.js'
 import * as BlockList from '../react/block-list.js'
+import * as BlockMaybeSkip from '../react/block-maybe-skip.js'
 import * as BlockName from './block-name.js'
 import * as BlockOffWhen from '../react/block-off-when.js'
 import * as BlockProperties from './block-properties.js'
@@ -18,6 +19,7 @@ import * as BlockTeleport from '../react/block-teleport.js'
 import * as BlockWrap from './block-wrap.js'
 
 export let enter = [
+  BlockMaybeSkip.enter,
   BlockSetTestId.enter,
   BlockOffWhen.enter,
   BlockRoute.enter,

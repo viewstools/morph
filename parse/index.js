@@ -1,6 +1,6 @@
 import {
   CAPTURE_TYPES,
-  didYouMeanBlock,
+  makeDidYouMeanBlock,
   didYouMeanProp,
   getAnimation,
   getBlock,
@@ -34,7 +34,8 @@ export default ({
   skipComments = true,
   skipInvalidProps = true,
   source,
-} = {}) => {
+  views = {},
+}) => {
   // convert crlf to lf
   let text = source.replace(/\r\n/g, '\n')
   let rlines = text.split('\n')
@@ -43,8 +44,10 @@ export default ({
   let locals = []
   let stack = []
   let slots = []
-  let views = []
+  let view = null
   let warnings = []
+
+  let didYouMeanBlock = makeDidYouMeanBlock(views)
 
   let blockIds = []
   let getBlockId = node => {
@@ -163,7 +166,7 @@ export default ({
 
     if (stack.length === 0) {
       // if we're the last block on the stack, then this is the view!
-      views.push(block)
+      view = block
       return true
     }
     return false
@@ -189,15 +192,14 @@ export default ({
       scopes: [],
     }
 
-    if (is && !block.isBasic) {
-      let meant = didYouMeanBlock(name)
-      if (meant && meant !== name) {
-        warnings.push({
-          loc: block.loc,
-          type: `Did you mean "${meant}" instead of "${name}"?`,
-          line,
-        })
-      }
+    let meant = didYouMeanBlock(name)
+    if (meant && meant !== name) {
+      warnings.push({
+        loc: block.loc,
+        type: `"${name} doesn't exist. Did you mean "${meant}" instead of "${name}"?`,
+        line,
+      })
+      block.skip = true
     }
 
     if (is) {
@@ -296,7 +298,7 @@ That would mean that SomeView in ${block.name} will be replaced by ${
           })
         }
       }
-    } else if (views.length > 0) {
+    } else if (view !== null) {
       warnings.push({
         loc: block.loc,
         type: `${block.is ||
@@ -714,7 +716,7 @@ That would mean that SomeView in ${block.name} will be replaced by ${
     fonts,
     locals,
     slots,
-    views,
+    view,
     warnings,
   }
 }

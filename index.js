@@ -1,7 +1,5 @@
 import { basename, extname } from 'path'
-import buble from 'buble'
 import doMorph from './morphers.js'
-import doGetViewNotFound from './get-view-not-found.js'
 import morphFont from './morph/font.js'
 import restrictedNames from './restricted-names.js'
 import toPascalCase from 'to-pascal-case'
@@ -12,7 +10,6 @@ let DEFAULT_IMPORT = name => `import ${name} from './${name}.view.js'`
 
 export let morph = ({
   as,
-  compile,
   enableAnimated,
   file = {},
   getFont,
@@ -21,7 +18,6 @@ export let morph = ({
   local = 'en',
   localSupported = [],
   name,
-  pretty = false,
   track = true,
   views = {},
 }) => {
@@ -38,29 +34,14 @@ export let morph = ({
     views,
   })
 
-  if (compile) {
-    morphed.code = buble.transform(morphed.code, {
-      objectAssign: 'Object.assign',
-      transforms: {
-        modules: false,
-        templateString: false,
-      },
-    }).code
-  }
-
-  if (pretty) {
-    morphed.code = prettier.format(morphed.code, {
-      parser: 'babel',
-      singleQuote: true,
-      trailingComma: 'es5',
-    })
-  }
+  morphed.code = prettier.format(morphed.code, {
+    parser: 'babel',
+    singleQuote: true,
+    trailingComma: 'es5',
+  })
 
   return morphed
 }
-
-export let getViewNotFound = (as, name, warning) =>
-  doGetViewNotFound[as](name, warning)
 
 let sanitize = input =>
   basename(input)
