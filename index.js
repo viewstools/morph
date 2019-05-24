@@ -4,34 +4,29 @@ import morphFont from './morph/font.js'
 import restrictedNames from './restricted-names.js'
 import toPascalCase from 'to-pascal-case'
 import prettier from 'prettier'
-import parse from './parse/index.js'
-
-let DEFAULT_IMPORT = name => `import ${name} from './${name}.view.js'`
 
 export let morph = ({
   as,
-  enableAnimated,
-  file = {},
   getFont,
-  getImport = DEFAULT_IMPORT,
+  getSystemImport = () => {},
   isStory,
   local = 'en',
   localSupported = [],
-  name,
   track = true,
-  views = {},
+  view,
+  viewsById,
+  viewsToFiles,
 }) => {
   let morphed = doMorph[as]({
-    enableAnimated,
-    file,
     getFont,
-    getImport,
+    getSystemImport,
     isStory,
     local,
     localSupported,
-    name,
     track,
-    views,
+    view,
+    viewsById,
+    viewsToFiles,
   })
 
   morphed.code = prettier.format(morphed.code, {
@@ -58,5 +53,3 @@ export let isViewNameRestricted = (view, as) =>
   restrictedNames[as].includes(view)
 
 export { morphFont }
-
-export { parse }

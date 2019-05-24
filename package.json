@@ -46,6 +46,7 @@
     "color": "^3.0.0",
     "debounce": "^1.2.0",
     "fast-glob": "^2.2.2",
+    "firstline": "^2.0.2",
     "flatten": "^1.0.2",
     "google-fonts-complete": "^1.1.1",
     "has-yarn": "^1.0.0",

@@ -2,6 +2,7 @@ import * as visitor from './react-dom/block.js'
 import getStyleForProperty from './react-dom/get-style-for-property.js'
 import getStyles from './react-dom/get-styles.js'
 import getValueForProperty from './react-dom/get-value-for-property.js'
+import makeGetImport from './react/make-get-import.js'
 import maybeUsesRouter from './react-dom/maybe-uses-router.js'
 import restrictedNames from './react-dom/restricted-names.js'
 import toComponent from './react/to-component.js'
@@ -16,16 +17,17 @@ let imports = {
 }
 
 export default ({
-  file,
   getFont = () => false,
-  getImport,
+  getSystemImport,
   isStory = () => true,
   local,
   localSupported,
-  name,
   track = true,
-  views,
+  view,
+  viewsById,
+  viewsToFiles,
 }) => {
+  let name = view.id
   let finalName = restrictedNames.includes(name) ? `${name}1` : name
   if (name !== finalName) {
     console.warn(
@@ -41,7 +43,6 @@ export default ({
     cssDynamic: false,
     cssStatic: false,
     dependencies: new Set(),
-    file,
     flow: null,
     flowSetState: false,
     getFont,
@@ -90,20 +91,22 @@ export default ({
     )
   }
 
-  let parsed = views[name]
-  state.fonts = parsed.fonts
-  state.slots = parsed.slots
+  state.fonts = view.parsed.fonts
+  state.slots = view.parsed.slots
   state.localSupported = localSupported
 
-  walk(parsed.view, visitor, state)
+  walk(view.parsed.view, visitor, state)
   maybeUsesRouter(state)
-
-  let finalGetImport = (name, isLazy) =>
-    imports[name] || getImport(name, isLazy)
 
   return {
     code: toComponent({
-      getImport: finalGetImport,
+      getImport: makeGetImport({
+        imports,
+        getSystemImport,
+        view,
+        viewsById,
+        viewsToFiles,
+      }),
       getStyles,
       name: finalName,
       state,
@@ -112,7 +115,7 @@ export default ({
     flow: state.flow,
     flowDefaultState: state.flowDefaultState,
     // TODO flow supported states
-    fonts: parsed.fonts,
-    slots: parsed.slots,
+    fonts: view.parsed.fonts,
+    slots: view.parsed.slots,
   }
 }

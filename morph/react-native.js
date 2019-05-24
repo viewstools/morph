@@ -17,7 +17,6 @@ let imports = {
 }
 
 export default ({
-  file,
   getFont = () => false,
   getImport,
   isStory = () => true,

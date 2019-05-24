@@ -31,10 +31,11 @@ export default ({
   convertSlotToProps = true,
   enableLocalScopes = true,
   enableSystemScopes = true,
+  id,
   skipComments = true,
   skipInvalidProps = true,
   source,
-  views = {},
+  views,
 }) => {
   // convert crlf to lf
   let text = source.replace(/\r\n/g, '\n')
@@ -47,7 +48,7 @@ export default ({
   let view = null
   let warnings = []
 
-  let didYouMeanBlock = makeDidYouMeanBlock(views)
+  let didYouMeanBlock = makeDidYouMeanBlock([...views.keys()])
 
   let blockIds = []
   let getBlockId = node => {
@@ -193,10 +194,28 @@ export default ({
     }
 
     let meant = didYouMeanBlock(name)
-    if (meant && meant !== name) {
+    if (meant) {
+      if (meant !== name) {
+        warnings.push({
+          loc: block.loc,
+          type: `"${name}" doesn't exist and won't be morphed. Did you mean "${meant}" instead of "${name}"?`,
+          line,
+        })
+        block.skip = true
+      }
+    } else {
       warnings.push({
         loc: block.loc,
-        type: `"${name} doesn't exist. Did you mean "${meant}" instead of "${name}"?`,
+        type: `"${name}" doesn't exist and won't be morphed.\nCreate the view or rename the block to point to the right view.`,
+        line,
+      })
+      block.skip = true
+    }
+
+    if (id === name) {
+      warnings.push({
+        loc: block.loc,
+        type: `Is this a typo? You can't use the view within itself.\nRename the view or use a different block instead of ${name} here. This won't be morphed to avoid loops.`,
         line,
       })
       block.skip = true
@@ -606,7 +625,11 @@ That would mean that SomeView in ${block.name} will be replaced by ${
               } else {
                 propNode.defaultValue = false
 
-                if (block.isBasic) {
+                if (
+                  block.isBasic &&
+                  (propNode.tags.style ||
+                    (block.name === 'Text' && propNode.name === 'text'))
+                ) {
                   warnings.push({
                     loc,
                     type: `Add a default value to "${name}" like: "${name} <${slotName} default value"`,
