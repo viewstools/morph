@@ -1,210 +1,51 @@
-import { exec } from 'child_process'
-import { isViewNameRestricted, morph, morphFont } from './index.js'
+// import { exec } from 'child_process'
+// import { isViewNameRestricted, morphFont } from './index.js'
+import {
+  getFilesView,
+  getFilesViewLogic,
+  getFilesViewCustom,
+  getFilesFont,
+} from './get-files.js'
+import { promises as fs } from 'fs'
+import addToMapSet from './add-to-map-set.js'
 import chalk from 'chalk'
-import chokidar from 'chokidar'
-import debounce from 'debounce'
-import ensureFlow from './ensure-flow.js'
-import ensureLocalContainer from './ensure-local-container.js'
-import ensureTrackContext from './ensure-track-context.js'
-import flatten from 'flatten'
-import fs from 'mz/fs.js'
-import getFirstLine from 'firstline'
-import getLatestVersion from 'latest-version'
-import glob from 'fast-glob'
-import hasYarn from 'has-yarn'
+// import chokidar from 'chokidar'
+// import debounce from 'debounce'
+// import ensureFlow from './ensure-flow.js'
+// import ensureLocalContainer from './ensure-local-container.js'
+// import ensureTrackContext from './ensure-track-context.js'
+// import flatten from 'flatten'
+// import getLatestVersion from 'latest-version'
+// import hasYarn from 'has-yarn'
+import makeGetSystemImport from './make-get-system-import.js'
+import maybePrintWarnings from './maybe-print-warnings.js'
+import morphAllViews from './morph-all-views.js'
+// import maybeMorph from './maybe-morph.js'
 import parse from './parse/index.js'
 import path from 'path'
-import readPkgUp from 'read-pkg-up'
-import relativise from './relativise.js'
-import toPascalCase from 'to-pascal-case'
-import uniq from 'array-uniq'
+import sortSetsInMap from './sort-sets-in-map.js'
+// import readPkgUp from 'read-pkg-up'
+// import relativise from './relativise.js'
+// import toPascalCase from 'to-pascal-case'
+// import uniq from 'array-uniq'
 
-let FONT_TYPES = {
-  '.otf': 'opentype',
-  '.eot': 'eot',
-  '.svg': 'svg',
-  '.ttf': 'truetype',
-  '.woff': 'woff',
-  '.woff2': 'woff2',
-}
+// let FONT_TYPES = {
+//   '.otf': 'opentype',
+//   '.eot': 'eot',
+//   '.svg': 'svg',
+//   '.ttf': 'truetype',
+//   '.woff': 'woff',
+//   '.woff2': 'woff2',
+// }
 
-let isMorphedView = f => /\.view\.js$/.test(f)
+// let isMorphedView = f => /\.view\.js$/.test(f)
 
-let isJs = f => path.extname(f) === '.js'
-let isLogic = f => /\.view\.logic\.js$/.test(f)
-let isView = f => path.extname(f) === '.view'
-let isFont = f => Object.keys(FONT_TYPES).includes(path.extname(f))
+// let isJs = f => path.extname(f) === '.js'
+// let isLogic = f => /\.view\.logic\.js$/.test(f)
+// let isView = f => path.extname(f) === '.view'
+// let isFont = f => Object.keys(FONT_TYPES).includes(path.extname(f))
 
-let getFontFileId = file => path.basename(file).split('.')[0]
-
-let onMorph = ({ file, code }) => fs.writeFile(`${file}.js`, code)
-
-let isViewCustom = source => /^\/\/ @view/.test(source)
-
-let getFiles = async (src, pattern, ignore = []) =>
-  new Set(
-    await glob(pattern, {
-      absolute: true,
-      bashNative: ['linux'],
-      cwd: src,
-      ignore: ['**/node_modules/**', '**/*.view.js', ...ignore],
-    })
-  )
-
-let getFilesView = src => getFiles(src, ['**/*.view'])
-let getFilesViewLogic = src => getFiles(src, ['**/*.view.logic.js'])
-let getFilesViewCustom = async src => {
-  let allFiles = await getFiles(src, ['**/*.js'], ['**/*.view.logic.js'])
-  let files = new Set()
-
-  for await (let file of allFiles) {
-    let firstLine = await getFirstLine(file)
-    if (isViewCustom(firstLine)) {
-      files.add(file)
-    }
-  }
-  return files
-}
-let getFilesFont = src =>
-  getFiles(src, [
-    '**/Fonts/*.eot',
-    '**/Fonts/*.otf',
-    '**/Fonts/*.ttf',
-    '**/Fonts/*.svg',
-    '**/Fonts/*.woff',
-    '**/Fonts/*.woff2',
-  ])
-
-let addToMapSet = (map, key, value) => {
-  if (!map.has(key)) {
-    map.set(key, new Set())
-  }
-  map.get(key).add(value)
-}
-let getFileDepth = file => file.split(path.sep).length - 1
-
-let sortByFileDepth = (a, b) => {
-  let depthA = getFileDepth(a)
-  let depthB = getFileDepth(b)
-  let depthDelta = depthA - depthB
-
-  if (depthDelta !== 0) return depthDelta
-
-  return a < b ? 1 : a > b ? -1 : 0
-}
-
-let sortSetsInMap = map => {
-  for (let [key, value] of map) {
-    if (value.size <= 1) continue
-
-    map.set(key, new Set([...value].sort(sortByFileDepth)))
-  }
-}
-
-let maybePrintWarnings = (view, verbose) => {
-  if (!verbose || view.parsed.warnings.length === 0) return
-
-  console.error(chalk.red(view.id), chalk.dim(view.file))
-
-  view.parsed.warnings.forEach(warning => {
-    console.error(
-      `  ${chalk.yellow(warning.loc.start.line)}: ${chalk.blue(
-        warning.type
-      )} Line: "${warning.line}"`
-    )
-  })
-}
-
-let maybeMorph = async ({
-  as,
-  getSystemImport,
-  local,
-  track,
-  view,
-  viewsById,
-  viewsToFiles,
-  verbose,
-}) => {
-  try {
-    let result = morph({
-      as,
-      getSystemImport,
-      local,
-      track,
-      view,
-      viewsById,
-      viewsToFiles,
-    })
-
-    await fs.writeFile(`${view.file}.js`, result.code, 'utf8')
-
-    view.version++
-
-    verbose &&
-      console.log(
-        `${chalk.green('M')} ${view.id}@${view.version}:${chalk.dim(view.file)}`
-      )
-  } catch (error) {
-    console.error(chalk.red('M'), view, error.codeFrame || error)
-  }
-}
-
-let morphAllViews = async ({
-  as,
-  getSystemImport,
-  local,
-  track,
-  viewsById,
-  viewsToFiles,
-}) => {
-  for await (let view of viewsToFiles.values()) {
-    if (view.custom) continue
-
-    await maybeMorph({
-      as,
-      getSystemImport,
-      local,
-      track,
-      verbose: false,
-      view,
-      viewsById,
-      viewsToFiles,
-    })
-  }
-}
-
-let FILE_USE_FLOW = 'use-flow.js'
-let FILE_LOCAL_CONTAINER = 'LocalContainer.js'
-let FILE_TRACK_CONTEXT = 'TrackContext.js'
-
-let makeGetSystemImport = src => (id, file) => {
-  switch (id) {
-    case 'Column':
-      // Column is imported from react-virtualized
-      break
-
-    case 'ViewsUseFlow':
-      return `import * as fromFlow from '${relativise(
-        file,
-        path.join(src, FILE_USE_FLOW)
-      )}'`
-
-    case 'LocalContainer':
-      return `import LocalContainer from '${relativise(
-        file,
-        path.join(src, FILE_LOCAL_CONTAINER)
-      )}'`
-
-    case 'TrackContext':
-      return `import { TrackContext } from '${relativise(
-        file,
-        path.join(src, FILE_TRACK_CONTEXT)
-      )}'`
-
-    default:
-      return false
-  }
-}
+// let getFontFileId = file => path.basename(file).split('.')[0]
 
 export default async function watch({
   as = 'react-dom',
@@ -262,7 +103,9 @@ export default async function watch({
   }
 
   verbose &&
-    console.log(`${chalk.yellow('A')} ${[...viewsById.keys()].join(', ')}`)
+    console.log(
+      `${chalk.yellow('A')} ${[...viewsById.keys()].sort().join(', ')}`
+    )
 
   // parse views
   for (let view of viewsToFiles.values()) {
