@@ -4,10 +4,15 @@ import {
   getFilesView,
   getFilesViewLogic,
   getFilesViewCustom,
-  getFilesFont,
+  getFilesFontCustom,
 } from './get-files.js'
-import { promises as fs } from 'fs'
-import addToMapSet from './add-to-map-set.js'
+import {
+  ensureFontsDirectory,
+  morphAllFonts,
+  processCustomFonts,
+} from './fonts.js'
+import processViewCustomFiles from './process-view-custom-files.js'
+import processViewFiles from './process-view-files.js'
 import chalk from 'chalk'
 // import chokidar from 'chokidar'
 // import debounce from 'debounce'
@@ -18,89 +23,47 @@ import chalk from 'chalk'
 // import getLatestVersion from 'latest-version'
 // import hasYarn from 'has-yarn'
 import makeGetSystemImport from './make-get-system-import.js'
-import maybePrintWarnings from './maybe-print-warnings.js'
 import morphAllViews from './morph-all-views.js'
 // import maybeMorph from './maybe-morph.js'
-import parse from './parse/index.js'
-import path from 'path'
-import sortSetsInMap from './sort-sets-in-map.js'
+import parseViews from './parse-views.js'
 // import readPkgUp from 'read-pkg-up'
-// import relativise from './relativise.js'
 // import toPascalCase from 'to-pascal-case'
-// import uniq from 'array-uniq'
-
-// let FONT_TYPES = {
-//   '.otf': 'opentype',
-//   '.eot': 'eot',
-//   '.svg': 'svg',
-//   '.ttf': 'truetype',
-//   '.woff': 'woff',
-//   '.woff2': 'woff2',
-// }
-
-// let isMorphedView = f => /\.view\.js$/.test(f)
-
-// let isJs = f => path.extname(f) === '.js'
-// let isLogic = f => /\.view\.logic\.js$/.test(f)
-// let isView = f => path.extname(f) === '.view'
-// let isFont = f => Object.keys(FONT_TYPES).includes(path.extname(f))
-
-// let getFontFileId = file => path.basename(file).split('.')[0]
 
 export default async function watch({
   as = 'react-dom',
   local = 'en',
   once = false,
-  src = process.cwd(),
+  src,
   track = false,
   verbose = true,
 }) {
   let viewsById = new Map()
   let viewsToFiles = new Map()
+  let customFonts = new Map()
 
   let [
     filesView,
     filesViewLogic,
     filesViewCustom,
-    // TODO fonts
-    // filesFont,
+    filesFontCustom,
   ] = await Promise.all([
     getFilesView(src),
     getFilesViewLogic(src),
     getFilesViewCustom(src),
-    getFilesFont(src),
+    getFilesFontCustom(src),
   ])
 
+  ensureFontsDirectory(src)
+  processCustomFonts({
+    customFonts,
+    files: filesFontCustom,
+  })
+
   // detect .view files
-  for await (let file of filesView) {
-    let id = path.basename(file, '.view')
+  await processViewFiles({ filesView, filesViewLogic, viewsById, viewsToFiles })
 
-    addToMapSet(viewsById, id, file)
-
-    viewsToFiles.set(file, {
-      custom: false,
-      file,
-      id,
-      logic: filesViewLogic.has(`${file}.logic.js`) && `${file}.logic.js`,
-      source: await fs.readFile(file, 'utf8'),
-      version: 0,
-    })
-  }
   // detect .js files meant to be custom views with "// @view" at the top
-  for (let file of filesViewCustom) {
-    let id = path.basename(file, '.js')
-
-    addToMapSet(viewsById, id, file)
-
-    viewsToFiles.set(file, {
-      custom: true,
-      file,
-      id,
-      logic: false,
-      source: null,
-      version: 0,
-    })
-  }
+  processViewCustomFiles({ files: filesViewCustom, viewsById, viewsToFiles })
 
   verbose &&
     console.log(
@@ -108,19 +71,24 @@ export default async function watch({
     )
 
   // parse views
-  for (let view of viewsToFiles.values()) {
-    if (view.custom) continue
+  parseViews({
+    customFonts,
+    verbose,
+    viewsById,
+    viewsToFiles,
+  })
 
-    view.parsed = parse({
-      id: view.id,
-      source: view.source,
-      views: viewsById,
-    })
-
-    maybePrintWarnings(view, verbose)
+  if (customFonts.size > 0) {
+    verbose &&
+      console.log(`Custom fonts: ${[...customFonts.keys()].sort().join(', ')}`)
   }
 
-  sortSetsInMap(viewsById)
+  await morphAllFonts({
+    as,
+    customFonts,
+    src,
+    viewsToFiles,
+  })
 
   // morph views
   let getSystemImport = makeGetSystemImport(src)
@@ -138,78 +106,6 @@ export default async function watch({
 
   if (once) return
 }
-
-// export async function other({
-//   as = 'react-dom',
-//   local = 'en',
-//   once = false,
-//   src = process.cwd(),
-//   track = false,
-//   verbose = true,
-// }) {
-//   let jsComponents = {}
-//   let isJsComponent = f => {
-//     if (jsComponents.hasOwnProperty(f)) return jsComponents[f]
-//     let is = false
-
-//     try {
-//       // TODO async
-//       let filePath = path.join(src, f)
-//       let content = fs.readFileSync(filePath, 'utf-8')
-//       is = /\/\/ @view/.test(content)
-//     } catch (err) {}
-
-//     return (jsComponents[f] = is)
-//   }
-
-//   let isDirectory = f => {
-//     try {
-//       // TODO async
-//       return fs.statSync(f).isDirectory()
-//     } catch (err) {
-//       return false
-//     }
-//   }
-
-//   let dontMorph = f =>
-//     isMorphedView(f) ||
-//     (isJs(f) && !isJsComponent(f) && !isLogic(f)) ||
-//     isDirectory(f) ||
-//     isFont(f)
-
-//   let getImportFileName = (name, file) => {
-//     let f = views[name]
-
-//     if (isView(f)) {
-//       let logicFile = logic[`${name}.view.logic`]
-//       if (logicFile) f = logicFile
-//     }
-
-//     let ret = relativise(file, f)
-
-//     return isJs(ret) ? ret.replace(/\.js$/, '') : `${ret}.js`
-//   }
-
-//   let addFont = file => {
-//     let id = getFontFileId(file)
-//     let type = FONT_TYPES[path.extname(file)]
-
-//     if (instance.customFonts.some(font => font.id === id && font.type === type))
-//       return
-
-//     instance.customFonts.push({
-//       file,
-//       relativeFile: file.replace('Fonts/', './'),
-//       id: getFontFileId(file),
-//       type,
-//     })
-//   }
-//   let removeFont = file => {
-//     let id = getFontFileId(file)
-//     instance.customFonts = instance.customFonts.filter(font => font.id !== id)
-//   }
-
-//   let fonts = {}
 
 //   let makeGetDomFont = (view, file) => {
 //     return font => {
@@ -235,67 +131,6 @@ export default async function watch({
 //       //   morphFont({ as, fonts, files: instance.customFonts })
 //       // )
 //     }
-//   }
-
-//   let makeGetImport = (view, file) => {
-//     dependsOn[view] = []
-
-//     return (name, isLazy) => {
-//       // Column is imported from react-virtualized
-//       if (name === 'Column') return
-
-//       if (name === 'ViewsUseFlow') {
-//         return `import * as fromFlow from '${relativise(
-//           file,
-//           instance.useFlow
-//         )}'`
-//       }
-
-//       if (name === 'LocalContainer') {
-//         return `import LocalContainer from '${relativise(
-//           file,
-//           instance.localContainer
-//         )}'`
-//       }
-
-//       if (name === 'TrackContext') {
-//         return `import { TrackContext } from '${relativise(
-//           file,
-//           instance.trackContext
-//         )}'`
-//       }
-
-//       if (!dependsOn[view].includes(name)) {
-//         dependsOn[view].push(name)
-//       }
-//       // TODO track dependencies to make it easy to rebuild files as new ones get
-//       // added, eg logic is added, we need to rebuild upwards
-
-//       let importPath = getImportFileName(name, file)
-
-//       return isLazy
-//         ? `let ${name} = React.lazy(() => import('${importPath}'))`
-//         : `import ${name} from '${importPath}'`
-//     }
-//   }
-
-//   let dependsOn = {}
-//   let responsibleFor = {}
-//   let logic = {}
-//   let views = {}
-//   let viewsSources = {}
-//   let viewsParsed = {}
-
-//   let instance = {
-//     customFonts: [],
-//     externalDependencies: new Set(),
-//     dependsOn,
-//     useFlow: 'use-flow.js',
-//     flow: {},
-//     responsibleFor,
-//     logic,
-//     views,
-//     stop() {},
 //   }
 
 //   let maybeUpdateExternalDependencies = debounce(async function() {
@@ -667,42 +502,6 @@ export default async function watch({
 //     'Fonts/*.woff',
 //     'Fonts/*.woff2',
 //   ].filter(Boolean)
-
-//   let fontsDirectory = path.join(src, 'Fonts')
-//   if (!(await fs.exists(fontsDirectory))) {
-//     await fs.mkdir(fontsDirectory)
-//   }
-//   let customFonts = await glob(
-//     [
-//       // fonts,
-//       'Fonts/*.eot',
-//       'Fonts/*.otf',
-//       'Fonts/*.ttf',
-//       'Fonts/*.svg',
-//       'Fonts/*.woff',
-//       'Fonts/*.woff2',
-//     ],
-//     watcherOptions
-//   )
-//   customFonts.forEach(addFont)
-
-//   console.log(
-//     'Custom fonts:\n',
-//     instance.customFonts.map(f => f.file).join(',\n'),
-//     '\n'
-//   )
-
-//   let viewsLeftToBeReady = null
-
-//   let listToMorph = await glob(watcherPattern, watcherOptions)
-//   let viewsToMorph = listToMorph.map(addViewSkipMorph).filter(Boolean)
-
-//   await Promise.all(viewsToMorph.map(getViewSource))
-
-//   viewsLeftToBeReady = viewsToMorph.length
-//   if (viewsLeftToBeReady > 0) {
-//     viewsToMorph.forEach(v => morphView(v, false, true))
-//   }
 
 //   ensureFlow(path.join(src, instance.useFlow), instance.flow)
 

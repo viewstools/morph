@@ -23,12 +23,15 @@ import {
   isLocalScope,
   isSystemScope,
   isUserComment,
+  makeDidYouMeanFontFamily,
 } from './helpers.js'
+import { isGoogleFont } from '../morph/fonts.js'
 import getLoc from './get-loc.js'
 import getTags from './get-tags.js'
 
 export default ({
   convertSlotToProps = true,
+  customFonts,
   enableLocalScopes = true,
   enableSystemScopes = true,
   id,
@@ -49,6 +52,9 @@ export default ({
   let warnings = []
 
   let didYouMeanBlock = makeDidYouMeanBlock([...views.keys()])
+  let didYouMeanFontFamily = makeDidYouMeanFontFamily(
+    [...customFonts.keys()].map(id => id.split('-')[0])
+  )
 
   let blockIds = []
   let getBlockId = node => {
@@ -83,35 +89,57 @@ export default ({
   let lookForFonts = block => {
     if (block.properties && (isFontable(block.name) || !block.isBasic)) {
       let fontFamilyProp = block.properties.find(p => p.name === 'fontFamily')
+      if (!fontFamilyProp) return
 
-      if (fontFamilyProp) {
-        let fontFamily = fontFamilyProp.value
-        let fontWeightProp = block.properties.find(p => p.name === 'fontWeight')
-        let fontStyleProp = block.properties.find(p => p.name === 'fontStyle')
-        let fontWeight = fontWeightProp
-          ? fontWeightProp.value.toString()
-          : '400'
+      let family = fontFamilyProp.value
 
-        let fontStyle = fontStyleProp
-          ? fontStyleProp.value.toString()
-          : 'normal'
+      let fontWeightProp = block.properties.find(p => p.name === 'fontWeight')
+      let weight = fontWeightProp ? fontWeightProp.value.toString() : '400'
 
-        if (
-          !fonts.find(
-            font =>
-              font.family === fontFamily &&
-              font.weight === fontWeight &&
-              font.style === fontStyle
-          )
-        ) {
-          fonts.push({
-            id: `${fontFamily}-${fontWeight}${
-              fontStyle === 'italic' ? '-italic' : ''
-            }`,
-            family: fontFamily,
-            weight: fontWeight,
-            style: fontStyle,
-          })
+      let fontStyleProp = block.properties.find(p => p.name === 'fontStyle')
+      let style = fontStyleProp ? fontStyleProp.value.toString() : 'normal'
+
+      if (
+        !fonts.find(
+          font =>
+            font.family === family &&
+            font.weight === weight &&
+            font.style === style
+        )
+      ) {
+        let font = {
+          id: `${family}-${weight}${style === 'italic' ? '-italic' : ''}`,
+          isGoogleFont: isGoogleFont(family),
+          family,
+          weight,
+          style,
+        }
+
+        if (font.isGoogleFont || customFonts.has(font.id)) {
+          fonts.push(font)
+        } else {
+          let meant = didYouMeanFontFamily(family)
+          if (meant && meant !== family) {
+            warnings.push({
+              loc: fontFamilyProp.loc,
+              type: `The font "${family}" is missing. Did you mean "${meant}" instead?\nIf not, download the font files (eg, "${
+                font.id
+              }.woff2", "${font.id}.woff", "${
+                font.id
+              }.ttf", etc) and add the to the "Fonts" folder.`,
+              line: lines[fontFamilyProp.loc.start.line - 1],
+            })
+          } else {
+            warnings.push({
+              loc: fontFamilyProp.loc,
+              type: `The font "${family}" is missing.\nDownload the font files (eg, "${
+                font.id
+              }.woff2", "${font.id}.woff", "${
+                font.id
+              }.ttf", etc) and add the to the "Fonts" folder.`,
+              line: lines[fontFamilyProp.loc.start.line - 1],
+            })
+          }
         }
       }
     }

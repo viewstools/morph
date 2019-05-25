@@ -1,8 +1,6 @@
 import { isGoogleFont } from '../fonts.js'
-import { sortFonts } from '../utils.js'
-import sort from 'bubblesort'
 
-export default (font, files) => {
+export default (font, sources) => {
   let body
 
   if (isGoogleFont(font.family)) {
@@ -11,10 +9,8 @@ export default (font, files) => {
       '+'
     )}:${font.weight}${font.style === 'italic' ? 'i' : ''}');body{}")`
   } else {
-    let sources = sort(files.filter(src => font.id === src.id), sortFonts)
-
     body = `${sources
-      .map(src => `import ${src.type} from '${src.relativeFile}'`)
+      .map(src => `import ${src.type} from '${src.file}'`)
       .join('\n')}
 
 injectGlobal(\`@font-face {

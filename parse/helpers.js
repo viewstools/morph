@@ -1,4 +1,5 @@
 import { isRowStyle, isStyle, STYLE } from './prop-is-style.js'
+import { fontFamily as googleFontFamilies } from '../morph/fonts.js'
 import DidYouMeanMatcher from './did-you-mean.js'
 import isNumber from './prop-is-number.js'
 import locales from 'i18n-locales'
@@ -80,7 +81,15 @@ export let makeDidYouMeanBlock = views => {
   )
   return block => dymBlockMatcher.get(block)
 }
+
 export let didYouMeanProp = prop => dymPropMatcher.get(prop)
+
+export let makeDidYouMeanFontFamily = customFonts => {
+  let dymFontFamilyMatcher = new DidYouMeanMatcher(
+    googleFontFamilies.concat(customFonts)
+  )
+  return family => dymFontFamilyMatcher.get(family)
+}
 
 let ANIMATION = /(.+)(?:\s)(spring|linear|easeOut|easeInOut|easeIn|ease)(?:\s?(.*)?)/
 let BASIC = /^(Capture|CaptureTextArea|Column|Horizontal|Image|List|Svg|SvgCircle|SvgEllipse|SvgDefs|SvgGroup|SvgLinearGradient|SvgRadialGradient|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgSymbol|SvgText|SvgUse|SvgStop|Table|Text|View|Vertical)$/i

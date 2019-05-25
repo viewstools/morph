@@ -4,9 +4,10 @@ import { promises as fs } from 'fs'
 import chalk from 'chalk'
 import cleanup from './clean.js'
 import minimist from 'minimist'
-import watch from './watch.js'
-import updateNotifier from 'update-notifier'
+import path from 'path'
 import pkg from './package.json'
+import updateNotifier from 'update-notifier'
+import watch from './watch.js'
 ;(async function() {
   let {
     _,
@@ -90,6 +91,10 @@ import pkg from './package.json'
   console.log(chalk.magenta('!'), ` = View doesn't exist but is being used`)
   console.log(chalk.magenta('X'), ` = View name is invalid`)
   console.log('\n\nPress', chalk.blue('ctrl+c'), 'to stop at any time.\n\n')
+
+  if (!path.isAbsolute(input)) {
+    input = path.normalize(path.join(process.cwd(), input))
+  }
 
   watch({
     as,

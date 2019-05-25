@@ -26,7 +26,7 @@ export let getFilesViewCustom = async src => {
   }
   return files
 }
-export let getFilesFont = src =>
+export let getFilesFontCustom = src =>
   getFiles(src, [
     '**/Fonts/*.eot',
     '**/Fonts/*.otf',

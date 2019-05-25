@@ -483,11 +483,6 @@ let TRANSFORM_WHITELIST = {
 export let canUseNativeDriver = name =>
   STYLES_WHITELIST[name] || TRANSFORM_WHITELIST[name] || false
 
-let fontsOrder = ['eot', 'woff2', 'woff', 'ttf', 'svg', 'otf']
-
-export let sortFonts = (a, b) =>
-  fontsOrder.indexOf(b.type) - fontsOrder.indexOf(a.type)
-
 export let createId = (node, state, addClassName = true) => {
   let id = node.is || node.name
   // count repeatead ones
