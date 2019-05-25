@@ -4,6 +4,7 @@ import morphFontAsReactDom from './morph/react-dom/morph-font.js'
 import morphFontAsReactNative from './morph/react-native/morph-fonts.js'
 import path from 'path'
 import sort from 'bubblesort'
+import relativise from './relativise.js'
 
 let morphFont = {
   'react-dom': morphFontAsReactDom,
@@ -44,8 +45,6 @@ export async function morphAllFonts({ as, customFonts, src, viewsToFiles }) {
   let fontsDirectory = path.join(src, 'Fonts')
   let fontsInUse = new Set()
 
-  console.log('fontsDirectory', fontsDirectory)
-
   let mapCustomFont = file => ({
     type: FONT_TYPES[path.extname(file)],
     file: file.replace(fontsDirectory, '.'),
@@ -65,7 +64,6 @@ export async function morphAllFonts({ as, customFonts, src, viewsToFiles }) {
     let customFontSources = []
     if (customFonts.has(font)) {
       customFontSources = [...customFonts.get(font)].map(mapCustomFont)
-      console.log(customFontSources)
     }
 
     let code = morphFont[as](
@@ -95,5 +93,8 @@ let FONT_TYPES = {
   '.woff': 'woff',
   '.woff2': 'woff2',
 }
+
+export let makeGetFontImport = src => (font, view) =>
+  `import "${relativise(view.file, path.join(src, 'Fonts', `${font}.js`))}"`
 
 // let isFont = f => Object.keys(FONT_TYPES).includes(path.extname(f))

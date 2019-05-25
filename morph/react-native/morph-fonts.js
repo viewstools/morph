@@ -1,6 +1,6 @@
 export default (font, sources) => {
-  return `export default {}`
   // TODO implement
+  return `export default "${font.id}"`
 
   //   let body = `export default {\n`
   //   fonts.forEach(font => {

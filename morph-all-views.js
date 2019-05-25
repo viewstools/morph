@@ -2,6 +2,7 @@ import maybeMorph from './maybe-morph.js'
 
 export default async function morphAllViews({
   as,
+  getFontImport,
   getSystemImport,
   local,
   track,
@@ -13,6 +14,7 @@ export default async function morphAllViews({
 
     await maybeMorph({
       as,
+      getFontImport,
       getSystemImport,
       local,
       track,

@@ -17,7 +17,7 @@ let imports = {
 }
 
 export default ({
-  getFont = () => false,
+  getFontImport,
   getImport,
   isStory = () => true,
   local,
@@ -40,7 +40,7 @@ export default ({
     animated: new Set(),
     images: [],
     dependencies: new Set(),
-    getFont,
+    getFontImport: font => getFontImport(font, view),
     getStyleForProperty,
     getValueForProperty,
     hasRefs: false,

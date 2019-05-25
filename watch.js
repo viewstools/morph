@@ -1,5 +1,4 @@
 // import { exec } from 'child_process'
-// import { isViewNameRestricted, morphFont } from './index.js'
 import {
   getFilesView,
   getFilesViewLogic,
@@ -8,6 +7,7 @@ import {
 } from './get-files.js'
 import {
   ensureFontsDirectory,
+  makeGetFontImport,
   morphAllFonts,
   processCustomFonts,
 } from './fonts.js'
@@ -91,10 +91,11 @@ export default async function watch({
   })
 
   // morph views
+  let getFontImport = makeGetFontImport(src)
   let getSystemImport = makeGetSystemImport(src)
-
   await morphAllViews({
     as,
+    getFontImport,
     getSystemImport,
     local,
     track,
@@ -106,32 +107,6 @@ export default async function watch({
 
   if (once) return
 }
-
-//   let makeGetDomFont = (view, file) => {
-//     return font => {
-//       if (!fonts[font.id]) {
-//         fonts[font.id] = `Fonts/${font.id}.js`
-
-//         fs.writeFileSync(
-//           path.join(src, fonts[font.id]),
-//           morphFont({ as, font, files: instance.customFonts })
-//         )
-//       }
-
-//       return relativise(file, fonts[font.id])
-//     }
-//   }
-
-//   let makeGetNativeFonts = view => {
-//     return fonts => {
-//       // TODO revisit, it's overwriting the fonts with an empty object, so
-//       // I'll disable it for now until we have more time to look into it.
-//       // fs.writeFileSync(
-//       //   path.join(src, 'fonts.js'),
-//       //   morphFont({ as, fonts, files: instance.customFonts })
-//       // )
-//     }
-//   }
 
 //   let maybeUpdateExternalDependencies = debounce(async function() {
 //     let pkg = await readPkgUp(src)
@@ -249,78 +224,6 @@ export default async function watch({
 //     }
 //   }
 
-//   let makeResponsibleFor = () => {
-//     Object.keys(views).forEach(updateResponsibleFor)
-//   }
-
-//   let maybeIsReady = () => {
-//     let isReady = viewsLeftToBeReady === 0
-
-//     if (isReady) return true
-
-//     if (viewsLeftToBeReady > 0) {
-//       viewsLeftToBeReady--
-
-//       if (viewsLeftToBeReady === 0) {
-//         makeResponsibleFor()
-//       }
-//     }
-//   }
-
-//   let getPointsOfUseFor = view =>
-//     Object.keys(dependsOn).filter(dep => dependsOn[dep].includes(view))
-
-//   let updateResponsibleFor = viewRaw => {
-//     let view = viewRaw.split('.')[0]
-//     let list = []
-//     let left = getPointsOfUseFor(view)
-
-//     while (left.length > 0) {
-//       let next = left.pop()
-
-//       if (!list.includes(next)) {
-//         list.push(next)
-//         getPointsOfUseFor(next).forEach(dep => left.push(dep))
-//       }
-//     }
-
-//     responsibleFor[view] = uniq(flatten(list))
-
-//     return responsibleFor[view]
-//   }
-
-//   let addViewSkipMorph = f => addView(f, true)
-
-//   let getViewSource = async f => {
-//     let { view } = toViewPath(f)
-
-//     try {
-//       let rawFile = path.join(src, f)
-//       let source = await fs.readFile(rawFile, 'utf-8')
-//       let parsed = parse({ source, views })
-//       viewsSources[view] = source
-//       viewsParsed[view] = parsed
-
-//       if (verbose && parsed.warnings.length > 0) {
-//         console.error(
-//           chalk.red(view),
-//           chalk.dim(path.resolve(src, views[view]))
-//         )
-//         parsed.warnings.forEach(warning => {
-//           console.error(
-//             `  ${chalk.blue(warning.type)} ${chalk.yellow(
-//               `line ${warning.loc.start.line}`
-//             )} ${warning.line}`
-//           )
-//         })
-//       }
-
-//       maybeUpdateLocal(parsed.locals)
-//     } catch (error) {
-//       verbose && console.error(chalk.red('M'), view, error)
-//     }
-//   }
-
 //   let isStory = viewId => {
 //     try {
 //       let view = viewsParsed[viewId]
@@ -331,50 +234,7 @@ export default async function watch({
 //     }
 //   }
 
-//   let morphing = new Set()
-//   let toMorphQueue = null
 //   let morphView = async (f, skipRemorph, skipSource) => {
-//     if (morphing.has(f) || dontMorph(f) || isJs(f)) return
-
-//     let { file, view } = toViewPath(f)
-//     if (isViewNameRestricted(view, as)) {
-//       verbose &&
-//         console.log(
-//           chalk.magenta('X'),
-//           view,
-//           chalk.dim(`-> ${f}`),
-//           'is a Views reserved name. To fix this, change its file name to something else.'
-//         )
-//       return
-//     }
-
-//     morphing.add(f)
-
-//     let getFont =
-//       as === 'react-native'
-//         ? makeGetNativeFonts(view)
-//         : makeGetDomFont(view, file)
-//     let getImport = makeGetImport(view, file)
-//     let calledMaybeIsReady = false
-
-//     try {
-//       let rawFile = path.join(src, f)
-//       if (!skipSource) {
-//         await getViewSource(f)
-//       }
-
-//       let res = morph({
-//         as,
-//         file: { raw: rawFile, relative: file },
-//         name: view,
-//         getFont,
-//         getImport,
-//         isStory,
-//         localSupported: instance.localSupported,
-//         track,
-//         views: viewsParsed,
-//       })
-
 //       for (let dep of res.dependencies) {
 //         instance.externalDependencies.add(dep)
 //       }
@@ -386,81 +246,9 @@ export default async function watch({
 //         delete instance.flow[view]
 //       }
 
-//       let toMorph = {
-//         as,
-//         code: res.code,
-//         dependsOn: dependsOn[view],
-//         // responsibleFor: responsibleFor[view],
-//         file: rawFile,
-//         fonts: res.fonts,
-//         slots: res.slots,
-//         source: viewsSources[view],
-//         view,
-//       }
-
-//       if (maybeIsReady()) {
-//         calledMaybeIsReady = true
-//         // TODO revisit effect of rawView vs view here
-//         updateResponsibleFor(view)
-//         toMorph.responsibleFor = responsibleFor[view]
-
-//         if (toMorphQueue === null) {
-//           toMorphQueue = []
-//         }
-//         toMorphQueue.push(toMorph)
-
-//         if (!skipRemorph) {
-//           await remorphDependenciesFor(view)
-//           await Promise.all(toMorphQueue.map(onMorph))
-//           toMorphQueue = null
-//         }
-
 //         ensureFlow(path.join(src, instance.useFlow), instance.flow)
-//       } else {
-//         await onMorph(toMorph)
-//       }
 
 //       maybeUpdateExternalDependencies()
-
-//       verbose && console.log(chalk.green('M'), view)
-//     } catch (error) {
-//       verbose && console.error(chalk.red('M'), view, error.codeFrame || error)
-
-//       if (!calledMaybeIsReady) {
-//         maybeIsReady()
-//       }
-//     }
-
-//     morphing.delete(f)
-//   }
-
-//   let remorphDependenciesFor = async viewRaw => {
-//     let view = viewRaw.split('.')[0]
-
-//     await Promise.all(
-//       responsibleFor[view].map(dep => morphView(views[dep], true))
-//     )
-
-//     if (Array.isArray(toMorphQueue)) {
-//       await Promise.all(toMorphQueue.map(onMorph))
-//     }
-//   }
-
-//   let toViewPath = f => {
-//     let file = f.replace(/(\.ios|\.android|\.web)/, '')
-
-//     let view = path.basename(file)
-//     if (isLogic(file)) {
-//       view = view.replace(/\.js/, '')
-//     } else {
-//       view = toPascalCase(view.replace(/\.(js|view)/, ''))
-//     }
-
-//     return {
-//       file: `./${file}`,
-//       view,
-//     }
-//   }
 
 //   let removeView = f => {
 //     if (dontMorph(f)) return

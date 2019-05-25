@@ -17,7 +17,7 @@ let imports = {
 }
 
 export default ({
-  getFont = () => false,
+  getFontImport,
   getSystemImport,
   isStory = () => true,
   local,
@@ -45,7 +45,7 @@ export default ({
     dependencies: new Set(),
     flow: null,
     flowSetState: false,
-    getFont,
+    getFontImport: font => getFontImport(font, view),
     getStyleForProperty,
     getValueForProperty,
     hasRefs: false,

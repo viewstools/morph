@@ -64,14 +64,12 @@ export default (state, getImport) => {
   })
 
   if (state.isReactNative) {
-    state.getFont(state.fonts)
+    // TODO fonts in RN
+    // state.getFont(state.fonts)
   } else {
-    state.fonts.forEach(usedFont => {
-      let font = state.getFont(usedFont)
-      if (font) {
-        dependencies.push(`import "${font}"`)
-      }
-    })
+    state.fonts.forEach(usedFont =>
+      dependencies.push(state.getFontImport(usedFont.id))
+    )
   }
 
   // TODO we probably want to check that the file exists and do something if it

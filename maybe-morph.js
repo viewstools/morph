@@ -5,6 +5,7 @@ import prettier from 'prettier'
 
 export default async function maybeMorph({
   as,
+  getFontImport,
   getSystemImport,
   local,
   track,
@@ -15,7 +16,7 @@ export default async function maybeMorph({
 }) {
   try {
     let result = morphers[as]({
-      // getFont,
+      getFontImport,
       getSystemImport,
       // isStory,
       local,
