@@ -96,6 +96,12 @@ import watch from './watch.js'
     input = path.normalize(path.join(process.cwd(), input))
   }
 
+  try {
+    if ((await fs.stat(path.join(input, 'src'))).isDirectory()) {
+      input = path.join(input, 'src')
+    }
+  } catch (error) {}
+
   watch({
     as,
     local,
