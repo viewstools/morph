@@ -14,7 +14,7 @@ import {
 import processViewCustomFiles from './process-view-custom-files.js'
 import processViewFiles from './process-view-files.js'
 import chalk from 'chalk'
-// import chokidar from 'chokidar'
+import chokidar from 'chokidar'
 // import debounce from 'debounce'
 import ensureFlow from './ensure-flow.js'
 // import ensureLocalContainer from './ensure-local-container.js'
@@ -71,6 +71,7 @@ export default async function watch({
       `${chalk.yellow('A')} ${[...viewsById.keys()].sort().join(', ')}`
     )
 
+  // TODO optimise
   // parse views
   parseViews({
     customFonts,
@@ -96,6 +97,8 @@ export default async function watch({
   // morph views
   let getFontImport = makeGetFontImport(src)
   let getSystemImport = makeGetSystemImport(src)
+
+  // TODO optimise
   await morphAllViews({
     as,
     getFontImport,
@@ -117,6 +120,36 @@ export default async function watch({
   // })
 
   if (once) return
+
+  // let watcher = chokidar.watch(watcherPattern, {
+  //   cwd: src,
+  //   ignored: /(node_modules|\.view.js)/,
+  //   ignoreInitial: true,
+  // })
+
+  // if (verbose) {
+  //   watcher.on('error', console.error.bind(console))
+  // }
+
+  // instance.stop = () => watcher.close()
+
+  // watcher.on('add', f => {
+  //   if (isFont(f)) {
+  //     addFont(f)
+  //   } else {
+  //     addView(f)
+  //   }
+  // })
+  // watcher.on('change', f => {
+  //   morphView(f)
+  // })
+  // watcher.on('unlink', f => {
+  //   if (isFont(f)) {
+  //     removeFont(f)
+  //   } else {
+  //     removeView(f)
+  //   }
+  // })
 }
 
 //   let maybeUpdateExternalDependencies = debounce(async function() {
