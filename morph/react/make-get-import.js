@@ -1,5 +1,5 @@
+import getViewRelativeToView from '../../get-view-relative-to-view.js'
 import relativise from '../../relativise.js'
-import path from 'path'
 
 export default function makeGetImport({
   imports,
@@ -20,22 +20,14 @@ export default function makeGetImport({
       )
     }
 
-    let importCandidates = viewsById.get(id)
-    let importViewFile = [...importCandidates][0]
-    if (importCandidates.size > 1) {
-      let pathToView = view.file.replace(/\.view$/, '')
-      let maybeFileViewInside = path.join(pathToView, `${id}.view`)
-      let maybeFileViewCustomInside = path.join(pathToView, `${id}.js`)
-
-      if (importCandidates.has(maybeFileViewInside)) {
-        importViewFile = maybeFileViewInside
-      } else if (importCandidates.has(maybeFileViewCustomInside)) {
-        importViewFile = maybeFileViewCustomInside
-      }
-    }
-
-    let importView = viewsToFiles.get(importViewFile)
+    let importView = getViewRelativeToView({
+      id,
+      view,
+      viewsById,
+      viewsToFiles,
+    })
     let importFile = importView.file
+
     if (importView.logic) {
       importFile = importView.logic
     } else if (!importView.custom) {

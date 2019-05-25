@@ -16,10 +16,9 @@ import processViewFiles from './process-view-files.js'
 import chalk from 'chalk'
 // import chokidar from 'chokidar'
 // import debounce from 'debounce'
-// import ensureFlow from './ensure-flow.js'
+import ensureFlow from './ensure-flow.js'
 // import ensureLocalContainer from './ensure-local-container.js'
 // import ensureTrackContext from './ensure-track-context.js'
-// import flatten from 'flatten'
 // import getLatestVersion from 'latest-version'
 // import hasYarn from 'has-yarn'
 import makeGetSystemImport from './make-get-system-import.js'
@@ -37,9 +36,9 @@ export default async function watch({
   track = false,
   verbose = true,
 }) {
+  let customFonts = new Map()
   let viewsById = new Map()
   let viewsToFiles = new Map()
-  let customFonts = new Map()
 
   let [
     filesView,
@@ -80,7 +79,9 @@ export default async function watch({
 
   if (customFonts.size > 0) {
     verbose &&
-      console.log(`Custom fonts: ${[...customFonts.keys()].sort().join(', ')}`)
+      console.log(
+        `Custom fonts detected: ${[...customFonts.keys()].sort().join(', ')}`
+      )
   }
 
   await morphAllFonts({
@@ -104,6 +105,8 @@ export default async function watch({
   })
 
   verbose && console.log(chalk.green('M'))
+
+  ensureFlow({ src, viewsById, viewsToFiles })
 
   if (once) return
 }
@@ -221,16 +224,6 @@ export default async function watch({
 //       } else {
 //         morphView(f)
 //       }
-//     }
-//   }
-
-//   let isStory = viewId => {
-//     try {
-//       let view = viewsParsed[viewId]
-//       return view && view.view.properties.some(p => p.name === 'flow')
-//     } catch (error) {
-//       console.error(viewId, error)
-//       return false
 //     }
 //   }
 

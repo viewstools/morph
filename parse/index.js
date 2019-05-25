@@ -49,6 +49,7 @@ export default ({
   let stack = []
   let slots = []
   let view = null
+  let viewsInView = new Set()
   let warnings = []
 
   let didYouMeanBlock = makeDidYouMeanBlock([...views.keys()])
@@ -247,6 +248,10 @@ export default ({
         line,
       })
       block.skip = true
+    }
+
+    if (!block.isBasic) {
+      viewsInView.add(block.name)
     }
 
     if (is) {
@@ -762,6 +767,15 @@ That would mean that SomeView in ${block.name} will be replaced by ${
   if (stack.length > 0) {
     while (!end(stack.pop(), lines.length - 1)) {}
   }
+
+  let flowProp = view.properties.find(p => p.name === 'flow')
+  if (flowProp) {
+    view.isStory = true
+    view.flow = flowProp.value
+  } else {
+    view.isStory = false
+  }
+  view.views = viewsInView
 
   return {
     fonts,

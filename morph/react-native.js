@@ -2,6 +2,8 @@ import * as visitor from './react-native/block.js'
 import getStyleForProperty from './react-native/get-style-for-property.js'
 import getStyles from './react-native/get-styles.js'
 import getValueForProperty from './react-native/get-value-for-property.js'
+import getViewRelativeToView from '../get-view-relative-to-view.js'
+import makeGetImport from './react/make-get-import.js'
 import maybeUsesTextInput from './react-native/maybe-uses-text-input.js'
 import maybeUsesRouter from './react-native/maybe-uses-router.js'
 import maybeUsesStyleSheet from './react-native/maybe-uses-style-sheet.js'
@@ -18,13 +20,13 @@ let imports = {
 
 export default ({
   getFontImport,
-  getImport,
-  isStory = () => true,
+  getSystemImport,
   local,
   localSupported,
-  name,
-  track = true,
-  views,
+  track,
+  view,
+  viewsById,
+  viewsToFiles,
 }) => {
   let finalName = restrictedNames.includes(name) ? `${name}1` : name
   if (name !== finalName) {
@@ -45,7 +47,16 @@ export default ({
     getValueForProperty,
     hasRefs: false,
     isReactNative: true,
-    isStory,
+    isStory: id => {
+      let viewInView = getViewRelativeToView({
+        id,
+        view,
+        viewsById,
+        viewsToFiles,
+      })
+
+      return !viewInView.custom && viewInView.parsed.view.isStory
+    },
     lazy: {},
     local,
     locals: {},
@@ -76,28 +87,33 @@ export default ({
     },
   }
 
-  let parsed = views[name]
-  state.fonts = parsed.fonts
-  state.slots = parsed.slots
+  state.fonts = view.parsed.fonts
+  state.slots = view.parsed.slots
   state.localSupported = localSupported
 
-  walk(parsed.view, visitor, state)
+  walk(view.parsed.view, visitor, state)
 
   maybeUsesTextInput(state)
   maybeUsesRouter(state)
   maybeUsesStyleSheet(state)
-  let finalGetImport = (name, isLazy) =>
-    imports[name] || getImport(name, isLazy)
 
   return {
     code: toComponent({
-      getImport: finalGetImport,
+      getImport: makeGetImport({
+        imports,
+        getSystemImport,
+        view,
+        viewsById,
+        viewsToFiles,
+      }),
       getStyles,
       name: finalName,
       state,
     }),
     dependencies: state.dependencies,
-    fonts: parsed.fonts,
-    slots: parsed.slots,
+    flow: state.flow,
+    flowDefaultState: state.flowDefaultState,
+    // fonts: view.parsed.fonts,
+    // slots: view.parsed.slots,
   }
 }

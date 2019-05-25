@@ -2,6 +2,7 @@ import * as visitor from './react-dom/block.js'
 import getStyleForProperty from './react-dom/get-style-for-property.js'
 import getStyles from './react-dom/get-styles.js'
 import getValueForProperty from './react-dom/get-value-for-property.js'
+import getViewRelativeToView from '../get-view-relative-to-view.js'
 import makeGetImport from './react/make-get-import.js'
 import maybeUsesRouter from './react-dom/maybe-uses-router.js'
 import restrictedNames from './react-dom/restricted-names.js'
@@ -19,10 +20,9 @@ let imports = {
 export default ({
   getFontImport,
   getSystemImport,
-  isStory = () => true,
   local,
   localSupported,
-  track = true,
+  track,
   view,
   viewsById,
   viewsToFiles,
@@ -52,7 +52,16 @@ export default ({
     images: [],
     isDynamic: false,
     isReactNative: false,
-    isStory,
+    isStory: id => {
+      let viewInView = getViewRelativeToView({
+        id,
+        view,
+        viewsById,
+        viewsToFiles,
+      })
+
+      return !viewInView.custom && viewInView.parsed.view.isStory
+    },
     lazy: {},
     local,
     locals: {},
@@ -115,7 +124,7 @@ export default ({
     flow: state.flow,
     flowDefaultState: state.flowDefaultState,
     // TODO flow supported states
-    fonts: view.parsed.fonts,
-    slots: view.parsed.slots,
+    // fonts: view.parsed.fonts,
+    // slots: view.parsed.slots,
   }
 }
