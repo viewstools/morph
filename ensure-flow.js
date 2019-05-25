@@ -64,7 +64,7 @@ export function Flow(props) {
       if (flow.get(key).has(value)) {
         _setState(state => ({ ...state, [key]: value }))
       } else {
-        throw new Exception(\`Story "$\{key}" doesn't have a state named "$\{value}". Valid states are $\{flow.get(key)}.\`)
+        throw new Error(\`Story "$\{key}" doesn't have a state named "$\{value}". Valid states are $\{[...flow.get(key)]}.\`)
       }
     },
     [_setState],

@@ -28,6 +28,8 @@ import parseViews from './parse-views.js'
 // import readPkgUp from 'read-pkg-up'
 // import toPascalCase from 'to-pascal-case'
 
+// import hackMigration from './hack-migration.js'
+
 export default async function watch({
   as = 'react-dom',
   local = 'en',
@@ -107,6 +109,12 @@ export default async function watch({
   verbose && console.log(chalk.green('M'))
 
   ensureFlow({ src, viewsById, viewsToFiles })
+
+  // hackMigration({
+  //   src,
+  //   viewsById,
+  //   viewsToFiles,
+  // })
 
   if (once) return
 }
