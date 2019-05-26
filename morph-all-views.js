@@ -5,11 +5,14 @@ export default async function morphAllViews({
   getFontImport,
   getSystemImport,
   local,
+  filesView,
   track,
   viewsById,
   viewsToFiles,
 }) {
-  for await (let view of viewsToFiles.values()) {
+  for await (let file of filesView) {
+    let view = viewsToFiles.get(file)
+
     if (view.custom) continue
 
     await maybeMorph({

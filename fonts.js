@@ -19,7 +19,7 @@ export async function ensureFontsDirectory(src) {
   } catch (error) {}
 }
 
-let getFontId = file => path.basename(file, path.extname(file))
+export let getFontId = file => path.basename(file, path.extname(file))
 
 let fontsOrder = ['eot', 'woff2', 'woff', 'ttf', 'svg', 'otf']
 
@@ -32,8 +32,8 @@ let sortFonts = fonts => {
   )
 }
 
-export function processCustomFonts({ customFonts, files }) {
-  for (let file of files) {
+export function processCustomFonts({ customFonts, filesFontCustom }) {
+  for (let file of filesFontCustom) {
     addToMapSet(customFonts, getFontId(file), file)
   }
   for (let [id, fonts] of customFonts) {
@@ -41,7 +41,13 @@ export function processCustomFonts({ customFonts, files }) {
   }
 }
 
-export async function morphAllFonts({ as, customFonts, src, viewsToFiles }) {
+export async function morphAllFonts({
+  as,
+  customFonts,
+  filesView,
+  src,
+  viewsToFiles,
+}) {
   let fontsDirectory = path.join(src, 'Fonts')
   let fontsInUse = new Set()
 
@@ -50,7 +56,9 @@ export async function morphAllFonts({ as, customFonts, src, viewsToFiles }) {
     file: file.replace(fontsDirectory, '.'),
   })
 
-  for (let view of viewsToFiles.values()) {
+  for (let file of filesView) {
+    let view = viewsToFiles.get(file)
+
     if (view.custom) continue
 
     view.parsed.fonts.forEach(font => {

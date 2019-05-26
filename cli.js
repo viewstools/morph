@@ -78,20 +78,17 @@ import watch from './watch.js'
   updateNotifier({ pkg }).notify()
 
   if (verbose) {
-    console.log(`Views Tools morpher v${pkg.version}\n\n`)
+    console.log(chalk.underline(`Views Tools morpher v${pkg.version}`))
 
     console.log(
-      `Will morph files at '${chalk.green(input)}' as ${chalk.green(as)} ${
+      `\nWill morph files at "${chalk.green(input)}" as "${chalk.green(as)}" ${
         track ? 'with tracking' : 'without tracking'
-      }\n`
+      }`
     )
-    console.log(chalk.yellow('A'), ' = Added')
-    console.log(chalk.blue('D'), ` = View deleted`)
-    console.log(chalk.green('M'), ` = Morphed`)
-    console.log(chalk.red('M'), ` = Morph failed`)
-    console.log(chalk.magenta('!'), ` = View doesn't exist but is being used`)
-    console.log(chalk.magenta('X'), ` = View name is invalid`)
-    console.log('\n\nPress', chalk.blue('ctrl+c'), 'to stop at any time.\n\n')
+    console.log(chalk.yellow('A'), '= Added')
+    console.log(chalk.green('M'), `= Morphed`)
+    console.log(chalk.blue('X'), `= Deleted`)
+    console.log('\nPress', chalk.blue('ctrl+c'), 'to stop at any time.\n')
   }
 
   if (!path.isAbsolute(input)) {

@@ -2,11 +2,11 @@ import addToMapSet from './add-to-map-set.js'
 import path from 'path'
 
 export default function processViewCustomFiles({
-  files,
+  filesViewCustom,
   viewsById,
   viewsToFiles,
 }) {
-  for (let file of files) {
+  for (let file of filesViewCustom) {
     let id = path.basename(file, '.js')
 
     addToMapSet(viewsById, id, file)

@@ -1,6 +1,6 @@
 import { promises as fs } from 'fs'
 import addToMapSet from './add-to-map-set.js'
-import path from 'path'
+import getViewIdFromFile from './get-view-id-from-file.js'
 
 export default async function processViewFiles({
   filesView,
@@ -9,17 +9,20 @@ export default async function processViewFiles({
   viewsToFiles,
 }) {
   for await (let file of filesView) {
-    let id = path.basename(file, '.view')
+    let id = getViewIdFromFile(file)
 
     addToMapSet(viewsById, id, file)
 
+    let view = viewsToFiles.has(file) ? viewsToFiles.get(file) : {}
+
     viewsToFiles.set(file, {
+      ...view,
       custom: false,
       file,
       id,
       logic: filesViewLogic.has(`${file}.logic.js`) && `${file}.logic.js`,
       source: await fs.readFile(file, 'utf8'),
-      version: 0,
+      version: view.version ? view.version + 1 : 0,
     })
   }
 }

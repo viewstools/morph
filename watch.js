@@ -5,26 +5,21 @@ import {
   getFilesViewCustom,
   getFilesFontCustom,
 } from './get-files.js'
+import { ensureFontsDirectory } from './fonts.js'
 import {
-  ensureFontsDirectory,
-  makeGetFontImport,
-  morphAllFonts,
-  processCustomFonts,
-} from './fonts.js'
-import processViewCustomFiles from './process-view-custom-files.js'
-import processViewFiles from './process-view-files.js'
+  watchFilesView,
+  watchFilesViewLogic,
+  watchFilesViewCustom,
+  watchFilesFontCustom,
+} from './watch-files.js'
+import makeProcessFiles from './process-files.js'
 import chalk from 'chalk'
-import chokidar from 'chokidar'
 // import debounce from 'debounce'
-import ensureFlow from './ensure-flow.js'
 // import ensureLocalContainer from './ensure-local-container.js'
 // import ensureTrackContext from './ensure-track-context.js'
 // import getLatestVersion from 'latest-version'
 // import hasYarn from 'has-yarn'
-import makeGetSystemImport from './make-get-system-import.js'
-import morphAllViews from './morph-all-views.js'
 // import maybeMorph from './maybe-morph.js'
-import parseViews from './parse-views.js'
 // import readPkgUp from 'read-pkg-up'
 // import toPascalCase from 'to-pascal-case'
 
@@ -42,6 +37,19 @@ export default async function watch({
   let viewsById = new Map()
   let viewsToFiles = new Map()
 
+  let processFiles = makeProcessFiles({
+    as,
+    customFonts,
+    local,
+    track,
+    src,
+    verbose,
+    viewsById,
+    viewsToFiles,
+  })
+
+  await ensureFontsDirectory(src)
+
   let [
     filesView,
     filesViewLogic,
@@ -54,64 +62,34 @@ export default async function watch({
     getFilesFontCustom(src),
   ])
 
-  ensureFontsDirectory(src)
-  processCustomFonts({
-    customFonts,
-    files: filesFontCustom,
+  await processFiles({
+    filesFontCustom,
+    filesView,
+    filesViewCustom,
+    filesViewLogic,
   })
 
-  // detect .view files
-  await processViewFiles({ filesView, filesViewLogic, viewsById, viewsToFiles })
-
-  // detect .js files meant to be custom views with "// @view" at the top
-  processViewCustomFiles({ files: filesViewCustom, viewsById, viewsToFiles })
-
-  verbose &&
-    console.log(
-      `${chalk.yellow('A')} ${[...viewsById.keys()].sort().join(', ')}`
-    )
-
-  // TODO optimise
-  // parse views
-  parseViews({
-    customFonts,
-    verbose,
-    viewsById,
-    viewsToFiles,
-  })
-
-  if (customFonts.size > 0) {
-    verbose &&
+  if (verbose) {
+    let files = [...viewsToFiles.values()]
+      .map(view => {
+        if (view.custom) {
+          return `${view.id} ${chalk.dim('(custom)')}`
+        } else if (view.logic) {
+          return `${view.id} ${chalk.dim('(with logic)')}`
+        } else {
+          return view.id
+        }
+      })
+      .sort()
+      .join(', ')
+    console.log(`${chalk.yellow('A')} ${chalk.green('M')} ${files}`)
+    if (customFonts.size > 0) {
       console.log(
-        `Custom fonts detected: ${[...customFonts.keys()].sort().join(', ')}`
+        chalk.yellow(`\nCustom fonts detected:`),
+        [...customFonts.keys()].sort().join(', ')
       )
+    }
   }
-
-  await morphAllFonts({
-    as,
-    customFonts,
-    src,
-    viewsToFiles,
-  })
-
-  // morph views
-  let getFontImport = makeGetFontImport(src)
-  let getSystemImport = makeGetSystemImport(src)
-
-  // TODO optimise
-  await morphAllViews({
-    as,
-    getFontImport,
-    getSystemImport,
-    local,
-    track,
-    viewsById,
-    viewsToFiles,
-  })
-
-  verbose && console.log(chalk.green('M'))
-
-  ensureFlow({ src, viewsById, viewsToFiles })
 
   // hackMigration({
   //   src,
@@ -121,35 +99,41 @@ export default async function watch({
 
   if (once) return
 
-  // let watcher = chokidar.watch(watcherPattern, {
-  //   cwd: src,
-  //   ignored: /(node_modules|\.view.js)/,
-  //   ignoreInitial: true,
-  // })
+  watchFilesView({
+    filesViewLogic,
+    processFiles,
+    src,
+    verbose,
+    viewsById,
+    viewsToFiles,
+  })
 
-  // if (verbose) {
-  //   watcher.on('error', console.error.bind(console))
-  // }
+  watchFilesViewCustom({
+    filesViewLogic,
+    processFiles,
+    src,
+    verbose,
+    viewsById,
+    viewsToFiles,
+  })
 
-  // instance.stop = () => watcher.close()
+  watchFilesViewLogic({
+    filesViewLogic,
+    processFiles,
+    src,
+    verbose,
+    viewsToFiles,
+  })
 
-  // watcher.on('add', f => {
-  //   if (isFont(f)) {
-  //     addFont(f)
-  //   } else {
-  //     addView(f)
-  //   }
-  // })
-  // watcher.on('change', f => {
-  //   morphView(f)
-  // })
-  // watcher.on('unlink', f => {
-  //   if (isFont(f)) {
-  //     removeFont(f)
-  //   } else {
-  //     removeView(f)
-  //   }
-  // })
+  watchFilesFontCustom({
+    customFonts,
+    filesViewLogic,
+    processFiles,
+    src,
+    verbose,
+    viewsById,
+    viewsToFiles,
+  })
 }
 
 //   let maybeUpdateExternalDependencies = debounce(async function() {
@@ -219,143 +203,3 @@ export default async function watch({
 //       file: path.join(src, instance.trackContext),
 //     })
 //   }
-
-//   let addView = (f, skipMorph = false) => {
-//     if (dontMorph(f)) return
-
-//     let { file, view } = toViewPath(f)
-
-//     if (isViewNameRestricted(view, as)) {
-//       verbose &&
-//         console.log(
-//           chalk.magenta('X'),
-//           view,
-//           chalk.dim(`-> ${f}`),
-//           'is a Views reserved name. To fix this, change its file name to something else.'
-//         )
-//       return
-//     }
-
-//     if (views[view]) {
-//       console.log(
-//         chalk.magenta('X'),
-//         chalk.dim(`-> ${f}`),
-//         `This view will not be morphed as a view with the name ${view} already exists. If you did intend to morph this view please give it a unique name.`
-//       )
-//       return
-//     }
-
-//     verbose && console.log(chalk.yellow('A'), view, chalk.dim(`-> ${f}`))
-
-//     let shouldMorph = isView(file)
-
-//     if (isLogic(file)) {
-//       logic[view] = file
-
-//       if (viewsLeftToBeReady === 0) {
-//         remorphDependenciesFor(view)
-//       }
-//     } else {
-//       views[view] = file
-//     }
-
-//     if (shouldMorph) {
-//       if (skipMorph) {
-//         return f
-//       } else {
-//         morphView(f)
-//       }
-//     }
-//   }
-
-//   let morphView = async (f, skipRemorph, skipSource) => {
-//       for (let dep of res.dependencies) {
-//         instance.externalDependencies.add(dep)
-//       }
-
-//       // TODO nested flows
-//       if (res.flow === 'separate') {
-//         instance.flow[view] = res.flowDefaultState
-//       } else {
-//         delete instance.flow[view]
-//       }
-
-//         ensureFlow(path.join(src, instance.useFlow), instance.flow)
-
-//       maybeUpdateExternalDependencies()
-
-//   let removeView = f => {
-//     if (dontMorph(f)) return
-
-//     let { view } = toViewPath(f)
-//     if (isViewNameRestricted(view, as)) return
-
-//     verbose && console.log(chalk.blue('D'), view)
-
-//     if (isLogic(f)) {
-//       delete logic[view]
-//     } else {
-//       delete views[view]
-//       delete viewsSources[view]
-//       delete viewsParsed[view]
-//     }
-
-//     updateResponsibleFor(view)
-
-//     remorphDependenciesFor(view)
-
-//     delete dependsOn[view]
-//   }
-
-//   let watcherOptions = {
-//     bashNative: ['linux'],
-//     cwd: src,
-//     ignore: ['**/node_modules/**', '**/*.view.js'],
-//   }
-//   let watcherPattern = [
-//     `**/*.js`,
-//     `**/*.view`,
-//     `**/*.view.logic.js`,
-//     // fonts,
-//     'Fonts/*.eot',
-//     'Fonts/*.otf',
-//     'Fonts/*.ttf',
-//     'Fonts/*.svg',
-//     'Fonts/*.woff',
-//     'Fonts/*.woff2',
-//   ].filter(Boolean)
-
-//   ensureFlow(path.join(src, instance.useFlow), instance.flow)
-
-//   if (!once) {
-//     let watcher = chokidar.watch(watcherPattern, {
-//       cwd: src,
-//       ignored: /(node_modules|\.view.js)/,
-//       ignoreInitial: true,
-//     })
-
-//     if (verbose) {
-//       watcher.on('error', console.error.bind(console))
-//     }
-
-//     instance.stop = () => watcher.close()
-
-//     watcher.on('add', f => {
-//       if (isFont(f)) {
-//         addFont(f)
-//       } else {
-//         addView(f)
-//       }
-//     })
-//     watcher.on('change', f => {
-//       morphView(f)
-//     })
-//     watcher.on('unlink', f => {
-//       if (isFont(f)) {
-//         removeFont(f)
-//       } else {
-//         removeView(f)
-//       }
-//     })
-//   }
-// }
