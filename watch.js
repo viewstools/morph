@@ -75,7 +75,7 @@ export default async function watch({
         if (view.custom) {
           return `${view.id} ${chalk.dim('(custom)')}`
         } else if (view.logic) {
-          return `${view.id} ${chalk.dim('(with logic)')}`
+          return `${view.id} ${chalk.dim('(+ logic)')}`
         } else {
           return view.id
         }

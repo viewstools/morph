@@ -12,4 +12,5 @@ export default function maybePrintWarnings(view, verbose) {
       )} Line: "${warning.line}"`
     )
   })
+  console.log('')
 }
