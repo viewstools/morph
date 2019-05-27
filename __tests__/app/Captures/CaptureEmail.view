@@ -1,0 +1,13 @@
+CaptureEmail View
+  Capture
+    color #404040
+    onChange <
+    type email
+    placeholder Type an email
+    value <
+    when <isPlaceholder
+    color #323232
+    when <isHovered
+    color #808080
+    when <isFocused
+    color #a0a0a0

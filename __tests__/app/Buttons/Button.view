@@ -1,0 +1,19 @@
+Button View
+  Vertical
+    alignSelf < auto
+    backgroundColor #323232
+    onClick <
+    marginLeft < 0
+    paddingBottom 12
+    paddingLeft 8
+    paddingRight 8
+    paddingTop 12
+    opacity 1
+    when <isHovered
+    opacity 0.85 easeOut duration 75
+    Text
+      color #ffffff
+      fontFamily Montserrat
+      fontWeight 400
+      fontSize 12
+      text < label

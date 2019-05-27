@@ -1,0 +1,17 @@
+Settings View
+  flow together
+  Vertical
+    marginLeft 8
+    ButtonIcon
+      alignSelf flexStart
+      onClick <setFlowState
+      onClickId /App/Users
+      text Go to users
+      ArrowRight ArrowLeft
+    Text
+      color deepskyblue
+      fontFamily WonderUnitSans
+      fontSize 28
+      fontWeight 300
+      marginTop 24
+      text Settings

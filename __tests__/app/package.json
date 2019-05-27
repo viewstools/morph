@@ -1,0 +1,28 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "BSD-3-Clause",
+  "private": true,
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "concurrently": "^4.1.0",
+    "parcel": "^1.12.3"
+  },
+  "dependencies": {
+    "emotion": "^10.0.9",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "scripts": {
+    "start": "concurrently npm:dev npm:views",
+    "dev": "parcel --port 3000 index.html",
+    "views": "../../cli.js . --watch --as react-dom"
+  },
+  "browserslist": [
+    "last 1 chrome version",
+    "node >= 12",
+    "not dead"
+  ]
+}

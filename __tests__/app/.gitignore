@@ -1,0 +1,6 @@
+**/*.view.js
+dist
+node_modules
+*.log
+*.tmp
+.cache
