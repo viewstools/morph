@@ -12,7 +12,16 @@ export default {
   plugins: [
     babel({
       babelrc: false,
-      presets: [['@babel/preset-env', { modules: false, useBuiltIns: false }]],
+      presets: [
+        [
+          '@babel/preset-env',
+          {
+            modules: false,
+            useBuiltIns: false,
+            exclude: ['@babel/plugin-transform-regenerator'],
+          },
+        ],
+      ],
     }),
   ],
 }
