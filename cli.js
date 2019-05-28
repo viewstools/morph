@@ -69,6 +69,16 @@ import watch from './watch.js'
     process.exit()
   }
 
+  if (!path.isAbsolute(input)) {
+    input = path.normalize(path.join(process.cwd(), input))
+  }
+
+  try {
+    if ((await fs.stat(path.join(input, 'src'))).isDirectory()) {
+      input = path.join(input, 'src')
+    }
+  } catch (error) {}
+
   if (clean) {
     console.log(`Cleaning up ${input}...`)
     await cleanup(input)
@@ -90,17 +100,6 @@ import watch from './watch.js'
     console.log(chalk.blue('X'), `= Deleted`)
     console.log('\nPress', chalk.blue('ctrl+c'), 'to stop at any time.\n')
   }
-
-  if (!path.isAbsolute(input)) {
-    input = path.normalize(path.join(process.cwd(), input))
-  }
-
-  try {
-    if ((await fs.stat(path.join(input, 'src'))).isDirectory()) {
-      input = path.join(input, 'src')
-    }
-  } catch (error) {}
-
   watch({
     as,
     local,
