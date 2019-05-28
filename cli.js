@@ -81,7 +81,7 @@ import watch from './watch.js'
 
   if (clean) {
     console.log(`Cleaning up ${input}...`)
-    await cleanup(input)
+    await cleanup(input, verbose)
     process.exit()
   }
 
