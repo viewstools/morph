@@ -15,6 +15,8 @@ Button View
     when <isHovered
     backgroundColor #ff8300
     opacity 0.85 easeOut duration 75
+    when <isFocused
+    backgroundColor #ffff00
     Text
       color #ffffff
       fontFamily Montserrat
@@ -22,4 +24,6 @@ Button View
       fontSize 12
       text < label
       when <isHovered
+      color #323232
+      when <isFocused
       color #323232
