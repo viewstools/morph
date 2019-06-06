@@ -225,8 +225,8 @@ let asStaticCss = (styles, dynamicStyles = []) =>
 
 let systemScopeToCssKey = {
   isDisabled: 'disabled',
-  isHovered: 'hover',
-  isFocused: 'focus',
+  isHovered: 'hover:enabled',
+  isFocused: 'focus:enabled',
 }
 let ensureSystemScopeCssKey = key => systemScopeToCssKey[key] || key
 

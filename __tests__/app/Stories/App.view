@@ -22,5 +22,8 @@ App View
       onClick <setFlowState
       onClickId /App/Settings
       text Go to settings
+    Button
+      isDisabled true
+      text Disabled button
   Users
   Settings

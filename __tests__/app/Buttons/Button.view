@@ -2,14 +2,18 @@ Button View
   Vertical
     alignSelf < auto
     backgroundColor #323232
-    onClick <
+    isDisabled <
     marginLeft < 0
+    onClick <
+    opacity 1
     paddingBottom 12
     paddingLeft 8
     paddingRight 8
     paddingTop 12
-    opacity 1
+    when <isDisabled
+    opacity 0.2 easeOut duration 75
     when <isHovered
+    backgroundColor #ff8300
     opacity 0.85 easeOut duration 75
     Text
       color #ffffff
@@ -17,3 +21,5 @@ Button View
       fontWeight 400
       fontSize 12
       text < label
+      when <isHovered
+      color #323232
