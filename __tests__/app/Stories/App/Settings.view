@@ -4,7 +4,7 @@ Settings View
     marginLeft 8
     ButtonIcon
       alignSelf flexStart
-      onClick <setFlowState
+      onClick <flowSetState
       onClickId /App/Users
       text Go to users
       ArrowRight ArrowLeft

@@ -71,17 +71,17 @@ export default (node, parent, state) => {
   } else if (node.name === 'onClick') {
     let onClick = safe(node.value, node)
 
-    if (node.slotName === 'setFlowState') {
+    if (node.slotName === 'flowSetState') {
       if (hasProp(parent, 'onClickId')) {
         let parts = getProp(parent, 'onClickId').value.split('/')
         let key = parts[parts.length - 2]
         let value = parts[parts.length - 1]
-        onClick = `{() => setFlowState("${key}", "${value}")}`
+        onClick = `{() => flowSetState("${key}", "${value}")}`
         state.use('ViewsUseFlow')
         state.flowSetState = true
         // TODO warn if action is used but it isn't in actions (on parser)
       } else {
-        // TODO warn that there's setFlowState without an id (on parser)
+        // TODO warn that there's flowSetState without an id (on parser)
       }
     } else if (state.track) {
       // TODO merge flow with track

@@ -65,7 +65,7 @@ export default ({ state, name }) => {
     )
   }
   if (state.flowSetState) {
-    flow.push(`let setFlowState = fromFlow.useFlowSetState()`)
+    flow.push(`let flowSetState = fromFlow.useFlowSetState()`)
   }
 
   flow = flow.join('\n')

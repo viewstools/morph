@@ -1,16 +1,17 @@
-ArrowLeft Svg
-  alignSelf < auto
-  marginTop < 0
-  marginBottom < 0
-  marginLeft < 0
-  marginRight < 0
-  opacity < 1
-  viewBox 0 0 16 16
-  width < 16
-  height < 16
-  SvgPath
-    fill < none
-    stroke < #B5B5B5
-    strokeWidth 2
-    strokeMiterlimit 10
-    d M11.2 14.4L4.8 8l6.4-6.4
+ArrowLeft View
+  Svg
+    alignSelf < auto
+    marginTop < 0
+    marginBottom < 0
+    marginLeft < 0
+    marginRight < 0
+    opacity < 1
+    viewBox 0 0 16 16
+    width < 16
+    height < 16
+    SvgPath
+      fill < none
+      stroke < #B5B5B5
+      strokeWidth 2
+      strokeMiterlimit 10
+      d M11.2 14.4L4.8 8l6.4-6.4

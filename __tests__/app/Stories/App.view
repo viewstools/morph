@@ -14,12 +14,12 @@ App View
     paddingLeft 24
     paddingRight 24
     Button
-      onClick <setFlowState
+      onClick <flowSetState
       onClickId /App/Users
       text Go to users
     Button
       marginLeft 8
-      onClick <setFlowState
+      onClick <flowSetState
       onClickId /App/Settings
       text Go to settings
     Button
