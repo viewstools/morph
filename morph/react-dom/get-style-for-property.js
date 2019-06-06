@@ -91,7 +91,12 @@ let maybeAsVar = (prop, code) =>
 let asVar = prop => `'var(--${prop.name})'`
 
 let setScopedVar = (prop, block) => {
-  if (prop.scope === 'isHovered') return false
+  if (
+    prop.scope === 'isHovered' ||
+    prop.scope === 'isFocused' ||
+    prop.scope === 'isDisabled'
+  )
+    return false
 
   let scopedCondition = getScopedCondition(prop, block, false)
   return scopedCondition && asVar(prop)
