@@ -768,6 +768,30 @@ That would mean that SomeView in ${block.name} will be replaced by ${
     while (!end(stack.pop(), lines.length - 1)) {}
   }
 
+  if (!view) {
+    view = {
+      type: 'Block',
+      name: id,
+      animations: {},
+      isAnimated: false,
+      isBasic: true,
+      isCapture: false,
+      isColumn: false,
+      isGroup: false,
+      isProxy: false,
+      level: 0,
+      loc: getLoc(1, 0),
+      properties: [],
+      scopes: [],
+    }
+
+    warnings.push({
+      loc: view.loc,
+      type: `The view file for ${id} is empty and won't render! Add some blocks to it like:\nView\n  Text\n    text content`,
+      line: '',
+    })
+  }
+
   let flowProp = view.properties.find(p => p.name === 'flow')
   if (flowProp) {
     view.isStory = true
