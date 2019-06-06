@@ -73,11 +73,6 @@ export default (node, parent, code) => {
         transformOrigin: getTransformOrigin(node, parent),
       }
 
-    case 'userSelect':
-      return {
-        WebkitUserSelect: maybeAsVar(node, code),
-      }
-
     case 'zIndex':
       return {
         zIndex: code ? asVar(node) : parseInt(node.value, 10),

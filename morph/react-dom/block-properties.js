@@ -3,6 +3,7 @@ import * as PropertiesImage from './properties-image.js'
 import * as PropertiesRoute from '../react/properties-route.js'
 import * as PropertiesStyle from './properties-style.js'
 import * as PropertyFormat from '../react/property-format.js'
+import * as PropertyOnClickUserSelect from './property-onclick-user-select.js'
 import * as PropertyRef from '../react/property-ref.js'
 import * as PropertyRest from '../react/property-rest.js'
 import * as PropertyStyle from '../react/property-style.js'
@@ -39,6 +40,7 @@ export function enter(node, parent, state) {
       !PropertyText.enter(propNode, node, state) &&
       PropertyRest.enter(propNode, node, state)
   })
+  PropertyOnClickUserSelect.enter(node, parent, state)
 
   PropertiesStyle.leave(node, parent, state)
   PropertiesRoute.leave(node, parent, state)
