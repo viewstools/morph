@@ -1,4 +1,4 @@
-import { getScopedCondition, getProp, makeOnClickTracker } from '../utils.js'
+import { getProp, hasProp } from '../utils.js'
 import getBlockName from './get-block-name.js'
 import safe from '../react/safe.js'
 import wrap from '../react/wrap.js'
@@ -18,7 +18,19 @@ export let enter = (node, parent, state) => {
     let isDisabled = getProp(node, 'isDisabled')
     let onClick = getProp(node, 'onClick')
 
-    let hasScopedActions = getScopedCondition(onClick, node)
+    let onPress = wrap(onClick.value)
+
+    if (onClick.slotName === 'flowSetState' && hasProp(node, 'onClickId')) {
+      let parts = getProp(node, 'onClickId').value.split('/')
+      let key = parts[parts.length - 2]
+      let value = parts[parts.length - 1]
+      onPress = `{() => flowSetState("${key}", "${value}")}`
+      state.use('ViewsUseFlow')
+      state.flowSetState = true
+      // TODO warn if action is used but it isn't in actions (on parser)
+      // TODO warn that there's flowSetState without an id (on parser)
+    }
+
     let key = getProp(node, 'key')
 
     state.use(block)
@@ -26,11 +38,7 @@ export let enter = (node, parent, state) => {
     state.render.push(
       `<${block}
           activeOpacity={0.7}
-          ${
-            hasScopedActions
-              ? `onPress=${wrap(getScopedCondition(onClick, node))}`
-              : `onPress=${wrap(makeOnClickTracker(onClick, node, state))}`
-          }
+          onPress=${onPress}
           ${isDisabled ? `disabled=${wrap(isDisabled.value)}` : ''}
           underlayColor='transparent'
           ${node.isInList ? `key={${key ? key.value : 'index'}}` : ''}>`

@@ -1,7 +1,9 @@
 import {
+  getProp,
   getScopedCondition,
   getScopedImageCondition,
   getScopes,
+  hasProp,
   isValidImgSrc,
   pushImageToState,
 } from '../utils.js'
@@ -64,6 +66,23 @@ export default (node, parent, state) => {
     return {
       [node.name]: safe(getScopedCondition(node, parent)),
     }
+  } else if (node.name === 'onClick') {
+    if (parent.action) return false
+
+    let onClick = safe(node.value, node)
+
+    if (node.slotName === 'flowSetState' && hasProp(parent, 'onClickId')) {
+      let parts = getProp(parent, 'onClickId').value.split('/')
+      let key = parts[parts.length - 2]
+      let value = parts[parts.length - 1]
+      onClick = `{() => flowSetState("${key}", "${value}")}`
+      state.use('ViewsUseFlow')
+      state.flowSetState = true
+      // TODO warn if action is used but it isn't in actions (on parser)
+      // TODO warn that there's flowSetState without an id (on parser)
+    }
+
+    return { onClick }
   } else {
     return {
       [node.name]: safe(node.value, node),

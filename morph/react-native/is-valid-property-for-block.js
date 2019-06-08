@@ -10,7 +10,6 @@ let blacklist = [
   'goto',
   'isdisabled',
   'isfragment',
-  'onclick',
   'onclickid',
   'onclickselected',
   'onclickselectedtype',
