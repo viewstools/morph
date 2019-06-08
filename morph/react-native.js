@@ -28,6 +28,7 @@ export default ({
   viewsById,
   viewsToFiles,
 }) => {
+  let name = view.id
   let finalName = restrictedNames.includes(name) ? `${name}1` : name
   if (name !== finalName) {
     console.warn(
