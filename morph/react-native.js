@@ -43,6 +43,8 @@ export default ({
     animated: new Set(),
     images: [],
     dependencies: new Set(),
+    flow: null,
+    flowSetState: false,
     getFontImport: font => getFontImport(font, view),
     getStyleForProperty,
     getValueForProperty,
