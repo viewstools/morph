@@ -18,5 +18,8 @@ Users View
     paddingLeft 24
     paddingRight 24
     paddingTop 12
+    opacity 1
+    when <isBefore
+    opacity 0 linear
     Name
     Surname

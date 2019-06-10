@@ -133,6 +133,10 @@ export default (state, getImport) => {
     dependencies.push(getImport('TrackContext'))
   }
 
+  if (state.useIsBefore) {
+    dependencies.push(getImport('ViewsUseIsBefore'))
+  }
+
   if (Object.keys(state.locals).length > 0) {
     dependencies.push('import { Subscribe } from "unstated"')
     dependencies.push(getImport('LocalContainer'))

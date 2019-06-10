@@ -59,9 +59,7 @@ export default ({ state, name }) => {
   let flow = []
   if (state.flow === 'separate' && state.flowDefaultState !== null) {
     flow.push(
-      `let flowState = fromFlow.useFlowState("${state.name}", "${
-        state.flowDefaultState
-      }")`
+      `let flowState = fromFlow.useFlowState("${state.name}", "${state.flowDefaultState}")`
     )
   }
   if (state.flowSetState) {
@@ -87,6 +85,7 @@ export default ({ state, name }) => {
 
     return `let ${name} = (props) => {
     ${state.track ? `let track = React.useContext(TrackContext)` : ''}
+    ${state.useIsBefore ? 'let isBefore = useIsBefore()' : ''}
     ${flow}
   return ${ret}
 }`

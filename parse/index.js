@@ -48,6 +48,7 @@ export default ({
   let locals = []
   let stack = []
   let slots = []
+  let useIsBefore = false
   let view = null
   let viewsInView = new Set()
   let warnings = []
@@ -123,21 +124,13 @@ export default ({
           if (meant && meant !== family) {
             warnings.push({
               loc: fontFamilyProp.loc,
-              type: `The font "${family}" is missing. Did you mean "${meant}" instead?\nIf not, download the font files (eg, "${
-                font.id
-              }.woff2", "${font.id}.woff", "${
-                font.id
-              }.ttf", etc) and add the to the "Fonts" folder.`,
+              type: `The font "${family}" is missing. Did you mean "${meant}" instead?\nIf not, download the font files (eg, "${font.id}.woff2", "${font.id}.woff", "${font.id}.ttf", etc) and add the to the "Fonts" folder.`,
               line: lines[fontFamilyProp.loc.start.line - 1],
             })
           } else {
             warnings.push({
               loc: fontFamilyProp.loc,
-              type: `The font "${family}" is missing.\nDownload the font files (eg, "${
-                font.id
-              }.woff2", "${font.id}.woff", "${
-                font.id
-              }.ttf", etc) and add the to the "Fonts" folder.`,
+              type: `The font "${family}" is missing.\nDownload the font files (eg, "${font.id}.woff2", "${font.id}.woff", "${font.id}.ttf", etc) and add the to the "Fonts" folder.`,
               line: lines[fontFamilyProp.loc.start.line - 1],
             })
           }
@@ -273,18 +266,14 @@ export default ({
           if (block.isBasic) {
             warnings.push({
               loc: block.loc,
-              type: `A basic block "${
-                block.name
-              }" can't be inside a List. Use a view you made instead.`,
+              type: `A basic block "${block.name}" can't be inside a List. Use a view you made instead.`,
               line,
               blocker: true,
             })
           } else if (last.children.length > 0) {
             warnings.push({
               loc: block.loc,
-              type: `A List can only have one view inside. "${
-                block.name
-              }" is outside of it. Put 1 empty line before.`,
+              type: `A List can only have one view inside. "${block.name}" is outside of it. Put 1 empty line before.`,
               line,
             })
           } else {
@@ -300,9 +289,7 @@ export default ({
           if (block.isBasic) {
             warnings.push({
               loc: block.loc,
-              type: `A basic block "${
-                block.name
-              }" cant' be inside a View. Use a view you made instead.`,
+              type: `A basic block "${block.name}" cant' be inside a View. Use a view you made instead.`,
               line,
               blocker: true,
             })
@@ -318,9 +305,7 @@ ${block.name}
 
 You should replace "${block.name}" with "SomeView ${block.name}"
 
-That would mean that SomeView in ${block.name} will be replaced by ${
-                  block.name
-                }.`,
+That would mean that SomeView in ${block.name} will be replaced by ${block.name}.`,
               })
             }
             last.children.push(block)
@@ -377,9 +362,7 @@ That would mean that SomeView in ${block.name} will be replaced by ${
       }
     } else if (stack.length === 0) {
       warnings.push({
-        type: `A view must start with a View block. ${
-          block.name
-        } isn't valid.\nWrap everything within a View block at the top.`,
+        type: `A view must start with a View block. ${block.name} isn't valid.\nWrap everything within a View block at the top.`,
         line,
         loc: block.loc,
       })
@@ -541,10 +524,14 @@ That would mean that SomeView in ${block.name} will be replaced by ${
           }
 
           if (convertSlotToProps) {
-            scope.value =
-              isSystem || isLocal
-                ? slotName
-                : `${slotIsNot ? '!' : ''}props.${slotName || name}`
+            if (slotName === 'isBefore') {
+              scope.value = 'isBefore'
+              useIsBefore = true
+            } else if (isSystem || isLocal) {
+              scope.value = slotName
+            } else {
+              scope.value = `${slotIsNot ? '!' : ''}props.${slotName || name}`
+            }
           }
 
           scopes.push(scope)
@@ -712,9 +699,7 @@ That would mean that SomeView in ${block.name} will be replaced by ${
           ) {
             warnings.push({
               loc: propNode.loc,
-              type: `You're missing a base prop for ${
-                propNode.name
-              }. Add it before all whens on the block.`,
+              type: `You're missing a base prop for ${propNode.name}. Add it before all whens on the block.`,
               line,
             })
           }
@@ -799,6 +784,7 @@ That would mean that SomeView in ${block.name} will be replaced by ${
   } else {
     view.isStory = false
   }
+  view.useIsBefore = true
   view.views = viewsInView
 
   return {
