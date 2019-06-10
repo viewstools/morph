@@ -13,6 +13,8 @@ App View
     marginTop 8
     paddingLeft 24
     paddingRight 24
+    when <isMediaMobile
+    backgroundColor #AABBCC
     Button
       onClick <flowSetState
       onClickId /App/Users

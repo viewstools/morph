@@ -5,6 +5,7 @@ import {
 } from './fonts.js'
 import ensureFlow from './ensure-flow.js'
 import ensureIsBefore from './ensure-is-before.js'
+import ensureIsMedia from './ensure-is-media.js'
 import makeGetSystemImport from './make-get-system-import.js'
 import morphAllViews from './morph-all-views.js'
 import parseViews from './parse-views.js'
@@ -82,5 +83,6 @@ export default ({
     await Promise.all([
       ensureFlow({ src, viewsById, viewsToFiles }),
       ensureIsBefore({ src }),
+      ensureIsMedia({ src }),
     ])
   }

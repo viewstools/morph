@@ -92,6 +92,7 @@ export default ({ state, name }) => {
     return `let ${name} = (props) => {
     ${state.track ? `let track = React.useContext(TrackContext)` : ''}
     ${state.useIsBefore ? 'let isBefore = useIsBefore()' : ''}
+    ${state.useIsMedia ? 'let isMedia = useIsMedia()' : ''}
     ${animated}
     ${flow}
   return ${ret}

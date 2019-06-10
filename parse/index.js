@@ -49,6 +49,7 @@ export default ({
   let stack = []
   let slots = []
   let useIsBefore = false
+  let useIsMedia = false
   let view = null
   let viewsInView = new Set()
   let warnings = []
@@ -524,12 +525,21 @@ That would mean that SomeView in ${block.name} will be replaced by ${block.name}
           }
 
           if (convertSlotToProps) {
+            scope.value = slotName
+
             if (slotName === 'isBefore') {
-              scope.value = 'isBefore'
               useIsBefore = true
-            } else if (isSystem || isLocal) {
-              scope.value = slotName
-            } else {
+            } else if (
+              slotName === 'isMediaMobile' ||
+              slotName === 'isMediaTablet' ||
+              slotName === 'isMediaLaptop' ||
+              slotName === 'isMediaDesktop'
+            ) {
+              scope.value = `isMedia.${slotName
+                .replace('isMedia', '')
+                .toLowerCase()}`
+              useIsMedia = true
+            } else if (!isSystem && !isLocal) {
               scope.value = `${slotIsNot ? '!' : ''}props.${slotName || name}`
             }
           }
@@ -785,6 +795,7 @@ That would mean that SomeView in ${block.name} will be replaced by ${block.name}
     view.isStory = false
   }
   view.useIsBefore = useIsBefore
+  view.useIsMedia = useIsMedia
   view.views = viewsInView
 
   return {

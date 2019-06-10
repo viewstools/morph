@@ -89,6 +89,7 @@ export default ({
       state.uses.push(block)
     },
     useIsBefore: view.parsed.view.useIsBefore,
+    useIsMedia: view.parsed.view.useIsMedia,
   }
 
   state.fonts = view.parsed.fonts

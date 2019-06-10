@@ -137,6 +137,10 @@ export default (state, getImport) => {
     dependencies.push(getImport('ViewsUseIsBefore'))
   }
 
+  if (state.useIsMedia) {
+    dependencies.push(getImport('ViewsUseIsMedia'))
+  }
+
   if (Object.keys(state.locals).length > 0) {
     dependencies.push('import { Subscribe } from "unstated"')
     dependencies.push(getImport('LocalContainer'))
