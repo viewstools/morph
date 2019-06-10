@@ -88,12 +88,12 @@ export default (state, getImport) => {
       'animated',
       (state.hasSpringAnimation ||
         (state.hasTimingAnimation && state.isReactNative)) &&
-        'Spring',
+        'useSpring',
     ].filter(Boolean)
 
     if (animations.length > 0) {
       dependencies.push(
-        `import { ${animations.join(', ')} } from "react-spring/renderprops"`
+        `import { ${animations.join(', ')} } from "react-spring"`
       )
 
       state.dependencies.add('react-spring')

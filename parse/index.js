@@ -784,7 +784,7 @@ That would mean that SomeView in ${block.name} will be replaced by ${block.name}
   } else {
     view.isStory = false
   }
-  view.useIsBefore = true
+  view.useIsBefore = useIsBefore
   view.views = viewsInView
 
   return {

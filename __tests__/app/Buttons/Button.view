@@ -11,7 +11,7 @@ Button View
     paddingRight 8
     paddingTop 12
     when <isSelected
-    backgroundColor #ff8383
+    backgroundColor #ff8383 spring
     when <isDisabled
     opacity 0.2 easeOut duration 75
     when <isHovered
