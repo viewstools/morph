@@ -19,6 +19,9 @@ App View
       onClick <flowSetState
       onClickId /App/Users
       text Go to users
+      width 300
+      when <isMediaMobile
+      width 400
     Button
       marginLeft 8
       onClick <flowSetState
