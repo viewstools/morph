@@ -1,4 +1,4 @@
-#!/usr/bin/env node --experimental-modules --experimental-json-modules
+#!/usr/bin/env node --experimental-modules
 
 import { promises as fs } from 'fs'
 import chalk from 'chalk'
