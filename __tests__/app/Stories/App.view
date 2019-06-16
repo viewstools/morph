@@ -16,7 +16,7 @@ App View
     when <isMediaMobile
     backgroundColor #AABBCC
     Button
-      onClick <flowSetState
+      onClick <setFlow
       onClickId /App/Users
       text Go to users
       width 300
@@ -24,7 +24,7 @@ App View
       width 400
     Button
       marginLeft 8
-      onClick <flowSetState
+      onClick <setFlow
       onClickId /App/Settings
       text Go to settings
     Button

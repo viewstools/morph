@@ -1,4 +1,4 @@
-import { Flow } from '../use-flow.js'
+import { Flow } from '../useFlow.js'
 import App from './App.view.js'
 import React from 'react'
 

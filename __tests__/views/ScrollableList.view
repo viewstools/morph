@@ -1,7 +1,0 @@
-ScrollableList List
-  from <
-  overflowY auto
-  paddingBottom 200
-  paddingLeft <
-  backgroundColor red
-  Card

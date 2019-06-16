@@ -1,5 +1,0 @@
-AnimatedButtonHoverOnly Vertical
-  backgroundColor red
-  onClick <
-  when <isHovered
-  backgroundColor blue easeOut

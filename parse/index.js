@@ -28,16 +28,19 @@ import {
 import { isGoogleFont } from '../morph/fonts.js'
 import getLoc from './get-loc.js'
 import getTags from './get-tags.js'
+import path from 'path'
 
 export default ({
   convertSlotToProps = true,
   customFonts,
   enableLocalScopes = true,
   enableSystemScopes = true,
+  file,
   id,
   skipComments = true,
   skipInvalidProps = true,
   source,
+  src,
   views,
 }) => {
   // convert crlf to lf
@@ -791,9 +794,13 @@ That would mean that SomeView in ${block.name} will be replaced by ${block.name}
   if (flowProp) {
     view.isStory = true
     view.flow = flowProp.value
+    view.pathToStory = file
+      .replace(path.join(src, 'Stories'), '')
+      .replace('.view', '')
   } else {
     view.isStory = false
   }
+
   view.useIsBefore = useIsBefore
   view.useIsMedia = useIsMedia
   view.views = viewsInView

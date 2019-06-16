@@ -51,6 +51,7 @@ export default ({
     parseViews({
       customFonts,
       filesView,
+      src,
       verbose,
       viewsById,
       viewsToFiles,

@@ -63,19 +63,14 @@ export default ({ state, name }) => {
       })
     })
   }
-  animated = animated.join('\n')
 
   let flow = []
-  if (state.flow === 'separate' && state.flowDefaultState !== null) {
-    flow.push(
-      `let flowState = fromFlow.useFlowState("${state.name}", "${state.flowDefaultState}")`
-    )
+  if (state.flow === 'separate') {
+    flow.push(`let flow = fromFlow.useFlow()`)
   }
-  if (state.flowSetState) {
-    flow.push(`let flowSetState = fromFlow.useFlowSetState()`)
+  if (state.setFlow) {
+    flow.push(`let setFlow = fromFlow.useSetFlow()`)
   }
-
-  flow = flow.join('\n')
 
   if (state.hasRefs) {
     let trackOpen = state.track ? '<TrackContext.Consumer>{track => (' : ''
@@ -93,8 +88,9 @@ export default ({ state, name }) => {
     ${state.track ? `let track = React.useContext(TrackContext)` : ''}
     ${state.useIsBefore ? 'let isBefore = useIsBefore()' : ''}
     ${state.useIsMedia ? 'let isMedia = useIsMedia()' : ''}
-    ${animated}
-    ${flow}
+    ${animated.join('\n')}
+    ${flow.join('\n')}
+
   return ${ret}
 }`
   }
