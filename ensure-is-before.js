@@ -11,9 +11,12 @@ export default function useIsBefore() {
   let [isBefore, setIsBefore] = useState(true)
 
   useEffect(function() {
+    let cancel = false
     requestIdleCallback(function() {
+      if (cancel) return
       setIsBefore(false)
     })
+    return () => cancel = true
   }, [])
 
   return isBefore
