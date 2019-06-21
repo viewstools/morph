@@ -1,6 +1,6 @@
 {
   "name": "@viewstools/morph",
-  "version": "19.6.0",
+  "version": "19.6.1",
   "description": "Views language morpher",
   "main": "index.js",
   "type": "module",
@@ -49,6 +49,7 @@
     "fast-glob": "^2.2.2",
     "firstline": "^2.0.2",
     "flatten": "^1.0.2",
+    "fs-extra": "^8.0.1",
     "google-fonts-complete": "^1.1.1",
     "has-yarn": "^1.0.0",
     "html2json": "^1.0.2",

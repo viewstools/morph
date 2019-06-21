@@ -1,4 +1,5 @@
 import { promises as fs } from 'fs'
+import fsExtra from 'fs-extra'
 import getViewRelativeToView from './get-view-relative-to-view.js'
 import prettier from 'prettier'
 import path from 'path'
@@ -196,7 +197,46 @@ Flow.defaultProps = {
 }`
 }
 
-export default function ensureFlow({ src, tools, viewsById, viewsToFiles }) {
+let TOOLS_FILE = `export default function useTools() {
+  console.log(\`
+
+
+
+  😱😱😱😱😱😱😱😱😱😱😱
+
+
+
+  🚨 You're missing out!!!
+
+  🚀 Views Tools can help you find product market fit before you run out of money.
+
+  ✨ Find out how 👉 https://views.tools
+
+
+
+
+
+  \`)
+
+  return () => {}
+}`
+
+async function ensureTools(src) {
+  let toolsFile = path.join(src, 'useTools.js')
+
+  if (await fsExtra.exists(toolsFile)) return
+
+  return fs.writeFile(toolsFile, TOOLS_FILE, 'utf8')
+}
+
+export default async function ensureFlow({
+  src,
+  tools,
+  viewsById,
+  viewsToFiles,
+}) {
+  await ensureTools(src)
+
   return fs.writeFile(
     path.join(src, 'useFlow.js'),
     prettier.format(makeFlow({ tools, viewsById, viewsToFiles }), {
@@ -204,6 +244,6 @@ export default function ensureFlow({ src, tools, viewsById, viewsToFiles }) {
       singleQuote: true,
       trailingComma: 'es5',
     }),
-    { encoding: 'utf8' }
+    'utf8'
   )
 }
