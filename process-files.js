@@ -16,6 +16,7 @@ export default ({
   as,
   customFonts,
   local,
+  tools,
   track,
   src,
   verbose,
@@ -82,7 +83,7 @@ export default ({
     })
 
     await Promise.all([
-      ensureFlow({ src, viewsById, viewsToFiles }),
+      ensureFlow({ src, tools, viewsById, viewsToFiles }),
       ensureIsBefore({ src }),
       ensureIsMedia({ src }),
     ])

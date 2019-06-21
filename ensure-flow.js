@@ -25,7 +25,7 @@ function getTopStory(flow) {
   }
 }
 
-let makeFlow = ({ viewsById, viewsToFiles }) => {
+let makeFlow = ({ tools, viewsById, viewsToFiles }) => {
   let flowMap = new Map()
   let flowMapStr = []
 
@@ -76,6 +76,7 @@ let makeFlow = ({ viewsById, viewsToFiles }) => {
 // https://github.com/viewstools/morph/blob/master/ensure-flow.js
 
 import React, { useCallback, useContext, useEffect, useState } from 'react'
+${tools ? "import useTools from './useTools.js'" : ''}
 
 let GetFlow = React.createContext(new Set())
 let SetFlow = React.createContext(() => {})
@@ -157,6 +158,7 @@ function getNextFlow(key, state) {
 
 export function Flow(props) {
   let [state, setState] = useState(props.initialState)
+  ${tools ? 'let sendToTools = useTools(setState)' : ''}
 
   let setFlow = useCallback(
     id => {
@@ -178,8 +180,9 @@ export function Flow(props) {
   useEffect(() => {
     if (process.env.NODE_ENV === 'development') {
       console.debug('flow', state)
+      ${tools ? "sendToTools({ type: 'client:flow', flow: [...state] })" : ''}
     }
-  }, [state])
+  }, [state${tools ? ', sendToTools' : ''}])
 
   return (
     <SetFlow.Provider value={setFlow}>
@@ -193,10 +196,10 @@ Flow.defaultProps = {
 }`
 }
 
-export default function ensureFlow({ src, viewsById, viewsToFiles }) {
+export default function ensureFlow({ src, tools, viewsById, viewsToFiles }) {
   return fs.writeFile(
     path.join(src, 'useFlow.js'),
-    prettier.format(makeFlow({ viewsById, viewsToFiles }), {
+    prettier.format(makeFlow({ tools, viewsById, viewsToFiles }), {
       parser: 'babel',
       singleQuote: true,
       trailingComma: 'es5',
