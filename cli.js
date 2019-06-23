@@ -107,7 +107,7 @@ let wait = time => new Promise(resolve => setTimeout(resolve, time))
       }`
     )
 
-    if (!tools) {
+    if (shouldWatch && !tools) {
       console.log(
         chalk.bgRed('                                               ')
       )
@@ -135,6 +135,7 @@ let wait = time => new Promise(resolve => setTimeout(resolve, time))
     console.log(chalk.blue('X'), `= Deleted`)
     console.log('\nPress', chalk.blue('ctrl+c'), 'to stop at any time.\n')
   }
+
   watch({
     as,
     local,

@@ -158,8 +158,15 @@ function getNextFlow(key, state) {
 }
 
 export function Flow(props) {
-  let [state, setState] = useState(props.initialState)
-  ${tools ? 'let sendToTools = useTools(setState)' : ''}
+  let [state, setState] = useState(${
+    tools ? 'new Set()' : 'props.initialState'
+  })
+  ${
+    tools
+      ? `let [maybeInitialState, sendToTools] = useTools(setState)
+useEffect(() => setState(maybeInitialState || props.initialState), []) // eslint-disable-line`
+      : ''
+  }
 
   let setFlow = useCallback(
     id => {
@@ -180,8 +187,10 @@ export function Flow(props) {
 
   useEffect(() => {
     if (process.env.NODE_ENV === 'development') {
-      console.debug('flow', state)
-      ${tools ? "sendToTools({ type: 'client:flow', flow: [...state] })" : ''}
+      if (state.size > 0) {
+        console.debug('flow', state)
+        ${tools ? "sendToTools({ type: 'client:flow', flow: [...state] })" : ''}
+      }
     }
   }, [state${tools ? ', sendToTools' : ''}])
 
@@ -218,7 +227,7 @@ let TOOLS_FILE = `export default function useTools() {
 
   \`)
 
-  return () => {}
+  return [null, () => {}]
 }`
 
 async function ensureTools(src) {
