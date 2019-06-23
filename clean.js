@@ -4,11 +4,21 @@ import glob from 'fast-glob'
 import path from 'path'
 
 export default async function clean(src, verbose) {
-  let morphed = await glob(['**/*.view.js', `Fonts/*.js`, 'use-flow.js'], {
-    bashNative: ['linux'],
-    cwd: src,
-    ignore: ['*node_modules*'],
-  })
+  let morphed = await glob(
+    [
+      '**/*.view.js',
+      `Fonts/*.js`,
+      'useFlow.js',
+      'useIsMedia.js',
+      'useIsBefore.js',
+      'useTools.js',
+    ],
+    {
+      bashNative: ['linux'],
+      cwd: src,
+      ignore: ['*node_modules*'],
+    }
+  )
 
   await Promise.all(
     morphed.map(f => {
