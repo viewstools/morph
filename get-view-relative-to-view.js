@@ -7,6 +7,11 @@ export default function getViewRelativeToView({
   viewsToFiles,
 }) {
   let importCandidates = viewsById.get(id)
+  if (!importCandidates) {
+    // TODO add better error message
+    console.log('No import candidates for ', id, 'from', view.file)
+    importCandidates = new Set()
+  }
   let importViewFile = [...importCandidates][0]
   if (importCandidates.size > 1) {
     let pathToView = view.file.replace(/\.view$/, '')
