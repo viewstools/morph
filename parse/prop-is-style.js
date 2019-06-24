@@ -33,6 +33,7 @@ export let STYLE = [
   'color',
   'cursor',
   'display',
+  'direction',
   'fill',
   'filter',
   'flexGrow',
