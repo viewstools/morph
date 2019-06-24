@@ -233,7 +233,8 @@ let TOOLS_FILE = `export default function useTools() {
 async function ensureTools(src) {
   let toolsFile = path.join(src, 'useTools.js')
 
-  if (await fsExtra.exists(toolsFile)) return
+  if ((await fsExtra.exists(toolsFile)) && process.env.REACT_APP_VIEWS_TOOLS)
+    return
 
   return fs.writeFile(toolsFile, TOOLS_FILE, 'utf8')
 }
