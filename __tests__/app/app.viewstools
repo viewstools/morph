@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "media": {
+    "base": "laptop",
+    "mobile": {
+      "width": 375,
+      "height": 667
+    },
+    "tablet": {
+      "width": 1024,
+      "height": 768
+    },
+    "laptop": {
+      "width": 1280,
+      "height": 800
+    },
+    "desktop": {
+      "width": 2560,
+      "height": 1600
+    }
+  },
+  "customArtboards": {
+    "BackRepeater": {
+      "width": 250,
+      "height": 250
+    },
+    "ButtonIcon": {
+      "width": 100,
+      "height": 100
+    },
+    "ChoiceRadial": {
+      "width": 50,
+      "height": 25
+    },
+    "ChoiceSubtext": {
+      "width": 250,
+      "height": 150
+    },
+    "Repeater": {
+      "width": 250,
+      "height": 250
+    }
+  }
+}

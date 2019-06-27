@@ -188,7 +188,9 @@ export let hasDefaultProp = (node, parent) =>
   parent.properties.some(prop => prop.nameRaw === node.nameRaw)
 
 export let isSlot = node =>
-  typeof node === 'string' ? /props/.test(node) : isTag(node, 'slot')
+  typeof node === 'string'
+    ? /(props|isBefore|isMedia\.)/.test(node)
+    : isTag(node, 'slot')
 export let isStyle = node => isTag(node, 'style')
 export let isRowStyle = node => isTag(node, 'rowStyle')
 export let isTag = (node, tag) => node && node.tags[tag]

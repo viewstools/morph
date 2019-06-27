@@ -1,7 +1,0 @@
-AnimatedButtonScopeOnly Vertical
-  backgroundColor red
-  onClick <
-  opacity 1
-  when <before
-  backgroundColor blue spring
-  opacity 1 linear

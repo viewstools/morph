@@ -44,7 +44,7 @@ export default ({
     cssStatic: false,
     dependencies: new Set(),
     flow: null,
-    flowSetState: false,
+    setFlow: false,
     getFontImport: font => getFontImport(font, view),
     getStyleForProperty,
     getValueForProperty,
@@ -67,6 +67,7 @@ export default ({
     locals: {},
     localSupported: [],
     name: finalName,
+    pathToStory: view.parsed.view.pathToStory,
     render: [],
     styles: {},
     stylesOrder: [],
@@ -92,6 +93,8 @@ export default ({
 
       state.uses.push(block)
     },
+    useIsBefore: view.parsed.view.useIsBefore,
+    useIsMedia: view.parsed.view.useIsMedia,
   }
 
   if (name !== finalName) {

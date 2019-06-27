@@ -4,6 +4,8 @@ import {
   processCustomFonts,
 } from './fonts.js'
 import ensureFlow from './ensure-flow.js'
+import ensureIsBefore from './ensure-is-before.js'
+import ensureIsMedia from './ensure-is-media.js'
 import makeGetSystemImport from './make-get-system-import.js'
 import morphAllViews from './morph-all-views.js'
 import parseViews from './parse-views.js'
@@ -14,6 +16,7 @@ export default ({
   as,
   customFonts,
   local,
+  tools,
   track,
   src,
   verbose,
@@ -49,6 +52,7 @@ export default ({
     parseViews({
       customFonts,
       filesView,
+      src,
       verbose,
       viewsById,
       viewsToFiles,
@@ -78,5 +82,9 @@ export default ({
       viewsToFiles,
     })
 
-    await ensureFlow({ src, viewsById, viewsToFiles })
+    await Promise.all([
+      ensureFlow({ src, tools, viewsById, viewsToFiles }),
+      ensureIsBefore({ src }),
+      ensureIsMedia({ src }),
+    ])
   }

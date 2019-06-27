@@ -1,5 +1,0 @@
-Vertical
-  backgroundImage https://views.tools/image.jpg
-  Horizontal
-    backgroundImage < https://views.tools/image.jpg
-    backgroundSize contain

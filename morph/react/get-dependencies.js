@@ -88,12 +88,12 @@ export default (state, getImport) => {
       'animated',
       (state.hasSpringAnimation ||
         (state.hasTimingAnimation && state.isReactNative)) &&
-        'Spring',
+        'useSpring',
     ].filter(Boolean)
 
     if (animations.length > 0) {
       dependencies.push(
-        `import { ${animations.join(', ')} } from "react-spring/renderprops"`
+        `import { ${animations.join(', ')} } from "react-spring"`
       )
 
       state.dependencies.add('react-spring')
@@ -131,6 +131,14 @@ export default (state, getImport) => {
 
   if (state.track) {
     dependencies.push(getImport('TrackContext'))
+  }
+
+  if (state.useIsBefore) {
+    dependencies.push(getImport('ViewsUseIsBefore'))
+  }
+
+  if (state.useIsMedia) {
+    dependencies.push(getImport('ViewsUseIsMedia'))
   }
 
   if (Object.keys(state.locals).length > 0) {

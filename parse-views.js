@@ -5,6 +5,7 @@ import sortSetsInMap from './sort-sets-in-map.js'
 export default function parseViews({
   customFonts,
   filesView,
+  src,
   verbose,
   viewsById,
   viewsToFiles,
@@ -16,7 +17,9 @@ export default function parseViews({
 
     view.parsed = parse({
       customFonts,
+      file,
       id: view.id,
+      src,
       source: view.source,
       views: viewsById,
     })
