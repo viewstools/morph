@@ -1,16 +1,16 @@
 {
   "name": "@viewstools/morph",
-  "version": "19.6.6",
+  "version": "19.6.7",
   "description": "Views language morpher",
   "main": "index.js",
   "type": "module",
   "bin": {
-    "views-morph": "./cli.js"
+    "views-morph": "./bin.js"
   },
   "private": false,
   "scripts": {
     "precommit": "lint-staged",
-    "prepare": "cross-env NODE_ENV=production rollup --config rollup.config.js && cross-env NODE_ENV=production rollup --config rollup.config.parse.js",
+    "prepare": "cross-env NODE_ENV=production rollup --config rollup.config.js && chmod +x bin.js",
     "test": "jest",
     "watch": "rollup --config rollup.config.js --watch"
   },
@@ -36,7 +36,8 @@
     "jest": "^24.3.1",
     "lint-staged": "^8.1.5",
     "rollup": "^1.6.0",
-    "rollup-plugin-babel": "^4.3.2"
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-json": "^4.0.0"
   },
   "dependencies": {
     "array-uniq": "^2.0.0",
@@ -62,6 +63,7 @@
     "prettier": "^1.4.2",
     "read-pkg-up": "^4.0.0",
     "robust-websocket": "^1.0.0",
+    "source-map-support": "^0.5.12",
     "svgo": "^1.0.3",
     "to-camel-case": "^1.0.0",
     "to-pascal-case": "^1.0.0",

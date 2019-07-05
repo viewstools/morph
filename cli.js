@@ -1,5 +1,3 @@
-#!/usr/bin/env node --experimental-modules
-
 import { promises as fs } from 'fs'
 import chalk from 'chalk'
 import cleanup from './clean.js'

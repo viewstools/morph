@@ -1,15 +1,18 @@
 import babel from 'rollup-plugin-babel'
-import pkg from './package.json'
+import json from 'rollup-plugin-json'
+// import pkg from './package.json'
 
 export default {
-  input: 'index.js',
-  external: Object.keys(pkg.dependencies).concat('path'),
+  input: 'cli.js',
+  // external: Object.keys(pkg.dependencies).concat('path'),
   output: {
-    file: 'lib.js',
+    banner: `#!/usr/bin/env node\nrequire('source-map-support').install();`,
+    file: 'bin.js',
     format: 'cjs',
     sourcemap: true,
   },
   plugins: [
+    json(),
     babel({
       babelrc: false,
       presets: [
