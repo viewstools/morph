@@ -206,26 +206,32 @@ Flow.defaultProps = {
 }`
 }
 
-let TOOLS_FILE = `export default function useTools() {
-  console.log(\`
+let TOOLS_FILE = `let warnedAboutMissingOut = false
+
+export default function useTools() {
+  if (!warnedAboutMissingOut) {
+    warnedAboutMissingOut = true
+
+    console.log(\`
 
 
 
-  😱😱😱😱😱😱😱😱😱😱😱
+    😱😱😱😱😱😱😱😱😱😱😱
 
 
 
-  🚨 You're missing out!!!
+    🚨 You're missing out!!!
 
-  🚀 Views Tools can help you find product market fit before you run out of money.
+    🚀 Views Tools can help you find product market fit before you run out of money.
 
-  ✨ Find out how 👉 https://views.tools
-
-
+    ✨ Find out how 👉 https://views.tools
 
 
 
-  \`)
+
+
+    \`)
+  }
 
   return [null, () => {}]
 }`
