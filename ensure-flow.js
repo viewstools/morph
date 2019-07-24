@@ -31,7 +31,7 @@ let makeFlow = ({ tools, viewsById, viewsToFiles }) => {
   let flowMapStr = []
 
   for (let view of viewsToFiles.values()) {
-    if (view.custom || !view.parsed.view.isStory) continue
+    if (!view || view.custom || !view.parsed.view.isStory) continue
 
     let states = []
     for (let id of view.parsed.view.views) {
@@ -42,7 +42,7 @@ let makeFlow = ({ tools, viewsById, viewsToFiles }) => {
         viewsToFiles,
       })
 
-      if (!viewInView.custom && viewInView.parsed.view.isStory) {
+      if (viewInView && !viewInView.custom && viewInView.parsed.view.isStory) {
         states.push(viewInView.parsed.view.pathToStory) // `${pathToViewId}/${id}`)
       }
     }

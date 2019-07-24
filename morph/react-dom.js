@@ -60,7 +60,7 @@ export default ({
         viewsToFiles,
       })
 
-      return !viewInView.custom && viewInView.parsed.view.isStory
+      return viewInView && !viewInView.custom && viewInView.parsed.view.isStory
     },
     lazy: {},
     local,

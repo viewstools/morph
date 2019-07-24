@@ -65,7 +65,7 @@ export default ({ state, name }) => {
   }
 
   let flow = []
-  if (state.flow === 'separate') {
+  if (state.flow === 'separate' && state.uses.includes('ViewsUseFlow')) {
     flow.push(`let flow = fromFlow.useFlow()`)
   }
   if (state.setFlow) {
