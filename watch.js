@@ -1,9 +1,3 @@
-import {
-  getFilesView,
-  getFilesViewLogic,
-  getFilesViewCustom,
-  getFilesFontCustom,
-} from './get-files.js'
 import { ensureFontsDirectory } from './fonts.js'
 import {
   watchFilesView,
@@ -11,8 +5,10 @@ import {
   watchFilesViewCustom,
   watchFilesFontCustom,
 } from './watch-files.js'
+import getFiles from './get-files.js'
 import makeProcessFiles from './process-files.js'
 import chalk from 'chalk'
+import path from 'path'
 
 export default async function watch({
   as = 'react-dom',
@@ -41,17 +37,12 @@ export default async function watch({
 
   await ensureFontsDirectory(src)
 
-  let [
+  let {
     filesView,
     filesViewLogic,
     filesViewCustom,
     filesFontCustom,
-  ] = await Promise.all([
-    getFilesView(src),
-    getFilesViewLogic(src),
-    getFilesViewCustom(src),
-    getFilesFontCustom(src),
-  ])
+  } = await getFiles(src)
 
   await processFiles({
     filesFontCustom,
@@ -61,24 +52,25 @@ export default async function watch({
   })
 
   if (verbose) {
-    let files = [...viewsToFiles.values()]
-      .map(view => {
-        if (view.custom) {
-          return `${view.id} ${chalk.dim('(custom)')}`
-        } else if (view.logic) {
-          return `${view.id} ${chalk.dim('(+ logic)')}`
-        } else {
-          return view.id
-        }
-      })
-      .sort()
-      .join(', ')
-    console.log(`${chalk.yellow('A')} ${chalk.green('M')} ${files}`)
+    console.log(
+      [...viewsToFiles.values()]
+        .map(view => {
+          let msg = view.id
+          if (view.custom) {
+            msg = `${view.id} ${chalk.dim('(is custom)')}`
+          } else if (view.logic) {
+            msg = `${view.id} ${chalk.dim('(has logic)')}`
+          }
+          return `${chalk.yellow('A')} ${chalk.green('M')} ${msg} ${chalk.dim(
+            path.relative(process.cwd(), view.file)
+          )}`
+        })
+        .sort()
+        .join('\n')
+    )
     if (customFonts.size > 0) {
-      console.log(
-        chalk.yellow(`\nCustom fonts detected:`),
-        [...customFonts.keys()].sort().join(', ')
-      )
+      console.log(chalk.yellow(`\nCustom fonts detected:`))
+      console.log([...customFonts.keys()].sort().join('\n'))
     }
   }
 
