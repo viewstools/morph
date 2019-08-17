@@ -1,59 +1,20 @@
 import { ensureFontsDirectory } from './fonts.js'
-import {
-  watchFilesView,
-  watchFilesViewLogic,
-  watchFilesViewCustom,
-  watchFilesFontCustom,
-} from './watch-files.js'
 import getFiles from './get-files.js'
-import makeProcessFiles from './process-files.js'
 import chalk from 'chalk'
+import makeMorpher from './make-morpher.js'
 import path from 'path'
+import watchFiles from './watch-files.js'
 
-export default async function watch({
-  as = 'react-dom',
-  local = 'en',
-  once = false,
-  src,
-  tools = false,
-  track = false,
-  verbose = true,
-}) {
-  let customFonts = new Map()
-  let viewsById = new Map()
-  let viewsToFiles = new Map()
+export default async function watch(options) {
+  let morpher = makeMorpher(options)
 
-  let processFiles = makeProcessFiles({
-    as,
-    customFonts,
-    local,
-    tools,
-    track,
-    src,
-    verbose,
-    viewsById,
-    viewsToFiles,
-  })
+  await ensureFontsDirectory(morpher.src)
 
-  await ensureFontsDirectory(src)
+  await morpher.processFiles(await getFiles(morpher.src))
 
-  let {
-    filesView,
-    filesViewLogic,
-    filesViewCustom,
-    filesFontCustom,
-  } = await getFiles(src)
-
-  await processFiles({
-    filesFontCustom,
-    filesView,
-    filesViewCustom,
-    filesViewLogic,
-  })
-
-  if (verbose) {
+  if (options.verbose) {
     console.log(
-      [...viewsToFiles.values()]
+      [...morpher.viewsToFiles.values()]
         .map(view => {
           let msg = view.id
           if (view.custom) {
@@ -68,47 +29,18 @@ export default async function watch({
         .sort()
         .join('\n')
     )
-    if (customFonts.size > 0) {
+    if (morpher.customFonts.size > 0) {
       console.log(chalk.yellow(`\nCustom fonts detected:`))
-      console.log([...customFonts.keys()].sort().join('\n'))
+      console.log([...morpher.customFonts.keys()].sort().join('\n'))
     }
   }
 
-  if (once) return
+  if (options.once) return
 
-  watchFilesView({
-    filesViewLogic,
-    processFiles,
-    src,
-    verbose,
-    viewsById,
-    viewsToFiles,
-  })
+  let watcher = watchFiles(morpher)
 
-  watchFilesViewCustom({
-    filesViewLogic,
-    processFiles,
-    src,
-    verbose,
-    viewsById,
-    viewsToFiles,
-  })
-
-  watchFilesViewLogic({
-    filesViewLogic,
-    processFiles,
-    src,
-    verbose,
-    viewsToFiles,
-  })
-
-  watchFilesFontCustom({
-    customFonts,
-    filesViewLogic,
-    processFiles,
-    src,
-    verbose,
-    viewsById,
-    viewsToFiles,
+  process.on('beforeExit', () => {
+    console.log('Stopping Views morpher file watcher...')
+    watcher.close()
   })
 }
