@@ -15,6 +15,8 @@ let dymPropMatcher = new DidYouMeanMatcher([
   'cy',
   'd',
   'data',
+  'xdata',
+  'dataFormat',
   'defaultValue',
   'fill',
   'flow',
@@ -236,6 +238,29 @@ export let getComment = line => {
     return ''
   }
 }
+
+export let getData = maybeProp => {
+  if (!maybeProp) return null
+
+  let match = maybeProp.value.match(/^(show|capture)\s+(.+)$/)
+  if (!match) return null
+
+  return { type: match[1], path: match[2] }
+}
+export let getDataFormat = maybeProp => {
+  if (!maybeProp) return null
+
+  let match = maybeProp.value.match(/^(date)\s+(.+?)\s+(.+?)(\s+(.+))?$/)
+  if (!match) return null
+
+  return {
+    type: match[1],
+    formatIn: match[2],
+    formatOut: match[3],
+    whenInvalid: match[5] || null,
+  }
+}
+
 export let getFormat = line => {
   let properties = {}
   let values = line.split(' ')

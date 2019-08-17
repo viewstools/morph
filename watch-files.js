@@ -22,6 +22,7 @@ export default function watchFiles(morpher) {
       'useIsMedia.js',
       'useIsBefore.js',
       'useTools.js',
+      'useData.js',
     ],
     ignoreInitial: true,
     // awaitWriteFinish: true,

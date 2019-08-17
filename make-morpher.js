@@ -3,6 +3,7 @@ import {
   morphAllFonts,
   processCustomFonts,
 } from './fonts.js'
+import ensureData from './ensure-data.js'
 import ensureFlow from './ensure-flow.js'
 import ensureIsBefore from './ensure-is-before.js'
 import ensureIsMedia from './ensure-is-media.js'
@@ -93,6 +94,7 @@ export default function makeMorpher({
     })
 
     await Promise.all([
+      ensureData(state),
       ensureFlow(state),
       ensureIsBefore(state),
       ensureIsMedia(state),
