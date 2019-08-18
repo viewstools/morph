@@ -174,8 +174,9 @@ useEffect(() => setState(maybeInitialState || props.initialState), []) // eslint
         console.debug('setFlow', id)
 
         if (!flow.has(id)) {
+          console.log('Stories', flow)
           throw new Error(
-            \`Story "$\{id}" doesn't exist. Valid stories are $\{[...flow.keys()]}.\`
+            \`Story "$\{id}" doesn't exist. See the valid stories logged above this error.\`
           )
         }
       }
