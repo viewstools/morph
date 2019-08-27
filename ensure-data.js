@@ -95,7 +95,8 @@ export let useMakeFormatDate = (formatIn, formatOut, whenInvalid) =>
   useMemo(() => ({
     in: value => formatDateInOut(value, formatIn, formatOut, whenInvalid),
     out: value => formatDateInOut(value, formatOut, formatIn, whenInvalid),
-  }), [])
+  }), []) // eslint-disable-line
+  // ignore formatIn, formatouOut, whenInvalid
 `
 
 export default function ensureIsBefore({ src }) {
