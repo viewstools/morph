@@ -20,7 +20,7 @@ let identity = { in: i => i, out: i => i };
 // show
 let ItemContext = React.createContext({});
 export let ItemProvider = ItemContext.Provider;
-export let useItem = (path = null, format = identity) => {
+export let useItem = ({ path = null, format = identity }) => {
   let item = useContext(ItemContext);
 
   return useMemo(() => (path ? format.in(get(item, path)) : item), [

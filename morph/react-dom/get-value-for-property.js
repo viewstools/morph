@@ -60,7 +60,8 @@ export default (node, parent, state) => {
     state.data &&
     (node.value === 'props.value' ||
       node.value === 'props.onSubmit' ||
-      node.value === 'props.onChange')
+      node.value === 'props.onChange' ||
+      node.value === 'props.isInvalid')
   ) {
     return {
       [node.name]: `{${node.value.replace('props.', '')} || ${node.value}}`,

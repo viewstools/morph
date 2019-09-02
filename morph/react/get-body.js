@@ -75,20 +75,19 @@ export default ({ state, name }) => {
   if (state.data) {
     switch (state.data.type) {
       case 'show': {
-        data.push(`let value = fromData.useItem('${state.data.path}'`)
+        data.push(`let value = fromData.useItem({ path: '${state.data.path}', `)
         maybeDataFormat(state.dataFormat, data)
-        data.push(')')
+        data.push('})')
         break
       }
 
       case 'capture': {
         data.push(
-          `let { value, onChange, onSubmit, isInvalid }= fromData.useCaptureItem('${state.data.path}'`
+          `let { value, onChange, onSubmit, isInvalid }= fromData.useCaptureItem({ path: '${state.data.path}', `
         )
         maybeDataFormat(state.dataFormat, data)
-        // TODO refactor to take in the validate and the param to useCaptureItem
-        // to be an object
-        data.push(')')
+        maybeDataValidate(state.dataValidate, data)
+        data.push('})')
         break
       }
 
@@ -128,10 +127,14 @@ function maybeDataFormat(format, data) {
   if (format.type !== 'date') return
 
   data.push(
-    `, fromData.useMakeFormatDate('${format.formatIn}', '${format.formatOut}'`
+    `format: fromData.useMakeFormatDate('${format.formatIn}', '${format.formatOut}'`
   )
   if (format.whenInvalid) {
     data.push(`, '${format.whenInvalid}'`)
   }
-  data.push(`)`)
+  data.push(`),`)
+}
+function maybeDataValidate(validate, data) {
+  if (!validate || validate.type !== 'js') return
+  data.push(`validate: '${validate.value}',`)
 }

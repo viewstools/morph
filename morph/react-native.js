@@ -44,6 +44,7 @@ export default ({
     images: [],
     data: view.parsed.view.data,
     dataFormat: view.parsed.view.dataFormat,
+    dataValidate: view.parsed.view.dataValidate,
     dependencies: new Set(),
     flow: null,
     setFlow: false,
