@@ -12,10 +12,9 @@ export function enter(node, parent, state) {
     if (parent && !isList(parent)) state.render.push('{')
     let value = onWhen.value
     if (state.data && value === 'props.isInvalid') {
-      value = 'data.isInvalid || props.isInvalid'
-    }
-    if (state.data && value === 'props.isValid') {
-      value = 'data.isValid || props.isValid'
+      value = 'data.isInvalid'
+    } else if (state.data && value === 'props.isValid') {
+      value = 'data.isValid'
     }
     state.render.push(`${value} ? `)
   } else if (isStory(node, state)) {
