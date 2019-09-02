@@ -575,6 +575,11 @@ That would mean that SomeView in ${block.name} will be replaced by ${block.name}
           block.format = getFormat(value)
         }
 
+        // TODO
+        // if (name === 'validate') {
+        //   block.validate = getValidate(value)
+        // }
+
         if (value === '' && name !== 'text') {
           warnings.push({
             loc,

@@ -83,9 +83,11 @@ export default ({ state, name }) => {
 
       case 'capture': {
         data.push(
-          `let { value, onChange, onSubmit }= fromData.useCaptureItem('${state.data.path}'`
+          `let { value, onChange, onSubmit, isInvalid }= fromData.useCaptureItem('${state.data.path}'`
         )
         maybeDataFormat(state.dataFormat, data)
+        // TODO refactor to take in the validate and the param to useCaptureItem
+        // to be an object
         data.push(')')
         break
       }
