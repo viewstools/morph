@@ -1,5 +1,4 @@
 import { getProp, hasProp, isSlot } from '../utils.js'
-import toPascalCase from 'to-pascal-case'
 
 export default (node, parent, state) => {
   switch (node.name) {

@@ -9,7 +9,7 @@ import {
 import safe from './safe.js'
 
 let PROPS_THAT_IMPLY_CODE_FOR_OTHERS = {
-  fontFamily: 'fontSize',
+  fontFamily: 'fontWeight',
   shadowOffsetX: 'shadowOffsetY',
   shadowOffsetY: 'shadowOffsetX',
 }

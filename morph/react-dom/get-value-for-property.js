@@ -56,7 +56,16 @@ let getImageSource = (node, state, parent) => {
 }
 
 export default (node, parent, state) => {
-  if (isValidImgSrc(node, parent)) {
+  if (
+    state.data &&
+    (node.value === 'props.value' ||
+      node.value === 'props.onSubmit' ||
+      node.value === 'props.onChange')
+  ) {
+    return {
+      [node.name]: `{${node.value.replace('props.', '')} || ${node.value}}`,
+    }
+  } else if (isValidImgSrc(node, parent)) {
     return {
       src: getImageSource(node, state, parent),
     }

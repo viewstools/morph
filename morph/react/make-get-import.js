@@ -26,6 +26,12 @@ export default function makeGetImport({
       viewsById,
       viewsToFiles,
     })
+    if (!importView) {
+      throw new Error(
+        `Import "${id}" doesn't exist. It's being imported from ${view.id}.`
+      )
+    }
+
     let importFile = importView.file
 
     if (importView.logic) {

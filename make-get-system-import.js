@@ -3,6 +3,7 @@ import path from 'path'
 
 let FILE_USE_IS_BEFORE = 'useIsBefore.js'
 let FILE_USE_IS_MEDIA = 'useIsMedia.js'
+let FILE_USE_DATA = 'useData.js'
 let FILE_USE_FLOW = 'useFlow.js'
 let FILE_LOCAL_CONTAINER = 'LocalContainer.js'
 let FILE_TRACK_CONTEXT = 'TrackContext.js'
@@ -24,6 +25,12 @@ export default function makeGetSystemImport(src) {
         return `import useIsBefore from '${relativise(
           file,
           path.join(src, FILE_USE_IS_BEFORE)
+        )}'`
+
+      case 'ViewsUseData':
+        return `import * as fromData from '${relativise(
+          file,
+          path.join(src, FILE_USE_DATA)
         )}'`
 
       case 'ViewsUseFlow':

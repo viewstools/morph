@@ -42,6 +42,8 @@ export default ({
     animations: {},
     cssDynamic: false,
     cssStatic: false,
+    data: view.parsed.view.data,
+    dataFormat: view.parsed.view.dataFormat,
     dependencies: new Set(),
     flow: null,
     setFlow: false,
@@ -60,7 +62,7 @@ export default ({
         viewsToFiles,
       })
 
-      return !viewInView.custom && viewInView.parsed.view.isStory
+      return viewInView && !viewInView.custom && viewInView.parsed.view.isStory
     },
     lazy: {},
     local,
@@ -95,6 +97,10 @@ export default ({
     },
     useIsBefore: view.parsed.view.useIsBefore,
     useIsMedia: view.parsed.view.useIsMedia,
+  }
+
+  if (state.data) {
+    state.use('ViewsUseData')
   }
 
   if (name !== finalName) {

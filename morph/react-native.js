@@ -42,6 +42,8 @@ export default ({
     animations: {},
     animated: new Set(),
     images: [],
+    data: view.parsed.view.data,
+    dataFormat: view.parsed.view.dataFormat,
     dependencies: new Set(),
     flow: null,
     setFlow: false,
@@ -58,7 +60,7 @@ export default ({
         viewsToFiles,
       })
 
-      return !viewInView.custom && viewInView.parsed.view.isStory
+      return viewInView && !viewInView.custom && viewInView.parsed.view.isStory
     },
     lazy: {},
     local,
@@ -102,6 +104,10 @@ export default ({
   maybeUsesTextInput(state)
   maybeUsesRouter(state)
   maybeUsesStyleSheet(state)
+
+  if (state.data) {
+    state.use('ViewsUseData')
+  }
 
   return {
     code: toComponent({

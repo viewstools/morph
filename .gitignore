@@ -2,9 +2,7 @@ node_modules
 *.log
 *.tmp
 .DS_Store
-lib.js
-lib.js.map
-parse.js
-parse.js.map
+bin.js
+bin.js.map
 TODO
 .scannerwork

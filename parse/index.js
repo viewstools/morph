@@ -5,6 +5,8 @@ import {
   getAnimation,
   getBlock,
   getComment,
+  getData,
+  getDataFormat,
   getFormat,
   getProp,
   getPropType,
@@ -343,7 +345,9 @@ That would mean that SomeView in ${block.name} will be replaced by ${block.name}
       warnings.push({
         loc: block.loc,
         type: `${block.is ||
-          block.name} is outside of the top block and it won't render.\nTo fix it, either:\na) add a Vertical at the top and indent all the code inside of it, or\nb) remove it.`,
+          block.name} is outside of the top block and it won't render. Views relies on indentation to nest child views within View blocks\nTo fix it, either:\na) Indent ${block.is ||
+          block.name} within the top block and indent all nested views within ${block.is ||
+          block.name}, or\nb) remove it.`,
         line,
       })
     }
@@ -797,6 +801,11 @@ That would mean that SomeView in ${block.name} will be replaced by ${block.name}
     view.pathToStory = file
       .replace(path.join(src, 'Stories'), '')
       .replace('.view', '')
+
+    view.data = getData(view.properties.find(p => p.name === 'data'))
+    view.dataFormat = getDataFormat(
+      view.properties.find(p => p.name === 'dataFormat')
+    )
   } else {
     view.isStory = false
   }

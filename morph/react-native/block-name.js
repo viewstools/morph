@@ -1,4 +1,4 @@
-import { getPropValueOrDefault, isStory } from '../utils.js'
+import { getProp, getPropValueOrDefault, isStory } from '../utils.js'
 import { leave } from '../react/block-name.js'
 import handleTable from '../react/block-name-handle-table.js'
 import getBlockName from './get-block-name.js'

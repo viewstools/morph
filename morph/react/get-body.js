@@ -65,11 +65,35 @@ export default ({ state, name }) => {
   }
 
   let flow = []
-  if (state.flow === 'separate') {
+  if (state.flow === 'separate' && state.uses.includes('ViewsUseFlow')) {
     flow.push(`let flow = fromFlow.useFlow()`)
   }
   if (state.setFlow) {
     flow.push(`let setFlow = fromFlow.useSetFlow()`)
+  }
+  let data = []
+  if (state.data) {
+    switch (state.data.type) {
+      case 'show': {
+        data.push(`let value = fromData.useItem('${state.data.path}'`)
+        maybeDataFormat(state.dataFormat, data)
+        data.push(')')
+        break
+      }
+
+      case 'capture': {
+        data.push(
+          `let { value, onChange, onSubmit }= fromData.useCaptureItem('${state.data.path}'`
+        )
+        maybeDataFormat(state.dataFormat, data)
+        data.push(')')
+        break
+      }
+
+      default: {
+        break
+      }
+    }
   }
 
   if (state.hasRefs) {
@@ -90,8 +114,22 @@ export default ({ state, name }) => {
     ${state.useIsMedia ? 'let isMedia = useIsMedia()' : ''}
     ${animated.join('\n')}
     ${flow.join('\n')}
+    ${data.join('\n')}
 
   return ${ret}
 }`
   }
+}
+
+function maybeDataFormat(format, data) {
+  if (!format) return
+  if (format.type !== 'date') return
+
+  data.push(
+    `, fromData.useMakeFormatDate('${format.formatIn}', '${format.formatOut}'`
+  )
+  if (format.whenInvalid) {
+    data.push(`, '${format.whenInvalid}'`)
+  }
+  data.push(`)`)
 }

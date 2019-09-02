@@ -31,7 +31,7 @@ let makeFlow = ({ tools, viewsById, viewsToFiles }) => {
   let flowMapStr = []
 
   for (let view of viewsToFiles.values()) {
-    if (view.custom || !view.parsed.view.isStory) continue
+    if (!view || view.custom || !view.parsed.view.isStory) continue
 
     let states = []
     for (let id of view.parsed.view.views) {
@@ -42,7 +42,7 @@ let makeFlow = ({ tools, viewsById, viewsToFiles }) => {
         viewsToFiles,
       })
 
-      if (!viewInView.custom && viewInView.parsed.view.isStory) {
+      if (viewInView && !viewInView.custom && viewInView.parsed.view.isStory) {
         states.push(viewInView.parsed.view.pathToStory) // `${pathToViewId}/${id}`)
       }
     }
@@ -174,8 +174,9 @@ useEffect(() => setState(maybeInitialState || props.initialState), []) // eslint
         console.debug('setFlow', id)
 
         if (!flow.has(id)) {
+          console.log('Stories', flow)
           throw new Error(
-            \`Story "$\{id}" doesn't exist. Valid stories are $\{[...flow.keys()]}.\`
+            \`Story "$\{id}" doesn't exist. See the valid stories logged above this error.\`
           )
         }
       }
@@ -206,26 +207,32 @@ Flow.defaultProps = {
 }`
 }
 
-let TOOLS_FILE = `export default function useTools() {
-  console.log(\`
+let TOOLS_FILE = `let warnedAboutMissingOut = false
+
+export default function useTools() {
+  if (!warnedAboutMissingOut) {
+    warnedAboutMissingOut = true
+
+    console.log(\`
 
 
 
-  😱😱😱😱😱😱😱😱😱😱😱
+    😱😱😱😱😱😱😱😱😱😱😱
 
 
 
-  🚨 You're missing out!!!
+    🚨 You're missing out!!!
 
-  🚀 Views Tools can help you find product market fit before you run out of money.
+    🚀 Views Tools can help you find product market fit before you run out of money.
 
-  ✨ Find out how 👉 https://views.tools
-
-
+    ✨ Find out how 👉 https://views.tools
 
 
 
-  \`)
+
+
+    \`)
+  }
 
   return [null, () => {}]
 }`
