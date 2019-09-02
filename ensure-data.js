@@ -20,10 +20,10 @@ let identity = { in: i => i, out: i => i };
 // show
 let ItemContext = React.createContext({});
 export let ItemProvider = ItemContext.Provider;
-export let useItem = ({ path = null, format = identity }) => {
+export let useItem = ({ path = null, format = identity } = {}) => {
   let item = useContext(ItemContext);
 
-  return useMemo(() => (path ? format.in(get(item, path)) : item), [
+  return useMemo(() => (path ? { value: format.in(get(item, path)) } : item), [
     item,
     path,
     format,
@@ -63,11 +63,11 @@ let CaptureItemContext = React.createContext({});
 export let CaptureItemProvider = CaptureItemContext.Provider;
 export let useCaptureItem = ({
   path = null, format = identity, validate = null
-}) => {
+} = {}) => {
   let captureItem = useContext(CaptureItemContext);
 
   if (process.env.NODE_ENV === 'development') {
-    if (!(validate in fromValidate)) {
+    if (validate && !(validate in fromValidate)) {
       throw new Error(
         \`"\${validate}" function doesn't exist or is not exported in Data/validators.js\`
       );
@@ -79,14 +79,16 @@ export let useCaptureItem = ({
 
     let [item, dispatch, onSubmit] = captureItem;
 
-    let value = format.in(get(item, path));
-    let isInvalid = validate ? !fromValidate[validate](value) : false;
+    if (!item) return {};
 
+    let value = format.in(get(item, path));
+    let isValid = validate ? fromValidate[validate](value) : true;
     return {
       onChange: value => dispatch(setField(path, format.out(value))),
       onSubmit,
       value,
-      isInvalid,
+      isValid,
+      isInvalid: !isValid
     };
   }, [captureItem, path, format, validate]);
 };

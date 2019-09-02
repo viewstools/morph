@@ -75,7 +75,7 @@ export default ({ state, name }) => {
   if (state.data) {
     switch (state.data.type) {
       case 'show': {
-        data.push(`let value = fromData.useItem({ path: '${state.data.path}', `)
+        data.push(`let data = fromData.useItem({ path: '${state.data.path}', `)
         maybeDataFormat(state.dataFormat, data)
         data.push('})')
         break
@@ -83,7 +83,7 @@ export default ({ state, name }) => {
 
       case 'capture': {
         data.push(
-          `let { value, onChange, onSubmit, isInvalid }= fromData.useCaptureItem({ path: '${state.data.path}', `
+          `let data = fromData.useCaptureItem({ path: '${state.data.path}', `
         )
         maybeDataFormat(state.dataFormat, data)
         maybeDataValidate(state.dataValidate, data)
