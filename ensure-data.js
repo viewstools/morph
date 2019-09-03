@@ -9,12 +9,11 @@ import * as fromValidate from './Data/validators.js';
 import get from 'lodash/get';
 import produce from 'immer';
 import set from 'lodash/set';
-import React, { useContext, useEffect, useMemo, useReducer } from 'react';
+import React, { useContext, useEffect, useMemo, useReducer, useRef } from 'react';
 import parseDate from 'date-fns/parse';
 import parseISO from 'date-fns/parseISO';
 import formatDate from 'date-fns/format';
 import isValidDate from 'date-fns/isValid';
-import { useInputValidator } from 'utils/useInputValidator.js';
 
 let identity = { in: i => i, out: i => i };
 
@@ -66,6 +65,7 @@ export let useCaptureItem = ({
   path = null, format = identity, validate = null
 } = {}) => {
   let captureItem = useContext(CaptureItemContext);
+  let touched = useRef(false);
 
   if (process.env.NODE_ENV === 'development') {
     if (validate && !(validate in fromValidate)) {
@@ -83,9 +83,14 @@ export let useCaptureItem = ({
     if (!item) return {};
 
     let value = format.in(get(item, path));
-    let isValid = useInputValidator(value, validate);
+    let isValid =
+      touched.current && validate ? fromValidate[validate](value) : true;
+    let onChange = value => {
+      touched.current = true;
+      dispatch(setField(path, format.out(value)));
+    }
     return {
-      onChange: value => dispatch(setField(path, format.out(value))),
+      onChange,
       onSubmit,
       value,
       isValid,
