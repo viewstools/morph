@@ -14,6 +14,7 @@ import parseDate from 'date-fns/parse';
 import parseISO from 'date-fns/parseISO';
 import formatDate from 'date-fns/format';
 import isValidDate from 'date-fns/isValid';
+import { useInputValidator } from 'utils/useInputValidator.js';
 
 let identity = { in: i => i, out: i => i };
 
@@ -82,7 +83,7 @@ export let useCaptureItem = ({
     if (!item) return {};
 
     let value = format.in(get(item, path));
-    let isValid = validate ? fromValidate[validate](value) : true;
+    let isValid = useInputValidator(value, validate);
     return {
       onChange: value => dispatch(setField(path, format.out(value))),
       onSubmit,
