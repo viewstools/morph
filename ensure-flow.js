@@ -8,7 +8,7 @@ function ensureFirstStoryIsOn(flow, key, stories) {
   if (!stories.has(key)) return
 
   let story = flow.get(key)
-  if (story.stories.size > 0) {
+  if (story && story.stories.size > 0) {
     let index = 0
     for (let id of story.stories) {
       if (index === 0 || !story.isSeparate) {
