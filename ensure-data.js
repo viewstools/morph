@@ -43,6 +43,11 @@ let captureItemReducer = produce((draft, action) => {
       return action.state;
     }
 
+    case CAPTURE_FORCE_REQUIRED: {
+      draft._forceRequired = true;
+      break;
+    }
+
     default: {
       throw new Error(
         \`Unknown action type "\${action.type}" in update item reducer.\`
@@ -59,10 +64,12 @@ export let setField = (key, value) => ({
 let CAPTURE_RESET = 'capture/RESET';
 export let reset = state => ({ type: CAPTURE_RESET, state });
 
+let CAPTURE_FORCE_REQUIRED = 'capture/FORCE_REQUIRED';
+
 let CaptureItemContext = React.createContext({});
 export let CaptureItemProvider = CaptureItemContext.Provider;
 export let useCaptureItem = ({
-  path = null, format = identity, validate = null
+  path = null, format = identity, validate = null, required = false
 } = {}) => {
   let captureItem = useContext(CaptureItemContext);
   let touched = useRef(false);
@@ -83,8 +90,11 @@ export let useCaptureItem = ({
     if (!item) return {};
 
     let value = format.in(get(item, path));
+    
     let isValid =
-      touched.current && validate ? fromValidate[validate](value) : true;
+      validate && (touched.current || (required && item._forceRequired))
+        ? fromValidate[validate](value)
+        : true;
     let onChange = value => {
       touched.current = true;
       dispatch(setField(path, format.out(value)));
@@ -105,7 +115,17 @@ export let useCaptureItemProvider = (item, onSubmit) => {
     dispatch(reset(item));
   }, [item]);
 
-  return useMemo(() => [state, dispatch, onSubmit], [
+  return useMemo(() => {
+    async function _onSubmit() {
+      try {
+        if(!await onSubmit()) return;
+      } catch(error) {
+        console.log('onSubmit', error);
+      }
+      dispatch({ type: CAPTURE_FORCE_REQUIRED });
+    }
+    return [state, dispatch, _onSubmit];
+  }, [
     state,
     dispatch,
     onSubmit,

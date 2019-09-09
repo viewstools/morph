@@ -263,9 +263,11 @@ export let getDataFormat = maybeProp => {
 
 export let getDataValidate = maybeProp => {
   if (!maybeProp || !maybeProp.value) return null
+  let [value, required] = maybeProp.value.split(' ')
   return {
     type: 'js',
-    value: maybeProp.value,
+    value,
+    required: required === 'required',
   }
 }
 

@@ -137,4 +137,7 @@ function maybeDataFormat(format, data) {
 function maybeDataValidate(validate, data) {
   if (!validate || validate.type !== 'js') return
   data.push(`validate: '${validate.value}',`)
+  if (validate.required) {
+    data.push('required: true')
+  }
 }
