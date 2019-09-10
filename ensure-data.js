@@ -119,9 +119,7 @@ export let useCaptureItemProvider = (item, onSubmit) => {
     async function _onSubmit() {
       try {
         if(!await onSubmit()) return;
-      } catch(error) {
-        console.log('onSubmit', error);
-      }
+      } catch(error) {}
       dispatch({ type: CAPTURE_FORCE_REQUIRED });
     }
     return [state, dispatch, _onSubmit];
