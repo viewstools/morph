@@ -23,6 +23,7 @@ export default ({
   getSystemImport,
   local,
   localSupported,
+  reactNativeLibraryImport = 'react-native',
   track,
   view,
   viewsById,
@@ -44,6 +45,7 @@ export default ({
     images: [],
     data: view.parsed.view.data,
     dataFormat: view.parsed.view.dataFormat,
+    dataValidate: view.parsed.view.dataValidate,
     dependencies: new Set(),
     flow: null,
     setFlow: false,
@@ -74,6 +76,7 @@ export default ({
     testIdKey: 'testID',
     testIds: {},
     track,
+    reactNativeLibraryImport,
     usedBlockNames: { [finalName]: 1, AutoSizer: 1, Column: 1, Table: 1 },
     uses: [],
     use(block, isLazy = false) {

@@ -60,10 +60,12 @@ export default (node, parent, state) => {
     state.data &&
     (node.value === 'props.value' ||
       node.value === 'props.onSubmit' ||
-      node.value === 'props.onChange')
+      node.value === 'props.onChange' ||
+      node.value === 'props.isInvalid' ||
+      node.value === 'props.isValid')
   ) {
     return {
-      [node.name]: `{${node.value.replace('props.', '')} || ${node.value}}`,
+      [node.name]: `{${node.value.replace('props.', 'data.')}}`,
     }
   } else if (isValidImgSrc(node, parent)) {
     return {

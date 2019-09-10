@@ -10,8 +10,13 @@ export function enter(node, parent, state) {
     node.onWhen = true
 
     if (parent && !isList(parent)) state.render.push('{')
-
-    state.render.push(`${onWhen.value} ? `)
+    let value = onWhen.value
+    if (state.data && value === 'props.isInvalid') {
+      value = 'data.isInvalid'
+    } else if (state.data && value === 'props.isValid') {
+      value = 'data.isValid'
+    }
+    state.render.push(`${value} ? `)
   } else if (isStory(node, state)) {
     node.onWhen = true
     state.render.push(`{flow.has("${state.pathToStory}/${node.name}") ? `)

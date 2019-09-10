@@ -261,6 +261,14 @@ export let getDataFormat = maybeProp => {
   }
 }
 
+export let getDataValidate = maybeProp => {
+  if (!maybeProp || !maybeProp.value) return null
+  return {
+    type: 'js',
+    value: maybeProp.value,
+  }
+}
+
 export let getFormat = line => {
   let properties = {}
   let values = line.split(' ')

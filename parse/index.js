@@ -7,6 +7,7 @@ import {
   getComment,
   getData,
   getDataFormat,
+  getDataValidate,
   getFormat,
   getProp,
   getPropType,
@@ -805,6 +806,9 @@ That would mean that SomeView in ${block.name} will be replaced by ${block.name}
     view.data = getData(view.properties.find(p => p.name === 'data'))
     view.dataFormat = getDataFormat(
       view.properties.find(p => p.name === 'dataFormat')
+    )
+    view.dataValidate = getDataValidate(
+      view.properties.find(p => p.name === 'dataValidate')
     )
   } else {
     view.isStory = false

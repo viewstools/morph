@@ -126,7 +126,11 @@ export default (state, getImport) => {
   }
 
   if (usesNative.length > 0) {
-    dependencies.push(`import { ${usesNative.join(', ')} } from 'react-native'`)
+    dependencies.push(
+      `import { ${usesNative.join(', ')} } from '${
+        state.reactNativeLibraryImport
+      }'`
+    )
   }
 
   if (state.track) {
