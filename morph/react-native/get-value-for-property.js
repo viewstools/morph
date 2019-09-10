@@ -65,9 +65,7 @@ export default (node, parent, state) => {
       node.value === 'props.isInvalid')
   ) {
     return {
-      [node.name]: `{${node.value.replace('props.', 'data.')} || ${
-        node.value
-      }}`,
+      [node.name]: `{${node.value.replace('props.', 'data.')}}`,
     }
   } else if (isValidImgSrc(node, parent)) {
     return (

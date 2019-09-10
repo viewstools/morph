@@ -9,6 +9,7 @@ import relativise from './relativise.js'
 let morphFont = {
   'react-dom': morphFontAsReactDom,
   'react-native': morphFontAsReactNative,
+  'react-pdf': morphFontAsReactNative,
 }
 
 export async function ensureFontsDirectory(src) {
