@@ -90,7 +90,7 @@ export let useCaptureItem = ({
     if (!item) return {};
 
     let value = format.in(get(item, path));
-    
+
     let isValid =
       validate && (touched.current || (required && item._forceRequired))
         ? fromValidate[validate](value)
@@ -99,6 +99,7 @@ export let useCaptureItem = ({
       touched.current = true;
       dispatch(setField(path, format.out(value)));
     }
+
     return {
       onChange,
       onSubmit,
@@ -106,20 +107,30 @@ export let useCaptureItem = ({
       isValid,
       isInvalid: !isValid
     };
-  }, [captureItem, path, format, validate]);
+  }, [captureItem, path, format, required, validate]);
 };
 export let useCaptureItemProvider = (item, onSubmit) => {
   let [state, dispatch] = useReducer(captureItemReducer, item);
+  let isSubmitting = useRef(false);
 
   useEffect(() => {
     dispatch(reset(item));
   }, [item]);
 
   return useMemo(() => {
-    async function _onSubmit() {
+    async function _onSubmit(options) {
+      if (isSubmitting.current) return;
+      isSubmitting.current = true;
+
       try {
-        if(!await onSubmit()) return;
-      } catch(error) {}
+        let res = await onSubmit(options)
+        isSubmitting.current = false;
+
+        if (!res) return;
+      } catch(error) {
+        isSubmitting.current = false;
+      }
+
       dispatch({ type: CAPTURE_FORCE_REQUIRED });
     }
     return [state, dispatch, _onSubmit];
@@ -144,9 +155,8 @@ export let useMakeFormatDate = (formatIn, formatOut, whenInvalid) =>
       in: value => formatDateInOut(value, formatIn, formatOut, whenInvalid),
       out: value => formatDateInOut(value, formatOut, formatIn, whenInvalid),
     }),
-    []
-  ); // eslint-disable-line
-// ignore formatIn, formatouOut, whenInvalid
+    [] // eslint-disable-line
+  ); // ignore formatIn, formatouOut, whenInvalid
 `
 
 export default function ensureIsBefore({ src }) {
