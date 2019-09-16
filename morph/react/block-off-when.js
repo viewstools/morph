@@ -10,11 +10,27 @@ export function enter(node, parent, state) {
     node.onWhen = true
 
     if (parent && !isList(parent)) state.render.push('{')
+
     let value = onWhen.value
-    if (state.data && value === 'props.isInvalid') {
-      value = 'data.isInvalid'
-    } else if (state.data && value === 'props.isValid') {
-      value = 'data.isValid'
+    if (state.data) {
+      switch (value) {
+        case 'props.isInvalid': {
+          value = 'data.isInvalid'
+          break
+        }
+
+        case 'props.isValid': {
+          value = 'data.isValid'
+          break
+        }
+        case 'props.value': {
+          value = 'data.value'
+          break
+        }
+
+        default:
+          break
+      }
     }
     state.render.push(`${value} ? `)
   } else if (isStory(node, state)) {
