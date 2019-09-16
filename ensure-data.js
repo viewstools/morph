@@ -103,11 +103,12 @@ export let useCaptureItem = ({
       return {};
     }
 
-    let value = format.in(get(item, path));
+    let rawValue = get(item, path);
+    let value = format.in(rawValue);
 
     let isValid =
       validate && (touched.current || (required && item._forceRequired))
-        ? fromValidate[validate](value)
+        ? fromValidate[validate](rawValue, value)
         : true;
     let onChange = value => {
       touched.current = true;
