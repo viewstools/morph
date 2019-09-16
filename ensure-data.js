@@ -66,7 +66,7 @@ export let reset = state => ({ type: CAPTURE_RESET, state });
 
 let CAPTURE_FORCE_REQUIRED = 'capture/FORCE_REQUIRED';
 
-let CaptureItemContext = React.createContext({});
+let CaptureItemContext = React.createContext([]);
 export let CaptureItemProvider = CaptureItemContext.Provider;
 export let useCaptureItem = ({
   path = null, format = identity, validate = null, required = false
@@ -87,7 +87,21 @@ export let useCaptureItem = ({
 
     let [item, dispatch, onSubmit] = captureItem;
 
-    if (!item) return {};
+    if (!item) {
+      if (process.env.NODE_ENV === 'development') {
+        console.error(
+          'Check that you have <CaptureItemProvider value={captureData}> in the component that defines the data for this story.'
+        );
+        console.log({
+          path,
+          format,
+          validate,
+          required,
+          captureItem,
+        });
+      }
+      return {};
+    }
 
     let value = format.in(get(item, path));
 
