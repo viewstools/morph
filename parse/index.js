@@ -802,6 +802,7 @@ That would mean that SomeView in ${block.name} will be replaced by ${block.name}
     view.pathToStory = file
       .replace(path.join(src, 'Stories'), '')
       .replace('.view', '')
+      .replace(/\\/g, '')
 
     view.data = getData(view.properties.find(p => p.name === 'data'))
     view.dataFormat = getDataFormat(
