@@ -800,7 +800,7 @@ That would mean that SomeView in ${block.name} will be replaced by ${block.name}
     view.isStory = true
     view.flow = flowProp.value
     view.pathToStory = file
-      .replace(path.join(src, 'Stories'), '')
+      .replace(path.join(src, 'Stories').replace(/\\/g, '/'), '')
       .replace('.view', '')
 
     view.data = getData(view.properties.find(p => p.name === 'data'))
