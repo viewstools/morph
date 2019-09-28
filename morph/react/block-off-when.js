@@ -23,8 +23,13 @@ export function enter(node, parent, state) {
           value = 'data.isValid'
           break
         }
+
         case 'props.value': {
           value = 'data.value'
+          break
+        }
+        case '!props.value': {
+          value = '!data.value'
           break
         }
 
