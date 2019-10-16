@@ -60,6 +60,7 @@
     "minimist": "^1.2.0",
     "mz": "^2.6.0",
     "prettier": "^1.4.2",
+    "react-scripts": "^3.2.0",
     "read-pkg-up": "^6.0.0",
     "robust-websocket": "^1.0.0",
     "source-map-support": "^0.5.12",

@@ -16,6 +16,7 @@ let wait = time => new Promise(resolve => setTimeout(resolve, time))
     clean,
     help,
     local,
+    serve,
     tools,
     track,
     watch: shouldWatch,
@@ -25,12 +26,13 @@ let wait = time => new Promise(resolve => setTimeout(resolve, time))
     alias: {
       help: 'h',
     },
-    booleans: ['clean', 'help', 'track', 'tools', 'watch', 'version'],
+    booleans: ['clean', 'help', 'serve', 'track', 'tools', 'watch', 'version'],
 
     default: {
       as: 'react-dom',
       clean: false,
       local: 'en',
+      serve: true,
       tools: true,
       track: false,
       verbose: true,
@@ -139,6 +141,7 @@ let wait = time => new Promise(resolve => setTimeout(resolve, time))
     as,
     local,
     once: !shouldWatch,
+    serve,
     src: input,
     tools,
     track,

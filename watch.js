@@ -37,7 +37,7 @@ export default async function watch(options) {
 
   if (options.once) return
 
-  let watcher = watchFiles(morpher)
+  let watcher = watchFiles({ morpher, serve: options.serve })
 
   process.on('beforeExit', () => {
     console.log('Stopping Views morpher file watcher...')

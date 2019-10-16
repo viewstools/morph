@@ -11,8 +11,9 @@ import chalk from 'chalk'
 import chokidar from 'chokidar'
 import getPointsOfUse from './get-points-of-use.js'
 import path from 'path'
+import runCra from './runCra.js'
 
-export default function watchFiles(morpher) {
+export default async function watchFiles({ morpher, serve }) {
   let watcher = chokidar.watch(MATCH, {
     cwd: morpher.src,
     ignored: [
@@ -27,8 +28,13 @@ export default function watchFiles(morpher) {
     ignoreInitial: true,
     // awaitWriteFinish: true,
   })
+  let compiler = null
+  if (serve) {
+    compiler = await runCra()
+  }
 
   let timeout = null
+  let idle = true
   let queue = []
   function onEvent({ file, op }) {
     if (timeout) {
@@ -39,7 +45,22 @@ export default function watchFiles(morpher) {
 
     timeout = setTimeout(() => {
       timeout = null
-      processQueue({ queue: [...queue], morpher })
+      idle = false
+      processQueue({ queue: [...queue], morpher }).then(() => {
+        if (compiler && idle) {
+          compiler.run((err, stats) => {
+            idle = true
+
+            if (err) {
+              console.error('compiler errors', err)
+              return
+            }
+
+            console.log('compiler done', stats)
+          })
+        }
+      })
+
       queue = []
     }, 1500)
   }
