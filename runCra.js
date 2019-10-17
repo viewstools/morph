@@ -141,9 +141,9 @@ export default function run() {
       )
       const devServer = new WebpackDevServer(compiler, {
         ...serverConfig,
-        watchOptions: {
-          ignored: '*',
-        },
+        // watchOptions: {
+        //   ignored: '**/*',
+        // },
       })
       // Launch WebpackDevServer.
       devServer.listen(port, HOST, err => {

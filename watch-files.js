@@ -19,6 +19,7 @@ export default async function watchFiles({ morpher, serve }) {
     ignored: [
       '**/node_modules/**',
       '**/*.view.js',
+      '**/Fonts/*.js',
       'useFlow.js',
       'useIsMedia.js',
       'useIsBefore.js',
@@ -26,43 +27,67 @@ export default async function watchFiles({ morpher, serve }) {
       'useData.js',
     ],
     ignoreInitial: true,
-    // awaitWriteFinish: true,
+    awaitWriteFinish: true,
   })
   let compiler = null
   if (serve) {
     compiler = await runCra()
+    // compiler.hooks.beforeRun.tap('ViewsMorpher', processEvents)
   }
 
   let timeout = null
   let idle = true
   let queue = []
   function onEvent({ file, op }) {
-    if (timeout) {
-      clearTimeout(timeout)
-      timeout = null
-    }
+    console.log('entered event, file: ', file, 'op: ', op)
+    // if (timeout) {
+    //   clearTimeout(timeout)
+    //   timeout = null
+    // }
     queue.push({ file: path.join(morpher.src, file), op })
+    console.log('after enter, queue is', queue)
 
-    timeout = setTimeout(() => {
-      timeout = null
-      idle = false
-      processQueue({ queue: [...queue], morpher }).then(() => {
-        if (compiler && idle) {
-          compiler.run((err, stats) => {
-            idle = true
+    timeout = setTimeout(processEvents, 500)
+  }
+  async function processEvents() {
+    console.log('process events, queue is empty?', queue.length === 0)
+    if (queue.length === 0) return
+    console.log('on process, queue is', queue)
 
-            if (err) {
-              console.error('compiler errors', err)
-              return
-            }
+    if (!idle) {
+      timeout = setTimeout(processEvents, 500)
+      return
+    }
 
-            console.log('compiler done', stats)
-          })
-        }
-      })
+    idle = false
 
-      queue = []
-    }, 1500)
+    let queueClone = [...queue]
+    queue = []
+    await processQueue({ queue: queueClone, morpher })
+    idle = true
+
+    // if (compiler) {
+    //   console.log('runnning compiler', 'idle is?', idle)
+    //   compiler.run((err, stats) => {
+    //     idle = true
+
+    //     console.log(
+    //       process.hrtime(),
+    //       'webpack compiler finished running',
+    //       'idle is?',
+    //       idle
+    //     )
+
+    //     if (err) {
+    //       console.error('compiler errors', err)
+    //       return
+    //     }
+
+    //     console.log('compiler done', stats)
+    //   })
+    // } else {
+    //   idle = true
+    // }
   }
 
   watcher.on('add', file => onEvent({ file, op: 'add' }))
@@ -126,7 +151,6 @@ function processUnlinked({ files, morpher, filesToProcess }) {
         processPointsOfUse({ view, morpher, filesToProcess })
 
         filesToProcess.filesView.delete(view.file)
-
         morpher.viewsById.delete(view.id)
         morpher.viewsToFiles.delete(view.file)
 
@@ -137,6 +161,7 @@ function processUnlinked({ files, morpher, filesToProcess }) {
         if (await isViewFile(file)) {
           filesToProcess.filesView.delete(file)
         } else if (await isViewLogicFile(file)) {
+          filesToProcess.filesView.add(view.file)
           filesToProcess.filesViewLogic.delete(file)
         } else if (await isViewCustomFile(file)) {
           filesToProcess.filesViewCustom.delete(file)
@@ -162,6 +187,7 @@ function processAddedOrChanged({ files, morpher, filesToProcess }) {
             filesToProcess.filesViewLogic.add(logicFile)
           }
         } else if (await isViewLogicFile(file)) {
+          filesToProcess.filesView.add(file.replace('.logic.js', ''))
           filesToProcess.filesViewLogic.add(file)
         } else if (await isViewCustomFile(file)) {
           filesToProcess.filesViewCustom.add(file)
