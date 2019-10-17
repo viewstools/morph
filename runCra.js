@@ -21,7 +21,7 @@ process.on('unhandledRejection', err => {
 })
 
 // Ensure environment variables are read.
-import './runCraEnv.js'
+//require( './runCraEnv.js')
 // @remove-on-eject-begin
 // Do the preflight check (only happens before eject).
 // import verifyPackageTree from 'react-scripts/scripts/utils/verifyPackageTree.js'
@@ -46,8 +46,9 @@ import {
 } from './runCraWebpackDevServerUtils' // 'react-dev-utils/WebpackDevServerUtils.js'
 import openBrowser from 'react-dev-utils/openBrowser.js'
 import paths from './runCraPaths.js'
-import configFactory from 'react-scripts/config/webpack.config.js'
-import createDevServerConfig from 'react-scripts/config/webpackDevServer.config.js'
+
+const configFactory = require('react-scripts/config/webpack.config.js')
+const createDevServerConfig = require('react-scripts/config/webpackDevServer.config.js')
 
 import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin'
 

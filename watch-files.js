@@ -32,39 +32,78 @@ export default async function watchFiles({ morpher, serve }) {
   let compiler = null
   if (serve) {
     compiler = await runCra()
-    // compiler.hooks.beforeRun.tap('ViewsMorpher', processEvents)
+    compiler.hooks.beforeRun.tapPromise('ViewsMorpher', () => {
+      if (processEventsPromise) {
+        return processEventsPromise
+      } else {
+        return Promise.resolve()
+      }
+    })
   }
 
   let timeout = null
-  let idle = true
+  let skipTimeout = null
+  let processEventsPromise = null
   let queue = []
-  function onEvent({ file, op }) {
+  function onEvent({ file, op }, skip) {
     console.log('entered event, file: ', file, 'op: ', op)
-    // if (timeout) {
-    //   clearTimeout(timeout)
-    //   timeout = null
-    // }
-    queue.push({ file: path.join(morpher.src, file), op })
+    if (timeout) {
+      clearTimeout(timeout)
+      timeout = null
+    }
+    if (!skip) {
+      queue.push({ file: path.join(morpher.src, file), op })
+    }
+
+    // if morpher busy, try again next time
+    if (processEventsPromise) {
+      clearTimeout(skipTimeout)
+      skipTimeout = null
+      setTimeout(() => onEvent({}, true), 200)
+      return
+    }
     console.log('after enter, queue is', queue)
+    processEvents()
 
-    timeout = setTimeout(processEvents, 500)
+    // timeout = setTimeout(()=>{
+    //   if(processEventsPromise){
+    //     onEvent({},true)
+    //   }else{
+    //     processEvents()
+    //   }
+
+    // }, 500)
   }
-  async function processEvents() {
-    console.log('process events, queue is empty?', queue.length === 0)
-    if (queue.length === 0) return
-    console.log('on process, queue is', queue)
 
-    if (!idle) {
-      timeout = setTimeout(processEvents, 500)
+  async function processEvents() {
+    // idle = false
+    console.log('process events, queue is empty?', queue.length === 0)
+    if (queue.length === 0) {
+      console.log('skipping morpher', queue.length)
+      // idle = true
+      return
+    }
+    if (processEventsPromise) {
+      console.log('this should never happen, promise is not null')
       return
     }
 
-    idle = false
+    console.log('on process, queue is', queue)
 
     let queueClone = [...queue]
     queue = []
-    await processQueue({ queue: queueClone, morpher })
-    idle = true
+    processEventsPromise = new Promise(async (response, reject) => {
+      try {
+        await processQueue({ queue: queueClone, morpher })
+      } catch (e) {
+        console.log('error')
+      } finally {
+        response()
+        processEventsPromise = null
+      }
+    })
+
+    // idle = true
 
     // if (compiler) {
     //   console.log('runnning compiler', 'idle is?', idle)

@@ -132,7 +132,7 @@ export function createCompiler({
     if (isInteractive) {
       clearConsole()
     }
-    console.log('Compiling...')
+    console.log('WP Compiling...')
   })
 
   let isFirstCompile = true
@@ -225,7 +225,7 @@ export function createCompiler({
     const messages = formatWebpackMessages(statsData)
     const isSuccessful = !messages.errors.length && !messages.warnings.length
     if (isSuccessful) {
-      console.log(chalk.green('Compiled successfully!'))
+      console.log(chalk.green('WP Compiled successfully!'))
     }
     if (isSuccessful && (isInteractive || isFirstCompile)) {
       printInstructions(appName, urls, useYarn)
