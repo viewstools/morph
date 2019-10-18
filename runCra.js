@@ -142,9 +142,12 @@ export default function run() {
       )
       const devServer = new WebpackDevServer(compiler, {
         ...serverConfig,
-        // watchOptions: {
-        //   ignored: '**/*',
-        // },
+        watchOptions: {
+          // ignored: '**/*.view.logic.js',
+          ignored: 'node_modules/*',
+          aggregateTimeout: 500,
+          //poll: 1000
+        },
       })
       // Launch WebpackDevServer.
       devServer.listen(port, HOST, err => {

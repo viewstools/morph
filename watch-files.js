@@ -32,47 +32,55 @@ export default async function watchFiles({ morpher, serve }) {
   let compiler = null
   if (serve) {
     compiler = await runCra()
-    compiler.hooks.beforeRun.tapPromise('ViewsMorpher', () => {
+    //let beforeRunTimeout = null
+    const awaitProcessEventsPromise = s => {
+      //console.log('Tap Changed files:',Object.keys(s.watchFileSystem.watcher.mtimes))
+
       if (processEventsPromise) {
+        console.log('Morpher busy, wait')
         return processEventsPromise
       } else {
         return Promise.resolve()
+        // return new Promise( (res,rej)=>{
+        //   clearTimeout(beforeRunTimeout)
+        //   beforeRunTimeout = null
+        //   //give the morpher a chance to start
+        //   beforeRunTimeout = setTimeout(async ()=>{
+        //     console.log(`${!!processEventsPromise?"Morpher running, wait":"morpher not running, ignore"}`)
+        //     if (processEventsPromise) {
+        //       await processEventsPromise
+        //       console.log("morpher done")
+        //     }
+        //     res()
+        //   },1000)
+        // })
       }
-    })
+    }
+    compiler.hooks.watchRun.tapPromise(
+      'ViewsMorpher',
+      awaitProcessEventsPromise
+    )
   }
 
-  let timeout = null
   let skipTimeout = null
   let processEventsPromise = null
   let queue = []
   function onEvent({ file, op }, skip) {
     console.log('entered event, file: ', file, 'op: ', op)
-    if (timeout) {
-      clearTimeout(timeout)
-      timeout = null
-    }
+
     if (!skip) {
       queue.push({ file: path.join(morpher.src, file), op })
     }
 
-    // if morpher busy, try again next time
+    // if morpher busy, try again in a bit
+    clearTimeout(skipTimeout)
+    skipTimeout = null
     if (processEventsPromise) {
-      clearTimeout(skipTimeout)
-      skipTimeout = null
       setTimeout(() => onEvent({}, true), 200)
       return
     }
     console.log('after enter, queue is', queue)
     processEvents()
-
-    // timeout = setTimeout(()=>{
-    //   if(processEventsPromise){
-    //     onEvent({},true)
-    //   }else{
-    //     processEvents()
-    //   }
-
-    // }, 500)
   }
 
   async function processEvents() {
