@@ -1,9 +1,8 @@
-import { promises as fs } from 'fs'
 import chalk from 'chalk'
 import morphers from './morphers.js'
 import prettier from 'prettier'
 
-export default async function maybeMorph({
+export default function maybeMorph({
   as,
   getFontImport,
   getSystemImport,
@@ -27,21 +26,20 @@ export default async function maybeMorph({
       viewsToFiles,
     })
 
-    result.code = prettier.format(result.code, {
-      parser: 'babel',
-      singleQuote: true,
-      trailingComma: 'es5',
-    })
-
-    await fs.writeFile(`${view.file}.js`, result.code, 'utf8')
-
     view.version++
 
     verbose &&
       console.log(
         `${chalk.green('M')} ${view.id}@${view.version}:${chalk.dim(view.file)}`
       )
+
+    return prettier.format(result.code, {
+      parser: 'babel',
+      singleQuote: true,
+      trailingComma: 'es5',
+    })
   } catch (error) {
     console.error(chalk.red('M'), view, error.codeFrame || error)
+    return null
   }
 }

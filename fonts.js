@@ -42,7 +42,7 @@ export function processCustomFonts({ customFonts, filesFontCustom }) {
   }
 }
 
-export async function morphAllFonts({
+export function morphAllFonts({
   as,
   customFonts,
   filesView,
@@ -67,7 +67,7 @@ export async function morphAllFonts({
     })
   }
 
-  for await (let font of fontsInUse) {
+  return [...fontsInUse].map(font => {
     let [family, weight, style = 'normal'] = font.split('-')
 
     let customFontSources = []
@@ -75,18 +75,19 @@ export async function morphAllFonts({
       customFontSources = [...customFonts.get(font)].map(mapCustomFont)
     }
 
-    let code = morphFont[as](
-      {
-        id: font,
-        family,
-        style,
-        weight,
-      },
-      customFontSources
-    )
-
-    fs.writeFile(path.join(src, 'Fonts', `${font}.js`), code)
-  }
+    return {
+      file: path.join(src, 'Fonts', `${font}.js`),
+      content: morphFont[as](
+        {
+          id: font,
+          family,
+          style,
+          weight,
+        },
+        customFontSources
+      ),
+    }
+  })
 }
 
 // let removeFont = file => {

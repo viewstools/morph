@@ -2,7 +2,7 @@
   "name": "@viewstools/morph",
   "version": "19.10.6",
   "description": "Views language morpher",
-  "main": "index.js",
+  "main": "bin.js",
   "type": "module",
   "bin": {
     "views-morph": "./bin.js"

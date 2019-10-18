@@ -1,6 +1,6 @@
 import maybeMorph from './maybe-morph.js'
 
-export default async function morphAllViews({
+export default function morphAllViews({
   as,
   getFontImport,
   getSystemImport,
@@ -10,21 +10,21 @@ export default async function morphAllViews({
   viewsById,
   viewsToFiles,
 }) {
-  for await (let file of filesView) {
-    let view = viewsToFiles.get(file)
-
-    if (view.custom) continue
-
-    await maybeMorph({
-      as,
-      getFontImport,
-      getSystemImport,
-      local,
-      track,
-      verbose: false,
-      view,
-      viewsById,
-      viewsToFiles,
-    })
-  }
+  return [...filesView]
+    .map(file => viewsToFiles.get(file))
+    .filter(view => !view.custom)
+    .map(view => ({
+      file: `${view.file}.js`,
+      content: maybeMorph({
+        as,
+        getFontImport,
+        getSystemImport,
+        local,
+        track,
+        verbose: false,
+        view,
+        viewsById,
+        viewsToFiles,
+      }),
+    }))
 }

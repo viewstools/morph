@@ -31,7 +31,7 @@ let useIsMedia = () => {
 }
 export default useIsMedia`
 
-let getMediaConfig = async src => {
+async function getMediaConfig(src) {
   try {
     return JSON.parse(
       await fs.readFile(path.join(src, 'app.viewstools'), 'utf8')
@@ -52,11 +52,8 @@ let getMediaConfig = async src => {
 }
 
 export default async function ensureIsMedia({ src }) {
-  return fs.writeFile(
-    path.join(src, 'useIsMedia.js'),
-    makeUseIsMedia(await getMediaConfig(src)),
-    {
-      encoding: 'utf8',
-    }
-  )
+  return {
+    file: path.join(src, 'useIsMedia.js'),
+    content: makeUseIsMedia(await getMediaConfig(src)),
+  }
 }

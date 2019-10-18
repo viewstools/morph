@@ -1,5 +1,3 @@
-import { promises as fs } from 'fs'
-import fsExtra from 'fs-extra'
 import getViewRelativeToView from './get-view-relative-to-view.js'
 import prettier from 'prettier'
 import path from 'path'
@@ -207,60 +205,13 @@ Flow.defaultProps = {
 }`
 }
 
-let TOOLS_FILE = `let warnedAboutMissingOut = false
-
-export default function useTools() {
-  if (!warnedAboutMissingOut) {
-    warnedAboutMissingOut = true
-
-    console.log(\`
-
-
-
-    😱😱😱😱😱😱😱😱😱😱😱
-
-
-
-    🚨 You're missing out!!!
-
-    🚀 Views Tools can help you find product market fit before you run out of money.
-
-    ✨ Find out how 👉 https://views.tools
-
-
-
-
-
-    \`)
-  }
-
-  return [null, () => {}]
-}`
-
-async function ensureTools(src) {
-  let toolsFile = path.join(src, 'useTools.js')
-
-  if ((await fsExtra.exists(toolsFile)) && process.env.REACT_APP_VIEWS_TOOLS)
-    return
-
-  return fs.writeFile(toolsFile, TOOLS_FILE, 'utf8')
-}
-
-export default async function ensureFlow({
-  src,
-  tools,
-  viewsById,
-  viewsToFiles,
-}) {
-  await ensureTools(src)
-
-  return fs.writeFile(
-    path.join(src, 'useFlow.js'),
-    prettier.format(makeFlow({ tools, viewsById, viewsToFiles }), {
+export default function ensureFlow({ src, tools, viewsById, viewsToFiles }) {
+  return {
+    file: path.join(src, 'useFlow.js'),
+    content: prettier.format(makeFlow({ tools, viewsById, viewsToFiles }), {
       parser: 'babel',
       singleQuote: true,
       trailingComma: 'es5',
     }),
-    'utf8'
-  )
+  }
 }

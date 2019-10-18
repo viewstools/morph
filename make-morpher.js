@@ -3,10 +3,12 @@ import {
   morphAllFonts,
   processCustomFonts,
 } from './fonts.js'
+import { promises as fs } from 'fs'
 import ensureData from './ensure-data.js'
 import ensureFlow from './ensure-flow.js'
 import ensureIsBefore from './ensure-is-before.js'
 import ensureIsMedia from './ensure-is-media.js'
+import ensureTools from './ensure-tools.js'
 import makeGetSystemImport from './make-get-system-import.js'
 import morphAllViews from './morph-all-views.js'
 import parseViews from './parse-views.js'
@@ -72,7 +74,7 @@ export default function makeMorpher({
       viewsToFiles: state.viewsToFiles,
     })
 
-    await morphAllFonts({
+    let morphedFonts = morphAllFonts({
       as: state.as,
       customFonts: state.customFonts,
       filesView,
@@ -82,7 +84,7 @@ export default function makeMorpher({
 
     // TODO optimise
     // morph views
-    await morphAllViews({
+    let morphedViews = morphAllViews({
       as: state.as,
       filesView,
       getFontImport: makeGetFontImport(state.src),
@@ -93,12 +95,28 @@ export default function makeMorpher({
       viewsToFiles: state.viewsToFiles,
     })
 
-    await Promise.all([
-      ensureData(state),
-      ensureFlow(state),
-      ensureIsBefore(state),
-      ensureIsMedia(state),
-    ])
+    // TODO optimise, only if they changed, cache, etc
+    let morphedData = ensureData(state)
+    let morphedFlow = ensureFlow(state)
+    let morphedTools = await ensureTools(state)
+    let morphedIsBefore = ensureIsBefore(state)
+    let morphedIsMedia = await ensureIsMedia(state)
+
+    let filesToWrite = [
+      ...morphedFonts,
+      ...morphedViews,
+      morphedData,
+      morphedFlow,
+      morphedTools,
+      morphedIsBefore,
+      morphedIsMedia,
+    ].filter(Boolean)
+
+    await Promise.all(
+      filesToWrite.map(({ file, content }) =>
+        fs.writeFile(file, content, 'utf-8')
+      )
+    )
   }
 
   return state

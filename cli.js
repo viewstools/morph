@@ -27,12 +27,11 @@ let wait = time => new Promise(resolve => setTimeout(resolve, time))
       help: 'h',
     },
     booleans: ['clean', 'help', 'serve', 'track', 'tools', 'watch', 'version'],
-
     default: {
       as: 'react-dom',
       clean: false,
       local: 'en',
-      serve: true,
+      serve: false,
       tools: true,
       track: false,
       verbose: true,
