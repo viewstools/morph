@@ -1,3 +1,4 @@
+import flatten from 'flatten'
 import getFirstLine from 'firstline'
 import isViewCustom from './is-view-custom.js'
 import mm from 'micromatch'
@@ -47,10 +48,7 @@ export let isFontCustomFile = async file =>
   // @ts-ignore
   mm.isMatch(file, PATTERNS.filesFontCustom.match)
 
-export let MATCH = Object.values(PATTERNS)
-  .map(item => item.match)
-  // @ts-ignore
-  .flat()
+export let MATCH = flatten(Object.values(PATTERNS).map(item => item.match))
 
 export async function getMatchesPerPattern(files) {
   // @ts-ignore
