@@ -1,6 +1,6 @@
 {
   "name": "@viewstools/morph",
-  "version": "19.10.8",
+  "version": "19.10.9",
   "description": "Views language morpher",
   "main": "bin.js",
   "type": "module",
@@ -44,7 +44,7 @@
     "chalk": "^2.3.0",
     "chokidar": "^3.0.2",
     "color": "^3.0.0",
-    "debounce": "^1.2.0",
+    "core-js": "3",
     "delete-empty": "^3.0.0",
     "fast-glob": "^3.0.4",
     "firstline": "^2.0.2",

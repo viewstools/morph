@@ -19,9 +19,12 @@ export default {
         [
           '@babel/preset-env',
           {
-            modules: false,
-            useBuiltIns: false,
-            exclude: ['@babel/plugin-transform-regenerator'],
+            useBuiltIns: 'usage',
+            // exclude: ['@babel/plugin-transform-regenerator'],
+            targets: {
+              node: '10',
+            },
+            corejs: 3,
           },
         ],
       ],
