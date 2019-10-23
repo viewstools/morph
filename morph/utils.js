@@ -149,7 +149,7 @@ export let getScopedCondition = (propNode, blockNode, alreadyInterpolated) => {
     !lastScope.prop.animation ||
     lastScope.prop.animation.curve !== 'spring'
   ) {
-    lastScope.prop.conditional = `\${${conditional}}`
+    lastScope.prop.conditional = conditional
   }
 
   return conditional
@@ -368,18 +368,19 @@ export let getDynamicStyles = node => {
       )
       .map(prop => `'--${prop.name}': ${getPropValue(prop)}`),
     node.scopes.map(scope =>
-      scope.properties.map(prop => {
-        let unit = getUnit(prop)
-        return (
-          (prop.tags.style &&
-            prop.conditional &&
-            `'--${prop.name}': \`${prop.conditional}${unit}\``) ||
-          (prop.tags.style &&
-            prop.tags.slot &&
-            prop.scope === 'isHovered' &&
-            `'--${prop.name}': ${getPropValue(prop)}`)
-        )
-      })
+      scope.properties
+        .filter(prop => prop.tags.style)
+        .map(prop => {
+          let value = null
+
+          if (prop.conditional) {
+            value = prop.conditional
+          } else if (prop.tags.slot && prop.scope === 'isHovered') {
+            value = getPropValue(prop)
+          }
+
+          return value && `'--${prop.name}': ${value}`
+        })
     ),
   ]).filter(Boolean)
 }

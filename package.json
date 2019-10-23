@@ -1,6 +1,6 @@
 {
   "name": "@viewstools/morph",
-  "version": "19.10.10",
+  "version": "19.10.11",
   "description": "Views language morpher",
   "main": "bin.js",
   "type": "module",

@@ -37,18 +37,12 @@ export default ({ state, name }) => {
             JSON.stringify(prop.value)
           )
 
-          let unit = getUnit(prop)
-          if (!state.isReactNative && unit) {
-            value = `\`$\{${value}}${unit}\``
-          }
-
           toValue.push(`${JSON.stringify(prop.name)}: ${value}`)
-
-          let firstScopeValue = JSON.stringify(prop.scopes[0].value)
-          if (!state.isReactNative && unit) {
-            firstScopeValue = `\`$\{${firstScopeValue}}${unit}\``
-          }
-          fromValue.push(`${JSON.stringify(prop.name)}: ${firstScopeValue}`)
+          fromValue.push(
+            `${JSON.stringify(prop.name)}: ${JSON.stringify(
+              prop.scopes[0].value
+            )}`
+          )
         })
 
         spring.push(`"from": {${fromValue.join(',')}},`)
