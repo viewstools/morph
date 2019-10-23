@@ -1,5 +1,7 @@
 import { getProp, isList, isStory } from '../utils.js'
 
+let IS_MEDIA = /(!?props\.isMedia)(.+)/
+
 export function enter(node, parent, state) {
   if (node.isFragment && node.children.length === 0) return
 
@@ -36,6 +38,9 @@ export function enter(node, parent, state) {
         default:
           break
       }
+    } else if (IS_MEDIA.test(value)) {
+      let [, variable, media] = value.match(IS_MEDIA)
+      value = `${variable.replace('props.', '')}.${media.toLowerCase()}`
     }
     state.render.push(`${value} ? `)
   } else if (isStory(node, state)) {

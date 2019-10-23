@@ -567,6 +567,10 @@ That would mean that SomeView in ${block.name} will be replaced by ${block.name}
           })
         }
 
+        if (name === 'onWhen' && /!?isMedia.+/.test(slotName)) {
+          useIsMedia = true
+        }
+
         if (name === 'format') {
           block.format = getFormat(value)
         }
