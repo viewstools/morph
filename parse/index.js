@@ -537,12 +537,7 @@ That would mean that SomeView in ${block.name} will be replaced by ${block.name}
 
             if (slotName === 'isBefore') {
               useIsBefore = true
-            } else if (
-              slotName === 'isMediaMobile' ||
-              slotName === 'isMediaTablet' ||
-              slotName === 'isMediaLaptop' ||
-              slotName === 'isMediaDesktop'
-            ) {
+            } else if (/!?isMedia.+/.test(slotName)) {
               scope.value = `isMedia.${slotName
                 .replace('isMedia', '')
                 .toLowerCase()}`
