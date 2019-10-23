@@ -69,13 +69,6 @@ export let getPropValueOrDefault = (node, key, defaultValue) => {
 
 export let getScope = node => node.value.split('when ')[1]
 
-let maybeSafe = node =>
-  node.tags.slot
-    ? node.value
-    : typeof node.value === 'string'
-    ? safe(node.value)
-    : node.value
-
 let getScopedProps = (propNode, blockNode) => {
   let scopes = blockNode.scopes
     .filter(scope => !scope.isSystem && !scope.isLocal)
@@ -91,56 +84,31 @@ let getScopedProps = (propNode, blockNode) => {
   return scopes
 }
 
-// export let interpolateText = (node, parent, isTemplateLiteral) => {
-//   parent.interpolation.forEach(item => {
-//     let re = new RegExp(`${item.is ? item.is : item.name}`)
-//     let textNode = item.properties.find(prop => prop.name === 'text')
-//     node.value = isTemplateLiteral
-//       ? getLiteralInterpolation(node, re, textNode)
-//       : getStandardInterpolation(node, re, textNode, item)
-//   })
-//   return isTemplateLiteral ? '`' + node.value + '`' : node.value
-// }
+let getScopedConditionPropValue = node => {
+  let value = null
 
-// let getLiteralInterpolation = (node, re, textNode) =>
-//   node.value.replace(
-//     re,
-//     `$${isSlot(textNode) ? wrap(textNode.value) : textNode.value}`
-//   )
+  if (node.tags.slot) {
+    value = node.value
+  } else if (typeof node.value === 'string') {
+    value = safe(node.value)
+  } else {
+    let unit = getUnit(node)
+    value = unit ? `"${node.value}${unit}"` : node.value
+  }
 
-// let getStandardInterpolation = (node, re, textNode, item) =>
-//   node.value.replace(
-//     re,
-//     hasCustomScopes(textNode, item)
-//       ? wrap(getScopedCondition(textNode, item, true))
-//       : isSlot(textNode)
-//       ? wrap(textNode.value)
-//       : textNode.value
-//   )
+  return value
+}
 
-export let getScopedCondition = (propNode, blockNode, alreadyInterpolated) => {
-  // alreadyInterpolated = interpolation that contains scoped condition
-  // !alreadyInterpolated = scoped condition that contains interpolation
-  // see tests in TextInterpolation.view for an example of both
+export let getScopedCondition = (propNode, blockNode) => {
   let scopedProps = getScopedProps(propNode, blockNode)
 
   if (!scopedProps) return false
 
-  // let conditional =
-  //   blockNode.hasOwnProperty('interpolation') && !alreadyInterpolated
-  //     ? interpolateText(propNode, blockNode, true)
-  //     : maybeSafe(propNode)
-  let conditional = maybeSafe(propNode)
-
+  let conditional = getScopedConditionPropValue(propNode)
   scopedProps.forEach(scope => {
-    conditional = `${scope.when} ? ${maybeSafe(scope.prop)} : ` + conditional
-
-    // conditional =
-    //   `${scope.when} ? ${
-    //     blockNode.hasOwnProperty('interpolation') && !alreadyInterpolated
-    //       ? interpolateText(scope.prop, blockNode, true)
-    //       : maybeSafe(scope.prop)
-    //   } : ` + conditional
+    conditional = `${scope.when} ? ${getScopedConditionPropValue(
+      scope.prop
+    )} : ${conditional}`
   })
 
   let lastScope = scopedProps[scopedProps.length - 1]
