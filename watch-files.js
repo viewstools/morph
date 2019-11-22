@@ -29,46 +29,23 @@ export default async function watchFiles({ morpher, serve }) {
     ignoreInitial: true,
     awaitWriteFinish: true,
   })
+
   let compiler = null
   if (serve) {
     compiler = await runCra()
-    //let beforeRunTimeout = null
-    const awaitProcessEventsPromise = s => {
-      //console.log('Tap Changed files:',Object.keys(s.watchFileSystem.watcher.mtimes))
-
-      if (processEventsPromise) {
-        console.log('Morpher busy, wait')
-        return processEventsPromise
-      } else {
-        return Promise.resolve()
-        // return new Promise( (res,rej)=>{
-        //   clearTimeout(beforeRunTimeout)
-        //   beforeRunTimeout = null
-        //   //give the morpher a chance to start
-        //   beforeRunTimeout = setTimeout(async ()=>{
-        //     console.log(`${!!processEventsPromise?"Morpher running, wait":"morpher not running, ignore"}`)
-        //     if (processEventsPromise) {
-        //       await processEventsPromise
-        //       console.log("morpher done")
-        //     }
-        //     res()
-        //   },1000)
-        // })
-      }
-    }
     compiler.hooks.watchRun.tapPromise(
       'ViewsMorpher',
-      awaitProcessEventsPromise
+      () => processEventsPromise || Promise.resolve()
     )
   }
 
   let skipTimeout = null
   let processEventsPromise = null
   let queue = []
-  function onEvent({ file, op }, skip) {
-    console.log('entered event, file: ', file, 'op: ', op)
+  function onEvent({ file, op }, process = true) {
+    // console.log('entered event, file: ', file, 'op: ', op)
 
-    if (!skip) {
+    if (process) {
       queue.push({ file: path.join(morpher.src, file), op })
     }
 
@@ -76,65 +53,30 @@ export default async function watchFiles({ morpher, serve }) {
     clearTimeout(skipTimeout)
     skipTimeout = null
     if (processEventsPromise) {
-      setTimeout(() => onEvent({}, true), 200)
+      skipTimeout = setTimeout(() => onEvent({}, false), 200)
       return
     }
-    console.log('after enter, queue is', queue)
+    // console.log('after enter, queue is', queue)
     processEvents()
   }
 
   async function processEvents() {
-    // idle = false
-    console.log('process events, queue is empty?', queue.length === 0)
-    if (queue.length === 0) {
-      console.log('skipping morpher', queue.length)
-      // idle = true
+    if (queue.length === 0 || processEventsPromise) {
       return
     }
-    if (processEventsPromise) {
-      console.log('this should never happen, promise is not null')
-      return
-    }
-
-    console.log('on process, queue is', queue)
 
     let queueClone = [...queue]
     queue = []
-    processEventsPromise = new Promise(async (response, reject) => {
+    processEventsPromise = new Promise(async resolve => {
       try {
         await processQueue({ queue: queueClone, morpher })
-      } catch (e) {
-        console.log('error')
+      } catch (error) {
+        console.error(error)
       } finally {
-        response()
+        resolve()
         processEventsPromise = null
       }
     })
-
-    // idle = true
-
-    // if (compiler) {
-    //   console.log('runnning compiler', 'idle is?', idle)
-    //   compiler.run((err, stats) => {
-    //     idle = true
-
-    //     console.log(
-    //       process.hrtime(),
-    //       'webpack compiler finished running',
-    //       'idle is?',
-    //       idle
-    //     )
-
-    //     if (err) {
-    //       console.error('compiler errors', err)
-    //       return
-    //     }
-
-    //     console.log('compiler done', stats)
-    //   })
-    // } else {
-    //   idle = true
-    // }
   }
 
   watcher.on('add', file => onEvent({ file, op: 'add' }))
@@ -168,9 +110,9 @@ async function processQueue({ queue, morpher }) {
 
   if (!morpher.verbose) return // && viewsId.size > 0) {
 
-  Object.entries(filesToProcess).forEach(([key, value]) => {
-    console.log(chalk.greenBright(key), [...value])
-  })
+  // Object.entries(filesToProcess).forEach(([key, value]) => {
+  //   console.log(chalk.greenBright(key), [...value])
+  // })
 
   //   console.log(chalk.green('M'), [...viewsId].join(', '))
   // }
