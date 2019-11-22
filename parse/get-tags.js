@@ -46,7 +46,7 @@ export default ({ name, isSlot, slotIsNot, value, block }) => {
   if (
     isUnsupportedShorthand(name) &&
     block.isBasic &&
-    block.name !== 'SvgGroup'
+    !block.name.startsWith('Svg')
   ) {
     tags.unsupportedShorthand = true
   }

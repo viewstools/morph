@@ -2,6 +2,7 @@ import { ensureFontsDirectory } from './fonts.js'
 import getFiles from './get-files.js'
 import chalk from 'chalk'
 import makeMorpher from './make-morpher.js'
+import maybePrintWarnings from './maybe-print-warnings.js'
 import path from 'path'
 import watchFiles from './watch-files.js'
 
@@ -13,8 +14,14 @@ export default async function watch(options) {
   await morpher.processFiles(await getFiles(morpher.src))
 
   if (options.verbose) {
+    if (morpher.customFonts.size > 0) {
+      console.log(chalk.yellow(`\nCustom fonts detected:`))
+      console.log([...morpher.customFonts.keys()].sort().join('\n'))
+    }
+
+    let views = [...morpher.viewsToFiles.values()]
     console.log(
-      [...morpher.viewsToFiles.values()]
+      views
         .map(view => {
           let msg = view.id
           if (view.custom) {
@@ -29,10 +36,8 @@ export default async function watch(options) {
         .sort()
         .join('\n')
     )
-    if (morpher.customFonts.size > 0) {
-      console.log(chalk.yellow(`\nCustom fonts detected:`))
-      console.log([...morpher.customFonts.keys()].sort().join('\n'))
-    }
+
+    views.forEach(maybePrintWarnings)
   }
 
   if (options.once) return

@@ -42,6 +42,7 @@ export default ({
   id,
   skipComments = true,
   skipInvalidProps = true,
+  warnMissingDefaultValue = false,
   source,
   src,
   views,
@@ -66,7 +67,7 @@ export default ({
   )
 
   let blockIds = []
-  let getBlockId = node => {
+  function getBlockId(node) {
     let maybeId = node.is || node.name
 
     if (!blockIds.includes(maybeId)) {
@@ -83,7 +84,7 @@ export default ({
     return id
   }
 
-  let getChildrenProxyMap = block => {
+  function getChildrenProxyMap(block) {
     let childrenProxyMap = {}
 
     block.children
@@ -95,7 +96,7 @@ export default ({
     return Object.keys(childrenProxyMap).length === 0 ? null : childrenProxyMap
   }
 
-  let lookForFonts = block => {
+  function lookForFonts(block) {
     if (block.properties && (isFontable(block.name) || !block.isBasic)) {
       let fontFamilyProp = block.properties.find(p => p.name === 'fontFamily')
       if (!fontFamilyProp) return
@@ -134,7 +135,7 @@ export default ({
               type: `The font "${family}" is missing. Did you mean "${meant}" instead?\nIf not, download the font files (eg, "${font.id}.woff2", "${font.id}.woff", "${font.id}.ttf", etc) and add the to the "Fonts" folder.`,
               line: lines[fontFamilyProp.loc.start.line - 1],
             })
-          } else {
+          } else if (!font.weight.startsWith('props.')) {
             warnings.push({
               loc: fontFamilyProp.loc,
               type: `The font "${family}" is missing.\nDownload the font files (eg, "${font.id}.woff2", "${font.id}.woff", "${font.id}.ttf", etc) and add the to the "Fonts" folder.`,
@@ -146,30 +147,29 @@ export default ({
     }
   }
 
-  let lookForMultiples = block => {
-    let names = block.properties.map(prop => prop.name)
+  function lookForMultiples(block) {
+    let freq = {}
+    block.properties.forEach(prop => {
+      if (!(prop.name in freq)) {
+        freq[prop.name] = 0
+      }
+      freq[prop.name]++
+    })
 
-    let occurences = names.reduce((prev, cur) => {
-      prev[cur] = (prev[cur] || 0) + 1
-      return prev
-    }, {})
-
-    let multiples = Object.values(occurences).filter(value => value > 1)
+    let multiples = Object.keys(freq).filter(name => freq[name] > 1)
 
     if (multiples.length > 0) {
-      multiples.forEach(mulitple =>
+      multiples.forEach(name =>
         warnings.push({
           loc: block.loc,
-          type: `You have declared a value for ${mulitple[0]} ${
-            mulitple[1]
-          } times. Only the last value will be used. You may want to delete the ones you don't use.`,
+          type: `You have declared a value for ${name} ${freq[name]} times. Only the last value will be used. Delete the ones you don't use.`,
           line: lines[block.loc.start.line - 1],
         })
       )
     }
   }
 
-  let end = (block, endLine) => {
+  function end(block, endLine) {
     block.loc.end = {
       line: endLine + 1,
       column: Math.max(0, lines[endLine].length - 1),
@@ -202,7 +202,7 @@ export default ({
     return false
   }
 
-  let parseBlock = (line, i) => {
+  function parseBlock(line, i) {
     let { block: name, is, level } = getBlock(line)
     let shouldPushToStack = false
 
@@ -386,7 +386,7 @@ That would mean that SomeView in ${block.name} will be replaced by ${block.name}
     lookForMultiples(block)
   }
 
-  let parseProps = (i, block) => {
+  function parseProps(i, block) {
     let endOfBlockIndex = i
     while (
       endOfBlockIndex < lines.length - 1 &&
@@ -412,7 +412,6 @@ That would mean that SomeView in ${block.name} will be replaced by ${block.name}
           name,
           isSlot,
           slotIsNot,
-          slotName,
           value,
           block,
         })
@@ -663,6 +662,7 @@ That would mean that SomeView in ${block.name} will be replaced by ${block.name}
                 propNode.defaultValue = false
 
                 if (
+                  warnMissingDefaultValue &&
                   block.isBasic &&
                   (propNode.tags.style ||
                     (block.name === 'Text' && propNode.name === 'text'))

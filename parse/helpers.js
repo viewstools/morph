@@ -25,6 +25,8 @@ let dymPropMatcher = new DidYouMeanMatcher([
   'id',
   'key',
   'maxLength',
+  'max',
+  'min',
   'onBlur',
   'onChange',
   'onClick',
