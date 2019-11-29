@@ -55,11 +55,6 @@ import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin'
 const useYarn = fs.existsSync(paths.yarnLockFile)
 const isInteractive = false // process.stdout.isTTY
 
-// Warn and crash if required files are missing
-if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
-  process.exit(1)
-}
-
 // Tools like Cloud9 rely on this.
 const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3000
 const HOST = process.env.HOST || '0.0.0.0'
@@ -89,6 +84,11 @@ let { checkBrowsers } = rdub
 let wait = () => new Promise(resolve => setTimeout(resolve, 1000))
 
 export default function run() {
+  // Warn and crash if required files are missing
+  if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
+    process.exit(1)
+  }
+
   return new Promise(async (resolve, reject) => {
     await wait()
     try {
