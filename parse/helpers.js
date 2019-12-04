@@ -50,6 +50,7 @@ let dymPropMatcher = new DidYouMeanMatcher([
   'onMouseMove',
   'onMouseOver',
   'onMouseUp',
+  'order',
   'onWheel',
   'onWhen',
   'r',

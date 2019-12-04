@@ -167,7 +167,7 @@ export let STYLE = [
   // 'navIndex',
   // 'navLeft',
   // 'navRight',
-  // 'order',
+  'order',
   // 'outline',
   // 'overflow',
   // 'padding',
