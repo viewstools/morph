@@ -105,12 +105,13 @@ export let useCaptureItem = ({
     let rawValue = get(item, path);
     let value = format.in(rawValue);
 
-    let isValid =
-      validate && (touched.current || (required && item._forceRequired))
-        ? fromValidate[validate](rawValue, value)
-        : true;
-    let onChange = value => {
-      touched.current = true;
+    let isValid = true;
+    if (validate && (touched.current || (required && item._forceRequired))) {
+      isValid = fromValidate[validate](rawValue, value);
+    }
+
+    function onChange(value) {
+      touched.current = !!value;
       dispatch(setField(path, format.out(value)));
     }
 
@@ -155,19 +156,19 @@ export let useCaptureItemProvider = (item, onSubmit) => {
   ]);
 };
 
-function formatDateInOut(rvalue, formatIn, formatOut, whenInvalid = '') {
+function formatDateInOut(rvalue, formatIn, formatOut) {
   let value =
     formatIn === 'iso'
       ? parseISO(rvalue)
       : parseDate(rvalue, formatIn, new Date());
-  return isValidDate(value) ? formatDate(value, formatOut) : whenInvalid;
+  return isValidDate(value) ? formatDate(value, formatOut) : rvalue;
 }
 
-export let useMakeFormatDate = (formatIn, formatOut, whenInvalid) =>
+export let useMakeFormatDate = (formatIn, formatOut) =>
   useMemo(
     () => ({
-      in: value => formatDateInOut(value, formatIn, formatOut, whenInvalid),
-      out: value => formatDateInOut(value, formatOut, formatIn, whenInvalid),
+      in: value => formatDateInOut(value, formatIn, formatOut),
+      out: value => formatDateInOut(value, formatOut, formatIn),
     }),
     [] // eslint-disable-line
   ); // ignore formatIn, formatouOut, whenInvalid
