@@ -189,7 +189,8 @@ useEffect(() => setState(maybeInitialState || props.initialState), []) // eslint
         return nextState
       })
     },
-    []
+    [] // eslint-disable-line
+    // ignore props.onSetFlow
   )
 
   useEffect(() => {
