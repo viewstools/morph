@@ -179,7 +179,15 @@ useEffect(() => setState(maybeInitialState || props.initialState), []) // eslint
         }
       }
 
-      setState(state => getNextFlow(id, state))
+      setState(state => {
+        let nextState = getNextFlow(id, state)
+
+        if (typeof props.onSetFlow === 'function') {
+          props.onSetFlow(id, nextState)
+        }
+
+        return nextState
+      })
     },
     []
   )
