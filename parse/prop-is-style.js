@@ -9,6 +9,7 @@ export let STYLE = [
   'backgroundPosition',
   'backgroundRepeat',
   'backgroundSize',
+  'backdropFilter',
   'borderBottomColor',
   'borderBottomLeftRadius',
   'borderBottomRightRadius',
