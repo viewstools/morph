@@ -88,6 +88,7 @@ let UNITS = {
   shadowOffsetX: LENGTH,
   shadowBlur: LENGTH,
   shadowSpread: LENGTH,
+  shadowInset: UNITLESS,
   skew: ANGLE,
   spreadRadius: LENGTH,
   top: LENGTH,

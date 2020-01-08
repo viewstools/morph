@@ -195,6 +195,7 @@ let ensurePropName = name => {
     case 'shadowOffsetX':
     case 'shadowOffsetY':
     case 'shadowSpread':
+    case 'shadowInset':
       return 'box-shadow'
 
     default:

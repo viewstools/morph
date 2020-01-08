@@ -55,6 +55,7 @@ export default (node, parent, code) => {
     case 'shadowOffsetX':
     case 'shadowOffsetY':
     case 'shadowSpread':
+    case 'shadowInset':
       return getShadow(node, parent)
 
     case 'rotate':
@@ -124,8 +125,10 @@ let getShadow = (node, parent) => {
   let shadowOffsetX = getProp(parent, 'shadowOffsetX', node.scope)
   let shadowOffsetY = getProp(parent, 'shadowOffsetY', node.scope)
   let shadowSpread = getProp(parent, 'shadowSpread', node.scope)
+  let shadowInset = getProp(parent, 'shadowInset', node.scope)
 
   let value = [
+    !isText && getPropValue(shadowInset, parent) && 'inset',
     getPropValue(shadowOffsetX, parent, 'px'),
     getPropValue(shadowOffsetY, parent, 'px'),
     getPropValue(shadowBlur, parent, 'px'),
@@ -141,7 +144,8 @@ let getShadow = (node, parent) => {
     isSlot(shadowBlur) ||
     isSlot(shadowOffsetY) ||
     isSlot(shadowOffsetX) ||
-    isSlot(shadowSpread)
+    isSlot(shadowSpread) ||
+    isSlot(shadowInset)
   ) {
     value = `\`${value}\``
   }

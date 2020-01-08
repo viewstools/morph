@@ -82,6 +82,7 @@ export let STYLE = [
   'shadowOffsetY',
   'shadowBlur',
   'shadowSpread',
+  'shadowInset',
   'stroke',
   'textAlign',
   'textDecoration',
