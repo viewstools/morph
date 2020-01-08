@@ -119,11 +119,11 @@ let getPropValue = (prop, block, unit = '') => {
 let getShadow = (node, parent) => {
   let isText = parent.name === 'Text'
 
-  let shadowColor = getProp(parent, 'shadowColor')
-  let shadowBlur = getProp(parent, 'shadowBlur')
-  let shadowOffsetX = getProp(parent, 'shadowOffsetX')
-  let shadowOffsetY = getProp(parent, 'shadowOffsetY')
-  let shadowSpread = getProp(parent, 'shadowSpread')
+  let shadowColor = getProp(parent, 'shadowColor', node.scope)
+  let shadowBlur = getProp(parent, 'shadowBlur', node.scope)
+  let shadowOffsetX = getProp(parent, 'shadowOffsetX', node.scope)
+  let shadowOffsetY = getProp(parent, 'shadowOffsetY', node.scope)
+  let shadowSpread = getProp(parent, 'shadowSpread', node.scope)
 
   let value = [
     getPropValue(shadowOffsetX, parent, 'px'),
@@ -157,14 +157,14 @@ let getTransformValue = (prop, parent, unit) => {
 }
 
 let getTransform = (node, parent) => {
-  let rotate = getProp(parent, 'rotate')
-  let rotateX = getProp(parent, 'rotateX')
-  let rotateY = getProp(parent, 'rotateY')
-  let scale = getProp(parent, 'scale')
-  let scaleX = getProp(parent, 'scaleX')
-  let scaleY = getProp(parent, 'scaleY')
-  let translateX = getProp(parent, 'translateX')
-  let translateY = getProp(parent, 'translateY')
+  let rotate = getProp(parent, 'rotate', node.scope)
+  let rotateX = getProp(parent, 'rotateX', node.scope)
+  let rotateY = getProp(parent, 'rotateY', node.scope)
+  let scale = getProp(parent, 'scale', node.scope)
+  let scaleX = getProp(parent, 'scaleX', node.scope)
+  let scaleY = getProp(parent, 'scaleY', node.scope)
+  let translateX = getProp(parent, 'translateX', node.scope)
+  let translateY = getProp(parent, 'translateY', node.scope)
 
   let value = [
     getTransformValue(rotate, parent, 'deg'),
@@ -199,8 +199,8 @@ let getTransform = (node, parent) => {
 }
 
 let getTransformOrigin = (node, parent) => {
-  let transformOriginX = getProp(parent, 'transformOriginX')
-  let transformOriginY = getProp(parent, 'transformOriginY')
+  let transformOriginX = getProp(parent, 'transformOriginX', node.scope)
+  let transformOriginY = getProp(parent, 'transformOriginY', node.scope)
   let value = [
     getPropValue(
       transformOriginX,

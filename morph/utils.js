@@ -56,9 +56,17 @@ export let getPropertiesAsObject = list => {
   return getObjectAsString(obj)
 }
 
-export let getProp = (node, key) => {
+export let getProp = (node, key, scope = 'base') => {
   let finder =
     typeof key === 'string' ? p => p.name === key : p => key.test(p.name)
+
+  if (scope !== 'base') {
+    let nodeScope = node.scopes.find(item => item.value === scope)
+    let prop = nodeScope && nodeScope.properties.find(finder)
+    if (prop) {
+      return prop
+    }
+  }
 
   return node.properties && node.properties.find(finder)
 }
