@@ -99,6 +99,8 @@ let getScopedConditionPropValue = node => {
     value = node.value
   } else if (typeof node.value === 'string') {
     value = safe(node.value)
+  } else if (typeof node.value === 'boolean' && node.name === 'shadowInset') {
+    value = node.value ? "'inset'" : "''"
   } else {
     let unit = getUnit(node)
     value = unit ? `"${node.value}${unit}"` : node.value

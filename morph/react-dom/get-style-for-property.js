@@ -24,6 +24,23 @@ export default (node, parent, code) => {
           transform: `'${getTransform(node, parent)}'`,
         }
 
+      case 'shadowColor':
+      case 'shadowBlur':
+      case 'shadowOffsetX':
+      case 'shadowOffsetY':
+      case 'shadowSpread':
+      case 'shadowInset': {
+        let shadow = getShadow(node, parent)
+        let key = Object.keys(shadow)[0]
+
+        console.log('shadow', shadow)
+
+        return {
+          _isScoped: true,
+          [key]: `'${shadow[key]}'`,
+        }
+      }
+
       default:
         return {
           _isScoped: true,
@@ -126,9 +143,13 @@ let getShadow = (node, parent) => {
   let shadowOffsetY = getProp(parent, 'shadowOffsetY', node.scope)
   let shadowSpread = getProp(parent, 'shadowSpread', node.scope)
   let shadowInset = getProp(parent, 'shadowInset', node.scope)
+  let shadowInsetValue = getPropValue(shadowInset, parent)
 
   let value = [
-    !isText && Boolean(getPropValue(shadowInset, parent)) && 'inset',
+    !isText &&
+      (typeof shadowInsetValue === 'string' && /var\(/.test(shadowInsetValue)
+        ? shadowInsetValue
+        : shadowInsetValue && 'inset'),
     getPropValue(shadowOffsetX, parent, 'px'),
     getPropValue(shadowOffsetY, parent, 'px'),
     getPropValue(shadowBlur, parent, 'px'),
