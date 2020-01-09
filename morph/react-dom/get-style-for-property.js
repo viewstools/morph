@@ -128,7 +128,7 @@ let getShadow = (node, parent) => {
   let shadowInset = getProp(parent, 'shadowInset', node.scope)
 
   let value = [
-    !isText && getPropValue(shadowInset, parent) && 'inset',
+    !isText && Boolean(getPropValue(shadowInset, parent)) && 'inset',
     getPropValue(shadowOffsetX, parent, 'px'),
     getPropValue(shadowOffsetY, parent, 'px'),
     getPropValue(shadowBlur, parent, 'px'),
