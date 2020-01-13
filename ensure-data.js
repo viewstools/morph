@@ -22,7 +22,9 @@ export let ItemProvider = ItemContext.Provider;
 export let useItem = ({ path = null, format = identity } = {}) => {
   let item = useContext(ItemContext);
 
-  return useMemo(() => (path ? { value: format.in(get(item, path)) } : item), [
+  return useMemo(() => ({
+    value: path ? format.in(get(item, path)) : item
+  }), [
     item,
     path,
     format,
@@ -82,8 +84,6 @@ export let useCaptureItem = ({
   }
 
   return useMemo(() => {
-    if (!path) return captureItem;
-
     let [item, dispatch, onSubmit] = captureItem;
 
     if (!item) {
@@ -102,8 +102,8 @@ export let useCaptureItem = ({
       return {};
     }
 
-    let rawValue = get(item, path);
-    let value = format.in(rawValue);
+    let rawValue = path ? get(item, path) : item;
+    let value = path ? format.in(rawValue) : rawValue;
 
     let isValid = true;
     if (validate && (touched.current || (required && item._forceRequired))) {
@@ -112,7 +112,7 @@ export let useCaptureItem = ({
 
     function onChange(value) {
       touched.current = !!value;
-      dispatch(setField(path, format.out(value)));
+      dispatch(path ? setField(path, format.out(value)) : reset(value))
     }
 
     return {
