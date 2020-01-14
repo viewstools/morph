@@ -194,7 +194,7 @@ export let STYLE = [
   // 'transitionTimingFunction',
   // 'unicodeBidi',
   // 'verticalAlign',
-  // 'visibility',
+  'visibility',
 ]
 export let ROWSTYLE = [
   'rowBackgroundColor',
