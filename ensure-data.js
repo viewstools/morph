@@ -70,12 +70,12 @@ export function DataProvider(props) {
   // ignore dispatch
 
   let value = useMemo(() => {
-    async function onSubmit(args) {
+    async function onSubmit() {
       if (isSubmitting.current) return
       isSubmitting.current = true
 
       try {
-        let res = await props.onSubmit(args)
+        let res = await props.onSubmit(state)
         isSubmitting.current = false
 
         if (!res) return
@@ -87,12 +87,19 @@ export function DataProvider(props) {
     }
 
     return [state, dispatch, onSubmit]
-  }, [state, dispatch, props.onSubmit])
+  }, [state, dispatch]) // eslint-disable-line
+  // ignore props.onSubmit
+
+  useEffect(() => {
+    props.onChange(state, fn => dispatch({ type: SET_FN, fn }))
+  }, [state, dispatch]) // eslint-disable-line
+  // ignore props.onChange
 
   return <Context.Provider value={value}>{props.children}</Context.Provider>
 }
 DataProvider.defaultProps = {
   context: 'default',
+  onChange: () => {},
   onSubmit: () => {},
 }
 

@@ -249,10 +249,11 @@ export let getData = maybeProp => {
   if (!match) return null
 
   let path = match[2]
-  let [context = null] = /\./.test(path) ? path.split('.') : []
+  let [context = null] = /\./.test(path) ? path.split('.') : [path]
 
   return { type: match[1], path, context }
 }
+
 export let getDataFormat = maybeProp => {
   if (!maybeProp || !maybeProp.value) return null
   let [formatIn, formatOut] = maybeProp.value.split(' ')
