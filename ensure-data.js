@@ -190,12 +190,15 @@ export function useData({
   }, [contextValue, path, formatIn, formatOut, required, validate])
 }
 
-let identity = i => i
-export function useDataList({ list, itemName = 'item', getItem = identity } = {}) {
+export function useDataList({ list, itemName = 'item', byId = null } = {}) {
   return useMemo(
-    () => list.map((item, index) => ({ [itemName]: getItem(item), index: index + 1, i: index })),
-    [list, itemName] // eslint-disable-line
-    // ignore getItem
+    () =>
+      list.map((item, index) => ({
+        [itemName]: byId ? byId[item] : item,
+        index: index + 1,
+        i: index,
+      })),
+    [list, itemName, byId]
   )
 }
 `

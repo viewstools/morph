@@ -122,11 +122,13 @@ function maybeDataContext(dataDefinition, data) {
 function maybeDataFormat(format, data) {
   if (!format) return
 
-  data.push(`formatIn: '${format.formatIn}', formatOut: '${format.formatOut}'`)
-  if (format.whenInvalid) {
-    data.push(`, '${format.whenInvalid}'`)
+  if (format.formatIn) {
+    data.push(`formatIn: '${format.formatIn}',`)
   }
-  data.push(`),`)
+
+  if (format.formatOut) {
+    data.push(`formatOut: '${format.formatOut}',`)
+  }
 }
 function maybeDataValidate(validate, data) {
   if (!validate || validate.type !== 'js') return
