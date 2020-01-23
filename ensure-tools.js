@@ -1,12 +1,10 @@
 import fsExtra from 'fs-extra'
 import path from 'path'
 
-let TOOLS_FILE = `let warnedAboutMissingOut = false
+let TOOLS_FILE = `import { useEffect } from 'react'
 
-export default function useTools() {
-  if (!warnedAboutMissingOut) {
-    warnedAboutMissingOut = true
-
+export default function Tools(props) {
+  useEffect(() => {
     console.log(\`
 
 
@@ -24,15 +22,14 @@ export default function useTools() {
 
 
 
-
     \`)
-  }
+  }, [])
 
-  return [null, () => {}]
+  return props.children
 }`
 
 export default async function ensureTools({ src }) {
-  let file = path.join(src, 'useTools.js')
+  let file = path.join(src, 'Tools.view.logic.js')
 
   if ((await fsExtra.exists(file)) && process.env.REACT_APP_VIEWS_TOOLS)
     return null

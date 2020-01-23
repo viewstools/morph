@@ -1,5 +1,3 @@
-import getUnit from '../get-unit.js'
-
 export default ({ state, name }) => {
   let render = state.render.join('')
   if (Object.keys(state.locals).length > 0 || state.isFormatted) {
@@ -69,16 +67,16 @@ export default ({ state, name }) => {
   if (state.data) {
     switch (state.data.type) {
       case 'show': {
-        data.push(`let data = fromData.useItem({ path: '${state.data.path}', `)
+        data.push(`let data = fromData.useData({ path: '${state.data.path}', `)
+        maybeDataContext(state.data, data)
         maybeDataFormat(state.dataFormat, data)
         data.push('})')
         break
       }
 
       case 'capture': {
-        data.push(
-          `let data = fromData.useCaptureItem({ path: '${state.data.path}', `
-        )
+        data.push(`let data = fromData.useData({ path: '${state.data.path}', `)
+        maybeDataContext(state.data, data)
         maybeDataFormat(state.dataFormat, data)
         maybeDataValidate(state.dataValidate, data)
         data.push('})')
@@ -116,17 +114,21 @@ export default ({ state, name }) => {
   }
 }
 
+function maybeDataContext(dataDefinition, data) {
+  if (dataDefinition.context === null) return
+
+  data.push(`context: '${dataDefinition.context}',`)
+}
 function maybeDataFormat(format, data) {
   if (!format) return
-  if (format.type !== 'date') return
 
-  data.push(
-    `format: fromData.useMakeFormatDate('${format.formatIn}', '${format.formatOut}'`
-  )
-  if (format.whenInvalid) {
-    data.push(`, '${format.whenInvalid}'`)
+  if (format.formatIn) {
+    data.push(`formatIn: '${format.formatIn}',`)
   }
-  data.push(`),`)
+
+  if (format.formatOut) {
+    data.push(`formatOut: '${format.formatOut}',`)
+  }
 }
 function maybeDataValidate(validate, data) {
   if (!validate || validate.type !== 'js') return

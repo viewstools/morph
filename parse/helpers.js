@@ -248,19 +248,19 @@ export let getData = maybeProp => {
   let match = maybeProp.value.match(/^(show|capture)\s+(.+)$/)
   if (!match) return null
 
-  return { type: match[1], path: match[2] }
+  let path = match[2]
+  let [context = null] = /\./.test(path) ? path.split('.') : [path]
+
+  return { type: match[1], path, context }
 }
+
 export let getDataFormat = maybeProp => {
-  if (!maybeProp) return null
-
-  let match = maybeProp.value.match(/^(date)\s+(.+?)\s+(.+?)(\s+(.+))?$/)
-  if (!match) return null
-
+  if (!maybeProp || !maybeProp.value) return null
+  let [formatIn, formatOut] = maybeProp.value.split(' ')
   return {
-    type: match[1],
-    formatIn: match[2],
-    formatOut: match[3],
-    whenInvalid: match[5] || null,
+    type: 'js',
+    formatIn,
+    formatOut,
   }
 }
 

@@ -74,14 +74,8 @@ let makeFlow = ({ tools, viewsById, viewsToFiles }) => {
 // improving the algorithms inside, etc, see this:
 // https://github.com/viewstools/morph/blob/master/ensure-flow.js
 
-import React, { useCallback, useContext, useEffect, useState } from 'react'
-${tools ? "import useTools from './useTools.js'" : ''}
-
-let GetFlow = React.createContext(new Set())
-let SetFlow = React.createContext(() => {})
-
-export let useFlow = () => useContext(GetFlow)
-export let useSetFlow = () => useContext(SetFlow)
+import React, { useCallback, useContext, useEffect, useReducer } from 'react'
+${tools ? "import Tools from './Tools.view.logic.js'" : ''}
 
 export let flow = new Map([${flowMapStr.join(', ')}])
 
@@ -139,6 +133,12 @@ function getNextFlow(key, state) {
 
   difference(state, next).forEach(id => {
     let story = flow.get(id)
+    if (!story) {
+      console.debug({ type: 'views/flow/missing-story', id })
+      diffOut.add(id)
+      return
+    }
+
     if (state.has(story.parent)) {
       let parent = flow.get(story.parent)
       if (intersection(parent.stories, diffIn).size > 0) {
@@ -155,57 +155,83 @@ function getNextFlow(key, state) {
   return new Set([...nextState].sort())
 }
 
-export function Flow(props) {
-  let [state, setState] = useState(${
-    tools ? 'new Set()' : 'props.initialState'
-  })
-  ${
-    tools
-      ? `let [maybeInitialState, sendToTools] = useTools(setState)
-useEffect(() => setState(maybeInitialState || props.initialState), []) // eslint-disable-line`
-      : ''
-  }
+let MAX_ACTIONS = 10000
+let SYNC = 'flow/SYNC'
+let SET = 'flow/SET'
 
-  let setFlow = useCallback(
-    id => {
+let Context = React.createContext([{ actions: [], flow: new Set() }, () => {}])
+export let useFlow = () => useContext(Context)[0].flow
+export let useSetFlow = () => {
+  let [, dispatch] = useContext(Context)
+  return useCallback(id => dispatch({ type: SET, id }), [])
+}
+
+function getNextActions(state, id) {
+  return [id, ...state.actions].slice(0, MAX_ACTIONS)
+}
+
+function reducer(state, action) {
+  switch (action.type) {
+    ${
+      tools
+        ? `case SYNC: {
+      return {
+        flow: new Set(action.flow),
+        actions: getNextActions(state, action.id)
+      }
+    }`
+        : ''
+    }
+
+    case SET: {
       if (process.env.NODE_ENV === 'development') {
-        console.debug('setFlow', id)
+        console.debug({ type: 'views/flow/set', id: action.id })
 
-        if (!flow.has(id)) {
-          console.log('Stories', flow)
+        if (!flow.has(action.id)) {
+          console.debug({ type: 'views/flow/invalid-story', id: action.id, availableStories: flow })
           throw new Error(
-            \`Story "$\{id}" doesn't exist. See the valid stories logged above this error.\`
+            \`Story "$\{action.id}" doesn't exist. See the valid stories logged above this error.\`
           )
         }
       }
 
-      setState(state => {
-        let nextState = getNextFlow(id, state)
-
-        if (typeof props.onSetFlow === 'function') {
-          props.onSetFlow(id, nextState)
+      if (state.actions[0] === action.id) {
+        if (process.env.NODE_ENV === 'development') {
+          console.debug({ type: 'views/flow/already-set-as-last-action-ignoring', id: action.id, actions: state.actions })
         }
+        return state
+      }
 
-        return nextState
-      })
-    },
-    [] // eslint-disable-line
-    // ignore props.onSetFlow
-  )
-
-  useEffect(() => {
-    if (process.env.NODE_ENV === 'development') {
-      if (state.size > 0) {
-        console.debug('flow', state)
-        ${tools ? "sendToTools({ type: 'client:flow', flow: [...state] })" : ''}
+      return {
+        flow: getNextFlow(action.id, state.flow),
+        actions: getNextActions(state, action.id)
       }
     }
-  }, [state${tools ? ', sendToTools' : ''}])
+
+    default: {
+      throw new Error(\`Unknown action "\${action.type}" in Flow\`)
+    }
+  }
+}
+
+export function Flow(props) {
+  let context = useReducer(reducer, { actions: [], flow: props.initialState })
+  let [state] = context
+
+  useEffect(() => {
+    if (typeof props.onChange === 'function') {
+      props.onChange(state)
+    }
+  }, [state])
 
   return (
-    <SetFlow.Provider value={setFlow}>
-      <GetFlow.Provider value={state}>{props.children}</GetFlow.Provider>
-    </SetFlow.Provider>
+    <Context.Provider value={context}>
+      ${
+        tools
+          ? '<Tools flow={context}>{props.children}</Tools>'
+          : '{props.children}'
+      }
+    </Context.Provider>
   )
 }
 

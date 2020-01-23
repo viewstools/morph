@@ -101,6 +101,7 @@ export let STYLE = [
   'transformOriginX',
   'transformOriginY',
   'transition',
+  'unicodeBidi',
   'userSelect',
   'whiteSpace',
   'width',
