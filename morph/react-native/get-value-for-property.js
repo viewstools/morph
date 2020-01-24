@@ -61,8 +61,10 @@ export default (node, parent, state) => {
     (node.value === 'props.value' ||
       node.value === 'props.onSubmit' ||
       node.value === 'props.onChange' ||
-      node.value === 'props.isValid' ||
       node.value === 'props.isInvalid' ||
+      node.value === 'props.isInvalidInitial' ||
+      node.value === 'props.isValid' ||
+      node.value === 'props.isValidInitial' ||
       node.value === 'props.onSubmit')
   ) {
     return {

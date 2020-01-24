@@ -109,7 +109,7 @@ export function useData({
   formatIn = null,
   formatOut = null,
   validate = null,
-  required = false,
+  validateRequired = false,
 } = {}) {
   if (process.env.NODE_ENV === 'development') {
     if (!(context in DataContexts)) {
@@ -152,7 +152,7 @@ export function useData({
             formatIn,
             formatOut,
             validate,
-            required,
+            validateRequired,
             data,
           }
         )
@@ -166,10 +166,11 @@ export function useData({
       value = fromFormat[formatIn](rawValue, data)
     }
 
-    let isValid = true
-    if (validate && (touched.current || (required && data._forceRequired))) {
-      isValid = fromValidate[validate](rawValue, value)
+    let isValidInitial = true
+    if (validate) {
+      isValidInitial = fromValidate[validate](rawValue, value, data)
     }
+    let isValid = touched.current || (validateRequired && data._forceRequired)? isValidInitial : true
 
     function onChange(value, changePath = path) {
       touched.current = !!value
@@ -192,9 +193,11 @@ export function useData({
       onSubmit,
       value,
       isValid,
+      isValidInitial,
       isInvalid: !isValid,
+      isInvalidInitial: !isValidInitial,
     }
-  }, [contextValue, path, formatIn, formatOut, required, validate])
+  }, [contextValue, path, formatIn, formatOut, validateRequired, validate])
 }
 
 export function useDataList({ list, itemName = 'item', byId = null } = {}) {

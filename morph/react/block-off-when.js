@@ -16,22 +16,13 @@ export function enter(node, parent, state) {
     let value = onWhen.value
     if (state.data) {
       switch (value) {
-        case 'props.isInvalid': {
-          value = 'data.isInvalid'
-          break
-        }
-
-        case 'props.isValid': {
-          value = 'data.isValid'
-          break
-        }
-
+        case 'props.isInvalid':
+        case 'props.isInvalidInitial':
+        case 'props.isValid':
+        case 'props.isValidInitial':
+        case '!props.value':
         case 'props.value': {
-          value = 'data.value'
-          break
-        }
-        case '!props.value': {
-          value = '!data.value'
+          value = value.replace('props', 'data')
           break
         }
 

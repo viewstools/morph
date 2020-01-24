@@ -163,7 +163,8 @@ let Context = React.createContext([{ actions: [], flow: new Set() }, () => {}])
 export let useFlow = () => useContext(Context)[0].flow
 export let useSetFlow = () => {
   let [, dispatch] = useContext(Context)
-  return useCallback(id => dispatch({ type: SET, id }), [])
+  return useCallback(id => dispatch({ type: SET, id }), []) // eslint-disable-line
+  // ignore dispatch
 }
 
 function getNextActions(state, id) {
@@ -222,7 +223,8 @@ export function Flow(props) {
     if (typeof props.onChange === 'function') {
       props.onChange(state)
     }
-  }, [state])
+  }, [state]) // eslint-disable-line
+  // ignore props.onChange
 
   return (
     <Context.Provider value={context}>

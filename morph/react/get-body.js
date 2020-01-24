@@ -66,14 +66,7 @@ export default ({ state, name }) => {
   let data = []
   if (state.data) {
     switch (state.data.type) {
-      case 'show': {
-        data.push(`let data = fromData.useData({ path: '${state.data.path}', `)
-        maybeDataContext(state.data, data)
-        maybeDataFormat(state.dataFormat, data)
-        data.push('})')
-        break
-      }
-
+      case 'show':
       case 'capture': {
         data.push(`let data = fromData.useData({ path: '${state.data.path}', `)
         maybeDataContext(state.data, data)
@@ -134,6 +127,6 @@ function maybeDataValidate(validate, data) {
   if (!validate || validate.type !== 'js') return
   data.push(`validate: '${validate.value}',`)
   if (validate.required) {
-    data.push('required: true,')
+    data.push('validateRequired: true,')
   }
 }
