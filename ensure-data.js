@@ -87,13 +87,13 @@ export function DataProvider(props) {
     }
 
     return [state, dispatch, onSubmit]
-  }, [state, dispatch]) // eslint-disable-line
-  // ignore props.onSubmit
+  }, [state, props.onSubmit]) // eslint-disable-line
+  // the linter says we need props when props.onSubmit is already there
 
   useEffect(() => {
     props.onChange(state, fn => dispatch({ type: SET_FN, fn }))
-  }, [state, dispatch]) // eslint-disable-line
-  // ignore props.onChange
+  }, [state, props.onChange]) // eslint-disable-line
+  // the linter says we need props when props.onChange is already there
 
   return <Context.Provider value={value}>{props.children}</Context.Provider>
 }
