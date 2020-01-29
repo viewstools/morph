@@ -33,8 +33,6 @@ export default (node, parent, code) => {
         let shadow = getShadow(node, parent)
         let key = Object.keys(shadow)[0]
 
-        console.log('shadow', shadow)
-
         return {
           _isScoped: true,
           [key]: `'${shadow[key]}'`,

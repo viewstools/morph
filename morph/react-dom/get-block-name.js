@@ -54,7 +54,6 @@ export default (node, parent, state) => {
       name = toCamelCase(node.name.replace('Svg', ''))
       break
 
-    // TODO don't output a fragment if there's only one child
     case 'View':
       name = 'React.Fragment'
       break

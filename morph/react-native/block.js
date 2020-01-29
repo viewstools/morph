@@ -10,7 +10,6 @@ import * as BlockMaybeSkip from '../react/block-maybe-skip.js'
 import * as BlockName from './block-name.js'
 import * as BlockOffWhen from '../react/block-off-when.js'
 import * as BlockProperties from './block-properties.js'
-import * as BlockProxy from '../react/block-proxy.js'
 import * as BlockRoute from '../react/block-route.js'
 import * as BlockSetTestId from '../react/block-set-test-id.js'
 import * as BlockSvg from './block-svg.js'
@@ -25,7 +24,6 @@ export let enter = [
   BlockRoute.enter,
   BlockWrap.enter,
   BlockName.enter,
-  BlockProxy.enter,
   BlockTable.enter,
   BlockColumn.enter,
   BlockSvg.enter,

@@ -1,4 +1,6 @@
 export function leave(node, parent, state) {
+  if (node.isDefiningChildrenExplicitly) return
+
   if (
     ((!parent && node.isGroup) ||
       node.explicitChildren ||
@@ -10,8 +12,12 @@ export function leave(node, parent, state) {
         state.render.push('>')
       }
 
-      state.render.push(`{props.children}`)
+      if (!state.hasAlreadyDefinedChildren) {
+        state.hasAlreadyDefinedChildren = true
+        state.render.push(`{props.children}`)
+      }
     }
+
     state.render.push(`</${node.nameFinal}>`)
   } else {
     state.render.push('/>')

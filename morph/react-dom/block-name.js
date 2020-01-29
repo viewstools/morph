@@ -4,11 +4,13 @@ import handleTable from '../react/block-name-handle-table.js'
 import getBlockName from './get-block-name.js'
 
 export function enter(node, parent, state) {
-  if (
-    (parent && !parent.isBasic && !node.isBasic) ||
-    (node.isFragment && node.children.length === 0)
-  )
+  // if (parent && !parent.isBasic && !node.isBasic) return true
+  if (node.isFragment && node.children.length === 0) return true
+  if (node.isChildren) {
+    state.hasAlreadyDefinedChildren = true
+    state.render.push('{props.children}')
     return true
+  }
 
   if (node.isFragment && node.name === 'View') {
     state.flow = getPropValueOrDefault(node, 'flow', false)
@@ -28,17 +30,15 @@ export function enter(node, parent, state) {
 
   state.use(name, node.isLazy)
 
-  if (node.isProxy) {
-    name = `props.proxy${name}`
-  }
-
   // TODO remove the use of those because they're just the name and keep one
   node.nameFinal = name
   node.nameTag = name
 
   if (handleTable(node, parent, state)) return true
 
-  state.render.push(`<${node.nameFinal}`)
+  if (!node.isDefiningChildrenExplicitly) {
+    state.render.push(`<${node.nameFinal}`)
+  }
 }
 
 export { leave }
