@@ -13,8 +13,9 @@ export default function maybeMorph({
   viewsToFiles,
   verbose,
 }) {
+  let result = null
   try {
-    let result = morphers[as]({
+    result = morphers[as]({
       getFontImport,
       getSystemImport,
       // isStory,
@@ -40,6 +41,29 @@ export default function maybeMorph({
     })
   } catch (error) {
     console.error(chalk.red('M'), view, error.codeFrame || error)
-    return null
+    return `import { useEffect } from 'react'
+
+export default function ${view.id}() {
+  useEffect(() => {
+    console.error({
+      type: 'morph',
+      view: '${view.id}',
+      file: '${view.file}',
+      todo: "Report to https://github.com/viewstools/morph/issues/new with .view and .view.js files and what changed when it failed. This will help us improve the morpher. Thanks!",
+    })
+  }, [])
+
+  return "😳 Can't morph '${view.id}'. See console for more details."
+}
+
+/*
+>>> CODE
+${result && result.code}
+
+
+>>> ERROR
+${error.message}
+${error.stack}
+*/`
   }
 }
