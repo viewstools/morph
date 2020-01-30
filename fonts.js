@@ -1,10 +1,10 @@
-import { promises as fs } from 'fs'
 import addToMapSet from './add-to-map-set.js'
 import morphFontAsReactDom from './morph/react-dom/morph-font.js'
 import morphFontAsReactNative from './morph/react-native/morph-fonts.js'
 import path from 'path'
 import sort from 'bubblesort'
 import relativise from './relativise.js'
+import ensureDir from './ensure-dir.js'
 
 let morphFont = {
   'react-dom': morphFontAsReactDom,
@@ -13,11 +13,7 @@ let morphFont = {
 }
 
 export async function ensureFontsDirectory(src) {
-  let fontsDirectory = path.join(src, 'Fonts')
-
-  try {
-    await fs.mkdir(fontsDirectory)
-  } catch (error) {}
+  await ensureDir(path.join(src, 'Fonts'))
 }
 
 export let getFontId = file => path.basename(file, path.extname(file))

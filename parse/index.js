@@ -755,7 +755,9 @@ export default ({
     view.isStory = true
     view.flow = flowProp.value
     view.pathToStory = file
+      // .replace(path.join(src, 'Views').replace(/\\/g, '/'), '')
       .replace(path.join(src, 'Stories').replace(/\\/g, '/'), '')
+      .replace(src.replace(/\\/g, '/'), '')
       .replace('.view', '')
 
     view.data = getData(view.properties.find(p => p.name === 'data'))

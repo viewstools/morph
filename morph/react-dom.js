@@ -47,7 +47,7 @@ export default ({
     dataValidate: view.parsed.view.dataValidate,
     dependencies: new Set(),
     flow: null,
-    setFlow: false,
+    setFlowTo: false,
     getFontImport: font => getFontImport(font, view),
     getStyleForProperty,
     getValueForProperty,

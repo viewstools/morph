@@ -6,6 +6,7 @@ export function enter(node, parent, state) {
       state.hasRefs = true
     }
 
+    // TODO swap for React.forwardRef
     state.render.push(
       ` ${parent.isDynamic ? 'innerRef' : 'ref'}=${wrap(node.value)}`
     )

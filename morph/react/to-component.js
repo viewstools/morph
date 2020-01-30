@@ -18,6 +18,5 @@ ${getFormatters(state, name)}
 ${getLocals(state, name)}
 
 ${getBody({ state, name })}
-${getDefaultProps({ state, name })}
-export default ${name}`
+${getDefaultProps({ state, name })}`
 }

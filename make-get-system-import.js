@@ -1,10 +1,10 @@
 import relativise from './relativise.js'
 import path from 'path'
 
-let FILE_USE_IS_BEFORE = 'useIsBefore.js'
-let FILE_USE_IS_MEDIA = 'useIsMedia.js'
-let FILE_USE_DATA = 'useData.js'
-let FILE_USE_FLOW = 'useFlow.js'
+let FILE_USE_IS_BEFORE = path.join('Logic', 'useIsBefore.js')
+let FILE_USE_IS_MEDIA = path.join('Logic', 'useIsMedia.js')
+let FILE_USE_DATA = path.join('Data', 'ViewsData.js')
+let FILE_USE_FLOW = path.join('Logic', 'ViewsFlow.js')
 let FILE_LOCAL_CONTAINER = 'LocalContainer.js'
 let FILE_TRACK_CONTEXT = 'TrackContext.js'
 

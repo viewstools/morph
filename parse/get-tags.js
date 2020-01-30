@@ -10,7 +10,6 @@ let SLOT_PROPS = [
   'onBlur',
   'onChange',
   'onClick',
-  'onClickSelected',
   'onDrag',
   'onDragEnd',
   'onDragEnter',

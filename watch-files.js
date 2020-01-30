@@ -11,52 +11,41 @@ import chalk from 'chalk'
 import chokidar from 'chokidar'
 import getPointsOfUse from './get-points-of-use.js'
 import path from 'path'
-import runCra from './runCra.js'
 
-export default async function watchFiles({ morpher, serve }) {
+export default async function watchFiles({ morpher }) {
   let watcher = chokidar.watch(MATCH, {
     cwd: morpher.src,
     ignored: [
-      '**/node_modules/**',
-      '**/*.view.js',
-      '**/Fonts/*.js',
-      'useFlow.js',
-      'useIsMedia.js',
-      'useIsBefore.js',
-      'useTools.js',
-      'useData.js',
+      path.join('**', 'node_modules', '**'),
+      path.join('**', '*.view.js'),
+      path.join('**', 'Fonts', '*.js'),
+      path.join('**', 'Logic', 'ViewsFlow.js'),
+      path.join('**', 'Logic', 'useIsMedia.js'),
+      path.join('**', 'Logic', 'useIsBefore.js'),
+      path.join('**', 'Logic', 'ViewsTools.view.logic.js'),
+      path.join('**', 'Data', 'ViewsData.js'),
     ],
     ignoreInitial: true,
     awaitWriteFinish: true,
   })
 
-  let compiler = null
-  if (serve) {
-    compiler = await runCra()
-    compiler.hooks.watchRun.tapPromise(
-      'ViewsMorpher',
-      () => processEventsPromise || Promise.resolve()
-    )
-  }
-
   let skipTimeout = null
   let processEventsPromise = null
   let queue = []
-  function onEvent({ file, op }, process = true) {
-    // console.log('entered event, file: ', file, 'op: ', op)
+  function onEvent({ file, op }) {
+    queue.push({ file: path.join(morpher.src, file), op })
 
-    if (process) {
-      queue.push({ file: path.join(morpher.src, file), op })
-    }
+    maybeProcess
+  }
 
-    // if morpher busy, try again in a bit
+  function maybeProcess() {
+    // if busy, try again in a bit
     clearTimeout(skipTimeout)
     skipTimeout = null
     if (processEventsPromise) {
-      skipTimeout = setTimeout(() => onEvent({}, false), 200)
+      skipTimeout = setTimeout(maybeProcess, 200)
       return
     }
-    // console.log('after enter, queue is', queue)
     processEvents()
   }
 

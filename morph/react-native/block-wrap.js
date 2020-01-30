@@ -20,12 +20,12 @@ export let enter = (node, parent, state) => {
 
     let onPress = wrap(onClick.value)
 
-    if (onClick.slotName === 'setFlow' && hasProp(node, 'onClickId')) {
-      onPress = `{() => setFlow("${getProp(node, 'onClickId').value}")}`
+    if (onClick.slotName === 'setFlowTo' && hasProp(node, 'onClickId')) {
+      onPress = `{() => setFlowTo("${getProp(node, 'onClickId').value}")}`
       state.use('ViewsUseFlow')
-      state.setFlow = true
+      state.setFlowTo = true
       // TODO warn if action is used but it isn't in actions (on parser)
-      // TODO warn that there's setFlow without an id (on parser)
+      // TODO warn that there's setFlowTo without an id (on parser)
     }
 
     let key = getProp(node, 'key')

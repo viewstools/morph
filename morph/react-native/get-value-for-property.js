@@ -85,12 +85,12 @@ export default (node, parent, state) => {
 
     let onClick = safe(node.value, node)
 
-    if (node.slotName === 'setFlow' && hasProp(parent, 'onClickId')) {
-      onClick = `{() => setFlow("${getProp(parent, 'onClickId').value}")}`
+    if (node.slotName === 'setFlowTo' && hasProp(parent, 'onClickId')) {
+      onClick = `{() => setFlowTo("${getProp(parent, 'onClickId').value}")}`
       state.use('ViewsUseFlow')
-      state.setFlow = true
+      state.setFlowTo = true
       // TODO warn if action is used but it isn't in actions (on parser)
-      // TODO warn that there's setFlow without an id (on parser)
+      // TODO warn that there's setFlowTo without an id (on parser)
     }
 
     return { onClick }

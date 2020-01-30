@@ -1,16 +1,14 @@
 import {
-  getProp,
   getScopedCondition,
   getScopedImageCondition,
   getScopes,
-  hasProp,
   isValidImgSrc,
-  makeOnClickTracker,
   pushImageToState,
 } from '../utils.js'
+import path from 'path'
 import safe from '../react/safe.js'
-import wrap from '../react/wrap.js'
 import toCamelCase from 'to-camel-case'
+import wrap from '../react/wrap.js'
 
 let isUrl = str => /^https?:\/\//.test(str)
 
@@ -82,27 +80,33 @@ export default (node, parent, state) => {
     return {
       [node.name]: safe(getScopedCondition(node, parent)),
     }
-  } else if (node.name === 'onClick') {
-    let onClick = safe(node.value, node)
+  } else if (/^on[A-Z]/.test(node.name) && node.slotName === 'setFlowTo') {
+    // TODO warn if action is used but it isn't in actions (on parser)
+    // TODO warn that there's setFlowTo without an id (on parser)
+    let setFlowTo = node.defaultValue
+    if (!setFlowTo.startsWith('/')) {
+      setFlowTo = path.normalize(path.join(state.pathToStory, setFlowTo))
+    }
+    state.use('ViewsUseFlow')
+    state.setFlowTo = true
 
-    if (node.slotName === 'setFlow') {
-      if (hasProp(parent, 'onClickId')) {
-        onClick = `{() => setFlow("${getProp(parent, 'onClickId').value}")}`
-        state.use('ViewsUseFlow')
-        state.setFlow = true
-        // TODO warn if action is used but it isn't in actions (on parser)
-      } else {
-        // TODO warn that there's setFlow without an id (on parser)
-      }
-    } else if (state.track) {
-      // TODO merge flow with track
-      onClick = wrap(makeOnClickTracker(node, parent, state))
+    let ret = {
+      [node.name]: `{() => setFlowTo('${setFlowTo}')}`,
     }
 
-    return { onClick }
+    if (!parent.isBasic && ON_IS_SELECTED.test(node.name)) {
+      state.useFlow = true
+      ret[
+        node.name.replace(ON_IS_SELECTED, 'isSelected')
+      ] = `{flow.has('${setFlowTo}')}`
+    }
+
+    return ret
   } else {
     return {
       [node.name]: safe(node.value, node),
     }
   }
 }
+
+let ON_IS_SELECTED = /(onClick|onPress)/

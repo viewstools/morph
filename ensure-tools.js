@@ -1,9 +1,10 @@
+import ensureFile from './ensure-file.js'
 import fsExtra from 'fs-extra'
 import path from 'path'
 
 let TOOLS_FILE = `import { useEffect } from 'react'
 
-export default function Tools(props) {
+export default function ViewsTools(props) {
   useEffect(() => {
     console.log(\`
 
@@ -29,10 +30,10 @@ export default function Tools(props) {
 }`
 
 export default async function ensureTools({ src }) {
-  let file = path.join(src, 'Tools.view.logic.js')
+  let file = path.join(src, 'Logic', 'ViewsTools.view.logic.js')
 
   if ((await fsExtra.exists(file)) && process.env.REACT_APP_VIEWS_TOOLS)
     return null
 
-  return { file, content: TOOLS_FILE }
+  return ensureFile({ file, content: TOOLS_FILE })
 }

@@ -57,11 +57,14 @@ export default ({ state, name }) => {
   }
 
   let flow = []
-  if (state.flow === 'separate' && state.uses.includes('ViewsUseFlow')) {
+  if (
+    state.useFlow ||
+    (state.flow === 'separate' && state.uses.includes('ViewsUseFlow'))
+  ) {
     flow.push(`let flow = fromFlow.useFlow()`)
   }
-  if (state.setFlow) {
-    flow.push(`let setFlow = fromFlow.useSetFlow()`)
+  if (state.setFlowTo) {
+    flow.push(`let setFlowTo = fromFlow.useSetFlowTo()`)
   }
   let data = []
   if (state.data) {
@@ -85,7 +88,7 @@ export default ({ state, name }) => {
   if (state.hasRefs) {
     let trackOpen = state.track ? '<TrackContext.Consumer>{track => (' : ''
     let trackClose = state.track ? ')}</TrackContext.Consumer>' : ''
-    return `class ${name} extends React.Component {
+    return `export default class ${name} extends React.Component {
   render() {
     let { props } = this
     return (${trackOpen}${render}${trackClose})
@@ -94,7 +97,7 @@ export default ({ state, name }) => {
   } else {
     let ret = render ? `(${render})` : null
 
-    return `let ${name} = (props) => {
+    return `export default function ${name}(props) {
     ${state.track ? `let track = React.useContext(TrackContext)` : ''}
     ${state.useIsBefore ? 'let isBefore = useIsBefore()' : ''}
     ${state.useIsMedia ? 'let isMedia = useIsMedia()' : ''}

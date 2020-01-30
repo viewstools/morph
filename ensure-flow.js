@@ -1,5 +1,5 @@
+import ensureFile from './ensure-file.js'
 import getViewRelativeToView from './get-view-relative-to-view.js'
-import prettier from 'prettier'
 import path from 'path'
 
 function ensureFirstStoryIsOn(flow, key, stories) {
@@ -161,7 +161,7 @@ let SET = 'flow/SET'
 
 let Context = React.createContext([{ actions: [], flow: new Set() }, () => {}])
 export let useFlow = () => useContext(Context)[0].flow
-export let useSetFlow = () => {
+export let useSetFlowTo = () => {
   let [, dispatch] = useContext(Context)
   return useCallback(id => dispatch({ type: SET, id }), []) // eslint-disable-line
   // ignore dispatch
@@ -215,7 +215,7 @@ function reducer(state, action) {
   }
 }
 
-export function Flow(props) {
+export function ViewsFlow(props) {
   let context = useReducer(reducer, { actions: [], flow: props.initialState })
   let [state] = context
 
@@ -237,18 +237,14 @@ export function Flow(props) {
   )
 }
 
-Flow.defaultProps = {
+ViewsFlow.defaultProps = {
   initialState: new Set(${JSON.stringify([...initialState], null, '  ')})
 }`
 }
 
 export default function ensureFlow({ src, tools, viewsById, viewsToFiles }) {
-  return {
-    file: path.join(src, 'useFlow.js'),
-    content: prettier.format(makeFlow({ tools, viewsById, viewsToFiles }), {
-      parser: 'babel',
-      singleQuote: true,
-      trailingComma: 'es5',
-    }),
-  }
+  return ensureFile({
+    file: path.join(src, 'Logic', 'Flow.js'),
+    content: makeFlow({ tools, viewsById, viewsToFiles }),
+  })
 }
