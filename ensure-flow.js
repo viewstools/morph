@@ -244,7 +244,7 @@ ViewsFlow.defaultProps = {
 
 export default function ensureFlow({ src, tools, viewsById, viewsToFiles }) {
   return ensureFile({
-    file: path.join(src, 'Logic', 'Flow.js'),
+    file: path.join(src, 'Logic', 'ViewsFlow.js'),
     content: makeFlow({ tools, viewsById, viewsToFiles }),
   })
 }
