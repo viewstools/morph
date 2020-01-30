@@ -17,6 +17,7 @@ export default async function watchFiles({ morpher }) {
     cwd: morpher.src,
     ignored: [
       path.join('**', 'node_modules', '**'),
+      path.join('**', '*.block.js'),
       path.join('**', '*.view.js'),
       path.join('**', 'Fonts', '*.js'),
       path.join('**', 'Logic', 'ViewsFlow.js'),
@@ -32,10 +33,11 @@ export default async function watchFiles({ morpher }) {
   let skipTimeout = null
   let processEventsPromise = null
   let queue = []
+
   function onEvent({ file, op }) {
     queue.push({ file: path.join(morpher.src, file), op })
 
-    maybeProcess
+    maybeProcess()
   }
 
   function maybeProcess() {
@@ -121,9 +123,9 @@ function processUnlinked({ files, morpher, filesToProcess }) {
           morpher.customFonts.delete(id)
         }
       } else {
-        let view = morpher.viewsToFiles.get(
-          file.replace('.view.logic.js', '.view')
-        )
+        let view =
+          morpher.viewsToFiles.get(file.replace('.view.logic.js', '.view')) ||
+          morpher.viewsToFiles.get(file.replace('.block.logic.js', '.block'))
         if (!view) return
 
         processPointsOfUse({ view, morpher, filesToProcess })
@@ -171,9 +173,9 @@ function processAddedOrChanged({ files, morpher, filesToProcess }) {
           filesToProcess.filesViewCustom.add(file)
         }
 
-        let view = morpher.viewsToFiles.get(
-          file.replace('.view.logic.js', '.view')
-        )
+        let view =
+          morpher.viewsToFiles.get(file.replace('.view.logic.js', '.view')) ||
+          morpher.viewsToFiles.get(file.replace('.block.logic.js', '.block'))
         if (!view) return
 
         processPointsOfUse({ view, morpher, filesToProcess })

@@ -13,7 +13,7 @@ export function enter(node, parent, state) {
   }
 
   if (node.isFragment && node.name === 'View') {
-    state.flow = getPropValueOrDefault(node, 'flow', false)
+    state.flow = getPropValueOrDefault(node, 'is', false)
     state.flowDefaultState = null
   }
 

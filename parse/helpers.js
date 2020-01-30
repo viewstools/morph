@@ -19,10 +19,10 @@ let dymPropMatcher = new DidYouMeanMatcher([
   'dataFormat',
   'defaultValue',
   'fill',
-  'flow',
   'from',
   'direction',
   'id',
+  'is',
   'key',
   'maxLength',
   'max',
@@ -47,9 +47,9 @@ let dymPropMatcher = new DidYouMeanMatcher([
   'onMouseMove',
   'onMouseOver',
   'onMouseUp',
-  'order',
   'onWheel',
   'onWhen',
+  'order',
   'r',
   'ref',
   'rx',
@@ -77,7 +77,7 @@ let dymPropMatcher = new DidYouMeanMatcher([
 
 export let makeDidYouMeanBlock = views => {
   let dymBlockMatcher = new DidYouMeanMatcher(
-    'Capture|CaptureTextArea|Children|Horizontal|Image|List|Svg|SvgCircle|SvgEllipse|SvgDefs|SvgGroup|SvgLinearGradient|SvgRadialGradient|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgSymbol|SvgText|SvgUse|SvgStop|Text|View|Vertical'
+    'Block|Capture|CaptureTextArea|Children|Horizontal|Image|List|Svg|SvgCircle|SvgEllipse|SvgDefs|SvgGroup|SvgLinearGradient|SvgRadialGradient|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgSymbol|SvgText|SvgUse|SvgStop|Text|View|Vertical'
       .split('|')
       .concat(views)
   )
@@ -94,7 +94,7 @@ export let makeDidYouMeanFontFamily = customFonts => {
 }
 
 let ANIMATION = /(.+)(?:\s)(spring|linear|easeOut|easeInOut|easeIn|ease)(?:\s?(.*)?)/
-let BASIC = /^(Capture|CaptureTextArea|Children|Column|Horizontal|Image|List|Svg|SvgCircle|SvgEllipse|SvgDefs|SvgGroup|SvgLinearGradient|SvgRadialGradient|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgSymbol|SvgText|SvgUse|SvgStop|Table|Text|View|Vertical)$/i
+let BASIC = /^(Block|Capture|CaptureTextArea|Children|Column|Horizontal|Image|List|Svg|SvgCircle|SvgEllipse|SvgDefs|SvgGroup|SvgLinearGradient|SvgRadialGradient|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgSymbol|SvgText|SvgUse|SvgStop|Table|Text|View|Vertical)$/i
 let BLOCK = /^(\s*)([A-Z][a-zA-Z0-9]*)(\s+([A-Z][a-zA-Z0-9]*))?$/
 let BOOL = /^(false|true)$/i
 let CAPTURE = /^(Capture|CaptureTextArea)$/i

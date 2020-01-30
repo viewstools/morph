@@ -10,7 +10,7 @@
   "scripts": {
     "prepare": "cross-env NODE_ENV=production rollup --config rollup.config.js && chmod +x bin.js",
     "test": "jest",
-    "debug:issue": "npx nodemon -w bin.js -w issue/Issue.view bin.js issue --as react-dom",
+    "debug:issue": "npx nodemon -w bin.js -- bin.js issue --as react-dom --watch",
     "watch": "rollup --config rollup.config.js --watch"
   },
   "repository": {

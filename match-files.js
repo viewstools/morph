@@ -4,14 +4,14 @@ import mm from 'micromatch'
 
 export let PATTERNS = {
   filesView: {
-    match: ['**/*.view'],
+    match: ['**/*.view', '**/*.block'],
   },
   filesViewLogic: {
-    match: ['**/*.view.logic.js'],
+    match: ['**/*.view.logic.js', '**/*.block.logic.js'],
   },
   filesViewCustom: {
     match: ['**/*.js'],
-    ignore: ['**/*.view.logic.js'],
+    ignore: ['**/*.view.logic.js', '**/*.block.logic.js'],
     filter: async files => {
       let filesFirstLine = await Promise.all(
         files.map(async file => [file, await getFirstLine(file)])

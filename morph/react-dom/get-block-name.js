@@ -54,6 +54,7 @@ export default (node, parent, state) => {
       name = toCamelCase(node.name.replace('Svg', ''))
       break
 
+    case 'Block':
     case 'View':
       name = 'React.Fragment'
       break

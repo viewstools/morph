@@ -1,15 +1,15 @@
 import path from 'path'
 
-export default file => {
-  if (file.endsWith('.view')) {
-    return path.basename(file, '.view')
-  } else if (file.endsWith('.view.logic.js')) {
-    return path.basename(file, '.view.logic.js')
-  } else if (file.endsWith('.js')) {
-    return path.basename(file, '.js')
-  } else {
+let EXTENSIONS = ['.block', '.block.logic.js', '.view', '.view.logic.js', '.js']
+
+export default function getViewIdFromFile(file) {
+  let extension = EXTENSIONS.find(item => file.endsWith(item))
+
+  if (!extension) {
     throw new Error(
       `Can't recognise the extension of "${file}" to get a view's id.`
     )
   }
+
+  return path.basename(file, extension)
 }

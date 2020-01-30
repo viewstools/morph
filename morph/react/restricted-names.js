@@ -1,10 +1,11 @@
 export default [
+  'Block',
   'Capture',
   'CaptureTextArea',
+  'Children',
   'Column',
   'Horizontal',
   'Image',
-  'Link',
   'List',
   'ModalContent',
   'ModalOverlay',

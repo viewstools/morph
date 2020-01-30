@@ -52,12 +52,13 @@ export default ({
   let rlines = text.split('\n')
   let lines = rlines.map(line => line.trimRight())
   let fonts = []
+  let isDefiningChildrenExplicitly = false
   let locals = []
   let stack = []
   let slots = []
   let useIsBefore = false
   let useIsMedia = false
-  let isDefiningChildrenExplicitly = false
+  let topBlockShouldBe = file.endsWith('.view') ? 'View' : 'Block'
   let view = null
   let viewsInView = new Set()
   let warnings = []
@@ -311,7 +312,7 @@ export default ({
       warnings.push({
         loc: block.loc,
         type: `${block.is ||
-          block.name} is outside of the top block and it won't render. Views relies on indentation to nest child views within View blocks\nTo fix it, either:\na) Indent ${block.is ||
+          block.name} is outside of the top block and it won't render. Views relies on indentation to nest child views within ${topBlockShouldBe} blocks\nTo fix it, either:\na) Indent ${block.is ||
           block.name} within the top block and indent all nested views within ${block.is ||
           block.name}, or\nb) remove it.`,
         line,
@@ -325,18 +326,18 @@ export default ({
       block.children = []
     }
 
-    if (block.isBasic && block.name === 'View') {
+    if (block.isBasic && (block.name === 'View' || block.name === 'Block')) {
       block.isFragment = true
       if (stack.length > 0) {
         warnings.push({
-          type: `A view can only have one View block. Maybe you want to split this block into another view?`,
+          type: `A view can only have one ${block.name} block. Maybe you want to split this block into another view?`,
           line,
           loc: block.loc,
         })
       }
     } else if (stack.length === 0) {
       warnings.push({
-        type: `A view must start with a View block. ${block.name} isn't valid.\nWrap everything within a View block at the top.`,
+        type: `A view must start with a ${topBlockShouldBe} block. ${block.name} isn't valid.\nWrap everything within a ${topBlockShouldBe} block at the top.`,
         line,
         loc: block.loc,
       })
@@ -745,18 +746,17 @@ export default ({
 
     warnings.push({
       loc: view.loc,
-      type: `The view file for ${id} is empty and won't render! Add some blocks to it like:\nView\n  Text\n    text content`,
+      type: `The file for ${id} is empty and won't render! Add some blocks to it like:\n${topBlockShouldBe}\n  Text\n    text content`,
       line: '',
     })
   }
 
-  let flowProp = view.properties.find(p => p.name === 'flow')
+  let flowProp = view.properties.find(p => p.name === 'is')
   if (flowProp) {
     view.isStory = true
     view.flow = flowProp.value
     view.pathToStory = file
-      // .replace(path.join(src, 'Views').replace(/\\/g, '/'), '')
-      .replace(path.join(src, 'Stories').replace(/\\/g, '/'), '')
+      .replace(path.join(src, 'Views').replace(/\\/g, '/'), '')
       .replace(src.replace(/\\/g, '/'), '')
       .replace('.view', '')
 
