@@ -1,9 +1,10 @@
 import flatten from 'flatten'
+import getUnit from './get-unit.js'
 import safe from './react/safe.js'
 import toCamelCase from 'to-camel-case'
 import toSlugCase from 'to-slug-case'
+import path from 'path'
 import wrap from './react/wrap.js'
-import getUnit from './get-unit.js'
 
 let safeScope = value =>
   typeof value === 'string' && !isSlot(value) ? JSON.stringify(value) : value
@@ -82,7 +83,7 @@ let getScopedProps = (propNode, blockNode) => {
     .filter(scope => !scope.isSystem && !scope.isLocal)
     .map(scope => {
       let prop = scope.properties.find(prop => prop.name === propNode.name)
-      return prop && { prop, when: scope.value }
+      return prop && { prop, when: scope.value, scope }
     })
     .filter(Boolean)
     .reverse()
@@ -124,6 +125,9 @@ export let getScopedCondition = (propNode, blockNode, state) => {
       when = when.replace('props', 'data')
     } else if (hasCustomBlockParent(blockNode) && CHILD_VALUES.test(when)) {
       when = when.replace('props.', 'childProps.')
+    } else if (when === 'props.flow') {
+      let flowPath = getFlowPath(scope.scope, blockNode, state)
+      when = `flow.has('${flowPath}')`
     }
 
     conditional = `${when} ? ${getScopedConditionPropValue(
@@ -569,3 +573,14 @@ export let maybeMakeHyphenated = ({ name, value }) =>
 
 export let isStory = (node, state) =>
   !node.isBasic && state.isStory(node.name) && state.flow === 'separate'
+
+export function getFlowPath(node, parent, state) {
+  // TODO warn if action is used but it isn't in actions (on parser)
+  // TODO warn that there's setFlowTo without an id (on parser)
+  let setFlowTo = node.defaultValue
+  if (!setFlowTo.startsWith('/')) {
+    setFlowTo = path.normalize(path.join(state.pathToStory, setFlowTo))
+  }
+
+  return setFlowTo
+}

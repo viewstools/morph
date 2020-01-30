@@ -1,4 +1,5 @@
 import {
+  getFlowPath,
   getScopedCondition,
   getScopedImageCondition,
   getScopes,
@@ -6,7 +7,6 @@ import {
   isValidImgSrc,
   pushImageToState,
 } from '../utils.js'
-import path from 'path'
 import safe from '../react/safe.js'
 import toCamelCase from 'to-camel-case'
 import wrap from '../react/wrap.js'
@@ -89,24 +89,19 @@ export default function getValueForProperty(node, parent, state) {
       [node.name]: safe(getScopedCondition(node, parent, state)),
     }
   } else if (/^on[A-Z]/.test(node.name) && node.slotName === 'setFlowTo') {
-    // TODO warn if action is used but it isn't in actions (on parser)
-    // TODO warn that there's setFlowTo without an id (on parser)
-    let setFlowTo = node.defaultValue
-    if (!setFlowTo.startsWith('/')) {
-      setFlowTo = path.normalize(path.join(state.pathToStory, setFlowTo))
-    }
+    let flowPath = getFlowPath(node, parent, state)
     state.use('ViewsUseFlow')
     state.setFlowTo = true
 
     let ret = {
-      [node.name]: `{() => setFlowTo('${setFlowTo}')}`,
+      [node.name]: `{() => setFlowTo('${flowPath}')}`,
     }
 
     if (!parent.isBasic && ON_IS_SELECTED.test(node.name)) {
       state.useFlow = true
       ret[
         node.name.replace(ON_IS_SELECTED, 'isSelected')
-      ] = `{flow.has('${setFlowTo}')}`
+      ] = `{flow.has('${flowPath}')}`
     }
 
     return ret

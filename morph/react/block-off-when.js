@@ -1,4 +1,10 @@
-import { getProp, hasCustomBlockParent, isList, isStory } from '../utils.js'
+import {
+  getFlowPath,
+  getProp,
+  hasCustomBlockParent,
+  isList,
+  isStory,
+} from '../utils.js'
 
 let IS_MEDIA = /(!?props\.isMedia)(.+)/
 let DATA_VALUES = /props\.(isInvalid|isInvalidInitial|isValid|isValidInitial|!value|value)/
@@ -23,6 +29,9 @@ export function enter(node, parent, state) {
       value = `${variable.replace('props.', '')}.${media.toLowerCase()}`
     } else if (hasCustomBlockParent(node) && CHILD_VALUES.test(value)) {
       value = value.replace('props.', 'childProps.')
+    } else if (value === 'props.flow') {
+      let flowPath = getFlowPath(onWhen, node, state)
+      value = `flow.has('${flowPath}')`
     }
 
     state.render.push(`${value} ? `)

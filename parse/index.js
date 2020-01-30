@@ -481,6 +481,7 @@ export default ({
           scope = {
             isLocal,
             isSystem,
+            defaultValue: getValue(value, name),
             value,
             name,
             slotName,
