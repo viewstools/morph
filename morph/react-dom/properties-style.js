@@ -242,8 +242,7 @@ let asCss = (styles, key, scopedUnderParent) => {
     } else if (
       key === 'isDisabled' ||
       key === 'isHovered' ||
-      key === 'isFocused' ||
-      key === 'isSelected'
+      key === 'isFocused'
     ) {
       css.push(`"&:${ensureSystemScopeCssKey(key)}": {`)
     } else if (key === 'isPlaceholder') {

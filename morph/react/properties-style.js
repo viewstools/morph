@@ -33,6 +33,7 @@ export function enter(node, parent, state) {
         let { _isProp, ...styleForProperty } = state.getStyleForProperty(
           propNode,
           node,
+          state,
           isSlot(propNode)
         )
 

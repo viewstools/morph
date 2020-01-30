@@ -8,7 +8,7 @@ export function enter(node, parent, state) {
   if (node.isFragment && node.children.length === 0) return true
   if (node.isChildren) {
     state.hasAlreadyDefinedChildren = true
-    state.render.push('{props.children}')
+    state.render.push('{props.children({ isSelected: props.isSelected })}')
     return true
   }
 

@@ -109,14 +109,24 @@ let getScopedConditionPropValue = node => {
   return value
 }
 
-export let getScopedCondition = (propNode, blockNode) => {
+let CHILD_VALUES = /props\.(isSelected|isHovered|isFocused)/
+let DATA_VALUES = /props\.(isInvalid|isInvalidInitial|isValid|isValidInitial|!value|value)/
+
+export let getScopedCondition = (propNode, blockNode, state) => {
   let scopedProps = getScopedProps(propNode, blockNode)
 
   if (!scopedProps) return false
 
   let conditional = getScopedConditionPropValue(propNode)
   scopedProps.forEach(scope => {
-    conditional = `${scope.when} ? ${getScopedConditionPropValue(
+    let when = scope.when
+    if (state.data && DATA_VALUES.test(when)) {
+      when = when.replace('props', 'data')
+    } else if (hasCustomBlockParent(blockNode) && CHILD_VALUES.test(when)) {
+      when = when.replace('props.', 'childProps.')
+    }
+
+    conditional = `${when} ? ${getScopedConditionPropValue(
       scope.prop
     )} : ${conditional}`
   })
@@ -177,6 +187,12 @@ export let getActionableParent = node => {
   if (!node.parent) return false
   if (node.parent.action) return node.parent
   return getActionableParent(node.parent)
+}
+
+export let hasCustomBlockParent = node => {
+  if (!node.parent) return !node.isBasic
+  if (!node.parent.isBasic) return true
+  return hasCustomBlockParent(node.parent)
 }
 
 export let getAllowedStyleKeys = node => {

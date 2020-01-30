@@ -29,7 +29,7 @@ export function enter(node, parent, state) {
     if (state.data && node.value === 'props.value') {
       parent.explicitChildren = '{data.value}'
     } else if (hasCustomScopes(node, parent)) {
-      parent.explicitChildren = wrap(getScopedCondition(node, parent))
+      parent.explicitChildren = wrap(getScopedCondition(node, parent, state))
     } else if (isSlot(node)) {
       parent.explicitChildren = wrap(node.value)
     } else if (hasLocals(node, parent)) {

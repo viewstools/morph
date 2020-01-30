@@ -6,8 +6,8 @@ import {
 } from '../utils.js'
 import { maybeAddFallbackFont } from '../fonts.js'
 
-export default (node, parent, code) => {
-  let scopedVar = setScopedVar(node, parent)
+export default function getStyleForProperty(node, parent, state, code) {
+  let scopedVar = setScopedVar(node, parent, state)
 
   if (scopedVar) {
     switch (node.name) {
@@ -21,7 +21,7 @@ export default (node, parent, code) => {
       case 'translateY':
         return {
           _isScoped: true,
-          transform: `'${getTransform(node, parent)}'`,
+          transform: `'${getTransform(node, parent, state)}'`,
         }
 
       case 'shadowColor':
@@ -30,7 +30,7 @@ export default (node, parent, code) => {
       case 'shadowOffsetY':
       case 'shadowSpread':
       case 'shadowInset': {
-        let shadow = getShadow(node, parent)
+        let shadow = getShadow(node, parent, state)
         let key = Object.keys(shadow)[0]
 
         return {
@@ -71,7 +71,7 @@ export default (node, parent, code) => {
     case 'shadowOffsetY':
     case 'shadowSpread':
     case 'shadowInset':
-      return getShadow(node, parent)
+      return getShadow(node, parent, state)
 
     case 'rotate':
     case 'rotateX':
@@ -81,12 +81,12 @@ export default (node, parent, code) => {
     case 'scaleY':
     case 'translateX':
     case 'translateY':
-      return { transform: getTransform(node, parent) }
+      return { transform: getTransform(node, parent, state) }
 
     case 'transformOriginX':
     case 'transformOriginY':
       return {
-        transformOrigin: getTransformOrigin(node, parent),
+        transformOrigin: getTransformOrigin(node, parent, state),
       }
 
     case 'zIndex':
@@ -106,7 +106,7 @@ let maybeAsVar = (prop, code) =>
 
 let asVar = prop => `'var(--${prop.name})'`
 
-let setScopedVar = (prop, block) => {
+let setScopedVar = (prop, block, state) => {
   if (
     prop.scope === 'isHovered' ||
     prop.scope === 'isFocused' ||
@@ -114,14 +114,14 @@ let setScopedVar = (prop, block) => {
   )
     return false
 
-  let scopedCondition = getScopedCondition(prop, block, false)
+  let scopedCondition = getScopedCondition(prop, block, state)
   return scopedCondition && asVar(prop)
 }
 
-let getPropValue = (prop, block, unit = '') => {
+let getPropValue = (prop, block, state, unit = '') => {
   if (!prop) return false
 
-  let scopedVar = setScopedVar(prop, block)
+  let scopedVar = setScopedVar(prop, block, state)
 
   if (scopedVar) return scopedVar
 
@@ -132,7 +132,7 @@ let getPropValue = (prop, block, unit = '') => {
   return typeof prop.value === 'number' ? `${prop.value}${unit}` : prop.value
 }
 
-let getShadow = (node, parent) => {
+let getShadow = (node, parent, state) => {
   let isText = parent.name === 'Text'
 
   let shadowColor = getProp(parent, 'shadowColor', node.scope)
@@ -141,18 +141,18 @@ let getShadow = (node, parent) => {
   let shadowOffsetY = getProp(parent, 'shadowOffsetY', node.scope)
   let shadowSpread = getProp(parent, 'shadowSpread', node.scope)
   let shadowInset = getProp(parent, 'shadowInset', node.scope)
-  let shadowInsetValue = getPropValue(shadowInset, parent)
+  let shadowInsetValue = getPropValue(shadowInset, parent, state)
 
   let value = [
     !isText &&
       (typeof shadowInsetValue === 'string' && /var\(/.test(shadowInsetValue)
         ? shadowInsetValue
         : shadowInsetValue && 'inset'),
-    getPropValue(shadowOffsetX, parent, 'px'),
-    getPropValue(shadowOffsetY, parent, 'px'),
+    getPropValue(shadowOffsetX, parent, state, 'px'),
+    getPropValue(shadowOffsetY, parent, state, 'px'),
     getPropValue(shadowBlur, parent, 'px'),
-    !isText && getPropValue(shadowSpread, parent, 'px'),
-    getPropValue(shadowColor, parent),
+    !isText && getPropValue(shadowSpread, parent, state, 'px'),
+    getPropValue(shadowColor, parent, state),
   ]
     .filter(Boolean)
     .join(' ')

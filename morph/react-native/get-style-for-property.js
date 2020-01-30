@@ -5,8 +5,8 @@ import {
   maybeMakeHyphenated,
 } from '../utils.js'
 
-export default (node, parent, code) => {
-  let scopedCondition = getScopedCondition(node, parent)
+export default function getStyleForProperty(node, parent, state, code) {
+  let scopedCondition = getScopedCondition(node, parent, state)
   if (scopedCondition) {
     switch (node.name) {
       case 'rotate':
@@ -19,13 +19,13 @@ export default (node, parent, code) => {
       case 'translateY':
         return {
           _isScoped: true,
-          transform: getTransform(node, parent),
+          transform: getTransform(node, parent, state),
         }
 
       default:
         return {
           _isScoped: true,
-          [node.name]: getScopedCondition(node, parent),
+          [node.name]: getScopedCondition(node, parent, state),
         }
     }
   }
@@ -59,12 +59,12 @@ export default (node, parent, code) => {
 
     case 'shadowOffsetX':
     case 'shadowOffsetY':
-      return getShadowOffset(node, parent)
+      return getShadowOffset(node, parent, state)
 
     case 'fontWeight':
     case 'fontFamily':
       return {
-        fontFamily: getFontFamily(node, parent),
+        fontFamily: getFontFamily(node, parent, state),
       }
 
     case 'rotate':
@@ -76,7 +76,7 @@ export default (node, parent, code) => {
     case 'translateX':
     case 'translateY':
       return {
-        transform: getTransform(node, parent),
+        transform: getTransform(node, parent, state),
       }
 
     case 'zIndex':
@@ -110,7 +110,7 @@ export default (node, parent, code) => {
   }
 }
 
-let getFontFamily = (node, parent) => {
+let getFontFamily = (node, parent, state) => {
   let fontWeight = getProp(parent, 'fontWeight')
   // let key = node.key.value
   let fontFamily = node.value.replace(/\s/g, '')
@@ -124,14 +124,14 @@ let getFontFamily = (node, parent) => {
   return fontWeight ? `${fontFamily}-${fontWeight.value}` : fontFamily
 }
 
-let getLineHeight = (node, parent) => {
+let getLineHeight = (node, parent, state) => {
   let fontSize = getProp(parent, 'fontSize')
   // using a default font size of 16 if none specified
   let fontSizeValue = fontSize ? fontSize.value : 16
   return node.value * fontSizeValue
 }
 
-let getShadowOffset = (node, parent) => {
+let getShadowOffset = (node, parent, state) => {
   let shadowOffsetX = getProp(parent, 'shadowOffsetX')
   let shadowOffsetY = getProp(parent, 'shadowOffsetY')
 
@@ -150,10 +150,10 @@ let decorateShadow = obj => {
   return obj
 }
 
-let getPropValue = (prop, block, unit = '') => {
+let getPropValue = (prop, block, state, unit = '') => {
   if (!prop) return false
 
-  let scopedCondition = getScopedCondition(prop, block)
+  let scopedCondition = getScopedCondition(prop, block, state)
   if (scopedCondition) {
     return unit ? `\`\${${scopedCondition}}${unit}\`` : scopedCondition
   }
@@ -167,12 +167,12 @@ let getPropValue = (prop, block, unit = '') => {
     : prop.value
 }
 
-let getTransformValue = (prop, parent, unit) =>
+let getTransformValue = (prop, parent, state, unit) =>
   prop && {
-    [prop.name]: getPropValue(prop, parent, unit),
+    [prop.name]: getPropValue(prop, parent, state, unit),
   }
 
-let getTransform = (node, parent) => {
+let getTransform = (node, parent, state) => {
   let rotate = getProp(parent, 'rotate')
   let rotateX = getProp(parent, 'rotateX')
   let rotateY = getProp(parent, 'rotateY')
@@ -183,13 +183,13 @@ let getTransform = (node, parent) => {
   let translateY = getProp(parent, 'translateY')
 
   return [
-    getTransformValue(rotate, parent, 'deg'),
-    getTransformValue(rotateX, parent, 'deg'),
-    getTransformValue(rotateY, parent, 'deg'),
-    getTransformValue(scale, parent),
-    getTransformValue(scaleX, parent),
-    getTransformValue(scaleY, parent),
-    getTransformValue(translateX, parent),
-    getTransformValue(translateY, parent),
+    getTransformValue(rotate, parent, state, 'deg'),
+    getTransformValue(rotateX, parent, state, 'deg'),
+    getTransformValue(rotateY, parent, state, 'deg'),
+    getTransformValue(scale, parent, state),
+    getTransformValue(scaleX, parent, state),
+    getTransformValue(scaleY, parent, state),
+    getTransformValue(translateX, parent, state),
+    getTransformValue(translateY, parent, state),
   ].filter(Boolean)
 }

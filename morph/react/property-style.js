@@ -35,6 +35,7 @@ export function enter(node, parent, state) {
   let { _isProp, _isScoped, ...styleForProperty } = state.getStyleForProperty(
     node,
     parent,
+    state,
     code
   )
 

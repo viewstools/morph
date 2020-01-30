@@ -1,9 +1,8 @@
 import {
-  getProp,
   getScopedCondition,
   getScopedImageCondition,
   getScopes,
-  hasProp,
+  hasCustomBlockParent,
   isValidImgSrc,
   pushImageToState,
 } from '../utils.js'
@@ -13,11 +12,11 @@ import toCamelCase from 'to-camel-case'
 
 let isUrl = str => /^https?:\/\//.test(str)
 
-let getImageSource = (node, state, parent) => {
-  let scopes = getScopes(node, parent)
+function getImageSource(node, parent, state) {
+  let scopes = getScopes(node, parent, state)
 
   if (scopes && (isUrl(node.value) || node.tags.slot)) {
-    return `{{ uri: ${getScopedCondition(node, parent)} }}`
+    return `{{ uri: ${getScopedCondition(node, parent, state)} }}`
   } else if (isUrl(node.value) || node.tags.slot) {
     if (node.defaultValue && !isUrl(node.defaultValue)) {
       state.slots.forEach(item => {
@@ -55,7 +54,10 @@ let getImageSource = (node, state, parent) => {
   }
 }
 
-export default (node, parent, state) => {
+let CHILD_VALUES = /props\.(isSelected|isHovered|isFocused)/
+let ON_IS_SELECTED = /(onClick|onPress)/
+
+export default function getValueForProperty(node, parent, state) {
   if (
     state.data &&
     (node.value === 'props.value' ||
@@ -70,15 +72,19 @@ export default (node, parent, state) => {
     return {
       [node.name]: `{${node.value.replace('props.', 'data.')}}`,
     }
+  } else if (hasCustomBlockParent(parent) && CHILD_VALUES.test(node.value)) {
+    return {
+      [node.name]: `{${node.value.replace('props.', 'childProps.')}}`,
+    }
   } else if (isValidImgSrc(node, parent)) {
     return (
       !parent.isSvg && {
-        source: getImageSource(node, state, parent),
+        source: getImageSource(node, parent, state),
       }
     )
-  } else if (getScopedCondition(node, parent)) {
+  } else if (getScopedCondition(node, parent, state)) {
     return {
-      [node.name]: safe(getScopedCondition(node, parent)),
+      [node.name]: safe(getScopedCondition(node, parent, state)),
     }
   } else if (/^on[A-Z]/.test(node.name) && node.slotName === 'setFlowTo') {
     // TODO warn if action is used but it isn't in actions (on parser)

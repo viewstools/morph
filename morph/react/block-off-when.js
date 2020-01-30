@@ -1,6 +1,8 @@
-import { getProp, isList, isStory } from '../utils.js'
+import { getProp, hasCustomBlockParent, isList, isStory } from '../utils.js'
 
 let IS_MEDIA = /(!?props\.isMedia)(.+)/
+let DATA_VALUES = /props\.(isInvalid|isInvalidInitial|isValid|isValidInitial|!value|value)/
+let CHILD_VALUES = /props\.(isSelected|isHovered|isFocused)/
 
 export function enter(node, parent, state) {
   if (node.isFragment && node.children.length === 0) return
@@ -14,25 +16,15 @@ export function enter(node, parent, state) {
     if (parent && !isList(parent)) state.render.push('{')
 
     let value = onWhen.value
-    if (state.data) {
-      switch (value) {
-        case 'props.isInvalid':
-        case 'props.isInvalidInitial':
-        case 'props.isValid':
-        case 'props.isValidInitial':
-        case '!props.value':
-        case 'props.value': {
-          value = value.replace('props', 'data')
-          break
-        }
-
-        default:
-          break
-      }
+    if (state.data && DATA_VALUES.test(value)) {
+      value = value.replace('props', 'data')
     } else if (IS_MEDIA.test(value)) {
       let [, variable, media] = value.match(IS_MEDIA)
       value = `${variable.replace('props.', '')}.${media.toLowerCase()}`
+    } else if (hasCustomBlockParent(node) && CHILD_VALUES.test(value)) {
+      value = value.replace('props.', 'childProps.')
     }
+
     state.render.push(`${value} ? `)
   } else if (isStory(node, state)) {
     node.onWhen = true

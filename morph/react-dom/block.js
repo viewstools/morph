@@ -36,6 +36,7 @@ export let enter = [
 export let leave = [
   BlockList.leave,
   BlockExplicitChildren.leave,
+  BlockGroup.leave,
   BlockName.leave,
   BlockTable.leave,
   BlockRoute.leave,

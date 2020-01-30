@@ -2,6 +2,7 @@ import {
   getScopedCondition,
   getScopedImageCondition,
   getScopes,
+  hasCustomBlockParent,
   isValidImgSrc,
   pushImageToState,
 } from '../utils.js'
@@ -12,11 +13,11 @@ import wrap from '../react/wrap.js'
 
 let isUrl = str => /^https?:\/\//.test(str)
 
-let getImageSource = (node, state, parent) => {
+function getImageSource(node, parent, state) {
   let scopes = getScopes(node, parent)
 
   if (scopes && (isUrl(node.value) || node.tags.slot)) {
-    return wrap(getScopedCondition(node, parent))
+    return wrap(getScopedCondition(node, parent, state))
   } else if (isUrl(node.value) || node.tags.slot) {
     if (node.defaultValue && !isUrl(node.defaultValue)) {
       state.slots.forEach(item => {
@@ -53,7 +54,10 @@ let getImageSource = (node, state, parent) => {
   }
 }
 
-export default (node, parent, state) => {
+let CHILD_VALUES = /props\.(isSelected|isHovered|isFocused)/
+let ON_IS_SELECTED = /(onClick|onPress)/
+
+export default function getValueForProperty(node, parent, state) {
   if (
     state.data &&
     (node.value === 'props.value' ||
@@ -68,17 +72,21 @@ export default (node, parent, state) => {
     return {
       [node.name]: `{${node.value.replace('props.', 'data.')}}`,
     }
+  } else if (hasCustomBlockParent(parent) && CHILD_VALUES.test(node.value)) {
+    return {
+      [node.name]: `{${node.value.replace('props.', 'childProps.')}}`,
+    }
   } else if (isValidImgSrc(node, parent)) {
     return {
-      src: getImageSource(node, state, parent),
+      src: getImageSource(node, parent, state),
     }
   } else if (parent.isBasic && node.name === 'isDisabled') {
     return {
       disabled: safe(node.value, node),
     }
-  } else if (getScopedCondition(node, parent)) {
+  } else if (getScopedCondition(node, parent, state)) {
     return {
-      [node.name]: safe(getScopedCondition(node, parent)),
+      [node.name]: safe(getScopedCondition(node, parent, state)),
     }
   } else if (/^on[A-Z]/.test(node.name) && node.slotName === 'setFlowTo') {
     // TODO warn if action is used but it isn't in actions (on parser)
@@ -108,5 +116,3 @@ export default (node, parent, state) => {
     }
   }
 }
-
-let ON_IS_SELECTED = /(onClick|onPress)/
