@@ -9,8 +9,11 @@ export function enter(node, parent, state) {
         return state.render.push(
           ` ${k}=${getLocalsString(node, parent, state)}`
         )
+      } else if (k === '...') {
+        return state.render.push(` {...${value[k]}}`)
+      } else {
+        return state.render.push(` ${k}=${value[k]}`)
       }
-      return state.render.push(` ${k}=${value[k]}`)
     })
   }
 }

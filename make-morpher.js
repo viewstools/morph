@@ -7,6 +7,7 @@ import { promises as fs } from 'fs'
 import ensureData from './ensure-data.js'
 import ensureFlow from './ensure-flow.js'
 import ensureIsBefore from './ensure-is-before.js'
+import ensureIsHovered from './ensure-is-hovered.js'
 import ensureIsMedia from './ensure-is-media.js'
 import ensureTools from './ensure-tools.js'
 import makeGetSystemImport from './make-get-system-import.js'
@@ -103,6 +104,7 @@ export default function makeMorpher({
       await ensureFlow(state),
       await ensureTools(state),
       await ensureIsBefore(state),
+      await ensureIsHovered(state),
       await ensureIsMedia(state),
     ].filter(Boolean)
 

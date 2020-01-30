@@ -226,7 +226,7 @@ let asStaticCss = (styles, dynamicStyles = []) =>
 
 let systemScopeToCssKey = {
   isDisabled: 'disabled',
-  isHovered: 'hover:enabled',
+  // isHovered: 'hover:enabled',
   isFocused: 'focus:enabled',
 }
 let ensureSystemScopeCssKey = key => systemScopeToCssKey[key] || key
@@ -241,7 +241,7 @@ let asCss = (styles, key, scopedUnderParent) => {
       css.push(`[\`${parent}:${theKey} &\`]: {`)
     } else if (
       key === 'isDisabled' ||
-      key === 'isHovered' ||
+      // key === 'isHovered' ||
       key === 'isFocused'
     ) {
       css.push(`"&:${ensureSystemScopeCssKey(key)}": {`)

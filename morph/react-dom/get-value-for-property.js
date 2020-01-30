@@ -104,7 +104,16 @@ export default function getValueForProperty(node, parent, state) {
       ] = `{flow.has('${flowPath}')}`
     }
 
+    if (parent.isBasic && node.name.startsWith('onClick')) {
+      ret['...'] = `${node.name.replace('onClick', 'isHovered')}Bind`
+    }
+
     return ret
+  } else if (node.name.startsWith('onClick') && parent.isBasic) {
+    return {
+      ['...']: `${node.name.replace('onClick', 'isHovered')}Bind`,
+      [node.name]: safe(node.value, node),
+    }
   } else {
     return {
       [node.name]: safe(node.value, node),

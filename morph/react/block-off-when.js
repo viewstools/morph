@@ -8,7 +8,9 @@ import {
 
 let IS_MEDIA = /(!?props\.isMedia)(.+)/
 let DATA_VALUES = /props\.(isInvalid|isInvalidInitial|isValid|isValidInitial|!value|value)/
-let CHILD_VALUES = /props\.(isSelected|isHovered|isFocused)/
+let CHILD_VALUES = /!?props\.(isSelected|isHovered|isFocused)/
+let IS_HOVERED = /!?props\.isHovered/
+let IS_FLOW = /!?props\.flow/
 
 export function enter(node, parent, state) {
   if (node.isFragment && node.children.length === 0) return
@@ -29,9 +31,11 @@ export function enter(node, parent, state) {
       value = `${variable.replace('props.', '')}.${media.toLowerCase()}`
     } else if (hasCustomBlockParent(node) && CHILD_VALUES.test(value)) {
       value = value.replace('props.', 'childProps.')
-    } else if (value === 'props.flow') {
+    } else if (IS_FLOW.test(value)) {
       let flowPath = getFlowPath(onWhen, node, state)
-      value = `flow.has('${flowPath}')`
+      value = value.replace('props.flow', `flow.has('${flowPath}')`)
+    } else if (IS_HOVERED.test(value)) {
+      value = value.replace('props.', '')
     }
 
     state.render.push(`${value} ? `)

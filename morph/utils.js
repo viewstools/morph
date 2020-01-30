@@ -110,8 +110,10 @@ let getScopedConditionPropValue = node => {
   return value
 }
 
-let CHILD_VALUES = /props\.(isSelected|isHovered|isFocused)/
+let CHILD_VALUES = /!?props\.(isSelected|isHovered|isFocused)/
 let DATA_VALUES = /props\.(isInvalid|isInvalidInitial|isValid|isValidInitial|!value|value)/
+let IS_HOVERED = /!?props\.isHovered/
+let IS_FLOW = /!?props.flow/
 
 export let getScopedCondition = (propNode, blockNode, state) => {
   let scopedProps = getScopedProps(propNode, blockNode)
@@ -125,9 +127,11 @@ export let getScopedCondition = (propNode, blockNode, state) => {
       when = when.replace('props', 'data')
     } else if (hasCustomBlockParent(blockNode) && CHILD_VALUES.test(when)) {
       when = when.replace('props.', 'childProps.')
-    } else if (when === 'props.flow') {
+    } else if (IS_FLOW.test(when)) {
       let flowPath = getFlowPath(scope.scope, blockNode, state)
-      when = `flow.has('${flowPath}')`
+      when = when.replace('props.flow', `flow.has('${flowPath}')`)
+    } else if (IS_HOVERED.test(when)) {
+      when = when.replace('props.', '')
     }
 
     conditional = `${when} ? ${getScopedConditionPropValue(
@@ -373,8 +377,8 @@ export let getDynamicStyles = node => {
 
           if (prop.conditional) {
             value = prop.conditional
-          } else if (prop.tags.slot && prop.scope === 'isHovered') {
-            value = getPropValue(prop)
+            // } else if (prop.tags.slot && prop.scope === 'isHovered') {
+            //   value = getPropValue(prop)
           }
 
           return value && `'--${prop.name}': ${value}`

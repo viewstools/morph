@@ -400,7 +400,7 @@ export let isLocalScope = name => LOCAL_SCOPES.includes(name)
 let SYSTEM_SCOPES = [
   'isDisabled',
   'isFocused',
-  'isHovered',
+  // 'isHovered',
   'isPlaceholder',
   // 'isSelected',
   // TODO do we want to do media queries here?

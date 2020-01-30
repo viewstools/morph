@@ -100,6 +100,11 @@ export default ({ state, name }) => {
     return `export default function ${name}(props) {
     ${state.track ? `let track = React.useContext(TrackContext)` : ''}
     ${state.useIsBefore ? 'let isBefore = useIsBefore()' : ''}
+    ${
+      state.useIsHovered
+        ? 'let [isHovered, isHoveredBind] = useIsHovered()'
+        : ''
+    }
     ${state.useIsMedia ? 'let isMedia = useIsMedia()' : ''}
     ${animated.join('\n')}
     ${flow.join('\n')}

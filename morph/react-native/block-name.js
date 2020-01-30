@@ -1,4 +1,8 @@
-import { getProp, getPropValueOrDefault, isStory } from '../utils.js'
+import {
+  getActionableParent,
+  getPropValueOrDefault,
+  isStory,
+} from '../utils.js'
 import { leave } from '../react/block-name.js'
 import handleTable from '../react/block-name-handle-table.js'
 import getBlockName from './get-block-name.js'
@@ -8,7 +12,18 @@ export function enter(node, parent, state) {
   if (node.isFragment && node.children.length === 0) return true
   if (node.isChildren) {
     state.hasAlreadyDefinedChildren = true
-    state.render.push('{props.children({ isSelected: props.isSelected })}')
+
+    let useIsHovered = !!getActionableParent(node)
+
+    if (useIsHovered) {
+      state.useIsHovered = true
+    }
+
+    state.render.push(
+      `{props.children({ isSelected: props.isSelected${
+        useIsHovered ? ', isHovered' : ''
+      } })}`
+    )
     return true
   }
 

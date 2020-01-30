@@ -141,6 +141,10 @@ export default (state, getImport) => {
     dependencies.push(getImport('ViewsUseIsBefore'))
   }
 
+  if (state.useIsHovered) {
+    dependencies.push(getImport('ViewsUseIsHovered'))
+  }
+
   if (state.useIsMedia) {
     dependencies.push(getImport('ViewsUseIsMedia'))
   }
