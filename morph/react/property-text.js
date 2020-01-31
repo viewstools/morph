@@ -24,6 +24,8 @@ let parseFormatValue = (value, type) => {
   }
 }
 
+let HAS_RESTRICTED_CHARACTERS = /[{}<>/]/
+
 export function enter(node, parent, state) {
   if (node.name === 'text' && parent.name === 'Text') {
     if (state.data && node.value === 'props.value') {
@@ -40,6 +42,8 @@ export function enter(node, parent, state) {
         node.value,
         type
       )})}`
+    } else if (HAS_RESTRICTED_CHARACTERS.test(node.value)) {
+      parent.explicitChildren = `{"${node.value}"}`
     } else {
       parent.explicitChildren = node.value
     }
