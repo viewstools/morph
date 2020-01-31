@@ -104,11 +104,13 @@ export default function getValueForProperty(node, parent, state) {
     }
 
     if (parent.isBasic && node.name.startsWith('onClick')) {
+      state.useIsHovered = true
       ret['...'] = `${node.name.replace('onClick', 'isHovered')}Bind`
     }
 
     return ret
   } else if (node.name.startsWith('onClick') && parent.isBasic) {
+    state.useIsHovered = true
     return {
       ['...']: `${node.name.replace('onClick', 'isHovered')}Bind`,
       [node.name]: safe(node.value, node),

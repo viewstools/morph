@@ -14,7 +14,6 @@ export function enter(node, parent, state) {
     state.hasAlreadyDefinedChildren = true
 
     let useIsHovered = !!getActionableParent(node)
-
     if (useIsHovered) {
       state.useIsHovered = true
     }
