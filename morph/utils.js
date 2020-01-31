@@ -185,7 +185,7 @@ export let hasDefaultProp = (node, parent) =>
 
 export let isSlot = node =>
   typeof node === 'string'
-    ? /(props|isBefore|isMedia\.)/.test(node)
+    ? /(isHovered|childProps|props|isBefore|isMedia\.)/.test(node)
     : isTag(node, 'slot')
 export let isStyle = node => isTag(node, 'style')
 export let isRowStyle = node => isTag(node, 'rowStyle')
