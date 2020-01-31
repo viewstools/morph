@@ -150,7 +150,7 @@ let getShadow = (node, parent, state) => {
         : shadowInsetValue && 'inset'),
     getPropValue(shadowOffsetX, parent, state, 'px'),
     getPropValue(shadowOffsetY, parent, state, 'px'),
-    getPropValue(shadowBlur, parent, 'px'),
+    getPropValue(shadowBlur, parent, state, 'px'),
     !isText && getPropValue(shadowSpread, parent, state, 'px'),
     getPropValue(shadowColor, parent, state),
   ]
