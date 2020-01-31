@@ -113,7 +113,7 @@ let getScopedConditionPropValue = node => {
 let CHILD_VALUES = /!?props\.(isSelected|isHovered|isFocused)/
 let DATA_VALUES = /props\.(isInvalid|isInvalidInitial|isValid|isValidInitial|!value|value)/
 let IS_HOVERED = /!?props\.isHovered/
-let IS_FLOW = /!?props.flow/
+let IS_FLOW = /!?props.flow$/
 
 export let getScopedCondition = (propNode, blockNode, state) => {
   let scopedProps = getScopedProps(propNode, blockNode)
@@ -130,7 +130,10 @@ export let getScopedCondition = (propNode, blockNode, state) => {
     } else if (IS_FLOW.test(when)) {
       let flowPath = getFlowPath(scope.scope, blockNode, state)
       when = when.replace('props.flow', `flow.has('${flowPath}')`)
-    } else if (IS_HOVERED.test(when)) {
+    } else if (
+      (blockNode.action || !!getActionableParent(blockNode)) &&
+      IS_HOVERED.test(when)
+    ) {
       when = when.replace('props.', '')
     }
 

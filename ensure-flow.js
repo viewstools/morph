@@ -75,7 +75,7 @@ let makeFlow = ({ tools, viewsById, viewsToFiles }) => {
 // https://github.com/viewstools/morph/blob/master/ensure-flow.js
 
 import React, { useCallback, useContext, useEffect, useReducer } from 'react'
-${tools ? "import Tools from './Tools.view.logic.js'" : ''}
+${tools ? "import ViewsTools from './ViewsTools.view.logic.js'" : ''}
 
 export let flow = new Map([${flowMapStr.join(', ')}])
 
@@ -230,7 +230,7 @@ export function ViewsFlow(props) {
     <Context.Provider value={context}>
       ${
         tools
-          ? '<Tools flow={context}>{props.children}</Tools>'
+          ? '<ViewsTools flow={context}>{props.children}</ViewsTools>'
           : '{props.children}'
       }
     </Context.Provider>
