@@ -58,7 +58,6 @@ function getImageSource(node, parent, state) {
 
 let CHILD_VALUES = /props\.(isSelected|isHovered|isFocused)/
 let ON_IS_SELECTED = /(onClick|onPress)/
-let IS_CHILD_KEY = /^(isSelected|isHovered|isFocused)$/
 
 export default function getValueForProperty(node, parent, state) {
   if (
@@ -120,47 +119,34 @@ export default function getValueForProperty(node, parent, state) {
       [node.name]: safe(node.value, node),
     }
   } else if (
-    IS_CHILD_KEY.test(node.name) &&
+    CHILD_VALUES.test(node.value) &&
     !!getActionableParent(parent) &&
     !parent.isBasic
   ) {
     // TODO support more than one hover/selected in the same block - let's wait
     // for a use case
-    switch (node.name) {
-      case 'isHovered': {
-        return {
-          isHovered: '{isHovered}',
-        }
+    if (/isHovered/.test(node.value)) {
+      return {
+        [node.name]: safe(node.value.replace('props.', ''), node),
       }
-
-      case 'isSelected': {
-        try {
-          let actionableParent = getActionableParent(parent)
-          let flowPath = getFlowPath(
-            getProp(actionableParent, 'onClick'),
-            actionableParent,
-            state
-          )
-          state.use('ViewsUseFlow')
-          state.useFlow = true
-          return {
-            isSelected: `{flow.has('${flowPath}')}`,
-          }
-        } catch (error) {
-          return {
-            isSelected: safe(node.value, node),
-          }
-        }
-      }
-
-      // TODO
-      // case 'isFocused': {
-      // }
-
-      default: {
+    } else if (/isSelected/.test(node.value)) {
+      let actionableParent = getActionableParent(parent)
+      let actionableProp = getProp(actionableParent, 'onClick')
+      if (!actionableProp.defaultValue) {
         return {
           [node.name]: safe(node.value, node),
         }
+      }
+
+      let flowPath = getFlowPath(actionableProp, actionableParent, state)
+      state.use('ViewsUseFlow')
+      state.useFlow = true
+      return {
+        [node.name]: `{flow.has('${flowPath}')}`,
+      }
+    } else {
+      return {
+        [node.name]: safe(node.value, node),
       }
     }
   } else {

@@ -9,6 +9,9 @@ export function enter(node, parent, state) {
 
     if (!node.isBasic) {
       state.render.push('{childProps => (')
+      if (node.children.length > 1) {
+        state.render.push('<React.Fragment>')
+      }
     }
   }
 }
@@ -21,6 +24,9 @@ export function leave(node, parent, state) {
     !node.nameFinal.includes('FlatList') &&
     !node.isBasic
   ) {
+    if (node.children.length > 1) {
+      state.render.push('</React.Fragment>')
+    }
     state.render.push(')}')
   }
 }

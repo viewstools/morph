@@ -59,7 +59,6 @@ function getImageSource(node, parent, state) {
 
 let CHILD_VALUES = /props\.(isSelected|isHovered|isFocused)/
 let ON_IS_SELECTED = /(onClick|onPress)/
-let IS_CHILD_KEY = /^(isSelected|isHovered|isFocused)$/
 
 export default function getValueForProperty(node, parent, state) {
   if (
@@ -119,47 +118,37 @@ export default function getValueForProperty(node, parent, state) {
       [node.name]: safe(node.value, node),
     }
   } else if (
-    IS_CHILD_KEY.test(node.name) &&
+    CHILD_VALUES.test(node.value) &&
     !!getActionableParent(parent) &&
     !parent.isBasic
   ) {
     // TODO support more than one hover/selected in the same block - let's wait
     // for a use case
-    switch (node.name) {
-      case 'isHovered': {
+    if (/isHovered/.test(node.value)) {
+      return {
+        [node.name]: safe(node.value.replace('props.', ''), node),
+      }
+    } else if (/isSelected/.test(node.value)) {
+      try {
+        let actionableParent = getActionableParent(parent)
+        let flowPath = getFlowPath(
+          getProp(actionableParent, 'onClick'),
+          actionableParent,
+          state
+        )
+        state.use('ViewsUseFlow')
+        state.useFlow = true
         return {
-          isHovered: '{isHovered}',
+          [node.name]: `{flow.has('${flowPath}')}`,
         }
-      }
-
-      case 'isSelected': {
-        try {
-          let actionableParent = getActionableParent(parent)
-          let flowPath = getFlowPath(
-            getProp(actionableParent, 'onClick'),
-            actionableParent,
-            state
-          )
-          state.use('ViewsUseFlow')
-          state.useFlow = true
-          return {
-            isSelected: `{flow.has('${flowPath}')}`,
-          }
-        } catch (error) {
-          return {
-            isSelected: safe(node.value, node),
-          }
-        }
-      }
-
-      // TODO
-      // case 'isFocused': {
-      // }
-
-      default: {
+      } catch (error) {
         return {
           [node.name]: safe(node.value, node),
         }
+      }
+    } else {
+      return {
+        [node.name]: safe(node.value, node),
       }
     }
   } else {
