@@ -102,7 +102,7 @@ export default ({ state, name }) => {
     ${state.useIsBefore ? 'let isBefore = useIsBefore()' : ''}
     ${
       state.useIsHovered
-        ? 'let [isHovered, isHoveredBind] = useIsHovered()'
+        ? 'let [isHovered, isHoveredBind] = useIsHovered(props)'
         : ''
     }
     ${state.useIsMedia ? 'let isMedia = useIsMedia()' : ''}
