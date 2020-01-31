@@ -100,6 +100,15 @@ export default ({
     useIsMedia: view.parsed.view.useIsMedia,
   }
 
+  // TIP: use the following code to trace generated code
+  // let _push = state.render.push.bind(state.render)
+  // state.render.push = item => {
+  //   _push(item)
+  //   if (item.includes("Some <isHovered")) {
+  //     console.trace()
+  //   }
+  // }
+
   if (state.data) {
     state.use('ViewsUseData')
   }

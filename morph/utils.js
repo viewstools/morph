@@ -186,10 +186,13 @@ export let hasProp = (node, key, match) => {
 export let hasDefaultProp = (node, parent) =>
   parent.properties.some(prop => prop.nameRaw === node.nameRaw)
 
-export let isSlot = node =>
-  typeof node === 'string'
+export let isSlot = (maybeNode1, maybeNode2) => {
+  let node = maybeNode2 || maybeNode1
+
+  return typeof node === 'string'
     ? /(isHovered|childProps|props|isBefore|isMedia\.)/.test(node)
     : isTag(node, 'slot')
+}
 export let isStyle = node => isTag(node, 'style')
 export let isRowStyle = node => isTag(node, 'rowStyle')
 export let isTag = (node, tag) => node && node.tags[tag]

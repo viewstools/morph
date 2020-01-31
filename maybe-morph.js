@@ -58,7 +58,7 @@ export default function ${view.id}() {
 
 /*
 >>> CODE
-${result && result.code}
+${result && result.code.replace(/(\/\*|\*\/)/g, '')}
 
 
 >>> ERROR

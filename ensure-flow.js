@@ -166,6 +166,7 @@ export let useSetFlowTo = () => {
   return useCallback(id => dispatch({ type: SET, id }), []) // eslint-disable-line
   // ignore dispatch
 }
+export let useSetFlow = useSetFlowTo
 
 function getNextActions(state, id) {
   return [id, ...state.actions].slice(0, MAX_ACTIONS)
