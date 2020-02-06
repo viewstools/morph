@@ -71,12 +71,12 @@ export function DataProvider(props) {
   // ignore dispatch
 
   let value = useMemo(() => {
-    async function onSubmit() {
+    async function onSubmit(args) {
       if (isSubmitting.current) return
       isSubmitting.current = true
 
       try {
-        let res = await props.onSubmit(state)
+        let res = await props.onSubmit(state, args)
         isSubmitting.current = false
 
         if (!res) return
