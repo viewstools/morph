@@ -11,7 +11,7 @@ import { useMemo, useState } from 'react'
 // https://github.com/therealparmesh/use-hovering/blob/master/src/index.js
 // or useTooltip from Reach UI
 // https://github.com/reach/reach-ui/blob/master/packages/tooltip/src/index.tsx
-export default function useIsHovered(props) {
+export default function useIsHovered({ onMouseEnter, onMouseLeave }) {
   let [isHovered, setIsHovered] = useState(false)
 
   let isHoveredBind = useMemo(() => {
@@ -19,19 +19,19 @@ export default function useIsHovered(props) {
       onMouseEnter: event => {
         setIsHovered(true)
 
-        if (typeof props.onMouseEnter === 'function') {
-          props.onMouseEnter(event)
+        if (typeof onMouseEnter === 'function') {
+          onMouseEnter(event)
         }
       },
       onMouseLeave: event => {
         setIsHovered(false)
 
-        if (typeof props.onMouseLeave === 'function') {
-          props.onMouseLeave(event)
+        if (typeof onMouseLeave === 'function') {
+          onMouseLeave(event)
         }
       },
     }
-  }, [props.onMouseEnter, props.onMouseLeave])
+  }, [onMouseEnter, onMouseLeave])
 
   return [isHovered, isHoveredBind]
 }
