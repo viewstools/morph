@@ -19,9 +19,9 @@ export function enter(node, parent, state) {
     }
 
     state.render.push(
-      `{props.children({ isSelected: props.isSelected${
+      `{typeof props.children === 'function'? props.children({ isSelected: props.isSelected${
         useIsHovered ? ', isHovered' : ''
-      } })}`
+      } }) : null}`
     )
     return true
   }
