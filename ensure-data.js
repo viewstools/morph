@@ -57,6 +57,11 @@ let DataContexts = {
   default: React.createContext([]),
 }
 export function DataProvider(props) {
+  if (!props.context) {
+    throw new Error(
+      \`You're missing the context value in DataProvider. Eg: <DataProvider context="namespace" ...\`
+    )
+  }
   if (!(props.context in DataContexts)) {
     DataContexts[props.context] = React.createContext([])
   }
@@ -64,8 +69,12 @@ export function DataProvider(props) {
 
   let [state, dispatch] = useReducer(reducer, props.value)
   let isSubmitting = useRef(false)
+  let shouldCallOnChange = useRef(false)
 
   useEffect(() => {
+    if (isSubmitting.current) return
+
+    shouldCallOnChange.current = false
     dispatch({ type: RESET, value: props.value })
   }, [props.value]) // eslint-disable-line
   // ignore dispatch
@@ -91,10 +100,21 @@ export function DataProvider(props) {
   }, [state, props.onSubmit]) // eslint-disable-line
   // the linter says we need props when props.onSubmit is already there
 
+  // keep track of props.onChange outside of the following effect to
+  // prevent loops. Making the function useCallback didn't work
+  let onChange = useRef(props.onChange)
   useEffect(() => {
-    props.onChange(state, fn => dispatch({ type: SET_FN, fn }))
-  }, [state, props.onChange]) // eslint-disable-line
-  // the linter says we need props when props.onChange is already there
+    onChange.current = props.onChange
+  }, [props.onChange])
+
+  useEffect(() => {
+    if (!shouldCallOnChange.current) {
+      shouldCallOnChange.current = true
+      return
+    }
+
+    onChange.current(state, fn => dispatch({ type: SET_FN, fn }))
+  }, [state])
 
   return <Context.Provider value={value}>{props.children}</Context.Provider>
 }
