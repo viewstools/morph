@@ -190,7 +190,7 @@ export let isSlot = (maybeNode1, maybeNode2) => {
   let node = maybeNode2 || maybeNode1
 
   return typeof node === 'string'
-    ? /(isHovered|childProps|props|isBefore|isMedia\.)/.test(node)
+    ? /(data|isHovered|childProps|props|isBefore|isMedia\.)/.test(node)
     : isTag(node, 'slot')
 }
 export let isStyle = node => isTag(node, 'style')
