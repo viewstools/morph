@@ -27,6 +27,7 @@ import {
   isSystemScope,
   isUserComment,
   makeDidYouMeanFontFamily,
+  sortScopes,
 } from './helpers.js'
 import { isGoogleFont } from '../morph/fonts.js'
 import getLoc from './get-loc.js'
@@ -687,7 +688,7 @@ export default ({
     }
 
     block.properties = properties
-    block.scopes = scopes
+    block.scopes = sortScopes(scopes)
 
     if (block.name !== 'View' && block.isFragment) {
       let invalidProps = properties

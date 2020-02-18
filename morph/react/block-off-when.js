@@ -9,7 +9,7 @@ import {
 let IS_MEDIA = /(!?props\.isMedia)(.+)/
 let DATA_VALUES = /props\.(isInvalid|isInvalidInitial|isValid|isValidInitial|!value|value)/
 let CHILD_VALUES = /!?props\.(isSelected|isHovered|isFocused)/
-let IS_HOVERED = /!?props\.isHovered/
+let IS_HOVERED = /!?props\.(isHovered|isSelectedHovered)/
 let IS_FLOW = /!?props\.flow$/
 
 export function enter(node, parent, state) {

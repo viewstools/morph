@@ -56,7 +56,7 @@ function getImageSource(node, parent, state) {
   }
 }
 
-let CHILD_VALUES = /props\.(isSelected|isHovered|isFocused)/
+let CHILD_VALUES = /props\.(isSelected|isHovered|isFocused|isSelectedHovered)/
 let ON_IS_SELECTED = /(onClick|onPress)/
 
 export default function getValueForProperty(node, parent, state) {

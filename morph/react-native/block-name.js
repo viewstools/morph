@@ -13,16 +13,16 @@ export function enter(node, parent, state) {
   if (node.isChildren) {
     state.hasAlreadyDefinedChildren = true
 
+    state.render.push(
+      `{typeof props.children === 'function'? props.children({ isSelected: props.isSelected`
+    )
     let useIsHovered = !!getActionableParent(node)
     if (useIsHovered) {
       state.useIsHovered = true
+      state.render.push(', isHovered, isSelectedHovered')
     }
+    state.render.push(`}) : null}`)
 
-    state.render.push(
-      `{typeof props.children === 'function'? props.children({ isSelected: props.isSelected${
-        useIsHovered ? ', isHovered' : ''
-      } }) : null}`
-    )
     return true
   }
 

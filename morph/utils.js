@@ -14,6 +14,7 @@ export let checkParentStem = (node, styleKey) => {
     styleKey !== 'isHovered' ||
     styleKey !== 'isDisabled' ||
     styleKey !== 'isSelected' ||
+    styleKey !== 'isSelectedHovered' ||
     !node.parent
   )
     return false
@@ -110,9 +111,9 @@ let getScopedConditionPropValue = node => {
   return value
 }
 
-let CHILD_VALUES = /!?props\.(isSelected|isHovered|isFocused)/
+let CHILD_VALUES = /!?props\.(isSelected|isHovered|isFocused|isSelectedHovered)/
 let DATA_VALUES = /props\.(isInvalid|isInvalidInitial|isValid|isValidInitial|!value|value)/
-let IS_HOVERED = /!?props\.isHovered/
+let IS_HOVERED_OR_SELECTED_HOVER = /!?props\.(isHovered|isSelectedHovered)/
 let IS_FLOW = /!?props.flow$/
 
 export let getScopedCondition = (propNode, blockNode, state) => {
@@ -132,7 +133,7 @@ export let getScopedCondition = (propNode, blockNode, state) => {
       when = when.replace('props.flow', `flow.has('${flowPath}')`)
     } else if (
       (blockNode.action || !!getActionableParent(blockNode)) &&
-      IS_HOVERED.test(when)
+      IS_HOVERED_OR_SELECTED_HOVER.test(when)
     ) {
       when = when.replace('props.', '')
     }
@@ -170,6 +171,7 @@ let styleStems = [
   'isPlaceholder',
   'isDisabled',
   'isSelected',
+  'isSelectedHovered',
 ]
 export let getStyleType = node =>
   styleStems.find(tag => isTag(node, tag)) || 'base'
@@ -213,7 +215,14 @@ export let getAllowedStyleKeys = node => {
   if (node.isCapture) {
     return ['base', 'isFocused', 'isHovered', 'isDisabled', 'isPlaceholder']
   } else if (node.action || isTable(node) || getActionableParent(node)) {
-    return ['base', 'isFocused', 'isHovered', 'isDisabled', 'isSelected']
+    return [
+      'base',
+      'isFocused',
+      'isHovered',
+      'isDisabled',
+      'isSelected',
+      'isSelectedHovered',
+    ]
   }
   return ['base', 'isFocused']
 }

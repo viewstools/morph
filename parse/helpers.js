@@ -449,3 +449,20 @@ export let maybeMakeHyphenated = (value, name) =>
   MAYBE_HYPHENATED_STYLE_PROPS.includes(name) && /^[a-zA-Z]+$/.test(value)
     ? toSlugCase(value)
     : value
+
+export function sortScopes(scopes) {
+  let isHovered = scopes.find(item => item.slotName === 'isHovered')
+  let isSelected = scopes.find(item => item.slotName === 'isSelected')
+  let isSelectedHovered = scopes.find(
+    item => item.slotName === 'isSelectedHovered'
+  )
+
+  return [
+    isSelectedHovered,
+    isSelected,
+    isHovered,
+    ...scopes.filter(
+      item => !/^(isHovered|isSelected|isSelectedHovered)$/.test(item.slotName)
+    ),
+  ].filter(Boolean)
+}

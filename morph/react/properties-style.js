@@ -10,6 +10,7 @@ export function enter(node, parent, state) {
       isDisabled: {},
       isPlaceholder: {},
       isSelected: {},
+      isSelectedHovered: {},
     },
     static: {
       base: {},
@@ -18,6 +19,7 @@ export function enter(node, parent, state) {
       isDisabled: {},
       isPlaceholder: {},
       isSelected: {},
+      isSelectedHovered: {},
     },
   }
 
