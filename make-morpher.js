@@ -91,6 +91,7 @@ export default function makeMorpher({
       getFontImport: makeGetFontImport(state.src),
       getSystemImport: makeGetSystemImport(state.src),
       local: state.local,
+      tools: state.tools,
       track: state.track,
       viewsById: state.viewsById,
       viewsToFiles: state.viewsToFiles,

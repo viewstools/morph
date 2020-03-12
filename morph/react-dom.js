@@ -23,6 +23,7 @@ export default ({
   local,
   localSupported,
   track,
+  tools,
   view,
   viewsById,
   viewsToFiles,
@@ -77,7 +78,9 @@ export default ({
     usedBlockNames: { [finalName]: 1, AutoSizer: 1, Column: 1, Table: 1 },
     uses: [],
     testIdKey: 'data-testid',
+    viewPathKey: 'data-view-path',
     testIds: {},
+    tools,
     track,
     use(block, isLazy = false) {
       if (isLazy) {

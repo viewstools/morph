@@ -1,4 +1,5 @@
 import * as BlockAddTestIdProp from '../react/block-add-test-id-prop.js'
+import * as BlockAddViewPath from '../react/block-add-view-path.js'
 import * as BlockCapture from './block-capture.js'
 import * as BlockColumn from '../react/block-column.js'
 import * as BlockExplicitChildren from '../react/block-explicit-children.js'
@@ -28,6 +29,7 @@ export let enter = [
   BlockGoTo.enter,
   BlockInList.enter,
   BlockAddTestIdProp.enter,
+  BlockAddViewPath.enter,
   BlockProperties.enter,
   BlockGroup.enter,
   BlockList.enter,
