@@ -26,6 +26,7 @@ export default {
   shadowOffsetX: true,
   shadowSpread: true,
   shadowRadius: true,
+  perspective: true,
   scale: true,
   scaleX: true,
   scaleY: true,

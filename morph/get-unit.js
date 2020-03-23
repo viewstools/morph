@@ -77,6 +77,7 @@ let UNITS = {
   paddingLeft: LENGTH,
   paddingRight: LENGTH,
   paddingTop: LENGTH,
+  perspective: LENGTH,
   right: LENGTH,
   rotate: ANGLE,
   rotateX: ANGLE,
