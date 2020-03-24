@@ -62,7 +62,8 @@ let ON_IS_SELECTED = /(onClick|onPress)/
 export default function getValueForProperty(node, parent, state) {
   if (
     state.data &&
-    (node.value === 'props.value' ||
+    (node.value === '!props.value' ||
+      node.value === 'props.value' ||
       node.value === 'props.onSubmit' ||
       node.value === 'props.onChange' ||
       node.value === 'props.isInvalid' ||
