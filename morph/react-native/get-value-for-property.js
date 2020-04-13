@@ -58,7 +58,7 @@ function getImageSource(node, parent, state) {
 }
 
 let CHILD_VALUES = /props\.(isSelected|isHovered|isFocused|isSelectedHovered)/
-let ON_IS_SELECTED = /(onClick|onPress)/
+let ON_IS_SELECTED = /(onClick|onPress|goTo)/
 
 export default function getValueForProperty(node, parent, state) {
   if (
@@ -106,16 +106,16 @@ export default function getValueForProperty(node, parent, state) {
       ] = `{flow.has('${flowPath}')}`
     }
 
-    if (parent.isBasic && node.name.startsWith('onClick')) {
+    if (parent.isBasic && ON_IS_SELECTED.test(node.name)) {
       state.useIsHovered = true
-      ret['...'] = `${node.name.replace('onClick', 'isHovered')}Bind`
+      ret['...'] = `${node.name.replace(ON_IS_SELECTED, 'isHovered')}Bind`
     }
 
     return ret
-  } else if (node.name.startsWith('onClick') && parent.isBasic) {
+  } else if (parent.isBasic && ON_IS_SELECTED.test(node.name)) {
     state.useIsHovered = true
     return {
-      ['...']: `${node.name.replace('onClick', 'isHovered')}Bind`,
+      '...': `${node.name.replace(ON_IS_SELECTED, 'isHovered')}Bind`,
       [node.name]: safe(node.value, node),
     }
   } else if (

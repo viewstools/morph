@@ -85,6 +85,7 @@ let getGroupBlockName = (node, parent, state) => {
   } else if (hasProp(node, 'goTo')) {
     name = 'a'
     node.goTo = true
+    node.action = getProp(node, 'goTo').value
   } else if (hasProp(node, 'onClick')) {
     let propNode = getProp(node, 'onClick')
     let prevParent = parent

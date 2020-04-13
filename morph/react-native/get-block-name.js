@@ -39,6 +39,8 @@ let getGroupBlockName = (node, state) => {
     node.teleport = true
   } else if (hasProp(node, 'goTo')) {
     node.goTo = true
+    let propNode = getProp(node, 'goTo')
+    node.action = propNode.value
   } else if (hasProp(node, 'onClick')) {
     let propNode = getProp(node, 'onClick')
     node.action = propNode.value
