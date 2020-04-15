@@ -160,8 +160,8 @@ let SYNC = 'flow/SYNC'
 let SET = 'flow/SET'
 
 let Context = React.createContext([{ actions: [], flow: new Set() }, () => {}])
-export let useFlowState = () => useContext(Context)
-export let useFlow = () => useFlowState()[0].flow
+export let useFlowState = () => useContext(Context)[0]
+export let useFlow = () => useFlowState().flow
 export let useSetFlowTo = () => {
   let [, dispatch] = useContext(Context)
   return useCallback(id => dispatch({ type: SET, id }), []) // eslint-disable-line
