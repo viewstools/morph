@@ -7,7 +7,7 @@ import * as PropertyRef from '../react/property-ref.js'
 import * as PropertyRest from '../react/property-rest.js'
 import * as PropertyStyle from '../react/property-style.js'
 import * as PropertyText from '../react/property-text.js'
-import * as PropertyPathToView from '../react/property-path-to-view.js'
+import * as PropertyViewPath from '../react/property-view-path.js'
 import { isColumn } from '../utils.js'
 import isValidPropertyForBlock from './is-valid-property-for-block.js'
 
@@ -18,7 +18,7 @@ export function enter(node, parent, state) {
   PropertiesClassName.enter(node, parent, state)
   PropertiesImage.enter(node, parent, state)
   PropertyFormat.enter(node, parent, state)
-  PropertyPathToView.enter(node, parent, state)
+  PropertyViewPath.enter(node, parent, state)
 
   node.properties.forEach(propNode => {
     if (
