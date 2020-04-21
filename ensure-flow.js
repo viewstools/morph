@@ -240,6 +240,11 @@ export function ViewsFlow(props) {
 
 ViewsFlow.defaultProps = {
   initialState: new Set(${JSON.stringify([...initialState], null, '  ')})
+}
+
+export function normalizePath(viewPath, relativePath) {
+  let url = new URL(\`file://\${viewPath}/../\${relativePath}\`)
+  return url.pathname
 }`
 }
 
