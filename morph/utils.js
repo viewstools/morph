@@ -598,7 +598,7 @@ export function getFlowPath(node, parent, state) {
   // TODO warn that there's setFlowTo without an id (on parser)
   let setFlowTo = node.defaultValue
   if (!setFlowTo.startsWith('/')) {
-    setFlowTo = path.normalize(path.join(state.pathToStory, setFlowTo))
+    setFlowTo = path.normalize(path.join(state.viewPathParent, setFlowTo))
   }
 
   return setFlowTo

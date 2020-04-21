@@ -41,24 +41,21 @@ let makeFlow = ({ tools, viewsById, viewsToFiles }) => {
       })
 
       if (viewInView && !viewInView.custom && viewInView.parsed.view.isStory) {
-        states.push(viewInView.parsed.view.pathToStory) // `${pathToViewId}/${id}`)
+        states.push(viewInView.parsed.view.viewPath) // `${pathToViewId}/${id}`)
       }
     }
 
     let isSeparate = view.parsed.view.flow === 'separate'
-    let parent = view.parsed.view.pathToStory.replace(
-      new RegExp(`/${view.id}$`),
-      ''
-    )
+    let parent = view.parsed.view.viewPathParent
 
     flowMapStr.push(
-      `["${view.parsed.view.pathToStory}", {
+      `["${view.parsed.view.viewPath}", {
         parent: "${parent}",
         isSeparate: ${isSeparate},
         stories: new Set(${states.length > 0 ? JSON.stringify(states) : ''})
       }]`
     )
-    flowMap.set(view.parsed.view.pathToStory, {
+    flowMap.set(view.parsed.view.viewPath, {
       parent,
       isSeparate,
       stories: new Set(states),

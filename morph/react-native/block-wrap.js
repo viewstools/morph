@@ -1,4 +1,4 @@
-import { getProp } from '../utils.js'
+import { getFlowPath, getProp } from '../utils.js'
 import getBlockName from './get-block-name.js'
 import wrap from '../react/wrap.js'
 
@@ -22,10 +22,7 @@ export let enter = (node, parent, state) => {
     if (/^on[A-Z]/.test(onClick.name) && onClick.slotName === 'setFlowTo') {
       // TODO warn if action is used but it isn't in actions (on parser)
       // TODO warn that there's setFlowTo without an id (on parser)
-      let setFlowTo = onClick.defaultValue
-      if (!setFlowTo.startsWith('/')) {
-        setFlowTo = path.normalize(path.join(state.pathToStory, setFlowTo))
-      }
+      let setFlowTo = getFlowPath(onClick, parent, state)
       state.use('ViewsUseFlow')
       state.setFlowTo = true
 

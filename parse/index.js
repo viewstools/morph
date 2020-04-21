@@ -757,11 +757,12 @@ export default ({
   if (flowProp) {
     view.isStory = true
     view.flow = flowProp.value
-    view.pathToStory = file
+    view.viewPath = file
       .replace(path.join(src, 'Stories').replace(/\\/g, '/'), '')
       .replace(path.join(src, 'Views').replace(/\\/g, '/'), '')
       .replace(src.replace(/\\/g, '/'), '')
       .replace('.view', '')
+    view.viewPathParent = path.dirname(view.viewPath)
 
     view.data = getData(view.properties.find(p => p.name === 'data'))
     view.dataFormat = getDataFormat(

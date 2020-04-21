@@ -33,10 +33,6 @@ export function enter(node, parent, state) {
 
   if (isStory(node, state)) {
     state.use('ViewsUseFlow')
-
-    // if (state.flowDefaultState === null) {
-    //   state.flowDefaultState = `${state.pathToStory}/${node.name}`
-    // }
   }
 
   let name = getBlockName(node, parent, state)
