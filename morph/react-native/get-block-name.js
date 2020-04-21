@@ -35,8 +35,6 @@ let getGroupBlockName = (node, state) => {
 
   if (node.isFragment) {
     name = 'React.Fragment'
-  } else if (hasProp(node, 'teleportTo')) {
-    node.teleport = true
   } else if (hasProp(node, 'goTo')) {
     node.goTo = true
     let propNode = getProp(node, 'goTo')
@@ -57,7 +55,7 @@ let getGroupBlockName = (node, state) => {
     name = 'ScrollView'
   }
 
-  if (node.isAnimated && name !== 'Link') {
+  if (node.isAnimated) {
     state.animated.add(name)
     name = `Animated${name}`
   }

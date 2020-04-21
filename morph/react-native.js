@@ -5,7 +5,6 @@ import getValueForProperty from './react-native/get-value-for-property.js'
 import getViewRelativeToView from '../get-view-relative-to-view.js'
 import makeGetImport from './react/make-get-import.js'
 import maybeUsesTextInput from './react-native/maybe-uses-text-input.js'
-import maybeUsesRouter from './react-native/maybe-uses-router.js'
 import maybeUsesStyleSheet from './react-native/maybe-uses-style-sheet.js'
 import restrictedNames from './react-native/restricted-names.js'
 import toComponent from './react/to-component.js'
@@ -13,9 +12,6 @@ import walk from './walk.js'
 
 let imports = {
   DismissKeyboard: `import dismissKeyboard from 'dismissKeyboard'`,
-  Link: "import { Link } from 'react-router-native'",
-  Route: "import { Route } from 'react-router-native'",
-  Router: "import { NativeRouter as Router } from 'react-router-native'",
 }
 
 export default ({
@@ -108,7 +104,6 @@ export default ({
   walk(view.parsed.view, visitor, state)
 
   maybeUsesTextInput(state)
-  maybeUsesRouter(state)
   maybeUsesStyleSheet(state)
 
   if (state.data) {

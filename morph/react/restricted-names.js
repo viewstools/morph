@@ -9,8 +9,6 @@ export default [
   'List',
   'ViewsModalOverlay',
   'ViewsModalOverlayContent',
-  'Route',
-  'Router',
   'Spring',
   'Svg',
   'SvgCircle',

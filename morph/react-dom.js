@@ -4,15 +4,11 @@ import getStyles from './react-dom/get-styles.js'
 import getValueForProperty from './react-dom/get-value-for-property.js'
 import getViewRelativeToView from '../get-view-relative-to-view.js'
 import makeGetImport from './react/make-get-import.js'
-import maybeUsesRouter from './react-dom/maybe-uses-router.js'
 import restrictedNames from './react-dom/restricted-names.js'
 import toComponent from './react/to-component.js'
 import walk from './walk.js'
 
 let imports = {
-  Link: "import { Link } from 'react-router-dom'",
-  Route: "import { Route } from 'react-router-dom'",
-  Router: "import { BrowserRouter as Router } from 'react-router-dom'",
   ViewsModalOverlay:
     "import { DialogOverlay as ViewsModalOverlay, DialogContent as ViewsModalOverlayContent } from '@reach/dialog'",
 }
@@ -127,7 +123,6 @@ export default ({
   state.localSupported = localSupported
 
   walk(view.parsed.view, visitor, state)
-  maybeUsesRouter(state)
 
   return {
     code: toComponent({

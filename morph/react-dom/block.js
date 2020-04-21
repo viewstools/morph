@@ -11,21 +11,17 @@ import * as BlockMaybeSkip from '../react/block-maybe-skip.js'
 import * as BlockName from './block-name.js'
 import * as BlockOffWhen from '../react/block-off-when.js'
 import * as BlockProperties from './block-properties.js'
-import * as BlockRoute from '../react/block-route.js'
 import * as BlockSetTestId from '../react/block-set-test-id.js'
 import * as BlockTable from '../react/block-table.js'
-import * as BlockTeleport from '../react/block-teleport.js'
 
 export let enter = [
   BlockMaybeSkip.enter,
   BlockSetTestId.enter,
   BlockOffWhen.enter,
-  BlockRoute.enter,
   BlockName.enter,
   BlockTable.enter,
   BlockColumn.enter,
   BlockCapture.enter,
-  BlockTeleport.enter,
   BlockGoTo.enter,
   BlockInList.enter,
   BlockAddTestIdProp.enter,
@@ -41,6 +37,5 @@ export let leave = [
   BlockGroup.leave,
   BlockName.leave,
   BlockTable.leave,
-  BlockRoute.leave,
   BlockOffWhen.leave,
 ]

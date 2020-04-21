@@ -1,6 +1,5 @@
-import { getProp, hasProp } from '../utils.js'
+import { getProp } from '../utils.js'
 import getBlockName from './get-block-name.js'
-import safe from '../react/safe.js'
 import wrap from '../react/wrap.js'
 
 export let enter = (node, parent, state) => {
@@ -46,17 +45,6 @@ export let enter = (node, parent, state) => {
           ${node.isInList ? `key={${key ? key.value : 'index'}}` : ''}>`
     )
     node.wrapEnd = `</${block}>`
-  } else if (node.teleport) {
-    state.use('Link')
-    let to = getProp(node, 'teleportTo').value
-
-    state.render.push(
-      `<Link
-          activeOpacity={0.7}
-          to=${safe(to)}
-          underlayColor='transparent'>`
-    )
-    node.wrapEnd = '</Link>'
   } else if (node.goTo) {
     // let goTo = getProp(node, 'goTo')
     // TODO https://facebook.github.io/react-native/docs/linking.html

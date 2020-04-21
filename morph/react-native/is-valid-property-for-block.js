@@ -20,7 +20,6 @@ let blacklist = [
   'rotatez',
   'scalez',
   'shadowspread',
-  'teleportto',
   'texttransform',
   'transformorigin',
   'transformoriginz',

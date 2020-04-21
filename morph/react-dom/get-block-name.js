@@ -79,9 +79,6 @@ let getGroupBlockName = (node, parent, state) => {
     name = 'ViewsModalOverlay'
   } else if (parent && hasProp(parent, 'isModal')) {
     name = 'ViewsModalOverlayContent'
-  } else if (hasProp(node, 'teleportTo')) {
-    name = 'Link'
-    node.teleport = true
   } else if (hasProp(node, 'goTo')) {
     name = 'a'
     node.goTo = true
