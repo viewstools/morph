@@ -1,5 +1,6 @@
 import getViewRelativeToView from '../../get-view-relative-to-view.js'
 import relativise from '../../relativise.js'
+import path from 'path'
 
 export default function makeGetImport({
   imports,
@@ -37,7 +38,7 @@ export default function makeGetImport({
     if (importView.logic) {
       importFile = importView.logic
     } else if (!importView.custom) {
-      importFile = `${importFile}.js`
+      importFile = path.join(path.dirname(importFile), 'view.js')
     }
     let importPath = relativise(view.file, importFile)
 

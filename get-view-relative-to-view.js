@@ -14,13 +14,13 @@ export default function getViewRelativeToView({
   }
   let importViewFile = [...importCandidates][0]
   if (importCandidates.size > 1) {
-    let pathToView = view.file.replace(/\.view$/, '')
+    let pathToView = path.dirname(view.file)
 
     let maybeFileViewInside = path
-      .join(pathToView, `${id}.view`)
+      .join(pathToView, id, 'view.blocks')
       .replace(/\\/g, '/')
     let maybeFileViewCustomInside = path
-      .join(pathToView, `${id}.js`)
+      .join(pathToView, id, 'react.js')
       .replace(/\\/g, '/')
     if (importCandidates.has(maybeFileViewInside)) {
       importViewFile = maybeFileViewInside

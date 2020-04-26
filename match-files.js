@@ -1,35 +1,23 @@
-import getFirstLine from 'firstline'
-import isViewCustom from './is-view-custom.js'
 import mm from 'micromatch'
 
 export let PATTERNS = {
   filesView: {
-    match: ['**/*.view', '**/*.block'],
+    match: ['**/view.blocks'],
   },
   filesViewLogic: {
-    match: ['**/*.view.logic.js', '**/*.block.logic.js'],
+    match: ['**/logic.js'],
   },
   filesViewCustom: {
-    match: ['**/*.js'],
-    ignore: ['**/*.view.logic.js', '**/*.block.logic.js'],
-    filter: async files => {
-      let filesFirstLine = await Promise.all(
-        files.map(async file => [file, await getFirstLine(file)])
-      )
-
-      return filesFirstLine
-        .filter(([, firstLine]) => isViewCustom(firstLine))
-        .map(([file]) => file)
-    },
+    match: ['**/react.js'],
   },
   filesFontCustom: {
     match: [
-      '**/Fonts/*.eot',
-      '**/Fonts/*.otf',
-      '**/Fonts/*.ttf',
-      '**/Fonts/*.svg',
-      '**/Fonts/*.woff',
-      '**/Fonts/*.woff2',
+      '**/DesignSystem/Fonts/*.eot',
+      '**/DesignSystem/Fonts/*.otf',
+      '**/DesignSystem/Fonts/*.ttf',
+      '**/DesignSystem/Fonts/*.svg',
+      '**/DesignSystem/Fonts/*.woff',
+      '**/DesignSystem/Fonts/*.woff2',
     ],
   },
 }
@@ -41,8 +29,7 @@ export let isViewLogicFile = async file =>
   mm.isMatch(file, PATTERNS.filesViewLogic.match)
 export let isViewCustomFile = async file =>
   // @ts-ignore
-  mm.isMatch(file, PATTERNS.filesViewCustom.match) &&
-  (await PATTERNS.filesViewCustom.filter([file])).length > 0
+  mm.isMatch(file, PATTERNS.filesViewCustom.match)
 export let isFontCustomFile = async file =>
   // @ts-ignore
   mm.isMatch(file, PATTERNS.filesFontCustom.match)

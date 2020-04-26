@@ -1,6 +1,6 @@
 import path from 'path'
 
-let EXTENSIONS = ['.block', '.block.logic.js', '.view', '.view.logic.js', '.js']
+let EXTENSIONS = ['view.blocks', 'logic.js', 'react.js']
 
 export default function getViewIdFromFile(file) {
   let extension = EXTENSIONS.find(item => file.endsWith(item))
@@ -11,5 +11,5 @@ export default function getViewIdFromFile(file) {
     )
   }
 
-  return path.basename(file, extension)
+  return path.basename(path.dirname(file))
 }

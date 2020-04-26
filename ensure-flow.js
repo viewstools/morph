@@ -18,12 +18,6 @@ function ensureFirstStoryIsOn(flow, key, stories) {
   }
 }
 
-function getTopStory(flow) {
-  for (let [key, value] of flow) {
-    if (value.parent === '') return key
-  }
-}
-
 let makeFlow = ({ tools, viewsById, viewsToFiles }) => {
   let flowMap = new Map()
   let flowMapStr = []
@@ -50,7 +44,7 @@ let makeFlow = ({ tools, viewsById, viewsToFiles }) => {
 
     flowMapStr.push(
       `["${view.parsed.view.viewPath}", {
-        parent: "${parent}",
+        parent: "${parent === '/' ? '' : parent}",
         isSeparate: ${isSeparate},
         stories: new Set(${states.length > 0 ? JSON.stringify(states) : ''})
       }]`
@@ -62,7 +56,7 @@ let makeFlow = ({ tools, viewsById, viewsToFiles }) => {
     })
   }
 
-  let topStory = getTopStory(flowMap)
+  let topStory = '/App'
   let initialState = new Set([topStory])
   ensureFirstStoryIsOn(flowMap, topStory, initialState)
 
@@ -72,7 +66,7 @@ let makeFlow = ({ tools, viewsById, viewsToFiles }) => {
 // https://github.com/viewstools/morph/blob/master/ensure-flow.js
 
 import React, { useCallback, useContext, useEffect, useReducer } from 'react'
-${tools ? "import ViewsTools from './ViewsTools.view.logic.js'" : ''}
+${tools ? "import ViewsTools from './ViewsTools.js'" : ''}
 
 export let flow = new Map([${flowMapStr.join(', ')}])
 
@@ -97,7 +91,13 @@ function ensureFirstStoryIsOn(key, stories) {
 
 function ensureParents(key, stories) {
   let story = flow.get(key)
-  if (!story.parent) return
+  if (!story) {
+    console.error(\`View "\${key}" is missing its parent\`)
+    return
+  }
+  if (!story.parent) {
+    return
+  }
 
   stories.add(story.parent)
   ensureParents(story.parent, stories)

@@ -13,7 +13,7 @@ let morphFont = {
 }
 
 export async function ensureFontsDirectory(src) {
-  await ensureDir(path.join(src, 'Fonts'))
+  await ensureDir(path.join(src, 'DesignSystem', 'Fonts'))
 }
 
 export let getFontId = file => path.basename(file, path.extname(file))
@@ -45,7 +45,7 @@ export function morphAllFonts({
   src,
   viewsToFiles,
 }) {
-  let fontsDirectory = path.join(src, 'Fonts')
+  let fontsDirectory = path.join(src, 'DesignSystem', 'Fonts')
   let fontsInUse = new Set()
 
   let mapCustomFont = file => ({
@@ -72,7 +72,7 @@ export function morphAllFonts({
     }
 
     return {
-      file: path.join(src, 'Fonts', `${font}.js`),
+      file: path.join(src, 'DesignSystem', 'Fonts', `${font}.js`),
       content: morphFont[as](
         {
           id: font,
@@ -101,6 +101,9 @@ let FONT_TYPES = {
 }
 
 export let makeGetFontImport = src => (font, view) =>
-  `import "${relativise(view.file, path.join(src, 'Fonts', `${font}.js`))}"`
+  `import "${relativise(
+    view.file,
+    path.join(src, 'DesignSystem', 'Fonts', `${font}.js`)
+  )}"`
 
 // let isFont = f => Object.keys(FONT_TYPES).includes(path.extname(f))

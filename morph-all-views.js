@@ -1,4 +1,5 @@
 import maybeMorph from './maybe-morph.js'
+import path from 'path'
 
 export default function morphAllViews({
   as,
@@ -15,7 +16,7 @@ export default function morphAllViews({
     .map(file => viewsToFiles.get(file))
     .filter(view => !view.custom)
     .map(view => ({
-      file: `${view.file}.js`,
+      file: path.join(path.dirname(view.file), 'view.js'),
       content: maybeMorph({
         as,
         getFontImport,

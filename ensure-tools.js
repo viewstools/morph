@@ -30,7 +30,7 @@ export default function ViewsTools(props) {
 }`
 
 export default async function ensureTools({ src }) {
-  let file = path.join(src, 'Logic', 'ViewsTools.view.logic.js')
+  let file = path.join(src, 'Logic', 'ViewsTools.js')
 
   if ((await fsExtra.exists(file)) && process.env.REACT_APP_VIEWS_TOOLS)
     return null

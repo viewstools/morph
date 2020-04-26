@@ -17,14 +17,13 @@ export default async function watchFiles({ morpher }) {
     cwd: morpher.src,
     ignored: [
       path.join('**', 'node_modules', '**'),
-      path.join('**', '*.block.js'),
-      path.join('**', '*.view.js'),
-      path.join('**', 'Fonts', '*.js'),
+      path.join('**', 'view.js'),
+      path.join('**', 'DesignSystem', 'Fonts', '*.js'),
       path.join('**', 'Logic', 'ViewsFlow.js'),
       path.join('**', 'Logic', 'useIsMedia.js'),
       path.join('**', 'Logic', 'useIsBefore.js'),
       path.join('**', 'Logic', 'useIsHovered.js'),
-      path.join('**', 'Logic', 'ViewsTools.block.logic.js'),
+      path.join('**', 'Logic', 'ViewsTools', 'logic.js'),
       path.join('**', 'Data', 'ViewsData.js'),
     ],
     ignoreInitial: true,
@@ -124,9 +123,7 @@ function processUnlinked({ files, morpher, filesToProcess }) {
           morpher.customFonts.delete(id)
         }
       } else {
-        let view =
-          morpher.viewsToFiles.get(file.replace('.view.logic.js', '.view')) ||
-          morpher.viewsToFiles.get(file.replace('.block.logic.js', '.block'))
+        let view = morpher.viewsToFiles.get(path.dirname(file))
         if (!view) return
 
         processPointsOfUse({ view, morpher, filesToProcess })
@@ -136,7 +133,7 @@ function processUnlinked({ files, morpher, filesToProcess }) {
         morpher.viewsToFiles.delete(view.file)
 
         try {
-          fs.unlink(`${view.file}.js`)
+          fs.unlink(view.file)
         } catch (error) {}
 
         if (await isViewFile(file)) {
@@ -163,20 +160,18 @@ function processAddedOrChanged({ files, morpher, filesToProcess }) {
         if (await isViewFile(file)) {
           filesToProcess.filesView.add(file)
 
-          let logicFile = `${file}.logic.js`
+          let logicFile = path.join(path.dirname(file), 'logic.js')
           if (existsSync(logicFile)) {
             filesToProcess.filesViewLogic.add(logicFile)
           }
         } else if (await isViewLogicFile(file)) {
-          filesToProcess.filesView.add(file.replace('.logic.js', ''))
+          filesToProcess.filesView.add(file.replace('logic.js', 'view.blocks'))
           filesToProcess.filesViewLogic.add(file)
         } else if (await isViewCustomFile(file)) {
           filesToProcess.filesViewCustom.add(file)
         }
 
-        let view =
-          morpher.viewsToFiles.get(file.replace('.view.logic.js', '.view')) ||
-          morpher.viewsToFiles.get(file.replace('.block.logic.js', '.block'))
+        let view = morpher.viewsToFiles.get(path.dirname(file))
         if (!view) return
 
         processPointsOfUse({ view, morpher, filesToProcess })

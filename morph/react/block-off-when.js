@@ -41,7 +41,7 @@ export function enter(node, parent, state) {
     state.render.push(`${value} ? `)
   } else if (isStory(node, state)) {
     node.onWhen = true
-    state.render.push(`{flow.has("${state.pathToStory}/${node.name}") ? `)
+    state.render.push(`{flow.has("${state.viewPath}/${node.name}") ? `)
   }
 }
 

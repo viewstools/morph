@@ -1,5 +1,5 @@
 import addToMapSet from './add-to-map-set.js'
-import path from 'path'
+import getViewIdFromFile from './get-view-id-from-file.js'
 
 export default function processViewCustomFiles({
   filesViewCustom,
@@ -7,7 +7,7 @@ export default function processViewCustomFiles({
   viewsToFiles,
 }) {
   for (let file of filesViewCustom) {
-    let id = path.basename(file, '.js')
+    let id = getViewIdFromFile(file)
 
     addToMapSet(viewsById, id, file)
 
