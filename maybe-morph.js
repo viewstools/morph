@@ -1,6 +1,6 @@
 import chalk from 'chalk'
 import morphers from './morphers.js'
-import prettier from 'prettier'
+// import prettier from 'prettier'
 
 export default function maybeMorph({
   as,
@@ -36,11 +36,13 @@ export default function maybeMorph({
         `${chalk.green('M')} ${view.id}@${view.version}:${chalk.dim(view.file)}`
       )
 
-    return prettier.format(result.code, {
-      parser: 'babel',
-      singleQuote: true,
-      trailingComma: 'es5',
-    })
+    return result.code
+
+    // return prettier.format(result.code, {
+    //   parser: 'babel',
+    //   singleQuote: true,
+    //   trailingComma: 'es5',
+    // })
   } catch (error) {
     console.error(chalk.red('M'), view, error.codeFrame || error)
     return `import { useEffect } from 'react'
