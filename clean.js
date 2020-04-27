@@ -6,12 +6,13 @@ import path from 'path'
 export default async function clean(src, verbose) {
   let morphed = await glob(
     [
-      '**/*.view.js',
-      `Fonts/*.js`,
-      'useFlow.js',
-      'useIsMedia.js',
-      'useIsBefore.js',
-      'useTools.js',
+      '**/view.js',
+      'Data/ViewsData.js',
+      `DesignSystem/Fonts/*.js`,
+      'Logic/ViewsFlow.js',
+      'Logic/useIsMedia.js',
+      'Logic/useIsBefore.js',
+      'Logic/ViewsTools.js',
     ],
     {
       bashNative: ['linux'],
