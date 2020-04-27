@@ -241,7 +241,7 @@ ViewsFlow.defaultProps = {
 }
 
 export function normalizePath(viewPath, relativePath) {
-  let url = new URL(\`file://\${viewPath}/../\${relativePath}\`)
+  let url = new URL(\`file://\${viewPath}/\${relativePath}\`)
   return url.pathname
 }`
 }
