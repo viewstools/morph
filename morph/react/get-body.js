@@ -1,8 +1,5 @@
 export default ({ state, name }) => {
-  let render = state.render.join('')
-  if (Object.keys(state.locals).length > 0 || state.isFormatted) {
-    render = `<Subscribe to={[LocalContainer]}>\n{local =>\n${render}\n}</Subscribe>`
-  }
+  let render = state.render.join('\n')
 
   let animated = []
   if (state.isAnimated) {
@@ -86,19 +83,16 @@ export default ({ state, name }) => {
   }
 
   if (state.hasRefs) {
-    let trackOpen = state.track ? '<TrackContext.Consumer>{track => (' : ''
-    let trackClose = state.track ? ')}</TrackContext.Consumer>' : ''
     return `export default class ${name} extends React.Component {
   render() {
     let { props } = this
-    return (${trackOpen}${render}${trackClose})
+    return (${render})
   }
 }`
   } else {
     let ret = render ? `(${render})` : null
 
     return `export default function ${name}(props) {
-    ${state.track ? `let track = React.useContext(TrackContext)` : ''}
     ${state.useIsBefore ? 'let isBefore = useIsBefore()' : ''}
     ${
       state.useIsHovered

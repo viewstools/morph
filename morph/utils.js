@@ -81,7 +81,7 @@ export let getScope = node => node.value.split('when ')[1]
 
 let getScopedProps = (propNode, blockNode) => {
   let scopes = blockNode.scopes
-    .filter(scope => !scope.isSystem && !scope.isLocal)
+    .filter(scope => !scope.isSystem)
     .map(scope => {
       let prop = scope.properties.find(prop => prop.name === propNode.name)
       return prop && { prop, when: scope.value, scope }
@@ -271,56 +271,9 @@ export let isSvg = node => /^Svg/.test(node.name) && node.isBasic
 export let hasCustomScopes = (propNode, blockNode) =>
   blockNode.scopes.some(
     scope =>
-      !scope.isLocal &&
       !scope.isSystem &&
       scope.properties.some(prop => prop.name === propNode.name)
   )
-
-export let hasLocals = (propNode, blockNode) =>
-  blockNode.scopes.some(scope => scope.isLocal)
-
-export let getLocals = (propNode, blockNode, state) => {
-  let locals = {}
-
-  blockNode.scopes
-    .filter(scope => scope.isLocal)
-    .forEach(scope => {
-      let prop = scope.properties.find(prop => prop.name === propNode.name)
-      if (prop) {
-        locals[scope.value] = prop.value
-      }
-    })
-
-  return locals
-}
-
-export let getLocalsString = (propNode, blockNode, state) => {
-  let baseLocalName = `${blockNode.is || blockNode.name}Local`
-  let localName = baseLocalName
-  let index = 1
-  while (localName in state.locals) {
-    localName = `${baseLocalName}${index++}`
-  }
-
-  state.locals[localName] = getLocals(propNode, blockNode, state)
-  return wrap(`${localName}[local.state.lang] || ${safe(propNode.value)}`)
-}
-
-export let makeOnClickTracker = (node, parent, state) => {
-  if (!state.track) return node.value
-
-  let block = parent.testId
-    ? `"${state.name}.${parent.testId}"`
-    : `props["${state.testIdKey}"] || "${state.name}"`
-
-  state.isTracking = true
-
-  return `event => {
-    typeof ${node.value} === 'function' && ${node.value}(event);
-
-    track({ block: ${block}, action: "click", event, props });
-  }`
-}
 
 // let isRotate = name =>
 //   name === 'rotate' || name === 'rotateX' || name === 'rotateY'

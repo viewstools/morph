@@ -6,8 +6,6 @@ let FILE_USE_IS_HOVERED = path.join('Logic', 'useIsHovered.js')
 let FILE_USE_IS_MEDIA = path.join('Logic', 'useIsMedia.js')
 let FILE_USE_DATA = path.join('Data', 'ViewsData.js')
 let FILE_USE_FLOW = path.join('Logic', 'ViewsFlow.js')
-let FILE_LOCAL_CONTAINER = 'LocalContainer.js'
-let FILE_TRACK_CONTEXT = 'TrackContext.js'
 
 export default function makeGetSystemImport(src) {
   return function getSystemImport(id, file) {
@@ -44,18 +42,6 @@ export default function makeGetSystemImport(src) {
         return `import * as fromFlow from '${relativise(
           file,
           path.join(src, FILE_USE_FLOW)
-        )}'`
-
-      case 'LocalContainer':
-        return `import LocalContainer from '${relativise(
-          file,
-          path.join(src, FILE_LOCAL_CONTAINER)
-        )}'`
-
-      case 'TrackContext':
-        return `import { TrackContext } from '${relativise(
-          file,
-          path.join(src, FILE_TRACK_CONTEXT)
         )}'`
 
       default:

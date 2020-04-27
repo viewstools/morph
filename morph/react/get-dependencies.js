@@ -59,7 +59,12 @@ export default (state, getImport) => {
       )
     } else if (d === 'Table') {
     } else if (/^[A-Z]/.test(d)) {
-      dependencies.push(getImport(d, state.lazy[d]))
+      let importStatement = getImport(d, state.lazy[d])
+      dependencies.push(importStatement)
+
+      if (/logic\.js'/.test(importStatement)) {
+        dependencies.push(`${d}.displayName = '${d}Logic'`)
+      }
     }
   })
 
@@ -133,10 +138,6 @@ export default (state, getImport) => {
     )
   }
 
-  if (state.track) {
-    dependencies.push(getImport('TrackContext'))
-  }
-
   if (state.useIsBefore) {
     dependencies.push(getImport('ViewsUseIsBefore'))
   }
@@ -147,12 +148,6 @@ export default (state, getImport) => {
 
   if (state.useIsMedia) {
     dependencies.push(getImport('ViewsUseIsMedia'))
-  }
-
-  if (Object.keys(state.locals).length > 0) {
-    dependencies.push('import { Subscribe } from "unstated"')
-    dependencies.push(getImport('LocalContainer'))
-    state.dependencies.add('unstated')
   }
 
   return dependencies

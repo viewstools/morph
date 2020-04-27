@@ -16,9 +16,6 @@ let imports = {
 export default ({
   getFontImport,
   getSystemImport,
-  local,
-  localSupported,
-  track,
   tools,
   view,
   viewsById,
@@ -63,9 +60,6 @@ export default ({
       return viewInView && !viewInView.custom && viewInView.parsed.view.isStory
     },
     lazy: {},
-    local,
-    locals: {},
-    localSupported: [],
     name: finalName,
     viewPath: view.parsed.view.viewPath,
     viewPathParent: view.parsed.view.viewPathParent,
@@ -78,7 +72,6 @@ export default ({
     viewPathKey: 'data-view-path',
     testIds: {},
     tools,
-    track,
     use(block, isLazy = false) {
       if (isLazy) {
         state.lazy[block] = true
@@ -121,7 +114,6 @@ export default ({
 
   state.fonts = view.parsed.fonts
   state.slots = view.parsed.slots
-  state.localSupported = localSupported
 
   walk(view.parsed.view, visitor, state)
 

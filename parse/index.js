@@ -23,7 +23,6 @@ import {
   isList,
   isProp,
   isTable,
-  isLocalScope,
   isSystemScope,
   isUserComment,
   makeDidYouMeanFontFamily,
@@ -37,7 +36,6 @@ import path from 'path'
 export default ({
   convertSlotToProps = true,
   customFonts,
-  enableLocalScopes = true,
   enableSystemScopes = true,
   file,
   id,
@@ -54,7 +52,6 @@ export default ({
   let lines = rlines.map(line => line.trimRight())
   let fonts = []
   let isDefiningChildrenExplicitly = false
-  let locals = []
   let stack = []
   let slots = []
   let useIsBefore = false
@@ -441,13 +438,6 @@ export default ({
 
         if (name === 'when') {
           let isSystem = enableSystemScopes && isSystemScope(slotName)
-          let isLocal = enableLocalScopes && isLocalScope(slotName)
-
-          if (isLocal) {
-            if (!locals.includes(value)) {
-              locals.push(slotName)
-            }
-          }
 
           if (value === '' || value === '<' || value === '<!') {
             warnings.push({
@@ -473,20 +463,15 @@ export default ({
             })
           }
 
-          // TODO warning
-          // if (isLocal && (name !== 'text' || name !== 'placeholder')) {
-          // }
-
           tags.scope = value
           inScope = true
           scope = {
-            isLocal,
             isSystem,
             defaultValue: getValue(value, name),
             value,
             name,
             slotName,
-            slotIsNot: isSystem || isLocal ? false : slotIsNot,
+            slotIsNot: isSystem ? false : slotIsNot,
             properties: [],
           }
 
@@ -500,7 +485,7 @@ export default ({
                 .replace('isMedia', '')
                 .toLowerCase()}`
               useIsMedia = true
-            } else if (!isSystem && !isLocal) {
+            } else if (!isSystem) {
               scope.value = `${slotIsNot ? '!' : ''}props.${slotName || name}`
             }
           }
@@ -778,7 +763,6 @@ export default ({
 
   return {
     fonts,
-    locals,
     slots,
     view,
     warnings,

@@ -17,11 +17,8 @@ let imports = {
 export default ({
   getFontImport,
   getSystemImport,
-  local,
-  localSupported,
   reactNativeLibraryImport = 'react-native',
   tools,
-  track,
   view,
   viewsById,
   viewsToFiles,
@@ -62,9 +59,6 @@ export default ({
       return viewInView && !viewInView.custom && viewInView.parsed.view.isStory
     },
     lazy: {},
-    local,
-    locals: {},
-    localSupported: [],
     name: finalName,
     viewPath: view.parsed.view.viewPath,
     viewPathParent: view.parsed.view.viewPathParent,
@@ -75,7 +69,6 @@ export default ({
     viewPathKey: 'testID',
     testIds: {},
     tools,
-    track,
     reactNativeLibraryImport,
     usedBlockNames: { [finalName]: 1, AutoSizer: 1, Column: 1, Table: 1 },
     uses: [],
@@ -100,7 +93,6 @@ export default ({
 
   state.fonts = view.parsed.fonts
   state.slots = view.parsed.slots
-  state.localSupported = localSupported
 
   walk(view.parsed.view, visitor, state)
 

@@ -58,7 +58,7 @@ export function leave(node, parent, state) {
       }
     }
 
-    state.styles[id] = `css({label: '${id}', ${css.join(', ')}})`
+    state.styles[id] = `css({label: '${id}',\n  ${css.join(',\n  ')}})`
     state.stylesOrder.push(id)
   }
 }

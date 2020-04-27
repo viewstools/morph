@@ -2,10 +2,7 @@ import { isRowStyle, isStyle, STYLE } from './prop-is-style.js'
 import { fontFamily as googleFontFamilies } from '../morph/fonts.js'
 import DidYouMeanMatcher from './did-you-mean.js'
 import isNumber from './prop-is-number.js'
-import locales from 'i18n-locales'
 import toSlugCase from 'to-slug-case'
-
-let LOCAL_SCOPES = locales.map(item => item.replace(/-/g, ''))
 
 let dymPropMatcher = new DidYouMeanMatcher([
   ...STYLE,
@@ -394,8 +391,6 @@ export let getValue = (value, name) => {
     return maybeMakeHyphenated(value, name)
   }
 }
-
-export let isLocalScope = name => LOCAL_SCOPES.includes(name)
 
 let SYSTEM_SCOPES = [
   'isDisabled',

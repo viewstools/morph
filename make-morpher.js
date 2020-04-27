@@ -18,18 +18,14 @@ import processViewFiles from './process-view-files.js'
 
 export default function makeMorpher({
   as = 'react-dom',
-  local = 'en',
   src,
   tools = false,
-  track = false,
   verbose = true,
 }) {
   let state = {
     as,
-    local,
     src,
     tools,
-    track,
     verbose,
     customFonts: new Map(),
     viewsById: new Map(),
@@ -90,9 +86,7 @@ export default function makeMorpher({
       filesView,
       getFontImport: makeGetFontImport(state.src),
       getSystemImport: makeGetSystemImport(state.src),
-      local: state.local,
       tools: state.tools,
-      track: state.track,
       viewsById: state.viewsById,
       viewsToFiles: state.viewsToFiles,
     })
