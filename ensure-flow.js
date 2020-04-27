@@ -18,7 +18,7 @@ function ensureFirstStoryIsOn(flow, key, stories) {
   }
 }
 
-let makeFlow = ({ tools, viewsById, viewsToFiles }) => {
+function makeFlow({ tools, viewsById, viewsToFiles }) {
   let flowMap = new Map()
   let flowMapStr = []
 
@@ -43,11 +43,10 @@ let makeFlow = ({ tools, viewsById, viewsToFiles }) => {
     let parent = view.parsed.view.viewPathParent
 
     flowMapStr.push(
-      `["${view.parsed.view.viewPath}", {
-        parent: "${parent === '/' ? '' : parent}",
-        isSeparate: ${isSeparate},
-        stories: new Set(${states.length > 0 ? JSON.stringify(states) : ''})
-      }]`
+      `['${view.parsed.view.viewPath}', { isSeparate: ${isSeparate}, parent: '${
+        parent === '/' ? '' : parent
+      }',
+  stories: new Set(${states.length > 0 ? JSON.stringify(states) : ''}) }]`
     )
     flowMap.set(view.parsed.view.viewPath, {
       parent,
@@ -68,7 +67,9 @@ let makeFlow = ({ tools, viewsById, viewsToFiles }) => {
 import React, { useCallback, useContext, useEffect, useReducer } from 'react'
 ${tools ? "import ViewsTools from './ViewsTools.js'" : ''}
 
-export let flow = new Map([${flowMapStr.join(', ')}])
+export let flow = new Map([
+${flowMapStr.join(',\n')}
+])
 
 let TOP_STORY = "${topStory}"
 

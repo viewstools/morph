@@ -97,6 +97,7 @@ export default function makeMorpher({
       viewsToFiles: state.viewsToFiles,
     })
 
+    console.time('a')
     let filesToWrite = [
       ...morphedFonts,
       ...morphedViews,
@@ -108,6 +109,7 @@ export default function makeMorpher({
       await ensureIsHovered(state),
       await ensureIsMedia(state),
     ].filter(Boolean)
+    console.timeEnd('a')
 
     await Promise.all(
       filesToWrite.map(({ file, content }) =>

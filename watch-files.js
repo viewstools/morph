@@ -23,11 +23,11 @@ export default async function watchFiles({ morpher }) {
       path.join('**', 'Logic', 'useIsMedia.js'),
       path.join('**', 'Logic', 'useIsBefore.js'),
       path.join('**', 'Logic', 'useIsHovered.js'),
-      path.join('**', 'Logic', 'ViewsTools', 'logic.js'),
+      path.join('**', 'Logic', 'ViewsTools.js'),
       path.join('**', 'Data', 'ViewsData.js'),
     ],
     ignoreInitial: true,
-    awaitWriteFinish: true,
+    // awaitWriteFinish: true,
   })
 
   let skipTimeout = null
@@ -36,7 +36,6 @@ export default async function watchFiles({ morpher }) {
 
   function onEvent({ file, op }) {
     queue.push({ file: path.join(morpher.src, file), op })
-
     maybeProcess()
   }
 
@@ -45,7 +44,7 @@ export default async function watchFiles({ morpher }) {
     clearTimeout(skipTimeout)
     skipTimeout = null
     if (processEventsPromise) {
-      skipTimeout = setTimeout(maybeProcess, 200)
+      skipTimeout = setTimeout(maybeProcess, 50)
       return
     }
     processEvents()
@@ -85,17 +84,18 @@ async function processQueue({ queue, morpher }) {
     filesFontCustom: new Set(),
   }
 
-  await processUnlinked({
-    files: queue.filter(item => item.op === 'unlink'),
-    morpher,
-    filesToProcess,
-  })
-
-  await processAddedOrChanged({
-    files: queue.filter(item => item.op !== 'unlink'),
-    morpher,
-    filesToProcess,
-  })
+  await Promise.all([
+    processUnlinked({
+      files: queue.filter(item => item.op === 'unlink'),
+      morpher,
+      filesToProcess,
+    }),
+    processAddedOrChanged({
+      files: queue.filter(item => item.op !== 'unlink'),
+      morpher,
+      filesToProcess,
+    }),
+  ])
 
   await morpher.processFiles(filesToProcess)
 
@@ -112,7 +112,12 @@ async function processQueue({ queue, morpher }) {
 function processUnlinked({ files, morpher, filesToProcess }) {
   return Promise.all(
     files.map(async ({ file }) => {
-      morpher.verbose && console.log(chalk.magenta('X'), file) // view.id, chalk.dim(`-> ${file}`))
+      morpher.verbose &&
+        console.log(
+          chalk.magenta('X'),
+          path.basename(path.dirname(file)),
+          chalk.dim(file.replace(morpher.src, '').replace(/^\//, ''))
+        )
 
       if (await isFontCustomFile(file)) {
         let id = getFontId(file)
@@ -123,7 +128,8 @@ function processUnlinked({ files, morpher, filesToProcess }) {
           morpher.customFonts.delete(id)
         }
       } else {
-        let view = morpher.viewsToFiles.get(path.dirname(file))
+        let viewFile = path.join(path.dirname(file), 'view.blocks')
+        let view = morpher.viewsToFiles.get(viewFile)
         if (!view) return
 
         processPointsOfUse({ view, morpher, filesToProcess })
@@ -132,12 +138,11 @@ function processUnlinked({ files, morpher, filesToProcess }) {
         morpher.viewsById.delete(view.id)
         morpher.viewsToFiles.delete(view.file)
 
-        try {
-          fs.unlink(view.file)
-        } catch (error) {}
-
         if (await isViewFile(file)) {
           filesToProcess.filesView.delete(file)
+          try {
+            await fs.unlink(file.replace('view.blocks', 'view.js'))
+          } catch (error) {}
         } else if (await isViewLogicFile(file)) {
           filesToProcess.filesView.add(view.file)
           filesToProcess.filesViewLogic.delete(file)
@@ -152,7 +157,12 @@ function processUnlinked({ files, morpher, filesToProcess }) {
 function processAddedOrChanged({ files, morpher, filesToProcess }) {
   return Promise.all(
     files.map(async ({ file, op }) => {
-      morpher.verbose && console.log(chalk.yellow(op), file)
+      morpher.verbose &&
+        console.log(
+          chalk.yellow(op.toUpperCase()[0]),
+          path.basename(path.dirname(file)),
+          chalk.dim(file.replace(morpher.src, '').replace(/^\//, ''))
+        )
 
       if (await isFontCustomFile(file)) {
         filesToProcess.filesFontCustom.add(file)
@@ -164,14 +174,25 @@ function processAddedOrChanged({ files, morpher, filesToProcess }) {
           if (existsSync(logicFile)) {
             filesToProcess.filesViewLogic.add(logicFile)
           }
+
+          let parentFile = path.join(
+            path.dirname(path.dirname(file)),
+            'view.blocks'
+          )
+          if (existsSync(parentFile)) {
+            filesToProcess.filesView.add(parentFile)
+          }
         } else if (await isViewLogicFile(file)) {
-          filesToProcess.filesView.add(file.replace('logic.js', 'view.blocks'))
+          filesToProcess.filesView.add(
+            path.join(path.dirname(file), 'view.blocks')
+          )
           filesToProcess.filesViewLogic.add(file)
         } else if (await isViewCustomFile(file)) {
           filesToProcess.filesViewCustom.add(file)
         }
 
-        let view = morpher.viewsToFiles.get(path.dirname(file))
+        let viewFile = path.join(path.dirname(file), 'view.blocks')
+        let view = morpher.viewsToFiles.get(viewFile)
         if (!view) return
 
         processPointsOfUse({ view, morpher, filesToProcess })
@@ -194,6 +215,7 @@ function processPointsOfUse({ view, morpher, filesToProcess }) {
     view,
     viewsToFiles: morpher.viewsToFiles,
   })
+
   for (let file of filesView) {
     filesToProcess.filesView.add(file)
   }

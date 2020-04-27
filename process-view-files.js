@@ -9,22 +9,24 @@ export default async function processViewFiles({
   viewsById,
   viewsToFiles,
 }) {
-  for await (let file of filesView) {
-    let id = getViewIdFromFile(file)
+  await Promise.all(
+    [...filesView].map(async file => {
+      let id = getViewIdFromFile(file)
 
-    addToMapSet(viewsById, id, file)
+      addToMapSet(viewsById, id, file)
 
-    let view = viewsToFiles.has(file) ? viewsToFiles.get(file) : {}
-    let logic = path.join(path.dirname(file), 'logic.js')
+      let view = viewsToFiles.has(file) ? viewsToFiles.get(file) : {}
+      let logic = path.join(path.dirname(file), 'logic.js')
 
-    viewsToFiles.set(file, {
-      ...view,
-      custom: false,
-      file,
-      id,
-      logic: filesViewLogic.has(logic) && logic,
-      source: await fs.readFile(file, 'utf8'),
-      version: view.version ? view.version + 1 : 0,
+      viewsToFiles.set(file, {
+        ...view,
+        custom: false,
+        file,
+        id,
+        logic: filesViewLogic.has(logic) && logic,
+        source: await fs.readFile(file, 'utf8'),
+        version: view.version ? view.version + 1 : 0,
+      })
     })
-  }
+  )
 }
