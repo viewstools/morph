@@ -64,6 +64,7 @@ export function DataProvider(props) {
   }
   if (!(props.context in DataContexts)) {
     DataContexts[props.context] = React.createContext([])
+    DataContexts[props.context].displayName = props.context
   }
   let Context = DataContexts[props.context]
 
