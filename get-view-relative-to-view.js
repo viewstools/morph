@@ -32,7 +32,11 @@ export default function getViewRelativeToView({
 
   let importView = viewsToFiles.get(importViewFile)
 
-  if (view.parsed.view.isStory && importView.parsed.view.isStory) {
+  if (
+    !importView.custom &&
+    view.parsed.view.isStory &&
+    importView.parsed.view.isStory
+  ) {
     let pathToView = path.dirname(view.file)
     let maybeFileViewInside = path
       .join(pathToView, id, 'view.blocks')
