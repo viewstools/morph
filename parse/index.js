@@ -230,15 +230,6 @@ export default ({
       block.skip = true
     }
 
-    if (id === name) {
-      warnings.push({
-        loc: block.loc,
-        type: `Is this a typo? You can't use the view within itself.\nRename the view or use a different block instead of ${name} here. This won't be morphed to avoid loops.`,
-        line,
-      })
-      block.skip = true
-    }
-
     if (!block.isBasic) {
       viewsInView.add(block.name)
     }

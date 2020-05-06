@@ -10,8 +10,10 @@ export default function getViewRelativeToView({
   if (!importCandidates) {
     return null
   }
+  importCandidates = new Set([...importCandidates])
+  importCandidates.delete(view.file)
 
-  let importViewFile = [...importCandidates][0]
+  let [importViewFile] = importCandidates
   if (importCandidates.size > 1) {
     let pathToView = path.dirname(view.file)
 

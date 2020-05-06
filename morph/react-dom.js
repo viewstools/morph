@@ -83,10 +83,13 @@ export default ({
         /props/.test(block) ||
         /^Animated/.test(block) ||
         'React.Fragment' === block ||
-        'ViewsModalOverlayContent' === block ||
-        block === finalName
+        'ViewsModalOverlayContent' === block
       )
         return
+
+      if (block === finalName) {
+        state.name = `${view.id}${state.usedBlockNames[finalName]++}`
+      }
 
       state.uses.push(block)
     },
@@ -129,7 +132,7 @@ export default ({
         viewsToFiles,
       }),
       getStyles,
-      name: finalName,
+      name: state.name,
       state,
     }),
     dependencies: state.dependencies,

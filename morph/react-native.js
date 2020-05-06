@@ -81,10 +81,13 @@ export default ({
       if (
         state.uses.includes(block) ||
         /props/.test(block) ||
-        'React.Fragment' === block ||
-        block === finalName
+        'React.Fragment' === block
       )
         return
+
+      if (block === finalName) {
+        state.name = `${view.id}${state.usedBlockNames[finalName]++}`
+      }
 
       state.uses.push(block)
     },
