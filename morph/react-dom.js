@@ -16,6 +16,7 @@ let imports = {
 export default ({
   getFontImport,
   getSystemImport,
+  src,
   tools,
   view,
   viewsById,
@@ -120,6 +121,7 @@ export default ({
   return {
     code: toComponent({
       getImport: makeGetImport({
+        src,
         imports,
         getSystemImport,
         view,

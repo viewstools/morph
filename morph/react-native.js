@@ -18,6 +18,7 @@ export default ({
   getFontImport,
   getSystemImport,
   reactNativeLibraryImport = 'react-native',
+  src,
   tools,
   view,
   viewsById,
@@ -108,6 +109,7 @@ export default ({
       getImport: makeGetImport({
         imports,
         getSystemImport,
+        src,
         view,
         viewsById,
         viewsToFiles,

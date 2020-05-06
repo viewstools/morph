@@ -8,10 +8,9 @@ export default function getViewRelativeToView({
 }) {
   let importCandidates = viewsById.get(id)
   if (!importCandidates) {
-    // TODO add better error message
-    console.log('No import candidates for ', id, 'from', view.file)
-    importCandidates = new Set()
+    return null
   }
+
   let importViewFile = [...importCandidates][0]
   if (importCandidates.size > 1) {
     let pathToView = path.dirname(view.file)
@@ -29,5 +28,18 @@ export default function getViewRelativeToView({
     }
   }
 
-  return viewsToFiles.get(importViewFile)
+  let importView = viewsToFiles.get(importViewFile)
+
+  if (view.parsed.view.isStory && importView.parsed.view.isStory) {
+    let pathToView = path.dirname(view.file)
+    let maybeFileViewInside = path
+      .join(pathToView, id, 'view.blocks')
+      .replace(/\\/g, '/')
+
+    if (importViewFile !== maybeFileViewInside) {
+      return null
+    }
+  }
+
+  return importView
 }

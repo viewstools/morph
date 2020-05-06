@@ -2,13 +2,13 @@ import mm from 'micromatch'
 
 export let PATTERNS = {
   filesView: {
-    match: ['**/view.blocks'],
+    match: ['**/App/**/view.blocks', '**/DesignSystem/**/view.blocks'],
   },
   filesViewLogic: {
-    match: ['**/logic.js'],
+    match: ['**/App/**/logic.js', '**/DesignSystem/**/logic.js'],
   },
   filesViewCustom: {
-    match: ['**/react.js'],
+    match: ['**/DesignSystem/**/react.js'],
   },
   filesFontCustom: {
     match: [
