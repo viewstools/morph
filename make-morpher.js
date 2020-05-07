@@ -92,17 +92,19 @@ export default function makeMorpher({
       viewsToFiles: state.viewsToFiles,
     })
 
-    let filesToWrite = [
-      ...morphedFonts,
-      ...morphedViews,
-      // TODO optimise, only if they changed, cache, etc
-      await ensureData(state),
-      await ensureFlow(state),
-      await ensureTools(state),
-      await ensureIsBefore(state),
-      await ensureIsHovered(state),
-      await ensureIsMedia(state),
-    ].filter(Boolean)
+    // TODO optimise, only if they changed, cache, etc
+    let viewsFiles = await Promise.all([
+      ensureData(state),
+      ensureFlow(state),
+      ensureTools(state),
+      ensureIsBefore(state),
+      ensureIsHovered(state),
+      ensureIsMedia(state),
+    ])
+
+    let filesToWrite = [...morphedFonts, ...morphedViews, ...viewsFiles].filter(
+      Boolean
+    )
 
     await Promise.all(
       filesToWrite.map(({ file, content }) =>
