@@ -30,7 +30,7 @@ export default async function watch(options) {
             msg = `${view.id} ${chalk.dim('(has logic)')}`
           }
           return `${chalk.yellow('A')} ${chalk.green('M')} ${msg} ${chalk.dim(
-            path.relative(process.cwd(), view.file)
+            path.relative(morpher.src, view.file)
           )}`
         })
         .sort()

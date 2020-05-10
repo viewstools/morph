@@ -1,6 +1,6 @@
 {
   "name": "@viewstools/morph",
-  "version": "23.3.0",
+  "version": "23.3.1",
   "description": "Views language morpher",
   "main": "bin.js",
   "bin": {
@@ -50,6 +50,8 @@
     "chokidar": "^3.0.2",
     "color": "^3.0.0",
     "core-js": "3",
+    "debounce": "^1.2.0",
+    "del": "^5.1.0",
     "delete-empty": "^3.0.0",
     "fast-glob": "^3.0.4",
     "flatten": "^1.0.2",
@@ -66,6 +68,7 @@
     "to-camel-case": "^1.0.0",
     "to-pascal-case": "^1.0.0",
     "to-slug-case": "^1.0.0",
+    "trash": "^6.1.1",
     "update-notifier": "^3.0.1"
   },
   "husky": {

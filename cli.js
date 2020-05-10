@@ -82,8 +82,10 @@ let wait = time => new Promise(resolve => setTimeout(resolve, time))
 
   if (clean) {
     console.log(`Cleaning up ${input}...`)
-    await cleanup(input, verbose)
+    await cleanup(input, verbose, true)
     process.exit()
+  } else {
+    await cleanup(input, verbose)
   }
 
   updateNotifier({ pkg }).notify()
@@ -122,7 +124,7 @@ let wait = time => new Promise(resolve => setTimeout(resolve, time))
 
     console.log(chalk.yellow('A'), '= Added')
     console.log(chalk.green('M'), `= Morphed`)
-    console.log(chalk.blue('X'), `= Deleted`)
+    console.log(chalk.magenta('X'), `= Deleted`)
     console.log('\nPress', chalk.blue('ctrl+c'), 'to stop at any time.\n')
   }
 

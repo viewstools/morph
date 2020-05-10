@@ -1,54 +1,31 @@
 import mm from 'micromatch'
 
-export let PATTERNS = {
-  filesView: {
-    match: ['**/App/**/view.blocks', '**/DesignSystem/**/view.blocks'],
-  },
-  filesViewLogic: {
-    match: ['**/App/**/logic.js', '**/DesignSystem/**/logic.js'],
-  },
-  filesViewCustom: {
-    match: ['**/DesignSystem/**/react.js'],
-  },
-  filesFontCustom: {
-    match: [
-      '**/DesignSystem/Fonts/*.eot',
-      '**/DesignSystem/Fonts/*.otf',
-      '**/DesignSystem/Fonts/*.ttf',
-      '**/DesignSystem/Fonts/*.svg',
-      '**/DesignSystem/Fonts/*.woff',
-      '**/DesignSystem/Fonts/*.woff2',
-    ],
-  },
+let PATTERNS = {
+  filesView: ['**/App/**/view.blocks', '**/DesignSystem/**/view.blocks'],
+  filesViewLogic: ['**/App/**/logic.js', '**/DesignSystem/**/logic.js'],
+  filesViewCustom: ['**/DesignSystem/**/react.js'],
+  filesFontCustom: [
+    '**/DesignSystem/Fonts/*.eot',
+    '**/DesignSystem/Fonts/*.otf',
+    '**/DesignSystem/Fonts/*.ttf',
+    '**/DesignSystem/Fonts/*.svg',
+    '**/DesignSystem/Fonts/*.woff',
+    '**/DesignSystem/Fonts/*.woff2',
+  ],
 }
 
-// @ts-ignore
-export let isViewFile = async file => mm.isMatch(file, PATTERNS.filesView.match)
-export let isViewLogicFile = async file =>
-  // @ts-ignore
-  mm.isMatch(file, PATTERNS.filesViewLogic.match)
-export let isViewCustomFile = async file =>
-  // @ts-ignore
-  mm.isMatch(file, PATTERNS.filesViewCustom.match)
-export let isFontCustomFile = async file =>
-  // @ts-ignore
-  mm.isMatch(file, PATTERNS.filesFontCustom.match)
+export let isViewFile = file => mm.isMatch(file, PATTERNS.filesView)
+export let isViewLogicFile = file => mm.isMatch(file, PATTERNS.filesViewLogic)
+export let isViewCustomFile = file => mm.isMatch(file, PATTERNS.filesViewCustom)
+export let isFontCustomFile = file => mm.isMatch(file, PATTERNS.filesFontCustom)
 
-export let MATCH = Object.values(PATTERNS)
-  .map(item => item.match)
-  .flat()
+export let MATCH = ['App/**', 'DesignSystem/**']
 
-export async function getMatchesPerPattern(files) {
-  // @ts-ignore
+export function getMatchesPerPattern(files) {
   return Object.fromEntries(
-    await Promise.all(
-      Object.entries(PATTERNS).map(async ([key, { filter, match, ignore }]) => {
-        let matches = mm(files, match, { ignore })
-        if (typeof filter === 'function') {
-          matches = await filter(matches)
-        }
-        return [key, new Set(matches)]
-      })
-    )
+    Object.entries(PATTERNS).map(([key, match]) => [
+      key,
+      new Set(mm(files, match)),
+    ])
   )
 }

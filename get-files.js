@@ -5,8 +5,8 @@ export default async function getFiles(src) {
   let files = await glob(MATCH, {
     absolute: true,
     cwd: src,
-    ignore: ['**/node_modules/**', '**/view.js'],
+    ignore: ['**/view.js'],
   })
 
-  return await getMatchesPerPattern(files)
+  return getMatchesPerPattern(files)
 }
