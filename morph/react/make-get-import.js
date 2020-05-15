@@ -40,8 +40,7 @@ Either remove the reference to the view or create a new file ${path.join(
 
       console.error(chalk.red(error))
 
-      return `
-console.error(${JSON.stringify(error)})
+      return `console.error(${JSON.stringify(error)})
 function ${id}() {
   throw new Error(${JSON.stringify(error)})
 }`

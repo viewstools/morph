@@ -18,15 +18,8 @@ let sortAlphabetically = (a, b) => {
   return a === b ? 0 : a < b ? -1 : 1
 }
 
-let importsFirst = (a, b) => {
-  let aIsImport = a.startsWith('import')
-  let bIsImport = b.startsWith('import')
-
-  if ((aIsImport && bIsImport) || (!aIsImport && !bIsImport))
-    return sortAlphabetically(a, b)
-
-  if (aIsImport) return -1
-  if (bIsImport) return 1
+function filterAndSort(list) {
+  return list.filter(Boolean).sort(sortAlphabetically)
 }
 
 export default (state, getImport) => {
@@ -45,6 +38,9 @@ export default (state, getImport) => {
   }
 
   let dependencies = [`import React from 'react'`]
+  let dependenciesLazy = []
+  let dependenciesDisplayNames = []
+  let dependenciesErrors = []
 
   state.uses.sort().forEach(d => {
     if (state.isReactNative && NATIVE.includes(d)) {
@@ -60,10 +56,17 @@ export default (state, getImport) => {
     } else if (d === 'Table') {
     } else if (/^[A-Z]/.test(d)) {
       let importStatement = getImport(d, state.lazy[d])
-      dependencies.push(importStatement)
+
+      if (importStatement.startsWith('import ')) {
+        dependencies.push(importStatement)
+      } else if (importStatement.startsWith('let ')) {
+        dependenciesLazy.push(importStatement)
+      } else {
+        dependenciesErrors.push(importStatement)
+      }
 
       if (/logic\.js'/.test(importStatement)) {
-        dependencies.push(`${d}.displayName = '${d}Logic'`)
+        dependenciesDisplayNames.push(`${d}.displayName = '${d}Logic'`)
       }
     }
   })
@@ -150,8 +153,10 @@ export default (state, getImport) => {
     dependencies.push(getImport('ViewsUseIsMedia'))
   }
 
-  return dependencies
-    .filter(Boolean)
-    .sort(importsFirst)
-    .join('\n')
+  return [
+    ...filterAndSort(dependencies),
+    ...filterAndSort(dependenciesLazy),
+    ...filterAndSort(dependenciesErrors),
+    ...filterAndSort(dependenciesDisplayNames),
+  ].join('\n')
 }
