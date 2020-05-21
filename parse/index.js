@@ -50,6 +50,10 @@ export default ({
   let text = source.replace(/\r\n/g, '\n')
   let rlines = text.split('\n')
   let lines = rlines.map(line => line.trimRight())
+  lines = lines.slice(
+    0,
+    lines.findIndex(line => /# ignore/.test(line))
+  )
   let fonts = []
   let isDefiningChildrenExplicitly = false
   let stack = []
