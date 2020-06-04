@@ -50,9 +50,9 @@ export default async function watchFiles({ morpher }) {
     processEvents()
   }
 
-  watcher.on('add', file => onEvent({ file, op: 'add' }))
-  watcher.on('change', file => onEvent({ file, op: 'change' }))
-  watcher.on('unlink', file => onEvent({ file, op: 'unlink' }))
+  watcher.on('add', (file) => onEvent({ file, op: 'add' }))
+  watcher.on('change', (file) => onEvent({ file, op: 'change' }))
+  watcher.on('unlink', (file) => onEvent({ file, op: 'unlink' }))
 
   return watcher
 }
@@ -66,13 +66,13 @@ async function processQueue({ queue, morpher }) {
   }
 
   processAddedOrChanged({
-    files: queue.filter(item => item.op !== 'unlink'),
+    files: queue.filter((item) => item.op !== 'unlink'),
     morpher,
     filesToProcess,
   })
 
   await processUnlinked({
-    files: queue.filter(item => item.op === 'unlink'),
+    files: queue.filter((item) => item.op === 'unlink'),
     morpher,
     filesToProcess,
   })
@@ -106,7 +106,13 @@ async function processUnlinked({ files, morpher, filesToProcess }) {
         processPointsOfUse({ view, morpher, filesToProcess })
 
         filesToProcess.filesView.delete(view.file)
-        morpher.viewsById.delete(view.id)
+
+        let viewFilesSet = morpher.viewsById.get(view.id)
+        viewFilesSet.delete(view.file)
+        if (viewFilesSet.size === 0) {
+          morpher.viewsById.delete(view.id)
+        }
+
         morpher.viewsToFiles.delete(view.file)
 
         if (isViewFile(file)) {
@@ -115,7 +121,7 @@ async function processUnlinked({ files, morpher, filesToProcess }) {
             await fs.unlink(file.replace('view.blocks', 'view.js'))
           } catch (error) {}
         } else if (isViewLogicFile(file)) {
-          if (files.every(item => item.file !== view.file)) {
+          if (files.every((item) => item.file !== view.file)) {
             filesToProcess.filesView.add(view.file)
           }
           filesToProcess.filesViewLogic.delete(file)
