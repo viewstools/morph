@@ -36,7 +36,8 @@ let shouldBeSlot = (prop, block) =>
 export default ({ name, isSlot, slotIsNot, value, block }) => {
   let tags = {}
 
-  if (isAnimation(value) && name !== 'text') tags.animation = true
+  if (isAnimation(value) && name !== 'text' && name !== 'animation')
+    tags.animation = true
   if (isStyle(name)) tags.style = true
   if (isRowStyle(name)) {
     tags.style = true

@@ -2,6 +2,7 @@ export let STYLE = [
   'alignContent',
   'alignItems',
   'alignSelf',
+  'animation',
   'appRegion',
   'background',
   'backgroundColor',
@@ -84,6 +85,8 @@ export let STYLE = [
   'shadowSpread',
   'shadowInset',
   'stroke',
+  'strokeDashoffset',
+  'strokeDasharray',
   'textAlign',
   'textDecoration',
   'textOverflow',
@@ -204,5 +207,5 @@ export let ROWSTYLE = [
   'rowColorAlternate',
 ]
 
-export let isStyle = name => STYLE.includes(name)
-export let isRowStyle = name => ROWSTYLE.includes(name)
+export let isStyle = (name) => STYLE.includes(name)
+export let isRowStyle = (name) => ROWSTYLE.includes(name)

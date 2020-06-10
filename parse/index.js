@@ -49,8 +49,8 @@ export default ({
   // convert crlf to lf
   let text = source.replace(/\r\n/g, '\n')
   let rlines = text.split('\n')
-  let lines = rlines.map(line => line.trimRight())
-  let ignoreIndex = lines.findIndex(line => /# ignore/.test(line))
+  let lines = rlines.map((line) => line.trimRight())
+  let ignoreIndex = lines.findIndex((line) => /# ignore/.test(line))
   if (ignoreIndex !== -1) {
     lines = lines.slice(0, ignoreIndex)
   }
@@ -67,7 +67,7 @@ export default ({
 
   let didYouMeanBlock = makeDidYouMeanBlock([...views.keys()])
   let didYouMeanFontFamily = makeDidYouMeanFontFamily(
-    [...customFonts.keys()].map(id => id.split('-')[0])
+    [...customFonts.keys()].map((id) => id.split('-')[0])
   )
 
   let blockIds = []
@@ -90,20 +90,20 @@ export default ({
 
   function lookForFonts(block) {
     if (block.properties && (isFontable(block.name) || !block.isBasic)) {
-      let fontFamilyProp = block.properties.find(p => p.name === 'fontFamily')
+      let fontFamilyProp = block.properties.find((p) => p.name === 'fontFamily')
       if (!fontFamilyProp) return
 
       let family = fontFamilyProp.value
 
-      let fontWeightProp = block.properties.find(p => p.name === 'fontWeight')
+      let fontWeightProp = block.properties.find((p) => p.name === 'fontWeight')
       let weight = fontWeightProp ? fontWeightProp.value.toString() : '400'
 
-      let fontStyleProp = block.properties.find(p => p.name === 'fontStyle')
+      let fontStyleProp = block.properties.find((p) => p.name === 'fontStyle')
       let style = fontStyleProp ? fontStyleProp.value.toString() : 'normal'
 
       if (
         !fonts.find(
-          font =>
+          (font) =>
             font.family === family &&
             font.weight === weight &&
             font.style === style
@@ -141,17 +141,17 @@ export default ({
 
   function lookForMultiples(block) {
     let freq = {}
-    block.properties.forEach(prop => {
+    block.properties.forEach((prop) => {
       if (!(prop.name in freq)) {
         freq[prop.name] = 0
       }
       freq[prop.name]++
     })
 
-    let multiples = Object.keys(freq).filter(name => freq[name] > 1)
+    let multiples = Object.keys(freq).filter((name) => freq[name] > 1)
 
     if (multiples.length > 0) {
-      multiples.forEach(name =>
+      multiples.forEach((name) =>
         warnings.push({
           loc: block.loc,
           type: `You have declared a value for ${name} ${freq[name]} times. Only the last value will be used. Delete the ones you don't use.`,
@@ -173,7 +173,7 @@ export default ({
 
     if (
       block.name === 'List' &&
-      !block.properties.some(prop => prop.name === 'from')
+      !block.properties.some((prop) => prop.name === 'from')
     ) {
       warnings.push({
         loc: block.loc,
@@ -286,8 +286,9 @@ export default ({
         if (last.isBasic) {
           warnings.push({
             loc: block.loc,
-            type: `${block.is || block.name} is inside a block ${last.is ||
-              last.name} but ${
+            type: `${block.is || block.name} is inside a block ${
+              last.is || last.name
+            } but ${
               last.name
             } isn't a container and can't have blocks inside of it.\nIndent it one level less.`,
             line,
@@ -295,8 +296,9 @@ export default ({
         } else {
           warnings.push({
             loc: block.loc,
-            type: `${block.is ||
-              block.name} is inside a view. While that's allowed for now, it may break in the future. Ideally, you'd refactor it into its specific own view.`,
+            type: `${
+              block.is || block.name
+            } is inside a view. While that's allowed for now, it may break in the future. Ideally, you'd refactor it into its specific own view.`,
             line,
           })
         }
@@ -304,10 +306,13 @@ export default ({
     } else if (view !== null) {
       warnings.push({
         loc: block.loc,
-        type: `${block.is ||
-          block.name} is outside of the top block and it won't render. Views relies on indentation to nest child views within ${topBlockShouldBe} blocks\nTo fix it, either:\na) Indent ${block.is ||
-          block.name} within the top block and indent all nested views within ${block.is ||
-          block.name}, or\nb) remove it.`,
+        type: `${
+          block.is || block.name
+        } is outside of the top block and it won't render. Views relies on indentation to nest child views within ${topBlockShouldBe} blocks\nTo fix it, either:\na) Indent ${
+          block.is || block.name
+        } within the top block and indent all nested views within ${
+          block.is || block.name
+        }, or\nb) remove it.`,
         line,
       })
     }
@@ -555,7 +560,7 @@ export default ({
 
           if (!block.animations[currentAnimation.id].props[name]) {
             let baseValue = null
-            let baseProp = properties.find(prop => prop.name === name)
+            let baseProp = properties.find((prop) => prop.name === name)
             if (baseProp) {
               baseValue = baseProp.value
             }
@@ -586,40 +591,49 @@ export default ({
 
           propNode.slotName = slotName
 
-          if (name !== 'when' || (name === 'when' && !scope.isSystem)) {
-            propNode.defaultValue = propNode.value
+          // if (name !== 'when' || (name === 'when' && !scope.isSystem)) {
+          propNode.defaultValue = propNode.value
 
-            if (convertSlotToProps) {
-              propNode.value = `${slotIsNot ? '!' : ''}props.${slotName ||
-                name}`
-            }
+          if (convertSlotToProps) {
+            propNode.value = `${slotIsNot ? '!' : ''}props.${slotName || name}`
+          }
 
-            if (needsDefaultValue) {
-              if (name === 'text' && block.name === 'Text') {
-                propNode.defaultValue = ''
-              } else {
-                propNode.defaultValue = false
+          if (needsDefaultValue) {
+            if (name === 'text' && block.name === 'Text') {
+              propNode.defaultValue = ''
+            } else {
+              propNode.defaultValue = false
 
-                if (
-                  warnMissingDefaultValue &&
-                  block.isBasic &&
-                  (propNode.tags.style ||
-                    (block.name === 'Text' && propNode.name === 'text'))
-                ) {
-                  warnings.push({
-                    loc,
-                    type: `Add a default value to "${name}" like: "${name} <${slotName} default value"`,
-                    line,
-                  })
-                }
+              if (
+                warnMissingDefaultValue &&
+                block.isBasic &&
+                (propNode.tags.style ||
+                  (block.name === 'Text' && propNode.name === 'text'))
+              ) {
+                warnings.push({
+                  loc,
+                  type: `Add a default value to "${name}" like: "${name} <${slotName} default value"`,
+                  line,
+                })
               }
             }
+          }
 
-            if (
-              !inScope &&
-              !propNode.tags.fragment &&
-              !slots.some(vp => vp.name === (slotName || name))
-            ) {
+          let existingDefaultValue = slots.find(
+            (vp) => vp.name === (slotName || name)
+          )
+          if (
+            // !inScope &&
+            !propNode.tags.fragment &&
+            (!existingDefaultValue || !existingDefaultValue.defaultValue)
+          ) {
+            if (existingDefaultValue) {
+              existingDefaultValue.name = slotName || name
+              existingDefaultValue.type = getPropType(block, name, value)
+              existingDefaultValue.defaultValue = tags.shouldBeSlot
+                ? false
+                : propNode.defaultValue
+            } else {
               slots.push({
                 name: slotName || name,
                 type: getPropType(block, name, value),
@@ -627,6 +641,7 @@ export default ({
               })
             }
           }
+          // }
         }
       } else if (isComment(line) && !skipComments) {
         let [value] = getComment(line)
@@ -651,7 +666,7 @@ export default ({
           if (
             propNode.name !== 'when' &&
             !propNode.tags.comment &&
-            !properties.some(baseProp => baseProp.name === propNode.name)
+            !properties.some((baseProp) => baseProp.name === propNode.name)
           ) {
             warnings.push({
               loc: propNode.loc,
@@ -672,8 +687,8 @@ export default ({
 
     if (block.name !== 'View' && block.isFragment) {
       let invalidProps = properties
-        .filter(prop => prop.name !== 'isFragment' || prop.name !== 'onWhen')
-        .map(prop => prop.name)
+        .filter((prop) => prop.name !== 'isFragment' || prop.name !== 'onWhen')
+        .map((prop) => prop.name)
 
       if (invalidProps.length > 0) {
         warnings.push({
@@ -733,19 +748,19 @@ export default ({
     })
   }
 
-  let flowProp = view.properties.find(p => p.name === 'is')
+  let flowProp = view.properties.find((p) => p.name === 'is')
   if (flowProp) {
     view.isStory = true
     view.flow = flowProp.value
     view.viewPath = path.dirname(file.replace(src.replace(/\\/g, '/'), ''))
     view.viewPathParent = path.dirname(view.viewPath)
 
-    view.data = getData(view.properties.find(p => p.name === 'data'))
+    view.data = getData(view.properties.find((p) => p.name === 'data'))
     view.dataFormat = getDataFormat(
-      view.properties.find(p => p.name === 'dataFormat')
+      view.properties.find((p) => p.name === 'dataFormat')
     )
     view.dataValidate = getDataValidate(
-      view.properties.find(p => p.name === 'dataValidate')
+      view.properties.find((p) => p.name === 'dataValidate')
     )
   } else {
     view.isStory = false

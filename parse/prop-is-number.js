@@ -47,4 +47,6 @@ export default {
   letterSpacing: true,
   lineHeight: true,
   wordSpacing: true,
+  strokeDasharray: true,
+  strokeDashoffset: true,
 }

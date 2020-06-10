@@ -14,13 +14,13 @@ let GRADIANS = 'grad'
 let RADIANS = 'rad'
 let TURN = 'turn'
 
-let getUnit = node => {
+let getUnit = (node) => {
   let units = getUnits(node.name)
 
   if (typeof node.value === 'number') return units[0] || ''
 
   let match = node.value.match(IS_INT.test(node.value) ? IS_INT : IS_FLOAT)
-  return (match && units.find(u => u === match[2])) || units[0] || ''
+  return (match && units.find((u) => u === match[2])) || units[0] || ''
 }
 export default getUnit
 
@@ -85,6 +85,8 @@ let UNITS = {
   scale: UNITLESS,
   scaleX: UNITLESS,
   scaleY: UNITLESS,
+  strokeDasharray: UNITLESS,
+  strokeDashoffset: UNITLESS,
   shadowOffsetY: LENGTH,
   shadowOffsetX: LENGTH,
   shadowBlur: LENGTH,
@@ -100,7 +102,7 @@ let UNITS = {
 }
 let UNITS_KEYS = Object.keys(UNITS)
 
-let getUnits = key => {
-  let found = UNITS_KEYS.find(ukey => key.startsWith(ukey))
+let getUnits = (key) => {
+  let found = UNITS_KEYS.find((ukey) => key.startsWith(ukey))
   return UNITS[found] || UNITLESS
 }
