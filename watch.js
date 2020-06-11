@@ -22,7 +22,7 @@ export default async function watch(options) {
     let views = [...morpher.viewsToFiles.values()]
     console.log(
       views
-        .map(view => {
+        .map((view) => {
           let msg = view.id
           if (view.custom) {
             msg = `${view.id} ${chalk.dim('(is custom)')}`
@@ -39,6 +39,8 @@ export default async function watch(options) {
 
     views.forEach(maybePrintWarnings)
   }
+
+  console.log(chalk.green('Views Morpher is ready'))
 
   if (options.once) return
 
