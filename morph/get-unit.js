@@ -19,7 +19,9 @@ let getUnit = (node) => {
 
   if (typeof node.value === 'number') return units[0] || ''
 
-  let match = node.value.match(IS_INT.test(node.value) ? IS_INT : IS_FLOAT)
+  let match =
+    typeof node.value === 'string' &&
+    node.value.match(IS_INT.test(node.value) ? IS_INT : IS_FLOAT)
   return (match && units.find((u) => u === match[2])) || units[0] || ''
 }
 export default getUnit
