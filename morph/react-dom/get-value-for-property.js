@@ -13,7 +13,7 @@ import safe from '../react/safe.js'
 import toCamelCase from 'to-camel-case'
 import wrap from '../react/wrap.js'
 
-let isUrl = str => /^https?:\/\//.test(str)
+let isUrl = (str) => /^https?:\/\//.test(str)
 
 function getImageSource(node, parent, state) {
   let scopes = getScopes(node, parent)
@@ -22,7 +22,7 @@ function getImageSource(node, parent, state) {
     return wrap(getScopedCondition(node, parent, state))
   } else if (isUrl(node.value) || node.tags.slot) {
     if (node.defaultValue && !isUrl(node.defaultValue)) {
-      state.slots.forEach(item => {
+      state.slots.forEach((item) => {
         if (item.defaultValue === node.defaultValue) {
           item.type = 'import'
           let name = toCamelCase(item.defaultValue)
@@ -74,6 +74,17 @@ export default function getValueForProperty(node, parent, state) {
   ) {
     return {
       [node.name]: `{${node.value.replace('props.', 'data.')}}`,
+    }
+  } else if (/!?props\.(isFlow|flow)$/.test(node.value)) {
+    let flowPath = getFlowPath(node, parent, state)
+    state.use('ViewsUseFlow')
+    state.useFlow = true
+
+    return {
+      [node.name]: `{${node.value.replace(
+        /props\.(isFlow|flow)/,
+        `flow.has('${flowPath}')`
+      )}}`,
     }
   } else if (hasCustomBlockParent(parent) && CHILD_VALUES.test(node.value)) {
     return {

@@ -130,6 +130,8 @@ export let getScopedCondition = (propNode, blockNode, state) => {
       when = when.replace('props.', 'childProps.')
     } else if (IS_FLOW.test(when)) {
       let flowPath = getFlowPath(scope.scope, blockNode, state)
+      state.use('ViewsUseFlow')
+      state.useFlow = true
       when = when.replace(/props\.(isFlow|flow)/, `flow.has('${flowPath}')`)
     } else if (
       (blockNode.action || !!getActionableParent(blockNode)) &&
