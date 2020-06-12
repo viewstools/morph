@@ -94,10 +94,16 @@ let getScopedProps = (propNode, blockNode) => {
   return scopes
 }
 
-let getScopedConditionPropValue = (node) => {
+function getScopedConditionPropValue(node, parent, state) {
   let value = null
 
-  if (node.tags.slot) {
+  if (/^on[A-Z]/.test(node.name) && node.slotName === 'setFlowTo') {
+    let flowPath = getFlowPath(node, parent, state)
+    state.use('ViewsUseFlow')
+    state.setFlowTo = true
+
+    return `() => setFlowTo('${flowPath}')`
+  } else if (node.tags.slot) {
     value = node.value
   } else if (typeof node.value === 'string') {
     value = safe(node.value)
@@ -116,12 +122,12 @@ let DATA_VALUES = /!?props\.(isInvalid|isInvalidInitial|isValid|isValidInitial|v
 let IS_HOVERED_OR_SELECTED_HOVER = /!?props\.(isHovered|isSelectedHovered)/
 let IS_FLOW = /!?props\.(isFlow|flow)$/
 
-export let getScopedCondition = (propNode, blockNode, state) => {
+export function getScopedCondition(propNode, blockNode, state) {
   let scopedProps = getScopedProps(propNode, blockNode)
 
   if (!scopedProps) return false
 
-  let conditional = getScopedConditionPropValue(propNode)
+  let conditional = getScopedConditionPropValue(propNode, blockNode, state)
   scopedProps.forEach((scope) => {
     let when = scope.when
     if (state.data && DATA_VALUES.test(when)) {
@@ -141,7 +147,9 @@ export let getScopedCondition = (propNode, blockNode, state) => {
     }
 
     conditional = `${when} ? ${getScopedConditionPropValue(
-      scope.prop
+      scope.prop,
+      blockNode,
+      state
     )} : ${conditional}`
   })
 
