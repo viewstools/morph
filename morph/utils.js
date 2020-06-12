@@ -6,7 +6,7 @@ import toSlugCase from 'to-slug-case'
 import path from 'path'
 import wrap from './react/wrap.js'
 
-let safeScope = value =>
+let safeScope = (value) =>
   typeof value === 'string' && !isSlot(value) ? JSON.stringify(value) : value
 
 export let checkParentStem = (node, styleKey) => {
@@ -20,25 +20,25 @@ export let checkParentStem = (node, styleKey) => {
     return false
 
   let matchingParentStem = node.parent.scopes.some(
-    scope => scope.value === styleKey
+    (scope) => scope.value === styleKey
   )
 
   return matchingParentStem && (node.parent.is || node.parent.name)
 }
 
 let INTERPOLATION = /\${(.+)}/
-export let isInterpolation = str => INTERPOLATION.test(str)
-export let deinterpolate = str => {
+export let isInterpolation = (str) => INTERPOLATION.test(str)
+export let deinterpolate = (str) => {
   let match = str.match(INTERPOLATION)
   return match ? match[1] : str
 }
 
-export let getObjectAsString = obj =>
+export let getObjectAsString = (obj) =>
   Array.isArray(obj)
     ? `[${obj.map(getObjectAsString)}]`
     : wrap(
         Object.keys(obj)
-          .map(k => {
+          .map((k) => {
             let v =
               typeof obj[k] === 'object' && hasKeys(obj[k])
                 ? getObjectAsString(obj[k])
@@ -48,10 +48,10 @@ export let getObjectAsString = obj =>
           .join(',')
       )
 
-export let getPropertiesAsObject = list => {
+export let getPropertiesAsObject = (list) => {
   let obj = {}
 
-  list.forEach(prop => {
+  list.forEach((prop) => {
     obj[prop.name] = safeScope(prop.value)
   })
 
@@ -60,10 +60,10 @@ export let getPropertiesAsObject = list => {
 
 export let getProp = (node, key, scope = 'base') => {
   let finder =
-    typeof key === 'string' ? p => p.name === key : p => key.test(p.name)
+    typeof key === 'string' ? (p) => p.name === key : (p) => key.test(p.name)
 
   if (scope !== 'base') {
-    let nodeScope = node.scopes.find(item => item.value === scope)
+    let nodeScope = node.scopes.find((item) => item.value === scope)
     let prop = nodeScope && nodeScope.properties.find(finder)
     if (prop) {
       return prop
@@ -77,13 +77,13 @@ export let getPropValueOrDefault = (node, key, defaultValue) => {
   return hasProp(node, key) ? getProp(node, key).value : defaultValue
 }
 
-export let getScope = node => node.value.split('when ')[1]
+export let getScope = (node) => node.value.split('when ')[1]
 
 let getScopedProps = (propNode, blockNode) => {
   let scopes = blockNode.scopes
-    .filter(scope => !scope.isSystem)
-    .map(scope => {
-      let prop = scope.properties.find(prop => prop.name === propNode.name)
+    .filter((scope) => !scope.isSystem)
+    .map((scope) => {
+      let prop = scope.properties.find((prop) => prop.name === propNode.name)
       return prop && { prop, when: scope.value, scope }
     })
     .filter(Boolean)
@@ -94,7 +94,7 @@ let getScopedProps = (propNode, blockNode) => {
   return scopes
 }
 
-let getScopedConditionPropValue = node => {
+let getScopedConditionPropValue = (node) => {
   let value = null
 
   if (node.tags.slot) {
@@ -114,7 +114,7 @@ let getScopedConditionPropValue = node => {
 let CHILD_VALUES = /!?props\.(isSelected|isHovered|isFocused|isSelectedHovered)/
 let DATA_VALUES = /!?props\.(isInvalid|isInvalidInitial|isValid|isValidInitial|value)/
 let IS_HOVERED_OR_SELECTED_HOVER = /!?props\.(isHovered|isSelectedHovered)/
-let IS_FLOW = /!?props.flow$/
+let IS_FLOW = /!?props\.(isFlow|flow)$/
 
 export let getScopedCondition = (propNode, blockNode, state) => {
   let scopedProps = getScopedProps(propNode, blockNode)
@@ -122,7 +122,7 @@ export let getScopedCondition = (propNode, blockNode, state) => {
   if (!scopedProps) return false
 
   let conditional = getScopedConditionPropValue(propNode)
-  scopedProps.forEach(scope => {
+  scopedProps.forEach((scope) => {
     let when = scope.when
     if (state.data && DATA_VALUES.test(when)) {
       when = when.replace('props', 'data')
@@ -130,7 +130,7 @@ export let getScopedCondition = (propNode, blockNode, state) => {
       when = when.replace('props.', 'childProps.')
     } else if (IS_FLOW.test(when)) {
       let flowPath = getFlowPath(scope.scope, blockNode, state)
-      when = when.replace('props.flow', `flow.has('${flowPath}')`)
+      when = when.replace(/props\.(isFlow|flow)/, `flow.has('${flowPath}')`)
     } else if (
       (blockNode.action || !!getActionableParent(blockNode)) &&
       IS_HOVERED_OR_SELECTED_HOVER.test(when)
@@ -173,11 +173,11 @@ let styleStems = [
   'isSelected',
   'isSelectedHovered',
 ]
-export let getStyleType = node =>
-  styleStems.find(tag => isTag(node, tag)) || 'base'
-export let hasKeys = obj => Object.keys(obj).length > 0
-export let hasKeysInChildren = obj =>
-  Object.keys(obj).some(k => hasKeys(obj[k]))
+export let getStyleType = (node) =>
+  styleStems.find((tag) => isTag(node, tag)) || 'base'
+export let hasKeys = (obj) => Object.keys(obj).length > 0
+export let hasKeysInChildren = (obj) =>
+  Object.keys(obj).some((k) => hasKeys(obj[k]))
 
 export let hasProp = (node, key, match) => {
   let prop = getProp(node, key)
@@ -186,7 +186,7 @@ export let hasProp = (node, key, match) => {
 }
 
 export let hasDefaultProp = (node, parent) =>
-  parent.properties.some(prop => prop.nameRaw === node.nameRaw)
+  parent.properties.some((prop) => prop.nameRaw === node.nameRaw)
 
 export let isSlot = (maybeNode1, maybeNode2) => {
   let node = maybeNode2 || maybeNode1
@@ -195,23 +195,23 @@ export let isSlot = (maybeNode1, maybeNode2) => {
     ? /(data|isHovered|childProps|props|isBefore|isMedia\.)/.test(node)
     : isTag(node, 'slot')
 }
-export let isStyle = node => isTag(node, 'style')
-export let isRowStyle = node => isTag(node, 'rowStyle')
+export let isStyle = (node) => isTag(node, 'style')
+export let isRowStyle = (node) => isTag(node, 'rowStyle')
 export let isTag = (node, tag) => node && node.tags[tag]
 
-export let getActionableParent = node => {
+export let getActionableParent = (node) => {
   if (!node.parent) return false
   if (node.parent.action) return node.parent
   return getActionableParent(node.parent)
 }
 
-export let hasCustomBlockParent = node => {
+export let hasCustomBlockParent = (node) => {
   if (!node.parent) return !node.isBasic
   if (!node.parent.isBasic) return true
   return hasCustomBlockParent(node.parent)
 }
 
-export let getAllowedStyleKeys = node => {
+export let getAllowedStyleKeys = (node) => {
   if (node.isCapture) {
     return ['base', 'isFocused', 'isHovered', 'isDisabled', 'isPlaceholder']
   } else if (node.action || isTable(node) || getActionableParent(node)) {
@@ -227,28 +227,29 @@ export let getAllowedStyleKeys = node => {
   return ['base', 'isFocused']
 }
 
-export let isList = node =>
+export let isList = (node) =>
   node && node.type === 'Block' && node.name === 'List'
 
-export let isCell = node => node.properties.some(prop => prop.name === 'isCell')
+export let isCell = (node) =>
+  node.properties.some((prop) => prop.name === 'isCell')
 
-export let isHeader = node =>
-  node.properties.some(prop => prop.name === 'isHeader')
+export let isHeader = (node) =>
+  node.properties.some((prop) => prop.name === 'isHeader')
 
-export let isColumn = node =>
+export let isColumn = (node) =>
   node && node.type === 'Block' && node.name === 'Column'
 
-export let isTable = node =>
+export let isTable = (node) =>
   node && node.type === 'Block' && node.name === 'Table'
 
-export let isEmpty = list => list.length === 0
+export let isEmpty = (list) => list.length === 0
 
 export let isValidImgSrc = (node, parent) =>
   node.name === 'source' && parent.name === 'Image' && parent.isBasic
 
 export let pushImageToState = (state, scopedNames, paths) =>
-  scopedNames.forEach(name => {
-    let path = paths[scopedNames.findIndex(item => item === name)]
+  scopedNames.forEach((name) => {
+    let path = paths[scopedNames.findIndex((item) => item === name)]
     if (!state.images.includes(path)) {
       state.images.push({
         name,
@@ -260,19 +261,19 @@ export let pushImageToState = (state, scopedNames, paths) =>
 export let getScopes = (node, parent) => {
   let scopedProps = getScopedProps(node, parent)
   if (!scopedProps) return false
-  let paths = scopedProps.map(scope => scope.prop.value)
-  let scopedNames = paths.map(path => toCamelCase(path))
+  let paths = scopedProps.map((scope) => scope.prop.value)
+  let scopedNames = paths.map((path) => toCamelCase(path))
 
   return { scopedProps, paths, scopedNames }
 }
 
-export let isSvg = node => /^Svg/.test(node.name) && node.isBasic
+export let isSvg = (node) => /^Svg/.test(node.name) && node.isBasic
 
 export let hasCustomScopes = (propNode, blockNode) =>
   blockNode.scopes.some(
-    scope =>
+    (scope) =>
       !scope.isSystem &&
-      scope.properties.some(prop => prop.name === propNode.name)
+      scope.properties.some((prop) => prop.name === propNode.name)
   )
 
 // let isRotate = name =>
@@ -302,20 +303,20 @@ let getTransformString = (node, transform, isNative) => {
 }
 
 export let getScopeIndex = (node, currentScope) =>
-  node.scopes.findIndex(scope => {
+  node.scopes.findIndex((scope) => {
     return scope.slotName === currentScope
   })
 
 export let isNewScope = (state, currentAnimation, index) =>
   index ===
   state.animations.findIndex(
-    animation => animation.scope === currentAnimation.scope
+    (animation) => animation.scope === currentAnimation.scope
   )
 
 export let getAnimatedStyles = (node, isNative) => {
   let props = isNative ? getAllAnimatedProps(node, true) : getSpringProps(node)
 
-  return props.map(prop => getAnimatedString(node, prop, isNative)).join(', ')
+  return props.map((prop) => getAnimatedString(node, prop, isNative)).join(', ')
 }
 
 let getPropValue = (prop, interpolateValue = true) => {
@@ -330,17 +331,18 @@ let getPropValue = (prop, interpolateValue = true) => {
   }
 }
 
-export let getDynamicStyles = node => {
+export let getDynamicStyles = (node) => {
   return flatten([
     node.properties
       .filter(
-        prop => prop.tags.style && prop.tags.slot && !getScopedProps(prop, node)
+        (prop) =>
+          prop.tags.style && prop.tags.slot && !getScopedProps(prop, node)
       )
-      .map(prop => `'--${prop.name}': ${getPropValue(prop)}`),
-    node.scopes.map(scope =>
+      .map((prop) => `'--${prop.name}': ${getPropValue(prop)}`),
+    node.scopes.map((scope) =>
       scope.properties
-        .filter(prop => prop.tags.style)
-        .map(prop => {
+        .filter((prop) => prop.tags.style)
+        .map((prop) => {
           let value = null
 
           if (prop.conditional) {
@@ -360,17 +362,17 @@ let getAnimatedString = (node, prop, isNative) =>
     ? getTransformString(node, prop, isNative)
     : getStandardAnimatedString(node, prop, isNative)
 
-export let getNonAnimatedDynamicStyles = node => {
-  let animatedProps = getAllAnimatedProps(node, true).map(prop => prop.name)
+export let getNonAnimatedDynamicStyles = (node) => {
+  let animatedProps = getAllAnimatedProps(node, true).map((prop) => prop.name)
   let animatedTransforms = animatedProps.includes('transform')
     ? getAllAnimatedProps(node, true)
-        .find(prop => prop.name === 'transform')
-        .props.map(prop => prop.name)
+        .find((prop) => prop.name === 'transform')
+        .props.map((prop) => prop.name)
     : []
 
   return Object.keys(node.style.dynamic.base)
     .filter(
-      key => !animatedProps.includes(key) && !animatedTransforms.includes(key)
+      (key) => !animatedProps.includes(key) && !animatedTransforms.includes(key)
     )
     .reduce((obj, key) => {
       obj[key] = node.style.dynamic.base[key]
@@ -380,14 +382,16 @@ export let getNonAnimatedDynamicStyles = node => {
 
 export let getAllAnimatedProps = (node, isNative) => {
   let props = flatten(
-    node.scopes.map(scope => scope.properties.filter(prop => prop.animation))
+    node.scopes.map((scope) =>
+      scope.properties.filter((prop) => prop.animation)
+    )
   )
   return checkForTransforms(props) && isNative
     ? combineTransforms(props)
     : props
 }
 
-let combineTransforms = props => {
+let combineTransforms = (props) => {
   // TODO: handle transforms on different scopes
   let transform = { name: 'transform', props: [] }
   props.forEach((prop, i) => {
@@ -397,26 +401,26 @@ let combineTransforms = props => {
     }
   })
   props.push(transform)
-  return props.filter(prop => !prop.isTransform)
+  return props.filter((prop) => !prop.isTransform)
 }
 
-let checkForTransforms = props =>
-  props.some(prop => TRANSFORM_WHITELIST[prop.name])
+let checkForTransforms = (props) =>
+  props.some((prop) => TRANSFORM_WHITELIST[prop.name])
 
-export let getTimingProps = node =>
+export let getTimingProps = (node) =>
   flatten(
-    node.scopes.map(scope =>
+    node.scopes.map((scope) =>
       scope.properties.filter(
-        prop => prop.animation && prop.animation.curve !== 'spring'
+        (prop) => prop.animation && prop.animation.curve !== 'spring'
       )
     )
   )
 
-let getSpringProps = node =>
+let getSpringProps = (node) =>
   flatten(
-    node.scopes.map(scope =>
+    node.scopes.map((scope) =>
       scope.properties.filter(
-        prop => prop.animation && prop.animation.curve === 'spring'
+        (prop) => prop.animation && prop.animation.curve === 'spring'
       )
     )
   )
@@ -453,7 +457,7 @@ let TRANSFORM_WHITELIST = {
   perspective: true,
 }
 
-export let canUseNativeDriver = name =>
+export let canUseNativeDriver = (name) =>
   STYLES_WHITELIST[name] || TRANSFORM_WHITELIST[name] || false
 
 export let createId = (node, state, addClassName = true) => {
@@ -483,13 +487,13 @@ let CONTENT_CONTAINER_STYLE_PROPS = [
   'alignItems',
 ]
 
-let isContentContainerStyleProp = prop =>
+let isContentContainerStyleProp = (prop) =>
   CONTENT_CONTAINER_STYLE_PROPS.includes(prop)
 
-export let hasContentContainerStyleProp = styleProps =>
+export let hasContentContainerStyleProp = (styleProps) =>
   Object.keys(styleProps).some(isContentContainerStyleProp)
 
-export let getContentContainerStyleProps = styleProps =>
+export let getContentContainerStyleProps = (styleProps) =>
   Object.keys(styleProps)
     .filter(isContentContainerStyleProp)
     .reduce((obj, key) => {
@@ -497,17 +501,17 @@ export let getContentContainerStyleProps = styleProps =>
       return obj
     }, {})
 
-export let removeContentContainerStyleProps = styleProps =>
+export let removeContentContainerStyleProps = (styleProps) =>
   Object.keys(styleProps)
-    .filter(key => !isContentContainerStyleProp(key))
+    .filter((key) => !isContentContainerStyleProp(key))
     .reduce((obj, key) => {
       obj[key] = styleProps[key]
       return obj
     }, {})
 
-export let hasRowStyles = node =>
+export let hasRowStyles = (node) =>
   node.properties.some(
-    prop => prop.name.match(/^row/) && prop.name !== 'rowHeight'
+    (prop) => prop.name.match(/^row/) && prop.name !== 'rowHeight'
   )
 
 let MAYBE_HYPHENATED_STYLE_PROPS = [
