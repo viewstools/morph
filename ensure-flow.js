@@ -194,14 +194,18 @@ function reducer(state, action) {
           )
         }
 
-        if (ViewsTools.SYNC_ONE_WAY) {
+      ${
+        tools
+          ? `if (ViewsTools.SYNC_ONE_WAY) {
           return action.id.startsWith(ViewsTools.SYNC_ONE_WAY)
             ? {
                 flow: getNextFlow(action.id, state.flow),
                 actions: state.actions,
               }
             : state;
-        }
+        }`
+          : ''
+      }
       }
 
       if (state.actions[0] === action.id) {
