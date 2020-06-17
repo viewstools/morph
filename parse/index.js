@@ -1,7 +1,7 @@
 import {
   CAPTURE_TYPES,
-  makeDidYouMeanBlock,
-  didYouMeanProp,
+  // makeDidYouMeanBlock,
+  // didYouMeanProp,
   getAnimation,
   getBlock,
   getComment,
@@ -25,7 +25,7 @@ import {
   isTable,
   isSystemScope,
   isUserComment,
-  makeDidYouMeanFontFamily,
+  // makeDidYouMeanFontFamily,
   sortScopes,
 } from './helpers.js'
 import { isGoogleFont } from '../morph/fonts.js'
@@ -65,10 +65,12 @@ export default ({
   let viewsInView = new Set()
   let warnings = []
 
-  let didYouMeanBlock = makeDidYouMeanBlock([...views.keys()])
-  let didYouMeanFontFamily = makeDidYouMeanFontFamily(
-    [...customFonts.keys()].map((id) => id.split('-')[0])
-  )
+  // TODO revisit at a later stage, it was making longer files super slow to
+  // parse so we're removing it for now
+  // let didYouMeanBlock = makeDidYouMeanBlock([...views.keys()])
+  // let didYouMeanFontFamily = makeDidYouMeanFontFamily(
+  //   [...customFonts.keys()].map((id) => id.split('-')[0])
+  // )
 
   let blockIds = []
   function getBlockId(node) {
@@ -119,21 +121,24 @@ export default ({
 
         if (font.isGoogleFont || customFonts.has(font.id)) {
           fonts.push(font)
-        } else {
-          let meant = didYouMeanFontFamily(family)
-          if (meant && meant !== family) {
-            warnings.push({
-              loc: fontFamilyProp.loc,
-              type: `The font "${family}" is missing. Did you mean "${meant}" instead?\nIf not, download the font files (eg, "${font.id}.woff2", "${font.id}.woff", "${font.id}.ttf", etc) and add the to the "Fonts" folder.`,
-              line: lines[fontFamilyProp.loc.start.line - 1],
-            })
-          } else if (!font.weight.startsWith('props.')) {
-            warnings.push({
-              loc: fontFamilyProp.loc,
-              type: `The font "${family}" is missing.\nDownload the font files (eg, "${font.id}.woff2", "${font.id}.woff", "${font.id}.ttf", etc) and add the to the "Fonts" folder.`,
-              line: lines[fontFamilyProp.loc.start.line - 1],
-            })
-          }
+
+          // TODO revisit at a later stage, it was making longer files super slow to
+          // parse so we're removing it for now
+          // } else {
+          //   let meant = didYouMeanFontFamily(family)
+          //   if (meant && meant !== family) {
+          //     warnings.push({
+          //       loc: fontFamilyProp.loc,
+          //       type: `The font "${family}" is missing. Did you mean "${meant}" instead?\nIf not, download the font files (eg, "${font.id}.woff2", "${font.id}.woff", "${font.id}.ttf", etc) and add the to the "Fonts" folder.`,
+          //       line: lines[fontFamilyProp.loc.start.line - 1],
+          //     })
+          //   } else if (!font.weight.startsWith('props.')) {
+          //     warnings.push({
+          //       loc: fontFamilyProp.loc,
+          //       type: `The font "${family}" is missing.\nDownload the font files (eg, "${font.id}.woff2", "${font.id}.woff", "${font.id}.ttf", etc) and add the to the "Fonts" folder.`,
+          //       line: lines[fontFamilyProp.loc.start.line - 1],
+          //     })
+          //   }
         }
       }
     }
@@ -215,24 +220,26 @@ export default ({
       scopes: [],
     }
 
-    let meant = didYouMeanBlock(name)
-    if (meant) {
-      if (meant !== name) {
-        warnings.push({
-          loc: block.loc,
-          type: `"${name}" doesn't exist and won't be morphed. Did you mean "${meant}" instead of "${name}"?`,
-          line,
-        })
-        block.skip = true
-      }
-    } else {
-      warnings.push({
-        loc: block.loc,
-        type: `"${name}" doesn't exist and won't be morphed.\nCreate the view or rename the block to point to the right view.`,
-        line,
-      })
-      block.skip = true
-    }
+    // TODO revisit at a later stage, it was making longer files super slow to
+    // parse so we're removing it for now
+    // let meant = didYouMeanBlock(name)
+    // if (meant) {
+    //   if (meant !== name) {
+    //     warnings.push({
+    //       loc: block.loc,
+    //       type: `"${name}" doesn't exist and won't be morphed. Did you mean "${meant}" instead of "${name}"?`,
+    //       line,
+    //     })
+    //     block.skip = true
+    //   }
+    // } else {
+    //   warnings.push({
+    //     loc: block.loc,
+    //     type: `"${name}" doesn't exist and won't be morphed.\nCreate the view or rename the block to point to the right view.`,
+    //     line,
+    //   })
+    //   block.skip = true
+    // }
 
     if (!block.isBasic) {
       viewsInView.add(block.name)
@@ -242,7 +249,6 @@ export default ({
       block.is = is
     }
     block.id = getBlockId(block)
-
     let last = stack[stack.length - 1]
     while (last && last.level >= block.level) {
       end(stack.pop(), i)
@@ -372,6 +378,7 @@ export default ({
       if (isProp(line)) {
         let { name, isSlot, slotName, slotIsNot, value } = getProp(line)
         let loc = getLoc(j + 1, line.indexOf(name), line.length - 1)
+
         let tags = getTags({
           name,
           isSlot,
@@ -390,15 +397,18 @@ export default ({
               ).join('\n')}`,
               line,
             })
-          } else {
-            let meant = didYouMeanProp(name)
-            if (meant && meant !== name) {
-              warnings.push({
-                loc,
-                type: `Did you mean "${meant}" instead of "${name}"?`,
-                line,
-              })
-            }
+
+            // TODO revisit at a later stage, it was making longer files super slow to
+            // parse so we're removing it for now
+            // } else {
+            //   let meant = didYouMeanProp(name)
+            //   if (meant && meant !== name) {
+            //     warnings.push({
+            //       loc,
+            //       type: `Did you mean "${meant}" instead of "${name}"?`,
+            //       line,
+            //     })
+            //   }
           }
 
           if (tags.fragment && block.isGroup) {

@@ -1,76 +1,76 @@
-import { isRowStyle, isStyle, STYLE } from './prop-is-style.js'
+import { isRowStyle, isStyle /*, STYLE*/ } from './prop-is-style.js'
 import { fontFamily as googleFontFamilies } from '../morph/fonts.js'
-import DidYouMeanMatcher from './did-you-mean.js'
+// import DidYouMeanMatcher from './did-you-mean.js'
 import isNumber from './prop-is-number.js'
 import toSlugCase from 'to-slug-case'
 
-let dymPropMatcher = new DidYouMeanMatcher([
-  ...STYLE,
-  'at',
-  'className',
-  'cx',
-  'cy',
-  'd',
-  'data',
-  'xdata',
-  'dataFormat',
-  'defaultValue',
-  'fill',
-  'from',
-  'direction',
-  'id',
-  'is',
-  'key',
-  'maxLength',
-  'max',
-  'min',
-  'onBlur',
-  'onChange',
-  'onClick',
-  'onClickUseDiv',
-  'onDrag',
-  'onDragEnd',
-  'onDragEnter',
-  'onDragExit',
-  'onDragLeave',
-  'onDragOver',
-  'onDragStart',
-  'onDrop',
-  'onFocus',
-  'onFocus',
-  'onMouseDown',
-  'onMouseEnter',
-  'onMouseLeave',
-  'onMouseMove',
-  'onMouseOver',
-  'onMouseUp',
-  'onWheel',
-  'onWhen',
-  'order',
-  'r',
-  'ref',
-  'rx',
-  'ry',
-  'step',
-  'stroke',
-  'stroke',
-  'strokeLinecap',
-  'strokeLinejoin',
-  'strokeMiterlimit',
-  'strokeWidth',
-  'tabIndex',
-  'text',
-  'type',
-  'value',
-  'viewBox',
-  'when',
-  'x',
-  'x1',
-  'x2',
-  'y',
-  'y1',
-  'y2',
-])
+// let dymPropMatcher = new DidYouMeanMatcher([
+//   ...STYLE,
+//   'at',
+//   'className',
+//   'cx',
+//   'cy',
+//   'd',
+//   'data',
+//   'xdata',
+//   'dataFormat',
+//   'defaultValue',
+//   'fill',
+//   'from',
+//   'direction',
+//   'id',
+//   'is',
+//   'key',
+//   'maxLength',
+//   'max',
+//   'min',
+//   'onBlur',
+//   'onChange',
+//   'onClick',
+//   'onClickUseDiv',
+//   'onDrag',
+//   'onDragEnd',
+//   'onDragEnter',
+//   'onDragExit',
+//   'onDragLeave',
+//   'onDragOver',
+//   'onDragStart',
+//   'onDrop',
+//   'onFocus',
+//   'onFocus',
+//   'onMouseDown',
+//   'onMouseEnter',
+//   'onMouseLeave',
+//   'onMouseMove',
+//   'onMouseOver',
+//   'onMouseUp',
+//   'onWheel',
+//   'onWhen',
+//   'order',
+//   'r',
+//   'ref',
+//   'rx',
+//   'ry',
+//   'step',
+//   'stroke',
+//   'stroke',
+//   'strokeLinecap',
+//   'strokeLinejoin',
+//   'strokeMiterlimit',
+//   'strokeWidth',
+//   'tabIndex',
+//   'text',
+//   'type',
+//   'value',
+//   'viewBox',
+//   'when',
+//   'x',
+//   'x1',
+//   'x2',
+//   'y',
+//   'y1',
+//   'y2',
+// ])
 
 export let makeDidYouMeanBlock = (views) => {
   let dymBlockMatcher = new DidYouMeanMatcher(
@@ -81,14 +81,14 @@ export let makeDidYouMeanBlock = (views) => {
   return (block) => dymBlockMatcher.get(block)
 }
 
-export let didYouMeanProp = (prop) => dymPropMatcher.get(prop)
+// export let didYouMeanProp = (prop) => dymPropMatcher.get(prop)
 
-export let makeDidYouMeanFontFamily = (customFonts) => {
-  let dymFontFamilyMatcher = new DidYouMeanMatcher(
-    googleFontFamilies.concat(customFonts)
-  )
-  return (family) => dymFontFamilyMatcher.get(family)
-}
+// export let makeDidYouMeanFontFamily = (customFonts) => {
+//   let dymFontFamilyMatcher = new DidYouMeanMatcher(
+//     googleFontFamilies.concat(customFonts)
+//   )
+//   return (family) => dymFontFamilyMatcher.get(family)
+// }
 
 let ANIMATION = /(.+)(?:\s)(spring|linear|easeOut|easeInOut|easeIn|ease)(?:\s?(.*)?)/
 let BASIC = /^(Block|Capture|CaptureTextArea|Children|Column|Horizontal|Image|List|Svg|SvgCircle|SvgEllipse|SvgDefs|SvgGroup|SvgLinearGradient|SvgRadialGradient|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgSymbol|SvgText|SvgUse|SvgStop|Table|Text|View|Vertical)$/i
@@ -150,7 +150,9 @@ let USER_COMMENT = /^##(.*)$/
 let SLOT = /^<((!)?([a-zA-Z0-9]+))?(\s+(.+))?$/
 
 export let is = (thing, line) => thing.test(line)
-export let isAnimation = (line) => is(ANIMATION, line)
+// TODO only parse animations on lines with less than 250 chars because longer
+// lines are too expensive for that regex - like svg paths
+export let isAnimation = (line) => line.length < 250 && is(ANIMATION, line)
 export let isBasic = (line) => is(BASIC, line)
 export let isBlock = (line) => is(BLOCK, line)
 export let isBool = (line) => is(BOOL, line)

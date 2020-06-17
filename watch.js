@@ -7,6 +7,7 @@ import path from 'path'
 import watchFiles from './watch-files.js'
 
 export default async function watch(options) {
+  console.time('startup time')
   let morpher = makeMorpher(options)
 
   await ensureFontsDirectory(morpher.src)
@@ -41,7 +42,7 @@ export default async function watch(options) {
   }
 
   console.log(chalk.green('Views Morpher is ready'))
-
+  console.timeEnd('startup time')
   if (options.once) return
 
   let watcher = watchFiles({ morpher })

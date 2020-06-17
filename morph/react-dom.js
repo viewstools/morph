@@ -24,13 +24,6 @@ export default ({
 }) => {
   let name = view.id
   let finalName = restrictedNames.includes(name) ? `${name}1` : name
-  if (name !== finalName) {
-    console.warn(
-      `// "${name}" is a Views reserved name.
-      We've renamed it to "${finalName}", so your view should work but this isn't ideal.
-      To fix this, change its file name to something else.`
-    )
-  }
 
   let state = {
     animated: new Set(),
@@ -43,14 +36,14 @@ export default ({
     dependencies: new Set(),
     flow: null,
     setFlowTo: false,
-    getFontImport: font => getFontImport(font, view),
+    getFontImport: (font) => getFontImport(font, view),
     getStyleForProperty,
     getValueForProperty,
     hasRefs: false,
     images: [],
     isDynamic: false,
     isReactNative: false,
-    isStory: id => {
+    isStory: (id) => {
       let viewInView = getViewRelativeToView({
         id,
         view,
