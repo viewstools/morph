@@ -72,22 +72,22 @@ let dymPropMatcher = new DidYouMeanMatcher([
   'y2',
 ])
 
-export let makeDidYouMeanBlock = views => {
+export let makeDidYouMeanBlock = (views) => {
   let dymBlockMatcher = new DidYouMeanMatcher(
     'Block|Capture|CaptureTextArea|Children|Horizontal|Image|List|Svg|SvgCircle|SvgEllipse|SvgDefs|SvgGroup|SvgLinearGradient|SvgRadialGradient|SvgLine|SvgPath|SvgPolygon|SvgPolyline|SvgRect|SvgSymbol|SvgText|SvgUse|SvgStop|Text|View|Vertical'
       .split('|')
       .concat(views)
   )
-  return block => dymBlockMatcher.get(block)
+  return (block) => dymBlockMatcher.get(block)
 }
 
-export let didYouMeanProp = prop => dymPropMatcher.get(prop)
+export let didYouMeanProp = (prop) => dymPropMatcher.get(prop)
 
-export let makeDidYouMeanFontFamily = customFonts => {
+export let makeDidYouMeanFontFamily = (customFonts) => {
   let dymFontFamilyMatcher = new DidYouMeanMatcher(
     googleFontFamilies.concat(customFonts)
   )
-  return family => dymFontFamilyMatcher.get(family)
+  return (family) => dymFontFamilyMatcher.get(family)
 }
 
 let ANIMATION = /(.+)(?:\s)(spring|linear|easeOut|easeInOut|easeIn|ease)(?:\s?(.*)?)/
@@ -150,28 +150,28 @@ let USER_COMMENT = /^##(.*)$/
 let SLOT = /^<((!)?([a-zA-Z0-9]+))?(\s+(.+))?$/
 
 export let is = (thing, line) => thing.test(line)
-export let isAnimation = line => is(ANIMATION, line)
-export let isBasic = line => is(BASIC, line)
-export let isBlock = line => is(BLOCK, line)
-export let isBool = line => is(BOOL, line)
-export let isCapture = line => is(CAPTURE, line)
-export let isColumn = line => line === 'Column'
-export let isComment = line => is(COMMENT, line)
-export let isEmptyText = line => line === ''
-export let isEnd = line => line === ''
-export let isFloat = line => is(FLOAT, line)
-export let isFragment = line => line === 'isFragment'
-export let isFontable = line => is(FONTABLE, line)
-export let isGroup = line => !is(NOT_GROUP, line) && !isCapture(line)
-export let isList = line => line === 'List'
-export let isInt = line => is(INT, line)
-export let isProp = line => is(PROP, line)
-export let isSlot = line => is(SLOT, line)
-export let isTable = line => line === 'Table'
-export let isUnsupportedShorthand = name => name in UNSUPPORTED_SHORTHAND
+export let isAnimation = (line) => is(ANIMATION, line)
+export let isBasic = (line) => is(BASIC, line)
+export let isBlock = (line) => is(BLOCK, line)
+export let isBool = (line) => is(BOOL, line)
+export let isCapture = (line) => is(CAPTURE, line)
+export let isColumn = (line) => line === 'Column'
+export let isComment = (line) => is(COMMENT, line)
+export let isEmptyText = (line) => line === ''
+export let isEnd = (line) => line === ''
+export let isFloat = (line) => is(FLOAT, line)
+export let isFragment = (line) => line === 'isFragment'
+export let isFontable = (line) => is(FONTABLE, line)
+export let isGroup = (line) => !is(NOT_GROUP, line) && !isCapture(line)
+export let isList = (line) => line === 'List'
+export let isInt = (line) => is(INT, line)
+export let isProp = (line) => is(PROP, line)
+export let isSlot = (line) => is(SLOT, line)
+export let isTable = (line) => line === 'Table'
+export let isUnsupportedShorthand = (name) => name in UNSUPPORTED_SHORTHAND
 export { isRowStyle, isStyle }
-export let isTrue = line => is(TRUE, line)
-export let isUserComment = line => is(USER_COMMENT, line)
+export let isTrue = (line) => is(TRUE, line)
+export let isUserComment = (line) => is(USER_COMMENT, line)
 
 let get = (regex, line) => line.match(regex)
 
@@ -193,7 +193,7 @@ let addDefaults = (animationType, properties) => {
   return properties
 }
 
-export let getAnimation = line => {
+export let getAnimation = (line) => {
   // eslint-disable-next-line
   let [_, defaultValue, animationType, animationValues] = get(ANIMATION, line)
   let properties = {
@@ -212,14 +212,14 @@ export let getAnimation = line => {
   return {
     id: Object.keys(properties)
       .sort()
-      .map(key => `${key}${properties[key]}`)
+      .map((key) => `${key}${properties[key]}`)
       .join(''),
     defaultValue: getValue(defaultValue),
     properties,
   }
 }
 
-export let getBlock = line => {
+export let getBlock = (line) => {
   // eslint-disable-next-line
   let [_, indentation, is, _1, block] = get(BLOCK, line)
   return {
@@ -228,7 +228,7 @@ export let getBlock = line => {
     level: Math.floor(indentation.length / 2),
   }
 }
-export let getComment = line => {
+export let getComment = (line) => {
   try {
     return get(COMMENT, line).slice(1)
   } catch (err) {
@@ -236,19 +236,19 @@ export let getComment = line => {
   }
 }
 
-export let getData = maybeProp => {
+export let getData = (maybeProp) => {
   if (!maybeProp) return null
 
-  let match = maybeProp.value.match(/^(show|capture)\s+(.+)$/)
+  let match = maybeProp.value.match(/^((show|capture)\s+)?(.+)$/)
   if (!match) return null
 
-  let path = match[2]
+  let path = match[3]
   let [context = null] = /\./.test(path) ? path.split('.') : [path]
 
-  return { type: match[1], path, context }
+  return { path, context }
 }
 
-export let getDataFormat = maybeProp => {
+export let getDataFormat = (maybeProp) => {
   if (!maybeProp || !maybeProp.value) return null
   let [formatIn, formatOut] = maybeProp.value.split(' ')
   return {
@@ -258,7 +258,7 @@ export let getDataFormat = maybeProp => {
   }
 }
 
-export let getDataValidate = maybeProp => {
+export let getDataValidate = (maybeProp) => {
   if (!maybeProp || !maybeProp.value) return null
   let [value, required] = maybeProp.value.split(' ')
   return {
@@ -268,7 +268,7 @@ export let getDataValidate = maybeProp => {
   }
 }
 
-export let getFormat = line => {
+export let getFormat = (line) => {
   let properties = {}
   let values = line.split(' ')
   let formatKey = values[0]
@@ -284,7 +284,7 @@ export let getFormat = line => {
 
   return properties
 }
-export let getProp = line => {
+export let getProp = (line) => {
   // eslint-disable-next-line
   let [_, name, _1, value = ''] = get(PROP, line)
 
@@ -310,7 +310,7 @@ export let getProp = line => {
 
   return prop
 }
-export let getSlot = line => get(SLOT, line).slice(1)
+export let getSlot = (line) => get(SLOT, line).slice(1)
 export let getUnsupportedShorthandExpanded = (name, value) => {
   let props = UNSUPPORTED_SHORTHAND[name]
 
@@ -400,9 +400,9 @@ let SYSTEM_SCOPES = [
   // 'isSelected',
   // TODO do we want to do media queries here?
 ]
-export let isSystemScope = name => SYSTEM_SCOPES.includes(name)
+export let isSystemScope = (name) => SYSTEM_SCOPES.includes(name)
 
-let isActionable = name => name !== 'onWhen' && /^on[A-Z]/.test(name)
+let isActionable = (name) => name !== 'onWhen' && /^on[A-Z]/.test(name)
 
 export let getPropType = (block, name, defaultValue) =>
   block.isList && name === 'from'
@@ -446,10 +446,10 @@ export let maybeMakeHyphenated = (value, name) =>
     : value
 
 export function sortScopes(scopes) {
-  let isHovered = scopes.find(item => item.slotName === 'isHovered')
-  let isSelected = scopes.find(item => item.slotName === 'isSelected')
+  let isHovered = scopes.find((item) => item.slotName === 'isHovered')
+  let isSelected = scopes.find((item) => item.slotName === 'isSelected')
   let isSelectedHovered = scopes.find(
-    item => item.slotName === 'isSelectedHovered'
+    (item) => item.slotName === 'isSelectedHovered'
   )
 
   return [
@@ -457,7 +457,8 @@ export function sortScopes(scopes) {
     isSelected,
     isHovered,
     ...scopes.filter(
-      item => !/^(isHovered|isSelected|isSelectedHovered)$/.test(item.slotName)
+      (item) =>
+        !/^(isHovered|isSelected|isSelectedHovered)$/.test(item.slotName)
     ),
   ].filter(Boolean)
 }

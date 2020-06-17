@@ -3,8 +3,8 @@ export default ({ state, name }) => {
 
   let animated = []
   if (state.isAnimated) {
-    Object.keys(state.animations).forEach(blockId => {
-      Object.values(state.animations[blockId]).forEach(item => {
+    Object.keys(state.animations).forEach((blockId) => {
+      Object.values(state.animations[blockId]).forEach((item) => {
         let { curve, ...configValues } = item.animation.properties
 
         if (!state.isReactNative && curve !== 'spring') return
@@ -21,7 +21,7 @@ export default ({ state, name }) => {
 
         let toValue = []
         let fromValue = []
-        Object.values(item.props).forEach(prop => {
+        Object.values(item.props).forEach((prop) => {
           prop.scopes.reverse()
 
           let value = prop.scopes.reduce(
@@ -65,21 +65,11 @@ export default ({ state, name }) => {
   }
   let data = []
   if (state.data) {
-    switch (state.data.type) {
-      case 'show':
-      case 'capture': {
-        data.push(`let data = fromData.useData({ path: '${state.data.path}', `)
-        maybeDataContext(state.data, data)
-        maybeDataFormat(state.dataFormat, data)
-        maybeDataValidate(state.dataValidate, data)
-        data.push('})')
-        break
-      }
-
-      default: {
-        break
-      }
-    }
+    data.push(`let data = fromData.useData({ path: '${state.data.path}', `)
+    maybeDataContext(state.data, data)
+    maybeDataFormat(state.dataFormat, data)
+    maybeDataValidate(state.dataValidate, data)
+    data.push('})')
   }
 
   if (state.hasRefs) {
