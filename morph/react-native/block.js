@@ -15,6 +15,7 @@ import * as BlockSvg from './block-svg.js'
 import * as BlockTable from '../react/block-table.js'
 import * as BlockWrap from './block-wrap.js'
 
+// match new lines with ../react-dom/block.js
 export let enter = [
   BlockMaybeSkip.enter,
   BlockSetTestId.enter,
@@ -25,9 +26,11 @@ export let enter = [
   BlockColumn.enter,
   BlockSvg.enter,
   BlockCapture.enter,
+
   BlockBackgroundImage.enter,
   BlockInList.enter,
   BlockAddTestIdProp.enter,
+
   BlockProperties.enter,
   BlockGroup.enter,
   BlockList.enter,

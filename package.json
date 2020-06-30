@@ -1,6 +1,6 @@
 {
   "name": "@viewstools/morph",
-  "version": "23.10.0",
+  "version": "23.10.1",
   "description": "Views language morpher",
   "main": "bin.js",
   "bin": {
@@ -14,7 +14,8 @@
   "scripts": {
     "prepare": "cross-env NODE_ENV=production rollup --config rollup.config.js && chmod +x bin.js",
     "test": "jest",
-    "debug:issue": "npx nodemon -w bin.js -- bin.js issue/src --as react-dom --watch",
+    "debug:dom": "npx nodemon -w bin.js -- bin.js issue/src --as react-dom --watch",
+    "debug:native": "npx nodemon -w bin.js -- bin.js issue/src --as react-native --watch",
     "watch": "rollup --config rollup.config.js --watch"
   },
   "repository": {

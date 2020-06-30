@@ -21,7 +21,7 @@ export function enter(node, parent, state) {
       state.useIsHovered = true
       state.render.push(', isHovered, isSelectedHovered')
     }
-    state.render.push(`}) : null}`)
+    state.render.push(`}) : props.children}`)
 
     return true
   }
@@ -49,7 +49,9 @@ export function enter(node, parent, state) {
 
   if (handleTable(node, parent, state)) return true
 
-  state.render.push(`<${name}`)
+  if (!node.isDefiningChildrenExplicitly) {
+    state.render.push(`<${name}`)
+  }
 }
 
 export { leave }

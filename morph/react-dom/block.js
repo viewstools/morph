@@ -14,15 +14,19 @@ import * as BlockProperties from './block-properties.js'
 import * as BlockSetTestId from '../react/block-set-test-id.js'
 import * as BlockTable from '../react/block-table.js'
 
+// match new lines with ../react-native/block.js
 export let enter = [
   BlockMaybeSkip.enter,
   BlockSetTestId.enter,
   BlockOffWhen.enter,
+
   BlockName.enter,
   BlockTable.enter,
   BlockColumn.enter,
+
   BlockCapture.enter,
   BlockGoTo.enter,
+
   BlockInList.enter,
   BlockAddTestIdProp.enter,
   BlockAddViewPath.enter,
@@ -37,5 +41,6 @@ export let leave = [
   BlockGroup.leave,
   BlockName.leave,
   BlockTable.leave,
+
   BlockOffWhen.leave,
 ]
