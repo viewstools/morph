@@ -175,6 +175,8 @@ function reducer(state, action) {
     ${
       tools
         ? `case SYNC: {
+      console.debug({ type: 'views/flow/sync', id: action.id });
+
       return {
         flow: new Set(action.flow),
         actions: getNextActions(state, action.id)
