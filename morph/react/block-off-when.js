@@ -10,7 +10,7 @@ let IS_MEDIA = /(!?props\.isMedia)(.+)/
 let DATA_VALUES = /!?props\.(isInvalid|isInvalidInitial|isValid|isValidInitial|value)/
 let CHILD_VALUES = /!?props\.(isSelected|isHovered|isFocused)/
 let IS_HOVERED = /!?props\.(isHovered|isSelectedHovered)/
-let IS_FLOW = /!?props\.flow$/
+let IS_FLOW = /!?props\.(isFlow|flow)$/
 
 export function enter(node, parent, state) {
   if (node.isFragment && node.children.length === 0) return
