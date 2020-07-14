@@ -91,7 +91,11 @@ export let leave = (node, parent, state) => {
       // fixed, come back to using the array notation
       style = `{...${baseStyle},${animatedStyle},${dynamicStyle || ''}}`
     } else if (dynamicStyle) {
-      style = `[${baseStyle},{${dynamicStyle}}]`
+      if (state.morpher === 'react-pdf') {
+        style = `{...${baseStyle}, ${dynamicStyle}}`
+      } else {
+        style = `[${baseStyle},{${dynamicStyle}}]`
+      }
     }
 
     state.render.push(` style={${style}}`)

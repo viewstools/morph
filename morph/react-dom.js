@@ -16,6 +16,7 @@ let imports = {
 export default ({
   getFontImport,
   getSystemImport,
+  morpher = 'react-dom',
   src,
   tools,
   view,
@@ -54,6 +55,7 @@ export default ({
       return viewInView && !viewInView.custom && viewInView.parsed.view.isStory
     },
     lazy: {},
+    morpher,
     name: finalName,
     viewPath: view.parsed.view.viewPath,
     viewPathParent: view.parsed.view.viewPathParent,
