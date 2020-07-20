@@ -42,7 +42,9 @@ export default function useIsHovered({ isDisabled, isSelected, onMouseEnter, onM
   return [isHovered, isHovered && isSelected, isHoveredBind]
 }`
 
-export default function ensureIsHovered({ src }) {
+export default function ensureIsHovered({ pass, src }) {
+  if (pass > 0) return false
+
   return ensureFile({
     file: path.join(src, 'Logic', 'useIsHovered.js'),
     content: USE_IS_HOVERED,

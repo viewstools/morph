@@ -25,6 +25,7 @@ export default function makeMorpher({
   let state = {
     as,
     src,
+    pass: 0,
     tools,
     verbose,
     customFonts: new Map(),
@@ -95,7 +96,7 @@ export default function makeMorpher({
     // TODO optimise, only if they changed, cache, etc
     let viewsFiles = await Promise.all([
       ensureData(state),
-      ensureFlow(state),
+      ...ensureFlow(state),
       ensureTools(state),
       ensureIsBefore(state),
       ensureIsHovered(state),
@@ -111,6 +112,8 @@ export default function makeMorpher({
         fs.writeFile(file, content, 'utf-8')
       )
     )
+
+    state.pass++
   }
 
   return state

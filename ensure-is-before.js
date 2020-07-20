@@ -22,7 +22,9 @@ export default function useIsBefore() {
   return isBefore
 }`
 
-export default function ensureIsBefore({ src }) {
+export default function ensureIsBefore({ pass, src }) {
+  if (pass > 0) return false
+
   return ensureFile({
     file: path.join(src, 'Logic', 'useIsBefore.js'),
     content: USE_IS_BEFORE,
