@@ -71,8 +71,17 @@ export function DataProvider(props) {
     DataContexts[props.context].displayName = props.context
   }
   let Context = DataContexts[props.context]
+  let _value = props.value
 
-  let [state, dispatch] = useReducer(reducer, props.value)
+  if (process.env.NODE_ENV === 'development') {
+    if (props.viewPath) {
+      let key = `${props.context}:${props.viewPath}`
+      let cache = sessionStorage.getItem(`ViewsDataContextValues:${key}`)
+      _value = cache ? JSON.parse(cache) : _value
+    }
+  }
+
+  let [state, dispatch] = useReducer(reducer, _value)
   let isSubmitting = useRef(false)
   let shouldCallOnChange = useRef(false)
 
@@ -80,7 +89,17 @@ export function DataProvider(props) {
     if (isSubmitting.current) return
 
     shouldCallOnChange.current = false
-    dispatch({ type: RESET, value: props.value })
+
+    let _value = props.value
+    if (process.env.NODE_ENV === 'development') {
+      if (props.viewPath) {
+        let key = `${props.context}:${props.viewPath}`
+        let cache = sessionStorage.getItem(`ViewsDataContextValues:${key}`)
+        _value = cache ? JSON.parse(cache) : _value
+      }
+    }
+
+    dispatch({ type: RESET, value: _value })
   }, [props.value]) // eslint-disable-line
   // ignore dispatch
 
@@ -122,8 +141,19 @@ export function DataProvider(props) {
       return
     }
 
+    if (process.env.NODE_ENV === 'development') {
+      if (props.viewPath) {
+        let key = `${props.context}:${props.viewPath}`
+        sessionStorage.setItem(
+          `ViewsDataContextValues:${key}`,
+          JSON.stringify(state)
+        )
+      }
+    }
+
     onChange.current(state, (fn) => dispatch({ type: SET_FN, fn }))
-  }, [state])
+  }, [state]) // eslint-disable-line
+  // ignore props.context, props.viewPath
 
   return <Context.Provider value={value}>{props.children}</Context.Provider>
 }
