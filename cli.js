@@ -1,15 +1,11 @@
 import { promises as fs } from 'fs'
-import chalk from 'chalk'
 import cleanup from './clean.js'
 import minimist from 'minimist'
 import path from 'path'
 import pkg from './package.json'
 import updateNotifier from 'update-notifier'
 import watch from './watch.js'
-
-let wait = time => new Promise(resolve => setTimeout(resolve, time))
-
-;(async function() {
+;(async function () {
   let {
     _,
     as,
@@ -27,7 +23,7 @@ let wait = time => new Promise(resolve => setTimeout(resolve, time))
     default: {
       as: 'react-dom',
       clean: false,
-      tools: true,
+      tools: false,
       verbose: true,
       version: false,
       watch: false,
@@ -89,44 +85,6 @@ let wait = time => new Promise(resolve => setTimeout(resolve, time))
   }
 
   updateNotifier({ pkg }).notify()
-
-  if (verbose) {
-    console.log(chalk.underline(`Views Tools morpher v${pkg.version}`))
-
-    console.log(
-      `\nWill morph files at "${chalk.green(input)}" as "${chalk.green(as)}" ${
-        tools ? 'with Views Tools' : 'without Views Tools'
-      }`
-    )
-
-    if (shouldWatch && !tools) {
-      console.log(
-        chalk.bgRed('                                               ')
-      )
-      console.log()
-      console.log(`🚨 You're missing out!!!`)
-      console.log(
-        chalk.bold(
-          '🚀 Views Tools can help you find product market\n   fit before you run out of money.'
-        )
-      )
-      console.log()
-      console.log(
-        '✨ Find out how 👉',
-        chalk.bold(chalk.green('https://views.tools'))
-      )
-      console.log()
-      console.log(
-        chalk.bgRed('                                               ')
-      )
-      await wait(15000)
-    }
-
-    console.log(chalk.yellow('A'), '= Added')
-    console.log(chalk.green('M'), `= Morphed`)
-    console.log(chalk.magenta('X'), `= Deleted`)
-    console.log('\nPress', chalk.blue('ctrl+c'), 'to stop at any time.\n')
-  }
 
   watch({
     as,

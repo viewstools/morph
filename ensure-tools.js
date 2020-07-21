@@ -29,12 +29,12 @@ export default function ViewsTools(props) {
   return props.children
 }`
 
-export default async function ensureTools({ pass, src }) {
+export default async function ensureTools({ pass, tools, src }) {
   if (pass > 0) return false
 
   let file = path.join(src, 'Logic', 'ViewsTools.js')
 
-  if (fs.existsSync(file) && process.env.REACT_APP_VIEWS_TOOLS) return false
+  if (fs.existsSync(file) && tools) return false
 
   return ensureFile({ file, content: TOOLS_FILE })
 }

@@ -10,6 +10,7 @@ import ensureIsBefore from './ensure-is-before.js'
 import ensureIsHovered from './ensure-is-hovered.js'
 import ensureIsMedia from './ensure-is-media.js'
 import ensureTools from './ensure-tools.js'
+import ensureGitignore from './ensure-gitignore.js'
 import makeGetSystemImport from './make-get-system-import.js'
 import morphAllViews from './morph-all-views.js'
 import parseViews from './parse-views.js'
@@ -101,6 +102,7 @@ export default function makeMorpher({
       ensureIsBefore(state),
       ensureIsHovered(state),
       ensureIsMedia(state),
+      ensureGitignore(state),
     ])
 
     let filesToWrite = [...morphedFonts, ...morphedViews, ...viewsFiles].filter(
