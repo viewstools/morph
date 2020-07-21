@@ -118,7 +118,7 @@ function getScopedConditionPropValue(node, parent, state) {
 }
 
 let CHILD_VALUES = /!?props\.(isSelected|isHovered|isFocused|isSelectedHovered)/
-let DATA_VALUES = /!?props\.(isInvalid|isInvalidInitial|isValid|isValidInitial|value)/
+let DATA_VALUES = /!?props\.(isInvalid|isInvalidInitial|isValid|isValidInitial|value|isSubmitting)/
 let IS_HOVERED_OR_SELECTED_HOVER = /!?props\.(isHovered|isSelectedHovered)/
 let IS_FLOW = /!?props\.(isFlow|flow)$/
 

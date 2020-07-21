@@ -70,7 +70,9 @@ export default function getValueForProperty(node, parent, state) {
       node.value === 'props.isInvalidInitial' ||
       node.value === 'props.isValid' ||
       node.value === 'props.isValidInitial' ||
-      node.value === 'props.onSubmit')
+      node.value === 'props.onSubmit' ||
+      node.value === 'props.isSubmitting' ||
+      node.value === '!props.isSubmitting')
   ) {
     return {
       [node.name]: `{${node.value.replace('props.', 'data.')}}`,
