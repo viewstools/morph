@@ -8,6 +8,7 @@ export function enter(node, parent, state) {
 
     if (!node.isBasic) {
       state.render.push('{childProps => (')
+      node.childProps = true
       if (node.children.length > 1) {
         state.render.push('<React.Fragment>')
       }

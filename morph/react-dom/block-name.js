@@ -49,6 +49,10 @@ export function enter(node, parent, state) {
   if (!node.isDefiningChildrenExplicitly) {
     state.render.push(`<${node.nameFinal}`)
   }
+
+  if (parent && parent.childProps) {
+    state.render.push('{...childProps}')
+  }
 }
 
 export { leave }
