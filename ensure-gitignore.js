@@ -19,7 +19,10 @@ export default async function ensureIsBefore({ pass, src }) {
   if (pass > 0) return false
 
   let file = path.join(src, '..', '.gitignore')
-  let content = await fs.readFile(file, 'utf8')
+  let content = ''
+  try {
+    await fs.readFile(file, 'utf8')
+  } catch (error) {}
 
   // convert crlf to lf
   let lines = content.replace(/\r\n/g, '\n').split('\n')

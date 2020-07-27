@@ -11,11 +11,7 @@ export function enter(node, parent, state) {
       state.render.push(' {...item}')
     }
 
-    if (!parent.nameFinal.includes('FlatList')) {
-      let key = getProp(node, 'key')
-      key = key ? key.value : 'index'
-
-      state.render.push(` key={${key}}`)
-    }
+    let key = getProp(node, 'key')
+    state.render.push(` key={${key ? key.value : 'index'}}`)
   }
 }

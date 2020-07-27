@@ -8,27 +8,14 @@ export function enter(node, parent, state) {
     let pass = getProp(node, 'pass')
     let itemName = pass ? pass.value : 'item'
 
-    if (node.nameFinal.includes('FlatList')) {
-      let key = getProp(node.children[0], 'key')
-      key = key ? key.value : 'index'
-
-      state.render.push(
-        `data={${
-          from.value
-        }} keyExtractor={(item, index) => ${key}} renderItem={({ ${itemName}, index }) =>`
-      )
-    } else {
-      state.render.push(
-        `{Array.isArray(${from.value}) && ${
-          from.value
-        }.map((${itemName}, index) => `
-      )
-    }
+    state.render.push(
+      `{Array.isArray(${from.value}) && ${from.value}.map((${itemName}, index) => `
+    )
   }
 }
 
 export function leave(node, parent, state) {
   if (isList(node)) {
-    state.render.push(node.nameFinal.includes('FlatList') ? '}' : ')}')
+    state.render.push(')}')
   }
 }

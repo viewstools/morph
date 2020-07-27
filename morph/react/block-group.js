@@ -2,8 +2,7 @@ export function enter(node, parent, state) {
   if (
     !node.isDefiningChildrenExplicitly &&
     node.isGroup &&
-    node.children.length > 0 &&
-    !node.nameFinal.includes('FlatList')
+    node.children.length > 0
   ) {
     state.render.push('>')
 
@@ -21,7 +20,6 @@ export function leave(node, parent, state) {
     !node.isDefiningChildrenExplicitly &&
     node.isGroup &&
     node.children.length > 0 &&
-    !node.nameFinal.includes('FlatList') &&
     !node.isBasic
   ) {
     if (node.children.length > 1) {

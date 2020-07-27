@@ -32,22 +32,9 @@ export let leave = (node, parent, state) => {
 
   if (hasKeys(node.style.static.base)) {
     let id = createId(node, state)
-    if (
-      node.nameFinal.includes('FlatList') &&
-      hasContentContainerStyleProp(node.style.static.base)
-    ) {
-      state.styles[`${id}ContentContainer`] = getContentContainerStyleProps(
-        node.style.static.base
-      )
-      node.style.static.base = removeContentContainerStyleProps(
-        node.style.static.base
-      )
-      containerStyle = `styles.${id}ContentContainer`
-    }
-    if (hasKeys(node.style.static.base)) {
-      state.styles[id] = node.style.static.base
-      baseStyle = `styles.${id}`
-    }
+
+    state.styles[id] = node.style.static.base
+    baseStyle = `styles.${id}`
   }
 
   if (node.isAnimated) {
@@ -66,22 +53,8 @@ export let leave = (node, parent, state) => {
   }
 
   if (hasKeys(dynamicStyles)) {
-    if (
-      node.nameFinal.includes('FlatList') &&
-      hasContentContainerStyleProp(dynamicStyles)
-    ) {
-      let dynamicContainerStyle = getObjectAsString(
-        getContentContainerStyleProps(dynamicStyles)
-      )
-      dynamicStyles = removeContentContainerStyleProps(dynamicStyles)
-      containerStyle = containerStyle
-        ? `[${containerStyle},${dynamicContainerStyle}]`
-        : dynamicContainerStyle
-    }
-    if (hasKeys(dynamicStyles)) {
-      dynamicStyle = getObjectAsString(dynamicStyles)
-      dynamicStyle = dynamicStyle.substr(1, dynamicStyle.length - 2)
-    }
+    dynamicStyle = getObjectAsString(dynamicStyles)
+    dynamicStyle = dynamicStyle.substr(1, dynamicStyle.length - 2)
   }
 
   if (baseStyle || animatedStyle || dynamicStyle) {

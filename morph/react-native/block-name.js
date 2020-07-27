@@ -38,11 +38,6 @@ export function enter(node, parent, state) {
   let name = getBlockName(node, parent, state)
   if (name === null) return true
 
-  if (name === 'Animated.FlatList') {
-    state.use('FlatList')
-    name = 'AnimatedFlatList'
-  }
-
   state.use(node.isBasic ? name.replace(/^Animated/, '') : name, node.isLazy)
 
   node.nameFinal = name

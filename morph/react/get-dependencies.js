@@ -4,7 +4,6 @@ let NATIVE = [
   'Animated',
   'Image',
   'KeyboardAvoidingView',
-  'FlatList',
   'ScrollView',
   'StyleSheet',
   'Text',
@@ -26,12 +25,12 @@ export default (state, getImport) => {
   let usesNative = []
   let usesSvg = []
 
-  let useNative = d => {
+  let useNative = (d) => {
     if (!usesNative.includes(d)) {
       usesNative.push(d)
     }
   }
-  let useSvg = d => {
+  let useSvg = (d) => {
     if (!usesSvg.includes(d)) {
       usesSvg.push(d)
     }
@@ -42,7 +41,7 @@ export default (state, getImport) => {
   let dependenciesDisplayNames = []
   let dependenciesErrors = []
 
-  state.uses.sort().forEach(d => {
+  state.uses.sort().forEach((d) => {
     if (state.isReactNative && NATIVE.includes(d)) {
       useNative(d)
     } else if (state.isReactNative && SVG.includes(d)) {
@@ -75,14 +74,14 @@ export default (state, getImport) => {
     // TODO fonts in RN
     // state.getFont(state.fonts)
   } else {
-    state.fonts.forEach(usedFont =>
+    state.fonts.forEach((usedFont) =>
       dependencies.push(state.getFontImport(usedFont.id))
     )
   }
 
   // TODO we probably want to check that the file exists and do something if it
   // doesn't, like warn the user at least?
-  state.images.forEach(img =>
+  state.images.forEach((img) =>
     dependencies.push(`import ${img.name} from "${img.file}"`)
   )
 
@@ -129,7 +128,7 @@ export default (state, getImport) => {
   }
 
   if (usesSvg.length > 0) {
-    let svg = usesSvg.filter(m => m !== 'Svg').join(', ')
+    let svg = usesSvg.filter((m) => m !== 'Svg').join(', ')
     dependencies.push(`import Svg, { ${svg} } from 'react-native-svg'`)
   }
 

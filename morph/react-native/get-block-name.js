@@ -51,7 +51,9 @@ let getGroupBlockName = (node, state) => {
       : JSON.stringify(propNode.value)
 
     name = 'Image'
-  } else if (hasProp(node, 'overflowY', v => v === 'auto' || v === 'scroll')) {
+  } else if (
+    hasProp(node, 'overflowY', (v) => v === 'auto' || v === 'scroll')
+  ) {
     name = 'ScrollView'
   }
 
@@ -64,8 +66,8 @@ let getGroupBlockName = (node, state) => {
 }
 
 let getListBlockName = (node, state) => {
-  let base = hasProp(node, /^overflow/, v => v === 'auto' || v === 'scroll')
-    ? 'FlatList'
+  let base = hasProp(node, /^overflow/, (v) => v === 'auto' || v === 'scroll')
+    ? 'ScrollView'
     : 'View'
   if (node.isAnimated) {
     state.animated.add(base)
