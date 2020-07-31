@@ -561,6 +561,7 @@ export default ({
           if (!block.animations[currentAnimation.id]) {
             block.animations[currentAnimation.id] = {
               index: Object.keys(block.animations).length,
+              block,
               animation: currentAnimation,
               props: {},
             }
@@ -583,7 +584,7 @@ export default ({
           }
 
           block.animations[currentAnimation.id].props[name].scopes.push({
-            name: scope.slotName,
+            name: scope.value,
             value: currentAnimation.defaultValue,
             defaultValue: scope.defaultValue,
           })

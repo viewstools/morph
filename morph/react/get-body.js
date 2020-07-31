@@ -1,4 +1,4 @@
-import { getFlowPath, isFlow } from '../utils.js'
+import { getScopedName } from '../utils.js'
 
 export default function getBody({ state, name }) {
   let render = state.render.join('\n')
@@ -103,15 +103,12 @@ function getAnimated({ state }) {
         prop.scopes.reverse()
 
         let value = prop.scopes.reduce((current, scope) => {
-          let condition = `props.${scope.name}`
-          if (isFlow(condition)) {
-            let flowPath = getFlowPath(scope, prop, state)
-            condition = condition.replace(
-              /props\.(isFlow|flow)/,
-              `flow.has('${flowPath}')`
-            )
-          }
-
+          let condition = getScopedName({
+            name: scope.name,
+            blockNode: item.block,
+            scope,
+            state,
+          })
           return `${condition}? ${JSON.stringify(scope.value)} : ${current}`
         }, JSON.stringify(prop.value))
 

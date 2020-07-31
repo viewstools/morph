@@ -124,6 +124,30 @@ let IS_FLOW = /!?props\.(isFlow|flow)$/
 export function isFlow(prop) {
   return IS_FLOW.test(prop)
 }
+export function getScopedName({ name, blockNode, scope, state }) {
+  if (state.data && DATA_VALUES.test(name)) {
+    return name.replace('props', 'data')
+  } else if (
+    blockNode &&
+    hasCustomBlockParent(blockNode) &&
+    CHILD_VALUES.test(name)
+  ) {
+    return name.replace('props.', 'childProps.')
+  } else if (isFlow(name)) {
+    let flowPath = getFlowPath(scope, blockNode, state)
+    state.use('ViewsUseFlow')
+    state.useFlow = true
+    return name.replace(/props\.(isFlow|flow)/, `flow.has('${flowPath}')`)
+  } else if (
+    blockNode &&
+    (blockNode.action || !!getActionableParent(blockNode)) &&
+    IS_HOVERED_OR_SELECTED_HOVER.test(name)
+  ) {
+    return name.replace('props.', '')
+  } else {
+    return name
+  }
+}
 
 export function getScopedCondition(propNode, blockNode, state) {
   let scopedProps = getScopedProps(propNode, blockNode)
@@ -132,22 +156,12 @@ export function getScopedCondition(propNode, blockNode, state) {
 
   let conditional = getScopedConditionPropValue(propNode, blockNode, state)
   scopedProps.forEach((scope) => {
-    let when = scope.when
-    if (state.data && DATA_VALUES.test(when)) {
-      when = when.replace('props', 'data')
-    } else if (hasCustomBlockParent(blockNode) && CHILD_VALUES.test(when)) {
-      when = when.replace('props.', 'childProps.')
-    } else if (isFlow(when)) {
-      let flowPath = getFlowPath(scope.scope, blockNode, state)
-      state.use('ViewsUseFlow')
-      state.useFlow = true
-      when = when.replace(/props\.(isFlow|flow)/, `flow.has('${flowPath}')`)
-    } else if (
-      (blockNode.action || !!getActionableParent(blockNode)) &&
-      IS_HOVERED_OR_SELECTED_HOVER.test(when)
-    ) {
-      when = when.replace('props.', '')
-    }
+    let when = getScopedName({
+      name: scope.when,
+      blockNode,
+      scope: scope.scope,
+      state,
+    })
 
     conditional = `${when} ? ${getScopedConditionPropValue(
       scope.prop,
