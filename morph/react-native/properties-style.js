@@ -55,20 +55,78 @@ export let leave = (node, parent, state) => {
   }
 
   if (baseStyle || animatedStyle || dynamicStyle) {
-    let style = baseStyle
-    if (animatedStyle) {
-      // TODO once https://github.com/drcmda/react-spring/issues/337 gets
-      // fixed, come back to using the array notation
-      style = `{...${baseStyle},${animatedStyle},${dynamicStyle || ''}}`
-    } else if (dynamicStyle) {
-      if (state.morpher === 'react-pdf') {
-        style = `{...${baseStyle}, ${dynamicStyle}}`
-      } else {
-        style = `[${baseStyle},{${dynamicStyle}}]`
+    state.render.push(` style={`)
+
+    let key = [
+      baseStyle && 'base',
+      animatedStyle && 'animated',
+      dynamicStyle && 'dynamic',
+    ]
+      .filter(Boolean)
+      .join('-')
+
+    switch (key) {
+      case 'base': {
+        state.render.push(baseStyle)
+        break
+      }
+
+      case 'animated': {
+        state.render.push(`{${animatedStyle}}`)
+        break
+      }
+
+      case 'dynamic': {
+        state.render.push(`{${dynamicStyle}}`)
+        break
+      }
+
+      case 'base-animated': {
+        if (state.morpher === 'react-pdf') {
+          state.render.push(`{...${baseStyle}, ${animatedStyle}}`)
+        } else {
+          state.render.push(`[${baseStyle},{${animatedStyle}}]`)
+        }
+        break
+      }
+
+      case 'base-animated-dynamic': {
+        if (state.morpher === 'react-pdf') {
+          state.render.push(
+            `{...${baseStyle},${animatedStyle}, ${dynamicStyle}}`
+          )
+        } else {
+          state.render.push(
+            `[${baseStyle},{${animatedStyle}},{${dynamicStyle}}]`
+          )
+        }
+        break
+      }
+
+      case 'base-dynamic': {
+        if (state.morpher === 'react-pdf') {
+          state.render.push(`{...${baseStyle}, ${dynamicStyle}}`)
+        } else {
+          state.render.push(`[${baseStyle},{${dynamicStyle}}]`)
+        }
+        break
+      }
+
+      case 'animated-dynamic': {
+        if (state.morpher === 'react-pdf') {
+          state.render.push(`{${animatedStyle}, ${dynamicStyle}}`)
+        } else {
+          state.render.push(`[{${animatedStyle}},{${dynamicStyle}}]`)
+        }
+        break
+      }
+
+      default: {
+        throw new Error(`Invalid style key ${key}`)
       }
     }
 
-    state.render.push(` style={${style}}`)
+    state.render.push(`}`)
   }
 
   if (containerStyle) {
