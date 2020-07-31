@@ -1,6 +1,7 @@
 import {
   getActionableParent,
   getPropValueOrDefault,
+  hasProp,
   isStory,
 } from '../utils.js'
 import { leave } from '../react/block-name.js'
@@ -48,8 +49,15 @@ export function enter(node, parent, state) {
     state.render.push(`<${name}`)
   }
 
+  if (
+    /(Animated)?ScrollView/.test(name) &&
+    hasProp(node, 'overflowX', (v) => v === 'auto' || v === 'scroll')
+  ) {
+    state.render.push(' horizontal')
+  }
+
   if (parent && parent.childProps) {
-    state.render.push('{...childProps}')
+    state.render.push(' {...childProps}')
   }
 }
 
