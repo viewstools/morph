@@ -14,17 +14,18 @@ let GRADIANS = 'grad'
 let RADIANS = 'rad'
 let TURN = 'turn'
 
-let getUnit = (node) => {
+export default function getUnit(node, parent, state) {
   let units = getUnits(node.name)
 
-  if (typeof node.value === 'number') return units[0] || ''
+  if (typeof node.value === 'number') {
+    return state.morpher === 'react-dom' ? units[0] || '' : ''
+  }
 
   let match =
     typeof node.value === 'string' &&
     node.value.match(IS_INT.test(node.value) ? IS_INT : IS_FLOAT)
   return (match && units.find((u) => u === match[2])) || units[0] || ''
 }
-export default getUnit
 
 let LENGTH = [PIXEL, PERCENTAGE, EM, REM, VW, VH]
 let PERCENTAGE_FIRST_LENGTH = [PERCENTAGE, PIXEL, EM, REM, VW, VH]
@@ -104,7 +105,7 @@ let UNITS = {
 }
 let UNITS_KEYS = Object.keys(UNITS)
 
-let getUnits = (key) => {
+function getUnits(key) {
   let found = UNITS_KEYS.find((ukey) => key.startsWith(ukey))
   return UNITS[found] || UNITLESS
 }
