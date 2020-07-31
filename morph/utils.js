@@ -121,6 +121,9 @@ let CHILD_VALUES = /!?props\.(isSelected|isHovered|isFocused|isSelectedHovered)/
 let DATA_VALUES = /!?props\.(isInvalid|isInvalidInitial|isValid|isValidInitial|value|isSubmitting)/
 let IS_HOVERED_OR_SELECTED_HOVER = /!?props\.(isHovered|isSelectedHovered)/
 let IS_FLOW = /!?props\.(isFlow|flow)$/
+export function isFlow(prop) {
+  return IS_FLOW.test(prop)
+}
 
 export function getScopedCondition(propNode, blockNode, state) {
   let scopedProps = getScopedProps(propNode, blockNode)
@@ -134,7 +137,7 @@ export function getScopedCondition(propNode, blockNode, state) {
       when = when.replace('props', 'data')
     } else if (hasCustomBlockParent(blockNode) && CHILD_VALUES.test(when)) {
       when = when.replace('props.', 'childProps.')
-    } else if (IS_FLOW.test(when)) {
+    } else if (isFlow(when)) {
       let flowPath = getFlowPath(scope.scope, blockNode, state)
       state.use('ViewsUseFlow')
       state.useFlow = true

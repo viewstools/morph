@@ -585,6 +585,7 @@ export default ({
           block.animations[currentAnimation.id].props[name].scopes.push({
             name: scope.slotName,
             value: currentAnimation.defaultValue,
+            defaultValue: scope.defaultValue,
           })
         }
 

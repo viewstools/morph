@@ -5,9 +5,6 @@ import {
   getObjectAsString,
   // TODO: Think of a better name 🙈
   getNonAnimatedDynamicStyles,
-  hasContentContainerStyleProp,
-  getContentContainerStyleProps,
-  removeContentContainerStyleProps,
   hasKeys,
 } from '../utils.js'
 

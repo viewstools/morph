@@ -1,57 +1,7 @@
-export default ({ state, name }) => {
+import { getFlowPath, isFlow } from '../utils.js'
+
+export default function getBody({ state, name }) {
   let render = state.render.join('\n')
-
-  let animated = []
-  if (state.isAnimated) {
-    Object.keys(state.animations).forEach((blockId) => {
-      Object.values(state.animations[blockId]).forEach((item) => {
-        let { curve, ...configValues } = item.animation.properties
-
-        if (!state.isReactNative && curve !== 'spring') return
-
-        let spring = ['{', '"config": {']
-        Object.entries(configValues).forEach(([k, v]) => {
-          spring.push(`${k}: ${JSON.stringify(v)},`)
-        })
-
-        if (curve !== 'spring' && curve !== 'linear') {
-          spring.push(`"easing": Easing.${curve.replace('ease', 'easeCubic')},`)
-        }
-        spring.push('},')
-
-        let toValue = []
-        let fromValue = []
-        Object.values(item.props).forEach((prop) => {
-          prop.scopes.reverse()
-
-          let value = prop.scopes.reduce(
-            (current, scope) =>
-              `props.${scope.name}? ${JSON.stringify(
-                scope.value
-              )} : ${current}`,
-            JSON.stringify(prop.value)
-          )
-
-          toValue.push(`${JSON.stringify(prop.name)}: ${value}`)
-          fromValue.push(
-            `${JSON.stringify(prop.name)}: ${JSON.stringify(
-              prop.scopes[0].value
-            )}`
-          )
-        })
-
-        spring.push(`"from": {${fromValue.join(',')}},`)
-        spring.push(`"to": {${toValue.join(',')}},`)
-        spring.push('}')
-
-        animated.push(
-          `let animated${blockId}${
-            item.index > 0 ? item.index : ''
-          } = useSpring(${spring.join('\n')})`
-        )
-      })
-    })
-  }
 
   let flow = []
   if (
@@ -63,6 +13,7 @@ export default ({ state, name }) => {
   if (state.setFlowTo) {
     flow.push(`let setFlowTo = fromFlow.useSetFlowTo()`)
   }
+
   let data = []
   if (state.data) {
     data.push(`let data = fromData.useData({ path: '${state.data.path}', `)
@@ -71,6 +22,8 @@ export default ({ state, name }) => {
     maybeDataValidate(state.dataValidate, data)
     data.push('})')
   }
+
+  let animated = getAnimated({ state, name })
 
   if (state.hasRefs) {
     return `export default class ${name} extends React.Component {
@@ -90,9 +43,9 @@ export default ({ state, name }) => {
         : ''
     }
     ${state.useIsMedia ? 'let isMedia = useIsMedia()' : ''}
-    ${animated.join('\n')}
     ${flow.join('\n')}
     ${data.join('\n')}
+    ${animated.join('\n')}
 
   return ${ret}
 }`
@@ -121,4 +74,66 @@ function maybeDataValidate(validate, data) {
   if (validate.required) {
     data.push('validateRequired: true,')
   }
+}
+
+function getAnimated({ state }) {
+  if (!state.isAnimated) return []
+
+  let animated = []
+
+  Object.keys(state.animations).forEach((blockId) => {
+    Object.values(state.animations[blockId]).forEach((item) => {
+      let { curve, ...configValues } = item.animation.properties
+
+      if (!state.isReactNative && curve !== 'spring') return
+
+      let spring = ['{', '"config": {']
+      Object.entries(configValues).forEach(([k, v]) => {
+        spring.push(`${k}: ${JSON.stringify(v)},`)
+      })
+
+      if (curve !== 'spring' && curve !== 'linear') {
+        spring.push(`"easing": Easing.${curve.replace('ease', 'easeCubic')},`)
+      }
+      spring.push('},')
+
+      let toValue = []
+      let fromValue = []
+      Object.values(item.props).forEach((prop) => {
+        prop.scopes.reverse()
+
+        let value = prop.scopes.reduce((current, scope) => {
+          let condition = `props.${scope.name}`
+          if (isFlow(condition)) {
+            let flowPath = getFlowPath(scope, prop, state)
+            condition = condition.replace(
+              /props\.(isFlow|flow)/,
+              `flow.has('${flowPath}')`
+            )
+          }
+
+          return `${condition}? ${JSON.stringify(scope.value)} : ${current}`
+        }, JSON.stringify(prop.value))
+
+        toValue.push(`${JSON.stringify(prop.name)}: ${value}`)
+        fromValue.push(
+          `${JSON.stringify(prop.name)}: ${JSON.stringify(
+            prop.scopes[0].value
+          )}`
+        )
+      })
+
+      spring.push(`"from": {${fromValue.join(',')}},`)
+      spring.push(`"to": {${toValue.join(',')}},`)
+      spring.push('}')
+
+      animated.push(
+        `let animated${blockId}${
+          item.index > 0 ? item.index : ''
+        } = useSpring(${spring.join('\n')})`
+      )
+    })
+  })
+
+  return animated
 }
