@@ -110,7 +110,7 @@ export default function getStyleForProperty(node, parent, state, code) {
   }
 }
 
-let getFontFamily = (node, parent, state) => {
+function getFontFamily(node, parent, state) {
   let fontWeight = getProp(parent, 'fontWeight')
   // let key = node.key.value
   let fontFamily = node.value.replace(/\s/g, '')
@@ -124,14 +124,14 @@ let getFontFamily = (node, parent, state) => {
   return fontWeight ? `${fontFamily}-${fontWeight.value}` : fontFamily
 }
 
-let getLineHeight = (node, parent, state) => {
+function getLineHeight(node, parent, state) {
   let fontSize = getProp(parent, 'fontSize')
   // using a default font size of 16 if none specified
   let fontSizeValue = fontSize ? fontSize.value : 16
   return node.value * fontSizeValue
 }
 
-let getShadowOffset = (node, parent, state) => {
+function getShadowOffset(node, parent, state) {
   let shadowOffsetX = getProp(parent, 'shadowOffsetX')
   let shadowOffsetY = getProp(parent, 'shadowOffsetY')
 
@@ -144,13 +144,13 @@ let getShadowOffset = (node, parent, state) => {
   })
 }
 
-let decorateShadow = obj => {
+function decorateShadow(obj) {
   obj.elevation = 1 // for Android
   obj.shadowOpacity = 1
   return obj
 }
 
-let getPropValue = (prop, block, state, unit = '') => {
+function getPropValue(prop, block, state, unit = '') {
   if (!prop) return false
 
   let scopedCondition = getScopedCondition(prop, block, state)
@@ -159,7 +159,7 @@ let getPropValue = (prop, block, state, unit = '') => {
   }
 
   if (prop.tags.slot) {
-    return `\${${prop.value}}${unit}`
+    return `\`\${${prop.value}}${unit}\``
   }
 
   return typeof prop.value === 'number' && unit
@@ -167,12 +167,15 @@ let getPropValue = (prop, block, state, unit = '') => {
     : prop.value
 }
 
-let getTransformValue = (prop, parent, state, unit) =>
-  prop && {
-    [prop.name]: getPropValue(prop, parent, state, unit),
-  }
+function getTransformValue(prop, parent, state, unit) {
+  return (
+    prop && {
+      [prop.name]: getPropValue(prop, parent, state, unit),
+    }
+  )
+}
 
-let getTransform = (node, parent, state) => {
+function getTransform(node, parent, state) {
   let rotate = getProp(parent, 'rotate')
   let rotateX = getProp(parent, 'rotateX')
   let rotateY = getProp(parent, 'rotateY')
