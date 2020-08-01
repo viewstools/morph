@@ -22,6 +22,8 @@ export default function getStyleForProperty(node, parent, state, code) {
           transform: getTransform(node, parent, state),
         }
 
+      case 'lineHeight':
+      // TODO
       default:
         return {
           _isScoped: true,
@@ -99,9 +101,7 @@ export default function getStyleForProperty(node, parent, state, code) {
       }
 
     case 'lineHeight':
-      return {
-        lineHeight: getLineHeight(node, parent),
-      }
+      return getLineHeight(node, parent)
 
     default:
       return {
@@ -126,9 +126,20 @@ function getFontFamily(node, parent, state) {
 
 function getLineHeight(node, parent, state) {
   let fontSize = getProp(parent, 'fontSize')
+
+  if (node.tags.slot || fontSize.tags.slot) {
+    return {
+      _isProp: true,
+      _useValueAsIs: true,
+      lineHeight: `{${fontSize.value} * ${node.value}}`,
+    }
+  }
+
   // using a default font size of 16 if none specified
   let fontSizeValue = fontSize ? fontSize.value : 16
-  return node.value * fontSizeValue
+  return {
+    lineHeight: node.value * fontSizeValue,
+  }
 }
 
 function getShadowOffset(node, parent, state) {

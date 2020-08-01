@@ -32,16 +32,20 @@ export function enter(node, parent, state) {
     }
   }
 
-  let { _isProp, _isScoped, ...styleForProperty } = state.getStyleForProperty(
-    node,
-    parent,
-    state,
-    code
-  )
+  let {
+    _isProp,
+    _isScoped,
+    _useValueAsIs,
+    ...styleForProperty
+  } = state.getStyleForProperty(node, parent, state, code)
 
   if (_isProp) {
-    Object.keys(styleForProperty).forEach(k =>
-      state.render.push(` ${k}=${safe(styleForProperty[k], node)}`)
+    Object.keys(styleForProperty).forEach((k) =>
+      state.render.push(
+        ` ${k}=${
+          _useValueAsIs ? styleForProperty[k] : safe(styleForProperty[k], node)
+        }`
+      )
     )
   } else {
     let hasMatchingParent =
