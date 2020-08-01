@@ -578,6 +578,7 @@ export default ({
 
             block.animations[currentAnimation.id].props[name] = {
               name,
+              propNode,
               scopes: [],
               value: baseValue,
             }

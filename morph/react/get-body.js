@@ -1,4 +1,5 @@
 import { getScopedName } from '../utils.js'
+import getUnit from '../get-unit.js'
 
 export default function getBody({ state, name }) {
   let render = state.render.join('\n')
@@ -102,6 +103,20 @@ function getAnimated({ state }) {
       Object.values(item.props).forEach((prop) => {
         prop.scopes.reverse()
 
+        let unit = getUnit(
+          {
+            name: prop.name,
+            value: prop.value,
+          },
+          item.block,
+          state
+        )
+        let propValue = unit
+          ? typeof prop.value === 'string' && prop.value.includes(unit)
+            ? prop.value
+            : `${prop.value}${unit}`
+          : prop.value
+
         let value = prop.scopes.reduce((current, scope) => {
           let condition = getScopedName({
             name: scope.name,
@@ -109,8 +124,23 @@ function getAnimated({ state }) {
             scope,
             state,
           })
-          return `${condition}? ${JSON.stringify(scope.value)} : ${current}`
-        }, JSON.stringify(prop.value))
+
+          let unit = getUnit(
+            {
+              name: prop.name,
+              value: scope.value,
+            },
+            item.block,
+            state
+          )
+          let value = unit
+            ? typeof scope.value === 'string' && scope.value.includes(unit)
+              ? scope.value
+              : `${scope.value}${unit}`
+            : scope.value
+
+          return `${condition}? ${JSON.stringify(value)} : ${current}`
+        }, JSON.stringify(propValue))
 
         toValue.push(`${JSON.stringify(prop.name)}: ${value}`)
         fromValue.push(

@@ -18,7 +18,9 @@ export default function getUnit(node, parent, state) {
   let units = getUnits(node.name)
 
   if (typeof node.value === 'number') {
-    return state.morpher === 'react-dom' ? units[0] || '' : ''
+    return state.morpher === 'react-dom' || node.name.startsWith('rotate')
+      ? units[0] || ''
+      : ''
   }
 
   let match =
