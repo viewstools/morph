@@ -1,6 +1,6 @@
 {
   "name": "@viewstools/morph",
-  "version": "23.17.0",
+  "version": "23.17.1",
   "description": "Views language morpher",
   "main": "bin.js",
   "bin": {
@@ -65,6 +65,7 @@
     "lodash.sortby": "^4.7.0",
     "micromatch": "^4.0.2",
     "minimist": "^1.2.0",
+    "react-native-url-polyfill": "^1.2.0",
     "react-query": "^0.3.24",
     "read-pkg-up": "^6.0.0",
     "source-map-support": "^0.5.12",

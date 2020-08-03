@@ -19,7 +19,7 @@ function ensureFirstStoryIsOn(flow, key, stories) {
   }
 }
 
-function makeFlow({ viewsById, viewsToFiles }) {
+function makeFlow({ as, viewsById, viewsToFiles }) {
   let flowMap = new Map()
   let flowMapStr = []
 
@@ -65,6 +65,9 @@ function makeFlow({ viewsById, viewsToFiles }) {
 // improving the algorithms inside, etc, see this:
 // https://github.com/viewstools/morph/blob/master/ensure-flow.js
 
+${
+  as === 'react-native' ? `import { URL } from 'react-native-url-polyfill'` : ''
+}
 import React, { useCallback, useContext, useEffect, useReducer } from 'react'
 
 export let flow = new Map([
@@ -278,7 +281,7 @@ function makeFlowJson({ viewsById, viewsToFiles }) {
   return { hash, changed, flow: flowMapEntries }
 }
 
-function makeFlowTools() {
+function makeFlowTools({ as }) {
   let topStory = '/App'
   let initialState = new Set([topStory])
 
@@ -287,6 +290,9 @@ function makeFlowTools() {
 // improving the algorithms inside, etc, see this:
 // https://github.com/viewstools/morph/blob/master/ensure-flow.js
 
+${
+  as === 'react-native' ? `import { URL } from 'react-native-url-polyfill'` : ''
+}
 import React, { useCallback, useContext, useEffect, useReducer } from 'react'
 import ViewsTools from './ViewsTools.js'
 
@@ -476,6 +482,7 @@ export function normalizePath(viewPath, relativePath) {
 }
 
 export default function ensureFlow({
+  as,
   pass,
   src,
   tools,
@@ -489,7 +496,7 @@ export default function ensureFlow({
       pass === 0 &&
         ensureFile({
           file: path.join(src, 'Logic', 'ViewsFlow.js'),
-          content: makeFlowTools(),
+          content: makeFlowTools({ as }),
         }),
       flowJson.changed &&
         ensureFile({
@@ -501,7 +508,7 @@ export default function ensureFlow({
     return [
       ensureFile({
         file: path.join(src, 'Logic', 'ViewsFlow.js'),
-        content: makeFlow({ viewsById, viewsToFiles }),
+        content: makeFlow({ as, viewsById, viewsToFiles }),
       }),
     ]
   }
