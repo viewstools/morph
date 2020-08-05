@@ -108,8 +108,7 @@ function getAnimated({ state }) {
             name: prop.name,
             value: prop.value,
           },
-          item.block,
-          state
+          state.morpher === 'react-native' && prop.name.startsWith('rotate')
         )
         let propValue = unit
           ? typeof prop.value === 'string' && prop.value.includes(unit)
@@ -130,8 +129,7 @@ function getAnimated({ state }) {
               name: prop.name,
               value: scope.value,
             },
-            item.block,
-            state
+            state.morpher === 'react-native' && prop.name.startsWith('rotate')
           )
           let value = unit
             ? typeof scope.value === 'string' && scope.value.includes(unit)

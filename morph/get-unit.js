@@ -14,13 +14,11 @@ let GRADIANS = 'grad'
 let RADIANS = 'rad'
 let TURN = 'turn'
 
-export default function getUnit(node, parent, state) {
+export default function getUnit(node, returnDefaultUnitOnNumbers = true) {
   let units = getUnits(node.name)
 
   if (typeof node.value === 'number') {
-    return state.morpher === 'react-dom' || node.name.startsWith('rotate')
-      ? units[0] || ''
-      : ''
+    return returnDefaultUnitOnNumbers ? units[0] || '' : ''
   }
 
   let match =
