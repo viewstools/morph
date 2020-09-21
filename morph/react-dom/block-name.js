@@ -50,7 +50,7 @@ export function enter(node, parent, state) {
     state.render.push(`<${node.nameFinal}`)
   }
 
-  if (parent && parent.childProps) {
+  if (parent && parent.childProps && !node.isBasic) {
     state.render.push('{...childProps}')
   }
 }
