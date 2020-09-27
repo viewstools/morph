@@ -15,6 +15,7 @@ import React, {
   useMemo,
   useReducer,
   useRef,
+  useState,
 } from 'react'
 
 let SET = 'data/SET'
@@ -103,14 +104,21 @@ export function DataProvider(props) {
   }, [props.value]) // eslint-disable-line
   // ignore dispatch
 
+  // keep track of props.onChange outside of the following effect to
+  // prevent loops. Making the function useCallback didn't work
+  let onSubmit = useRef(props.onSubmit)
+  useEffect(() => {
+    onSubmit.current = props.onSubmit
+  }, [props.onSubmit])
+
   let value = useMemo(() => {
-    async function onSubmit(args) {
+    async function _onSubmit(args) {
       if (isSubmitting.current) return
       isSubmitting.current = true
 
       try {
         dispatch({ type: IS_SUBMITTING, value: true })
-        let res = await props.onSubmit(state, args)
+        let res = await onSubmit.current(state, args)
         isSubmitting.current = false
 
         if (!res) {
@@ -124,9 +132,8 @@ export function DataProvider(props) {
       dispatch({ type: FORCE_REQUIRED })
     }
 
-    return [state, dispatch, onSubmit]
-  }, [state, props.onSubmit]) // eslint-disable-line
-  // the linter says we need props when props.onSubmit is already there
+    return [state, dispatch, _onSubmit]
+  }, [state])
 
   // keep track of props.onChange outside of the following effect to
   // prevent loops. Making the function useCallback didn't work
@@ -171,10 +178,89 @@ export function useData({
   validate = null,
   validateRequired = false,
 } = {}) {
+  let [data, dispatch, onSubmit] = useContext(DataContexts[context])
+  let touched = useRef(false)
+  let [error, setError] = useState(false)
+
+  let [value, isValidInitial, isValid] = useMemo(() => {
+    let rawValue = path ? get(data, path) : data
+
+    let value = rawValue
+    if (path && formatIn) {
+      value = fromFormat[formatIn](rawValue, data)
+    }
+
+    let isValidInitial = true
+    if (validate) {
+      isValidInitial = fromValidate[validate](rawValue, value, data)
+    }
+    let isValid =
+      touched.current || (validateRequired && data._forceRequired)
+        ? isValidInitial
+        : true
+
+    return [value, isValidInitial, isValid]
+  }, [data, formatIn, path, validate, validateRequired])
+
+  let memo = useMemo(
+    () => {
+      if (!data) return {}
+
+      function onChange(value, changePath = path) {
+        touched.current = !!value
+
+        if (typeof value === 'function') {
+          dispatch({ type: SET_FN, fn: value })
+        } else if (!changePath) {
+          dispatch({ type: RESET, value })
+        } else {
+          let valueSet = value
+          if (formatOut) {
+            try {
+              valueSet = fromFormat[formatOut](value, data)
+            } catch (error) {
+              setError(error)
+              return
+            }
+          }
+
+          dispatch({
+            type: SET,
+            path: changePath,
+            value: valueSet,
+          })
+        }
+      }
+
+      return {
+        onChange,
+        onSubmit,
+        value,
+        isSubmitting: data._isSubmitting,
+        isValid,
+        isValidInitial,
+        isInvalid: !isValid,
+        isInvalidInitial: !isValidInitial,
+      }
+    },
+    // eslint-disable-next-line
+    [
+      dispatch,
+      path,
+      value,
+      isValidInitial,
+      isValid,
+      formatOut,
+      data?._isSubmitting, // eslint-disable-line
+      onSubmit,
+    ]
+  )
+  // ignore data - this can cause rendering issues though
+
   if (process.env.NODE_ENV === 'development') {
-    if (!(context in DataContexts)) {
+    if (!(context in DataContexts) || !data) {
       throw new Error(
-        `"${context}" isn't a valid Data context. Check that you have <DataProvider context="${context}" value={data}> in the component that defines the context for this story.`
+        `"${context}" isn't a valid Data context. Add a <DataProvider context="${context}" value={data}> in the component that defines the context for this view.`
       )
     }
 
@@ -197,69 +283,9 @@ export function useData({
     }
   }
 
-  let contextValue = useContext(DataContexts[context])
-  let touched = useRef(false)
+  if (error) {
+    throw error
+  }
 
-  return useMemo(() => {
-    let [data, dispatch, onSubmit] = contextValue
-
-    if (!data) {
-      if (process.env.NODE_ENV === 'development') {
-        console.error(
-          'Check that you have <DataProvider value={data}> in the component that defines the data for this story.',
-          {
-            path,
-            formatIn,
-            formatOut,
-            validate,
-            validateRequired,
-            data,
-          }
-        )
-      }
-      return {}
-    }
-
-    let rawValue = path ? get(data, path) : data
-    let value = rawValue
-    if (path && formatIn) {
-      value = fromFormat[formatIn](rawValue, data)
-    }
-
-    let isValidInitial = true
-    if (validate) {
-      isValidInitial = fromValidate[validate](rawValue, value, data)
-    }
-    let isValid =
-      touched.current || (validateRequired && data._forceRequired)
-        ? isValidInitial
-        : true
-
-    function onChange(value, changePath = path) {
-      touched.current = !!value
-
-      if (typeof value === 'function') {
-        dispatch({ type: SET_FN, fn: value })
-      } else if (!changePath) {
-        dispatch({ type: RESET, value })
-      } else {
-        dispatch({
-          type: SET,
-          path: changePath,
-          value: formatOut ? fromFormat[formatOut](value, data) : value,
-        })
-      }
-    }
-
-    return {
-      onChange,
-      onSubmit,
-      value,
-      isSubmitting: data._isSubmitting,
-      isValid,
-      isValidInitial,
-      isInvalid: !isValid,
-      isInvalidInitial: !isValidInitial,
-    }
-  }, [contextValue, path, formatIn, formatOut, validateRequired, validate])
+  return memo
 }
