@@ -111,6 +111,13 @@ export function DataProvider(props) {
     onSubmit.current = props.onSubmit
   }, [props.onSubmit])
 
+  // track a reference of state so that any call to onSubmit gets the latest
+  // state even if it changed through the execution
+  let stateRef = useRef(state)
+  useEffect(() => {
+    stateRef.current = state
+  }, [state])
+
   let value = useMemo(() => {
     async function _onSubmit(args) {
       if (isSubmitting.current) return
@@ -118,7 +125,7 @@ export function DataProvider(props) {
 
       try {
         dispatch({ type: IS_SUBMITTING, value: true })
-        let res = await onSubmit.current(state, args)
+        let res = await onSubmit.current(stateRef.current, args)
         isSubmitting.current = false
 
         if (!res) {
