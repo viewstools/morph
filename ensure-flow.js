@@ -96,7 +96,7 @@ function ensureFirstStoryIsOn(key, stories) {
 function ensureParents(key, stories) {
   let story = flow.get(key)
   if (!story) {
-    console.error(\`View "\${key}" is missing its parent\`)
+    console.error({ type: 'views/flow/missing-parent', id: key })
     return
   }
   if (!story.parent) {
@@ -320,7 +320,7 @@ function ensureFirstStoryIsOn(key, stories) {
 function ensureParents(key, stories) {
   let story = flow.get(key)
   if (!story) {
-    console.error(\`View "\${key}" is missing its parent\`)
+    console.error({ type: 'views/flow/missing-parent', id: key })
     return
   }
   if (!story.parent) {

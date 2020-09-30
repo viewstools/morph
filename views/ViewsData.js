@@ -62,10 +62,14 @@ let DataContexts = {
   default: React.createContext([]),
 }
 export function DataProvider(props) {
-  if (!props.context) {
-    throw new Error(
-      `You're missing the context value in DataProvider. Eg: <DataProvider context="namespace" ...`
-    )
+  if (process.env.NODE_ENV === 'development') {
+    if (!props.context) {
+      console.error({
+        type: 'views/data/missing-context-value',
+        viewPath: props.viewPath,
+        message: `You're missing the context value in DataProvider. Eg: <DataProvider context="namespace" value={value}>. You're using the default one now instead.`,
+      })
+    }
   }
   if (!(props.context in DataContexts)) {
     DataContexts[props.context] = React.createContext([])
@@ -75,7 +79,10 @@ export function DataProvider(props) {
   let _value = props.value
 
   if (process.env.NODE_ENV === 'development') {
-    if (props.viewPath) {
+    if (
+      props.viewPath &&
+      sessionStorage?.getItem('ViewsDataKeepContextValues')
+    ) {
       let key = `${props.context}:${props.viewPath}`
       let cache = sessionStorage.getItem(`ViewsDataContextValues:${key}`)
       _value = cache ? JSON.parse(cache) : _value
@@ -83,6 +90,13 @@ export function DataProvider(props) {
   }
 
   let [state, dispatch] = useReducer(reducer, _value)
+  // track a reference of state so that any call to onSubmit gets the latest
+  // state even if it changed through the execution
+  let stateRef = useRef(state)
+  useEffect(() => {
+    stateRef.current = state
+  }, [state])
+
   let isSubmitting = useRef(false)
   let shouldCallOnChange = useRef(false)
 
@@ -93,7 +107,10 @@ export function DataProvider(props) {
 
     let _value = props.value
     if (process.env.NODE_ENV === 'development') {
-      if (props.viewPath) {
+      if (
+        props.viewPath &&
+        sessionStorage?.getItem('ViewsDataKeepContextValues')
+      ) {
         let key = `${props.context}:${props.viewPath}`
         let cache = sessionStorage.getItem(`ViewsDataContextValues:${key}`)
         _value = cache ? JSON.parse(cache) : _value
@@ -111,36 +128,27 @@ export function DataProvider(props) {
     onSubmit.current = props.onSubmit
   }, [props.onSubmit])
 
-  // track a reference of state so that any call to onSubmit gets the latest
-  // state even if it changed through the execution
-  let stateRef = useRef(state)
-  useEffect(() => {
-    stateRef.current = state
-  }, [state])
+  async function _onSubmit(args) {
+    if (isSubmitting.current) return
+    isSubmitting.current = true
 
-  let value = useMemo(() => {
-    async function _onSubmit(args) {
-      if (isSubmitting.current) return
-      isSubmitting.current = true
+    try {
+      dispatch({ type: IS_SUBMITTING, value: true })
+      let res = await onSubmit.current(stateRef.current, args)
+      isSubmitting.current = false
 
-      try {
-        dispatch({ type: IS_SUBMITTING, value: true })
-        let res = await onSubmit.current(stateRef.current, args)
-        isSubmitting.current = false
-
-        if (!res) {
-          dispatch({ type: IS_SUBMITTING, value: false })
-          return
-        }
-      } catch (error) {
-        isSubmitting.current = false
+      if (!res) {
+        dispatch({ type: IS_SUBMITTING, value: false })
+        return
       }
-
-      dispatch({ type: FORCE_REQUIRED })
+    } catch (error) {
+      isSubmitting.current = false
     }
 
-    return [state, dispatch, _onSubmit]
-  }, [state])
+    dispatch({ type: FORCE_REQUIRED })
+  }
+
+  let value = useMemo(() => [state, dispatch, _onSubmit], [state])
 
   // keep track of props.onChange outside of the following effect to
   // prevent loops. Making the function useCallback didn't work
@@ -156,7 +164,10 @@ export function DataProvider(props) {
     }
 
     if (process.env.NODE_ENV === 'development') {
-      if (props.viewPath) {
+      if (
+        props.viewPath &&
+        sessionStorage?.getItem('ViewsDataKeepContextValues')
+      ) {
         let key = `${props.context}:${props.viewPath}`
         sessionStorage.setItem(
           `ViewsDataContextValues:${key}`,
@@ -184,6 +195,7 @@ export function useData({
   formatOut = null,
   validate = null,
   validateRequired = false,
+  viewPath = null,
 } = {}) {
   let [data, dispatch, onSubmit] = useContext(DataContexts[context])
   let touched = useRef(false)
@@ -265,28 +277,98 @@ export function useData({
   // ignore data - this can cause rendering issues though
 
   if (process.env.NODE_ENV === 'development') {
-    if (!(context in DataContexts) || !data) {
-      throw new Error(
-        `"${context}" isn't a valid Data context. Add a <DataProvider context="${context}" value={data}> in the component that defines the context for this view.`
-      )
+    // source: https://github.com/TheWWWorm/proxy-mock/blob/master/index.js
+    function getProxyMock(specifics = {}, name = 'proxyMock', wrap) {
+      function _target() {
+        getProxyMock()
+      }
+
+      let target = wrap ? wrap(name, _target) : _target
+
+      target[Symbol.toPrimitive] = (hint) => {
+        if (hint === 'string') {
+          return 'proxyString'
+        } else if (hint === 'number') {
+          return 42
+        }
+        return '1337'
+      }
+      target[Symbol.iterator] = function* () {
+        yield getProxyMock({}, `${name}.Symbol(Symbol.iterator)`, wrap)
+      }
+
+      return new Proxy(target, {
+        get(obj, key) {
+          key = key.toString()
+          if (specifics.hasOwnProperty(key)) {
+            return specifics[key]
+          }
+          if (key === 'Symbol(Symbol.toPrimitive)') {
+            return obj[Symbol.toPrimitive]
+          }
+          if (key === 'Symbol(Symbol.iterator)') {
+            return obj[Symbol.iterator]
+          }
+          if (!obj.hasOwnProperty(key)) {
+            obj[key] = getProxyMock({}, `${name}.${key}`, wrap)
+          }
+          return obj[key]
+        },
+      })
+    }
+
+    if (!(context in DataContexts)) {
+      console.error({
+        type: 'views/data/missing-data-provider',
+        viewPath,
+        context,
+        message: `"${context}" isn't a valid Data context. Add a <DataProvider context="${context}" value={data}> in the component that defines the context for this view. You're using a mock now.`,
+      })
+      return getProxyMock()
+    }
+
+    if (!data) {
+      console.error({
+        type: 'views/data/missing-data-for-provider',
+        viewPath,
+        context,
+        message: `"${context}" doesn't have data. Consider turning on session caching of ViewsData with window.ViewsDataKeepContextValues(). You're using a mock now.`,
+        ViewsDataKeepContextValues: window.ViewsDataKeepContextValues,
+      })
+      return getProxyMock()
     }
 
     if (formatIn && !(formatIn in fromFormat)) {
-      throw new Error(
-        `"${formatIn}" function doesn't exist or is not exported in Data/format.js`
-      )
+      console.error({
+        type: 'views/data/invalid-formatIn',
+        viewPath,
+        context,
+        formatIn,
+        message: `"${formatIn}" function doesn't exist or is not exported in Data/format.js. You're using a mock now.`,
+      })
+      return getProxyMock()
     }
 
     if (formatOut && !(formatOut in fromFormat)) {
-      throw new Error(
-        `"${formatOut}" function doesn't exist or is not exported in Data/format.js`
-      )
+      console.error({
+        type: 'views/data/invalid-formatOut',
+        viewPath,
+        context,
+        formatOut,
+        message: `"${formatOut}" function doesn't exist or is not exported in Data/format.js. You're using a mock now.`,
+      })
+      return getProxyMock()
     }
 
     if (validate && !(validate in fromValidate)) {
-      throw new Error(
-        `"${validate}" function doesn't exist or is not exported in Data/validators.js`
-      )
+      console.error({
+        type: 'views/data/invalid-validate',
+        viewPath,
+        context,
+        validate,
+        message: `"${validate}" function doesn't exist or is not exported in Data/validators.js. You're using a mock now.`,
+      })
+      return getProxyMock()
     }
   }
 
@@ -295,4 +377,14 @@ export function useData({
   }
 
   return memo
+}
+
+if (process.env.NODE_ENV === 'development') {
+  window.ViewsDataKeepContextValues = function (keep = true) {
+    if (keep) {
+      sessionStorage.setItem('ViewsDataKeepContextValues', true)
+    } else {
+      sessionStorage.removeItem('ViewsDataKeepContextValues')
+    }
+  }
 }
