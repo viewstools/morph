@@ -33,7 +33,7 @@ export function enter(node, parent, state) {
       value = value.replace('props.', 'childProps.')
     } else if (IS_FLOW.test(value)) {
       let flowPath = getFlowPath(onWhen, node, state)
-      value = value.replace('props.flow', `flow.has('${flowPath}')`)
+      value = value.replace('props.flow', `flow.has(${flowPath})`)
     } else if (IS_HOVERED.test(value)) {
       value = value.replace('props.', '')
     }
@@ -41,7 +41,9 @@ export function enter(node, parent, state) {
     state.render.push(`${value} ? `)
   } else if (isView(node, state)) {
     node.onWhen = true
-    state.render.push(`{flow.has("${state.viewPath}/${node.name}") ? `)
+    state.render.push(
+      `{flow.has(fromFlow.normalizePath(props.viewPath, '${node.name}')) ? `
+    )
   }
 }
 

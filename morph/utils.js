@@ -137,7 +137,7 @@ export function getScopedName({ name, blockNode, scope, state }) {
     let flowPath = getFlowPath(scope, blockNode, state)
     state.use('ViewsUseFlow')
     state.useFlow = true
-    return name.replace(/props\.(isFlow|flow)/, `flow.has('${flowPath}')`)
+    return name.replace(/props\.(isFlow|flow)/, `flow.has(${flowPath})`)
   } else if (
     blockNode &&
     (blockNode.action || !!getActionableParent(blockNode)) &&
@@ -581,9 +581,7 @@ export function getFlowPath(node, parent, state) {
   // TODO warn if action is used but it isn't in actions (on parser)
   // TODO warn that there's setFlowTo without an id (on parser)
   let setFlowTo = node.defaultValue
-  if (!setFlowTo.startsWith('/')) {
-    setFlowTo = path.normalize(path.join(state.viewPath, setFlowTo))
-  }
-
-  return setFlowTo
+  return setFlowTo.startsWith('/')
+    ? JSON.stringify(setFlowTo)
+    : `fromFlow.normalizePath(props.viewPath, '${setFlowTo}')`
 }

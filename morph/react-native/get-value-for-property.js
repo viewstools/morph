@@ -86,7 +86,7 @@ export default function getValueForProperty(node, parent, state) {
     return {
       [node.name]: `{${node.value.replace(
         /props\.(isFlow|flow)/,
-        `flow.has('${flowPath}')`
+        `flow.has(${flowPath})`
       )}}`,
     }
   } else if (hasCustomBlockParent(parent) && CHILD_VALUES.test(node.value)) {
@@ -109,14 +109,14 @@ export default function getValueForProperty(node, parent, state) {
     state.setFlowTo = true
 
     let ret = {
-      [node.name]: `{() => setFlowTo('${flowPath}')}`,
+      [node.name]: `{() => setFlowTo(${flowPath})}`,
     }
 
     if (!parent.isBasic && ON_IS_SELECTED.test(node.name)) {
       state.useFlow = true
       ret[
         node.name.replace(ON_IS_SELECTED, 'isSelected')
-      ] = `{flow.has('${flowPath}')}`
+      ] = `{flow.has(${flowPath})}`
     }
 
     if (parent.isBasic && ON_IS_SELECTED.test(node.name)) {
@@ -153,7 +153,7 @@ export default function getValueForProperty(node, parent, state) {
         state.use('ViewsUseFlow')
         state.useFlow = true
         return {
-          [node.name]: `{flow.has('${flowPath}')}`,
+          [node.name]: `{flow.has(${flowPath})}`,
         }
       } catch (error) {
         return {
