@@ -574,8 +574,8 @@ export let maybeMakeHyphenated = ({ name, value }) =>
     ? toSlugCase(value)
     : value
 
-export let isStory = (node, state) =>
-  !node.isBasic && state.isStory(node.name) && state.flow === 'separate'
+export let isView = (node, state) =>
+  !node.isBasic && state.isView(node.name) && state.flow === 'separate'
 
 export function getFlowPath(node, parent, state) {
   // TODO warn if action is used but it isn't in actions (on parser)

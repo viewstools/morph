@@ -3,7 +3,7 @@ import {
   getProp,
   hasCustomBlockParent,
   isList,
-  isStory,
+  isView,
 } from '../utils.js'
 
 let IS_MEDIA = /(!?props\.isMedia)(.+)/
@@ -39,7 +39,7 @@ export function enter(node, parent, state) {
     }
 
     state.render.push(`${value} ? `)
-  } else if (isStory(node, state)) {
+  } else if (isView(node, state)) {
     node.onWhen = true
     state.render.push(`{flow.has("${state.viewPath}/${node.name}") ? `)
   }

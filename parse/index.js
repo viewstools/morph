@@ -763,7 +763,7 @@ export default ({
 
   let flowProp = view.properties.find((p) => p.name === 'is')
   if (flowProp) {
-    view.isStory = true
+    view.isView = true
     view.flow = flowProp.value
     view.viewPath = path.dirname(file.replace(src.replace(/\\/g, '/'), ''))
     view.viewPathParent = path.dirname(view.viewPath)
@@ -776,7 +776,7 @@ export default ({
       view.properties.find((p) => p.name === 'dataValidate')
     )
   } else {
-    view.isStory = false
+    view.isView = false
   }
 
   view.isDefiningChildrenExplicitly = isDefiningChildrenExplicitly

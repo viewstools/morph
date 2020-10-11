@@ -34,8 +34,8 @@ export default function getViewRelativeToView({
 
   if (
     !importView.custom &&
-    view.parsed.view.isStory &&
-    importView.parsed.view.isStory
+    view.parsed.view.isView &&
+    importView.parsed.view.isView
   ) {
     let pathToView = path.dirname(view.file)
     let maybeFileViewInside = path

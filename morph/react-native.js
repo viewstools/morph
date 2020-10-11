@@ -43,7 +43,7 @@ export default ({
     getValueForProperty,
     hasRefs: false,
     isReactNative: true,
-    isStory: (id) => {
+    isView: (id) => {
       let viewInView = getViewRelativeToView({
         id,
         view,
@@ -51,7 +51,7 @@ export default ({
         viewsToFiles,
       })
 
-      return viewInView && !viewInView.custom && viewInView.parsed.view.isStory
+      return viewInView && !viewInView.custom && viewInView.parsed.view.isView
     },
     lazy: {},
     morpher,
