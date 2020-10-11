@@ -6,29 +6,29 @@
 import React, { useCallback, useContext, useEffect, useReducer } from 'react'
 import ViewsTools from './ViewsTools.js'
 
-export let flow = new Map()
+export let flowDefinition = new Map()
 
 let TOP_VIEW = '/App'
 
-function ensureFirstViewIsOn(key, views) {
-  if (!views.has(key)) return
+function ensureFirstViewIsOn(key, flow) {
+  if (!flow.has(key)) return
 
-  let view = flow.get(key)
+  let view = flowDefinition.get(key)
   if (view.views.size > 0) {
     let index = 0
-    let canAdd = intersection(views, view.views).size === 0
+    let canAdd = intersection(flow, view.views).size === 0
     for (let id of view.views) {
       if ((canAdd && index === 0) || !view.isSeparate) {
-        views.add(id)
+        flow.add(id)
       }
       index++
-      ensureFirstViewIsOn(id, views)
+      ensureFirstViewIsOn(id, flow)
     }
   }
 }
 
-function ensureParents(key, views) {
-  let view = flow.get(key)
+function ensureParents(key, flow) {
+  let view = flowDefinition.get(key)
   if (!view) {
     console.error({ type: 'views/flow/missing-parent', id: key })
     return
@@ -37,14 +37,14 @@ function ensureParents(key, views) {
     return
   }
 
-  views.add(view.parent)
-  ensureParents(view.parent, views)
+  flow.add(view.parent)
+  ensureParents(view.parent, flow)
 }
 
 function getAllChildrenOf(key, children) {
-  if (!flow.has(key)) return
+  if (!flowDefinition.has(key)) return
 
-  let view = flow.get(key)
+  let view = flowDefinition.get(key)
   for (let id of view.views) {
     children.add(id)
     getAllChildrenOf(id, children)
@@ -54,27 +54,27 @@ function getAllChildrenOf(key, children) {
 let intersection = (a, b) => new Set([...a].filter((ai) => b.has(ai)))
 let difference = (a, b) => new Set([...a].filter((ai) => !b.has(ai)))
 
-function getNextFlow(key, state) {
-  if (state.has(key)) return state
+function getNextFlow(key, flow) {
+  if (flow.has(key)) return flow
 
   let next = new Set([key])
 
   ensureFirstViewIsOn(key, next)
   ensureParents(key, next)
 
-  let diffIn = difference(next, state)
+  let diffIn = difference(next, flow)
   let diffOut = new Set()
 
-  difference(state, next).forEach((id) => {
-    let view = flow.get(id)
+  difference(flow, next).forEach((id) => {
+    let view = flowDefinition.get(id)
     if (!view) {
       console.debug({ type: 'views/flow/missing-view', id })
       diffOut.add(id)
       return
     }
 
-    if (state.has(view.parent)) {
-      let parent = flow.get(view.parent)
+    if (flow.has(view.parent)) {
+      let parent = flowDefinition.get(view.parent)
       if (intersection(parent.views, diffIn).size > 0) {
         diffOut.add(id)
         let children = new Set()
@@ -84,9 +84,9 @@ function getNextFlow(key, state) {
     }
   })
 
-  let nextState = new Set([...difference(state, diffOut), ...diffIn])
-  ensureFirstViewIsOn(TOP_VIEW, nextState)
-  return new Set([...nextState].sort())
+  let nextFlow = new Set([...difference(flow, diffOut), ...diffIn])
+  ensureFirstViewIsOn(TOP_VIEW, nextFlow)
+  return new Set([...nextFlow].sort())
 }
 
 let MAX_ACTIONS = 10000
@@ -121,11 +121,11 @@ function reducer(state, action) {
       if (process.env.NODE_ENV === 'development') {
         console.debug({ type: 'views/flow/set', id: action.id })
 
-        if (!flow.has(action.id)) {
+        if (!flowDefinition.has(action.id)) {
           console.error({
             type: 'views/flow/invalid-view',
             id: action.id,
-            availableViews: flow,
+            flowDefinition,
           })
           return state
         }
@@ -179,12 +179,10 @@ export function ViewsFlow(props) {
       <ViewsTools
         flow={context}
         onFlowMapChange={(next) => {
-          flow = new Map(
-            JSON.parse(next).map(([key, value]) => [
-              key,
-              { ...value, views: new Set(value.views) },
-            ])
-          )
+          flowDefinition.clear()
+          JSON.parse(next).forEach(([key, value]) => {
+            flowDefinition.set(key, { ...value, views: new Set(value.views) })
+          })
         }}
       >
         {props.children}
