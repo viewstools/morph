@@ -775,6 +775,11 @@ export default ({
     view.dataValidate = getDataValidate(
       view.properties.find((p) => p.name === 'dataValidate')
     )
+    slots.push({
+      name: 'viewPath',
+      type: 'string',
+      defaultValue: view.viewPath,
+    })
   } else {
     view.isView = false
   }

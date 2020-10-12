@@ -7,35 +7,50 @@ import React, { useCallback, useContext, useEffect, useReducer } from 'react'
 import ViewsTools from './ViewsTools.js'
 
 export let flowDefinition = new Map()
+function getFlowDefinitionKey(key) {
+  return key.replace(/\(.+?\)/g, '')
+}
+function getFlowKeyWithoutEndingArguments(key) {
+  // TODO ideally we'd do this with a regex and replace
+  if (!key.endsWith(')')) return key
+  let bits = key.split('/')
+  bits[bits.length - 1] = bits[bits.length - 1].replace(/\(.+\)$/, '')
+  return bits.join('/')
+}
+function getFlowDefinition(key) {
+  return flowDefinition.get(getFlowDefinitionKey(key))
+}
+function getViewsRelativeToDefinition(key, views) {
+  return new Set([...views].map((id) => `${key}/${id}`))
+}
 
 let TOP_VIEW = '/App'
 
 function ensureFirstViewIsOn(key, flow) {
   if (!flow.has(key)) return
 
-  let view = flowDefinition.get(key)
-  if (view.views.size > 0) {
-    let index = 0
-    let canAdd = intersection(flow, view.views).size === 0
-    for (let id of view.views) {
-      if ((canAdd && index === 0) || !view.isSeparate) {
-        flow.add(id)
-      }
-      index++
-      ensureFirstViewIsOn(id, flow)
+  let view = getFlowDefinition(key)
+  if (view.views.size === 0) return
+
+  let index = 0
+  let views = getViewsRelativeToDefinition(key, view.views)
+  let canAdd = intersection(flow, views).size === 0
+  for (let id of views) {
+    if ((canAdd && index === 0) || !view.isSeparate) {
+      flow.add(id)
     }
+    index++
+    ensureFirstViewIsOn(id, flow)
   }
 }
 
 function ensureParents(key, flow) {
-  let view = flowDefinition.get(key)
+  let view = getFlowDefinition(key)
   if (!view) {
     console.error({ type: 'views/flow/missing-parent', id: key })
     return
   }
-  if (!view.parent) {
-    return
-  }
+  if (!view.parent) return
 
   flow.add(view.parent)
   ensureParents(view.parent, flow)
@@ -44,15 +59,13 @@ function ensureParents(key, flow) {
 function getAllChildrenOf(key, children) {
   if (!flowDefinition.has(key)) return
 
-  let view = flowDefinition.get(key)
-  for (let id of view.views) {
+  let view = getFlowDefinition(key)
+  let views = getViewsRelativeToDefinition(key, view.views)
+  for (let id of views) {
     children.add(id)
     getAllChildrenOf(id, children)
   }
 }
-
-let intersection = (a, b) => new Set([...a].filter((ai) => b.has(ai)))
-let difference = (a, b) => new Set([...a].filter((ai) => !b.has(ai)))
 
 function getNextFlow(key, flow) {
   if (flow.has(key)) return flow
@@ -66,7 +79,7 @@ function getNextFlow(key, flow) {
   let diffOut = new Set()
 
   difference(flow, next).forEach((id) => {
-    let view = flowDefinition.get(id)
+    let view = getFlowDefinition(id)
     if (!view) {
       console.debug({ type: 'views/flow/missing-view', id })
       diffOut.add(id)
@@ -74,8 +87,16 @@ function getNextFlow(key, flow) {
     }
 
     if (flow.has(view.parent)) {
-      let parent = flowDefinition.get(view.parent)
-      if (intersection(parent.views, diffIn).size > 0) {
+      let parent = getFlowDefinition(view.parent)
+      // remove last bit of () from key if present and ending with it
+      let parentViews = getViewsRelativeToDefinition(
+        getFlowKeyWithoutEndingArguments(key),
+        parent.views
+      )
+      // TODO if view has ending arguments, ensure views without the argument
+      // aren't in the flow, eg /App/Todos/Todo(1) shouldn't have
+      // /App/Todos/Todo
+      if (intersection(parentViews, diffIn).size > 0) {
         diffOut.add(id)
         let children = new Set()
         getAllChildrenOf(id, children)
@@ -121,10 +142,12 @@ function reducer(state, action) {
       if (process.env.NODE_ENV === 'development') {
         console.debug({ type: 'views/flow/set', id: action.id })
 
-        if (!flowDefinition.has(action.id)) {
+        let definitionKey = getFlowDefinitionKey(action.id)
+        if (!flowDefinition.has(definitionKey)) {
           console.error({
             type: 'views/flow/invalid-view',
             id: action.id,
+            definitionKey,
             flowDefinition,
           })
           return state
@@ -198,4 +221,11 @@ ViewsFlow.defaultProps = {
 export function normalizePath(viewPath, relativePath) {
   let url = new URL(`file://${viewPath}/${relativePath}`)
   return url.pathname
+}
+
+function intersection(a, b) {
+  return new Set([...a].filter((ai) => b.has(ai)))
+}
+function difference(a, b) {
+  return new Set([...a].filter((ai) => !b.has(ai)))
 }

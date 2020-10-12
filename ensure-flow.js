@@ -47,7 +47,7 @@ async function makeFlow({ as, viewsById, viewsToFiles }) {
       })
 
       if (viewInView && !viewInView.custom && viewInView.parsed.view.isView) {
-        states.push(viewInView.parsed.view.viewPath) // `${pathToViewId}/${id}`)
+        states.push(id)
       }
     }
 
@@ -112,7 +112,7 @@ function makeFlowJson({ viewsById, viewsToFiles }) {
       })
 
       if (viewInView && !viewInView.custom && viewInView.parsed.view.isView) {
-        states.push(viewInView.parsed.view.viewPath) // `${pathToViewId}/${id}`)
+        states.push(id)
       }
     }
 
