@@ -1,5 +1,5 @@
 export let enter = (node, parent, state) => {
-  if (node.isFragment || !state.tools) return
+  if (node.isFragment) return
 
   if (state.viewPath) {
     state.render.push(` ${state.viewPathKey}="${state.viewPath}"`)
