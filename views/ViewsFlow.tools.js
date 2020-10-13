@@ -10,11 +10,12 @@ export let flowDefinition = new Map()
 function getFlowDefinitionKey(key) {
   return key.replace(/\(.+?\)/g, '')
 }
-function getFlowKeyWithoutEndingArguments(key) {
-  // TODO ideally we'd do this with a regex and replace
-  if (!key.endsWith(')')) return key
+function isFlowKeyWithArguments(key) {
+  return key.endsWith(')')
+}
+function getFlowKeyParent(key) {
   let bits = key.split('/')
-  bits[bits.length - 1] = bits[bits.length - 1].replace(/\(.+\)$/, '')
+  bits.pop()
   return bits.join('/')
 }
 function getFlowDefinition(key) {
@@ -52,8 +53,17 @@ function ensureParents(key, flow) {
   }
   if (!view.parent) return
 
-  flow.add(view.parent)
-  ensureParents(view.parent, flow)
+  // TODO try to improve this too
+  // we can't use view.parent because it is static
+  let [, ...bits] = key.split('/')
+  bits.pop()
+  let path = ''
+  bits.forEach((item) => {
+    path = `${path}/${item}`
+    flow.add(path)
+  })
+  // flow.add(view.parent)
+  // ensureParents(view.parent, flow)
 }
 
 function getAllChildrenOf(key, children) {
@@ -86,16 +96,27 @@ function getNextFlow(key, flow) {
       return
     }
 
+    // (1) this is for the flow definition itself
     if (flow.has(view.parent)) {
       let parent = getFlowDefinition(view.parent)
+
+      if (intersection(parent.views, diffIn).size > 0) {
+        diffOut.add(id)
+        let children = new Set()
+        getAllChildrenOf(id, children)
+        children.forEach((cid) => diffOut.add(cid))
+      }
+    }
+
+    let viewParent = getFlowKeyParent(id)
+    if (flow.has(viewParent)) {
+      let parent = getFlowDefinition(viewParent)
       // remove last bit of () from key if present and ending with it
-      let parentViews = getViewsRelativeToDefinition(
-        getFlowKeyWithoutEndingArguments(key),
-        parent.views
-      )
-      // TODO if view has ending arguments, ensure views without the argument
-      // aren't in the flow, eg /App/Todos/Todo(1) shouldn't have
-      // /App/Todos/Todo
+      let parentViews = getViewsRelativeToDefinition(viewParent, parent.views)
+      // TODO if view has ending arguments, we may want to remove views without
+      // the argument from the flow, eg /App/Todos/Todo(1) shouldn't have
+      // /App/Todos/Todo. This will impact (1). Tools may need them though, so
+      // let's explore it.
       if (intersection(parentViews, diffIn).size > 0) {
         diffOut.add(id)
         let children = new Set()
@@ -113,13 +134,18 @@ function getNextFlow(key, flow) {
 let MAX_ACTIONS = 10000
 let SYNC = 'flow/SYNC'
 let SET = 'flow/SET'
+let UNSET = 'flow/UNSET'
 
 let Context = React.createContext([{ actions: [], flow: new Set() }, () => {}])
 export let useFlowState = () => useContext(Context)[0]
 export let useFlow = () => useFlowState().flow
 export let useSetFlowTo = () => {
   let [, dispatch] = useContext(Context)
-  return useCallback((id) => dispatch({ type: SET, id }), []) // eslint-disable-line
+  return useCallback((id) => {
+    dispatch({ type: SET, id })
+
+    return () => dispatch({ type: UNSET, id })
+  }, []) // eslint-disable-line
   // ignore dispatch
 }
 
@@ -177,6 +203,21 @@ function reducer(state, action) {
       return {
         flow: getNextFlow(action.id, state.flow),
         actions: getNextActions(state, action.id),
+      }
+    }
+
+    case UNSET: {
+      // You can't unset a view otherwise
+      if (!isFlowKeyWithArguments(action.id)) return state
+
+      console.debug({ type: 'views/flow/unset', id: action.id })
+
+      return {
+        flow: new Set(
+          [...state.flow].filter((id) => !id.startsWith(action.id))
+        ),
+        // TODO not sure if we need to do something else with this
+        actions: state.actions,
       }
     }
 

@@ -32,7 +32,7 @@ function maybeReactNative(as, content) {
 let TOP_VIEW = '/App'
 async function makeFlow({ as, viewsById, viewsToFiles }) {
   let flowMap = new Map()
-  let flowMapStr = []
+  let flowDefinition = []
 
   for (let view of viewsToFiles.values()) {
     if (!view || view.custom || !view.parsed.view.isView) continue
@@ -54,7 +54,7 @@ async function makeFlow({ as, viewsById, viewsToFiles }) {
     let isSeparate = view.parsed.view.flow === 'separate'
     let parent = view.parsed.view.viewPathParent
 
-    flowMapStr.push(
+    flowDefinition.push(
       `['${view.parsed.view.viewPath}', { isSeparate: ${isSeparate}, parent: '${
         parent === '/' ? '' : parent
       }',
@@ -63,7 +63,7 @@ async function makeFlow({ as, viewsById, viewsToFiles }) {
     flowMap.set(view.parsed.view.viewPath, {
       parent,
       isSeparate,
-      views: new Set(states),
+      views: new Set(states.map((id) => `${view.parsed.view.viewPath}/${id}`)),
     })
   }
 
@@ -76,9 +76,9 @@ async function makeFlow({ as, viewsById, viewsToFiles }) {
   )
   return maybeReactNative(as, content)
     .replace(
-      'export let flow = new Map()',
-      `export let flow = new Map([
-${flowMapStr.join(',\n')}
+      'export let flowDefinition = new Map()',
+      `export let flowDefinition = new Map([
+${flowDefinition.join(',\n')}
 ])`
     )
     .replace(
@@ -122,12 +122,6 @@ function makeFlowJson({ viewsById, viewsToFiles }) {
       parent = ''
     }
 
-    // flowMapStr.push(
-    //   `['${view.parsed.view.viewPath}', { isSeparate: ${isSeparate}, parent: '${
-    //     parent === '/' ? '' : parent
-    //   }',
-    // views: new Set(${states.length > 0 ? JSON.stringify(states) : ''}) }]`
-    // )
     flowMap.set(view.parsed.view.viewPath, {
       parent,
       isSeparate,
