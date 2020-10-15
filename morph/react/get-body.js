@@ -17,7 +17,9 @@ export default function getBody({ state, name }) {
 
   let data = []
   if (state.data) {
-    data.push(`let data = fromData.useData({ path: '${state.data.path}', `)
+    data.push(
+      `let data = fromData.useData({ viewPath: props.viewPath, path: '${state.data.path}', `
+    )
     maybeDataContext(state.data, data)
     maybeDataFormat(state.dataFormat, data)
     maybeDataValidate(state.dataValidate, data)
