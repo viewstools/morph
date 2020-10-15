@@ -102,7 +102,7 @@ function getScopedConditionPropValue(node, parent, state) {
     state.use('ViewsUseFlow')
     state.setFlowTo = true
 
-    return `() => setFlowTo('${flowPath}')`
+    return `() => setFlowTo(${flowPath})`
   } else if (node.tags.slot) {
     value = node.value
   } else if (typeof node.value === 'string') {
