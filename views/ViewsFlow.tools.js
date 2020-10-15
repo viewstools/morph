@@ -137,14 +137,19 @@ let SET = 'flow/SET'
 let UNSET = 'flow/UNSET'
 
 let Context = React.createContext([{ actions: [], flow: new Set() }, () => {}])
-export let useFlowState = () => useContext(Context)[0]
-export let useFlow = () => useFlowState().flow
-export let useSetFlowTo = () => {
+export function useFlowState() {
+  return useContext(Context)[0]
+}
+export function useFlow() {
+  return useFlowState().flow
+}
+export function useSetFlowTo(source) {
   let [, dispatch] = useContext(Context)
-  return useCallback((id) => {
-    dispatch({ type: SET, id })
 
-    return () => dispatch({ type: UNSET, id })
+  return useCallback((target, data = null) => {
+    dispatch({ type: SET, target, source, data })
+
+    return () => dispatch({ type: UNSET, target, source })
   }, []) // eslint-disable-line
   // ignore dispatch
 }
@@ -160,19 +165,29 @@ function reducer(state, action) {
 
       return {
         flow: new Set(action.flow),
-        actions: getNextActions(state, action.id),
+        actions: getNextActions(state, {
+          target: action.id,
+          source: action.id,
+          data: null,
+        }),
       }
     }
 
     case SET: {
       if (process.env.NODE_ENV === 'development') {
-        console.debug({ type: 'views/flow/set', id: action.id })
+        console.debug({
+          type: 'views/flow/set',
+          target: action.target,
+          source: action.source,
+          data: action.data,
+        })
 
-        let definitionKey = getFlowDefinitionKey(action.id)
+        let definitionKey = getFlowDefinitionKey(action.target)
         if (!flowDefinition.has(definitionKey)) {
           console.error({
             type: 'views/flow/invalid-view',
-            id: action.id,
+            target: action.target,
+            source: action.source,
             definitionKey,
             flowDefinition,
           })
@@ -180,41 +195,51 @@ function reducer(state, action) {
         }
 
         if (ViewsTools.SYNC_ONE_WAY) {
-          return action.id.startsWith(ViewsTools.SYNC_ONE_WAY)
+          return action.target.startsWith(ViewsTools.SYNC_ONE_WAY)
             ? {
-                flow: getNextFlow(action.id, state.flow),
+                flow: getNextFlow(action.target, state.flow),
                 actions: state.actions,
               }
             : state
         }
       }
 
-      if (state.actions[0] === action.id) {
+      if (state.actions[0].target === action.target) {
         if (process.env.NODE_ENV === 'development') {
           console.debug({
             type: 'views/flow/already-set-as-last-action-ignoring',
-            id: action.id,
+            target: action.target,
             actions: state.actions,
+            source: action.source,
           })
         }
         return state
       }
 
       return {
-        flow: getNextFlow(action.id, state.flow),
-        actions: getNextActions(state, action.id),
+        flow: getNextFlow(action.target, state.flow),
+        // TODO this might be too verbose for an analytics layer
+        actions: getNextActions(state, {
+          target: action.target,
+          source: action.source,
+          data: action.data,
+        }),
       }
     }
 
     case UNSET: {
       // You can't unset a view otherwise
-      if (!isFlowKeyWithArguments(action.id)) return state
+      if (!isFlowKeyWithArguments(action.target)) return state
 
-      console.debug({ type: 'views/flow/unset', id: action.id })
+      console.debug({
+        type: 'views/flow/unset',
+        target: action.target,
+        source: action.source,
+      })
 
       return {
         flow: new Set(
-          [...state.flow].filter((id) => !id.startsWith(action.id))
+          [...state.flow].filter((id) => !id.startsWith(action.target))
         ),
         // TODO not sure if we need to do something else with this
         actions: state.actions,

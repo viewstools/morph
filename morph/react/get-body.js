@@ -12,7 +12,7 @@ export default function getBody({ state, name }) {
     flow.push(`let flow = fromFlow.useFlow()`)
   }
   if (state.setFlowTo) {
-    flow.push(`let setFlowTo = fromFlow.useSetFlowTo()`)
+    flow.push(`let setFlowTo = fromFlow.useSetFlowTo(props.viewPath)`)
   }
 
   let data = []
