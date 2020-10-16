@@ -152,8 +152,8 @@ export function useSetFlowTo(source) {
   // ignore dispatch
 }
 
-function getNextActions(state, id) {
-  return [id, ...state.actions].slice(0, MAX_ACTIONS)
+function getNextActions(state, action) {
+  return [action, ...state.actions].slice(0, MAX_ACTIONS)
 }
 
 function reducer(state, action) {
@@ -180,7 +180,7 @@ function reducer(state, action) {
         }
       }
 
-      if (state.actions[0].target === action.target) {
+      if (state.actions[0]?.target === action.target) {
         if (process.env.NODE_ENV === 'development') {
           console.debug({
             type: 'views/flow/already-set-as-last-action-ignoring',
