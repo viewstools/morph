@@ -180,7 +180,10 @@ function reducer(state, action) {
         }
       }
 
-      if (state.actions[0]?.target === action.target) {
+      if (
+        state.actions.length > 0 &&
+        state.actions[0].target === action.target
+      ) {
         if (process.env.NODE_ENV === 'development') {
           console.debug({
             type: 'views/flow/already-set-as-last-action-ignoring',
