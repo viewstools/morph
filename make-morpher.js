@@ -13,17 +13,20 @@ import ensureTools from './ensure-tools.js'
 import ensureGitignore from './ensure-gitignore.js'
 import makeGetSystemImport from './make-get-system-import.js'
 import morphAllViews from './morph-all-views.js'
+import morphAllViewGraphlFiles from './morph-all-view-graphql-files.js'
 import parseViews from './parse-views.js'
 import processViewCustomFiles from './process-view-custom-files.js'
 import processViewFiles from './process-view-files.js'
 
 export default function makeMorpher({
+  appName = 'app',
   as = 'react-dom',
   src,
   tools = false,
   verbose = true,
 }) {
   let state = {
+    appName,
     as,
     src,
     pass: 0,
@@ -39,6 +42,7 @@ export default function makeMorpher({
     filesView = new Set(),
     filesViewCustom = new Set(),
     filesViewLogic = new Set(),
+    filesViewGraphql = new Set(),
   }) {
     if (filesFontCustom.size > 0) {
       processCustomFonts({
@@ -81,6 +85,12 @@ export default function makeMorpher({
       viewsToFiles: state.viewsToFiles,
     })
 
+    let morphedViewGraphqlFiles = morphAllViewGraphlFiles({
+      appName,
+      filesViewGraphql,
+      src: state.src,
+    })
+
     // TODO optimise
     // morph views
     let morphedViews = morphAllViews({
@@ -105,13 +115,16 @@ export default function makeMorpher({
       ensureGitignore(state),
     ])
 
-    let filesToWrite = [...morphedFonts, ...morphedViews, ...viewsFiles].filter(
-      Boolean
-    )
+    let filesToWrite = [
+      ...morphedFonts,
+      ...morphedViewGraphqlFiles,
+      ...morphedViews,
+      ...viewsFiles,
+    ].filter(Boolean)
 
     await Promise.all(
-      filesToWrite.map(({ file, content }) =>
-        fs.writeFile(file, content, 'utf-8')
+      filesToWrite.map(async ({ file, content }) =>
+        fs.writeFile(file, await content, 'utf-8')
       )
     )
 

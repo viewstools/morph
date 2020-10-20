@@ -3,6 +3,7 @@ import cleanup from './clean.js'
 import minimist from 'minimist'
 import path from 'path'
 import pkg from './package.json'
+import readPkgUp from 'read-pkg-up'
 import updateNotifier from 'update-notifier'
 import watch from './watch.js'
 ;(async function () {
@@ -86,7 +87,14 @@ import watch from './watch.js'
 
   updateNotifier({ pkg }).notify()
 
+  let appName = 'app'
+  try {
+    let { packageJson } = readPkgUp({ cwd: input })
+    appName = packageJson.name
+  } catch (error) {}
+
   watch({
+    appName,
     as,
     once: !shouldWatch,
     src: input,

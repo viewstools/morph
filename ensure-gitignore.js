@@ -6,6 +6,7 @@ let MARKER = '# views'
 let CONTENT = `# views
 **/view.js
 **/DesignSystem/Fonts/*.js
+**/*.graphql.js
 src/Data/ViewsData.js
 src/Logic/ViewsFlow.js
 src/Logic/ViewsFlow.json

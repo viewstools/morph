@@ -1,6 +1,6 @@
 {
   "name": "@viewstools/morph",
-  "version": "23.22.1",
+  "version": "23.23.0",
   "description": "Views language morpher",
   "main": "bin.js",
   "bin": {
@@ -59,6 +59,8 @@
     "fast-glob": "^3.0.4",
     "flatten": "^1.0.2",
     "google-fonts-complete": "^1.1.1",
+    "graphql": "^15.3.0",
+    "graphql-tag": "^2.11.0",
     "has-yarn": "^2.1.0",
     "latest-version": "^5.1.0",
     "levenshtein": "^1.0.5",
@@ -67,7 +69,7 @@
     "minimist": "^1.2.0",
     "react-native-url-polyfill": "^1.2.0",
     "react-query": "^0.3.24",
-    "read-pkg-up": "^6.0.0",
+    "read-pkg-up": "^7.0.1",
     "source-map-support": "^0.5.12",
     "to-camel-case": "^1.0.0",
     "to-pascal-case": "^1.0.0",
