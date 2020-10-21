@@ -149,7 +149,10 @@ export function DataProvider(props) {
     dispatch({ type: FORCE_REQUIRED })
   }
 
-  let value = useMemo(() => [state, dispatch, _onSubmit], [state])
+  let value = useMemo(() => [state, dispatch, _onSubmit, _value], [
+    state,
+    _value,
+  ])
 
   // keep track of props.onChange outside of the following effect to
   // prevent loops. Making the function useCallback didn't work
@@ -198,7 +201,9 @@ export function useData({
   validateRequired = false,
   viewPath = null,
 } = {}) {
-  let [data, dispatch, onSubmit] = useContext(DataContexts[context])
+  let [data, dispatch, onSubmit, originalValue] = useContext(
+    DataContexts[context]
+  )
   let touched = useRef(false)
   let [error, setError] = useState(false)
 
@@ -256,6 +261,7 @@ export function useData({
         onChange,
         onSubmit,
         value,
+        originalValue,
         isSubmitting: data._isSubmitting,
         isValid,
         isValidInitial,
