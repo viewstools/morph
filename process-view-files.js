@@ -30,7 +30,11 @@ export default async function processViewFiles({
         data,
         query,
         file,
-        importFile: query ? data : logic ? logic : file,
+        importFile: query
+          ? data
+          : logic
+          ? logic
+          : file.replace(/\.blocks$/, '.js'),
         id,
         logic,
         source: await fs.readFile(file, 'utf8'),
