@@ -46,14 +46,7 @@ function ${id}() {
 }`
     }
 
-    let importFile = importView.file
-
-    if (importView.logic) {
-      importFile = importView.logic
-    } else if (!importView.custom) {
-      importFile = path.join(path.dirname(importFile), 'view.js')
-    }
-    let importPath = relativise(view.file, importFile, src)
+    let importPath = relativise(view.file, importView.importFile, src)
 
     return isLazy
       ? `let ${id} = React.lazy(() => import('${importPath}'))`

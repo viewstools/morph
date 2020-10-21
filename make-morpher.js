@@ -55,6 +55,7 @@ export default function makeMorpher({
     await processViewFiles({
       filesView,
       filesViewLogic,
+      filesViewGraphql,
       viewsById: state.viewsById,
       viewsToFiles: state.viewsToFiles,
     })

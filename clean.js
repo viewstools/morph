@@ -11,7 +11,7 @@ export default async function clean(src, verbose, all = false) {
   })
 
   let map = {}
-  views.forEach(item => {
+  views.forEach((item) => {
     let dir = path.dirname(item)
     if (!map[dir]) {
       map[dir] = new Set()
@@ -20,8 +20,8 @@ export default async function clean(src, verbose, all = false) {
   })
 
   let empty = Object.keys(map)
-    .filter(key => map[key].size === 1 && map[key].has('view.js'))
-    .map(item => path.join(src, item))
+    .filter((key) => map[key].size === 1 && map[key].has('view.js'))
+    .map((item) => path.join(src, item))
 
   await trash(empty)
 
@@ -29,6 +29,8 @@ export default async function clean(src, verbose, all = false) {
     await del(
       [
         '**/view.js',
+        '**/*.graphql.js',
+        '**/data.js',
         'Data/ViewsData.js',
         `DesignSystem/Fonts/*.js`,
         'Logic/ViewsFlow.js',
@@ -36,12 +38,12 @@ export default async function clean(src, verbose, all = false) {
         'Logic/useIsBefore.js',
         'Logic/useIsHovered.js',
         'Logic/ViewsTools.js',
-      ].map(item => path.join(src, item))
+      ].map((item) => path.join(src, item))
     )
 
     let deleted = await deleteEmpty(src)
     if (verbose) {
-      deleted.forEach(d => console.log(`x ${d}`))
+      deleted.forEach((d) => console.log(`x ${d}`))
     }
   }
 }

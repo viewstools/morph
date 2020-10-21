@@ -1,17 +1,37 @@
-import { promises as fs } from 'fs'
+import { promises as fs, existsSync } from 'fs'
 import gql from 'graphql-tag'
 import path from 'path'
 
 export default function morphAllViews({ appName, filesViewGraphql, src }) {
-  return [...filesViewGraphql].map((file) => ({
-    file: `${file}.js`,
-    content: maybeMorph({
-      appName,
-      file,
-      src,
-      viewPath: path.relative(src, path.dirname(file)),
-    }),
-  }))
+  return [...filesViewGraphql]
+    .map((file) => {
+      let viewPath = path.relative(src, path.dirname(file))
+
+      let files = [
+        {
+          file: `${file}.js`,
+          content: maybeMorph({
+            appName,
+            file,
+            src,
+            viewPath,
+          }),
+        },
+      ]
+
+      if (path.basename(file) === 'query.graphql') {
+        files.push({
+          file: path.join(path.dirname(file), 'data.js'),
+          content: makeDataJs({
+            file,
+            viewName: path.basename(viewPath),
+          }),
+        })
+      }
+
+      return files
+    })
+    .flat()
 }
 
 async function maybeMorph({ appName, file, src, viewPath }) {
@@ -44,4 +64,71 @@ ${content}
 
 export default null`
   }
+}
+
+async function makeDataJs({ file, viewName }) {
+  let content = await fs.readFile(file, 'utf8')
+
+  try {
+    // eslint-disable-next-line
+    let parsed = gql`
+      ${content}
+    `
+    let definition = parsed.definitions[0]
+
+    // TODO make morpher pick changes on these files as well as query.graphl
+    // and remorph data.js
+    let isUsingDataTransform = existsSync(
+      path.join(path.dirname(file), 'useDataTransform.js')
+    )
+    let isUsingDataVariables =
+      existsSync(path.join(path.dirname(file), 'useDataVariables.js')) &&
+      definition.variableDefinitions.length > 0
+    let useOperation =
+      definition.operation === 'query' ? 'useQuery' : 'useSubscription'
+    let field = definition.selectionSet.selections[0]
+    let context = field.alias ? field.alias.value : field.name.value
+
+    let importName = existsSync(path.join(path.dirname(file), 'logic.js'))
+      ? 'Logic'
+      : 'View'
+
+    return `// This file is auto-generated. Edit query.graphql to change it.
+import { DataProvider, useSetFlowToBasedOnData } from 'Data/ViewsData.js'
+import { ${useOperation} } from 'Data/Api.js'
+${
+  isUsingDataTransform
+    ? "import useDataTransform from './useDataTransform.js'"
+    : ''
+}
+${
+  isUsingDataVariables
+    ? "import useDataVariables from './useDataVariables.js'"
+    : ''
+}
+import query from './query.graphql.js'
+import React from 'react'
+import ${importName} from './${importName.toLowerCase()}.js'
+
+export default function ${viewName}Data(props) {
+${isUsingDataVariables ? '  let variables = useDataVariables(props)' : ''}
+  let [{ data${
+    isUsingDataTransform ? ': rdata' : ''
+  }, error }] = ${useOperation}({ query${
+      isUsingDataVariables ? ', variables' : ''
+    } })
+${isUsingDataTransform ? '  let data = useDataTransform(props, rdata)' : ''}
+  useSetFlowToBasedOnData(props, data, error)
+
+  return (
+    <DataProvider
+      context="${context}"
+      value={data}
+      viewPath={props.viewPath}
+    >
+      <${importName} {...props} />
+    </DataProvider>
+  )
+}`
+  } catch (error) {}
 }

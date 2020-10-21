@@ -4,6 +4,7 @@
 // https://github.com/viewstools/morph/blob/master/ensure-data.js
 import * as fromValidate from './validate.js'
 import * as fromFormat from './format.js'
+import { normalizePath, useSetFlowTo } from 'Logic/ViewsFlow.js'
 // import get from 'dlv';
 import get from 'lodash/get'
 import produce from 'immer'
@@ -387,4 +388,28 @@ if (process.env.NODE_ENV === 'development') {
       sessionStorage.removeItem('ViewsDataKeepContextValues')
     }
   }
+}
+
+export function useSetFlowToBasedOnData(props, value, error) {
+  let setFlowTo = useSetFlowTo(props.viewPath)
+  useEffect(() => {
+    let view = error
+      ? 'Error'
+      : // TODO this might change depending on what queries and subscriptions need
+      !value
+      ? 'Loading'
+      : isEmpty(props.context, value)
+      ? 'Empty'
+      : 'Content'
+
+    // TODO do we need No? I think we need it, even if it is used once only
+    // otherwise we'll need to render any of the other states
+    setFlowTo(normalizePath(props.viewPath, view))
+  }, [value, error]) // eslint-disable-line
+  // ignore setFlowTo and props.viewPath
+}
+function isEmpty(context, data) {
+  if (!data) return true
+  let value = data[context]
+  return Array.isArray(value) ? value.length === 0 : !value
 }

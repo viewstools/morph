@@ -6,7 +6,7 @@ export default function processViewCustomFiles({
   viewsById,
   viewsToFiles,
 }) {
-  ;[...filesViewCustom].forEach(file => {
+  ;[...filesViewCustom].forEach((file) => {
     let id = getViewIdFromFile(file)
 
     addToMapSet(viewsById, id, file)
@@ -14,6 +14,7 @@ export default function processViewCustomFiles({
     viewsToFiles.set(file, {
       custom: true,
       file,
+      importFile: file,
       id,
       logic: false,
       source: null,
