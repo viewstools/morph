@@ -1,10 +1,15 @@
 export default function getPointsOfUse({ view, viewsToFiles }) {
   let filesView = new Set([view.file])
   let filesViewLogic = new Set()
+  let filesViewGraphql = new Set()
   let viewsId = new Set()
 
   if (view.logic) {
     filesViewLogic.add(view.logic)
+  }
+
+  if (view.query) {
+    filesViewGraphql.add(view.query)
   }
 
   for (let viewInView of viewsToFiles.values()) {
@@ -15,9 +20,12 @@ export default function getPointsOfUse({ view, viewsToFiles }) {
       if (viewInView.logic) {
         filesViewLogic.add(viewInView.logic)
       }
+      if (viewInView.query) {
+        filesViewGraphql.add(viewInView.query)
+      }
       viewsId.add(viewInView.id)
     }
   }
 
-  return { filesView, filesViewLogic, viewsId }
+  return { filesView, filesViewGraphql, filesViewLogic, viewsId }
 }

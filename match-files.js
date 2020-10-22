@@ -19,6 +19,8 @@ export let isViewFile = (file) => mm.isMatch(file, PATTERNS.filesView)
 export let isViewLogicFile = (file) => mm.isMatch(file, PATTERNS.filesViewLogic)
 export let isViewGraphqlFile = (file) =>
   mm.isMatch(file, PATTERNS.filesViewGraphql)
+export let isViewDataGraphqlFile = (file) =>
+  mm.isMatch(file, ['**/App/**/data.graphql'])
 export let isViewCustomFile = (file) =>
   mm.isMatch(file, PATTERNS.filesViewCustom)
 export let isFontCustomFile = (file) =>

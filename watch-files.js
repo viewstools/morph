@@ -4,6 +4,7 @@ import {
   isViewCustomFile,
   isViewFile,
   isViewLogicFile,
+  isViewDataGraphqlFile,
 } from './match-files.js'
 import { debounce } from 'debounce'
 import { promises as fs, existsSync } from 'fs'
@@ -16,7 +17,12 @@ import path from 'path'
 export default async function watchFiles({ morpher }) {
   let watcher = chokidar.watch(MATCH, {
     cwd: morpher.src,
-    ignored: ['**/view.js', 'DesignSystem/Fonts/*.js'],
+    ignored: [
+      '**/view.js',
+      'DesignSystem/Fonts/*.js',
+      '**/data.js',
+      '**/*.graphql.js',
+    ],
     ignoreInitial: true,
     // awaitWriteFinish: true,
   })
@@ -60,6 +66,7 @@ export default async function watchFiles({ morpher }) {
 async function processQueue({ queue, morpher }) {
   let filesToProcess = {
     filesView: new Set(),
+    filesViewGraphql: new Set(),
     filesViewLogic: new Set(),
     filesViewCustom: new Set(),
     filesFontCustom: new Set(),
@@ -125,6 +132,19 @@ async function processUnlinked({ files, morpher, filesToProcess }) {
             filesToProcess.filesView.add(view.file)
           }
           filesToProcess.filesViewLogic.delete(file)
+          let dataFile = path.join(path.dirname(file), 'data.graphql')
+          if (existsSync(dataFile)) {
+            filesToProcess.filesViewGraphql.add(dataFile)
+          }
+        } else if (isViewDataGraphqlFile(file)) {
+          if (files.every((item) => item.file !== view.file)) {
+            filesToProcess.filesView.add(view.file)
+          }
+          filesToProcess.filesViewGraphql.delete(file)
+          let logicFile = path.join(path.dirname(file), 'logic.js')
+          if (existsSync(logicFile)) {
+            filesToProcess.filesViewLogic.add(logicFile)
+          }
         } else if (isViewCustomFile(file)) {
           filesToProcess.filesViewCustom.delete(file)
         }
@@ -153,6 +173,11 @@ function processAddedOrChanged({ files, morpher, filesToProcess }) {
           filesToProcess.filesViewLogic.add(logicFile)
         }
 
+        let dataFile = path.join(path.dirname(file), 'data.graphql')
+        if (existsSync(dataFile)) {
+          filesToProcess.filesViewGraphql.add(dataFile)
+        }
+
         let parentFile = path.join(
           path.dirname(path.dirname(file)),
           'view.blocks'
@@ -165,6 +190,19 @@ function processAddedOrChanged({ files, morpher, filesToProcess }) {
           path.join(path.dirname(file), 'view.blocks')
         )
         filesToProcess.filesViewLogic.add(file)
+        let dataFile = path.join(path.dirname(file), 'data.graphql')
+        if (existsSync(dataFile)) {
+          filesToProcess.filesViewGraphql.add(dataFile)
+        }
+      } else if (isViewDataGraphqlFile(file)) {
+        filesToProcess.filesView.add(
+          path.join(path.dirname(file), 'view.blocks')
+        )
+        filesToProcess.filesViewGraphql.add(file)
+        let logicFile = path.join(path.dirname(file), 'logic.js')
+        if (existsSync(logicFile)) {
+          filesToProcess.filesViewLogic.add(logicFile)
+        }
       } else if (isViewCustomFile(file)) {
         filesToProcess.filesViewCustom.add(file)
       }
@@ -179,7 +217,7 @@ function processAddedOrChanged({ files, morpher, filesToProcess }) {
 }
 
 function processPointsOfUse({ view, morpher, filesToProcess }) {
-  let { filesView, filesViewLogic } = getPointsOfUse({
+  let { filesView, filesViewLogic, filesViewGraphql } = getPointsOfUse({
     view,
     viewsToFiles: morpher.viewsToFiles,
   })
@@ -189,5 +227,8 @@ function processPointsOfUse({ view, morpher, filesToProcess }) {
   }
   for (let file of filesViewLogic) {
     filesToProcess.filesViewLogic.add(file)
+  }
+  for (let file of filesViewGraphql) {
+    filesToProcess.filesViewGraphql.add(file)
   }
 }
