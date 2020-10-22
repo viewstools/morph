@@ -122,7 +122,9 @@ ${
       isUsingDataConfiguration ? ', ...configuration' : ''
     } })
 ${isUsingDataTransform ? '  let data = useDataTransform(props, rdata)' : ''}
-  useSetFlowToBasedOnData(props, data, error)
+  useSetFlowToBasedOnData({context: '${context}', data, error, viewPath: props.viewPath, pause: ${
+      isUsingDataConfiguration ? 'configuration.pause' : 'false'
+    }})
 
   return (
     <DataProvider

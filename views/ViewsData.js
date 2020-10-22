@@ -396,8 +396,14 @@ if (process.env.NODE_ENV === 'development') {
   }
 }
 
-export function useSetFlowToBasedOnData(props, data, error, pause = false) {
-  let setFlowTo = useSetFlowTo(props.viewPath)
+export function useSetFlowToBasedOnData({
+  context,
+  data,
+  error,
+  viewPath,
+  pause = false,
+}) {
+  let setFlowTo = useSetFlowTo(viewPath)
   useEffect(() => {
     let view = 'Content'
     if (error) {
@@ -406,13 +412,13 @@ export function useSetFlowToBasedOnData(props, data, error, pause = false) {
       view = 'No'
     } else if (!data) {
       view = 'Loading'
-    } else if (isEmpty(props.context, data)) {
+    } else if (isEmpty(context, data)) {
       view = 'Empty'
     }
 
     // TODO do we need No? I think we need it, even if it is used once only
     // otherwise we'll need to render any of the other states
-    setFlowTo(normalizePath(props.viewPath, view))
+    setFlowTo(normalizePath(viewPath, view))
   }, [data, error]) // eslint-disable-line
   // ignore setFlowTo and props.viewPath
 }
