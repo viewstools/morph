@@ -19,7 +19,7 @@ export default function morphAllViews({ appName, filesViewGraphql, src }) {
         },
       ]
 
-      if (path.basename(file) === 'query.graphql') {
+      if (path.basename(file) === 'data.graphql') {
         files.push({
           file: path.join(path.dirname(file), 'data.js'),
           content: makeDataJs({
@@ -81,8 +81,8 @@ async function makeDataJs({ file, viewName }) {
     let isUsingDataTransform = existsSync(
       path.join(path.dirname(file), 'useDataTransform.js')
     )
-    let isUsingDataVariables =
-      existsSync(path.join(path.dirname(file), 'useDataVariables.js')) &&
+    let isUsingDataConfiguration =
+      existsSync(path.join(path.dirname(file), 'useDataConfiguration.js')) &&
       definition.variableDefinitions.length > 0
     let useOperation =
       definition.operation === 'query' ? 'useQuery' : 'useSubscription'
@@ -102,20 +102,24 @@ ${
     : ''
 }
 ${
-  isUsingDataVariables
-    ? "import useDataVariables from './useDataVariables.js'"
+  isUsingDataConfiguration
+    ? "import useDataConfiguration from './useDataConfiguration.js'"
     : ''
 }
-import query from './query.graphql.js'
+import query from './data.graphql.js'
 import React from 'react'
 import ${importName} from './${importName.toLowerCase()}.js'
 
 export default function ${viewName}Data(props) {
-${isUsingDataVariables ? '  let variables = useDataVariables(props)' : ''}
+${
+  isUsingDataConfiguration
+    ? '  let configuration = useDataConfiguration(props)'
+    : ''
+}
   let [{ data${
     isUsingDataTransform ? ': rdata' : ''
   }, error }] = ${useOperation}({ query${
-      isUsingDataVariables ? ', variables' : ''
+      isUsingDataConfiguration ? ', ...configuration' : ''
     } })
 ${isUsingDataTransform ? '  let data = useDataTransform(props, rdata)' : ''}
   useSetFlowToBasedOnData(props, data, error)

@@ -19,7 +19,7 @@ export default async function processViewFiles({
       let view = viewsToFiles.has(file) ? viewsToFiles.get(file) : {}
       let logic = path.join(path.dirname(file), 'logic.js')
       logic = filesViewLogic.has(logic) && logic
-      let query = path.join(path.dirname(file), 'query.graphql')
+      let query = path.join(path.dirname(file), 'data.graphql')
       query = filesViewGraphql.has(query) && query
 
       let data = path.join(path.dirname(file), 'data.js')
