@@ -81,9 +81,12 @@ async function makeDataJs({ file, viewName }) {
     let isUsingDataTransform = existsSync(
       path.join(path.dirname(file), 'useDataTransform.js')
     )
-    let isUsingDataConfiguration =
-      existsSync(path.join(path.dirname(file), 'useDataConfiguration.js')) &&
-      definition.variableDefinitions.length > 0
+    let isUsingDataConfiguration = existsSync(
+      path.join(path.dirname(file), 'useDataConfiguration.js')
+    )
+    // TODO sometimes we want to send a configuration value such as context: {requestPolicy: 'cache-and-network'} or pause: true,
+    // even if there's no variable
+    // && definition.variableDefinitions.length > 0
     let useOperation =
       definition.operation === 'query' ? 'useQuery' : 'useSubscription'
     let field = definition.selectionSet.selections[0]
