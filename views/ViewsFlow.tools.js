@@ -3,153 +3,137 @@
 // improving the algorithms inside, etc, see this:
 // https://github.com/viewstools/morph/blob/master/ensure-flow.js
 
-import React, { useCallback, useContext, useEffect, useReducer } from 'react'
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useReducer,
+} from 'react'
 import ViewsTools from './ViewsTools.js'
 
-export let flowDefinition = new Map()
+export let flowDefinition = {}
 function getFlowDefinitionKey(key) {
   return key.replace(/\(.+?\)/g, '')
 }
-function isFlowKeyWithArguments(key) {
-  return key.endsWith(')')
-}
-function getFlowKeyParent(key) {
-  let bits = key.split('/')
-  bits.pop()
-  return bits.join('/')
-}
 function getFlowDefinition(key) {
-  return flowDefinition.get(getFlowDefinitionKey(key))
-}
-function getViewsRelativeToDefinition(key, views) {
-  return new Set([...views].map((id) => `${key}/${id}`))
+  return flowDefinition[getFlowDefinitionKey(key)]
 }
 
-let TOP_VIEW = '/App'
-
-function ensureFirstViewIsOn(key, flow) {
-  if (!flow.has(key)) return
-
-  let view = getFlowDefinition(key)
-  if (view.views.size === 0) return
-
-  let index = 0
-  let views = getViewsRelativeToDefinition(key, view.views)
-  let canAdd = intersection(flow, views).size === 0
-  for (let id of views) {
-    if ((canAdd && index === 0) || !view.isSeparate) {
-      flow.add(id)
-    }
-    index++
-    ensureFirstViewIsOn(id, flow)
-  }
+function getParentView(key) {
+  let parentBits = key.split('/')
+  let view = parentBits.pop()
+  let parent = parentBits.join('/')
+  return [parent, view]
 }
 
-function ensureParents(key, flow) {
-  let view = getFlowDefinition(key)
-  if (!view) {
-    console.error({ type: 'views/flow/missing-parent', id: key })
-    return
-  }
-  if (!view.parent) return
+function findSeparateParentAndView(key) {
+  if (!key || key === '/') return [null, null]
 
-  // TODO try to improve this too
-  // we can't use view.parent because it is static
-  let [, ...bits] = key.split('/')
-  bits.pop()
-  let path = ''
-  bits.forEach((item) => {
-    path = `${path}/${item}`
-    flow.add(path)
-  })
-  // flow.add(view.parent)
-  // ensureParents(view.parent, flow)
+  let [parent, view] = getParentView(key)
+  let parentFlowDefinitionKey = getFlowDefinitionKey(parent)
+  return parentFlowDefinitionKey in flowDefinition
+    ? [parent, view]
+    : findSeparateParentAndView(parent)
 }
 
-function getAllChildrenOf(key, children) {
-  if (!flowDefinition.has(key)) return
-
-  let view = getFlowDefinition(key)
-  let views = getViewsRelativeToDefinition(key, view.views)
-  for (let id of views) {
-    children.add(id)
-    getAllChildrenOf(id, children)
-  }
+function makeRemovedRegexAlternatives(keys) {
+  return keys.map((key) => `${key}$|${key}/|${key}\\(`).join('|')
 }
 
-function getNextFlow(key, flow) {
-  if (flow.has(key)) return flow
+function getNextFlowWithoutKeys(removed, flow) {
+  if (removed.length === 0) return flow
 
-  let next = new Set([key])
+  let removedRegex = new RegExp(`^(${makeRemovedRegexAlternatives(removed)})`)
 
-  ensureFirstViewIsOn(key, next)
-  ensureParents(key, next)
+  return Object.fromEntries(
+    Object.entries(flow).filter(([key]) => !removedRegex.test(key))
+  )
+}
 
-  let diffIn = difference(next, flow)
-  let diffOut = new Set()
+function getNextFlow(rkeys, rflow) {
+  let keys = Array.isArray(rkeys) ? rkeys : [rkeys]
+  if (keys.length === 0) return rflow
 
-  difference(flow, next).forEach((id) => {
-    let view = getFlowDefinition(id)
-    if (!view) {
-      console.debug({ type: 'views/flow/missing-view', id })
-      diffOut.add(id)
-      return
-    }
+  let flow = { ...rflow }
+  let removed = []
+  keys.forEach((key) => {
+    let [parent, view] = findSeparateParentAndView(key)
+    while (parent && view) {
+      let viewCurrent = flow[parent]
+      if (viewCurrent !== view) {
+        // TODO maybe use map [parent, view] and Object.fromEntries joining it
+        // with the keys that stay after removing them
+        flow[parent] = view
 
-    // (1) this is for the flow definition itself
-    if (flow.has(view.parent)) {
-      let parent = getFlowDefinition(view.parent)
-
-      if (intersection(parent.views, diffIn).size > 0) {
-        diffOut.add(id)
-        let children = new Set()
-        getAllChildrenOf(id, children)
-        children.forEach((cid) => diffOut.add(cid))
+        if (viewCurrent) {
+          removed.push(`${parent}/${viewCurrent}`)
+        }
       }
-    }
 
-    let viewParent = getFlowKeyParent(id)
-    if (flow.has(viewParent)) {
-      let parent = getFlowDefinition(viewParent)
-      // remove last bit of () from key if present and ending with it
-      let parentViews = getViewsRelativeToDefinition(viewParent, parent.views)
-      // TODO if view has ending arguments, we may want to remove views without
-      // the argument from the flow, eg /App/Todos/Todo(1) shouldn't have
-      // /App/Todos/Todo. This will impact (1). Tools may need them though, so
-      // let's explore it.
-      if (intersection(parentViews, diffIn).size > 0) {
-        diffOut.add(id)
-        let children = new Set()
-        getAllChildrenOf(id, children)
-        children.forEach((cid) => diffOut.add(cid))
-      }
+      ;[parent, view] = findSeparateParentAndView(parent)
     }
   })
 
-  let nextFlow = new Set([...difference(flow, diffOut), ...diffIn])
-  ensureFirstViewIsOn(TOP_VIEW, nextFlow)
-  return new Set([...nextFlow].sort())
+  return getNextFlowWithoutKeys(removed, flow)
 }
 
 let MAX_ACTIONS = 10000
 let SYNC = 'flow/SYNC'
 let SET = 'flow/SET'
-let UNSET = 'flow/UNSET'
+let SET_BUFFERED = 'flow/SET_BUFFERED'
+let FLOW_MAP_CHANGE = 'flow/FLOW_MAP_CHANGE'
 
-let Context = React.createContext([{ actions: [], flow: new Set() }, () => {}])
+let Context = React.createContext([{ actions: [], flow: {} }, () => {}])
 export function useFlowState() {
   return useContext(Context)[0]
 }
 export function useFlow() {
-  return useFlowState().flow
+  let state = useFlowState()
+
+  return useMemo(
+    () => ({
+      has: (key) => {
+        if (!key) return false
+
+        let [parent, view] = getParentView(key)
+        let value = state.flow[parent]
+        if (value === view) return true
+        if (typeof value === 'string') return false
+
+        let parentFlowDefinition = getFlowDefinition(parent)
+        return (
+          Array.isArray(parentFlowDefinition) &&
+          parentFlowDefinition[0] === view
+        )
+      },
+    }),
+    [state.flow]
+  )
 }
-export function useSetFlowTo(source) {
+
+let useSetFlowToBuffer = {}
+let useSetFlowToTimeout = null
+
+export function useSetFlowTo(source, buffer = false) {
   let [, dispatch] = useContext(Context)
 
   return useCallback((target, data = null) => {
-    dispatch({ type: SET, target, source, data })
+    if (buffer) {
+      useSetFlowToBuffer[source] = target
 
-    return () => dispatch({ type: UNSET, target, source })
+      clearTimeout(useSetFlowToTimeout)
+      useSetFlowToTimeout = setTimeout(() => {
+        useSetFlowToTimeout = null
+
+        let targets = Object.values(useSetFlowToBuffer)
+        useSetFlowToBuffer = {}
+
+        dispatch({ type: SET_BUFFERED, targets })
+      }, 25)
+    } else {
+      dispatch({ type: SET, target, source, data })
+    }
   }, []) // eslint-disable-line
   // ignore dispatch
 }
@@ -161,10 +145,14 @@ function getNextActions(state, action) {
 function reducer(state, action) {
   switch (action.type) {
     case SYNC: {
-      console.debug({ type: 'views/flow/sync', id: action.id })
+      console.debug({
+        type: 'views/flow/sync',
+        id: action.id,
+        flow: action.flow,
+      })
 
       return {
-        flow: new Set(action.flow),
+        flow: action.flow,
         actions: getNextActions(state, {
           target: action.id,
           source: action.id,
@@ -182,8 +170,8 @@ function reducer(state, action) {
           data: action.data,
         })
 
-        let definitionKey = getFlowDefinitionKey(action.target)
-        if (!flowDefinition.has(definitionKey)) {
+        let [definitionKey] = getParentView(getFlowDefinitionKey(action.target))
+        if (!flowDefinition[definitionKey]) {
           console.error({
             type: 'views/flow/invalid-view',
             target: action.target,
@@ -195,12 +183,19 @@ function reducer(state, action) {
         }
 
         if (ViewsTools.SYNC_ONE_WAY) {
-          return action.target.startsWith(ViewsTools.SYNC_ONE_WAY)
-            ? {
-                flow: getNextFlow(action.target, state.flow),
+          if (action.target.startsWith(ViewsTools.SYNC_ONE_WAY)) {
+            let flow = getNextFlow(action.target, state.flow)
+            if (flow === state.flow) {
+              return state
+            } else {
+              return {
+                flow,
                 actions: state.actions,
               }
-            : state
+            }
+          } else {
+            return state
+          }
         }
       }
 
@@ -219,32 +214,39 @@ function reducer(state, action) {
         return state
       }
 
-      return {
-        flow: getNextFlow(action.target, state.flow),
-        // TODO this might be too verbose for an analytics layer
-        actions: getNextActions(state, {
-          target: action.target,
-          source: action.source,
-          data: action.data,
-        }),
+      let flow = getNextFlow(action.target, state.flow)
+
+      if (flow === state.flow) {
+        return state
+      } else {
+        return {
+          flow,
+          // TODO this might be too verbose for an analytics layer
+          actions: getNextActions(state, {
+            target: action.target,
+            source: action.source,
+            data: action.data,
+          }),
+        }
       }
     }
 
-    case UNSET: {
-      // You can't unset a view otherwise
-      if (!isFlowKeyWithArguments(action.target)) return state
-
+    case SET_BUFFERED: {
       console.debug({
-        type: 'views/flow/unset',
-        target: action.target,
-        source: action.source,
+        type: 'views/flow/set-buffered',
+        targets: action.targets,
       })
 
       return {
-        flow: new Set(
-          [...state.flow].filter((id) => !id.startsWith(action.target))
-        ),
+        flow: getNextFlow(action.targets, state.flow),
         // TODO not sure if we need to do something else with this
+        actions: state.actions,
+      }
+    }
+
+    case FLOW_MAP_CHANGE: {
+      return {
+        flow: { ...state.flow },
         actions: state.actions,
       }
     }
@@ -257,7 +259,7 @@ function reducer(state, action) {
 
 export function ViewsFlow(props) {
   let context = useReducer(reducer, { actions: [], flow: props.initialState })
-  let [state] = context
+  let [state, dispatch] = context
 
   useEffect(() => {
     if (typeof props.onChange === 'function') {
@@ -271,10 +273,8 @@ export function ViewsFlow(props) {
       <ViewsTools
         flow={context}
         onFlowMapChange={(next) => {
-          flowDefinition.clear()
-          JSON.parse(next).forEach(([key, value]) => {
-            flowDefinition.set(key, { ...value, views: new Set(value.views) })
-          })
+          flowDefinition = next
+          dispatch({ type: FLOW_MAP_CHANGE })
         }}
       >
         {props.children}
@@ -284,17 +284,10 @@ export function ViewsFlow(props) {
 }
 
 ViewsFlow.defaultProps = {
-  initialState: new Set([TOP_VIEW]),
+  initialState: {},
 }
 
 export function normalizePath(viewPath, relativePath) {
   let url = new URL(`file://${viewPath}/${relativePath}`)
   return url.pathname
-}
-
-function intersection(a, b) {
-  return new Set([...a].filter((ai) => b.has(ai)))
-}
-function difference(a, b) {
-  return new Set([...a].filter((ai) => !b.has(ai)))
 }

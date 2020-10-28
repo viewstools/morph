@@ -41,9 +41,7 @@ export function enter(node, parent, state) {
     state.render.push(`${value} ? `)
   } else if (isView(node, state)) {
     node.onWhen = true
-    state.render.push(
-      `{flow.has(fromFlow.normalizePath(props.viewPath, '${node.name}')) ? `
-    )
+    state.render.push(`{flow.has(\`\${props.viewPath}/${node.name}\`) ? `)
   }
 }
 

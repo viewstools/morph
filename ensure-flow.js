@@ -4,22 +4,6 @@ import ensureFile from './ensure-file.js'
 import getViewRelativeToView from './get-view-relative-to-view.js'
 import path from 'path'
 
-function ensureFirstViewIsOn(flow, key, views) {
-  if (!views.has(key)) return
-
-  let view = flow.get(key)
-  if (view && view.views.size > 0) {
-    let index = 0
-    for (let id of view.views) {
-      if (index === 0 || !view.isSeparate) {
-        views.add(id)
-      }
-      index++
-      ensureFirstViewIsOn(flow, id, views)
-    }
-  }
-}
-
 function maybeReactNative(as, content) {
   return as === 'react-native'
     ? content.replace(
@@ -29,62 +13,17 @@ function maybeReactNative(as, content) {
     : content
 }
 
-let TOP_VIEW = '/App'
 async function makeFlow({ as, viewsById, viewsToFiles }) {
-  let flowMap = new Map()
-  let flowDefinition = []
-
-  for (let view of viewsToFiles.values()) {
-    if (!view || view.custom || !view.parsed.view.isView) continue
-
-    let states = []
-    for (let id of view.parsed.view.views) {
-      let viewInView = getViewRelativeToView({
-        id,
-        view,
-        viewsById,
-        viewsToFiles,
-      })
-
-      if (viewInView && !viewInView.custom && viewInView.parsed.view.isView) {
-        states.push(id)
-      }
-    }
-
-    let isSeparate = view.parsed.view.flow === 'separate'
-    let parent = view.parsed.view.viewPathParent
-
-    flowDefinition.push(
-      `['${view.parsed.view.viewPath}', { isSeparate: ${isSeparate}, parent: '${
-        parent === '/' ? '' : parent
-      }',
-  views: new Set(${states.length > 0 ? JSON.stringify(states) : ''}) }]`
-    )
-    flowMap.set(view.parsed.view.viewPath, {
-      parent,
-      isSeparate,
-      views: new Set(states.map((id) => `${view.parsed.view.viewPath}/${id}`)),
-    })
-  }
-
-  let initialState = new Set([TOP_VIEW])
-  ensureFirstViewIsOn(flowMap, TOP_VIEW, initialState)
+  let flowJson = makeFlowJson({ viewsById, viewsToFiles })
 
   let content = await fs.readFile(
     path.join(__dirname, 'views', 'ViewsFlow.js'),
     'utf8'
   )
-  return maybeReactNative(as, content)
-    .replace(
-      'export let flowDefinition = new Map()',
-      `export let flowDefinition = new Map([
-${flowDefinition.join(',\n')}
-])`
-    )
-    .replace(
-      'initialState: new Set()',
-      `initialState: new Set(${JSON.stringify([...initialState], null, '  ')})`
-    )
+  return maybeReactNative(as, content).replace(
+    'export let flowDefinition = {}',
+    `export let flowDefinition = ${flowJson.flowDefinitionString}`
+  )
 }
 
 async function makeFlowTools({ as }) {
@@ -97,7 +36,7 @@ async function makeFlowTools({ as }) {
 
 let prevHash = null
 function makeFlowJson({ viewsById, viewsToFiles }) {
-  let flowMap = new Map()
+  let flowDefinition = {}
 
   for (let view of viewsToFiles.values()) {
     if (!view || view.custom || !view.parsed.view.isView) continue
@@ -116,26 +55,21 @@ function makeFlowJson({ viewsById, viewsToFiles }) {
       }
     }
 
-    let isSeparate = view.parsed.view.flow === 'separate'
-    let parent = view.parsed.view.viewPathParent
-    if (parent === '/') {
-      parent = ''
-    }
+    if (view.parsed.view.flow !== 'separate') continue
 
-    flowMap.set(view.parsed.view.viewPath, {
-      parent,
-      isSeparate,
-      views: states,
-    })
+    flowDefinition[view.parsed.view.viewPath] = states
   }
 
-  let flowMapEntries = JSON.stringify(Array.from(flowMap.entries()))
-  let hash = crypto.createHash('sha1').update(flowMapEntries).digest('hex')
+  let flowDefinitionString = JSON.stringify(flowDefinition)
+  let hash = crypto
+    .createHash('sha1')
+    .update(flowDefinitionString)
+    .digest('hex')
   let changed = prevHash !== hash
   if (changed) {
     prevHash = hash
   }
-  return { hash, changed, flow: flowMapEntries }
+  return { hash, changed, flowDefinition, flowDefinitionString }
 }
 
 export default function ensureFlow({
@@ -160,7 +94,7 @@ export default function ensureFlow({
       flowJson.changed &&
         ensureFile({
           file: path.join(src, 'Logic', 'ViewsFlow.json'),
-          content: flowJson.flow,
+          content: flowJson.flowDefinitionString,
         }),
     ]
   } else {

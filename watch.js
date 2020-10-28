@@ -43,7 +43,15 @@ export default async function watch(options) {
   }
 
   if (options.verbose) {
-    console.log(chalk.underline(`Views Tools morpher v${pkg.version}`))
+    console.log(
+      chalk.underline(
+        `Views Tools morpher v${
+          path.dirname(__dirname).endsWith('node_modules')
+            ? pkg.version
+            : 'DEVELOPMENT'
+        }`
+      )
+    )
 
     console.log(
       `\nWill morph files at "${chalk.green(options.src)}" as "${chalk.green(

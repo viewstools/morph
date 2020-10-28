@@ -16,7 +16,6 @@ import React, {
   useMemo,
   useReducer,
   useRef,
-  useState,
 } from 'react'
 
 let SET = 'data/SET'
@@ -205,19 +204,44 @@ export function useData({
     DataContexts[context]
   )
   let touched = useRef(false)
-  let [error, setError] = useState(false)
 
   let [value, isValidInitial, isValid] = useMemo(() => {
     let rawValue = path ? get(data, path) : data
 
     let value = rawValue
     if (path && formatIn) {
-      value = fromFormat[formatIn](rawValue, data)
+      try {
+        value = fromFormat[formatIn](rawValue, data)
+      } catch (error) {
+        if (process.env.NODE_ENV === 'development') {
+          console.error({
+            type: 'views/data/runtime-formatIn',
+            viewPath,
+            context,
+            formatIn,
+            message: `"${formatIn}" function failed to run on Data/format.js.`,
+            error,
+          })
+        }
+      }
     }
 
     let isValidInitial = true
     if (validate) {
-      isValidInitial = fromValidate[validate](rawValue, value, data)
+      try {
+        isValidInitial = fromValidate[validate](rawValue, value, data)
+      } catch (error) {
+        if (process.env.NODE_ENV === 'development') {
+          console.error({
+            type: 'views/data/runtime-validate',
+            viewPath,
+            context,
+            validate,
+            message: `"${validate}" function failed to run on Data/validate.js.`,
+            error,
+          })
+        }
+      }
     }
     let isValid =
       touched.current || (validateRequired && data._forceRequired)
@@ -244,8 +268,16 @@ export function useData({
             try {
               valueSet = fromFormat[formatOut](value, data)
             } catch (error) {
-              setError(error)
-              return
+              if (process.env.NODE_ENV === 'development') {
+                console.error({
+                  type: 'views/data/runtime-formatOut',
+                  viewPath,
+                  context,
+                  formatOut,
+                  message: `"${formatIn}" function failed to run on Data/format.js.`,
+                  error,
+                })
+              }
             }
           }
 
@@ -379,10 +411,6 @@ export function useData({
     }
   }
 
-  if (error) {
-    throw error
-  }
-
   return memo
 }
 
@@ -403,7 +431,7 @@ export function useSetFlowToBasedOnData({
   viewPath,
   pause = false,
 }) {
-  let setFlowTo = useSetFlowTo(viewPath)
+  let setFlowTo = useSetFlowTo(viewPath, true)
   useEffect(() => {
     let view = 'Content'
     if (error) {
