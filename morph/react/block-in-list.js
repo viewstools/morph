@@ -13,7 +13,7 @@ export function enter(node, parent, state) {
   let pass = getProp(parent, 'pass')
   if (state.data && DATA_VALUE.test(from.value)) {
     state.render.push(
-      ` item={item} viewPath={\`$\{props.viewPath}($\{item.id || index})\`}`
+      ` item={item} viewPath={\`$\{props.viewPath}/${node.name}($\{item.id || index})\`}`
     )
     node.skipViewPath = true
   } else if (pass) {
