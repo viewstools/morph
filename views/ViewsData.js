@@ -249,7 +249,8 @@ export function useData({
         : true
 
     return [value, isValidInitial, isValid]
-  }, [data, formatIn, path, validate, validateRequired])
+  }, [data, formatIn, path, validate, validateRequired]) // eslint-disable-line
+  // ignore context and viewPath
 
   let memo = useMemo(
     () => {

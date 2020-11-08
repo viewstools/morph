@@ -46,7 +46,7 @@ export default async function watch(options) {
     console.log(
       chalk.underline(
         `Views Tools morpher v${
-          path.dirname(__dirname).endsWith('node_modules')
+          path.dirname(__dirname).endsWith('bin.js')
             ? pkg.version
             : 'DEVELOPMENT'
         }`
