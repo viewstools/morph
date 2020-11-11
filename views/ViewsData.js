@@ -354,6 +354,9 @@ export function useData({
           }
           return obj[key]
         },
+        apply() {
+          return getProxyMock({}, `${name}`, wrap)
+        },
       })
     }
 
