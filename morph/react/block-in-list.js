@@ -7,7 +7,7 @@ export function enter(node, parent, state) {
     ` index={index} indexReverse={list.length - index} isFirst={index === 0} isLast={index === list.length - 1}`
   )
 
-  state.render.push(` item={item}`)
+  state.render.push(` {...item} item={item}`)
 
   if (state.viewPath) {
     state.render.push(
