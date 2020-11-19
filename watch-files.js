@@ -5,6 +5,7 @@ import {
   isViewFile,
   isViewLogicFile,
   isViewDataGraphqlFile,
+  isViewGraphqlFile,
 } from './match-files.js'
 import { debounce } from 'debounce'
 import { promises as fs, existsSync } from 'fs'
@@ -147,6 +148,11 @@ async function processUnlinked({ files, morpher, filesToProcess }) {
           }
         } else if (isViewCustomFile(file)) {
           filesToProcess.filesViewCustom.delete(file)
+        } else if (isViewGraphqlFile(file)) {
+          filesToProcess.filesViewGraphql.delete(file)
+          try {
+            await fs.unlink(`${file}.js`)
+          } catch (error) {}
         }
       }
     })
@@ -205,6 +211,8 @@ function processAddedOrChanged({ files, morpher, filesToProcess }) {
         }
       } else if (isViewCustomFile(file)) {
         filesToProcess.filesViewCustom.add(file)
+      } else if (isViewGraphqlFile(file)) {
+        filesToProcess.filesViewGraphql.add(file)
       }
 
       let viewFile = path.join(path.dirname(file), 'view.blocks')
