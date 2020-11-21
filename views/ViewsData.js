@@ -89,7 +89,25 @@ export function DataProvider(props) {
     }
   }
 
-  let [state, dispatch] = useReducer(reducer, _value)
+  let [_state, dispatch] = useReducer(reducer, _value)
+  let [state, setState] = useReducer((_, s) => s, _value)
+  let listeners = useRef([])
+  function registerListener(listener) {
+    listeners.current.push(listener)
+    return () => {
+      listeners.current = listeners.current.filter((l) => l !== listener)
+    }
+  }
+
+  useEffect(() => {
+    if (state === _state) return
+
+    listeners.current.forEach((listener) => {
+      listener(_state, state)
+    })
+    setState(_state)
+  }, [_state, state])
+
   // track a reference of state so that any call to onSubmit gets the latest
   // state even if it changed through the execution
   let stateRef = useRef(state)
@@ -148,10 +166,10 @@ export function DataProvider(props) {
     dispatch({ type: FORCE_REQUIRED })
   }
 
-  let value = useMemo(() => [state, dispatch, _onSubmit, _value], [
-    state,
-    _value,
-  ])
+  let value = useMemo(
+    () => [state, dispatch, _onSubmit, _value, registerListener],
+    [state, _value]
+  )
 
   // keep track of props.onChange outside of the following effect to
   // prevent loops. Making the function useCallback didn't work
@@ -189,6 +207,19 @@ DataProvider.defaultProps = {
   context: 'default',
   onChange: () => {},
   onSubmit: () => {},
+}
+
+export function useDataListener({
+  // path = null,
+  context = 'default',
+  // viewPath = null,
+  listener,
+} = {}) {
+  let [, , , , registerListener] = useContext(DataContexts[context])
+
+  return useEffect(() => {
+    return registerListener(listener)
+  }, [])
 }
 
 export function useData({
