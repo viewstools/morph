@@ -94,6 +94,7 @@ export function DataProvider(props) {
   let listeners = useRef([])
   function registerListener(listener) {
     listeners.current.push(listener)
+    listener(_state, state)
     return () => {
       listeners.current = listeners.current.filter((l) => l !== listener)
     }
