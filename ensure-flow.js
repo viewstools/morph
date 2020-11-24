@@ -27,7 +27,7 @@ async function makeFlow({ as, viewsById, viewsToFiles }) {
 }
 
 async function makeFlowTools({ as }) {
-  let content = fs.readFile(
+  let content = await fs.readFile(
     path.join(__dirname, 'views', 'ViewsFlow.tools.js'),
     'utf8'
   )
