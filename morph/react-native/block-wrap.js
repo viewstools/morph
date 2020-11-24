@@ -26,7 +26,7 @@ export let enter = (node, parent, state) => {
       state.use('ViewsUseFlow')
       state.setFlowTo = true
 
-      onPress = `{() => setFlowTo('${setFlowTo}')}`
+      onPress = `{() => setFlowTo(${setFlowTo})}`
     }
 
     let key = getProp(node, 'key')
