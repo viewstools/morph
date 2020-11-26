@@ -1,11 +1,17 @@
 import { getProp } from '../utils.js'
 import safe from '../react/safe.js'
 
+let DATA_VALUE = /props\.value/
+
 export let enter = (node, parent, state) => {
   if (node.goTo) {
-    let goTo = getProp(node, 'goTo')
+    let { value } = getProp(node, 'goTo')
+    if (state.data && DATA_VALUE.test(value)) {
+      value = value.replace('props', 'data')
+    }
+
     state.render.push(
-      ` href=${safe(goTo.value)} rel='noopener noreferrer' target='_blank'`
+      ` href=${safe(value)} rel='noopener noreferrer' target='_blank'`
     )
   }
 }
