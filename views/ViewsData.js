@@ -463,6 +463,7 @@ if (process.env.NODE_ENV === 'development') {
 export function useSetFlowToBasedOnData({
   context,
   data,
+  fetching,
   error,
   viewPath,
   pause = false,
@@ -474,7 +475,7 @@ export function useSetFlowToBasedOnData({
       view = 'Error'
     } else if (pause && !data) {
       view = 'No'
-    } else if (!data) {
+    } else if (fetching) {
       view = 'Loading'
     } else if (isEmpty(context, data)) {
       view = 'Empty'

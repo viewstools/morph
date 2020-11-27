@@ -89,6 +89,7 @@ async function makeDataJs({ file, viewName }) {
     // && definition.variableDefinitions.length > 0
     let useOperation =
       definition.operation === 'query' ? 'useQuery' : 'useSubscription'
+    let isQueryOperation = definition.operation === 'query'
     let field = definition.selectionSet.selections[0]
     let context = field.alias ? field.alias.value : field.name.value
 
@@ -119,13 +120,15 @@ ${
     ? '  let configuration = useDataConfiguration(props)'
     : ''
 }
-  let [{ data${
-    isUsingDataTransform ? ': rdata' : ''
-  }, error }] = ${useOperation}({ query${
+  let [{ data${isUsingDataTransform ? ': rdata' : ''}, ${
+      isQueryOperation ? 'fetching, ' : ''
+    }error }] = ${useOperation}({ query${
       isUsingDataConfiguration ? ', ...configuration' : ''
     } })
 ${isUsingDataTransform ? '  let data = useDataTransform(props, rdata)' : ''}
-  useSetFlowToBasedOnData({context: '${context}', data, error, viewPath: props.viewPath, pause: ${
+  useSetFlowToBasedOnData({context: '${context}', data, ${
+      isQueryOperation ? 'fetching' : 'fetching: !data'
+    }, error, viewPath: props.viewPath, pause: ${
       isUsingDataConfiguration ? 'configuration.pause' : 'false'
     }})
 
