@@ -16,11 +16,11 @@ export async function ensureFontsDirectory(src) {
   await ensureDir(path.join(src, 'DesignSystem', 'Fonts'))
 }
 
-export let getFontId = file => path.basename(file, path.extname(file))
+export let getFontId = (file) => path.basename(file, path.extname(file))
 
 let fontsOrder = ['eot', 'woff2', 'woff', 'ttf', 'svg', 'otf']
 
-let sortFonts = fonts => {
+let sortFonts = (fonts) => {
   return new Set(
     sort(
       [...fonts],
@@ -48,7 +48,7 @@ export function morphAllFonts({
   let fontsDirectory = path.join(src, 'DesignSystem', 'Fonts')
   let fontsInUse = new Set()
 
-  let mapCustomFont = file => ({
+  let mapCustomFont = (file) => ({
     type: FONT_TYPES[path.extname(file)],
     file: file.replace(fontsDirectory, '.'),
   })
@@ -58,12 +58,12 @@ export function morphAllFonts({
 
     if (view.custom) continue
 
-    view.parsed.fonts.forEach(font => {
+    view.parsed.fonts.forEach((font) => {
       fontsInUse.add(font.id)
     })
   }
 
-  return [...fontsInUse].map(font => {
+  return [...fontsInUse].map((font) => {
     let [family, weight, style = 'normal'] = font.split('-')
 
     let customFontSources = []
@@ -100,10 +100,11 @@ let FONT_TYPES = {
   '.woff2': 'woff2',
 }
 
-export let makeGetFontImport = src => (font, view) =>
+export let makeGetFontImport = (src) => (font, view) =>
   `import "${relativise(
     view.file,
-    path.join(src, 'DesignSystem', 'Fonts', `${font}.js`)
+    path.join(src, 'DesignSystem', 'Fonts', `${font}.js`),
+    src
   )}"`
 
 // let isFont = f => Object.keys(FONT_TYPES).includes(path.extname(f))
