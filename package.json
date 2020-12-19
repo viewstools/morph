@@ -1,6 +1,6 @@
 {
   "name": "@viewstools/morph",
-  "version": "23.28.0",
+  "version": "23.28.1",
   "description": "Views language morpher",
   "main": "bin.js",
   "bin": {
@@ -71,6 +71,7 @@
     "react-query": "^0.3.24",
     "read-pkg-up": "^7.0.1",
     "reconnecting-websocket": "^4.4.0",
+    "slash": "^3.0.0",
     "source-map-support": "^0.5.12",
     "to-camel-case": "^1.0.0",
     "to-pascal-case": "^1.0.0",

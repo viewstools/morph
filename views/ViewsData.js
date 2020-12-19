@@ -169,8 +169,8 @@ export function DataProvider(props) {
 
   let value = useMemo(
     () => [state, dispatch, _onSubmit, _value, registerListener],
-    [state, _value]
-  )
+    [state, _value] // eslint-disable-line
+  ) // ignore registerListener
 
   // keep track of props.onChange outside of the following effect to
   // prevent loops. Making the function useCallback didn't work
@@ -220,7 +220,7 @@ export function useDataListener({
 
   return useEffect(() => {
     return registerListener(listener)
-  }, [])
+  }, []) // eslint-disable-line
 }
 
 export function useData({

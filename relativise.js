@@ -1,7 +1,12 @@
 import path from 'path'
+import slash from 'slash'
 
-export default function relativise(from, to, src) {
-  let r = path.relative(from, to).replace(/\\/g, '/')
+export default function relativise(rfrom, rto, rsrc = '') {
+  let src = slash(rsrc)
+  let from = slash(rfrom)
+  let to = slash(rto)
+
+  let r = slash(path.relative(from, to))
   let p = r.substr(r.startsWith('../..') ? 3 : 1)
 
   if (p.startsWith('..')) {
