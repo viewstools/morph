@@ -261,7 +261,7 @@ export function useData({
     let isValidInitial = true
     if (validate) {
       try {
-        isValidInitial = fromValidate[validate](rawValue, value, data)
+        isValidInitial = !!fromValidate[validate](rawValue, value, data)
       } catch (error) {
         if (process.env.NODE_ENV === 'development') {
           console.error({
