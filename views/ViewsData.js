@@ -289,7 +289,7 @@ export function useData({
       if (!data) return {}
 
       function onChange(value, changePath = path) {
-        touched.current = !!value
+        touched.current = true
 
         if (typeof value === 'function') {
           dispatch({ type: SET_FN, fn: value })
