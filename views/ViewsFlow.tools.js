@@ -170,13 +170,19 @@ function reducer(state, action) {
           data: action.data,
         })
 
-        let [definitionKey] = getParentView(getFlowDefinitionKey(action.target))
-        if (!flowDefinition[definitionKey]) {
+        let [definitionKey, definitionView] = getParentView(
+          getFlowDefinitionKey(action.target)
+        )
+        if (
+          !flowDefinition[definitionKey] ||
+          !flowDefinition[definitionKey].includes(definitionView)
+        ) {
           console.error({
             type: 'views/flow/invalid-view',
             target: action.target,
             source: action.source,
             definitionKey,
+            definitionView,
             flowDefinition,
           })
           return state
@@ -236,6 +242,36 @@ function reducer(state, action) {
         type: 'views/flow/set-buffered',
         targets: action.targets,
       })
+
+      let invalidTargets = action.targets
+        .map((target) => {
+          let [definitionKey, definitionView] = getParentView(
+            getFlowDefinitionKey(target)
+          )
+          if (
+            !flowDefinition[definitionKey] ||
+            !flowDefinition[definitionKey].includes(definitionView)
+          ) {
+            return {
+              target,
+              definitionKey,
+              definitionView,
+            }
+          }
+
+          return false
+        })
+        .filter(Boolean)
+
+      if (invalidTargets.length > 0) {
+        console.error({
+          type: 'views/flow/invalid-view',
+          invalidTargets,
+          flowDefinition,
+          source: action.source,
+        })
+        return state
+      }
 
       return {
         flow: getNextFlow(action.targets, state.flow),
