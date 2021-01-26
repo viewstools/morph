@@ -393,7 +393,7 @@ export function useData({
     }
 
     if (!(context in DataContexts)) {
-      console.error({
+      console.log({
         type: 'views/data/missing-data-provider',
         viewPath,
         context,
@@ -403,7 +403,7 @@ export function useData({
     }
 
     if (!data) {
-      console.error({
+      console.log({
         type: 'views/data/missing-data-for-provider',
         viewPath,
         context,
@@ -414,7 +414,7 @@ export function useData({
     }
 
     if (formatIn && !(formatIn in fromFormat)) {
-      console.error({
+      console.log({
         type: 'views/data/invalid-formatIn',
         viewPath,
         context,
@@ -425,7 +425,7 @@ export function useData({
     }
 
     if (formatOut && !(formatOut in fromFormat)) {
-      console.error({
+      console.log({
         type: 'views/data/invalid-formatOut',
         viewPath,
         context,
@@ -436,7 +436,7 @@ export function useData({
     }
 
     if (validate && !(validate in fromValidate)) {
-      console.error({
+      console.log({
         type: 'views/data/invalid-validate',
         viewPath,
         context,
