@@ -5,7 +5,7 @@ export let enter = (node, parent, state) => {
   if (parent) {
     value = `"${state.name}.${node.testId}"`
   } else {
-    value = `{\`\${props['${state.testIdKey}'] || '${node.testId}'}\`}`
+    value = `{\`${state.testIdKeyAsProp} || '${node.testId}'}\`}`
   }
 
   state.render.push(` ${state.testIdKey}=${value}`)

@@ -1,8 +1,10 @@
 import { getScopedName } from '../utils.js'
 import getUnit from '../get-unit.js'
+import getExpandedProps from './get-expanded-props.js'
+import getUseIsHovered from './get-use-is-hovered.js'
 
 export default function getBody({ state, name }) {
-  let render = state.render.join('\n')
+  let render = state.render.join('\n').replace(/props\./g, '')
 
   let flow = []
   if (
@@ -12,13 +14,13 @@ export default function getBody({ state, name }) {
     flow.push(`let flow = fromFlow.useFlow()`)
   }
   if (state.setFlowTo) {
-    flow.push(`let setFlowTo = fromFlow.useSetFlowTo(props.viewPath)`)
+    flow.push(`let setFlowTo = fromFlow.useSetFlowTo(viewPath)`)
   }
 
   let data = []
   if (state.data) {
     data.push(
-      `let data = fromData.useData({ viewPath: props.viewPath, path: '${state.data.path}', `
+      `let data = fromData.useData({ viewPath, path: '${state.data.path}', `
     )
     maybeDataContext(state.data, data)
     maybeDataFormat(state.dataFormat, data)
@@ -26,25 +28,22 @@ export default function getBody({ state, name }) {
     data.push('})')
   }
 
-  let animated = getAnimated({ state, name })
+  let animated = getAnimated({ state })
+  let expandedProps = getExpandedProps({ state })
 
   if (state.hasRefs) {
     return `export default class ${name} extends React.Component {
   render() {
-    let { props } = this
+    let { props: ${expandedProps} } = this
     return (${render})
   }
 }`
   } else {
     let ret = render ? `(${render})` : null
 
-    return `export default function ${name}(props) {
+    return `export default function ${name}(${expandedProps}) {
     ${state.useIsBefore ? 'let isBefore = useIsBefore()' : ''}
-    ${
-      state.useIsHovered
-        ? 'let [isHovered, isSelectedHovered, isHoveredBind] = useIsHovered(props)'
-        : ''
-    }
+    ${state.useIsHovered ? getUseIsHovered({ state }) : ''}
     ${state.useIsMedia ? 'let isMedia = useIsMedia()' : ''}
     ${flow.join('\n')}
     ${data.join('\n')}

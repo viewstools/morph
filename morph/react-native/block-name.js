@@ -17,6 +17,7 @@ export function enter(node, parent, state) {
     state.render.push(
       `{typeof props.children === 'function'? props.children({ isSelected: props.isSelected`
     )
+    state.useIsSelected = true
     let useIsHovered = !!getActionableParent(node)
     if (useIsHovered) {
       state.useIsHovered = true

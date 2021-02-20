@@ -1,5 +1,4 @@
 import getBody from './get-body.js'
-import getDefaultProps from './get-default-props.js'
 import getDependencies from './get-dependencies.js'
 
 export default ({ getImport, getStyles, name, state }) => {
@@ -11,6 +10,5 @@ ${getDependencies(state, getImport)}
 
 ${getStyles(state, name)}
 
-${getBody({ state, name })}
-${getDefaultProps({ state, name })}`
+${getBody({ state, name })}`
 }

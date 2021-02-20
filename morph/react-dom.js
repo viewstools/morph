@@ -65,7 +65,9 @@ export default ({
     usedBlockNames: { [finalName]: 1, AutoSizer: 1, Column: 1, Table: 1 },
     uses: [],
     testIdKey: 'data-testid',
+    testIdKeyAsProp: 'dataTestid',
     viewPathKey: 'data-view-path',
+    viewPathKeyAsProp: 'dataViewPath',
     testIds: {},
     tools,
     use(block, isLazy = false) {
