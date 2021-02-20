@@ -91,8 +91,13 @@ function getAnimated({ state }) {
       if (!state.isReactNative && curve !== 'spring') return
 
       let spring = ['{', '"config": {']
+      let delay = null
       Object.entries(configValues).forEach(([k, v]) => {
-        spring.push(`${k}: ${JSON.stringify(v)},`)
+        if (k === 'delay') {
+          delay = v
+        } else {
+          spring.push(`${k}: ${JSON.stringify(v)},`)
+        }
       })
 
       if (curve !== 'spring' && curve !== 'linear') {
@@ -100,17 +105,22 @@ function getAnimated({ state }) {
       }
       spring.push('},')
 
+      if (delay) {
+        spring.push(`"delay": ${delay},`)
+      }
+
       let toValue = []
       let fromValue = []
       Object.values(item.props).forEach((prop) => {
         prop.scopes.reverse()
 
+        let shouldIncludeUnit =
+          state.morpher === 'react-native'
+            ? prop.name.startsWith('rotate')
+            : true
         let unit = getUnit(
-          {
-            name: prop.name,
-            value: prop.value,
-          },
-          state.morpher === 'react-native' && prop.name.startsWith('rotate')
+          { name: prop.name, value: prop.value },
+          shouldIncludeUnit
         )
         let propValue = unit
           ? typeof prop.value === 'string' && prop.value.includes(unit)
@@ -127,12 +137,10 @@ function getAnimated({ state }) {
           })
 
           let unit = getUnit(
-            {
-              name: prop.name,
-              value: scope.value,
-            },
-            state.morpher === 'react-native' && prop.name.startsWith('rotate')
+            { name: prop.name, value: scope.value },
+            shouldIncludeUnit
           )
+
           let value = unit
             ? typeof scope.value === 'string' && scope.value.includes(unit)
               ? scope.value
@@ -143,10 +151,20 @@ function getAnimated({ state }) {
         }, JSON.stringify(propValue))
 
         toValue.push(`${JSON.stringify(prop.name)}: ${value}`)
+
+        let fromValueProp = prop.scopes[0].value
+        let fromValuePropUnit = getUnit(
+          { name: prop.name, value: fromValueProp },
+          shouldIncludeUnit
+        )
+        fromValueProp = fromValuePropUnit
+          ? typeof fromValueProp === 'string' &&
+            fromValueProp.includes(fromValuePropUnit)
+            ? fromValueProp
+            : `${fromValueProp}${unit}`
+          : fromValueProp
         fromValue.push(
-          `${JSON.stringify(prop.name)}: ${JSON.stringify(
-            prop.scopes[0].value
-          )}`
+          `${JSON.stringify(prop.name)}: ${JSON.stringify(fromValueProp)}`
         )
       })
 
