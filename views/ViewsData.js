@@ -64,7 +64,7 @@ let DataContexts = {
 export function DataProvider(props) {
   if (process.env.NODE_ENV === 'development') {
     if (!props.context) {
-      console.error({
+      log({
         type: 'views/data/missing-context-value',
         viewPath: props.viewPath,
         message: `You're missing the context value in DataProvider. Eg: <DataProvider context="namespace" value={value}>. You're using the default one now instead.`,
@@ -246,7 +246,7 @@ export function useData({
         value = fromFormat[formatIn](rawValue, data)
       } catch (error) {
         if (process.env.NODE_ENV === 'development') {
-          console.error({
+          log({
             type: 'views/data/runtime-formatIn',
             viewPath,
             context,
@@ -264,7 +264,7 @@ export function useData({
         isValidInitial = !!fromValidate[validate](rawValue, value, data)
       } catch (error) {
         if (process.env.NODE_ENV === 'development') {
-          console.error({
+          log({
             type: 'views/data/runtime-validate',
             viewPath,
             context,
@@ -302,7 +302,7 @@ export function useData({
               valueSet = fromFormat[formatOut](value, data)
             } catch (error) {
               if (process.env.NODE_ENV === 'development') {
-                console.error({
+                log({
                   type: 'views/data/runtime-formatOut',
                   viewPath,
                   context,
@@ -350,7 +350,13 @@ export function useData({
 
   if (process.env.NODE_ENV === 'development') {
     // source: https://github.com/TheWWWorm/proxy-mock/blob/master/index.js
-    function getProxyMock(specifics = {}, name = 'proxyMock', wrap) {
+    function getProxyMock(
+      specifics = {
+        value: 'proxyString',
+      },
+      name = 'proxyMock',
+      wrap
+    ) {
       function _target() {
         getProxyMock()
       }
@@ -372,6 +378,9 @@ export function useData({
       return new Proxy(target, {
         get(obj, key) {
           key = key.toString()
+          if (key === 'text') {
+            return 'proxyString'
+          }
           if (specifics.hasOwnProperty(key)) {
             return specifics[key]
           }
@@ -393,7 +402,7 @@ export function useData({
     }
 
     if (!(context in DataContexts)) {
-      console.log({
+      log({
         type: 'views/data/missing-data-provider',
         viewPath,
         context,
@@ -403,7 +412,7 @@ export function useData({
     }
 
     if (!data) {
-      console.log({
+      log({
         type: 'views/data/missing-data-for-provider',
         viewPath,
         context,
@@ -414,7 +423,7 @@ export function useData({
     }
 
     if (formatIn && !(formatIn in fromFormat)) {
-      console.log({
+      log({
         type: 'views/data/invalid-formatIn',
         viewPath,
         context,
@@ -425,7 +434,7 @@ export function useData({
     }
 
     if (formatOut && !(formatOut in fromFormat)) {
-      console.log({
+      log({
         type: 'views/data/invalid-formatOut',
         viewPath,
         context,
@@ -436,7 +445,7 @@ export function useData({
     }
 
     if (validate && !(validate in fromValidate)) {
-      console.log({
+      log({
         type: 'views/data/invalid-validate',
         viewPath,
         context,
@@ -492,4 +501,20 @@ function isEmpty(context, data) {
   if (!data) return true
   let value = data[context]
   return Array.isArray(value) ? value.length === 0 : !value
+}
+
+let logQueue = []
+let logTimeout = null
+function log(stuff) {
+  logQueue.push(stuff)
+  clearTimeout(logTimeout)
+  logTimeout = setTimeout(() => {
+    if (logQueue.length > 0) {
+      console.log({
+        type: 'views/data',
+        warnings: logQueue,
+      })
+      logQueue = []
+    }
+  }, 500)
 }
