@@ -43,10 +43,22 @@ export default function getExpandedProps({ state }) {
     slots.push('isHovered')
   }
 
+  let testId = ''
+  if (state.testIdKey !== state.viewPathKey) {
+    testId =
+      state.testIdKey === state.testIdKeyAsProp
+        ? `\n  ${state.testIdKeyAsProp},`
+        : `\n  '${state.testIdKey}': ${state.testIdKeyAsProp},`
+  }
+
+  let viewPath =
+    state.viewPathKey === state.viewPathKeyAsProp
+      ? `${state.viewPathKeyAsProp},`
+      : `'${state.viewPathKey}': ${state.viewPathKeyAsProp},`
+
   return `{
-  children,
-  '${state.testIdKey}': ${state.testIdKeyAsProp},
-  '${state.viewPathKey}': ${state.viewPathKeyAsProp},
+  children,${testId}
+  ${viewPath}
   ${slots.join(',\n')}
 }`
 }
