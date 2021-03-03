@@ -533,3 +533,36 @@ function log(stuff) {
     }
   }, 500)
 }
+
+export function ListItemDataProvider(props) {
+  let value = useMemo(() => ({ [props.context]: props.item }), [
+    props.context,
+    props.item,
+  ])
+  let valueItem = useMemo(() => ({
+    [`${props.context}_item`]: {
+      index: props.index,
+      indexReverse: props.list.length - props.index,
+      isFirst: props.index === 0,
+      isLast: props.index === props.list.length - 1,
+    },
+  }))
+
+  return (
+    <DataProvider
+      context={props.context}
+      value={value}
+      onChange={props.onChange}
+      onSubmit={props.onSubmit}
+      viewPath={props.viewPath}
+    >
+      <DataProvider
+        context={`${props.context}_item`}
+        value={valueItem}
+        viewPath={props.viewPath}
+      >
+        {props.children}
+      </DataProvider>
+    </DataProvider>
+  )
+}
