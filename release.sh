@@ -8,5 +8,3 @@ git commit -am "chore: $VERSION"
 git tag $VERSION
 git push
 git push --tags
-
-npm publish
