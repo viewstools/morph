@@ -104,6 +104,7 @@ export function useFlow() {
           parentFlowDefinition[0] === view
         )
       },
+      flow: state.flow,
     }),
     [state.flow]
   )

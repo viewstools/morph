@@ -477,9 +477,24 @@ export function useSetFlowToBasedOnData({
   viewPath,
   pause = false,
 }) {
+  let flow = useFlow()
   let setFlowTo = useSetFlowTo(viewPath, true)
+  let contentPath = useMemo(() => {
+    if (flow.flow[viewPath] === 'Content') {
+      let result = Object.entries(flow.flow).find(([key]) =>
+        key.includes(`${viewPath}/Content`)
+      )
+      if (result) {
+        let [key, value] = result
+        return `${key.replace(`${viewPath}/`, '')}/${value}`
+      }
+    }
+
+    return 'Content'
+  }, [])
+
   useEffect(() => {
-    let view = 'Content'
+    let view = contentPath
     if (error) {
       view = 'Error'
     } else if (pause && !data) {
