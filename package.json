@@ -1,6 +1,6 @@
 {
   "name": "@viewstools/morph",
-  "version": "23.29.5",
+  "version": "23.29.6",
   "description": "Views language morpher",
   "main": "bin.js",
   "bin": {
@@ -17,9 +17,9 @@
     "test": "jest",
     "debug:dom": "npx nodemon -w bin.js -- bin.js issue/src --as react-dom --watch",
     "debug:native": "npx nodemon -w bin.js -- bin.js issue/src --as react-native --watch",
-    "release:patch": "./release.sh patch && npm publish",
-    "release:minor": "./release.sh minor && npm publish",
-    "release:major": "./release.sh major && npm publish",
+    "release:patch": "./release.sh patch",
+    "release:minor": "./release.sh minor",
+    "release:major": "./release.sh major",
     "watch": "rollup --config rollup.config.js --watch"
   },
   "repository": {

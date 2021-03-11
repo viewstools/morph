@@ -8,3 +8,5 @@ git commit -am "chore: $VERSION"
 git tag $VERSION
 git push
 git push --tags
+
+echo "Now run: npm publish"
