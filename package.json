@@ -17,6 +17,9 @@
     "test": "jest",
     "debug:dom": "npx nodemon -w bin.js -- bin.js issue/src --as react-dom --watch",
     "debug:native": "npx nodemon -w bin.js -- bin.js issue/src --as react-native --watch",
+    "release:patch": "./release.sh patch",
+    "release:minor": "./release.sh minor",
+    "release:major": "./release.sh major",
     "watch": "rollup --config rollup.config.js --watch"
   },
   "repository": {
