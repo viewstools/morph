@@ -7,8 +7,8 @@ internals - February 2018](https://youtu.be/iUAxvYi3MJo).
 
 1. You need to symlink your local morpher to your Views project.
 
-    * In your local instance of the morpher run `yarn link` in the root directory.
-    * In your project where you are using Views run `yarn link @viewstools/morph` in the root directory.
+   - In your local instance of the morpher run `yarn link` in the root directory.
+   - In your project where you are using Views run `yarn link @viewstools/morph` in the root directory.
 
 2. Put in your `debugger` statements where necessary.
 
@@ -31,6 +31,31 @@ You can debug a specific test with `node --inspect node_modules/.bin/jest --runI
 When you're happy with snapshot diffs you can run `yarn test -u` to update them all at once or you can run `jest --updateSnapshot -t='<nameOfTest>'` to update them individually.
 
 All tests should be passing before you open a PR.<br/><br/>
+
+## How do I publish a new package version to NPM?
+
+**Prerequisites:**
+
+- login with your NPM credentials by running the following command in a terminal: `npm login`
+- add this entry `git-tag-version=false` to `~/.npmrc`
+
+For bug fixes:
+
+```
+yarn release:patch
+```
+
+For non-breaking changes:
+
+```
+yarn release:minor
+```
+
+To finally publish the package run:
+
+```
+npm publish
+```
 
 Having problems? Let us know in the [Views slack channel](https://slack.views.tools/).
 
