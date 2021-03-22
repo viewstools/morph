@@ -13,8 +13,12 @@ import React, {
 import ViewsTools from './ViewsTools.js'
 
 export let flowDefinition = {}
+let FLOW_KEY_WITH_ARGUMENTS = /\(.+?\)/g
+function isFlowKeyWithArguments(item) {
+  return FLOW_KEY_WITH_ARGUMENTS.test(item)
+}
 function getFlowDefinitionKey(key) {
-  return key.replace(/\(.+?\)/g, '')
+  return key.replace(FLOW_KEY_WITH_ARGUMENTS, '')
 }
 function getFlowDefinition(key) {
   return flowDefinition[getFlowDefinitionKey(key)]
@@ -96,11 +100,24 @@ export function useFlow() {
       has: (key) => {
         if (!key) return false
 
+        // active view in flow
         let [parent, view] = getParentView(key)
         let value = state.flow[parent]
         if (value === view) return true
         if (typeof value === 'string') return false
 
+        // FIXME HACK: check for a definition key instead of the arguments
+        // version of it because Tools doesn't understand list items on the
+        //  flow just yet and sets the flow to the definition key instead
+        if (isFlowKeyWithArguments(key)) {
+          let definitionKey = getFlowDefinitionKey(key)
+          let [parent, view] = getParentView(definitionKey)
+          let value = state.flow[parent]
+          if (value === view) return true
+          if (typeof value === 'string') return false
+        }
+
+        // first view defined on the flow
         let parentFlowDefinition = getFlowDefinition(parent)
         return (
           Array.isArray(parentFlowDefinition) &&
@@ -151,8 +168,18 @@ function reducer(state, action) {
         flow: action.flow,
       })
 
+      // FIXME HACK: filter keys that may have been set by lists on the app
+      // because Tools doesn't understand list items on the flow just yet and
+      // sets the flow to the definition key instead
+      let flow = { ...action.flow }
+      Object.keys(action.flow)
+        .filter(isFlowKeyWithArguments)
+        .map((item) => [item, getFlowDefinitionKey(item)])
+        .filter(([, key]) => key in action.flow)
+        .forEach(([item]) => delete flow[item])
+
       return {
-        flow: action.flow,
+        flow,
         actions: getNextActions(state, {
           target: action.id,
           source: action.id,
