@@ -1,4 +1,6 @@
 import SVG from './svg.js'
+import { existsSync } from 'fs'
+import path from 'path'
 
 let NATIVE = [
   'Animated',
@@ -21,7 +23,7 @@ function filterAndSort(list) {
   return list.filter(Boolean).sort(sortAlphabetically)
 }
 
-export default (state, getImport) => {
+export default (state, getImport, file) => {
   let usesNative = []
   let usesSvg = []
 
@@ -150,6 +152,23 @@ export default (state, getImport) => {
 
   if (state.useIsMedia) {
     dependencies.push(getImport('ViewsUseIsMedia'))
+  }
+
+  let isUsingDataOnChange = existsSync(
+    path.join(path.dirname(file), 'useListItemDataOnChange.js')
+  )
+  if (isUsingDataOnChange) {
+    dependencies.push(
+      "import useListItemDataOnChange from './useListItemDataOnChange.js'"
+    )
+  }
+  let isUsingDataOnSubmit = existsSync(
+    path.join(path.dirname(file), 'useListItemDataOnSubmit.js')
+  )
+  if (isUsingDataOnSubmit) {
+    dependencies.push(
+      "import useListItemDataOnSubmit from './useListItemDataOnSubmit.js'"
+    )
   }
 
   return [

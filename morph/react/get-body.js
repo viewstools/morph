@@ -1,9 +1,11 @@
-import { getScopedName } from '../utils.js'
+import { getScopedName, isList } from '../utils.js'
 import getUnit from '../get-unit.js'
 import getExpandedProps from './get-expanded-props.js'
 import getUseIsHovered from './get-use-is-hovered.js'
+import { existsSync } from 'fs'
+import path from 'path'
 
-export default function getBody({ state, name }) {
+export default function getBody({ state, name, view }) {
   let render = state.render.join('\n').replace(/props\./g, '')
 
   let flow = []
@@ -30,6 +32,10 @@ export default function getBody({ state, name }) {
 
   let animated = getAnimated({ state })
   let expandedProps = getExpandedProps({ state })
+  let listItemDataProvider = getListItemDataProvider(
+    view.parsed.view,
+    view.file
+  )
 
   if (state.hasRefs) {
     return `export default class ${name} extends React.Component {
@@ -50,7 +56,10 @@ export default function getBody({ state, name }) {
     ${animated.join('\n')}
 
   return ${ret}
-}`
+}
+
+${listItemDataProvider}
+`
   }
 }
 
@@ -180,4 +189,42 @@ function getAnimated({ state }) {
   })
 
   return animated
+}
+
+function getListItemDataProvider(node, file) {
+  if (!Array.isArray(node.children) || !node.children.some(isList)) return ''
+
+  let isUsingDataOnChange = existsSync(
+    path.join(path.dirname(file), 'useListItemDataOnChange.js')
+  )
+  let isUsingDataOnSubmit = existsSync(
+    path.join(path.dirname(file), 'useListItemDataOnSubmit.js')
+  )
+
+  return `
+  function ListItem({ item, index, list, context, children, viewPath }) {
+    ${
+      isUsingDataOnChange
+        ? 'let onChange = useListItemDataOnChange({ item, index, list })'
+        : ''
+    }
+    ${
+      isUsingDataOnSubmit
+        ? 'let onSubmit = useListItemDataOnSubmit({ item, index, list })'
+        : ''
+    }
+    return (
+      <fromData.ListItemDataProvider
+        context={context}
+        item={item}
+        index={index}
+        list={list}
+        ${isUsingDataOnChange ? 'onChange={onChange}' : ''}
+        ${isUsingDataOnSubmit ? 'onSubmit={onSubmit}' : ''}
+        viewPath={viewPath}
+      >
+        {children}
+      </fromData.ListItemDataProvider>
+    )
+  }`
 }

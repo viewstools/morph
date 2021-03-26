@@ -131,6 +131,7 @@ export default ({
       getStyles,
       name: state.name,
       state,
+      view,
     }),
     dependencies: state.dependencies,
     flow: state.flow,

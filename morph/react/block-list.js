@@ -24,7 +24,7 @@ export function enter(node, parent, state) {
       getProp(node, 'itemDataContextName') ||
       defaultItemDataContextName(state, node, from.value)
     state.render.push(
-      `<fromData.ListItemDataProvider
+      `<ListItem
         key={item.id || index}
         context="${itemDataContextName.value}"
         item={item}
@@ -40,7 +40,7 @@ export function leave(node, parent, state) {
   if (!isList(node)) return
 
   if (parent.viewPath) {
-    state.render.push('</fromData.ListItemDataProvider>')
+    state.render.push('</ListItem>')
   }
   state.render.push(')}')
 }
