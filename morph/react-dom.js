@@ -34,6 +34,7 @@ export default ({
     data: view.parsed.view.data,
     dataFormat: view.parsed.view.dataFormat,
     dataValidate: view.parsed.view.dataValidate,
+    hasListItem: false,
     dependencies: new Set(),
     flow: null,
     setFlowTo: false,

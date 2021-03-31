@@ -19,7 +19,7 @@ export function enter(node, parent, state) {
     `{Array.isArray(${value}) && ${value}.map((item, index, list) => `
   )
 
-  if (parent.viewPath) {
+  if (state.viewPath) {
     let itemDataContextName =
       getProp(node, 'itemDataContextName') ||
       defaultItemDataContextName(state, node, from.value)
@@ -30,16 +30,20 @@ export function enter(node, parent, state) {
         item={item}
         index={index}
         list={list}
-        viewPath={viewPath}
+        viewPath={\`$\{props.viewPath}/${node.children[0].name}($\{item.id || index})\`}
       >`
     )
+
+    node.children[0].skipViewPath = true
+    state.hasListItem = true
+    state.use('ViewsUseData')
   }
 }
 
 export function leave(node, parent, state) {
   if (!isList(node)) return
 
-  if (parent.viewPath) {
+  if (state.viewPath) {
     state.render.push('</ListItem>')
   }
   state.render.push(')}')

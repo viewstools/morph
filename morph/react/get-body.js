@@ -1,4 +1,4 @@
-import { getScopedName, isList } from '../utils.js'
+import { getScopedName } from '../utils.js'
 import getUnit from '../get-unit.js'
 import getExpandedProps from './get-expanded-props.js'
 import getUseIsHovered from './get-use-is-hovered.js'
@@ -32,10 +32,7 @@ export default function getBody({ state, name, view }) {
 
   let animated = getAnimated({ state })
   let expandedProps = getExpandedProps({ state })
-  let listItemDataProvider = getListItemDataProvider(
-    view.parsed.view,
-    view.file
-  )
+  let listItemDataProvider = getListItemDataProvider({ state, name, view })
 
   if (state.hasRefs) {
     return `export default class ${name} extends React.Component {
@@ -191,14 +188,14 @@ function getAnimated({ state }) {
   return animated
 }
 
-function getListItemDataProvider(node, file) {
-  if (!Array.isArray(node.children) || !node.children.some(isList)) return ''
+function getListItemDataProvider({ state, view }) {
+  if (!state.hasListItem) return ''
 
   let isUsingDataOnChange = existsSync(
-    path.join(path.dirname(file), 'useListItemDataOnChange.js')
+    path.join(path.dirname(view.file), 'useListItemDataOnChange.js')
   )
   let isUsingDataOnSubmit = existsSync(
-    path.join(path.dirname(file), 'useListItemDataOnSubmit.js')
+    path.join(path.dirname(view.file), 'useListItemDataOnSubmit.js')
   )
 
   return `
