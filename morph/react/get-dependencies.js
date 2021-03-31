@@ -154,6 +154,14 @@ export default (state, getImport, file) => {
     dependencies.push(getImport('ViewsUseIsMedia'))
   }
 
+  let isUsingDataTransform = existsSync(
+    path.join(path.dirname(file), 'useListItemDataTransform.js')
+  )
+  if (isUsingDataTransform) {
+    dependencies.push(
+      "import useListItemDataTransform from './useListItemDataTransform.js'"
+    )
+  }
   let isUsingDataOnChange = existsSync(
     path.join(path.dirname(file), 'useListItemDataOnChange.js')
   )

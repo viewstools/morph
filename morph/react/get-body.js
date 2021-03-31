@@ -191,6 +191,9 @@ function getAnimated({ state }) {
 function getListItemDataProvider({ state, view }) {
   if (!state.hasListItem) return ''
 
+  let isUsingDataTransform = existsSync(
+    path.join(path.dirname(view.file), 'useListItemDataTransform.js')
+  )
   let isUsingDataOnChange = existsSync(
     path.join(path.dirname(view.file), 'useListItemDataOnChange.js')
   )
@@ -199,29 +202,50 @@ function getListItemDataProvider({ state, view }) {
   )
 
   return `
-  function ListItem({ item, index, list, context, children, viewPath }) {
+  function ListItem(props) {
     ${
-      isUsingDataOnChange
-        ? 'let onChange = useListItemDataOnChange({ item, index, list })'
+      isUsingDataTransform
+        ? `
+    let transformedValue = useListItemDataTransform(props)`
         : ''
     }
+    
+    let value = React.useMemo(() => ({ [props.context]: ${
+      isUsingDataTransform ? 'transformedValue' : 'props.item'
+    } }), [
+      props.context,
+      ${isUsingDataTransform ? 'transformedValue' : 'props.item'},
+    ])
+    let valueItem = React.useMemo(() => ({
+      [\`\${props.context}_item\`]: {
+        index: props.index,
+        indexReverse: props.list.length - props.index,
+        isFirst: props.index === 0,
+        isLast: props.index === props.list.length - 1,
+      },
+    }))
     ${
-      isUsingDataOnSubmit
-        ? 'let onSubmit = useListItemDataOnSubmit({ item, index, list })'
-        : ''
+      isUsingDataOnChange ? 'let onChange = useListItemDataOnChange(props)' : ''
+    }
+    ${
+      isUsingDataOnSubmit ? 'let onSubmit = useListItemDataOnSubmit(props)' : ''
     }
     return (
-      <fromData.ListItemDataProvider
-        context={context}
-        item={item}
-        index={index}
-        list={list}
-        ${isUsingDataOnChange ? 'onChange={onChange}' : ''}
-        ${isUsingDataOnSubmit ? 'onSubmit={onSubmit}' : ''}
-        viewPath={viewPath}
+      <fromData.DataProvider
+      context={props.context}
+      value={value}
+      ${isUsingDataOnChange ? 'onChange={onChange}' : ''}
+      ${isUsingDataOnSubmit ? 'onSubmit={onSubmit}' : ''}
+      viewPath={props.viewPath}
+    >
+      <fromData.DataProvider
+        context={\`\${props.context}_item\`}
+        value={valueItem}
+        viewPath={props.viewPath}
       >
-        {children}
-      </fromData.ListItemDataProvider>
+        {props.children}
+      </fromData.DataProvider>
+    </fromData.DataProvider>
     )
   }`
 }
