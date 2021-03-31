@@ -3,7 +3,6 @@ import getUnit from './get-unit.js'
 import safe from './react/safe.js'
 import toCamelCase from 'to-camel-case'
 import toSlugCase from 'to-slug-case'
-import path from 'path'
 import wrap from './react/wrap.js'
 
 let safeScope = (value) =>
