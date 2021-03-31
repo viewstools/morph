@@ -199,29 +199,41 @@ function getListItemDataProvider({ state, view }) {
   )
 
   return `
-  function ListItem({ item, index, list, context, children, viewPath }) {
+  function ListItem(props) {
+    let value = React.useMemo(() => ({ [props.context]: props.item }), [
+      props.context,
+      props.item,
+    ])
+    let valueItem = React.useMemo(() => ({
+      [\`\${props.context}_item\`]: {
+        index: props.index,
+        indexReverse: props.list.length - props.index,
+        isFirst: props.index === 0,
+        isLast: props.index === props.list.length - 1,
+      },
+    }))
     ${
-      isUsingDataOnChange
-        ? 'let onChange = useListItemDataOnChange({ item, index, list })'
-        : ''
+      isUsingDataOnChange ? 'let onChange = useListItemDataOnChange(props)' : ''
     }
     ${
-      isUsingDataOnSubmit
-        ? 'let onSubmit = useListItemDataOnSubmit({ item, index, list })'
-        : ''
+      isUsingDataOnSubmit ? 'let onSubmit = useListItemDataOnSubmit(props)' : ''
     }
     return (
-      <fromData.ListItemDataProvider
-        context={context}
-        item={item}
-        index={index}
-        list={list}
-        ${isUsingDataOnChange ? 'onChange={onChange}' : ''}
-        ${isUsingDataOnSubmit ? 'onSubmit={onSubmit}' : ''}
-        viewPath={viewPath}
+      <fromData.DataProvider
+      context={props.context}
+      value={value}
+      ${isUsingDataOnChange ? 'onChange={onChange}' : ''}
+      ${isUsingDataOnSubmit ? 'onSubmit={onSubmit}' : ''}
+      viewPath={props.viewPath}
+    >
+      <fromData.DataProvider
+        context={\`\${props.context}_item\`}
+        value={valueItem}
+        viewPath={props.viewPath}
       >
-        {children}
-      </fromData.ListItemDataProvider>
+        {props.children}
+      </fromData.DataProvider>
+    </fromData.DataProvider>
     )
   }`
 }
