@@ -62,11 +62,21 @@ let DataContexts = {
   default: React.createContext([]),
 }
 export function DataProvider(props) {
+  if (process.env.NODE_ENV === 'development') {
+    if (!props.context) {
+      log({
+        type: 'views/data/missing-context-value',
+        viewPath: props.viewPath,
+        message: `You're missing the context value in DataProvider. Eg: <DataProvider context="namespace" value={value}>. You're using the default one now instead.`,
+      })
+    }
+  }
   if (!(props.context in DataContexts)) {
     DataContexts[props.context] = React.createContext([])
     DataContexts[props.context].displayName = props.context
   }
   let Context = DataContexts[props.context]
+
   let [_state, dispatch] = useReducer(reducer, props.value)
   let [state, setState] = useReducer((_, s) => s, props.value)
   let listeners = useRef([])
@@ -81,7 +91,9 @@ export function DataProvider(props) {
   useEffect(() => {
     if (state === _state) return
 
-    listeners.current.forEach((listener) => listener(_state, state))
+    listeners.current.forEach((listener) => {
+      listener(_state, state)
+    })
     setState(_state)
   }, [_state, state])
 
@@ -174,6 +186,16 @@ export function useDataListener({
   }, []) // eslint-disable-line
 }
 
+if (process.env.NODE_ENV === 'development') {
+  let isArray = Array.isArray
+  Array.isArray = (maybeArray) => {
+    try {
+      return isArray(maybeArray) || `${maybeArray}` === 'proxyString'
+    } catch (error) {
+      return false
+    }
+  }
+}
 export function useData({
   path = null,
   context = 'default',
@@ -184,7 +206,7 @@ export function useData({
   viewPath = null,
 } = {}) {
   let [data, dispatch, onSubmit, originalValue] = useContext(
-    DataContexts[context]
+    DataContexts[context] || DataContexts.default
   )
   let touched = useRef(false)
 
@@ -195,14 +217,36 @@ export function useData({
     if (path && formatIn) {
       try {
         value = fromFormat[formatIn](rawValue, data)
-      } catch (error) {}
+      } catch (error) {
+        if (process.env.NODE_ENV === 'development') {
+          log({
+            type: 'views/data/runtime-formatIn',
+            viewPath,
+            context,
+            formatIn,
+            message: `"${formatIn}" function failed to run on Data/format.js.`,
+            error,
+          })
+        }
+      }
     }
 
     let isValidInitial = true
     if (validate) {
       try {
         isValidInitial = !!fromValidate[validate](rawValue, value, data)
-      } catch (error) {}
+      } catch (error) {
+        if (process.env.NODE_ENV === 'development') {
+          log({
+            type: 'views/data/runtime-validate',
+            viewPath,
+            context,
+            validate,
+            message: `"${validate}" function failed to run on Data/validate.js.`,
+            error,
+          })
+        }
+      }
     }
     let isValid =
       touched.current || (validateRequired && data._forceRequired)
@@ -229,7 +273,18 @@ export function useData({
           if (formatOut) {
             try {
               valueSet = fromFormat[formatOut](value, data)
-            } catch (error) {}
+            } catch (error) {
+              if (process.env.NODE_ENV === 'development') {
+                log({
+                  type: 'views/data/runtime-formatOut',
+                  viewPath,
+                  context,
+                  formatOut,
+                  message: `"${formatIn}" function failed to run on Data/format.js.`,
+                  error,
+                })
+              }
+            }
           }
 
           dispatch({
@@ -265,6 +320,175 @@ export function useData({
     ]
   )
   // ignore data - this can cause rendering issues though
+
+  if (process.env.NODE_ENV === 'development') {
+    // source: https://github.com/TheWWWorm/proxy-mock/blob/master/index.js
+    function getProxyMock(
+      specifics = {
+        value: 'proxyString',
+      },
+      name = 'proxyMock',
+      wrap
+    ) {
+      function _target() {
+        getProxyMock()
+      }
+
+      let target = wrap ? wrap(name, _target) : _target
+
+      target[Symbol.toPrimitive] = (hint, b, c) => {
+        if (hint === 'string') {
+          return 'proxyString'
+        } else if (hint === 'number') {
+          return 42
+        }
+        return '1337'
+      }
+      target[Symbol.iterator] = function* () {
+        yield getProxyMock({}, `${name}.Symbol(Symbol.iterator)`, wrap)
+      }
+
+      let length = 3
+
+      return new Proxy(target, {
+        get(obj, key) {
+          key = key.toString()
+          if (key === 'forEach') {
+            return function forEach(fn) {
+              Array(length)
+                .fill(0)
+                .forEach((_, i) => {
+                  let item = getProxyMock({}, `${name}`, wrap)
+                  fn(item, i, [item])
+                })
+            }
+          }
+          if (key === 'map' || key === 'filter') {
+            return function map(fn) {
+              return Array(length)
+                .fill(0)
+                .map((_, i) => {
+                  let item = getProxyMock({}, `${name}`, wrap)
+                  return fn(item, i, [item])
+                })
+            }
+          }
+          if (key === 'find') {
+            return function map(fn) {
+              let item = getProxyMock({}, `${name}`, wrap)
+              return fn(item, 0, [item])
+            }
+          }
+          if (key === 'length') {
+            return length
+          }
+          if (key === 'lat') {
+            return 35.3877847
+          }
+          if (key === 'lng') {
+            return 24.048761
+          }
+          if (/date/.test(key)) {
+            return '2021-03-22'
+          }
+          if (/time/.test(key)) {
+            return '11:50'
+          }
+          if (key === 'text') {
+            return 'proxyString'
+          }
+          if (key === 'id') {
+            return null
+          }
+          if (specifics.hasOwnProperty(key)) {
+            return specifics[key]
+          }
+          if (key === 'Symbol(Symbol.toPrimitive)') {
+            return obj[Symbol.toPrimitive]
+          }
+          if (key === 'Symbol(Symbol.iterator)') {
+            return obj[Symbol.iterator]
+          }
+          if (!obj.hasOwnProperty(key)) {
+            obj[key] = getProxyMock({}, `${name}.${key}`, wrap)
+          }
+
+          return obj[key]
+        },
+        apply() {
+          return getProxyMock({}, `${name}`, wrap)
+        },
+      })
+    }
+
+    function getDataMock() {
+      let value = getProxyMock()
+      return {
+        onChange() {},
+        onSubmit() {},
+        value,
+        originalValue: value,
+        isSubmitting: false,
+        isValid: true,
+        isValidInitial: true,
+        isInvalid: false,
+        isInvalidInitial: false,
+      }
+    }
+
+    if (!(context in DataContexts)) {
+      log({
+        type: 'views/data/missing-data-provider',
+        viewPath,
+        context,
+        message: `"${context}" isn't a valid Data context. Add a <DataProvider context="${context}" value={data}> in the component that defines the context for this view. You're using a mock now.`,
+      })
+      return getDataMock()
+    }
+
+    if (!data) {
+      log({
+        type: 'views/data/missing-data-for-provider',
+        viewPath,
+        context,
+        message: `"${context}" doesn't have data. You're using a mock now.`,
+      })
+      return getDataMock()
+    }
+
+    if (formatIn && !(formatIn in fromFormat)) {
+      log({
+        type: 'views/data/invalid-formatIn',
+        viewPath,
+        context,
+        formatIn,
+        message: `"${formatIn}" function doesn't exist or is not exported in Data/format.js. You're using a mock now.`,
+      })
+      return getDataMock()
+    }
+
+    if (formatOut && !(formatOut in fromFormat)) {
+      log({
+        type: 'views/data/invalid-formatOut',
+        viewPath,
+        context,
+        formatOut,
+        message: `"${formatOut}" function doesn't exist or is not exported in Data/format.js. You're using a mock now.`,
+      })
+      return getDataMock()
+    }
+
+    if (validate && !(validate in fromValidate)) {
+      log({
+        type: 'views/data/invalid-validate',
+        viewPath,
+        context,
+        validate,
+        message: `"${validate}" function doesn't exist or is not exported in Data/validators.js. You're using a mock now.`,
+      })
+      return getDataMock()
+    }
+  }
 
   return memo
 }
@@ -316,4 +540,20 @@ function isEmpty(context, data) {
   if (!data) return true
   let value = data[context]
   return Array.isArray(value) ? value.length === 0 : !value
+}
+
+let logQueue = []
+let logTimeout = null
+function log(stuff) {
+  logQueue.push(stuff)
+  clearTimeout(logTimeout)
+  logTimeout = setTimeout(() => {
+    if (logQueue.length > 0) {
+      console.log({
+        type: 'views/data',
+        warnings: logQueue,
+      })
+      logQueue = []
+    }
+  }, 500)
 }

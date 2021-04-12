@@ -3,11 +3,17 @@ import addFileIfItDoesntExist from './add-file-if-it-doesnt-exist.js'
 import ensureFile from './ensure-file.js'
 import path from 'path'
 
-export default async function ensureData({ pass, src }) {
+export default async function ensureData({ pass, src, tools }) {
   if (pass > 0) return false
 
   let [DATA] = await Promise.all([
-    fs.readFile(path.join(__dirname, 'views', 'ViewsData.js')),
+    fs.readFile(
+      path.join(
+        __dirname,
+        'views',
+        tools ? 'ViewsData.tools.js' : 'ViewsData.js'
+      )
+    ),
     addFileIfItDoesntExist(
       path.join(src, 'Data', 'format.js'),
       '// export functions to use in data format'
