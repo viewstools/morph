@@ -2,8 +2,10 @@ import { getScopedName } from '../utils.js'
 import getUnit from '../get-unit.js'
 import getExpandedProps from './get-expanded-props.js'
 import getUseIsHovered from './get-use-is-hovered.js'
+import { existsSync } from 'fs'
+import path from 'path'
 
-export default function getBody({ state, name }) {
+export default function getBody({ state, name, view }) {
   let render = state.render.join('\n').replace(/props\./g, '')
 
   let flow = []
@@ -30,6 +32,7 @@ export default function getBody({ state, name }) {
 
   let animated = getAnimated({ state })
   let expandedProps = getExpandedProps({ state })
+  let listItemDataProvider = getListItemDataProvider({ state, name, view })
 
   if (state.hasRefs) {
     return `export default class ${name} extends React.Component {
@@ -50,7 +53,10 @@ export default function getBody({ state, name }) {
     ${animated.join('\n')}
 
   return ${ret}
-}`
+}
+
+${listItemDataProvider}
+`
   }
 }
 
@@ -180,4 +186,54 @@ function getAnimated({ state }) {
   })
 
   return animated
+}
+
+function getListItemDataProvider({ state, view }) {
+  if (!state.hasListItem) return ''
+
+  let isUsingDataOnChange = existsSync(
+    path.join(path.dirname(view.file), 'useListItemDataOnChange.js')
+  )
+  let isUsingDataOnSubmit = existsSync(
+    path.join(path.dirname(view.file), 'useListItemDataOnSubmit.js')
+  )
+
+  return `
+  function ListItem(props) {
+    let value = React.useMemo(() => ({ [props.context]: props.item }), [
+      props.context,
+      props.item,
+    ])
+    let valueItem = React.useMemo(() => ({
+      [\`\${props.context}_item\`]: {
+        index: props.index,
+        indexReverse: props.list.length - props.index,
+        isFirst: props.index === 0,
+        isLast: props.index === props.list.length - 1,
+      },
+    }))
+    ${
+      isUsingDataOnChange ? 'let onChange = useListItemDataOnChange(props)' : ''
+    }
+    ${
+      isUsingDataOnSubmit ? 'let onSubmit = useListItemDataOnSubmit(props)' : ''
+    }
+    return (
+      <fromData.DataProvider
+      context={props.context}
+      value={value}
+      ${isUsingDataOnChange ? 'onChange={onChange}' : ''}
+      ${isUsingDataOnSubmit ? 'onSubmit={onSubmit}' : ''}
+      viewPath={props.viewPath}
+    >
+      <fromData.DataProvider
+        context={\`\${props.context}_item\`}
+        value={valueItem}
+        viewPath={props.viewPath}
+      >
+        {props.children}
+      </fromData.DataProvider>
+    </fromData.DataProvider>
+    )
+  }`
 }

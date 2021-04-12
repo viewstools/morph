@@ -16,6 +16,8 @@ export function enter(node, parent, state) {
     node.skipViewPath = true
   }
 
-  let key = getProp(node, 'key')
-  state.render.push(` key={${key ? key.value : 'item.id || index'}}`)
+  if (!state.hasListItem) {
+    let key = getProp(node, 'key')
+    state.render.push(` key={${key ? key.value : 'item.id || index'}}`)
+  }
 }

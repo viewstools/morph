@@ -84,6 +84,12 @@ async function makeDataJs({ file, viewName }) {
     let isUsingDataConfiguration = existsSync(
       path.join(path.dirname(file), 'useDataConfiguration.js')
     )
+    let isUsingDataOnChange = existsSync(
+      path.join(path.dirname(file), 'useDataOnChange.js')
+    )
+    let isUsingDataOnSubmit = existsSync(
+      path.join(path.dirname(file), 'useDataOnSubmit.js')
+    )
     // TODO sometimes we want to send a configuration value such as context: {requestPolicy: 'cache-and-network'} or pause: true,
     // even if there's no variable
     // && definition.variableDefinitions.length > 0
@@ -110,6 +116,16 @@ ${
     ? "import useDataConfiguration from './useDataConfiguration.js'"
     : ''
 }
+${
+  isUsingDataOnChange
+    ? "import useDataOnChange from './useDataOnChange.js'"
+    : ''
+}
+${
+  isUsingDataOnSubmit
+    ? "import useDataOnSubmit from './useDataOnSubmit.js'"
+    : ''
+}
 import query from './data.graphql.js'
 import React from 'react'
 import ${importName} from './${importName.toLowerCase()}.js'
@@ -126,6 +142,9 @@ ${
       isUsingDataConfiguration ? ', ...configuration' : ''
     } })
 ${isUsingDataTransform ? '  let data = useDataTransform(props, rdata)' : ''}
+${isUsingDataOnChange ? '  let onChange = useDataOnChange(props, data)' : ''}
+${isUsingDataOnSubmit ? '  let onSubmit = useDataOnSubmit(props, data)' : ''}
+
   useSetFlowToBasedOnData({context: '${context}', data, ${
       isQueryOperation ? 'fetching' : 'fetching: !data'
     }, error, viewPath: props.viewPath, pause: ${
@@ -137,6 +156,8 @@ ${isUsingDataTransform ? '  let data = useDataTransform(props, rdata)' : ''}
       context="${context}"
       value={data}
       viewPath={props.viewPath}
+      ${isUsingDataOnChange ? 'onChange={onChange}' : ''}
+      ${isUsingDataOnSubmit ? 'onSubmit={onSubmit}' : ''}
     >
       <${importName} {...props} />
     </DataProvider>

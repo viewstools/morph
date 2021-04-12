@@ -20,7 +20,7 @@ export function enter(node, parent, state) {
   PropertyFormat.enter(node, parent, state)
   PropertyViewPath.enter(node, parent, state)
 
-  node.properties.forEach(propNode => {
+  node.properties.forEach((propNode) => {
     if (
       propNode.name === 'lazy' ||
       propNode.name === 'at' ||
@@ -28,7 +28,7 @@ export function enter(node, parent, state) {
       propNode.name === 'onWhen' ||
       propNode.tags.unsupportedShorthand ||
       (!isValidPropertyForBlock(propNode, node, state) && node.isBasic) ||
-      (propNode.name === 'from' &&
+      ((propNode.name === 'from' || propNode.name === 'itemDataContextName') &&
         (node.name === 'List' || node.name === 'Table')) ||
       (propNode.name === 'key' && parent.isList) ||
       (propNode.name === 'pass' && node.isList) ||
