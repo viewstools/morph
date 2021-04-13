@@ -62,7 +62,7 @@ let ON_IS_SELECTED = /(onClick|onPress|goTo)/
 
 export default function getValueForProperty(node, parent, state) {
   if (
-    (state.data || parent.data) &&
+    parent.data &&
     (node.value === '!props.value' ||
       node.value === 'props.value' ||
       node.value === 'props.onSubmit' ||
@@ -75,9 +75,8 @@ export default function getValueForProperty(node, parent, state) {
       node.value === 'props.isSubmitting' ||
       node.value === '!props.isSubmitting')
   ) {
-    let value = parent.data ? `${parent.data.name}.` : 'data.'
     return {
-      [node.name]: `{${node.value.replace('props.', value)}}`,
+      [node.name]: `{${node.value.replace('props.', `${parent.data.name}.`)}}`,
     }
   } else if (/!?props\.(isFlow|flow)$/.test(node.value)) {
     let flowPath = getFlowPath(node, parent, state)

@@ -11,8 +11,8 @@ export function enter(node, parent, state) {
   if (!from) return
 
   let value = from.value
-  if ((state.data || node.data) && DATA_VALUE.test(value)) {
-    value = value.replace('props', node.data ? node.data.name : 'data')
+  if (node.data && DATA_VALUE.test(value)) {
+    value = value.replace('props', node.data.name)
   }
 
   state.render.push(
@@ -22,7 +22,7 @@ export function enter(node, parent, state) {
   if (state.viewPath) {
     let itemDataContextName =
       getProp(node, 'itemDataContextName') ||
-      defaultItemDataContextName(state, node, from.value)
+      defaultItemDataContextName(node, from.value)
     state.render.push(
       `<ListItem
         key={item.id || index}
@@ -49,15 +49,12 @@ export function leave(node, parent, state) {
   state.render.push(')}')
 }
 
-function defaultItemDataContextName(state, node, fromValue) {
-  let value
-  if ((state.data || node.data) && DATA_VALUE.test(fromValue)) {
-    value = node.data
+function defaultItemDataContextName(node, fromValue) {
+  let value =
+    node.data && DATA_VALUE.test(fromValue)
       ? node.data.path.replace('.', '_')
-      : state.data.path.replace('.', '_')
-  } else {
-    value = fromValue.replace('props.', '')
-  }
+      : fromValue.replace('props.', '')
+
   let singularValue = singular(value)
   if (singularValue !== value) {
     value = singularValue

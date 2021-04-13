@@ -32,8 +32,6 @@ export default ({
     animations: {},
     animated: new Set(),
     images: [],
-    hasData: !!view.parsed.view.data,
-    data: view.parsed.view.data,
     hasListItem: false,
     dependencies: new Set(),
     flow: null,
@@ -110,10 +108,6 @@ export default ({
 
   maybeUsesTextInput(state)
   maybeUsesStyleSheet(state)
-
-  if (state.hasData) {
-    state.use('ViewsUseData')
-  }
 
   return {
     code: toComponent({
