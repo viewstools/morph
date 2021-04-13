@@ -32,9 +32,8 @@ export default ({
     animations: {},
     animated: new Set(),
     images: [],
+    hasData: !!view.parsed.view.data,
     data: view.parsed.view.data,
-    dataFormat: view.parsed.view.dataFormat,
-    dataValidate: view.parsed.view.dataValidate,
     hasListItem: false,
     dependencies: new Set(),
     flow: null,
@@ -70,6 +69,7 @@ export default ({
     tools,
     reactNativeLibraryImport,
     usedBlockNames: { [finalName]: 1, AutoSizer: 1, Column: 1, Table: 1 },
+    usedDataNames: [],
     uses: [],
     use(block, isLazy = false) {
       if (isLazy) {
@@ -111,7 +111,7 @@ export default ({
   maybeUsesTextInput(state)
   maybeUsesStyleSheet(state)
 
-  if (state.data) {
+  if (state.hasData) {
     state.use('ViewsUseData')
   }
 

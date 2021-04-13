@@ -270,22 +270,6 @@ export let getDataValidate = (maybeProp) => {
   }
 }
 
-export let getFormat = (line) => {
-  let properties = {}
-  let values = line.split(' ')
-  let formatKey = values[0]
-
-  if (values.length === 2) {
-    properties[formatKey] = values[1]
-  } else {
-    properties[formatKey] = {}
-    for (let i = 1; i < values.length; i = i + 2) {
-      properties[formatKey][values[i]] = getValue(values[i + 1])
-    }
-  }
-
-  return properties
-}
 export let getProp = (line) => {
   // eslint-disable-next-line
   let [_, name, _1, value = ''] = get(PROP, line)

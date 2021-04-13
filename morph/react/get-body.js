@@ -19,17 +19,6 @@ export default function getBody({ state, name, view }) {
     flow.push(`let setFlowTo = fromFlow.useSetFlowTo(viewPath)`)
   }
 
-  let data = []
-  if (state.data) {
-    data.push(
-      `let data = fromData.useData({ viewPath, path: '${state.data.path}', `
-    )
-    maybeDataContext(state.data, data)
-    maybeDataFormat(state.dataFormat, data)
-    maybeDataValidate(state.dataValidate, data)
-    data.push('})')
-  }
-
   let animated = getAnimated({ state })
   let expandedProps = getExpandedProps({ state })
   let listItemDataProvider = getListItemDataProvider({ state, name, view })
@@ -49,7 +38,7 @@ export default function getBody({ state, name, view }) {
     ${state.useIsHovered ? getUseIsHovered({ state }) : ''}
     ${state.useIsMedia ? 'let isMedia = useIsMedia()' : ''}
     ${flow.join('\n')}
-    ${data.join('\n')}
+    ${state.dataBlocks.join('\n')}
     ${animated.join('\n')}
 
   return ${ret}
@@ -57,30 +46,6 @@ export default function getBody({ state, name, view }) {
 
 ${listItemDataProvider}
 `
-  }
-}
-
-function maybeDataContext(dataDefinition, data) {
-  if (dataDefinition.context === null) return
-
-  data.push(`context: '${dataDefinition.context}',`)
-}
-function maybeDataFormat(format, data) {
-  if (!format) return
-
-  if (format.formatIn) {
-    data.push(`formatIn: '${format.formatIn}',`)
-  }
-
-  if (format.formatOut) {
-    data.push(`formatOut: '${format.formatOut}',`)
-  }
-}
-function maybeDataValidate(validate, data) {
-  if (!validate || validate.type !== 'js') return
-  data.push(`validate: '${validate.value}',`)
-  if (validate.required) {
-    data.push('validateRequired: true,')
   }
 }
 

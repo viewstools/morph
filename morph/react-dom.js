@@ -31,9 +31,9 @@ export default ({
     animations: {},
     cssDynamic: false,
     cssStatic: false,
+    hasData: !!view.parsed.view.data,
     data: view.parsed.view.data,
-    dataFormat: view.parsed.view.dataFormat,
-    dataValidate: view.parsed.view.dataValidate,
+    dataBlocks: [],
     hasListItem: false,
     dependencies: new Set(),
     flow: null,
@@ -64,6 +64,7 @@ export default ({
     styles: {},
     stylesOrder: [],
     usedBlockNames: { [finalName]: 1, AutoSizer: 1, Column: 1, Table: 1 },
+    usedDataNames: [],
     uses: [],
     testIdKey: 'data-testid',
     testIdKeyAsProp: 'dataTestid',
@@ -104,10 +105,6 @@ export default ({
   //   }
   // }
 
-  if (state.data) {
-    state.use('ViewsUseData')
-  }
-
   if (name !== finalName) {
     console.warn(
       `// ${name} is a Views reserved name. To fix this, change its file name to something else.`
@@ -118,6 +115,10 @@ export default ({
   state.slots = view.parsed.slots
 
   walk(view.parsed.view, visitor, state)
+
+  if (state.hasData) {
+    state.use('ViewsUseData')
+  }
 
   return {
     code: toComponent({
