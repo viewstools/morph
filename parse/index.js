@@ -355,18 +355,6 @@ export default ({
     lookForFonts(block)
     lookForMultiples(block)
 
-    let data = getData(block.properties.find((p) => p.name === 'data'))
-    if (data) {
-      let format = getDataFormat(
-        block.properties.find((p) => p.name === 'format')
-      )
-      let validate = getDataValidate(
-        block.properties.find((p) => p.name === 'validate')
-      )
-
-      block.data = { ...data, format, validate }
-    }
-
     let flowProp = block.properties.find((p) => p.name === 'is')
     if (flowProp) {
       block.isView = true
@@ -379,6 +367,18 @@ export default ({
         type: 'string',
         defaultValue: block.viewPath,
       })
+    } else {
+      let data = getData(block.properties.find((p) => p.name === 'data'))
+      if (data) {
+        let format = getDataFormat(
+          block.properties.find((p) => p.name === 'format')
+        )
+        let validate = getDataValidate(
+          block.properties.find((p) => p.name === 'validate')
+        )
+
+        block.data = { ...data, format, validate }
+      }
     }
   }
 

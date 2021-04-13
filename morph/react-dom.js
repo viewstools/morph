@@ -31,8 +31,6 @@ export default ({
     animations: {},
     cssDynamic: false,
     cssStatic: false,
-    hasData: !!view.parsed.view.data,
-    data: view.parsed.view.data,
     dataBlocks: [],
     hasListItem: false,
     dependencies: new Set(),
@@ -115,10 +113,6 @@ export default ({
   state.slots = view.parsed.slots
 
   walk(view.parsed.view, visitor, state)
-
-  if (state.hasData) {
-    state.use('ViewsUseData')
-  }
 
   return {
     code: toComponent({

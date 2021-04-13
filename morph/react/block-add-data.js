@@ -19,7 +19,7 @@ export function enter(node, parent, state) {
       state.usedDataNames.push(name)
     }
 
-    state.hasData = true
+    state.use('ViewsUseData')
   }
 }
 
