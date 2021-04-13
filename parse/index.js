@@ -8,7 +8,6 @@ import {
   getData,
   getDataFormat,
   getDataValidate,
-  getFormat,
   getProp,
   getPropType,
   getUnsupportedShorthandExpanded,
@@ -208,6 +207,7 @@ export default ({
       type: 'Block',
       name,
       animations: {},
+      isView: false,
       isAnimated: false,
       isBasic: isBasic(name),
       isCapture: isCapture(name),
@@ -354,6 +354,32 @@ export default ({
     parseProps(i, block, last)
     lookForFonts(block)
     lookForMultiples(block)
+
+    let data = getData(block.properties.find((p) => p.name === 'data'))
+    if (data) {
+      let format = getDataFormat(
+        block.properties.find((p) => p.name === 'format')
+      )
+      let validate = getDataValidate(
+        block.properties.find((p) => p.name === 'validate')
+      )
+
+      block.data = { ...data, format, validate }
+    }
+
+    let flowProp = block.properties.find((p) => p.name === 'is')
+    if (flowProp) {
+      block.isView = true
+      block.flow = flowProp.value
+      block.viewPath = path.dirname(file.replace(src.replace(/\\/g, '/'), ''))
+      block.viewPathParent = path.dirname(block.viewPath)
+
+      slots.push({
+        name: 'viewPath',
+        type: 'string',
+        defaultValue: block.viewPath,
+      })
+    }
   }
 
   function parseProps(i, block) {
@@ -522,10 +548,6 @@ export default ({
 
         if (name === 'onWhen' && /!?isMedia.+/.test(slotName)) {
           useIsMedia = true
-        }
-
-        if (name === 'format') {
-          block.format = getFormat(value)
         }
 
         if (value === '' && name !== 'text') {
@@ -742,6 +764,7 @@ export default ({
       type: 'Block',
       name: id,
       animations: {},
+      isView: false,
       isAnimated: false,
       isBasic: true,
       isCapture: false,
@@ -759,29 +782,6 @@ export default ({
       type: `The file for ${id} is empty and won't render! Add some blocks to it like:\n${topBlockShouldBe}\n  Text\n    text content`,
       line: '',
     })
-  }
-
-  let flowProp = view.properties.find((p) => p.name === 'is')
-  if (flowProp) {
-    view.isView = true
-    view.flow = flowProp.value
-    view.viewPath = path.dirname(file.replace(src.replace(/\\/g, '/'), ''))
-    view.viewPathParent = path.dirname(view.viewPath)
-
-    view.data = getData(view.properties.find((p) => p.name === 'data'))
-    view.dataFormat = getDataFormat(
-      view.properties.find((p) => p.name === 'dataFormat')
-    )
-    view.dataValidate = getDataValidate(
-      view.properties.find((p) => p.name === 'dataValidate')
-    )
-    slots.push({
-      name: 'viewPath',
-      type: 'string',
-      defaultValue: view.viewPath,
-    })
-  } else {
-    view.isView = false
   }
 
   view.isDefiningChildrenExplicitly = isDefiningChildrenExplicitly

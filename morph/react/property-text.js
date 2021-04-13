@@ -5,8 +5,10 @@ let HAS_RESTRICTED_CHARACTERS = /[{}<>/]/
 
 export function enter(node, parent, state) {
   if (node.name === 'text' && parent.name === 'Text') {
-    if (state.data && node.value === 'props.value') {
-      parent.explicitChildren = '{data.value}'
+    if ((state.data || parent.data) && node.value === 'props.value') {
+      parent.explicitChildren = parent.data
+        ? `{${parent.data.name}.value}`
+        : '{data.value}'
     } else if (hasCustomScopes(node, parent)) {
       parent.explicitChildren = wrap(getScopedCondition(node, parent, state))
     } else if (isSlot(node)) {

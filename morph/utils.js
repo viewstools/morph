@@ -124,8 +124,8 @@ export function isFlow(prop) {
   return IS_FLOW.test(prop)
 }
 export function getScopedName({ name, blockNode, scope, state }) {
-  if (state.data && DATA_VALUES.test(name)) {
-    return name.replace('props', 'data')
+  if ((state.data || blockNode.data) && DATA_VALUES.test(name)) {
+    return name.replace('props', blockNode.data ? blockNode.data.name : 'data')
   } else if (
     blockNode &&
     hasCustomBlockParent(blockNode) &&

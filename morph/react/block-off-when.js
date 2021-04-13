@@ -24,8 +24,8 @@ export function enter(node, parent, state) {
     if (parent && !isList(parent)) state.render.push('{')
 
     let value = onWhen.value
-    if (state.data && DATA_VALUES.test(value)) {
-      value = value.replace('props', 'data')
+    if ((state.data || node.data) && DATA_VALUES.test(value)) {
+      value = value.replace('props', node.data ? node.data.name : 'data')
     } else if (IS_MEDIA.test(value)) {
       let [, variable, media] = value.match(IS_MEDIA)
       value = `${variable.replace('props.', '')}.${media.toLowerCase()}`
