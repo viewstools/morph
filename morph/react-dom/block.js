@@ -19,13 +19,12 @@ import * as BlockTable from '../react/block-table.js'
 export let enter = [
   BlockMaybeSkip.enter,
   BlockSetTestId.enter,
+  BlockAddData.enter,
   BlockOffWhen.enter,
 
   BlockName.enter,
   BlockTable.enter,
   BlockColumn.enter,
-
-  BlockAddData.enter,
 
   BlockCapture.enter,
   BlockGoTo.enter,
