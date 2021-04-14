@@ -57,6 +57,23 @@ To finally publish the package run:
 npm publish
 ```
 
+**Releasing a major version:**
+
+Run:
+
+```
+yarn release:major
+```
+
+and then:
+
+```
+npm publish
+```
+
+Update the version of `@viewstools/create-react-app` to match the new version of the morpher (see https://github.com/viewstools/create-react-app/blob/master/package.json) and the `template.json` file in this repo to make use of the new version https://github.com/viewstools/cra-template-views/blob/master/template.json#L4. In addition to that, the version of `@viewstools/cra-template-views` should be increased to match the new major version of the morpher.
+
+
 Having problems? Let us know in the [Views slack channel](https://slack.views.tools/).
 
 Thanks! :clap:
