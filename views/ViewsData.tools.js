@@ -116,6 +116,20 @@ export function DataProvider(props) {
   }, [props.value]) // eslint-disable-line
   // ignore dispatch
 
+  function _onChange(value, changePath = props.context) {
+    if (typeof value === 'function') {
+      dispatch({ type: SET_FN, fn: value })
+    } else if (!changePath) {
+      dispatch({ type: RESET, value })
+    } else {
+      dispatch({
+        type: SET,
+        path: changePath,
+        value,
+      })
+    }
+  }
+
   // keep track of props.onChange outside of the following effect to
   // prevent loops. Making the function useCallback didn't work
   let onSubmit = useRef(props.onSubmit)
@@ -129,7 +143,11 @@ export function DataProvider(props) {
 
     try {
       dispatch({ type: IS_SUBMITTING, value: true })
-      let res = await onSubmit.current(stateRef.current, args)
+      let res = await onSubmit.current({
+        value: stateRef.current,
+        args,
+        onChange: _onChange,
+      })
       isSubmitting.current = false
 
       if (!res) {
