@@ -355,6 +355,38 @@ export default ({
     lookForFonts(block)
     lookForMultiples(block)
 
+    let data = []
+    let index = 0
+    while (index < block.properties.length) {
+      let p = block.properties[index]
+      if (p.name === 'data') {
+        let currentData = getData(p)
+        currentData.loc = p.loc
+        data.push(currentData)
+
+        do {
+          index++
+          if (index === block.properties.length) {
+            break
+          }
+
+          p = block.properties[index]
+          if (p.name === 'format') {
+            currentData.format = getDataFormat(p)
+          } else if (p.name === 'validate') {
+            currentData.validate = getDataValidate(p)
+          }
+        } while (
+          index < block.properties.length &&
+          ['format', 'validate'].includes(p.name)
+        )
+      } else {
+        index++
+      }
+    }
+
+    block.data = data
+
     let flowProp = block.properties.find((p) => p.name === 'is')
     if (flowProp) {
       block.isView = true
@@ -367,18 +399,6 @@ export default ({
         type: 'string',
         defaultValue: block.viewPath,
       })
-    } else {
-      let data = getData(block.properties.find((p) => p.name === 'data'))
-      if (data) {
-        let format = getDataFormat(
-          block.properties.find((p) => p.name === 'format')
-        )
-        let validate = getDataValidate(
-          block.properties.find((p) => p.name === 'validate')
-        )
-
-        block.data = { ...data, format, validate }
-      }
     }
   }
 
@@ -536,14 +556,6 @@ export default ({
             })
             if (skipInvalidProps) continue
           }
-        }
-
-        if (name === 'onWhen' && properties.length > 0) {
-          warnings.push({
-            type: `Put onWhen at the top of the block. It's easier to see it that way!`,
-            line,
-            loc,
-          })
         }
 
         if (name === 'onWhen' && /!?isMedia.+/.test(slotName)) {

@@ -1,12 +1,18 @@
-import { getScopedCondition, hasCustomScopes, isSlot } from '../utils.js'
+import {
+  getScopedCondition,
+  getDataForLoc,
+  hasCustomScopes,
+  isSlot,
+} from '../utils.js'
 import wrap from './wrap.js'
 
 let HAS_RESTRICTED_CHARACTERS = /[{}<>/]/
 
 export function enter(node, parent, state) {
   if (node.name === 'text' && parent.name === 'Text') {
-    if (parent.data && node.value === 'props.value') {
-      parent.explicitChildren = `{${parent.data.name}.value}`
+    let data = getDataForLoc(parent, node.loc)
+    if (data && node.value === 'props.value') {
+      parent.explicitChildren = `{${data.name}.value}`
     } else if (hasCustomScopes(node, parent)) {
       parent.explicitChildren = wrap(getScopedCondition(node, parent, state))
     } else if (isSlot(node)) {

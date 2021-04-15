@@ -1,5 +1,6 @@
 import {
   getActionableParent,
+  getDataForLoc,
   getFlowPath,
   getProp,
   getScopedCondition,
@@ -60,8 +61,9 @@ let CHILD_VALUES = /props\.(isSelected|isHovered|isFocused|isSelectedHovered)/
 let ON_IS_SELECTED = /(onClick|onPress|goTo)/
 
 export default function getValueForProperty(node, parent, state) {
+  let data = getDataForLoc(parent, node.loc)
   if (
-    parent.data &&
+    data &&
     (node.value === '!props.value' ||
       node.value === 'props.value' ||
       node.value === 'props.onSubmit' ||
@@ -75,7 +77,7 @@ export default function getValueForProperty(node, parent, state) {
       node.value === '!props.isSubmitting')
   ) {
     return {
-      [node.name]: `{${node.value.replace('props.', `${parent.data.name}.`)}}`,
+      [node.name]: `{${node.value.replace('props.', `${data.name}.`)}}`,
     }
   } else if (/!?props\.(isFlow|flow)$/.test(node.value)) {
     let flowPath = getFlowPath(node, parent, state)

@@ -123,9 +123,10 @@ let IS_FLOW = /!?props\.(isFlow|flow)$/
 export function isFlow(prop) {
   return IS_FLOW.test(prop)
 }
-export function getScopedName({ name, blockNode, scope, state }) {
-  if (blockNode.data && DATA_VALUES.test(name)) {
-    return name.replace('props', blockNode.data.name)
+export function getScopedName({ name, blockNode, propNode, scope, state }) {
+  let data = getDataForLoc(blockNode, propNode.loc)
+  if (data && DATA_VALUES.test(name)) {
+    return name.replace('props', data.name)
   } else if (
     blockNode &&
     hasCustomBlockParent(blockNode) &&
@@ -158,6 +159,7 @@ export function getScopedCondition(propNode, blockNode, state) {
     let when = getScopedName({
       name: scope.when,
       blockNode,
+      propNode,
       scope: scope.scope,
       state,
     })
@@ -585,4 +587,18 @@ export function getFlowPath(node, parent, state) {
   return setFlowTo.startsWith('/')
     ? JSON.stringify(setFlowTo)
     : `fromFlow.normalizePath(props.viewPath, '${setFlowTo}')`
+}
+
+/**
+ *
+ * Returns the closest data key which will apply for a given location in the block
+ *
+ */
+export function getDataForLoc(blockNode, loc) {
+  return (
+    blockNode.data
+      // the data should be defined before the current line
+      .filter((data) => data.loc.start.line < loc.start.line)
+      .sort((a, b) => b.loc.start.line - a.loc.start.line)?.[0]
+  )
 }
