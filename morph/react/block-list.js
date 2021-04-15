@@ -1,6 +1,6 @@
 import { singular } from 'pluralize'
 import toSnakeCase from 'to-snake-case'
-import { getProp, isList } from '../utils.js'
+import { getProp, getDataForLoc, isList } from '../utils.js'
 
 let DATA_VALUE = /props\.value/
 
@@ -11,8 +11,9 @@ export function enter(node, parent, state) {
   if (!from) return
 
   let value = from.value
-  if (node.data && DATA_VALUE.test(value)) {
-    value = value.replace('props', node.data.name)
+  let data = getDataForLoc(node, from.loc)
+  if (data && DATA_VALUE.test(value)) {
+    value = value.replace('props', data.name)
   }
 
   state.render.push(
@@ -22,7 +23,7 @@ export function enter(node, parent, state) {
   if (state.viewPath) {
     let itemDataContextName =
       getProp(node, 'itemDataContextName') ||
-      defaultItemDataContextName(node, from.value)
+      defaultItemDataContextName(node, from)
     state.render.push(
       `<ListItem
         key={item.id || index}
@@ -49,11 +50,14 @@ export function leave(node, parent, state) {
   state.render.push(')}')
 }
 
-function defaultItemDataContextName(node, fromValue) {
-  let value =
-    node.data && DATA_VALUE.test(fromValue)
-      ? node.data.path.replace('.', '_')
-      : fromValue.replace('props.', '')
+function defaultItemDataContextName(node, from) {
+  let value
+  let data = getDataForLoc(node, from.loc)
+  if (data && DATA_VALUE.test(from.value)) {
+    value = data.path.replace('.', '_')
+  } else {
+    value = from.value.replace('props.', '')
+  }
 
   let singularValue = singular(value)
   if (singularValue !== value) {

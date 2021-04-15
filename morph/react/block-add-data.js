@@ -1,18 +1,19 @@
+import toSnakeCase from 'to-snake-case'
 import toCamelCase from 'to-camel-case'
 
 export function enter(node, parent, state) {
-  if (node.data) {
-    let name = getDataVariableName(node)
+  for (let data of node.data) {
+    let name = getDataVariableName(data)
 
-    node.data.name = name
+    data.name = name
 
     if (!state.usedDataNames.includes(name)) {
       state.dataBlocks.push(
-        `let ${name} = fromData.useData({ viewPath, path: '${node.data.path}', `
+        `let ${name} = fromData.useData({ viewPath, path: '${data.path}', `
       )
-      maybeDataContext(node.data, state.dataBlocks)
-      maybeDataFormat(node.data.format, state.dataBlocks)
-      maybeDataValidate(node.data.validate, state.dataBlocks)
+      maybeDataContext(data, state.dataBlocks)
+      maybeDataFormat(data.format, state.dataBlocks)
+      maybeDataValidate(data.validate, state.dataBlocks)
       state.dataBlocks.push('})')
 
       // pushing it on to the state to indicate if it was already defined
@@ -23,23 +24,20 @@ export function enter(node, parent, state) {
   }
 }
 
-function getDataVariableName(node) {
-  // keep the same name if the data is defined at the view level
-  return node.isView
-    ? 'data'
-    : // using the format and validate as part of the name to uniquely identify a data key
-      `${toCamelCase(
-        [
-          node.data.path.replace(/\./g, '_'),
-          node.data.format?.formatIn,
-          node.data.format?.formatOut,
-          node.data.validate?.value,
-          node.data.validate?.required ? 'required' : null,
-          'data',
-        ]
-          .filter(Boolean)
-          .join('_')
-      )}`
+function getDataVariableName(data) {
+  return `${toCamelCase(
+    [
+      data.path.replace(/\./g, '_'),
+      data.format?.formatIn,
+      data.format?.formatOut,
+      data.validate?.value,
+      data.validate?.required ? 'required' : null,
+      'data',
+    ]
+      .filter(Boolean)
+      .map(toSnakeCase)
+      .join('_')
+  )}`
 }
 
 function maybeDataContext(dataDefinition, data) {

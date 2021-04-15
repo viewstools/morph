@@ -102,6 +102,7 @@ function getAnimated({ state }) {
           let condition = getScopedName({
             name: scope.name,
             blockNode: item.block,
+            propNode: prop,
             scope,
             state,
           })
@@ -176,7 +177,7 @@ function getListItemDataProvider({ state, view }) {
         isFirst: props.index === 0,
         isLast: props.index === props.list.length - 1,
       },
-    }))
+    }), [props.context, props.index, props.list])
     ${
       isUsingDataOnChange ? 'let onChange = useListItemDataOnChange(props)' : ''
     }
