@@ -15,11 +15,11 @@ export let flowDefinition = {}
 function getFlowDefinitionKey(key) {
   return key.replace(/\(.+?\)/g, '')
 }
-function getFlowDefinition(key) {
+export function getFlowDefinition(key) {
   return flowDefinition[getFlowDefinitionKey(key)]
 }
 
-function getParentView(key) {
+export function getParentView(key) {
   let parentBits = key.split('/')
   let view = parentBits.pop()
   let parent = parentBits.join('/')
@@ -50,7 +50,7 @@ function getNextFlowWithoutKeys(removed, flow) {
   )
 }
 
-function getNextFlow(rkeys, rflow) {
+export function getNextFlow(rkeys, rflow) {
   let keys = Array.isArray(rkeys) ? rkeys : [rkeys]
   if (keys.length === 0) return rflow
 
