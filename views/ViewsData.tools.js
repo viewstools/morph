@@ -4,7 +4,16 @@
 // https://github.com/viewstools/morph/blob/master/ensure-data.js
 import * as fromValidate from './validate.js'
 import * as fromFormat from './format.js'
-import { normalizePath, useSetFlowTo, useFlow } from 'Logic/ViewsFlow.js'
+import {
+  normalizePath,
+  useSetFlowTo,
+  useFlow,
+  getNextFlow,
+  isFlowKeyWithArguments,
+  getFlowDefinitionKey,
+  getFlowDefinition,
+  getParentView,
+} from 'Logic/ViewsFlow.js'
 // import get from 'dlv';
 import get from 'lodash/get'
 import produce from 'immer'
@@ -79,10 +88,18 @@ export function DataProvider(props) {
 
   let [_state, dispatch] = useReducer(reducer, props.value)
   let [state, setState] = useReducer((_, s) => s, props.value)
+  // TODO: refactor -- This is part of the listeners
+  let setFlowTo = useSetFlowTo(props.viewPath)
+  let flow = useFlow()
+  let flowRef = useRef(flow)
+  useEffect(() => {
+    flowRef.current = flow
+  }, [flow])
   let listeners = useRef([])
   function registerListener(listener) {
     listeners.current.push(listener)
-    listener(_state, state)
+    // TODO: because we have the effect now but we may need it then
+    // listener(_state, state)
     return () => {
       listeners.current = listeners.current.filter((l) => l !== listener)
     }
@@ -90,10 +107,70 @@ export function DataProvider(props) {
 
   useEffect(() => {
     if (state === _state) return
-
-    listeners.current.forEach((listener) => {
-      listener(_state, state)
+    console.debug({
+      type: 'views/data/listeners/state-change',
+      state,
+      _state,
     })
+
+    // We are sorting the listeners from longest to shorter
+    // as an approximation to get the order of setFlowTo's application
+    let nextFlow = flowRef.current.flow
+    let listenersCurrent = [...listeners.current]
+    listenersCurrent.sort((a, b) => b.viewPath.length - a.viewPath.length)
+    let targets = []
+
+    function _setFlowTo(target) {
+      nextFlow = getNextFlow(target, nextFlow)
+      targets.push(target)
+    }
+
+    function _has(key) {
+      if (!key) return false
+
+      // active view in flow
+      let [parent, view] = getParentView(key)
+      let value = nextFlow[parent]
+      if (value === view) return true
+      if (typeof value === 'string') return false
+
+      // FIXME HACK: check for a definition key instead of the arguments
+      // version of it because Tools doesn't understand list items on the
+      //  flow just yet and sets the flow to the definition key instead
+      if (isFlowKeyWithArguments(key)) {
+        let definitionKey = getFlowDefinitionKey(key)
+        let [parent, view] = getParentView(definitionKey)
+        let value = nextFlow[parent]
+        if (value === view) return true
+        if (typeof value === 'string') return false
+      }
+
+      // first view defined on the flow
+      let parentFlowDefinition = getFlowDefinition(parent)
+      return (
+        Array.isArray(parentFlowDefinition) && parentFlowDefinition[0] === view
+      )
+    }
+
+    let hasKeys = []
+
+    listenersCurrent.forEach(({ listener, viewPath }) => {
+      let has = (key) => {
+        let result = _has(key)
+        hasKeys.push({ viewPath, key, result, flow: { ...nextFlow } })
+        return result
+      }
+      listener(_state, state, { has }, _setFlowTo)
+    })
+    if (listenersCurrent.length || targets.length || hasKeys.length) {
+      console.debug({
+        type: 'views/data/listeners/current',
+        listeners: listenersCurrent,
+        targets,
+        hasKeys,
+      })
+    }
+    targets.forEach(setFlowTo)
     setState(_state)
   }, [_state, state])
 
@@ -194,13 +271,14 @@ DataProvider.defaultProps = {
 export function useDataListener({
   // path = null,
   context = 'default',
-  // viewPath = null,
+  viewPath,
   listener,
 } = {}) {
   let [, , , , registerListener] = useContext(DataContexts[context])
 
   return useEffect(() => {
-    return registerListener(listener)
+    if (!viewPath) return
+    return registerListener({ listener, viewPath })
   }, []) // eslint-disable-line
 }
 
