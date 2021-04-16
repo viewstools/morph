@@ -60,7 +60,7 @@ export default function makeMorpher({
       viewsToFiles: state.viewsToFiles,
     })
 
-    // detect .js files meant to be custom views with "// @view" at the top
+    // detect DesignSystem react.js files
     processViewCustomFiles({
       filesViewCustom,
       viewsById: state.viewsById,
