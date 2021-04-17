@@ -112,7 +112,7 @@ export function DataProvider(props) {
       if (!key) return false
 
       let [parent, view] = getParentView(key)
-      let value = state.flow[parent]
+      let value = nextFlow[parent]
       if (value === view) return true
       if (typeof value === 'string') return false
 
