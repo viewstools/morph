@@ -1,3 +1,4 @@
+import * as BlockAddData from '../react/block-add-data'
 import * as BlockAddTestIdProp from '../react/block-add-test-id-prop.js'
 import * as BlockBackgroundImage from './block-background-image.js'
 import * as BlockCapture from './block-capture.js'
@@ -19,6 +20,7 @@ import * as BlockWrap from './block-wrap.js'
 export let enter = [
   BlockMaybeSkip.enter,
   BlockSetTestId.enter,
+  BlockAddData.enter,
   BlockOffWhen.enter,
   BlockWrap.enter,
   BlockName.enter,
