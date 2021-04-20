@@ -102,7 +102,7 @@ function getAnimated({ state }) {
           let condition = getScopedName({
             name: scope.name,
             blockNode: item.block,
-            propNode: prop,
+            propNode: scope.prop,
             scope,
             state,
           })
