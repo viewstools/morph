@@ -159,7 +159,7 @@ export function getScopedCondition(propNode, blockNode, state) {
     let when = getScopedName({
       name: scope.when,
       blockNode,
-      propNode,
+      propNode: scope.prop,
       scope: scope.scope,
       state,
     })
@@ -220,9 +220,7 @@ export let isSlot = (maybeNode1, maybeNode2) => {
   let node = maybeNode2 || maybeNode1
 
   return typeof node === 'string'
-    ? /(flow\.|isHovered|childProps|props|isBefore|isMedia\.|Data\.)/.test(
-        node
-      )
+    ? /(flow\.|isHovered|childProps|props|isBefore|isMedia\.|Data\.)/.test(node)
     : isTag(node, 'slot')
 }
 export let isStyle = (node) => isTag(node, 'style')
