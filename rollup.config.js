@@ -22,7 +22,7 @@ export default {
             useBuiltIns: 'usage',
             // exclude: ['@babel/plugin-transform-regenerator'],
             targets: {
-              node: '10',
+              node: '14',
             },
             corejs: 3,
           },
