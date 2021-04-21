@@ -1,8 +1,8 @@
+import { existsSync } from 'fs'
 import { getScopedName } from '../utils.js'
 import getUnit from '../get-unit.js'
 import getExpandedProps from './get-expanded-props.js'
 import getUseIsHovered from './get-use-is-hovered.js'
-import { existsSync } from 'fs'
 import path from 'path'
 
 export default function getBody({ state, name, view }) {

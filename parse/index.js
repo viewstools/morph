@@ -207,6 +207,7 @@ export default ({
       type: 'Block',
       name,
       animations: {},
+      slots: [],
       isView: false,
       isAnimated: false,
       isBasic: isBasic(name),
@@ -351,7 +352,7 @@ export default ({
       stack.push(block)
     }
 
-    parseProps(i, block, last)
+    parseProps(i, block)
     lookForFonts(block)
     lookForMultiples(block)
 
@@ -386,6 +387,12 @@ export default ({
     }
 
     block.data = data
+
+    if (block.data.length > 0) {
+      block.slots = block.slots.filter((item) => item.name !== 'value')
+    }
+    slots = [...slots, ...block.slots]
+    delete block.slots
 
     let flowProp = block.properties.find((p) => p.name === 'is')
     if (flowProp) {
@@ -666,9 +673,9 @@ export default ({
             }
           }
 
-          let existingDefaultValue = slots.find(
-            (vp) => vp.name === (slotName || name)
-          )
+          let existingDefaultValue =
+            block.slots.find((vp) => vp.name === (slotName || name)) ||
+            slots.find((vp) => vp.name === (slotName || name))
           if (
             // !inScope &&
             !propNode.tags.fragment &&
@@ -681,7 +688,7 @@ export default ({
                 ? false
                 : propNode.defaultValue
             } else {
-              slots.push({
+              block.slots.push({
                 name: slotName || name,
                 type: getPropType(block, name, value),
                 defaultValue: tags.shouldBeSlot ? false : propNode.defaultValue,

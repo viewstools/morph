@@ -347,15 +347,21 @@ export let getAnimatedStyles = (node, isNative) => {
   return props.map((prop) => getAnimatedString(node, prop, isNative)).join(', ')
 }
 
-let getPropValue = (prop, interpolateValue = true) => {
+function getPropValue(prop, blockNode, interpolateValue = true) {
+  let propValue = prop.value
+  let data = getDataForLoc(blockNode, prop?.loc)
+  if (data && DATA_VALUES.test(`props.${prop.value}`)) {
+    propValue = `${data.name}.${propValue}`
+  }
+
   let unit = getUnit(prop)
   if (unit) {
     let value = interpolateValue
-      ? `\`\${${prop.value}}${unit}\``
-      : `"${prop.value}${unit}"`
-    return `typeof ${prop.value} === 'number' ? ${value} : ${prop.value}`
+      ? `\`\${${propValue}}${unit}\``
+      : `"${propValue}${unit}"`
+    return `typeof ${propValue} === 'number' ? ${value} : ${propValue}`
   } else {
-    return prop.value
+    return propValue
   }
 }
 
@@ -366,7 +372,7 @@ export let getDynamicStyles = (node) => {
         (prop) =>
           prop.tags.style && prop.tags.slot && !getScopedProps(prop, node)
       )
-      .map((prop) => `'--${prop.name}': ${getPropValue(prop)}`),
+      .map((prop) => `'--${prop.name}': ${getPropValue(prop, node)}`),
     node.scopes.map((scope) =>
       scope.properties
         .filter((prop) => prop.tags.style)
