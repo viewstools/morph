@@ -124,7 +124,7 @@ export function isFlow(prop) {
   return IS_FLOW.test(prop)
 }
 export function getScopedName({ name, blockNode, propNode, scope, state }) {
-  let data = getDataForLoc(blockNode, propNode.loc)
+  let data = getDataForLoc(blockNode, propNode?.loc)
   if (data && DATA_VALUES.test(name)) {
     return name.replace('props', data.name)
   } else if (
