@@ -172,7 +172,8 @@ export function DataProvider(props) {
     }
     targets.forEach(setFlowTo)
     setState(_state)
-  }, [_state, state])
+  }, [_state, state]) // eslint-disable-line
+  // ignore setFlowTo
 
   // track a reference of state so that any call to onSubmit gets the latest
   // state even if it changed through the execution
@@ -611,7 +612,8 @@ export function useSetFlowToBasedOnData({
     }
 
     return 'Content'
-  }, [])
+  }, []) // eslint-disable-line
+  // ignore flow.flow
 
   useEffect(() => {
     let view = contentPath
