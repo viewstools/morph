@@ -374,12 +374,16 @@ export default ({
           p = block.properties[index]
           if (p.name === 'format') {
             currentData.format = getDataFormat(p)
+          } else if (p.name === 'formatOut') {
+            currentData.format.formatOut = p.value
           } else if (p.name === 'validate') {
             currentData.validate = getDataValidate(p)
+          } else if (p.name === 'required') {
+            currentData.validate.required = p.value
           }
         } while (
           index < block.properties.length &&
-          ['format', 'validate'].includes(p.name)
+          ['format', 'formatOut', 'validate', 'required'].includes(p.name)
         )
       } else {
         index++

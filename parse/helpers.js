@@ -252,21 +252,17 @@ export let getData = (maybeProp) => {
 
 export let getDataFormat = (maybeProp) => {
   if (!maybeProp || !maybeProp.value) return null
-  let [formatIn, formatOut] = maybeProp.value.split(' ')
   return {
     type: 'js',
-    formatIn,
-    formatOut,
+    formatIn: maybeProp.value,
   }
 }
 
 export let getDataValidate = (maybeProp) => {
   if (!maybeProp || !maybeProp.value) return null
-  let [value, required] = maybeProp.value.split(' ')
   return {
     type: 'js',
-    value,
-    required: required === 'required',
+    value: maybeProp.value,
   }
 }
 
