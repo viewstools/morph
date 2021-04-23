@@ -250,19 +250,35 @@ export let getData = (maybeProp) => {
   return { path, context }
 }
 
+function maybeSourceAndValue(input) {
+  let source
+  let value
+  if (input.includes(' ')) {
+    ;[source, value] = input.split(' ')
+  } else {
+    value = input
+  }
+  return { source, value }
+}
+
 export let getDataFormat = (maybeProp) => {
   if (!maybeProp || !maybeProp.value) return null
   return {
     type: 'js',
-    formatIn: maybeProp.value,
+    formatIn: maybeSourceAndValue(maybeProp.value),
   }
+}
+
+export let getDataFormatOut = (maybeProp) => {
+  if (!maybeProp || !maybeProp.value) return null
+  return maybeSourceAndValue(maybeProp.value)
 }
 
 export let getDataValidate = (maybeProp) => {
   if (!maybeProp || !maybeProp.value) return null
   return {
     type: 'js',
-    value: maybeProp.value,
+    ...maybeSourceAndValue(maybeProp.value),
   }
 }
 

@@ -69,6 +69,8 @@ export default (state, getImport, file) => {
       if (/logic\.js'/.test(importStatement)) {
         dependenciesDisplayNames.push(`${d}.displayName = '${d}Logic'`)
       }
+    } else if (d.startsWith('import ')) {
+      dependencies.push(d)
     }
   })
 
