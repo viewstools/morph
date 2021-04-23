@@ -1,6 +1,8 @@
 let blacklist = [
   'classname',
   'format',
+  'formatout',
+  'required',
   'goto',
   'isfragment',
   'ismodal',
