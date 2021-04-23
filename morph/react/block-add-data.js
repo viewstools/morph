@@ -1,35 +1,31 @@
 import toSnakeCase from 'to-snake-case'
 import toCamelCase from 'to-camel-case'
+import path from 'path'
 
 export function enter(node, parent, state) {
   for (let data of node.data) {
-    let name = getDataVariableName(data)
+    data.name = getDataVariableName(data, state)
 
-    data.name = name
-
-    if (!state.usedDataNames.includes(name)) {
-      state.dataBlocks.push(
-        `let ${name} = fromData.useData({ viewPath, path: '${data.path}', `
-      )
-      maybeDataContext(data, state.dataBlocks)
-      maybeDataFormat(data.format, state.dataBlocks)
-      maybeDataValidate(data.validate, state.dataBlocks)
-      state.dataBlocks.push('})')
-
-      // pushing it on to the state to indicate if it was already defined
-      state.usedDataNames.push(name)
-    }
+    // at the moment it will create multiple instances for the same data key
+    // an optimization will be implemented to reuse a variable if possible
+    state.dataBlocks.push(
+      `let ${data.name} = fromData.useData({ viewPath, path: '${data.path}', `
+    )
+    maybeDataContext(data, state)
+    maybeDataFormat(data.format, state)
+    maybeDataValidate(data.validate, state)
+    state.dataBlocks.push('})')
 
     state.use('ViewsUseData')
   }
 }
 
-function getDataVariableName(data) {
-  return `${toCamelCase(
+function getDataVariableName(data, state) {
+  let name = `${toCamelCase(
     [
       data.path.replace(/\./g, '_'),
-      data.format?.formatIn,
-      data.format?.formatOut,
+      data.format?.formatIn?.value,
+      data.format?.formatOut?.value,
       data.validate?.value,
       data.validate?.required ? 'required' : null,
       'data',
@@ -38,29 +34,98 @@ function getDataVariableName(data) {
       .map(toSnakeCase)
       .join('_')
   )}`
+  if (state.usedDataNames[name]) {
+    name = `${name}${state.usedDataNames[name]}`
+    state.usedDataNames[name] += 1
+  } else {
+    state.usedDataNames[name] = 1
+  }
+  return name
 }
 
-function maybeDataContext(dataDefinition, data) {
+function maybeDataContext(dataDefinition, state) {
   if (dataDefinition.context === null) return
 
-  data.push(`context: '${dataDefinition.context}',`)
+  state.dataBlocks.push(`context: '${dataDefinition.context}',`)
 }
 
-function maybeDataFormat(format, data) {
+function maybeDataFormat(format, state) {
   if (!format) return
 
   if (format.formatIn) {
-    data.push(`formatIn: '${format.formatIn}',`)
+    let importName = getFormatImportName(format.formatIn.source, state)
+    state.dataBlocks.push(`formatIn: ${importName}.${format.formatIn.value},`)
   }
 
   if (format.formatOut) {
-    data.push(`formatOut: '${format.formatOut}',`)
+    let importName = getFormatImportName(format.formatOut.source, state)
+    state.dataBlocks.push(`formatOut: ${importName}.${format.formatOut.value},`)
   }
 }
-function maybeDataValidate(validate, data) {
+
+function maybeDataValidate(validate, state) {
   if (!validate || validate.type !== 'js') return
-  data.push(`validate: '${validate.value}',`)
+  let importName = getValidateImportName(validate.source, state)
+  state.dataBlocks.push(`validate: ${importName}.${validate.value},`)
   if (validate.required) {
-    data.push('validateRequired: true,')
+    state.dataBlocks.push('validateRequired: true,')
   }
+}
+
+function getFilePath(source) {
+  if (path.isAbsolute(source)) {
+    return source.substring(1)
+  }
+  if (source.startsWith('.')) return source
+  return `./${source}`
+}
+
+function getValidateImportName(source, state) {
+  let importName
+  if (source) {
+    importName = getImportNameForSource(source, state)
+  } else {
+    state.use('ViewsUseDataValidate')
+    importName = 'fromViewsValidate'
+  }
+  return importName
+}
+
+function getFormatImportName(source, state) {
+  let importName
+  if (source) {
+    importName = getImportNameForSource(source, state)
+  } else {
+    state.use('ViewsUseDataFormat')
+    importName = 'fromViewsFormat'
+  }
+  return importName
+}
+
+function getImportNameForSource(source, state) {
+  let filePath = getFilePath(source)
+  if (state.usedImports[filePath]) {
+    // there is already a reference to the exact file
+    return state.usedImports[filePath]
+  }
+
+  let importName = getImportName(
+    toCamelCase(`from_${path.parse(filePath).name.replace(/[\W_]+/g, '')}`),
+    state
+  )
+
+  state.usedImports[filePath] = importName
+  state.use(`import * as ${importName} from '${filePath}'`)
+  return importName
+}
+
+function getImportName(importName, state) {
+  let result = importName
+  if (state.usedImportNames[importName]) {
+    result = `${importName}${state.usedImportNames[importName]}`
+    state.usedImportNames[importName] += 1
+  } else {
+    state.usedImportNames[importName] = 1
+  }
+  return result
 }
