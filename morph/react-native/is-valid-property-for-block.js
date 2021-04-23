@@ -7,6 +7,8 @@ let blacklist = [
   'cursor',
   'fontweight',
   'format',
+  'formatout',
+  'required',
   'goto',
   'isdisabled',
   'isfragment',
