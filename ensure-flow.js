@@ -17,7 +17,7 @@ async function makeFlow({ as, viewsById, viewsToFiles }) {
   let flowJson = makeFlowJson({ viewsById, viewsToFiles })
 
   let content = await fs.readFile(
-    path.join(__dirname, 'views', 'ViewsFlow.js'),
+    path.join(__dirname, 'views', 'Flow.js'),
     'utf8'
   )
   return maybeReactNative(as, content).replace(
@@ -28,7 +28,7 @@ async function makeFlow({ as, viewsById, viewsToFiles }) {
 
 async function makeFlowTools({ as }) {
   let content = await fs.readFile(
-    path.join(__dirname, 'views', 'ViewsFlow.tools.js'),
+    path.join(__dirname, 'views', 'Flow.tools.js'),
     'utf8'
   )
   return maybeReactNative(as, content)
@@ -87,13 +87,13 @@ export default function ensureFlow({
       pass === 0 &&
         makeFlowTools({ as }).then((content) =>
           ensureFile({
-            file: path.join(src, 'Logic', 'ViewsFlow.js'),
+            file: path.join(src, 'Views', 'Flow.js'),
             content,
           })
         ),
       flowJson.changed &&
         ensureFile({
-          file: path.join(src, 'Logic', 'ViewsFlow.json'),
+          file: path.join(src, 'Views', 'Flow.json'),
           content: flowJson.flowDefinitionString,
         }),
     ]
@@ -101,7 +101,7 @@ export default function ensureFlow({
     return [
       makeFlow({ as, viewsById, viewsToFiles }).then((content) =>
         ensureFile({
-          file: path.join(src, 'Logic', 'ViewsFlow.js'),
+          file: path.join(src, 'Views', 'Flow.js'),
           content,
         })
       ),

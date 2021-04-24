@@ -11,7 +11,7 @@ import {
   getNextFlow,
   getFlowDefinition,
   getParentView,
-} from 'Logic/ViewsFlow.js'
+} from './Flow.js'
 // import get from 'dlv';
 import get from 'lodash/get'
 import produce from 'immer'

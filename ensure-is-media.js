@@ -65,7 +65,7 @@ export default async function ensureIsMedia({ pass, src }) {
   if (pass > 0) return false
 
   return ensureFile({
-    file: path.join(src, 'Logic', 'useIsMedia.js'),
+    file: path.join(src, 'Views', 'hooks', 'useIsMedia.js'),
     content: makeUseIsMedia(await getMediaConfig(src)),
   })
 }

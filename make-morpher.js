@@ -4,13 +4,7 @@ import {
   processCustomFonts,
 } from './fonts.js'
 import { promises as fs } from 'fs'
-import ensureData from './ensure-data.js'
-import ensureFlow from './ensure-flow.js'
-import ensureIsBefore from './ensure-is-before.js'
-import ensureIsHovered from './ensure-is-hovered.js'
-import ensureIsMedia from './ensure-is-media.js'
-import ensureTools from './ensure-tools.js'
-import ensureGitignore from './ensure-gitignore.js'
+import ensureViewsFiles from './ensure-views-files.js'
 import makeGetSystemImport from './make-get-system-import.js'
 import morphAllViews from './morph-all-views.js'
 import morphAllViewGraphlFiles from './morph-all-view-graphql-files.js'
@@ -106,15 +100,7 @@ export default function makeMorpher({
     })
 
     // TODO optimise, only if they changed, cache, etc
-    let viewsFiles = await Promise.all([
-      ensureData(state),
-      ...ensureFlow(state),
-      ensureTools(state),
-      ensureIsBefore(state),
-      ensureIsHovered(state),
-      ensureIsMedia(state),
-      ensureGitignore(state),
-    ])
+    let viewsFiles = await ensureViewsFiles(state)
 
     let filesToWrite = [
       ...morphedFonts,
