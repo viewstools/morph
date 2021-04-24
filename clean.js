@@ -31,13 +31,8 @@ export default async function clean(src, verbose, all = false) {
         '**/view.js',
         '**/*.graphql.js',
         '**/data.js',
-        'Data/ViewsData.js',
         `DesignSystem/Fonts/*.js`,
-        'Logic/ViewsFlow.js',
-        'Logic/useIsMedia.js',
-        'Logic/useIsBefore.js',
-        'Logic/useIsHovered.js',
-        'Logic/ViewsTools.js',
+        'Views/**',
       ].map((item) => path.join(src, item))
     )
 

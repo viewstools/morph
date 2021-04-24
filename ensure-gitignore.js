@@ -10,7 +10,7 @@ let CONTENT = `# views
 **/data.js
 src/Views`
 
-export default async function ensureIsBefore({ pass, src }) {
+export default async function ensureGitignore({ pass, src }) {
   if (pass > 0) return false
 
   let file = path.join(src, '..', '.gitignore')

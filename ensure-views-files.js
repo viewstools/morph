@@ -3,6 +3,7 @@ import ensureFile from './ensure-file.js'
 import ensureFlow from './ensure-flow.js'
 import ensureIsMedia from './ensure-is-media.js'
 import ensureGitignore from './ensure-gitignore.js'
+import ensureMorpherVersion from './ensure-morpher-version.js'
 import glob from 'fast-glob'
 import path from 'path'
 
@@ -11,6 +12,7 @@ export default async function ensureViewsFiles(state) {
     ...ensureFlow(state),
     ensureIsMedia(state),
     ...(await ensureStaticFiles(state)),
+    ensureMorpherVersion(state),
     ensureGitignore(state),
   ])
 }
@@ -20,12 +22,12 @@ async function ensureStaticFiles({ pass, src, tools }) {
 
   let files = await glob('**/*.js', {
     cwd: path.join(__dirname, 'views'),
-    ignore: ['Flow.js', '**/*.tools.js'],
+    ignore: ['Flow.js', '**/*.tools.js', tools && 'Tools.js'].filter(Boolean),
   })
   if (tools) {
     let filesTools = await glob('**/*.tools.js', {
       cwd: src,
-      ignore: ['Flow.js', '**/*.tools.js'],
+      ignore: ['Flow.js'],
     })
 
     files = [

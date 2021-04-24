@@ -2,8 +2,8 @@
 // when the morpher runs. If you want to contribute to how it's generated, eg,
 // improving the algorithms inside, etc, see this:
 // https://github.com/viewstools/morph/blob/master/ensure-data.js
-import * as fromValidate from './validate.js'
-import * as fromFormat from './format.js'
+import * as fromValidate from 'Data/validate.js'
+import * as fromFormat from 'Data/format.js'
 import {
   normalizePath,
   useSetFlowTo,

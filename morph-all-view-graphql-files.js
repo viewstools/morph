@@ -104,7 +104,7 @@ async function makeDataJs({ file, viewName }) {
       : 'View'
 
     return `// This file is auto-generated. Edit query.graphql to change it.
-import { DataProvider, useSetFlowToBasedOnData } from 'Data/ViewsData.js'
+import { DataProvider, useSetFlowToBasedOnData } from 'Views/Data.js'
 import { ${useOperation} } from 'Data/Api.js'
 ${
   isUsingDataTransform
