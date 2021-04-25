@@ -2,8 +2,6 @@
 // when the morpher runs. If you want to contribute to how it's generated, eg,
 // improving the algorithms inside, etc, see this:
 // https://github.com/viewstools/morph/blob/master/ensure-data.js
-import * as fromValidate from 'Data/validate.js'
-import * as fromFormat from 'Data/format.js'
 import {
   normalizePath,
   useSetFlowTo,
@@ -313,7 +311,7 @@ export function useData({
     let value = rawValue
     if (path && formatIn) {
       try {
-        value = fromFormat[formatIn](rawValue, data)
+        value = formatIn(rawValue, data)
       } catch (error) {
         if (process.env.NODE_ENV === 'development') {
           log({
@@ -331,7 +329,7 @@ export function useData({
     let isValidInitial = true
     if (validate) {
       try {
-        isValidInitial = !!fromValidate[validate](rawValue, value, data)
+        isValidInitial = !!validate(rawValue, value, data)
       } catch (error) {
         if (process.env.NODE_ENV === 'development') {
           log({
@@ -369,7 +367,7 @@ export function useData({
           let valueSet = value
           if (formatOut) {
             try {
-              valueSet = fromFormat[formatOut](value, data)
+              valueSet = formatOut(value, data)
             } catch (error) {
               if (process.env.NODE_ENV === 'development') {
                 log({
@@ -549,39 +547,6 @@ export function useData({
         viewPath,
         context,
         message: `"${context}" doesn't have data. You're using a mock now.`,
-      })
-      return getDataMock()
-    }
-
-    if (formatIn && !(formatIn in fromFormat)) {
-      log({
-        type: 'views/data/invalid-formatIn',
-        viewPath,
-        context,
-        formatIn,
-        message: `"${formatIn}" function doesn't exist or is not exported in Data/format.js. You're using a mock now.`,
-      })
-      return getDataMock()
-    }
-
-    if (formatOut && !(formatOut in fromFormat)) {
-      log({
-        type: 'views/data/invalid-formatOut',
-        viewPath,
-        context,
-        formatOut,
-        message: `"${formatOut}" function doesn't exist or is not exported in Data/format.js. You're using a mock now.`,
-      })
-      return getDataMock()
-    }
-
-    if (validate && !(validate in fromValidate)) {
-      log({
-        type: 'views/data/invalid-validate',
-        viewPath,
-        context,
-        validate,
-        message: `"${validate}" function doesn't exist or is not exported in Data/validators.js. You're using a mock now.`,
       })
       return getDataMock()
     }

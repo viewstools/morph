@@ -7,6 +7,7 @@ import {
   getComment,
   getData,
   getDataFormat,
+  getDataFormatOut,
   getDataValidate,
   getProp,
   getPropType,
@@ -375,7 +376,7 @@ export default ({
           if (p.name === 'format') {
             currentData.format = getDataFormat(p)
           } else if (p.name === 'formatOut') {
-            currentData.format.formatOut = p.value
+            currentData.format.formatOut = getDataFormatOut(p)
           } else if (p.name === 'validate') {
             currentData.validate = getDataValidate(p)
           } else if (p.name === 'required') {
