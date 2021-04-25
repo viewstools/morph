@@ -34,13 +34,13 @@ function getDataVariableName(data, state) {
       .map(toSnakeCase)
       .join('_')
   )}`
-  if (state.usedDataNames[name]) {
-    name = `${name}${state.usedDataNames[name]}`
-    state.usedDataNames[name] += 1
+  let suffix = ''
+  if (name in state.usedDataNames) {
+    suffix = `${state.usedDataNames[name]++}`
   } else {
     state.usedDataNames[name] = 1
   }
-  return name
+  return `${name}${suffix}`
 }
 
 function maybeDataContext(dataDefinition, state) {
