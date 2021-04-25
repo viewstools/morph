@@ -360,7 +360,7 @@ export default ({
     let index = 0
     while (index < block.properties.length) {
       let p = block.properties[index]
-      if (p.name === 'data') {
+      if (p.name === 'data' && !p.tags.slot) {
         let currentData = getData(p)
         currentData.loc = p.loc
         data.push(currentData)
