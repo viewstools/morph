@@ -1,13 +1,13 @@
 import relativise from './relativise.js'
 import path from 'path'
 
-let FILE_USE_IS_BEFORE = path.join('Logic', 'useIsBefore.js')
-let FILE_USE_IS_HOVERED = path.join('Logic', 'useIsHovered.js')
-let FILE_USE_IS_MEDIA = path.join('Logic', 'useIsMedia.js')
-let FILE_USE_DATA = path.join('Data', 'ViewsData.js')
+let FILE_USE_IS_BEFORE = path.join('Views', 'hooks', 'useIsBefore.js')
+let FILE_USE_IS_HOVERED = path.join('Views', 'hooks', 'useIsHovered.js')
+let FILE_USE_IS_MEDIA = path.join('Views', 'hooks', 'useIsMedia.js')
+let FILE_USE_DATA = path.join('Views', 'Data.js')
 let FILE_USE_DATA_FORMAT = path.join('Views', 'Data', 'format.js')
 let FILE_USE_DATA_VALIDATE = path.join('Views', 'Data', 'validate.js')
-let FILE_USE_FLOW = path.join('Logic', 'ViewsFlow.js')
+let FILE_USE_FLOW = path.join('Views', 'Flow.js')
 
 export default function makeGetSystemImport(src) {
   return function getSystemImport(id, file) {

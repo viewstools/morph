@@ -8,16 +8,9 @@ let CONTENT = `# views
 **/DesignSystem/Fonts/*.js
 **/*.graphql.js
 **/data.js
-src/Data/ViewsData.js
-src/Logic/ViewsFlow.js
-src/Logic/ViewsFlow.json
-src/Logic/useIsBefore.js
-src/Logic/useIsMedia.js
-src/Logic/useIsHovered.js
-src/Logic/ViewsTools.js
-src/Logic/ViewsToolsDesignSystem.js`
+src/Views`
 
-export default async function ensureIsBefore({ pass, src }) {
+export default async function ensureGitignore({ pass, src }) {
   if (pass > 0) return false
 
   let file = path.join(src, '..', '.gitignore')

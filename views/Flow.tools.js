@@ -10,7 +10,7 @@ import React, {
   useMemo,
   useReducer,
 } from 'react'
-import ViewsTools from './ViewsTools.js'
+import ViewsTools from './Tools.js'
 
 export let flowDefinition = {}
 let FLOW_KEY_WITH_ARGUMENTS = /\(.+?\)/g
