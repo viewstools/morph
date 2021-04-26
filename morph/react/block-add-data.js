@@ -3,20 +3,39 @@ import toCamelCase from 'to-camel-case'
 import path from 'path'
 
 export function enter(node, parent, state) {
-  for (let data of node.data) {
-    data.name = getDataVariableName(data, state)
+  for (let dataGroup of node.data) {
+    for (let data of dataGroup.data) {
+      data.name = getDataVariableName(data, state)
 
-    // at the moment it will create multiple instances for the same data key
-    // an optimization will be implemented to reuse a variable if possible
-    state.dataBlocks.push(
-      `let ${data.name} = fromData.useData({ viewPath, path: '${data.path}', `
-    )
-    maybeDataContext(data, state)
-    maybeDataFormat(data.format, state)
-    maybeDataValidate(data.validate, state)
-    state.dataBlocks.push('})')
+      // at the moment it will create multiple instances for the same data key
+      // an optimization will be implemented to reuse a variable if possible
+      state.dataBlocks.push(
+        `let ${data.name} = fromData.useData({ viewPath, path: '${data.path}', `
+      )
+      maybeDataContext(data, state)
+      maybeDataFormat(data.format, state)
+      maybeDataValidate(data.validate, state)
+      state.dataBlocks.push('})')
 
-    state.use('ViewsUseData')
+      state.use('ViewsUseData')
+    }
+
+    if (dataGroup.aggregate) {
+      dataGroup.name = getAggregateDataVariableName(state)
+      let importName = getAggregateImportName(dataGroup.aggregate.source, state)
+      state.dataBlocks.push(
+        `let ${dataGroup.name} = ${importName}.${
+          dataGroup.aggregate.value
+        }(${dataGroup.data.map((d) => d.name).join(', ')})`
+      )
+      dataGroup.path = dataGroup.data[0].path
+    } else {
+      // no aggregate function so will use the data directly
+      dataGroup.name = dataGroup.data[0].name
+      // the list item data provider functionality makes use of the path
+      // so adding it to keep consistency with already generated data providers
+      dataGroup.path = dataGroup.data[0].path
+    }
   }
 }
 
@@ -34,6 +53,17 @@ function getDataVariableName(data, state) {
       .map(toSnakeCase)
       .join('_')
   )}`
+  let suffix = ''
+  if (name in state.usedDataNames) {
+    suffix = `${state.usedDataNames[name]++}`
+  } else {
+    state.usedDataNames[name] = 1
+  }
+  return `${name}${suffix}`
+}
+
+function getAggregateDataVariableName(state) {
+  let name = 'aggregateData'
   let suffix = ''
   if (name in state.usedDataNames) {
     suffix = `${state.usedDataNames[name]++}`
@@ -78,6 +108,17 @@ function getFilePath(source) {
   }
   if (source.startsWith('.')) return source
   return `./${source}`
+}
+
+function getAggregateImportName(source, state) {
+  let importName
+  if (source) {
+    importName = getImportNameForSource(source, state)
+  } else {
+    state.use('ViewsUseDataAggregate')
+    importName = 'fromViewsAggregate'
+  }
+  return importName
 }
 
 function getValidateImportName(source, state) {

@@ -1,8 +1,11 @@
 let blacklist = [
   'classname',
+  'data',
   'format',
   'formatout',
   'required',
+  'aggregate',
+  'validate',
   'goto',
   'isfragment',
   'ismodal',
