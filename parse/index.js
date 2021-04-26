@@ -9,6 +9,7 @@ import {
   getDataFormat,
   getDataFormatOut,
   getDataValidate,
+  getDataAggregate,
   getProp,
   getPropType,
   getUnsupportedShorthandExpanded,
@@ -359,12 +360,18 @@ export default ({
 
     let data = []
     let index = 0
+    let currentDataGroup = null
     while (index < block.properties.length) {
       let p = block.properties[index]
       if (p.name === 'data' && !p.tags.slot) {
         let currentData = getData(p)
         currentData.loc = p.loc
-        data.push(currentData)
+        if (!currentDataGroup) {
+          currentDataGroup = { data: [], loc: p.loc }
+          data.push(currentDataGroup)
+        }
+
+        currentDataGroup.data.push(currentData)
 
         do {
           index++
@@ -381,10 +388,31 @@ export default ({
             currentData.validate = getDataValidate(p)
           } else if (p.name === 'required') {
             currentData.validate.required = p.value
+          } else if (p.name === 'aggregate') {
+            currentDataGroup.aggregate = getDataAggregate(p)
+          } else if (p.name === 'data') {
+            // data section finished - setting end line
+            currentData.loc.end = block.properties[index - 1].loc.end
+          } else {
+            if (
+              !currentDataGroup.aggregate &&
+              currentDataGroup.data.length > 1
+            ) {
+              warnings.push({
+                type: `No aggregate function was provided, but ${currentDataGroup.data.length} data keys were found. Did you forget to specify an aggregate function?`,
+                line,
+                loc: block.loc,
+              })
+            }
+            currentData.loc.end = block.properties[index - 1].loc.end
+            currentDataGroup.loc.end = block.properties[index - 1].loc.end
+            currentDataGroup = null
           }
         } while (
           index < block.properties.length &&
-          ['format', 'formatOut', 'validate', 'required'].includes(p.name)
+          ['format', 'formatOut', 'validate', 'required', 'aggregate'].includes(
+            p.name
+          )
         )
       } else {
         index++

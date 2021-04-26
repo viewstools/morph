@@ -64,7 +64,11 @@ export default ({
     usedBlockNames: { [finalName]: 1, AutoSizer: 1, Column: 1, Table: 1 },
     usedDataNames: {},
     usedImports: {},
-    usedImportNames: { fromViewsFormat: 1, fromViewsValidate: 1 },
+    usedImportNames: {
+      fromViewsFormat: 1,
+      fromViewsValidate: 1,
+      fromViewsAggregate: 1,
+    },
     uses: [],
     testIdKey: 'data-testid',
     testIdKeyAsProp: 'dataTestid',

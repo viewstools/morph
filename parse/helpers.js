@@ -282,6 +282,14 @@ export let getDataValidate = (maybeProp) => {
   }
 }
 
+export let getDataAggregate = (maybeProp) => {
+  if (!maybeProp || !maybeProp.value) return null
+  return {
+    type: 'js',
+    ...maybeSourceAndValue(maybeProp.value),
+  }
+}
+
 export let getProp = (line) => {
   // eslint-disable-next-line
   let [_, name, _1, value = ''] = get(PROP, line)

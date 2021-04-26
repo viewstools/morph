@@ -7,6 +7,7 @@ let FILE_USE_IS_MEDIA = path.join('Views', 'hooks', 'useIsMedia.js')
 let FILE_USE_DATA = path.join('Views', 'Data.js')
 let FILE_USE_DATA_FORMAT = path.join('Views', 'Data', 'format.js')
 let FILE_USE_DATA_VALIDATE = path.join('Views', 'Data', 'validate.js')
+let FILE_USE_DATA_AGGREGATE = path.join('Views', 'Data', 'aggregate.js')
 let FILE_USE_FLOW = path.join('Views', 'Flow.js')
 
 export default function makeGetSystemImport(src) {
@@ -55,6 +56,13 @@ export default function makeGetSystemImport(src) {
         return `import * as fromViewsValidate from '${relativise(
           file,
           path.join(src, FILE_USE_DATA_VALIDATE),
+          src
+        )}'`
+
+      case 'ViewsUseDataAggregate':
+        return `import * as fromViewsAggregate from '${relativise(
+          file,
+          path.join(src, FILE_USE_DATA_AGGREGATE),
           src
         )}'`
 
