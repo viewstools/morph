@@ -5,19 +5,11 @@ import path from 'path'
 export function enter(node, parent, state) {
   for (let dataGroup of node.data) {
     for (let data of dataGroup.data) {
-      data.name = getDataVariableName(data, state)
-
-      // at the moment it will create multiple instances for the same data key
-      // an optimization will be implemented to reuse a variable if possible
-      state.dataBlocks.push(
-        `let ${data.name} = fromData.useData({ viewPath, path: '${data.path}', `
-      )
-      maybeDataContext(data, state)
-      maybeDataFormat(data.format, state)
-      maybeDataValidate(data.validate, state)
-      state.dataBlocks.push('})')
-
-      state.use('ViewsUseData')
+      if (data.isConstant) {
+        addConstantData(data, state)
+      } else {
+        addData(data, state)
+      }
     }
 
     if (dataGroup.aggregate) {
@@ -39,6 +31,34 @@ export function enter(node, parent, state) {
   }
 }
 
+function addConstantData(data, state) {
+  data.name = getConstantDataVariableName(state)
+  if (data.format?.formatIn) {
+    let importName = getImportNameForSource(data.format.formatIn.source, state)
+    state.dataBlocks.push(
+      `let ${data.name} = ${importName}.${data.format.formatIn.value}(${data.value})`
+    )
+  } else {
+    state.dataBlocks.push(`let ${data.name} = ${data.value}`)
+  }
+}
+
+function addData(data, state) {
+  data.name = getDataVariableName(data, state)
+
+  // at the moment it will create multiple instances for the same data key
+  // an optimization will be implemented to reuse a variable if possible
+  state.dataBlocks.push(
+    `let ${data.name} = fromData.useData({ viewPath, path: '${data.path}', `
+  )
+  maybeDataContext(data, state)
+  maybeDataFormat(data.format, state)
+  maybeDataValidate(data.validate, state)
+  state.dataBlocks.push('})')
+
+  state.use('ViewsUseData')
+}
+
 function getDataVariableName(data, state) {
   let name = `${toCamelCase(
     [
@@ -53,6 +73,17 @@ function getDataVariableName(data, state) {
       .map(toSnakeCase)
       .join('_')
   )}`
+  let suffix = ''
+  if (name in state.usedDataNames) {
+    suffix = `${state.usedDataNames[name]++}`
+  } else {
+    state.usedDataNames[name] = 1
+  }
+  return `${name}${suffix}`
+}
+
+function getConstantDataVariableName(state) {
+  let name = 'constantData'
   let suffix = ''
   if (name in state.usedDataNames) {
     suffix = `${state.usedDataNames[name]++}`

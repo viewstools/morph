@@ -241,10 +241,19 @@ export let getComment = (line) => {
 export let getData = (maybeProp) => {
   if (!maybeProp) return null
 
-  let match = maybeProp.value.match(/^((show|capture)\s+)?(.+)$/)
+  let match = `${maybeProp.value}`.match(/^((show|capture)\s+)?(.+)$/)
   if (!match) return null
 
   let path = match[3]
+  if (/^\"(.+)?\"$/.test(path) || /^\'(.+)?\'$/.test(path)) {
+    return {
+      value: path,
+      isConstant: true,
+    }
+  }
+  if (!isNaN(Number(path))) {
+    return { value: Number(path), isConstant: true }
+  }
   let [context = null] = /\./.test(path) ? path.split('.') : [path]
 
   return { path, context }
