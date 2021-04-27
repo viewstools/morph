@@ -3,6 +3,7 @@ import {
   getDataForLoc,
   hasCustomScopes,
   isSlot,
+  replacePropWithDataValue,
 } from '../utils.js'
 import wrap from './wrap.js'
 
@@ -12,7 +13,10 @@ export function enter(node, parent, state) {
   if (node.name === 'text' && parent.name === 'Text') {
     let data = getDataForLoc(parent, node.loc)
     if (data && node.value === 'props.value') {
-      parent.explicitChildren = `{${data.name}.value}`
+      parent.explicitChildren = `{${replacePropWithDataValue(
+        node.value,
+        data
+      )}}`
     } else if (hasCustomScopes(node, parent)) {
       parent.explicitChildren = wrap(getScopedCondition(node, parent, state))
     } else if (isSlot(node)) {
