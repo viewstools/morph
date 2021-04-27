@@ -1,6 +1,11 @@
 import { singular } from 'pluralize'
 import toSnakeCase from 'to-snake-case'
-import { getProp, getDataForLoc, isList } from '../utils.js'
+import {
+  getProp,
+  getDataForLoc,
+  replacePropWithDataValue,
+  isList,
+} from '../utils.js'
 
 let DATA_VALUE = /props\.value/
 
@@ -13,7 +18,7 @@ export function enter(node, parent, state) {
   let value = from.value
   let data = getDataForLoc(node, from.loc)
   if (data && DATA_VALUE.test(value)) {
-    value = value.replace('props', data.name)
+    value = replacePropWithDataValue(value, data)
   }
 
   state.render.push(

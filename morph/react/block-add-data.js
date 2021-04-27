@@ -14,6 +14,7 @@ export function enter(node, parent, state) {
 
     if (dataGroup.aggregate) {
       dataGroup.name = getAggregateDataVariableName(state)
+      dataGroup.valueName = dataGroup.name
       let importName = getAggregateImportName(dataGroup.aggregate.source, state)
       state.dataBlocks.push(
         `let ${dataGroup.name} = ${importName}.${
@@ -24,6 +25,7 @@ export function enter(node, parent, state) {
     } else {
       // no aggregate function so will use the data directly
       dataGroup.name = dataGroup.data[0].name
+      dataGroup.valueName = dataGroup.data[0].valueName
       // the list item data provider functionality makes use of the path
       // so adding it to keep consistency with already generated data providers
       dataGroup.path = dataGroup.data[0].path
@@ -33,6 +35,8 @@ export function enter(node, parent, state) {
 
 function addConstantData(data, state) {
   data.name = getConstantDataVariableName(state)
+  data.valueName = data.name
+
   if (data.format?.formatIn) {
     let importName = getImportNameForSource(data.format.formatIn.source, state)
     state.dataBlocks.push(
@@ -45,6 +49,7 @@ function addConstantData(data, state) {
 
 function addData(data, state) {
   data.name = getDataVariableName(data, state)
+  data.valueName = `${data.name}.value`
 
   // at the moment it will create multiple instances for the same data key
   // an optimization will be implemented to reuse a variable if possible

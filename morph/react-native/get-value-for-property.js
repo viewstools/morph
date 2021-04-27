@@ -9,6 +9,7 @@ import {
   hasCustomBlockParent,
   isValidImgSrc,
   pushImageToState,
+  replacePropWithDataValue,
 } from '../utils.js'
 import safe from '../react/safe.js'
 import wrap from '../react/wrap.js'
@@ -58,27 +59,15 @@ function getImageSource(node, parent, state) {
   }
 }
 
+let DATA_VALUES = /!?props\.(isInvalid|isInvalidInitial|isValid|isValidInitial|isSubmitting|value|onSubmit|onChange)/
 let CHILD_VALUES = /props\.(isSelected|isHovered|isFocused|isSelectedHovered)/
 let ON_IS_SELECTED = /(onClick|onPress|goTo)/
 
 export default function getValueForProperty(node, parent, state) {
   let data = getDataForLoc(parent, node.loc)
-  if (
-    data &&
-    (node.value === '!props.value' ||
-      node.value === 'props.value' ||
-      node.value === 'props.onSubmit' ||
-      node.value === 'props.onChange' ||
-      node.value === 'props.isInvalid' ||
-      node.value === 'props.isInvalidInitial' ||
-      node.value === 'props.isValid' ||
-      node.value === 'props.isValidInitial' ||
-      node.value === 'props.onSubmit' ||
-      node.value === 'props.isSubmitting' ||
-      node.value === '!props.isSubmitting')
-  ) {
+  if (data && DATA_VALUES.test(node.value)) {
     return {
-      [node.name]: `{${node.value.replace('props.', `${data.name}.`)}}`,
+      [node.name]: `{${replacePropWithDataValue(node.value, data)}}`,
     }
   } else if (/!?props\.(isFlow|flow)$/.test(node.value)) {
     let flowPath = getFlowPath(node, parent, state)

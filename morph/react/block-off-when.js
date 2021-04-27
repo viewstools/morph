@@ -2,6 +2,7 @@ import {
   getFlowPath,
   getProp,
   getDataForLoc,
+  replacePropWithDataValue,
   hasCustomBlockParent,
   isList,
   isView,
@@ -27,7 +28,7 @@ export function enter(node, parent, state) {
     let value = onWhen.value
     let data = getDataForLoc(node, onWhen.loc)
     if (data && DATA_VALUES.test(value)) {
-      value = value.replace('props', data.name)
+      value = replacePropWithDataValue(value, data)
     } else if (IS_MEDIA.test(value)) {
       let [, variable, media] = value.match(IS_MEDIA)
       value = `${variable.replace('props.', '')}.${media.toLowerCase()}`

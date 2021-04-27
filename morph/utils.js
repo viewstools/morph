@@ -126,7 +126,7 @@ export function isFlow(prop) {
 export function getScopedName({ name, blockNode, propNode, scope, state }) {
   let data = getDataForLoc(blockNode, propNode?.loc)
   if (data && DATA_VALUES.test(name)) {
-    return name.replace('props', data.name)
+    return replacePropWithDataValue(name, data)
   } else if (
     blockNode &&
     hasCustomBlockParent(blockNode) &&
@@ -353,7 +353,7 @@ function getPropValue(prop, blockNode, interpolateValue = true) {
   let propValue = prop.value
   let data = getDataForLoc(blockNode, prop?.loc)
   if (data && DATA_VALUES.test(`props.${prop.value}`)) {
-    propValue = `${data.name}.${propValue}`
+    propValue = replacePropWithDataValue(`props.${prop.value}`, data)
   }
 
   let unit = getUnit(prop)
@@ -607,4 +607,10 @@ export function getDataForLoc(blockNode, loc) {
       .filter((data) => data.loc.start.line < loc.start.line)
       .sort((a, b) => b.loc.start.line - a.loc.start.line)?.[0]
   )
+}
+
+export function replacePropWithDataValue(value, dataGroup) {
+  return value
+    .replace('props.value', dataGroup.valueName)
+    .replace('props', dataGroup.name)
 }
