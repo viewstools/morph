@@ -24,10 +24,11 @@ async function ensureStaticFiles({ pass, src, tools }) {
     cwd: path.join(__dirname, 'views'),
     ignore: ['Flow.js', '**/*.tools.js', tools && 'Tools.js'].filter(Boolean),
   })
+
   if (tools) {
     let filesTools = await glob('**/*.tools.js', {
-      cwd: src,
-      ignore: ['Flow.js'],
+      cwd: path.join(__dirname, 'views'),
+      ignore: ['Flow.tools.js'],
     })
 
     files = [
