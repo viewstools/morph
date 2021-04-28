@@ -352,8 +352,14 @@ export let getAnimatedStyles = (node, isNative) => {
 function getPropValue(prop, blockNode, interpolateValue = true) {
   let propValue = prop.value
   let data = getDataForLoc(blockNode, prop?.loc)
-  if (data && DATA_VALUES.test(`props.${prop.value}`)) {
-    propValue = replacePropWithDataValue(`props.${prop.value}`, data)
+  if (data) {
+    let propToReplace = prop.value.startsWith('props.')
+      ? prop.value
+      : `props.${prop.value}`
+
+    if (DATA_VALUES.test(propToReplace)) {
+      propValue = replacePropWithDataValue(propToReplace, data)
+    }
   }
 
   let unit = getUnit(prop)
