@@ -385,8 +385,15 @@ export default ({
           } else if (p.name === 'formatOut') {
             currentData.format.formatOut = getDataFormatOut(p)
           } else if (p.name === 'validate') {
+            let required = currentData.validate?.required
             currentData.validate = getDataValidate(p)
+            if (required) {
+              currentData.validate.required = true
+            }
           } else if (p.name === 'required') {
+            if (!currentData.validate) {
+              currentData.validate = {}
+            }
             currentData.validate.required = p.value
           } else if (p.name === 'aggregate') {
             currentDataGroup.aggregate = getDataAggregate(p)
@@ -403,6 +410,13 @@ export default ({
                 line,
                 loc: block.loc,
               })
+            }
+            if (
+              'validate' in currentData &&
+              !('type' in currentData.validate)
+            ) {
+              // required keyword without validate
+              delete currentData.validate
             }
             currentData.loc.end = block.properties[index - 1].loc.end
             currentDataGroup.loc.end = block.properties[index - 1].loc.end
