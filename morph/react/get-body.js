@@ -38,7 +38,7 @@ export default function getBody({ state, name, view }) {
     ${state.useIsHovered ? getUseIsHovered({ state }) : ''}
     ${state.useIsMedia ? 'let isMedia = useIsMedia()' : ''}
     ${flow.join('\n')}
-    ${state.dataBlocks.join('\n')}
+    ${state.variables.join('\n')}
     ${animated.join('\n')}
 
   return ${ret}

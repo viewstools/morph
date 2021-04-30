@@ -357,7 +357,30 @@ export default ({
     parseProps(i, block)
     lookForFonts(block)
     lookForMultiples(block)
+    parseData(block)
 
+    if (block.data.length > 0) {
+      block.slots = block.slots.filter((item) => item.name !== 'value')
+    }
+    slots = [...slots, ...block.slots]
+    delete block.slots
+
+    let flowProp = block.properties.find((p) => p.name === 'is')
+    if (flowProp) {
+      block.isView = true
+      block.flow = flowProp.value
+      block.viewPath = path.dirname(file.replace(src.replace(/\\/g, '/'), ''))
+      block.viewPathParent = path.dirname(block.viewPath)
+
+      slots.push({
+        name: 'viewPath',
+        type: 'string',
+        defaultValue: block.viewPath,
+      })
+    }
+  }
+
+  function parseData(block) {
     let data = []
     let index = 0
     let currentDataGroup = null
@@ -434,26 +457,6 @@ export default ({
     }
 
     block.data = data
-
-    if (block.data.length > 0) {
-      block.slots = block.slots.filter((item) => item.name !== 'value')
-    }
-    slots = [...slots, ...block.slots]
-    delete block.slots
-
-    let flowProp = block.properties.find((p) => p.name === 'is')
-    if (flowProp) {
-      block.isView = true
-      block.flow = flowProp.value
-      block.viewPath = path.dirname(file.replace(src.replace(/\\/g, '/'), ''))
-      block.viewPathParent = path.dirname(block.viewPath)
-
-      slots.push({
-        name: 'viewPath',
-        type: 'string',
-        defaultValue: block.viewPath,
-      })
-    }
   }
 
   function parseProps(i, block) {
@@ -762,6 +765,19 @@ export default ({
 
       if (propNode) {
         block.loc.end = propNode.loc.end
+
+        if (
+          /^on[A-Z]/.test(propNode.name) &&
+          propNode.name !== 'onWhen' &&
+          !propNode.tags.slot &&
+          typeof propNode.value === 'string'
+        ) {
+          let components = propNode.value.split(' ')
+          if (components.length === 2) {
+            propNode.source = components[0]
+            propNode.value = components[1]
+          }
+        }
 
         if (inScope) {
           if (
