@@ -16,7 +16,7 @@ export function enter(node, parent, state) {
   if (/^use[A-Z]/.test(node.value)) {
     let variableName = getVariableName(node.name, state)
     state.variables.push(
-      `let ${variableName} = ${importName}.${node.value}(VIEW_PROPS)`
+      `let ${variableName} = ${importName}.${node.value}({ viewPath })`
     )
     node.value = variableName
   } else {
