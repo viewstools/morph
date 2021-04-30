@@ -6,30 +6,7 @@ import {
   isUnsupportedShorthand,
 } from './helpers.js'
 
-let SLOT_PROPS = [
-  'onBlur',
-  'onChange',
-  'onClick',
-  'onDrag',
-  'onDragEnd',
-  'onDragEnter',
-  'onDragExit',
-  'onDragLeave',
-  'onDragOver',
-  'onDragStart',
-  'onDrop',
-  'onFocus',
-  'onFocus',
-  'onMouseDown',
-  'onMouseEnter',
-  'onMouseLeave',
-  'onMouseMove',
-  'onMouseOver',
-  'onMouseUp',
-  'onWheel',
-  'onWhen',
-  'when',
-]
+let SLOT_PROPS = ['onWhen', 'when']
 let shouldBeSlot = (prop, block) =>
   SLOT_PROPS.includes(prop) || (block.isList && prop === 'from')
 

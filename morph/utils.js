@@ -3,6 +3,7 @@ import getUnit from './get-unit.js'
 import safe from './react/safe.js'
 import toCamelCase from 'to-camel-case'
 import toSlugCase from 'to-slug-case'
+import path from 'path'
 import wrap from './react/wrap.js'
 
 let safeScope = (value) =>
@@ -223,8 +224,10 @@ export let isSlot = (maybeNode1, maybeNode2) => {
     ? /(flow\.|isHovered|childProps|props|isBefore|isMedia\.|Data\d*\.)/.test(
         node
       )
-    : isTag(node, 'slot')
+    : isTag(node, 'slot') ||
+        (node?.name && /^on[A-Z]/.test(node.name) && node.source)
 }
+
 export let isStyle = (node) => isTag(node, 'style')
 export let isRowStyle = (node) => isTag(node, 'rowStyle')
 export let isTag = (node, tag) => node && node.tags[tag]
@@ -619,4 +622,50 @@ export function replacePropWithDataValue(value, dataGroup) {
   return value
     .replace('props.value', dataGroup.valueName)
     .replace('props', dataGroup.name)
+}
+
+export function getImportNameForSource(source, state) {
+  let filePath = getFilePath(source)
+  if (state.usedImports[filePath]) {
+    // there is already a reference to the exact file
+    return state.usedImports[filePath]
+  }
+
+  let importName = getImportName(
+    toCamelCase(`from_${path.parse(filePath).name.replace(/[\W_]+/g, '')}`),
+    state
+  )
+
+  state.usedImports[filePath] = importName
+  state.use(`import * as ${importName} from '${filePath}'`)
+  return importName
+}
+
+function getImportName(importName, state) {
+  let result = importName
+  if (state.usedImportNames[importName]) {
+    result = `${importName}${state.usedImportNames[importName]}`
+    state.usedImportNames[importName] += 1
+  } else {
+    state.usedImportNames[importName] = 1
+  }
+  return result
+}
+
+function getFilePath(source) {
+  if (path.isAbsolute(source)) {
+    return source.substring(1)
+  }
+  if (source.startsWith('.')) return source
+  return `./${source}`
+}
+
+export function getVariableName(name, state) {
+  let suffix = ''
+  if (name in state.usedVariableNames) {
+    suffix = `${state.usedVariableNames[name]++}`
+  } else {
+    state.usedVariableNames[name] = 1
+  }
+  return `${name}${suffix}`
 }

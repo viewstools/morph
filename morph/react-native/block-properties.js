@@ -5,6 +5,7 @@ import * as PropertyRest from '../react/property-rest.js'
 import * as PropertyStyle from '../react/property-style.js'
 import * as PropertyText from '../react/property-text.js'
 import * as PropertyViewPath from '../react/property-view-path.js'
+import * as PropertyEventHandler from '../react/property-event-handler.js'
 import { isColumn } from '../utils.js'
 import isValidPropertyForBlock from './is-valid-property-for-block.js'
 
@@ -31,6 +32,8 @@ export function enter(node, parent, state) {
       (propNode.name === 'width' && isColumn(node))
     )
       return
+
+    PropertyEventHandler.enter(propNode, node, state)
 
     !PropertyRef.enter(propNode, node, state) &&
       !PropertyStyle.enter(propNode, node, state) &&
