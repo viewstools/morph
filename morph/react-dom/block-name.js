@@ -1,4 +1,8 @@
-import { getActionableParent, getPropValueOrDefault, isView } from '../utils.js'
+import {
+  getActionableParent,
+  getPropValueOrDefault,
+  isViewSeparate,
+} from '../utils.js'
 import { leave } from '../react/block-name.js'
 import handleTable from '../react/block-name-handle-table.js'
 import getBlockName from './get-block-name.js'
@@ -28,7 +32,7 @@ export function enter(node, parent, state) {
     state.flowDefaultState = null
   }
 
-  if (isView(node, state)) {
+  if (isViewSeparate(node, state)) {
     state.use('ViewsUseFlow')
   }
 

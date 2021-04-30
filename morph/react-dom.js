@@ -17,6 +17,7 @@ export default ({
   getFontImport,
   getSystemImport,
   morpher = 'react-dom',
+  profile = false,
   src,
   tools,
   view,
@@ -69,6 +70,7 @@ export default ({
       fromViewsValidate: 1,
       fromViewsAggregate: 1,
     },
+    profile,
     uses: [],
     testIdKey: 'data-testid',
     testIdKeyAsProp: 'dataTestid',
@@ -113,6 +115,10 @@ export default ({
     console.warn(
       `// ${name} is a Views reserved name. To fix this, change its file name to something else.`
     )
+  }
+
+  if (profile) {
+    state.use('ViewsUseProfile')
   }
 
   state.fonts = view.parsed.fonts

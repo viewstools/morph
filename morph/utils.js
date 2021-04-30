@@ -592,7 +592,7 @@ export let maybeMakeHyphenated = ({ name, value }) =>
     ? toSlugCase(value)
     : value
 
-export let isView = (node, state) =>
+export let isViewSeparate = (node, state) =>
   !node.isBasic && state.isView(node.name) && state.flow === 'separate'
 
 export function getFlowPath(node, parent, state) {

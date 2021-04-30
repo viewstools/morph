@@ -5,7 +5,7 @@ import {
   replacePropWithDataValue,
   hasCustomBlockParent,
   isList,
-  isView,
+  isViewSeparate,
 } from '../utils.js'
 
 let IS_MEDIA = /(!?props\.isMedia)(.+)/
@@ -42,7 +42,7 @@ export function enter(node, parent, state) {
     }
 
     state.render.push(`${value} ? `)
-  } else if (isView(node, state)) {
+  } else if (isViewSeparate(node, state)) {
     node.onWhen = true
     state.render.push(`{flow.has(\`\${props.viewPath}/${node.name}\`) ? `)
   }

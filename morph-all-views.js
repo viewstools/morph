@@ -6,20 +6,22 @@ export default function morphAllViews({
   getFontImport,
   getSystemImport,
   filesView,
+  profile,
   src,
   tools,
   viewsById,
   viewsToFiles,
 }) {
   return [...filesView]
-    .map(file => viewsToFiles.get(file))
-    .filter(view => !view.custom)
-    .map(view => ({
+    .map((file) => viewsToFiles.get(file))
+    .filter((view) => !view.custom)
+    .map((view) => ({
       file: path.join(path.dirname(view.file), 'view.js'),
       content: maybeMorph({
         as,
         getFontImport,
         getSystemImport,
+        profile,
         src,
         tools,
         verbose: false,

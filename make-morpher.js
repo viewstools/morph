@@ -15,6 +15,7 @@ import processViewFiles from './process-view-files.js'
 export default function makeMorpher({
   appName = 'app',
   as = 'react-dom',
+  profile,
   src,
   tools = false,
   verbose = true,
@@ -93,6 +94,7 @@ export default function makeMorpher({
       filesView,
       getFontImport: makeGetFontImport(state.src),
       getSystemImport: makeGetSystemImport(state.src),
+      profile,
       src,
       tools: state.tools,
       viewsById: state.viewsById,
