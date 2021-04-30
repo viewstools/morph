@@ -6,6 +6,7 @@ export default function maybeMorph({
   as,
   getFontImport,
   getSystemImport,
+  profile,
   src,
   tools,
   view,
@@ -18,6 +19,7 @@ export default function maybeMorph({
     result = morphers[as]({
       getFontImport,
       getSystemImport,
+      profile,
       src,
       tools,
       view,

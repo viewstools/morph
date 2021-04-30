@@ -9,6 +9,7 @@ let FILE_USE_DATA_FORMAT = path.join('Views', 'Data', 'format.js')
 let FILE_USE_DATA_VALIDATE = path.join('Views', 'Data', 'validate.js')
 let FILE_USE_DATA_AGGREGATE = path.join('Views', 'Data', 'aggregate.js')
 let FILE_USE_FLOW = path.join('Views', 'Flow.js')
+let FILE_USE_PROFILE = path.join('Views', 'Profile.js')
 
 export default function makeGetSystemImport(src) {
   return function getSystemImport(id, file) {
@@ -70,6 +71,13 @@ export default function makeGetSystemImport(src) {
         return `import * as fromFlow from '${relativise(
           file,
           path.join(src, FILE_USE_FLOW),
+          src
+        )}'`
+
+      case 'ViewsUseProfile':
+        return `import * as fromProfile from '${relativise(
+          file,
+          path.join(src, FILE_USE_PROFILE),
           src
         )}'`
 

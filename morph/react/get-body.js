@@ -7,6 +7,17 @@ import path from 'path'
 
 export default function getBody({ state, name, view }) {
   let render = state.render.join('\n').replace(/props\./g, '')
+  if (state.profile || typeof state.profile === 'number') {
+    let viewPath = state.flow
+      ? ` viewPath={viewPath}`
+      : ` viewPath="/DesignSystem/${state.name}"`
+    let threshold =
+      typeof state.profile === 'number' ? ` threshold={${state.profile}}` : ''
+
+    render = `<fromProfile.Profile${viewPath}${threshold}>
+  ${render}
+</fromProfile.Profile>`
+  }
 
   let flow = []
   if (

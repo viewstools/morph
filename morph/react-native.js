@@ -19,6 +19,7 @@ export default ({
   getSystemImport,
   morpher = 'react-native',
   reactNativeLibraryImport = 'react-native',
+  profile = false,
   src,
   tools,
   view,
@@ -57,6 +58,7 @@ export default ({
     name: finalName,
     viewPath: view.parsed.view.viewPath,
     viewPathParent: view.parsed.view.viewPathParent,
+    profile,
     remap: {},
     render: [],
     styles: {},
@@ -107,6 +109,10 @@ export default ({
   //     console.trace()
   //   }
   // }
+
+  if (profile) {
+    state.use('ViewsUseProfile')
+  }
 
   state.fonts = view.parsed.fonts
   state.slots = view.parsed.slots
