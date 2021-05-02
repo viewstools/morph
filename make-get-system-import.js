@@ -11,7 +11,7 @@ let FILE_USE_DATA_AGGREGATE = path.join('Views', 'Data', 'aggregate.js')
 let FILE_USE_FLOW = path.join('Views', 'Flow.js')
 let FILE_USE_PROFILE = path.join('Views', 'Profile.js')
 
-export default function makeGetSystemImport(src) {
+export default function makeGetSystemImport({ src }) {
   return function getSystemImport(id, file) {
     switch (id) {
       case 'Column':

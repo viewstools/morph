@@ -15,9 +15,8 @@ export default function morphAllViews({
   return [...filesView]
     .map((file) => viewsToFiles.get(file))
     .filter((view) => !view.custom)
-    .map((view) => ({
-      file: path.join(path.dirname(view.file), 'view.js'),
-      content: maybeMorph({
+    .map((view) => {
+      let { content, extraFiles = [] } = maybeMorph({
         as,
         getFontImport,
         getSystemImport,
@@ -28,6 +27,18 @@ export default function morphAllViews({
         view,
         viewsById,
         viewsToFiles,
-      }),
-    }))
+      })
+
+      return [
+        {
+          file: path.join(path.dirname(view.file), 'view.js'),
+          content,
+        },
+        ...extraFiles.map(({ name, content }) => ({
+          file: path.join(path.dirname(view.file), name),
+          content,
+        })),
+      ]
+    })
+    .flat()
 }

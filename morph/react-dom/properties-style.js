@@ -9,8 +9,6 @@ import {
   getTimingProps,
   hasKeys,
   hasKeysInChildren,
-  hasRowStyles,
-  isTable,
 } from '../utils.js'
 import toSlugCase from 'to-slug-case'
 import uniq from 'array-uniq'
@@ -36,101 +34,52 @@ export function leave(node, parent, state) {
     state.scopes = node.scopes
   }
 
-  let id = null
+  let css = {}
+  getStaticCss({ node, scopedUnderParent, state, allowedStyleKeys, css })
+  getAnimatedCss(node, css)
+  getDynamicCss({ node, scopedUnderParent, state, allowedStyleKeys, css })
 
-  if (isTable(node) && hasRowStyles(node)) {
-    id = createId(node, state, false)
-    getTableRowCss({ node, state, id, scopedUnderParent })
-  }
-
-  let css = [
-    getStaticCss({ node, scopedUnderParent, state, allowedStyleKeys }),
-    node.isAnimated && getAnimatedCss(node),
-    getDynamicCss({ node, scopedUnderParent, state, allowedStyleKeys }),
-  ].filter(Boolean)
-
-  if (css.length > 0) {
-    if (id === null) {
-      id = createId(node, state)
-    } else if (isTable(node)) {
-      if (node.className) {
-        node.className.push(`\${styles.${id}}`)
-      }
-    }
-
-    state.styles[id] = `css({label: '${id}',\n  ${css.join(',\n  ')}})`
-    state.stylesOrder.push(id)
+  if (Object.keys(css).length > 0) {
+    let id = createId(node, state)
+    Object.entries(css).forEach(([key, content]) => {
+      let lid = key.replace('VIEW_ID', id)
+      state.styles[lid] = content.join('\n')
+      state.stylesOrder.push(lid)
+    })
   }
 }
 
-let composeStyles = (node, styles, scopedUnderParent) => {
-  let allowedStyleKeys = getAllowedStyleKeys(node)
-
-  if (hasKeysInChildren(styles.dynamic)) {
-    let cssStatic = Object.keys(styles.static)
-      .filter(
-        key => allowedStyleKeys.includes(key) && hasKeys(styles.static[key])
-      )
-      .map(key =>
-        asCss(
-          asStaticCss(styles.static[key], Object.keys(styles.dynamic[key])),
-          key,
-          scopedUnderParent
-        ).join('\n')
-      )
-
-    cssStatic = cssStatic.join(',\n')
-
-    let cssDynamic = Object.keys(styles.dynamic)
-      .filter(
-        key => allowedStyleKeys.includes(key) && hasKeys(styles.dynamic[key])
-      )
-      .map(key =>
-        asCss(asDynamicCss(styles.dynamic[key]), key, scopedUnderParent).join(
-          '\n'
-        )
-      )
-      .join(',\n')
-
-    return { cssDynamic, cssStatic }
-  }
-
-  let cssStatic = Object.keys(styles.static)
-    .filter(
-      key => allowedStyleKeys.includes(key) && hasKeys(styles.static[key])
-    )
-    .map(key =>
-      asCss(asStaticCss(styles.static[key]), key, scopedUnderParent).join('\n')
-    )
-    .join(',\n')
-
-  return { cssStatic }
-}
-
-let getStaticCss = ({ node, scopedUnderParent, state, allowedStyleKeys }) => {
+function getStaticCss({
+  node,
+  scopedUnderParent,
+  state,
+  allowedStyleKeys,
+  css,
+}) {
   let style = node.style.static
   if (!hasKeysInChildren(style)) return false
 
   state.cssStatic = true
 
-  let hasDynamicCss = hasKeysInChildren(node.style.dynamic)
+  Object.keys(style)
+    .filter((key) => allowedStyleKeys.includes(key) && hasKeys(style[key]))
+    .forEach((key) => {
+      let dynamic = node.style.dynamic[key]
 
-  return Object.keys(style)
-    .filter(key => allowedStyleKeys.includes(key) && hasKeys(style[key]))
-    .map(key =>
-      asCss(
-        asStaticCss(
-          style[key],
-          hasDynamicCss ? Object.keys(node.style.dynamic[key]) : []
-        ),
-        key,
-        scopedUnderParent
-      ).join('\n')
-    )
-    .join(',\n')
+      let code = asCss(
+        Object.entries(style[key]).filter(([key]) => !(key in dynamic))
+      )
+      addCodeToCss(code, key, scopedUnderParent, css)
+    })
 }
 
-let getDynamicCss = ({ node, scopedUnderParent, state, allowedStyleKeys }) => {
+function getDynamicCss({
+  node,
+  scopedUnderParent,
+  state,
+  allowedStyleKeys,
+  css,
+}) {
   let style = node.style.dynamic
   if (!hasKeysInChildren(style)) return false
 
@@ -152,33 +101,40 @@ let getDynamicCss = ({ node, scopedUnderParent, state, allowedStyleKeys }) => {
   }
 
   return Object.keys(style)
-    .filter(key => allowedStyleKeys.includes(key) && hasKeys(style[key]))
-    .map(key =>
-      asCss(asDynamicCss(style[key]), key, scopedUnderParent).join('\n')
-    )
-    .join(',\n')
+    .filter((key) => allowedStyleKeys.includes(key) && hasKeys(style[key]))
+    .forEach((key) => {
+      addCodeToCss(
+        asCss(Object.entries(style[key])),
+        key,
+        scopedUnderParent,
+        css
+      )
+    })
 }
 
-let getAnimatedCss = node => {
+function getAnimatedCss(node, css) {
+  if (!node.isAnimated) return
+
+  if (!('VIEW_ID' in css)) {
+    css['VIEW_ID'] = []
+  }
+
+  css['VIEW_ID'].push(`  will-change: ${getUniqueNames(node)};`)
   if (node.hasTimingAnimation) {
     let transition = uniq(getTimingProps(node).map(makeTransition)).join(', ')
 
-    return `\ntransition: '${transition}',\nwillChange: '${getUniqueNames(
-      node
-    )}'`
+    css['VIEW_ID'].push(`  transition: ${transition};`)
   }
-
-  return `\nwillChange: '${getUniqueNames(node)}'`
 }
 
-let getUniqueNames = node => {
+function getUniqueNames(node) {
   let names = [
-    ...new Set(getAllAnimatedProps(node, false).map(prop => prop.name)),
+    ...new Set(getAllAnimatedProps(node, false).map((prop) => prop.name)),
   ]
-  return uniq(names.map(name => ensurePropName(name))).join(', ')
+  return uniq(names.map((name) => ensurePropName(name))).join(', ')
 }
 
-let ensurePropName = name => {
+function ensurePropName(name) {
   switch (name) {
     case 'rotate':
     case 'rotateX':
@@ -203,8 +159,8 @@ let ensurePropName = name => {
   }
 }
 
-let makeTransition = ({ name, animation }) =>
-  [
+function makeTransition({ name, animation }) {
+  return [
     ensurePropName(name),
     `${animation.duration}ms`,
     toSlugCase(animation.curve),
@@ -212,122 +168,39 @@ let makeTransition = ({ name, animation }) =>
   ]
     .filter(Boolean)
     .join(' ')
+}
 
-let asDynamicCss = styles =>
-  Object.keys(styles).map(prop => `${prop}: ${styles[prop]}`)
-
-let safe = str =>
-  typeof str === 'string' ? `"${str.replace(/"/g, "'")}"` : str
-
-let asStaticCss = (styles, dynamicStyles = []) =>
-  Object.keys(styles)
-    .filter(prop => !dynamicStyles.includes(prop))
-    .map(prop => `${prop}: ${safe(styles[prop])}`)
+function asCss(styles) {
+  return styles.map(([key, value]) => `  ${toSlugCase(key)}: ${value};`)
+}
 
 let systemScopeToCssKey = {
   isDisabled: 'disabled',
   // isHovered: 'hover:enabled',
   isFocused: 'focus:enabled',
 }
-let ensureSystemScopeCssKey = key => systemScopeToCssKey[key] || key
-
-let asCss = (styles, key, scopedUnderParent) => {
-  let css = []
-
-  if (key !== 'base') {
-    if (scopedUnderParent) {
-      let parent = `.\${styles.${scopedUnderParent}}`
-      let theKey = ensureSystemScopeCssKey(key)
-      css.push(`[\`${parent}:${theKey} &\`]: {`)
-    } else if (
-      key === 'isDisabled' ||
-      // key === 'isHovered' ||
-      key === 'isFocused'
-    ) {
-      css.push(`"&:${ensureSystemScopeCssKey(key)}": {`)
-    } else if (key === 'isPlaceholder') {
-      css.push(`"&::placeholder": {`)
-    }
-  }
-
-  css.push(styles.join(',\n'))
-
-  if (key !== 'base') css.push(`}`)
-
-  return css
+function ensureSystemScopeCssKey(key) {
+  return systemScopeToCssKey[key] || key
 }
 
-let getTableRowCss = ({ node, state, id, scopedUnderParent }) => {
-  let normalStyles = {}
-  let alternateStyles = {}
+function addCodeToCss(code, key, scopedUnderParent, css) {
+  let cssKey = 'VIEW_ID'
 
-  Object.entries(node.style).forEach(([type, typeScopes]) => {
-    if (!(type in alternateStyles)) {
-      alternateStyles[type] = {}
-    }
-    if (!(type in normalStyles)) {
-      normalStyles[type] = {}
-    }
+  if (key !== 'base' && scopedUnderParent) {
+    cssKey = `${scopedUnderParent}:${ensureSystemScopeCssKey(key)} .VIEW_ID`
+  } else if (
+    key === 'isDisabled' ||
+    // key === 'isHovered' ||
+    key === 'isFocused'
+  ) {
+    cssKey = `VIEW_ID:${ensureSystemScopeCssKey(key)}`
+  } else if (key === 'isPlaceholder') {
+    cssKey = `VIEW_ID::placeholder`
+  }
 
-    Object.entries(typeScopes).forEach(([scope, scopeStyles]) => {
-      if (!(scope in alternateStyles[type])) {
-        alternateStyles[type][scope] = {}
-      }
-      if (!(scope in normalStyles[type])) {
-        normalStyles[type][scope] = {}
-      }
+  if (!(cssKey in css)) {
+    css[cssKey] = []
+  }
 
-      Object.entries(scopeStyles).forEach(([key, value]) => {
-        switch (key) {
-          case 'rowColor':
-            normalStyles[type][scope]['color'] = value
-            delete node.style[type][scope][key]
-            break
-          case 'rowBackgroundColor':
-            normalStyles[type][scope]['backgroundColor'] = value
-            delete node.style[type][scope][key]
-            break
-          case 'rowColorAlternate':
-            alternateStyles[type][scope]['color'] = value
-            delete node.style[type][scope][key]
-            break
-          case 'rowBackgroundColorAlternate':
-            alternateStyles[type][scope]['backgroundColor'] = value
-            delete node.style[type][scope][key]
-            break
-
-          default:
-            break
-        }
-      })
-    })
-  })
-
-  let { cssDynamic: normalDynamic, cssStatic: normalStatic } = composeStyles(
-    node,
-    normalStyles,
-    scopedUnderParent
-  )
-
-  let {
-    cssDynamic: alternateDynamic,
-    cssStatic: alternateStatic,
-  } = composeStyles(node, alternateStyles, scopedUnderParent)
-
-  let normalCss = `${normalStatic ? `${normalStatic}` : ''} ${
-    normalDynamic ? `, ${normalDynamic}` : ''
-  }`
-
-  let alternateCss = `${alternateStatic ? `${alternateStatic}` : ''} ${
-    alternateDynamic ? `, ${alternateDynamic}` : ''
-  }`
-
-  node.hasDynamicRowStyles = !!(normalDynamic || alternateDynamic)
-  state.render.push(` rowClassName={styles.${id}Row}`)
-
-  state.styles[`${id}Row`] = `css({ display: 'flex'
-    ${normalCss ? `, ${normalCss}` : ''}
-    ${alternateCss ? `, "&:nth-child(even)": {${alternateCss}}` : ''}
-    })`
-  state.stylesOrder.push(`${id}Row`)
+  css[cssKey] = [...css[cssKey], ...code]
 }

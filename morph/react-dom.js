@@ -126,6 +126,15 @@ export default ({
 
   walk(view.parsed.view, visitor, state)
 
+  let extraFiles = []
+  if (state.stylesOrder.length > 0) {
+    state.use(`import styles from './view.module.css'`)
+    extraFiles.push({
+      name: 'view.module.css',
+      content: getStyles(state),
+    })
+  }
+
   return {
     code: toComponent({
       getImport: makeGetImport({
@@ -136,11 +145,12 @@ export default ({
         viewsById,
         viewsToFiles,
       }),
-      getStyles,
+      getStyles: () => '',
       name: state.name,
       state,
       view,
     }),
+    extraFiles,
     dependencies: state.dependencies,
     flow: state.flow,
     flowDefaultState: state.flowDefaultState,

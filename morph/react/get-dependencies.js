@@ -89,11 +89,6 @@ export default (state, getImport, file) => {
     dependencies.push(`import ${img.name} from "${img.file}"`)
   )
 
-  if (state.cssDynamic || state.cssStatic) {
-    dependencies.push('import { css } from "emotion"')
-    state.dependencies.add('emotion')
-  }
-
   if (state.isAnimated) {
     let animations = [
       'animated',
