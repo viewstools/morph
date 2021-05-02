@@ -37,6 +37,8 @@ export default ({
     hasListItem: false,
     dependencies: new Set(),
     flow: null,
+    flowHas: false,
+    flowValue: false,
     setFlowTo: false,
     getFontImport: (font) => getFontImport(font, view),
     getStyleForProperty,

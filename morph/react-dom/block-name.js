@@ -29,7 +29,6 @@ export function enter(node, parent, state) {
 
   if (node.isFragment && node.name === 'View') {
     state.flow = getPropValueOrDefault(node, 'is', false)
-    state.flowDefaultState = null
   }
 
   if (isViewSeparate(node, state)) {

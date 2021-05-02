@@ -71,7 +71,7 @@ export default function getValueForProperty(node, parent, state) {
   } else if (/!?props\.(isFlow|flow)$/.test(node.value)) {
     let flowPath = getFlowPath(node, parent, state)
     state.use('ViewsUseFlow')
-    state.useFlow = true
+    state.useFlowHas = true
 
     return {
       [node.name]: `{${node.value.replace(
@@ -105,7 +105,7 @@ export default function getValueForProperty(node, parent, state) {
     }
 
     if (!parent.isBasic && ON_IS_SELECTED.test(node.name)) {
-      state.useFlow = true
+      state.useFlowHas = true
       ret[
         node.name.replace(ON_IS_SELECTED, 'isSelected')
       ] = `{flow.has(${flowPath})}`
@@ -147,7 +147,7 @@ export default function getValueForProperty(node, parent, state) {
 
       let flowPath = getFlowPath(actionableProp, actionableParent, state)
       state.use('ViewsUseFlow')
-      state.useFlow = true
+      state.useFlowHas = true
       return {
         [node.name]: `{flow.has(${flowPath})}`,
       }

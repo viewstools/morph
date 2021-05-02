@@ -20,14 +20,18 @@ export default function getBody({ state, name, view }) {
   }
 
   let flow = []
-  if (
-    state.useFlow ||
-    (state.flow === 'separate' && state.uses.includes('ViewsUseFlow'))
-  ) {
-    flow.push(`let flow = fromFlow.useFlow()`)
+  // if (state.flow === 'separate' && state.uses.includes('ViewsUseFlow')) {
+  if (state.useFlowHas) {
+    flow.push(`  let flow = fromFlow.useFlow()`)
   }
+  if (state.useFlowValue) {
+    flow.push(
+      `  let flowValue = fromFlow.useFlowValue(viewPath) || '${state.flowDefaultState}'`
+    )
+  }
+  // }
   if (state.setFlowTo) {
-    flow.push(`let setFlowTo = fromFlow.useSetFlowTo(viewPath)`)
+    flow.push(`  let setFlowTo = fromFlow.useSetFlowTo(viewPath)`)
   }
 
   let animated = getAnimated({ state })
@@ -42,21 +46,20 @@ export default function getBody({ state, name, view }) {
   }
 }`
   } else {
-    let ret = render ? `(${render})` : null
-
-    return `export default function ${name}(${expandedProps}) {
-    ${state.useIsBefore ? 'let isBefore = useIsBefore()' : ''}
-    ${state.useIsHovered ? getUseIsHovered({ state }) : ''}
-    ${state.useIsMedia ? 'let isMedia = useIsMedia()' : ''}
-    ${flow.join('\n')}
-    ${state.variables.join('\n')}
-    ${animated.join('\n')}
-
-  return ${ret}
-}
-
-${listItemDataProvider}
-`
+    return [
+      `export default function ${name}(${expandedProps}) {`,
+      state.useIsBefore && '  let isBefore = useIsBefore()',
+      state.useIsHovered && getUseIsHovered({ state }),
+      state.useIsMedia && '  let isMedia = useIsMedia()',
+      ...flow,
+      ...state.variables,
+      ...animated,
+      `  return ${render ? `(${render})` : 'null'}`,
+      '}',
+      listItemDataProvider,
+    ]
+      .filter(Boolean)
+      .join('\n')
   }
 }
 

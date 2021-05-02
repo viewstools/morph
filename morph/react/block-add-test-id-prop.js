@@ -8,5 +8,5 @@ export let enter = (node, parent, state) => {
     value = `{\`${state.testIdKeyAsProp} || '${node.testId}'}\`}`
   }
 
-  state.render.push(` ${state.testIdKey}=${value}`)
+  state.render.push(`  ${state.testIdKey}=${value}`)
 }

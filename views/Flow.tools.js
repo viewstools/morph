@@ -93,7 +93,7 @@ export function useFlowState() {
   return useContext(Context)[0]
 }
 export function useFlow() {
-  let state = useFlowState()
+  let [state] = useContext(Context)
 
   return useMemo(
     () => ({
@@ -128,6 +128,17 @@ export function useFlow() {
     }),
     [state.flow]
   )
+}
+export function useFlowValue(viewPath) {
+  let [state] = useContext(Context)
+
+  let flowValue = state.flow[viewPath]
+  if (flowValue) return flowValue
+
+  if (isFlowKeyWithArguments(viewPath)) {
+    let definitionKey = getFlowDefinitionKey(viewPath)
+    return state.flow[definitionKey]
+  }
 }
 
 let useSetFlowToBuffer = {}

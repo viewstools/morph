@@ -596,6 +596,7 @@ export let isViewSeparate = (node, state) =>
   !node.isBasic && state.isView(node.name) && state.flow === 'separate'
 
 export function getFlowPath(node, parent, state) {
+  // TODO morph to useFlowValue and do a lookup
   // TODO warn if action is used but it isn't in actions (on parser)
   // TODO warn that there's setFlowTo without an id (on parser)
   let setFlowTo = node.defaultValue
