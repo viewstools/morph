@@ -72,7 +72,12 @@ export function morphAllFonts({
     }
 
     return {
-      file: path.join(src, 'DesignSystem', 'Fonts', `${font}.js`),
+      file: path.join(
+        src,
+        'DesignSystem',
+        'Fonts',
+        `${font}${getFontFileExtension({ as })}`
+      ),
       content: morphFont[as](
         {
           id: font,
@@ -100,11 +105,27 @@ let FONT_TYPES = {
   '.woff2': 'woff2',
 }
 
-export let makeGetFontImport = (src) => (font, view) =>
+export let makeGetFontImport = ({ as, src }) => (font, view) =>
   `import "${relativise(
     view.file,
-    path.join(src, 'DesignSystem', 'Fonts', `${font}.js`),
+    path.join(
+      src,
+      'DesignSystem',
+      'Fonts',
+      `${font}${getFontFileExtension({ as })}`
+    ),
     src
   )}"`
 
 // let isFont = f => Object.keys(FONT_TYPES).includes(path.extname(f))
+
+function getFontFileExtension({ as }) {
+  switch (as) {
+    case 'react-dom': {
+      return '.module.css'
+    }
+    default: {
+      return '.js'
+    }
+  }
+}

@@ -5,6 +5,7 @@ import {
   maybeMakeHyphenated,
 } from '../utils.js'
 import { maybeAddFallbackFont } from '../fonts.js'
+import getUnit from '../get-unit.js'
 
 export default function getStyleForProperty(node, parent, state, code) {
   let scopedVar = setScopedVar(node, parent, state)
@@ -21,7 +22,7 @@ export default function getStyleForProperty(node, parent, state, code) {
       case 'translateY':
         return {
           _isScoped: true,
-          transform: `'${getTransform(node, parent, state)}'`,
+          transform: getTransform(node, parent, state),
         }
 
       case 'shadowColor':
@@ -35,7 +36,7 @@ export default function getStyleForProperty(node, parent, state, code) {
 
         return {
           _isScoped: true,
-          [key]: `'${shadow[key]}'`,
+          [key]: shadow[key],
         }
       }
 
@@ -55,9 +56,7 @@ export default function getStyleForProperty(node, parent, state, code) {
 
     case 'backgroundImage':
       return {
-        backgroundImage: code
-          ? `\`url(\${${asVar(node)}})\``
-          : `url("${node.value}")`,
+        backgroundImage: code ? `url(${asVar(node)})` : `url("${node.value}")`,
       }
 
     case 'fontFamily':
@@ -101,12 +100,29 @@ export default function getStyleForProperty(node, parent, state, code) {
   }
 }
 
-let maybeAsVar = (prop, code) =>
-  code ? asVar(prop) : maybeMakeHyphenated(prop)
+function maybeAsVar(prop, code) {
+  return code
+    ? asVar(prop)
+    : maybeAddUnit({
+        name: prop.name,
+        value: maybeMakeHyphenated(prop),
+      })
+}
 
-let asVar = prop => `'var(--${prop.name})'`
+function maybeAddUnit(prop) {
+  if (typeof prop.value === 'number') {
+    let unit = getUnit(prop, true)
+    return unit ? `${prop.value}${unit}` : prop.value
+  }
 
-let setScopedVar = (prop, block, state) => {
+  return prop.value
+}
+
+function asVar(prop) {
+  return `var(--${prop.name})`
+}
+
+function setScopedVar(prop, block, state) {
   if (
     prop.scope === 'isHovered' ||
     prop.scope === 'isFocused' ||
@@ -118,7 +134,7 @@ let setScopedVar = (prop, block, state) => {
   return scopedCondition && asVar(prop)
 }
 
-let getPropValue = (prop, block, state, unit = '') => {
+function getPropValue(prop, block, state, unit = '') {
   if (!prop) return false
 
   let scopedVar = setScopedVar(prop, block, state)
@@ -174,12 +190,12 @@ let getShadow = (node, parent, state) => {
   }
 }
 
-let getTransformValue = (prop, parent, unit) => {
+function getTransformValue(prop, parent, unit) {
   if (!prop) return false
   return `${prop.name}(${getPropValue(prop, parent, unit)})`
 }
 
-let getTransform = (node, parent) => {
+function getTransform(node, parent) {
   let rotate = getProp(parent, 'rotate', node.scope)
   let rotateX = getProp(parent, 'rotateX', node.scope)
   let rotateY = getProp(parent, 'rotateY', node.scope)
@@ -203,25 +219,12 @@ let getTransform = (node, parent) => {
     .filter(Boolean)
     .join(' ')
 
-  if (
-    isSlot(rotate) ||
-    isSlot(rotateX) ||
-    isSlot(rotateY) ||
-    isSlot(scale) ||
-    isSlot(scaleX) ||
-    isSlot(scaleY) ||
-    isSlot(translateX) ||
-    isSlot(translateY)
-  ) {
-    value = `\`${value}\``
-  }
-
   // TODO FIXME this is a hack to remove strings because my head is fried
   // and yeah it does what we need for now :)
   return value.replace(/'/g, '')
 }
 
-let getTransformOrigin = (node, parent) => {
+function getTransformOrigin(node, parent) {
   let transformOriginX = getProp(parent, 'transformOriginX', node.scope)
   let transformOriginY = getProp(parent, 'transformOriginY', node.scope)
   let value = [
@@ -239,8 +242,5 @@ let getTransformOrigin = (node, parent) => {
     .filter(Boolean)
     .join(' ')
 
-  if (isSlot(transformOriginX) || isSlot(transformOriginY)) {
-    value = `\`${value}\``
-  }
   return value
 }

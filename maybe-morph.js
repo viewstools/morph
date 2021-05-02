@@ -34,7 +34,7 @@ export default function maybeMorph({
         `${chalk.green('M')} ${view.id}@${view.version}:${chalk.dim(view.file)}`
       )
 
-    return result.code
+    return { content: result.code, extraFiles: result.extraFiles }
 
     // return prettier.format(result.code, {
     //   parser: 'babel',
@@ -43,7 +43,8 @@ export default function maybeMorph({
     // })
   } catch (error) {
     console.error(chalk.red('M'), view, error.codeFrame || error)
-    return `import { useEffect } from 'react'
+    return {
+      content: `import { useEffect } from 'react'
 
 export default function ${view.id}() {
   useEffect(() => {
@@ -66,6 +67,7 @@ ${result && result.code.replace(/(\/\*|\*\/)/g, '')}
 >>> ERROR
 ${error.message}
 ${error.stack}
-*/`
+*/`,
+    }
   }
 }

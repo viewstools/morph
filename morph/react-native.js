@@ -137,6 +137,7 @@ export default ({
       state,
       view,
     }),
+    extraFiles: [],
     dependencies: state.dependencies,
     flow: state.flow,
     flowDefaultState: state.flowDefaultState,
