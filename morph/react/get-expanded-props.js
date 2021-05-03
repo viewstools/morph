@@ -21,12 +21,17 @@ let IGNORED_SLOTS = new Set([
   'isMediaMobile',
   'isMediaLaptop',
 ])
-export default function getExpandedProps({ state }) {
+export default function getExpandedProps({
+  state,
+  ignoreDefaultValues = false,
+}) {
   let slots = state.slots
     .filter((slot) => !IGNORED_SLOTS.has(slot.name))
     .map((slot) => {
       let maybeDefaultValue =
-        slot.defaultValue === false ? '' : `= ${stringify(slot)}`
+        slot.defaultValue === false || ignoreDefaultValues
+          ? ''
+          : `= ${stringify(slot)}`
       return `${slot.name}${maybeDefaultValue}`
     })
 
