@@ -6,8 +6,10 @@ let MARKER = '# views'
 let CONTENT = `# views
 **/view.js
 **/DesignSystem/Fonts/*.js
+**/DesignSystem/Fonts/*.module.css
 **/*.graphql.js
 **/data.js
+**/view.module.css
 src/Views`
 
 export default async function ensureGitignore({ pass, src }) {
