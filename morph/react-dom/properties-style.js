@@ -43,6 +43,10 @@ export function leave(node, parent, state) {
     let id = createId(node, state)
     Object.entries(css).forEach(([key, content]) => {
       let lid = key.replace('VIEW_ID', id)
+      // use animation keys from src/index.css
+      if (content.some((item) => /animation/.test(item))) {
+        lid = `${lid} :global`
+      }
       state.styles[lid] = content.join('\n')
       state.stylesOrder.push(lid)
     })
