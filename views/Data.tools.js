@@ -33,17 +33,17 @@ let IS_SUBMITTING = 'data/IS_SUBMITTING'
 let reducer = produce((draft, action) => {
   switch (action.type) {
     case SET: {
-      set(draft, action.path, action.value)
+      set(draft.value, action.path, action.value)
       break
     }
 
     case SET_FN: {
-      action.fn(draft, set, get)
+      action.fn(draft.value, set, get)
       break
     }
 
     case RESET: {
-      return action.value
+      return { value: action.value }
     }
 
     case IS_SUBMITTING: {
@@ -84,8 +84,8 @@ export function DataProvider(props) {
   }
   let Context = DataContexts[props.context]
 
-  let [_state, dispatch] = useReducer(reducer, props.value)
-  let [state, setState] = useReducer((_, s) => s, props.value)
+  let [_state, dispatch] = useReducer(reducer, { value: props.value })
+  let [state, setState] = useReducer((_, s) => s, { value: props.value })
   // TODO: refactor -- This is part of the listeners
   let setFlowTo = useSetFlowTo(props.viewPath)
   let flow = useFlow()
@@ -158,7 +158,7 @@ export function DataProvider(props) {
         hasKeys.push({ viewPath, key, result, flow: { ...nextFlow } })
         return result
       }
-      listener(_state, state, { has }, _setFlowTo)
+      listener(_state.value, state.value, { has }, _setFlowTo)
     })
     if (listenersCurrent.length || targets.length || hasKeys.length) {
       console.debug({
@@ -192,7 +192,7 @@ export function DataProvider(props) {
   }, [props.value]) // eslint-disable-line
   // ignore dispatch
 
-  function _onChange(value, changePath = props.context) {
+  function _onChange(value, changePath = null) {
     if (typeof value === 'function') {
       dispatch({ type: SET_FN, fn: value })
     } else if (!changePath) {
@@ -220,7 +220,7 @@ export function DataProvider(props) {
     try {
       dispatch({ type: IS_SUBMITTING, value: true })
       let res = await onSubmit.current({
-        value: stateRef.current,
+        value: stateRef.current.value,
         args,
         onChange: _onChange,
       })
@@ -255,7 +255,7 @@ export function DataProvider(props) {
       return
     }
 
-    onChange.current(state, (fn) => dispatch({ type: SET_FN, fn }))
+    onChange.current(state.value, (fn) => dispatch({ type: SET_FN, fn }))
   }, [state]) // eslint-disable-line
   // ignore props.context, props.viewPath
 
@@ -291,6 +291,7 @@ if (process.env.NODE_ENV === 'development') {
     }
   }
 }
+
 export function useData({
   path = null,
   context = 'default',
@@ -306,12 +307,12 @@ export function useData({
   let touched = useRef(false)
 
   let [value, isValidInitial, isValid] = useMemo(() => {
-    let rawValue = path ? get(data, path) : data
+    let rawValue = path ? get(data.value, path) : data.value
 
     let value = rawValue
-    if (path && formatIn) {
+    if (formatIn) {
       try {
-        value = formatIn(rawValue, data)
+        value = formatIn(rawValue, data.value)
       } catch (error) {
         if (process.env.NODE_ENV === 'development') {
           log({
@@ -329,7 +330,7 @@ export function useData({
     let isValidInitial = true
     if (validate) {
       try {
-        isValidInitial = !!validate(rawValue, value, data)
+        isValidInitial = !!validate(rawValue, value, data.value)
       } catch (error) {
         if (process.env.NODE_ENV === 'development') {
           log({
@@ -367,7 +368,7 @@ export function useData({
           let valueSet = value
           if (formatOut) {
             try {
-              valueSet = formatOut(value, data)
+              valueSet = formatOut(value, data.value)
             } catch (error) {
               if (process.env.NODE_ENV === 'development') {
                 log({
@@ -556,7 +557,6 @@ export function useData({
 }
 
 export function useSetFlowToBasedOnData({
-  context,
   data,
   fetching,
   error,
@@ -588,7 +588,7 @@ export function useSetFlowToBasedOnData({
       view = 'No'
     } else if (fetching) {
       view = 'Loading'
-    } else if (isEmpty(context, data)) {
+    } else if (isEmpty(data)) {
       view = 'Empty'
     }
 
@@ -599,10 +599,9 @@ export function useSetFlowToBasedOnData({
   // ignore setFlowTo and props.viewPath
 }
 
-function isEmpty(context, data) {
+function isEmpty(data) {
   if (!data) return true
-  let value = data[context]
-  return Array.isArray(value) ? value.length === 0 : !value
+  return Array.isArray(data) ? data.length === 0 : !data
 }
 
 let logQueue = []

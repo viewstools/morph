@@ -145,16 +145,16 @@ ${isUsingDataTransform ? '  let data = useDataTransform(props, rdata)' : ''}
 ${isUsingDataOnChange ? '  let onChange = useDataOnChange(props, data)' : ''}
 ${isUsingDataOnSubmit ? '  let onSubmit = useDataOnSubmit(props, data)' : ''}
 
-  useSetFlowToBasedOnData({context: '${context}', data, ${
-      isQueryOperation ? 'fetching' : 'fetching: !data'
-    }, error, viewPath: props.viewPath, pause: ${
+  useSetFlowToBasedOnData({ data, ${
+    isQueryOperation ? 'fetching' : 'fetching: !data'
+  }, error, viewPath: props.viewPath, pause: ${
       isUsingDataConfiguration ? 'configuration.pause' : 'false'
     }})
 
   return (
     <DataProvider
       context="${context}"
-      value={data}
+      value={data?.${context}}
       viewPath={props.viewPath}
       ${isUsingDataOnChange ? 'onChange={onChange}' : ''}
       ${isUsingDataOnSubmit ? 'onSubmit={onSubmit}' : ''}
