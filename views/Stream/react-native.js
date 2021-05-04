@@ -7,7 +7,10 @@ import { View } from 'react-native'
 export default function Stream({ every = 5, pinToBottom = false, children }) {
   let [renderedItemsCount, setRenderedItemsCount] = useState(every)
 
-  let childrenArray = useMemo(() => Children.toArray(children), [children])
+  let [childrenArray, childrenArrayKey] = useMemo(
+    () => [Children.toArray(children), Date.now()],
+    [children]
+  )
 
   useEffect(() => {
     if (renderedItemsCount >= childrenArray.length) return
@@ -40,10 +43,10 @@ export default function Stream({ every = 5, pinToBottom = false, children }) {
     <React.Fragment>
       <View style={{ marginTop: 'auto' }} />
       {childrenArray.slice(
-        childrenArray.length - renderedItemsCount,
+        Math.max(childrenArray.length - renderedItemsCount, 0),
         childrenArray.length
       )}
-      <PinToBottom key={renderedItemsCount} />
+      <PinToBottom key={childrenArrayKey + renderedItemsCount} />
     </React.Fragment>
   ) : (
     childrenArray.slice(0, renderedItemsCount)
