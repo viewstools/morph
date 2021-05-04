@@ -137,7 +137,7 @@ export function getScopedName({ name, blockNode, propNode, scope, state }) {
   } else if (isFlow(name)) {
     let flowPath = getFlowPath(scope, blockNode, state)
     state.use('ViewsUseFlow')
-    state.useFlow = true
+    state.useFlowHas = true
     return name.replace(/props\.(isFlow|flow)/, `flow.has(${flowPath})`)
   } else if (
     blockNode &&
