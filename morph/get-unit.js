@@ -18,7 +18,11 @@ export default function getUnit(node, returnDefaultUnitOnNumbers = true) {
   let units = getUnits(node.name)
 
   if (typeof node.value === 'number') {
-    return returnDefaultUnitOnNumbers ? units[0] || '' : ''
+    return returnDefaultUnitOnNumbers &&
+      units[0] &&
+      units[0] !== MULTIPLE_BY_FONT_SIZE
+      ? units[0]
+      : ''
   }
 
   let match =

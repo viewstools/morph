@@ -1,11 +1,9 @@
 let blacklist = [
+  'aggregate',
   'classname',
   'data',
   'format',
   'formatout',
-  'required',
-  'aggregate',
-  'validate',
   'goto',
   'isfragment',
   'ismodal',
@@ -14,12 +12,15 @@ let blacklist = [
   'onclickselectedtype',
   'onclickusediv',
   'perspective',
+  'required',
   'rotatez',
   'scalez',
+  'stream',
   'teleportto',
   'transformoriginz',
   'translatez',
   'type',
+  'validate',
 ]
 
 export default (node, parent, state) =>
