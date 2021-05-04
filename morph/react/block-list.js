@@ -90,7 +90,10 @@ function defaultItemDataContextName(node, from) {
   let value
   let data = getDataForLoc(node, from.loc)
   if (data && DATA_VALUE.test(from.value)) {
-    value = data.path.replace('.', '_')
+    value = [data.context, data.path]
+      .filter(Boolean)
+      .join('_')
+      .replace('.', '_')
   } else {
     value = from.value.replace('props.', '')
   }

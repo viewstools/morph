@@ -180,18 +180,12 @@ function getListItemDataProvider({ state, view }) {
 
   return `
   function ListItem(props) {
-    let value = React.useMemo(() => ({ [props.context]: props.item }), [
-      props.context,
-      props.item,
-    ])
     let valueItem = React.useMemo(() => ({
-      [\`\${props.context}_item\`]: {
-        index: props.index,
-        indexReverse: props.list.length - props.index,
-        isFirst: props.index === 0,
-        isLast: props.index === props.list.length - 1,
-      },
-    }), [props.context, props.index, props.list])
+      index: props.index,
+      indexReverse: props.list.length - props.index,
+      isFirst: props.index === 0,
+      isLast: props.index === props.list.length - 1,
+    }), [props.index, props.list])
     ${
       isUsingDataOnChange ? 'let onChange = useListItemDataOnChange(props)' : ''
     }
@@ -201,7 +195,7 @@ function getListItemDataProvider({ state, view }) {
     return (
       <fromData.DataProvider
       context={props.context}
-      value={value}
+      value={props.item}
       ${isUsingDataOnChange ? 'onChange={onChange}' : ''}
       ${isUsingDataOnSubmit ? 'onSubmit={onSubmit}' : ''}
       viewPath={props.viewPath}

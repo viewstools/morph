@@ -244,17 +244,18 @@ export let getData = (maybeProp) => {
   let match = `${maybeProp.value}`.match(/^((show|capture)\s+)?(.+)$/)
   if (!match) return null
 
-  let path = match[3]
-  if (/^\"(.+)?\"$/.test(path) || /^\'(.+)?\'$/.test(path)) {
+  let fullPath = match[3]
+  if (/^\"(.+)?\"$/.test(fullPath) || /^\'(.+)?\'$/.test(fullPath)) {
     return {
-      value: path,
+      value: fullPath,
       isConstant: true,
     }
   }
-  if (!isNaN(Number(path))) {
-    return { value: Number(path), isConstant: true }
+  if (!isNaN(Number(fullPath))) {
+    return { value: Number(fullPath), isConstant: true }
   }
-  let [context = null] = /\./.test(path) ? path.split('.') : [path]
+  let [context = null] = /\./.test(fullPath) ? fullPath.split('.') : [fullPath]
+  let path = context === fullPath ? null : fullPath.replace(`${context}.`, '')
 
   return { path, context }
 }

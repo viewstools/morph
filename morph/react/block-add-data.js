@@ -22,6 +22,7 @@ export function enter(node, parent, state) {
           dataGroup.aggregate.value
         }(${dataGroup.data.map((d) => d.name).join(', ')})`
       )
+      dataGroup.context = dataGroup.data[0].context
       dataGroup.path = dataGroup.data[0].path
     } else {
       // no aggregate function so will use the data directly
@@ -29,6 +30,7 @@ export function enter(node, parent, state) {
       dataGroup.valueName = dataGroup.data[0].valueName
       // the list item data provider functionality makes use of the path
       // so adding it to keep consistency with already generated data providers
+      dataGroup.context = dataGroup.data[0].context
       dataGroup.path = dataGroup.data[0].path
     }
   }
@@ -54,10 +56,9 @@ function addData(data, state) {
 
   // at the moment it will create multiple instances for the same data key
   // an optimization will be implemented to reuse a variable if possible
-  state.variables.push(
-    `let ${data.name} = fromData.useData({ viewPath, path: '${data.path}', `
-  )
+  state.variables.push(`let ${data.name} = fromData.useData({ viewPath,`)
   maybeDataContext(data, state)
+  maybeDataPath(data, state)
   maybeDataFormat(data.format, state)
   maybeDataValidate(data.validate, state)
   state.variables.push('})')
@@ -68,7 +69,8 @@ function addData(data, state) {
 function getDataVariableName(data, state) {
   let name = `${toCamelCase(
     [
-      data.path.replace(/\./g, '_'),
+      data.context,
+      data.path ? data.path.replace(/\./g, '_') : null,
       data.format?.formatIn?.value,
       data.format?.formatOut?.value,
       data.validate?.value,
@@ -86,6 +88,12 @@ function maybeDataContext(dataDefinition, state) {
   if (dataDefinition.context === null) return
 
   state.variables.push(`context: '${dataDefinition.context}',`)
+}
+
+function maybeDataPath(dataDefinition, state) {
+  if (!dataDefinition.path) return
+
+  state.variables.push(`path: '${dataDefinition.path}',`)
 }
 
 function maybeDataFormat(format, state) {
