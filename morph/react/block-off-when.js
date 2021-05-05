@@ -9,7 +9,7 @@ import {
 } from '../utils.js'
 
 let IS_MEDIA = /(!?props\.isMedia)(.+)/
-let DATA_VALUES = /!?props\.(isInvalid|isInvalidInitial|isValid|isValidInitial|isSubmitting|value)/
+let DATA_VALUES = /!?props\.(isInvalid|isInvalidInitial|isValid|isValidInitial|isSubmitting|value)$/
 let CHILD_VALUES = /!?props\.(isSelected|isHovered|isFocused)/
 let IS_HOVERED = /!?props\.(isHovered|isSelectedHovered)/
 let IS_FLOW = /!?props\.(isFlow|flow)$/
