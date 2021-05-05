@@ -58,7 +58,7 @@ function getImageSource(node, parent, state) {
   }
 }
 
-let DATA_VALUES = /!?props\.(isInvalid|isInvalidInitial|isValid|isValidInitial|isSubmitting|value|onSubmit|onChange)/
+let DATA_VALUES = /!?props\.(isInvalid|isInvalidInitial|isValid|isValidInitial|isSubmitting|value|onSubmit|onChange)$/
 let CHILD_VALUES = /props\.(isSelected|isHovered|isFocused|isSelectedHovered)/
 let ON_IS_SELECTED = /(onClick|onPress|goTo)/
 
