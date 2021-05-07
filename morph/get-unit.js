@@ -64,7 +64,7 @@ let UNITS = {
   fontSize: LENGTH,
   height: LENGTH,
   left: LENGTH,
-  letterSpacing: UNITLESS,
+  letterSpacing: LENGTH,
   lineHeight: MULTIPLE_BY_FONT_SIZE_LENGTH,
   margin: LENGTH,
   marginBottom: LENGTH,
