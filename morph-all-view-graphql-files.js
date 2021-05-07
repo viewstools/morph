@@ -103,69 +103,88 @@ async function makeDataJs({ file, viewName }) {
       ? 'Logic'
       : 'View'
 
-    return `// This file is auto-generated. Edit query.graphql to change it.
+    let res = [
+      `// This file is auto-generated. Edit query.graphql to change it.
 import { DataProvider, useSetFlowToBasedOnData } from 'Views/Data.js'
-import { ${useOperation} } from 'Data/Api.js'
-${
-  isUsingDataTransform
-    ? "import useDataTransform from './useDataTransform.js'"
-    : ''
-}
-${
-  isUsingDataConfiguration
-    ? "import useDataConfiguration from './useDataConfiguration.js'"
-    : ''
-}
-${
-  isUsingDataOnChange
-    ? "import useDataOnChange from './useDataOnChange.js'"
-    : ''
-}
-${
-  isUsingDataOnSubmit
-    ? "import useDataOnSubmit from './useDataOnSubmit.js'"
-    : ''
-}
-import query from './data.graphql.js'
+import { ${useOperation} } from 'Data/Api.js'`,
+    ]
+
+    if (isUsingDataTransform) {
+      res.push("import useDataTransform from './useDataTransform.js'")
+    }
+
+    if (isUsingDataConfiguration) {
+      res.push("import useDataConfiguration from './useDataConfiguration.js'")
+    }
+
+    if (isUsingDataOnChange) {
+      res.push("import useDataOnChange from './useDataOnChange.js'")
+    }
+    if (isUsingDataOnSubmit) {
+      res.push("import useDataOnSubmit from './useDataOnSubmit.js'")
+    }
+
+    res.push(`import query from './data.graphql.js'
 import React from 'react'
 import ${importName} from './${importName.toLowerCase()}.js'
 
-export default function ${viewName}Data(props) {
-${
-  isUsingDataConfiguration
-    ? '  let configuration = useDataConfiguration(props)'
-    : ''
-}
-  let [{ data: rdata, ${
-    isQueryOperation ? 'fetching, ' : ''
-  }error }] = ${useOperation}({ query${
-      isUsingDataConfiguration ? ', ...configuration' : ''
-    } })
-  let data = ${
-    isUsingDataTransform
-      ? `useDataTransform(props, rdata?.${context})`
-      : `rdata?.${context}`
-  }
-${isUsingDataOnChange ? '  let onChange = useDataOnChange(props, data)' : ''}
-${isUsingDataOnSubmit ? '  let onSubmit = useDataOnSubmit(props, data)' : ''}
+export default function ${viewName}Data(props) {`)
 
-  useSetFlowToBasedOnData({ data, ${
-    isQueryOperation ? 'fetching' : 'fetching: !data'
-  }, error, viewPath: props.viewPath, pause: ${
-      isUsingDataConfiguration ? 'configuration.pause' : 'false'
-    }})
+    if (isUsingDataConfiguration) {
+      res.push('  let configuration = useDataConfiguration(props)')
+    }
+    res.push(
+      `  let [{ data: rdata,${
+        isQueryOperation ? 'fetching,' : ''
+      } error }] = ${useOperation}({ query${
+        isUsingDataConfiguration ? ', ...configuration' : ''
+      } })`
+    )
+
+    res.push(
+      `  let data = ${
+        isUsingDataTransform
+          ? `useDataTransform(props, rdata?.${context})`
+          : `rdata?.${context}`
+      }`
+    )
+
+    if (isUsingDataOnChange) {
+      res.push('  let onChange = useDataOnChange(props, data)')
+    }
+
+    if (isUsingDataOnSubmit) {
+      res.push('  let onSubmit = useDataOnSubmit(props, data)')
+    }
+
+    res.push(`
+  useSetFlowToBasedOnData({
+    data,
+    ${isQueryOperation ? 'fetching' : 'fetching: !data'},
+    error,
+    pause: ${isUsingDataConfiguration ? 'configuration.pause' : 'false'},
+    viewPath: props.viewPath,
+  })
 
   return (
     <DataProvider
       context="${context}"
       value={data}
-      viewPath={props.viewPath}
-      ${isUsingDataOnChange ? 'onChange={onChange}' : ''}
-      ${isUsingDataOnSubmit ? 'onSubmit={onSubmit}' : ''}
-    >
+      viewPath={props.viewPath}`)
+
+    if (isUsingDataOnChange) {
+      res.push('      onChange={onChange}')
+    }
+    if (isUsingDataOnSubmit) {
+      res.push('      onSubmit={onSubmit}')
+    }
+
+    res.push(`    >
       <${importName} {...props} />
     </DataProvider>
   )
-}`
+}`)
+
+    return res.join('\n')
   } catch (error) {}
 }
