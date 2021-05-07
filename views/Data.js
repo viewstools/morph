@@ -298,7 +298,7 @@ export function useData({
           let valueSet = value
           if (formatOut) {
             try {
-              valueSet = formatOut(value, data)
+              valueSet = formatOut(value, data.value)
             } catch (error) {}
           }
 
