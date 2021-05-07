@@ -96,8 +96,12 @@ async function makeDataJs({ file, viewName }) {
     let useOperation =
       definition.operation === 'query' ? 'useQuery' : 'useSubscription'
     let isQueryOperation = definition.operation === 'query'
-    let field = definition.selectionSet.selections[0]
-    let context = field.alias ? field.alias.value : field.name.value
+    let context = definition.name?.value || 'query_result'
+    let hasManyFields = definition.selectionSet.selections.length > 1
+    let firstField = definition.selectionSet.selections[0]
+    let firstFieldName = firstField.alias
+      ? firstField.alias.value
+      : firstField.name.value
 
     let importName = existsSync(path.join(path.dirname(file), 'logic.js'))
       ? 'Logic'
@@ -126,8 +130,16 @@ import { ${useOperation} } from 'Data/Api.js'`,
 
     res.push(`import query from './data.graphql.js'
 import React from 'react'
-import ${importName} from './${importName.toLowerCase()}.js'
+import ${importName} from './${importName.toLowerCase()}.js'`)
 
+    if (context === 'query_result') {
+      res.push(`console.debug({
+  type: 'views/morph/query',
+  message: \`The GraphQL query has no name, which means that the data provider's context will have a default "query_result" name. You may want to name it accordingly.\`
+})`)
+    }
+
+    res.push(`
 export default function ${viewName}Data(props) {`)
 
     if (isUsingDataConfiguration) {
@@ -135,17 +147,17 @@ export default function ${viewName}Data(props) {`)
     }
     res.push(
       `  let [{ data: rdata,${
-        isQueryOperation ? 'fetching,' : ''
+        isQueryOperation ? ' fetching,' : ''
       } error }] = ${useOperation}({ query${
         isUsingDataConfiguration ? ', ...configuration' : ''
       } })`
     )
 
+    let rdata = hasManyFields ? 'rdata' : `rdata?.${firstFieldName}`
+
     res.push(
       `  let data = ${
-        isUsingDataTransform
-          ? `useDataTransform(props, rdata?.${context})`
-          : `rdata?.${context}`
+        isUsingDataTransform ? `useDataTransform(props, ${rdata})` : rdata
       }`
     )
 
@@ -186,5 +198,21 @@ export default function ${viewName}Data(props) {`)
 }`)
 
     return res.join('\n')
-  } catch (error) {}
+  } catch (error) {
+    return `
+/* There was a problem trying to morph your data.graphql file
+${error.message}
+${error.stack}
+*/
+
+console.error({
+  type: 'views/morph/error',
+  message: ${JSON.stringify(error.message)},
+  stack: ${JSON.stringify(error.stack)},
+})
+
+export default function NoData(props) {
+  return props.children
+}`
+  }
 }
