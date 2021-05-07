@@ -600,7 +600,6 @@ export function useSetFlowToBasedOnData({
 }
 
 function isEmpty(data) {
-  if (!data) return true
   return Array.isArray(data) ? data.length === 0 : !data
 }
 

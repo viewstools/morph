@@ -136,12 +136,16 @@ ${
     ? '  let configuration = useDataConfiguration(props)'
     : ''
 }
-  let [{ data${isUsingDataTransform ? ': rdata' : ''}, ${
-      isQueryOperation ? 'fetching, ' : ''
-    }error }] = ${useOperation}({ query${
+  let [{ data: rdata, ${
+    isQueryOperation ? 'fetching, ' : ''
+  }error }] = ${useOperation}({ query${
       isUsingDataConfiguration ? ', ...configuration' : ''
     } })
-${isUsingDataTransform ? '  let data = useDataTransform(props, rdata)' : ''}
+  let data = ${
+    isUsingDataTransform
+      ? `useDataTransform(props, rdata?.${context})`
+      : `rdata?.${context}`
+  }
 ${isUsingDataOnChange ? '  let onChange = useDataOnChange(props, data)' : ''}
 ${isUsingDataOnSubmit ? '  let onSubmit = useDataOnSubmit(props, data)' : ''}
 
@@ -154,7 +158,7 @@ ${isUsingDataOnSubmit ? '  let onSubmit = useDataOnSubmit(props, data)' : ''}
   return (
     <DataProvider
       context="${context}"
-      value={data?.${context}}
+      value={data}
       viewPath={props.viewPath}
       ${isUsingDataOnChange ? 'onChange={onChange}' : ''}
       ${isUsingDataOnSubmit ? 'onSubmit={onSubmit}' : ''}
