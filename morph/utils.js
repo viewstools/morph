@@ -622,6 +622,8 @@ export function getDataForLoc(blockNode, loc) {
 export function replacePropWithDataValue(value, dataGroup) {
   return value
     .replace('props.value', dataGroup.valueName)
+    .replace('props.onChange', 'props.change')
+    .replace('props.onSubmit', 'props.submit')
     .replace('props', dataGroup.name)
 }
 

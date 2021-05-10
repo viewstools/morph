@@ -34,16 +34,22 @@ let reducer = produce((draft, action) => {
   switch (action.type) {
     case SET: {
       set(draft.value, action.path, action.value)
+      if (action.touched) {
+        draft._touched = new Set([...draft._touched, action.touched])
+      }
       break
     }
 
     case SET_FN: {
       action.fn(draft.value, set, get)
+      if (action.touched) {
+        draft._touched = new Set([...draft._touched, action.touched])
+      }
       break
     }
 
     case RESET: {
-      return { value: action.value }
+      return { value: action.value, _touched: new Set(draft._touched) }
     }
 
     case IS_SUBMITTING: {
@@ -71,7 +77,7 @@ let DataContexts = {
 export function DataProvider(props) {
   if (process.env.NODE_ENV === 'development') {
     if (!props.context) {
-      log({
+      debug({
         type: 'views/data/missing-context-value',
         viewPath: props.viewPath,
         message: `You're missing the context value in DataProvider. Eg: <DataProvider context="namespace" value={value}>. You're using the default one now instead.`,
@@ -84,8 +90,9 @@ export function DataProvider(props) {
   }
   let Context = DataContexts[props.context]
 
-  let [_state, dispatch] = useReducer(reducer, { value: props.value })
-  let [state, setState] = useReducer((_, s) => s, { value: props.value })
+  let initialState = { value: props.value, _touched: new Set() }
+  let [_state, dispatch] = useReducer(reducer, initialState)
+  let [state, setState] = useReducer((_, s) => s, initialState)
   // TODO: refactor -- This is part of the listeners
   let setFlowTo = useSetFlowTo(props.viewPath)
   let flow = useFlow()
@@ -105,7 +112,7 @@ export function DataProvider(props) {
 
   useEffect(() => {
     if (state === _state) return
-    console.debug({
+    debug({
       type: 'views/data/listeners/state-change',
       state,
       _state,
@@ -161,7 +168,7 @@ export function DataProvider(props) {
       listener(_state.value, state.value, { has }, _setFlowTo)
     })
     if (listenersCurrent.length || targets.length || hasKeys.length) {
-      console.debug({
+      debug({
         type: 'views/data/listeners/current',
         listeners: listenersCurrent,
         targets,
@@ -192,7 +199,7 @@ export function DataProvider(props) {
   }, [props.value]) // eslint-disable-line
   // ignore dispatch
 
-  function _onChange(value, changePath = null) {
+  function _change(value, changePath = null) {
     if (typeof value === 'function') {
       dispatch({ type: SET_FN, fn: value })
     } else if (!changePath) {
@@ -202,6 +209,7 @@ export function DataProvider(props) {
         type: SET,
         path: changePath,
         value,
+        touched: false,
       })
     }
   }
@@ -222,7 +230,7 @@ export function DataProvider(props) {
       let res = await onSubmit.current({
         value: stateRef.current.value,
         args,
-        onChange: _onChange,
+        change: _change,
       })
       isSubmitting.current = false
 
@@ -269,7 +277,7 @@ DataProvider.defaultProps = {
 
 export function useDataListener({
   // path = null,
-  context = 'default',
+  context,
   viewPath,
   listener,
 } = {}) {
@@ -292,130 +300,69 @@ if (process.env.NODE_ENV === 'development') {
   }
 }
 
+export function useDataContext(name) {
+  let context = DataContexts[name]
+  if (!context) {
+    context = DataContexts.default
+    debug({ type: 'views/data/missing-context', context: name })
+  }
+  return useContext(context)
+}
+
 export function useData({
+  context,
   path = null,
-  context = 'default',
-  formatIn = null,
+  formatIn: format = null,
   formatOut = null,
   validate = null,
-  validateRequired = false,
+  validateRequired: required = false,
   viewPath = null,
 } = {}) {
-  let [data, dispatch, onSubmit, originalValue] = useContext(
-    DataContexts[context] || DataContexts.default
-  )
-  let touched = useRef(false)
+  let value = useDataFormat({
+    context,
+    path,
+    format,
+    viewPath,
+    __ignoreMissingInDevMode: true,
+  })
+  let originalValue = useDataOriginalValue({
+    context,
+    viewPath,
+  })
+  let change = useDataChange({ context, path, formatOut, viewPath })
+  let submit = useDataSubmit({ context, viewPath })
+  let isSubmitting = useDataIsSubmitting({ context, viewPath })
+  let isValidInitial = useDataIsValidInitial({
+    context,
+    path,
+    validate,
+    viewPath,
+    __ignoreMissingInDevMode: true,
+  })
+  let isValid = useDataIsValid({
+    context,
+    path,
+    validate,
+    required,
+    viewPath,
+    __ignoreMissingInDevMode: true,
+  })
 
-  let [value, isValidInitial, isValid] = useMemo(() => {
-    let rawValue = path ? get(data.value, path) : data.value
+  return {
+    change,
+    submit,
+    value,
+    originalValue,
+    isSubmitting,
+    isValid,
+    isValidInitial,
+    isInvalid: !isValid,
+    isInvalidInitial: !isValidInitial,
+  }
+}
 
-    let value = rawValue
-    if (formatIn) {
-      try {
-        value = formatIn(rawValue, data.value)
-      } catch (error) {
-        if (process.env.NODE_ENV === 'development') {
-          log({
-            type: 'views/data/runtime-formatIn',
-            viewPath,
-            context,
-            formatIn,
-            message: `"${formatIn}" function failed to run on Data/format.js.`,
-            error,
-          })
-        }
-      }
-    }
-
-    let isValidInitial = true
-    if (validate) {
-      try {
-        isValidInitial = !!validate(rawValue, value, data.value)
-      } catch (error) {
-        if (process.env.NODE_ENV === 'development') {
-          log({
-            type: 'views/data/runtime-validate',
-            viewPath,
-            context,
-            validate,
-            message: `"${validate}" function failed to run on Data/validate.js.`,
-            error,
-          })
-        }
-      }
-    }
-    let isValid =
-      touched.current || (validateRequired && data._forceRequired)
-        ? isValidInitial
-        : true
-
-    return [value, isValidInitial, isValid]
-  }, [data, formatIn, path, validate, validateRequired]) // eslint-disable-line
-  // ignore context and viewPath
-
-  let memo = useMemo(
-    () => {
-      if (!data) return {}
-
-      function onChange(value, changePath = path) {
-        touched.current = true
-
-        if (typeof value === 'function') {
-          dispatch({ type: SET_FN, fn: value })
-        } else if (!changePath) {
-          dispatch({ type: RESET, value })
-        } else {
-          let valueSet = value
-          if (formatOut) {
-            try {
-              valueSet = formatOut(value, data.value)
-            } catch (error) {
-              if (process.env.NODE_ENV === 'development') {
-                log({
-                  type: 'views/data/runtime-formatOut',
-                  viewPath,
-                  context,
-                  formatOut,
-                  message: `"${formatIn}" function failed to run on Data/format.js.`,
-                  error,
-                })
-              }
-            }
-          }
-
-          dispatch({
-            type: SET,
-            path: changePath,
-            value: valueSet,
-          })
-        }
-      }
-
-      return {
-        onChange,
-        onSubmit,
-        value,
-        originalValue,
-        isSubmitting: data._isSubmitting,
-        isValid,
-        isValidInitial,
-        isInvalid: !isValid,
-        isInvalidInitial: !isValidInitial,
-      }
-    },
-    // eslint-disable-next-line
-    [
-      dispatch,
-      path,
-      value,
-      isValidInitial,
-      isValid,
-      formatOut,
-      data?._isSubmitting, // eslint-disable-line
-      onSubmit,
-    ]
-  )
-  // ignore data - this can cause rendering issues though
+export function useDataValue({ context, path = null, viewPath = null } = {}) {
+  let [data] = useDataContext(context)
 
   if (process.env.NODE_ENV === 'development') {
     // source: https://github.com/TheWWWorm/proxy-mock/blob/master/index.js
@@ -520,20 +467,12 @@ export function useData({
     function getDataMock() {
       let value = getProxyMock()
       return {
-        onChange() {},
-        onSubmit() {},
         value,
-        originalValue: value,
-        isSubmitting: false,
-        isValid: true,
-        isValidInitial: true,
-        isInvalid: false,
-        isInvalidInitial: false,
       }
     }
 
     if (!(context in DataContexts)) {
-      log({
+      debug({
         type: 'views/data/missing-data-provider',
         viewPath,
         context,
@@ -543,7 +482,7 @@ export function useData({
     }
 
     if (!data) {
-      log({
+      debug({
         type: 'views/data/missing-data-for-provider',
         viewPath,
         context,
@@ -553,7 +492,258 @@ export function useData({
     }
   }
 
-  return memo
+  return path ? get(data.value, path) : data.value
+}
+
+export function useDataOriginalValue({ context } = {}) {
+  let [, , , originalValue] = useDataContext(context)
+  return originalValue
+}
+
+export function useDataFormat({
+  context,
+  path = null,
+  format = null,
+  viewPath = null,
+  __ignoreMissingInDevMode = false,
+} = {}) {
+  let [data] = useDataContext(context)
+  let value = useDataValue({ context, path, viewPath })
+
+  if (format) {
+    try {
+      value = format(value, data.value)
+    } catch (error) {
+      if (process.env.NODE_ENV === 'development') {
+        debug({
+          type: 'views/data/runtime-format',
+          viewPath,
+          context,
+          format,
+          message: `format function failed to run`,
+          error,
+        })
+      }
+    }
+  } else if (!__ignoreMissingInDevMode) {
+    debug({
+      type: 'views/data/runtime-format-missing',
+      viewPath,
+      context,
+      message: `Please provide a format function.`,
+    })
+  }
+  return value
+}
+
+export function useDataChange({
+  context,
+  path = null,
+  formatOut = null,
+  viewPath = null,
+} = {}) {
+  let [data, dispatch] = useDataContext(context)
+
+  function change(value, changePath = path) {
+    if (typeof value === 'function') {
+      dispatch({ type: SET_FN, fn: value, touched: changePath })
+    } else if (!changePath) {
+      dispatch({ type: RESET, value })
+    } else {
+      let valueSet = value
+      if (formatOut) {
+        try {
+          valueSet = formatOut(value, data.value)
+        } catch (error) {
+          if (process.env.NODE_ENV === 'development') {
+            debug({
+              type: 'views/data/runtime-formatOut',
+              viewPath,
+              context,
+              formatOut,
+              message: `format function failed to run`,
+              error,
+            })
+          }
+        }
+      }
+
+      dispatch({
+        type: SET,
+        path: changePath,
+        value: valueSet,
+        touched: changePath,
+      })
+    }
+  }
+
+  if (process.env.NODE_ENV === 'development') {
+    function getDataMock() {
+      return function change() {}
+    }
+
+    if (!(context in DataContexts)) {
+      debug({
+        type: 'views/data/missing-data-provider',
+        viewPath,
+        context,
+        message: `"${context}" isn't a valid Data context. Add a <DataProvider context="${context}" value={data}> in the component that defines the context for this view. You're using a mock now.`,
+      })
+      return getDataMock()
+    }
+
+    if (!data) {
+      debug({
+        type: 'views/data/missing-data-for-provider',
+        viewPath,
+        context,
+        message: `"${context}" doesn't have data. You're using a mock now.`,
+      })
+      return getDataMock()
+    }
+  }
+
+  return change
+}
+
+export function useDataSubmit({ context, viewPath = null } = {}) {
+  let [data, , submit] = useDataContext(context)
+
+  if (process.env.NODE_ENV === 'development') {
+    function getDataMock() {
+      return function submit() {}
+    }
+
+    if (!(context in DataContexts)) {
+      debug({
+        type: 'views/data/missing-data-provider',
+        viewPath,
+        context,
+        message: `"${context}" isn't a valid Data context. Add a <DataProvider context="${context}" value={data}> in the component that defines the context for this view. You're using a mock now.`,
+      })
+      return getDataMock()
+    }
+
+    if (!data) {
+      debug({
+        type: 'views/data/missing-data-for-provider',
+        viewPath,
+        context,
+        message: `"${context}" doesn't have data. You're using a mock now.`,
+      })
+      return getDataMock()
+    }
+  }
+
+  return submit
+}
+
+export function useDataIsSubmitting({ context, viewPath = null } = {}) {
+  let [data] = useDataContext(context)
+
+  if (process.env.NODE_ENV === 'development') {
+    function getDataMock() {
+      return false
+    }
+
+    if (!(context in DataContexts)) {
+      debug({
+        type: 'views/data/missing-data-provider',
+        viewPath,
+        context,
+        message: `"${context}" isn't a valid Data context. Add a <DataProvider context="${context}" value={data}> in the component that defines the context for this view. You're using a mock now.`,
+      })
+      return getDataMock()
+    }
+
+    if (!data) {
+      debug({
+        type: 'views/data/missing-data-for-provider',
+        viewPath,
+        context,
+        message: `"${context}" doesn't have data. You're using a mock now.`,
+      })
+      return getDataMock()
+    }
+  }
+
+  return data?._isSubmitting
+}
+
+function isValidInitial({
+  context,
+  value,
+  validate,
+  viewPath,
+  __ignoreMissingInDevMode = false,
+}) {
+  let isValidInitial = true
+  if (validate) {
+    try {
+      isValidInitial = !!validate(value)
+    } catch (error) {
+      if (process.env.NODE_ENV === 'development') {
+        debug({
+          type: 'views/data/runtime-validate',
+          viewPath,
+          context,
+          validate,
+          message: `validate function failed to run`,
+          error,
+        })
+      }
+    }
+  } else if (!__ignoreMissingInDevMode) {
+    debug({
+      type: 'views/data/runtime-validate-missing',
+      viewPath,
+      context,
+      message: `Please provide a validate function.`,
+    })
+  }
+  return isValidInitial
+}
+
+export function useDataIsValidInitial({
+  context,
+  path = null,
+  validate = null,
+  viewPath = null,
+  __ignoreMissingInDevMode = false,
+}) {
+  let value = useDataValue({ context, path, viewPath })
+  return isValidInitial({
+    context,
+    value,
+    validate,
+    viewPath,
+    __ignoreMissingInDevMode,
+  })
+}
+
+export function useDataIsValid({
+  context,
+  path = null,
+  validate = null,
+  required = false,
+  viewPath = null,
+  __ignoreMissingInDevMode = false,
+} = {}) {
+  let [data] = useDataContext(context)
+  let value = useDataValue({ context, path, viewPath })
+
+  let isValid =
+    data._touched.has(path) || (required && data._forceRequired)
+      ? isValidInitial({
+          context,
+          value,
+          validate,
+          viewPath,
+          __ignoreMissingInDevMode,
+        })
+      : true
+
+  return isValid
 }
 
 export function useSetFlowToBasedOnData({
@@ -605,12 +795,12 @@ function isEmpty(data) {
 
 let logQueue = []
 let logTimeout = null
-function log(stuff) {
+function debug(stuff) {
   logQueue.push(stuff)
   clearTimeout(logTimeout)
   logTimeout = setTimeout(() => {
     if (logQueue.length > 0) {
-      console.log({
+      console.debug({
         type: 'views/data',
         warnings: logQueue,
       })
