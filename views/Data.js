@@ -32,16 +32,22 @@ let reducer = produce((draft, action) => {
   switch (action.type) {
     case SET: {
       set(draft.value, action.path, action.value)
+      if (action.touched) {
+        draft._touched = new Set([...draft._touched, action.touched])
+      }
       break
     }
 
     case SET_FN: {
       action.fn(draft.value, set, get)
+      if (action.touched) {
+        draft._touched = new Set([...draft._touched, action.touched])
+      }
       break
     }
 
     case RESET: {
-      return { value: action.value }
+      return { value: action.value, _touched: new Set(draft._touched) }
     }
 
     case IS_SUBMITTING: {
@@ -63,9 +69,7 @@ let reducer = produce((draft, action) => {
   }
 })
 
-let DataContexts = {
-  default: React.createContext([]),
-}
+let DataContexts = {}
 export function DataProvider(props) {
   if (!(props.context in DataContexts)) {
     DataContexts[props.context] = React.createContext([])
@@ -73,8 +77,9 @@ export function DataProvider(props) {
   }
   let Context = DataContexts[props.context]
 
-  let [_state, dispatch] = useReducer(reducer, { value: props.value })
-  let [state, setState] = useReducer((_, s) => s, { value: props.value })
+  let initialState = { value: props.value, _touched: new Set() }
+  let [_state, dispatch] = useReducer(reducer, initialState)
+  let [state, setState] = useReducer((_, s) => s, initialState)
   // TODO: refactor -- This is part of the listeners
   let setFlowTo = useSetFlowTo(props.viewPath)
   let flow = useFlow()
@@ -155,7 +160,7 @@ export function DataProvider(props) {
   }, [props.value]) // eslint-disable-line
   // ignore dispatch
 
-  function _onChange(value, changePath = null) {
+  function _change(value, changePath = null) {
     if (typeof value === 'function') {
       dispatch({ type: SET_FN, fn: value })
     } else if (!changePath) {
@@ -165,6 +170,7 @@ export function DataProvider(props) {
         type: SET,
         path: changePath,
         value,
+        touched: false,
       })
     }
   }
@@ -185,7 +191,7 @@ export function DataProvider(props) {
       let res = await onSubmit.current({
         value: stateRef.current.value,
         args,
-        onChange: _onChange,
+        change: _change,
       })
       isSubmitting.current = false
 
@@ -225,14 +231,13 @@ export function DataProvider(props) {
   return <Context.Provider value={value}>{props.children}</Context.Provider>
 }
 DataProvider.defaultProps = {
-  context: 'default',
   onChange: () => {},
   onSubmit: () => {},
 }
 
 export function useDataListener({
   // path = null,
-  context = 'default',
+  context,
   viewPath,
   listener,
 } = {}) {
@@ -244,103 +249,137 @@ export function useDataListener({
   }, []) // eslint-disable-line
 }
 
+export function useDataContext(context) {
+  return useContext(DataContexts[context])
+}
+
 export function useData({
+  context,
   path = null,
-  context = 'default',
-  formatIn = null,
+  formatIn: format = null,
   formatOut = null,
   validate = null,
-  validateRequired = false,
-  viewPath = null,
+  validateRequired: required = false,
 } = {}) {
-  let [data, dispatch, onSubmit, originalValue] = useContext(
-    DataContexts[context]
-  )
-  let touched = useRef(false)
+  let value = useDataFormat({ context, path, format })
+  let originalValue = useDataOriginalValue({
+    context,
+  })
+  let change = useDataChange({ context, path, formatOut })
+  let submit = useDataSubmit({ context })
+  let isSubmitting = useDataIsSubmitting({ context })
+  let isValidInitial = useDataIsValidInitial({
+    context,
+    path,
+    validate,
+  })
+  let isValid = useDataIsValid({ context, path, validate, required })
 
-  let [value, isValidInitial, isValid] = useMemo(() => {
-    let rawValue = path ? get(data.value, path) : data.value
+  return {
+    value,
+    originalValue,
+    change,
+    submit,
+    isSubmitting,
+    isValid,
+    isValidInitial,
+    isInvalid: !isValid,
+    isInvalidInitial: !isValidInitial,
+  }
+}
 
-    let value = rawValue
-    if (formatIn) {
-      try {
-        value = formatIn(rawValue, data.value)
-      } catch (error) {}
-    }
+export function useDataValue({ context, path = null } = {}) {
+  let [data] = useDataContext(context)
+  return path ? get(data.value, path) : data.value
+}
 
-    let isValidInitial = true
-    if (validate) {
-      try {
-        isValidInitial = !!validate(rawValue, value, data.value)
-      } catch (error) {}
-    }
-    let isValid =
-      touched.current || (validateRequired && data._forceRequired)
-        ? isValidInitial
-        : true
+export function useDataOriginalValue({ context } = {}) {
+  let [, , , originalValue] = useDataContext(context)
+  return originalValue
+}
 
-    return [value, isValidInitial, isValid]
-  }, [data, formatIn, path, validate, validateRequired]) // eslint-disable-line
-  // ignore context and viewPath
+export function useDataFormat({ context, path = null, format = null } = {}) {
+  let [data] = useDataContext(context)
+  let value = useDataValue({ context, path })
 
-  let memo = useMemo(
-    () => {
-      if (!data) return {}
+  try {
+    value = format(value, data.value)
+  } catch (error) {}
 
-      function onChange(value, changePath = path) {
-        touched.current = true
+  return value
+}
 
-        if (typeof value === 'function') {
-          dispatch({ type: SET_FN, fn: value })
-        } else if (!changePath) {
-          dispatch({ type: RESET, value })
-        } else {
-          let valueSet = value
-          if (formatOut) {
-            try {
-              valueSet = formatOut(value, data.value)
-            } catch (error) {}
-          }
+export function useDataChange({ context, path = null, formatOut = null } = {}) {
+  let [data, dispatch] = useDataContext(context)
 
-          dispatch({
-            type: SET,
-            path: changePath,
-            value: valueSet,
-          })
-        }
+  return function change(value, changePath = path) {
+    if (typeof value === 'function') {
+      dispatch({ type: SET_FN, fn: value, touched: changePath })
+    } else if (!changePath) {
+      dispatch({ type: RESET, value })
+    } else {
+      let valueSet = value
+      if (formatOut) {
+        try {
+          valueSet = formatOut(value, data.value)
+        } catch (error) {}
       }
 
-      return {
-        onChange,
-        onSubmit,
-        value,
-        originalValue,
-        isSubmitting: data._isSubmitting,
-        isValid,
-        isValidInitial,
-        isInvalid: !isValid,
-        isInvalidInitial: !isValidInitial,
-      }
-    },
-    // eslint-disable-next-line
-    [
-      dispatch,
-      path,
-      value,
-      isValidInitial,
-      isValid,
-      formatOut,
-      data?._isSubmitting, // eslint-disable-line
-      onSubmit,
-    ]
-  )
-  // ignore data - this can cause rendering issues though
+      dispatch({
+        type: SET,
+        path: changePath,
+        value: valueSet,
+        touched: changePath,
+      })
+    }
+  }
+}
 
-  return memo
+export function useDataSubmit({ context } = {}) {
+  let [, , submit] = useDataContext(context)
+  return submit
+}
+
+export function useDataIsSubmitting({ context } = {}) {
+  let [data] = useDataContext(context)
+  return data?._isSubmitting
+}
+
+function isValidInitial({ value, validate }) {
+  let isValidInitial = true
+  try {
+    isValidInitial = !!validate(value)
+  } catch (error) {}
+  return isValidInitial
+}
+
+export function useDataIsValidInitial({
+  context,
+  path = null,
+  validate = null,
+}) {
+  let value = useDataValue({ context, path })
+  return isValidInitial({ value, validate })
+}
+
+export function useDataIsValid({
+  context,
+  path = null,
+  validate = null,
+  required = false,
+} = {}) {
+  let [data] = useDataContext(context)
+  let value = useDataValue({ context, path, viewPath })
+
+  let isValid =
+    data._touched.has(path) || (required && data._forceRequired)
+      ? isValidInitial({ value, validate })
+      : true
+
+  return isValid
 }
 
 export function useSetFlowToBasedOnData({
-  context,
   data,
   fetching,
   error,
