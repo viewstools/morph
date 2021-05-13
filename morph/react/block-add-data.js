@@ -9,25 +9,26 @@ export function enter(node, parent, state) {
       if (data.isConstant) {
         addConstantData(data, state)
       } else {
-        addData(data, state)
+        addData(data, !!dataGroup.aggregate, state)
       }
     }
 
     if (dataGroup.aggregate) {
-      dataGroup.name = getVariableName('aggregateData', state)
-      dataGroup.valueName = dataGroup.name
+      dataGroup.name = getDataVariableName(['aggregate'], state)
       let importName = getAggregateImportName(dataGroup.aggregate.source, state)
       state.variables.push(
         `let ${dataGroup.name} = ${importName}.${
           dataGroup.aggregate.value
-        }(${dataGroup.data.map((d) => d.name).join(', ')})`
+        }(${dataGroup.data
+          .map((d) => (d.isConstant ? d.name : d.variables.value))
+          .join(', ')})`
       )
       dataGroup.context = dataGroup.data[0].context
       dataGroup.path = dataGroup.data[0].path
     } else {
       // no aggregate function so will use the data directly
       dataGroup.name = dataGroup.data[0].name
-      dataGroup.valueName = dataGroup.data[0].valueName
+      dataGroup.variables = dataGroup.data[0].variables
       // the list item data provider functionality makes use of the path
       // so adding it to keep consistency with already generated data providers
       dataGroup.context = dataGroup.data[0].context
@@ -37,8 +38,7 @@ export function enter(node, parent, state) {
 }
 
 function addConstantData(data, state) {
-  data.name = getVariableName('constantData', state)
-  data.valueName = data.name
+  data.name = getDataVariableName(['constant'], state)
 
   if (data.format?.formatIn) {
     let importName = getImportNameForSource(data.format.formatIn.source, state)
@@ -50,38 +50,103 @@ function addConstantData(data, state) {
   }
 }
 
-function addData(data, state) {
-  data.name = getDataVariableName(data, state)
-  data.valueName = `${data.name}.value`
+function addData(data, isAggregate, state) {
+  data.variables = {}
 
-  // at the moment it will create multiple instances for the same data key
-  // an optimization will be implemented to reuse a variable if possible
-  state.variables.push(`let ${data.name} = fromData.useData({ viewPath,`)
-  maybeDataContext(data, state)
-  maybeDataPath(data, state)
-  maybeDataFormat(data.format, state)
-  maybeDataValidate(data.validate, state)
-  state.variables.push('})')
+  if (data.uses.has('useDataValue') || isAggregate) {
+    let dataValueName = getDataVariableName(
+      [data.context, data.path, 'value'],
+      state
+    )
+    state.variables.push(
+      `let ${dataValueName} = fromData.${
+        data.format?.formatIn ? 'useDataFormat' : 'useDataValue'
+      }({ viewPath,`
+    )
+    maybeDataContext(data, state)
+    maybeDataPath(data, state)
+    maybeDataFormat(data, state)
+    state.variables.push('})')
+    data.variables.value = dataValueName
+  }
+
+  if (data.validate && data.validate.type === 'js') {
+    if (data.uses.has('useDataIsValidInitial')) {
+      let dataIsValidInitialName = getDataVariableName(
+        [data.context, data.path, 'isValidInitial'],
+        state
+      )
+      state.variables.push(
+        `let ${dataIsValidInitialName} = fromData.useDataIsValidInitial({ viewPath,`
+      )
+      maybeDataContext(data, state)
+      maybeDataPath(data, state)
+      maybeDataValidate(data, state)
+      state.variables.push('})')
+      data.variables.isValidInitial = dataIsValidInitialName
+    }
+
+    if (data.uses.has('useDataIsValid')) {
+      let dataIsValidName = getDataVariableName(
+        [data.context, data.path, 'isValid'],
+        state
+      )
+      state.variables.push(
+        `let ${dataIsValidName} = fromData.useDataIsValid({ viewPath,`
+      )
+      maybeDataContext(data, state)
+      maybeDataPath(data, state)
+      maybeDataValidate(data, state)
+      if (data.validate.required) {
+        state.variables.push('required: true,')
+      }
+      state.variables.push('})')
+      data.variables.isValid = dataIsValidName
+    }
+  }
+
+  if (data.uses.has('useDataChange')) {
+    let dataChangeName = getDataVariableName(
+      [data.context, data.path, 'change'],
+      state
+    )
+    state.variables.push(
+      `let ${dataChangeName} = fromData.useDataChange({ viewPath,`
+    )
+    maybeDataContext(data, state)
+    maybeDataPath(data, state)
+    maybeDataFormatOut(data, state)
+    state.variables.push('})')
+    data.variables.onChange = dataChangeName
+  }
+
+  if (data.uses.has('useDataSubmit')) {
+    let dataSubmitName = getDataVariableName(
+      [data.context, data.path, 'submit'],
+      state
+    )
+    state.variables.push(
+      `let ${dataSubmitName} = fromData.useDataSubmit({ viewPath,`
+    )
+    maybeDataContext(data, state)
+    state.variables.push('})')
+    data.variables.onSubmit = dataSubmitName
+  }
+
+  if (data.uses.has('useDataIsSubmitting')) {
+    let dataIsSubmittingName = getDataVariableName(
+      [data.context, data.path, 'isSubmitting'],
+      state
+    )
+    state.variables.push(
+      `let ${dataIsSubmittingName} = fromData.useDataIsSubmitting({ viewPath,`
+    )
+    maybeDataContext(data, state)
+    state.variables.push('})')
+    data.variables.isSubmitting = dataIsSubmittingName
+  }
 
   state.use('ViewsUseData')
-}
-
-function getDataVariableName(data, state) {
-  let name = `${toCamelCase(
-    [
-      data.context,
-      data.path ? data.path.replace(/\./g, '_') : null,
-      data.format?.formatIn?.value,
-      data.format?.formatOut?.value,
-      data.validate?.value,
-      data.validate?.required ? 'required' : null,
-      'data',
-    ]
-      .filter(Boolean)
-      .map(toSnakeCase)
-      .join('_')
-  )}`
-  return getVariableName(name, state)
 }
 
 function maybeDataContext(dataDefinition, state) {
@@ -96,27 +161,26 @@ function maybeDataPath(dataDefinition, state) {
   state.variables.push(`path: '${dataDefinition.path}',`)
 }
 
-function maybeDataFormat(format, state) {
-  if (!format) return
+function maybeDataFormat(data, state) {
+  if (!data.format?.formatIn) return
 
-  if (format.formatIn) {
-    let importName = getFormatImportName(format.formatIn.source, state)
-    state.variables.push(`formatIn: ${importName}.${format.formatIn.value},`)
-  }
-
-  if (format.formatOut) {
-    let importName = getFormatImportName(format.formatOut.source, state)
-    state.variables.push(`formatOut: ${importName}.${format.formatOut.value},`)
-  }
+  let importName = getFormatImportName(data.format.formatIn.source, state)
+  state.variables.push(`format: ${importName}.${data.format.formatIn.value},`)
 }
 
-function maybeDataValidate(validate, state) {
-  if (!validate || validate.type !== 'js') return
-  let importName = getValidateImportName(validate.source, state)
-  state.variables.push(`validate: ${importName}.${validate.value},`)
-  if (validate.required) {
-    state.variables.push('validateRequired: true,')
-  }
+function maybeDataFormatOut(data, state) {
+  if (!data.format?.formatOut) return
+
+  let importName = getFormatImportName(data.format.formatOut.source, state)
+  state.variables.push(
+    `formatOut: ${importName}.${data.format.formatOut.value},`
+  )
+}
+
+function maybeDataValidate(data, state) {
+  if (!data.validate || data.validate.type !== 'js') return
+  let importName = getValidateImportName(data.validate.source, state)
+  state.variables.push(`validate: ${importName}.${data.validate.value},`)
 }
 
 function getAggregateImportName(source, state) {
@@ -150,4 +214,18 @@ function getFormatImportName(source, state) {
     importName = 'fromViewsFormat'
   }
   return importName
+}
+
+function getDataVariableName(params, state) {
+  return getVariableName(transformToCamelCase([...params, 'data']), state)
+}
+
+function transformToCamelCase(args) {
+  return toCamelCase(
+    args
+      .filter(Boolean)
+      .map((arg) => arg.replace(/\./g, '_'))
+      .map(toSnakeCase)
+      .join('_')
+  )
 }

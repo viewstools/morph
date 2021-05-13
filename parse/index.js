@@ -33,6 +33,7 @@ import { isGoogleFont } from '../morph/fonts.js'
 import getLoc from './get-loc.js'
 import getTags from './get-tags.js'
 import path from 'path'
+import { maybeGetUseDataForValue } from '../morph/utils.js'
 
 export default ({
   convertSlotToProps = true,
@@ -399,6 +400,16 @@ export default ({
         do {
           index++
           if (index === block.properties.length) {
+            if (
+              'validate' in currentData &&
+              !('type' in currentData.validate)
+            ) {
+              // required keyword without validate
+              delete currentData.validate
+            }
+            currentData.loc.end = block.properties[index - 1].loc.end
+            currentDataGroup.loc.end = block.properties[index - 1].loc.end
+            currentDataGroup = null
             break
           }
 
@@ -423,17 +434,7 @@ export default ({
           } else if (p.name === 'data') {
             // data section finished - setting end line
             currentData.loc.end = block.properties[index - 1].loc.end
-          } else {
-            if (
-              !currentDataGroup.aggregate &&
-              currentDataGroup.data.length > 1
-            ) {
-              warnings.push({
-                type: `No aggregate function was provided, but ${currentDataGroup.data.length} data keys were found. Did you forget to specify an aggregate function?`,
-                line,
-                loc: block.loc,
-              })
-            }
+
             if (
               'validate' in currentData &&
               !('type' in currentData.validate)
@@ -442,15 +443,29 @@ export default ({
               delete currentData.validate
             }
             currentData.loc.end = block.properties[index - 1].loc.end
-            currentDataGroup.loc.end = block.properties[index - 1].loc.end
-            currentDataGroup = null
+            if (currentData.uses.size) {
+              // if current data has an assignment then set currentDataGroup to null
+              // else leave it as probably is part of aggregate data group
+              currentDataGroup.loc.end = block.properties[index - 1].loc.end
+              currentDataGroup = null
+            }
+          } else {
+            if (
+              !currentDataGroup.aggregate &&
+              currentDataGroup.data.length > 1
+            ) {
+              warnings.push({
+                type: `No aggregate function was provided, but ${currentDataGroup.data.length} data keys were found. Did you forget to specify an aggregate function?`,
+                loc: block.loc,
+              })
+            }
+
+            let value = maybeGetUseDataForValue(p)
+            if (value) {
+              currentData.uses.add(value)
+            }
           }
-        } while (
-          index < block.properties.length &&
-          ['format', 'formatOut', 'validate', 'required', 'aggregate'].includes(
-            p.name
-          )
-        )
+        } while (index < block.properties.length && p.name !== 'data')
       } else {
         index++
       }
