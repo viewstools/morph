@@ -118,7 +118,7 @@ function getScopedConditionPropValue(node, parent, state) {
 }
 
 let CHILD_VALUES = /!?props\.(isSelected|isHovered|isFocused|isSelectedHovered)/
-let DATA_VALUES = /!?props\.(isInvalid|isInvalidInitial|isValid|isValidInitial|value|isSubmitting)$/
+let DATA_VALUES = /!?props\.(isInvalid|isInvalidInitial|isValid|isValidInitial|isSubmitting|value|onSubmit|onChange)$/
 let IS_HOVERED_OR_SELECTED_HOVER = /!?props\.(isHovered|isSelectedHovered)/
 let IS_FLOW = /!?props\.(isFlow|flow)$/
 export function isFlow(prop) {
@@ -620,11 +620,48 @@ export function getDataForLoc(blockNode, loc) {
 }
 
 export function replacePropWithDataValue(value, dataGroup) {
-  return value
-    .replace('props.value', dataGroup.valueName)
-    .replace('props.onChange', 'props.change')
-    .replace('props.onSubmit', 'props.submit')
-    .replace('props', dataGroup.name)
+  let propValue = value.replace('props.', '')
+  if (dataGroup.aggregate) {
+    if (propValue === 'value') {
+      return dataGroup.name
+    } else {
+      throw new Error(
+        `Property ${propValue} is not available on aggregate data, only "value" is a valid option`
+      )
+    }
+  } else if (dataGroup.data[0].isConstant) {
+    if (propValue === 'value') {
+      return dataGroup.data[0].name
+    } else {
+      throw new Error(
+        `Property ${propValue} is not available on constant data, only "value" is a valid option`
+      )
+    }
+  } else {
+    if (propValue === 'isInvalid') return `!${dataGroup.variables['isValid']}`
+    if (propValue === 'isInvalidInitial')
+      return `!${dataGroup.variables['isValidInitial']}`
+    return dataGroup.variables[propValue]
+  }
+}
+
+let PROP_TO_USE_DATA = {
+  isInvalid: 'useDataIsValid',
+  isInvalidInitial: 'useDataIsValidInitial',
+  isValid: 'useDataIsValid',
+  isValidInitial: 'useDataIsValidInitial',
+  isSubmitting: 'useDataIsSubmitting',
+  value: 'useDataValue',
+  onSubmit: 'useDataSubmit',
+  onChange: 'useDataChange',
+}
+export function maybeGetUseDataForValue(p) {
+  if (DATA_VALUES.test(p.value)) {
+    let [, value] = DATA_VALUES.exec(p.value)
+    return PROP_TO_USE_DATA[value]
+  } else {
+    return null
+  }
 }
 
 export function getImportNameForSource(source, state) {

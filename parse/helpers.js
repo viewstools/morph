@@ -249,15 +249,16 @@ export let getData = (maybeProp) => {
     return {
       value: fullPath,
       isConstant: true,
+      uses: new Set(),
     }
   }
   if (!isNaN(Number(fullPath))) {
-    return { value: Number(fullPath), isConstant: true }
+    return { value: Number(fullPath), isConstant: true, uses: new Set() }
   }
   let [context = null] = /\./.test(fullPath) ? fullPath.split('.') : [fullPath]
   let path = context === fullPath ? null : fullPath.replace(`${context}.`, '')
 
-  return { path, context }
+  return { path, context, uses: new Set() }
 }
 
 function maybeSourceAndValue(input) {
