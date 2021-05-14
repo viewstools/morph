@@ -369,7 +369,7 @@ export function useDataIsValid({
   required = false,
 } = {}) {
   let [data] = useDataContext(context)
-  let value = useDataValue({ context, path, viewPath })
+  let value = useDataValue({ context, path })
 
   let isValid =
     data._touched.has(path) || (required && data._forceRequired)
