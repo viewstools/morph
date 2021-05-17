@@ -221,7 +221,7 @@ export let isSlot = (maybeNode1, maybeNode2) => {
   let node = maybeNode2 || maybeNode1
 
   return typeof node === 'string'
-    ? /(flow\.|isHovered|childProps|props|isBefore|isMedia\.|Data\d*\.)/.test(
+    ? /(flow\.|isHovered|childProps|props|isBefore|isMedia\.|Data\d*$)/.test(
         node
       )
     : isTag(node, 'slot') ||
@@ -624,6 +624,8 @@ export function replacePropWithDataValue(value, dataGroup) {
   if (dataGroup.aggregate) {
     if (propValue === 'value') {
       return dataGroup.name
+    } else if (propValue === '!value') {
+      return `!${dataGroup.name}`
     } else {
       throw new Error(
         `Property ${propValue} is not available on aggregate data, only "value" is a valid option`
@@ -632,6 +634,8 @@ export function replacePropWithDataValue(value, dataGroup) {
   } else if (dataGroup.data[0].isConstant) {
     if (propValue === 'value') {
       return dataGroup.data[0].name
+    } else if (propValue === '!value') {
+      return `!${dataGroup.data[0].name}`
     } else {
       throw new Error(
         `Property ${propValue} is not available on constant data, only "value" is a valid option`
@@ -639,8 +643,13 @@ export function replacePropWithDataValue(value, dataGroup) {
     }
   } else {
     if (propValue === 'isInvalid') return `!${dataGroup.variables['isValid']}`
+    if (propValue === '!isInvalid') return `${dataGroup.variables['isValid']}`
     if (propValue === 'isInvalidInitial')
       return `!${dataGroup.variables['isValidInitial']}`
+    if (propValue === '!isInvalidInitial')
+      return `${dataGroup.variables['isValidInitial']}`
+    if (propValue.startsWith('!'))
+      return `!${dataGroup.variables[propValue.substring(1)]}`
     return dataGroup.variables[propValue]
   }
 }
