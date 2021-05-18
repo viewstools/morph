@@ -28,37 +28,38 @@ let SET_FN = 'data/SET_FN'
 let RESET = 'data/RESET'
 let FORCE_REQUIRED = 'data/FORCE_REQUIRED'
 let IS_SUBMITTING = 'data/IS_SUBMITTING'
-let reducer = produce((draft, action) => {
+function reducer(state, action) {
   switch (action.type) {
     case SET: {
-      set(draft.value, action.path, action.value)
-      if (action.touched) {
-        draft._touched = new Set([...draft._touched, action.touched])
+      return {
+        ...state,
+        _touched: action.touched
+          ? new Set([...state._touched, action.touched])
+          : state._touched,
+        value: produce(set)(state.value, action.path, action.value),
       }
-      break
     }
 
     case SET_FN: {
-      action.fn(draft.value, set, get)
-      if (action.touched) {
-        draft._touched = new Set([...draft._touched, action.touched])
+      return {
+        ...state,
+        _touched: action.touched
+          ? new Set([...state._touched, action.touched])
+          : state._touched,
+        value: produce(action.fn)(state.value, set, get),
       }
-      break
     }
 
     case RESET: {
-      return { value: action.value, _touched: new Set(draft._touched) }
+      return { value: action.value, _touched: new Set(state._touched) }
     }
 
     case IS_SUBMITTING: {
-      draft._isSubmitting = action.value
-      break
+      return { ...state, _isSubmitting: action.value }
     }
 
     case FORCE_REQUIRED: {
-      draft._forceRequired = true
-      draft._isSubmitting = false
-      break
+      return { ...state, _forceRequired: true, _isSubmitting: false }
     }
 
     default: {
@@ -67,7 +68,7 @@ let reducer = produce((draft, action) => {
       )
     }
   }
-})
+}
 
 let DataContexts = {}
 export function DataProvider(props) {
