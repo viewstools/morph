@@ -477,7 +477,7 @@ export function useSetFlowToBasedOnDataIsValid({
   path,
   viewPath,
   validate,
-  checkInitial = true,
+  validateInitial = true,
 }) {
   let dataIsValidInitial = useDataIsValidInitial({
     context,
@@ -493,7 +493,7 @@ export function useSetFlowToBasedOnDataIsValid({
   })
 
   let setFlowTo = useSetFlowTo(viewPath)
-  let checkInitialRef = useRef(false)
+  let validateInitialRef = useRef(false)
   let renderOneRef = useRef(false)
 
   useDataListener({
@@ -512,24 +512,24 @@ export function useSetFlowToBasedOnDataIsValid({
 
       if (
         isContent !== isContentPrev ||
-        checkInitialRef.current ||
+        validateInitialRef.current ||
         !flow.has(target)
       ) {
         setFlowTo(target)
       }
 
-      if (checkInitialRef.current) {
-        checkInitialRef.current = false
+      if (validateInitialRef.current) {
+        validateInitialRef.current = false
       }
     },
   })
 
   useEffect(() => {
     // on mount
-    let isContent = checkInitial ? dataIsValidInitial : dataIsValid
+    let isContent = validateInitial ? dataIsValidInitial : dataIsValid
     let target = normalizePath(viewPath, isContent ? 'IsValid' : 'No')
     setFlowTo(target)
-    checkInitialRef.current = !checkInitial
+    validateInitialRef.current = !validateInitial
     renderOneRef.current = true
   }, [viewPath]) //eslint-disable-line
 
@@ -541,7 +541,7 @@ export function useSetFlowToBasedOnDataIsInvalid({
   path,
   viewPath,
   validate,
-  checkInitial = true,
+  validateInitial = true,
 }) {
   let dataIsValidInitial = useDataIsValidInitial({
     context,
@@ -557,7 +557,7 @@ export function useSetFlowToBasedOnDataIsInvalid({
   })
 
   let setFlowTo = useSetFlowTo(viewPath)
-  let checkInitialRef = useRef(false)
+  let validateInitialRef = useRef(false)
   let renderOneRef = useRef(false)
 
   useDataListener({
@@ -576,24 +576,24 @@ export function useSetFlowToBasedOnDataIsInvalid({
 
       if (
         isContent !== isContentPrev ||
-        checkInitialRef.current ||
+        validateInitialRef.current ||
         !flow.has(target)
       ) {
         setFlowTo(target)
       }
 
-      if (checkInitialRef.current) {
-        checkInitialRef.current = false
+      if (validateInitialRef.current) {
+        validateInitialRef.current = false
       }
     },
   })
 
   useEffect(() => {
     // on mount
-    let isContent = checkInitial ? !dataIsValidInitial : !dataIsValid
+    let isContent = validateInitial ? !dataIsValidInitial : !dataIsValid
     let target = normalizePath(viewPath, isContent ? 'IsInvalid' : 'No')
     setFlowTo(target)
-    checkInitialRef.current = !checkInitial
+    validateInitialRef.current = !validateInitial
     renderOneRef.current = true
   }, [viewPath]) //eslint-disable-line
 
