@@ -14,7 +14,7 @@ export function enter(node, parent, state) {
     maybeDataContext(node.setFlowToBasedOnData, state)
     maybeDataPath(node.setFlowToBasedOnData, state)
     maybeDataValidate(node.setFlowToBasedOnData, state)
-    maybeDataCheckInitial(node.setFlowToBasedOnData, state)
+    maybeDataValidateInitial(node.setFlowToBasedOnData, state)
     state.variables.push('})')
   } else if (isSetFlowToBasedOnDataIsInvalid(node)) {
     state.variables.push(
@@ -23,7 +23,7 @@ export function enter(node, parent, state) {
     maybeDataContext(node.setFlowToBasedOnData, state)
     maybeDataPath(node.setFlowToBasedOnData, state)
     maybeDataValidate(node.setFlowToBasedOnData, state)
-    maybeDataCheckInitial(node.setFlowToBasedOnData, state)
+    maybeDataValidateInitial(node.setFlowToBasedOnData, state)
     state.variables.push('})')
   } else if (isSetFlowToBasedOnDataExists(node)) {
     state.variables.push(`fromData.useSetFlowToBasedOnDataExists({ viewPath,`)
@@ -113,14 +113,14 @@ function maybeDataIsInvalid(dataDefinition, state) {
   state.variables.push(`isInvalid: '${dataDefinition.isInvalid}',`)
 }
 
-function maybeDataCheckInitial(dataDefinition, state) {
+function maybeDataValidateInitial(dataDefinition, state) {
   if (
-    dataDefinition.checkInitial !== true &&
-    dataDefinition.checkInitial !== false
+    dataDefinition.validateInitial !== true &&
+    dataDefinition.validateInitial !== false
   )
     return
 
-  state.variables.push(`checkInitial: ${dataDefinition.checkInitial},`)
+  state.variables.push(`validateInitial: ${dataDefinition.validateInitial},`)
 }
 
 function maybeDataValidate(data, state) {

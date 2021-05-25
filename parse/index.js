@@ -414,8 +414,8 @@ export default ({
     block.setFlowToBasedOnData = {
       context,
       path,
-      checkInitial: block.properties.find(
-        (item) => item.name === 'checkInitial'
+      validateInitial: block.properties.find(
+        (item) => item.name === 'validateInitial'
       )?.value,
       validate,
       format,
