@@ -10,6 +10,7 @@ import * as BlockList from '../react/block-list.js'
 import * as BlockMaybeSkip from '../react/block-maybe-skip.js'
 import * as BlockName from './block-name.js'
 import * as BlockOffWhen from '../react/block-off-when.js'
+import * as BlockSetFlowToBasedOnData from '../react/block-set-flow-to-based-on-data.js'
 import * as BlockProfile from '../react/block-profile.js'
 import * as BlockProperties from './block-properties.js'
 import * as BlockSetTestId from '../react/block-set-test-id.js'
@@ -24,6 +25,7 @@ export let enter = [
   BlockAddData.enter,
   BlockOffWhen.enter,
   BlockWrap.enter,
+  BlockSetFlowToBasedOnData.enter,
 
   BlockName.enter,
   BlockProfile.enter,

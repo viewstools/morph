@@ -12,6 +12,7 @@ import {
 } from './Flow.js'
 // import get from 'dlv';
 import get from 'lodash/get'
+import camelCase from 'lodash/camelCase'
 import produce from 'immer'
 // import set from 'dset';
 import set from 'lodash/set'
@@ -420,6 +421,250 @@ export function useSetFlowToBasedOnData({
     setFlowTo(normalizePath(viewPath, view))
   }, [data, error]) // eslint-disable-line
   // ignore setFlowTo and props.viewPath
+}
+
+export function useSetFlowToBasedOnDataExists({
+  context,
+  path = null,
+  format = null,
+  viewPath,
+}) {
+  let dataValue = useDataValue({ context, path, viewPath })
+  let setFlowTo = useSetFlowTo(viewPath)
+
+  let renderOneRef = useRef(false)
+
+  useDataListener({
+    context,
+    viewPath,
+    listener: (next, prev, flow, setFlowTo) => {
+      if (!renderOneRef.current) return
+
+      let value = path ? get(next, path) : next
+      let isContent = !!value
+      if (format) {
+        isContent = format(value)
+      }
+
+      let prevValue = path ? get(prev, path) : prev
+      let isContentPrev = !!prevValue
+      if (format) {
+        isContentPrev = format(prevValue)
+      }
+
+      let target = normalizePath(viewPath, isContent ? 'Content' : 'No')
+      if (isContent !== isContentPrev || !flow.has(target)) {
+        setFlowTo(target)
+      }
+    },
+  })
+
+  useEffect(() => {
+    let isContent = !!dataValue
+    if (format) {
+      isContent = format(dataValue)
+    }
+    let viewPathNext = normalizePath(viewPath, isContent ? 'Content' : 'No')
+    setFlowTo(viewPathNext)
+    renderOneRef.current = true
+  }, [viewPath]) //eslint-disable-line
+
+  return null
+}
+
+export function useSetFlowToBasedOnDataIsValid({
+  context,
+  path,
+  viewPath,
+  validate,
+  checkInitial = true,
+}) {
+  let dataIsValidInitial = useDataIsValidInitial({
+    context,
+    path,
+    validate,
+    viewPath,
+  })
+  let dataIsValid = useDataIsValid({
+    context,
+    path,
+    validate,
+    viewPath,
+  })
+
+  let setFlowTo = useSetFlowTo(viewPath)
+  let checkInitialRef = useRef(false)
+  let renderOneRef = useRef(false)
+
+  useDataListener({
+    context,
+    viewPath,
+    listener: (next, prev, flow, setFlowTo) => {
+      if (!renderOneRef.current) return
+
+      let value = path ? get(next, path) : next
+      let isContent = validate(value, value, next)
+
+      let prevValue = path ? get(prev, path) : prev
+      let isContentPrev = validate(prevValue, prevValue, prev)
+
+      let target = normalizePath(viewPath, isContent ? 'IsValid' : 'No')
+
+      if (
+        isContent !== isContentPrev ||
+        checkInitialRef.current ||
+        !flow.has(target)
+      ) {
+        setFlowTo(target)
+      }
+
+      if (checkInitialRef.current) {
+        checkInitialRef.current = false
+      }
+    },
+  })
+
+  useEffect(() => {
+    // on mount
+    let isContent = checkInitial ? dataIsValidInitial : dataIsValid
+    let target = normalizePath(viewPath, isContent ? 'IsValid' : 'No')
+    setFlowTo(target)
+    checkInitialRef.current = !checkInitial
+    renderOneRef.current = true
+  }, [viewPath]) //eslint-disable-line
+
+  return null
+}
+
+export function useSetFlowToBasedOnDataIsInvalid({
+  context,
+  path,
+  viewPath,
+  validate,
+  checkInitial = true,
+}) {
+  let dataIsValidInitial = useDataIsValidInitial({
+    context,
+    path,
+    validate,
+    viewPath,
+  })
+  let dataIsValid = useDataIsValid({
+    context,
+    path,
+    validate,
+    viewPath,
+  })
+
+  let setFlowTo = useSetFlowTo(viewPath)
+  let checkInitialRef = useRef(false)
+  let renderOneRef = useRef(false)
+
+  useDataListener({
+    context,
+    viewPath,
+    listener: (next, prev, flow, setFlowTo) => {
+      if (!renderOneRef.current) return
+
+      let value = path ? get(next, path) : next
+      let isContent = !validate(value, value, next)
+
+      let prevValue = path ? get(prev, path) : prev
+      let isContentPrev = !validate(prevValue, prevValue, prev)
+
+      let target = normalizePath(viewPath, isContent ? 'IsInvalid' : 'No')
+
+      if (
+        isContent !== isContentPrev ||
+        checkInitialRef.current ||
+        !flow.has(target)
+      ) {
+        setFlowTo(target)
+      }
+
+      if (checkInitialRef.current) {
+        checkInitialRef.current = false
+      }
+    },
+  })
+
+  useEffect(() => {
+    // on mount
+    let isContent = checkInitial ? !dataIsValidInitial : !dataIsValid
+    let target = normalizePath(viewPath, isContent ? 'IsInvalid' : 'No')
+    setFlowTo(target)
+    checkInitialRef.current = !checkInitial
+    renderOneRef.current = true
+  }, [viewPath]) //eslint-disable-line
+
+  return null
+}
+
+export function useSetFlowToBasedOnDataIsSubmitting({ context, viewPath }) {
+  let setFlowTo = useSetFlowTo(viewPath)
+  let dataIsSubmitting = useDataIsSubmitting({ context, viewPath })
+
+  // Does not need a register listener
+  // Review when merge into the morpher
+  useEffect(() => {
+    setFlowTo(normalizePath(viewPath, dataIsSubmitting ? 'IsSubmitting' : 'No'))
+  }, [viewPath, dataIsSubmitting]) //eslint-disable-line
+
+  return null
+}
+
+export function useSetFlowToBasedOnDataSwitch({
+  context,
+  path,
+  format,
+  viewPath,
+}) {
+  let dataValue = useDataFormat({
+    context,
+    path,
+    format,
+    viewPath,
+  })
+  let setFlowTo = useSetFlowTo(viewPath)
+  let renderOneRef = useRef(false)
+
+  useDataListener({
+    context,
+    viewPath,
+    listener: (next, prev, flow, setFlowTo) => {
+      if (!renderOneRef.current) return
+
+      let value = path ? get(next, path) : next
+      let view = format ? format(value, next) : capitalize(camelCase(value))
+
+      let prevValue = path ? get(prev, path) : prev
+      let viewPrev = format
+        ? format(prevValue, prev)
+        : capitalize(camelCase(prevValue))
+
+      let target = normalizePath(viewPath, view)
+      if (view !== viewPrev || !flow.has(target)) {
+        setFlowTo(target)
+      }
+    },
+  })
+
+  useEffect(() => {
+    setFlowTo(
+      normalizePath(
+        viewPath,
+        format ? dataValue : capitalize(camelCase(dataValue))
+      )
+    )
+    renderOneRef.current = true
+  }, [viewPath]) //eslint-disable-line
+
+  return null
+}
+
+function capitalize(value) {
+  if (!value || typeof value !== 'string') return ''
+  return value.charAt(0).toUpperCase() + value.slice(1)
 }
 
 function isEmpty(data) {

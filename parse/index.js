@@ -373,11 +373,52 @@ export default ({
       block.viewPath = path.dirname(file.replace(src.replace(/\\/g, '/'), ''))
       block.viewPathParent = path.dirname(block.viewPath)
 
+      if (flowProp.value === 'separate') {
+        parseViewSetFlowToBasedOnData(block)
+      }
+
       slots.push({
         name: 'viewPath',
         type: 'string',
         defaultValue: block.viewPath,
       })
+    }
+  }
+
+  function parseViewSetFlowToBasedOnData(block) {
+    let dataProp = block.properties.find((item) => item.name === 'data')
+    if (!dataProp) return
+    if (!dataProp.value) {
+      warnings.push({
+        type: 'Missing data context.',
+        loc: dataProp.loc,
+      })
+      return
+    }
+
+    let [context] = /\./.test(dataProp.value)
+      ? dataProp.value.split('.')
+      : [dataProp.value]
+    let path =
+      context === dataProp.value
+        ? null
+        : dataProp.value.replace(`${context}.`, '')
+
+    let validate = getDataValidate(
+      block.properties.find((item) => item.name === 'validate')
+    )
+    let format = getDataFormat(
+      block.properties.find((item) => item.name === 'format')
+    )
+
+    block.setFlowToBasedOnData = {
+      context,
+      path,
+      checkInitial: block.properties.find(
+        (item) => item.name === 'checkInitial'
+      )?.value,
+      validate,
+      format,
     }
   }
 
