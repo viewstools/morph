@@ -58,12 +58,12 @@ export function enter(node, parent, state) {
       defaultItemDataContextName(node, from)
     state.render.push(
       `<ListItem
-        key={item.id || index}
+        key={item?.id || index}
         context="${itemDataContextName.value}"
         item={item}
         index={index}
         list={list}
-        viewPath={\`$\{props.viewPath}/${node.children[0].name}($\{item.id || index})\`}
+        viewPath={\`$\{props.viewPath}/${node.children[0].name}($\{item?.id || index})\`}
       >`
     )
 
