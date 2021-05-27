@@ -83,36 +83,6 @@ function maybeDataPath(dataDefinition, state) {
   state.variables.push(`path: '${dataDefinition.path}',`)
 }
 
-function maybeDataNo(dataDefinition, state) {
-  if (!dataDefinition.no) return
-
-  state.variables.push(`no: '${dataDefinition.no}',`)
-}
-
-function maybeDataContent(dataDefinition, state) {
-  if (!dataDefinition.content) return
-
-  state.variables.push(`content: '${dataDefinition.content}',`)
-}
-
-function maybeDataIsSubmitting(dataDefinition, state) {
-  if (!dataDefinition.isSubmitting) return
-
-  state.variables.push(`isSubmitting: '${dataDefinition.isSubmitting}',`)
-}
-
-function maybeDataIsValid(dataDefinition, state) {
-  if (!dataDefinition.isValid) return
-
-  state.variables.push(`isValid: '${dataDefinition.isValid}',`)
-}
-
-function maybeDataIsInvalid(dataDefinition, state) {
-  if (!dataDefinition.isInvalid) return
-
-  state.variables.push(`isInvalid: '${dataDefinition.isInvalid}',`)
-}
-
 function maybeDataValidateInitial(dataDefinition, state) {
   if (
     dataDefinition.validateInitial !== true &&

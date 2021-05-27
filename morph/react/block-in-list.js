@@ -11,13 +11,13 @@ export function enter(node, parent, state) {
 
   if (state.viewPath) {
     state.render.push(
-      ` viewPath={\`$\{props.viewPath}/${node.name}($\{item.id || index})\`}`
+      ` viewPath={\`$\{props.viewPath}/${node.name}($\{item?.id || index})\`}`
     )
     node.skipViewPath = true
   }
 
   if (!state.hasListItem) {
     let key = getProp(node, 'key')
-    state.render.push(` key={${key ? key.value : 'item.id || index'}}`)
+    state.render.push(` key={${key ? key.value : 'item?.id || index'}}`)
   }
 }
