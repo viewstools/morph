@@ -6,10 +6,11 @@ export default (font, sources) => {
   if (isGoogleFont(font.family)) {
     let family = font.family.replace(/\s/g, '+')
     let style = font.style === 'italic' ? 'i' : ''
-    body = `@import url('https://fonts.googleapis.com/css?family=${family}:${font.weight}${style}');`
+    body = `@import url('https://fonts.googleapis.com/css?family=${family}:${font.weight}${style}&display=swap');`
   } else {
     body = `@font-face {
-    font-family: '${font.family}';
+    font-display: swap;
+    font-family: '${font.family}', sans-serif;
     font-style: ${font.style};
     font-weight: ${font.weight};
     src: local('${font.family}'),
