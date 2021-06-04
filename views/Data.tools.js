@@ -984,7 +984,7 @@ export function useSetFlowToBasedOnDataIsSubmitting({ context, viewPath }) {
 export function useSetFlowToBasedOnDataSwitch({
   context,
   path,
-  format,
+  format = toCapitalisedCamelCase,
   viewPath,
 }) {
   let dataValue = useDataFormat({
@@ -1003,12 +1003,10 @@ export function useSetFlowToBasedOnDataSwitch({
       if (!renderOneRef.current) return
 
       let value = path ? get(next, path) : next
-      let view = format ? format(value, next) : capitalize(camelCase(value))
+      let view = format(value, next)
 
       let prevValue = path ? get(prev, path) : prev
-      let viewPrev = format
-        ? format(prevValue, prev)
-        : capitalize(camelCase(prevValue))
+      let viewPrev = format(prevValue, prev)
 
       let target = normalizePath(viewPath, view)
       if (view !== viewPrev || !flow.has(target)) {
@@ -1018,16 +1016,15 @@ export function useSetFlowToBasedOnDataSwitch({
   })
 
   useEffect(() => {
-    setFlowTo(
-      normalizePath(
-        viewPath,
-        format ? dataValue : capitalize(camelCase(dataValue))
-      )
-    )
+    setFlowTo(normalizePath(viewPath, dataValue))
     renderOneRef.current = true
   }, [viewPath]) //eslint-disable-line
 
   return null
+}
+
+function toCapitalisedCamelCase(value) {
+  return value && capitalize(camelCase(value))
 }
 
 function capitalize(value) {
