@@ -59,9 +59,12 @@ export default function getStyleForProperty(node, parent, state, code) {
         backgroundImage: code ? `url(${asVar(node)})` : `url("${node.value}")`,
       }
 
+    // see here for variable format with fallback values: https://www.w3.org/TR/css-variables/#using-variables
     case 'fontFamily':
       return {
-        fontFamily: code ? asVar(node) : maybeAddFallbackFont(node.value),
+        fontFamily: code
+          ? asVar({ name: `${node.name}, ${getSystemDefaultFont()}` })
+          : `${maybeAddFallbackFont(node.value)}, ${getSystemDefaultFont()}`,
       }
 
     case 'shadowColor':
@@ -98,6 +101,10 @@ export default function getStyleForProperty(node, parent, state, code) {
         [node.name]: maybeAsVar(node, code),
       }
   }
+}
+
+function getSystemDefaultFont() {
+  return 'sans-serif'
 }
 
 function maybeAsVar(prop, code) {
