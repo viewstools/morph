@@ -62,10 +62,8 @@ export default function getStyleForProperty(node, parent, state, code) {
     case 'fontFamily':
       return {
         fontFamily: code
-          ? [asVar(node), getSystemDefaultFont()].join(',')
-          : [maybeAddFallbackFont(node.value), getSystemDefaultFont()].join(
-              ','
-            ),
+          ? asVar({ name: `${node.name}, ${getSystemDefaultFont()}` })
+          : `${maybeAddFallbackFont(node.value)}, ${getSystemDefaultFont()}`,
       }
 
     case 'shadowColor':
