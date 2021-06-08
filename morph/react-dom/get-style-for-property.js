@@ -59,6 +59,7 @@ export default function getStyleForProperty(node, parent, state, code) {
         backgroundImage: code ? `url(${asVar(node)})` : `url("${node.value}")`,
       }
 
+    // see here for variable format with fallback values: https://www.w3.org/TR/css-variables/#using-variables
     case 'fontFamily':
       return {
         fontFamily: code
