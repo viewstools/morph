@@ -27,6 +27,7 @@ export default function getExpandedProps({
 }) {
   let slots = state.slots
     .filter((slot) => !IGNORED_SLOTS.has(slot.name))
+    .filter((slot) => !state.ignoredExpandedProps.includes(slot.name))
     .map((slot) => {
       let maybeDefaultValue =
         slot.defaultValue === false || ignoreDefaultValues

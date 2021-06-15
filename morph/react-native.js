@@ -79,6 +79,7 @@ export default ({
       fromViewsValidate: 1,
       fromViewsAggregate: 1,
     },
+    ignoredExpandedProps: [],
     uses: [],
     use(block, isLazy = false) {
       if (isLazy) {

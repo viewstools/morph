@@ -84,6 +84,9 @@ function addData(data, isAggregate, state) {
       maybeDataValidate(data, state)
       state.variables.push('})')
       data.variables.isValidInitial = dataIsValidInitialName
+
+      state.ignoredExpandedProps.push('isValidInitial')
+      state.ignoredExpandedProps.push('isInvalidInitial')
     }
 
     if (data.uses.has('useDataIsValid')) {
@@ -102,6 +105,9 @@ function addData(data, isAggregate, state) {
       }
       state.variables.push('})')
       data.variables.isValid = dataIsValidName
+
+      state.ignoredExpandedProps.push('isValid')
+      state.ignoredExpandedProps.push('isInvalid')
     }
   }
 
@@ -118,6 +124,8 @@ function addData(data, isAggregate, state) {
     maybeDataFormatOut(data, state)
     state.variables.push('})')
     data.variables.onChange = dataChangeName
+
+    state.ignoredExpandedProps.push('onChange')
   }
 
   if (data.uses.has('useDataSubmit')) {
@@ -131,6 +139,8 @@ function addData(data, isAggregate, state) {
     maybeDataContext(data, state)
     state.variables.push('})')
     data.variables.onSubmit = dataSubmitName
+
+    state.ignoredExpandedProps.push('onSubmit')
   }
 
   if (data.uses.has('useDataIsSubmitting')) {
@@ -144,6 +154,8 @@ function addData(data, isAggregate, state) {
     maybeDataContext(data, state)
     state.variables.push('})')
     data.variables.isSubmitting = dataIsSubmittingName
+
+    state.ignoredExpandedProps.push('isSubmitting')
   }
 
   state.use('ViewsUseData')

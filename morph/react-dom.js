@@ -73,6 +73,7 @@ export default ({
       fromViewsValidate: 1,
       fromViewsAggregate: 1,
     },
+    ignoredExpandedProps: [],
     profile,
     uses: [],
     testIdKey: 'data-testid',
