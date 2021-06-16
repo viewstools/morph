@@ -85,7 +85,7 @@ function getDynamicCss({
   css,
 }) {
   let style = node.style.dynamic
-  if (!hasKeysInChildren(style)) return false
+  if (!hasKeysInChildren(style) && !hasDesignTokens(node)) return false
 
   state.cssDynamic = true
   node.styleName = node.nameFinal
@@ -95,10 +95,10 @@ function getDynamicCss({
       ` style={{${getAnimatedStyles(
         node,
         state.isReactNative
-      )},${getDynamicStyles(node)}}}`
+      )},${getDynamicStyles(node, state)}}}`
     )
   } else {
-    let inlineDynamicStyles = getDynamicStyles(node)
+    let inlineDynamicStyles = getDynamicStyles(node, state)
     if (inlineDynamicStyles) {
       state.render.push(` style={{${inlineDynamicStyles}}}`)
     }
@@ -114,6 +114,10 @@ function getDynamicCss({
         css
       )
     })
+}
+
+function hasDesignTokens(node) {
+  return !!node.properties.find((prop) => prop.tags.designToken)
 }
 
 function getAnimatedCss(node, css) {

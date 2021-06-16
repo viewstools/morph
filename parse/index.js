@@ -790,14 +790,18 @@ export default ({
             if (existingDefaultValue) {
               existingDefaultValue.name = slotName || name
               existingDefaultValue.type = getPropType(block, name, value)
-              existingDefaultValue.defaultValue = tags.shouldBeSlot
-                ? false
-                : propNode.defaultValue
+              existingDefaultValue.defaultValue =
+                tags.shouldBeSlot || tags.designToken
+                  ? false
+                  : propNode.defaultValue
             } else {
               block.slots.push({
                 name: slotName || name,
                 type: getPropType(block, name, value),
-                defaultValue: tags.shouldBeSlot ? false : propNode.defaultValue,
+                defaultValue:
+                  tags.shouldBeSlot || tags.designToken
+                    ? false
+                    : propNode.defaultValue,
               })
             }
           }

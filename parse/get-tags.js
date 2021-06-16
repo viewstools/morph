@@ -36,5 +36,11 @@ export default ({ name, isSlot, slotIsNot, value, block }) => {
 
   if (isFragment(name)) tags.fragment = true
 
+  if (isDesignToken(value)) tags.designToken = true
+
   return tags
+}
+
+function isDesignToken(value) {
+  return typeof value === 'string' && value.startsWith('dt.')
 }

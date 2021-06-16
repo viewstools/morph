@@ -1,7 +1,8 @@
-import toSnakeCase from 'to-snake-case'
-import toCamelCase from 'to-camel-case'
-
-import { getImportNameForSource, getVariableName } from '../utils.js'
+import {
+  getImportNameForSource,
+  getVariableName,
+  transformToCamelCase,
+} from '../utils.js'
 
 export function enter(node, parent, state) {
   for (let dataGroup of node.data) {
@@ -218,14 +219,4 @@ function getFormatImportName(source, state) {
 
 function getDataVariableName(params, state) {
   return getVariableName(transformToCamelCase([...params, 'data']), state)
-}
-
-function transformToCamelCase(args) {
-  return toCamelCase(
-    args
-      .filter(Boolean)
-      .map((arg) => arg.replace(/\./g, '_'))
-      .map(toSnakeCase)
-      .join('_')
-  )
 }

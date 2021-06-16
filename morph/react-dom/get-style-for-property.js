@@ -10,6 +10,13 @@ import getUnit from '../get-unit.js'
 export default function getStyleForProperty(node, parent, state, code) {
   let scopedVar = setScopedVar(node, parent, state)
 
+  if (node.tags.designToken) {
+    return {
+      _isScoped: !!scopedVar,
+      [node.name]: asVar(node),
+    }
+  }
+
   if (scopedVar) {
     switch (node.name) {
       case 'rotate':
