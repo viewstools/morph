@@ -8,6 +8,7 @@ let FILE_USE_DATA = path.join('Views', 'Data.js')
 let FILE_USE_DATA_FORMAT = path.join('Views', 'Data', 'format.js')
 let FILE_USE_DATA_VALIDATE = path.join('Views', 'Data', 'validate.js')
 let FILE_USE_DATA_AGGREGATE = path.join('Views', 'Data', 'aggregate.js')
+let FILE_USE_DESIGN_TOKENS = path.join('Views', 'DesignTokens.js')
 let FILE_USE_FLOW = path.join('Views', 'Flow.js')
 let FILE_USE_PROFILE = path.join('Views', 'Profile.js')
 let FILE_USE_STREAM = path.join('Views', 'Stream')
@@ -65,6 +66,13 @@ export default function makeGetSystemImport({ as, src }) {
         return `import * as fromViewsAggregate from '${relativise(
           file,
           path.join(src, FILE_USE_DATA_AGGREGATE),
+          src
+        )}'`
+
+      case 'ViewsUseDesignTokens':
+        return `import * as fromDesignTokens from '${relativise(
+          file,
+          path.join(src, FILE_USE_DESIGN_TOKENS),
           src
         )}'`
 

@@ -3,6 +3,7 @@ import getUnit from './get-unit.js'
 import safe from './react/safe.js'
 import toCamelCase from 'to-camel-case'
 import toSlugCase from 'to-slug-case'
+import toSnakeCase from 'to-snake-case'
 import path from 'path'
 import wrap from './react/wrap.js'
 
@@ -103,6 +104,12 @@ function getScopedConditionPropValue(node, parent, state) {
     state.setFlowTo = true
 
     return `() => setFlowTo(${flowPath})`
+  } else if (node.tags.designToken) {
+    value = node.tags.slot
+      ? `${node.value.replace('props.', '')} || ${
+          state.designTokenVariableName[node.defaultValue]
+        }`
+      : state.designTokenVariableName[node.value.replace('props.', '')]
   } else if (node.tags.slot) {
     value = node.value
   } else if (typeof node.value === 'string') {
@@ -352,7 +359,7 @@ export let getAnimatedStyles = (node, isNative) => {
   return props.map((prop) => getAnimatedString(node, prop, isNative)).join(', ')
 }
 
-function getPropValue(prop, blockNode, interpolateValue = true) {
+function getPropValue(prop, blockNode, interpolateValue = true, state) {
   let propValue = prop.value
   let data = getDataForLoc(blockNode, prop?.loc)
   if (data) {
@@ -363,6 +370,12 @@ function getPropValue(prop, blockNode, interpolateValue = true) {
     if (DATA_VALUES.test(propToReplace)) {
       propValue = replacePropWithDataValue(propToReplace, data)
     }
+  } else if (prop.tags.designToken) {
+    propValue = prop.tags.slot
+      ? `${prop.value.replace('props.', '')} || ${
+          state.designTokenVariableName[prop.defaultValue]
+        }`
+      : state.designTokenVariableName[prop.value.replace('props.', '')]
   }
 
   let unit = getUnit(prop)
@@ -376,14 +389,18 @@ function getPropValue(prop, blockNode, interpolateValue = true) {
   }
 }
 
-export let getDynamicStyles = (node) => {
+export let getDynamicStyles = (node, state) => {
   return flatten([
     node.properties
       .filter(
         (prop) =>
-          prop.tags.style && prop.tags.slot && !getScopedProps(prop, node)
+          prop.tags.style &&
+          (prop.tags.slot || prop.tags.designToken) &&
+          !getScopedProps(prop, node)
       )
-      .map((prop) => `'--${prop.name}': ${getPropValue(prop, node)}`),
+      .map(
+        (prop) => `'--${prop.name}': ${getPropValue(prop, node, true, state)}`
+      ),
     node.scopes.map((scope) =>
       scope.properties
         .filter((prop) => prop.tags.style)
@@ -717,4 +734,14 @@ export function getVariableName(name, state) {
     state.usedVariableNames[name] = 1
   }
   return `${name}${suffix}`
+}
+
+export function transformToCamelCase(args) {
+  return toCamelCase(
+    args
+      .filter(Boolean)
+      .map((arg) => arg.replace(/\./g, '_'))
+      .map(toSnakeCase)
+      .join('_')
+  )
 }

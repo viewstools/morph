@@ -73,6 +73,7 @@ export default ({
       fromViewsValidate: 1,
       fromViewsAggregate: 1,
     },
+    designTokenVariableName: {},
     profile,
     uses: [],
     testIdKey: 'data-testid',

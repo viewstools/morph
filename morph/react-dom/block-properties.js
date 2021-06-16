@@ -9,12 +9,14 @@ import * as PropertyStyle from '../react/property-style.js'
 import * as PropertyText from '../react/property-text.js'
 import * as PropertyViewPath from '../react/property-view-path.js'
 import * as PropertyEventHandler from '../react/property-event-handler.js'
+import * as PropertyDesignToken from '../react/properties-design-token.js'
 import { isColumn } from '../utils.js'
 import isValidPropertyForBlock from './is-valid-property-for-block.js'
 
 export function enter(node, parent, state) {
   if (node.isFragment) return false
 
+  PropertyDesignToken.enter(node, parent, state)
   PropertiesStyle.enter(node, parent, state)
   PropertiesClassName.enter(node, parent, state)
   PropertiesImage.enter(node, parent, state)
