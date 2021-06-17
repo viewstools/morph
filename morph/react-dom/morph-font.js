@@ -6,7 +6,7 @@ export default (font, sources) => {
   if (isGoogleFont(font.family)) {
     let family = font.family.replace(/\s/g, '+')
     let style = font.style === 'italic' ? 'i' : ''
-    body = `@import url('https://fonts.googleapis.com/css2?family=${family}:${font.weight}${style}&display=swap');`
+    body = `@import url('https://fonts.googleapis.com/css2?family=${family}:wght@${font.weight}${style}&display=swap');`
   } else {
     body = `@font-face {
     font-display: swap;
