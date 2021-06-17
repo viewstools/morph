@@ -690,6 +690,13 @@ export function maybeGetUseDataForValue(p) {
   }
 }
 
+export function mergeBlockPropertiesAndScopes(block) {
+  return [
+    ...block.properties,
+    ...block.scopes.flatMap((scope) => scope.properties),
+  ].sort((a, b) => a.loc.start.line - b.loc.start.line)
+}
+
 export function getImportNameForSource(source, state) {
   let filePath = getFilePath(source)
   if (state.usedImports[filePath]) {

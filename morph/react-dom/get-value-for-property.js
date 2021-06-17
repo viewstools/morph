@@ -93,7 +93,7 @@ export default function getValueForProperty(node, parent, state) {
     }
   } else if (getScopedCondition(node, parent, state)) {
     return {
-      [node.name]: safe(getScopedCondition(node, parent, state)),
+      [node.name]: `{${getScopedCondition(node, parent, state)}}`,
     }
   } else if (/^on[A-Z]/.test(node.name) && node.slotName === 'setFlowTo') {
     let flowPath = getFlowPath(node, parent, state)
