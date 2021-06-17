@@ -5,8 +5,10 @@ export default (font, sources) => {
 
   if (isGoogleFont(font.family)) {
     let family = font.family.replace(/\s/g, '+')
-    let style = font.style === 'italic' ? 'i' : ''
-    body = `@import url('https://fonts.googleapis.com/css2?family=${family}:wght@${font.weight}${style}&display=swap');`
+    let style = font.style === 'italic' ? 'ital,' : ''
+    body = `@import url('https://fonts.googleapis.com/css2?family=${family}:${style}wght@${
+      style !== '' ? '1,' : ''
+    }${font.weight}&display=swap');`
   } else {
     body = `@font-face {
     font-display: swap;
