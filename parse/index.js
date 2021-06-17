@@ -33,7 +33,10 @@ import { isGoogleFont } from '../morph/fonts.js'
 import getLoc from './get-loc.js'
 import getTags from './get-tags.js'
 import path from 'path'
-import { maybeGetUseDataForValue } from '../morph/utils.js'
+import {
+  maybeGetUseDataForValue,
+  mergeBlockPropertiesAndScopes,
+} from '../morph/utils.js'
 
 export default ({
   convertSlotToProps = true,
@@ -423,11 +426,12 @@ export default ({
   }
 
   function parseData(block) {
+    let properties = mergeBlockPropertiesAndScopes(block)
     let data = []
     let index = 0
     let currentDataGroup = null
-    while (index < block.properties.length) {
-      let p = block.properties[index]
+    while (index < properties.length) {
+      let p = properties[index]
       if (p.name === 'data' && !p.tags.slot) {
         let currentData = getData(p)
         currentData.loc = p.loc
@@ -440,7 +444,7 @@ export default ({
 
         do {
           index++
-          if (index === block.properties.length) {
+          if (index === properties.length) {
             if (
               'validate' in currentData &&
               !('type' in currentData.validate)
@@ -448,13 +452,13 @@ export default ({
               // required keyword without validate
               delete currentData.validate
             }
-            currentData.loc.end = block.properties[index - 1].loc.end
-            currentDataGroup.loc.end = block.properties[index - 1].loc.end
+            currentData.loc.end = properties[index - 1].loc.end
+            currentDataGroup.loc.end = properties[index - 1].loc.end
             currentDataGroup = null
             break
           }
 
-          p = block.properties[index]
+          p = properties[index]
           if (p.name === 'format') {
             currentData.format = getDataFormat(p)
           } else if (p.name === 'formatOut') {
@@ -474,7 +478,7 @@ export default ({
             currentDataGroup.aggregate = getDataAggregate(p)
           } else if (p.name === 'data') {
             // data section finished - setting end line
-            currentData.loc.end = block.properties[index - 1].loc.end
+            currentData.loc.end = properties[index - 1].loc.end
 
             if (
               'validate' in currentData &&
@@ -483,11 +487,11 @@ export default ({
               // required keyword without validate
               delete currentData.validate
             }
-            currentData.loc.end = block.properties[index - 1].loc.end
+            currentData.loc.end = properties[index - 1].loc.end
             if (currentData.uses.size) {
               // if current data has an assignment then set currentDataGroup to null
               // else leave it as probably is part of aggregate data group
-              currentDataGroup.loc.end = block.properties[index - 1].loc.end
+              currentDataGroup.loc.end = properties[index - 1].loc.end
               currentDataGroup = null
             }
           } else {
@@ -506,7 +510,7 @@ export default ({
               currentData.uses.add(value)
             }
           }
-        } while (index < block.properties.length && p.name !== 'data')
+        } while (index < properties.length && p.name !== 'data')
       } else {
         index++
       }

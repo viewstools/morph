@@ -1,11 +1,11 @@
-import { getVariableName, transformToCamelCase } from '../utils.js'
+import {
+  getVariableName,
+  mergeBlockPropertiesAndScopes,
+  transformToCamelCase,
+} from '../utils.js'
 
 export function enter(node, parent, state) {
-  let properties = [
-    ...node.properties,
-    ...node.scopes.flatMap((scope) => scope.properties),
-  ]
-  properties
+  mergeBlockPropertiesAndScopes(node)
     .filter((prop) => prop.tags.designToken)
     .forEach((prop) => {
       let name = prop.tags.slot
