@@ -375,6 +375,7 @@ export default ({
       block.flow = flowProp.value
       block.viewPath = path.dirname(file.replace(src.replace(/\\/g, '/'), ''))
       block.viewPathParent = path.dirname(block.viewPath)
+      block.isDesignSystemRoot = block.viewPathParent === '/DesignSystem'
 
       if (flowProp.value === 'separate') {
         parseViewSetFlowToBasedOnData(block)
@@ -383,6 +384,7 @@ export default ({
       slots.push({
         name: 'viewPath',
         type: 'string',
+        alias: block.isDesignSystemRoot && 'viewPathParent',
         defaultValue: block.viewPath,
       })
     }
