@@ -32,7 +32,8 @@ export default function getExpandedProps({
         slot.defaultValue === false || ignoreDefaultValues
           ? ''
           : `= ${stringify(slot)}`
-      return `${slot.name}${maybeDefaultValue}`
+      let maybeAlias = slot.alias ? `: ${slot.alias}` : ''
+      return `${slot.name}${maybeAlias}${maybeDefaultValue}`
     })
 
   if (

@@ -101,6 +101,7 @@ export default ({
     },
     useIsBefore: view.parsed.view.useIsBefore,
     useIsMedia: view.parsed.view.useIsMedia,
+    isDesignSystemRoot: view.parsed.view.isDesignSystemRoot,
   }
 
   // // TIP: use the following code to trace generated code

@@ -48,6 +48,7 @@ export default function getBody({ state, name, view }) {
   } else {
     return [
       `export default function ${name}(${expandedProps}) {`,
+      state.isDesignSystemRoot && `  let viewPath = "${state.viewPath}"`,
       state.useIsBefore && '  let isBefore = useIsBefore()',
       state.useIsHovered && getUseIsHovered({ state }),
       state.useIsMedia && '  let isMedia = useIsMedia()',

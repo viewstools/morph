@@ -30,22 +30,5 @@ export default function getViewRelativeToView({
     }
   }
 
-  let importView = viewsToFiles.get(importViewFile)
-
-  if (
-    !importView.custom &&
-    view.parsed.view.isView &&
-    importView.parsed.view.isView
-  ) {
-    let pathToView = path.dirname(view.file)
-    let maybeFileViewInside = path
-      .join(pathToView, id, 'view.blocks')
-      .replace(/\\/g, '/')
-
-    if (importViewFile !== maybeFileViewInside) {
-      return null
-    }
-  }
-
-  return importView
+  return viewsToFiles.get(importViewFile)
 }
