@@ -9,16 +9,57 @@ let makeUseIsMedia = (
 // improving the algorithms inside, etc, see this:
 // https://github.com/viewstools/morph/blob/master/ensure-is-media.js
 
-import { useMedia } from 'use-media';
+import { useState, useEffect } from 'react'
+
+const MOCK_MEDIA_QUERY_LIST = {
+  media: '',
+  matches: false,
+  onchange: () => {},
+  addListener: () => {},
+  removeListener: () => {},
+  addEventListener: () => {},
+  removeEventListener: () => {},
+  dispatchEvent: _ => true, // dispatchEvent: (_: Event) => true
+}
+
+let useMedia = (
+  query,
+  defaultState = window.matchMedia(query).matches
+) => {
+  const [state, setState] = useState(defaultState)
+
+  useEffect(() => {
+    let mounted = true
+    const mediaQueryList =
+      typeof window === 'undefined'
+        ? MOCK_MEDIA_QUERY_LIST
+        : window.matchMedia(query)
+
+    const onChange = () => {
+      if (!mounted) return
+      setState(Boolean(mediaQueryList.matches))
+    }
+
+    mediaQueryList.addEventListener('change', onChange)
+    setState(Boolean(mediaQueryList.matches))
+
+    return () => {
+      mounted = false
+      mediaQueryList.removeEventListener('change', onChange)
+    }
+  }, [query])
+
+  return state
+}
 
 let useIsMedia = () => ({
   ${media
     .map(({ name, minWidth, maxWidth }) => {
-      let ret = [`"${name}": useMedia({ minWidth: ${minWidth}`]
+      let ret = [`"${name}": useMedia("(min-width: ${minWidth}px)`]
       if (maxWidth) {
-        ret.push(`, maxWidth: ${maxWidth}`)
+        ret.push(` and (max-width: ${maxWidth}px)`)
       }
-      ret.push('})')
+      ret.push('")')
       return ret.join('')
     })
     .join(',')}
