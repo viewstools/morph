@@ -11,7 +11,7 @@ let makeUseIsMedia = (
 
 import { useState, useEffect } from 'react'
 
-const MOCK_MEDIA_QUERY_LIST = {
+let MOCK_MEDIA_QUERY_LIST = {
   media: '',
   matches: false,
   onchange: () => {},
@@ -22,21 +22,20 @@ const MOCK_MEDIA_QUERY_LIST = {
   dispatchEvent: _ => true, // dispatchEvent: (_: Event) => true
 }
 
-let useMedia = (
-  query,
-  defaultState = window.matchMedia(query).matches
-) => {
-  const [state, setState] = useState(defaultState)
+function matchMedia(query) {
+  if (typeof window === 'undefined') return MOCK_MEDIA_QUERY_LIST
+  return window.matchMedia(query)
+}
+
+function useMedia (query, defaultState = Boolean(matchMedia(query).matches)) {
+  let [state, setState] = useState(defaultState)
 
   useEffect(() => {
-    let mounted = true
-    const mediaQueryList =
-      typeof window === 'undefined'
-        ? MOCK_MEDIA_QUERY_LIST
-        : window.matchMedia(query)
+    let cancel = true
+    let mediaQueryList = matchMedia(query)
 
-    const onChange = () => {
-      if (!mounted) return
+    let onChange = () => {
+      if (!cancel) return
       setState(Boolean(mediaQueryList.matches))
     }
 
@@ -44,7 +43,7 @@ let useMedia = (
     setState(Boolean(mediaQueryList.matches))
 
     return () => {
-      mounted = false
+      cancel = false
       mediaQueryList.removeEventListener('change', onChange)
     }
   }, [query])
@@ -52,8 +51,8 @@ let useMedia = (
   return state
 }
 
-let useIsMedia = () => ({
-  ${media
+export default function useIsMedia() {
+  return {${media
     .map(({ name, minWidth, maxWidth }) => {
       let ret = [`"${name}": useMedia("(min-width: ${minWidth}px)`]
       if (maxWidth) {
@@ -63,8 +62,9 @@ let useIsMedia = () => ({
       return ret.join('')
     })
     .join(',')}
-})
-export default useIsMedia`
+  }
+}
+`
 
 async function getMediaConfig(src) {
   let media = {
