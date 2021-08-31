@@ -9,6 +9,7 @@ let makeUseIsMedia = (
 // improving the algorithms inside, etc, see this:
 // https://github.com/viewstools/morph/blob/master/ensure-is-media.js
 
+// based on https://github.com/streamich/use-media
 import { useState, useEffect } from 'react'
 
 let MOCK_MEDIA_QUERY_LIST = {
