@@ -12,7 +12,7 @@ import React, {
 } from 'react'
 
 export let flowDefinition = {}
-function getFlowDefinitionKey(key) {
+export function getFlowDefinitionKey(key) {
   return key.replace(/\(.+?\)/g, '')
 }
 export function getFlowDefinition(key) {
