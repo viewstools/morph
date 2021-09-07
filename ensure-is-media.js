@@ -40,12 +40,12 @@ function useMedia (query, defaultState = Boolean(matchMedia(query).matches)) {
       setState(Boolean(mediaQueryList.matches))
     }
 
-    mediaQueryList.addEventListener('change', onChange)
+    mediaQueryList.addListener('change', onChange)
     setState(Boolean(mediaQueryList.matches))
 
     return () => {
       cancel = false
-      mediaQueryList.removeEventListener('change', onChange)
+      mediaQueryList.removeListener('change', onChange)
     }
   }, [query])
 
