@@ -15,12 +15,8 @@ import { useState, useEffect } from 'react'
 let MOCK_MEDIA_QUERY_LIST = {
   media: '',
   matches: false,
-  onchange: () => {},
   addListener: () => {},
   removeListener: () => {},
-  addEventListener: () => {},
-  removeEventListener: () => {},
-  dispatchEvent: _ => true, // dispatchEvent: (_: Event) => true
 }
 
 function matchMedia(query) {
@@ -40,12 +36,12 @@ function useMedia (query, defaultState = Boolean(matchMedia(query).matches)) {
       setState(Boolean(mediaQueryList.matches))
     }
 
-    mediaQueryList.addListener('change', onChange)
+    mediaQueryList.addListener(onChange)
     setState(Boolean(mediaQueryList.matches))
 
     return () => {
       cancel = false
-      mediaQueryList.removeListener('change', onChange)
+      mediaQueryList.removeListener(onChange)
     }
   }, [query])
 
