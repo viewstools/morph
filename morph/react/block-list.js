@@ -5,6 +5,7 @@ import {
   getDataForLoc,
   replacePropWithDataValue,
   isList,
+  hasProp,
 } from '../utils.js'
 
 let DATA_VALUE = /props\.value/
@@ -49,21 +50,47 @@ export function enter(node, parent, state) {
   }
 
   state.render.push(
-    `{Array.isArray(${value}) && ${value}.map((item, index, list) => `
+    `{Array.isArray(${value}) && ${value}.map((item, index, list) => {`
   )
 
   if (state.viewPath) {
     let itemDataContextName =
       getProp(node, 'itemDataContextName') ||
       defaultItemDataContextName(node, from)
+    let key
+    if (hasProp(node, 'itemKey')) {
+      let elements = getProp(node, 'itemKey')
+        .value.split(',')
+        .map((key) => key.trim())
+      key = `\`${elements
+        .map((key) =>
+          /[^A-Za-z_]/.test(key) ? `$\{item?.["${key}"]}` : `$\{item?.${key}}`
+        )
+        .join('-')}\``
+    } else {
+      key = `item?.id || index`
+
+      if (state.tools) {
+        state.render.push(`
+          if (process.env.NODE_ENV === 'development') {
+            if(!item?.id) {
+              console.debug({
+                type: 'views/data',
+                warning: \`Missing "id" property on the item $\{JSON.stringify(item)} in context "${itemDataContextName.value}" so the index in the list will be used as a fallback key. Consider setting "itemKey" if the item has a custom or compound key e.g.  first_name,last_name.\`,
+              })
+            }
+          }`)
+      }
+    }
+
     state.render.push(
-      `<ListItem
-        key={item?.id || index}
+      `return <ListItem
+        key={${key}}
         context="${itemDataContextName.value}"
         item={item}
         index={index}
         list={list}
-        viewPath={\`$\{props.viewPath}/${node.children[0].name}($\{item?.id || index})\`}
+        viewPath={\`$\{props.viewPath}/${node.children[0].name}($\{${key}})\`}
       >`
     )
 
@@ -79,7 +106,7 @@ export function leave(node, parent, state) {
   if (state.viewPath) {
     state.render.push('</ListItem>')
   }
-  state.render.push(')}')
+  state.render.push('})}')
 
   if (getProp(node, 'stream')?.value) {
     state.render.push(`</ViewsStream>`)
