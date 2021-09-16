@@ -51,7 +51,7 @@ export function enter(node, parent, state) {
   }
 
   state.render.push(
-    `{Array.isArray(${value}) && ${value}.map((item, index, list) => {`
+    `{Array.isArray(${value}) && ${value}.map((item, index, list) => `
   )
 
   if (state.viewPath) {
@@ -62,7 +62,7 @@ export function enter(node, parent, state) {
     let key = hasItemKey ? getListItemKey(node) : `item?.id || index`
 
     state.render.push(
-      `return <ListItem
+      `<ListItem
         key={${key}}
         context="${itemDataContextName.value}"
         item={item}
@@ -85,7 +85,7 @@ export function leave(node, parent, state) {
   if (state.viewPath) {
     state.render.push('</ListItem>')
   }
-  state.render.push('})}')
+  state.render.push(')}')
 
   if (getProp(node, 'stream')?.value) {
     state.render.push(`</ViewsStream>`)
