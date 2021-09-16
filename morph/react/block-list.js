@@ -6,6 +6,7 @@ import {
   replacePropWithDataValue,
   isList,
   hasProp,
+  getListItemKey,
 } from '../utils.js'
 
 let DATA_VALUE = /props\.value/
@@ -59,14 +60,7 @@ export function enter(node, parent, state) {
       defaultItemDataContextName(node, from)
     let key
     if (hasProp(node, 'itemKey')) {
-      let elements = getProp(node, 'itemKey')
-        .value.split(',')
-        .map((key) => key.trim())
-      key = `\`${elements
-        .map((key) =>
-          /[^A-Za-z_]/.test(key) ? `$\{item?.["${key}"]}` : `$\{item?.${key}}`
-        )
-        .join('-')}\``
+      key = getListItemKey(node)
     } else {
       key = `item?.id || index`
 
