@@ -752,3 +752,14 @@ export function transformToCamelCase(args) {
       .join('_')
   )
 }
+
+export function getListItemKey(node) {
+  let elements = getProp(node, 'itemKey')
+    .value.split(',')
+    .map((key) => key.trim())
+  return `\`${elements
+    .map((key) =>
+      /[^A-Za-z_]/.test(key) ? `$\{item?.["${key}"]}` : `$\{item?.${key}}`
+    )
+    .join('-')}\``
+}

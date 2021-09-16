@@ -1,4 +1,4 @@
-import { getProp, isList } from '../utils.js'
+import { getListItemKey, getProp, hasProp, isList } from '../utils.js'
 
 export function enter(node, parent, state) {
   if (!isList(parent)) return
@@ -10,8 +10,12 @@ export function enter(node, parent, state) {
   state.render.push(` item={item}`)
 
   if (state.viewPath) {
+    let key = hasProp(parent, 'itemKey')
+      ? getListItemKey(parent)
+      : `item?.id || index`
+
     state.render.push(
-      ` viewPath={\`$\{props.viewPath}/${node.name}($\{item?.id || index})\`}`
+      ` viewPath={\`$\{props.viewPath}/${node.name}($\{${key}})\`}`
     )
     node.skipViewPath = true
   }
