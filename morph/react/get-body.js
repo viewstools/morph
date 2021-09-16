@@ -193,6 +193,17 @@ function getListItemDataProvider({ state, view }) {
     ${
       isUsingDataOnSubmit ? 'let onSubmit = useListItemDataOnSubmit(props)' : ''
     }
+    ${
+      state.tools
+        ? `
+    if (process.env.NODE_ENV === 'development' && !props.hasItemKey && !props.item?.id) {
+      console.debug({
+        type: 'views/data',
+        warning: \`Missing "id" property on the item $\{JSON.stringify(props.item)} in context "\${props.context}" so the index in the list will be used as a fallback key. Consider setting "itemKey" if the item has a custom or compound key e.g.  first_name,last_name.\`,
+      })
+    }`
+        : ''
+    }
     return (
       <fromData.DataProvider
       context={props.context}
