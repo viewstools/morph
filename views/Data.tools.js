@@ -231,6 +231,7 @@ export function DataProvider(props) {
       dispatch({ type: IS_SUBMITTING, value: true })
       let res = await onSubmit.current({
         value: stateRef.current.value,
+        originalValue: props.value,
         args,
         change: _change,
       })
