@@ -10,7 +10,8 @@ export default function relativise(rfrom, rto, rsrc = '') {
   let p = r.substr(r.startsWith('../..') ? 3 : 1)
 
   if (p.startsWith('..')) {
-    p = to.replace(`${src}/`, '')
+    // relativise base path
+    p = to.replace(`${src}/`, '/src/')
   }
 
   return p

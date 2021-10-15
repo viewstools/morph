@@ -727,7 +727,7 @@ function getImportName(importName, state) {
 
 function getFilePath(source) {
   if (path.isAbsolute(source)) {
-    return source.substring(1)
+    return `/src${source}` // source.substring(1)
   }
   if (source.startsWith('.')) return source
   return `./${source}`
