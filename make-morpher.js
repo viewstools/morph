@@ -19,6 +19,7 @@ export default function makeMorpher({
   src,
   tools = false,
   verbose = true,
+  designSystemImportRoot,
 }) {
   let state = {
     appName,
@@ -28,6 +29,7 @@ export default function makeMorpher({
     profile,
     tools,
     verbose,
+    designSystemImportRoot,
     customFonts: new Map(),
     viewsById: new Map(),
     viewsToFiles: new Map(),
@@ -100,6 +102,7 @@ export default function makeMorpher({
       tools: state.tools,
       viewsById: state.viewsById,
       viewsToFiles: state.viewsToFiles,
+      designSystemImportRoot: state.designSystemImportRoot,
     })
 
     // TODO optimise, only if they changed, cache, etc

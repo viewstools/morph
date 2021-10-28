@@ -17,7 +17,7 @@ export let enter = (node, parent, state) => {
     let isDisabled = getProp(node, 'isDisabled')
     let onClick = getProp(node, 'onClick')
 
-    let onPress = wrap(onClick.value)
+    let onPress = onClick && wrap(onClick.value)
 
     if (/^on[A-Z]/.test(onClick.name) && onClick.slotName === 'setFlowTo') {
       // TODO warn if action is used but it isn't in actions (on parser)
@@ -36,7 +36,7 @@ export let enter = (node, parent, state) => {
     state.render.push(
       `<${block}
           activeOpacity={0.7}
-          onPress=${onPress}
+          ${onPress ? `onPress=${onPress}` : ''}
           ${isDisabled ? `disabled=${wrap(isDisabled.value)}` : ''}
           underlayColor='transparent'
           ${node.isInList ? `key={${key ? key.value : 'index'}}` : ''}>`

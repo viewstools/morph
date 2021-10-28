@@ -11,6 +11,7 @@ export default function morphAllViews({
   tools,
   viewsById,
   viewsToFiles,
+  designSystemImportRoot,
 }) {
   return [...filesView]
     .map((file) => viewsToFiles.get(file))
@@ -27,6 +28,7 @@ export default function morphAllViews({
         view,
         viewsById,
         viewsToFiles,
+        designSystemImportRoot,
       })
 
       return [

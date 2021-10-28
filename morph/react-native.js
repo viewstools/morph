@@ -25,6 +25,7 @@ export default ({
   view,
   viewsById,
   viewsToFiles,
+  designSystemImportRoot,
 }) => {
   let name = view.id
   let finalName = restrictedNames.includes(name) ? `${name}1` : name
@@ -135,6 +136,7 @@ export default ({
         view,
         viewsById,
         viewsToFiles,
+        designSystemImportRoot,
       }),
       getStyles,
       name: finalName,

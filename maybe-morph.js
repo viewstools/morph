@@ -13,6 +13,7 @@ export default function maybeMorph({
   viewsById,
   viewsToFiles,
   verbose,
+  designSystemImportRoot,
 }) {
   let result = null
   try {
@@ -25,6 +26,7 @@ export default function maybeMorph({
       view,
       viewsById,
       viewsToFiles,
+      designSystemImportRoot,
     })
 
     view.version++
