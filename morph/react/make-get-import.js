@@ -10,6 +10,7 @@ export default function makeGetImport({
   view,
   viewsById,
   viewsToFiles,
+  designSystemImportRoot,
 }) {
   return function getImport(id, isLazy) {
     if (imports[id]) return imports[id]
@@ -47,6 +48,10 @@ function ${id}() {
     }
 
     let importPath = relativise(view.file, importView.importFile, src)
+
+    if (designSystemImportRoot && importPath.startsWith('DesignSystem')) {
+      importPath = importPath.replace('DesignSystem', designSystemImportRoot)
+    }
 
     return isLazy
       ? `let ${id} = React.lazy(() => import('${importPath}'))`
