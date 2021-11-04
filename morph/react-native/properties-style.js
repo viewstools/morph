@@ -228,6 +228,8 @@ let VIEW_PROPS = [
   'zIndex',
 ]
 
+let BLOCK_TYPES = ['Text', 'Horizontal', 'Vertical']
+
 export { enter }
 
 export let leave = (node, parent, state) => {
@@ -250,12 +252,10 @@ export let leave = (node, parent, state) => {
   if (hasKeys(node.style.static.base)) {
     let id = createId(node, state)
 
-    let blockType = node.is || node.name
-    let handleBlockTypes = ['Text', 'Horizontal', 'Vertical']
-    if (handleBlockTypes.includes(blockType)) {
+    if (BLOCK_TYPES.includes(node.name)) {
       state.styles[id] = filterInvalidStyles(
         node.style.static.base,
-        blockType === 'Text' ? TEXT_PROPS : VIEW_PROPS,
+        node.name === 'Text' ? TEXT_PROPS : VIEW_PROPS,
         node,
         state
       )
@@ -282,6 +282,14 @@ export let leave = (node, parent, state) => {
   }
 
   if (hasKeys(dynamicStyles)) {
+    if (BLOCK_TYPES.includes(node.name)) {
+      dynamicStyles = filterInvalidStyles(
+        dynamicStyles,
+        node.name === 'Text' ? TEXT_PROPS : VIEW_PROPS,
+        node,
+        state
+      )
+    }
     dynamicStyle = getObjectAsString(dynamicStyles)
     dynamicStyle = dynamicStyle.substr(1, dynamicStyle.length - 2)
   }
