@@ -628,6 +628,7 @@ export function getFlowPath(node, parent, state) {
  *
  */
 export function getDataForLoc(blockNode, loc) {
+  if (!loc) return null
   return (
     blockNode.data
       // the data should be defined before the current line

@@ -3,7 +3,11 @@ import {
   getScopedCondition,
   isTag,
   maybeMakeHyphenated,
+  getDataForLoc,
+  replacePropWithDataValue,
 } from '../utils.js'
+
+let DATA_VALUES = /!?props\.(isInvalid|isInvalidInitial|isValid|isValidInitial|isSubmitting|value)$/
 
 export default function getStyleForProperty(node, parent, state, code) {
   let scopedCondition = getScopedCondition(node, parent, state)
@@ -32,13 +36,19 @@ export default function getStyleForProperty(node, parent, state, code) {
     }
   }
 
+  let data = getDataForLoc(parent, node.loc)
+  let value =
+    data && DATA_VALUES.test(node.value)
+      ? replacePropWithDataValue(node.value, data)
+      : node.value
+
   switch (node.name) {
     case 'borderTopLeftRadius':
     case 'borderTopRightRadius':
     case 'borderBottomLeftRadius':
     case 'borderBottomRightRadius':
       return {
-        [parent.name === 'Image' ? 'borderRadius' : node.name]: node.value,
+        [parent.name === 'Image' ? 'borderRadius' : node.name]: value,
       }
 
     case 'borderTopStyle':
@@ -46,17 +56,17 @@ export default function getStyleForProperty(node, parent, state, code) {
     case 'borderLeftStyle':
     case 'borderRightStyle':
       return {
-        borderStyle: node.value,
+        borderStyle: value,
       }
 
     case 'shadowColor':
       return decorateShadow({
-        shadowColor: node.value,
+        shadowColor: value,
       })
 
     case 'shadowBlur':
       return decorateShadow({
-        shadowRadius: node.value,
+        shadowRadius: value,
       })
 
     case 'shadowOffsetX':
@@ -83,7 +93,7 @@ export default function getStyleForProperty(node, parent, state, code) {
 
     case 'zIndex':
       return {
-        zIndex: code ? node.value : parseInt(node.value, 10),
+        zIndex: code ? value : parseInt(value, 10),
       }
 
     case 'color':
@@ -91,13 +101,13 @@ export default function getStyleForProperty(node, parent, state, code) {
       if (/Capture/.test(parent.name) && isTag(node, 'placeholder')) {
         return {
           _isProp: true,
-          placeholderTextColor: node.value,
+          placeholderTextColor: value,
         }
       }
-      // Just returning the node.value in cases where if statement is not true
+      // Just returning the value in cases where if statement is not true
       // Otherwise it was falling through to the next case.
       return {
-        color: node.value,
+        color: value,
       }
 
     case 'lineHeight':
