@@ -7,17 +7,17 @@ import ensureMorpherVersion from './ensure-morpher-version.js'
 import glob from 'fast-glob'
 import path from 'path'
 
-export default async function ensureViewsFiles(state) {
+export default async function ensureViewsFiles(state, designSystemImportRoot) {
   return Promise.all([
     ...ensureFlow(state),
     ensureIsMedia(state),
-    ...(await ensureStaticFiles(state)),
+    ...(await ensureStaticFiles(state, designSystemImportRoot)),
     ensureMorpherVersion(state),
     ensureGitignore(state),
   ])
 }
 
-async function ensureStaticFiles({ pass, src, tools }) {
+async function ensureStaticFiles({ pass, src, tools }, designSystemImportRoot) {
   if (pass > 0) return []
 
   let files = await glob('**/*.js', {
@@ -43,8 +43,22 @@ async function ensureStaticFiles({ pass, src, tools }) {
     .map(async (file) =>
       ensureFile({
         file: path.join(src, 'Views', file.replace('.tools.js', '.js')),
-        content: await fs.readFile(path.join(__dirname, 'views', file)),
+        content: await getContent(file, designSystemImportRoot),
       })
     )
     .flat()
+}
+
+async function getContent(file, designSystemImportRoot) {
+  let content = (
+    await fs.readFile(path.join(__dirname, 'views', file))
+  ).toString('utf-8')
+  if (designSystemImportRoot && content.includes(`from 'DesignSystem/`)) {
+    // replace design system imports with the provided alias
+    content = content.replace(
+      /from 'DesignSystem\//g,
+      `from '${designSystemImportRoot}/`
+    )
+  }
+  return content
 }

@@ -38,6 +38,8 @@ import {
   mergeBlockPropertiesAndScopes,
 } from '../morph/utils.js'
 
+let ALLOWED_MULTIPLE_DECLARATIONS = ['data']
+
 export default ({
   convertSlotToProps = true,
   customFonts,
@@ -158,7 +160,9 @@ export default ({
       freq[prop.name]++
     })
 
-    let multiples = Object.keys(freq).filter((name) => freq[name] > 1)
+    let multiples = Object.keys(freq)
+      .filter((name) => freq[name] > 1)
+      .filter((name) => !ALLOWED_MULTIPLE_DECLARATIONS.includes(name))
 
     if (multiples.length > 0) {
       multiples.forEach((name) =>

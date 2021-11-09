@@ -106,7 +106,7 @@ export default function makeMorpher({
     })
 
     // TODO optimise, only if they changed, cache, etc
-    let viewsFiles = await ensureViewsFiles(state)
+    let viewsFiles = await ensureViewsFiles(state, state.designSystemImportRoot)
 
     let filesToWrite = [
       ...morphedFonts,
