@@ -139,7 +139,7 @@ export default ({
         designSystemImportRoot,
       }),
       getStyles,
-      name: finalName,
+      name: state.name,
       state,
       view,
     }),
