@@ -7,17 +7,17 @@ import ensureMorpherVersion from './ensure-morpher-version.js'
 import glob from 'fast-glob'
 import path from 'path'
 
-export default async function ensureViewsFiles(state, designSystemImportRoot) {
+export default async function ensureViewsFiles(state) {
   return Promise.all([
     ...ensureFlow(state),
     ensureIsMedia(state),
-    ...(await ensureStaticFiles(state, designSystemImportRoot)),
+    ...(await ensureStaticFiles(state)),
     ensureMorpherVersion(state),
     ensureGitignore(state),
   ])
 }
 
-async function ensureStaticFiles({ pass, src, tools }, designSystemImportRoot) {
+async function ensureStaticFiles({ pass, src, tools, designSystemImportRoot }) {
   if (pass > 0) return []
 
   let files = await glob('**/*.js', {
