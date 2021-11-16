@@ -118,7 +118,7 @@ export let STYLE = [
   // 'background',
   // 'backgroundAttachment',
   // 'backgroundBlend-mode',
-  // 'backgroundClip',
+  'backgroundClip',
   // 'backgroundOrigin',
   // 'backgroundPosition',
   // 'backgroundRepeat',
@@ -199,6 +199,7 @@ export let STYLE = [
   // 'unicodeBidi',
   // 'verticalAlign',
   'visibility',
+  'willChange',
 ]
 export let ROWSTYLE = [
   'rowBackgroundColor',
