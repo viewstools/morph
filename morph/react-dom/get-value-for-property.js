@@ -156,6 +156,16 @@ export default function getValueForProperty(node, parent, state) {
         [node.name]: safe(node.value, node),
       }
     }
+  } else if (
+    ['Capture', 'CaptureTextArea'].includes(parent.name) &&
+    node.name === 'onChange'
+  ) {
+    return {
+      [node.name]: safe(
+        `(e) => ${node.value} && ${node.value}(e, e.target.value)`,
+        node
+      ),
+    }
   } else {
     return {
       [node.name]: safe(node.value, node),
