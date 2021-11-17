@@ -156,6 +156,17 @@ export default function getValueForProperty(node, parent, state) {
         [node.name]: safe(node.value, node),
       }
     }
+  } else if (
+    ['Capture', 'CaptureTextArea'].includes(parent.name) &&
+    node.name === 'onChange'
+  ) {
+    // adding the value as a second argument to onChange as the event received if different on React DOM from React Native
+    return {
+      [node.name]: safe(
+        `(e) => ${node.value} && ${node.value}(e, e.nativeEvent.text)`,
+        node
+      ),
+    }
   } else {
     return {
       [node.name]: safe(node.value, node),
