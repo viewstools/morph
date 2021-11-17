@@ -132,8 +132,10 @@ function getAnimated({ state }) {
               ? scope.value
               : `${scope.value}${unit}`
             : scope.value
-
-          return `${condition}? ${JSON.stringify(value)} : ${current}`
+          let elseValue = current.startsWith('"props.')
+            ? current.substring(1, current.length - 1).replace('props.', '')
+            : current.replace('props.', '')
+          return `${condition} ? ${JSON.stringify(value)} : ${elseValue}`
         }, JSON.stringify(propValue))
 
         toValue.push(`${JSON.stringify(prop.name)}: ${value}`)
