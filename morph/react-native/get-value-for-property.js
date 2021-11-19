@@ -62,6 +62,7 @@ function getImageSource(node, parent, state) {
 let DATA_VALUES = /!?props\.(isInvalid|isInvalidInitial|isValid|isValidInitial|isSubmitting|value|onSubmit|onChange)$/
 let CHILD_VALUES = /props\.(isSelected|isHovered|isFocused|isSelectedHovered)/
 let ON_IS_SELECTED = /(onClick|onPress|goTo)/
+let ON_IS_FOCUSED = /(onFocus|onBlur)/
 
 export default function getValueForProperty(node, parent, state) {
   let data = getDataForLoc(parent, node.loc)
@@ -166,6 +167,11 @@ export default function getValueForProperty(node, parent, state) {
         `(e) => ${node.value} && ${node.value}(e, e.nativeEvent.text)`,
         node
       ),
+    }
+  } else if (parent.isBasic && ON_IS_FOCUSED.test(node.name)) {
+    state.useIsFocused = true
+    return {
+      [node.name]: safe(`${node.value.replace('props.', '')}Bind`, node),
     }
   } else {
     return {
