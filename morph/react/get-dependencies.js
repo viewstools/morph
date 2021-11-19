@@ -147,6 +147,10 @@ export default (state, getImport, file) => {
     dependencies.push(getImport('ViewsUseIsHovered'))
   }
 
+  if (state.useIsFocused) {
+    dependencies.push(getImport('ViewsUseIsFocused'))
+  }
+
   if (state.useIsMedia) {
     dependencies.push(getImport('ViewsUseIsMedia'))
   }

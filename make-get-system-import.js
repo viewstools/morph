@@ -3,6 +3,7 @@ import path from 'path'
 
 let FILE_USE_IS_BEFORE = path.join('Views', 'hooks', 'useIsBefore.js')
 let FILE_USE_IS_HOVERED = path.join('Views', 'hooks', 'useIsHovered.js')
+let FILE_USE_IS_FOCUSED = path.join('Views', 'hooks', 'useIsFocused.js')
 let FILE_USE_IS_MEDIA = path.join('Views', 'hooks', 'useIsMedia.js')
 let FILE_USE_DATA = path.join('Views', 'Data.js')
 let FILE_USE_DATA_FORMAT = path.join('Views', 'Data', 'format.js')
@@ -38,6 +39,13 @@ export default function makeGetSystemImport({ as, src }) {
         return `import useIsHovered from '${relativise(
           file,
           path.join(src, FILE_USE_IS_HOVERED),
+          src
+        )}'`
+
+      case 'ViewsUseIsFocused':
+        return `import useIsFocused from '${relativise(
+          file,
+          path.join(src, FILE_USE_IS_FOCUSED),
           src
         )}'`
 

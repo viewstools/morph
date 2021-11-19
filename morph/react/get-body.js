@@ -3,6 +3,7 @@ import { getScopedName } from '../utils.js'
 import getUnit from '../get-unit.js'
 import getExpandedProps from './get-expanded-props.js'
 import getUseIsHovered from './get-use-is-hovered.js'
+import getUseIsFocused from './get-use-is-focused.js'
 import path from 'path'
 
 export default function getBody({ state, name, view }) {
@@ -51,6 +52,7 @@ export default function getBody({ state, name, view }) {
       state.isDesignSystemRoot && `  let viewPath = "${state.viewPath}"`,
       state.useIsBefore && '  let isBefore = useIsBefore()',
       state.useIsHovered && getUseIsHovered({ state }),
+      state.useIsFocused && getUseIsFocused({ state }),
       state.useIsMedia && '  let isMedia = useIsMedia()',
       ...flow,
       ...state.variables,
