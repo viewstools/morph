@@ -4,7 +4,7 @@ export default (node, parent, state) => {
   switch (node.name) {
     case 'Capture':
     case 'CaptureTextArea':
-      return 'TextInput'
+      return getTextInputBlockName(node, state)
 
     case 'Horizontal':
     case 'Vertical':
@@ -14,12 +14,7 @@ export default (node, parent, state) => {
       return getListBlockName(node, state)
 
     case 'Text':
-      if (node.isAnimated) {
-        state.animated.add('Text')
-        return 'AnimatedText'
-      } else {
-        return 'Text'
-      }
+      return getTextBlockName(node, state)
 
     case 'Block':
     case 'View':
@@ -27,6 +22,24 @@ export default (node, parent, state) => {
 
     default:
       return node.name
+  }
+}
+
+let getTextInputBlockName = (node, state) => {
+  if (node.isAnimated) {
+    state.animated.add('TextInput')
+    return 'AnimatedTextInput'
+  } else {
+    return 'TextInput'
+  }
+}
+
+let getTextBlockName = (node, state) => {
+  if (node.isAnimated) {
+    state.animated.add('Text')
+    return 'AnimatedText'
+  } else {
+    return 'Text'
   }
 }
 
