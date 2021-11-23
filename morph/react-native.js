@@ -38,6 +38,7 @@ export default ({
     hasListItem: false,
     dependencies: new Set(),
     flow: null,
+    flowDefaultState: null,
     flowHas: false,
     flowValue: false,
     setFlowTo: false,
