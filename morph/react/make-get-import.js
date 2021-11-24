@@ -47,7 +47,10 @@ function ${id}() {
 }`
     }
 
-    let importPath = relativise(view.file, importView.importFile, src)
+    let importPath = relativise(view.file, importView.importFile, src).replace(
+      '.js',
+      ''
+    )
 
     if (designSystemImportRoot && importPath.startsWith('DesignSystem')) {
       importPath = importPath.replace('DesignSystem', designSystemImportRoot)
