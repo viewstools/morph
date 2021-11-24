@@ -28,14 +28,11 @@ export default async function processViewFiles({
       viewsToFiles.set(file, {
         ...view,
         custom: false,
+        flow: false,
         data,
         query,
         file,
-        importFile: query
-          ? data
-          : logic
-          ? logic
-          : file.replace(/\.blocks$/, '.js'),
+        importFile: file.replace(/view\.blocks$/, 'index.js'),
         id,
         logic,
         source: await fs.readFile(file, 'utf8'),

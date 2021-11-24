@@ -1,6 +1,6 @@
-import { DataProvider } from './Data.js'
+import { DataProvider } from './Data'
 import React, { useMemo } from 'react'
-import useIsMedia from './hooks/useIsMedia.js'
+import useIsMedia from './hooks/useIsMedia'
 
 export default function Media(props) {
   let media = useIsMedia()

@@ -9,6 +9,8 @@ let CONTENT = `# views
 **/DesignSystem/Fonts/*.module.css
 **/*.graphql.js
 **/data.js
+**/index.js
+**/flow.js
 **/view.module.css
 src/Views`
 

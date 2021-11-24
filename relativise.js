@@ -13,5 +13,5 @@ export default function relativise(rfrom, rto, rsrc = '') {
     p = to.replace(`${src}/`, '')
   }
 
-  return p
+  return p.replace(/\.js$/, '')
 }

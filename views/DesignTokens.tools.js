@@ -1,5 +1,5 @@
 import React from 'react'
-import { DataProvider, useDataValue } from 'Views/Data.js'
+import { DataProvider, useDataValue } from 'Views/Data'
 import get from 'lodash/get'
 import tokens from 'DesignSystem/tokens.json'
 

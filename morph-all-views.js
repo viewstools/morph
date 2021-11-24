@@ -1,3 +1,4 @@
+import getViewIndex from './get-view-index.js'
 import maybeMorph from './maybe-morph.js'
 import path from 'path'
 
@@ -40,6 +41,10 @@ export default function morphAllViews({
           file: path.join(path.dirname(view.file), name),
           content,
         })),
+        {
+          file: path.join(path.dirname(view.file), 'index.js'),
+          content: getViewIndex(view),
+        },
       ]
     })
     .flat()

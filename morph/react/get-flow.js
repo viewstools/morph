@@ -1,14 +1,11 @@
-import relativise from '../../relativise.js'
-
 export default function getFlow({ name, viewPath, src, view }) {
+  let importFile = view.query ? 'data' : view.logic ? 'logic' : 'view'
+
   return `// This file is auto-generated.
 // It's responsible for giving the view it's own Flow context.
 
 import * as fromFlow from 'Views/Flow'
-import ${name} from '${relativise(view.file, view.importFile, src).replace(
-    '.js',
-    ''
-  )}'
+import ${name} from './${importFile}'
 
 export default function ${name}Flow({ children, viewPath, ...props }) {
   return (
