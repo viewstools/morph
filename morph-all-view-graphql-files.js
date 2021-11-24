@@ -2,7 +2,11 @@ import { promises as fs, existsSync } from 'fs'
 import gql from 'graphql-tag'
 import path from 'path'
 
-export default function morphAllViews({ appName, filesViewGraphql, src }) {
+export default function morphAllViewsGraphqlFiles({
+  appName,
+  filesViewGraphql,
+  src,
+}) {
   return [...filesViewGraphql]
     .map((file) => {
       let viewPath = path.relative(src, path.dirname(file))

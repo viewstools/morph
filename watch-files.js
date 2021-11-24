@@ -20,6 +20,7 @@ export default async function watchFiles({ morpher }) {
     cwd: morpher.src,
     ignored: [
       '**/view.js',
+      '**/flow.js',
       '**/view.module.css',
       'DesignSystem/Fonts/*.js',
       'DesignSystem/Fonts/*.css',

@@ -1,4 +1,5 @@
 import * as visitor from './react-dom/block.js'
+import getFlow from './react/get-flow.js'
 import getStyleForProperty from './react-dom/get-style-for-property.js'
 import getStyles from './react-dom/get-styles.js'
 import getValueForProperty from './react-dom/get-value-for-property.js'
@@ -106,6 +107,7 @@ export default ({
     useIsBefore: view.parsed.view.useIsBefore,
     useIsMedia: view.parsed.view.useIsMedia,
     isDesignSystemRoot: view.parsed.view.isDesignSystemRoot,
+    view,
   }
 
   // TIP: use the following code to trace generated code
@@ -138,6 +140,12 @@ export default ({
     extraFiles.push({
       name: 'view.module.css',
       content: getStyles(state),
+    })
+  }
+  if (state.isDesignSystemRoot) {
+    extraFiles.push({
+      name: 'flow.js',
+      content: getFlow(state),
     })
   }
 

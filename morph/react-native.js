@@ -1,4 +1,5 @@
 import * as visitor from './react-native/block.js'
+import getFlow from './react/get-flow.js'
 import getStyleForProperty from './react-native/get-style-for-property.js'
 import getStyles from './react-native/get-styles.js'
 import getValueForProperty from './react-native/get-value-for-property.js'
@@ -104,6 +105,7 @@ export default ({
     useIsBefore: view.parsed.view.useIsBefore,
     useIsMedia: view.parsed.view.useIsMedia,
     isDesignSystemRoot: view.parsed.view.isDesignSystemRoot,
+    view,
   }
 
   // // TIP: use the following code to trace generated code
@@ -125,6 +127,14 @@ export default ({
 
   walk(view.parsed.view, visitor, state)
 
+  let extraFiles = []
+  if (state.isDesignSystemRoot) {
+    extraFiles.push({
+      name: 'flow.js',
+      content: getFlow(state),
+    })
+  }
+
   maybeUsesTextInput(state)
   maybeUsesStyleSheet(state)
 
@@ -144,7 +154,7 @@ export default ({
       state,
       view,
     }),
-    extraFiles: [],
+    extraFiles,
     dependencies: state.dependencies,
     flow: state.flow,
     flowDefaultState: state.flowDefaultState,
