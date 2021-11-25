@@ -117,7 +117,7 @@ function getScopedConditionPropValue(node, parent, state) {
   } else if (typeof node.value === 'boolean' && node.name === 'shadowInset') {
     value = node.value ? "'inset'" : "''"
   } else {
-    let unit = getUnit(node)
+    let unit = !state.isReactNative && getUnit(node)
     value = unit ? `"${node.value}${unit}"` : node.value
   }
 
