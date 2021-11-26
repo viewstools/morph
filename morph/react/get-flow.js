@@ -5,6 +5,7 @@ export default function getFlow({ name, viewPath, src, view }) {
 // It's responsible for giving the view it's own Flow context.
 
 import * as fromFlow from 'Views/Flow'
+import React from 'react'
 import ${name} from './${importFile}'
 
 export default function ${name}Flow({ children, viewPath, ...props }) {

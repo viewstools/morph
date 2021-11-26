@@ -10,6 +10,7 @@ let CONTENT = `# views
 **/*.graphql.js
 **/data.js
 **/index.js
+!src/index.js
 **/flow.js
 **/view.module.css
 src/Views`
