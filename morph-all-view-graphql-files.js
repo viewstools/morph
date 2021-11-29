@@ -132,7 +132,10 @@ import { ${useOperation} } from 'Data/Api'`,
       res.push("import useDataOnSubmit from './useDataOnSubmit'")
     }
 
-    res.push(`import query from './data.graphql'
+    // this import needs to keep the .js extension, otherwise the bundler will
+    // try to use the .graphql file instead and fail if it can't understand
+    // graphql files
+    res.push(`import query from './data.graphql.js'
 import React from 'react'
 import ${importName} from './${importName.toLowerCase()}'`)
 
