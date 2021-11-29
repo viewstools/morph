@@ -10,7 +10,6 @@ import * as BlockInList from '../react/block-in-list.js'
 import * as BlockList from '../react/block-list.js'
 import * as BlockMaybeSkip from '../react/block-maybe-skip.js'
 import * as BlockName from './block-name.js'
-import * as BlockViewsFlow from './block-views-flow.js'
 import * as BlockOffWhen from '../react/block-off-when.js'
 import * as BlockSetFlowToBasedOnData from '../react/block-set-flow-to-based-on-data.js'
 import * as BlockProfile from '../react/block-profile.js'
@@ -26,7 +25,6 @@ export let enter = [
   BlockOffWhen.enter,
   BlockSetFlowToBasedOnData.enter,
 
-  BlockViewsFlow.enter,
   BlockName.enter,
   BlockProfile.enter,
   BlockTable.enter,
@@ -48,7 +46,6 @@ export let leave = [
   BlockExplicitChildren.leave,
   BlockGroup.leave,
   BlockName.leave,
-  BlockViewsFlow.leave,
   BlockTable.leave,
 
   BlockOffWhen.leave,

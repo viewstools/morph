@@ -3,8 +3,11 @@ import mm from 'micromatch'
 let PATTERNS = {
   filesView: ['**/App/**/view.blocks', '**/DesignSystem/**/view.blocks'],
   filesViewLogic: ['**/App/**/logic.js', '**/DesignSystem/**/logic.js'],
-  filesViewGraphql: ['**/App/**/*.graphql'],
-  filesViewDataGraphql: ['**/App/**/data.graphql'],
+  filesViewGraphql: ['**/App/**/*.graphql', '**/DesignSystem/**/*.graphql'],
+  filesViewDataGraphql: [
+    '**/App/**/data.graphql',
+    '**/DesignSystem/**/data.graphql',
+  ],
   filesViewCustom: ['**/DesignSystem/**/react.js'],
   filesFontCustom: [
     '**/DesignSystem/Fonts/*.eot',

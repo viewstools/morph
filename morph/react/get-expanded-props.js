@@ -31,7 +31,7 @@ export default function getExpandedProps({
       let maybeDefaultValue =
         slot.defaultValue === false || ignoreDefaultValues
           ? ''
-          : `= ${stringify(slot)}`
+          : ` = ${stringify(slot)}`
       let maybeAlias = slot.alias ? `: ${slot.alias}` : ''
       return `${slot.name}${maybeAlias}${maybeDefaultValue}`
     })
@@ -65,6 +65,6 @@ export default function getExpandedProps({
   return `{
   children,${testId}
   ${viewPath}
-  ${slots.join(',\n')}
+  ${slots.join(',\n  ')}
 }`
 }

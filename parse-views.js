@@ -1,5 +1,7 @@
 import maybePrintWarnings from './maybe-print-warnings.js'
 import parse from './parse/index.js'
+import path from 'path'
+import slash from 'slash'
 import sortSetsInMap from './sort-sets-in-map.js'
 
 export default function parseViews({
@@ -23,6 +25,10 @@ export default function parseViews({
       source: view.source,
       views: viewsById,
     })
+
+    view.flow =
+      view.parsed.view.isDesignSystemRoot &&
+      slash(path.join(path.dirname(file), 'flow.js'))
 
     maybePrintWarnings(view, verbose)
   }

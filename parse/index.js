@@ -388,7 +388,6 @@ export default ({
       slots.push({
         name: 'viewPath',
         type: 'string',
-        alias: block.isDesignSystemRoot && 'viewPathParent',
         defaultValue: block.viewPath,
       })
     }

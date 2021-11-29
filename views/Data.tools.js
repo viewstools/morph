@@ -11,7 +11,7 @@ import {
   getFlowDefinitionKey,
   getFlowDefinition,
   getParentView,
-} from './Flow.js'
+} from './Flow'
 // import get from 'dlv';
 import get from 'lodash/get'
 import camelCase from 'lodash/camelCase'
