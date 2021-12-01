@@ -33,6 +33,7 @@ export let enter = (node, parent, state) => {
                   '${keyboardType.phone}' : 'default'
         `
         state.render.push(` keyboardType={${dynamicKeyboardType}}`)
+        state.render.push(` secureTextEntry={${type.value} === 'secure'}`)
       } else if (keyboardType[type.value]) {
         state.render.push(` keyboardType='${keyboardType[type.value]}'`)
       }
