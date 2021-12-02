@@ -117,6 +117,114 @@ let TEXT_PROPS = [
   'writingDirection',
 ]
 
+let TEXT_INPUT_PROPS = [
+  'display',
+  'width',
+  'height',
+  'start',
+  'end',
+  'top',
+  'left',
+  'right',
+  'bottom',
+  'minWidth',
+  'maxWidth',
+  'minHeight',
+  'maxHeight',
+  'margin',
+  'marginVertical',
+  'marginHorizontal',
+  'marginTop',
+  'marginBottom',
+  'marginLeft',
+  'marginRight',
+  'marginStart',
+  'marginEnd',
+  'padding',
+  'paddingVertical',
+  'paddingHorizontal',
+  'paddingTop',
+  'paddingBottom',
+  'paddingLeft',
+  'paddingRight',
+  'paddingStart',
+  'paddingEnd',
+  'borderWidth',
+  'borderTopWidth',
+  'borderStartWidth',
+  'borderEndWidth',
+  'borderRightWidth',
+  'borderBottomWidth',
+  'borderLeftWidth',
+  'position',
+  'flexDirection',
+  'flexWrap',
+  'justifyContent',
+  'alignItems',
+  'alignSelf',
+  'alignContent',
+  'overflow',
+  'flex',
+  'flexGrow',
+  'flexShrink',
+  'flexBasis',
+  'aspectRatio',
+  'zIndex',
+  'direction',
+  'shadowColor',
+  'shadowOffset',
+  'shadowOpacity',
+  'shadowRadius',
+  'transform',
+  'transformMatrix',
+  'decomposedMatrix',
+  'scaleX',
+  'scaleY',
+  'rotation',
+  'translateX',
+  'translateY',
+  'backfaceVisibility',
+  'backgroundColor',
+  'borderColor',
+  'borderTopColor',
+  'borderRightColor',
+  'borderBottomColor',
+  'borderLeftColor',
+  'borderStartColor',
+  'borderEndColor',
+  'borderRadius',
+  'borderTopLeftRadius',
+  'borderTopRightRadius',
+  'borderTopStartRadius',
+  'borderTopEndRadius',
+  'borderBottomLeftRadius',
+  'borderBottomRightRadius',
+  'borderBottomStartRadius',
+  'borderBottomEndRadius',
+  'borderStyle',
+  'opacity',
+  'elevation',
+  'color',
+  'fontFamily',
+  'fontSize',
+  'fontStyle',
+  'fontWeight',
+  'fontVariant',
+  'textShadowOffset',
+  'textShadowRadius',
+  'textShadowColor',
+  'letterSpacing',
+  'lineHeight',
+  'textAlign',
+  'textAlignVertical',
+  'includeFontPadding',
+  'textDecorationLine',
+  'textDecorationStyle',
+  'textDecorationColor',
+  'textTransform',
+  'writingDirection',
+]
+
 let VIEW_PROPS = [
   'alignContent',
   'alignItems',
@@ -228,8 +336,6 @@ let VIEW_PROPS = [
   'zIndex',
 ]
 
-let BLOCK_TYPES = ['Text', 'Horizontal', 'Vertical']
-
 export { enter }
 
 export let leave = (node, parent, state) => {
@@ -252,10 +358,10 @@ export let leave = (node, parent, state) => {
   if (hasKeys(node.style.static.base)) {
     let id = createId(node, state)
 
-    if (BLOCK_TYPES.includes(node.name)) {
+    if (isBlockType(node.name)) {
       state.styles[id] = filterInvalidStyles(
         node.style.static.base,
-        node.name === 'Text' ? TEXT_PROPS : VIEW_PROPS,
+        getValidPropsForBlock(node.name),
         node,
         state
       )
@@ -282,10 +388,10 @@ export let leave = (node, parent, state) => {
   }
 
   if (hasKeys(dynamicStyles)) {
-    if (BLOCK_TYPES.includes(node.name)) {
+    if (isBlockType(node.name)) {
       dynamicStyles = filterInvalidStyles(
         dynamicStyles,
-        node.name === 'Text' ? TEXT_PROPS : VIEW_PROPS,
+        getValidPropsForBlock(node.name),
         node,
         state
       )
@@ -375,6 +481,8 @@ export let leave = (node, parent, state) => {
 }
 
 function filterInvalidStyles(styles, validStyles, node, state) {
+  if (!validStyles) return styles
+
   let result = {}
   for (let key of Object.keys(styles)) {
     if (validStyles.includes(key)) {
@@ -393,4 +501,27 @@ function filterInvalidStyles(styles, validStyles, node, state) {
 function printWarning(warning, nodeName, viewPath) {
   console.error(chalk.red(nodeName), chalk.dim(viewPath))
   console.error(`  ${chalk.blue(warning)}`)
+}
+
+function isBlockType(value) {
+  return isText(value) || isInput(value) || isView(value)
+}
+
+function isText(value) {
+  return value === 'Text'
+}
+
+function isInput(value) {
+  return ['Capture', 'CaptureTextArea'].includes(value)
+}
+
+function isView(value) {
+  return ['Horizontal', 'Vertical'].includes(value)
+}
+
+function getValidPropsForBlock(value) {
+  if (isText(value)) return TEXT_PROPS
+  if (isInput(value)) return TEXT_INPUT_PROPS
+  if (isView(value)) return VIEW_PROPS
+  return null
 }
