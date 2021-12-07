@@ -16,14 +16,15 @@ export let enter = (node, parent, state) => {
   let type = getProp(node, 'type')
 
   if (isSlot(type)) {
-    state.render.push(` type=${safe(type.value)}`)
+    let dynamicType = `
+                ${type.value} === 'phone' ? '${typesMap.phone}' :
+                ${type.value} === 'secure' ? '${typesMap.secure}' : ${type.value}`
+    state.render.push(` type={${dynamicType}}`)
 
     // fix for iOS Safari to show the numpad on
     // http://danielfriesen.name/blog/2013/09/19/input-type-number-and-ios-numeric-keypad/
     let maybeNumber = (name, valueWhenTrue) =>
-      `${name}={${type.value} === 'number' || ${
-        type.value
-      } === 'phone'? "${valueWhenTrue}" : undefined}`
+      `${name}={${type.value} === 'number' || ${type.value} === 'phone'? "${valueWhenTrue}" : undefined}`
     state.render.push(maybeNumber('inputMode', 'numeric'))
     state.render.push(maybeNumber('pattern', '[0-9]*'))
   } else {
