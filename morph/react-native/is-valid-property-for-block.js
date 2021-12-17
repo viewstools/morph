@@ -13,6 +13,7 @@ let blacklist = [
   'goto',
   'isdisabled',
   'isfragment',
+  'ismodal',
   'onclickusediv',
   'onsubmit',
   'overflow',
