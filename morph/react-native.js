@@ -13,6 +13,7 @@ import walk from './walk.js'
 
 let imports = {
   DismissKeyboard: `import dismissKeyboard from 'dismissKeyboard'`,
+  ViewsModalOverlay: `import { Modal as ViewsModalOverlay } from 'react-native'`,
 }
 
 export default ({

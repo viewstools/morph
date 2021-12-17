@@ -55,6 +55,8 @@ let getGroupBlockName = (node, state) => {
   } else if (hasProp(node, 'onClick')) {
     let propNode = getProp(node, 'onClick')
     node.action = propNode.value
+  } else if (hasProp(node, 'isModal')) {
+    name = 'ViewsModalOverlay'
   }
 
   if (hasProp(node, 'backgroundImage')) {
