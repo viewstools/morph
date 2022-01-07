@@ -12,7 +12,6 @@ export let enter = (node, parent, state) => {
     node.ensureBackgroundColor = true
   }
 
-  let isKeyboardAvoidingView = getProp(node, 'isKeyboardAvoidingView')
   if (node.action) {
     let block = 'TouchableWithoutFeedback'
     let isDisabled = getProp(node, 'isDisabled')
@@ -46,14 +45,25 @@ export let enter = (node, parent, state) => {
   } else if (node.goTo) {
     // let goTo = getProp(node, 'goTo')
     // TODO https://facebook.github.io/react-native/docs/linking.html
-  } else if (isKeyboardAvoidingView) {
+  }
+
+  node.wrapEnd = ''
+  let isSafeAreaView = getProp(node, 'isSafeAreaView')
+  if (isSafeAreaView) {
+    let block = 'SafeAreaView'
+    state.use(block)
+    state.render.push(`<${block} style={{ flex: 1 }}>`)
+    node.wrapEnd = `</${block}>${node.wrapEnd}`
+  }
+  let isKeyboardAvoidingView = getProp(node, 'isKeyboardAvoidingView')
+  if (isKeyboardAvoidingView) {
     let block = 'KeyboardAvoidingView'
     state.use(block)
     state.use('Platform')
     state.render.push(`<${block}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={{ flex: 1 }}>`)
-    node.wrapEnd = `</${block}>`
+    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    style={{ flex: 1 }}>`)
+    node.wrapEnd = `</${block}>${node.wrapEnd}`
   }
 }
 

@@ -22,6 +22,7 @@ let blacklist = [
   'type',
   'validate',
   'iskeyboardavoidingview',
+  'issafeareaview',
 ]
 
 export default (node, parent, state) =>

@@ -6,6 +6,7 @@ let NATIVE = [
   'Animated',
   'Image',
   'KeyboardAvoidingView',
+  'SafeAreaView',
   'ScrollView',
   'StyleSheet',
   'Text',
