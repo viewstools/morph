@@ -13,6 +13,7 @@ let NATIVE = [
   'TouchableWithoutFeedback',
   'TouchableHighlight',
   'View',
+  'Platform',
 ]
 
 let sortAlphabetically = (a, b) => {

@@ -21,6 +21,7 @@ let blacklist = [
   'translatez',
   'type',
   'validate',
+  'iskeyboardavoidingview',
 ]
 
 export default (node, parent, state) =>
