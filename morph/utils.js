@@ -764,3 +764,10 @@ export function getListItemKey(node) {
     )
     .join('-')}\``
 }
+
+export function isScrollView(node) {
+  return (
+    hasProp(node, 'overflowY', (v) => v === 'auto' || v === 'scroll') ||
+    hasProp(node, 'overflowX', (v) => v === 'auto' || v === 'scroll')
+  )
+}

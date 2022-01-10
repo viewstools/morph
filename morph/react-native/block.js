@@ -17,6 +17,7 @@ import * as BlockSetTestId from '../react/block-set-test-id.js'
 import * as BlockSvg from './block-svg.js'
 import * as BlockTable from '../react/block-table.js'
 import * as BlockWrap from './block-wrap.js'
+import * as BlockScrollView from './block-scroll-view.js'
 
 // match new lines with ../react-dom/block.js
 export let enter = [
@@ -39,6 +40,7 @@ export let enter = [
   BlockInList.enter,
   BlockAddTestIdProp.enter,
 
+  BlockScrollView.enter,
   BlockProperties.enter,
   BlockGroup.enter,
   BlockList.enter,

@@ -1,4 +1,4 @@
-import { getProp, hasProp, isSlot } from '../utils.js'
+import { getProp, hasProp, isScrollView, isSlot } from '../utils.js'
 
 export default (node, parent, state) => {
   switch (node.name) {
@@ -66,10 +66,7 @@ let getGroupBlockName = (node, state) => {
       : JSON.stringify(propNode.value)
 
     name = 'Image'
-  } else if (
-    hasProp(node, 'overflowY', (v) => v === 'auto' || v === 'scroll') ||
-    hasProp(node, 'overflowX', (v) => v === 'auto' || v === 'scroll')
-  ) {
+  } else if (isScrollView(node)) {
     name = 'ScrollView'
   }
 

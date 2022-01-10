@@ -24,6 +24,7 @@ let blacklist = [
   'iskeyboardavoidingview',
   'issafeareaview',
   'numberoflines',
+  'scrolltoend',
 ]
 
 export default (node, parent, state) =>
