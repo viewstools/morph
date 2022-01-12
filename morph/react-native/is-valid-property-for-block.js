@@ -34,6 +34,8 @@ let blacklist = [
   'type',
   'userselect',
   'validate',
+  'iskeyboardavoidingview',
+  'issafeareaview',
 ]
 
 export default (node, parent, state) =>
