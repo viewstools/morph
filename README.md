@@ -35,6 +35,4 @@ Brilliant! Check out [CONTRIBUTING.md](https://github.com/viewstools/morph/blob/
 
 See https://views.tools for more info.
 
-License BSD-Clause-3
-
-by UXtemple
+This repository is no longer open sourced
