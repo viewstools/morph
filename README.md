@@ -35,4 +35,8 @@ Brilliant! Check out [CONTRIBUTING.md](https://github.com/viewstools/morph/blob/
 
 See https://views.tools for more info.
 
-This repository is no longer open sourced
+
+Copyright Tom Parandyk - All Rights Reserved
+Unauthorized copying of this file, via any medium is strictly prohibited
+Proprietary and confidential
+Written by Tom Parandyk <tom@altramanera.app>, 19 Jan 2022
