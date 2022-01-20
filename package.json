@@ -26,8 +26,7 @@
     "type": "git",
     "url": "git+https://github.com/viewstools/morph.git"
   },
-  "author": "Darío Javier Cravero <dario@uxtemple.com>",
-  "license": "BSD-3-Clause",
+  "license": "Non-free",
   "bugs": {
     "url": "https://github.com/viewstools/morph/issues"
   },
